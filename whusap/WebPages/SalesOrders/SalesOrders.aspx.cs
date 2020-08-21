@@ -253,6 +253,8 @@ namespace whusap.WebPages.SalesOrders
                         {
                             Ent_tticol082 Objtticol082 = new Ent_tticol082
                             {
+                                PAID = " ",
+                                LOGN = _operator,
                                 OORG = myObj.OORG,
                                 ORNO = myObj.ORNO,
                                 OSET = myObj.OSET,

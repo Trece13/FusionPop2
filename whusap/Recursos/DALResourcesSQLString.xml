@@ -1146,7 +1146,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where   inh220.t$lsta = 5
           and     inh220.t$oorg = 1
           and TRIM(inh200.T$STCO)=TRIM('[:T$STAD]')
-          and inh220.t$pddt &lt;= TO_CHAR(TO_DATE('[:T$PDDT]','MM/DD/YYYY'),'DD-MON-YYYY')
+          and inh220.t$pddt &lt;= TO_CHAR(TO_DATE('[:T$PDDT]','YYYY/MM/DD'),'DD-MON-YYYY')
           and not exists (select (col082.t$orno||col082.t$pono||col082.t$oset) from {0}.tticol082{1} col082
           where   col082.t$orno = inh220.t$orno
           and     col082.t$pono = inh220.t$pono
