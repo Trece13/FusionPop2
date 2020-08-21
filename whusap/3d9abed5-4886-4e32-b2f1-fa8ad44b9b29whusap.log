@@ -1,0 +1,123 @@
+----Reporte de Error----
+
+Title:
+
+Timestamp: 18/08/2020 6:00:50 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 18/08/2020 6:00:50 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module whLogIni.aspx for ddlIdioma1 return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)LabelsText.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-7-132422472454221435
+ProcessId: 2136
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:20804
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - LabelsText
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-7-132422472454221435
+
+ProcessId: 2136
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 18/08/2020 6:01:17 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 18/08/2020 6:01:17 p. m.
+Message: ORA-12170: TNS:Se ha producido un timeout de conexión
+
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)BaseDal.creaConexion
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-7-132422472454221435
+ProcessId: 2136
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:20804
+Extended Properties: Generado desde :  - EjecutarCons
+Clase:  - BaseDal
+Metodo:  - creaConexion
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-7-132422472454221435
+
+ProcessId: 2136
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 18/08/2020 6:03:28 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 18/08/2020 6:03:28 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module whLogIni.aspx for ddlIdioma1 return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)LabelsText.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-7-132422472454221435
+ProcessId: 2136
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:18592
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - LabelsText
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-7-132422472454221435
+
+ProcessId: 2136
+
+Extended Properties: 
+-----Fin de Reporte----

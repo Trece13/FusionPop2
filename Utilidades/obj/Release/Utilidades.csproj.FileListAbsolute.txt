@@ -1,0 +1,20 @@
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\whusa.Utilidades.dll.config
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\whusa.Utilidades.dll
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\whusa.Utilidades.pdb
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\Microsoft.Practices.Unity.dll
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\bin\Release\Microsoft.Practices.Unity.Interception.dll
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\obj\Release\whusa.Utilidades.dll
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\obj\Release\whusa.Utilidades.pdb
+C:\Users\Md\Desktop\Fusion2Pop\Utilidades\obj\Release\Utilidades.csprojResolveAssemblyReference.cache
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\whusa.Utilidades.dll.config
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\whusa.Utilidades.dll
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\whusa.Utilidades.pdb
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\Microsoft.Practices.Unity.dll
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\bin\Release\Microsoft.Practices.Unity.Interception.dll
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\obj\Release\Utilidades.csprojResolveAssemblyReference.cache
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\obj\Release\whusa.Utilidades.dll
+C:\Users\Md\Documents\FusionPop2 - Copy\Utilidades\obj\Release\whusa.Utilidades.pdb

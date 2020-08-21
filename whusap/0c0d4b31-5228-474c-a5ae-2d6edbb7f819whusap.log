@@ -1,0 +1,330 @@
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:55:27 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:55:27 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module whLogIni.aspx for ddlIdioma1 return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)LabelsText.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:9748
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - LabelsText
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:56:05 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:56:05 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:1432
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:56:22 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:56:22 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+La secuencia no contiene ningún elemento coincidente
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)Mensajes.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:3564
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - Mensajes
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:56:22 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:56:22 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module GlobalMessages for encabezado return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)Mensajes.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:3564
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - Mensajes
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:56:23 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:56:23 p. m.
+Message: ORA-01400: no se puede realizar una inserción NULL en ("BAAN"."TTCCOL301140"."T$COME")
+
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)BaseDal.GetDbType
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:3564
+Extended Properties: Generado desde :  - EjecutarCons
+Clase:  - BaseDal
+Metodo:  - GetDbType
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:56:23 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:56:23 p. m.
+Message: Error when inserting data [ttccol301]. Try again or contact your administrator 
+
+ORA-01400: no se puede realizar una inserción NULL en ("BAAN"."TTCCOL301140"."T$COME")
+
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)ttccol301.AdicionaParametrosComunes
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:3564
+Extended Properties: Generado desde :  - .ctor
+Clase:  - ttccol301
+Metodo:  - AdicionaParametrosComunes
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:57:01 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:57:01 p. m.
+Message: ORA-00001: restricción única (BAAN.TWHCOL130140$IDX1) violada
+
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)BaseDal.agregaParametrosCommand
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:3564
+Extended Properties: Generado desde :  - EjecutarCons
+Clase:  - BaseDal
+Metodo:  - agregaParametrosCommand
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 21/05/2020 4:57:02 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 21/05/2020 4:57:02 p. m.
+Message: My Query
+ORA-00001: restricción única (BAAN.TWHCOL130140$IDX1) violada
+
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)twhcol130.InsertarReseiptRawMaterial
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-3-132345537170608282
+ProcessId: 5056
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:3564
+Extended Properties: Generado desde :  - .ctor
+Clase:  - twhcol130
+Metodo:  - InsertarReseiptRawMaterial
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-3-132345537170608282
+
+ProcessId: 5056
+
+Extended Properties: 
+-----Fin de Reporte----

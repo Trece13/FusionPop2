@@ -1,0 +1,282 @@
+----Reporte de Error----
+
+Title:
+
+Timestamp: 12/08/2020 2:29:28 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 12/08/2020 2:29:28 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module whLogIni.aspx for ddlIdioma1 return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)LabelsText.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:5556
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - LabelsText
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 12/08/2020 2:29:44 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 12/08/2020 2:29:44 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:5556
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 8/12/2020 2:30:14 PM
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 8/12/2020 2:30:14 PM
+Message: Object reference not set to an instance of an object.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:7936
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 8/12/2020 2:30:18 PM
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 8/12/2020 2:30:18 PM
+Message: Object reference not set to an instance of an object.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14736
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 8/12/2020 2:30:36 PM
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 8/12/2020 2:30:36 PM
+Message: Object reference not set to an instance of an object.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14736
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 8/12/2020 2:31:16 PM
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 8/12/2020 2:31:16 PM
+Message: Failed to read statement. Try again or contact your administrator 
+module whInvMaterialDevolution.aspx for msjsave return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)Mensajes.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14736
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - Mensajes
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 8/12/2020 2:34:36 PM
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 8/12/2020 2:34:36 PM
+Message: Object reference not set to an instance of an object.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 255cd914-6-132417161635881359
+ProcessId: 10908
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:13308
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 255cd914-6-132417161635881359
+
+ProcessId: 10908
+
+Extended Properties: 
+-----Fin de Reporte----
