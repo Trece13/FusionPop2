@@ -37,18 +37,35 @@ namespace whusa.DAL
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
 
-            Ent_twhcol018 obj018;
-            twhcol018 dal018 = new twhcol018();
+            //Ent_twhcol018 obj018;
+            //twhcol018 dal018 = new twhcol018();
 
             try
             {
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
-                int cant = parametros.Count;
+                //int cant = parametros.Count;
 
                 foreach (Ent_tticol080 reg in parametros)
                 {
-                    obj018 = new Ent_twhcol018();
-                    parametrosIn = AdicionaParametrosComunes(reg);
+                    //obj018 = new Ent_twhcol018();
+                    //parametrosIn = AdicionaParametrosComunes(reg);
+
+                    method = MethodBase.GetCurrentMethod();
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$ORNO", reg.orno);
+                    paramList.Add(":T$PONO", reg.pono);
+                    paramList.Add(":T$CWAR", reg.cwar);
+                    paramList.Add(":T$ITEM", reg.item);
+                    paramList.Add(":T$QUNE", reg.qune);
+                    paramList.Add(":T$LOGN", reg.logn);
+                    paramList.Add(":T$DATE", reg.date);
+                    paramList.Add(":T$PROC", reg.proc);
+                    paramList.Add(":T$REFCNTD", reg.refcntd);
+                    paramList.Add(":T$REFCNTU", reg.refcntu);
+                    paramList.Add(":T$CLOT", reg.clot);
+                    paramList.Add(":T$OORG", reg.oorg);
+                    //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
                     retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
                 }
                 return Convert.ToInt32(retorno);

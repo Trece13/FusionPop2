@@ -237,6 +237,90 @@ namespace whusa.DAL
         
         }
 
+        public DataTable ConsultarCantidadPoritem022042131( MyLioEntidad objEnt, ref string strError)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ITEM", objEnt.SITM);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+                if (consulta.Rows.Count < 1) { strError = "there are not results for item"; }
+                //return consulta;
+
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+
+        }
+
+        public DataTable ConsultarCantidad215( MyLioEntidad objEnt, ref string strError)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ITEM", objEnt.SITM);
+            paramList.Add(":T$CWAR", objEnt.CWAR);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+                if (consulta.Rows.Count < 1) { strError = "there are not results for item"; }
+                //return consulta;
+
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+
+        }
+
+        public DataTable InsertTticol088( Ent_tticol088 obj088, ref string strError)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ORNO",obj088.orno);
+            paramList.Add(":T$PONO",obj088.pono);
+            paramList.Add(":T$ITEM",obj088.item);
+            paramList.Add(":T$QUNE",obj088.qune);
+            paramList.Add(":T$LOGN",obj088.logn);
+            paramList.Add(":T$DATE",obj088.date);
+            paramList.Add(":T$PROC",obj088.proc);
+            paramList.Add(":T$REFCNTD",obj088.refcntd);
+            paramList.Add(":T$REFCNTU", obj088.refcntu);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+                if (consulta.Rows.Count < 1) { strError = "there are not results for item"; }
+                //return consulta;
+
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+
+        }
+
         private List<Ent_ParametrosDAL> AdicionaParametrosComunes(Ent_tticol090 parametros, bool blnUsarPRetorno = false)
         {
             string param = string.Empty;

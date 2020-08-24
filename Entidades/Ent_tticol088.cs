@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations;
 namespace whusa.Entidades
 {
     [DataContract]
-    public class Ent_tticol080
+    public class Ent_tticol088
     {
         [DataMember(Order = 0)]
         [Column(Name = "ORNO")]
@@ -52,13 +52,6 @@ namespace whusa.Entidades
         [Column(Name = "REFCNTU")]
         public int refcntu { get; set; }
 
-        [DataMember(Order = 10)]
-        [Column(Name = "CLOT")]
-        public string clot { get; set; }
-
-        [DataMember(Order = 11)]
-        [Column(Name = "IDRECORD")]
-        public string idrecord { get; set; }
 
         [DataMember(Order = 12)]
         public bool Error { get; set; }
@@ -69,12 +62,8 @@ namespace whusa.Entidades
         [DataMember(Order = 15)]
         public string SuccessMsg { get; set; }
 
-        [DataMember(Order = 16)]
-        [Column(Name = "OORG")]
-        public string oorg { get; set; }
-        
 
-        public Ent_tticol080()
+        public Ent_tticol088()
         {
 
             orno = string.Empty;
@@ -87,8 +76,6 @@ namespace whusa.Entidades
             proc = 0;
             refcntd = 0;
             refcntu = 0;
-            clot = string.Empty;
-            idrecord = string.Empty;
 
             Error = false;
             TypeMsgJs = string.Empty;
@@ -96,8 +83,8 @@ namespace whusa.Entidades
             SuccessMsg = string.Empty;
         }
 
-        public Ent_tticol080(string _orno, int _pono, string _item, string _cwar, decimal _qune, string _logn, string _date,
-                              int _proc, int _refcntd, int _refcntu, string _clot, string _idrecord)
+        public Ent_tticol088(string _orno, int _pono, string _item, string _cwar, decimal _qune, string _logn, string _date,
+                              int _proc, int _refcntd, int _refcntu)
         {
             this.orno = _orno;
             this.pono = _pono;
@@ -109,9 +96,8 @@ namespace whusa.Entidades
             this.proc = _proc;
             this.refcntd = _refcntd;
             this.refcntu = _refcntu;
-            this.clot = _clot;
-            this.idrecord = _idrecord;
         }
+
     }
 }
 

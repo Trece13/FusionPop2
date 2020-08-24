@@ -2150,6 +2150,41 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol090">
+      <operationName name="ConsultarCantidadPoritem022042131">
+        <stringSQL>
+          select TBL, ITEM, SUM(QTYC) QTYC, CUNI, STAT,ORNO from (
+          SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,SUM(T$QTYA) AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT,T$ORNO AS ORNO,T$LOGN LOGN, T$DATE FROM baan.tWhcol131140
+          WHERE T$STAT = 6
+          group by T$PAID,T$CWAA,T$LOAA,T$ITEM,T$UNIC,T$STAT,T$ORNO,T$LOGN, T$DATE
+          UNION
+          SELECT 'ticol042' AS TBL,ticol042.T$SQNB AS PAID,ticol242.T$CWAT AS CWAR,ticol242.T$ACLO AS LOCA,ticol042.T$MITM AS ITEM,SUM(ticol242.T$ACQT) AS qtyc,
+          ticol042.T$CUNI AS CUNI,ticol042.T$DELE AS STAT,ticol042.T$PDNO AS ORNO,T$LOGN LOGN, T$DATE
+          FROM baan.tticol042140 ticol042
+          INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          WHERE ticol042.T$DELE = 8
+          group by ticol042.T$SQNB,T$CWAT,T$ACLO,T$MITM,T$CUNI,T$DELE,ticol042.T$PDNO,T$LOGN,T$DATE
+          UNION
+          SELECT 'ticol022' AS TBL,ticol022.T$SQNB AS PAID,ticol222.T$CWAT AS CWAR,ticol222.T$ACLO AS LOCA,ticol022.T$MITM AS ITEM,SUM(ticol222.T$ACQT) AS qtyc,
+          ticol022.T$CUNI AS CUNI,ticol022.T$DELE AS STAT,ticol022.T$PDNO AS ORNO,T$LOGN LOGN, T$DATE
+          FROM baan.tticol022140 ticol022
+          INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          WHERE ticol022.T$DELE = 8
+          group by ticol022.T$SQNB,T$CWAT,T$ACLO,T$MITM,T$CUNI,T$DELE,ticol022.T$PDNO,T$LOGN,T$DATE
+          ) where trim(ITEM) = trim('[:T$ITEM]')
+          GROUP BY TBL, ITEM, CUNI, STAT,ORNO
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarCantidad215">
+        <stringSQL>
+          SELECT * FROM BAAN.twhwmd215140 where TRIM(T$CWAR) = TRIM('[:T$CWAR]') and TRIM(T$ITEM) = TRIM('[:T$ITEM]')
+        </stringSQL>
+      </operationName>
+      <operationName name="InsertTticol088">
+        <stringSQL>
+          INSERT INTO baan.tticol088140 (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU) VALUES ('[:T$ORNO]','[:T$PONO]','[:T$ITEM]','[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
+        </stringSQL>
+      </operationName>
+      
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2}
@@ -3882,8 +3917,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="insertarRegistro">
         <stringSQL>
-          INSERT INTO {2} (T$ORNO, T$PONO, T$ITEM, T$CWAR, T$QUNE, T$LOGN, T$DATE, T$PROC, T$REFCNTD, T$REFCNTU,T$CLOT)
-          VALUES(:T$ORNO, :T$PONO, :T$ITEM, :T$CWAR, :T$QUNE, :T$LOGN, sysdate+(5/24), :T$PROC, :T$REFCNTD, :T$REFCNTU, :T$CLOT)
+          INSERT INTO {2} (T$ORNO, T$PONO, T$ITEM, T$CWAR, T$QUNE, T$LOGN, T$DATE, T$PROC, T$REFCNTD, T$REFCNTU,T$CLOT,T$PDAT,T$PICK,T$OORG)
+          VALUES('[:T$ORNO]', '[:T$PONO]', '[:T$ITEM]', '[:T$CWAR]', '[:T$QUNE]', '[:T$LOGN]', sysdate+(5/24), '[:T$PROC]', '[:T$REFCNTD]', '[:T$REFCNTU]', '[:T$CLOT]',sysdate+(5/24),'0','[:T$OORG]')
         </stringSQL>
       </operationName>
       <operationName name="actualizarRegistro_Param">
@@ -5024,7 +5059,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --(SELECT CASE WHEN cant_reg IS NULL THEN 0 ELSE cant_reg END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO) CANT_REG,
           tcibd001.T$CUNI AS CUNI, ticst001.T$QUES AS CANT_EST,
           (SELECT SUM(ticst0012.T$QUCS) FROM {0}.tticst001{1} ticst0012 WHERE ticst0012.T$PDNO = '[:T$PDNO]' AND ticst0012.T$SITM = ticst001.T$SITM ) AS ACT_CANT,
-          ticst001.T$ISWH AS ISWH, tcibd200.T$OQMF AS OQMF,
+          (SELECT SUM(ticol082.T$QTYT) FROM BAAN.tticol082140 ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,
+          ticst001.T$ISWH AS ISWH_1, tcibd200.T$OQMF AS OQMF,
           CASE WHEN ticol080.T$QUNE IS NULL THEN 0 ELSE ticol080.T$QUNE END AS CANTD, tisfc010.T$MCNO AS MCNO
           FROM {0}.tticst001{1} ticst001
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.T$ITEM = ticst001.T$SITM

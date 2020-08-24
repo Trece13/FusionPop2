@@ -115,5 +115,47 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
+
+        public DataTable ConsultarCantidadPoritem022042131(MyLioEntidad objEnt, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.ConsultarCantidadPoritem022042131( objEnt, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public DataTable ConsultarCantidad215(MyLioEntidad objEnt, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.ConsultarCantidad215( objEnt, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public DataTable InsertTticol088( Ent_tticol088 obj088, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.InsertTticol088( obj088, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
     }
 }

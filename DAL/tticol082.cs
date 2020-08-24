@@ -437,7 +437,7 @@ namespace whusa.DAL
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
             }
-
+                  
             catch (Exception ex)
             {
                 strError = ex.InnerException != null ?
