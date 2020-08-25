@@ -53,6 +53,7 @@
             position: absolute;
             font-family: Segoe UI Light;
             font-size: 20px;
+            margin-left: -12%;
         }
         
         #Cuerpo
@@ -163,7 +164,8 @@
             onclick="btnMainMenu_Click" /></div>&nbsp;&nbsp;
     </div>
     <div class="d-flex justify-content-center" style="position: center ">
-        <label class = "bd-title" id="LblHome" >Phoenix  Operation Portal</label>
+        <!--<label class = "bd-title" id="LblHome" >Phoenix  Operation Portal</label>-->
+        <strong><asp:Label class = "bd-title" ID="LblHome" runat="server" Text="Label"></asp:Label></strong>
     </div>
     <div class="d-flex flex-row-reverse bd-highlight" >
         <div style="margin-left: 10px"><asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/images/exit.png" onclick="btnSessionOut_Click" /></div>
@@ -203,7 +205,8 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#LblHome').html("<%= namePage %> - " + " Phoenix  Operation Portal ");
+        var myPage = "<%= namePage %>";
+        //$('#LblHome').html(<%= namePage %>" - " + " Phoenix  Operation Portal ");
         //HomeTitle();
         $('#lblPage').show("1000");
         $('#LblHome').show("slow");

@@ -210,7 +210,7 @@ namespace whusap.WebPages.Migration
                 bool tticol088 = false;
                 var txtQuantity = Request.Form["txtQuantity-" + i].ToString().Trim();
 
-                if (txtQuantity != String.Empty)
+                if (txtQuantity.Trim() != String.Empty && txtQuantity.Trim() != "0")
                 {
                     var orno = Convert.ToString(Session["orno"]);
                     var qune = double.Parse(txtQuantity, CultureInfo.InvariantCulture.NumberFormat);
@@ -251,7 +251,7 @@ namespace whusap.WebPages.Migration
                         proc = 1,
                         refcntd = 0,
                         refcntu = 0,
-
+                        oorg = "4"
 
                     };
 
@@ -363,7 +363,7 @@ namespace whusap.WebPages.Migration
                 //var cant_max = _consultaMateriales.Rows[i]["CANT_MAX"].ToString().Trim().ToUpper();
                 //var cant_reg = _consultaMateriales.Rows[i]["CANT_REG"].ToString().Trim().ToUpper();
 
-                table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>"
+                table += String.Format("<tr><td>{0}</td><td>{1}</td><td style='text-align:left'>{2}</td><td style='text-align:left'>{3}</td><td>{4}</td><td>{5}</td></tr>"
                     , LstTable[i].SITM.ToString().Trim().ToUpper()
                     , LstTable[i].DSCA.ToString().Trim().ToUpper()
                     , LstTable[i].ACT_CANT.ToString().Trim().ToUpper()
@@ -371,8 +371,8 @@ namespace whusap.WebPages.Migration
 
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
-                                    LstTable[i].cant_max,
-                                    LstTable[i].cant_reg,
+                                    LstTable[i].ACT_CANT.ToString().Trim().ToUpper(),
+                                    LstTable[i].ISWH.ToString().Trim().ToUpper(),
                                     LstTable[i].cant_proc)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()
                     );

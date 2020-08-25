@@ -148,6 +148,15 @@ namespace whusap {
         protected global::System.Web.UI.WebControls.ImageButton ImageButton3;
         
         /// <summary>
+        /// LblHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblHome;
+        
+        /// <summary>
         /// ImageButton2 control.
         /// </summary>
         /// <remarks>

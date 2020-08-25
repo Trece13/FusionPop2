@@ -214,13 +214,14 @@
         var ClickQuery = function () {
             //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
             var Data = "{'Customer':'" + txCustomer.val().toUpperCase() + "','ToDate':'" + txToDate.val() + "'}";
+            var fecha = txToDate.val();
             WebMethod = "ClickQuery";
             sendAjax(WebMethod, Data, ClickQuerySuccess, false);
         }
 
 
         function ClickQuerySuccess(r) {
-
+            lstEnviar = [];
             var EncavezadoTable = "<table class='table display' id='MyTable' cellspacing='0' width='100%'>" +
                                     "<thead>" +
                                     "<tr>" +

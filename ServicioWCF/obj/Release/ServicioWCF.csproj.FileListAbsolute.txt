@@ -36,3 +36,22 @@ C:\Users\Md\Documents\FusionPop2 - Copy\ServicioWCF\bin\SendMailService.pdb
 C:\Users\Md\Documents\FusionPop2 - Copy\ServicioWCF\obj\Release\ServicioWCF.csprojResolveAssemblyReference.cache
 C:\Users\Md\Documents\FusionPop2 - Copy\ServicioWCF\obj\Release\ServicioWCF.dll
 C:\Users\Md\Documents\FusionPop2 - Copy\ServicioWCF\obj\Release\ServicioWCF.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\ServicioWCF.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\ServicioWCF.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.Entidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.Interfases.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.DAL.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.Utilidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\SendMailService.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\Microsoft.Practices.Unity.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.Entidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.Interfases.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.DAL.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\whusa.Utilidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\bin\SendMailService.pdb
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\obj\Release\ServicioWCF.csprojResolveAssemblyReference.cache
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\obj\Release\ServicioWCF.dll
+C:\Users\Md\Desktop\new\FusionPop2\ServicioWCF\obj\Release\ServicioWCF.pdb

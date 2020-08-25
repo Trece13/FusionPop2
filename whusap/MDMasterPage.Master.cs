@@ -10,12 +10,14 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Collections;
 using System.Web.Configuration;
+using whusa.Interfases;
 
 
 namespace whusap
 {
     public partial class MDMasterPage : System.Web.UI.MasterPage
     {
+        protected static InterfazDAL_ttccol303 idal = new InterfazDAL_ttccol303();
         private static whusa.Utilidades.Seguimiento log = new Seguimiento();
         private static StackTrace stackTrace = new StackTrace();
         private static MethodBase method = MethodBase.GetCurrentMethod();
@@ -24,11 +26,16 @@ namespace whusap
         private static string metodo = method.Name;
         private static string _idioma = String.Empty;
         private static string formName;
-        
+        public string namePage = string.Empty;
+
         string rutaServ = string.Empty;
         string rutaRetorno = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            string url = Request.Url.AbsolutePath.ToString();
+            namePage = ( idal.datosMenu_Param(Session["user"].ToString(), url).Trim() == "" ? "" : idal.datosMenu_Param(Session["user"].ToString(), url).Trim() + " - ") + "Phoenix  Operation Portal";
+            LblHome.Text = namePage;
             if (Session.IsNewSession == true)
             //if (Session["SessionID"] == null || !System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -227,5 +234,7 @@ namespace whusap
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
         }
+
+        public string strError { get; set; }
     }
 }

@@ -2,6 +2,12 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
+    <style>
+        #lblConfirm,#lblError
+        {
+            text-align:left !important;
+        }
+    </style>
     <script type="text/javascript">
         var _idioma = '<%= _idioma %>';
         var numeroRegistros = <%= LstTable.Count %>;
@@ -121,6 +127,9 @@
             <td colspan="2" style="text-align:center;">
                 <hr />  
                 <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
+                <br />
+                <asp:Label Text="" class = "infoLabels" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+                <asp:Label Text="" class = "infoLabels" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
             </td>
         </tr>
     </table>
@@ -137,7 +146,6 @@
     </div>
 
 
-    <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+    
 
 </asp:Content>

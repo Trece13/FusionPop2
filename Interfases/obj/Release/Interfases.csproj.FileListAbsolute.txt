@@ -32,3 +32,20 @@ C:\Users\Md\Documents\FusionPop2 - Copy\Interfases\bin\Release\SendMailService.p
 C:\Users\Md\Documents\FusionPop2 - Copy\Interfases\obj\Release\Interfases.csprojResolveAssemblyReference.cache
 C:\Users\Md\Documents\FusionPop2 - Copy\Interfases\obj\Release\whusa.Interfases.dll
 C:\Users\Md\Documents\FusionPop2 - Copy\Interfases\obj\Release\whusa.Interfases.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.Interfases.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.Interfases.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.DAL.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.Entidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.Utilidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\SendMailService.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\Microsoft.Practices.Unity.Interception.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\Microsoft.Practices.Unity.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.DAL.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.Entidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\whusa.Utilidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\bin\Release\SendMailService.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\obj\Release\Interfases.csprojResolveAssemblyReference.cache
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\obj\Release\whusa.Interfases.dll
+C:\Users\Md\Desktop\new\FusionPop2\Interfases\obj\Release\whusa.Interfases.pdb

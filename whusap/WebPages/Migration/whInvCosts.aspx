@@ -39,15 +39,15 @@
             }
         };
 
-        function validarCantidadLimiteArticuloMaquina(field, cant_max, cant_reg,cant_proc) {
-            if(parseFloat(cant_max) >= parseFloat(field.value) + parseFloat(cant_reg) + parseFloat(cant_proc)){
+        function validarCantidadLimiteArticuloMaquina(field, cant_max, cant_reg) {
+            if(parseFloat(cant_max) - parseFloat(cant_reg) >= parseFloat(field.value)){
                 
             }
             else{
 
-                alert(_idioma == "INGLES" ? "Requested Quantity higher than: "+cant_max+" quantities allowed for this material" : "Requested Quantity higher than quantities allowed for this material");
+                alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
                 this.focus();
-                field.value = 0;
+                field.value = "";
             }
 //            debugger;
 //            var dividendo = field.value;

@@ -30,3 +30,19 @@ C:\Users\Md\Documents\FusionPop2 - Copy\DAL\bin\Release\whusa.Utilidades.pdb
 C:\Users\Md\Documents\FusionPop2 - Copy\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
 C:\Users\Md\Documents\FusionPop2 - Copy\DAL\obj\Release\whusa.DAL.dll
 C:\Users\Md\Documents\FusionPop2 - Copy\DAL\obj\Release\whusa.DAL.pdb
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.DAL.dll.config
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.DAL.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.DAL.pdb
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\SendMailService.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.Entidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.Utilidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\Microsoft.Practices.Unity.Interception.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\Microsoft.Practices.Unity.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.Entidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\SendMailService.pdb
+C:\Users\Md\Desktop\new\FusionPop2\DAL\bin\Release\whusa.Utilidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\DAL\obj\Release\DAL.csprojResolveAssemblyReference.cache
+C:\Users\Md\Desktop\new\FusionPop2\DAL\obj\Release\whusa.DAL.dll
+C:\Users\Md\Desktop\new\FusionPop2\DAL\obj\Release\whusa.DAL.pdb

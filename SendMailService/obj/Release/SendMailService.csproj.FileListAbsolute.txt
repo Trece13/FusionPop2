@@ -8,3 +8,8 @@ C:\Users\Md\Documents\FusionPop2 - Copy\SendMailService\bin\SendMailService.pdb
 C:\Users\Md\Documents\FusionPop2 - Copy\SendMailService\obj\Release\SendMailService.csprojResolveAssemblyReference.cache
 C:\Users\Md\Documents\FusionPop2 - Copy\SendMailService\obj\Release\SendMailService.dll
 C:\Users\Md\Documents\FusionPop2 - Copy\SendMailService\obj\Release\SendMailService.pdb
+C:\Users\Md\Desktop\new\FusionPop2\SendMailService\bin\SendMailService.dll
+C:\Users\Md\Desktop\new\FusionPop2\SendMailService\bin\SendMailService.pdb
+C:\Users\Md\Desktop\new\FusionPop2\SendMailService\obj\Release\SendMailService.csprojResolveAssemblyReference.cache
+C:\Users\Md\Desktop\new\FusionPop2\SendMailService\obj\Release\SendMailService.dll
+C:\Users\Md\Desktop\new\FusionPop2\SendMailService\obj\Release\SendMailService.pdb

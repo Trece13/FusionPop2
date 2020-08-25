@@ -1,0 +1,161 @@
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 1:41:04 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 1:41:04 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module whLogIni.aspx for ddlIdioma1 return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)LabelsText.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 4cda0c86-36-132428364491495887
+ProcessId: 14368
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:5708
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - LabelsText
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 4cda0c86-36-132428364491495887
+
+ProcessId: 14368
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 1:41:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 1:41:07 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 4cda0c86-36-132428364491495887
+ProcessId: 14368
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:21224
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 4cda0c86-36-132428364491495887
+
+ProcessId: 14368
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 1:41:32 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 1:41:32 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 4cda0c86-36-132428364491495887
+ProcessId: 14368
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:5708
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 4cda0c86-36-132428364491495887
+
+ProcessId: 14368
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 1:41:35 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 1:41:35 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 4cda0c86-36-132428364491495887
+ProcessId: 14368
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:5708
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 4cda0c86-36-132428364491495887
+
+ProcessId: 14368
+
+Extended Properties: 
+-----Fin de Reporte----

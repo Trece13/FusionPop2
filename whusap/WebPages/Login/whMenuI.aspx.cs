@@ -348,7 +348,7 @@ namespace whusap.WebPages.Login
                 foreach (Ent_ttccol303 item in lstCat)
                 {
                     htmlSliderBody +=
-                        "<a href='" + item.strSess + "'class='list-group-item list-group-item-action list-sm'" + (Submenu > 10 ? "style = 'Display:none; border-left-color:transparent; border-right-color:transparent'" : "style = 'border-left-color:transparent; border-right-color:transparent'") + ">" + (Session["ddlIdioma"] == "INGLES" ? item.MENG : item.MESP) + "</a>";
+                        "<a onclick = saveNamePage('" + item.MENG.ToString().Replace(" ","_") + "') href='" + item.strSess + "'class='list-group-item list-group-item-action list-sm'" + (Submenu > 10 ? "style = 'Display:none; border-left-color:transparent; border-right-color:transparent'" : "style = 'border-left-color:transparent; border-right-color:transparent'") + ">" + (Session["ddlIdioma"] == "INGLES" ? item.MENG : item.MESP) + "</a>";
                     Submenu++;
                 }
                 string xe = NomCategoria;
