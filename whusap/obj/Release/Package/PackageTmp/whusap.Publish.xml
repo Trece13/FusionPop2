@@ -7,7 +7,7 @@
     <file relUrl="images/btn_anuncioi.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_consultalote.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_rollannounce.jpg" publishTime="08/25/2020 12:58:37" />
-    <file relUrl="bin/whusap.dll" publishTime="08/25/2020 15:33:42" />
+    <file relUrl="bin/whusap.dll" publishTime="08/25/2020 15:39:11" />
     <file relUrl="images/logophoenix_login.png" publishTime="08/25/2020 12:58:37" />
     <file relUrl="WebPages/Migration/whInvUbicacion.aspx" publishTime="08/25/2020 12:58:37" />
     <file relUrl="whInvReprintLabelPalletTag2.aspx" publishTime="08/25/2020 12:58:38" />
@@ -136,7 +136,7 @@
     <file relUrl="whInvRollAnnounce2.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="WebPages/Labels/whInvLabelMaterialRejectedMRB.aspx" publishTime="08/25/2020 12:58:36" />
     <file relUrl="whsugubicacion.aspx" publishTime="08/25/2020 12:58:38" />
-    <file relUrl="bin/whusa.DAL.pdb" publishTime="08/25/2020 15:33:39" />
+    <file relUrl="bin/whusa.DAL.pdb" publishTime="08/25/2020 15:39:08" />
     <file relUrl="WebPages/Balance/whInvLabelRegrindm.aspx" publishTime="08/25/2020 12:58:36" />
     <file relUrl="images/btn_reprintlabelsdmtrm.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_timeai.jpg" publishTime="08/25/2020 12:58:37" />
@@ -201,7 +201,7 @@
     <file relUrl="WebServices/WebService.asmx" publishTime="08/25/2020 12:58:37" />
     <file relUrl="WebPages/InvMaterial/whInvMaterialPlasticBoxesTracker.aspx" publishTime="08/25/2020 12:58:36" />
     <file relUrl="images/btn_consultaarticulo.jpg" publishTime="08/25/2020 12:58:37" />
-    <file relUrl="bin/whusa.Interfases.pdb" publishTime="08/25/2020 15:33:40" />
+    <file relUrl="bin/whusa.Interfases.pdb" publishTime="08/25/2020 15:39:09" />
     <file relUrl="images/btn_Exit.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btnMenuPpal.JPG" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_Mainmenu.jpg" publishTime="08/25/2020 12:58:37" />
@@ -238,7 +238,7 @@
     <file relUrl="WebPages/Migration/whInvStarWorkOrders.aspx" publishTime="08/25/2020 12:58:37" />
     <file relUrl="WebPages/InvReceipts/RelabelFinishProduct.aspx" publishTime="08/25/2020 12:58:36" />
     <file relUrl="whInvReprintLabelMaterialRejectedM.aspx" publishTime="08/25/2020 12:58:38" />
-    <file relUrl="bin/whusap.pdb" publishTime="08/25/2020 15:33:42" />
+    <file relUrl="bin/whusap.pdb" publishTime="08/25/2020 15:39:11" />
     <file relUrl="images/btn_itemrejectedr.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="whtransferencias.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="WebPages/Migration/whInvAnuncioOrd.aspx" publishTime="08/25/2020 12:58:36" />
@@ -256,7 +256,7 @@
     <file relUrl="images/exit.png" publishTime="08/25/2020 12:58:37" />
     <file relUrl="Scripts/JSON-js-master/json_parse.js" publishTime="08/25/2020 12:58:36" />
     <file relUrl="images/btn_querytimereg.jpg" publishTime="08/25/2020 12:58:37" />
-    <file relUrl="bin/whusa.DAL.dll" publishTime="08/25/2020 15:33:39" />
+    <file relUrl="bin/whusa.DAL.dll" publishTime="08/25/2020 15:39:08" />
     <file relUrl="WebPages/Labels/whInvLabelRegrind.aspx" publishTime="08/25/2020 12:58:36" />
     <file relUrl="images/btn_reprintlabels.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_itemrejected.jpg" publishTime="08/25/2020 12:58:37" />
@@ -299,7 +299,7 @@
     <file relUrl="whInvReprintLabelDmtrm.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="images/btn_invfisico.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="WebPages/InvMaterial/whInvMaterialTakePrintLabel.aspx" publishTime="08/25/2020 12:58:36" />
-    <file relUrl="bin/whusa.Interfases.dll" publishTime="08/25/2020 15:33:40" />
+    <file relUrl="bin/whusa.Interfases.dll" publishTime="08/25/2020 15:39:09" />
     <file relUrl="bin/whusa.Utilidades.dll" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_Confirm.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_printtag.jpg" publishTime="08/25/2020 12:58:37" />
@@ -311,7 +311,7 @@
     <file relUrl="whInvsaveadvice.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="images/btn_transfersp.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="whInvMaterialRejected2.aspx" publishTime="08/25/2020 12:58:37" />
-    <file relUrl="whusap.Publish.xml" publishTime="08/25/2020 15:29:32" />
+    <file relUrl="whusap.Publish.xml" publishTime="08/25/2020 15:33:44" />
     <file relUrl="whInvsavelocation.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="Scripts/script.js" publishTime="08/25/2020 12:58:36" />
     <file relUrl="bin/Microsoft.Practices.Unity.Interception.dll" publishTime="08/25/2020 12:58:37" />

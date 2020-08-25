@@ -7,7 +7,7 @@
     <file relUrl="images/btn_anuncioi.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_consultalote.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="images/btn_rollannounce.jpg" publishTime="08/25/2020 12:58:37" />
-    <file relUrl="bin/whusap.dll" publishTime="08/25/2020 15:39:11" />
+    <file relUrl="bin/whusap.dll" publishTime="08/25/2020 15:54:27" />
     <file relUrl="images/logophoenix_login.png" publishTime="08/25/2020 12:58:37" />
     <file relUrl="WebPages/Migration/whInvUbicacion.aspx" publishTime="08/25/2020 12:58:37" />
     <file relUrl="whInvReprintLabelPalletTag2.aspx" publishTime="08/25/2020 12:58:38" />
@@ -238,7 +238,7 @@
     <file relUrl="WebPages/Migration/whInvStarWorkOrders.aspx" publishTime="08/25/2020 12:58:37" />
     <file relUrl="WebPages/InvReceipts/RelabelFinishProduct.aspx" publishTime="08/25/2020 12:58:36" />
     <file relUrl="whInvReprintLabelMaterialRejectedM.aspx" publishTime="08/25/2020 12:58:38" />
-    <file relUrl="bin/whusap.pdb" publishTime="08/25/2020 15:39:11" />
+    <file relUrl="bin/whusap.pdb" publishTime="08/25/2020 15:54:27" />
     <file relUrl="images/btn_itemrejectedr.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="whtransferencias.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="WebPages/Migration/whInvAnuncioOrd.aspx" publishTime="08/25/2020 12:58:36" />
@@ -311,7 +311,7 @@
     <file relUrl="whInvsaveadvice.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="images/btn_transfersp.jpg" publishTime="08/25/2020 12:58:37" />
     <file relUrl="whInvMaterialRejected2.aspx" publishTime="08/25/2020 12:58:37" />
-    <file relUrl="whusap.Publish.xml" publishTime="08/25/2020 15:33:44" />
+    <file relUrl="whusap.Publish.xml" publishTime="08/25/2020 15:39:12" />
     <file relUrl="whInvsavelocation.aspx" publishTime="08/25/2020 12:58:38" />
     <file relUrl="Scripts/script.js" publishTime="08/25/2020 12:58:36" />
     <file relUrl="bin/Microsoft.Practices.Unity.Interception.dll" publishTime="08/25/2020 12:58:37" />

@@ -255,7 +255,7 @@ namespace whusap.WebPages.Migration
 
                     };
 
-                    if ((Convert.ToDecimal(actcant.Trim()) - Convert.ToDecimal(iswh.Trim())) <= Convert.ToDecimal(txtQuantity.Trim()))
+                    if ((Convert.ToDecimal(actcant.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantity.Trim()))
                     {
                         _idaltticol090.InsertTticol088(data088, ref strError);
                         lblError.Text += "[" + item + "] Available quantity not enough for your request <br/>";
