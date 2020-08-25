@@ -302,6 +302,7 @@ namespace whusa.DAL
             paramList.Add(":T$PROC",obj088.proc);
             paramList.Add(":T$REFCNTD",obj088.refcntd);
             paramList.Add(":T$REFCNTU", obj088.refcntu);
+            paramList.Add(":T$OORG", obj088.oorg);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
 

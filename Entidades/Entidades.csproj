@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ent_tticol088.cs" />
     <Compile Include="EntidadZones.cs" />
     <Compile Include="Documentos\Ent_DocumentoNacional.cs" />
     <Compile Include="Documentos\Ent_EncabezadoNacional.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Ent_twhwmd200.cs" />
     <Compile Include="Ent_twhwmd300.cs" />
     <Compile Include="Factor.cs" />
+    <Compile Include="MyLioEntidad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ent_ttwhcol016.cs" />
     <Compile Include="Ent_twhcol018.cs" />

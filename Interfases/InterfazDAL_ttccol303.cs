@@ -31,5 +31,22 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
+
+
+
+        public string datosMenu_Param(string USER, string PROG)
+        {
+            //int retorno = -1;
+            string retorno;
+            try
+            {
+                retorno = dal.datosMenu_Param(USER,PROG);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
     }
 }

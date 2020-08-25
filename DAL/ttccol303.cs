@@ -55,6 +55,34 @@ namespace whusa.DAL
                 throw ex;
             }
         }
+
+        public string datosMenu_Param(string USER,string PROG)
+        {
+            string retorno = string.Empty;
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$USER", USER);
+            paramList.Add(":T$PROG", PROG);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                //if (consulta.Rows.Count < 1) { strError = "-1"; }
+                if (consulta.Rows.Count > 0) {
+                    retorno = consulta.Rows[0]["MENG"].ToString().Trim();
+                }
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                //strError = "Error when querying data [ttccol303]. Try again or contact your administrator";
+                throw ex;
+            }
+        }
+
     }
 }
 

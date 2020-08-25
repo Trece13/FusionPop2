@@ -1988,6 +1988,24 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND col303.t$orde != 0 ORDER BY col303.t$orde
         </stringSQL>
       </operationName>
+      <operationName name="datosMenu_Param">
+        <stringSQL>
+          <!-- 
+            Fecha: 01/08/2019     
+            Desarrollador: Juan Carlos Cubillos Granados
+            Detalle: Se agrega el atrubuto T$CATE as categoria para obtenerlo como retorno y categorizar el menu.          
+          SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, T$CATE as categoria
+          FROM  {2} col303 inner join {0}.ttccol302{1} col302 on col302.t$SESS = col303.t$SESS
+          WHERE  UPPER(TRIM(col303.t$user))= '[p1]'
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+          -->
+          SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  {2} col303 inner join {0}.ttccol302{1} col302 on col302.t$SESS = col303.t$SESS left outer join {0}.ttccol306{1} col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('[:T$USER]')
+          AND TRIM(col302.t$prog)  = TRIM('[:T$PROG]')
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+        </stringSQL>
+      </operationName>
     </Module>
     <Module name="ttcibd001">
       <!--NEW-->
@@ -2181,7 +2199,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="InsertTticol088">
         <stringSQL>
-          INSERT INTO baan.tticol088140 (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU) VALUES ('[:T$ORNO]','[:T$PONO]','[:T$ITEM]','[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
+          INSERT INTO baan.tticol088140 (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU,T$OORG) VALUES ('[:T$ORNO]','[:T$PONO]','[:T$ITEM]','[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]','[:T$OORG]')
         </stringSQL>
       </operationName>
       

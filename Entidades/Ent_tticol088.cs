@@ -52,6 +52,10 @@ namespace whusa.Entidades
         [Column(Name = "REFCNTU")]
         public int refcntu { get; set; }
 
+        [DataMember(Order = 10)]
+        [Column(Name = "OORG")]
+        public string oorg { get; set; }
+        
 
         [DataMember(Order = 12)]
         public bool Error { get; set; }
@@ -76,6 +80,7 @@ namespace whusa.Entidades
             proc = 0;
             refcntd = 0;
             refcntu = 0;
+            oorg = string.Empty;
 
             Error = false;
             TypeMsgJs = string.Empty;
@@ -84,7 +89,7 @@ namespace whusa.Entidades
         }
 
         public Ent_tticol088(string _orno, int _pono, string _item, string _cwar, decimal _qune, string _logn, string _date,
-                              int _proc, int _refcntd, int _refcntu)
+                              int _proc, int _refcntd, int _refcntu,string _oorg)
         {
             this.orno = _orno;
             this.pono = _pono;
@@ -94,6 +99,7 @@ namespace whusa.Entidades
             this.logn = _logn;
             this.date = _date;
             this.proc = _proc;
+            this.oorg = _oorg;
             this.refcntd = _refcntd;
             this.refcntu = _refcntu;
         }

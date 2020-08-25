@@ -8,3 +8,8 @@ C:\Users\Md\Documents\FusionPop2 - Copy\Entidades\bin\Release\whusa.Entidades.pd
 C:\Users\Md\Documents\FusionPop2 - Copy\Entidades\obj\Release\Entidades.csprojResolveAssemblyReference.cache
 C:\Users\Md\Documents\FusionPop2 - Copy\Entidades\obj\Release\whusa.Entidades.dll
 C:\Users\Md\Documents\FusionPop2 - Copy\Entidades\obj\Release\whusa.Entidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Entidades\bin\Release\whusa.Entidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\Entidades\bin\Release\whusa.Entidades.pdb
+C:\Users\Md\Desktop\new\FusionPop2\Entidades\obj\Release\Entidades.csprojResolveAssemblyReference.cache
+C:\Users\Md\Desktop\new\FusionPop2\Entidades\obj\Release\whusa.Entidades.dll
+C:\Users\Md\Desktop\new\FusionPop2\Entidades\obj\Release\whusa.Entidades.pdb
