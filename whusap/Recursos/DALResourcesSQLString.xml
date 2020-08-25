@@ -2002,7 +2002,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
           FROM  {2} col303 inner join {0}.ttccol302{1} col302 on col302.t$SESS = col303.t$SESS left outer join {0}.ttccol306{1} col306 on col302.T$CODE = col306.T$CODE
           WHERE  UPPER(TRIM(col303.t$user))= TRIM('[:T$USER]')
-          AND TRIM(col302.t$prog)  = TRIM('[:T$PROG]')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('[:T$PROG]'))
           AND col303.t$orde != 0 ORDER BY col303.t$orde
         </stringSQL>
       </operationName>

@@ -32,8 +32,13 @@ namespace whusap
         string rutaRetorno = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+            log.escribirError("entra al page load","master","Load","master");
+            string url = Request.Url.AbsolutePath.ToString().Trim();
+            //string url = "/fusionpub/WebPages/InvReceipts/whInvReceiptRawMaterialNew.aspx";
             
-            string url = Request.Url.AbsolutePath.ToString();
+            
+            string menupage = idal.datosMenu_Param(Session["user"].ToString(), url);
+
             namePage = ( idal.datosMenu_Param(Session["user"].ToString(), url).Trim() == "" ? "" : idal.datosMenu_Param(Session["user"].ToString(), url).Trim() + " - ") + "Phoenix  Operation Portal";
             LblHome.Text = namePage;
             if (Session.IsNewSession == true)
