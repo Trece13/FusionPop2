@@ -1,11 +1,14 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="whInvCosts.aspx.cs" Inherits="whusap.WebPages.Migration.whInvCosts" %>
-
+﻿<%@ Page Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
+    CodeBehind="whInvCosts.aspx.cs" Inherits="whusap.WebPages.Migration.whInvCosts" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
     <style>
-        #lblConfirm,#lblError
+        #lblConfirm, #lblError
         {
-            text-align:left !important;
+            text-align: left !important;
         }
     </style>
     <script type="text/javascript">
@@ -39,15 +42,18 @@
             }
         };
 
-        function validarCantidadLimiteArticuloMaquina(field, cant_max, cant_reg) {
+        function validarCantidadLimiteArticuloMaquina(field,cant_max,cant_reg,index) {
             if(parseFloat(cant_max) - parseFloat(cant_reg) >= parseFloat(field.value)){
-                
+                $('#txtQuantityHidden-'+index).val("0");
+                $('#btnAlert-'+index).hide(1500);
             }
             else{
 
                 alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
                 this.focus();
+                $('#txtQuantityHidden-'+index).val(field.value);
                 field.value = "";
+                $('#btnAlert-'+index).show(1500);
             }
 //            debugger;
 //            var dividendo = field.value;
@@ -75,6 +81,12 @@
 //                alert(_idioma == "INGLES" ? "Only numbers here" : "Solo números.");
 //            }
         };
+        function clickAlert(index){  
+            var txtQuantityHidden = $('#txtQuantityHidden-'+index); 
+            var btnAlert = $('#btnAlert-'+index); 
+            txtQuantityHidden.val("");
+            btnAlert.hide(1500);
+        };
 
         function validarFormulario() {
             debugger
@@ -84,13 +96,14 @@
 
             for (var i = 0; i < numeroRegistros; i++) {
                 var txtQuantity = $('#txtQuantity-'+i).val();
+                var txtQuantityHidden = $('#txtQuantityHidden-'+i).val();
                 
                 if (txtQuantity.trim() != "" && parseFloat(txtQuantity.trim()) <= 0) { 
                     validate = false;
                     mensaje += _idioma == "INGLES" ? "-Valid quantity - row " + i +"\n" : "-Cantidad valida - fila " + (i + 1) +"\n";
                 }else
                 {
-                    if (txtQuantity.trim() != "") {
+                    if ((txtQuantity.trim() != "" && txtQuantity.trim() != "0")||(txtQuantityHidden.trim() != "" && txtQuantityHidden.trim() != "0")) {
                         dataSave = true;
                     }
                 } 
@@ -112,40 +125,35 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <table border="0">
         <tr>
-            <td style="text-align:left;">
+            <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblOrder" /></b></span>
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="lblOrder" /></b></span>
             </td>
-            <td style="width: 250px; padding:5px;">
+            <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtOrder" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="text-align:center;">
-                <hr />  
-                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
+            <td colspan="2" style="text-align: center;">
+                <hr />
+                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click"
+                    CssClass="ButtonsSendSave" Style="height: 30px;" />
                 <br />
-                <asp:Label Text="" class = "infoLabels" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-                <asp:Label Text="" class = "infoLabels" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+                <asp:Label Text="" class="infoLabels" runat="server" ID="lblConfirm" Style="color: green;
+                    font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                <asp:Label Text="" class="infoLabels" runat="server" ID="lblError" Style="color: red;
+                    font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
             </td>
         </tr>
     </table>
-
-     <div runat="server" id="divBtnGuardar" visible="false">
+    <div runat="server" id="divBtnGuardar" visible="false">
         <hr />
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validarFormulario();" CssClass="ButtonsSendSave"/>
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validarFormulario();"
+            CssClass="ButtonsSendSave" />
     </div>
-
     <div runat="server" id="divTable">
-        
-        
-
     </div>
-
-
-    
-
 </asp:Content>

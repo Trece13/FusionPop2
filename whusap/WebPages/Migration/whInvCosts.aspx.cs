@@ -257,7 +257,7 @@ namespace whusap.WebPages.Migration
 
                     };
 
-                    if ((Convert.ToDecimal(actcant.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantityHidden.Trim()))
+                    if ((Convert.ToDecimal(stock.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantityHidden.Trim()))
                     {
                         _idaltticol090.InsertTticol088(data088, ref strError);
                         lblError.Text += "[" + item + "] Available quantity not enough for your request <br/>";
@@ -350,7 +350,7 @@ namespace whusap.WebPages.Migration
                 , _idioma == "INGLES" ? "Order:" : "Orden:"
                 , txtOrder.Text.Trim().ToUpper());
 
-            table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td style='display:none'>{6}</td></tr>"
+            table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td style='display:none'>{7}</td></tr>"
                 , _idioma == "INGLES" ? "Item" : "Articulo"
                 , _idioma == "INGLES" ? "Description" : "Descripción"
                 , _idioma == "INGLES" ? "Actual Quantity" : "Cantidad Actual"
@@ -367,7 +367,7 @@ namespace whusap.WebPages.Migration
                 //var cant_max = _consultaMateriales.Rows[i]["CANT_MAX"].ToString().Trim().ToUpper();
                 //var cant_reg = _consultaMateriales.Rows[i]["CANT_REG"].ToString().Trim().ToUpper();
 
-                table += String.Format("<tr><td>{0}</td><td>{1}</td><td style='text-align:left'>{2}</td><td style='text-align:left'>{3}</td><td>{4}</td><td>{5}</td><td style='display:none'>{6}</td><td style='border-top: none;border-bottom: none;border-right: none;'>{7}</td></tr>"
+                table += String.Format("<tr><td>{0}</td><td>{1}</td><td style='text-align:left'>{2}</td><td style='text-align:left'>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td style='display:none'>{7}</td><td style='border-top: none;border-bottom: none;border-right: none;'>{8}</td></tr>"
                     , LstTable[i].SITM.ToString().Trim().ToUpper()
                     , LstTable[i].DSCA.ToString().Trim().ToUpper()
                     , LstTable[i].ACT_CANT.ToString().Trim().ToUpper()
@@ -376,7 +376,7 @@ namespace whusap.WebPages.Migration
 
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
-                                    LstTable[i].ACT_CANT.ToString().Trim().ToUpper().Replace(",","."),
+                                    LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
                                     LstTable[i].ISWH.ToString().Trim().ToUpper().Replace(",", "."),
                                     i)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()
