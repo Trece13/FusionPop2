@@ -30,6 +30,7 @@ namespace whusa.Entidades
         public string cant_hidden { get; set; }
         public string fecha { get; set; }
         public string Error { get; set; }
+        public string STOCK { get; set; }
     }
 }
 

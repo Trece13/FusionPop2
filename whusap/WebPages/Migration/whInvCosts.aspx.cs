@@ -153,12 +153,12 @@ namespace whusap.WebPages.Migration
 
                                 if (dt022044131.Rows.Count > 0)
                                 {
-                                    MyLioEntidadObj.ACT_CANT = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
                                 }
 
                                 if (dt215.Rows.Count > 0)
                                 {
-                                    MyLioEntidadObj.ACT_CANT = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
                                 }
 
                                 LstTable.Add(MyLioEntidadObj);
@@ -220,6 +220,7 @@ namespace whusap.WebPages.Migration
                     var cwar = LstTable[i].CWAR.ToString().Trim();
                     var iswh = LstTable[i].ISWH.ToString().Trim();
                     var actcant = LstTable[i].ACT_CANT.ToString().Trim();
+                    var stock = LstTable[i].STOCK.ToString().Trim();
                     var consultaRegistro = _idaltticol080.findRecordByOrnoPono(ref orno, ref pono, ref strError);
 
 
@@ -345,7 +346,7 @@ namespace whusap.WebPages.Migration
 
             table += String.Format("<hr /><table class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");
 
-            table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='5'>{1}</td></tr>"
+            table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='6'>{1}</td></tr>"
                 , _idioma == "INGLES" ? "Order:" : "Orden:"
                 , txtOrder.Text.Trim().ToUpper());
 
@@ -354,6 +355,7 @@ namespace whusap.WebPages.Migration
                 , _idioma == "INGLES" ? "Description" : "Descripción"
                 , _idioma == "INGLES" ? "Actual Quantity" : "Cantidad Actual"
                 , _idioma == "INGLES" ? "To Issue by Warehousing" : "Para emitir por almacenaje"
+                , _idioma == "INGLES" ? "Stock" : "Stock"
                 , _idioma == "INGLES" ? "To Issue" : "Para emitir"
                 , _idioma == "INGLES" ? "Unit" : "Unidad"
                 , _idioma == "Hidden");
@@ -370,6 +372,7 @@ namespace whusap.WebPages.Migration
                     , LstTable[i].DSCA.ToString().Trim().ToUpper()
                     , LstTable[i].ACT_CANT.ToString().Trim().ToUpper()
                     , LstTable[i].ISWH.ToString().Trim().ToUpper()
+                    , LstTable[i].STOCK.ToString().Trim().ToUpper()
 
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
