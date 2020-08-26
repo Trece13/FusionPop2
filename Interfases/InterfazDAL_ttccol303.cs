@@ -34,14 +34,14 @@ namespace whusa.Interfases
 
 
 
-        public string datosMenu_Param(string USER, string PROG)
+        public DataTable datosMenu_Param(string USER, string PROG)
         {
             //int retorno = -1;
             string retorno;
             try
             {
-                retorno = dal.datosMenu_Param(USER,PROG);
-                return retorno;
+                return dal.datosMenu_Param(USER,PROG);
+                //return retorno;
             }
             catch (Exception ex)
             {

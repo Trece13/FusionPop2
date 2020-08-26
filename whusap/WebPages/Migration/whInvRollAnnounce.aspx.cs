@@ -173,7 +173,8 @@ namespace whusap.WebPages.Migration
                 proc = 2,
                 refcntd = 0,
                 refcntu = 0,
-                clot = " "
+                clot = " ",
+                oorg = "4"
             };
 
             if (consultaRegistro.Count > 0)

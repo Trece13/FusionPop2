@@ -377,6 +377,9 @@
             }
             if (MyObj.error == false) {
                 $('#lblError').html("");
+                $('#txLocation').val("");
+                $('#txQuantity').val("");
+                $('#btnSave').prop("disabled", true);
                 lblWarehouse.html(MyObj.DESCRIPCION)
                 if (MyObj.sloc == "1") {
                     $('#txLocation').prop("disabled", false);

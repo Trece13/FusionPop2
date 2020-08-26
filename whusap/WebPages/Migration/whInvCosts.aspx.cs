@@ -147,7 +147,7 @@ namespace whusap.WebPages.Migration
                                 MyLioEntidadObj.OQMF = item["OQMF"].ToString();
                                 MyLioEntidadObj.CANTD = item["CANTD"].ToString();
                                 MyLioEntidadObj.MCNO = item["MCNO"].ToString();
-                                MyLioEntidadObj.cant_hidden = "";
+                                //MyLioEntidadObj.cant_hidden = "";
                                 DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
 

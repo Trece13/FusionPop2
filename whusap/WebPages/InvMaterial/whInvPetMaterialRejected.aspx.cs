@@ -410,7 +410,7 @@ namespace whusap.WebPages.InvMaterial
             MyObj.refcntu = 0;
             MyObj.refcntd = 0;
             MyObj.clot = CLOT.ToUpper().Trim() == string.Empty ? " " : CLOT.ToUpper().Trim();
-
+            MyObj.oorg = "4";
             lstTticol080.Add(MyObj);
             
             string ORNO = MyObj.orno.ToString();

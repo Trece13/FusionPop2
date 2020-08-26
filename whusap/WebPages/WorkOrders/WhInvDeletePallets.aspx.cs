@@ -292,7 +292,8 @@ namespace whusap.WebPages.WorkOrders
                                         obj080.refcntu = 0;
                                         obj080.clot = " ";
                                         obj080.idrecord = "2";
-
+                                        obj080.oorg = "4";
+                                        
                                         string strTagID = string.Empty;
                                         List<Ent_tticol080> list080 = new List<Ent_tticol080>();
                                         list080.Add(obj080);
