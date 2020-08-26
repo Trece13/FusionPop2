@@ -1,0 +1,1285 @@
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:04 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:04 p. m.
+Message: Failed to read statement. Try again or contact your administrator 
+module whLogIni.aspx for ddlIdioma1 return null on query
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)LabelsText.readStatement
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - whusa.Utilidades.dll
+Clase:  - LabelsText
+Metodo:  - readStatement
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:07 p. m.
+Message: entra al page load
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)master.Load
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - master
+Clase:  - master
+Metodo:  - Load
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:07 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:07 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Login/whMenuI.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:07 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:07 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Login/whMenuI.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:07 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: entra al page load
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)master.Load
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - master
+Clase:  - master
+Metodo:  - Load
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:11 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:11 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:14 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:14 p. m.
+Message: entra al page load
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)master.Load
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - master
+Clase:  - master
+Metodo:  - Load
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:14 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:14 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:15 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:15 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:15 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:15 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:15 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:15 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:15 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:15 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:15 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:15 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:31:15 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:31:15 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:06 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:06 p. m.
+Message: entra al page load
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)master.Load
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - master
+Clase:  - master
+Metodo:  - Load
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:06 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:06 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:06 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:06 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:06 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:06 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:06 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:06 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:06 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:06 p. m.
+Message: Ejecucion correcta de : 
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:07 p. m.
+Message: Ejecucion correcta de Sql : SELECT col303.t$orde orden, TRIM(col302.t$prog) programa, TRIM(col302.t$boto) boton, col302.T$MESP AS MESP, col302.T$MENG AS MENG, col302.T$CODE as idCategoria, col306.T$CATE as categoria, col303.T$MENF as MENUPADRE, col303.T$SESS as MENUID
+          FROM  BAAN.ttccol303140 col303 inner join BAAN.ttccol302140 col302 on col302.t$SESS = col303.t$SESS left outer join BAAN.ttccol306140 col306 on col302.T$CODE = col306.T$CODE
+          WHERE  UPPER(TRIM(col303.t$user))= TRIM('JCUBILLOS')
+          AND UPPER(TRIM(col302.t$prog))  = UPPER(TRIM('/WebPages/Migration/whInvCosts.aspx'))
+          AND col303.t$orde != 0 ORDER BY col303.t$orde
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)una.datosMenu_Param
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - Fusion2pop
+Clase:  - una
+Metodo:  - datosMenu_Param
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----
+----Reporte de Error----
+
+Title:
+
+Timestamp: 25/08/2020 10:32:07 p. m.
+
+Message: There is no explicit mapping for the categories 'Error'. The log entry was: 
+Timestamp: 25/08/2020 10:32:07 p. m.
+Message: Referencia a objeto no establecida como instancia de un objeto.
+Category: Error
+Priority: 9
+EventId: 9007
+Severity: Error
+Title:Excepcion en Modulo de Aplicacion (General)MDMasterPage..cctor
+Machine: LW10CONSULTORTI
+App Domain: 3450896e-8-132428682530678261
+ProcessId: 5144
+Process Name: C:\Program Files (x86)\Common Files\Microsoft Shared\DevServer\10.0\WebDev.WebServer40.exe
+Thread Name: 
+Win32 ThreadId:14296
+Extended Properties: Generado desde :  - .ctor
+Clase:  - MDMasterPage
+Metodo:  - .cctor
+Modulo - --- [Este valor debe ser el nombre de la clase y metodo que genera la excepcion ] --- 
+
+
+Category: 
+
+Priority: -1
+
+Severity: Error
+
+Machine: LW10CONSULTORTI
+
+App Domain: 3450896e-8-132428682530678261
+
+ProcessId: 5144
+
+Extended Properties: 
+-----Fin de Reporte----

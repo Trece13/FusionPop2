@@ -147,7 +147,7 @@ namespace whusap.WebPages.Migration
                                 MyLioEntidadObj.OQMF = item["OQMF"].ToString();
                                 MyLioEntidadObj.CANTD = item["CANTD"].ToString();
                                 MyLioEntidadObj.MCNO = item["MCNO"].ToString();
-
+                                MyLioEntidadObj.cant_hidden = "";
                                 DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
 
@@ -209,11 +209,12 @@ namespace whusap.WebPages.Migration
             {
                 bool tticol088 = false;
                 var txtQuantity = Request.Form["txtQuantity-" + i].ToString().Trim();
+                var txtQuantityHidden = Request.Form["txtQuantityHidden-" + i].ToString().Trim();
 
-                if (txtQuantity.Trim() != String.Empty && txtQuantity.Trim() != "0")
+                if ((txtQuantity.Trim() != string.Empty && txtQuantity.Trim() != "0") || (txtQuantityHidden.Trim() != string.Empty && txtQuantityHidden.Trim() != "0"))
                 {
                     var orno = Convert.ToString(Session["orno"]);
-                    var qune = double.Parse(txtQuantity, CultureInfo.InvariantCulture.NumberFormat);
+                    var qune = double.Parse((txtQuantity.Trim() == "" ? "0" : txtQuantity.Trim()),CultureInfo.InvariantCulture.NumberFormat) == 0 ? double.Parse(txtQuantityHidden, CultureInfo.InvariantCulture.NumberFormat) : double.Parse(txtQuantity, CultureInfo.InvariantCulture.NumberFormat);
                     var pono = LstTable[i].PONO.ToString().Trim();
                     var item = LstTable[i].SITM.ToString().Trim();
                     var cwar = LstTable[i].CWAR.ToString().Trim();
@@ -255,7 +256,7 @@ namespace whusap.WebPages.Migration
 
                     };
 
-                    if ((Convert.ToDecimal(actcant.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantity.Trim()))
+                    if ((Convert.ToDecimal(actcant.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantityHidden.Trim()))
                     {
                         _idaltticol090.InsertTticol088(data088, ref strError);
                         lblError.Text += "[" + item + "] Available quantity not enough for your request <br/>";
@@ -342,19 +343,20 @@ namespace whusap.WebPages.Migration
         {
             var table = String.Empty;
 
-            table += String.Format("<hr /><table class='table table-bordered' style='width:1000px; font-size:13px; border:3px solid; border-style:outset; text-align:center; margin-bottom: 200px;'>");
+            table += String.Format("<hr /><table class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");
 
             table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='5'>{1}</td></tr>"
                 , _idioma == "INGLES" ? "Order:" : "Orden:"
                 , txtOrder.Text.Trim().ToUpper());
 
-            table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>"
+            table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td style='display:none'>{6}</td></tr>"
                 , _idioma == "INGLES" ? "Item" : "Articulo"
                 , _idioma == "INGLES" ? "Description" : "Descripción"
                 , _idioma == "INGLES" ? "Actual Quantity" : "Cantidad Actual"
                 , _idioma == "INGLES" ? "To Issue by Warehousing" : "Para emitir por almacenaje"
                 , _idioma == "INGLES" ? "To Issue" : "Para emitir"
-                , _idioma == "INGLES" ? "Unit" : "Unidad");
+                , _idioma == "INGLES" ? "Unit" : "Unidad"
+                , _idioma == "Hidden");
 
 
 
@@ -363,7 +365,7 @@ namespace whusap.WebPages.Migration
                 //var cant_max = _consultaMateriales.Rows[i]["CANT_MAX"].ToString().Trim().ToUpper();
                 //var cant_reg = _consultaMateriales.Rows[i]["CANT_REG"].ToString().Trim().ToUpper();
 
-                table += String.Format("<tr><td>{0}</td><td>{1}</td><td style='text-align:left'>{2}</td><td style='text-align:left'>{3}</td><td>{4}</td><td>{5}</td></tr>"
+                table += String.Format("<tr><td>{0}</td><td>{1}</td><td style='text-align:left'>{2}</td><td style='text-align:left'>{3}</td><td>{4}</td><td>{5}</td><td style='display:none'>{6}</td><td style='border-top: none;border-bottom: none;border-right: none;'>{7}</td></tr>"
                     , LstTable[i].SITM.ToString().Trim().ToUpper()
                     , LstTable[i].DSCA.ToString().Trim().ToUpper()
                     , LstTable[i].ACT_CANT.ToString().Trim().ToUpper()
@@ -371,10 +373,15 @@ namespace whusap.WebPages.Migration
 
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
-                                    LstTable[i].ACT_CANT.ToString().Trim().ToUpper(),
-                                    LstTable[i].ISWH.ToString().Trim().ToUpper(),
-                                    LstTable[i].cant_proc)
+                                    LstTable[i].ACT_CANT.ToString().Trim().ToUpper().Replace(",","."),
+                                    LstTable[i].ISWH.ToString().Trim().ToUpper().Replace(",", "."),
+                                    i)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()
+                    , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox'  readonly/>"
+                                    , "txtQuantityHidden-" + i)
+                    , String.Format("<i style='display:none; color:red' class='fa fa-exclamation-triangle' aria-hidden='true' id={0} onclick='clickAlert({1})'></i>"
+                                    , "btnAlert-" + i
+                                    , i)
                     );
             }
 
