@@ -58,15 +58,23 @@ namespace whusa.DAL
 
         public string datosMenu_Param(string USER,string PROG)
         {
+
+
+            int positionWebPages = PROG.ToLower().IndexOf("webpages");
+
+            if (positionWebPages > 0)
+            {
+                PROG = PROG.Remove(0, positionWebPages-1);
+            }
+
             string retorno = string.Empty;
             method = MethodBase.GetCurrentMethod();
-
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$USER", USER);
             paramList.Add(":T$PROG", PROG);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            log.escribirError("Ejecucion correcta de : ", "Fusion2pop", "datosMenu_Param", "una");
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -74,10 +82,13 @@ namespace whusa.DAL
                 if (consulta.Rows.Count > 0) {
                     retorno = consulta.Rows[0]["MENG"].ToString().Trim();
                 }
+                log.escribirError("Ejecucion correcta de Sql : " + strSentencia, "Fusion2pop", "datosMenu_Param", "una");
                 return retorno;
+                
             }
             catch (Exception ex)
             {
+                log.escribirError("Script Error 13: " + strSentencia, "Fusion2pop", method.ToString(), "ttccol303");
                 //strError = "Error when querying data [ttccol303]. Try again or contact your administrator";
                 throw ex;
             }
