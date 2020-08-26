@@ -27,6 +27,7 @@ namespace whusa.Entidades
         public string cant_reg { get; set; }
         public string cant_max { get; set; }
         public string cant_proc { get; set; }
+        public string cant_hidden { get; set; }
         public string fecha { get; set; }
         public string Error { get; set; }
     }
