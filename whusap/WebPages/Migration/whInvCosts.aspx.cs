@@ -147,7 +147,7 @@ namespace whusap.WebPages.Migration
                                 MyLioEntidadObj.OQMF = item["OQMF"].ToString();
                                 MyLioEntidadObj.CANTD = item["CANTD"].ToString();
                                 MyLioEntidadObj.MCNO = item["MCNO"].ToString();
-                                MyLioEntidadObj.cant_hidden = "";
+                                //MyLioEntidadObj.cant_hidden = "";
                                 DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
 
@@ -376,7 +376,7 @@ namespace whusap.WebPages.Migration
 
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
-                                    LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
+                                    //LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
                                     LstTable[i].ISWH.ToString().Trim().ToUpper().Replace(",", "."),
                                     i)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()

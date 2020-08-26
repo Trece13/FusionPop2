@@ -192,6 +192,7 @@ namespace whusap.WebPages.Balance
             obj080.refcntd = 0;
             obj080.refcntu = 0;
             obj080.idrecord = unityItem;
+            obj080.oorg = "4";
             parameterCollection.Add(obj080);
 
             //GRRC Inicio
