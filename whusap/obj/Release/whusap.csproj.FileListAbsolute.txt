@@ -143,3 +143,32 @@ C:\Users\Md\Desktop\New folder\FusionPop2\whusap\bin\Newtonsoft.Json.xml
 C:\Users\Md\Desktop\New folder\FusionPop2\whusap\bin\whusa.DAL.pdb
 C:\Users\Md\Desktop\New folder\FusionPop2\whusap\bin\SendMailService.pdb
 C:\Users\Md\Desktop\New folder\FusionPop2\whusap\obj\Release\whusap.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\obj\Release\whusap.csprojResolveAssemblyReference.cache
+C:\Desarrollos\Pop\FusionPop2\whusap\obj\Release\whusap.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\images\grd_alt.png
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\images\grd_head.png
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\images\grd_pgr.png
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusap.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusap.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\ASPNetToolTip.NET3.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\ASPNetToolTip.NET4.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Microsoft.Practices.Unity.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Newtonsoft.Json.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Online Barcode Generator.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.Entidades.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.Interfases.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.Utilidades.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.DAL.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Microsoft.Practices.Unity.Interception.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\TECIT.TBarCode.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\SendMailService.dll
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.Entidades.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.Interfases.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.Utilidades.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\Newtonsoft.Json.xml
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\whusa.DAL.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\bin\SendMailService.pdb
+C:\Desarrollos\Pop\FusionPop2\whusap\obj\Release\whusap.pdb
