@@ -56,7 +56,7 @@ namespace whusa.DAL
             }
         }
 
-        public string datosMenu_Param(string USER,string PROG)
+        public DataTable datosMenu_Param(string USER,string PROG)
         {
 
 
@@ -83,7 +83,7 @@ namespace whusa.DAL
                     retorno = consulta.Rows[0]["MENG"].ToString().Trim();
                 }
                 log.escribirError("Ejecucion correcta de Sql : " + strSentencia, "Fusion2pop", "datosMenu_Param", "una");
-                return retorno;
+                return consulta;
                 
             }
             catch (Exception ex)
