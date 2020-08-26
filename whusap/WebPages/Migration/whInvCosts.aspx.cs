@@ -376,7 +376,7 @@ namespace whusap.WebPages.Migration
 
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
-                                    //LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
+                                    LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
                                     LstTable[i].ISWH.ToString().Trim().ToUpper().Replace(",", "."),
                                     i)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()
