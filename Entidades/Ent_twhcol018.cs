@@ -50,6 +50,15 @@ namespace whusa.Entidades
         [DataMember(Order = 7)]
         [Column(Name = "ORNO")]
         public string orno { get; set; }
+
+        [DataMember(Order = 8)]
+        [Column(Name = "PICK")]
+        public int pick { get; set; }
+
+        [DataMember(Order = 9)]
+        [Column(Name = "OORG")]
+        public string oorg { get; set; }
+
         
         public Ent_twhcol018()
         {
@@ -61,8 +70,11 @@ namespace whusa.Entidades
             refcntd = 0;
             refcntu = 0;
             orno = string.Empty;
+            pick = 0;
+            oorg = string.Empty;
         }
-        public Ent_twhcol018(string ptgid, string pitem, string pclot, decimal pqtdl, string pcuni, int prefcntd, int prefcntu, string _orno)
+
+        public Ent_twhcol018(string ptgid, string pitem, string pclot, decimal pqtdl, string pcuni, int prefcntd, int prefcntu, string _orno, int _pick, string _oorg)
         { 
             this.tgid = ptgid;    
             this.item = pitem;    
@@ -72,6 +84,8 @@ namespace whusa.Entidades
             this.refcntd = prefcntd;
             this.refcntu = prefcntu;
             this.orno = _orno;
+            this.pick = _pick;
+            this.oorg = _oorg;
         }
     }
 }

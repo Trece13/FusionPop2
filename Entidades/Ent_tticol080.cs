@@ -72,7 +72,14 @@ namespace whusa.Entidades
         [DataMember(Order = 16)]
         [Column(Name = "OORG")]
         public string oorg { get; set; }
-        
+
+        [DataMember(Order = 17)]
+        [Column(Name = "PDAT")]
+        public string pdat { get; set; }
+
+        [DataMember(Order = 18)]
+        [Column(Name = "PICK")]
+        public int pick { get; set; }
 
         public Ent_tticol080()
         {
@@ -88,6 +95,9 @@ namespace whusa.Entidades
             refcntd = 0;
             refcntu = 0;
             clot = string.Empty;
+            pdat = string.Empty;
+            pick = 0;
+            oorg = "0";
             idrecord = string.Empty;
 
             Error = false;
@@ -97,7 +107,7 @@ namespace whusa.Entidades
         }
 
         public Ent_tticol080(string _orno, int _pono, string _item, string _cwar, decimal _qune, string _logn, string _date,
-                              int _proc, int _refcntd, int _refcntu, string _clot, string _idrecord)
+                              int _proc, int _refcntd, int _refcntu, string _clot, string _pdat, int _pick, string _oorg, string _idrecord)
         {
             this.orno = _orno;
             this.pono = _pono;
@@ -110,6 +120,9 @@ namespace whusa.Entidades
             this.refcntd = _refcntd;
             this.refcntu = _refcntu;
             this.clot = _clot;
+            this.pdat = _pdat;
+            this.pick = _pick;
+            this.oorg = _oorg;
             this.idrecord = _idrecord;
         }
     }

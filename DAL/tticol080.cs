@@ -108,6 +108,8 @@ namespace whusa.DAL
                         obj018.cuni = reg.idrecord;
                         obj018.qtdl = reg.qune;
                         obj018.clot = " ";
+                        obj018.pick = reg.pick;
+                        obj018.oorg = reg.oorg;
                         obj018.refcntd = 0;
                         obj018.refcntu = 0;
                         Listparametros018.Add(obj018);
@@ -337,6 +339,8 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTD", DbType.String, parametros.refcntd);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTU", DbType.String, parametros.refcntu);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PICK", DbType.String, parametros.pick);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$OORG", DbType.String, parametros.oorg);
 
                 if (blnUsarPRetorno)
                 {

@@ -230,6 +230,8 @@ namespace whusap.WebPages.Balance
             obj080.proc = 2;
             obj080.refcntd = 0;
             obj080.refcntu = 0;
+            obj080.pick = 0;
+            obj080.oorg = "4";
             obj080.idrecord = unityItem;
             parameterCollection.Add(obj080);
 
