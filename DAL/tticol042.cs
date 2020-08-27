@@ -542,6 +542,7 @@ namespace whusa.DAL
                     paramList.Add(":T$CWAT", reg.cwaf);
                     paramList.Add(":T$URPT", reg.urpt);
                     paramList.Add(":T$ACLO", reg.aclo.Trim() == string.Empty ?" ":reg.aclo.Trim());
+                    paramList.Add(":T$ALLO", reg.allo.ToString().Contains(".") == true ? reg.allo.ToString().Replace(".", ",") : reg.allo.ToString().Replace(",", "."));
 
                     strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, tabla2, paramList);
                     log.escribirError("aclo: " + reg.acqt + " Sentencia SQL 242 : " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);

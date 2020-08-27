@@ -1173,8 +1173,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="insertarRegistroTticon242">
         <stringSQL>
-          INSERT INTO {0}.tticol242{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU)
-          VALUES('[:T$PDNO]','[:T$SQNB]',SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0)
+          INSERT INTO {0}.tticol242{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLO)
+          VALUES('[:T$PDNO]','[:T$SQNB]',SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0,'[:T$ALLO]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarCantidadAlmacenRegistroTicol242">

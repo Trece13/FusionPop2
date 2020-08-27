@@ -276,6 +276,7 @@ namespace whusap.WebPages.Balance
             obj042.cwaf = BodegaItem;
             obj042.cwat = " ";
             obj042.aclo = " ";
+            obj042.allo = 0;
 
             parameterCollectionRegrind.Add(obj042);
 
