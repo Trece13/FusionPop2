@@ -360,6 +360,7 @@ namespace whusap.WebPages.InvMaterial
                         obj022.cwaf = row.Cells[3].Text.ToUpperInvariant();
                         obj022.cwat = row.Cells[3].Text.ToUpperInvariant();
                         obj022.aclo = " ";
+                        obj022.allo = 0;
 
                         list022.Add(obj022);
                         Itticol022.insertarRegistroSimple(ref obj022, ref strError);

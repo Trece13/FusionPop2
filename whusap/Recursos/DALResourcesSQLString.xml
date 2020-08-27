@@ -1192,8 +1192,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol222">
       <operationName name="InsertarRegistroTicol222">
         <stringSQL>
-          INSERT INTO {0}.tticol222{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU)
-          VALUES('[:T$PDNO]','[:T$SQNB]',SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0)
+          INSERT INTO {0}.tticol222{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU, T$ALLO)
+          VALUES('[:T$PDNO]','[:T$SQNB]',SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0,'[:T$ALLO]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarRegistroTicol222">
@@ -2287,7 +2287,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT  t$clot LOTE, t$clot DESCRIPCION
           FROM {0}.TWHINH225{1} INH225
-          WHERE t$oorg = 4 AND TRIM(t$orno) = '[p1]' AND TRIM(t$item) = '[p2]'
+          WHERE t$oorg = 4 AND t$rlsd = 1 AND TRIM(t$orno) = '[p1]' AND TRIM(t$item) = '[p2]'
           GROUP BY t$clot
           <!--SELECT  t$clot LOTE, t$clot DESCRIPCION  
           FROM {0}.twhltc300{1} ltc100 

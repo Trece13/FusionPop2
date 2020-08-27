@@ -18,6 +18,7 @@ namespace whusa.Entidades
             this.cwaf = string.Empty;
             this.cwat = string.Empty;
             this.aclo = string.Empty;
+            this.allo = decimal.MinValue;
 
                
               /*drpt
@@ -35,6 +36,7 @@ namespace whusa.Entidades
         public string cwaf { get; set; }
         public string cwat { get; set; }
         public string aclo { get; set; }
+        public decimal allo { get; set; }
 
     }
 }
