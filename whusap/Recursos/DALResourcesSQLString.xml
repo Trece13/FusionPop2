@@ -194,7 +194,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="listaRegistroXSQNB_LocatedRegrind">
         <stringSQL>
-          SELECT A.T$PDNO, A.T$SQNB, A.T$MITM, A.T$QTDL,A.T$DELE, A.T$CUNI, A.T$PONO, A.T$PRO2, B.T$DSCA,B.T$KLTC,C.T$CWAR
+          SELECT A.T$PDNO, SUBSTR(TRIM(A.T$SQNB),-1,3) T$SQNB, A.T$MITM, A.T$QTDL,A.T$DELE, A.T$CUNI, A.T$PONO, A.T$PRO2, B.T$DSCA,B.T$KLTC,C.T$CWAR
           FROM {0}.tticol042{1} A INNER JOIN
           {0}.ttcibd001{1} B ON TRIM(A.T$MITM) = TRIM(B.T$ITEM) INNER JOIN
           {0}.tticst001{1} C ON A.T$PDNO = C.T$PDNO AND A.T$PONO = C.T$PONO

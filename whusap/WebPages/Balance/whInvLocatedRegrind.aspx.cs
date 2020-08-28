@@ -131,7 +131,8 @@ namespace whusap.WebPages.Balance
 
                 obj042.sqnb = txtSQNB.Text.Trim().ToUpperInvariant();
                 obj042.loca = txtLocated.Text.Trim().ToUpperInvariant();
-                resultadoLocated = idal042.listaRegistroXSQNB_FindLocation(ref obj042, ref strError);
+                //resultadoLocated = idal042.listaRegistroXSQNB_FindLocation(ref obj042, ref strError);
+                resultadoLocated = idal042.listaRegistroXSQNB_LocatedRegrind(ref obj042, ref strError);
 
                 if (resultadoLocated.Rows.Count < 1)
                 {
