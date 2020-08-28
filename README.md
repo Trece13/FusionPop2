@@ -1,2 +1,0 @@
-# FusionPop
-Repositorio fusion pop
