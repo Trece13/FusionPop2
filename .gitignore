@@ -1,0 +1,8 @@
+*.txt
+*.cache
+*.log
+*.pdb
+*.dll
+
+!*/bin/*.dll
+!*/bin/Release/*.dll
