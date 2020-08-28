@@ -153,7 +153,7 @@ namespace whusap.WebPages.InvMaterial
                         Qtdl = Convert.ToInt32(ResQtdl.Rows[0]["REQT"].ToString());
                     }
 
-                    item["CANT"] = Convert.ToString(Convert.ToInt32(item["CANT"].ToString()) - Qtdl);
+                    item["CANT"] = Convert.ToString(Convert.ToDecimal(item["CANT"].ToString()) - Qtdl);
                 }
             }
 
