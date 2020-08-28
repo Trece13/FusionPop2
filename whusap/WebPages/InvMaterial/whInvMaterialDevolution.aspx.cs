@@ -351,7 +351,7 @@ namespace whusap.WebPages.InvMaterial
                         obj022.pro2 = 2;
                         obj022.loca = " ";
                         obj022.norp = 1;
-                        obj022.dele = 11;
+                        obj022.dele = 2;
                         obj022.logd = "NONE";
                         obj022.refcntd = 0;
                         obj022.refcntu = 0;

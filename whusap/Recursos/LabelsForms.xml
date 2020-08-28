@@ -5615,7 +5615,7 @@
         </label>
         <label name="printLabel">
           <stringMessage>
-            Print Work Order Tags
+            Print Return Tags
           </stringMessage>
         </label>
         <label name="regularWorkOrder">
@@ -5727,7 +5727,7 @@
         </label>
         <label name="printLabel">
           <stringMessage>
-            Imprimir etiquetas OT
+            Imp Etiquetas Devol
           </stringMessage>
         </label>
         <label name="regularWorkOrder">

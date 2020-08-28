@@ -3952,8 +3952,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$PROC = :T$PROC,
           T$REFCNTD = :T$REFCNTD,
           T$REFCNTU = :T$REFCNTU,
-          T$CLOT = :T$CLOT
-          T$PICK = :T$PICK
+          T$CLOT = :T$CLOT,
+          T$PICK = :T$PICK,
           T$OORG = :T$OORG
         </stringSQL>
       </operationName>
