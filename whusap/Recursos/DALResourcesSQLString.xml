@@ -1147,12 +1147,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and     inh220.t$oorg = 1
           and TRIM(inh200.T$STCO)=TRIM('[:T$STAD]')
           and inh220.t$pddt &lt;= TO_CHAR(TO_DATE('[:T$PDDT]','YYYY/MM/DD'),'DD-MON-YYYY')
-          and not exists (select (col082.t$orno||col082.t$pono||col082.t$oset) from {0}.tticol082{1} col082
+          <!--and not exists (select (col082.t$orno||col082.t$pono||col082.t$oset) from {0}.tticol082{1} col082
           where   col082.t$orno = inh220.t$orno
           and     col082.t$pono = inh220.t$pono
           and     col082.t$oset = inh220.t$oset
           and     col082.t$oorg = inh220.t$oorg
-          and     col082.t$sqnb = inh220.t$seqn)
+          and     col082.t$sqnb = inh220.t$seqn)-->
           order by inh220.t$pddt, inh220.t$orno, inh220.t$pono ASC
         </stringSQL>
       </operationName>
