@@ -5613,9 +5613,9 @@
             Save Items
           </stringMessage>
         </label>
-        <label name="printLabel">
+        <label name="c">
           <stringMessage>
-            Print Work Order Tags
+            Print Return Tag
           </stringMessage>
         </label>
         <label name="regularWorkOrder">
@@ -5727,7 +5727,7 @@
         </label>
         <label name="printLabel">
           <stringMessage>
-            Imprimir etiquetas OT
+            Imprmir Etiqueta Devol
           </stringMessage>
         </label>
         <label name="regularWorkOrder">
