@@ -95,7 +95,7 @@ namespace whusa.DAL
               paramList.Add(":T$SQNB", parametros.sqnb.Trim().ToUpper());
               paramList.Add(":T$PROC", parametros.proc);
               paramList.Add(":T$LOGN", parametros.logn.Trim().ToUpper());
-              paramList.Add(":T$MITM", parametros.mitm.Trim().ToUpper());
+              paramList.Add(":T$MITM", "         " + parametros.mitm.Trim().ToUpper());
               paramList.Add(":T$PONO", parametros.pono); 
               paramList.Add(":T$QTDL", parametros.qtdl); 
               paramList.Add(":T$CUNI", parametros.cuni.Trim().ToUpper());  
