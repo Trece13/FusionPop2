@@ -33,7 +33,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="SecuenciaMayor042">
         <stringSQL>
-          select * from (select * from BAAN.tticol042140 where T$SQNB LIKE '%[:T$SQNB]-C%' order by T$SQNB desc) where rownum = 1
+          select * from (select * from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-C%' order by T$SQNB desc) where rownum = 1
         </stringSQL>
       </operationName>
       <operationName name="InsertarRegistroTicol242">
@@ -54,7 +54,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="insertarRegistroSimpleD">
         <stringSQL>
-          INSERT INTO BAAN.tticol042140 (
+          INSERT INTO {0}.tticol042{1} (
           T$PDNO,
           T$SQNB,
           T$PROC,
@@ -242,12 +242,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol022">
       <operationName name="SecuenciaMayor022">
         <stringSQL>
-          select * from (select * from BAAN.tticol022140 where T$SQNB LIKE '%[:T$SQNB]-C%' order by T$SQNB desc) where rownum = 1
+          select * from (select * from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-C%' order by T$SQNB desc) where rownum = 1
         </stringSQL>
       </operationName>
       <operationName name="SecuenciaMayor022RT">
         <stringSQL>
-          select * from (select * from BAAN.tticol022140 where T$SQNB LIKE '%[:T$SQNB]-RT%' order by T$SQNB desc) where rownum = 1
+          select * from (select * from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-RT%' order by T$SQNB desc) where rownum = 1
         </stringSQL>
       </operationName>
       <operationName name="ActualizarUbicacionTicol222">
@@ -493,13 +493,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol019">
       <operationName name="insertRegistertwhcol019">
         <stringSQL>
-          INSERT INTO baan.twhcol019140(T$PAID,T$SQNB,T$ZONE,T$CWAR,T$LOCA,T$ITEM,T$CLOT,T$QTDL,T$CUNI,T$LOGN,T$DATE,T$COUN,T$PROC,T$REFCNTD,T$REFCNTU)
+          INSERT INTO {0}.twhcol019{1}(T$PAID,T$SQNB,T$ZONE,T$CWAR,T$LOCA,T$ITEM,T$CLOT,T$QTDL,T$CUNI,T$LOGN,T$DATE,T$COUN,T$PROC,T$REFCNTD,T$REFCNTU)
           VALUES ('[:T$PAID]','[:T$SQNB]','[:T$ZONE]','[:T$CWAR]','[:T$LOCA]','[:T$ITEM]','[:T$CLOT]','[:T$QTDL]','[:T$CUNI]','[:T$LOGN]',SYSDATE,'[:T$COUN]','[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
         </stringSQL>
       </operationName>
       <operationName name="Consetwhcol019">
         <stringSQL>
-          select * from baan.twhcol019140 where trim(T$PAID) = trim('[:T$PAID]')
+          select * from {0}.twhcol019{1} where trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
       </operationName>
     </Module>
@@ -1085,22 +1085,22 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultaWarehouseTticol082">
         <stringSQL>
           SELECT DISTINCT col082.T$CWAR as TITE, mcs003.T$DSCA dsca
-          from  BAAN.tticol082140 col082
-          inner join BAAN.tticol003140 col003 on col003.t$mcno =  col082.t$mcno
-          left join BAAN.tticol002140 col002 on col002.t$tite =  col003.t$tite
-          left join BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM = col082.T$ITEM
-          left join baan.ttcmcs003140 mcs003 on col082.t$cwar = mcs003.t$cwar
+          from  {0}.tticol082{1} col082
+          inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno
+          left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite
+          left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM
+          left join {0}.ttcmcs003{1} mcs003 on col082.t$cwar = mcs003.t$cwar
           where t$STAT =1  and col002.t$tite = '[:T$TITE]'
         </stringSQL>
       </operationName>
       <operationName name="ConsultaMachineTticol082">
         <stringSQL>
           SELECT DISTINCT col003.t$mcno as MCNO, col003.t$mcno dsca
-          from  BAAN.tticol082140 col082
-          inner join BAAN.tticol003140 col003 on col003.t$mcno =  col082.t$mcno
-          left join BAAN.tticol002140 col002 on col002.t$tite =  col003.t$tite
-          left join BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM = col082.T$ITEM
-          left join baan.ttcmcs003140 mcs003 on col082.t$cwar = mcs003.t$cwar
+          from  {0}.tticol082{1} col082
+          inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno
+          left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite
+          left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM
+          left join {0}.ttcmcs003{1} mcs003 on col082.t$cwar = mcs003.t$cwar
           where t$STAT =1  and col002.t$tite = '[:T$TITE]' and col082.t$cwar = '[:T$CWAR]'
         </stringSQL>
       </operationName>
@@ -1395,23 +1395,23 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="maximaSecuencia">
       <stringSQL>
         SELECT T$PAID  FROM(
-        SELECT t$PAID FROM BAAN.twhcol131140 WHERE T$paid LIKE '%[:T$ORNO]%' order by t$PAID desc
+        SELECT t$PAID FROM {0}.twhcol131{1} WHERE T$paid LIKE '%[:T$ORNO]%' order by t$PAID desc
         ) WHERE ROWNUM =1
       </stringSQL>
     </operationName>
       <operationName name="VerificarZoneCode">
         <stringSQL>
-          SELECT * FROM BAAN.twhwmd310140 WHERE T$ZONE = '[:ZONE]'
+          SELECT * FROM {0}.twhwmd310{1} WHERE T$ZONE = '[:ZONE]'
         </stringSQL>
       </operationName>
       <operationName name="VerificarPalletID">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO from {0}.tticol022{1} col022
-          INNER JOIN baan.tticol222140 col222 on col222.t$sqnb = col022.t$sqnb
+          INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           UNION
           select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO from {0}.tticol042{1} col042
-          INNER JOIN baan.tticol242140 col242 on col242.t$sqnb = col042.t$sqnb
+          INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
           UNION
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA from {0}.twhcol131{1} col131
           ) ConGlobal
@@ -1424,20 +1424,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="VerificarPalletIDz">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,whwmd200.T$sloc SLOC FROM (
-          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO from baan.tticol022140 col022
-          INNER JOIN baan.tticol222140 col222 on col222.t$sqnb = col022.t$sqnb
+          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO from {0}.tticol022{1} col022
+          INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           where col022.T$DELE = 7
           UNION
-          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO from baan.tticol042140 col042
-          INNER JOIN baan.tticol242140 col242 on col242.t$sqnb = col042.t$sqnb
+          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO from {0}.tticol042{1} col042
+          INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
           where col042.T$DELE = 7
           UNION
-          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA from baan.twhcol131140 col131
+          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA from {0}.twhcol131{1} col131
           where col131.T$STAT = 3
           ) ConGlobal
-          LEFT JOIN baan.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
-          LEFT JOIN baan.ttcmcs003140 mcs003 on ConGlobal.CWAT = mcs003.t$cwar
-          LEFT JOIN baan.twhwmd200140 whwmd200 ON ConGlobal.CWAT = whwmd200.T$CWAR
+          LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
+          LEFT JOIN {0}.twhwmd200{1} whwmd200 ON ConGlobal.CWAT = whwmd200.T$CWAR
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
         </stringSQL>
       </operationName>
@@ -2029,7 +2029,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {2} tcibd001
           LEFT JOIN {0}.ttdipu001{1} tdipu001 ON tdipu001.T$ITEM = tcibd001.T$ITEM
           LEFT JOIN {0}.ttccom100{1} tccom100 ON tccom100.T$BPID = tdipu001.T$OTBP
-          LEFT JOIN {0}.twhltc100{1} whltc100140 ON tcibd001.T$ITEM = whltc100140.T$ITEM
+          LEFT JOIN {0}.twhltc100{1} whltc100{1} ON tcibd001.T$ITEM = whltc100140.T$ITEM
           WHERE TRIM(upper(tcibd001.T$ITEM)) = TRIM(upper('[:T$ITEM]'))
         </stringSQL>
       </operationName>
@@ -2171,21 +2171,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultarCantidadPoritem022042131">
         <stringSQL>
           select TBL, ITEM, SUM(QTYC) QTYC, CUNI, STAT,ORNO from (
-          SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,SUM(T$QTYA) AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT,T$ORNO AS ORNO,T$LOGN LOGN, T$DATE FROM baan.tWhcol131140
+          SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,SUM(T$QTYA) AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT,T$ORNO AS ORNO,T$LOGN LOGN, T$DATE FROM {0}.tWhcol131{1}
           WHERE T$STAT = 6
           group by T$PAID,T$CWAA,T$LOAA,T$ITEM,T$UNIC,T$STAT,T$ORNO,T$LOGN, T$DATE
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$SQNB AS PAID,ticol242.T$CWAT AS CWAR,ticol242.T$ACLO AS LOCA,ticol042.T$MITM AS ITEM,SUM(ticol242.T$ACQT) AS qtyc,
           ticol042.T$CUNI AS CUNI,ticol042.T$DELE AS STAT,ticol042.T$PDNO AS ORNO,T$LOGN LOGN, T$DATE
-          FROM baan.tticol042140 ticol042
-          INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          FROM {0}.tticol042{1} ticol042
+          INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           WHERE ticol042.T$DELE = 8
           group by ticol042.T$SQNB,T$CWAT,T$ACLO,T$MITM,T$CUNI,T$DELE,ticol042.T$PDNO,T$LOGN,T$DATE
           UNION
           SELECT 'ticol022' AS TBL,ticol022.T$SQNB AS PAID,ticol222.T$CWAT AS CWAR,ticol222.T$ACLO AS LOCA,ticol022.T$MITM AS ITEM,SUM(ticol222.T$ACQT) AS qtyc,
           ticol022.T$CUNI AS CUNI,ticol022.T$DELE AS STAT,ticol022.T$PDNO AS ORNO,T$LOGN LOGN, T$DATE
-          FROM baan.tticol022140 ticol022
-          INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          FROM {0}.tticol022{1} ticol022
+          INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           WHERE ticol022.T$DELE = 8
           group by ticol022.T$SQNB,T$CWAT,T$ACLO,T$MITM,T$CUNI,T$DELE,ticol022.T$PDNO,T$LOGN,T$DATE
           ) where trim(ITEM) = trim('[:T$ITEM]')
@@ -2194,12 +2194,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarCantidad215">
         <stringSQL>
-          SELECT * FROM BAAN.twhwmd215140 where TRIM(T$CWAR) = TRIM('[:T$CWAR]') and TRIM(T$ITEM) = TRIM('[:T$ITEM]')
+          SELECT * FROM {0}.twhwmd215{1} where TRIM(T$CWAR) = TRIM('[:T$CWAR]') and TRIM(T$ITEM) = TRIM('[:T$ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="InsertTticol088">
         <stringSQL>
-          INSERT INTO baan.tticol088140 (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU,T$OORG) VALUES ('[:T$ORNO]','[:T$PONO]','[:T$ITEM]','[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]','[:T$OORG]')
+          INSERT INTO {0}.tticol088{1} (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU,T$OORG) VALUES ('[:T$ORNO]','[:T$PONO]','[:T$ITEM]','[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]','[:T$OORG]')
         </stringSQL>
       </operationName>
       
@@ -2700,10 +2700,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT T022.T$TGID T$LABL, T022.T$ITEM, T002.T$DSCA ARTICULO, T002.T$CUNI UNIDAD,
           T003.T$CWAR, SUBSTR(T022.T$TGID, 0, INSTR(T022.T$TGID, '-')) T$PDNO, T022.T$CLOT,
           T022.T$QTDL T$QTYR, T003.T$DSCA BODEGA, T002.T$KLTC T$KITM
-          FROM  baan,twhcol018140 T022 LEFT JOIN baan.ttisfc001140 T001 ON
+          FROM  {0},twhcol018{1} T022 LEFT JOIN {0}.ttisfc001{1} T001 ON
           SUBSTR(T022.T$TGID, 0, INSTR(T022.T$TGID, '-')) = T001.T$PDNO
-          LEFT JOIN  baan.ttcmcs003140  T003 ON T001.T$CWAR = T003.T$CWAR
-          LEFT JOIN  baan.ttcibd001140 T002 ON LTRIM(RTRIM(T022.T$ITEM))= LTRIM(RTRIM(T002.T$ITEM))
+          LEFT JOIN  {0}.ttcmcs003{1}  T003 ON T001.T$CWAR = T003.T$CWAR
+          LEFT JOIN  {0}.ttcibd001{1} T002 ON LTRIM(RTRIM(T022.T$ITEM))= LTRIM(RTRIM(T002.T$ITEM))
           WHERE LTRIM(RTRIM(T$TGID)) = '[:T$LABL]'
         </stringSQL>
       </operationName>
@@ -2712,9 +2712,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT T022.T$SQNB T$LABL, T022.T$MITM T$ITEM, T002.T$DSCA ARTICULO, T002.T$CUNI UNIDAD,
           T003.T$CWAR, T022.T$QTDL T$QTYR, T003.T$DSCA BODEGA, NVL(T002.T$KLTC ,3) T$KITM,
           CASE NVL(T002.T$KLTC,3) WHEN 1 THEN T022.T$PDNO ELSE '' END T$CLOT
-          FROM BAAN baan.tticol022140 T022 LEFT JOIN  BAAN.ttisfc001140 T001 ON T022.T$PDNO = T001.T$PDNO
-          LEFT JOIN BAAN.ttcmcs003140 T003 ON T001.T$CWAR = T003.T$CWAR
-          LEFT JOIN BAAN.ttcibd001140 T002 ON TRIM(T022.T$MITM)= TRIM(T002.T$ITEM)
+          FROM {0} {0}.tticol022{1} T022 LEFT JOIN  {0}.ttisfc001{1} T001 ON T022.T$PDNO = T001.T$PDNO
+          LEFT JOIN {0}.ttcmcs003{1} T003 ON T001.T$CWAR = T003.T$CWAR
+          LEFT JOIN {0}.ttcibd001{1} T002 ON TRIM(T022.T$MITM)= TRIM(T002.T$ITEM)
           WHERE TRIM(T$SQNB) = '[:T$LABL]'
         </stringSQL>
       </operationName>
@@ -2723,8 +2723,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT T016.T$ZONE, T016.T$LABL, T016.T$ITEM, T002.T$DSCA ARTICULO, T002.T$CUNI UNIDAD, T002.T$KLTC T$KITM,
           T016.T$CWAR, T003.T$DSCA BODEGA, T016.T$CLOT, T016.T$QTYR, T016.T$LOGN,
           TO_CHAR(((T016.T$DATE)-5/24), 'DD/MM/YYYY hh24:mi:ss') T$DATE, T016.T$REFCNTD, T016.T$REFCNTU
-          FROM baan.twhcol016140 T016 LEFT JOIN baan.ttcibd001140 T002 ON TRIM(T016.T$ITEM) = TRIM(T002.T$ITEM)
-          LEFT JOIN baan.ttcmcs003140 T003 ON T016.T$CWAR = T003.T$CWAR
+          FROM {0}.twhcol016{1} T016 LEFT JOIN {0}.ttcibd001{1} T002 ON TRIM(T016.T$ITEM) = TRIM(T002.T$ITEM)
+          LEFT JOIN {0}.ttcmcs003{1} T003 ON T016.T$CWAR = T003.T$CWAR
           WHERE TRIM(t$labl) = '[:T$LABL]'
         </stringSQL>
       </operationName>
@@ -2859,8 +2859,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ibd001.t$cuni Unit,
           col130.t$cdis AdjustmentReason,
           1 AS Status,
-          ' ' AS AdjustmentBaanOrder,
-          10 AS AdjustmentBaanOrderLine
+          ' ' AS Adjustment{0}Order,
+          10 AS Adjustment{0}OrderLine
           FROM {0}.tticol130{1} col130, {0}.ttcmcs050{1} mcs050, {0}.ttcibd001{1} ibd001
           WHERE mcs050.t$nrgr = col130.t$nrgr AND
           trim(ibd001.t$item) = '[p1]'
@@ -4026,32 +4026,32 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol100">
       <operationName name="updatetwhcol131">
         <stringSQL>
-          UPDATE  BAAN.twhcol131140 SET T$CWAA  = '[:T$SWAR]'  ,T$LOAA ='[:ACLO]'   WHERE T$PAID = '[:T$SQNB]'
+          UPDATE  {0}.twhcol131{1} SET T$CWAA  = '[:T$SWAR]'  ,T$LOAA ='[:ACLO]'   WHERE T$PAID = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="selectpriowhwmd300">
         <stringSQL>
-          select  t$cwar warehouse, t$loca lcation, min(t$prio) priority from baan.twhwmd300140 where   t$cwar =  '[:T$SWAR]' and t$loct = 5 and rownum = 1 GROUP BY t$cwar,t$loca
+          select  t$cwar warehouse, t$loca lcation, min(t$prio) priority from {0}.twhwmd300{1} where   t$cwar =  '[:T$SWAR]' and t$loct = 5 and rownum = 1 GROUP BY t$cwar,t$loca
         </stringSQL>
       </operationName>
       <operationName name="selecthandletwhwmd200">
         <stringSQL>
-          select  t$cwar warehosue, t$sloc handle_locations from   baan.twhwmd200140   where   t$cwar = '[:T$SWAR]'
+          select  t$cwar warehosue, t$sloc handle_locations from   {0}.twhwmd200{1}   where   t$cwar = '[:T$SWAR]'
         </stringSQL>
       </operationName>
       <operationName name="updatetticol222">
         <stringSQL>
-          UPDATE  baan.tticol222140 SET T$CWAT = '[:T$SWAR]'  ,T$ACLO='[:ALOC]'    WHERE T$SQNB = '[:T$SQNB]'
+          UPDATE  {0}.tticol222{1} SET T$CWAT = '[:T$SWAR]'  ,T$ACLO='[:ALOC]'    WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="selecttwhwmd200">
         <stringSQL>
-          SELECT  t$cwar warehosue, t$sloc handle_locations FROM   baan.twhwmd200140  WHERE   t$cwar = '[:T$SWAR]'
+          SELECT  t$cwar warehosue, t$sloc handle_locations FROM   {0}.twhwmd200{1}  WHERE   t$cwar = '[:T$SWAR]'
         </stringSQL>
       </operationName>
       <operationName name="selecttwhwmd300">
         <stringSQL>
-          SELECT  t$cwar warehouse, t$loca lcation, min(t$prio) priority FROM baan.twhwmd300140 WHERE   t$cwar =  '[:T$SWAR]' AND t$loct = 5 AND rownum = 1 GROUP BY t$cwar, t$loca
+          SELECT  t$cwar warehouse, t$loca lcation, min(t$prio) priority FROM {0}.twhwmd300{1} WHERE   t$cwar =  '[:T$SWAR]' AND t$loct = 5 AND rownum = 1 GROUP BY t$cwar, t$loca
         </stringSQL>
       </operationName>
       <operationName name="findMaxSeqnByPdno">
@@ -4324,15 +4324,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol118">
       <operationName name="invRegrid_Indentifier">
         <stringSQL>
-          select count(*) cnt from BAAN.tticol118140 WHERE T$PAID= '[:T$PAID]' and T$DISP = '[:T$DISP]';
+          select count(*) cnt from {0}.tticol118{1} WHERE T$PAID= '[:T$PAID]' and T$DISP = '[:T$DISP]';
         </stringSQL>
       </operationName>
       <operationName name="invLabel_registroImprimir_Param2">
         <stringSQL>
           select trim(ibd001.t$item), col020.t$pent factorkg, col008.t$wreg wreg
-          from baan.ttcibd001140  ibd001
-          inner join baan.ttccol020140  col020 on col020.t$item = ibd001.t$item
-          inner join baan.tticol008140  col008 on col008.t$wmrb = '[:T$CWAR]'
+          from {0}.ttcibd001{1}  ibd001
+          inner join {0}.ttccol020{1}  col020 on col020.t$item = ibd001.t$item
+          inner join {0}.tticol008{1}  col008 on col008.t$wmrb = '[:T$CWAR]'
           where trim(ibd001.t$item)=trim('[::T$ITEM]')
         </stringSQL>
       </operationName>
@@ -4340,12 +4340,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           select * from (select case trim(col118.t$ritm) when 'NA' then trim(col118.t$item) else trim(col118.t$ritm) end item, trim(ibd001.t$dsca) desci, trim(ibd001.t$cuni) unidad, col118.t$qtyr cantidad, " +
           col118.t$clot lote, mcs005.t$dsca descr, substr(col118.t$obse,1,255) comentario, col020.t$pent factorkg, col118.t$datr-5/24 fecha, trim(col118.T$PAID) paid, col008.t$wreg wreg " +
-          from baan.tticol118140 col118
-          inner join baan.ttcibd001140 ibd001 on ibd001.t$item = col118.t$item
-          left join baan.ttcibd001140 dbi001 on dbi001.t$item = col118.t$ritm
-          inner join baan.ttccol020140 col020 on col020.t$item = col118.t$item
-          inner join baan.ttcmcs005140 mcs005 on mcs005.t$cdis = col118.t$cdis
-          inner join baan.tticol008140 col008 on col008.t$wmrb = col118.t$cwar
+          from {0}.tticol118{1} col118
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col118.t$item
+          left join {0}.ttcibd001{1} dbi001 on dbi001.t$item = col118.t$ritm
+          inner join {0}.ttccol020{1} col020 on col020.t$item = col118.t$item
+          inner join {0}.ttcmcs005{1} mcs005 on mcs005.t$cdis = col118.t$cdis
+          inner join {0}.tticol008{1} col008 on col008.t$wmrb = col118.t$cwar
           where trim(col118.t$item)=trim('[:T$ITEM]')
           and upper(col118.t$clot)='[:T$CLOT"]'
           and col118.t$cwar='[::T$CWAR]' order by col118.T$DATR DESC)where rownum = 1
@@ -4354,56 +4354,56 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="listaRegrind_ParamV2">
         <stringSQL>
           select distinct ticol001.t$item item, ticol001.t$dsca descri, trim(ticol001.t$item)||' - '||trim(ticol001.t$dsca) descrc
-          from baan.ttcibd0011140 ticol001
-          INNER JOIN baan.tticol135140 ticol135 ON ticol135.T$RGRN = ticol001.T$ITEM"
+          from {0}.ttcibd0011{1} ticol001
+          INNER JOIN {0}.tticol135{1} ticol135 ON ticol135.T$RGRN = ticol001.T$ITEM"
           WHERE TRIM(ticol135.T$ITEM) = '[:T$ITEM] '
         </stringSQL>
       </operationName>
       <operationName name="listaRegrind_Param">
         <stringSQL>
-          select t$item item, t$dsca descri, trim(t$item)||' - '||trim(t$dsca) descrc from baan.ttcibd001140
+          select t$item item, t$dsca descri, trim(t$item)||' - '||trim(t$dsca) descrc from {0}.ttcibd001{1}
           where t$cpcl = 'RET'
           order by t$dsca
         </stringSQL>
       </operationName>
       <operationName name="listaStockw_Param">
         <stringSQL>
-          strSentencia = "select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from baan.ttcmcs003140 order by warehouse";
+          strSentencia = "select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from {0}.ttcmcs003{1} order by warehouse";
         </stringSQL>
       </operationName>
       <operationName name="listaReason_Param">
         <stringSQL>
-          select t$cdis reason, t$dsca descr from baan.ttcmcs005140
+          select t$cdis reason, t$dsca descr from {0}.ttcmcs005{1}
           where t$rstp = 10
           order by t$dsca
         </stringSQL>
       </operationName>
       <operationName name="ListaProveedoresProducto">
         <stringSQL>
-          select com100.T$BPID proveedor, com100.T$NAMA nombre from baan.ttccom100140 com100
-          INNER JOIN baan.ttdipu010140  dipu0101 ON  dipu0101.T$OTBP = com100.T$BPID
+          select com100.T$BPID proveedor, com100.T$NAMA nombre from {0}.ttccom100{1} com100
+          INNER JOIN {0}.ttdipu010{1}  dipu0101 ON  dipu0101.T$OTBP = com100.T$BPID
           WHERE Trim(dipu0101.T$ITEM) = Trim('[:T$ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="listaProveedores_ParamMRB">
         <stringSQL>
-          select ipu010.t$otbp proveedor, com100.t$nama nombre from baan.ttdipu010140 ipu010
-          inner join baan.ttccom100140 com100 on ipu010.t$otbp = com100.t$bpid
+          select ipu010.t$otbp proveedor, com100.t$nama nombre from {0}.ttdipu010{1} ipu010
+          inner join {0}.ttccom100{1} com100 on ipu010.t$otbp = com100.t$bpid
           where trim(ipu010.t$item) like '%[:T$ITEM]%'
         </stringSQL>
       </operationName>
       <operationName name="listaProveedores_Param">
         <stringSQL>
-          select ipu010.t$otbp proveedor, com100.t$nama nombre from baan.ttcibd001140 ibd001
-          left join baan.ttdipu010140 ipu010 on ipu010.t$item = ibd001.t$item
-          left join baan.ttccom100140 com100 on com100.t$bpid = ipu010.t$otbp
+          select ipu010.t$otbp proveedor, com100.t$nama nombre from {0}.ttcibd001{1} ibd001
+          left join {0}.ttdipu010{1} ipu010 on ipu010.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu010.t$otbp
           where trim(ibd001.t$item)='[:T$ITEM]'
         </stringSQL>
       </operationName>
       <operationName name="selectticol118">
         <stringSQL>
           SELECT * FROM (SELECT T$ITEM, T$CWAR, T$CLOT, T$QTYR, T$CDIS, T$OBSE, T$LOGR, T$DATR, T$DISP, T$STOC, T$RITM, T$PROC, T$MESS, T$SUNO,T$PAID
-          FROM BAAN.tticol118140 col118
+          FROM {0}.tticol118{1} col118
           WHERE trim(col118.t$item) ='[:T$ITEM]'
           AND upper(col118.t$clot) = '[:T$CLOT]' order by T$DATR DESC) WHERE ROWNUM = 1
         </stringSQL>
@@ -4436,10 +4436,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
           ipu001.t$otbp proveedor, com100.t$nama nombre
-          from baan.twhinr140140 inr140
-          inner join baan.ttcibd001140 ibd001 on ibd001.t$item = inr140.t$item
-          left join baan.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join baan.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
+          from {0}.twhinr140{1} inr140
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
+          left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
           where trim(inr140.t$item)=trim('[:T$ITEM]')
           and trim(inr140.t$clot)=trim('[:T$CLOT]')
           and trim(inr140.t$cwar) = trim('[:T$CWAR]')
@@ -4449,17 +4449,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
           ipu001.t$otbp proveedor, com100.t$nama nombre
-          from BAAN.twhinr140140 inr140
-          inner join BAAN.ttcibd001140 ibd001 on ibd001.t$item = inr140.t$item
-          left join  BAAN.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join  BAAN.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
+          from {0}.twhinr140{1} inr140
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr{1}.t$item
+          left join  {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join  {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
           where trim(inr140.t$item)=trim('[:T$ITEM]')
           and trim(inr140.t$cwar) = trim('[:T$CWAR]')
         </stringSQL>
       </operationName>
       <operationName name="selecttwhltc100">
         <stringSQL>
-          select ltc100.t$clot lot, ltc100.t$orno orden from BAAN.twhltc100140 ltc100
+          select ltc100.t$clot lot, ltc100.t$orno orden from {0}.twhltc100{1} ltc100
           where trim(ltc100.t$item)='[:T$ITEM]'
           and trim(ltc100.t$clot)='[:T$CLOT]'
         </stringSQL>
@@ -4467,16 +4467,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="selectttcibd001">
         <stringSQL>
           select ibd001.t$item AS item, ibd001.t$dsca AS descitem, ibd001.t$cuni AS unit, ibd001.t$cwar  AS ware, ibd001.t$kltc as mlot, ipu001.t$otbp as proveedor, com100.t$nama as nombre,col020.t$pent AS factorkg
-          from BAAN.ttcibd001140 ibd001
-          left join BAAN.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join BAAN.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
-          left join BAAN.ttccol020140 col020 on col020.t$item = ibd001.t$item
+          from {0}.ttcibd001{1} ibd001
+          left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
+          left join {0}.ttccol020{1} col020 on col020.t$item = ibd001.t$item
           where trim(ibd001.t$item)=TRIM('[:T$ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="listaRegistrosOrden_Param">
         <stringSQL>
-          SELECT RTRIM(col127.t$cwar) waremrb FROM BAAN.tticol127140 col127
+          SELECT RTRIM(col127.t$cwar) waremrb FROM {0}.tticol127{1} col127
           WHERE upper(col127.t$user) = '[:T$USER]'
         </stringSQL>
       </operationName>
@@ -4484,10 +4484,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
           ipu001.t$otbp proveedor, com100.t$nama nombre
-          from baan.twhinr140140 inr140
-          inner join baan.ttcibd001140 ibd001 on ibd001.t$item = inr140.t$item
-          left join baan.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join baan.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
+          from {0}.twhinr140{1} inr140
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
+          left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
           where trim(inr140.t$item)=trim('[:T$ITEM]')
           and trim(inr140.t$cwar) = trim('[:T$CWAR]')
         </stringSQL>
@@ -4496,10 +4496,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
           ipu001.t$otbp proveedor, com100.t$nama nombre
-          from baan.twhinr140140 inr140
-          inner join bann.ttcibd001140 ibd001 on ibd001.t$item = inr140.t$item
-          left join bann.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join bann.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
+          from {0}.twhinr140{1} inr140
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
+          left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
           where trim(inr140.t$item)=trim('[:T$ITEM]')
           and trim(inr140.t$clot)=trim('[:T$CLOT]')
           and trim(inr140.t$cwar) = trim('[:T$CWAR]')
@@ -4507,7 +4507,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="selecttwhltc100">
         <stringSQL>
-          select ltc100.t$clot lot, ltc100.t$orno orden from BAAN.twhltc100140 ltc100
+          select ltc100.t$clot lot, ltc100.t$orno orden from {0}.twhltc100{1} ltc100
           where trim(ltc100.t$item)='[:T$ITEM]'
           and trim(ltc100.t$clot)='[:T$CLOT]'
         </stringSQL>
@@ -4515,24 +4515,24 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="listaRegistrosOrden_ParamMRB">
         <stringSQL>
           select ibd001.t$item AS item, ibd001.t$dsca AS descitem, ibd001.t$cuni AS unit, ibd001.t$cwar  AS ware, ibd001.t$kltc as mlot, ipu001.t$otbp as proveedor, com100.t$nama as nombre,col020.t$pent AS factorkg
-          from baan.ttcibd001140 ibd001
-          left join BAAN.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join BAAN.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
-          left join BAAN.ttccol020140 col020 on col020.t$item = ibd001.t$item
+          from {0}.ttcibd001{1} ibd001
+          left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
+          left join {0}.ttccol020{1} col020 on col020.t$item = ibd001.t$item
           where trim(ibd001.t$item)=TRIM('[:T$ITEM]')"
         </stringSQL>
       </operationName>
       <operationName name="Lista_Lote">
         <stringSQL>
-          select distinct ltc100.t$clot lot from baan.twhltc100140 ltc100 where trim(upper(ltc100.t$clot)) ='[:T$CLOT]'
+          select distinct ltc100.t$clot lot from {0}.twhltc100{1} ltc100 where trim(upper(ltc100.t$clot)) ='[:T$CLOT]'
         </stringSQL>
       </operationName>
       <operationName name="Lista_Items">
         <stringSQL>
           select distinct ibd001.t$item AS item, ibd001.t$kltc as kltc
-          from baan.ttcibd001140 ibd001
-          left join baan.ttdipu001140 ipu001 on ipu001.t$item = ibd001.t$item
-          left join baan.ttccom100140 com100 on com100.t$bpid = ipu001.t$otbp
+          from {0}.ttcibd001{1} ibd001
+          left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
+          left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
         </stringSQL>
       </operationName>
       <operationName name="listaRegistro_ObtieneAlmacen">
@@ -5081,7 +5081,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --(SELECT CASE WHEN cant_reg IS NULL THEN 0 ELSE cant_reg END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO) CANT_REG,
           tcibd001.T$CUNI AS CUNI, ticst001.T$QUES AS CANT_EST,
           (SELECT SUM(ticst0012.T$QUCS) FROM {0}.tticst001{1} ticst0012 WHERE ticst0012.T$PDNO = '[:T$PDNO]' AND ticst0012.T$SITM = ticst001.T$SITM ) AS ACT_CANT,
-          (SELECT SUM(ticol082.T$QTYT) FROM BAAN.tticol082140 ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,
+          (SELECT SUM(ticol082.T$QTYT) FROM {0}.tticol082{1} ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,
           ticst001.T$ISWH AS ISWH_1, tcibd200.T$OQMF AS OQMF,
           CASE WHEN ticol080.T$QUNE IS NULL THEN 0 ELSE ticol080.T$QUNE END AS CANTD, tisfc010.T$MCNO AS MCNO
           FROM {0}.tticst001{1} ticst001
