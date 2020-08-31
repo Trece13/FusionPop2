@@ -22,7 +22,7 @@ namespace whusap.WebPages.SalesOrders
 {
     public partial class SalesOrders : System.Web.UI.Page
     {
-        
+
 
         public static IntefazDAL_ttccom110 Ittccom110 = new IntefazDAL_ttccom110();
         public static IntefazDAL_twhinh220 Itwhinh220 = new IntefazDAL_twhinh220();
@@ -35,7 +35,7 @@ namespace whusap.WebPages.SalesOrders
         public static string InvalidCustomerCode = string.Empty;
         string formName = string.Empty;
         public static string _operator = string.Empty;
-        string  _idioma = string.Empty;
+        string _idioma = string.Empty;
         private static Mensajes _mensajesForm = new Mensajes();
         private static string globalMessages = "GlobalMessages";
 
@@ -95,13 +95,28 @@ namespace whusap.WebPages.SalesOrders
         [WebMethod]
         public static string ClickQuery(string Customer, string ToDate)
         {
+            string ToDateAux = string.Empty;
+            while(ToDate.IndexOf("/") != -1){
+                
+
+                int LocateSlash = ToDate.IndexOf("/");
+                ToDateAux += (ToDate.Substring(0, LocateSlash))+"-";
+                ToDate = ToDate.Remove(0, LocateSlash+1);
+                if (ToDate.IndexOf("/") == -1)
+                {
+                    ToDateAux = (ToDate+"-"+ToDateAux);
+                    ToDate = ToDate.Remove(0, LocateSlash);
+                    ToDate = ToDateAux.Remove((ToDateAux.Length-1),1);
+                }
+            }
+
             Ent_twhinh220 Objtwhinh220 = new Ent_twhinh220
             {
                 STAD = Customer,
                 PDDT = ToDate
             };
             string strError = string.Empty;
-            DataTable ListaRegistroCustomer = Itwhinh220.TraerOrdenesCustomer(Objtwhinh220,ref strError);
+            DataTable ListaRegistroCustomer = Itwhinh220.TraerOrdenesCustomer(Objtwhinh220, ref strError);
             if (strError == string.Empty)
             {
                 return JsonConvert.SerializeObject(ListaRegistroCustomer);
@@ -111,11 +126,11 @@ namespace whusap.WebPages.SalesOrders
                 return strError;
             }
 
-           
-            
+
+
         }
 
-        
+
 
         private static int CantidadPorCiclo(decimal QCUNI, int QFAC, int CICLOS, int CICLOACTUAL)
         {
@@ -213,12 +228,12 @@ namespace whusap.WebPages.SalesOrders
         {
 
             List<Ent_twhinh220> lstGuardar = JsonConvert.DeserializeObject<List<Ent_twhinh220>>(LstJson);
-            List<bool> ListInsertResult = new List<bool>(); 
+            List<bool> ListInsertResult = new List<bool>();
 
             if (lstGuardar.Count > 0)
             {
 
-                
+
                 foreach (Ent_twhinh220 myObj in lstGuardar)
                 {
                     Factor MyConvertionFactor = new Factor { };
@@ -292,7 +307,7 @@ namespace whusap.WebPages.SalesOrders
                             List<Ent_tticol080> lst80 = new List<Ent_tticol080>();
                             lst80.Add(Objtticol080);
                             string aux = string.Empty;
-                            int InsertSuccess = Itticol080.insertarRegistro(ref lst80, ref strError,ref aux);
+                            int InsertSuccess = Itticol080.insertarRegistro(ref lst80, ref strError, ref aux);
                             ListInsertResult.Add((InsertSuccess != -1 ? true : false));
                             //PRIO++;
                         }

@@ -4,6 +4,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="table.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
@@ -100,7 +103,7 @@
     <br />
     <div id="DivTable">
         <div class="form-group row" id="MyRegisterCustomer">
-<%--            <table class="table display" id="example" class="display" cellspacing="0" width="100%">
+            <%--            <table class="table display" id="example" class="display" cellspacing="0" width="100%">
                 <thead>
                     <tr>
                         <th scope="col">
@@ -158,9 +161,9 @@
     <script>
         $(document).ready(function () {
             $('#MyTable').dataTable();
+            $("#txToDate").datepicker();
         });
-    </script>
-    <script>
+
 
         function iniciarComponentes() {
             txCustomer = $('#txCustomer');
@@ -172,6 +175,9 @@
         iniciarComponentes();
 
         btnQuery.click(function () {
+            var feachaOld = txToDate.val()+"/";
+            var fecha = "";
+
             ClickQuery();
         });
 
