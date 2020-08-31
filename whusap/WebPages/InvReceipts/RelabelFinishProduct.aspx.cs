@@ -586,7 +586,8 @@ namespace whusap.WebPages.InvReceipts
 
             if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
             {
-                string id = CLOT.Trim() == "" ? cyclecountLabel : CLOT.Trim();
+                //string id = CLOT.Trim() == "" ? cyclecountLabel : CLOT.Trim();
+                string id = cyclecountLabel;
                 DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
                 if (Dtticol022.Rows.Count > 0)
                 {
@@ -606,7 +607,8 @@ namespace whusap.WebPages.InvReceipts
             }
             else
             {
-                string id = CLOT.Trim() == "" ? ITEM.Trim() : CLOT.Trim();
+                //string id = CLOT.Trim() == "" ? ITEM.Trim() : CLOT.Trim();
+                string id = cyclecountLabel;
                 DataTable Dtticol042 = _idaltticol042.SecuenciaMayor(id);
                 if (Dtticol042.Rows.Count > 0)
                 {
