@@ -291,7 +291,7 @@ namespace whusap.WebPages.InvMaterial
                         MyObj.NPRT = "1";//conteo de reimpresiones 
                         MyObj.LOGN = _operator;// nombre de ususario de la session
                         MyObj.LOGT = " ";//llena baan
-                        MyObj.STAT = "9";// LLENAR EN 1  
+                        MyObj.STAT = "1";// LLENAR EN 1  
                         MyObj.DSCA = row.Cells[2].Text.ToUpperInvariant();
                         MyObj.COTP = "0";
                         MyObj.FIRE = "1";
@@ -558,14 +558,13 @@ namespace whusap.WebPages.InvMaterial
                     lista.DataBind();
 
                 }
-                ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MinimumValue = "0";
-                ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MaximumValue = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["CANT"].ToString(); ;
-                TextBox control = (TextBox)e.Row.Cells[6].FindControl("toReturn");
-                string quantityCheck = control.Text;
-                control.Attributes.Add("onblur", "validaLot(this, " + FilaSerializada + ", '" + txtWorkOrder.Text.Trim() + "');");
-                control.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 0);validateQty('" + rowIndex + "')");
-                lista.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 1);");
-
+                    ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MinimumValue = "0";
+                    ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MaximumValue = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["CANT"].ToString(); ;
+                    TextBox control = (TextBox)e.Row.Cells[6].FindControl("toReturn");
+                    string quantityCheck = control.Text;
+                    control.Attributes.Add("onblur", "validaLot(this, " + FilaSerializada + ", '" + txtWorkOrder.Text.Trim() + "');");
+                    control.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 0);validateQty('" + rowIndex + "')");
+                    lista.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 1);");
                 //TextBox palletIdTextBox = (TextBox)e.Row.Cells[10].FindControl("palletId");
                 //Console.WriteLine("This is palletIDBox value : ", palletIdTextBox);
                 //changing following line.
@@ -730,12 +729,15 @@ namespace whusap.WebPages.InvMaterial
                 lote = lote.Trim().ToUpperInvariant();
                 if (!string.IsNullOrEmpty(valor))
                 {
-                    MyConvertionFactor = FactorConversion(row.GetValue(4).ToString().Trim(), row.GetValue(6).ToString().Trim(), "plt");
-                    decimal QUANTITYCUNI = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((Convert.ToDecimal(qty) * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((Convert.ToDecimal(qty) * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
-                    if (QUANTITYCUNI > 1)
+                    if (row.GetValue(10).ToString().Trim() == "1")
                     {
-                        strError =  Returnedquantityhigherthanpalletsize;
-                        return strError;
+                        MyConvertionFactor = FactorConversion(row.GetValue(4).ToString().Trim(), row.GetValue(6).ToString().Trim(), "plt");
+                        decimal QUANTITYCUNI = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((Convert.ToDecimal(qty) * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((Convert.ToDecimal(qty) * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                        if (QUANTITYCUNI > 1)
+                        {
+                            strError = Returnedquantityhigherthanpalletsize;
+                            return strError;
+                        }
                     }
                 }
                 if (!string.IsNullOrEmpty(valor) && !string.IsNullOrEmpty(lote))
