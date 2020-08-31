@@ -214,6 +214,7 @@ namespace whusap.WebPages.InvMaterial
                 }
 
                 HttpContext.Current.Session["PAID"] = PAID.ToString();
+                HttpContext.Current.Session["PDNO"] = myObj["T$ORNO"].ToString();
                 string PDNO = HttpContext.Current.Session["PDNO"].ToString();
                 string ITEM = Obj_tticol125.item.ToString();
 
@@ -272,8 +273,7 @@ namespace whusap.WebPages.InvMaterial
                     ObjTtcibd001.Error = true;
                     ObjTtcibd001.TypeMsgJs = "label";
                     
-                    ObjTtcibd001.ErrorMsg = Itemcodedoesntexist
-;
+                    ObjTtcibd001.ErrorMsg = Itemcodedoesntexist;
                 }
 
             }

@@ -55,7 +55,7 @@ namespace whusa.DAL
                     paramList.Add(":T$ORNO", reg.orno);
                     paramList.Add(":T$PONO", reg.pono);
                     paramList.Add(":T$CWAR", reg.cwar);
-                    paramList.Add(":T$ITEM", reg.item);
+                    paramList.Add(":T$ITEM", "         "+reg.item);
                     paramList.Add(":T$QUNE", reg.qune);
                     paramList.Add(":T$LOGN", reg.logn);
                     paramList.Add(":T$DATE", reg.date);
