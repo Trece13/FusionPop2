@@ -161,7 +161,7 @@
     <script>
         $(document).ready(function () {
             $('#MyTable').dataTable();
-            $("#txToDate").datepicker();
+            //$("#txToDate").datepicker();
         });
 
 
