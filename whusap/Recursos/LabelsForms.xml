@@ -687,6 +687,11 @@
             Change password
           </stringMessage>
         </label>
+        <label name="ddlIdioma1">
+          <stringMessage>
+            INGLES
+          </stringMessage>
+        </label>
         <label name="lblCurrentPassword">
           <stringMessage>
             Current password:
@@ -757,6 +762,11 @@
         <label name="lblEncLogin1">
           <stringMessage>
             Inicio de sesión
+          </stringMessage>
+        </label>
+        <label name="ddlIdioma1">
+          <stringMessage>
+            ESPAÑOL
           </stringMessage>
         </label>
         <label name="lblCurrentPassword">
