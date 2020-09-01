@@ -250,7 +250,7 @@ namespace whusap.WebPages.SalesOrders
                         {
                             MyConvertionFactor = FactorConversion(myObj.ITEM, myObj.CUNI, "PLT");
                             QUANTITYPLT = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITYCUNI * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITYCUNI * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
-                            ciclosADVS = Convert.ToInt32(Math.Ceiling(QUANTITYPLT));
+                            //ciclosADVS = Convert.ToInt32(Math.Ceiling(QUANTITYPLT));
                         }
                     }
                     else
@@ -258,33 +258,33 @@ namespace whusap.WebPages.SalesOrders
                         QUANTITYCUNI = Convert.ToDecimal(myObj.QSTR);
                         MyConvertionFactor = FactorConversion(myObj.ITEM, myObj.CUNI, "PLT");
                         QUANTITYPLT = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((Convert.ToDecimal(myObj.QSTR) * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((Convert.ToDecimal(myObj.QSTR) * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
-                        ciclosADVS = Convert.ToInt32(Math.Ceiling(QUANTITYPLT));
+                        //ciclosADVS = Convert.ToInt32(Math.Ceiling(QUANTITYPLT));
                     }
 
-                    if (ciclosADVS > 0)
-                    {
-                        //int PRIO = Itticol082.PrioridadMaxima();
-                        //int PRIO = Itticol080.PrioridadMaxima();
+                    //if (ciclosADVS > 0)
+                    //{
+                    //    //int PRIO = Itticol082.PrioridadMaxima();
+                    //    //int PRIO = Itticol080.PrioridadMaxima();
 
-                        for (int i = 1; i <= ciclosADVS; i++)
-                        {
-                            //Ent_tticol082 Objtticol082 = new Ent_tticol082
-                            //{
-                            //    PAID = " ",
-                            //    LOGN = _operator,
-                            //    OORG = myObj.OORG,
-                            //    ORNO = myObj.ORNO,
-                            //    OSET = myObj.OSET,
-                            //    PONO = myObj.PONO,
-                            //    SQNB = myObj.SEQN,
-                            //    ADVS = i.ToString(),
-                            //    ITEM = myObj.ITEM,
-                            //    STAT = "1",
-                            //    QTYT = CantidadPorCiclo(QUANTITYCUNI, Convert.ToInt32(MyConvertionFactor.FactorD), ciclosADVS, i).ToString(),
-                            //    CWAR = myObj.SFCO.Trim(),
-                            //    UNIT = myObj.CUNI,
-                            //    PRIO = Convert.ToString(PRIO+1)
-                            //};
+                        //for (int i = 1; i <= ciclosADVS; i++)
+                        //{
+                        //    //Ent_tticol082 Objtticol082 = new Ent_tticol082
+                        //    //{
+                        //    //    PAID = " ",
+                        //    //    LOGN = _operator,
+                        //    //    OORG = myObj.OORG,
+                        //    //    ORNO = myObj.ORNO,
+                        //    //    OSET = myObj.OSET,
+                        //    //    PONO = myObj.PONO,
+                        //    //    SQNB = myObj.SEQN,
+                        //    //    ADVS = i.ToString(),
+                        //    //    ITEM = myObj.ITEM,
+                        //    //    STAT = "1",
+                        //    //    QTYT = CantidadPorCiclo(QUANTITYCUNI, Convert.ToInt32(MyConvertionFactor.FactorD), ciclosADVS, i).ToString(),
+                        //    //    CWAR = myObj.SFCO.Trim(),
+                        //    //    UNIT = myObj.CUNI,
+                        //    //    PRIO = Convert.ToString(PRIO+1)
+                        //    //};
 
                             Ent_tticol080 Objtticol080 = new Ent_tticol080
                             {
@@ -294,7 +294,8 @@ namespace whusap.WebPages.SalesOrders
                                 pono = Convert.ToInt32(myObj.PONO),
                                 item = myObj.ITEM,
                                 cwar = myObj.SFCO.Trim(),
-                                qune = Convert.ToDecimal(CantidadPorCiclo(QUANTITYCUNI, Convert.ToInt32(MyConvertionFactor.FactorD), ciclosADVS, i).ToString()),
+                                //qune = Convert.ToDecimal(CantidadPorCiclo(QUANTITYCUNI, Convert.ToInt32(MyConvertionFactor.FactorD), ciclosADVS, i).ToString()),
+                                qune = Convert.ToDecimal(QUANTITYCUNI),
                                 logn = _operator,
                                 proc = 1,
                                 pick = 1,
@@ -310,8 +311,8 @@ namespace whusap.WebPages.SalesOrders
                             int InsertSuccess = Itticol080.insertarRegistro(ref lst80, ref strError, ref aux);
                             ListInsertResult.Add((InsertSuccess != -1 ? true : false));
                             //PRIO++;
-                        }
-                    }
+                        //}
+                    //}
                 }
             }
             return JsonConvert.SerializeObject(ListInsertResult);
