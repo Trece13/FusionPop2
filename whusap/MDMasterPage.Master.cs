@@ -33,12 +33,15 @@ namespace whusap
         string rutaRetorno = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            log.escribirError("entra al page load","master","Load","master");
+            //log.escribirError("entra al page load","master","Load","master");
             string url = Request.Url.AbsolutePath.ToString().Trim();
             //string url = "/fusionpub/WebPages/InvReceipts/whInvReceiptRawMaterialNew.aspx";
-            
-            
-            DataTable menupages = idal.datosMenu_Param(Session["user"].ToString(), url);
+
+            DataTable menupages = new DataTable();
+            if (Session["user"] != null && Session["user"].ToString().Trim() != "")
+            {
+                menupages = idal.datosMenu_Param(Session["user"].ToString(), url);
+            }
 
             if (menupages.Rows.Count > 0)
             {
