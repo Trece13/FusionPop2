@@ -425,6 +425,11 @@ namespace whusap.WebPages.Migration
              else if (retorno == "Delivered")  //Deliverd
              {
                  var worder = TxtOrder.Text.Trim().ToUpper();
+                 if (worder == String.Empty)
+                 {
+                     lblErrorAnnounce.Text = mensajes("formempty");
+                     return;
+                 }
                  var encontrado = false;
                  if (worder != String.Empty)
                  {

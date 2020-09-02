@@ -1637,7 +1637,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001
           on ipu001.t$item = pur401.t$item
-          inner join {0}.twhinh220{1} inh210
+          inner join {0}.twhinh210{1} inh210
           on inh210.t$orno = pur401.t$orno
           and inh210.t$pono = pur401.t$pono
           --and inh210.t$seqn/100000 = pur401.t$sqnb
