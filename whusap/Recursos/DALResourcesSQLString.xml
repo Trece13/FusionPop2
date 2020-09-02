@@ -4324,7 +4324,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol118">
       <operationName name="invRegrid_Indentifier">
         <stringSQL>
-          select count(*) cnt from {0}.tticol118{1} WHERE T$PAID= '[:T$PAID]' and T$DISP = '[:T$DISP]';
+          select count(*) cnt from {0}.tticol118{1} WHERE T$PAID= '[:T$PAID]' and T$DISP = '[:T$DISP]'
         </stringSQL>
       </operationName>
       <operationName name="invLabel_registroImprimir_Param2">
@@ -4333,13 +4333,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           from {0}.ttcibd001{1}  ibd001
           inner join {0}.ttccol020{1}  col020 on col020.t$item = ibd001.t$item
           inner join {0}.tticol008{1}  col008 on col008.t$wmrb = '[:T$CWAR]'
-          where trim(ibd001.t$item)=trim('[::T$ITEM]')
+          where trim(ibd001.t$item)=trim('[:T$ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="invLabel_registroImprimir_Param">
         <stringSQL>
-          select * from (select case trim(col118.t$ritm) when 'NA' then trim(col118.t$item) else trim(col118.t$ritm) end item, trim(ibd001.t$dsca) desci, trim(ibd001.t$cuni) unidad, col118.t$qtyr cantidad, " +
-          col118.t$clot lote, mcs005.t$dsca descr, substr(col118.t$obse,1,255) comentario, col020.t$pent factorkg, col118.t$datr-5/24 fecha, trim(col118.T$PAID) paid, col008.t$wreg wreg " +
+          select * from (select case trim(col118.t$ritm) when 'NA' then trim(col118.t$item) else trim(col118.t$ritm) end item, trim(ibd001.t$dsca) desci, trim(ibd001.t$cuni) unidad, col118.t$qtyr cantidad,
+          col118.t$clot lote, mcs005.t$dsca descr, substr(col118.t$obse,1,255) comentario, col020.t$pent factorkg, col118.t$datr-5/24 fecha, trim(col118.T$PAID) paid, col008.t$wreg wreg
           from {0}.tticol118{1} col118
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col118.t$item
           left join {0}.ttcibd001{1} dbi001 on dbi001.t$item = col118.t$ritm
@@ -4347,8 +4347,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.ttcmcs005{1} mcs005 on mcs005.t$cdis = col118.t$cdis
           inner join {0}.tticol008{1} col008 on col008.t$wmrb = col118.t$cwar
           where trim(col118.t$item)=trim('[:T$ITEM]')
-          and upper(col118.t$clot)='[:T$CLOT"]'
-          and col118.t$cwar='[::T$CWAR]' order by col118.T$DATR DESC)where rownum = 1
+          and upper(col118.t$clot)='[:T$CLOT]'
+          and col118.t$cwar='[:T$CWAR]' order by col118.T$DATR DESC)where rownum = 1
         </stringSQL>
       </operationName>
       <operationName name="listaRegrind_ParamV2">
@@ -4368,7 +4368,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="listaStockw_Param">
         <stringSQL>
-          strSentencia = "select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from {0}.ttcmcs003{1} order by warehouse";
+          select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from {0}.ttcmcs003{1} order by warehouse
         </stringSQL>
       </operationName>
       <operationName name="listaReason_Param">
@@ -4519,7 +4519,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
           left join {0}.ttccom100{1} com100 on com100.t$bpid = ipu001.t$otbp
           left join {0}.ttccol020{1} col020 on col020.t$item = ibd001.t$item
-          where trim(ibd001.t$item)=TRIM('[:T$ITEM]')"
+          where trim(ibd001.t$item)=TRIM('[:T$ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="Lista_Lote">
