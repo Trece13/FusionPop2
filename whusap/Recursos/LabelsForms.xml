@@ -3007,7 +3007,16 @@
             The item does not exist
           </stringMessage>
         </label>
-
+        <label name="PalletIDdoesntexistsCannotcontinue">
+          <stringMessage>
+            Pallet Id doesn't exist.  Cannot continue
+          </stringMessage>
+        </label>
+        <label name="PalletIDdoesntavailablefordisposition">
+          <stringMessage>
+            Pallet Id doesn't available for disposition
+          </stringMessage>
+        </label>
         <label name="lblLotError">
           <stringMessage>
             The lot does not exist
@@ -3159,7 +3168,16 @@
             El item no existe
           </stringMessage>
         </label>
-
+        <label name="PalletIDdoesntexistsCannotcontinue">
+          <stringMessage>
+            Pallet Id no existe.  No se puede continuar
+          </stringMessage>
+        </label>
+        <label name="PalletIDdoesntavailablefordisposition">
+          <stringMessage>
+            Pallet Id no disponible para disposición
+          </stringMessage>
+        </label>
         <label name="lblLotError">
           <stringMessage>
             El lote no existe

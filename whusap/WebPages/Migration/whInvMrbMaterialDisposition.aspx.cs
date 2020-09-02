@@ -322,7 +322,8 @@ namespace whusap.WebPages.Migration
             lblResult.Text = string.Empty;
             if (resultado.Rows.Count < 1)
             {
-                lblError.Text = PalletIDdoesntexistsCannotcontinue;
+                //lblError.Text = PalletIDdoesntexistsCannotcontinue;
+                lblError.Text = _textoLabels.readStatement(formName, _idioma, "PalletIDdoesntexistsCannotcontinue");
                 return;
             }
             else
@@ -339,12 +340,14 @@ namespace whusap.WebPages.Migration
                     qty = dr.ItemArray[3].ToString();
                     if ((tableName == "whcol131") && (status != 11))
                     {
-                        lblError.Text = PalletIDdoesntavailablefordisposition;
+                        //lblError.Text = PalletIDdoesntavailablefordisposition;
+                        lblError.Text = _textoLabels.readStatement(formName, _idioma, "PalletIDdoesntavailablefordisposition");
                         return;
                     }
                     else if ((tableName == "ticol022") && (status != 3))
                     {
-                        lblError.Text = PalletIDdoesntavailablefordisposition;
+                        //lblError.Text = PalletIDdoesntavailablefordisposition;
+                        lblError.Text = _textoLabels.readStatement(formName, _idioma, "PalletIDdoesntavailablefordisposition");
                         return;
                     }
 
