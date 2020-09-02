@@ -853,7 +853,7 @@ namespace whusa.DAL
             try
             {
                 paramList = new Dictionary<string, object>();
-                paramList.Add(":T$ACQT", ACQT.ToString().Contains(".") == true ? ACQT.ToString().Replace(",", ".") : ACQT.ToString().Replace(".", ","));
+                paramList.Add(":T$ACQT", ACQT.ToString().Contains(".") == true ? ACQT.ToString().Replace(".", ",") : ACQT.ToString().Replace(",", "."));
                 paramList.Add(":T$SQNB", PDNO.ToUpper());
 
 
