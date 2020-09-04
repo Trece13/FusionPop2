@@ -94,5 +94,32 @@ namespace whusa.Interfases
 
             return retorno;
         }
+
+        public DataTable ConsecutivoConteo(string CWAR, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$CWAR", CWAR.Trim().ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                return retorno;
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+
+            return retorno;
+        }
+
     }
 }

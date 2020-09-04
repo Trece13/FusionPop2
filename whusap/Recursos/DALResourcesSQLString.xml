@@ -502,6 +502,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select * from {0}.twhcol019{1} where trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
       </operationName>
+      <operationName name="ConsecutivoConteo">
+        <stringSQL>
+          select t$coun from {0}.twhcol002{1} where T$CWAR = '[:T$CWAR]'
+        </stringSQL>
+      </operationName>
     </Module>
     <Module name="tticol092">
       <operationName name="InsertTticol092">
