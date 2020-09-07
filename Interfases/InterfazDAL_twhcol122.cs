@@ -444,11 +444,12 @@ namespace whusa.Interfases
                         ROWN = MyRow["ROWN"].ToString(),
                         OORG = MyRow["OORG"].ToString(),
                         ORNO = MyRow["ORNO"].ToString(),
-                        OSET = MyRow["OSET"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
                         PONO = MyRow["PONO"].ToString(),
-                        SQNB = MyRow["SQNB"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
-                        QTYT = MyRow["QTYT"].ToString(),
+                        //QTYT = MyRow["QTYT"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
                     };
 
                     Lstwhcol122.Add(MyObjet);
@@ -484,12 +485,12 @@ namespace whusa.Interfases
                         ROWN = MyRow["ROWN"].ToString(),
                         OORG = MyRow["OORG"].ToString(),
                         ORNO = MyRow["ORNO"].ToString(),
-                        OSET = MyRow["OSET"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
                         PONO = MyRow["PONO"].ToString(),
-                        SQNB = MyRow["SQNB"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
-                        QTYT = MyRow["QTYT"].ToString(),
-
+                        //QTYT = MyRow["QTYT"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
 
                     };
 
@@ -527,12 +528,12 @@ namespace whusa.Interfases
                         ROWN = MyRow["ROWN"].ToString(),
                         OORG = MyRow["OORG"].ToString(),
                         ORNO = MyRow["ORNO"].ToString(),
-                        OSET = MyRow["OSET"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
                         PONO = MyRow["PONO"].ToString(),
-                        SQNB = MyRow["SQNB"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
-                        QTYT = MyRow["QTYT"].ToString(),
-
+                        //QTYT = MyRow["QTYT"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
 
                     };
 
@@ -561,6 +562,129 @@ namespace whusa.Interfases
             {
                 throw new Exception(strError += "\nError: " + ex.Message);
             }
+        }
+
+        public List<EntidadPicking> ConsultarPalletPicking131With082(string PAID, string p, string _operator)
+        {
+            List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131With082(PAID, _operator);
+            if (DTwhcolo131.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DTwhcolo131.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        ROWN = MyRow["ROWN"].ToString(),
+                        OORG = MyRow["OORG"].ToString(),
+                        ORNO = MyRow["ORNO"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
+                        PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        ADVS = MyRow["ADVS"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
+
+                    };
+
+                    Lstwhcol131.Add(MyObjet);
+                }
+
+            }
+            return Lstwhcol131;
+        }
+
+        public List<EntidadPicking> ConsultarPalletPicking042With082(string PAID, string p, string _operator)
+        {
+            List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042With082(PAID, _operator);
+            if (DTwhcolo42.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DTwhcolo42.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        ROWN = MyRow["ROWN"].ToString(),
+                        OORG = MyRow["OORG"].ToString(),
+                        ORNO = MyRow["ORNO"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
+                        PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        ADVS = MyRow["ADVS"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
+
+                    };
+
+                    Lstwhcol042.Add(MyObjet);
+                }
+
+            }
+            return Lstwhcol042;
+        }
+
+        public List<EntidadPicking> ConsultarPalletPicking22With082(string PAID, string p, string _operator)
+        {
+            List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22With082(PAID, _operator);
+            if (DTwhcol122.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DTwhcol122.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        ROWN = MyRow["ROWN"].ToString(),
+                        OORG = MyRow["OORG"].ToString(),
+                        ORNO = MyRow["ORNO"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
+                        PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        ADVS = MyRow["ADVS"].ToString(),
+                        //QTYT = MyRow["QTYT"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
+
+                    };
+
+                    Lstwhcol122.Add(MyObjet);
+                }
+
+            }
+            return Lstwhcol122;
         }
     }
 }

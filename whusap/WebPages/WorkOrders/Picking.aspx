@@ -41,8 +41,8 @@
         }
         #LblError
         {
-            color:Red;
-            font-size:14px;
+            color: Red;
+            font-size: 14px;
         }
         .colorButton2
         {
@@ -89,9 +89,12 @@
     </div>
     <div id="MyEtiqueta2">
         <table class="table2">
-
             <tr>
-                ADVS: <asp:Label ID="lblADVS" runat="server" CssClass=""></asp:Label>
+                <asp:Label ID="lblCNPK" runat="server" CssClass=""></asp:Label>
+            </tr>
+            <tr>
+                ADVS:
+                <asp:Label ID="lblADVS" runat="server" CssClass=""></asp:Label>
             </tr>
             <tr>
                 <td class="">
@@ -105,7 +108,7 @@
                     <asp:TextBox ID="txtPalletID" MaxLength="20" Style="text-transform: uppercase;" runat="server"
                         CssClass="form-control" onkeyup="validarPallet();" Font-Size="Medium"></asp:TextBox>
                     <asp:Button ID="Reload" runat="server" Text="Next Picking" OnClick="Reload_Click"
-                        class="btn btn-primary btn-lg" />
+                        class="btn btn-primary btn-lg mt-3" />
                 </td>
             </tr>
             <tr>
@@ -166,7 +169,9 @@
                         Quantity</label>
                 </td>
                 <td class="">
-                    <asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>
+
+                    <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
+                    <asp:TextBox ID="lblQuantity" CssClass="form-control" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
@@ -192,21 +197,28 @@
                         value="CHANGE" />
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <input id="btnconfirPKG" type="button" class="btn btn-primary btn-lg" onclick="ShowCurrentTime()"
+                        value="Confirm" />
+                </td>
+                <td>
+                </td>
+                <td>
+                    <input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20 hidebutton" onclick="ShowCurrentTime()"
+                        value="Pallet Can't be picked" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <label id="LblError">
+                    </label>
+                </td>
+            </tr>
         </table>
     </div>
     <div>
         <table>
-            <tr>
-                <td>
-                    <input id="btnconfirPKG" type="button" class="btn btn-primary btn-lg" onclick="ShowCurrentTime()"
-                        value="CONFIRM " />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label id="LblError"></label>
-                </td>
-            </tr>
         </table>
     </div>
     <div class="hidetable">
@@ -219,9 +231,9 @@
                     <th>
                         ORNO
                     </th>
-                    <th>
+                    <%--<th>
                         OSET
-                    </th>
+                    </th>--%>
                     <th>
                         PONO
                     </th>
@@ -239,9 +251,9 @@
                     <td class="">
                         <asp:Label ID="lblORNO" runat="server" CssClass=""></asp:Label>
                     </td>
-                    <td class="">
+                    <%--<td class="">
                         <asp:Label ID="lblOSET" runat="server" CssClass=""></asp:Label>
-                    </td>
+                    </td>--%>
                     <td class="">
                         <asp:Label ID="lblPONO" runat="server" CssClass=""></asp:Label>
                     </td>
@@ -249,7 +261,6 @@
                         <asp:Label ID="lblSQNB" runat="server" CssClass=""></asp:Label>
                     </td>
                     <td class="">
-                        
                     </td>
                 </tr>
             </table>
@@ -442,7 +453,7 @@
 
             if (MyObj.error == false) {
 
-                
+
                 HideReason.style.display = "";
                 $('#LblError').html("");
 
@@ -466,7 +477,7 @@
             $.ajax({
                 type: "POST",
                 url: "Picking.aspx/Click_confirPKG",
-                data: "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','OSET':'" + document.getElementById("<%=lblOSET.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblSQNB.ClientID %>").innerHTML.toString() + "'}",
+                data: "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblSQNB.ClientID %>").innerHTML.toString() + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -500,7 +511,7 @@
             $.ajax({
                 type: "POST",
                 url: "Picking.aspx/Click_confirCausal",
-                data: "{'PAID':'" + document.getElementById("<%=lblPalletID.ClientID %>").innerHTML.toString() + "','Causal':'" + document.getElementById("listCausal").value + "' ,'txtPallet':'" + $("#<%=txtPalletID.ClientID%>")[0].value + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','OSET':'" + document.getElementById("<%=lblOSET.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblSQNB.ClientID %>").innerHTML.toString() + "','ADVS':'" + document.getElementById("<%=lblADVS.ClientID %>").innerHTML.toString() + "' ,'LOCA':'" + document.getElementById("<%=lbllocation.ClientID %>").innerHTML.toString() + "'}",
+                data: "{'PAID':'" + document.getElementById("<%=lblPalletID.ClientID %>").innerHTML.toString() + "','Causal':'" + document.getElementById("listCausal").value + "' ,'txtPallet':'" + $("#<%=txtPalletID.ClientID%>")[0].value + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblSQNB.ClientID %>").innerHTML.toString() + "','ADVS':'" + document.getElementById("<%=lblADVS.ClientID %>").innerHTML.toString() + "' ,'LOCA':'" + document.getElementById("<%=lbllocation.ClientID %>").innerHTML.toString() + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -508,12 +519,17 @@
                         $('#txtlocation').removeAttr('disabled');
                         alert("Reason saved");
                         //window.location = "/WebPages/Login/whMenuI.aspx";
-                        if ($('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
-                            document.getElementById('btnconfirPKG').disabled = false;
+                        //                        if ($('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
+                        //                            document.getElementById('btnconfirPKG').disabled = false;
+                        //                        }
+
+                        if ($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
+                            $("#btnNotPKG").show();
                         }
                     }
                     else {
                         $('#txtlocation').attr('disabled', 'disabled');
+                        $("#btnNotPKG").hide();
                     }
                 },
                 failure: function (response) {
@@ -548,9 +564,17 @@
 
                 if (result == 1) {
                     var flagPallet = 1;
-                    document.getElementById("txtlocation").disabled = false;
-                    document.getElementById("txtlocation").focus();
-                    return false;
+                    if ($("#Contenido_lblCNPK").html() != "1") {
+                        document.getElementById("txtlocation").disabled = false;
+                        document.getElementById("txtlocation").focus();
+                        return false;
+                    }
+                    else {
+                        document.getElementById("txtlocation").disabled = false;
+                        document.getElementById("txtlocation").focus();
+                        $("#btnconfirPKG").disabled = false;
+                    }
+                    
                 }
                 else {
                     alert('Pallet Id not equal to the selected pallet');
@@ -558,7 +582,7 @@
                     document.getElementById("txtlocation").disabled = true;
 
                     Method = "VerificarPalletID"
-                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() +"'}";
+                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "'}";
                     EventoAjax(Method, Data, PalletIDSuccess)
 
                     //JUANC
@@ -613,27 +637,27 @@
             }
         }
 
-        
+
 
         $('#txtlocation').bind("change paste keyup", function (a) {
 
             Method = "VerificarLocate"
             Data = "{'CWAR':'" + $('#Contenido_lblWarehouse').html().trim().toUpperCase() + "','LOCA':'" + $('#txtlocation').val().trim().toUpperCase() + "'}";
-//            if($('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase())
-//            {
-//                document.getElementById('btnconfirPKG').disabled = false;
-//            }
-//            else if($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase())
-//            {
-//            }
-//            else if($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase())
-//            {
-//                document.getElementById('btnconfirPKG').disabled = false;
-//                EventoAjax(Method, Data, LocateSuccess)
-//            }
-//            else if ($('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase()) 
-//            { 
-//            }  
+            //            if($('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase())
+            //            {
+            //                document.getElementById('btnconfirPKG').disabled = false;
+            //            }
+            //            else if($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase())
+            //            {
+            //            }
+            //            else if($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase())
+            //            {
+            //                document.getElementById('btnconfirPKG').disabled = false;
+            //                EventoAjax(Method, Data, LocateSuccess)
+            //            }
+            //            else if ($('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase()) 
+            //            { 
+            //            }  
 
 
             if ($('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
@@ -645,7 +669,7 @@
             }
             else if ($('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
 
-                
+
                 document.getElementById("txtlocation").disabled = false;
                 document.getElementById('btnconfirPKG').disabled = true;
                 EventoAjax(Method, Data, LocateSuccessD)
@@ -664,6 +688,7 @@
             HideReason.style.display = "none";
             document.getElementById("bntChange").disabled = true;
             document.getElementById("txtlocation").disabled = true;
+            document.getElementById("Contenido_lblCNPK").innerText == "1" ? document.getElementById("Contenido_lblQuantity").disabled = true : document.getElementById("Contenido_lblQuantity").disabled = false;
             document.getElementById("<%=txtPalletID.ClientID %>").focus();
             document.getElementById('btnconfirPKG').disabled = true;
 
