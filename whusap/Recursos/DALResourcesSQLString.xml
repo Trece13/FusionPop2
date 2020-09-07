@@ -637,13 +637,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22140">
         <stringSQL>
-          select    stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, oset,  pono,  sqnb, advs, rown,QTYT
+          select    stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown,QTYT
           from
           (
           select  col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
           col022.t$pdno lot, col222.t$cwat wrh,
-          mcs003.t$dsca descwrh, col222.t$acqt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, col082.t$oset oset, col082.t$pono pono, col082.t$sqnb sqnb, col082.t$advs advs,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
+          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           rank() over(order by col022.t$sqnb, col022.t$date) rown
           from {0}.tticol022{1} col022
           left join {0}.ttccol307{1} col307
@@ -666,17 +666,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col082.t$stat = 1
           order by col022.t$date
           )
-          where rown = 1
+          where rown &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042">
         <stringSQL>
-          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, oset, pono, sqnb, advs, rown
+          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown
           from
           (
           select col042.t$dele stat,col042.t$sqnb palletid, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,
-          mcs003.t$dsca descwrh, col242.t$acqt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, col082.t$oset oset, col082.t$pono pono, col082.t$sqnb sqnb, col082.t$advs advs,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
+          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           rank() over(order by col042.t$date) rown
           from {0}.tticol042{1} col042
           left join {0}.ttccol307{1} col307
@@ -699,16 +699,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col082.t$stat = 1
           order by col042.t$date
           )
-          where rown = 1
+          where rown &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131">
         <stringSQL>
-          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, oset, pono, sqnb, advs, rown
+          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown
           from
           (
           select col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
-          mcs003.t$dsca descwrh, col131.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg, col082.t$orno orno,col082.t$oset oset, col082.t$pono pono, col082.t$sqnb sqnb, col082.t$advs advs,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
+          col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           rank() over(order by col131.t$date) rown
           from {0}.twhcol131{1} col131
           left join {0}.ttccol307{1} col307
@@ -727,16 +728,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where loc082.t$stat = 1)
           and col082.t$stat = 1
           order by col131.t$date)
-          where rown = 1
+          where rown &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking130">
         <stringSQL>
-          select  stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, oset,  pono,  sqnb, advs, rown
+          select  stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown
           from
           (
           select  col130.t$stat stat, col130.t$paid palletid, col130.t$item item, ibd001.t$dsca description, col130.t$clot lot, col130.t$cwaa wrh,
-          mcs003.t$dsca descwrh, col130.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col130.t$loca loca,col082.t$oorg oorg, col082.t$orno orno,col082.t$oset oset, col082.t$pono pono, col082.t$sqnb sqnb, col082.t$advs advs,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col130.t$loca loca,col082.t$oorg oorg,
+          col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           rank() over(order by col130.t$date) rown
           from    {0}.twhcol130{1} col130
           left join {0}.ttccol307{1} col307
@@ -754,7 +756,139 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where loc082.t$stat = 1)
           and col082.t$stat = 1
           order by col130.t$date)
-          where rown  = 1
+          where rown  &lt;= 1
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPalletPicking22ItemQty">
+        <stringSQL>
+          select    stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown,QTYT
+          from
+          (
+          select  col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
+          col022.t$pdno lot, col222.t$cwat wrh,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
+          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
+          rank() over(order by col022.t$sqnb, col022.t$date) rown
+          from {0}.tticol022{1} col022
+          left join {0}.ttccol307{1} col307
+          on col022.t$sqnb = col307.T$PAID
+          inner join {0}.tticol222{1} col222
+          on col222.t$pdno = col022.t$pdno
+          and col222.t$sqnb = col022.t$sqnb
+          inner join {0}.ttcibd001{1} ibd001
+          on ibd001.t$item = col022.t$mitm
+          inner join {0}.ttcmcs003{1} mcs003
+          on mcs003.t$cwar = col222.t$cwat
+          inner join {0}.tticol082{1} col082
+          on col082.t$item = col022.t$mitm
+          where col022.t$dele = 7 -- 7-Located
+          and col307.T$PAID IS NULL
+          and col222.t$acqt >= col082.t$qtyt
+          and col222.t$cwat = col082.t$cwar
+          and col082.t$qtyt >= '[:QTYT]'
+          and col022.t$mitm = trim('[:ITEM]')
+          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          where loc082.t$stat = 1)
+          and col082.t$stat = 1
+          order by col022.t$date
+          )
+          where rown &lt;= 3
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPalletPicking042ItemQty">
+        <stringSQL>
+          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown
+          from
+          (
+          select col042.t$dele stat,col042.t$sqnb palletid, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
+          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
+          rank() over(order by col042.t$date) rown
+          from {0}.tticol042{1} col042
+          left join {0}.ttccol307{1} col307
+          on col042.t$sqnb = col307.T$PAID
+          inner join {0}.tticol242{1} col242
+          on col242.t$pdno = col042.t$pdno
+          and col242.t$sqnb = col042.t$sqnb
+          inner join {0}.ttcibd001{1} ibd001
+          on ibd001.t$item = col042.t$mitm
+          inner join {0}.ttcmcs003{1} mcs003
+          on mcs003.t$cwar = col242.t$cwat
+          inner join {0}.tticol082{1} col082
+          on col082.t$item = col042.t$mitm
+          where col042.t$dele = 7 -- 7-Located
+          and col307.T$PAID IS NULL
+          and col242.t$acqt >= col082.t$qtyt
+          and col242.t$cwat = col082.t$cwar
+          and col082.t$qtyt >= '[:QTYT]'
+          and col042.t$mitm = trim('[:ITEM]')
+          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          where loc082.t$stat = 1)
+          and col082.t$stat = 1
+          order by col042.t$date
+          )
+          where rown &lt;= 3
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPalletPicking131ItemQty">
+        <stringSQL>
+          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown
+          from
+          (
+          select col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
+          col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
+          rank() over(order by col131.t$date) rown
+          from {0}.twhcol131{1} col131
+          left join {0}.ttccol307{1} col307
+          on col131.t$paid = col307.T$PAID
+          inner join {0}.ttcibd001{1} ibd001
+          on ibd001.t$item = col131.t$item
+          inner join {0}.ttcmcs003{1} mcs003
+          on mcs003.t$cwar = col131.t$cwaa
+          inner join {0}.tticol082{1} col082
+          on col082.t$item = col131.t$item
+          where col131.t$stat = 3 -- 3-Located
+          and col307.T$PAID IS NULL
+          and col131.t$qtya >= col082.t$qtyt
+          and col131.t$cwaa = col082.t$cwar
+          and col082.t$qtyt >= '[:QTYT]'
+          and col131.t$item = trim('[:ITEM]')
+          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          where loc082.t$stat = 1)
+          and col082.t$stat = 1
+          order by col131.t$date)
+          where rown &lt;= 3
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPalletPicking130ItemQty">
+        <stringSQL>
+          select  stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown
+          from
+          (
+          select  col130.t$stat stat, col130.t$paid palletid, col130.t$item item, ibd001.t$dsca description, col130.t$clot lot, col130.t$cwaa wrh,
+          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col130.t$loca loca,col082.t$oorg oorg,
+          col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
+          rank() over(order by col130.t$date) rown
+          from    {0}.twhcol130{1} col130
+          left join {0}.ttccol307{1} col307
+          on col130.t$paid = col307.T$PAID
+          inner join {0}.ttcibd001{1} ibd001
+          on ibd001.t$item = col130.t$item
+          inner join {0}.ttcmcs003{1} mcs003
+          on mcs003.t$cwar = col130.t$cwaa
+          inner join {0}.tticol082{1} col082
+          on col082.t$item = col130.t$item
+          where col130.t$stat = 3  -- 3-Located
+          and col307.T$PAID IS NULL
+          and col130.t$qtya >= col082.t$qtyt
+          and col082.t$qtyt >= '[:QTYT]'
+          and col130.t$item = trim('[:ITEM]')
+          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          where loc082.t$stat = 1)
+          and col082.t$stat = 1
+          order by col130.t$date)
+          where rown  &lt;= 1
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking22With082">

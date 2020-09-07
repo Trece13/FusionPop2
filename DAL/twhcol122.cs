@@ -928,6 +928,85 @@ namespace whusa.DAL
             }
             return consulta;
         }
+
+        public DataTable ConsultarPalletPicking22ItemQty(string Item, string Cant, string _operator)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":ITEM", Item.Trim());
+            paramList.Add(":QTYT", Cant.Trim());
+            string tabla = ".tticol222";
+            string name1 = "ConsultarPalletPicking22ItemQty";
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                flag22 = 1;
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol222140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+        public DataTable ConsultarPalletPicking042ItemQty(string Item, string Cant, string _operator)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":ITEM", Item.Trim());
+            paramList.Add(":QTYT", Cant.Trim());
+            string tabla = ".tticol042";
+            string name1 = "ConsultarPalletPicking042ItemQty";
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol042140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+        public DataTable ConsultarPalletPicking131ItemQty(string Item, string Cant, string _operator)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":ITEM", Item.Trim());
+            paramList.Add(":QTYT", Cant.Trim());
+            string tabla = ".twhcol131";
+            string name1 = "ConsultarPalletPicking131ItemQty";
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [twhcol131140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
     }
 }
 

@@ -592,6 +592,39 @@ namespace whusap.WebPages.WorkOrders
             }
         }
 
+
+        [WebMethod]
+        //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
+        public static string ShowCurrentOptions()
+        {
+
+            string ITEM = HttpContext.Current.Session["ITEM"].ToString().Trim();
+            string QTY = HttpContext.Current.Session["QTY"].ToString().Trim();
+
+            List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
+            List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
+            List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
+            List<EntidadPicking> LstReturn = new List<EntidadPicking>();
+            LstPallet131 = twhcolDAL.ConsultarPalletPicking131ItemQty(ITEM,QTY, _operator);
+            if (LstPallet131.Count > 0)
+            {
+                LstReturn = LstPallet131;
+            }
+
+            LstPallet042 = twhcolDAL.ConsultarPalletPicking042ItemQty(ITEM, QTY, _operator);
+            if (LstPallet042.Count > 0)
+            {
+                LstReturn = LstPallet042;
+            }
+
+            LstPallet22 = twhcolDAL.ConsultarPalletPicking22ItemQty(ITEM, QTY, _operator);
+            if (LstPallet22.Count > 0)
+            {
+                LstReturn = LstPallet22;
+            }
+            return JsonConvert.SerializeObject(LstReturn);
+        }
+
         [WebMethod]
         //public static bool Click_confirCausal(string PAID, string Causal, string txtPallet, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB, string ADVS)
         public static bool Click_confirCausal(string PAID, string Causal, string txtPallet, string LOCA, string OORG, string ORNO, string PONO, string SQNB, string ADVS)

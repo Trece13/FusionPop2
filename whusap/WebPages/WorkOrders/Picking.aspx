@@ -4,9 +4,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css"
+        integrity="sha512-3QG6i4RNIYVKJ4nysdP4qo87uoO+vmEzGcEgN68abTpg2usKfuwvaYU+sk08z8k09a0vwflzwyR6agXZ+wgfLA=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"
+        integrity="sha512-aDa+VOyQu6doCaYbMFcBBZ1z5zro7l/aur7DgYpt7KzNS9bjuQeowEX0JyTTeBTcRd0wwN7dfg5OThSKIWYj3A=="
+        crossorigin="anonymous"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style type="text/css">
+        .swal2-popup{
+            width:850px !important;
+        }
         #MyEtiqueta
         {
             font-size: 14px;
@@ -169,7 +178,6 @@
                         Quantity</label>
                 </td>
                 <td class="">
-
                     <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
                     <asp:TextBox ID="lblQuantity" CssClass="form-control" runat="server"></asp:TextBox>
                 </td>
@@ -205,8 +213,8 @@
                 <td>
                 </td>
                 <td>
-                    <input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20 hidebutton" onclick="ShowCurrentTime()"
-                        value="Pallet Can't be picked" />
+                    <input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20 hidebutton"
+                        onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />
                 </td>
             </tr>
             <tr>
@@ -506,6 +514,52 @@
             alert(response.d);
         }
 
+        function ShowCurrentOptions() {
+            var bodyRows = ""
+
+            $.ajax({
+                type: "POST",
+                url: "Picking.aspx/ShowCurrentOptions",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    myObj = JSON.parse(response.d);
+                    for (var i = 0; i < myObj.length; i++) {
+                        bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                    }
+                    var tableOptions = "<table class='table' style='width:100%'>" +
+                                                "<thead class='thead-dark'>" +
+                                                  "<tr>" +
+                                                    "<th scope='col'>Pallet</th>" +
+                                                    "<th scope='col'>Location</th>" +
+                                                    "<th scope='col'>Item</th>" +
+                                                    "<th scope='col'>Description</th>" +
+                                                    "<th scope='col'>Quantity</th>" +
+                                                    "<th scope='col'>Unit</th>" +
+                                                "</tr>" +
+                                               "</thead>" +
+                                               "<tbody>" +
+                                               bodyRows
+                    "</tbody>" +
+                                            "</table>";
+                    Swal.fire({
+                        title: '<strong>Options</strong>',
+                        icon: 'info',
+                        html: tableOptions,
+                        showCloseButton: false,
+                        showCancelButton: false,
+                        focusConfirm: false
+                    });
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
+        }
+        function OnSuccess(response) {
+            alert(response.d);
+        }
 
         function IngresarCausales() {
             $.ajax({
@@ -574,7 +628,7 @@
                         document.getElementById("txtlocation").focus();
                         $("#btnconfirPKG").disabled = false;
                     }
-                    
+
                 }
                 else {
                     alert('Pallet Id not equal to the selected pallet');
@@ -694,6 +748,12 @@
 
 
         });
-
+        var selectNewPalletSuccess = function () {
+            alert("Exito");
+        }
+        var selectNewPallet = function (currentRow) {
+            currentRow = currentRow.cells[0].innerHTML.toString().trim()
+            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "'}", selectNewPalletSuccess);
+        }
     </script>
 </asp:Content>
