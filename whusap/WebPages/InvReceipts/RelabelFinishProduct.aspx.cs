@@ -21,7 +21,68 @@ namespace whusap.WebPages.InvReceipts
 {
     public partial class RelabelFinishProduct : System.Web.UI.Page
     {
+        //public static int kltc;
+        //public static string RequestUrlAuthority;
+        //string formName;
+        //public static string _operator;
+        //string _idioma;
+        //private static string globalMessages;
+        //public static string UrlBaseBarcode;
+        //public static string cyclecountLabel;
 
+        //public static string ItemcodeisnotManufacturingType;
+        //public static string Itemcodedoesntexist;
+        //public static string Lotcodedoesntexist;
+        //public static string Warehousecodedoesntexist;
+        //public static string Locationblockedinbound;
+        //public static string Locationcodedoesntexist;
+        //public static string codedoesntexist;
+        //public static string RegisteredquantitynotavilableonBaaninventory;
+        //public static string FactordontexistforthisItem;
+
+        //private static InterfazDAL_ttccol301 _idalttccol301;
+        //public static InterfazDAL_twhcol130 twhcol130DAL;
+        //private static InterfazDAL_tticol022 _idaltticol022;
+        //private static InterfazDAL_tticol042 _idaltticol042;
+        //public static InterfazDAL_ttcibd001 ITtcibd001;
+        //public static InterfazDAL_tticol125 ITticol125;
+        //public static InterfazDAL_ttwhcol016 ITtwhcol016;
+        //public static InterfazDAL_twhwmd200 ITwhwmd200;
+        //public static IntefazDAL_transfer Itransfer;
+        //public static InterfazDAL_twhinr140 ITtwhinr140;
+
+        //public static RelabelFinishProduct()
+        //{
+        //    kltc = 0;
+        //    RequestUrlAuthority = string.Empty;
+        //    formName = string.Empty;
+        //    _operator = string.Empty;
+        //    _idioma = string.Empty;
+        //    globalMessages = "GlobalMessages";
+        //    UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        //    cyclecountLabel = WebConfigurationManager.AppSettings["cyclecountLabel"].ToString();
+
+        //    ItemcodeisnotManufacturingType = mensajes("ItemcodeisnotManufacturingType");
+        //    Itemcodedoesntexist = mensajes("Itemcodedoesntexist");
+        //    Lotcodedoesntexist = mensajes("Lotcodedoesntexist");
+        //    Warehousecodedoesntexist = mensajes("Warehousecodedoesntexist");
+        //    Locationblockedinbound = mensajes("Locationblockedinbound");
+        //    Locationcodedoesntexist = mensajes("Locationcodedoesntexist");
+        //    codedoesntexist = mensajes("codedoesntexist");
+        //    RegisteredquantitynotavilableonBaaninventory = mensajes("RegisteredquantitynotavilableonBaaninventory");
+        //    FactordontexistforthisItem = mensajes("FactordontexistforthisItem");
+
+        //    _idalttccol301 = new InterfazDAL_ttccol301();
+        //    twhcol130DAL = new InterfazDAL_twhcol130();
+        //    _idaltticol022 = new InterfazDAL_tticol022();
+        //    _idaltticol042 = new InterfazDAL_tticol042();
+        //    ITtcibd001 = new InterfazDAL_ttcibd001();
+        //    ITticol125 = new InterfazDAL_tticol125();
+        //    ITtwhcol016 = new InterfazDAL_ttwhcol016();
+        //    ITwhwmd200 = new InterfazDAL_twhwmd200();
+        //    Itransfer = new IntefazDAL_transfer();
+        //    ITtwhinr140 = new InterfazDAL_twhinr140();
+        //}
 
         public static int kltc = 0;
         public static string RequestUrlAuthority = string.Empty;

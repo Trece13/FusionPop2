@@ -13,6 +13,15 @@ namespace whusap.WebPages.WorkOrders {
     public partial class Picking {
         
         /// <summary>
+        /// lblCNPK control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCNPK;
+        
+        /// <summary>
         /// lblADVS control.
         /// </summary>
         /// <remarks>
@@ -118,7 +127,7 @@ namespace whusap.WebPages.WorkOrders {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuantity;
+        protected global::System.Web.UI.WebControls.TextBox lblQuantity;
         
         /// <summary>
         /// lblQuantityDesc control.
@@ -146,15 +155,6 @@ namespace whusap.WebPages.WorkOrders {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblORNO;
-        
-        /// <summary>
-        /// lblOSET control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOSET;
         
         /// <summary>
         /// lblPONO control.

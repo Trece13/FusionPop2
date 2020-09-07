@@ -29,6 +29,7 @@ namespace whusa
             this.PONO =string.Empty;
             this.SQNB = string.Empty;
             this.ADVS = string.Empty;
+            this.CNPK = string.Empty;
 
             this.error = false;
             this.errorMsg = string.Empty;
@@ -52,6 +53,7 @@ namespace whusa
         public string PONO { get; set; }
         public string SQNB { get; set; }
         public string ADVS { get; set; }
+        public string CNPK { get; set; }
        
         public bool error { get; set; }
         public string errorMsg { get; set; }
