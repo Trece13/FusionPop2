@@ -75,9 +75,9 @@
             Lot</label>
         </label>
         <div class="col-sm-4">
-            <input type="text" class="col-10 form-control form-control-lg" id="Text1" placeholder="Lot" disabled>
+            <input type="text" class="col-10 form-control form-control-lg" id="txLot" placeholder="Lot" disabled>
         </div>
-        <label id="Label2" for="txItem">
+        <label id="lblLot" for="txLot">
         </label>
     </div>
         <div class="form-group row">
@@ -205,7 +205,7 @@
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
-            $('#btnSave').prop("disabled", true);
+            $('#btnSave').prop("disabled", false);
 
         };
         BloquearComponentes();
@@ -219,6 +219,7 @@
                 $('#txPalletID').val("");
                 $('#lblItem').val("");
                 $('#lblItemDsca').html("");
+                $('#txLot').val("");
                 $('#txWarehouse').val("");
                 $('#txLocation').val("");
                 $('#txQuantity').val("");
@@ -238,6 +239,7 @@
                 $('#txPalletID').prop("disabled", false);
                 $('#lblItem').val(MyObj.ITEM);
                 $('#lblItemDsca').html(MyObj.DESCRIPTION);
+                $('#txLot').val(MyObj.CLOT);
                 $('#txWarehouse').val(MyObj.WRH);
                 $('#lblWarehouse').html(MyObj.DESCWRH);
                 $('#txWarehouse').prop("disabled", true);
@@ -257,6 +259,7 @@
                 //                $('#lblWorkOrder').html("");
                 $('#lblItem').val("");
                 $('#lblItemDsca').html("");
+                $('#txLot').val("");
                 $('#txWarehouse').val("");
                 $('#txLocation').val("");
                 $('#txQuantity').val("");
@@ -278,10 +281,21 @@
                 $('#txQuantity').val(MyObj.QTY);
                 $('#lblQuantity').html(MyObj.UN)
                 $('#txLocation').val(MyObj.LOCA);
+                if (MyObj.KLTC == "1") {
+                    $('#txLot').prop("disabled", false);
+                    $('#txLot').val(MyObj.LOT);
+                }
+                else {
+                    $('#txLot').prop("disabled", true);
+                    $('#txLot').val("");
+                    $('#txWarehouse').prop("disabled", false);
+                    $('#txLocation').prop("disabled", true);
+                    $('#txQuantity').prop("disabled", true);
+                }
                 if (MyObj.SLOC == "1") {
                     $('#txLocation').prop("disabled", false);
                     $('#txQuantity').prop("disabled", false);
-                    $('#btnSave').prop("disabled", true);
+                    //$('#btnSave').prop("disabled", true);
                 }
                 else if (MyObj.SLOC != "1") {
                     $('#txLocation').prop("disabled", true);
@@ -298,10 +312,12 @@
             $('#txPalletID').val("");
             $('#lblItem').val("");
             $('#lblItemDsca').html("");
+            $('#txLot').val("");
             $('#txWarehouse').val("");
             $('#txLocation').val("");
             $('#txQuantity').val("");
             $('#lblQuantity').html("");
+            $('#lblError').html("");
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
@@ -315,11 +331,13 @@
             $('#txPalletID').val("");
             $('#lblItem').val("");
             $('#lblItemDsca').html("");
+            $('#txLot').val("");
             $('#txWarehouse').val("");
             $('#txLocation').val("");
             $('#txQuantity').val("");
             $('#lblQuantity').html("");
             $('#txZoneCode').val("");
+            $('#lblError').html("");
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
@@ -330,7 +348,7 @@
         var SuccesVerificarItem = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == true) {
-                    ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
                 BloquearComponentes();
             }
             if (MyObj.error == false) {
@@ -340,8 +358,8 @@
                 lblQuantity.html(MyObj.cuni);
                 ktlc = MyObj.kltc;
                 if (MyObj.kltc == "1") {
-                    
                     $('#txLot').prop("disabled", false);
+                    lblLot.html(MyObj.clot);
                 }
                 else {
                     $('#txLot').prop("disabled", true);
@@ -358,10 +376,20 @@
             if (MyObj.error == true) {
                 ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
                 $('#txWarehouse').prop("disabled", true);
+                $('#btnSave').prop("disabled", true);
             }
             if (MyObj.error == false) {
                 $('#lblError').html("");
                 $('#txWarehouse').prop("disabled", false);
+                $('#txLocation').prop("disabled", false);
+                $('#txQuantity').prop("disabled", false);
+                $('#btnSave').prop("disabled", false);
+            }
+            else {
+                $('#txWarehouse').prop("disabled", true);
+                $('#txLocation').prop("disabled", true);
+                $('#txQuantity').prop("disabled", true);
+                $('#btnSave').prop("disabled", true);
             }
         }
 
@@ -371,24 +399,25 @@
                 ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
                 $('#txLocation').prop("disabled", true);
                 $('#txQuantity').prop("disabled", true);
-                $('#txLocation').val("");
-                $('#txQuantity').val("");
+                //$('#txLocation').val("");
+                //$('#txQuantity').val("");
                 $('#btnSave').prop("disabled", true);
             }
             if (MyObj.error == false) {
                 $('#lblError').html("");
-                $('#txLocation').val("");
-                $('#txQuantity').val("");
+                //$('#txLocation').val("");
+                //$('#txQuantity').val("");
                 $('#btnSave').prop("disabled", true);
                 lblWarehouse.html(MyObj.DESCRIPCION)
                 if (MyObj.sloc == "1") {
                     $('#txLocation').prop("disabled", false);
                     $('#txQuantity').prop("disabled", true);
-                    $('#btnSave').prop("disabled", true);
+                    //$('#btnSave').prop("disabled", true);
                 }
                 else {
                     $('#txQuantity').prop("disabled", false);
                     $('#btnSave').prop("disabled", false);
+                    $('#txLocation').val("");
                     $('#txLocation').prop("disabled", true);
                 }
             }
@@ -404,7 +433,7 @@
             if (MyObj.error == false) {
                 $('#lblError').html("");
                 if ($('#txQuantity').val().trim() == "") {
-                    $('#btnSave').prop("disabled", true);
+                    //$('#btnSave').prop("disabled", true);
                     $('#txQuantity').prop("disabled", false);
                 }
                 else {
@@ -427,7 +456,7 @@
                     $('#btnSave').prop("disabled", false);
                 }
                 else {
-                    $('#btnSave').prop("disabled", true);
+                    //$('#btnSave').prop("disabled", true);
                     ImprimirMensaje(MyObj.typeMsgJs, MyObj.SuccessMsg);
                 }
             }
@@ -468,60 +497,62 @@
                 ////                $('#txZoneCode').prop("disabled", false);
                 ////                $('#divPallet').hide(500);
                 $('#btnClear').click();
+                $('#lblError').html("");
                 ImprimirMensaje(MyObject.typeMsgJs, MyObject.SuccessMsg);
             }
             else {
+                $('#lblError').html("");
                 ImprimirMensaje(MyObject.typeMsgJs, MyObject.SuccessMsg);
             }
 
         }
 
         var VerificarZoneCode = function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             var Data = "{'ZONE':'" + $('#txZoneCode').val() + "'}";
             sendAjax("VerificarZoneCode", Data, SuccesVerificarZoneCode)
         }
 
         var VerificarPalletID = function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             var Data = "{'PAID':'" + $('#txPalletID').val()+ "'}";
             sendAjax("VerificarPalletID", Data, SuccesVerificarPalletID)
         }
 
 
         var VerificarItem = function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             var Data = "{'ITEM':'" + $('#txItem').val() + "'}";
             sendAjax("VerificarItem", Data, SuccesVerificarItem)
         }
 
         var VerificarLote = function () {
-            $('#btnSave').prop("disabled", true);
-            var Data = "{'ITEM':'" + $('#txItem').val() + "','CLOT':'" + $('#txLot').val() + "'}";
+            //$('#btnSave').prop("disabled", true);
+            var Data = "{'ITEM':'" + $('#lblItem').val() + "','CLOT':'" + $('#txLot').val() + "'}";
             sendAjax("VerificarLote", Data, SuccesVerificarLote)
         }
 
         var VerificarWarehouse = function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             var Data = "{'CWAR':'" + $('#txWarehouse').val() + "'}";
             sendAjax("VerificarWarehouse", Data, SuccesVerificarWarehouse)
         }
 
         var VerificarLocation = function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             var Data = "{'CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "'}";
             sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
         }
 
         var VerificarQuantity = function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             var Data = "{'QTY':'" + $('#txQuantity').val() + "','CWAR':'" + $('#txWarehouse').val() + "','ITEM':'" + $('#lblItem').val() + "','LOCA':'" + $('#txLocation').val() + "','CLOT':'" + (ktlc == "1" ? $('#lblWorkOrder').html() : " ") + "'}";
             sendAjax("VerificarQuantity", Data, SuccesVerificarQuantity)
         }
 
         var Click_Save = function () {
 
-            var Data = "{'PAID':'" + $('#txPalletID').val() + "','ITEM':'" + $('#lblItem').val() + "','CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "','UNIT':'" + $('#lblQuantity').html() + "','QTYS':'" + $('#txQuantity').val() + "','ZONE':'" + $('#txZoneCode').val() + "'}";
+            var Data = "{'PAID':'" + $('#txPalletID').val() + "','ITEM':'" + $('#lblItem').val() + "','CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "','UNIT':'" + $('#lblQuantity').html() + "','QTYS':'" + $('#txQuantity').val() + "','CLOT':'" + $('#txLot').val() + "','ZONE':'" + $('#txZoneCode').val() + "'}";
             sendAjax("Click_Save", Data, SuccesClick_Save);
 
         }
@@ -562,7 +593,15 @@
         });
 
         txLot.bind('paste keyup', function () {
-                if ($('#txLot').val().trim() == "") {
+            $('#txWarehouse').prop("disabled", true);
+            $('#txLocation').prop("disabled", true);
+            $('#txQuantity').prop("disabled", true);
+            //$('#txWarehouse').val("");
+            //$('#txLocation').val("");
+            //$('#txQuantity').val("");
+            //$('#btnSave').prop("disabled", true);
+
+            if ($('#txLot').val().trim() == "") {
                 return;
             }
             stoper();
@@ -573,9 +612,9 @@
 
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
-            $('#txLocation').val("");
-            $('#txQuantity').val("");
-            $('#btnSave').prop("disabled", true);
+            //$('#txLocation').val("");
+            //$('#txQuantity').val("");
+            //$('#btnSave').prop("disabled", true);
 
             if ($('#txWarehouse').val().trim() == "") {
                 return;
@@ -587,8 +626,8 @@
         txLocation.bind('paste keyup', function () {
 
             $('#txQuantity').prop("disabled", true);
-            $('#txQuantity').val("");
-            $('#btnSave').prop("disabled", true);
+            //$('#txQuantity').val("");
+            //$('#btnSave').prop("disabled", true);
 
             if ($('#txLocation').val().trim() == "") {
                 return;
@@ -598,7 +637,7 @@
         });
 
         txQuantity.bind('paste keyup', function () {
-            $('#btnSave').prop("disabled", true);
+            //$('#btnSave').prop("disabled", true);
             if ($('#txQuantity').val().trim() == "") {
                 return;
             }

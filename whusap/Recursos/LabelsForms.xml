@@ -6812,6 +6812,11 @@
     <!--///////////////////-->
     <Module name="InventoryTakingByPalletIDWarehousesNotControlledByLocation.aspx">
       <Idiom name="INGLES">
+        <label name="CountWarehouseNotDefined">
+          <stringMessage>
+            Warehouse doesn't have defined the count number
+          </stringMessage>
+        </label>
         <label name="Zonecodedoesntexist">
           <stringMessage>
             Zone code doesn´t exist
@@ -6849,6 +6854,11 @@
         </label>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <label name="CountWarehouseNotDefined">
+          <stringMessage>
+            La bodega no tiene definido el número de conteo
+          </stringMessage>
+        </label>
         <label name="Zonecodedoesntexist">
           <stringMessage>
             Zone code doesn´t exist

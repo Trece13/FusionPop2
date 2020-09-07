@@ -1428,16 +1428,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="VerificarPalletIDz">
         <stringSQL>
-          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,whwmd200.T$sloc SLOC FROM (
-          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO from {0}.tticol022{1} col022
+          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,whwmd200.T$sloc SLOC, CLOT, KLTC FROM (
+          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
           INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col022.t$mitm
           where col022.T$DELE = 7
           UNION
-          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO from {0}.tticol042{1} col042
+          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
           INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col042.t$mitm
           where col042.T$DELE = 7
           UNION
-          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA from {0}.twhcol131{1} col131
+          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT, col131.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA, col131.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol131{1} col131
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col131.t$item
           where col131.T$STAT = 3
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM

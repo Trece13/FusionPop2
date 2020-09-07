@@ -45,7 +45,8 @@ namespace whusap.WebPages.InvReceipts
         public static string Lotcodedoesntexist; 
         public static string Locationblockedinbound; 
         public static string Locationcodedoesntexist; 
-        public static string Registeredquantitycannotbelessthanorequaltozero; 
+        public static string Registeredquantitycannotbelessthanorequaltozero;
+        public static string CountWarehouseNotDefined;
         public static string Warehousecodedoesntexist; 
                                                         
                
@@ -155,7 +156,7 @@ namespace whusap.WebPages.InvReceipts
                 ObjPicking.PALLETID = DTPalletID.Rows[0]["PAID"].ToString();
                 ObjPicking.ITEM = DTPalletID.Rows[0]["ITEM"].ToString();
                 ObjPicking.DESCRIPTION = DTPalletID.Rows[0]["DSCA"].ToString();
-                ObjPicking.LOT = DTPalletID.Rows[0]["DSCA"].ToString().Trim();
+                ObjPicking.LOT = DTPalletID.Rows[0]["CLOT"].ToString().Trim();
                 ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString().Trim();
                 ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
                 ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString().Trim();
@@ -164,6 +165,7 @@ namespace whusap.WebPages.InvReceipts
                 ObjPicking.STAT = DTPalletID.Rows[0]["STAT"].ToString();
                 ObjPicking.SLOC = DTPalletID.Rows[0]["SLOC"].ToString();
                 //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
+                ObjPicking.KLTC = DTPalletID.Rows[0]["KLTC"].ToString();
                 ObjPicking.error = false;
 
                 //if (DTPalletID.Rows[0]["STAT"].ToString() != "7")
@@ -381,16 +383,126 @@ namespace whusap.WebPages.InvReceipts
         }
 
         [WebMethod]
-        public static string Click_Save(string PAID, string ITEM, string CWAR, string LOCA, string UNIT, string QTYS,string ZONE)
+        public static string Click_Save(string PAID, string ITEM, string CWAR, string LOCA, string UNIT, string QTYS, string CLOT, string ZONE)
         {
             string strError = string.Empty;
+            
+            //Valido el Lote que exista en baan y este asociado al item
+            Ent_tticol125 Obj_tticol125 = new Ent_tticol125();
+            Obj_tticol125.item = ITEM;
+            Obj_tticol125.clot = CLOT;
 
+            DataTable DtTticol125 = ITticol125.listaRegistrosLoteItem_Param(ref Obj_tticol125);
+
+            if (DtTticol125.Rows.Count > 0)
+            {
+                Obj_tticol125.error = false;
+                Obj_tticol125.typeMsgJs = "console";
+                Obj_tticol125.SuccessMsg = "Lote Encontrado";
+            }
+            else
+            {
+
+                Obj_tticol125.error = true;
+                Obj_tticol125.typeMsgJs = "label";
+                Obj_tticol125.SuccessMsg = Lotcodedoesntexist;
+                return JsonConvert.SerializeObject(Obj_tticol125);
+            }
+
+            //Valido los datos de la bodega            
+            Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
+            Ent_ttwhcol016 Obj_twhcol016 = new Ent_ttwhcol016();            
+            Obj_twhcol016.cwar = CWAR;
+            Obj_twhwmd200.cwar = CWAR;
+            DataTable DtTtwhcol016 = ITtwhcol016.TakeMaterialInv_verificaBodega_Param(ref Obj_twhcol016, ref strError);
+            DataTable DtTwhwmd200 = ITwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref Obj_twhwmd200, ref strError);
+
+            if (DtTtwhcol016.Rows.Count > 0)
+            {
+                Obj_twhcol016.error = false;
+                Obj_twhcol016.typeMsgJs = "console";
+                Obj_twhcol016.SuccessMsg = "Warehouse Encontrado";
+
+                if (DtTwhwmd200.Rows.Count > 0)
+                {
+                    Obj_twhcol016.sloc = DtTwhwmd200.Rows[0]["LOC"].ToString();
+                }
+                else
+                {
+                    Obj_twhcol016.sloc = string.Empty;
+                }
+            }
+            else
+            {
+
+                Obj_twhcol016.error = true;
+                Obj_twhcol016.typeMsgJs = "label";
+                Obj_twhcol016.SuccessMsg = Warehousecodedoesntexist;
+                return JsonConvert.SerializeObject(Obj_twhcol016);
+            }
+            if (Obj_twhcol016.sloc == "1")
+            {
+                //Valido que la ubicación sea válida.
+                DataTable DtTransfer = Itransfer.ConsultarLocation(CWAR, LOCA);
+                if (DtTransfer.Rows.Count > 0)
+                {
+                    if (DtTransfer.Rows[0]["LOCT"].ToString() == "5")
+                    {
+                        if (DtTransfer.Rows[0]["BINB"].ToString() == "2")
+                        {
+                            Obj_twhwmd200.Error = false;
+                            Obj_twhwmd200.TypeMsgJs = "console";
+                            Obj_twhwmd200.SuccessMsg = "Location Encontrado";
+                        }
+                        else
+                        {
+                            Obj_twhwmd200.error = true;
+                            Obj_twhwmd200.typeMsgJs = "label";
+                            Obj_twhwmd200.SuccessMsg = Locationcodedoesntexist;
+                            return JsonConvert.SerializeObject(Obj_twhwmd200);
+                        }
+                    }
+                    else
+                    {
+                        Obj_twhwmd200.error = true;
+                        Obj_twhwmd200.typeMsgJs = "label";
+                        Obj_twhwmd200.SuccessMsg = Locationcodedoesntexist;
+                        return JsonConvert.SerializeObject(Obj_twhwmd200);
+                    }
+
+                }
+                else
+                {
+                    Obj_twhwmd200.error = true;
+                    Obj_twhwmd200.typeMsgJs = "label";
+                    Obj_twhwmd200.SuccessMsg = Locationcodedoesntexist;
+                    return JsonConvert.SerializeObject(Obj_twhwmd200);
+                }
+            }
+
+            //Valido que exista un conteo activo para la bodega.
+            Ent_twhcol002 ObjTwhcol002 = new Ent_twhcol002();
             DataTable DTSecuenciaConteo = _idaltwhcol019.ConsecutivoConteo(CWAR, ref strError);
             string SecuenciaConteo = "0";
             if (DTSecuenciaConteo.Rows.Count > 0)
             {
                 SecuenciaConteo = DTSecuenciaConteo.Rows[0]["T$COUN"].ToString();
+                if (SecuenciaConteo == "0")
+                {
+                    ObjTwhcol002.error = true;
+                    ObjTwhcol002.typeMsgJs = "label";
+                    ObjTwhcol002.SuccessMsg = CountWarehouseNotDefined;
+                    return JsonConvert.SerializeObject(ObjTwhcol002);
+                }
             }
+            else
+            {
+                ObjTwhcol002.error = true;
+                ObjTwhcol002.typeMsgJs = "label";
+                ObjTwhcol002.SuccessMsg = CountWarehouseNotDefined;
+                return JsonConvert.SerializeObject(ObjTwhcol002);
+            }
+                        
 
             DataTable DTPalletContinue = _idaltwhcol019.Consetwhcol019(PAID, ref strError);
             int SecuenciaPallet = 0;
@@ -417,15 +529,15 @@ namespace whusap.WebPages.InvReceipts
                 ObjTwhcol019.SuccessMsg = Registeredquantitycannotbelessthanorequaltozero;
                 return JsonConvert.SerializeObject(ObjTwhcol019);
             }
-            string CLOT = " ";
+            //string CLOT = " ";
             
             ObjTwhcol019.PAID   = PAID;
             ObjTwhcol019.SQNB   = SecuenciaPallet;//Convert.ToInt32(PAID.Substring(10,3));   
             ObjTwhcol019.ZONE   = ZONE;   
             ObjTwhcol019.CWAR   = CWAR;
-            ObjTwhcol019.LOCA   = LOCA.Trim() == "" ? " " : LOCA.Trim();   
-            ObjTwhcol019.ITEM   = ITEM;   
-            ObjTwhcol019.CLOT   = CLOT;
+            ObjTwhcol019.LOCA = Obj_twhcol016.sloc=="2" ? " ": LOCA.Trim() == "" ? " " : LOCA.Trim();   
+            ObjTwhcol019.ITEM   = ITEM;
+            ObjTwhcol019.CLOT = CLOT.Trim() == "" ? " " : CLOT.Trim();   
             ObjTwhcol019.QTDL = QTYD;   
             ObjTwhcol019.CUNI   = UNIT;   
             ObjTwhcol019.LOGN   = _operator;   
@@ -479,6 +591,7 @@ namespace whusap.WebPages.InvReceipts
             Locationblockedinbound                          =_textoLabels.readStatement(formName, idioma, "Locationblockedinbound");
             Locationcodedoesntexist                         =_textoLabels.readStatement(formName, idioma, "Locationcodedoesntexist");
             Registeredquantitycannotbelessthanorequaltozero =_textoLabels.readStatement(formName, idioma, "Registeredquantitycannotbelessthanorequaltozero");
+            CountWarehouseNotDefined                        = _textoLabels.readStatement(formName, idioma, "CountWarehouseNotDefined");
             Warehousecodedoesntexist                        =_textoLabels.readStatement(formName, idioma, "Warehousecodedoesntexist");
             return true;
         }

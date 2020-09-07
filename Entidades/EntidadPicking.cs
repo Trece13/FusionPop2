@@ -32,7 +32,7 @@ namespace whusa
 
             this.error = false;
             this.errorMsg = string.Empty;
-
+            this.KLTC = string.Empty;
         }
 
         public string PALLETID { get; set; }
@@ -55,7 +55,7 @@ namespace whusa
        
         public bool error { get; set; }
         public string errorMsg { get; set; }
-
+        public string KLTC { get; set; }
 
 
         public string QTYT { get; set; }

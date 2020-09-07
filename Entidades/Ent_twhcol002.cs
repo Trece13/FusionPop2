@@ -28,6 +28,16 @@ namespace whusa.Entidades
         [Column(Name = "REFCNTU")]
         public int refcntu { get; set; }
 
+        [DataMember(Order = 4)]
+        public bool error { get; set; }
+
+        [DataMember(Order = 5)]
+        public string typeMsgJs { get; set; }
+
+        [DataMember(Order = 6)]
+        public string errorMsg { get; set; }
+        [DataMember(Order = 7)]
+        public string SuccessMsg { get; set; }
 
         public Ent_twhcol002()
         {
