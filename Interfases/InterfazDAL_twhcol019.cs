@@ -38,5 +38,20 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public DataTable ConsecutivoConteo(string cwar, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.ConsecutivoConteo(cwar, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
     }
 }

@@ -385,6 +385,13 @@ namespace whusap.WebPages.InvReceipts
         {
             string strError = string.Empty;
 
+            DataTable DTSecuenciaConteo = _idaltwhcol019.ConsecutivoConteo(CWAR, ref strError);
+            string SecuenciaConteo = "0";
+            if (DTSecuenciaConteo.Rows.Count > 0)
+            {
+                SecuenciaConteo = DTSecuenciaConteo.Rows[0]["T$COUN"].ToString();
+            }
+
             DataTable DTPalletContinue = _idaltwhcol019.Consetwhcol019(PAID, ref strError);
             int SecuenciaPallet = 0;
             if (DTPalletContinue.Rows.Count > 0)
@@ -422,8 +429,8 @@ namespace whusap.WebPages.InvReceipts
             ObjTwhcol019.QTDL = QTYD;   
             ObjTwhcol019.CUNI   = UNIT;   
             ObjTwhcol019.LOGN   = _operator;   
-            ObjTwhcol019.DATE   = new DateTime();   
-            ObjTwhcol019.COUN   = 0;   
+            ObjTwhcol019.DATE   = new DateTime();
+            ObjTwhcol019.COUN = Convert.ToInt32(SecuenciaConteo);
             ObjTwhcol019.PROC   = 0;   
             ObjTwhcol019.REFCNTD= 0;        
             ObjTwhcol019.REFCNTU= 0;
