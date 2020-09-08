@@ -862,7 +862,6 @@ namespace whusa.DAL
             paramList.Add(":T$LOGP", USER.Trim());
             string tabla = ".tticol222";
             string name1 = "ConsultarPalletPicking22With082";
-            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
 
