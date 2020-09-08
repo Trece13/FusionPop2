@@ -287,6 +287,22 @@ namespace whusa.Interfases
             }
         }
 
+        public int actRegtticol082140Paid(string user, string pallet, string Location, int stat, string prio)
+        {
+
+            string strError = string.Empty;
+            try
+            {
+                int DTwhcolo131 = dal.actRegtticol082140Paid( user,  pallet,  Location,  stat,  prio);
+                return DTwhcolo131;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
+
       
 
        
@@ -687,10 +703,10 @@ namespace whusa.Interfases
             return Lstwhcol122;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking131ItemQty(string Item, string Cant, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking131ItemQty(string Item, string Cant,string Prio, string _operator)
         {
             List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
-            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131ItemQty(Item, Cant, _operator);
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131ItemQty(Item, Cant, Prio, _operator);
             if (DTwhcolo131.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo131.Rows)
@@ -727,10 +743,10 @@ namespace whusa.Interfases
             return Lstwhcol131;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking042ItemQty(string Item, string Cant, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking042ItemQty(string Item, string Cant,string Prio, string _operator)
         {
             List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
-            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042ItemQty(Item, Cant, _operator);
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042ItemQty(Item, Cant, Prio,_operator);
             if (DTwhcolo42.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo42.Rows)
@@ -767,10 +783,10 @@ namespace whusa.Interfases
             return Lstwhcol042;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking22ItemQty(string Item, string Cant, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking22ItemQty(string Item, string Cant, string Prio, string _operator)
         {
             List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
-            DataTable DTwhcol122 = dal.ConsultarPalletPicking22ItemQty(Item, Cant, _operator);
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22ItemQty(Item, Cant, Prio, _operator);
             if (DTwhcol122.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcol122.Rows)
@@ -805,6 +821,21 @@ namespace whusa.Interfases
 
             }
             return Lstwhcol122;
+        }
+
+        public DataTable ConsultarTt307140Proc(Ent_ttccol307 MyObj307)
+        {
+            return dal.ConsultarTt307140(MyObj307);
+        }
+
+        public bool Actualizar307Proc(string PAID_NEW, string PAID_OLD)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Actualizar307Proc(string PAID_NEW, string PAID_OLD, string _operator)
+        {
+            return dal.Actualizar307proc(PAID_NEW, PAID_OLD, _operator);
         }
     }
 }
