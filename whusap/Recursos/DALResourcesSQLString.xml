@@ -529,7 +529,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {0}.ttccol307{1} SET T$PAID = '[:PAID_NEW]' where T$PAID = '[:PAID_OLD]'
         </stringSQL>
       </operationName>
-
+      <operationName name="Actualizar307proc">
+        <stringSQL>
+          UPDATE {0}.ttccol307{1} SET T$PAID = '[:PAID_NEW]' where T$USER = '[:USER]' AND T$PROC = '[:PROC]'
+        </stringSQL>
+      </operationName>
       <operationName name="EliminarTccol307140">
         <stringSQL>
           delete from {0}.ttccol307{1} where t$PAID = '[:PAID]'
@@ -564,7 +568,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col222.t$cwat = col082.t$cwar
           --and col082.t$stat = 1
           and col022.t$sqnb = '[:PAID]'
-          and col082.t$stat ='1'
+          and col082.t$stat ='5'
           --order by col082.t$prio
           )
           where rown = 1
@@ -598,7 +602,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col242.t$acqt >= col082.t$qtyt
           and col242.t$cwat = col082.t$cwar
           and col042.t$sqnb = '[:PAID]'
-          and col082.t$stat ='1'
+          and col082.t$stat ='5'
           order by col042.t$date
           )
           where rown = 1
@@ -629,7 +633,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col131.t$qtya >= col082.t$qtyt
           and col131.t$cwaa = col082.t$cwar
           and col131.t$paid = '[:PAID]'
-          and col082.t$stat ='1'
+          and col082.t$stat ='5'
           order by col131.t$date
           )
           where rown = 1
@@ -786,10 +790,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col222.t$acqt >= col082.t$qtyt
           and col222.t$cwat = col082.t$cwar
           and col082.t$qtyt >= '[:QTYT]'
-          and col022.t$mitm = trim('[:ITEM]')
-          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          where loc082.t$stat = 1)
-          and col082.t$stat = 1
+          and trim(col022.t$mitm) = trim('[:ITEM]')
+          and col082.t$prio = '[:PRIO]'
+          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          --where loc082.t$stat = 1)
+          --and col082.t$stat = 1
           order by col022.t$date
           )
           where rown &lt;= 3
@@ -821,10 +826,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col242.t$acqt >= col082.t$qtyt
           and col242.t$cwat = col082.t$cwar
           and col082.t$qtyt >= '[:QTYT]'
-          and col042.t$mitm = trim('[:ITEM]')
-          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          where loc082.t$stat = 1)
-          and col082.t$stat = 1
+          and trim(col042.t$mitm) = trim('[:ITEM]')
+          and col082.t$prio = '[:PRIO]'
+          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          --where loc082.t$stat = 1)
+          --and col082.t$stat = 1
           order by col042.t$date
           )
           where rown &lt;= 3
@@ -853,10 +859,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col131.t$qtya >= col082.t$qtyt
           and col131.t$cwaa = col082.t$cwar
           and col082.t$qtyt >= '[:QTYT]'
-          and col131.t$item = trim('[:ITEM]')
-          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          where loc082.t$stat = 1)
-          and col082.t$stat = 1
+          and trim(col131.t$item) = trim('[:ITEM]')
+          and col082.t$prio = '[:PRIO]'
+          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          --where loc082.t$stat = 1)
+          --and col082.t$stat = 1
           order by col131.t$date)
           where rown &lt;= 3
         </stringSQL>
@@ -883,10 +890,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col307.T$PAID IS NULL
           and col130.t$qtya >= col082.t$qtyt
           and col082.t$qtyt >= '[:QTYT]'
-          and col130.t$item = trim('[:ITEM]')
-          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          where loc082.t$stat = 1)
-          and col082.t$stat = 1
+          and trim(col130.t$item) = trim('[:ITEM]')
+          and col082.t$prio = '[:PRIO]'
+          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          --where loc082.t$stat = 1)
+          --and col082.t$stat = 1
           order by col130.t$date)
           where rown  &lt;= 1
         </stringSQL>
@@ -953,7 +961,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking131With082">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs
+          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs,rown
           from(select  col020.t$cnpk cnpk,col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
           mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
           col082.t$orno orno, col082.t$pono pono, col082.t$advs advs, rank() over(order by col082.t$prio) rown
@@ -992,6 +1000,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND  T$PONO ='[:T$PONO]'
           --AND  T$SQNB = '[:T$SQNB]'
           AND  T$ADVS = '[:T$ADVS]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTbl082Paid">
+        <stringSQL>
+          update  {0}.tticol082{1}
+          set
+          T$PAID ='[:T$PAID]',
+          T$LOCA ='[:T$LOCA]'
+          WHERE T$STAT = '[:T$STAT]'
+          AND T$PRIO = '[:T$PRIO]'
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl022">

@@ -74,7 +74,7 @@ namespace whusa.DAL
             paramList.Add(":T$PROG", PROG);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-            log.escribirError("Ejecucion correcta de : ", "Fusion2pop", "datosMenu_Param", "una");
+            //log.escribirError("Ejecucion correcta de : ", "Fusion2pop", "datosMenu_Param", "una");
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
