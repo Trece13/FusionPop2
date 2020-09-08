@@ -911,7 +911,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col222.t$cwat
           inner join baan.tticol136140 col136
           on col136.t$cwar = col082.t$cwar
-          and col136.t$user = 'JCUBILLOS'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
+          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join BAAN.ttccol020140 col020
           on col020.T$ITEM = col022.t$mitm
           where   col022.t$dele = 7 -- 7-Located
@@ -941,7 +941,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col242.t$cwat
           inner join baan.tticol136140 col136
           on col136.t$cwar = col082.t$cwar
-          and col136.t$user = 'JCUBILLOS'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
+          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join BAAN.ttccol020140 col020
           on col020.T$ITEM = col042.t$mitm
           where   col042.t$dele = 7 -- 7-Located
@@ -969,7 +969,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col131.t$cwaa
           inner join baan.tticol136140 col136
           on col136.t$cwar = col082.t$cwar
-          and col136.t$user = 'JCUBILLOS'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
+          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join BAAN.ttccol020140 col020
           on col020.T$ITEM = col131.t$item
           where   col131.t$stat = 3 -- 3-Located
