@@ -976,7 +976,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and     col307.T$PAID IS NULL
           and     col082.t$prio = (select min(loc082.t$prio) from baan.tticol082140 loc082 where loc082.t$stat = 1 and loc082.t$cwar = col136.t$cwar)
           and     col082.t$stat = 1)
-          where   rown = 1)
+          where   rown = 1
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl082">
