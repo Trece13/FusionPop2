@@ -954,8 +954,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultarPalletPicking131With082">
         <stringSQL>
           select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs
-          from(select col020.t$cnpk cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs, rown
-          from(select  col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
+          from(select  col020.t$cnpk cnpk,col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
           mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
           col082.t$orno orno, col082.t$pono pono, col082.t$advs advs, rank() over(order by col082.t$prio) rown
           from    baan.tticol082140 col082
