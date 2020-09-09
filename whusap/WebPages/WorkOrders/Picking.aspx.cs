@@ -419,8 +419,8 @@ namespace whusap.WebPages.WorkOrders
                     if (Convert.ToDecimal(DTPalletID.Rows[0]["QTYT"].ToString()) >= Convert.ToDecimal(HttpContext.Current.Session["QTY"].ToString()))
                     {
                         ObjPicking.error = false;
-
-                        ObjPicking.LOT = DTPalletID.Rows[0]["ORNO"].ToString();
+                        ObjPicking.PALLETID = PAID_NEW;
+                        ObjPicking.LOT = DTPalletID.Rows[0]["LOT"].ToString();
                         ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString();
                         ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
                         ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString();

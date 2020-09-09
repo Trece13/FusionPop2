@@ -179,7 +179,7 @@
                 </td>
                 <td class="">
                     <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
-                    <asp:TextBox ID="lblQuantity" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="lblQuantity" CssClass="" runat="server"></asp:TextBox>
                 </td>
                 <td>
                     <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
@@ -464,7 +464,7 @@
 
                 HideReason.style.display = "";
                 $('#LblError').html("");
-
+                $('#Contenido_lblPalletID').html(MyObj.PALLETID.toString())
                 $('#Contenido_LblLotId').html(MyObj.LOT.toString())
                 $('#Contenido_lblWarehouse').html(MyObj.WRH.toString())
                 $('#Contenido_lblWareDescr').html(MyObj.DESCWRH.toString())
@@ -745,7 +745,6 @@
             document.getElementById("Contenido_lblCNPK").innerText == "1" ? document.getElementById("Contenido_lblQuantity").disabled = true : document.getElementById("Contenido_lblQuantity").disabled = false;
             document.getElementById("<%=txtPalletID.ClientID %>").focus();
             document.getElementById('btnconfirPKG').disabled = true;
-
 
         });
         var selectNewPalletSuccess = function () {
