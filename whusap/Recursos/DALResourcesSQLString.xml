@@ -499,6 +499,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Consetwhcol019">
         <stringSQL>
+          --select * from {0}.twhcol019{1} where cwar = '[:T$PAID]' and loca = '[:T$LOCA]' and trim(T$PAID) = trim('[:T$PAID]') and clot = '[:T$CLOT]'
           select * from {0}.twhcol019{1} where trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
       </operationName>
@@ -1674,13 +1675,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="VerificarPalletIDz">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,whwmd200.T$sloc SLOC, CLOT, KLTC FROM (
-          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
-          INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
+          --select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
+          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col022.T$QTDL AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT, ' ' AS CWAT ,col022.T$LOCA AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from BAAN.tticol022140 col022
+          --INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
+          LEFT JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col022.t$mitm
           where col022.T$DELE = 7
           UNION
-          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
-          INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
+          --select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
+          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col042.T$QTDL AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,' ',col042.T$LOCA, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from BAAN.tticol042140 col042
+          --INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
+          LEFT JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col042.t$mitm
           where col042.T$DELE = 7
           UNION
