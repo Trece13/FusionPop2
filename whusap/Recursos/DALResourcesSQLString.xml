@@ -4196,7 +4196,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$ORNO, T$PONO, T$ITEM, T$CWAR, T$QUNE, T$LOGN, T$DATE, T$PROC, T$REFCNTD, T$REFCNTU,T$CLOT,T$PDAT,T$PICK,T$OORG)
-          VALUES('[:T$ORNO]', '[:T$PONO]', '[:T$ITEM]', '[:T$CWAR]', '[:T$QUNE]', '[:T$LOGN]', sysdate+(5/24), '[:T$PROC]', '[:T$REFCNTD]', '[:T$REFCNTU]', '[:T$CLOT]',sysdate+(5/24),'0','[:T$OORG]')
+          VALUES('[:T$ORNO]', '[:T$PONO]', '[:T$ITEM]', '[:T$CWAR]', '[:T$QUNE]', '[:T$LOGN]', sysdate+(5/24), '[:T$PROC]', '[:T$REFCNTD]', '[:T$REFCNTU]', '[:T$CLOT]',sysdate+(5/24),'[:T$PICK]','[:T$OORG]')
         </stringSQL>
       </operationName>
       <operationName name="actualizarRegistro_Param">

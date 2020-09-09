@@ -297,7 +297,7 @@ namespace whusap.WebPages.SalesOrders
                                 //qune = Convert.ToDecimal(CantidadPorCiclo(QUANTITYCUNI, Convert.ToInt32(MyConvertionFactor.FactorD), ciclosADVS, i).ToString()),
                                 qune = Convert.ToDecimal(QUANTITYCUNI),
                                 logn = _operator,
-                                proc = 1,
+                                proc = 2,
                                 pick = 1,
                                 clot = " ",
                                 refcntd = 0,

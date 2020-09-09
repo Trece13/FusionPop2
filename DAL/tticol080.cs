@@ -42,7 +42,7 @@ namespace whusa.DAL
 
             try
             {
-                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+                //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
                 //int cant = parametros.Count;
 
                 foreach (Ent_tticol080 reg in parametros)

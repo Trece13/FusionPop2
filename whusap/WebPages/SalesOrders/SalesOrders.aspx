@@ -30,6 +30,11 @@
             color: Red;
         }
         
+        #lblMsgSuccess
+        {
+            font-size: 20px;
+            color: Green;
+        }
         
         .InputCorrecto
         {
@@ -99,6 +104,8 @@
     </div>
     <br />
     <label id="lblMsg">
+    </label>
+    <label id="lblMsgSuccess">
     </label>
     <br />
     <div id="DivTable">
@@ -207,6 +214,7 @@
                 }
                 else if (MyObj.TipeMsgJs == "lbl") {
                     $('#lblMsg').html(MyObj.ErrorMsg);
+                    $('#lblMsgSuccess').html("");
                 }
             }
             else {
@@ -214,6 +222,7 @@
                 txCustomer.removeClass("InputIncorrecto");
                 lblDecCustomer.html(MyObj.NAMA);
                 $('#lblMsg').html("");
+                $('#lblMsgSuccess').html("");
             }
         }
 
@@ -281,10 +290,12 @@
                 });
                 $('#MyRegisterCustomer').append(EncavezadoTable + CuerpoTable + PieTable);
                 $('#lblMsg').html("");
+                $('#lblMsgSuccess').html("");
             }
             else {
                 //alert(Mylist)
                 $('#lblMsg').html("There are no records for this customer");
+                $('#lblMsgSuccess').html("");
             }
             //alert("ClikSaveSuccess");
             console.log(Mylist);
@@ -298,16 +309,19 @@
                     if (x == false) {
                         $('.table tbody tr').remove();
                         $('#lblMsg').html("Some record was not inserted");
+                        $('#lblMsgSuccess').html("");
                     }
                     else {
                         $('.table tbody tr').remove();
-                        $('#lblMsg').html("All records were insert");
+                        $('#lblMsg').html("");
+                        $('#lblMsgSuccess').html("All records were insert");
                     }
                 });
             }
             else {
                 $('.table tbody tr').remove();
                 $('#lblMsg').html("The insertion was not done");
+                $('#lblMsgSuccess').html("");
             }
         }
 
