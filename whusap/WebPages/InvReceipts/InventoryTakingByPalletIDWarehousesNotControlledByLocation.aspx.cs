@@ -385,12 +385,21 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string Click_Save(string PAID, string ITEM, string CWAR, string LOCA, string UNIT, string QTYS, string CLOT, string ZONE)
         {
+            
             string strError = string.Empty;
             
             //Valido el Lote que exista en baan y este asociado al item
             Ent_tticol125 Obj_tticol125 = new Ent_tticol125();
             Obj_tticol125.item = ITEM;
             Obj_tticol125.clot = CLOT;
+
+            //if (true)
+            //{
+            //    Obj_tticol125.error = false;
+            //    Obj_tticol125.typeMsgJs = "console";
+            //    Obj_tticol125.SuccessMsg = "Lote Encontrado";
+            //    return JsonConvert.SerializeObject(Obj_tticol125);
+            //}
 
             DataTable DtTticol125 = ITticol125.listaRegistrosLoteItem_Param(ref Obj_tticol125);
 
@@ -578,7 +587,6 @@ namespace whusap.WebPages.InvReceipts
 
             return retorno;
         }
-
 
         protected static bool CargarIdioma()
         {

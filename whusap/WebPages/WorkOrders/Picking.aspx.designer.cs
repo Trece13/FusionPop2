@@ -130,6 +130,15 @@ namespace whusap.WebPages.WorkOrders {
         protected global::System.Web.UI.WebControls.TextBox lblQuantity;
         
         /// <summary>
+        /// lblQuantityAux control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblQuantityAux;
+        
+        /// <summary>
         /// lblQuantityDesc control.
         /// </summary>
         /// <remarks>

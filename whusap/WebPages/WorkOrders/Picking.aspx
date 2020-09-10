@@ -180,6 +180,7 @@
                 <td class="">
                     <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
                     <asp:TextBox ID="lblQuantity" CssClass="" runat="server"></asp:TextBox>
+                    <asp:Label ID="lblQuantityAux" runat="server" Text=""></asp:Label>
                 </td>
                 <td>
                     <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
