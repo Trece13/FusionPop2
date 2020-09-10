@@ -27,6 +27,7 @@ namespace whusap.WebPages.InvReceipts
         public static string _operator = string.Empty;
         string _idioma = string.Empty;
         public static string PCLOT = string.Empty;
+        public static string PCWAR = string.Empty;
 
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_twhcol019 _idaltwhcol019 = new InterfazDAL_twhcol019();
@@ -130,7 +131,7 @@ namespace whusap.WebPages.InvReceipts
                 ObjZone.PRTR = DTZoneCode.Rows[0]["T$PRTR"].ToString();
                 //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
                 ObjZone.error = false;
-
+                PCWAR = ObjZone.CWAR;
             }
             else
             {
@@ -157,7 +158,14 @@ namespace whusap.WebPages.InvReceipts
                 ObjPicking.ITEM = DTPalletID.Rows[0]["ITEM"].ToString();
                 ObjPicking.DESCRIPTION = DTPalletID.Rows[0]["DSCA"].ToString();
                 ObjPicking.LOT = DTPalletID.Rows[0]["CLOT"].ToString().Trim();
-                ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString().Trim();
+                if (PCWAR != "")
+                {
+                    ObjPicking.WRH = PCWAR;
+                }
+                else
+                {
+                    ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString().Trim();
+                }
                 ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
                 ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString().Trim();
                 ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
