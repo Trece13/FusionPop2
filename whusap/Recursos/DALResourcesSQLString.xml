@@ -436,14 +436,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ticol022.T$NORP AS NORP,
           ticol022.T$DELE AS DELE, CONCAT(CONCAT(TRIM(tccom130.T$NAME), ' - '),tccom130.T$CSTE)  AS NAME
           FROM {2} ticol022
-          INNER JOIN {0}.ttisfc001{1} tisfc001 ON tisfc001.T$PDNO = ticol022.T$PDNO
-          INNER JOIN {0}.ttcmcs003{1} tcmccs003 ON tcmccs003.T$CWAR = tisfc001.T$CWAR
-          INNER JOIN {0}.ttccom130{1} tccom130 ON tccom130.T$CADR = tcmccs003.T$CADR
-          INNER JOIN {0}.ttcibd001{1} ttcibd001 ON ttcibd001.T$ITEM = ticol022.T$MITM
-          INNER JOIN {0}.ttisfc010{1} ttisfc010 ON ttisfc010.T$PDNO = ticol022.T$PDNO
+          LEFT JOIN {0}.ttisfc001{1} tisfc001 ON tisfc001.T$PDNO = ticol022.T$PDNO
+          LEFT JOIN {0}.ttcmcs003{1} tcmccs003 ON tcmccs003.T$CWAR = tisfc001.T$CWAR
+          LEFT JOIN {0}.ttccom130{1} tccom130 ON tccom130.T$CADR = tcmccs003.T$CADR
+          LEFT JOIN {0}.ttcibd001{1} ttcibd001 ON ttcibd001.T$ITEM = ticol022.T$MITM
+          LEFT JOIN {0}.ttisfc010{1} ttisfc010 ON ttisfc010.T$PDNO = ticol022.T$PDNO
           LEFT JOIN {0}.ttcibd003{1} ttcibd003 ON ttcibd003.T$BASU = ttcibd001.T$CUNI AND ttcibd003.T$ITEM = ttcibd001.T$CUNI AND ttcibd003.T$UNIT = 'PLT'
-          WHERE ticol022.T$PDNO = '[:T$PDNO]' AND ticol022.
-          T$SQNB = '[:T$SQNB]'
+          WHERE ticol022.T$PDNO = '[:T$PDNO]' AND ticol022.T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="findRecordBySqnbRejectedPlant">
@@ -1678,20 +1677,24 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col022.T$QTDL AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT, ' ' AS CWAT ,col022.T$LOCA AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
           --INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
-          LEFT JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
+          --LEFT JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col022.t$mitm
-          where col022.T$DELE = 7
+          --where col022.T$DELE = 7
           UNION
           --select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
           select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col042.T$QTDL AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,' ',col042.T$LOCA, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
           --INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
-          LEFT JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
+          --LEFT JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col042.t$mitm
-          where col042.T$DELE = 7
+          --where col042.T$DELE = 7
+          UNION
+          select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT, col130.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA, col130.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol130{1} col130
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col130.t$item
+          --where col131.T$STAT = 3
           UNION
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT, col131.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA, col131.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol131{1} col131
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col131.t$item
-          where col131.T$STAT = 3
+          --where col131.T$STAT = 3
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
@@ -1792,25 +1795,25 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultarPorPalletIDReimpresion131">
         <stringSQL>
           SELECT
-          WHCOL130.T$OORG OORG, WHCOL130.T$ORNO ORNO, WHCOL130.T$ITEM ITEM, TCIBD001.T$DSCA DSCA, WHCOL130.T$PAID PAID, WHCOL130.T$PONO PONO, WHCOL130.T$SEQN SEQN,
-          WHCOL130.T$CLOT CLOT, WHCOL130.T$CWAR CWAR, WHCOL130.T$QTYS QTYS, WHCOL130.T$UNIC UNIC, WHCOL130.T$QTYC QTYC, WHCOL130.T$UNIC UNIC,
-          WHCOL130.T$DATE T$DATE, WHCOL130.T$CONF CONF, WHCOL130.T$RCNO RCNO, WHCOL130.T$DATR DATR, WHCOL130.T$LOCA LOCA, WHCOL130.T$DATL DATL,
-          WHCOL130.T$PICK PICK, WHCOL130.T$DATK DATK, WHCOL130.T$PRNT PRNT, WHCOL130.T$DATP DATP, WHCOL130.T$NPRT NPRT, WHCOL130.T$LOGN LOGN,
-          WHCOL130.T$LOGP LOGP, WHCOL130.T$LOGT LOGT, WHCOL130.T$DAFR DAFR, WHCOL130.T$MES1 MES1, WHCOL130.T$DAFL DAFL, WHCOL130.T$MES2 MES2,
-          WHCOL130.T$STAT T$STAT, WHCOL130.T$REFCNTD REFCNTD, WHCOL130.T$REFCNTU  REFCNTU
-          FROM  {0}.twhcol131{1} WHCOL130
-          INNER JOIN {0}.TTCIBD001{1} TCIBD001 ON WHCOL130.T$ITEM = TCIBD001.T$ITEM
+          WHCOL131.T$OORG OORG, WHCOL131.T$ORNO ORNO, WHCOL131.T$ITEM ITEM, TCIBD001.T$DSCA DSCA, WHCOL131.T$PAID PAID, WHCOL131.T$PONO PONO, WHCOL131.T$SEQN SEQN,
+          WHCOL131.T$CLOT CLOT, WHCOL131.T$CWAR CWAR, WHCOL131.T$QTYS QTYS, WHCOL131.T$UNIC UNIT, WHCOL131.T$QTYC QTYC, WHCOL131.T$UNIC UNIC,
+          WHCOL131.T$DATE T$DATE, WHCOL131.T$CONF CONF, WHCOL131.T$RCNO RCNO, WHCOL131.T$DATR DATR, WHCOL131.T$LOCA LOCA, WHCOL131.T$DATL DATL,
+          WHCOL131.T$PICK PICK, WHCOL131.T$DATK DATK, WHCOL131.T$PRNT PRNT, WHCOL131.T$DATP DATP, WHCOL131.T$NPRT NPRT, WHCOL131.T$LOGN LOGN,
+          WHCOL131.T$LOGP LOGP, WHCOL131.T$LOGT LOGT, WHCOL131.T$DAFR DAFR, WHCOL131.T$MES1 MES1, WHCOL131.T$DAFL DAFL, WHCOL131.T$MES2 MES2,
+          WHCOL131.T$STAT T$STAT, WHCOL131.T$REFCNTD REFCNTD, WHCOL131.T$REFCNTU  REFCNTU
+          FROM  {0}.twhcol131{1} WHCOL131
+          INNER JOIN {0}.TTCIBD001{1} TCIBD001 ON WHCOL131.T$ITEM = TCIBD001.T$ITEM
           WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActualizarConteoReimpresion">
         <stringSQL>
-          UPDATE {0}.twhcol130{1} SET T$NPRT = (SELECT T$NPRT NPRT FROM  {0}.twhcol130{1} WHERE T$PAID = '[:T$PAID]')+1 , T$DRPT = SYSDATE,T$LOGR='[:T$LOGR]' WHERE T$PAID = '[:T$PAID]'
+          UPDATE {0}.twhcol130{1} SET T$NPRT = (SELECT T$NPRT NPRT FROM  {0}.twhcol130{1} WHERE T$PAID = '[:T$PAID]')+1 , T$DRPT = SYSDATE+5/24,T$LOGR='[:T$LOGR]' WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
-      <operationName name="ActualizarConteoReimpresion">
+      <operationName name="ActualizarConteoReimpresion131">
         <stringSQL>
-          UPDATE {0}.twhcol131{1} SET T$NPRT = (SELECT T$NPRT NPRT FROM  {0}.twhcol130{1} WHERE T$PAID = '[:T$PAID]')+1 , T$DRPT = SYSDATE,T$LOGR='[:T$LOGR]' WHERE T$PAID = '[:T$PAID]'
+          UPDATE {0}.twhcol131{1} SET T$NPRT = (SELECT T$NPRT NPRT FROM  {0}.twhcol131{1} WHERE T$PAID = '[:T$PAID]')+1 , T$DRPT = SYSDATE+5/24,T$LOGR='[:T$LOGR]' WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ConsultafactoresporItem">

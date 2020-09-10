@@ -504,6 +504,7 @@
             else {
                 $('#lblError').html("");
                 ImprimirMensaje(MyObject.typeMsgJs, MyObject.SuccessMsg);
+                $('#txPalletID').focus();
             }
 
         }
