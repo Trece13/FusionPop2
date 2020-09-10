@@ -565,8 +565,7 @@ namespace whusap.WebPages.InvReceipts
             if (res)
             {
                 ObjTwhcol019.error = false;
-                ObjTwhcol019.typeMsgJs = "alert";
-                
+                ObjTwhcol019.typeMsgJs = "alert";               
                 ObjTwhcol019.SuccessMsg = Therecordwassuccessfullyinserted;
             }
             else{

@@ -499,10 +499,12 @@
                 $('#btnClear').click();
                 $('#lblError').html("");
                 ImprimirMensaje(MyObject.typeMsgJs, MyObject.SuccessMsg);
+                $('#txPalletID').focus();
             }
             else {
                 $('#lblError').html("");
                 ImprimirMensaje(MyObject.typeMsgJs, MyObject.SuccessMsg);
+                $('#txPalletID').focus();
             }
 
         }
