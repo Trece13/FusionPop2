@@ -387,26 +387,40 @@ namespace whusap.WebPages.InvReceipts
         {
             string strError = string.Empty;
             
-            //Valido el Lote que exista en baan y este asociado al item
-            Ent_tticol125 Obj_tticol125 = new Ent_tticol125();
-            Obj_tticol125.item = ITEM;
-            Obj_tticol125.clot = CLOT;
-
-            DataTable DtTticol125 = ITticol125.listaRegistrosLoteItem_Param(ref Obj_tticol125);
-
-            if (DtTticol125.Rows.Count > 0)
+            //Valido si el articulo maneja lote
+            Ent_ttcibd001 ObjTtcibd001 = new Ent_ttcibd001();
+            DataTable dtTtcibd001 = ITtcibd001.findItem(ITEM);
+            if (dtTtcibd001.Rows.Count > 0)
             {
-                Obj_tticol125.error = false;
-                Obj_tticol125.typeMsgJs = "console";
-                Obj_tticol125.SuccessMsg = "Lote Encontrado";
-            }
-            else
-            {
+                ObjTtcibd001.item = dtTtcibd001.Rows[0]["ITEM"].ToString();
+                ObjTtcibd001.dsca = dtTtcibd001.Rows[0]["DSCA"].ToString();
+                ObjTtcibd001.cuni = dtTtcibd001.Rows[0]["CUNI"].ToString();
+                ObjTtcibd001.kltc = dtTtcibd001.Rows[0]["KLTC"].ToString();
+                ObjTtcibd001.kitm = dtTtcibd001.Rows[0]["KITM"].ToString();
 
-                Obj_tticol125.error = true;
-                Obj_tticol125.typeMsgJs = "label";
-                Obj_tticol125.SuccessMsg = Lotcodedoesntexist;
-                return JsonConvert.SerializeObject(Obj_tticol125);
+                if (ObjTtcibd001.kltc.Trim() == "1")
+                {
+                    //Valido el Lote que exista en baan y este asociado al item
+                    Ent_tticol125 Obj_tticol125 = new Ent_tticol125();
+                    Obj_tticol125.item = ITEM;
+                    Obj_tticol125.clot = CLOT;
+
+                    DataTable DtTticol125 = ITticol125.listaRegistrosLoteItem_Param(ref Obj_tticol125);
+
+                    if (DtTticol125.Rows.Count > 0)
+                    {
+                        Obj_tticol125.error = false;
+                        Obj_tticol125.typeMsgJs = "console";
+                        Obj_tticol125.SuccessMsg = "Lote Encontrado";
+                    }
+                    else
+                    {
+                        Obj_tticol125.error = true;
+                        Obj_tticol125.typeMsgJs = "label";
+                        Obj_tticol125.SuccessMsg = Lotcodedoesntexist;
+                        return JsonConvert.SerializeObject(Obj_tticol125);
+                    }
+                }
             }
 
             //Valido los datos de la bodega            
