@@ -246,12 +246,12 @@
                                     "<th scope='col'>Sequence</th>" +
                                     "<th scope='col'>Item</th>" +
                                     "<th scope='col'>Description</th>" +
-                                    "<th scope='col'>Sales Qlt</th>" +
-                                    "<th scope='col'>Sales Unit</th>" +
-                                    "<th scope='col'>Stock Qty</th>" +
+                                    "<th scope='col'>Qty Ordered</th>" +
+                                    "<th scope='col'>Unit</th>" +
+                                    "<th scope='col'>Qty Stock Unit</th>" +
                                     "<th scope='col'>Stock Unit</th>" +
-                                    "<th scope='col'>Planet Del Date</th>" +
-                                    "<th scope='col'>Deliver</th>" +
+                                    "<th scope='col'>Planed Del Date</th>" +
+                                    "<th scope='col'>Delivery</th>" +
                                     "</tr>" +
                                     "</thead>" +
                                     "<tbody>";
@@ -278,11 +278,11 @@
                                     '<td>' + item.SEQN + '</td>' +
                                     '<td>' + item.ITEM + '</td>' +
                                     '<td>' + item.DSCA + '</td>' +
-                                    '<td>' + item.QSTR + '</td>' +
-                                    '<td>' + item.STUN + '</td>' +
-                                    '<td>' + item.STOC + '</td>' +
-                                    '<td>' + item.CUNI + '</td>' +
-                                    '<td>' + month + "/" + day + "/" + year + '</td>' +
+                                    '<td align ="center">' + item.QSTR + '</td>' +
+                                    '<td align ="center">' + item.STUN + '</td>' +
+                                    '<td align ="center">' + item.QSTK + '</td>' +
+                                    '<td align ="center">' + item.CUNI + '</td>' +
+                                    '<td align ="center">' + month + "/" + day + "/" + year + '</td>' +
                                     '<td><input type="checkbox" class="checkBoxSave" onclick="ClickMyCheckBox(' + id + ',this)"/></td>' +
                                   '</tr>';
                     CuerpoTable += newRow

@@ -1385,8 +1385,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="TraerOrdenesCustomer">
         <stringSQL>
           select  inh220.t$orno ORNO, inh220.t$oset OSET, inh220.t$pono PONO, inh220.t$seqn SEQN, inh220.t$item ITEM,
-          ibd001.t$dsca DSCA, inh220.t$qstr QSTR, inh220.t$stun STUN, wmd215.t$stoc STOC, ibd001.t$cuni CUNI,
-          inh220.t$pddt PDDT, inh200.t$stad STAD,inh200.t$sfco SFCO,inh200.t$oorg OORG
+          ibd001.t$dsca DSCA, inh220.t$qstr QSTR, inh220.t$qstk QSTK, inh220.t$stun STUN, wmd215.t$stoc STOC, 
+          ibd001.t$cuni CUNI, inh220.t$pddt PDDT, inh200.t$stad STAD,inh200.t$sfco SFCO,inh200.t$oorg OORG
           from    {0}.twhinh220{1} inh220
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inh220.t$item
           inner join {0}.twhinh200{1} inh200 on inh200.t$oorg = inh220.t$oorg
@@ -1397,13 +1397,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and     inh220.t$oorg = 1
           and TRIM(inh200.T$STCO)=TRIM('[:T$STAD]')
           and inh220.t$pddt &lt;= TO_CHAR(TO_DATE('[:T$PDDT]','YYYY/MM/DD'),'DD-MON-YYYY')
+          order by inh220.t$pddt, inh220.t$orno, inh220.t$pono ASC
           <!--and not exists (select (col082.t$orno||col082.t$pono||col082.t$oset) from {0}.tticol082{1} col082
           where   col082.t$orno = inh220.t$orno
           and     col082.t$pono = inh220.t$pono
           and     col082.t$oset = inh220.t$oset
           and     col082.t$oorg = inh220.t$oorg
           and     col082.t$sqnb = inh220.t$seqn)-->
-          order by inh220.t$pddt, inh220.t$orno, inh220.t$pono ASC
         </stringSQL>
       </operationName>
     </Module>
