@@ -4766,7 +4766,7 @@
       <Idiom name="INGLES">
         <operationName name="Thepickedissuccess">
           <stringMessage>
-            The picked is success
+            Information saved successfully
           </stringMessage>
         </operationName>
         <operationName name="Thepickedisnotsuccess">
@@ -4776,7 +4776,7 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            The Pallet ID Doesn't exist
+            Pallet ID has not been dropped or discounted
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
@@ -4786,14 +4786,14 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            The Pallet ID Doesn't exist
+            Pallet ID has not been dropped or discounted
           </stringMessage>
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="Thepickedissuccess">
           <stringMessage>
-            The picked is success
+            Information saved successfully
           </stringMessage>
         </operationName>
         <operationName name="Thepickedisnotsuccess">
@@ -4803,17 +4803,12 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            The Pallet ID Doesn't exist
+            Pallet ID has not been dropped or discounted
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
           <stringMessage>
             Pallet ID not valid for take to MFG
-          </stringMessage>
-        </operationName>
-        <operationName name="ThePalletIDDoesntexist">
-          <stringMessage>
-            The Pallet ID Doesn't exist
           </stringMessage>
         </operationName>
       </Idiom>
@@ -4823,7 +4818,7 @@
       <Idiom name="INGLES">
         <operationName name="Thedropprocessissuccess">
           <stringMessage>
-            The drop process is success
+            Information saved successfully
           </stringMessage>
         </operationName>
         <operationName name="Thedropprocessisnotsuccess">
@@ -4833,24 +4828,19 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            The Pallet ID Doesn't exist
+            Pallet ID has not been picked
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfordropprocess">
           <stringMessage>
             Pallet ID not valid for drop process
-          </stringMessage>
-        </operationName>
-        <operationName name="ThePalletIDDoesntexist">
-          <stringMessage>
-            The Pallet ID Doesn't exist
           </stringMessage>
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="Thedropprocessissuccess">
           <stringMessage>
-            The drop process is success
+            Information saved successfully
           </stringMessage>
         </operationName>
         <operationName name="Thedropprocessisnotsuccess">
@@ -4860,7 +4850,7 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            The Pallet ID Doesn't exist
+            Pallet ID has not been picked
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfordropprocess">
@@ -4870,7 +4860,7 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            The Pallet ID Doesn't exist
+            Pallet ID has not been picked
           </stringMessage>
         </operationName>
       </Idiom>

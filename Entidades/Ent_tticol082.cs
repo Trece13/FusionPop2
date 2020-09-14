@@ -33,6 +33,7 @@ namespace whusa.Entidades
         public string PAID  { get; set; }
         public string DSCA { get; set; }
         public string MCNO { get; set; }
+        public string DSCAM { get; set; }
         public string LOCA { get; set; }
         public string CUNI { get; set; }
         public string QTYC { get; set; }

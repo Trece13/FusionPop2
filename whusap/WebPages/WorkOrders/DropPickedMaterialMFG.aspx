@@ -95,13 +95,17 @@
                     <label class="col-sm-12 col-form-label-lg" id="lblMachine">
                     </label>
                 </div>
+                <div class="col-sm-3">
+                    <label class="col-sm-12 col-form-label-lg" id="lblDMachine">
+                    </label>
+                </div>
             </div>
             <div class="form-group row" id="divQueryAction">
                 <div class="col-sm-2">
                 </div>
                 <div class="col-sm-4">
                     <input type="button" class="btn btn-primary btn-lg col-sm-7 " id="btnDropTagPick"
-                        value="Picked by MFG" onclick="ClickDropTagPick()" />
+                        value="Pick Material" onclick="ClickDropTagPick()" />
                 </div>
             </div>
         </div>
@@ -153,6 +157,7 @@
 
             lblWorkOrder = $('#lblWorkOrder');
             lblMachine = $('#lblMachine');
+            lblDMachine = $('#lblDMachine');
             lblMsg = $('#lblMsg');
         }
 
@@ -206,12 +211,13 @@
                 LblQuantityUnit.html(MyObj.UNIT);
                 lblWorkOrder.html(MyObj.ORNO);
                 lblMachine.html(MyObj.MCNO);
+                lblDMachine.html(MyObj.DSCAM);
                 DetallePallet.show();
             }
         }
 
         function ClickDropTagPickSuccess(r) {
-            lblMsg.hide(500);
+            //FlblMsg.hide(500);
             var MyObj = JSON.parse(r.d);
             if (MyObj.Error == true) {
                 if (MyObj.TipeMsgJs == "alert") {

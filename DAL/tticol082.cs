@@ -766,32 +766,32 @@ namespace whusa.DAL
             }
             return retorno;
         }
-        public bool Actualizartticol083MFG(Ent_tticol082 MyObj)
-        {
-            method = MethodBase.GetCurrentMethod();
-            bool retorno = false;
-            string strError = string.Empty;
+        //public bool Actualizartticol082MFG(Ent_tticol082 MyObj)
+        //{
+        //    method = MethodBase.GetCurrentMethod();
+        //    bool retorno = false;
+        //    string strError = string.Empty;
 
-            try
-            {
+        //    try
+        //    {
 
-                paramList = new Dictionary<string, object>();
-                paramList.Add(":PAID", MyObj.PAID);
+        //        paramList = new Dictionary<string, object>();
+        //        paramList.Add(":PAID", MyObj.PAID);
 
 
-                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
-            }
+        //        strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+        //        return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+        //    }
 
-            catch (Exception ex)
-            {
-                strError = ex.InnerException != null ?
-                    ex.Message + " (" + ex.InnerException + ")" :
-                    ex.Message;
+        //    catch (Exception ex)
+        //    {
+        //        strError = ex.InnerException != null ?
+        //            ex.Message + " (" + ex.InnerException + ")" :
+        //            ex.Message;
 
-            }
-            return retorno;
-        }
+        //    }
+        //    return retorno;
+        //}
         public bool Actualizartwhcol130MFG(Ent_tticol082 MyObj)
         {
             method = MethodBase.GetCurrentMethod();

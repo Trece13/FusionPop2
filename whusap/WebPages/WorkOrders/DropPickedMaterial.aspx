@@ -90,12 +90,34 @@
                     </label>
                 </div>
             </div>
+            <div class="form-group row ">
+                <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblWorkOrderd">
+                WorkOrder
+                </label>
+                <div class="col-sm-3">
+                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblWorkOrderval">
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row ">
+                <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachined">
+                Machine
+                </label>
+                <div class="col-sm-3">
+                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachineval">
+                    </label>
+                </div>
+                <div class="col-sm-3">
+                    <label class="col-sm-12 col-form-label-lg" for="txCustomer" id="LblMachinedes">
+                    </label>
+                </div>
+            </div>
             <div class="form-group row" id="divQueryAction">
                 <div class="col-sm-2">
                 </div>
                 <div class="col-sm-4">
                     <input type="button" class="btn btn-primary btn-lg col-sm-7 " id="btnDropTagPick"
-                        value="Drop & Tag Pick" onclick="ClickDropTagPick()" />
+                        value="Drop Material" onclick="ClickDropTagPick()" />
                 </div>
             </div>
         </div>
@@ -215,13 +237,17 @@
             lblItemDesc = $('#lblItemDesc');
             LblQuantityVal = $('#LblQuantityVal');
             LblQuantityUnit = $('#LblQuantityUnit');
+            LblWorkOrderd = $('#LblWorkOrderd');
+            LblWorkOrderval = $('#LblWorkOrderval');
+            LblMachined = $('#LblMachined');
+            LblMachineval = $('#LblMachineval');
+            LblMachinedes = $('#LblMachinedes');
             btnDropTagPick = $('#btnDropTagPick');
             DetallePallet = $('#DetallePallet');
 
             LblEtiqueta = $('#LblEtiqueta');
             lblWorkOrder = $('#lblWorkOrder');
             lblMachine = $('#lblMachine');
-
         }
 
         var SearchPalletID = function () {
@@ -269,6 +295,9 @@
                 LblQuantityUnit.html(MyObj.UNIT);
                 lblWorkOrder.html(MyObj.ORNO);
                 lblMachine.html(MyObj.MCNO);
+                LblWorkOrderval.html(MyObj.ORNO);
+                LblMachineval.html(MyObj.MCNO);
+                LblMachinedes.html(MyObj.DSCAM);
                 DetallePallet.show();
             }
         }
@@ -289,7 +318,11 @@
                 lblItemDesc.html("");
                 LblQuantityVal.html("");
                 LblQuantityUnit.html("");
-
+                LblWorkOrderval.html("");
+                LblMachineval.html("");
+                LblMachinedes.html("");
+                lblItemDesc
+                
                 if (MyObj.TipeMsgJs == "alert") {
                     alert(MyObj.SuccessMsg);
                 }

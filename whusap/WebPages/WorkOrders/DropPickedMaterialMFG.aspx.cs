@@ -52,32 +52,32 @@ namespace whusap.WebPages.WorkOrders
                 {
                     case "ticol022":
                         ActalizacionExitosa = Itticol082.Actualizartticol022MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
+                        Itticol082.Actualizartticol082MFG(MyObj);                        
                         break;
-                    case "ticol222":
-                        ActalizacionExitosa = Itticol082.Actualizartticol222MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
-                        break;
-                    case "ticol242":
-                        ActalizacionExitosa = Itticol082.Actualizartticol242MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
-                        break;
-                    case "ticol082":
-                        ActalizacionExitosa = Itticol082.Actualizartticol082MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
-                        break;
+                    //case "ticol222":
+                    //    ActalizacionExitosa = Itticol082.Actualizartticol222MFG(MyObj);
+                    //    Itticol082.Actualizartticol083MFG(MyObj);                        
+                    //    break;
+                    //case "ticol242":
+                    //    ActalizacionExitosa = Itticol082.Actualizartticol242MFG(MyObj);
+                    //    Itticol082.Actualizartticol083MFG(MyObj);                        
+                    //    break;
+                    //case "ticol082":
+                    //    ActalizacionExitosa = Itticol082.Actualizartticol082MFG(MyObj);
+                    //    Itticol082.Actualizartticol083MFG(MyObj);                        
+                    //    break;
                     case "whcol130":
                         ActalizacionExitosa = Itticol082.Actualizartwhcol130MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
+                        Itticol082.Actualizartticol082MFG(MyObj);                        
                         break;
                     case "whcol131":
                         ActalizacionExitosa = Itticol082.Actualizartwhcol131MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
+                        Itticol082.Actualizartticol082MFG(MyObj);                        
 
                         break;
                     case "ticol042":
                         ActalizacionExitosa = Itticol082.Actualizartticol042MFG(MyObj);
-                        Itticol082.Actualizartticol083MFG(MyObj);                        
+                        Itticol082.Actualizartticol082MFG(MyObj);                        
                         break;
                 }
                 if (ActalizacionExitosa)
@@ -124,22 +124,25 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.ITEM = myObjDt["ITEM"].ToString();
                 MyObj.DSCA = myObjDt["DSCA"].ToString();
                 MyObj.MCNO = myObjDt["MCNO"].ToString();
+                MyObj.DSCAM = myObjDt["DSCAM"].ToString();
                 MyObj.ORNO = myObjDt["ORNO"].ToString();
                 MyObj.STAT = myObjDt["STAT"].ToString();
-               
-                if (VerificarStatPortabla(MyObj.TBL, MyObj.STAT))
-                {
-                    MyObj.Error = false;
+                MyObj.Error = false;
+                ObjRetorno = JsonConvert.SerializeObject(MyObj);
 
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                }
-                else
-                {
-                    MyObj.Error = true;
-                    MyObj.TipeMsgJs = "lbl";
-                    MyObj.ErrorMsg = PalletIDnotvalidfortaketoMFG;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                }
+                //if (VerificarStatPortabla(MyObj.TBL, MyObj.STAT))
+                //{
+                //    MyObj.Error = false;
+
+                //    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //}
+                //else
+                //{
+                //    MyObj.Error = true;
+                //    MyObj.TipeMsgJs = "lbl";
+                //    MyObj.ErrorMsg = PalletIDnotvalidfortaketoMFG;
+                //    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //}
 
             }
             else

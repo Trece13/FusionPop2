@@ -108,18 +108,18 @@ namespace whusap.WebPages.WorkOrders
                         Itticol082.Actualizartticol082(MyObj);
                         ActalizacionExitosa = Itticol082.Actualizartticol022(MyObj);
                         break;
-                    case "ticol222":
-                        Itwhcol130.Eliminartccol307(MyObj.PAID, "");
-                        Itticol082.Actualizartticol082(MyObj);
-                        Itticol082.Actualizartticol022(MyObj);
-                        ActalizacionExitosa = Itticol082.Actualizartticol222(MyObj);
-                        break;
-                    case "ticol242":
-                        Itwhcol130.Eliminartccol307(MyObj.PAID, "");
-                        Itticol082.Actualizartticol082(MyObj);
-                        Itticol082.Actualizartticol042(MyObj);
-                        ActalizacionExitosa = Itticol082.Actualizartticol242(MyObj);
-                        break;
+                    //case "ticol222":
+                    //    Itwhcol130.Eliminartccol307(MyObj.PAID, "");
+                    //    Itticol082.Actualizartticol082(MyObj);
+                    //    Itticol082.Actualizartticol022(MyObj);
+                    //    ActalizacionExitosa = Itticol082.Actualizartticol222(MyObj);
+                    //    break;
+                    //case "ticol242":
+                    //    Itwhcol130.Eliminartccol307(MyObj.PAID, "");
+                    //    Itticol082.Actualizartticol082(MyObj);
+                    //    Itticol082.Actualizartticol042(MyObj);
+                    //    ActalizacionExitosa = Itticol082.Actualizartticol242(MyObj);
+                    //    break;
                     case "whcol131":
                         Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
@@ -195,65 +195,67 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.ITEM = myObjDt["ITEM"].ToString();
                 MyObj.DSCA = myObjDt["DSCA"].ToString();
                 MyObj.MCNO = myObjDt["MCNO"].ToString();
+                MyObj.DSCAM = myObjDt["DSCAM"].ToString();
                 MyObj.ORNO = myObjDt["ORNO"].ToString();
                 MyObj.STAT = myObjDt["STAT"].ToString();
                 MyObj.STAP = myObjDt["STAP"].ToString();
+                ObjRetorno = JsonConvert.SerializeObject(MyObj);
 
-                switch (MyObj.TBL.ToString())
-                {
-                    case "ticol022":
-                            if (MyObj.STAP != "9")
-                            {
-                                MyObj.Error = true;
-                                MyObj.TipeMsgJs = "alert";
-                                MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
-                                ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            }
-                            else
-                            {
-                                ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            }
-                        break;
-                    case "whcol131":
-                            if (MyObj.STAP != "7")
-                            {
-                                MyObj.Error = true;
-                                MyObj.TipeMsgJs = "alert";
-                                MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
-                                ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            }
-                            else
-                            {
-                                ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            }
-                        break;
-                    case "ticol042":
-                        if (MyObj.STAP != "9")
-                        {
-                            MyObj.Error = true;
-                            MyObj.TipeMsgJs = "alert";
-                            MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                        }
-                        else
-                        {
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                        }
-                        break;
-                    case "whcol130":
-                        if (MyObj.STAP != "7")
-                        {
-                            MyObj.Error = true;
-                            MyObj.TipeMsgJs = "alert";
-                            MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                        }
-                        else
-                        {
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                        }
-                        break;
-                }
+                //switch (MyObj.TBL.ToString())
+                //{
+                //    case "ticol022":
+                //            if (MyObj.STAP != "9")
+                //            {
+                //                MyObj.Error = true;
+                //                MyObj.TipeMsgJs = "alert";
+                //                MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
+                //                ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //            }
+                //            else
+                //            {
+                //                ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //            }
+                //        break;
+                //    case "whcol131":
+                //            if (MyObj.STAP != "7")
+                //            {
+                //                MyObj.Error = true;
+                //                MyObj.TipeMsgJs = "alert";
+                //                MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
+                //                ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //            }
+                //            else
+                //            {
+                //                ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //            }
+                //        break;
+                //    case "ticol042":
+                //        if (MyObj.STAP != "9")
+                //        {
+                //            MyObj.Error = true;
+                //            MyObj.TipeMsgJs = "alert";
+                //            MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
+                //            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //        }
+                //        else
+                //        {
+                //            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //        }
+                //        break;
+                //    case "whcol130":
+                //        if (MyObj.STAP != "7")
+                //        {
+                //            MyObj.Error = true;
+                //            MyObj.TipeMsgJs = "alert";
+                //            MyObj.ErrorMsg = PalletIDnotvalidfordropprocess;
+                //            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //        }
+                //        else
+                //        {
+                //            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //        }
+                //        break;
+                //}
                 
 
             }

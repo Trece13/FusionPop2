@@ -126,10 +126,10 @@ namespace whusa.Interfases
             return dal.Actualizartwhcol131MFG(myObj);
         }
 
-        public bool Actualizartticol083MFG(Ent_tticol082 myObj)
-        {
-            return dal.Actualizartticol083MFG(myObj);
-        }
+        //public bool Actualizartticol082MFG(Ent_tticol082 myObj)
+        //{
+        //    return dal.Actualizartticol082MFG(myObj);
+        //}
 
         public bool Actualizartwhcol130MFG(Ent_tticol082 myObj)
         {
