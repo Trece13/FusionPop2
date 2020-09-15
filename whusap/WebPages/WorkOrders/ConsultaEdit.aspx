@@ -672,7 +672,8 @@
 
         function ClickMyCheckBox(MyRow, MyCheck) {
             Mylist.forEach(function (item) {
-                if (item.ORNO.trim() == $(MyRow).find('td').eq(0).html().trim() && item.OSET == $(MyRow).find('td').eq(1).html().trim() && item.PONO == $(MyRow).find('td').eq(2).html().trim() && item.SEQN == $(MyRow).find('td').eq(3).html().trim() && item.ITEM.trim() == $(MyRow).find('td').eq(4).html().trim()) {
+                //if (item.ORNO.trim() == $(MyRow).find('td').eq(0).html().trim() && item.OSET == $(MyRow).find('td').eq(1).html().trim() && item.PONO == $(MyRow).find('td').eq(2).html().trim() && item.SEQN == $(MyRow).find('td').eq(3).html().trim() && item.ITEM.trim() == $(MyRow).find('td').eq(4).html().trim()) {
+                if (item.ORNO.trim() == $(MyRow).find('td').eq(0).html().trim() && item.PONO == $(MyRow).find('td').eq(2).html().trim() && item.ITEM.trim() == $(MyRow).find('td').eq(4).html().trim()) {
                     if ($(MyCheck).is(':checked')) {
                         lstEnviar.push(item);
                     }
