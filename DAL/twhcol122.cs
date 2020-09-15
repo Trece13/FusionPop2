@@ -1069,6 +1069,63 @@ namespace whusa.DAL
 
             return Retorno;
         }
+
+        public void updatetwhcol131Quantity(string pallet, float sqnb_act)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", pallet.Trim());
+            paramList.Add(":T$QTYC", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, "twhcol130", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+        }
+
+        public void updatetticol242Quantity(string pallet, float sqnb_act)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", pallet.Trim());
+            paramList.Add(":T$ACQT", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, "tticol242", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+        }
+
+        public void updatetticol222Quantity(string pallet, float sqnb_act)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", pallet.Trim());
+            paramList.Add(":T$ACQT", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, "tticol222", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+        }
     }
 }
 

@@ -1419,6 +1419,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol242">
+      <operationName name="updatetticol242Quantity">
+        <stringSQL>
+          UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+        </stringSQL>
+      </operationName>
       <operationName name="ActualizarRegistroTticon242">
         <stringSQL>
           UPDATE {0}.tticol242{1} SET T$URPT = '[:T$URPT]',T$DRPT = SYSDATE WHERE T$SQNB = '[:T$SQNB]'
@@ -1443,6 +1448,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol222">
+      <operationName name="updatetticol222Quantity">
+        <stringSQL>
+          UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+        </stringSQL>
+      </operationName>
       <operationName name="InsertarRegistroTicol222">
         <stringSQL>
           INSERT INTO {0}.tticol222{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLO)
@@ -1645,6 +1655,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="updatetwhcol131Quantity">
+        <stringSQL>
+          UPDATE  {0}.twhcol131{1} SET T$QTYC = '[:T$QTYC]' WHERE trim(T$SQNB) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="maximaSecuencia">
       <stringSQL>
         SELECT T$PAID  FROM(

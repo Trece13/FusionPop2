@@ -629,8 +629,7 @@ namespace whusap.WebPages.InvReceipts
         //    }
         //}
 
-
-        protected void save_Click(object sender, EventArgs e)
+protected void save_Click(object sender, EventArgs e)
         {
             string ITEM = HttpContext.Current.Session["ITEM"].ToString();
             string CWAR = HttpContext.Current.Session["CWAR"].ToString();
@@ -822,6 +821,7 @@ namespace whusap.WebPages.InvReceipts
 
         }
 
+        
         protected static string mensajes(string tipoMensaje)
         {
             string idioma = "INGLES";

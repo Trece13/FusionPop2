@@ -179,8 +179,9 @@
                 </td>
                 <td class="">
                     <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
-                    <asp:TextBox ID="lblQuantity" CssClass="" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="lblQuantity" CssClass="" runat="server" type="number"></asp:TextBox>
                     <asp:Label ID="lblQuantityAux" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="lblQuantityOld" runat="server" Text=""></asp:Label>
                 </td>
                 <td>
                     <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
@@ -385,7 +386,7 @@
             }
 
         }
-
+        
         $(document).keypress(
          function validar(e) {
              var keycode = (e.keyCode ? e.keyCode : e.which);
@@ -486,7 +487,7 @@
             $.ajax({
                 type: "POST",
                 url: "Picking.aspx/Click_confirPKG",
-                data: "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblSQNB.ClientID %>").innerHTML.toString() + "'}",
+                data: "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblQuantity.ClientID %>").innerHTML.toString() + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -755,5 +756,20 @@
             currentRow = currentRow.cells[0].innerHTML.toString().trim()
             EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "'}", selectNewPalletSuccess);
         }
+        $("#Contenido_lblQuantity").bind("change paste keyup",
+            function () {
+                var newCant = parseFloat($("#Contenido_lblQuantity").val());
+                var oldCant = parseFloat($("#Contenido_lblQuantityOld").html());
+                if (newCant > 0 && newCant != null) {
+                    if (newCant <= oldCant) {
+
+                    }
+                    else {
+                        $("#Contenido_lblQuantity").val($("#Contenido_lblQuantityOld").html());
+                    }
+                }
+            }
+        );
+
     </script>
 </asp:Content>
