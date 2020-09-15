@@ -154,9 +154,9 @@ namespace whusa.DAL
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":T$OORG", Objtticol082.OORG);
                 paramList.Add(":T$ORNO", Objtticol082.ORNO);
-                paramList.Add(":T$OSET", Objtticol082.OSET);
+                //paramList.Add(":T$OSET", Objtticol082.OSET);
                 paramList.Add(":T$PONO", Objtticol082.PONO);
-                paramList.Add(":T$SQNB", Objtticol082.SQNB);
+                //paramList.Add(":T$SQNB", Objtticol082.SQNB);
                 paramList.Add(":T$ADVS", Objtticol082.ADVS);
 
                 paramList.Add(":T$ITEM", Objtticol082.ITEM);

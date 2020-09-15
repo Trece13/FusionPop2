@@ -152,9 +152,9 @@ namespace whusap.WebPages.WorkOrders
                         Ent_tticol082 obj82 = new Ent_tticol082();
                         obj82.OORG = itemDt["OORG"].ToString();
                         obj82.ORNO = itemDt["ORNO"].ToString();
-                        obj82.OSET = itemDt["OSET"].ToString();
+                        //obj82.OSET = itemDt["OSET"].ToString();
                         obj82.PONO = itemDt["PONO"].ToString();
-                        obj82.SQNB = itemDt["SQNB"].ToString();
+                        //obj82.SQNB = itemDt["SQNB"].ToString();
                         obj82.ADVS = itemDt["ADVS"].ToString();
                         obj82.ITEM = itemDt["ITEM"].ToString();
                         obj82.STAT = itemDt["STAT"].ToString();
