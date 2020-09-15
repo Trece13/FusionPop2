@@ -1327,7 +1327,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTticol082PorPlantPono">
         <stringSQL>
-          SELECT  col002.t$tite tite, col002.t$dsca dsca,col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$OSET as OSET, col082.T$PONO as PONO, col082.T$SQNB as SQNB, col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME-5/24 as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU from  {0}.tticol082{1} col082 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM where t$STAT =1 and col082.T$PRIO >= '[:T$PRIO]' order by t$prio
+          SELECT  col002.t$tite tite, col002.t$dsca dsca,col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$PONO as PONO,col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME-5/24 as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU from  {0}.tticol082{1} col082 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM where t$STAT =1 and col082.T$PRIO >= '[:T$PRIO]' order by t$prio
         </stringSQL>
       </operationName>
       <operationName name="ConsultaPlantTticol082">
@@ -1359,7 +1359,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActualizarPrioridadTticol082">
         <stringSQL>
-          update {0}.tticol082{1} set T$PRIO = '[:T$PRIO]' where T$OORG = '[:T$OORG]' and  T$ORNO = '[:T$ORNO]' and  T$ADVS = '[:T$ADVS]' and T$ITEM = '[:T$ITEM]' and T$OSET = '[:T$OSET]' and T$PONO = '[:T$PONO]' and T$SQNB = '[:T$SQNB]'
+          update {0}.tticol082{1} set T$PRIO = '[:T$PRIO]' where T$OORG = '[:T$OORG]' and  T$ORNO = '[:T$ORNO]' and  T$ADVS = '[:T$ADVS]' and T$ITEM = '[:T$ITEM]' and T$PONO = '[:T$PONO]'
         </stringSQL>
       </operationName>
       <operationName name="InsertarregistroItticol093">
@@ -1713,6 +1713,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT, col131.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA, col131.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol131{1} col131
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col131.t$item
           --where col131.T$STAT = 3
+          UNION
+          select 'whcol016' AS  TBL,T$LABL AS PAID,T$QTYR AS QTYT,T$CUNI AS UNIT, col016.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,col016.T$CWAR,' ', col016.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol016{1} col016
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col016.t$item
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
@@ -2381,9 +2384,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="findRecordsSupplies">
         <stringSQL>
-          SELECT T$ITEM AS ITEM, T$DSCA AS DSCA, T$CWAR AS CWAR, T$CUNI AS CUNI
-          FROM {2}
-          WHERE T$CCDE = '999' AND T$CSIG = ' ' ORDER BY T$DSCA ASC
+          SELECT ibd001.T$ITEM AS ITEM, ibd001.T$DSCA AS DSCA, ibd001.T$CWAR AS CWAR, ibd001.T$CUNI AS CUNI, NVL(wmd215.T$STOC, 0) AS STOCK
+          FROM {2} ibd001
+          LEFT JOIN {0}.twhwmd215{1} wmd215
+          on wmd215.T$ITEM = ibd001.T$ITEM
+          and wmd215.T$CWAR = ibd001.T$CWAR
+          WHERE ibd001.T$CCDE = '999' AND ibd001.T$CSIG = ' ' ORDER BY ibd001.T$DSCA ASC
         </stringSQL>
       </operationName>
     </Module>

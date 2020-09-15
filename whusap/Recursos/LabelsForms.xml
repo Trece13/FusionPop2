@@ -2100,6 +2100,11 @@
             Save order
           </stringMessage>
         </label>
+        <label name="lblMaxValue">
+          <stringMessage>
+            Max Quantity
+          </stringMessage>
+        </label>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <label name="lblMachine">
@@ -2135,6 +2140,11 @@
         <label name="btnSaveOrder">
           <stringMessage>
             Guardar orden
+          </stringMessage>
+        </label>
+        <label name="lblMaxValue">
+          <stringMessage>
+            Cantidad Maxima
           </stringMessage>
         </label>
       </Idiom>
