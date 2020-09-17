@@ -46,7 +46,8 @@ namespace whusap.WebPages.Migration
         private static DataTable _validaWarehouse;
         private static DataTable _validaUbicacion;
         private static DataTable _validaItemLote;
-        private static Decimal _stock;
+        //private static Decimal _stock;
+        private static String _stock;
         public string lotGlobal = string.Empty;
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static bool ManejolocalizacionAlmacen = true; 
@@ -209,14 +210,16 @@ namespace whusap.WebPages.Migration
                 }
             }
 
-            _stock = (Decimal)0;
+            //_stock = (Decimal)0;
 
             if (consultaCantidad.Rows.Count > 0)
             {
-                _stock = Convert.ToDecimal(consultaCantidad.Rows[0]["STKS"].ToString());
+                //_stock = Convert.ToDecimal(consultaCantidad.Rows[0]["STKS"].ToString());
+                _stock = consultaCantidad.Rows[0]["STKS"].ToString();
             }
 
-            if (_stock == 0)
+            //if (_stock == 0)
+            if (_stock == "0")
             {
                 lblError.Text = mensajes("notstock");
                 return;

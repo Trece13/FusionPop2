@@ -3291,7 +3291,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="consultaPorAlmacenItemUbicacionLote">
         <stringSQL>
-          SELECT NVL(SUM(T$STKS-T$STKA),0) AS STKS
+          --SELECT NVL(SUM(T$STKS-T$STKA),0) AS STKS
+          SELECT TO_CHAR((NVL(SUM(T$STKS-T$STKA),0)), '999999999.999') AS STKS
           FROM {2}
           WHERE TRIM(T$CWAR) = '[:T$CWAR]' AND TRIM(T$ITEM) = '[:T$ITEM]' AND T$LOCA = '[:T$LOCA]' AND T$CLOT = '[:T$CLOT]'
         </stringSQL>

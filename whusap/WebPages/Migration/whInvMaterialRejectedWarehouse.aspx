@@ -42,7 +42,7 @@
         }
 
         function validarCantidad(field, stk, CantidadDevuelta) {
-            var cantidad = parseInt(field.value);
+            var cantidad = parseFloat(field.value);
             var stock = stk;
             var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
             var re = new RegExp(regex);
