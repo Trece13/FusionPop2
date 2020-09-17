@@ -1715,7 +1715,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --where col131.T$STAT = 3
           UNION
           select 'whcol016' AS  TBL,T$LABL AS PAID,T$QTYR AS QTYT,T$CUNI AS UNIT, col016.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,col016.T$CWAR,' ', col016.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol016{1} col016
-          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col016.t$item
+          LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col016.t$item
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar

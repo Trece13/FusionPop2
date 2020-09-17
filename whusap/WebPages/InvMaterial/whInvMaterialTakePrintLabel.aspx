@@ -111,21 +111,6 @@
 
     <div align="left" style="width:60%; vertical-align:text-top;">
         <table class="style16">
-            <tr id="trWareHouse" runat="server" visible="false">
-                <td class="rTableCellHead" style="height:25px; width:30%">
-                    <span style="vertical-align: middle; width:10%">
-                        <b style="font-size:11px">
-                            <asp:Label ID="lblDescWarehouse" runat="server" />  
-                        </b>
-                    </span>
-                </td>
-                <td class="rTableCellLeft" style="width: 60%; height:18px;">
-                    <asp:TextBox ID="txtCwar" runat="server" CausesValidation="True" MaxLength="9" Width="84px" CssClass="TextBox" TabIndex="1" ToolTip="Enter warehouse code"></asp:TextBox>
-                </td>
-                <td class="rTableCellError" height="90%">
-                    <asp:Label ID="lblCwar" runat="server" CssClass="style2"></asp:Label>
-                </td>
-            </tr>
             <tr>
                 <td class="rTableCellHead" style="height:10%; width:30%">
                     <span class="style2" style="vertical-align: middle; width:3%">
@@ -134,13 +119,28 @@
                         </b>
                     </span>
                 </td>
-                <td class="rTableCellLeft" style="width: 60%; height:18px;">
+                <td class="rTableCellLeft" style="width: 60%; height:35px;">
                     <asp:TextBox ID="txtZone" runat="server" CausesValidation="True" MaxLength="9" Width="84px" CssClass="TextBox" TabIndex="2" ToolTip="Enter Zone Code"></asp:TextBox>
                 </td>
                 <td class="rTableCellError" height="90%">
                     <span style="vertical-align:middle" >
                         <asp:Label ID="LblZone" runat="server" CssClass="style2"></asp:Label>
                     </span>
+                </td>
+            </tr>
+            <tr id="trWareHouse" runat="server" visible="false">
+                <td class="rTableCellHead" style="height:25px; width:30%">
+                    <span style="vertical-align: middle; width:10%">
+                        <b style="font-size:11px">
+                            <asp:Label ID="lblDescWarehouse" runat="server" />  
+                        </b>
+                    </span>
+                </td>
+                <td class="rTableCellLeft" style="width: 60%; height:35px;">
+                    <asp:TextBox ID="txtCwar" runat="server" CausesValidation="True" MaxLength="9" Width="84px" CssClass="TextBox" TabIndex="1" ToolTip="Enter warehouse code"></asp:TextBox>
+                </td>
+                <td class="rTableCellError" height="90%">
+                    <asp:Label ID="lblCwar" runat="server" CssClass="style2"></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -151,7 +151,7 @@
                         </b>
                     </span>
                 </td>
-                <td class="rTableCellLeft" style="width: 60%; height:18px;">
+                <td class="rTableCellLeft" style="width: 60%; height:35px;">
                     <asp:TextBox ID="txtItem" runat="server" CausesValidation="True" MaxLength="18" Width="124px" CssClass="TextBox" TabIndex="3" ToolTip="Enter Item Code"></asp:TextBox>
                 </td>
                 <td class="rTableCellError" height="90%">
@@ -168,7 +168,7 @@
                         </b>
                     </span>
                 </td>
-                <td class="rTableCellLeft" style="width: 60%; height:18px;">
+                <td class="rTableCellLeft" style="width: 60%; height:35px;">
                     <asp:TextBox ID="txtLote" runat="server" CausesValidation="True" MaxLength="16" Width="124px" CssClass="TextBox" TabIndex="4" ToolTip="Enter Lot Code"></asp:TextBox>
                 </td>
                 <td class="rTableCellError" height="90%">
@@ -185,7 +185,7 @@
                         </b>
                     </span>
                 </td>
-                <td class="rTableCellLeft" style="width: 60%; height:18px;">
+                <td class="rTableCellLeft" style="width: 60%; height:35px;">
                     <asp:TextBox ID="txtQuantity" runat="server" CausesValidation="True" MaxLength="15" Width="84px" CssClass="TextBox" TabIndex="5" ToolTip="Current Quantity"></asp:TextBox>
                 </td>
                 <td class="rTableCellError" height="90%">
