@@ -168,7 +168,7 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public int CantidadDevueltaStock(string ITEM, string CLOT, string CWAR, string LOCA)
+        public String CantidadDevueltaStock(string ITEM, string CLOT, string CWAR, string LOCA)
         {
             method = MethodBase.GetCurrentMethod();
 
@@ -189,7 +189,7 @@ namespace whusa.DAL
                 Console.WriteLine(ex);
             }
             string retorno = string.IsNullOrEmpty(consulta.Rows[0]["QTYR"].ToString()) || string.IsNullOrWhiteSpace(consulta.Rows[0]["QTYR"].ToString()) ? "0" : consulta.Rows[0]["QTYR"].ToString();
-            return Convert.ToInt32(retorno);
+            return (retorno);
         }
 
 

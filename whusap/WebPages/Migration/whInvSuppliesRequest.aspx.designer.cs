@@ -121,6 +121,15 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.Label lblValueSelect;
         
         /// <summary>
+        /// lblMaxvalue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMaxvalue;
+        
+        /// <summary>
         /// slItem1 control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,24 @@ namespace whusap.WebPages.Migration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtValueSelect1;
+        
+        /// <summary>
+        /// txtMaxvalue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMaxvalue;
+        
+        /// <summary>
+        /// RangeValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
         
         /// <summary>
         /// slItem2 control.

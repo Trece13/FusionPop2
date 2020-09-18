@@ -97,7 +97,7 @@
             </td>
             <td style="width: 250px; padding:5px;">
                 <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtMachine" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
+                    <asp:TextBox runat="server" ID="txtMachine" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
@@ -126,14 +126,17 @@
 		        <td><asp:Label runat="server" ID="lblQuantity" /></td>
 		        <td class = "CampoOculto"><asp:Label runat="server" ID="lblMachine1" /></td>
                 <td class = "CampoOculto"><asp:Label runat="server" ID="lblValueSelect" /></td>
+                <td class = "CampoOculto"><asp:Label runat="server" ID="lblMaxvalue" /></td>
 	        </tr>
 
             <tr>
                 <td>1</td>
                 <td><asp:DropDownList runat="server" ClientIDMode="Static" ID="slItem1" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,1);"></asp:DropDownList></td>
                 <td><asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" /></td>
-                <td class = "CampoOculto"><asp:TextBox ID="txtMachine1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
-                <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtMachine1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtMaxvalue" name="txtMaxvalue" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
+                <asp:RangeValidator ID="RangeValidator1" runat="server" CssClass="TextBoxBig MyDrop" ControlToValidate="txtQuantity1" ErrorMessage="ERROR" MaximumValue="30" MinimumValue="0" ForeColor="Red" SetFocusOnError="True"></asp:RangeValidator>
             </tr>
             <tr>
                 <td>2</td>

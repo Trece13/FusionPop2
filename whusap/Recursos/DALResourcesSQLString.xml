@@ -2293,7 +2293,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <!--NEW-->
       <operationName name="CantidadDevueltaStock">
         <stringSQL>
-          SELECT SUM(T$QTYR) AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and TRIM(T$CLOT) = TRIM('[:T$CLOT]') and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
+          SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and TRIM(T$CLOT) = TRIM('[:T$CLOT]') and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
         </stringSQL>
       </operationName>
 

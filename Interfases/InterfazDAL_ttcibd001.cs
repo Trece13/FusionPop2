@@ -113,7 +113,7 @@ namespace whusa.Interfases
             return dal.listaLotesPorItem(Item);
         }
 
-        public int CantidadDevueltaStock(string ITEM, string CLOT, string CWAR, string LOCA)
+        public String CantidadDevueltaStock(string ITEM, string CLOT, string CWAR, string LOCA)
         {
             return dal.CantidadDevueltaStock(ITEM, CLOT, CWAR, LOCA);
         }
