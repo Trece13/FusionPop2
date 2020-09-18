@@ -47,6 +47,43 @@
             }
         };
 
+        function ValidarStock(field1, i) {
+            debugger;
+            var inputCant= parseFloat($("#txtQuantity" + i).val());
+            var field = $("#slItem"+i);
+            var maxCant = parseFloat($(field)[0][$(field)[0].selectedIndex].getAttribute("stock"));
+            
+            if (inputCant > 0) {
+                if (inputCant <= maxCant) {
+                    return;
+                }
+                else {
+                    $("#txtQuantity" + i).val("0")
+                    $("#txtQuantity" + i).focus()
+                }
+            }
+            else {
+                $("#txtQuantity" + i).val("0")
+                $("#txtQuantity" + i).focus()
+            }
+        }
+
+        function vaciarCampo(field) {
+            debugger;
+            $(field).val("");
+        }
+
+        function asignarCero(field) {
+            if ($(field).val().trim() == "") {
+                $(field).val("0");
+            }
+            else {
+                return;
+            }
+            debugger;
+            
+        }
+
         function validarFormulario() {
             debugger;
             var validaFormulario = true;
@@ -56,12 +93,11 @@
             for (var i = 1; i < 6; i++) {
             
                 var itemSelected = $('#slItem' + i).val();
-
                 if (itemSelected.trim() != "") {
                     validItemSelected = true;
                     var txtQuantity = $('#txtQuantity' + i).val()
                     var txtMachine = $('#txtMachine' + i).val();
-
+                    
                     if (txtQuantity <= 0) {
                         mensaje = _idioma == "INGLES" ? "Quantity can not be equal or minor zero. Sequence " + i : "La cantidad no puede ser menor o igual a cero. Sencuencia " + i;
                         validaFormulario = false;
@@ -132,10 +168,10 @@
             <tr>
                 <td>1</td>
                 <td><asp:DropDownList runat="server" ClientIDMode="Static" ID="slItem1" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,1);"></asp:DropDownList></td>
-                <td><asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" /></td>
+                <td><asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" onkeyup ="ValidarStock(this,1)" onchange ="ValidarStock(this,1)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"/></td>
                 <td><asp:TextBox ID="txtMachine1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
                 <td><asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
-                <td><asp:TextBox ID="txtMaxvalue" name="txtMaxvalue" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
+                <td><asp:TextBox ID="txtMaxvalue1" name="txtMaxvalue" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
                 <asp:RangeValidator ID="RangeValidator1" runat="server" CssClass="TextBoxBig MyDrop" ControlToValidate="txtQuantity1" ErrorMessage="ERROR" MaximumValue="30" MinimumValue="0" ForeColor="Red" SetFocusOnError="True"></asp:RangeValidator>
             </tr>
             <tr>

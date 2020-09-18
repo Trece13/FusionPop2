@@ -127,10 +127,10 @@ namespace whusap.WebPages.Migration
                         row.Text = String.Concat(item["ITEM"].ToString().Trim().ToUpper(), " - "
                                                 , item["DSCA"].ToString().Trim().ToUpper(), " -. "
                                                 , item["CWAR"].ToString().Trim().ToUpper(), " - "
-                                                , item["CUNI"].ToString().Trim().ToUpper(), " - "
+                                                , item["CUNI"].ToString().Trim().ToUpper(), " -|"
                                                 , item["STOCK"].ToString().Trim().ToUpper());
                         row.Value = item["ITEM"].ToString().Trim().ToUpper();
-
+                        row.Attributes.Add("stock", item["STOCK"].ToString().Trim().ToUpper());
                         _listaRegistros.Add(row);
                     }
 
