@@ -83,6 +83,10 @@
         {
             display: none;
         }
+        #Contenido_lblQuantityOld
+        {
+            display:none;
+        }
     </style>
     <form id="form1" class="container">
     <div class="form-group row">
@@ -269,6 +273,50 @@
                     </td>
                     <td class="">
                         <asp:Label ID="lblSQNB" runat="server" CssClass=""></asp:Label>
+                    </td>
+                    <td class="">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="">
+            <table border="1">
+                <tr>
+                    <th>
+                        OORG
+                    </th>
+                    <th>
+                        ORNO
+                    </th>
+                    <%--<th>
+                        OSET
+                    </th>--%>
+                    <th>
+                        PONO
+                    </th>
+                    <th>
+                        SQNB
+                    </th>
+                    <th>
+                        ADVS
+                    </th>
+                </tr>
+                <tr>
+                    <td class="">
+                        <asp:Label ID="lblOORGAUX" runat="server" CssClass=""></asp:Label>
+                    </td>
+                    <td class="">
+                        <asp:Label ID="lblORNOAUX" runat="server" CssClass=""></asp:Label>
+                    </td>
+                    <%--<td class="">
+                        <asp:Label ID="lblOSET" runat="server" CssClass=""></asp:Label>
+                    </td>--%>
+                    <td class="">
+                        <asp:Label ID="lblPONOAUX" runat="server" CssClass=""></asp:Label>
+                    </td>
+                    <td class="">
+                        <asp:Label ID="lblSQNBAUX" runat="server" CssClass=""></asp:Label>
                     </td>
                     <td class="">
                     </td>
@@ -484,10 +532,17 @@
         }
 
         function ShowCurrentTime() {
+            if ($("#Contenido_lblCNPK").html() != "1") {
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + document.getElementById("<%=lblQuantity.ClientID %>").value + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityOld.ClientID %>").innerHTML.toString() + "'}";
+            }
+            else {
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityOld.ClientID %>").innerHTML.toString() + "'}";
+            }
+
             $.ajax({
                 type: "POST",
                 url: "Picking.aspx/Click_confirPKG",
-                data: "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'SQNB':'" + document.getElementById("<%=lblQuantity.ClientID %>").innerHTML.toString() + "'}",
+                data: dataS,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {

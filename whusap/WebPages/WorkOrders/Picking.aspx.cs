@@ -193,7 +193,11 @@ namespace whusap.WebPages.WorkOrders
                         lblORNO.Text = MyObj.ORNO.ToString();
                         //lblOSET.Text = MyObj.OSET.ToString();
                         lblPONO.Text = MyObj.PONO.ToString();
-                        //lblSQNB.Text = MyObj.SQNB.ToString();
+                        lblSQNB.Text = MyObj.SQNB.ToString();
+                        lblOORGAUX.Text = MyObj.OORG.ToString();
+                        lblORNOAUX.Text = MyObj.ORNO.ToString();
+                        lblPONOAUX.Text = MyObj.PONO.ToString();
+                        lblSQNBAUX.Text = MyObj.SQNB.ToString();
                         lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                         ADVS = MyObj.ADVS.ToString();
                         flag022 = 1;
@@ -227,6 +231,10 @@ namespace whusap.WebPages.WorkOrders
                         //lblOSET.Text = MyObj.OSET.ToString();
                         lblPONO.Text = MyObj.PONO.ToString();
                         //lblSQNB.Text = MyObj.SQNB.ToString();
+                        lblOORGAUX.Text = MyObj.OORG.ToString();
+                        lblORNOAUX.Text = MyObj.ORNO.ToString();
+                        lblPONOAUX.Text = MyObj.PONO.ToString();
+                        //lblSQNBAUX.Text = MyObj.SQNB.ToString();
                         lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
 
                         ADVS = MyObj.ADVS.ToString();
@@ -294,6 +302,10 @@ namespace whusap.WebPages.WorkOrders
                     //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
+                    lblOORGAUX.Text = MyObj.OORG.ToString();
+                    lblORNOAUX.Text = MyObj.ORNO.ToString();
+                    lblPONOAUX.Text = MyObj.PONO.ToString();
+                    //lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
                     flag022 = 1;
@@ -301,7 +313,7 @@ namespace whusap.WebPages.WorkOrders
                     flag042 = 0;
 
                     //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                    twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
+                    twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString());
                 }
                 else if (LstPallet042.Count > 0)
                 {
@@ -329,13 +341,17 @@ namespace whusap.WebPages.WorkOrders
                     //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
+                    lblOORGAUX.Text = MyObj.OORG.ToString();
+                    lblORNOAUX.Text = MyObj.ORNO.ToString();
+                    lblPONOAUX.Text = MyObj.PONO.ToString();
+                    //lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
                     flag022 = 0;
                     flag131 = 0;
                     flag042 = 1;
                     //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                    twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
+                    twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString());
 
                     ////                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                     //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
@@ -371,13 +387,17 @@ namespace whusap.WebPages.WorkOrders
                     //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
+                    lblOORGAUX.Text = MyObj.OORG.ToString();
+                    lblORNOAUX.Text = MyObj.ORNO.ToString();
+                    lblPONOAUX.Text = MyObj.PONO.ToString();
+                    lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
                     flag022 = 0;
                     flag131 = 1;
                     flag042 = 0;
                     //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                    twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
+                    twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString());
 
                     ////twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                     //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
@@ -416,6 +436,10 @@ namespace whusap.WebPages.WorkOrders
             lblSQNB.Text = "";
             lblADVS.Text = "";
             lblCNPK.Text = "";
+            lblOORGAUX.Text = "";
+            lblORNOAUX.Text = "";
+            lblPONOAUX.Text = "";
+            lblSQNBAUX.Text = "";
         }
         [WebMethod]
         public static bool VerificarLocate(string CWAR, string LOCA)
@@ -563,17 +587,18 @@ namespace whusap.WebPages.WorkOrders
 
         [WebMethod]
         //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
-        public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string SQNB, string SQNB_OLD)
+        public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string QTYT, string QTYT_OLD)
         {
 
 
             try
             {
                 
-                float sqnb = Convert.ToInt32(SQNB.ToString().Trim());
-                float sqnb_old = Convert.ToInt32(SQNB_OLD.ToString().Trim());
-                float sqnb_act = sqnb_old - sqnb;
-
+                decimal qtyt = Convert.ToDecimal(QTYT.ToString().Trim());
+                decimal qtyt_old = Convert.ToDecimal(QTYT_OLD.ToString().Trim());
+                decimal qtyt_act = qtyt_old - qtyt;
+                string qtyt_acts = (qtyt_old - qtyt).ToString();
+                string qtytS = Convert.ToDecimal(QTYT.ToString().Trim()).ToString();
                 int cnpk = Convert.ToInt32(HttpContext.Current.Session["CNPK"].ToString());
                 String pallet = PAID;
                 String Location = LOCA;
@@ -587,13 +612,13 @@ namespace whusap.WebPages.WorkOrders
                 if (flag022 == 1)
                 {
                     //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
-                    twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, SQNB, ADVS);
+                    twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
                     twhcolDAL.actRegtticol022140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol222Quantity(pallet, sqnb_act); 
+                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act); 
                        
                         Ent_tticol022 data022;
                         string strError = string.Empty;
@@ -635,13 +660,13 @@ namespace whusap.WebPages.WorkOrders
                             proc = 2,
                             logn = _operator,
                             mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
-                            qtdl = Convert.ToDecimal(sqnb_act.ToString()),
+                            qtdl = Convert.ToDecimal(qtyt_act.ToString()),
                             cuni = " ",//CUNI,
                             log1 = "NONE",
-                            qtd1 = Convert.ToInt32(sqnb_act.ToString()),
+                            qtd1 = Convert.ToInt32(qtyt_act.ToString()),
                             pro1 = 2,
                             log2 = "NONE",
-                            qtd2 = Convert.ToInt32(sqnb_act.ToString()),
+                            qtd2 = Convert.ToInt32(qtyt_act.ToString()),
                             pro2 = 2,
                             loca = " ",
                             norp = 1,
@@ -651,7 +676,7 @@ namespace whusap.WebPages.WorkOrders
                             refcntu = 0,
                             drpt = DateTime.Now,
                             urpt = _operator,
-                            acqt =Convert.ToDecimal(sqnb_act.ToString()),
+                            acqt =Convert.ToDecimal(qtyt_act.ToString()),
                             cwaf = " ",//CWAR,
                             cwat = " ",//CWAR,
                             aclo = LOCA,
@@ -668,13 +693,13 @@ namespace whusap.WebPages.WorkOrders
                 {
 
                     //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
-                    twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, SQNB, ADVS);
+                    twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
                     twhcolDAL.actRegtticol042140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol242Quantity(pallet,sqnb_act);
+                        twhcolDAL.updatetticol242Quantity(pallet,qtyt_act);
                         Ent_tticol042 data042;
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
@@ -714,13 +739,13 @@ namespace whusap.WebPages.WorkOrders
                             proc = 2,
                             logn = _operator,
                             mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
-                            qtdl = Convert.ToDecimal(sqnb_act.ToString()),
+                            qtdl = Convert.ToDecimal(qtyt_act.ToString()),
                             cuni = " ",//CUNI,
                             log1 = "NONE",
-                            qtd1 = Convert.ToDecimal(sqnb_act.ToString()),
+                            qtd1 = Convert.ToDecimal(qtyt_act.ToString()),
                             pro1 = 2,
                             log2 = "NONE",
-                            qtd2 = Convert.ToDecimal(sqnb_act.ToString()),
+                            qtd2 = Convert.ToDecimal(qtyt_act.ToString()),
                             pro2 = 2,
                             loca = " ",
                             norp = 1,
@@ -730,7 +755,7 @@ namespace whusap.WebPages.WorkOrders
                             refcntu = 0,
                             drpt = DateTime.Now,
                             urpt = _operator,
-                            acqt = Convert.ToDouble(sqnb_act.ToString()),
+                            acqt = Convert.ToDouble(qtyt_act.ToString()),
                             cwaf = " ",//CWAR,
                             cwat = " ",//CWAR,
                             aclo = LOCA,
@@ -749,15 +774,15 @@ namespace whusap.WebPages.WorkOrders
                 else if (flag131 == 1)
                 {
                     //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
-                    twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, SQNB, ADVS);
+                    twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
                     twhcolDAL.actRegtticol131140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetwhcol131Quantity(pallet,sqnb_act);
+                        twhcolDAL.updatetwhcol131Quantity(pallet,qtyt_act);
                         int consecutivoPalletID = 0;
-                        DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO);
+                        DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(PAID.Substring(0,9));
                         string SecuenciaPallet = "001";
                         if (DTPalletContinue.Rows.Count > 0)
                         {
@@ -791,9 +816,9 @@ namespace whusap.WebPages.WorkOrders
                             SEQN = "1",
                             CLOT = " ",//CLOT.ToUpper(),// lote VIEW
                             CWAR = " ",//CWAR.ToUpper(),
-                            QTYS = sqnb_act.ToString(),//QTYS,// cantidad escaneada view 
+                            QTYS = qtyt_act.ToString(),//QTYS,// cantidad escaneada view 
                             UNIT = " ",//UNIT,//unit escaneada view
-                            QTYC = sqnb_act.ToString(),//QTYS,//cantidad escaneada view aplicando factor
+                            QTYC = qtyt_act.ToString(),//QTYS,//cantidad escaneada view aplicando factor
                             UNIC = " ",//UNIT,//unidad view stock
                             DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
                             CONF = "1",
@@ -1094,6 +1119,10 @@ namespace whusap.WebPages.WorkOrders
                     //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
+                    lblOORGAUX.Text = MyObj.OORG.ToString();
+                    lblORNOAUX.Text = MyObj.ORNO.ToString();
+                    lblPONOAUX.Text = MyObj.PONO.ToString();
+                    lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
                     flag022 = 1;
@@ -1124,6 +1153,10 @@ namespace whusap.WebPages.WorkOrders
                     //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
+                    lblOORGAUX.Text = MyObj.OORG.ToString();
+                    lblORNOAUX.Text = MyObj.ORNO.ToString();
+                    lblPONOAUX.Text = MyObj.PONO.ToString();
+                    lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
 
                     ADVS = MyObj.ADVS.ToString();
@@ -1155,6 +1188,10 @@ namespace whusap.WebPages.WorkOrders
                     //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
+                    lblOORGAUX.Text = MyObj.OORG.ToString();
+                    lblORNOAUX.Text = MyObj.ORNO.ToString();
+                    lblPONOAUX.Text = MyObj.PONO.ToString();
+                    lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
                     flag131 = 1;
@@ -1186,6 +1223,10 @@ namespace whusap.WebPages.WorkOrders
                 //lblOSET.Text = MyObj.OSET.ToString();
                 lblPONO.Text = MyObj.PONO.ToString();
                 lblSQNB.Text = MyObj.SQNB.ToString();
+                lblOORGAUX.Text = MyObj.OORG.ToString();
+                lblORNOAUX.Text = MyObj.ORNO.ToString();
+                lblPONOAUX.Text = MyObj.PONO.ToString();
+                lblSQNBAUX.Text = MyObj.SQNB.ToString();
                 lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 ADVS = MyObj.ADVS.ToString();
                 flag022 = 1;
@@ -1223,6 +1264,10 @@ namespace whusap.WebPages.WorkOrders
                 //lblOSET.Text = MyObj.OSET.ToString();
                 lblPONO.Text = MyObj.PONO.ToString();
                 lblSQNB.Text = MyObj.SQNB.ToString();
+                lblOORGAUX.Text = MyObj.OORG.ToString();
+                lblORNOAUX.Text = MyObj.ORNO.ToString();
+                lblPONOAUX.Text = MyObj.PONO.ToString();
+                lblSQNBAUX.Text = MyObj.SQNB.ToString();
                 lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 ADVS = MyObj.ADVS.ToString();
                 flag042 = 1;
@@ -1262,6 +1307,10 @@ namespace whusap.WebPages.WorkOrders
                 //lblOSET.Text = MyObj.OSET.ToString();
                 lblPONO.Text = MyObj.PONO.ToString();
                 lblSQNB.Text = MyObj.SQNB.ToString();
+                lblOORGAUX.Text = MyObj.OORG.ToString();
+                lblORNOAUX.Text = MyObj.ORNO.ToString();
+                lblPONOAUX.Text = MyObj.PONO.ToString();
+                lblSQNBAUX.Text = MyObj.SQNB.ToString();
                 lblADVS.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 ADVS = MyObj.ADVS.ToString();
                 flag131 = 1;

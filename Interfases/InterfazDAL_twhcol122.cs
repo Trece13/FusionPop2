@@ -838,18 +838,18 @@ namespace whusa.Interfases
             return dal.Actualizar307proc(PAID_NEW, PAID_OLD, _operator);
         }
 
-        public void updatetticol222Quantity(string pallet, float sqnb_act)
+        public void updatetticol222Quantity(string pallet, decimal sqnb_act)
         {
             dal.updatetticol222Quantity(pallet, sqnb_act);
         }
 
-        public void updatetticol242Quantity(string pallet, float sqnb_act)
+        public void updatetticol242Quantity(string pallet, decimal sqnb_act)
         {
             dal.updatetticol242Quantity(pallet, sqnb_act);
 
         }
 
-        public void updatetwhcol131Quantity(string pallet, float sqnb_act)
+        public void updatetwhcol131Quantity(string pallet, decimal sqnb_act)
         {
             dal.updatetwhcol131Quantity(pallet, sqnb_act);
 

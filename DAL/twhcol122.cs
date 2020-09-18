@@ -413,7 +413,7 @@ namespace whusa.DAL
         }
 
 
-        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string SQNB, string ADVS)
+        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string QTYT, string ADVS)
         {
             bool retorno = false;
             method = MethodBase.GetCurrentMethod();
@@ -430,6 +430,7 @@ namespace whusa.DAL
             paramList.Add(":T$PONO", PONO.Trim());
             //paramList.Add(":T$SQNB", SQNB.Trim());
             paramList.Add(":T$ADVS", ADVS.Trim());
+            paramList.Add(":T$QTYT", QTYT.Trim());
 
             string tabla = ".tticol082";
             string name1 = "UpdateTbl082";
@@ -1070,14 +1071,15 @@ namespace whusa.DAL
             return Retorno;
         }
 
-        public void updatetwhcol131Quantity(string pallet, float sqnb_act)
+        public void updatetwhcol131Quantity(string pallet, decimal qtyt_act)
         {
+            string qtyt = qtyt_act.ToString();
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$PAID", pallet.Trim());
-            paramList.Add(":T$QTYC", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, "twhcol130", paramList);
+            paramList.Add(":T$QTYA", qtyt /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+            strSentencia = recursos.readStatement("twhcol130", method.Name, ref owner, ref env, "twhcol130", paramList);
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1089,14 +1091,14 @@ namespace whusa.DAL
             Console.WriteLine(Retorno);
         }
 
-        public void updatetticol242Quantity(string pallet, float sqnb_act)
+        public void updatetticol242Quantity(string pallet, decimal sqnb_act)
         {
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", pallet.Trim());
             paramList.Add(":T$ACQT", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, "tticol242", paramList);
+            strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, "tticol242", paramList);
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1108,14 +1110,14 @@ namespace whusa.DAL
             Console.WriteLine(Retorno);
         }
 
-        public void updatetticol222Quantity(string pallet, float sqnb_act)
+        public void updatetticol222Quantity(string pallet, decimal sqnb_act)
         {
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", pallet.Trim());
             paramList.Add(":T$ACQT", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, "tticol222", paramList);
+            strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, "tticol222", paramList);
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
