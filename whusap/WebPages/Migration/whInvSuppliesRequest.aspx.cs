@@ -127,7 +127,8 @@ namespace whusap.WebPages.Migration
                         row.Text = String.Concat(item["ITEM"].ToString().Trim().ToUpper(), " - "
                                                 , item["DSCA"].ToString().Trim().ToUpper(), " -. "
                                                 , item["CWAR"].ToString().Trim().ToUpper(), " - "
-                                                , item["CUNI"].ToString().Trim().ToUpper());
+                                                , item["CUNI"].ToString().Trim().ToUpper(), " - "
+                                                , item["STOCK"].ToString().Trim().ToUpper());
                         row.Value = item["ITEM"].ToString().Trim().ToUpper();
 
                         _listaRegistros.Add(row);
@@ -333,6 +334,7 @@ namespace whusap.WebPages.Migration
             lblQuantity.Text = _textoLabels.readStatement(formName, _idioma, "lblQuantity");
             lblMachine1.Text = _textoLabels.readStatement(formName, _idioma, "lblMachine");
             lblValueSelect.Text = _textoLabels.readStatement(formName, _idioma, "lblValueSelect");
+            lblMaxvalue.Text = _textoLabels.readStatement(formName, _idioma, "lblMaxValue");
             btnSaveOrder.Text = _textoLabels.readStatement(formName, _idioma, "btnSaveOrder");
         }
 

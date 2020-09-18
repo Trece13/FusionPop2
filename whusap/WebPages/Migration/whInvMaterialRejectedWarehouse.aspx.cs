@@ -59,7 +59,7 @@ namespace whusap.WebPages.Migration
         public string    lblLocationError   = string.Empty;
         public string lblLotError = string.Empty;
 
-        public int CantidadDevuelta = 0; 
+        public String CantidadDevuelta = "0"; 
 
         public string LstItemsJSON = string.Empty;
 
@@ -293,7 +293,7 @@ namespace whusap.WebPages.Migration
                     cwar = warehouse,
                     loca = location == String.Empty ? " " : location,
                     clot = lot == String.Empty ? " " : lot,
-                    qtyr = cantidad,
+                    qtyr = Convert.ToDouble(cantidad),
                     cdis = cdis,
                     obse = obse == String.Empty ? " " : obse,
                     logr = _operator,

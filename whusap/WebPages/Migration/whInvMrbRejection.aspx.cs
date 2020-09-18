@@ -55,7 +55,7 @@ namespace whusap.WebPages.Migration
         public static string _idioma;
         public DataTable listaReasons = new DataTable();
         private static string _operator;
-        public int CantidadDevuelta = 0;
+        public String CantidadDevuelta = "0";
         public decimal Pqty = 0;
         public string itempallet;
         public string lotepallet;

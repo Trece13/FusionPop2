@@ -40,6 +40,24 @@ namespace whusa.DAL
 
             try
             {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$ITEM", parametro.item.Trim().ToUpper());
+                paramList.Add(":T$CWAR", parametro.cwar.Trim().ToUpper());
+                paramList.Add(":T$LOCA", parametro.loca.Trim().ToUpper());
+                paramList.Add(":T$CLOT", parametro.clot.Trim().ToUpper());
+                paramList.Add(":T$QTYR", parametro.qtyr.ToString().Replace(',', '.'));
+                paramList.Add(":T$CDIS", parametro.cdis.Trim().ToUpper());
+                paramList.Add(":T$OBSE", parametro.obse.Trim().ToUpper());
+                paramList.Add(":T$LOGR", parametro.logr.Trim().ToUpper());
+                paramList.Add(":T$DISP", parametro.disp);
+                paramList.Add(":T$PROC", parametro.proc);
+                paramList.Add(":T$MESS", parametro.mess.Trim().ToUpper());
+                paramList.Add(":T$SUNO", parametro.suno.Trim().ToUpper());
+                paramList.Add(":T$CWAM", parametro.cwam.Trim().ToUpper());
+                paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
+                paramList.Add(":T$REFCNTD", 0);
+                paramList.Add(":T$REFCNTU", 0);
+
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
 
                 parametrosIn = AdicionaParametrosComunes(parametro);
