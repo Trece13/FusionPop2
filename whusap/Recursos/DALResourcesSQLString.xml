@@ -563,8 +563,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on col082.t$item = col022.t$mitm
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col022.t$mitm
-          where col022.t$dele = 7 -- 7-Located
-          and col222.t$acqt >= col082.t$qtyt
+          where col022.t$dele = 8 -- 8-Asignado
+          and (col222.t$acqt+col222.t$allo) >= col082.t$qtyt
           and col222.t$cwat = col082.t$cwar
           --and col082.t$stat = 1
           and col022.t$sqnb = '[:PAID]'
@@ -598,16 +598,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on col082.t$item = col042.t$mitm
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col042.t$mitm
-          where col042.t$dele = 7 -- -Located
-          and col242.t$acqt >= col082.t$qtyt
+          where col042.t$dele = 8 -- 8-Asignado
+          and (col242.t$acqt+col242.t$allo) >= col082.t$qtyt
           and col242.t$cwat = col082.t$cwar
           and col042.t$sqnb = '[:PAID]'
           and col082.t$stat ='5'
           order by col042.t$date
           )
           where rown = 1
-
-
         </stringSQL>
       </operationName>
 
@@ -629,8 +627,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on col082.t$item = col131.t$item
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
-          where col131.t$stat = 3 -- 3-Located
-          and col131.t$qtya >= col082.t$qtyt
+          where col131.t$stat = 6 -- 6-Asignado
+          and (col131.t$qtya+col131-t$allo) >= col082.t$qtyt
           and col131.t$cwaa = col082.t$cwar
           and col131.t$paid = '[:PAID]'
           and col082.t$stat ='5'
@@ -641,15 +639,43 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22140">
         <stringSQL>
-          select    stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown,QTYT
-          from
-          (
-          select  col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
-          col022.t$pdno lot, col222.t$cwat wrh,
-          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          rank() over(order by col022.t$sqnb, col022.t$date) rown
-          from {0}.tticol022{1} col022
+          --select    stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown,QTYT
+          --from
+          --(
+          --select  col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
+          --col022.t$pdno lot, col222.t$cwat wrh,
+          --mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
+          --col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
+          --rank() over(order by col022.t$sqnb, col022.t$date) rown
+          --from {0}.tticol022{1} col022
+          --left join {0}.ttccol307{1} col307
+          --on col022.t$sqnb = col307.T$PAID
+          --inner join {0}.tticol222{1} col222
+          --on col222.t$pdno = col022.t$pdno
+          --and col222.t$sqnb = col022.t$sqnb
+          --inner join {0}.ttcibd001{1} ibd001
+          --on ibd001.t$item = col022.t$mitm
+          --inner join {0}.ttcmcs003{1} mcs003
+          --on mcs003.t$cwar = col222.t$cwat
+          --inner join {0}.tticol082{1} col082
+          --on col082.t$item = col022.t$mitm
+          --where col022.t$dele = 7 -- 7-Located
+          --and col307.T$PAID IS NULL
+          --and col222.t$acqt >= col082.t$qtyt
+          --and col222.t$cwat = col082.t$cwar
+          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
+          --where loc082.t$stat = 1)
+          --and col082.t$stat = 1
+          --order by col022.t$date
+          --)
+          --where rown &lt;= 3
+          select  cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs, qtyt, rown
+          from(select  col020.T$CNPK CNPK,col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description, col022.t$pdno lot,
+          col222.t$cwat wrh, mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
+          col082.t$oorg oorg, col082.t$orno orno, col082.t$pono pono, col082.t$advs advs, col082.t$qtyt qtyt, rank() over(order by col082.t$prio) rown
+          from    {0}.tticol082{1} col082
+          inner join {0}.tticol022{1} col022
+          on col022.t$sqnb = col082.t$paid
           left join {0}.ttccol307{1} col307
           on col022.t$sqnb = col307.T$PAID
           inner join {0}.tticol222{1} col222
@@ -659,18 +685,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on ibd001.t$item = col022.t$mitm
           inner join {0}.ttcmcs003{1} mcs003
           on mcs003.t$cwar = col222.t$cwat
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col022.t$mitm
-          where col022.t$dele = 7 -- 7-Located
-          and col307.T$PAID IS NULL
-          and col222.t$acqt >= col082.t$qtyt
-          and col222.t$cwat = col082.t$cwar
-          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          where loc082.t$stat = 1)
-          and col082.t$stat = 1
-          order by col022.t$date
-          )
-          where rown &lt;= 3
+          inner join {0}.tticol136{1} col136
+          on col136.t$cwar = col082.t$cwar
+          and col136.t$user = 'JCASTRO'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
+          left join {0}.ttccol020{1} col020
+          on col020.T$ITEM = col022.t$mitm
+          where   col022.t$dele = 8 -- 7-Located
+          and     col307.T$PAID IS NULL
+          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1 )
+          and col082.t$stat = 1)
+          where   rown = 1
+
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042">
@@ -694,7 +719,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col242.t$cwat
           inner join {0}.tticol082{1} col082
           on col082.t$item = col042.t$mitm
-          where col042.t$dele = 7 -- 7-Located
+          where col042.t$dele = 8 -- 8-Asignado
           and col307.T$PAID IS NULL
           and col242.t$acqt >= col082.t$qtyt
           and col242.t$cwat = col082.t$cwar
@@ -922,7 +947,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col022.t$mitm
-          where   col022.t$dele = 7 -- 7-Located
+          where   col022.t$dele = 8 -- 8-Asignado
           and     col307.T$PAID IS NULL
           and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1 )
           and col082.t$stat = 1)
@@ -952,7 +977,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col042.t$mitm
-          where   col042.t$dele = 7 -- 7-Located
+          where   col042.t$dele = 8 -- 8-Asignado
           and     col307.T$PAID IS NULL
           and     col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1)
           and     col082.t$stat = 1)
@@ -979,7 +1004,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
-          where   col131.t$stat = 3 -- 3-Located
+          where   col131.t$stat = 6 -- 6-Asignado
           and     col307.T$PAID IS NULL
           and     col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1)
           and     col082.t$stat = 1)
