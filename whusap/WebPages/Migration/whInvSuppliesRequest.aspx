@@ -58,11 +58,12 @@
                     return;
                 }
                 else {
+                    alert(_idioma == "INGLES" ? "Quantity can't be greather that stock available" : "La cantidad no puede ser mayor al stock disponible")
                     $("#txtQuantity" + i).val("0")
                     $("#txtQuantity" + i).focus()
                 }
             }
-            else {
+            else {                
                 $("#txtQuantity" + i).val("0")
                 $("#txtQuantity" + i).focus()
             }
@@ -169,15 +170,15 @@
                 <td>1</td>
                 <td><asp:DropDownList runat="server" ClientIDMode="Static" ID="slItem1" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,1);"></asp:DropDownList></td>
                 <td><asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" onkeyup ="ValidarStock(this,1)" onchange ="ValidarStock(this,1)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"/></td>
-                <td><asp:TextBox ID="txtMachine1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
-                <td><asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
+                <td class = "CampoOculto"><asp:TextBox ID="txtMachine1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
+                <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
                 <td><asp:TextBox ID="txtMaxvalue1" name="txtMaxvalue" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
                 <asp:RangeValidator ID="RangeValidator1" runat="server" CssClass="TextBoxBig MyDrop" ControlToValidate="txtQuantity1" ErrorMessage="ERROR" MaximumValue="30" MinimumValue="0" ForeColor="Red" SetFocusOnError="True"></asp:RangeValidator>
             </tr>
             <tr>
                 <td>2</td>
                 <td><asp:DropDownList ID="slItem2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,2);"></asp:DropDownList></td>
-                <td><asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" /></td>
+                <td><asp:TextBox min="0" step="any" ID="txtQuantity2" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" /></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtMachine2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
             </tr>
