@@ -177,28 +177,28 @@
             <tr>
                 <td>2</td>
                 <td><asp:DropDownList ID="slItem2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,2);"></asp:DropDownList></td>
-                <td><asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" /></td>
+                <td><asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup ="ValidarStock(this,2)" onchange ="ValidarStock(this,2)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"/></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtMachine2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
             </tr>
             <tr>
                 <td>3</td>
                 <td><asp:DropDownList ID="slItem3" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,3);"></asp:DropDownList></td>
-                <td><asp:TextBox min="0" step="any" ID="txtQuantity3" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" /></td>
+                <td><asp:TextBox min="0" step="any" ID="txtQuantity3" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup ="ValidarStock(this,3)" onchange ="ValidarStock(this,3)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"/></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtMachine3" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"> </asp:TextBox></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect3" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
             </tr>
             <tr>
                 <td>4</td>
                 <td><asp:DropDownList ID="slItem4" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,4);"></asp:DropDownList></td>
-                <td><asp:TextBox min="0" step="any" ID="txtQuantity4" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum"/></td>
+                <td><asp:TextBox min="0" step="any" ID="txtQuantity4" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup ="ValidarStock(this,4)" onchange ="ValidarStock(this,4)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"/></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtMachine4" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect4" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
             </tr>
             <tr>
                 <td>5</td>
                 <td><asp:DropDownList ID="slItem5" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,5);"></asp:DropDownList></td>
-                <td><asp:TextBox min="0" step="any" ID="txtQuantity5" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" /></td>
+                <td><asp:TextBox min="0" step="any" ID="txtQuantity5" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup ="ValidarStock(this,5)" onchange ="ValidarStock(this,5)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"/></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtMachine5" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox></td>
                 <td class = "CampoOculto"><asp:TextBox ID="txtValueSelect5" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox></td>
             </tr>

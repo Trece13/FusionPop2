@@ -854,5 +854,10 @@ namespace whusa.Interfases
             dal.updatetwhcol131Quantity(pallet, sqnb_act);
 
         }
+
+        public DataTable ConsultarTticol082porStat(string _operator, int stat)
+        {
+            return dal.ConsultarTticol082porStat(_operator, stat);
+        }
     }
 }
