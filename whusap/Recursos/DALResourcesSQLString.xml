@@ -524,6 +524,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     </Module>
 
     <Module name="tticol082">
+      <operationName name="ConsultarTticol082porStat">
+        <stringSQL>
+          select * from {0}.tticol082{1} where UPPER(T$LOGN) = UPPER('[:T$LOGN]') and UPPER(T$STAT) = UPPER('[:T$STAT]')
+        </stringSQL>
+      </operationName>
       <operationName name="Actualizar307">
         <stringSQL>
           UPDATE {0}.ttccol307{1} SET T$PAID = '[:PAID_NEW]' where T$PAID = '[:PAID_OLD]'
