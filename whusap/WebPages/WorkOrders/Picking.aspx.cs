@@ -112,8 +112,18 @@ namespace whusap.WebPages.WorkOrders
                 List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
                 List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
                 List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
+
+                DataTable DT082STAT = twhcolDAL.ConsultarTticol082porStat(MyObj307.USRR, 2);
+
+                if (DT082STAT.Rows.Count > 0)
+                {
+                    limpiarControles();
+                    return;
+                }
+
                 if (DTttccol307.Rows.Count < 1)
                 {
+
                     //LstPallet131 = twhcolDAL.ConsultarPalletPicking131(PAID, string.Empty, _operator);
                     LstPallet131 = twhcolDAL.ConsultarPalletPicking131With082(PAID, string.Empty, _operator);
                     if (LstPallet131.Count > 0)
@@ -456,8 +466,10 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string VerificarPalletID(string PAID_NEW, string PAID_OLD)
+        public static string VerificarPalletID(string PAID_NEW, string PAID_OLD, string selectOptionPallet = "false")
         {
+
+            
 
             EntidadPicking ObjPicking = new EntidadPicking();
 
@@ -514,6 +526,24 @@ namespace whusap.WebPages.WorkOrders
                                         break;
                                 }
 
+                            }
+                        }
+
+                        if (selectOptionPallet == "true")
+                        {
+                            if(flag022 == 1){
+                                twhcolDAL.ActCausalTICOL022(PAID_OLD,12);
+                                twhcolDAL.ActCausalTICOL022(PAID_NEW,8);
+                            }
+                            else if(flag042 == 1){
+                                twhcolDAL.ActCausalTICOL042(PAID_OLD,12);
+                                twhcolDAL.ActCausalTICOL042(PAID_NEW,8);
+
+                            }
+                            else if (flag022 == 1)
+                            {
+                                twhcolDAL.ActCausalcol131140(PAID_OLD,10);
+                                twhcolDAL.ActCausalcol131140(PAID_NEW,6);
                             }
                         }
 
@@ -1044,6 +1074,15 @@ namespace whusap.WebPages.WorkOrders
             List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
+            
+            DataTable DT082STAT = twhcolDAL.ConsultarTticol082porStat(MyObj307.USRR, 2);
+
+            if (DT082STAT.Rows.Count > 0)
+            {
+                limpiarControles();
+                return;
+            }
+
             if (DTttccol307.Rows.Count < 1)
             {
                 LstPallet22 = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, _operator);
@@ -1231,7 +1270,9 @@ namespace whusap.WebPages.WorkOrders
                 ADVS = MyObj.ADVS.ToString();
                 flag022 = 1;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
+                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString());
+                
+                //twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
                 //if (res == false)
                 //{
@@ -1272,7 +1313,8 @@ namespace whusap.WebPages.WorkOrders
                 ADVS = MyObj.ADVS.ToString();
                 flag042 = 1;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
+                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString());
+                //twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
 
                 ////                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
@@ -1315,7 +1357,8 @@ namespace whusap.WebPages.WorkOrders
                 ADVS = MyObj.ADVS.ToString();
                 flag131 = 1;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
+                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString());
+                //twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
 
                 ////twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");

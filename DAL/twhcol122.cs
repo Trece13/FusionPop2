@@ -1128,6 +1128,25 @@ namespace whusa.DAL
             }
             Console.WriteLine(Retorno);
         }
+
+        public DataTable ConsultarTticol082porStat(string _operator, int stat)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$LOGN", _operator.Trim());
+            paramList.Add(":T$STAT", stat);
+            strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return Retorno;
+        }
     }
 }
 
