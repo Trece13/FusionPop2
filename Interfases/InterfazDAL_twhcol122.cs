@@ -89,6 +89,7 @@ namespace whusa.Interfases
 
                         PALLETID = MyRow["PALLETID"].ToString(),
                         ITEM = MyRow["ITEM"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
                         DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
                         LOT = MyRow["LOT"].ToString(),
                         WRH = MyRow["WRH"].ToString(),
@@ -130,6 +131,7 @@ namespace whusa.Interfases
 
                         PALLETID = MyRow["PALLETID"].ToString(),
                         ITEM = MyRow["ITEM"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
                         DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
                         LOT = MyRow["LOT"].ToString(),
                         WRH = MyRow["WRH"].ToString(),
@@ -171,6 +173,7 @@ namespace whusa.Interfases
 
                         PALLETID = MyRow["PALLETID"].ToString(),
                         ITEM = MyRow["ITEM"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
                         DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
                         LOT = MyRow["LOT"].ToString(),
                         WRH = MyRow["WRH"].ToString(),

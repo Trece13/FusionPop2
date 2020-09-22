@@ -219,7 +219,7 @@
                 <td>
                 </td>
                 <td>
-                    <input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20 hidebutton"
+                    <input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
                         onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />
                 </td>
             </tr>
@@ -693,7 +693,7 @@
                     document.getElementById("txtlocation").disabled = true;
 
                     Method = "VerificarPalletID"
-                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "'}";
+                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
                     EventoAjax(Method, Data, PalletIDSuccess)
 
                     //JUANC
@@ -809,7 +809,7 @@
         }
         var selectNewPallet = function (currentRow) {
             currentRow = currentRow.cells[0].innerHTML.toString().trim()
-            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "'}", selectNewPalletSuccess);
+            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'true'}", selectNewPalletSuccess);
         }
         $("#Contenido_lblQuantity").bind("change paste keyup",
             function () {

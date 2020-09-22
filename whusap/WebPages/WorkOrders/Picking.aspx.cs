@@ -466,8 +466,10 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string VerificarPalletID(string PAID_NEW, string PAID_OLD)
+        public static string VerificarPalletID(string PAID_NEW, string PAID_OLD, string selectOptionPallet = "false")
         {
+
+            
 
             EntidadPicking ObjPicking = new EntidadPicking();
 
@@ -524,6 +526,24 @@ namespace whusap.WebPages.WorkOrders
                                         break;
                                 }
 
+                            }
+                        }
+
+                        if (selectOptionPallet == "true")
+                        {
+                            if(flag022 == 1){
+                                twhcolDAL.ActCausalTICOL022(PAID_OLD,12);
+                                twhcolDAL.ActCausalTICOL022(PAID_NEW,8);
+                            }
+                            else if(flag042 == 1){
+                                twhcolDAL.ActCausalTICOL042(PAID_OLD,12);
+                                twhcolDAL.ActCausalTICOL042(PAID_NEW,8);
+
+                            }
+                            else if (flag022 == 1)
+                            {
+                                twhcolDAL.ActCausalcol131140(PAID_OLD,10);
+                                twhcolDAL.ActCausalcol131140(PAID_NEW,6);
                             }
                         }
 
