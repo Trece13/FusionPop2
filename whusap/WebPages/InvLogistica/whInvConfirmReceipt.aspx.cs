@@ -153,9 +153,9 @@ namespace whusap.WebPages.InvLogistica
 
                         lblValueOrden.Text = numeroOrden;
                         lblValueArticulo.Text = consultaOrden.Rows[0]["MITM"].ToString()
-                                            + " - " + consultaOrden.Rows[0]["DSCA"].ToString();
+                                            + " | " + consultaOrden.Rows[0]["DSCA"].ToString();
                         lblValueWareHouse.Text = consultaOrden.Rows[0]["CWAR"].ToString()
-                                            + " - " + consultaOrden.Rows[0]["DSCACWAR"].ToString();
+                                            + " | " + consultaOrden.Rows[0]["DSCACWAR"].ToString();
                         lblValueTotal.Text = consultaOrden.Rows[0]["QRDR"].ToString();
                         lblValueDelivered.Text = consultaOrden.Rows[0]["TOTQTYENT"].ToString();
                         lblValueToReceive.Text = consultaOrden.Rows[0]["QTYPEND"].ToString();
@@ -218,8 +218,8 @@ namespace whusap.WebPages.InvLogistica
 
                     consecutivo = consecutivo + 1;
 
-                    var item = lblValueArticulo.Text.Split('-')[0].Trim().ToUpper() + "-" + lblValueArticulo.Text.Split('-')[1].Trim().ToUpper();
-                    var dsca = lblValueArticulo.Text.Split('-')[2].Trim().ToUpper();
+                    var item = lblValueArticulo.Text.Split('|')[0].Trim().ToUpper(); // + "|" + lblValueArticulo.Text.Split('|')[1].Trim().ToUpper();
+                    var dsca = lblValueArticulo.Text.Split('|')[1].Trim().ToUpper();
                     var qtdl = float.Parse(STRQTY.Replace(',', '.'), CultureInfo.InvariantCulture.NumberFormat);
                     var cuni = lblValueUnit.Text;
 
