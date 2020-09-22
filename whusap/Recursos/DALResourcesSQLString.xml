@@ -692,7 +692,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col222.t$cwat
           inner join {0}.tticol136{1} col136
           on col136.t$cwar = col082.t$cwar
-          and col136.t$user = 'JCASTRO'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
+          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col022.t$mitm
           where   col022.t$dele = 8 -- 7-Located
@@ -724,6 +724,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col242.t$cwat
           inner join {0}.tticol082{1} col082
           on col082.t$item = col042.t$mitm
+          inner join {0}.tticol136{1} col136
+          on col136.t$cwar = col082.t$cwar
+          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           where col042.t$dele = 8 -- 8-Asignado
           and col307.T$PAID IS NULL
           and col242.t$acqt >= col082.t$qtyt
@@ -754,6 +757,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col131.t$cwaa
           inner join {0}.tticol082{1} col082
           on col082.t$item = col131.t$item
+          inner join {0}.tticol136{1} col136
+          on col136.t$cwar = col082.t$cwar
+          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           where col131.t$stat = 3 -- 3-Located
           and col307.T$PAID IS NULL
           and col131.t$qtya >= col082.t$qtyt
