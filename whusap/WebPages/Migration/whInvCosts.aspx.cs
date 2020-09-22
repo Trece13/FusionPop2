@@ -240,7 +240,7 @@ namespace whusap.WebPages.Migration
                         refcntu = 0,
                         clot = " ",
                         oorg = "4",
-                        pick = 0
+                        pick = 1
                     };
 
                     Ent_tticol088 data088 = new Ent_tticol088()

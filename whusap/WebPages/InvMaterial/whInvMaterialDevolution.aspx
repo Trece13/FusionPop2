@@ -246,7 +246,7 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <asp:GridView ID="grdRecords" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
-                    OnRowDataBound="grdRecords_RowDataBound" SkinID="Default">
+                    OnRowDataBound="grdRecords_RowDataBound" SkinID="Default"> 
                     <Columns>
                         <asp:BoundField HeaderText="Position" DataField="pos">
                             <ItemStyle HorizontalAlign="Center" Width="10%" />
@@ -323,6 +323,19 @@
                         <FooterStyle CssClass="none" />
                             <HeaderStyle CssClass="none" HorizontalAlign="Center" />
                         </asp:BoundField>
+                        <asp:BoundField HeaderText="Tipo" DataField="tipo">
+                            <ItemStyle HorizontalAlign="Center" Width="10%" CssClass="none" />
+                            <ControlStyle CssClass="none" />
+                        <FooterStyle CssClass="none" />
+                            <HeaderStyle CssClass="none" HorizontalAlign="Center" />                          
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="Clase" DataField="clase">
+                            <ItemStyle HorizontalAlign="Center" Width="10%" CssClass="none" />
+                        <ControlStyle CssClass="none" />
+                        <FooterStyle CssClass="none" />
+                            <HeaderStyle CssClass="none" HorizontalAlign="Center" />
+                        </asp:BoundField>
+
                     </Columns>
                     <HeaderStyle HorizontalAlign="Center" Height="20px" />
                     <RowStyle BackColor="#F7F8FB" Font-Names="Arial" Font-Size="9pt" ForeColor="#1B1B1B"

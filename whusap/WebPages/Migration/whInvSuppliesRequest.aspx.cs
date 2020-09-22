@@ -201,7 +201,7 @@ namespace whusap.WebPages.Migration
             {
                 var item = slItem1.SelectedItem.Text.Split('-')[0] + "-" + slItem1.SelectedItem.Text.Split('-')[1];
                 var cwar = slItem1.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
-                var unit = slItem1.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-').Last();
+                var unit = slItem1.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
                 var seqn = _idaltticol095.consultaSeqn(ref mcno, ref cwar, ref item, ref strError);
                 seqn = seqn + 1;
@@ -223,7 +223,7 @@ namespace whusap.WebPages.Migration
             {
                 var item = slItem2.SelectedItem.Text.Split('-')[0] + "-" + slItem2.SelectedItem.Text.Split('-')[1];
                 var cwar = slItem2.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
-                var unit = slItem2.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-').Last();
+                var unit = slItem2.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
                 var seqn = _idaltticol095.consultaSeqn(ref mcno, ref cwar, ref item, ref strError);
                 seqn = seqn + 1;
@@ -245,7 +245,7 @@ namespace whusap.WebPages.Migration
             {
                 var item = slItem3.SelectedItem.Text.Split('-')[0] + "-" + slItem3.SelectedItem.Text.Split('-')[1];
                 var cwar = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
-                var unit = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-').Last();
+                var unit = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
                 var seqn = _idaltticol095.consultaSeqn(ref mcno, ref cwar, ref item, ref strError);
                 seqn = seqn + 1;
@@ -268,7 +268,7 @@ namespace whusap.WebPages.Migration
             {
                 var item = slItem4.SelectedItem.Text.Split('-')[0] + "-" + slItem4.SelectedItem.Text.Split('-')[1];
                 var cwar = slItem4.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
-                var unit = slItem4.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-').Last();
+                var unit = slItem4.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
                 var seqn = _idaltticol095.consultaSeqn(ref mcno, ref cwar, ref item, ref strError);
                 seqn = seqn + 1;
@@ -290,7 +290,7 @@ namespace whusap.WebPages.Migration
             {
                 var item = slItem5.SelectedItem.Text.Split('-')[0] + "-" + slItem5.SelectedItem.Text.Split('-')[1];
                 var cwar = slItem5.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
-                var unit = slItem5.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-').Last();
+                var unit = slItem5.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
                 var seqn = _idaltticol095.consultaSeqn(ref mcno, ref cwar, ref item, ref strError);
                 seqn = seqn + 1;

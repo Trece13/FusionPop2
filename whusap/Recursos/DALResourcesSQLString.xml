@@ -42,12 +42,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           VALUES('[:T$PDNO]','[:T$SQNB]',SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0,'[:T$ALLO]')
         </stringSQL>
       </operationName>
+      <operationName name="SecuenciaMayor042RT">
+        <stringSQL>
+          select * from (select * from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-RT%' order by T$SQNB desc) where rownum = 1
+        </stringSQL>
+      </operationName>
+
       <operationName name="insertarRegistroSimple">
         <stringSQL>
-          INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,
+          INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$PONO, T$QTDL, T$CUNI, T$LOG1,
           T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP,
           T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, :T$MITM, :T$QTDL, :T$CUNI, :T$LOG1,
+          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, :T$MITM, :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1,
           sysdate+5/24, :T$QTD1, :T$PRO1, :T$LOG2, sysdate+5/24, :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP,
           sysdate+5/24, :T$DELE, :T$LOGD, sysdate+5/24, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
@@ -247,7 +253,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="SecuenciaMayor022RT">
         <stringSQL>
-          select * from (select * from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-RT%' order by T$SQNB desc) where rownum = 1
+          --select * from (select * from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-RT%' order by T$SQNB desc) where rownum = 1
+          select t$sqnb from
+          (
+          select t$sqnb from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-RT%'
+          union
+          select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-RT%'
+          union
+          select t$paid as t$sqnb from {0}.twhcol131{1} where T$PAID LIKE '%[:T$SQNB]-RT%'
+          order by t$sqnb desc
+          )
+          where rownum = 1
         </stringSQL>
       </operationName>
       <operationName name="ActualizarUbicacionTicol222">
@@ -2825,7 +2841,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
           art.t$dsca Descripcion, art.t$cuni Unidad, TB1.Cantidad Cant, art.t$kltc Lote, art.t$kitm stat,
-          col020.t$cnpk cnpick
+          col020.t$cnpk cnpick, t$kitm as tipo, t$cpcl as clase
           FROM {0}.tticst001{1} rec
           LEFT JOIN {0}.ttcibd001{1} art on rec.t$sitm = art.t$item
           LEFT JOIN {0}.ttisfc001{1} sfc ON rec.t$pdno = sfc.t$pdno

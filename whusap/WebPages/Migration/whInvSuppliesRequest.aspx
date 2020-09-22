@@ -175,9 +175,9 @@
                     <td class="CampoOculto">
                         <asp:Label runat="server" ID="lblValueSelect" />
                     </td>
-                    <td class="CampoOculto">
+                    <!--<td class="CampoOculto">
                         <asp:Label runat="server" ID="lblMaxvalue" />
-                    </td>
+                    </td>-->
                 </tr>
 
                 <tr>
@@ -195,10 +195,10 @@
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox>
                     </td>
-                    <td>
+                    <!--<td>
                         <asp:TextBox ID="txtMaxvalue1" name="txtMaxvalue" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox>
                     </td>
-                    <asp:RangeValidator ID="RangeValidator1" runat="server" CssClass="TextBoxBig MyDrop" ControlToValidate="txtQuantity1" ErrorMessage="ERROR" MaximumValue="30" MinimumValue="0" ForeColor="Red" SetFocusOnError="True"></asp:RangeValidator>
+                    <asp:RangeValidator ID="RangeValidator1" runat="server" CssClass="TextBoxBig MyDrop" ControlToValidate="txtQuantity1" ErrorMessage="ERROR" MaximumValue="30" MinimumValue="0" ForeColor="Red" SetFocusOnError="True"></asp:RangeValidator>-->
                 </tr>
                 <tr>
                     <td>2</td>
