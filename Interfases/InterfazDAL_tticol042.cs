@@ -315,5 +315,21 @@ namespace whusa.Interfases
             return true;
 
         }
+
+    public DataTable SecuenciaMayorRT(string id)
+        {
+            string strError = "";
+            DataTable retorno;
+            try
+            {
+                retorno = dal.SecuenciaMayor042RT(id);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
     }
 }

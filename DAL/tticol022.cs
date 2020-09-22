@@ -158,7 +158,8 @@ namespace whusa.DAL
             paramList.Add(":T$ACQT", parametros.acqt.ToString().Contains(",") == true ? parametros.acqt.ToString().Replace(",", ".") : parametros.acqt.ToString().Replace(".", ","));
             paramList.Add(":T$CWAF", parametros.cwaf.ToUpper().Trim());
             paramList.Add(":T$CWAT", parametros.cwat.ToUpper().Trim()==string.Empty?" ":parametros.cwat.ToUpper().Trim());
-            paramList.Add(":T$ACLO", parametros.aclo.ToUpper());
+            //paramList.Add(":T$ACLO", parametros.aclo.ToUpper());
+            paramList.Add(":T$ACLO", parametros.aclo.ToUpper() == string.Empty ? " " : parametros.aclo.ToUpper().Trim());
             paramList.Add(":T$ALLO", parametros.allo.ToString().Contains(",") == true ? parametros.allo.ToString().Replace(",", ".") : parametros.allo.ToString().Replace(".", ","));
    
             try

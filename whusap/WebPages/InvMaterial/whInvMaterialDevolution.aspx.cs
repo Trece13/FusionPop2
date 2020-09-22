@@ -24,6 +24,7 @@ namespace whusap.WebPages.InvMaterial
         private static string _operator;
         public static InterfazDAL_twhcol130 Itwhcol130 = new InterfazDAL_twhcol130();
         public static InterfazDAL_tticol022 Itticol022 = new InterfazDAL_tticol022();
+        public static InterfazDAL_tticol042 Itticol042 = new InterfazDAL_tticol042();
         ClientScriptManager scriptBlock;
         Type csType;
         string strError = string.Empty;
@@ -31,6 +32,9 @@ namespace whusap.WebPages.InvMaterial
         string ktlc = string.Empty;
         string Item = string.Empty;
         string Uni = string.Empty;
+        string Tipo = string.Empty;
+        string Clase = string.Empty;
+        string Pos = string.Empty;
         //Manejo idioma
         public static string PalletIDdoesntexists = string.Empty;
         public static string RecordswithoutIDpallet = string.Empty;
@@ -196,14 +200,17 @@ namespace whusap.WebPages.InvMaterial
                 string paid = string.Empty;
                 string sec  = string.Empty;
                 int sec022 = 0;
-                int sec131 = 0;
                 string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
                 string toLot = ((DropDownList)row.Cells[8].FindControl("toLot")).SelectedValue;
-                string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
+                //string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
                 string condLote = ((HiddenField)row.Cells[6].FindControl("LOTE")).Value.Trim();
                 ktlc = Convert.ToString(row.Cells[11].Text);
                 Item = row.Cells[1].Text.ToUpperInvariant();
-                Uni = row.Cells[5].Text.ToLower().Trim(); 
+                Uni = row.Cells[5].Text.ToLower().Trim();
+                Pos = row.Cells[0].Text;
+                Tipo = row.Cells[12].Text;
+                Clase = row.Cells[13].Text.ToUpperInvariant().Trim();
+                
                 bool reqLote = condLote == "1" ? true : false;
                 
                 //if (myObj.CUNI.Trim().ToUpper() != "PLT")
@@ -229,146 +236,157 @@ namespace whusap.WebPages.InvMaterial
                 //string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
                 //string toLot = ((TextBox)row.Cells[8].FindControl("toLot")).Text;
 
+                int tabla022 = 0;
+                int tabla042 = 0;
+                int tabla131 = 0;
+
                 if (!toreturn.Equals(string.Empty))
                 {
-                    
-
-                    if (ktlc == "1")
+                    if (Tipo == "2")
                     {
-
-                        Ent_twhcol130131 obj131 = new Ent_twhcol130131();
-                        Ent_twhcol130131 MyObj = new Ent_twhcol130131();
-                        DataTable dt022 = Itticol022.SecuenciaMayorRT(txtWorkOrder.Text.Trim().ToUpperInvariant());
-                        DataTable dt131 = Itwhcol130.PaidMayorwhcol131(txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT");
-
-                        if (dt022.Rows.Count > 0)
+                        if (Clase != "RET")
                         {
-                            paid = dt022.Rows[0]["T$SQNB"].ToString().Trim();
-                            sec = paid.Substring(12, 2);
-                            sec022 = Convert.ToInt32(sec);
+                            tabla022 = 1;
+                            tabla042 = 0;
+                            tabla131 = 0;
                         }
-
-                        if (dt131.Rows.Count > 0)
+                        else
                         {
-                            paid = dt131.Rows[0]["T$PAID"].ToString().Trim();
-                            sec = paid.Substring(12, 2);
-                            sec131 = Convert.ToInt32(sec);
+                            tabla042 = 1;
+                            tabla022 = 0;
+                            tabla131 = 0;
                         }
-
-                        if (sec022 > sec131)
-                        {
-                            sec = addZero(sec022 + 1);
-                        }
-                        else if (sec022 < sec131)
-                        {
-                            sec = addZero(sec131 + 1);
-                        }
-                        else if (sec022 == sec131)
-                        {
-                            sec = addZero(sec022 + 1);
-                        }
-
-                        MyObj.OORG = "4";
-                        MyObj.ORNO = txtWorkOrder.Text.Trim().ToUpperInvariant();
-                        MyObj.ITEM = row.Cells[1].Text.ToUpperInvariant();
-                        MyObj.PAID = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
-                        MyObj.PONO = Convert.ToInt32(row.Cells[0].Text).ToString();
-                        MyObj.SEQN = "0";
-                        MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
-                        MyObj.CWAR = row.Cells[3].Text.ToUpperInvariant();
-                        MyObj.QTYS = toreturn;// cantidad escaneada view 
-                        MyObj.UNIT = row.Cells[5].Text.Trim();
-                        MyObj.QTYC = toreturn;//cantidad escaneada view aplicando factor
-                        MyObj.UNIC = row.Cells[5].Text.Trim();
-                        MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
-                        MyObj.CONF = "1";
-                        MyObj.RCNO = " ";//llena baan
-                        MyObj.DATR = "01/01/70";//llena baan
-                        MyObj.LOCA = " ";// enviamos vacio
-                        MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
-                        MyObj.PRNT = "1";// llenar en 1
-                        MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                        MyObj.NPRT = "1";//conteo de reimpresiones 
-                        MyObj.LOGN = _operator;// nombre de ususario de la session
-                        MyObj.LOGT = " ";//llena baan
-                        MyObj.STAT = "1";// LLENAR EN 1  
-                        MyObj.DSCA = row.Cells[2].Text.ToUpperInvariant();
-                        MyObj.COTP = "0";
-                        MyObj.FIRE = "1";
-                        MyObj.PSLIP = " ";
-                        MyObj.ALLO = "0";
-
-                        Itwhcol130.Insertartwhcol131(MyObj);
-
                     }
-                    else if (ktlc == "2")
+                    else
                     {
-
-                        Ent_tticol022 obj022 = new Ent_tticol022();
-                        List<Ent_tticol022> list022 = new List<Ent_tticol022>();
-                        
-                        DataTable dt022 = Itticol022.SecuenciaMayorRT(txtWorkOrder.Text.Trim().ToUpperInvariant());
-                        DataTable dt131 = Itwhcol130.PaidMayorwhcol131(txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT");
-
-                        if (dt022.Rows.Count > 0)
-                        {
-                            paid = dt022.Rows[0]["T$SQNB"].ToString().Trim();
-                            sec = paid.Substring(12, 2);
-                            sec022 = Convert.ToInt32(sec);
-                        }
-
-                        if (dt131.Rows.Count > 0)
-                        {
-                            paid = dt131.Rows[0]["T$PAID"].ToString().Trim();
-                            sec = paid.Substring(12, 2);
-                            sec131 = Convert.ToInt32(sec);
-                        }
-
-                        if( sec022 > sec131 ){
-                            sec = addZero(sec022 + 1);
-                        }
-                        else if ( sec022 < sec131 )
-                        {
-                            sec = addZero( sec131 + 1 );
-                        }
-                        else if ( sec022 == sec131 )
-                        {
-                            sec = addZero(sec022 + 1);
-                        }
-
-                        obj022.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
-                        obj022.sqnb = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
-                        obj022.proc = 1;
-                        obj022.logn = _operator;
-                        obj022.mitm = row.Cells[1].Text.ToUpperInvariant().Trim();
-                        obj022.qtdl = Convert.ToDecimal(toreturn);
-                        obj022.cuni = row.Cells[5].Text.Trim();
-                        obj022.log1 = "NONE";
-                        obj022.qtd1 = Convert.ToInt32(toreturn);
-                        obj022.pro1 = 1;
-                        obj022.log2 = "NONE";
-                        obj022.qtd2 = Convert.ToInt32(toreturn);
-                        obj022.pro2 = 2;
-                        obj022.loca = " ";
-                        obj022.norp = 1;
-                        obj022.dele = 2;
-                        obj022.logd = "NONE";
-                        obj022.refcntd = 0;
-                        obj022.refcntu = 0;
-                        obj022.drpt = DateTime.Now;
-                        obj022.urpt = _operator;
-                        obj022.acqt = Convert.ToDecimal(toreturn);
-                        obj022.cwaf = row.Cells[3].Text.ToUpperInvariant();
-                        obj022.cwat = row.Cells[3].Text.ToUpperInvariant();
-                        obj022.aclo = " ";
-                        obj022.allo = 0;
-
-
-                        list022.Add(obj022);
-                        Itticol022.insertarRegistroSimple(ref obj022, ref strError);
-                        Itticol022.InsertarRegistroTicol222(ref obj022, ref strError);
-
+                        tabla131 = 1;
+                        tabla022 = 0;
+                        tabla042 = 0;
                     }
+
+                    DataTable dt022 = Itticol022.SecuenciaMayorRT(txtWorkOrder.Text.Trim().ToUpperInvariant());
+                    if (dt022.Rows.Count > 0)
+                    {
+                        paid = dt022.Rows[0]["T$SQNB"].ToString().Trim();
+                        sec = paid.Substring(12, 2);
+                        sec022 = Convert.ToInt32(sec);
+                        sec = addZero(sec022 + 1);
+                    }
+
+                        if (tabla131 == 1)
+                        {
+                            Ent_twhcol130131 obj131 = new Ent_twhcol130131();
+                            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
+
+                            MyObj.OORG = "4";
+                            MyObj.ORNO = txtWorkOrder.Text.Trim().ToUpperInvariant();
+                            MyObj.ITEM = row.Cells[1].Text.ToUpperInvariant();
+                            MyObj.PAID = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+                            MyObj.PONO = Convert.ToInt32(row.Cells[0].Text).ToString();
+                            MyObj.SEQN = "0";
+                            MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
+                            MyObj.CWAR = row.Cells[3].Text.ToUpperInvariant();
+                            MyObj.QTYS = toreturn;// cantidad escaneada view 
+                            MyObj.UNIT = row.Cells[5].Text.Trim();
+                            MyObj.QTYC = toreturn;//cantidad escaneada view aplicando factor
+                            MyObj.UNIC = row.Cells[5].Text.Trim();
+                            MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                            MyObj.CONF = "1";
+                            MyObj.RCNO = " ";//llena baan
+                            MyObj.DATR = "01/01/70";//llena baan
+                            MyObj.LOCA = " ";// enviamos vacio
+                            MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                            MyObj.PRNT = "1";// llenar en 1
+                            MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                            MyObj.NPRT = "1";//conteo de reimpresiones 
+                            MyObj.LOGN = _operator;// nombre de ususario de la session
+                            MyObj.LOGT = " ";//llena baan
+                            MyObj.STAT = "1";// LLENAR EN 1  
+                            MyObj.DSCA = row.Cells[2].Text.ToUpperInvariant();
+                            MyObj.COTP = "0";
+                            MyObj.FIRE = "1";
+                            MyObj.PSLIP = " ";
+                            MyObj.ALLO = "0";
+
+                            Itwhcol130.Insertartwhcol131(MyObj);
+                        }
+
+                        if (tabla022 == 1)
+                        {
+
+                            Ent_tticol022 obj022 = new Ent_tticol022();
+                            List<Ent_tticol022> list022 = new List<Ent_tticol022>();
+                            
+                            obj022.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
+                            obj022.sqnb = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+                            obj022.proc = 1;
+                            obj022.logn = _operator;
+                            obj022.mitm = row.Cells[1].Text.ToUpperInvariant().Trim();
+                            obj022.qtdl = Convert.ToDecimal(toreturn);
+                            obj022.cuni = row.Cells[5].Text.Trim();
+                            obj022.log1 = "NONE";
+                            obj022.qtd1 = Convert.ToInt32(toreturn);
+                            obj022.pro1 = 1;
+                            obj022.log2 = "NONE";
+                            obj022.qtd2 = Convert.ToInt32(toreturn);
+                            obj022.pro2 = 2;
+                            obj022.loca = " ";
+                            obj022.norp = 1;
+                            obj022.dele = 2;
+                            obj022.logd = "NONE";
+                            obj022.refcntd = 0;
+                            obj022.refcntu = 0;
+                            obj022.drpt = DateTime.Now;
+                            obj022.urpt = _operator;
+                            obj022.acqt = Convert.ToDecimal(toreturn);
+                            obj022.cwaf = row.Cells[3].Text.ToUpperInvariant();
+                            obj022.cwat = row.Cells[3].Text.ToUpperInvariant();
+                            obj022.aclo = "";
+                            obj022.allo = 0;
+                            
+                            list022.Add(obj022);
+                            Itticol022.insertarRegistroSimple(ref obj022, ref strError);
+                            Itticol022.InsertarRegistroTicol222(ref obj022, ref strError);
+
+                        }
+                        if (tabla042 == 1)
+                        {
+                            Ent_tticol042 obj042 = new Ent_tticol042();
+                            List<Ent_tticol042> list042 = new List<Ent_tticol042>();
+                            
+                            obj042.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
+                            obj042.sqnb = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+                            obj042.proc = 1;
+                            obj042.logn = _operator;
+                            obj042.mitm = row.Cells[1].Text.ToUpperInvariant().Trim();
+                            obj042.pono = Convert.ToInt32(Pos);
+                            obj042.qtdl = Convert.ToDecimal(toreturn);
+                            obj042.cuni = row.Cells[5].Text.Trim();
+                            obj042.log1 = "NONE";
+                            obj042.qtd1 = Convert.ToInt32(toreturn);
+                            obj042.pro1 = 1;
+                            obj042.log2 = "NONE";
+                            obj042.qtd2 = Convert.ToInt32(toreturn);
+                            obj042.pro2 = 2;
+                            obj042.loca = " ";
+                            obj042.norp = 1;
+                            obj042.dele = 2;
+                            obj042.logd = "NONE";
+                            obj042.refcntd = 0;
+                            obj042.refcntu = 0;
+                            obj042.drpt = DateTime.Now;
+                            obj042.urpt = _operator;
+                            obj042.acqt = Convert.ToDouble(toreturn);
+                            obj042.cwaf = row.Cells[3].Text.ToUpperInvariant();
+                            obj042.cwat = row.Cells[3].Text.ToUpperInvariant();
+                            obj042.aclo = "";
+                            obj042.allo = 0;
+
+                            list042.Add(obj042);
+                            Itticol042.insertarRegistroSimple(ref obj042, ref strError);
+                            Itticol042.InsertarRegistroTicol242(ref obj042, ref strError);
+
+                        }
 
                     obj = new Ent_tticol125();
                     obj.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
