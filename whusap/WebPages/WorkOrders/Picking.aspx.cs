@@ -656,7 +656,7 @@ namespace whusap.WebPages.WorkOrders
 
         [WebMethod]
         //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
-        public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string QTYT, string QTYT_OLD)
+        public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string QTYT, string QTYT_OLD,string CUNI,string CWAR,string CLOT)
         {
 
 
@@ -692,7 +692,7 @@ namespace whusap.WebPages.WorkOrders
 
                         if (qtyt_act==0)
                         {
-                            return;
+                            return true;
                         }
 
                         Ent_tticol022 data022;
@@ -736,7 +736,7 @@ namespace whusap.WebPages.WorkOrders
                             logn = _operator,
                             mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
                             qtdl = Convert.ToDecimal(qtyt_act.ToString()),
-                            cuni = lblQuantityDesc.Text,//CUNI,
+                            cuni = CUNI,//CUNI,
                             log1 = "NONE",
                             qtd1 = Convert.ToInt32(qtyt_act.ToString()),
                             pro1 = 2,
@@ -752,8 +752,8 @@ namespace whusap.WebPages.WorkOrders
                             drpt = DateTime.Now,
                             urpt = _operator,
                             acqt =Convert.ToDecimal(qtyt_act.ToString()),
-                            cwaf = lblWarehouse.Text,//CWAR,
-                            cwat = lblWarehouse.Text,//CWAR,
+                            cwaf = CWAR,//CWAR,
+                            cwat = CWAR,//CWAR,
                             aclo = LOCA,
                             allo = 0
                         };
@@ -781,7 +781,7 @@ namespace whusap.WebPages.WorkOrders
                         int consecutivo = 0;
                         if (qtyt_act == 0)
                         {
-                            return;
+                            return true;
                         }
 
                         string id = ORNO;
@@ -818,7 +818,7 @@ namespace whusap.WebPages.WorkOrders
                             logn = _operator,
                             mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
                             qtdl = Convert.ToDecimal(qtyt_act.ToString()),
-                            cuni = lblQuantityDesc.Text,//CUNI,
+                            cuni = CUNI,//CUNI,
                             log1 = "NONE",
                             qtd1 = Convert.ToDecimal(qtyt_act.ToString()),
                             pro1 = 2,
@@ -834,8 +834,8 @@ namespace whusap.WebPages.WorkOrders
                             drpt = DateTime.Now,
                             urpt = _operator,
                             acqt = Convert.ToDouble(qtyt_act.ToString()),
-                            cwaf = lblWarehouse.Text,//CWAR,
-                            cwat = lblWarehouse.Text,//CWAR,
+                            cwaf = CWAR,//CWAR,
+                            cwat = CWAR,//CWAR,
                             aclo = LOCA,
                             allo = 0
                         };
@@ -861,7 +861,7 @@ namespace whusap.WebPages.WorkOrders
                         twhcolDAL.updatetwhcol131Quantity(pallet,qtyt_act);
                         if (qtyt_act == 0)
                         {
-                            return;
+                            return true;
                         }
                         int consecutivoPalletID = 0;
                         DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(PAID.Substring(0,9));
@@ -896,12 +896,12 @@ namespace whusap.WebPages.WorkOrders
                             PAID = ORNO+ "-" + SecuenciaPallet,
                             PONO = "1",
                             SEQN = "1",
-                            CLOT = LblLotId.Text,//CLOT.ToUpper(),// lote VIEW
-                            CWAR = lblWarehouse.Text,//CWAR.ToUpper(),
+                            CLOT = CLOT,//CLOT.ToUpper(),// lote VIEW
+                            CWAR = CWAR,//CWAR.ToUpper(),
                             QTYS = qtyt_act.ToString(),//QTYS,// cantidad escaneada view 
-                            UNIT = lblQuantityDesc.Text,//UNIT,//unit escaneada view
+                            UNIT = CUNI,//UNIT,//unit escaneada view
                             QTYC = qtyt_act.ToString(),//QTYS,//cantidad escaneada view aplicando factor
-                            UNIC = lblQuantityDesc.Text,//UNIT,//unidad view stock
+                            UNIC = CUNI,//UNIT,//unidad view stock
                             DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
                             CONF = "1",
                             RCNO = " ",//llena baan
