@@ -862,5 +862,20 @@ namespace whusa.Interfases
         {
             return dal.ConsultarTticol082porStat(_operator, stat);
         }
+
+        public bool ActualizarCantidades222(string PAID)
+        {
+            return dal.ActualizarCantidades222(PAID);
+        }
+
+        public bool ActualizarCantidades242(string PAID)
+        {
+            return dal.ActualizarCantidades242(PAID);
+        }
+
+        public bool ActualizarCantidades131(string PAID)
+        {
+            return dal.ActualizarCantidades131(PAID);
+        }
     }
 }

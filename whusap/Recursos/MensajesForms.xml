@@ -4620,6 +4620,11 @@
 
     <Module name="Picking.aspx">
       <Idiom name="INGLES">
+        <operationName name="NotAalletsAvailablethereNotPallets">
+          <stringMessage>
+            there are not pallets available or there are not pallets with the current warehouse
+          </stringMessage>
+        </operationName>
         <operationName name="thereisnotPalletavailable">
           <stringMessage>
             there is not Pallet available

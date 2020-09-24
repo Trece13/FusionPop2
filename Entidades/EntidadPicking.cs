@@ -67,5 +67,7 @@ namespace whusa
         public string STAT { get; set; }
 
         public string SLOC { get; set; }
+
+        public string ALLO { get; set; }
     }
 }

@@ -88,6 +88,62 @@
             display:none;
         }
     </style>
+    <script>
+        function printDiv(divID) {
+
+            var monthNames = [
+                "1", "2", "3",
+                "4", "5", "6", "7",
+                "8", "9", "10",
+                "11", "12"
+              ];
+
+            //PRINT LOCAL HOUR
+            var d = new Date();
+            var LbdDate = $("#LblDate");
+            LbdDate.html(
+                monthNames[d.getMonth()] +
+                "/" +
+                d.getDate() +
+                "/" +
+                d.getFullYear() +
+                " " +
+                d.getHours() +
+                ":" +
+                d.getMinutes() +
+                ":" +
+                d.getSeconds()
+                );
+            //            //Get the HTML of div
+            //            var divElements = document.getElementById(divID).innerHTML;
+            //            //Get the HTML of whole page
+            //            var oldPage = document.body.innerHTML;
+            //            //Reset the page's HTML with div's HTML only
+            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
+            //            //Print Page
+            //            window.print();
+            //            //Restore orignal HTML
+            //            document.body.innerHTML = oldPage;
+            //            window.close();
+            //            return true;
+
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body >');
+            //mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        };
+    </script>
     <form id="form1" class="container">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg hidebutton" for="txQuantity">
@@ -97,10 +153,11 @@
         </div>
     </div>
     <br />
+    <div class="row">
     <div class="form-group row">
         <input id="btnEnviar" type="button" class="hidebutton" value="START NEXT PICK" />&nbsp;&nbsp;&nbsp
     </div>
-    <div id="MyEtiqueta2">
+    <div id="MyEtiqueta2" class="col-6">
         <table class="table2">
             <tr>
                 <asp:Label ID="lblCNPK" runat="server" CssClass=""></asp:Label>
@@ -219,8 +276,8 @@
                 <td>
                 </td>
                 <td>
-                    <input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
-                        onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />
+                    <!--<input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
+                        onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />-->
                 </td>
             </tr>
             <tr>
@@ -231,9 +288,9 @@
             </tr>
         </table>
     </div>
-    <div>
-        <table>
-        </table>
+    
+    <div id="divTable" class="col-6">
+    </div>    
     </div>
     <div class="hidetable">
         <div class="">
@@ -560,6 +617,8 @@
                         $('#Contenido_lblQuantityDesc').html("");
                         $('#Contenido_txtPalletID').val("");
                         $('#txtlocation').val("");
+
+                        printDiv("hidetable");
                     }
                 },
                 failure: function (response) {
@@ -576,17 +635,19 @@
 
             $.ajax({
                 type: "POST",
+
                 url: "Picking.aspx/ShowCurrentOptions",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
                     myObj = JSON.parse(response.d);
+                    window.localStorage.setItem('MyPalletList',JSON.stringify(myObj));
                     for (var i = 0; i < myObj.length; i++) {
                         bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
                     }
                     var tableOptions = "<table class='table' style='width:100%'>" +
-                                                "<thead class='thead-dark'>" +
+                                                "<thead>" +
                                                   "<tr>" +
                                                     "<th scope='col'>Pallet</th>" +
                                                     "<th scope='col'>Location</th>" +
@@ -600,14 +661,17 @@
                                                bodyRows
                     "</tbody>" +
                                             "</table>";
-                    Swal.fire({
-                        title: '<strong>Options</strong>',
-                        icon: 'info',
-                        html: tableOptions,
-                        showCloseButton: false,
-                        showCancelButton: false,
-                        focusConfirm: false
-                    });
+
+
+                    $("#divTable").append(tableOptions);
+//                    Swal.fire({
+//                        title: '<strong>Options</strong>',
+//                        icon: 'info',
+//                        html: tableOptions,
+//                        showCloseButton: false,
+//                        showCancelButton: false,
+//                        focusConfirm: false
+//                    });
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -670,7 +734,7 @@
             var _txt1 = document.getElementById("<%=lblPalletID.ClientID %>").innerHTML.toString();
             var _txt2 = $('#<%=txtPalletID.ClientID%>').val().toString().toUpperCase();
 
-            if (_txt2.length == 13) {
+            if (_txt2.length >= 13) {
                 var result = _txt1.trim() == _txt2.trim() ? 1 : 2;
 
                 if (result == 1) {
@@ -691,14 +755,51 @@
                     alert('Pallet Id not equal to the selected pallet');
                     document.getElementById("txtlocation").value = "";
                     document.getElementById("txtlocation").disabled = true;
+                    var exist = false;
+                    var MyPalletList = JSON.parse(JSON.stringify(window.localStorage.getItem('MyPalletList')));
+                    for (var i in JSON.parse(MyPalletList)) {
+                        var MyList = JSON.parse(MyPalletList);
 
-                    Method = "VerificarPalletID"
-                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
-                    EventoAjax(Method, Data, PalletIDSuccess)
+                        if (MyList[i]["PALLETID"].trim() == _txt2) {
+                            MyObj = MyList[i];
+                            exist = true;
+                        }
+                    }
 
-                    //JUANC
-                    return false;
+                    if (exist) {
+//                        HideReason.style.display = "";
+//                        $('#LblError').html("");
+//                        $('#Contenido_lblPalletID').html(MyObj["PALLETID"].toString())
+//                        $('#Contenido_LblLotId').html(MyObj["LOT"].toString())
+//                        $('#Contenido_lblWarehouse').html(MyObj["WRH"].toString())
+//                        $('#Contenido_lblWareDescr').html(MyObj["DESCWRH"].toString())
+//                        $('#Contenido_lbllocation').html(MyObj["LOCA"].toString())
+//                        $('#Contenido_lblQuantity').html(MyObj["QTY"].toString())
+//                        $('#Contenido_lblQuantityDesc').html(MyObj["UN"].toString())
+
+                        document.getElementById("bntChange").disabled = true;
+                        Method = "VerificarPalletID"
+                        Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
+                        EventoAjax(Method, Data, PalletIDSuccess)
+                    }
+                    else {
+                        HideReason.style.display = "none";
+                        $('#LblError').html("The pallet does not correspond to those available");
+                        document.getElementById("bntChange").disabled = true;
+                    }
                 }
+//                else {
+//                    alert('Pallet Id not equal to the selected pallet');
+//                    document.getElementById("txtlocation").value = "";
+//                    document.getElementById("txtlocation").disabled = true;
+
+//                    Method = "VerificarPalletID"
+//                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
+//                    EventoAjax(Method, Data, PalletIDSuccess)
+
+//                    //JUANC
+//                    return false;
+//                }
             }
         }
 
@@ -808,8 +909,8 @@
             alert("Exito");
         }
         var selectNewPallet = function (currentRow) {
-            currentRow = currentRow.cells[0].innerHTML.toString().trim()
-            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'true'}", selectNewPalletSuccess);
+//            currentRow = currentRow.cells[0].innerHTML.toString().trim()
+//            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'true'}", selectNewPalletSuccess);
         }
         $("#Contenido_lblQuantity").bind("change paste keyup",
             function () {

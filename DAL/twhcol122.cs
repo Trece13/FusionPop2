@@ -1147,6 +1147,65 @@ namespace whusa.DAL
             }
             return Retorno;
         }
+
+        public bool ActualizarCantidades131(string PAID)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", PAID.Trim());
+            strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+            return Retorno;
+        }
+
+        public bool ActualizarCantidades242(string PAID)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", PAID.Trim());
+            strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+            return Retorno;
+
+        }
+
+        public bool ActualizarCantidades222(string PAID)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", PAID.Trim());
+            strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+            return Retorno;
+
+        }
     }
 }
 

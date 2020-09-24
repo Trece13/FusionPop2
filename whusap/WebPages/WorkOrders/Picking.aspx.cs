@@ -32,6 +32,7 @@ namespace whusap.WebPages.WorkOrders
         public static string ThePallethasalreadylocate = mensajes("ThePallethasalreadylocate");
         public static string ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus = mensajes("ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus");
         public static string ThePalletIDdoesnotexist = mensajes("ThePalletIDdoesnotexist");
+        public static string NotAalletsAvailablethereNotPallets = mensajes("NotAalletsAvailablethereNotPallets");
 
         public static string ADVS = string.Empty;
         public object GObject = new object();
@@ -102,7 +103,7 @@ namespace whusap.WebPages.WorkOrders
 
             }
             if (!IsPostBack)
-            {
+            { }
                 _operator = Session["user"].ToString();
                 EntidadPicking MyObj = new EntidadPicking();
                 Ent_ttccol307 MyObj307 = new Ent_ttccol307();
@@ -118,6 +119,8 @@ namespace whusap.WebPages.WorkOrders
                 if (DT082STAT.Rows.Count > 0)
                 {
                     limpiarControles();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('User has a picking pending')", true);
+
                     return;
                 }
 
@@ -136,6 +139,7 @@ namespace whusap.WebPages.WorkOrders
                             Page_Load(sender, e);
                         }
                     }
+                    
 
                     //LstPallet042 = twhcolDAL.ConsultarPalletPicking042(PAID, string.Empty, _operator);
                     LstPallet042 = twhcolDAL.ConsultarPalletPicking042With082(PAID, string.Empty, _operator);
@@ -149,6 +153,7 @@ namespace whusap.WebPages.WorkOrders
                             Page_Load(sender, e);
                         }
                     }
+                    
 
                     //LstPallet22 = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, _operator);
                     LstPallet22 = twhcolDAL.ConsultarPalletPicking22With082(PAID, string.Empty, _operator);
@@ -161,6 +166,11 @@ namespace whusap.WebPages.WorkOrders
                         {
                             Page_Load(sender, e);
                         }
+                    }
+
+                    if (LstPallet131.Count == 0 && LstPallet042.Count == 0 && LstPallet22.Count == 0)
+                    {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
                     }
                 }
 
@@ -422,7 +432,12 @@ namespace whusap.WebPages.WorkOrders
                     //Response.Write("<script language=javascript>alert('" + mensaje + "');window.location = '/WebPages/Login/whMenuI.aspx';</script>");
 
                 }
-            }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script","ShowCurrentOptions()", true);
+                }
+
+            
 
         }
 
@@ -490,6 +505,7 @@ namespace whusap.WebPages.WorkOrders
                         ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString();
                         ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
                         ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
+                        ObjPicking.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
 
                         bool ret = false;
                         //ret = twhcolDAL.Actualizar307(PAID_NEW, PAID_OLD);
@@ -504,6 +520,7 @@ namespace whusap.WebPages.WorkOrders
                             DataTable DTttccol307 = twhcolDAL.ConsultarTt307140(MyObj307);
                             if (DTttccol307.Rows.Count > 0)
                             {
+                                string PAID = "";
                                 string Tbl = DTPalletID.Rows[0]["TBL"].ToString().Trim();
                                 switch (Tbl)
                                 {
@@ -511,22 +528,44 @@ namespace whusap.WebPages.WorkOrders
                                         flag022 = 1;
                                         flag042 = 0;
                                         flag131 = 0;
+                                        twhcolDAL.ActualizarCantidades222(PAID_OLD);
+                                        twhcolDAL.ActualizarCantidades222(PAID_NEW);
                                         break;
 
                                     case "ticol042":
                                         flag042 = 1;
                                         flag131 = 0;
                                         flag022 = 0;
+                                        twhcolDAL.ActualizarCantidades242(PAID_OLD);
+                                        twhcolDAL.ActualizarCantidades242(PAID_NEW);
                                         break;
 
                                     case "whcol131":
                                         flag131 = 1;
                                         flag022 = 0;
                                         flag042 = 0;
+                                        twhcolDAL.ActualizarCantidades131(PAID_OLD);
+                                        twhcolDAL.ActualizarCantidades131(PAID_NEW);
                                         break;
                                 }
 
                             }
+                        }
+                        if (flag022 == 1)
+                        {
+                            twhcolDAL.ActCausalTICOL022(PAID_OLD, 12);
+                            twhcolDAL.ActCausalTICOL022(PAID_NEW, 8);
+                        }
+                        else if (flag042 == 1)
+                        {
+                            twhcolDAL.ActCausalTICOL042(PAID_OLD, 12);
+                            twhcolDAL.ActCausalTICOL042(PAID_NEW, 8);
+
+                        }
+                        else if (flag131 == 1)
+                        {
+                            twhcolDAL.ActCausalcol131140(PAID_OLD, 10);
+                            twhcolDAL.ActCausalcol131140(PAID_NEW, 6);
                         }
 
                         if (selectOptionPallet == "true")
@@ -540,7 +579,7 @@ namespace whusap.WebPages.WorkOrders
                                 twhcolDAL.ActCausalTICOL042(PAID_NEW,8);
 
                             }
-                            else if (flag022 == 1)
+                            else if (flag131 == 1)
                             {
                                 twhcolDAL.ActCausalcol131140(PAID_OLD,10);
                                 twhcolDAL.ActCausalcol131140(PAID_NEW,6);
@@ -623,7 +662,8 @@ namespace whusap.WebPages.WorkOrders
 
             try
             {
-                
+                PAID_OLD = HttpContext.Current.Session["originalPallet"].ToString();
+                QTYT_OLD = HttpContext.Current.Session["QTY"].ToString();
                 decimal qtyt = Convert.ToDecimal(QTYT.ToString().Trim());
                 decimal qtyt_old = Convert.ToDecimal(QTYT_OLD.ToString().Trim());
                 decimal qtyt_act = qtyt_old - qtyt;
@@ -648,8 +688,13 @@ namespace whusap.WebPages.WorkOrders
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act); 
-                       
+                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act);
+
+                        if (qtyt_act==0)
+                        {
+                            return;
+                        }
+
                         Ent_tticol022 data022;
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
@@ -691,14 +736,14 @@ namespace whusap.WebPages.WorkOrders
                             logn = _operator,
                             mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
                             qtdl = Convert.ToDecimal(qtyt_act.ToString()),
-                            cuni = " ",//CUNI,
+                            cuni = lblQuantityDesc.Text,//CUNI,
                             log1 = "NONE",
                             qtd1 = Convert.ToInt32(qtyt_act.ToString()),
                             pro1 = 2,
                             log2 = "NONE",
                             qtd2 = Convert.ToInt32(qtyt_act.ToString()),
                             pro2 = 2,
-                            loca = " ",
+                            loca = LOCA,
                             norp = 1,
                             dele = 2,
                             logd = "NONE",
@@ -707,8 +752,8 @@ namespace whusap.WebPages.WorkOrders
                             drpt = DateTime.Now,
                             urpt = _operator,
                             acqt =Convert.ToDecimal(qtyt_act.ToString()),
-                            cwaf = " ",//CWAR,
-                            cwat = " ",//CWAR,
+                            cwaf = lblWarehouse.Text,//CWAR,
+                            cwat = lblWarehouse.Text,//CWAR,
                             aclo = LOCA,
                             allo = 0
                         };
@@ -734,7 +779,10 @@ namespace whusap.WebPages.WorkOrders
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
                         int consecutivo = 0;
-
+                        if (qtyt_act == 0)
+                        {
+                            return;
+                        }
 
                         string id = ORNO;
                         DataTable Dtticol042 = _idaltticol042.SecuenciaMayor(id);
@@ -770,14 +818,14 @@ namespace whusap.WebPages.WorkOrders
                             logn = _operator,
                             mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
                             qtdl = Convert.ToDecimal(qtyt_act.ToString()),
-                            cuni = " ",//CUNI,
+                            cuni = lblQuantityDesc.Text,//CUNI,
                             log1 = "NONE",
                             qtd1 = Convert.ToDecimal(qtyt_act.ToString()),
                             pro1 = 2,
                             log2 = "NONE",
                             qtd2 = Convert.ToDecimal(qtyt_act.ToString()),
                             pro2 = 2,
-                            loca = " ",
+                            loca = LOCA,
                             norp = 1,
                             dele = 2,
                             logd = "NONE",
@@ -786,8 +834,8 @@ namespace whusap.WebPages.WorkOrders
                             drpt = DateTime.Now,
                             urpt = _operator,
                             acqt = Convert.ToDouble(qtyt_act.ToString()),
-                            cwaf = " ",//CWAR,
-                            cwat = " ",//CWAR,
+                            cwaf = lblWarehouse.Text,//CWAR,
+                            cwat = lblWarehouse.Text,//CWAR,
                             aclo = LOCA,
                             allo = 0
                         };
@@ -811,6 +859,10 @@ namespace whusap.WebPages.WorkOrders
                     if (cnpk != 1)
                     {
                         twhcolDAL.updatetwhcol131Quantity(pallet,qtyt_act);
+                        if (qtyt_act == 0)
+                        {
+                            return;
+                        }
                         int consecutivoPalletID = 0;
                         DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(PAID.Substring(0,9));
                         string SecuenciaPallet = "001";
@@ -844,17 +896,17 @@ namespace whusap.WebPages.WorkOrders
                             PAID = ORNO+ "-" + SecuenciaPallet,
                             PONO = "1",
                             SEQN = "1",
-                            CLOT = " ",//CLOT.ToUpper(),// lote VIEW
-                            CWAR = " ",//CWAR.ToUpper(),
+                            CLOT = LblLotId.Text,//CLOT.ToUpper(),// lote VIEW
+                            CWAR = lblWarehouse.Text,//CWAR.ToUpper(),
                             QTYS = qtyt_act.ToString(),//QTYS,// cantidad escaneada view 
-                            UNIT = " ",//UNIT,//unit escaneada view
+                            UNIT = lblQuantityDesc.Text,//UNIT,//unit escaneada view
                             QTYC = qtyt_act.ToString(),//QTYS,//cantidad escaneada view aplicando factor
-                            UNIC = " ",//UNIT,//unidad view stock
+                            UNIC = lblQuantityDesc.Text,//UNIT,//unidad view stock
                             DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
                             CONF = "1",
                             RCNO = " ",//llena baan
                             DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
-                            LOCA = " ",//LOCA.ToUpper(),// enviamos vacio
+                            LOCA = " ",//LOCA.ToUpper(),// enviamos vacio 
                             DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llenar con fecha de hoy
                             PRNT = "1",// llenar en 1
                             DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
@@ -867,6 +919,7 @@ namespace whusap.WebPages.WorkOrders
                             FIRE = "2",
                             PSLIP = " ",
                             ALLO = "0"
+                            
                             //PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "INITIAPOP" + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
                             //ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "DTOrdencompra.Rows[0][].ToString()" + "&code=Code128&dpi=96",
                             //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ITEM + "&code=Code128&dpi=96",
@@ -902,6 +955,10 @@ namespace whusap.WebPages.WorkOrders
             string ITEM = HttpContext.Current.Session["ITEM"].ToString().Trim();
             string QTY = HttpContext.Current.Session["QTY"].ToString().Trim();
             string PRIO = HttpContext.Current.Session["PRIO"].ToString().Trim();
+
+            //string ITEM = "";
+            //string QTY  = "";
+            //string PRIO = "";
 
             List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
@@ -961,13 +1018,13 @@ namespace whusap.WebPages.WorkOrders
                 if (flag022 == 1)
                 {
                     stat = 12;
-                    twhcolDAL.ingRegTticol092140(maximo, pallet, txtPallet, statCausal, _operator);
+                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), txtPallet, statCausal, _operator);
                     //twhcolDAL.actRegtticol082140(_operator, pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, _operator, statCausal);
-                    if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
-                    {
-                        twhcolDAL.ActCausalTICOL022(pallet, stat);
-                    }
+                    //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
+                    //{
+                    //    twhcolDAL.ActCausalTICOL022(pallet, stat);
+                    //}
                     return true;
 
                 }
@@ -975,13 +1032,13 @@ namespace whusap.WebPages.WorkOrders
                 {
 
                     stat = 12;
-                    twhcolDAL.ingRegTticol092140(maximo, pallet, txtPallet, statCausal, _operator);
+                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), txtPallet, statCausal, _operator);
                     //twhcolDAL.actRegtticol082140(_operator, pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, _operator, statCausal);
-                    if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
-                    {
-                        twhcolDAL.ActCausalTICOL042(pallet, stat);
-                    }
+                    //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
+                    //{
+                    //    twhcolDAL.ActCausalTICOL042(pallet, stat);
+                    //}
 
                     return true;
 
@@ -990,13 +1047,13 @@ namespace whusap.WebPages.WorkOrders
                 else if (flag131 == 1)
                 {
                     stat = 10;
-                    twhcolDAL.ingRegTticol092140(maximo, pallet, txtPallet, statCausal, _operator);
+                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), txtPallet, statCausal, _operator);
                     //twhcolDAL.actRegtticol082140(_operator, pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, _operator, statCausal);
-                    if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
-                    {
-                        twhcolDAL.ActCausalcol131140(pallet, stat);
-                    }
+                    //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
+                    //{
+                    //    twhcolDAL.ActCausalcol131140(pallet, stat);
+                    //}
                     return true;
                 }
                 else
@@ -1080,6 +1137,7 @@ namespace whusap.WebPages.WorkOrders
             if (DT082STAT.Rows.Count > 0)
             {
                 limpiarControles();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('User has a picking pending')", true);
                 return;
             }
 
@@ -1117,6 +1175,11 @@ namespace whusap.WebPages.WorkOrders
                     {
                         Page_Load(sender, e);
                     }
+                }
+
+                if (LstPallet131.Count == 0 && LstPallet042.Count == 0  && LstPallet22.Count == 0 )
+                {
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
                 }
             }
 

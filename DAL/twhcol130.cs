@@ -1279,7 +1279,7 @@ namespace whusa.Interfases
             paramList.Add(":T$NPRT", MyObj.NPRT);
             paramList.Add(":T$FIRE", MyObj.FIRE);
             paramList.Add(":T$PSNO", MyObj.PSLIP);
-            paramList.Add(":T$CWAA", MyObj.CWAR.Trim());
+            paramList.Add(":T$CWAA", MyObj.CWAR.Trim().Trim()==""?" ":MyObj.CWAR.Trim().Trim());
             paramList.Add(":T$LOAA", MyObj.LOCA.Trim() == string.Empty ? " " : MyObj.LOCA.Trim());
             paramList.Add(":T$QTYA", MyObj.QTYS == string.Empty ? "0" : MyObj.QTYS.Trim());
             paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO.Trim());
