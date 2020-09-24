@@ -1753,7 +1753,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col042.t$mitm
           --where col042.T$DELE = 7
           UNION
-          select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT, col130.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA, col130.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol130{1} col130
+          select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT,T$UNIC AS UNIT, col130.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,col130.T$CWAR,T$LOAA, col130.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol130{1} col130
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col130.t$item
           --where col131.T$STAT = 3
           UNION
