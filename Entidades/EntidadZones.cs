@@ -23,6 +23,7 @@ namespace whusa
             this.BASS = string.Empty;
             this.EMNO = string.Empty;
             this.PRTR = string.Empty;
+            this.SLOC = string.Empty;
             this.REFCNTD = string.Empty;
             this.REFCNTU = string.Empty; 
 
@@ -42,6 +43,7 @@ namespace whusa
         public string BASS { get; set; }
         public string EMNO { get; set; }
         public string PRTR { get; set; }
+        public string SLOC { get; set; }
         public string REFCNTD { get; set; }
         public string REFCNTU { get; set; }
 

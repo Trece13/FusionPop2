@@ -28,6 +28,7 @@ namespace whusap.WebPages.InvReceipts
         string _idioma = string.Empty;
         public static string PCLOT = string.Empty;
         public static string PCWAR = string.Empty;
+        public static string PSLOC = string.Empty;
 
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_twhcol019 _idaltwhcol019 = new InterfazDAL_twhcol019();
@@ -129,9 +130,11 @@ namespace whusap.WebPages.InvReceipts
                 ObjZone.BASS = DTZoneCode.Rows[0]["T$BASS"].ToString();
                 ObjZone.EMNO = DTZoneCode.Rows[0]["T$EMNO"].ToString();
                 ObjZone.PRTR = DTZoneCode.Rows[0]["T$PRTR"].ToString();
+                ObjZone.SLOC = DTZoneCode.Rows[0]["T$SLOC"].ToString();
                 //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
                 ObjZone.error = false;
                 PCWAR = ObjZone.CWAR;
+                PSLOC = ObjZone.SLOC;
             }
             else
             {
@@ -171,7 +174,14 @@ namespace whusap.WebPages.InvReceipts
                 ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
                 ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
                 ObjPicking.STAT = DTPalletID.Rows[0]["STAT"].ToString();
-                ObjPicking.SLOC = DTPalletID.Rows[0]["SLOC"].ToString();
+                if (DTPalletID.Rows[0]["SLOC"].ToString() == "")
+                {
+                    ObjPicking.SLOC = PSLOC;
+                }
+                else
+                {
+                    ObjPicking.SLOC = DTPalletID.Rows[0]["SLOC"].ToString();
+                }               
                 //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
                 ObjPicking.KLTC = DTPalletID.Rows[0]["KLTC"].ToString();
                 ObjPicking.error = false;
