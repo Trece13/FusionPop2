@@ -59,10 +59,26 @@ namespace whusa.Entidades
         public int PROC { get; set; }
 
         [DataMember(Order = 11)]
+        [Column(Name = "CWAR")]
+        public string CWAR { get; set; }
+
+        [DataMember(Order = 12)]
+        [Column(Name = "ORNO")]
+        public string ORNO { get; set; }
+
+        [DataMember(Order = 13)]
+        [Column(Name = "PONO")]
+        public int PONO { get; set; }
+
+        [DataMember(Order = 14)]
+        [Column(Name = "MESS")]
+        public string MESS { get; set; }
+
+        [DataMember(Order = 15)]
         [Column(Name = "REFCNTD")]
         public int REFCNTD { get; set; }
 
-        [DataMember(Order = 12)]
+        [DataMember(Order = 16)]
         [Column(Name = "REFCNTU")]
         public int REFCNTU { get; set; }
 

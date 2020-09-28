@@ -2663,8 +2663,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertRegistrItemAdjustment">
         <stringSQL>
           INSERT INTO {0}.twhcol025{1}
-          (T$PAID, T$ITEM, T$LOCA, T$CLOT, T$QTYA, T$UNIT, T$DATE, T$LOGN,T$CDIS, T$EMNO, T$PROC, T$REFCNTD,T$REFCNTU)
-          VALUES(:T$PAID, :T$ITEM, :T$LOCA, :T$CLOT, :T$QTYA, :T$UNIT, sysdate+(5/24), :T$LOGN,:T$CDIS, :T$EMNO, :T$PROC, :T$REFCNTD, :T$REFCNTU)
+          (T$PAID, T$DATE, T$EMNO, T$ITEM, T$CWAR, T$LOCA, T$CLOT, T$QTYA, T$UNIT, T$CDIS, T$LOGN, T$PROC, T$ORNO, T$PONO, T$MESS, T$REFCNTD,T$REFCNTU)
+          VALUES(:T$PAID, sysdate+(5/24), :T$EMNO, :T$ITEM, :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYA, :T$UNIT, :T$CDIS, :T$LOGN, :T$PROC, :T$ORNO, :T$PONO, :T$MESS, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
     </Module>

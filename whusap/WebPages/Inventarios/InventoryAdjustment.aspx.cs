@@ -344,7 +344,7 @@ namespace whusap.WebPages.Inventarios
             obj.PAID = txtPalletId.Text.ToUpperInvariant();
             obj.ITEM = lblItemValue.Text.Trim().ToUpper();
             //obj.LOCA = lblLocationValue.Text.Trim().ToUpper();
-            //obj.CLOT = lblLot.Text.Trim().ToUpper();
+            obj.CWAR = lblWarehouseValue.Text;
             obj.LOCA = lblLocationValue.Text;
             obj.CLOT = lblLotValue.Text;
             obj.QTYA = Convert.ToInt32(txtAdjustmentQuantity.Text.Trim());
@@ -352,8 +352,10 @@ namespace whusap.WebPages.Inventarios
             obj.LOGN = Session["user"].ToString(); ;
             obj.CDIS = dropDownReasonCodes.SelectedItem.Value;
             obj.EMNO = dropDownCostCenters.SelectedItem.Value; 
-         
             obj.PROC = 2;
+            obj.ORNO = " ";
+            obj.PONO = 0;
+            obj.MESS = " ";
             obj.REFCNTD = 0;
             obj.REFCNTU = 0;
             parameterCollection025.Add(obj);

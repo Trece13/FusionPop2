@@ -103,114 +103,82 @@
             <asp:TableCell ID="TableCell1" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <strong>
                     <asp:Label class="" ID="lblPalletId1" Text="Pallet ID" runat="server" style="font-size:13px;" /></strong>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell2" runat="server">
+            </asp:TableCell><asp:TableCell ID="TableCell2" runat="server">
                 <strong>
                     <asp:Label class="" ID="lblPalletId1Value" Text="Item" runat="server" /></strong>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow2" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow2" runat="server">
             <asp:TableCell ID="TableCell3" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <strong>
                     <asp:Label class="" ID="lblItem" Text="Item" runat="server" style="font-size:13px;" /></strong>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell4" runat="server">
+            </asp:TableCell><asp:TableCell ID="TableCell4" runat="server">
                 <strong>
                     <asp:Label class="" ID="lblItemValue" Text="Lot" runat="server" />
                      <asp:Label class="" ID="lblItemDescValue" Text="Item Desc" runat="server" style="padding-left:15px;"/>
                     </strong>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow3" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow3" runat="server">
             <asp:TableCell ID="TableCell5" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <strong>
                     <asp:Label class="" ID="lblWarehouse" Text="Warehouse" runat="server" style="font-size:13px;" /></strong>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell6" runat="server">
+            </asp:TableCell><asp:TableCell ID="TableCell6" runat="server">
                 <strong>
                     <asp:Label class="" ID="lblWarehouseValue" Text="warehouse" runat="server" />
                      <asp:Label class="" ID="lblWarehouseDescValue" Text="warehouse Description" runat="server" style="padding-left:15px;" />
                     </strong>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow4" runat="server">
-            <asp:TableCell ID="TableCell7" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
-                 <strong>
-                    <asp:Label class="" ID="lblLot" Text="Lot" runat="server" /></strong>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell8" runat="server">
-                <strong>
-                    <asp:Label class="" ID="lblLotValue" Text="Lot" runat="server" style="font-size:13px;" /></strong>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow5" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow5" runat="server">
             <asp:TableCell ID="TableCell9" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <strong>
                     <asp:Label class="" ID="lblLocation" Text="Location" runat="server" style="font-size:13px;" /></strong>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell10" runat="server">
+            </asp:TableCell><asp:TableCell ID="TableCell10" runat="server">
                 <strong>
                     <asp:Label class="" ID="lblLocationValue" Text="Location" runat="server" /></strong>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow6" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow4" runat="server">
+            <asp:TableCell ID="TableCell7" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
+                 <strong>
+                    <asp:Label class="" ID="lblLot" Text="Lot" runat="server" /></strong>
+            </asp:TableCell><asp:TableCell ID="TableCell8" runat="server">
+                <strong>
+                    <asp:Label class="" ID="lblLotValue" Text="Lot" runat="server" style="font-size:13px;" /></strong>
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow6" runat="server">
             <asp:TableCell ID="TableCell11" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <strong>
                     <asp:Label class="" ID="lblQuantity" Text="Quantity" runat="server" style="font-size:13px;"  /></strong>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell12" runat="server">
+            </asp:TableCell><asp:TableCell ID="TableCell12" runat="server">
                 <strong>
                     <asp:Label class="" ID="lblQuantityValue" Text="Qty" runat="server" />
                      <asp:Label class="" ID="lblUnitValue" Text="Unit" runat="server" style="padding-left:15px;" />
                     </strong>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow7" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow7" runat="server">
             <asp:TableCell ID="TableCell13" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
                 <asp:Label runat="server" ID="lblAdjustmentQuantity" text = "Adjustment Quantity" style="font-size:13px;"  /></b></span>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell14" runat="server">
+            </asp:TableCell><asp:TableCell ID="TableCell14" runat="server">
                <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtAdjustmentQuantity" CssClass="TextBoxBig" onChange="validarAdjustQty(this.value);" ClientIDMode="Static"  style="width: 80%" />
                      <asp:Label class="" ID="lblUnitValue1" Text="Unit" runat="server" style="padding-left:15px;" />
                      </span>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow8" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow8" runat="server">
             <asp:TableCell ID="TableCell15" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
                 <asp:Label runat="server" ID="lblReasonCode" text="Reason Code" style="font-size:13px;" /></b></span>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell16" runat="server" style="padding-top:5px;">
+            </asp:TableCell><asp:TableCell ID="TableCell16" runat="server" style="padding-top:5px;">
                <span style="vertical-align: middle;">
                     <asp:DropDownList runat="server" ID="dropDownReasonCodes" CssClass="TextBoxBig"></asp:DropDownList>
                 </span>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow9" runat="server" style="padding-top:15px;">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow9" runat="server" style="padding-top:15px;">
             <asp:TableCell ID="TableCell17" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
                 <asp:Label runat="server" ID="lblCostCenter" text="Cost Center" style="font-size:13px;"  /></b></span>
-            </asp:TableCell>
-            <asp:TableCell ID="TableCell18" runat="server" style="padding-top:5px;">
+            </asp:TableCell><asp:TableCell ID="TableCell18" runat="server" style="padding-top:5px;">
                <span style="vertical-align: middle;">
                     <asp:DropDownList runat="server" ID="dropDownCostCenters" CssClass="TextBoxBig"></asp:DropDownList>
                 </span>
-            </asp:TableCell>
-        </asp:TableRow>
-        <asp:TableRow ID="TableRow10" runat="server">
+            </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow10" runat="server">
             <asp:TableCell ID="TableCell19" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="ButtonsSendSave" />
-            </asp:TableCell>
-        </asp:TableRow>
-    </asp:Table>
-
-
-    <table border="0">
+            </asp:TableCell></asp:TableRow></asp:Table><table border="0">
        
       <%--<tr>
             <td style="text-align: left; padding: 5px 0px 5px; width: 200px;">
