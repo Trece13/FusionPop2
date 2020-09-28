@@ -30,6 +30,7 @@ namespace whusap.WebPages.Inventarios
         private static LabelsText _textoLabels = new LabelsText();
         private static string formName;
         public static string _idioma;
+        public static double Pquantity;
         #endregion
 
         #region Eventos
@@ -172,6 +173,7 @@ namespace whusap.WebPages.Inventarios
                 waredesc = dr.ItemArray[8].ToString();
                 lot = dr.ItemArray[10].ToString();
                 location = dr.ItemArray[9].ToString();
+                Pquantity = Convert.ToDouble(quantity);
 
                 lblPalletId1Value.Text = palletId;
                 lblItemValue.Text = item;
@@ -318,7 +320,7 @@ namespace whusap.WebPages.Inventarios
         protected void btnSave_Click(object sender, EventArgs e)
         {
 
-            if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) <= 0)
+            if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) < 0)
             {
 
                 lblError.Text = Adjustmentquantitycannotbezero;
@@ -327,14 +329,14 @@ namespace whusap.WebPages.Inventarios
                 btnSend.Visible = true;
                 return;
             }
-            if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) > Convert.ToInt32(lblQuantityValue.Text.Trim()))
-            {
-                lblError.Text = AdjustmentquantityshouldbelessthanexistingQty;
-                txtPalletId.Enabled = true;
-                txtPalletId.Text = String.Empty;
-                btnSend.Visible = true;
-                return;
-            }
+            //if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) > Convert.ToInt32(lblQuantityValue.Text.Trim()))
+            //{
+            //    lblError.Text = AdjustmentquantityshouldbelessthanexistingQty;
+            //    txtPalletId.Enabled = true;
+            //    txtPalletId.Text = String.Empty;
+            //    btnSend.Visible = true;
+            //    return;
+            //}
             InterfazDAL_twhcol025 idal = new InterfazDAL_twhcol025();
             Ent_twhcol025 obj = new Ent_twhcol025();
             string strError = string.Empty;
@@ -347,7 +349,7 @@ namespace whusap.WebPages.Inventarios
             obj.CWAR = lblWarehouseValue.Text;
             obj.LOCA = lblLocationValue.Text;
             obj.CLOT = lblLotValue.Text;
-            obj.QTYA = Convert.ToInt32(txtAdjustmentQuantity.Text.Trim());
+            obj.QTYA = Convert.ToDouble(txtAdjustmentQuantity.Text.Trim()) - Pquantity;
             obj.UNIT = lblUnitValue.Text.Trim().ToUpper();
             obj.LOGN = Session["user"].ToString(); ;
             obj.CDIS = dropDownReasonCodes.SelectedItem.Value;
@@ -368,6 +370,9 @@ namespace whusap.WebPages.Inventarios
                 //divTable.Visible = false;
                 txtPalletId.Enabled = true;
                 txtPalletId.Text = String.Empty;
+                txtAdjustmentQuantity.Text = String.Empty;
+                dropDownCostCenters.Items.Clear();
+                dropDownReasonCodes.Items.Clear();
                 btnSend.Visible = true;
                 return;
             }

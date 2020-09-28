@@ -32,7 +32,7 @@ namespace whusa.Entidades
 
         [DataMember(Order = 4)]
         [Column(Name = "QTYA")]
-        public int QTYA { get; set; }
+        public double QTYA { get; set; }
 
         [DataMember(Order = 5)]
         [Column(Name = "UNIT")]

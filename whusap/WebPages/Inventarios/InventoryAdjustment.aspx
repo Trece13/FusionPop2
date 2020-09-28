@@ -43,13 +43,13 @@
                  $("#txtAdjustmentQuantity").focus();
                  return false;
              }
-             qtyExting = $("#Contenido_lblQuantityValue").text();
-             if (parseInt(qty) > parseInt(qtyExting)) {
+             //qtyExting = $("#Contenido_lblQuantityValue").text();
+             //if (parseInt(qty) > parseInt(qtyExting)) {
 
-                 alert("Adjustment quantity shuould be less than existing Qty");
-                 // $("#txtAdjustmentQuantity").val('');
-                 $("#txtAdjustmentQuantity").focus();
-                 return false;
+             //     alert("Adjustment quantity shuould be less than existing Qty");
+             //    // $("#txtAdjustmentQuantity").val('');
+             //    $("#txtAdjustmentQuantity").focus();
+             //    return false;
              }
 
          }
@@ -151,17 +151,17 @@
             <asp:TableCell ID="TableCell13" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
-                <asp:Label runat="server" ID="lblAdjustmentQuantity" text = "Adjustment Quantity" style="font-size:13px;"  /></b></span>
+                <asp:Label runat="server" ID="lblAdjustmentQuantity" text = "New Quantity" style="font-size:13px;"  /></b></span>
             </asp:TableCell><asp:TableCell ID="TableCell14" runat="server">
                <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtAdjustmentQuantity" CssClass="TextBoxBig" onChange="validarAdjustQty(this.value);" ClientIDMode="Static"  style="width: 80%" />
+                    <asp:TextBox runat="server" ID="txtAdjustmentQuantity" CssClass="TextBoxBig" onChange="validarAdjustQty(this.value);" ClientIDMode="Static"  style="width: 80%" value="" />
                      <asp:Label class="" ID="lblUnitValue1" Text="Unit" runat="server" style="padding-left:15px;" />
                      </span>
             </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow8" runat="server">
             <asp:TableCell ID="TableCell15" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
-                <asp:Label runat="server" ID="lblReasonCode" text="Reason Code" style="font-size:13px;" /></b></span>
+                <asp:Label runat="server" ID="lblReasonCode" text="Reason Code" style="font-size:13px;" value="" /></b></span>
             </asp:TableCell><asp:TableCell ID="TableCell16" runat="server" style="padding-top:5px;">
                <span style="vertical-align: middle;">
                     <asp:DropDownList runat="server" ID="dropDownReasonCodes" CssClass="TextBoxBig"></asp:DropDownList>
@@ -170,7 +170,7 @@
             <asp:TableCell ID="TableCell17" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                  <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
-                <asp:Label runat="server" ID="lblCostCenter" text="Cost Center" style="font-size:13px;"  /></b></span>
+                <asp:Label runat="server" ID="lblCostCenter" text="Cost Center" style="font-size:13px;" value="" /></b></span>
             </asp:TableCell><asp:TableCell ID="TableCell18" runat="server" style="padding-top:5px;">
                <span style="vertical-align: middle;">
                     <asp:DropDownList runat="server" ID="dropDownCostCenters" CssClass="TextBoxBig"></asp:DropDownList>
