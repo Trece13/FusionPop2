@@ -126,6 +126,7 @@ namespace whusap.WebPages.Inventarios
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
+            string retorno = string.Empty;
 
             if (string.IsNullOrEmpty(txtPalletId.Text.Trim()))
             {
@@ -144,9 +145,10 @@ namespace whusap.WebPages.Inventarios
             //lblResult.Text = string.Empty;
             DataTable resultado = idal.invGetPalletInfo(ref obj, ref strError);
 
-            if (resultado == null)
+            if (resultado == null || resultado.Rows.Count == 0)
             {
-                return;
+                lblError.Text = PalletIDdoesntexists;
+                return;    
             }
 
           //  SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$PAID,ticol222.T$ACQT AS T$qtyc,
