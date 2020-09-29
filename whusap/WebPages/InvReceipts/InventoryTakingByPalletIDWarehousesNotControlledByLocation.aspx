@@ -511,13 +511,13 @@
 
         var VerificarZoneCode = function () {
             //$('#btnSave').prop("disabled", true);
-            var Data = "{'ZONE':'" + $('#txZoneCode').val() + "'}";
+            var Data = "{'ZONE':'" + $('#txZoneCode').val().trim() + "'}";
             sendAjax("VerificarZoneCode", Data, SuccesVerificarZoneCode)
         }
 
         var VerificarPalletID = function () {
             //$('#btnSave').prop("disabled", true);
-            var Data = "{'PAID':'" + $('#txPalletID').val()+ "'}";
+            var Data = "{'PAID':'" + $('#txPalletID').val().trim()+ "'}";
             sendAjax("VerificarPalletID", Data, SuccesVerificarPalletID)
         }
 
@@ -554,7 +554,7 @@
 
         var Click_Save = function () {
 
-            var Data = "{'PAID':'" + $('#txPalletID').val() + "','ITEM':'" + $('#lblItem').val() + "','CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "','UNIT':'" + $('#lblQuantity').html() + "','QTYS':'" + $('#txQuantity').val() + "','CLOT':'" + $('#txLot').val() + "','ZONE':'" + $('#txZoneCode').val() + "'}";
+            var Data = "{'PAID':'" + $('#txPalletID').val().trim() + "','ITEM':'" + $('#lblItem').val() + "','CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "','UNIT':'" + $('#lblQuantity').html() + "','QTYS':'" + $('#txQuantity').val() + "','CLOT':'" + $('#txLot').val() + "','ZONE':'" + $('#txZoneCode').val().trim() + "'}";
             sendAjax("Click_Save", Data, SuccesClick_Save);
 
         }
