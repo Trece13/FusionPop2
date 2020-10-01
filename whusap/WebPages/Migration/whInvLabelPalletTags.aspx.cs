@@ -292,7 +292,7 @@ namespace whusap.WebPages.Migration
                                 var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref data022, ref strError);
                                 if (validateSaveTicol222 < 1)
                                 {
-                                    lblError.Text = mensajes("errorsave Ticol222");
+                                    lblError.Text = mensajes("errorsaveTicol222");
                                     lblConfirm.Text = string.Empty;
                                     return;
                                 }

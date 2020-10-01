@@ -170,7 +170,8 @@ namespace whusap.WebPages.Migration
                                 lblValueAnounced.Visible = true;
                                 txtAnounced.Visible = false;
                             }
-
+                            Session["item"] = item;
+                            Session["descripcion"] = descripcion;
                             lblValueOrden.Text = PDNO;
                             lblValueArticulo.Text = String.Concat(item, " - ", descripcion);
                             lblValueWareHouse.Text = String.Concat(almacen, " - ", descalmacen);
@@ -250,8 +251,8 @@ namespace whusap.WebPages.Migration
                     var validaUpdateCantidad = _idaltticol022.ActualizarCantidadRegistroTicol222(enterqty, sqnb);
                     if (validaUpdate)
                     {
-                        var item = lblValueArticulo.Text.Split('-')[0].Trim().ToUpper() + "-" + lblValueArticulo.Text.Split('-')[1].Trim().ToUpper();
-                        var dsca = lblValueArticulo.Text.Split('-')[2].Trim().ToUpper();
+                        var item = Session["item"].ToString();
+                        var dsca = Session["descripcion"].ToString();
                         var cuni = lblValueUnit.Text;
 
                         Ent_tticol020 data020 = new Ent_tticol020()
