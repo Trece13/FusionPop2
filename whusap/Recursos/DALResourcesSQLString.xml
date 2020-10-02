@@ -1310,7 +1310,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Actualizartticol022">
         <stringSQL>
-          update {0}.tticol022{1} set t$dele = 8 where T$SQNB =  '[:PAID]'
+          update {0}.tticol022{1} set t$dele = 10 where T$SQNB =  '[:PAID]'
         </stringSQL>
       </operationName>
       <operationName name="Actualizartticol082">
@@ -1320,17 +1320,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Actualizartwhcol131">
         <stringSQL>
-          update  {0}.twhcol131{1} set t$stat = 10 where t$paid =  '[:PAID]'
+          update  {0}.twhcol131{1} set t$stat = 8 where t$paid =  '[:PAID]'
         </stringSQL>
       </operationName>
       <operationName name="Actualizartwhcol130">
         <stringSQL>
-          update  {0}.twhcol130{1} set t$stat = 10 where t$paid =  '[:PAID]'
+          update  {0}.twhcol130{1} set t$stat = 8 where t$paid =  '[:PAID]'
         </stringSQL>
       </operationName>
       <operationName name="Actualizartticol042">
         <stringSQL>
-          update {0}.tticol042{1} set t$dele = 8 where T$SQNB =  '[:PAID]'
+          update {0}.tticol042{1} set t$dele = 10 where T$SQNB =  '[:PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletIDTticol082">
@@ -2688,12 +2688,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="getReasonCodes">
         <stringSQL>
-          SELECT t$cdis, t$dsca FROM  {0}.ttcmcs005{1} WHERE t$rstp='50'
+          SELECT t$cdis, t$dsca FROM  {0}.ttcmcs005{1} WHERE t$rstp='50' order by t$dsca
         </stringSQL>
       </operationName>
       <operationName name="getCostCenters">
         <stringSQL>
-          SELECT  t$emno, t$nama FROM  {0}.ttccom001{1} WHERE t$emno like 'DO%'
+          SELECT  t$emno, t$nama FROM  {0}.ttccom001{1} WHERE t$emno like 'DO%' order by t$nama
         </stringSQL>
       </operationName>
       <operationName name="vallidatePalletID">
@@ -2763,6 +2763,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol022.t$mitm
           INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAF
+          WHERE ticol022.T$DELE = '7'
           UNION
           SELECT 'whcol131' AS TBL,whcol131.T$ORNO AS T$ORNO,whcol131.T$PAID AS T$paid,whcol131.T$QTYA AS T$qtyc,
           whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAR AS T$CWAR,
@@ -2770,6 +2771,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tWhcol131{1} whcol131
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
           INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAR
+          WHERE whcol131.T$STAT = '6'
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
           ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAF AS T$CWAR,
@@ -2777,7 +2779,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticol042{1} ticol042
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAF )
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAF
+          WHERE ticol042.T$DELE = '7')
           WHERE T$qtyc > 0
           AND T$paid = '[p1]'
           AND ROWNUM = 1

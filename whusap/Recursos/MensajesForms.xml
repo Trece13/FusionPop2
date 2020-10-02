@@ -5539,7 +5539,7 @@
       <Idiom name="INGLES">
         <operationName name="PalletIDdoesntexists">
           <stringMessage>
-            Pallet ID doesn't exists
+            Pallet ID doesn't exists or not located
           </stringMessage>
         </operationName>
         <operationName name="PalletIDstatusdoesntallowadjustment">
@@ -5561,7 +5561,7 @@
       <Idiom name="ESPAÑOL">
         <operationName name="PalletIDdoesntexists">
           <stringMessage>
-            Pallet ID doesn't exists
+            Palet ID no existe o no esta ubicado
           </stringMessage>
         </operationName>
         <operationName name="PalletIDstatusdoesntallowadjustment">

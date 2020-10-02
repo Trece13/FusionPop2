@@ -71,8 +71,8 @@ namespace whusap.WebPages.Inventarios
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 if (control != null) { control.Text = strTitulo; }
             }
-            generateDropDownReasonCodes();
-            generateDropDownCostCenters();
+            //generateDropDownReasonCodes();
+            //generateDropDownCostCenters();
             btnSave.Visible = false;
             tblPalletInfo.Visible = false;
         }
@@ -190,6 +190,9 @@ namespace whusap.WebPages.Inventarios
                 tblPalletInfo.Visible = true;
                 btnSend.Visible = false;
                 btnSave.Visible = true;
+                generateDropDownReasonCodes();
+                generateDropDownCostCenters();
+
             }
         }
 
