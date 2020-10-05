@@ -124,7 +124,7 @@ namespace whusap.WebPages.Migration
                     foreach (DataRow item in consultaItem.Rows)
                     {
                         ListItem row = new ListItem();
-                        row.Text = String.Concat(item["ITEM"].ToString().Trim().ToUpper(), " - "
+                        row.Text = String.Concat(item["ITEM"].ToString().Trim().ToUpper(), " |-"
                                                 , item["DSCA"].ToString().Trim().ToUpper(), " -. "
                                                 , item["CWAR"].ToString().Trim().ToUpper(), " - "
                                                 , item["CUNI"].ToString().Trim().ToUpper(), " -|"
@@ -199,7 +199,8 @@ namespace whusap.WebPages.Migration
 
             if (slItem1.SelectedValue.Trim() != "")
             {
-                var item = slItem1.SelectedItem.Text.Split('-')[0] + "-" + slItem1.SelectedItem.Text.Split('-')[1];
+                //var item = slItem1.SelectedItem.Text.Split('-')[0] + "-" + slItem1.SelectedItem.Text.Split('-')[1];
+                var item = slItem1.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
                 var cwar = slItem1.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
                 var unit = slItem1.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
@@ -221,7 +222,9 @@ namespace whusap.WebPages.Migration
 
             if (slItem2.SelectedValue.Trim() != "")
             {
-                var item = slItem2.SelectedItem.Text.Split('-')[0] + "-" + slItem2.SelectedItem.Text.Split('-')[1];
+                
+                //var item = slItem2.SelectedItem.Text.Split('-')[0] + "-" + slItem2.SelectedItem.Text.Split('-')[1];
+                var item = slItem2.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
                 var cwar = slItem2.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
                 var unit = slItem2.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
@@ -243,7 +246,8 @@ namespace whusap.WebPages.Migration
 
             if (slItem3.SelectedValue.Trim() != "")
             {
-                var item = slItem3.SelectedItem.Text.Split('-')[0] + "-" + slItem3.SelectedItem.Text.Split('-')[1];
+                //var item = slItem3.SelectedItem.Text.Split('-')[0] + "-" + slItem3.SelectedItem.Text.Split('-')[1];
+                var item = slItem2.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
                 var cwar = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
                 var unit = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
@@ -266,7 +270,8 @@ namespace whusap.WebPages.Migration
 
             if (slItem4.SelectedValue.Trim() != "")
             {
-                var item = slItem4.SelectedItem.Text.Split('-')[0] + "-" + slItem4.SelectedItem.Text.Split('-')[1];
+                //var item = slItem4.SelectedItem.Text.Split('-')[0] + "-" + slItem4.SelectedItem.Text.Split('-')[1];
+                var item = slItem4.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
                 var cwar = slItem4.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
                 var unit = slItem4.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
@@ -288,7 +293,8 @@ namespace whusap.WebPages.Migration
 
             if (slItem5.SelectedValue.Trim() != "")
             {
-                var item = slItem5.SelectedItem.Text.Split('-')[0] + "-" + slItem5.SelectedItem.Text.Split('-')[1];
+                //var item = slItem5.SelectedItem.Text.Split('-')[0] + "-" + slItem5.SelectedItem.Text.Split('-')[1];
+                var item = slItem5.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
                 var cwar = slItem5.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
                 var unit = slItem5.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 

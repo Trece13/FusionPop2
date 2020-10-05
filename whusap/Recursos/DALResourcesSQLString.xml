@@ -672,7 +672,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on col082.t$item = col131.t$item
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
-          where col131.t$stat = 6 -- 6-Asignado
+          where (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
           and (col131.t$qtya+col131.t$allo) >= col082.t$qtyt
           and col131.t$cwaa = col082.t$cwar
           and col131.t$paid = '[:PAID]'
@@ -1055,7 +1055,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
-          where   col131.t$stat = 6 -- 6-Asignado
+          where   (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
           and     col307.T$PAID IS NULL
           and     col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1)
           and     col082.t$stat = 1)
