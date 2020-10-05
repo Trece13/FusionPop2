@@ -768,6 +768,7 @@
                     }
 
                     if (exist) {
+                        $('#LblError').html("");
 //                        HideReason.style.display = "";
 //                        $('#LblError').html("");
 //                        $('#Contenido_lblPalletID').html(MyObj["PALLETID"].toString())
@@ -782,6 +783,7 @@
                         Method = "VerificarPalletID"
                         Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
                         EventoAjax(Method, Data, PalletIDSuccess)
+
                     }
                     else {
                         HideReason.style.display = "none";

@@ -437,6 +437,18 @@ namespace whusap.WebPages.WorkOrders
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "script","ShowCurrentOptions()", true);
                 }
 
+                if (HttpContext.Current.Session["CNPK"].ToString().Trim() == "")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').hide(500)", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('additional data not defined')", true);
+
+                }
+                else
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').show(500)", true);
+
+                }
+
             
 
         }
@@ -1480,6 +1492,18 @@ namespace whusap.WebPages.WorkOrders
                 //Response.Write("<script language=javascript>alert('" + mensaje + "');window.location = '/WebPages/Login/whMenuI.aspx';</script>");
 
             }
+
+            if (HttpContext.Current.Session["CNPK"].ToString().Trim() == "")
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').hide(500)", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('additional data not defined')", true);
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').show(500)", true);
+
+            }
+
 
         }
 

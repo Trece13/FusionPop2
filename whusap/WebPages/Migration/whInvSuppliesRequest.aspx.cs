@@ -247,7 +247,7 @@ namespace whusap.WebPages.Migration
             if (slItem3.SelectedValue.Trim() != "")
             {
                 //var item = slItem3.SelectedItem.Text.Split('-')[0] + "-" + slItem3.SelectedItem.Text.Split('-')[1];
-                var item = slItem2.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
+                var item = slItem3.SelectedItem.Text.Split(new string[] { "" }, StringSplitOptions.None).Last().Split('|')[0];
                 var cwar = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[0];
                 var unit = slItem3.SelectedItem.Text.Split(new string[] { "-." }, StringSplitOptions.None).Last().Split('-')[1];
 
