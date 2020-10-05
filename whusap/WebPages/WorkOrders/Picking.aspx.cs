@@ -506,7 +506,7 @@ namespace whusap.WebPages.WorkOrders
                         ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
                         ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
                         ObjPicking.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
-
+                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#LblQuantity').html(" + ObjPicking.QTY + ") ", true);
                         bool ret = false;
                         //ret = twhcolDAL.Actualizar307(PAID_NEW, PAID_OLD);
                         ret = twhcolDAL.Actualizar307Proc(PAID_NEW, PAID_OLD, _operator);
@@ -613,8 +613,6 @@ namespace whusap.WebPages.WorkOrders
             }
         }
 
-
-
         [WebMethod]
         public static string Click_Query(string PAID)
         {
@@ -652,7 +650,6 @@ namespace whusap.WebPages.WorkOrders
             }
 
         }
-
 
         [WebMethod]
         //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
@@ -946,7 +943,6 @@ namespace whusap.WebPages.WorkOrders
             }
         }
 
-
         [WebMethod]
         //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
         public static string ShowCurrentOptions()
@@ -1069,7 +1065,6 @@ namespace whusap.WebPages.WorkOrders
             }
         }
 
-
         public class Error
         {
             public string MyError { get; set; }
@@ -1143,29 +1138,9 @@ namespace whusap.WebPages.WorkOrders
 
             if (DTttccol307.Rows.Count < 1)
             {
-                LstPallet22 = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, _operator);
-                if (LstPallet22.Count > 0)
-                {
-                    MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
-                    Session["originalPallet"] = MyObj.PALLETID;
-                    bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
-                    if (res == false)
-                    {
-                        Page_Load(sender, e);
-                    }
-                }
-                LstPallet042 = twhcolDAL.ConsultarPalletPicking042(PAID, string.Empty, _operator);
-                if (LstPallet042.Count > 0)
-                {
-                    MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
-                    Session["originalPallet"] = MyObj.PALLETID;
-                    bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
-                    if (res == false)
-                    {
-                        Page_Load(sender, e);
-                    }
-                }
-                LstPallet131 = twhcolDAL.ConsultarPalletPicking131(PAID, string.Empty, _operator);
+
+                //LstPallet131 = twhcolDAL.ConsultarPalletPicking131(PAID, string.Empty, _operator);
+                LstPallet131 = twhcolDAL.ConsultarPalletPicking131With082(PAID, string.Empty, _operator);
                 if (LstPallet131.Count > 0)
                 {
                     MyObj.PALLETID = LstPallet131[0].PALLETID.ToString();
@@ -1177,11 +1152,80 @@ namespace whusap.WebPages.WorkOrders
                     }
                 }
 
-                if (LstPallet131.Count == 0 && LstPallet042.Count == 0  && LstPallet22.Count == 0 )
+
+                //LstPallet042 = twhcolDAL.ConsultarPalletPicking042(PAID, string.Empty, _operator);
+                LstPallet042 = twhcolDAL.ConsultarPalletPicking042With082(PAID, string.Empty, _operator);
+                if (LstPallet042.Count > 0)
                 {
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
+                    MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
+                    Session["originalPallet"] = MyObj.PALLETID;
+                    bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+                    if (res == false)
+                    {
+                        Page_Load(sender, e);
+                    }
+                }
+
+
+                //LstPallet22 = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, _operator);
+                LstPallet22 = twhcolDAL.ConsultarPalletPicking22With082(PAID, string.Empty, _operator);
+                if (LstPallet22.Count > 0)
+                {
+                    MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
+                    Session["originalPallet"] = MyObj.PALLETID;
+                    bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+                    if (res == false)
+                    {
+                        Page_Load(sender, e);
+                    }
+                }
+
+                if (LstPallet131.Count == 0 && LstPallet042.Count == 0 && LstPallet22.Count == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
                 }
             }
+            //if (DTttccol307.Rows.Count < 1)
+            //{
+            //    LstPallet22 = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, _operator);
+            //    if (LstPallet22.Count > 0)
+            //    {
+            //        MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
+            //        Session["originalPallet"] = MyObj.PALLETID;
+            //        bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+            //        if (res == false)
+            //        {
+            //            Page_Load(sender, e);
+            //        }
+            //    }
+            //    LstPallet042 = twhcolDAL.ConsultarPalletPicking042(PAID, string.Empty, _operator);
+            //    if (LstPallet042.Count > 0)
+            //    {
+            //        MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
+            //        Session["originalPallet"] = MyObj.PALLETID;
+            //        bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+            //        if (res == false)
+            //        {
+            //            Page_Load(sender, e);
+            //        }
+            //    }
+            //    LstPallet131 = twhcolDAL.ConsultarPalletPicking131(PAID, string.Empty, _operator);
+            //    if (LstPallet131.Count > 0)
+            //    {
+            //        MyObj.PALLETID = LstPallet131[0].PALLETID.ToString();
+            //        Session["originalPallet"] = MyObj.PALLETID;
+            //        bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+            //        if (res == false)
+            //        {
+            //            Page_Load(sender, e);
+            //        }
+            //    }
+
+            //    if (LstPallet131.Count == 0 && LstPallet042.Count == 0  && LstPallet22.Count == 0 )
+            //    {
+            //            ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
+            //    }
+            //}
 
 
 
@@ -1438,7 +1482,6 @@ namespace whusap.WebPages.WorkOrders
             }
 
         }
-
 
     }
 }

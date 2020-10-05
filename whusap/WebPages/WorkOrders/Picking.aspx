@@ -619,7 +619,7 @@
                         $('#Contenido_txtPalletID').val("");
                         $('#txtlocation').val("");
 
-                        printDiv("hidetable");
+                        //printDiv("hidetable");
                     }
                 },
                 failure: function (response) {
