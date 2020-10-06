@@ -1746,7 +1746,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     </operationName>
       <operationName name="VerificarZoneCode">
         <stringSQL>
-          SELECT * FROM {0}.twhwmd310{1} wmd310 left join {0}.twhwmd200{1} wmd200 on wmd200.T$CWAR = wmd310.T$CWAR WHERE wmd310.T$ZONE = '[:ZONE]'
+          SELECT * FROM {0}.twhwmd310{1} wmd310 left join {0}.twhwmd200{1} wmd200 on wmd200.T$CWAR = wmd310.T$CWAR left join baan.ttcmcs003140 mcs003 on mcs003.T$CWAR = wmd310.T$CWAR WHERE wmd310.T$ZONE = '[:ZONE]'
         </stringSQL>
       </operationName>
       <operationName name="VerificarPalletID">

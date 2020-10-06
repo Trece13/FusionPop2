@@ -25,7 +25,8 @@ namespace whusa
             this.PRTR = string.Empty;
             this.SLOC = string.Empty;
             this.REFCNTD = string.Empty;
-            this.REFCNTU = string.Empty; 
+            this.REFCNTU = string.Empty;
+            this.DSCAW = string.Empty;
 
             this.error = false;
             this.errorMsg = string.Empty;
@@ -46,6 +47,7 @@ namespace whusa
         public string SLOC { get; set; }
         public string REFCNTD { get; set; }
         public string REFCNTU { get; set; }
+        public string DSCAW { get; set; }
 
         public bool error { get; set; }
         public string typeMsgJs { get; set; }

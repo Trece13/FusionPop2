@@ -28,6 +28,7 @@ namespace whusap.WebPages.InvReceipts
         string _idioma = string.Empty;
         public static string PCLOT = string.Empty;
         public static string PCWAR = string.Empty;
+        public static string PDSCAW = string.Empty;
         public static string PSLOC = string.Empty;
 
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
@@ -131,9 +132,11 @@ namespace whusap.WebPages.InvReceipts
                 ObjZone.EMNO = DTZoneCode.Rows[0]["T$EMNO"].ToString();
                 ObjZone.PRTR = DTZoneCode.Rows[0]["T$PRTR"].ToString();
                 ObjZone.SLOC = DTZoneCode.Rows[0]["T$SLOC"].ToString();
+                ObjZone.DSCAW = DTZoneCode.Rows[0]["T$DSCA1"].ToString();
                 //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
                 ObjZone.error = false;
                 PCWAR = ObjZone.CWAR;
+                PDSCAW = ObjZone.DSCAW;
                 PSLOC = ObjZone.SLOC;
             }
             else
@@ -164,12 +167,13 @@ namespace whusap.WebPages.InvReceipts
                 if (PCWAR != "")
                 {
                     ObjPicking.WRH = PCWAR;
+                    ObjPicking.DESCWRH = PDSCAW;
                 }
                 else
                 {
                     ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString().Trim();
-                }
-                ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
+                    ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
+                }               
                 ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString().Trim();
                 ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
                 ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
@@ -405,7 +409,7 @@ namespace whusap.WebPages.InvReceipts
         {
             
             string strError = string.Empty;
-            
+
             //Valido si el articulo maneja lote
             Ent_ttcibd001 ObjTtcibd001 = new Ent_ttcibd001();
             DataTable dtTtcibd001 = ITtcibd001.findItem(ITEM);
@@ -447,6 +451,7 @@ namespace whusap.WebPages.InvReceipts
             Ent_ttwhcol016 Obj_twhcol016 = new Ent_ttwhcol016();            
             Obj_twhcol016.cwar = CWAR;
             Obj_twhwmd200.cwar = CWAR;
+
             DataTable DtTtwhcol016 = ITtwhcol016.TakeMaterialInv_verificaBodega_Param(ref Obj_twhcol016, ref strError);
             DataTable DtTwhwmd200 = ITwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref Obj_twhwmd200, ref strError);
 
@@ -473,6 +478,7 @@ namespace whusap.WebPages.InvReceipts
                 Obj_twhcol016.SuccessMsg = Warehousecodedoesntexist;
                 return JsonConvert.SerializeObject(Obj_twhcol016);
             }
+
             if (Obj_twhcol016.sloc == "1")
             {
                 //Valido que la ubicación sea válida.
