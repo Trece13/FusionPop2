@@ -50,8 +50,8 @@ namespace whusap.WebPages.InvReceipts
         public static string Locationcodedoesntexist; 
         public static string Registeredquantitycannotbelessthanorequaltozero;
         public static string CountWarehouseNotDefined;
-        public static string Warehousecodedoesntexist; 
-                                                        
+        public static string Warehousecodedoesntexist;
+        public static string Warehousenotequalzone;                                                         
                
         public static string ItemcodeisnotPurchaseType                          = mensajes("ItemcodeisnotPurchaseType");
         public static string Itemcodedoesntexist                                = mensajes("Itemcodedoesntexist");
@@ -99,7 +99,7 @@ namespace whusap.WebPages.InvReceipts
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = _operator,
-                    come = "",
+                    come = "Inventory per Pallet Id",
                     refcntd = 0,
                     refcntu = 0
                 };
@@ -461,6 +461,13 @@ namespace whusap.WebPages.InvReceipts
                 Obj_twhcol016.typeMsgJs = "console";
                 Obj_twhcol016.SuccessMsg = "Warehouse Encontrado";
 
+                if (CWAR != PCWAR)
+                {
+                    Obj_twhcol016.error = true;
+                    Obj_twhcol016.typeMsgJs = "label";
+                    Obj_twhcol016.SuccessMsg = Warehousenotequalzone;
+                    return JsonConvert.SerializeObject(Obj_twhcol016);
+                }
                 if (DtTwhwmd200.Rows.Count > 0)
                 {
                     Obj_twhcol016.sloc = DtTwhwmd200.Rows[0]["LOC"].ToString();
@@ -630,6 +637,7 @@ namespace whusap.WebPages.InvReceipts
             Registeredquantitycannotbelessthanorequaltozero =_textoLabels.readStatement(formName, idioma, "Registeredquantitycannotbelessthanorequaltozero");
             CountWarehouseNotDefined                        = _textoLabels.readStatement(formName, idioma, "CountWarehouseNotDefined");
             Warehousecodedoesntexist                        =_textoLabels.readStatement(formName, idioma, "Warehousecodedoesntexist");
+            Warehousenotequalzone                           =_textoLabels.readStatement(formName, idioma, "Warehousenotequalzone");
             return true;
         }
 

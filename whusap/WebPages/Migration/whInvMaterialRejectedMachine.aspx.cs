@@ -43,6 +43,9 @@ namespace whusap.WebPages.Migration
         private static DataTable _consultaPedido;
         private static DataTable _consultaInformacionPedido;
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        public static bool ManejolocalizacionAlmacen = true;
+        private static int manejaubicacion;
+        private static int manejalote;
         #endregion
 
         #region Eventos

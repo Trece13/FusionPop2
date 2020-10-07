@@ -50,8 +50,9 @@ namespace whusap.WebPages.Migration
         private static String _stock;
         public string lotGlobal = string.Empty;
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
-        public static bool ManejolocalizacionAlmacen = true; 
-
+        public static bool ManejolocalizacionAlmacen = true;
+        private static int manejaubicacion;
+        private static int manejalote;
         //Errores Labels
 
         public string lblitemError = string.Empty;         
@@ -150,6 +151,7 @@ namespace whusap.WebPages.Migration
             }
 
             var kltc = Convert.ToInt32(_validaItem.Rows[0]["KLTC"].ToString());
+            manejalote = kltc;
 
             _validaWarehouse = _idalttcmcs003.findRecordByCwar(ref warehouse, ref strError);
 
@@ -161,6 +163,7 @@ namespace whusap.WebPages.Migration
 
             Ent_twhwmd200 data200 = new Ent_twhwmd200() { cwar = warehouse };
             var manejoUbicacionAlmacen = Convert.ToInt32(_idaltwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref data200, ref strError).Rows[0]["LOC"]);
+            manejaubicacion = manejoUbicacionAlmacen;
 
             if (manejoUbicacionAlmacen == 1)
             {
@@ -451,7 +454,14 @@ namespace whusap.WebPages.Migration
         protected void makeTable()
         {
             var table = String.Empty;
-            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), Session["Lot"].ToString().Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(),txtLocation.Text.ToUpper().Trim());
+            if (manejaubicacion == 1)
+            {
+                CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), Session["Lot"].ToString().Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(), txtLocation.Text.ToUpper().Trim());
+            }
+            else
+            {
+                CantidadDevuelta = _idalttcibd001.CantidadDevueltaStocknotlocation(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), Session["Lot"].ToString().Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper());
+            }
             //Fila cwar
             table += String.Format("<hr /><div style='margin-bottom: 100px;'><table class='table table-bordered' style='width:1200px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");
 

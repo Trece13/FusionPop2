@@ -130,6 +130,11 @@
             Warehouse code doesn´t exist
           </stringMessage>
         </operationName>
+        <operationName name="Warehousenotequalzone">
+          <stringMessage>
+            Warehouse code not equal warehouse code
+          </stringMessage>
+        </operationName>
         <operationName name="LocationCodeDoesntExist">
           <stringMessage>
             Location code doesn´t exist
@@ -5155,6 +5160,11 @@
         <operationName name="Warehousecodedoesntexist">
           <stringMessage>
             Warehouse code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Warehousenotequalzone">
+          <stringMessage>
+            Warehouse code not equal warehouse code
           </stringMessage>
         </operationName>
         <operationName name="Locationblockedinbound">

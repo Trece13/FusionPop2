@@ -118,6 +118,11 @@ namespace whusa.Interfases
             return dal.CantidadDevueltaStock(ITEM, CLOT, CWAR, LOCA);
         }
 
+        public String CantidadDevueltaStocknotlocation(string ITEM, string CLOT, string CWAR)
+        {
+            return dal.CantidadDevueltaStocknotlocation(ITEM, CLOT, CWAR);
+        }
+
         public DataTable findItem(string ITEM)
         {
             return dal.findItem(ITEM);

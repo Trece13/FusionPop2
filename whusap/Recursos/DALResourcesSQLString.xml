@@ -1793,6 +1793,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UNION
           select 'whcol016' AS  TBL,T$LABL AS PAID,T$QTYR AS QTYT,T$CUNI AS UNIT, col016.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,col016.T$CWAR,' ', col016.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol016{1} col016
           LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col016.t$item
+          UNION
+          select 'whcol018' AS  TBL,T$TGID AS PAID,T$QTDL AS QTYT,col018.T$CUNI AS UNIT, col018.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,' ',' ', col018.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol018{1} col018
+          LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col018.t$item
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
@@ -2370,7 +2373,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <!--NEW-->
       <operationName name="CantidadDevueltaStock">
         <stringSQL>
-          SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and TRIM(T$CLOT) = TRIM('[:T$CLOT]') and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
+          SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and T$CLOT = '[:T$CLOT]' and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
+        </stringSQL>
+      </operationName>
+      <operationName name="CantidadDevueltaStocknotlocation">
+        <stringSQL>
+          SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and T$CLOT = '[:T$CLOT]' and  TRIM(T$CWAR)= TRIM('[:T$CWAR]')
         </stringSQL>
       </operationName>
 
