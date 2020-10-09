@@ -58,7 +58,6 @@ namespace whusap.WebPages.InvReceipts
         public static string Therecordwassuccessfullyinserted                   = mensajes("Therecordwassuccessfullyinserted");
         public static string Therecordwasnotinserted                            = mensajes("Therecordwasnotinserted");
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             CargarIdioma();

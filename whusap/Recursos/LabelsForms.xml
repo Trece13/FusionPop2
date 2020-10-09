@@ -6862,6 +6862,11 @@
             Warehouse code doesn´t exist
           </stringMessage>
         </label>
+        <label name="Warehousenotequalzone">
+          <stringMessage>
+            Warehouse code not equal warehouse zone
+          </stringMessage>
+        </label>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <label name="CountWarehouseNotDefined">
@@ -6902,6 +6907,11 @@
         <label name="Warehousecodedoesntexist">
           <stringMessage>
             Warehouse code doesn´t exist
+          </stringMessage>
+        </label>
+        <label name="Warehousenotequalzone">
+          <stringMessage>
+            Codigo de Bodega no igual a la bodega de la zona
           </stringMessage>
         </label>
       </Idiom>
