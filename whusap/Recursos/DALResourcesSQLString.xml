@@ -2152,6 +2152,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.twhinh210{1} inh210 on inh210.t$orno = pur401.t$orno
           and inh210.t$pono = pur401.t$pono/*
           and inh210.t$seqn/100000 = pur401.t$sqnb*/ INNER JOIN {0}.TTCIBD001{1} IBD001 on pur401.T$ITEM = IBD001.T$ITEM
+          INNER JOIN {0}.TTCCOL003{1} COL003 on COL003.T$CWAR = INH210.T$CWAR
           where /*TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') between TO_CHAR(sysdate-ipu001.t$rtdp,'MM/DD/YYYY')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'MM/DD/YYYY') -- Tolerancia en dias atras y adelante and */
           pur401.t$oltp != 3 --No tomar retroordenes
@@ -2162,6 +2163,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           /*and pur401.t$clot = ' ' --Lote escaneado and */
           and inh210.t$lsta = 5 --Linea en estado abierto en la orden de almacenaje
           and inh210.t$blck = 2
+          and COL003.t$ceam &lt;&gt; 1
           order by pur401.t$orno, pur401.t$pono, pur401.t$ddtb
         </stringSQL>
       </operationName>
@@ -2178,6 +2180,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.twhinh210{1} inh210 on inh210.t$orno = pur401.t$orno
           and inh210.t$pono = pur401.t$pono/*
           and inh210.t$seqn/100000 = pur401.t$sqnb*/ INNER JOIN {0}.TTCIBD001{1} IBD001 on pur401.T$ITEM = IBD001.T$ITEM
+          INNER JOIN {0}.TTCCOL003{1} COL003 on COL003.T$CWAR = INH210.T$CWAR
           where /*TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') between TO_CHAR(sysdate-ipu001.t$rtdp,'MM/DD/YYYY')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'MM/DD/YYYY') -- Tolerancia en dias atras y adelante and */
           pur401.t$oltp != 3 --No tomar retroordenes
@@ -2188,6 +2191,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           /*and pur401.t$clot = ' ' --Lote escaneado and */
           and inh210.t$lsta = 5 --Linea en estado abierto en la orden de almacenaje
           and inh210.t$blck = 2
+          and COL003.t$ceam &lt;&gt; 1
           and pur401.t$orno = '[:T$ORNO]'
           order by pur401.t$orno, pur401.t$pono, pur401.t$ddtb
         </stringSQL>
