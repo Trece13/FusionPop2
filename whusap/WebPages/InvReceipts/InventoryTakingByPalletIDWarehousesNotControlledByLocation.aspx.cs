@@ -404,7 +404,7 @@ namespace whusap.WebPages.InvReceipts
         }
 
         [WebMethod]
-        public static string Click_Save(string PAID, string ITEM, string CWAR, string LOCA, string UNIT, string QTYS, string CLOT, string ZONE)
+        public static string Click_Save(string PAID, string ITEM, string CWAR, string LOCA, string UNIT, string QTYS, string CLOT, string ZONE, string USER)
         {
             
             string strError = string.Empty;
@@ -575,8 +575,7 @@ namespace whusap.WebPages.InvReceipts
                 return JsonConvert.SerializeObject(ObjTwhcol019);
             }
             //string CLOT = " ";
-            
-            ObjTwhcol019.PAID   = PAID;
+            ObjTwhcol019.PAID = PAID;
             ObjTwhcol019.SQNB   = SecuenciaPallet;//Convert.ToInt32(PAID.Substring(10,3));   
             ObjTwhcol019.ZONE   = ZONE;   
             ObjTwhcol019.CWAR   = CWAR;
@@ -584,8 +583,8 @@ namespace whusap.WebPages.InvReceipts
             ObjTwhcol019.ITEM   = ITEM;
             ObjTwhcol019.CLOT = CLOT.Trim() == "" ? " " : CLOT.Trim();   
             ObjTwhcol019.QTDL = QTYD;   
-            ObjTwhcol019.CUNI   = UNIT;   
-            ObjTwhcol019.LOGN   = _operator;   
+            ObjTwhcol019.CUNI   = UNIT;
+            ObjTwhcol019.LOGN = USER.Trim()!=""?USER.Trim():_operator.Trim();   
             ObjTwhcol019.DATE   = new DateTime();
             ObjTwhcol019.COUN = Convert.ToInt32(SecuenciaConteo);
             ObjTwhcol019.PROC   = 0;   

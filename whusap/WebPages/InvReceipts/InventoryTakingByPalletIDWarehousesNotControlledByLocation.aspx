@@ -554,9 +554,14 @@
 
         var Click_Save = function () {
 
-            var Data = "{'PAID':'" + $('#txPalletID').val().trim() + "','ITEM':'" + $('#lblItem').val() + "','CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "','UNIT':'" + $('#lblQuantity').html() + "','QTYS':'" + $('#txQuantity').val() + "','CLOT':'" + $('#txLot').val() + "','ZONE':'" + $('#txZoneCode').val().trim() + "'}";
+            var Data = "{'PAID':'" + $('#txPalletID').val().trim() + "','ITEM':'" + $('#lblItem').val() + "','CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "','UNIT':'" + $('#lblQuantity').html() + "','QTYS':'" + $('#txQuantity').val() + "','CLOT':'" + $('#txLot').val() + "','ZONE':'" + $('#txZoneCode').val().trim() + "','USER':'" + GetUserUrl() + "'}";
             sendAjax("Click_Save", Data, SuccesClick_Save);
 
+        }
+
+        var GetUserUrl = function () {
+            var valor1 = window.location.href.toString().substring(window.location.href.toString().toLowerCase().indexOf("valor1"), window.location.href.toString().toLowerCase().indexOf("valor2") - 1);
+            return valor1.substring(valor1.indexOf("=") + 1);
         }
 
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
