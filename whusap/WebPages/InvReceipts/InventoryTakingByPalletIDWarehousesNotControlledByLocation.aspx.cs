@@ -134,6 +134,7 @@ namespace whusap.WebPages.InvReceipts
 
             if (DTZoneCode.Rows.Count > 0)
             {
+                
                 ObjZone.CWAR = DTZoneCode.Rows[0]["T$CWAR"].ToString();
                 ObjZone.ZONE = DTZoneCode.Rows[0]["T$ZONE"].ToString();
                 ObjZone.DSCA = DTZoneCode.Rows[0]["T$DSCA"].ToString();
@@ -215,8 +216,12 @@ namespace whusap.WebPages.InvReceipts
                 ObjPicking.ITEM = DTPalletID.Rows[0]["ITEM"].ToString();
                 ObjPicking.DESCRIPTION = DTPalletID.Rows[0]["DSCA"].ToString();
                 ObjPicking.LOT = DTPalletID.Rows[0]["CLOT"].ToString().Trim();
-                ObjPicking.WRH = ObjZone.CWAR;
-                ObjPicking.DESCWRH = ObjZone.DSCA;
+                using (ObjZone)
+                {
+                    ObjPicking.WRH = ObjZone.CWAR;
+                    ObjPicking.DESCWRH = ObjZone.DSCA;
+                    PCWAR = ObjZone.CWAR;
+                }
                 //if (PCWAR != "")
                 //{
                 //    ObjPicking.WRH = PCWAR;
@@ -514,13 +519,13 @@ namespace whusap.WebPages.InvReceipts
                 Obj_twhcol016.typeMsgJs = "console";
                 Obj_twhcol016.SuccessMsg = "Warehouse Encontrado";
 
-                if (CWAR != PCWAR)
-                {
-                    Obj_twhcol016.error = true;
-                    Obj_twhcol016.typeMsgJs = "label";
-                    Obj_twhcol016.SuccessMsg = Warehousenotequalzone;
-                    return JsonConvert.SerializeObject(Obj_twhcol016);
-                }
+                //if (CWAR != PCWAR)
+                //{
+                //    Obj_twhcol016.error = true;
+                //    Obj_twhcol016.typeMsgJs = "label";
+                //    Obj_twhcol016.SuccessMsg = Warehousenotequalzone;
+                //    return JsonConvert.SerializeObject(Obj_twhcol016);
+                //}
                 if (DtTwhwmd200.Rows.Count > 0)
                 {
                     Obj_twhcol016.sloc = DtTwhwmd200.Rows[0]["LOC"].ToString();

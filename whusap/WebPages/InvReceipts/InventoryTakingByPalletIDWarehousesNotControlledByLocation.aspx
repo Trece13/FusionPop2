@@ -211,6 +211,7 @@
         BloquearComponentes();
 
         var SuccesVerificarZoneCode = function (r) {
+            debugger
             $('#txWarehouse').val("");
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == true) {
@@ -254,6 +255,7 @@
         };
 
         var SuccesVerificarPalletID = function (r) {
+        debugger
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == true) {
                 ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
