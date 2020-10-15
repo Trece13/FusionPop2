@@ -60,6 +60,11 @@ namespace whusap.WebPages.InvReceipts
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            PCLOT = string.Empty;
+            PCWAR = string.Empty;
+            PDSCAW = string.Empty;
+            PSLOC = string.Empty;
+
             CargarIdioma();
             RequestUrlAuthority = (string)Request.Url.Authority;
 
@@ -70,6 +75,11 @@ namespace whusap.WebPages.InvReceipts
 
             if (!IsPostBack)
             {
+                PCLOT = string.Empty;
+                PCWAR = string.Empty;
+                PDSCAW = string.Empty;
+                PSLOC = string.Empty;
+
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
 
                 if (formName.Contains('?'))
@@ -113,6 +123,11 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string VerificarZoneCode(string ZONE)
         {
+            PCLOT = string.Empty;
+            PCWAR = string.Empty;
+            PDSCAW = string.Empty;
+            PSLOC = string.Empty;
+
             string strError = string.Empty;
             DataTable DTZoneCode = twhcol130DAL.VerificarZoneCode(ref ZONE);
             EntidadZones ObjZone = new EntidadZones();
@@ -149,9 +164,46 @@ namespace whusap.WebPages.InvReceipts
             return JsonConvert.SerializeObject(ObjZone);
         }
 
-        [WebMethod]
-        public static string VerificarPalletID(string PAID)
+        public static EntidadZones VerificarZoneCodenw(string ZONE)
         {
+
+            string strError = string.Empty;
+            DataTable DTZoneCode = twhcol130DAL.VerificarZoneCode(ref ZONE);
+            EntidadZones ObjZone = new EntidadZones();
+
+            if (DTZoneCode.Rows.Count > 0)
+            {
+                ObjZone.CWAR = DTZoneCode.Rows[0]["T$CWAR"].ToString();
+                ObjZone.ZONE = DTZoneCode.Rows[0]["T$ZONE"].ToString();
+                ObjZone.DSCA = DTZoneCode.Rows[0]["T$DSCA"].ToString();
+                ObjZone.BALL = DTZoneCode.Rows[0]["T$BALL"].ToString();
+                ObjZone.BINB = DTZoneCode.Rows[0]["T$BINB"].ToString();
+                ObjZone.BOUT = DTZoneCode.Rows[0]["T$BOUT"].ToString();
+                ObjZone.BTRR = DTZoneCode.Rows[0]["T$BTRR"].ToString();
+                ObjZone.BTRI = DTZoneCode.Rows[0]["T$BTRI"].ToString();
+                ObjZone.BASS = DTZoneCode.Rows[0]["T$BASS"].ToString();
+                ObjZone.EMNO = DTZoneCode.Rows[0]["T$EMNO"].ToString();
+                ObjZone.PRTR = DTZoneCode.Rows[0]["T$PRTR"].ToString();
+                ObjZone.SLOC = DTZoneCode.Rows[0]["T$SLOC"].ToString();
+                ObjZone.DSCAW = DTZoneCode.Rows[0]["T$DSCA1"].ToString();
+                //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
+                ObjZone.error = false;
+            }
+            else
+            {
+                ObjZone.error = true;
+                ObjZone.typeMsgJs = "label";
+                ObjZone.errorMsg = Zonecodedoesntexist;
+            }
+
+
+            return ObjZone;
+        }
+
+        [WebMethod]
+        public static string VerificarPalletID(string PAID, string ZONE)
+        {
+            EntidadZones ObjZone = VerificarZoneCodenw(ZONE);
             string strError = string.Empty;
             PAID = PAID.ToUpper();
             DataTable DTPalletID = twhcol130DAL.VerificarPalletIDz(ref PAID);
@@ -163,16 +215,18 @@ namespace whusap.WebPages.InvReceipts
                 ObjPicking.ITEM = DTPalletID.Rows[0]["ITEM"].ToString();
                 ObjPicking.DESCRIPTION = DTPalletID.Rows[0]["DSCA"].ToString();
                 ObjPicking.LOT = DTPalletID.Rows[0]["CLOT"].ToString().Trim();
-                if (PCWAR != "")
-                {
-                    ObjPicking.WRH = PCWAR;
-                    ObjPicking.DESCWRH = PDSCAW;
-                }
-                else
-                {
-                    ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString().Trim();
-                    ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
-                }               
+                ObjPicking.WRH = ObjZone.CWAR;
+                ObjPicking.DESCWRH = ObjZone.DSCA;
+                //if (PCWAR != "")
+                //{
+                //    ObjPicking.WRH = PCWAR;
+                //    ObjPicking.DESCWRH = PDSCAW;
+                //}
+                //else
+                //{
+                //    ObjPicking.WRH = DTPalletID.Rows[0]["CWAT"].ToString().Trim();
+                //    ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
+                //}               
                 ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString().Trim();
                 ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
                 ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
