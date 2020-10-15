@@ -174,7 +174,7 @@
 
         var timer;
         function stoper() {
-
+            $('#txWarehouse').val("");
             clearTimeout(timer);
         }
 
@@ -478,7 +478,7 @@
         }
         var SuccesClick_Save = function (r) {
             MyObject = JSON.parse(r.d);
-
+            $('#txWarehouse').val("");
             if (MyObject.error == false) {
                 ////                $('#txPalletID').val("");
                 ////                //$('#lblWorkOrder').html("");
@@ -511,6 +511,7 @@
 
         var VerificarZoneCode = function () {
             //$('#btnSave').prop("disabled", true);
+            $('#txWarehouse').val("");
             var Data = "{'ZONE':'" + $('#txZoneCode').val().trim() + "'}";
             sendAjax("VerificarZoneCode", Data, SuccesVerificarZoneCode)
         }
