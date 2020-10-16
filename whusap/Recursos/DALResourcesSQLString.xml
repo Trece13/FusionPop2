@@ -2783,7 +2783,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tWhcol131{1} whcol131
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
           INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAR
-          WHERE whcol131.T$STAT = '6'
+          WHERE whcol131.T$STAT = '3'
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
           ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAF AS T$CWAR,
