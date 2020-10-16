@@ -7,7 +7,7 @@ namespace whusa
 {
     // entida encargada  mostrar los campos del pallet disponible
 
-   public class EntidadZones
+   public class EntidadZones:IDisposable
     {
        public EntidadZones()
         {
@@ -52,6 +52,9 @@ namespace whusa
         public bool error { get; set; }
         public string typeMsgJs { get; set; }
         public string errorMsg { get; set; }
-       
+
+        public void Dispose()
+        {
+        }
     }
 }
