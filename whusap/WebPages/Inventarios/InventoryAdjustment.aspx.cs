@@ -355,7 +355,7 @@ namespace whusap.WebPages.Inventarios
             obj.LOCA = lblLocationValue.Text;
             obj.CLOT = lblLotValue.Text;
             obj.QTYA = Convert.ToDouble(txtAdjustmentQuantity.Text.Trim()) - Pquantity;
-            obj.UNIT = lblUnitValue.Text.Trim().ToUpper();
+            obj.UNIT = lblUnitValue.Text.Trim();
             obj.LOGN = Session["user"].ToString(); ;
             obj.CDIS = dropDownReasonCodes.SelectedItem.Value;
             obj.EMNO = dropDownCostCenters.SelectedItem.Value; 
