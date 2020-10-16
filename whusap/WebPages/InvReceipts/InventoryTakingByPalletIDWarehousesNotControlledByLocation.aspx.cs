@@ -134,25 +134,25 @@ namespace whusap.WebPages.InvReceipts
 
             if (DTZoneCode.Rows.Count > 0)
             {
-                
-                ObjZone.CWAR = DTZoneCode.Rows[0]["T$CWAR"].ToString();
-                ObjZone.ZONE = DTZoneCode.Rows[0]["T$ZONE"].ToString();
-                ObjZone.DSCA = DTZoneCode.Rows[0]["T$DSCA"].ToString();
-                ObjZone.BALL = DTZoneCode.Rows[0]["T$BALL"].ToString();
-                ObjZone.BINB = DTZoneCode.Rows[0]["T$BINB"].ToString();
-                ObjZone.BOUT = DTZoneCode.Rows[0]["T$BOUT"].ToString();
-                ObjZone.BTRR = DTZoneCode.Rows[0]["T$BTRR"].ToString();
-                ObjZone.BTRI = DTZoneCode.Rows[0]["T$BTRI"].ToString();
-                ObjZone.BASS = DTZoneCode.Rows[0]["T$BASS"].ToString();
-                ObjZone.EMNO = DTZoneCode.Rows[0]["T$EMNO"].ToString();
-                ObjZone.PRTR = DTZoneCode.Rows[0]["T$PRTR"].ToString();
-                ObjZone.SLOC = DTZoneCode.Rows[0]["T$SLOC"].ToString();
-                ObjZone.DSCAW = DTZoneCode.Rows[0]["T$DSCA1"].ToString();
-                //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
-                ObjZone.error = false;
-                PCWAR = ObjZone.CWAR;
-                PDSCAW = ObjZone.DSCAW;
-                PSLOC = ObjZone.SLOC;
+
+                    ObjZone.CWAR = DTZoneCode.Rows[0]["T$CWAR"].ToString();
+                    ObjZone.ZONE = DTZoneCode.Rows[0]["T$ZONE"].ToString();
+                    ObjZone.DSCA = DTZoneCode.Rows[0]["T$DSCA"].ToString();
+                    ObjZone.BALL = DTZoneCode.Rows[0]["T$BALL"].ToString();
+                    ObjZone.BINB = DTZoneCode.Rows[0]["T$BINB"].ToString();
+                    ObjZone.BOUT = DTZoneCode.Rows[0]["T$BOUT"].ToString();
+                    ObjZone.BTRR = DTZoneCode.Rows[0]["T$BTRR"].ToString();
+                    ObjZone.BTRI = DTZoneCode.Rows[0]["T$BTRI"].ToString();
+                    ObjZone.BASS = DTZoneCode.Rows[0]["T$BASS"].ToString();
+                    ObjZone.EMNO = DTZoneCode.Rows[0]["T$EMNO"].ToString();
+                    ObjZone.PRTR = DTZoneCode.Rows[0]["T$PRTR"].ToString();
+                    ObjZone.SLOC = DTZoneCode.Rows[0]["T$SLOC"].ToString();
+                    ObjZone.DSCAW = DTZoneCode.Rows[0]["T$DSCA1"].ToString();
+                    //PDNO, SQNB, MITM, DSCA, CUNI, QTDL, DELE, PRO1, PROC
+                    ObjZone.error = false;
+                    PCWAR = ObjZone.CWAR;
+                    PDSCAW = ObjZone.DSCAW;
+                    PSLOC = ObjZone.SLOC;
             }
             else
             {
@@ -221,6 +221,7 @@ namespace whusap.WebPages.InvReceipts
                     ObjPicking.WRH = ObjZone.CWAR;
                     ObjPicking.DESCWRH = ObjZone.DSCA;
                     PCWAR = ObjZone.CWAR;
+                    PSLOC = ObjZone.SLOC;
                 }
                 //if (PCWAR != "")
                 //{
