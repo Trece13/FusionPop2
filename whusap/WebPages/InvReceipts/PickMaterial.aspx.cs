@@ -100,7 +100,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 string retorno = string.Empty;  
                 string USRR = _operator;
-                DataTable DTtccol307PalletID = twhcol130DAL.Consultarttccol307(PAID, string.Empty);
+                DataTable DTtccol307PalletID = twhcol130DAL.Consultarttccol307(PAID, USRR);
 
 
                 if (DTtccol307PalletID.Rows.Count > 0)
