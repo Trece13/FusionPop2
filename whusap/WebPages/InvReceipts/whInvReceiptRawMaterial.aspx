@@ -294,21 +294,25 @@
     <div id="MyEtiqueta">
         <table style="margin: auto">
             <tr>
+                <td>
+                    <label style="font-size: 11px">
+                        ID</label>
+                </td>
                 <td colspan="4">
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
-                        vspace="5" style="width: 4in; height: .5in;" />
+                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label style="font-size: 14px">
+                    <label style="font-size: 11px">
                         ITEM</label>
                 </td>
-                <td>
+                <td colspan="4">
                     <label id="lblItemID" style="display: none; font-size: 11px">
                     </label>
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
-                        vspace="5" style="width: 3in; height: .5in;" />
+                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
                 </td>
             </tr>
             <tr>
@@ -321,14 +325,15 @@
             </tr>
             <tr>
                 <td>
-                    <label style="font-size: 14px">
+                    <label style="font-size: 11px">
                         QUANTITY</label>
                 </td>
-                <td>
+                <td colspan="4">
+                    
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
+                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
                     <label id="LblQuantity" style="display: none; font-size: 11px">
                     </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
-                        vspace="5" style="width: 1in; height: .5in;" />
                 </td>
                 <td>
                 </td>
@@ -343,23 +348,23 @@
             </tr>
             <tr>
                 <td>
-                    <label style="font-size: 14px">
+                    <label style="font-size: 11px">
                         LOT</label>
                 </td>
                 <td>
                     <label id="LblLotId" style="display: none; font-size: 11px">
                     </label>
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot" alt="" hspace="60"
-                        vspace="5" style="width: 3in; height: .5in;" />
+                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <label style="font-size: 14px">
+                    <label style="font-size: 9px">
                         RECEIPT DATE</label>
                 </td>
                 <td>
-                    <label id="LblDate" style="font-size: 14px">
+                    <label id="LblDate" style="font-size: 9px">
                     </label>
                 </td>
                 <!--<td>
