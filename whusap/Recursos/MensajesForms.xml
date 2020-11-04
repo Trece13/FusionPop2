@@ -22,7 +22,7 @@
         </operationName>
         <operationName name="ThePalletIDStatusisNotReceived">
           <stringMessage>
-            The Pallet ID Status is not Received
+            The pallet ID status is not received or has been located already
           </stringMessage>
         </operationName>
         <operationName name="TheIDPalletDoesNotExist">

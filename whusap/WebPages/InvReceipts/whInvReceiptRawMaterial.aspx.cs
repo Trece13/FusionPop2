@@ -184,9 +184,9 @@ namespace whusap.WebPages.InvReceipts
                             SEQN = DTOrdencompra.Rows[0]["T$SQNBR"].ToString(),
                             CLOT = LOT,// lote VIEW
                             CWAR = DTOrdencompra.Rows[0]["T$CWAR"].ToString(),
-                            QTYS = QUANTITYAUX.ToString("0.00"),// cantidad escaneada view 
+                            QTYS = QUANTITYAUX.ToString("0.0000"),// cantidad escaneada view 
                             UNIT = STUN,//unit escaneada view
-                            QTYC = QUANTITY.ToString("0.00"),//cantidad escaneada view aplicando factor
+                            QTYC = QUANTITY.ToString("0.0000"),//cantidad escaneada view aplicando factor
                             UNIC = CUNI,//unidad view stock
                             DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
                             CONF = "1",
@@ -209,7 +209,7 @@ namespace whusap.WebPages.InvReceipts
                             ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
                             ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96",
                             CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "",
-                            QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.00").Trim().ToUpper() + "&code=Code128&dpi=96",
+                            QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96",
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
                         };
 
@@ -311,9 +311,9 @@ namespace whusap.WebPages.InvReceipts
                             SEQN = DTNOOrdencompra.Rows[0]["T$SEQN"].ToString(),
                             CLOT = LOT,// lote VIEW
                             CWAR = DTNOOrdencompra.Rows[0]["T$CWAR"].ToString(),
-                            QTYS = QUANTITYAUX.ToString("0.00"),// cantidad escaneada view 
+                            QTYS = QUANTITYAUX.ToString("0.0000"),// cantidad escaneada view 
                             UNIT = STUN,//unidad view stock
-                            QTYC = QUANTITY.ToString("0.00"),//cantidad escaneada view aplicando factor
+                            QTYC = QUANTITY.ToString("0.0000"),//cantidad escaneada view aplicando factor
                             UNIC = CUNI,//unit escaneada view
                             DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
                             CONF = "1",
@@ -334,7 +334,7 @@ namespace whusap.WebPages.InvReceipts
                             ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
                             ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96",
                             CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "",
-                            QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.00").Trim().ToUpper() + "&code=Code128&dpi=96",
+                            QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96",
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
                         };
                         bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
