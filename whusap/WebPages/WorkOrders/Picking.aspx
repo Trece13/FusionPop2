@@ -153,9 +153,11 @@
         </div>
     </div>
     <br />
+    <div id="blocked">
     <div class="row">
     <div class="form-group row">
         <input id="btnEnviar" type="button" class="hidebutton" value="START NEXT PICK" />&nbsp;&nbsp;&nbsp
+    </div>
     </div>
     <div id="MyEtiqueta2" class="col-6">
         <table class="table2">

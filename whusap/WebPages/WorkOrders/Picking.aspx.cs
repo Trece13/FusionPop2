@@ -50,10 +50,11 @@ namespace whusap.WebPages.WorkOrders
         public static int flag022, flag042, flag131, flag307;
         DataTable resultado = new DataTable();
         public static string descombo = "";
+        
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
+            HttpContext.Current.Session["CNPK"] = "";
             GObject = sender;
             Ge = e;
 
@@ -114,13 +115,12 @@ namespace whusap.WebPages.WorkOrders
                 List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
                 List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
 
-                DataTable DT082STAT = twhcolDAL.ConsultarTticol082porStat(MyObj307.USRR, 2);
+                DataTable DT082STAT = twhcolDAL.ConsultarTticol082porStat(MyObj307.USRR, 5);
 
                 if (DT082STAT.Rows.Count > 0)
                 {
                     limpiarControles();
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('User has a picking pending')", true);
-
                     return;
                 }
 

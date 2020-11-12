@@ -566,7 +566,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTticol082porStat">
         <stringSQL>
-          select * from {0}.tticol082{1} where UPPER(T$LOGN) = UPPER('[:T$LOGN]') and UPPER(T$STAT) = UPPER('[:T$STAT]')
+          select * from {0}.tticol082{1} where UPPER(T$LOGN) = UPPER('[:T$LOGN]') and T$STAT = '[:T$STAT]'
         </stringSQL>
       </operationName>
       <operationName name="Actualizar307">
@@ -4722,7 +4722,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col118.t$item
           left join {0}.ttcibd001{1} dbi001 on dbi001.t$item = col118.t$ritm
           inner join {0}.ttccol020{1} col020 on col020.t$item = col118.t$item
-          inner join {0}.ttcmcs005{1} mcs005 on mcs005.t$cdis = col118.t$cdis
+          left join {0}.ttcmcs005{1} mcs005 on mcs005.t$cdis = col118.t$cdis
           inner join {0}.tticol008{1} col008 on col008.t$wmrb = col118.t$cwar
           where trim(col118.t$item)=trim('[:T$ITEM]')
           and upper(col118.t$clot)='[:T$CLOT]'

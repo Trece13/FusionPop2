@@ -485,6 +485,7 @@ namespace whusap.WebPages.Migration
                     obse = ((TextBox)grdRecords.Rows[0].Cells[3].FindControl("Comments")).Text.Substring(1, 255);
                 }
                 string supplier = ((DropDownList)grdRecords.Rows[0].Cells[0].FindControl("Supplier")).SelectedValue;
+                
                 if (supplier == string.Empty)
                 {
                     supplier = " ";
@@ -494,6 +495,11 @@ namespace whusap.WebPages.Migration
                     Session["Lote"] = " ";
                 }
 
+                if (reason == string.Empty)
+                {
+                    reason = " ";
+                }
+                
 
                 if (!toreturn.Equals(string.Empty))
                 {
@@ -603,7 +609,7 @@ namespace whusap.WebPages.Migration
             //int actualizar = idal.actualizarRegistro_Param(ref parameterCollection, ref strError);
             //if (actualizar < 1)
 
-            if (string.IsNullOrEmpty(reason) || string.IsNullOrWhiteSpace(reason))
+            if ((string.IsNullOrEmpty(reason) || string.IsNullOrWhiteSpace(reason)) && Convert.ToInt32(disposition) != 3)
             {
                 corregible = true;
                 strError = _textoLabels.readStatement(formName, _idioma, "lblReasoNull");

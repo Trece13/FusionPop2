@@ -270,20 +270,5 @@
                 </asp:GridView>
             </ContentTemplate>
         </asp:UpdatePanel>
-    </div>
-    <script>
-//        $("#Contenido_grdRecords_toReturn_0").keypress(function () {
-//            console.log($("#Contenido_grdRecords_toReturn_0").val());
-//        });
-        $("#Contenido_grdRecords_toReturn_0").keyup(function () {
-            var x = $("#Contenido_grdRecords_toReturn_0").val();
-            console.log($("#Contenido_grdRecords_toReturn_0").val());
-            x.replace(".", ","); ;
-            $("#Contenido_grdRecords_toReturn_0").val(x);
-        });
-//        $("#Contenido_grdRecords_toReturn_0").keydown(function () {
-//            console.log($("#Contenido_grdRecords_toReturn_0").val());
-//        });
-    </script>
-  
+    </div> 
 </asp:Content>
