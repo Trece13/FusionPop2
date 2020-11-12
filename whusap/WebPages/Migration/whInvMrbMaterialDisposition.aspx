@@ -189,14 +189,11 @@
                         <asp:TemplateField HeaderText="Quantity" HeaderStyle-CssClass="HeaderColor" ControlStyle-Width="10%">
                             <ItemTemplate>
                                 <asp:TextBox ID="toReturn" runat="server" Width="12%" MaxLength="12" CausesValidation="True"
-                                    CssClass="TextBox" />
+                                    CssClass="TextBox"  type="number"/>
                                 <asp:RangeValidator ID="validateQuantity" runat="server" Type="Double" ControlToValidate="toReturn"
                                     ErrorMessage="Quantity to return cannot be greater than Actual Quantity" Display="Dynamic"
                                     ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" SetFocusOnError="true"
                                     MaximumValue="0" MinimumValue="0" />
-                                <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="toReturn"
-                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]{1,4})?"
-                                    Display="Dynamic" ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" />
                             </ItemTemplate>
                             <ControlStyle Width="70px"></ControlStyle>
                             <HeaderStyle CssClass="HeaderColor" HorizontalAlign="Center" />
@@ -274,6 +271,19 @@
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
-    
+    <script>
+//        $("#Contenido_grdRecords_toReturn_0").keypress(function () {
+//            console.log($("#Contenido_grdRecords_toReturn_0").val());
+//        });
+        $("#Contenido_grdRecords_toReturn_0").keyup(function () {
+            var x = $("#Contenido_grdRecords_toReturn_0").val();
+            console.log($("#Contenido_grdRecords_toReturn_0").val());
+            x.replace(".", ","); ;
+            $("#Contenido_grdRecords_toReturn_0").val(x);
+        });
+//        $("#Contenido_grdRecords_toReturn_0").keydown(function () {
+//            console.log($("#Contenido_grdRecords_toReturn_0").val());
+//        });
+    </script>
   
 </asp:Content>

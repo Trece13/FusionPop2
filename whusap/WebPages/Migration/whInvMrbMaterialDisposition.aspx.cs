@@ -74,8 +74,8 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
             txtPalletId.Focus();
             Page.Form.DefaultButton = btnSend.UniqueID;
@@ -219,6 +219,7 @@ namespace whusap.WebPages.Migration
             DropDownList liststock = (DropDownList)grdRecords.Rows[0].Cells[0].FindControl("Stockwareh");
             DropDownList listregrind = (DropDownList)grdRecords.Rows[0].Cells[1].FindControl("Regrind");
             DropDownList listproveedor = (DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Supplier");
+            DropDownList listreason = (DropDownList)grdRecords.Rows[0].Cells[9].FindControl("Reasonid");
 
             btnSave.Visible = true;
             btnSave.Enabled = true;
@@ -228,12 +229,14 @@ namespace whusap.WebPages.Migration
                 listregrind.Enabled = false;
                 liststock.Enabled = false;
                 listproveedor.Enabled = true;
+                listreason.Enabled = true;
             }
             if (listdispo.SelectedValue == "3")
             {
                 listregrind.Enabled = false;
                 listproveedor.Enabled = false;
                 liststock.Enabled = true;
+                listreason.Enabled = false;
 
             }
             if (listdispo.SelectedValue == "4")
@@ -241,6 +244,7 @@ namespace whusap.WebPages.Migration
                 liststock.Enabled = false;
                 listproveedor.Enabled = false;
                 listregrind.Enabled = true;
+                listreason.Enabled = true;
 
 
                 if (listregrind.Items.Count > 1)
@@ -259,6 +263,7 @@ namespace whusap.WebPages.Migration
                 liststock.Enabled = false;
                 listproveedor.Enabled = false;
                 listregrind.Enabled = false;
+                listreason.Enabled = true;
             }
 
             if (listdispo.SelectedItem.Text == "Return to Vendor")
