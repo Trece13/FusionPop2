@@ -3508,7 +3508,7 @@
         </label>
         <label name="btnGuardar">
           <stringMessage>
-            Save Order
+            Submit Request
           </stringMessage>
         </label>
       </Idiom>
@@ -3530,7 +3530,7 @@
         </label>
         <label name="btnGuardar">
           <stringMessage>
-            Guardar orden
+            Enviar Solicitud
           </stringMessage>
         </label>
       </Idiom>

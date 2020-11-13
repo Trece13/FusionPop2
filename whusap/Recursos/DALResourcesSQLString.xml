@@ -5472,6 +5472,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE tisfc001.T$OSTA IN ('5','7','9') AND ticst001.T$NNTS = 1 AND ticst001.T$PDNO = '[:T$PDNO]' AND TURNO = '[:T$SHIF]'
           --WHERE tisfc001.T$OSTA IN ('5','7','9') AND ticst001.T$NNTS = 1 AND ticst001.T$PDNO = '[:T$PDNO]'
           --AND (SELECT TURNO FROM webuser.maxquantity_per_shift{1} WHERE ORDEN = ticst001.T$PDNO AND MAQUINA = tisfc010.T$MCNO GROUP BY TURNO) = '[:T$SHIF]'
+          ORDER BY ticst001.T$SITM
         </stringSQL>
       </operationName>
       <operationName name="findByPdnoMaterialRejected">

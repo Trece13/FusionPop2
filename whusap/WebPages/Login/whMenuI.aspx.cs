@@ -277,7 +277,7 @@ namespace whusap.WebPages.Login
             }
 
             int CountCategorias = Lstdividida.Count();
-            int CategoriasPagina = 3;
+            int CategoriasPagina = 4;
             int TotalpaginasSlider = Convert.ToInt32(Math.Ceiling(CountCategorias / Convert.ToDouble(CategoriasPagina)));
 
             string htmlSliderHead = string.Empty;

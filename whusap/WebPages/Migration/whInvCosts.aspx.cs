@@ -10,7 +10,7 @@ using whusa.Entidades;
 using System.Configuration;
 using System.Threading;
 using System.Globalization;
-using System.Data;
+using System.Data;  
 
 namespace whusap.WebPages.Migration
 {
@@ -42,10 +42,10 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
             // Cambiar cultura para manejo de separador decimal
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
-
+            _operator = Session["user"].ToString();
             if (!IsPostBack)
             {
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
@@ -63,7 +63,7 @@ namespace whusap.WebPages.Migration
 
                 }
 
-                _operator = Session["user"].ToString();
+                //_operator = Session["user"].ToString();
 
                 try
                 {
@@ -267,26 +267,26 @@ namespace whusap.WebPages.Migration
                     }
                     if (tticol088 == false)
                     {
-                        if (consultaRegistro.Rows.Count > 0)
-                        {
-                            var validaUptade = _idaltticol080.updateRecordCosts(ref data080, ref strError);
+                        //if (consultaRegistro.Rows.Count > 0)
+                        //{
+                        //    var validaUptade = _idaltticol080.updateRecordCosts(ref data080, ref strError);
 
-                            if (validaUptade)
-                            {
-                                //lblError.Text = String.Empty;
-                                lblConfirm.Text += "[" + item + "]" + mensajes("msjupdate") + "<br/>";
-                                //divTable.InnerHtml = String.Empty;
-                                divBtnGuardar.Visible = false;
-                                //txtOrder.Text = String.Empty;
-                            }
-                            else
-                            {
-                                lblError.Text += "[" + item + "]" + mensajes("errorupdt") + "<br/>";
-                                return;
-                            }
-                        }
-                        else
-                        {
+                        //    if (validaUptade)
+                        //    {
+                        //        //lblError.Text = String.Empty;
+                        //        lblConfirm.Text += "[" + item + "]" + mensajes("msjupdate") + "<br/>";
+                        //        //divTable.InnerHtml = String.Empty;
+                        //        divBtnGuardar.Visible = false;
+                        //        //txtOrder.Text = String.Empty;
+                        //    }
+                        //    else
+                        //    {
+                        //        lblError.Text += "[" + item + "]" + mensajes("errorupdt") + "<br/>";
+                        //        return;
+                        //    }
+                        //}
+                        //else
+                        //{
                             List<Ent_tticol080> lista = new List<Ent_tticol080>();
                             lista.Add(data080);
                             var tag = String.Empty;
@@ -305,7 +305,7 @@ namespace whusap.WebPages.Migration
                                 lblError.Text += "[" + item + "]" + mensajes("errorsave") + "<br/>";
                                
                             }
-                        }
+                        //}
                     }
                 }
             }
