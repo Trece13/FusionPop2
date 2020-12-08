@@ -44,7 +44,6 @@ namespace whusap.WebPages.InvMaterial
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
             base.InitializeCulture();
-
             if (!IsPostBack)
             {
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
@@ -62,7 +61,7 @@ namespace whusap.WebPages.InvMaterial
                     _idioma = "INGLES";
                 }
 
-                CargarIdioma();
+
 
                 // Determinar existencia de las maquinas en web.config
                 lblError.Visible = false;
@@ -76,6 +75,7 @@ namespace whusap.WebPages.InvMaterial
                 Page.Form.DefaultButton = btnSend.UniqueID;
 
             }
+            CargarIdioma();
         }
 
         protected void btnSend_Click(object sender, EventArgs e)
@@ -154,7 +154,8 @@ namespace whusap.WebPages.InvMaterial
 
         protected void CargarIdioma()
         {
-            therecordhasbeenupdatedsuccessfully = _textoLabels.readStatement(formName, _idioma, "therecordhasbeenupdatedsuccessfully");
+            therecordhasbeenupdatedsuccessfully = "therecordhasbeenupdatedsuccessfully";
+            therecordhasbeenupdatedsuccessfully = _mensajesForm.readStatement(formName, _idioma, ref therecordhasbeenupdatedsuccessfully);
             lblDescPalletId.Text = _textoLabels.readStatement(formName, _idioma, "lblDescPalletId");
             btnSend.Text = _textoLabels.readStatement(formName, _idioma, "btnSend");
         }

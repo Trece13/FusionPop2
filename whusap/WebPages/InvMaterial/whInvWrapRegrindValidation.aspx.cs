@@ -64,7 +64,7 @@ namespace whusap.WebPages.InvMaterial
                     _idioma = "INGLES";
                 }
 
-                CargarIdioma();
+                
 
                 lblError.Visible = false;
                 if (Session["IsPreviousPage"] == null) { Session.Clear(); }
@@ -79,6 +79,7 @@ namespace whusap.WebPages.InvMaterial
                     lblIngreso.Text = "1";
                 }
             }
+            CargarIdioma();
         }
 
         protected void btnSend_Click(object sender, EventArgs e)

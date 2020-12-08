@@ -6636,11 +6636,6 @@
 
     <Module name="whInvWrapValidation.aspx">
       <Idiom name="INGLES">
-        <label name="therecordhasbeenupdatedsuccessfully">
-          <stringMessage>
-            the record has been updated successfully
-          </stringMessage>
-        </label>
         <label name="lblDescPalletId">
           <stringMessage>
             Pallet Id
@@ -6653,11 +6648,6 @@
         </label>
       </Idiom>
       <Idiom name="ESPAÑOL">
-        <label name="therecordhasbeenupdatedsuccessfully">
-          <stringMessage>
-            the record has been updated successfully
-          </stringMessage>
-        </label>
         <label name="lblDescPalletId">
           <stringMessage>
             Id Pallet
@@ -6692,7 +6682,7 @@
         </label>
         <label name="btnSave">
           <stringMessage>
-            Save Items
+            Transfer Material
           </stringMessage>
         </label>
         <label name="btnSend">

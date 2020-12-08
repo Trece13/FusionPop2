@@ -325,6 +325,11 @@
             Information saved correctly
           </stringMessage>
         </operationName>
+        <operationName name="msjsaveLineClerance">
+          <stringMessage>
+            Items Transfer Successfully
+          </stringMessage>
+        </operationName>
         <operationName name="errorupdt">
           <stringMessage>
             An error has ocurred when try update information, please contact Administrator
@@ -407,6 +412,11 @@
         <operationName name="msjsave">
           <stringMessage>
             Se ha guardado la información correctamente.
+          </stringMessage>
+        </operationName>
+        <operationName name="msjsaveLineClerance">
+          <stringMessage>
+            Articulo transferido exitosamente.
           </stringMessage>
         </operationName>
         <operationName name="errorupdt">
@@ -4375,6 +4385,11 @@
 
     <Module name="whInvWrapValidation.aspx">
       <Idiom name="INGLES">
+        <operationName name="therecordhasbeenupdatedsuccessfully">
+          <stringMessage>
+            the record has been updated successfully
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Wrap Validation
@@ -4387,6 +4402,11 @@
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <operationName name="therecordhasbeenupdatedsuccessfully">
+          <stringMessage>
+            El registro a sido actualizado correctamente.
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Validación de envoltura
