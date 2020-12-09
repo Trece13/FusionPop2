@@ -202,6 +202,10 @@ namespace whusap.WebPages.InvMaterial
                 int sec022 = 0;
                 string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
                 string toLot = ((DropDownList)row.Cells[8].FindControl("toLot")).SelectedValue;
+                if (toLot.Trim() == "")
+                {
+                    return;
+                }
                 //string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
                 string condLote = ((HiddenField)row.Cells[6].FindControl("LOTE")).Value.Trim();
                 ktlc = Convert.ToString(row.Cells[11].Text);
@@ -268,7 +272,7 @@ namespace whusap.WebPages.InvMaterial
                     if (dt022.Rows.Count > 0)
                     {
                         paid = dt022.Rows[0]["T$SQNB"].ToString().Trim();
-                        sec = paid.Substring(12, 2);
+                        sec = paid.Substring(paid.IndexOf("-")+1, 2);
                         sec022 = Convert.ToInt32(sec);
                         sec = addZero(sec022 + 1);
                     }
@@ -531,6 +535,8 @@ namespace whusap.WebPages.InvMaterial
                 {
                     ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Enabled = false;
                     ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Attributes.Add("onfocus", "limpiar(this);");
+                    ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onkeyup", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["unidad"].ToString().Trim() + "');");
+
 
                 }
                 DropDownList lista = ((DropDownList)e.Row.Cells[5].FindControl("toLot"));
@@ -562,6 +568,8 @@ namespace whusap.WebPages.InvMaterial
                     {
                         //((TextBox)e.Row.Cells[8].FindControl("toLot")).Attributes.Add("onblur", "validaLot(" + FilaSerializada.Trim() + ", this.value, this);");
                         ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Attributes.Add("onfocus", "limpiar(this);");
+                        ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Attributes.Add("onkeypress", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["unidad"].ToString().Trim() + "');");
+
                     }
 
                     DataRow filaIni = lotesItem.NewRow();

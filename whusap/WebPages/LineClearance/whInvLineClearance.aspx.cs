@@ -47,7 +47,7 @@ namespace whusap.WebPages.LineClearance
             {
 
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
                 base.InitializeCulture();
 
                 txtWorkOrderFrom.Focus();
@@ -134,7 +134,7 @@ namespace whusap.WebPages.LineClearance
                             ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onblur", "if(this.value != '') " +
                                                                                                        "{ validaInfo('" + strItem + "' , '1',this); " +
                                                                                                          "validateMov('" + dataCant + "',this.value, '" + objVal.ClientID + "', this);}");
-                            ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onfocus", "limpiar(this);");
+                            ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onkeypress", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["UNIDAD"].ToString().Trim() + "');");
                         }
 
                         if (strLote != "1")
@@ -282,7 +282,7 @@ namespace whusap.WebPages.LineClearance
                 idal.insertarRegistro(ref parameterCollection, ref strError);
                 printResult.Visible = true;
 
-                lblResult.Text = mensajes("msjsave");
+                lblResult.Text = mensajes("msjsaveLineClerance");
                 lblResult.ForeColor = System.Drawing.Color.Green;
                 this.HeaderGrid.Visible = false;
 

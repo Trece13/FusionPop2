@@ -24,7 +24,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
     </asp:ContentPlaceHolder>
 </head>
-<body id="Cuerpo" runat="server">
+<body id="Cuerpo" runat="server" lang="en-US" step="any">
     <form id="Form1" runat="server">
     <nav class="navbar navbar-expand-sm bg-light navbar-light" id="Navp">
     <a style = "display:none" class="navbar-brand" href="http://www.grupophoenix.com"><img src= "<%=String.Concat(ConfigurationManager.AppSettings["UrlBase"],"/images/logophoenixBody.jpg") %>" style="width:100px;" alt="Grupo Phoenix" /></a>

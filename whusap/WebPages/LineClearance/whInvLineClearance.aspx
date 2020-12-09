@@ -12,6 +12,12 @@
             return;
         }
 
+        function verificarDecimal(obj, Unidad) {
+            if (Unidad.toUpperCase() != "KG") {
+                var objControl = document.getElementById(obj.id);
+                objControl.value = objControl.value.replace(".",""); 
+            }
+        }
 
         function validaInfo(args, val, obj) {
             if (args === "") {
@@ -170,7 +176,7 @@
                         <asp:TemplateField HeaderText="Actual Qty" HeaderStyle-CssClass="HeaderGrid"
                             ControlStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:TextBox ID="ActualQty" runat="server" Width="10%" MaxLength="15" CausesValidation="True"
+                                <asp:TextBox ID="ActualQty" type="number" runat="server" Width="10%" MaxLength="15" CausesValidation="True"
                                     CssClass="TextBox" value="10" Enabled="false"/>
                             </ItemTemplate>
                             <ControlStyle Width="70px"></ControlStyle>
@@ -184,11 +190,10 @@
                         <asp:TemplateField HeaderText="Quantity to Line Clearance WH" HeaderStyle-CssClass="HeaderGrid"
                             ControlStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
-                                <asp:TextBox ID="toReturn" runat="server" Width="10%" MaxLength="15" CausesValidation="True"
-                                    CssClass="TextBox" />
-                                <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="toReturn"
-                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="^[0-9]{1,11}(?:\.[0-9]{1,4})?$"
-                                    Display="Dynamic" ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" />
+                                <asp:TextBox runat="server" ID="toReturn" type="number" Width="10%" step="any"/>
+<%--                                <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="toReturn"
+                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="(\d{1,3}(,\d{3})*\.\d{2})|(\d+(\.\d{2})?)"
+                                    Display="Dynamic" ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" />--%>
                                 <asp:CompareValidator ID="validateQuantity" runat="server" Operator="LessThanEqual"
                                     controltovalidate="toReturn" controltocompare="ActualQty"
                                     Display="Dynamic" Type="Double" SetFocusOnError="true" ErrorMessage="Quantity to return cannot be greater than Actual Quantity"

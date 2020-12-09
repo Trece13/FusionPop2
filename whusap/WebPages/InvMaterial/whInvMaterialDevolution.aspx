@@ -23,6 +23,13 @@
             var e = document.getElementById("printerDiv");
         };
 
+        function verificarDecimal(obj, Unidad) {
+            if (Unidad.toUpperCase() != "KG") {
+                var objControl = document.getElementById(obj.id);
+                objControl.value = objControl.value.replace(".", "");
+            }
+        }
+
         function limpiar(obj) {
             var objControl = document.getElementById(obj.id);
             // objControl.value = "";
@@ -36,26 +43,26 @@
             var parametrosEnviar = "{ 'palletID': '" + args.value + "', 'quantity':'" + quantityToReturn + "'}";
             //alert(" pId " + args.value + " toReturn " + quantityToReturn);
             var objSend = document.getElementById('<%=btnSave.ClientID %>');
-            objSend.disabled = true;
-            $.ajax({
-                type: "POST",
-                url: "whInvMaterialDevolution.aspx/vallidatePalletID",
-                data: parametrosEnviar,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    if (msg.d != "") {
-                        var objControl = document.getElementById(args.id);
-                        objControl.value = "";
-                        alert(msg.d);
-                        return false;
-                    } else { objSend.disabled = false; }
-                },
-                error: function (msg) {
-                    alert("This is msg " + msg.d);
-                    return false;
-                }
-            });
+            //objSend.disabled = true;
+            //$.ajax({
+            //    type: "POST",
+            //    url: "whInvMaterialDevolution.aspx/vallidatePalletID",
+            //    data: parametrosEnviar,
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (msg) {
+            //        if (msg.d != "") {
+            //            var objControl = document.getElementById(args.id);
+            //            objControl.value = "";
+            //            alert(msg.d);
+            //            return false;
+            //        } else { objSend.disabled = false; }
+            //    },
+            //    error: function (msg) {
+            //        alert("This is msg " + msg.d);
+            //        return false;
+            //    }
+            //});
         }
 
         function validaLot(args, val, obj) {
@@ -64,32 +71,33 @@
             }
             var parametrosEnviar = "{ 'Fila': '" + JSON.stringify(val) + "', 'valor':'" + obj + "'}";
             var objSend = document.getElementById('<%=btnSave.ClientID %>');
-            objSend.disabled = true;
-            $.ajax({
-                type: "POST",
-                url: "whInvMaterialDevolution.aspx/validaExistLot",
-                data: parametrosEnviar,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (msg) {
-                    if (msg.d != "") {
-                        var objControl = document.getElementById(args.id);
-                        objControl.value = "";
-                        objControl.focus();
-                        alert(_idioma == "INGLES" ? "Pending to Confirm" : "Pendiente por confirmar");
-                        return false;
-                    } else { objSend.disabled = false; }
+            objSend.disabled = false;
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "whInvMaterialDevolution.aspx/validaExistLot",
+            //    data: parametrosEnviar,
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: function (msg) {
+            //        if (msg.d != "") {
+            //            var objControl = document.getElementById(args.id);
+            //            objControl.value = "";
+            //            objControl.focus();
+            //            alert(_idioma == "INGLES" ? "Pending to Confirm" : "Pendiente por confirmar");
+            //            return false;
+            //        } else { objSend.disabled = false; }
 
                    
-                },
-                error: function (msg) {
-                    var objControl = document.getElementById(args.id);
-                    objControl.value = "";
-                    objControl.focus();
-                    alert(msg.d);
-                    return false;
-                }
-            });
+            //    },
+            //    error: function (msg) {
+            //        var objControl = document.getElementById(args.id);
+            //        objControl.value = "";
+            //        objControl.focus();
+            //        alert(msg.d);
+            //        return false;
+            //    }
+            //});
         }
 
         $.fn.exists = function () {
@@ -106,7 +114,8 @@
         }
 
         function validarCantidadMaxima(args, val, opcion, rowIndex) {
-            if (args.value === "" || val.value === "") {
+            if (args.value.trim() === "" || val.value === "") {
+                $('#Contenido_btnSave').disabled = true;
                 return;
             }
             
@@ -118,6 +127,7 @@
                 rowSelected = document.getElementById(args.id);
                 valor = rowSelected.value; //"1000";
                 lote = document.getElementById(args.id.replace("toReturn", "toLot")).value;
+                $('#Contenido_btnSave').disabled = true;
             }
             else if (opcion === 1) {
                 rowSelected = document.getElementById(args.id);
@@ -128,8 +138,7 @@
                 return;
             var parametrosEnviar = "{ 'fila': '" + JSON.stringify(val) + "', 'valor':'" + valor + "', 'lote':'" + lote + "','qty':'" + (args.id.indexOf("toReturn") != -1 ? ($("#Contenido_grdRecords_toReturn_" + args.id.substring(30, args.id.length)).val()) : ($("#Contenido_grdRecords_toReturn_" + args.id.substring(27, args.id.length)).val())) + "'}";
             var objSend = document.getElementById('<%=btnSave.ClientID %>');
-            objSend.disabled = true;
-            $.ajax({
+           <%-- $.ajax({
                 type: "POST",
                 url: "whInvMaterialDevolution.aspx/validarCantidades",
                 data: parametrosEnviar,
@@ -161,7 +170,7 @@
                     alert(msg.d);
                     return false;
                 }
-            });
+            });--%>
         }
 
         function validateQty(rowIndex) {
