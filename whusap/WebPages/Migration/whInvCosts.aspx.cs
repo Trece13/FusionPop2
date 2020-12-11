@@ -357,7 +357,7 @@ namespace whusap.WebPages.Migration
                 , _idioma == "INGLES" ? "Actual Quantity" : "Cantidad Actual"
                 , _idioma == "INGLES" ? "To Issue by Warehousing" : "Para emitir por almacenaje"
                 , _idioma == "INGLES" ? "Stock" : "Stock"
-                , _idioma == "INGLES" ? "To Issue" : "Para emitir"
+                , _idioma == "INGLES" ? "Quantity" : "Cantidad"
                 , _idioma == "INGLES" ? "Unit" : "Unidad"
                 , _idioma == "Hidden");
 

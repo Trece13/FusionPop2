@@ -124,6 +124,7 @@ namespace whusap.WebPages.Migration
 
                     var consultaOrden = _idaltticol022.findBySqnbPdnoAndQtdl(ref PDNO, ref SQNB, ref QTDL, ref strError).Rows;
 
+
                     if (consultaOrden.Count > 0)
                     {
                         //Llamar metodo de consulta
@@ -137,6 +138,8 @@ namespace whusap.WebPages.Migration
                             var unidad = _consultaInformacionOrden.Rows[0]["CUNI"].ToString();
                             var almacen = _consultaInformacionOrden.Rows[0]["CWAR"].ToString();
                             var descalmacen = _consultaInformacionOrden.Rows[0]["DSCACWAR"].ToString();
+                            var maquina = _consultaInformacionOrden.Rows[0]["MCNO"].ToString();
+                            
                             var osta = Convert.ToUInt32(_consultaInformacionOrden.Rows[0]["OSTA"].ToString());
 
                             if (unidad.Trim() != "Kg")

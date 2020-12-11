@@ -873,9 +873,9 @@ namespace whusa.Interfases
             return dal.ActualizarCantidades242(PAID);
         }
 
-        public bool ActualizarCantidades131(string PAID)
+        public bool ActualizarCantidades131(string PAID,bool OLD = true )
         {
-            return dal.ActualizarCantidades131(PAID);
+            return dal.ActualizarCantidades131(PAID,OLD);
         }
     }
 }

@@ -53,7 +53,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$PONO, T$QTDL, T$CUNI, T$LOG1,
           T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP,
           T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, :T$MITM, :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1,
+          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1,
           sysdate+5/24, :T$QTD1, :T$PRO1, :T$LOG2, sysdate+5/24, :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP,
           sysdate+5/24, :T$DELE, :T$LOGD, sysdate+5/24, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
@@ -93,7 +93,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           '[:T$PROC]',
           '[:T$LOGN]',
           sysdate+5/24,
-          '[:T$MITM]',
+          {0}.F_ITEM_POP(TRIM('[:T$MITM]')) ,
           '[:T$PONO]',
           '[:T$QTDL]',
           '[:T$CUNI]',
@@ -136,7 +136,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$PONO, T$QTDL, T$CUNI, T$LOG1, T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP, T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+(5/24), :T$MITM, :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1, sysdate+(5/24), :T$QTD1, :T$PRO1, :T$LOG2, sysdate+(5/24), :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP, sysdate+(5/24), :T$DELE, :T$LOGD, sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+(5/24), {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1, sysdate+(5/24), :T$QTD1, :T$PRO1, :T$LOG2, sysdate+(5/24), :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP, sysdate+(5/24), :T$DELE, :T$LOGD, sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="listaCantidadRegrind">
@@ -290,7 +290,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,
           T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP,
           T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, :T$MITM, :T$QTDL, :T$CUNI, :T$LOG1,
+          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$QTDL, :T$CUNI, :T$LOG1,
           sysdate+5/24, :T$QTD1, :T$PRO1, :T$LOG2, sysdate+5/24, :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP,
           sysdate+5/24, :T$DELE, :T$LOGD, sysdate+5/24, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
@@ -300,7 +300,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,
           T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP,
           T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES ('[:T$PDNO]', '[:T$SQNB]', '[:T$PROC]', '[:T$LOGN]', sysdate+5/24, '[:T$MITM]', '[:T$QTDL]', '[:T$CUNI]', '[:T$LOG1]',
+          VALUES ('[:T$PDNO]', '[:T$SQNB]', '[:T$PROC]', '[:T$LOGN]', sysdate+5/24, {0}.F_ITEM_POP(TRIM('[:T$MITM]')) , '[:T$QTDL]', '[:T$CUNI]', '[:T$LOG1]',
           sysdate+5/24, '[:T$QTD1]', '[:T$PRO1]', '[:T$LOG2]', sysdate+5/24, '[:T$QTD2]', '[:T$PRO2]', '[:T$LOCA]', '[:T$NORP]',
           sysdate+5/24, '[:T$DELE]', '[:T$LOGD]', sysdate+5/24, '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
@@ -310,7 +310,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,
           T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP,
           T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, :T$MITM, :T$QTDL, :T$CUNI, :T$LOG1,
+          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$QTDL, :T$CUNI, :T$LOG1,
           sysdate+5/24, :T$QTD1, :T$PRO1, :T$LOG2, sysdate+5/24, :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP,
           sysdate+5/24, :T$DELE, :T$LOGD, sysdate+5/24, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
@@ -322,7 +322,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$SQNB = :T$SQNB,
           T$PROC = :T$PROC,
           T$LOGN = :T$LOGN,
-          T$MITM = :T$MITM,
+          T$MITM = {0}.F_ITEM_POP(TRIM(:T$MITM)) ,
           T$QTDL = :T$QTDL,
           T$CUNI = :T$CUNI,
           T$LOG1 = :T$LOG1,
@@ -509,7 +509,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertRegistertwhcol019">
         <stringSQL>
           INSERT INTO {0}.twhcol019{1}(T$PAID,T$SQNB,T$ZONE,T$CWAR,T$LOCA,T$ITEM,T$CLOT,T$QTDL,T$CUNI,T$LOGN,T$DATE,T$COUN,T$PROC,T$REFCNTD,T$REFCNTU)
-          VALUES ('[:T$PAID]','[:T$SQNB]','[:T$ZONE]','[:T$CWAR]','[:T$LOCA]','[:T$ITEM]','[:T$CLOT]','[:T$QTDL]','[:T$CUNI]','[:T$LOGN]',SYSDATE,'[:T$COUN]','[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
+          VALUES ('[:T$PAID]','[:T$SQNB]','[:T$ZONE]','[:T$CWAR]','[:T$LOCA]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$CLOT]','[:T$QTDL]','[:T$CUNI]','[:T$LOGN]',SYSDATE,'[:T$COUN]','[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
         </stringSQL>
       </operationName>
       <operationName name="Consetwhcol019">
@@ -559,9 +559,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ActualizarCantidades131">
         <stringSQL>
           UPDATE BAAN.twhcol131140 SET
-          T$ACQT = (select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')),
-          T$ALLO = (select T$ACQT from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))
+          T$QTYA = CASE WHEN '[:OLD]' = 'True'
+            THEN ((select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))+(select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))) 
+            ELSE (select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')) END,
+          T$ALLO = CASE WHEN '[:OLD]' = 'True'
+            THEN 0
+            ELSE (select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')) END
           WHERE  TRIM(T$PAID) = TRIM('[:T$SQNB]')
+          
+          <!--UPDATE BAAN.twhcol131140 SET
+          T$QTYA = (select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')),
+          T$ALLO = (select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))
+          WHERE  TRIM(T$PAID) = TRIM('[:T$SQNB]')-->
         </stringSQL>
       </operationName>
       <operationName name="ConsultarTticol082porStat">
@@ -846,7 +855,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           (
           select  col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
           col022.t$pdno lot, col222.t$cwat wrh,
-          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
+          mcs003.t$dsca descwrh, col222.t$acqt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
           col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           rank() over(order by col022.t$sqnb, col022.t$date) rown
           from {0}.tticol022{1} col022
@@ -865,7 +874,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col307.T$PAID IS NULL
           and col222.t$acqt >= col082.t$qtyt
           and col222.t$cwat = col082.t$cwar
-          and col082.t$qtyt >= '[:QTYT]'
+          and col222.t$acqt >= '[:QTYT]'
           and trim(col022.t$mitm) = trim('[:ITEM]')
           and col082.t$prio = '[:PRIO]'
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
@@ -882,7 +891,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           from
           (
           select col042.t$dele stat,col042.t$sqnb palletid, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,
-          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
+          mcs003.t$dsca descwrh, col242.t$acqt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
           col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           rank() over(order by col042.t$date) rown
           from {0}.tticol042{1} col042
@@ -901,7 +910,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col307.T$PAID IS NULL
           and col242.t$acqt >= col082.t$qtyt
           and col242.t$cwat = col082.t$cwar
-          and col082.t$qtyt >= '[:QTYT]'
+          and col242.t$acqt >= '[:QTYT]'
           and trim(col042.t$mitm) = trim('[:ITEM]')
           and col082.t$prio = '[:PRIO]'
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
@@ -918,7 +927,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           from
           (
           select col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
-          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
+          mcs003.t$dsca descwrh, col131.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
           col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           col131.t$date-5/24, rownum rown
           from {0}.twhcol131{1} col131
@@ -934,7 +943,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col307.T$PAID IS NULL
           and col131.t$qtya >= col082.t$qtyt
           and col131.t$cwaa = col082.t$cwar
-          and col082.t$qtyt >= '[:QTYT]'
+          and col131.t$qtya >= '[:QTYT]'
           and trim(col131.t$item) = trim('[:ITEM]')
           and col082.t$prio = '[:PRIO]'
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
@@ -1447,7 +1456,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="InsertarregistroItticol082">
         <stringSQL>
           INSERT INTO {0}.tticol082{1}(T$OORG,T$ORNO,T$OSET,T$PONO,T$SQNB,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU)
-          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$OSET]','[:T$PONO]','[:T$SQNB]','[:T$ADVS]','[:T$ITEM]','[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
+          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$OSET]','[:T$PONO]','[:T$SQNB]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
         </stringSQL>
       </operationName>
       <operationName name="ConsultarTticol082">
@@ -1620,7 +1629,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="InsertarTransferencia">
         <stringSQL>
           INSERT INTO {0}.twhcol020{1}(T$CLOT, T$SQNB, T$MITM, T$DSCA, T$CWOR, T$LOOR, T$CWDE, T$LODE, T$QTDL, T$CUNI, T$RCNO, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES('[:T$CLOT]', '[:T$SQNB]', '[:T$MITM]', '[:T$DSCA]', '[:T$CWOR]', '[:T$LOOR]', '[:T$CWDE]', '[:T$LODE]', '[:T$QTDL]', '[:T$CUNI]', '[:T$RCNO]', sysdate+5/24, '[:T$MESS]', '[:T$USER]', '[:T$REFCNTD]', '[:T$REFCNTU]')
+          VALUES('[:T$CLOT]', '[:T$SQNB]', {0}.F_ITEM_POP(TRIM('[:T$MITM]')) , '[:T$DSCA]', '[:T$CWOR]', '[:T$LOOR]', '[:T$CWDE]', '[:T$LODE]', '[:T$QTDL]', '[:T$CUNI]', '[:T$RCNO]', sysdate+5/24, '[:T$MESS]', '[:T$USER]', '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarTransferencia">
@@ -1671,7 +1680,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$CLOT, T$SQNB, T$MITM, T$DSCA, T$CWOR, T$LOOR, T$CWDE, T$LODE, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES(:T$CLOT,:T$SQNB,:T$MITM,:T$DSCA,:T$CWOR,:T$LOOR,:T$CWDE,:T$LODE,:T$QTDL,:T$CUNI, sysdate+5/24, ' ', :T$USER, :T$REFCNTD, :T$REFCNTU)
+          VALUES(:T$CLOT,:T$SQNB,{0}.F_ITEM_POP(TRIM(:T$MITM)) ,:T$DSCA,:T$CWOR,:T$LOOR,:T$CWDE,:T$LODE,:T$QTDL,:T$CUNI, sysdate+5/24, ' ', :T$USER, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="consultarConsecutivoRegistro">
@@ -1697,7 +1706,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$CLOT, T$SQNB, T$MITM, T$DSCA, T$CWOR, T$LOOR, T$CWDE, T$LODE, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU,T$RCNO)
-          VALUES(:T$CLOT,:T$SQNB,:T$MITM,:T$DSCA,:T$CWOR,:T$LOOR,:T$CWDE,:T$LODE,:T$QTDL,:T$CUNI, sysdate+5/24, ' ', :T$USER, :T$REFCNTD, :T$REFCNTU,' ')
+          VALUES(:T$CLOT,:T$SQNB,{0}.F_ITEM_POP(TRIM(:T$MITM)) ,:T$DSCA,:T$CWOR,:T$LOOR,:T$CWDE,:T$LODE,:T$QTDL,:T$CUNI, sysdate+5/24, ' ', :T$USER, :T$REFCNTD, :T$REFCNTU,' ')
         </stringSQL>
       </operationName>
       <operationName name="consultarConsecutivoRegistro">
@@ -2076,7 +2085,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           values (
           '[:T$OORG]',  			/*	T$OORG	*/		/*    '2'				*/
           '[:T$ORNO]', 			/*	T$ORNO	*/		/*    'OPN028526'		*/
-          '[:T$ITEM]', 			/*	T$ITEM	*/		/*    'BPBUG-00000' 	*/
+          {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , 			/*	T$ITEM	*/		/*    'BPBUG-00000' 	*/
           '[:T$PAID]',			/*	T$PAID	*/		/*    'OPN028526-023'	*/
           '[:T$PONO]', 			/*	T$PONO	*/		/*    '2'				*/
           '[:T$SEQN]', 			/*	T$SEQN	*/		/*    '1'				*/
@@ -2115,7 +2124,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           values (
           '[:T$OORG]',  			/*	T$OORG	*/		/*    '2'				*/
           '[:T$ORNO]', 			/*	T$ORNO	*/		/*    'OPN028526'		*/
-          '[:T$ITEM]', 			/*	T$ITEM	*/		/*    'BPBUG-00000' 	*/
+          {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , 			/*	T$ITEM	*/		/*    'BPBUG-00000' 	*/
           '[:T$PAID]',			/*	T$PAID	*/		/*    'OPN028526-023'	*/
           '[:T$PONO]', 			/*	T$PONO	*/		/*    '2'				*/
           '[:T$SEQN]', 			/*	T$SEQN	*/		/*    '1'				*/
@@ -2573,7 +2582,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="InsertTticol088">
         <stringSQL>
-          INSERT INTO {0}.tticol088{1} (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU,T$OORG) VALUES ('[:T$ORNO]','[:T$PONO]','[:T$ITEM]','[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]','[:T$OORG]')
+          INSERT INTO {0}.tticol088{1} (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU,T$OORG) VALUES ('[:T$ORNO]','[:T$PONO]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]','[:T$OORG]')
         </stringSQL>
       </operationName>
       
@@ -2581,7 +2590,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           INSERT INTO {2}
           (T$FPDN, T$TPDN, T$ITEM, T$CLOT, T$SRNO, T$QANA, T$PROC, T$LOGN, T$DATE, T$REFCNTD, T$REFCNTU)
-          VALUES(:T$FPDN, :T$TPDN, :T$ITEM, :T$CLOT, :T$SRNO, :T$QANA, :T$PROC, :T$LOGN, sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
+          VALUES(:T$FPDN, :T$TPDN, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CLOT, :T$SRNO, :T$QANA, :T$PROC, :T$LOGN, sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="actualizarRegistro_Param">
@@ -2676,7 +2685,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           INSERT INTO {0}.twhcol025{1}
           (T$PAID, T$DATE, T$EMNO, T$ITEM, T$CWAR, T$LOCA, T$CLOT, T$QTYA, T$UNIT, T$CDIS, T$LOGN, T$PROC, T$ORNO, T$PONO, T$MESS, T$REFCNTD,T$REFCNTU)
-          VALUES(:T$PAID, sysdate+(5/24), :T$EMNO, :T$ITEM, :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYA, :T$UNIT, :T$CDIS, :T$LOGN, :T$PROC, :T$ORNO, :T$PONO, :T$MESS, :T$REFCNTD, :T$REFCNTU)
+          VALUES(:T$PAID, sysdate+(5/24), :T$EMNO, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYA, :T$UNIT, :T$CDIS, :T$LOGN, :T$PROC, :T$ORNO, :T$PONO, :T$MESS, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
     </Module>
@@ -2803,7 +2812,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           INSERT INTO {2} (T$PDNO,T$PONO,T$ITEM,T$CWAR,T$CLOT,T$REQT,T$USER,
           T$DATE,T$PRIN,T$CONF,T$REFCNTD,T$REFCNTU,T$MESS,T$PAID)
-          VALUES (:T$PDNO,:T$PONO,:T$ITEM,:T$CWAR,:T$CLOT,:T$REQT,:T$USER,
+          VALUES (:T$PDNO,:T$PONO,{0}.F_ITEM_POP(TRIM(:T$ITEM)) ,:T$CWAR,:T$CLOT,:T$REQT,:T$USER,
           sysdate+(5/24),:T$PRIN,:T$CONF,:T$REFCNTD,:T$REFCNTU,:T$MESS,:T$PAID)
         </stringSQL>
       </operationName>
@@ -2958,7 +2967,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           INSERT INTO {2} ( T$ORNO, T$ITEM, T$LOCA, T$CWAR, T$QDEL, T$LOGN, T$DATE, T$CONF,
           T$CUSR, T$CDAT, T$MESS, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$ORNO, :T$ITEM, :T$LOCA, :T$CWAR, :T$QDEL, :T$LOGN, sysdate+(5/24),
+          VALUES (:T$ORNO, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$LOCA, :T$CWAR, :T$QDEL, :T$LOGN, sysdate+(5/24),
           :T$CONF, :T$CUSR, sysdate+(5/24), :T$MESS, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
@@ -3017,7 +3026,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$ZONE, T$LABL, T$ITEM, T$CWAR, T$CLOT, T$QTYR, T$LOGN, T$DATE, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$ZONE, :T$LABL, :T$ITEM, :T$CWAR, :T$CLOT, :T$QTYR, :T$LOGN ,sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$ZONE, :T$LABL, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$CLOT, :T$QTYR, :T$LOGN ,sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="actualizarSecuenciaInsert">
@@ -3106,7 +3115,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
       <operationName name="insertarRegistro">
-        <stringSQL>INSERT INTO {2} (T$LABL, T$SQNB, T$CWAR, T$ITEM, T$CLOT, T$QTDL, T$CUNI, T$LOGN, T$DATE, T$COUN, T$PROC, T$REFCNTD, T$REFCNTU, T$ZONE)             VALUES (:T$LABL, :T$SQNB, :T$CWAR, :T$ITEM, :T$CLOT, :T$QTDL, :T$CUNI, :T$LOGN, sysdate+(5/24), :T$COUN, :T$PROC, :T$REFCNTD, :T$REFCNTU, :T$ZONE)</stringSQL>
+        <stringSQL>INSERT INTO {2} (T$LABL, T$SQNB, T$CWAR, T$ITEM, T$CLOT, T$QTDL, T$CUNI, T$LOGN, T$DATE, T$COUN, T$PROC, T$REFCNTD, T$REFCNTU, T$ZONE)             VALUES (:T$LABL, :T$SQNB, :T$CWAR, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CLOT, :T$QTDL, :T$CUNI, :T$LOGN, sysdate+(5/24), :T$COUN, :T$PROC, :T$REFCNTD, :T$REFCNTU, :T$ZONE)</stringSQL>
       </operationName>
       <operationName name="TakeMaterialInv_verificaidLabel_Param">
         <stringSQL>
@@ -3137,7 +3146,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} ( T$TGID, T$ITEM, T$CLOT, T$QTDL, T$CUNI, T$REFCNTD,  T$REFCNTU)
-          VALUES (:T$TGID, :T$ITEM, :T$CLOT, :T$QTDL, :T$CUNI, :T$REFCNTD, :T$REFCNTU )
+          VALUES (:T$TGID, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CLOT, :T$QTDL, :T$CUNI, :T$REFCNTD, :T$REFCNTU )
         </stringSQL>
       </operationName>
       <operationName name="actualizarRegistro">
@@ -3189,7 +3198,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {0}.tticol132{1} (T$BCDE, T$DATE, T$TYPE, T$ITEM, T$USER, T$STAT, T$MCNO, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$BCDE, sysdate+(5/24), :T$TYPE, :T$ITEM, :T$USER, :T$STAT, :T$MCNO, :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$BCDE, sysdate+(5/24), :T$TYPE, {0}.F_ITEM_POP(TRIM(:T$ITEM))  :T$USER, :T$STAT, :T$MCNO, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="ObtenerBox">
@@ -3252,7 +3261,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarDatos">
         <stringSQL>
           INSERT INTO {0}.ttdcol524{1} ( t$orno$eam, t$odat, t$emno, t$cwar, t$item, t$vstk, t$stun, t$recd, t$esta, t$orno, t$pono, t$refcntd,t$refcntu)
-          VALUES (:t$orno$eam,sysdate+(5/24),:t$emno,:t$cwar,:t$item,:t$vstk,:t$stun,:t$recd,:t$esta,:t$orno,:t$pono,:t$refcntd,:t$refcntu)
+          VALUES (:t$orno$eam,sysdate+(5/24),:t$emno,:t$cwar,{0}.F_ITEM_POP(TRIM(:t$item)) ,:t$vstk,:t$stun,:t$recd,:t$esta,:t$orno,:t$pono,:t$refcntd,:t$refcntu)
         </stringSQL>
       </operationName>
       <operationName name="actualizarContadores">
@@ -3312,7 +3321,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$SQNB,T$CWAR,T$LOCA,T$PDNO,T$MITM,T$DSCA,T$QTDL,T$CUNI,T$DATE,T$MESS,T$PROC,T$COUN,T$REFCNTD,T$REFCNTU)
-          VALUES (:T$SQNB,:T$CWAR,:T$LOCA,:T$PDNO,:T$MITM,:T$DSCA,:T$QTDL,:T$CUNI,sysdate+(5/24),:T$MESS,:T$PROC,:T$COUN,:T$REFCNTD,:T$REFCNTU)
+          VALUES (:T$SQNB,:T$CWAR,:T$LOCA,:T$PDNO,{0}.F_ITEM_POP(TRIM(:T$MITM)) ,:T$DSCA,:T$QTDL,:T$CUNI,sysdate+(5/24),:T$MESS,:T$PROC,:T$COUN,:T$REFCNTD,:T$REFCNTU)
         </stringSQL>
       </operationName>
     </Module>
@@ -3320,7 +3329,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$SOUR,  T$ORNO,  T$PONO,  T$DWMS,  T$PWMS,  T$CWAR,  T$ITEM,  T$QANA,  T$CUNI,  T$CLOT,  T$INDT,  T$PRDT,  T$PROC,  T$RCNO,  T$RWMS,  T$LOGN,  T$ERRO,  T$SEQN,  T$REFCNTD,  T$REFCNTU)
-          VALUES (:T$SOUR, :T$ORNO, :T$PONO, :T$DWMS, :T$PWMS, :T$CWAR, :T$ITEM, :T$QANA, :T$CUNI, :T$CLOT, sysdate+(5/24), sysdate+(5/24), :T$PROC, :T$RCNO, :T$RWMS, :T$LOGN, :T$ERRO, :T$SEQN, :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$SOUR, :T$ORNO, :T$PONO, :T$DWMS, :T$PWMS, :T$CWAR, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$QANA, :T$CUNI, :T$CLOT, sysdate+(5/24), sysdate+(5/24), :T$PROC, :T$RCNO, :T$RWMS, :T$LOGN, :T$ERRO, :T$SEQN, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
     </Module>
@@ -3589,7 +3598,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertRecord">
         <stringSQL>
           INSERT INTO {2}
-          VALUES(:T$SOUR,:T$ORNO,:T$CONJ,:T$PONO,:T$SQNB,:T$SERN,:T$RCNO,:T$CWAR,:T$LOCA,:T$ITEM,:T$QANA,:T$CUNI,:T$CLOT,:T$LOGN,:T$HABL,:T$ESTI,sysdate+5/24,sysdate+5/24,:T$DIFE,:T$PROC,:T$CONF,:T$ORIG,:T$REFCNTD,:T$REFCNTU)
+          VALUES(:T$SOUR,:T$ORNO,:T$CONJ,:T$PONO,:T$SQNB,:T$SERN,:T$RCNO,:T$CWAR,:T$LOCA,{0}.F_ITEM_POP(TRIM(:T$ITEM)) ,:T$QANA,:T$CUNI,:T$CLOT,:T$LOGN,:T$HABL,:T$ESTI,sysdate+5/24,sysdate+5/24,:T$DIFE,:T$PROC,:T$CONF,:T$ORIG,:T$REFCNTD,:T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="findRecord">
@@ -3767,7 +3776,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$UNID, T$DATE, T$LOGN, T$LOSO, T$PAID, T$ITEM, T$CLOT, T$QTDT, T$PROC, T$MES1, T$DAFS, T$REFCNTD, T$REFCNTU)
-          VALUES ('[:T$UNID]', sysdate+(5/24), '[:T$LOGN]', '[:T$LOSO]', '[:T$PAID]', '[:T$ITEM]', '[:T$CLOT]', '[:T$QTDT]', '[:T$PROC]', '[:T$MES1]', TO_DATE('01/01/1970','DD/MM/YYYY'), '[:T$REFCNTD]', '[:T$REFCNTU]')
+          VALUES ('[:T$UNID]', sysdate+(5/24), '[:T$LOGN]', '[:T$LOSO]', '[:T$PAID]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , '[:T$CLOT]', '[:T$QTDT]', '[:T$PROC]', '[:T$MES1]', TO_DATE('01/01/1970','DD/MM/YYYY'), '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
       <operationName name="validarRegistroByPalletId">
@@ -3821,7 +3830,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$UNID, T$DATE, T$LOGN, T$PAID, T$ITEM, T$CLOT, T$QTDT, T$PROC, T$MES1, T$DAFS, T$REFCNTD, T$REFCNTU, T$LOCA, T$LOCS)
-          VALUES (:T$UNID, sysdate+(5/24), :T$LOGN, :T$PAID, :T$ITEM, :T$CLOT, :T$QTDT, :T$PROC, :T$MES1, TO_DATE('01/01/1970','DD/MM/YYYY'), :T$REFCNTD, :T$REFCNTU, :T$LOCA, :T$LOCS)
+          VALUES (:T$UNID, sysdate+(5/24), :T$LOGN, :T$PAID, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CLOT, :T$QTDT, :T$PROC, :T$MES1, TO_DATE('01/01/1970','DD/MM/YYYY'), :T$REFCNTD, :T$REFCNTU, :T$LOCA, :T$LOCS)
         </stringSQL>
       </operationName>
       <operationName name="validarRegistroByUniqueId">
@@ -4230,13 +4239,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} ( T$PDNO, T$MITM, T$DSCA, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$MITM, :T$DSCA, :T$QTDL, :T$CUNI, sysdate+5/24, :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$PDNO, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$DSCA, :T$QTDL, :T$CUNI, sysdate+5/24, :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="insertarRegistroAux">
         <stringSQL>
           INSERT INTO {2} ( T$PDNO, T$MITM, T$DSCA, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES ('[:T$PDNO]', '[:T$MITM]', '[:T$DSCA]', '[:T$QTDL]', '[:T$CUNI]', sysdate+5/24, '[:T$MESS]', '[:T$USER]', '[:T$REFCNTD]', '[:T$REFCNTU]')
+          VALUES ('[:T$PDNO]', {0}.F_ITEM_POP(TRIM('[:T$MITM]')) , '[:T$DSCA]', '[:T$QTDL]', '[:T$CUNI]', sysdate+5/24, '[:T$MESS]', '[:T$USER]', '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
     </Module>
@@ -4244,7 +4253,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} ( T$PDNO, T$SQNB, T$MITM, T$DSCA, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$MITM, :T$DSCA, :T$QTDL, :T$CUNI, sysdate+5/24, :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$PDNO, :T$SQNB, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$DSCA, :T$QTDL, :T$CUNI, sysdate+5/24, :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="sumQtdlByOrderNumber">
@@ -4263,7 +4272,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2}  (T$PDNO, T$SQNB, T$MITM, T$DSCA, T$CWAR, T$LOCA, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$MITM, :T$DSCA, :T$CWAR, :T$LOCA, :T$QTDL, :T$CUNI, sysdate+(5/24), :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$PDNO, :T$SQNB, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$DSCA, :T$CWAR, :T$LOCA, :T$QTDL, :T$CUNI, sysdate+(5/24), :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="consultarConsecutivoRegistro">
@@ -4276,7 +4285,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2}  (T$OORG,T$ORNO, T$SQNB, T$OSET, T$PONO, T$SEQN, T$MITM, T$DSCA, T$CWAR, T$LOCA, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$OORG,:T$ORNO, :T$SQNB, :T$OSET, :T$PONO, :T$SEQN, :T$MITM, :T$DSCA, :T$CWAR, UPPER(:T$LOCA), :T$QTDL, :T$CUNI, sysdate+(5/24), :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
+          VALUES (:T$OORG,:T$ORNO, :T$SQNB, :T$OSET, :T$PONO, :T$SEQN, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$DSCA, :T$CWAR, UPPER(:T$LOCA), :T$QTDL, :T$CUNI, sysdate+(5/24), :T$MESS, :T$USER, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="consultarConsecutivoRegistro">
@@ -4316,7 +4325,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$ORNO, T$PONO, T$ITEM, T$CWAR, T$QUNE, T$LOGN, T$DATE, T$PROC, T$REFCNTD, T$REFCNTU,T$CLOT,T$PDAT,T$PICK,T$OORG)
-          VALUES('[:T$ORNO]', '[:T$PONO]', '[:T$ITEM]', '[:T$CWAR]', '[:T$QUNE]', '[:T$LOGN]', sysdate+(5/24), '[:T$PROC]', '[:T$REFCNTD]', '[:T$REFCNTU]', '[:T$CLOT]',sysdate+(5/24),'[:T$PICK]','[:T$OORG]')
+          VALUES('[:T$ORNO]', '[:T$PONO]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , '[:T$CWAR]', '[:T$QUNE]', '[:T$LOGN]', sysdate+(5/24), '[:T$PROC]', '[:T$REFCNTD]', '[:T$REFCNTU]', '[:T$CLOT]',sysdate+(5/24),'[:T$PICK]','[:T$OORG]')
         </stringSQL>
       </operationName>
       <operationName name="actualizarRegistro_Param">
@@ -4350,7 +4359,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro_regrindM">
         <stringSQL>
           INSERT INTO {2} (T$ORNO, T$PONO, T$ITEM, T$CWAR, T$QUNE, T$LOGN, T$DATE, T$PROC, T$REFCNTD, T$REFCNTU,T$CLOT, T$PDAT, T$PICK, T$OORG)
-          VALUES(:T$ORNO, :T$PONO, :T$ITEM, :T$CWAR, :T$QUNE, :T$LOGN, sysdate+(5/24), :T$PROC, :T$REFCNTD, :T$REFCNTU, :T$CLOT, sysdate+(5/24), :T$PICK, :T$OORG)
+          VALUES(:T$ORNO, :T$PONO, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$QUNE, :T$LOGN, sysdate+(5/24), :T$PROC, :T$REFCNTD, :T$REFCNTU, :T$CLOT, sysdate+(5/24), :T$PICK, :T$OORG)
         </stringSQL>
       </operationName>
       <operationName name="findRecordByOrnoPonoItem">
@@ -4389,7 +4398,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2}
-          VALUES(:T$MCNO, :T$SEQN, :T$ITEM, :T$CWAR, :T$UNIT, :T$QANA, :T$LOGN, sysdate+(5/24), :T$PROC, :T$MESS, :T$REFCNTD, :T$REFCNTU)
+          VALUES(:T$MCNO, :T$SEQN, {0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$UNIT, :T$QANA, :T$LOGN, sysdate+(5/24), :T$PROC, :T$MESS, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="consultaSeqn">
@@ -4443,7 +4452,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertRecord">
         <stringSQL>
           INSERT INTO {0}.tticol100{1} (T$PDNO,T$PONO,T$SEQN,T$MCNO,T$SHIF,T$ITEM,T$QTYR,T$CDIS,T$REJT,T$CLOT,T$OBSE,T$LOGR,T$DATR,T$DISP,T$LOGN,T$DATE,T$PROC,T$MESS,T$REFCNTD,T$REFCNTU,T$CWAR,T$PAID)
-          VALUES('[:T$PDNO]', '[:T$PONO]', '[:T$SEQN]', '[:T$MCNO]', '[:T$SHIF]', '[:T$ITEM]', '[:T$QTYR]', '[:T$CDIS]', '[:T$REJT]', '[:T$CLOT]', '[:T$OBSE]', '[:T$LOGR]', sysdate+5/24, '[:T$DISP]', '[:T$LOGN]', sysdate+5/24, '[:T$PROC]', '[:T$MESS]', '[:T$REFCNTD]', '[:T$REFCNTU]','[:T$CWAR]','[:T$PAID]')
+          VALUES('[:T$PDNO]', '[:T$PONO]', '[:T$SEQN]', '[:T$MCNO]', '[:T$SHIF]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , '[:T$QTYR]', '[:T$CDIS]', '[:T$REJT]', '[:T$CLOT]', '[:T$OBSE]', '[:T$LOGR]', sysdate+5/24, '[:T$DISP]', '[:T$LOGN]', sysdate+5/24, '[:T$PROC]', '[:T$MESS]', '[:T$REFCNTD]', '[:T$REFCNTU]','[:T$CWAR]','[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizaRegistro_ticol022">
@@ -4695,7 +4704,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2}
-          VALUES(:T$ITEM, :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+5/24 ,:T$DISP, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU,:T$CWAM,:T$PAID)
+          VALUES({0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+5/24 ,:T$DISP, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU,:T$CWAM,:T$PAID)
         </stringSQL>
       </operationName>
     </Module>

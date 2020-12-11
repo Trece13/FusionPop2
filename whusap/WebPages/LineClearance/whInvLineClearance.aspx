@@ -152,7 +152,7 @@
     <div id="HeaderGrid" style="width: 80%" runat="server">
         <span style="text-align: right">
             <asp:Button ID="btnSave" runat="server" Text="Save Items" Visible="False" CssClass="ButtonsSendSave"
-                Width="90px" Height="20px" OnClick="btnSave_Click" />
+                Width="134px" Height="27px" OnClick="btnSave_Click" />
         </span>
     </div>
     <div style="height: 10px; margin-bottom: 200px" align="center">

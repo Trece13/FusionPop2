@@ -43,23 +43,23 @@ namespace whusap
                 menupages = idal.datosMenu_Param(Session["user"].ToString(), url);
             }
 
-            if (menupages.Rows.Count > 0)
-            {
-                if (menupages.Rows.Count > 1)
-                {
-                    foreach (DataRow page in menupages.Rows)
-                    {
-                        if (page["PROGRAMA"].ToString().Trim().IndexOf("tipoFormulario="+Request.QueryString["tipoFormulario"].ToString().Trim()) != -1)
-                        {
-                            namePage = page["MENG"].ToString() + " - ";
-                        }
-                    }
-                }
-                else
-                {
-                    namePage = menupages.Rows[0]["MENG"].ToString() + " - ";
-                }
-            }
+            //if (menupages.Rows.Count > 0)
+            //{
+            //    if (menupages.Rows.Count > 1)
+            //    {
+            //        foreach (DataRow page in menupages.Rows)
+            //        {
+            //            if (page["PROGRAMA"].ToString().Trim().IndexOf("tipoFormulario="+Request.QueryString["tipoFormulario"].ToString().Trim()) != -1)
+            //            {
+            //                namePage = page["MENG"].ToString() + " - ";
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        namePage = menupages.Rows[0]["MENG"].ToString() + " - ";
+            //    }
+            //}
 
             //namePage = ( idal.datosMenu_Param(Session["user"].ToString(), url).Trim() == "" ? "" : idal.datosMenu_Param(Session["user"].ToString(), url).Trim() + " - ") + "Phoenix  Operation Portal";
             LblHome.Text = namePage + "Phoenix  Operation Portal";

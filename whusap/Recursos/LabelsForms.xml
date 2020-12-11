@@ -4966,7 +4966,7 @@
         </label>
         <label name="lblToIssue">
           <stringMessage>
-            To Issue
+            Weight
           </stringMessage>
         </label>
         <label name="lblMaxDigits">
@@ -5018,7 +5018,7 @@
         </label>
         <label name="lblToIssue">
           <stringMessage>
-            Para emitir
+            Peso
           </stringMessage>
         </label>
         <label name="lblMaxDigits">
@@ -5068,7 +5068,7 @@
         </label>
         <label name="lblToIssue">
           <stringMessage>
-            To Issue
+            Weight
           </stringMessage>
         </label>
         <label name="lblMaxDigits">
@@ -5100,7 +5100,7 @@
         </label>
         <label name="lblToIssue">
           <stringMessage>
-            Para emitir
+            Peso
           </stringMessage>
         </label>
         <label name="lblMaxDigits">
@@ -5648,7 +5648,7 @@
         </label>
         <label name="btnSave">
           <stringMessage>
-            Save Items
+            Return Material
           </stringMessage>
         </label>
         <label name="printLabel">

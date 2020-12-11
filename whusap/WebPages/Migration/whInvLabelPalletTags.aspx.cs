@@ -73,7 +73,7 @@ namespace whusap.WebPages.Migration
                     _idioma = "INGLES";
                 }
 
-                CargarIdioma();
+                
 
                 if (Request.QueryString["tipoFormulario"] != null)
                 {
@@ -114,6 +114,7 @@ namespace whusap.WebPages.Migration
                     lblInfo.Text = mensajes("automaticannounced");
                 }
             }
+            CargarIdioma();
         }
 
         protected void btnConsultar_Click(object sender, EventArgs e)
@@ -222,7 +223,8 @@ namespace whusap.WebPages.Migration
                         var fec_hoy = validaPalletAnterior[0]["FEC_HOY"].ToString();
                         var fec_ant = validaPalletAnterior[0]["FEC_ANT"].ToString();
                         //if (Convert.ToInt32(dif_min) <= (tiempo / 60))
-                        if (Convert.ToInt32(dif_min) <= (tiempo / 60))
+                        var DoubleWindermachine = ConfigurationManager.AppSettings["DoubleWindermachine"].ToString().Split('|');
+                        if (Convert.ToInt32(dif_min) <= (tiempo / 60) && DoubleWindermachine.Contains(maquina) == false)
                         {
                             lblError.Text = String.Format(mensajes("announcedago"), (tiempo / 60));
                             lblConfirm.Text = string.Empty;

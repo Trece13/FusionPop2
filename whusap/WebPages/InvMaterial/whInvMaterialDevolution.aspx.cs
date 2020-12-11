@@ -150,11 +150,11 @@ namespace whusap.WebPages.InvMaterial
 
                     DataTable ResQtdl = idal.ConsultarQtdl(ref MyObj, ref strError);
 
-                    int Qtdl = 0;
+                    decimal Qtdl = 0;
 
                     if (ResQtdl.Rows.Count > 0)
                     {
-                        Qtdl = Convert.ToInt32(ResQtdl.Rows[0]["REQT"].ToString());
+                        Qtdl = Convert.ToDecimal(ResQtdl.Rows[0]["REQT"].ToString());
                     }
 
                     item["CANT"] = Convert.ToString(Convert.ToDecimal(item["CANT"].ToString()) - Qtdl);
@@ -202,10 +202,6 @@ namespace whusap.WebPages.InvMaterial
                 int sec022 = 0;
                 string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
                 string toLot = ((DropDownList)row.Cells[8].FindControl("toLot")).SelectedValue;
-                if (toLot.Trim() == "")
-                {
-                    return;
-                }
                 //string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
                 string condLote = ((HiddenField)row.Cells[6].FindControl("LOTE")).Value.Trim();
                 ktlc = Convert.ToString(row.Cells[11].Text);
@@ -272,9 +268,13 @@ namespace whusap.WebPages.InvMaterial
                     if (dt022.Rows.Count > 0)
                     {
                         paid = dt022.Rows[0]["T$SQNB"].ToString().Trim();
-                        sec = paid.Substring(paid.IndexOf("-")+1, 2);
+                        sec = paid.Substring(12, 2);
                         sec022 = Convert.ToInt32(sec);
                         sec = addZero(sec022 + 1);
+                    }
+                    else
+                    {
+                        sec = "01";
                     }
 
                         if (tabla131 == 1)
@@ -312,7 +312,7 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.PSLIP = " ";
                             MyObj.ALLO = "0";
 
-                            Itwhcol130.Insertartwhcol131(MyObj);
+                            Itwhcol130.Insertartwhcol131(MyObj); 
                         }
 
                         if (tabla022 == 1)
@@ -367,16 +367,16 @@ namespace whusap.WebPages.InvMaterial
                             obj042.qtdl = Convert.ToDecimal(toreturn);
                             obj042.cuni = row.Cells[5].Text.Trim();
                             obj042.log1 = "NONE";
-                            obj042.qtd1 = Convert.ToInt32(toreturn);
+                            obj042.qtd1 = Convert.ToDecimal(toreturn);
                             obj042.pro1 = 1;
                             obj042.log2 = "NONE";
-                            obj042.qtd2 = Convert.ToInt32(toreturn);
+                            obj042.qtd2 = Convert.ToDecimal(toreturn);
                             obj042.pro2 = 2;
                             obj042.loca = " ";
                             obj042.norp = 1;
                             obj042.dele = 2;
                             obj042.logd = "NONE";
-                            obj042.refcntd = 0;
+                            obj042.refcntd = 0; 
                             obj042.refcntu = 0;
                             obj042.drpt = DateTime.Now;
                             obj042.urpt = _operator;

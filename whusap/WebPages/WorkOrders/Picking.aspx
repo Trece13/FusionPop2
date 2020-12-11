@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="Picking.aspx.cs" Inherits="whusap.WebPages.WorkOrders.Picking" %>
+    CodeBehind="Picking.aspx.cs" Inherits="whusap.WebPages.WorkOrders.Picking" EnableEventValidation="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -13,29 +13,27 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style type="text/css">
-        .swal2-popup{
-            width:850px !important;
+        .swal2-popup {
+            width: 850px !important;
         }
-        #MyEtiqueta
-        {
+
+        #MyEtiqueta {
             font-size: 14px;
         }
-        #MyEtiqueta2 label
-        {
+
+        #MyEtiqueta2 label {
             font-size: 15px;
         }
-        
-        #LblDated
-        {
+
+        #LblDated {
             font-size: 14px !important;
         }
-        
-        #LblReprintInd, #LblReprint
-        {
+
+        #LblReprintInd, #LblReprint {
             display: none;
         }
-        .colorButton
-        {
+
+        .colorButton {
             background-color: #C0C0C0;
             background-position: center;
             font-size: 24px;
@@ -44,17 +42,17 @@
             font-size: 12px;
             padding: 5px 5px 5px 5px;
         }
-        .hidebutton
-        {
+
+        .hidebutton {
             display: none;
         }
-        #LblError
-        {
+
+        #LblError {
             color: Red;
             font-size: 14px;
         }
-        .colorButton2
-        {
+
+        .colorButton2 {
             background-color: #3399ff;
             background-position: center;
             font-size: 24px;
@@ -66,26 +64,25 @@
             padding: 5px 5px 5px 5px;
             color: white;
         }
-        .table2
-        {
+
+        .table2 {
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 70%;
             font-size: 16px;
         }
-        
-        td, th
-        {
+
+        td, th {
             text-align: left;
             padding: 8px;
         }
-        .hidetable
-        {
+
+        .hidetable {
             display: none;
         }
-        #Contenido_lblQuantityOld
-        {
-            display:none;
+
+        #Contenido_lblQuantityOld {
+            display: none;
         }
     </style>
     <script>
@@ -96,7 +93,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
@@ -145,244 +142,232 @@
         };
     </script>
     <form id="form1" class="container">
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg hidebutton" for="txQuantity">
-            Pallet ID</label>
-        <div class="col-sm-4">
-            <input type="text" class="hidebutton" id="txPalletID" placeholder="Pallet ID" data-method="ValidarQuantity">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label-lg hidebutton" for="txQuantity">
+                Pallet ID</label>
+            <div class="col-sm-4">
+                <input type="text" class="hidebutton" id="txPalletID" placeholder="Pallet ID" data-method="ValidarQuantity">
+            </div>
         </div>
-    </div>
-    <br />
-    <div id="blocked">
-    <div class="row">
-    <div class="form-group row">
-        <input id="btnEnviar" type="button" class="hidebutton" value="START NEXT PICK" />&nbsp;&nbsp;&nbsp
-    </div>
-    </div>
-    <div id="MyEtiqueta2" class="col-6">
-        <table class="table2">
-            <tr>
-                <asp:Label ID="lblCNPK" runat="server" CssClass=""></asp:Label>
-            </tr>
-            <tr>
-                ADVS:
+        <br />
+        <div id="blocked">
+            <div class="row">
+                <div id="MyEtiqueta2" class="col-6">
+                <table class="table2">
+                    <tr>
+                        <asp:Label ID="lblCNPK" runat="server" CssClass=""></asp:Label>
+                    </tr>
+                    <tr>
+                        ADVS:
                 <asp:Label ID="lblADVS" runat="server" CssClass=""></asp:Label>
-            </tr>
-            <tr>
-                <td class="">
-                    <label class="" id="Label1">
-                        Pallet ID</label>
-                </td>
-                <td>
-                    <asp:Label ID="lblPalletID" runat="server" CssClass=""></asp:Label>
-                </td>
-                <td>
-                    <asp:TextBox ID="txtPalletID" MaxLength="20" Style="text-transform: uppercase;" runat="server"
-                        CssClass="form-control" onkeyup="validarPallet();" Font-Size="Medium"></asp:TextBox>
-                    <asp:Button ID="Reload" runat="server" Text="Next Picking" OnClick="Reload_Click"
-                        class="btn btn-primary btn-lg mt-3" />
-                </td>
-            </tr>
-            <tr>
-                <td class="">
-                    <label class="">
-                        Item</label>
-                </td>
-                <td class="">
-                    <asp:Label ID="lblItemID" runat="server" CssClass=""></asp:Label>
-                </td>
-                <td class="">
-                    <asp:Label ID="lblItemDesc" runat="server" CssClass=""></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td class="">
-                    <label class="">
-                        Lot</label>
-                </td>
-                <td class="">
-                    <asp:Label ID="LblLotId" runat="server" CssClass=""></asp:Label>
-                </td>
-                <td class="">
-                    <asp:Label ID="LblLotIdDesc" runat="server" CssClass=""></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td class="">
-                    <label class="">
-                        Warehouse</label>
-                </td>
-                <td class="">
-                    <asp:Label ID="lblWarehouse" runat="server" CssClass=""></asp:Label>
-                </td>
-                <td class="">
-                    <asp:Label ID="lblWareDescr" runat="server" CssClass=""></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td class="">
-                    <label class="">
-                        Location</label>
-                </td>
-                <td class="">
-                    <asp:Label ID="lbllocation" runat="server" CssClass=""></asp:Label>
-                </td>
-                <td class="">
-                    <%--<asp:TextBox ID="txtlocation" MaxLength="20" Style="text-transform: uppercase;" runat="server"
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <label class="" id="Label1">
+                                Pallet ID</label>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblPalletID" runat="server" CssClass=""></asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="txtPalletID" MaxLength="20" Style="text-transform: uppercase;" runat="server"
+                                CssClass="form-control" onkeyup="validarPallet();" Font-Size="Medium"></asp:TextBox>
+                            <asp:Button ID="Reload" runat="server" Text="Next Picking" OnClick="Reload_Click"
+                                class="btn btn-primary btn-lg mt-3" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <label class="">
+                                Item</label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="lblItemID" runat="server" CssClass=""></asp:Label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="lblItemDesc" runat="server" CssClass=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <label class="">
+                                Lot</label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="LblLotId" runat="server" CssClass=""></asp:Label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="LblLotIdDesc" runat="server" CssClass=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <label class="">
+                                Warehouse</label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="lblWarehouse" runat="server" CssClass=""></asp:Label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="lblWareDescr" runat="server" CssClass=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <label class="">
+                                Location</label>
+                        </td>
+                        <td class="">
+                            <asp:Label ID="lbllocation" runat="server" CssClass=""></asp:Label>
+                        </td>
+                        <td class="">
+                            <%--<asp:TextBox ID="txtlocation" MaxLength="20" Style="text-transform: uppercase;" runat="server"
                         CssClass="form-control" onkeyup="validarLocation();" Font-Size="Medium"></asp:TextBox>--%>
-                    <%--<asp:TextBox ID="txtlocation" MaxLength="20" runat="server"
+                            <%--<asp:TextBox ID="txtlocation" MaxLength="20" runat="server"
                          Font-Size="Medium"></asp:TextBox>--%>
-                    <input type="text" id="txtlocation" />
-                </td>
-            </tr>
-            <tr>
-                <td class="">
-                    <label class="">
-                        Quantity</label>
-                </td>
-                <td class="">
-                    <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
-                    <asp:TextBox ID="lblQuantity" CssClass="" runat="server" type="number"></asp:TextBox>
-                    <asp:Label ID="lblQuantityAux" runat="server" Text=""></asp:Label>
-                    <asp:Label ID="lblQuantityOld" runat="server" Text=""></asp:Label>
-                </td>
-                <td>
-                    <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
-                </td>
-            </tr>
-            <tr id="HideReason">
-                <td class="">
-                    <label class="">
-                        Reason</label>
-                </td>
-                <td>
-                    <%-- <asp:DropDownList ID="listRegrind" runat="server"  Width="100%" height="100%" CssClass="DropDownList"    AutoPostBack="false" Font-Size="Larger" OnSelectedIndexChanged="listRegrind_SelectedIndexChanged">
+                            <input type="text" id="txtlocation" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="">
+                            <label class="">
+                                Quantity</label>
+                        </td>
+                        <td class="">
+                            <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
+                            <asp:TextBox ID="lblQuantity" CssClass="" runat="server" type="number"></asp:TextBox>
+                            <asp:Label ID="lblQuantityAux" runat="server" Text=""></asp:Label>
+                            <asp:Label ID="lblQuantityOld" runat="server" Text=""></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
+                        </td>
+                    </tr>
+                    <tr id="HideReason">
+                        <td class="">
+                            <label class="">
+                                Reason</label>
+                        </td>
+                        <td>
+                            <%-- <asp:DropDownList ID="listRegrind" runat="server"  Width="100%" height="100%" CssClass="DropDownList"    AutoPostBack="false" Font-Size="Larger" OnSelectedIndexChanged="listRegrind_SelectedIndexChanged">
                     </asp:DropDownList>--%>
-                    <select class="form-control form-control-lg" id="listCausal" tabindex="1">
-                        <option value="0">Select Causal</option>
-                        <option value="1">Wrong Lot</option>
-                        <option value="2">Aisle Blocked</option>
-                        <option value="3">Wrong Location</option>
-                    </select>
-                </td>
-                <td>
-                    <input id="bntChange" type="button" class="btn btn-primary btn-lg" onclick="IngresarCausales()"
-                        value="CHANGE" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input id="btnconfirPKG" type="button" class="btn btn-primary btn-lg" onclick="ShowCurrentTime()"
-                        value="Confirm" />
-                </td>
-                <td>
-                </td>
-                <td>
-                    <!--<input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
-                        onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />-->
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <label id="LblError">
-                    </label>
-                </td>
-            </tr>
-        </table>
-    </div>
-    
-    <div id="divTable" class="col-6">
-    </div>    
-    </div>
-    <div class="hidetable">
-        <div class="">
-            <table border="1">
-                <tr>
-                    <th>
-                        OORG
-                    </th>
-                    <th>
-                        ORNO
-                    </th>
-                    <%--<th>
+                            <select class="form-control form-control-lg" id="listCausal" tabindex="1">
+                                <option value="0">Select Reason</option>
+                                <option value="1">Wrong Lot</option>
+                                <option value="2">Aisle Blocked</option>
+                                <option value="3">Wrong Location</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input id="bntChange" type="button" class="btn btn-primary btn-lg" onclick="IngresarCausales()"
+                                value="CHANGE" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input id="btnconfirPKG" type="button" class="btn btn-primary btn-lg" onclick="ShowCurrentTime()"
+                                value="Confirm" />
+                        </td>
+                        <td></td>
+                        <td>
+                            <%--<input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
+                        onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />--%>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <label id="LblError">
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                
+            </div>
+                <div id="divTable" class="col-6">
+                </div>
+
+            </div>
+            
+            <div class="hidetable">
+                <div class="">
+                    <table border="1">
+                        <tr>
+                            <th>OORG
+                            </th>
+                            <th>ORNO
+                            </th>
+                            <%--<th>
                         OSET
                     </th>--%>
-                    <th>
-                        PONO
-                    </th>
-                    <th>
-                        SQNB
-                    </th>
-                    <th>
-                        ADVS
-                    </th>
-                </tr>
-                <tr>
-                    <td class="">
-                        <asp:Label ID="lblOORG" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <td class="">
-                        <asp:Label ID="lblORNO" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <%--<td class="">
+                            <th>PONO
+                            </th>
+                            <th>SQNB
+                            </th>
+                            <th>ADVS
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <asp:Label ID="lblOORG" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblORNO" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <%--<td class="">
                         <asp:Label ID="lblOSET" runat="server" CssClass=""></asp:Label>
                     </td>--%>
-                    <td class="">
-                        <asp:Label ID="lblPONO" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <td class="">
-                        <asp:Label ID="lblSQNB" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <td class="">
-                    </td>
-                </tr>
-            </table>
+                            <td class="">
+                                <asp:Label ID="lblPONO" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblSQNB" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class=""></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="">
+                    <table border="1">
+                        <tr>
+                            <th>OORG
+                            </th>
+                            <th>ORNO
+                            </th>
+                            <%--<th>
+                        OSET
+                    </th>--%>
+                            <th>PONO
+                            </th>
+                            <th>SQNB
+                            </th>
+                            <th>ADVS
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <asp:Label ID="lblOORGAUX" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblORNOAUX" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <%--<td class="">
+                        <asp:Label ID="lblOSET" runat="server" CssClass=""></asp:Label>
+                    </td>--%>
+                            <td class="">
+                                <asp:Label ID="lblPONOAUX" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblSQNBAUX" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class=""></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
-        <div class="">
-            <table border="1">
-                <tr>
-                    <th>
-                        OORG
-                    </th>
-                    <th>
-                        ORNO
-                    </th>
-                    <%--<th>
-                        OSET
-                    </th>--%>
-                    <th>
-                        PONO
-                    </th>
-                    <th>
-                        SQNB
-                    </th>
-                    <th>
-                        ADVS
-                    </th>
-                </tr>
-                <tr>
-                    <td class="">
-                        <asp:Label ID="lblOORGAUX" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <td class="">
-                        <asp:Label ID="lblORNOAUX" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <%--<td class="">
-                        <asp:Label ID="lblOSET" runat="server" CssClass=""></asp:Label>
-                    </td>--%>
-                    <td class="">
-                        <asp:Label ID="lblPONOAUX" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <td class="">
-                        <asp:Label ID="lblSQNBAUX" runat="server" CssClass=""></asp:Label>
-                    </td>
-                    <td class="">
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
     </form>
     <script type="text/javascript">
 
@@ -431,7 +416,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             var day = date.getDate();
             var monthIndex = date.getMonth();
@@ -493,7 +478,7 @@
             }
 
         }
-        
+
         $(document).keypress(
          function validar(e) {
              var keycode = (e.keyCode ? e.keyCode : e.which);
@@ -538,7 +523,7 @@
             var result = _txt3.trim() == _txt4.trim() ? 1 : 2;
 
             if (tecla == 13)
-            //alert("presion la tecla");
+                //alert("presion la tecla");
                 validar2(result);
             return false;
 
@@ -578,7 +563,7 @@
                 $('#Contenido_lblWarehouse').html(MyObj.WRH.toString())
                 $('#Contenido_lblWareDescr').html(MyObj.DESCWRH.toString())
                 $('#Contenido_lbllocation').html(MyObj.LOCA.toString())
-                $('#Contenido_lblQuantity').html(MyObj.QTY.toString())
+                $('#Contenido_lblQuantityAux').html(MyObj.QTY.toString())
                 $('#Contenido_lblQuantityDesc').html(MyObj.UN.toString())
 
                 document.getElementById("bntChange").disabled = true;
@@ -635,21 +620,7 @@
 
         function ShowCurrentOptions() {
             var bodyRows = ""
-
-            $.ajax({
-                type: "POST",
-
-                url: "Picking.aspx/ShowCurrentOptions",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    myObj = JSON.parse(response.d);
-                    window.localStorage.setItem('MyPalletList',JSON.stringify(myObj));
-                    for (var i = 0; i < myObj.length; i++) {
-                        bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
-                    }
-                    var tableOptions = "<table class='table' style='width:100%'>" +
+            var tableOptions = "<table class='table' style='width:100%'>" +
                                                 "<thead>" +
                                                   "<tr>" +
                                                     "<th scope='col'>Pallet</th>" +
@@ -662,24 +633,55 @@
                                                "</thead>" +
                                                "<tbody>" +
                                                bodyRows
-                    "</tbody>" +
-                                            "</table>";
+            "</tbody>" +
+                                    "</table>";
 
 
-                    $("#divTable").append(tableOptions);
-//                    Swal.fire({
-//                        title: '<strong>Options</strong>',
-//                        icon: 'info',
-//                        html: tableOptions,
-//                        showCloseButton: false,
-//                        showCancelButton: false,
-//                        focusConfirm: false
-//                    });
-                },
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
+            $("#divTable").append(tableOptions);
+            //            $.ajax({
+            //                type: "POST",
+
+            //                url: "Picking.aspx/ShowCurrentOptions",
+            //                data: "{}",
+            //                contentType: "application/json; charset=utf-8",
+            //                dataType: "json",
+            //                success: function (response) {
+            //                    myObj = JSON.parse(response.d);
+            //                    window.localStorage.setItem('MyPalletList',JSON.stringify(myObj));
+            //                    for (var i = 0; i < myObj.length; i++) {
+            //                        bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+            //                    }
+            //                    var tableOptions = "<table class='table' style='width:100%'>" +
+            //                                                "<thead>" +
+            //                                                  "<tr>" +
+            //                                                    "<th scope='col'>Pallet</th>" +
+            //                                                    "<th scope='col'>Location</th>" +
+            //                                                    "<th scope='col'>Item</th>" +
+            //                                                    "<th scope='col'>Description</th>" +
+            //                                                    "<th scope='col'>Quantity</th>" +
+            //                                                    "<th scope='col'>Unit</th>" +
+            //                                                "</tr>" +
+            //                                               "</thead>" +
+            //                                               "<tbody>" +
+            //                                               bodyRows
+            //                    "</tbody>" +
+            //                                            "</table>";
+
+
+            //                    $("#divTable").append(tableOptions);
+            ////                    Swal.fire({
+            ////                        title: '<strong>Options</strong>',
+            ////                        icon: 'info',
+            ////                        html: tableOptions,
+            ////                        showCloseButton: false,
+            ////                        showCancelButton: false,
+            ////                        focusConfirm: false
+            ////                    });
+            //                },
+            //                failure: function (response) {
+            //                    alert(response.d);
+            //                }
+            //});
         }
         function OnSuccess(response) {
             alert(response.d);
@@ -771,15 +773,15 @@
 
                     if (exist) {
                         $('#LblError').html("");
-//                        HideReason.style.display = "";
-//                        $('#LblError').html("");
-//                        $('#Contenido_lblPalletID').html(MyObj["PALLETID"].toString())
-//                        $('#Contenido_LblLotId').html(MyObj["LOT"].toString())
-//                        $('#Contenido_lblWarehouse').html(MyObj["WRH"].toString())
-//                        $('#Contenido_lblWareDescr').html(MyObj["DESCWRH"].toString())
-//                        $('#Contenido_lbllocation').html(MyObj["LOCA"].toString())
-//                        $('#Contenido_lblQuantity').html(MyObj["QTY"].toString())
-//                        $('#Contenido_lblQuantityDesc').html(MyObj["UN"].toString())
+                        //                        HideReason.style.display = "";
+                        //                        $('#LblError').html("");
+                        //                        $('#Contenido_lblPalletID').html(MyObj["PALLETID"].toString())
+                        //                        $('#Contenido_LblLotId').html(MyObj["LOT"].toString())
+                        //                        $('#Contenido_lblWarehouse').html(MyObj["WRH"].toString())
+                        //                        $('#Contenido_lblWareDescr').html(MyObj["DESCWRH"].toString())
+                        //                        $('#Contenido_lbllocation').html(MyObj["LOCA"].toString())
+                        //                        $('#Contenido_lblQuantity').html(MyObj["QTY"].toString())
+                        //                        $('#Contenido_lblQuantityDesc').html(MyObj["UN"].toString())
 
                         document.getElementById("bntChange").disabled = true;
                         Method = "VerificarPalletID"
@@ -793,18 +795,18 @@
                         document.getElementById("bntChange").disabled = true;
                     }
                 }
-//                else {
-//                    alert('Pallet Id not equal to the selected pallet');
-//                    document.getElementById("txtlocation").value = "";
-//                    document.getElementById("txtlocation").disabled = true;
+                //                else {
+                //                    alert('Pallet Id not equal to the selected pallet');
+                //                    document.getElementById("txtlocation").value = "";
+                //                    document.getElementById("txtlocation").disabled = true;
 
-//                    Method = "VerificarPalletID"
-//                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
-//                    EventoAjax(Method, Data, PalletIDSuccess)
+                //                    Method = "VerificarPalletID"
+                //                    Data = "{'PAID_NEW':'" + _txt2 + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'false'}";
+                //                    EventoAjax(Method, Data, PalletIDSuccess)
 
-//                    //JUANC
-//                    return false;
-//                }
+                //                    //JUANC
+                //                    return false;
+                //                }
             }
         }
 
@@ -905,22 +907,22 @@
             HideReason.style.display = "none";
             document.getElementById("bntChange").disabled = true;
             document.getElementById("txtlocation").disabled = true;
-            document.getElementById("Contenido_lblCNPK").innerText == "1" ? document.getElementById("Contenido_lblQuantity").disabled = true : document.getElementById("Contenido_lblQuantity").disabled = false;
+            //document.getElementById("Contenido_lblCNPK").innerText == "1" ? document.getElementById("Contenido_lblQuantity").disabled = true : document.getElementById("Contenido_lblQuantity").disabled = false;
             document.getElementById("<%=txtPalletID.ClientID %>").focus();
             document.getElementById('btnconfirPKG').disabled = true;
-
+            ShowCurrentOptions();
         });
-        var selectNewPalletSuccess = function () {
-            alert("Exito");
+        var selectNewPalletSuccess = function (r) {
+            PalletIDSuccess(r);
         }
         var selectNewPallet = function (currentRow) {
-//            currentRow = currentRow.cells[0].innerHTML.toString().trim()
-//            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'true'}", selectNewPalletSuccess);
+            currentRow = currentRow.cells[0].innerHTML.toString().trim();
+            EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'true'}", selectNewPalletSuccess);
         }
         $("#Contenido_lblQuantity").bind("change paste keyup",
             function () {
                 var newCant = parseFloat($("#Contenido_lblQuantity").val());
-                var oldCant = parseFloat($("#Contenido_lblQuantityOld").html());
+                var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
                 if (newCant > 0 && newCant != null) {
                     if (newCant <= oldCant) {
 

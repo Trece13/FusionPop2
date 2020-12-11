@@ -1148,12 +1148,13 @@ namespace whusa.DAL
             return Retorno;
         }
 
-        public bool ActualizarCantidades131(string PAID)
+        public bool ActualizarCantidades131(string PAID,bool OLD = true)
         {
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", PAID.Trim());
+            paramList.Add(":OLD", OLD);
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
             try
             {

@@ -46,7 +46,7 @@ namespace whusap.WebPages.LineClearance
         protected void Page_Load(object sender, EventArgs e)
             {
 
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
                 base.InitializeCulture();
 
@@ -105,7 +105,7 @@ namespace whusap.WebPages.LineClearance
                         var FilaSerializada = serializador.Serialize(fila);
 
                         //((RangeValidator)e.Row.Cells[4].FindControl("validateQuantity")).MinimumValue = "0";
-                        TextBox toReturn = (TextBox)e.Row.Cells[4].FindControl("toReturn");
+                        TextBox toReturn = (TextBox)e.Row.Cells[4].FindControl("toReturn");   
                         //                    TextBox toLot = (TextBox)e.Row.Cells[5].FindControl("toLot");
 
                         strLote = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["IND_LOTE"].ToString();
