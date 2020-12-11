@@ -620,68 +620,68 @@
 
         function ShowCurrentOptions() {
             var bodyRows = ""
-            var tableOptions = "<table class='table' style='width:100%'>" +
-                                                "<thead>" +
-                                                  "<tr>" +
-                                                    "<th scope='col'>Pallet</th>" +
-                                                    "<th scope='col'>Location</th>" +
-                                                    "<th scope='col'>Item</th>" +
-                                                    "<th scope='col'>Description</th>" +
-                                                    "<th scope='col'>Quantity</th>" +
-                                                    "<th scope='col'>Unit</th>" +
-                                                "</tr>" +
-                                               "</thead>" +
-                                               "<tbody>" +
-                                               bodyRows
-            "</tbody>" +
-                                    "</table>";
+            //var tableOptions = "<table class='table' style='width:100%'>" +
+            //                                    "<thead>" +
+            //                                      "<tr>" +
+            //                                        "<th scope='col'>Pallet</th>" +
+            //                                        "<th scope='col'>Location</th>" +
+            //                                        "<th scope='col'>Item</th>" +
+            //                                        "<th scope='col'>Description</th>" +
+            //                                        "<th scope='col'>Quantity</th>" +
+            //                                        "<th scope='col'>Unit</th>" +
+            //                                    "</tr>" +
+            //                                   "</thead>" +
+            //                                   "<tbody>" +
+            //                                   bodyRows
+            //"</tbody>" +
+            //                        "</table>";
 
 
-            $("#divTable").append(tableOptions);
-            //            $.ajax({
-            //                type: "POST",
+            //$("#divTable").append(tableOptions);
+                        $.ajax({
+                            type: "POST",
 
-            //                url: "Picking.aspx/ShowCurrentOptions",
-            //                data: "{}",
-            //                contentType: "application/json; charset=utf-8",
-            //                dataType: "json",
-            //                success: function (response) {
-            //                    myObj = JSON.parse(response.d);
-            //                    window.localStorage.setItem('MyPalletList',JSON.stringify(myObj));
-            //                    for (var i = 0; i < myObj.length; i++) {
-            //                        bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
-            //                    }
-            //                    var tableOptions = "<table class='table' style='width:100%'>" +
-            //                                                "<thead>" +
-            //                                                  "<tr>" +
-            //                                                    "<th scope='col'>Pallet</th>" +
-            //                                                    "<th scope='col'>Location</th>" +
-            //                                                    "<th scope='col'>Item</th>" +
-            //                                                    "<th scope='col'>Description</th>" +
-            //                                                    "<th scope='col'>Quantity</th>" +
-            //                                                    "<th scope='col'>Unit</th>" +
-            //                                                "</tr>" +
-            //                                               "</thead>" +
-            //                                               "<tbody>" +
-            //                                               bodyRows
-            //                    "</tbody>" +
-            //                                            "</table>";
+                            url: "Picking.aspx/ShowCurrentOptions",
+                            data: "{}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            success: function (response) {
+                                myObj = JSON.parse(response.d);
+                                window.localStorage.setItem('MyPalletList',JSON.stringify(myObj));
+                                for (var i = 0; i < myObj.length; i++) {
+                                    bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                                }
+                                var tableOptions = "<table class='table' style='width:100%'>" +
+                                                            "<thead>" +
+                                                              "<tr>" +
+                                                                "<th scope='col'>Pallet</th>" +
+                                                                "<th scope='col'>Location</th>" +
+                                                                "<th scope='col'>Item</th>" +
+                                                                "<th scope='col'>Description</th>" +
+                                                                "<th scope='col'>Quantity</th>" +
+                                                                "<th scope='col'>Unit</th>" +
+                                                            "</tr>" +
+                                                           "</thead>" +
+                                                           "<tbody>" +
+                                                           bodyRows
+                                "</tbody>" +
+                                                        "</table>";
 
 
-            //                    $("#divTable").append(tableOptions);
-            ////                    Swal.fire({
-            ////                        title: '<strong>Options</strong>',
-            ////                        icon: 'info',
-            ////                        html: tableOptions,
-            ////                        showCloseButton: false,
-            ////                        showCancelButton: false,
-            ////                        focusConfirm: false
-            ////                    });
-            //                },
-            //                failure: function (response) {
-            //                    alert(response.d);
-            //                }
-            //});
+                                $("#divTable").append(tableOptions);
+            //                    Swal.fire({
+            //                        title: '<strong>Options</strong>',
+            //                        icon: 'info',
+            //                        html: tableOptions,
+            //                        showCloseButton: false,
+            //                        showCancelButton: false,
+            //                        focusConfirm: false
+            //                    });
+                            },
+                            failure: function (response) {
+                                alert(response.d);
+                            }
+            });
         }
         function OnSuccess(response) {
             alert(response.d);
