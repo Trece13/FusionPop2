@@ -372,7 +372,7 @@
 
     </form>
     <div id="MyEtiqueta" style="display:none">
-        <table style="margin: auto; border:solid">
+        <table style="margin: auto; >
             <tr>
                 <td>
                     <label style="font-size: 11px">
@@ -459,7 +459,7 @@
         </table>
         <br />
         <br />
-        <table style="margin: auto; border:solid">
+        <table style="margin: auto; >
             <tr>
                 <td>
                     <label style="font-size: 11px">
@@ -753,10 +753,10 @@
 
         function ShowCurrentTime() {
             if ($("#Contenido_lblCNPK").html() != "1") {
-                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + document.getElementById("<%=lblQuantity.ClientID %>").value + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityOld.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + $("#Contenido_lblQuantity").val() + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
             }
             else {
-                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityOld.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + $("#Contenido_lblQuantity").val() + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID%>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
             }
 
             //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
@@ -798,9 +798,24 @@
                         var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
                         alert("Information saved successfully");
 
-                        if (newCant > 0) {
+                        if ((oldCant - newCant ) > 0) {
                             printDiv("MyEtiqueta");
                         }
+
+
+
+
+                        $('#Contenido_lblPalletID').html(""); 
+                        $('#Contenido_lblItemID').html("");
+                        $('#Contenido_LblLotId').html("");
+                        $('#Contenido_lblWarehouse').html("");
+                        $('#Contenido_lbllocation').html("");
+                        $('#Contenido_lblQuantity').html("");
+                        $('#Contenido_lblItemDesc').html("");
+                        $('#Contenido_lblWareDescr').html("");
+                        $('#Contenido_lblQuantityDesc').html("");
+                        $('#Contenido_txtPalletID').val("");
+                        $('#txtlocation').val("");
                         
                     }
                 },

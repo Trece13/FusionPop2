@@ -1071,14 +1071,17 @@ namespace whusa.DAL
             return Retorno;
         }
 
-        public void updatetwhcol131Quantity(string pallet, decimal qtyt_act)
+        public void updatetwhcol131Quantity(string pallet, decimal qtyt_act, decimal qtyt_old)
         {
+            string allo = qtyt_old.ToString();
             string qtyt = qtyt_act.ToString();
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$PAID", pallet.Trim());
             paramList.Add(":T$QTYA", qtyt /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+            paramList.Add(":T$ALLO", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+            
             strSentencia = recursos.readStatement("twhcol130", method.Name, ref owner, ref env, "twhcol130", paramList);
             try
             {
@@ -1091,13 +1094,17 @@ namespace whusa.DAL
             Console.WriteLine(Retorno);
         }
 
-        public void updatetticol242Quantity(string pallet, decimal sqnb_act)
+        public void updatetticol242Quantity(string pallet, decimal sqnb_act,decimal qtyt_old)
         {
+            string allo = qtyt_old.ToString();
+            string qtyt = sqnb_act.ToString();
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", pallet.Trim());
-            paramList.Add(":T$ACQT", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
+            paramList.Add(":T$ACQT", qtyt);
+            paramList.Add(":T$ALLO", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+
             strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, "tticol242", paramList);
             try
             {
@@ -1110,13 +1117,17 @@ namespace whusa.DAL
             Console.WriteLine(Retorno);
         }
 
-        public void updatetticol222Quantity(string pallet, decimal sqnb_act)
+        public void updatetticol222Quantity(string pallet, decimal sqnb_act,decimal qtyt_old)
         {
+            string allo = qtyt_old.ToString();
+            string qtyt = sqnb_act.ToString();
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", pallet.Trim());
-            paramList.Add(":T$ACQT", sqnb_act.ToString().Contains(".") ? sqnb_act.ToString().Replace(".", ",") : sqnb_act.ToString().Replace(",", "."));
+            paramList.Add(":T$ACQT", qtyt);
+            paramList.Add(":T$ALLO", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+
             strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, "tticol222", paramList);
             try
             {

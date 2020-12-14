@@ -246,9 +246,19 @@ namespace whusa.Interfases
             }
         }
 
-
-
-
+        public bool updataPalletStatus131(string paid, string stat)
+        {
+            bool retorno;
+            try
+            {
+                retorno = dal.updataPalletStatus131(paid,stat);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
 
         public DataTable listaRegistrosOrden_Param(ref Ent_tticol125 parametros, ref string strError, bool print = false)
         {

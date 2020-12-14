@@ -438,6 +438,30 @@ namespace whusa.DAL
             }
         }
 
+        public bool updataPalletStatus131(string paid, string stat)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add("p1", paid);
+            paramList.Add("p2", stat);// , whcol131 -Delieverd status=9
+            //string paid = ParametrosIn.paid.Trim().ToUpperInvariant();
+            //int paidStatus = ParametrosIn.conf;
+            strSentencia3 = recursos.readStatement(method.ReflectedType.Name, "updataPalletStatus131", ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia3, ref parametersOut, null, true);
+                //  strError = "Status updated successfully";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //strError = "Error when querying data [tticol125]. Try again or contact your administrator";
+                //log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                return false;
+            }
+        }
         public DataTable getReasonCode(ref Ent_tticol125 ParametrosIn, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

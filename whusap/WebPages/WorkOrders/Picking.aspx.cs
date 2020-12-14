@@ -37,11 +37,13 @@ namespace whusap.WebPages.WorkOrders
         public static string ADVS = string.Empty;
         public object GObject = new object();
         public EventArgs Ge = new EventArgs();
+        private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
         public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
+        private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
         string formName = string.Empty;
         public static string _operator = string.Empty;
         string _idioma = string.Empty;
@@ -670,14 +672,17 @@ namespace whusap.WebPages.WorkOrders
             try
             {
                 PAID_OLD = HttpContext.Current.Session["originalPallet"].ToString();
-                QTYT_OLD = HttpContext.Current.Session["QTY"].ToString();
+                //QTYT_OLD = HttpContext.Current.Session["QTY"].ToString();
+                string qtyaG = string.Empty;
                 decimal qtyt = Convert.ToDecimal(QTYT.ToString().Trim());
                 decimal qtyt_old = Convert.ToDecimal(QTYT_OLD.ToString().Trim());
                 decimal qtyt_act = qtyt_old - qtyt;
                 string qtyt_acts = (qtyt_old - qtyt).ToString();
                 string qtytS = Convert.ToDecimal(QTYT.ToString().Trim()).ToString();
                 int cnpk = Convert.ToInt32(HttpContext.Current.Session["CNPK"].ToString());
-                String pallet = PAID;
+                PAID_OLD = PAID_OLD.Trim();
+                PAID = PAID.Trim();
+                String pallet = PAID.Trim();
                 String Location = LOCA;
 
                 //Generar Ramdom
@@ -689,15 +694,15 @@ namespace whusap.WebPages.WorkOrders
                 if (flag022 == 1)
                 {
                     Ent_tticol022 MyObj = new Ent_tticol022();
-                    //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
-                    //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
-                    //twhcolDAL.actRegtticol022140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
+
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act);
-
+                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act, qtyt_old);
+                        DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
+                        qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
+                        _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "7" : "3");
                         //if (qtyt_act==0)
                         //{
                         //    return true;
@@ -769,12 +774,12 @@ namespace whusap.WebPages.WorkOrders
                         if (validateSave > 0 && qtyt_act!=0)
                         {
                             MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
-                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID_OLD + "&code=Code128&dpi=96";
+                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                             MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
                             MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.mitm + "&code=Code128&dpi=96";
                             MyObj.CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "";
-                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.qtd1 + "&code=Code128&dpi=96";
-                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyt_act + "&code=Code128&dpi=96";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyaG + "&code=Code128&dpi=96";
+                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.qtd1  + "&code=Code128&dpi=96";
                             MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.cuni + "&code=Code128&dpi=96";
                         }
                     }
@@ -784,15 +789,14 @@ namespace whusap.WebPages.WorkOrders
                 else if (flag042 == 1)
                 {
                     Ent_tticol042 MyObj = new Ent_tticol042();
-                    //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
-                    //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
-                    //twhcolDAL.actRegtticol042140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol242Quantity(pallet,qtyt_act);
-                        
+                        twhcolDAL.updatetticol242Quantity(pallet, qtyt_act, qtyt_old);
+                        DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
+                        qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
+                        _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "7" : "3");
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
                         int consecutivo = 0;
@@ -861,12 +865,12 @@ namespace whusap.WebPages.WorkOrders
                         if (validateSave > 0 && qtyt_act!=0)
                         {
                             MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
-                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID_OLD + "&code=Code128&dpi=96";
+                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                             MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
                             MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.mitm + "&code=Code128&dpi=96";
                             MyObj.CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "";
-                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.qtd1 + "&code=Code128&dpi=96";
-                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyt_act + "&code=Code128&dpi=96";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyaG + "&code=Code128&dpi=96";
+                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.qtd1 + "&code=Code128&dpi=96";
                             MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.cuni + "&code=Code128&dpi=96";
                         }
 
@@ -879,15 +883,16 @@ namespace whusap.WebPages.WorkOrders
 
                 else if (flag131 == 1)
                 {
-                    //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
-                    //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
-                    //twhcolDAL.actRegtticol131140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetwhcol131Quantity(pallet,qtyt_act,qtyt_old);
+                        
+                        twhcolDAL.updatetwhcol131Quantity(pallet, qtyt_act, qtyt_old);
+                        DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
+                        qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
+                        _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "7":"3");
                         //if (qtyt_act == 0)
                         //{
                         //    return true;
@@ -916,6 +921,7 @@ namespace whusap.WebPages.WorkOrders
                             }
 
                         }
+                        
 
                         MyObj.OORG = "2";// Order type escaneada view 
                         MyObj.ORNO = ORNO;
@@ -952,12 +958,12 @@ namespace whusap.WebPages.WorkOrders
                         if (Insertsucces && qtyt_act!=0)
                         {
                             MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
-                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID_OLD + "&code=Code128&dpi=96";
+                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                             MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
                             MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
                             MyObj.CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "";
-                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYS + "&code=Code128&dpi=96";
-                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyt_act + "&code=Code128&dpi=96";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyaG + "&code=Code128&dpi=96";
+                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +MyObj.QTYS+ "&code=Code128&dpi=96";
                             MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIT + "&code=Code128&dpi=96";
                         }
                     }

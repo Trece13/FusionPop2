@@ -1507,7 +1507,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol242">
       <operationName name="updatetticol242Quantity">
         <stringSQL>
-          UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+          <!--UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
+          UPDATE  {0}.tticol242{1} SET T$ACQT = T$ACQT +'[:T$ACQT]',T$AllO = T$AllO - '[:T$ALLO]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarRegistroTticon242">
@@ -1536,7 +1537,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol222">
       <operationName name="updatetticol222Quantity">
         <stringSQL>
-          UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+          UPDATE  {0}.tticol222{1} SET T$ACQT = T$ACQT +'[:T$ACQT]',T$AllO = T$AllO - '[:T$ALLO]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+
+          <!--UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
         </stringSQL>
       </operationName>
       <operationName name="InsertarRegistroTicol222">
