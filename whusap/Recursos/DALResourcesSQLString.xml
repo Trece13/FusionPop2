@@ -1743,7 +1743,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol130">
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
-          UPDATE  {0}.twhcol131{1} SET T$QTYA = '[:T$QTYA]' WHERE trim(T$PAID) = trim('[:T$PAID]')
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = T$QTYA +'[:T$QTYA]',T$AllO = T$AllO - '[:T$ALLO]' WHERE trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="maximaSecuencia">

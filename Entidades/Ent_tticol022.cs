@@ -138,12 +138,16 @@ namespace whusa.Entidades
         [DataMember(Order = 25)]
         [Column(Name = "DSCA")]
         public string dsca { get; set; }
+
         [DataMember(Order = 26)]
         public bool Error { get; set; }
+
         [DataMember(Order = 27)]
         public string TypeMsgJs { get; set; }
+
         [DataMember(Order = 28)]
         public string ErrorMsg { get; set; }
+
         [DataMember(Order = 29)]
         public string SuccessMsg { get; set; }
 
@@ -209,5 +213,21 @@ namespace whusa.Entidades
             this.Error = false;
         }
 
+
+        public string PAID_URL { get; set; }
+
+        public string PAID_OLD_URL { get; set; }
+
+        public string ORNO_URL { get; set; }
+
+        public string ITEM_URL { get; set; }
+
+        public string CLOT_URL { get; set; }
+
+        public string QTYC_URL { get; set; }
+
+        public string QTYC1_URL { get; set; }
+
+        public string UNIC_URL { get; set; }
     }
 }

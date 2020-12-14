@@ -852,9 +852,9 @@ namespace whusa.Interfases
 
         }
 
-        public void updatetwhcol131Quantity(string pallet, decimal sqnb_act)
+        public void updatetwhcol131Quantity(string pallet, decimal sqnb_act, decimal qtyt_old)
         {
-            dal.updatetwhcol131Quantity(pallet, sqnb_act);
+            dal.updatetwhcol131Quantity(pallet, sqnb_act,qtyt_old);
 
         }
 

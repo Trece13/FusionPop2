@@ -17,14 +17,14 @@ using whusa.Entidades;
 using whusa.Utilidades;
 using System.Web.UI.WebControls.WebParts;
 using whusa.DAL;
-
+using System.Web.Configuration;
 
 namespace whusap.WebPages.WorkOrders
 {
     public partial class Picking : System.Web.UI.Page
     {
 
-
+        public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static string thereisnotPalletavailable = mensajes("thereisnotPalletavailable");
         public static string ThequantityassociatetonewpalletisminortooldpalletID = mensajes("ThequantityassociatetonewpalletisminortooldpalletID");
         public static string ThenewpalletIddoesnthaveItemequaltotheoldpalletIditem = mensajes("ThenewpalletIddoesnthaveItemequaltotheoldpalletIditem");
@@ -663,7 +663,7 @@ namespace whusap.WebPages.WorkOrders
 
         [WebMethod]
         //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
-        public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string QTYT, string QTYT_OLD,string CUNI,string CWAR,string CLOT)
+        public static string Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string QTYT, string QTYT_OLD,string CUNI,string CWAR,string CLOT)
         {
 
 
@@ -688,21 +688,22 @@ namespace whusap.WebPages.WorkOrders
 
                 if (flag022 == 1)
                 {
+                    Ent_tticol022 MyObj = new Ent_tticol022();
                     //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
-                    twhcolDAL.actRegtticol022140(pallet);
+                    //twhcolDAL.actRegtticol022140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
                         twhcolDAL.updatetticol222Quantity(pallet, qtyt_act);
 
-                        if (qtyt_act==0)
-                        {
-                            return true;
-                        }
+                        //if (qtyt_act==0)
+                        //{
+                        //    return true;
+                        //}
 
-                        Ent_tticol022 data022;
+                        
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
                         int consecutivo = 0;
@@ -735,61 +736,70 @@ namespace whusap.WebPages.WorkOrders
                         }
 
 
-                        data022 = new Ent_tticol022()
-                        {
-                            pdno = " ",
-                            sqnb = ORNO+ "-" + SecuenciaPallet,
-                            proc = 2,
-                            logn = _operator,
-                            mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
-                            qtdl = Convert.ToDecimal(qtyt_act.ToString()),
-                            cuni = CUNI,//CUNI,
-                            log1 = "NONE",
-                            qtd1 = Convert.ToInt32(qtyt_act.ToString()),
-                            pro1 = 2,
-                            log2 = "NONE",
-                            qtd2 = Convert.ToInt32(qtyt_act.ToString()),
-                            pro2 = 2,
-                            loca = LOCA,
-                            norp = 1,
-                            dele = 2,
-                            logd = "NONE",
-                            refcntd = 0,
-                            refcntu = 0,
-                            drpt = DateTime.Now,
-                            urpt = _operator,
-                            acqt =Convert.ToDecimal(qtyt_act.ToString()),
-                            cwaf = CWAR,//CWAR,
-                            cwat = CWAR,//CWAR,
-                            aclo = LOCA,
-                            allo = 0
-                        };
+                        MyObj.pdno = " ";
+                        MyObj.sqnb = ORNO+ "-" + SecuenciaPallet;
+                        MyObj.proc = 2;
+                        MyObj.logn = _operator;
+                        MyObj.mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
+                        MyObj.qtdl = Convert.ToDecimal(qtyt.ToString());
+                        MyObj.cuni = CUNI;//CUNI;
+                        MyObj.log1 = "NONE";
+                        MyObj.qtd1 = Convert.ToInt32(qtyt.ToString());
+                        MyObj.pro1 = 2;
+                        MyObj.log2 = "NONE";
+                        MyObj.qtd2 = Convert.ToInt32(qtyt.ToString());
+                        MyObj.pro2 = 2;
+                        MyObj.loca = LOCA;
+                        MyObj.norp = 1;
+                        MyObj.dele = 9;
+                        MyObj.logd = "NONE";
+                        MyObj.refcntd = 0;
+                        MyObj.refcntu = 0;
+                        MyObj.drpt = DateTime.Now;
+                        MyObj.urpt = _operator;
+                        MyObj.acqt = Convert.ToDecimal(qtyt.ToString());
+                        MyObj.cwaf = CWAR;//CWAR;
+                        MyObj.cwat = CWAR;//CWAR;
+                        MyObj.aclo = LOCA;
+                        MyObj.allo = 0;
 
-                        var validateSave = _idaltticol022.insertarRegistroSimple(ref data022, ref strError);
-                        var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref data022, ref strError);
+                        var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
+                        var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
+
+                        if (validateSave > 0 && qtyt_act!=0)
+                        {
+                            MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
+                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID_OLD + "&code=Code128&dpi=96";
+                            MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
+                            MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.mitm + "&code=Code128&dpi=96";
+                            MyObj.CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.qtd1 + "&code=Code128&dpi=96";
+                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyt_act + "&code=Code128&dpi=96";
+                            MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.cuni + "&code=Code128&dpi=96";
+                        }
                     }
-                    return true;
+                    return JsonConvert.SerializeObject(MyObj);
 
                 }
                 else if (flag042 == 1)
                 {
-
+                    Ent_tticol042 MyObj = new Ent_tticol042();
                     //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
-                    twhcolDAL.actRegtticol042140(pallet);
+                    //twhcolDAL.actRegtticol042140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
                         twhcolDAL.updatetticol242Quantity(pallet,qtyt_act);
-                        Ent_tticol042 data042;
+                        
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
                         int consecutivo = 0;
-                        if (qtyt_act == 0)
-                        {
-                            return true;
-                        }
+                        //if (qtyt_act == 0)
+                        //{
+                        //    return true;
+                        //}
 
                         string id = ORNO;
                         DataTable Dtticol042 = _idaltticol042.SecuenciaMayor(id);
@@ -817,41 +827,52 @@ namespace whusap.WebPages.WorkOrders
                         }
 
 
-                        data042 = new Ent_tticol042()
-                        {
-                            pdno = " ",
-                            sqnb = ORNO+ "-" + SecuenciaPallet,
-                            proc = 2,
-                            logn = _operator,
-                            mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
-                            qtdl = Convert.ToDecimal(qtyt_act.ToString()),
-                            cuni = CUNI,//CUNI,
-                            log1 = "NONE",
-                            qtd1 = Convert.ToDecimal(qtyt_act.ToString()),
-                            pro1 = 2,
-                            log2 = "NONE",
-                            qtd2 = Convert.ToDecimal(qtyt_act.ToString()),
-                            pro2 = 2,
-                            loca = LOCA,
-                            norp = 1,
-                            dele = 2,
-                            logd = "NONE",
-                            refcntd = 0,
-                            refcntu = 0,
-                            drpt = DateTime.Now,
-                            urpt = _operator,
-                            acqt = Convert.ToDouble(qtyt_act.ToString()),
-                            cwaf = CWAR,//CWAR,
-                            cwat = CWAR,//CWAR,
-                            aclo = LOCA,
-                            allo = 0
-                        };
+                        MyObj.pdno = " ";
+                        MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
+                        MyObj.proc = 2;
+                        MyObj.logn = _operator;
+                        MyObj.mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
+                        MyObj.qtdl = Convert.ToDecimal(qtyt.ToString());
+                        MyObj.cuni = CUNI;//CUNI;
+                        MyObj.log1 = "NONE";
+                        MyObj.qtd1 = Convert.ToDecimal(qtyt.ToString());
+                        MyObj.pro1 = 2;
+                        MyObj.log2 = "NONE";
+                        MyObj.qtd2 = Convert.ToDecimal(qtyt.ToString());
+                        MyObj.pro2 = 2;
+                        MyObj.loca = LOCA;
+                        MyObj.norp = 1;
+                        MyObj.dele = 9;
+                        MyObj.logd = "NONE";
+                        MyObj.refcntd = 0;
+                        MyObj.refcntu = 0;
+                        MyObj.drpt = DateTime.Now;
+                        MyObj.urpt = _operator;
+                        MyObj.acqt = Convert.ToDouble(qtyt_act.ToString());
+                        MyObj.cwaf = CWAR;//CWAR;
+                        MyObj.cwat = CWAR;//CWAR;
+                        MyObj.aclo = LOCA;
+                        MyObj.allo = 0;
 
-                        var validateSave = _idaltticol042.insertarRegistroSimple(ref data042, ref strError);
-                        var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref data042, ref strError);
+
+                        var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj, ref strError);
+                        var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
+
+                        if (validateSave > 0 && qtyt_act!=0)
+                        {
+                            MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
+                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID_OLD + "&code=Code128&dpi=96";
+                            MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
+                            MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.mitm + "&code=Code128&dpi=96";
+                            MyObj.CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.qtd1 + "&code=Code128&dpi=96";
+                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyt_act + "&code=Code128&dpi=96";
+                            MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.cuni + "&code=Code128&dpi=96";
+                        }
 
                     }
-                    return true;
+
+                    return JsonConvert.SerializeObject(MyObj);
 
 
                 }
@@ -860,18 +881,19 @@ namespace whusap.WebPages.WorkOrders
                 {
                     //twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
+                    Ent_twhcol130131 MyObj = new Ent_twhcol130131();
                     //twhcolDAL.IngRegistrott307140(_operator, 2, pallet, 0, 0);
-                    twhcolDAL.actRegtticol131140(pallet);
+                    //twhcolDAL.actRegtticol131140(pallet);
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetwhcol131Quantity(pallet,qtyt_act);
-                        if (qtyt_act == 0)
-                        {
-                            return true;
-                        }
+                        twhcolDAL.updatetwhcol131Quantity(pallet,qtyt_act,qtyt_old);
+                        //if (qtyt_act == 0)
+                        //{
+                        //    return true;
+                        //}
                         int consecutivoPalletID = 0;
-                        DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(PAID.Substring(0,9));
+                        DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO);
                         string SecuenciaPallet = "001";
                         if (DTPalletContinue.Rows.Count > 0)
                         {
@@ -895,61 +917,66 @@ namespace whusap.WebPages.WorkOrders
 
                         }
 
-                        Ent_twhcol130131 MyObj = new Ent_twhcol130131
-                        {
-                            OORG = "2",// Order type escaneada view 
-                            ORNO = ORNO,
-                            ITEM = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim(),
-                            PAID = ORNO+ "-" + SecuenciaPallet,
-                            PONO = "1",
-                            SEQN = "1",
-                            CLOT = CLOT,//CLOT.ToUpper(),// lote VIEW
-                            CWAR = CWAR,//CWAR.ToUpper(),
-                            QTYS = qtyt_act.ToString(),//QTYS,// cantidad escaneada view 
-                            UNIT = CUNI,//UNIT,//unit escaneada view
-                            QTYC = qtyt_act.ToString(),//QTYS,//cantidad escaneada view aplicando factor
-                            UNIC = CUNI,//UNIT,//unidad view stock
-                            DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
-                            CONF = "1",
-                            RCNO = " ",//llena baan
-                            DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
-                            LOCA = " ",//LOCA.ToUpper(),// enviamos vacio 
-                            DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llenar con fecha de hoy
-                            PRNT = "1",// llenar en 1
-                            DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
-                            NPRT = "1",//conteo de reimpresiones 
-                            LOGN = _operator,// nombre de ususario de la session
-                            LOGT = " ",//llena baan
-                            STAT = "3",// LLENAR EN 3 
-                            DSCA = " ",
-                            COTP = " ",
-                            FIRE = "2",
-                            PSLIP = " ",
-                            ALLO = "0"
-                            
-                            //PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "INITIAPOP" + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
-                            //ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "DTOrdencompra.Rows[0][].ToString()" + "&code=Code128&dpi=96",
-                            //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ITEM + "&code=Code128&dpi=96",
-                            //CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "",
-                            //QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QTYS + "&code=Code128&dpi=96",
-                            //UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UNIT + "&code=Code128&dpi=96"
-                        };
+                        MyObj.OORG = "2";// Order type escaneada view 
+                        MyObj.ORNO = ORNO;
+                        MyObj.ITEM = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
+                        MyObj.PAID = ORNO+ "-" + SecuenciaPallet;
+                        MyObj.PONO = "1";
+                        MyObj.SEQN = "1";
+                        MyObj.CLOT = CLOT;//CLOT.ToUpper();// lote VIEW
+                        MyObj.CWAR = CWAR;//CWAR.ToUpper();
+                        MyObj.QTYS = qtyt.ToString();//QTYS;// cantidad escaneada view 
+                        MyObj.UNIT = CUNI;//UNIT;//unit escaneada view
+                        MyObj.QTYC = qtyt.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                        MyObj.UNIC = CUNI;//UNIT;//unidad view stock
+                        MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                        MyObj.CONF = "1";
+                        MyObj.RCNO = " ";//llena baan
+                        MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                        MyObj.LOCA = " ";//LOCA.ToUpper();// enviamos vacio 
+                        MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                        MyObj.PRNT = "1";// llenar en 1
+                        MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                        MyObj.NPRT = "1";//conteo de reimpresiones 
+                        MyObj.LOGN = _operator;// nombre de ususario de la session
+                        MyObj.LOGT = " ";//llena baan
+                        MyObj.STAT = "7";// LLENAR EN 3 
+                        MyObj.DSCA = " ";
+                        MyObj.COTP = " ";
+                        MyObj.FIRE = "2";
+                        MyObj.PSLIP = " ";
+                        MyObj.ALLO = "0";
 
                         bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+                        
+                        if (Insertsucces && qtyt_act!=0)
+                        {
+                            MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
+                            MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID_OLD + "&code=Code128&dpi=96";
+                            MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
+                            MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
+                            MyObj.CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYS + "&code=Code128&dpi=96";
+                            MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyt_act + "&code=Code128&dpi=96";
+                            MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIT + "&code=Code128&dpi=96";
+                        }
                     }
-                    return true;
+                    return JsonConvert.SerializeObject(MyObj);
                 }
                 else
                 {
-
-                    return false;
+                    Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
+                    MyErrorObj.Error = true;
+                    return JsonConvert.SerializeObject(MyErrorObj); ;
                 }
 
 
             }
             catch (Exception e)
             {
-                return false;
+                Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
+                MyErrorObj.Error = true;
+                return JsonConvert.SerializeObject(MyErrorObj); ;
             }
         }
 

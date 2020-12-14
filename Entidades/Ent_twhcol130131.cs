@@ -48,6 +48,7 @@ namespace whusa
             this.SLOC = string.Empty;
             this.error = false;
             this.errorMsg = string.Empty;
+            this.Error = false;
 
         }
 
@@ -90,5 +91,11 @@ namespace whusa
         public string errorMsg { get; set; }
         public string DSCA { get; set; }
         public string FIRE { get; set; }
+        public string QTYC1_URL { get; set; }
+        public string PAID_OLD_URL { get; set; }
+
+
+
+        public bool Error { get; set; }
     }
 }

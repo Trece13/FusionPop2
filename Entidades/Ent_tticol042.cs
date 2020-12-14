@@ -195,5 +195,21 @@ namespace whusa.Entidades
             this.refcntu = _refcntu;
         }
 
+
+        public string PAID_URL { get; set; }
+
+        public string PAID_OLD_URL { get; set; }
+
+        public string ORNO_URL { get; set; }
+
+        public string ITEM_URL { get; set; }
+
+        public string CLOT_URL { get; set; }
+
+        public string QTYC_URL { get; set; }
+
+        public string QTYC1_URL { get; set; }
+
+        public string UNIC_URL { get; set; }
     }
 }
