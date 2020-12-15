@@ -117,10 +117,10 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
-		
-        public DataTable PaidMayorwhcol130(string ORNO)
+
+        public DataTable PaidMayorwhcol130(string ORNO, bool excludeletters = false)
         {
-            return dal.PaidMayorwhcol130(ORNO);
+            return dal.PaidMayorwhcol130(ORNO, excludeletters);
         }
 
 

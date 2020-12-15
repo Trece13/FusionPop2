@@ -33,7 +33,7 @@ namespace whusap.WebPages.WorkOrders
         public static string ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus = mensajes("ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus");
         public static string ThePalletIDdoesnotexist = mensajes("ThePalletIDdoesnotexist");
         public static string NotAalletsAvailablethereNotPallets = mensajes("NotAalletsAvailablethereNotPallets");
-
+        public static string errorlog = string.Empty;
         public static string ADVS = string.Empty;
         public object GObject = new object();
         public EventArgs Ge = new EventArgs();
@@ -446,10 +446,7 @@ namespace whusap.WebPages.WorkOrders
                 else
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').show(500)", true);
-
                 }
-
-            
 
         }
 
@@ -883,6 +880,7 @@ namespace whusap.WebPages.WorkOrders
 
                 else if (flag131 == 1)
                 {
+                    errorlog = "-Entro en 131\n";
                     twhcolDAL.actRegtticol082140(_operator, pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVS);
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
                     twhcolDAL.EliminarTccol307140(pallet.Trim());
@@ -898,13 +896,21 @@ namespace whusap.WebPages.WorkOrders
                         //    return true;
                         //}
                         int consecutivoPalletID = 0;
-                        DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO);
+                        DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO,true);
+                        errorlog += "-Modifico trablas\n";
                         string SecuenciaPallet = "001";
+                        errorlog += "-Realiza conteo de busqueda pallet max: " + DTPalletContinue.Rows.Count + "\n";
                         if (DTPalletContinue.Rows.Count > 0)
                         {
+                            errorlog += "-Verifica si la catidad max es mato a 0\n";
                             foreach (DataRow item in DTPalletContinue.Rows)
                             {
+                                errorlog += "-Entro a for each\n";
+                                errorlog += "la cadena a recortar es esta: " + item["T$PAID"].ToString().Trim() + " \n";
+                                errorlog += "la cadena extraida es : " + item["T$PAID"].ToString().Trim().Substring(10, 3) + " \n";
+
                                 consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(10, 3)) + 1;
+                                errorlog += "realiza substring de pallet para tener la secuencia:" + consecutivoPalletID + "\n";
                                 if (consecutivoPalletID.ToString().Length == 1)
                                 {
                                     SecuenciaPallet = "00" + consecutivoPalletID;
@@ -921,7 +927,7 @@ namespace whusap.WebPages.WorkOrders
                             }
 
                         }
-                        
+                        errorlog += "genero secuencia,";
 
                         MyObj.OORG = "2";// Order type escaneada view 
                         MyObj.ORNO = ORNO;
@@ -982,6 +988,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
                 MyErrorObj.Error = true;
+                MyErrorObj.errorMsg = errorlog + e.Message;
                 return JsonConvert.SerializeObject(MyErrorObj); ;
             }
         }

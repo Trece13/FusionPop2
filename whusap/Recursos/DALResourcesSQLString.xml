@@ -1761,7 +1761,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT * FROM {0}.twhwmd310{1} wmd310 left join {0}.twhwmd200{1} wmd200 on wmd200.T$CWAR = wmd310.T$CWAR left join baan.ttcmcs003140 mcs003 on mcs003.T$CWAR = wmd310.T$CWAR WHERE wmd310.T$ZONE = '[:ZONE]'
         </stringSQL>
       </operationName>
-      <operationName name="VerificarPalletID">
+      <operationName name="VerificarPalletID">   
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,ALLO FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO from {0}.tticol022{1} col022

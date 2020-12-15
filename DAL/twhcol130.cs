@@ -343,7 +343,7 @@ namespace whusa.Interfases
 
         #region Method´s
 
-        public DataTable PaidMayorwhcol130(string ORNO)
+        public DataTable PaidMayorwhcol130(string ORNO, bool excludeletters = false)
         {
             DataTable retorno = new DataTable();
 
@@ -352,8 +352,12 @@ namespace whusa.Interfases
             paramList.Add(":T$ORNO", ORNO);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            if (excludeletters)
+            {
+                strSentencia += "and SUBSTR(T$PAID,11,1) not in ('C','G','I','J','M','O','P','R','S','T','W')";
+            }
 
-
+            log.escribirError("My query es jc" + strSentencia,"Hola","Hola", "Hola");
             try
             {
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);

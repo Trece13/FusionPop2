@@ -375,8 +375,8 @@
         <table style="margin: auto; >
             <tr>
                 <td>
-                    <label style="font-size: 11px">
-                        Pallet ID</label>
+                    <%--<label style="font-size: 11px">
+                        Pallet ID</label>--%>
                 </td>
                 <td colspan="4">
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
@@ -461,9 +461,9 @@
         <br />
         <table style="margin: auto; >
             <tr>
-                <td>
-                    <label style="font-size: 11px">
-                        Pallet ID</label>
+               <td>
+                    <%--<label style="font-size: 11px">
+                        Pallet ID</label>--%>
                 </td>
                 <td colspan="4">
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO2" alt="" hspace="60"
@@ -817,6 +817,21 @@
                         $('#Contenido_txtPalletID').val("");
                         $('#txtlocation').val("");
                         
+                    }
+                    else {
+                        alert(myObj.errorMsg);
+                        $('#Contenido_lblPalletID').html("");
+                        $('#Contenido_lblItemID').html("");
+                        $('#Contenido_LblLotId').html("");
+                        $('#Contenido_lblWarehouse').html("");
+                        $('#Contenido_lbllocation').html("");
+                        $('#Contenido_lblQuantity').html("");
+                        $('#Contenido_lblItemDesc').html("");
+                        $('#Contenido_lblWareDescr').html("");
+                        $('#Contenido_lblQuantityDesc').html("");
+                        $('#Contenido_txtPalletID').val("");
+                        $('#txtlocation').val("");
+
                     }
                 },
                 failure: function (response) {
