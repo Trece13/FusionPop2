@@ -1161,12 +1161,12 @@
         </operationName>
         <operationName name="announcedago">
           <stringMessage>
-            Previous palette has been announced, less than {0} minutes ago. Please wait some more time.
+            Previous pallet has been announced, less than {0} minutes ago. Please wait some more time.
           </stringMessage>
         </operationName>
         <operationName name="previouspalette">
           <stringMessage>
-            Previous palette has not been announced. Please announce the pallet first.
+            Previous pallet has not been announced. Please announce the pallet first.
           </stringMessage>
         </operationName>
         <operationName name="notfoundpallet">
@@ -1338,12 +1338,12 @@
         </operationName>
         <operationName name="announcedago">
           <stringMessage>
-            Previous palette has been announced, less than {0} ago. Please wait some more time.
+            Previous pallet has been announced, less than {0} ago. Please wait some more time.
           </stringMessage>
         </operationName>
         <operationName name="previouspalette">
           <stringMessage>
-            Previous palette has not been announced. Please announce the pallet first.
+            Previous pallet has not been announced. Please announce the pallet first.
           </stringMessage>
         </operationName>
         <operationName name="notfoundpallet">

@@ -1346,7 +1346,7 @@
         </label>
         <label name="announcedago">
           <stringMessage>
-            Previous palette has been announced, less than {0} minutes ago. Please wait some more time.
+            Previous pallet has been announced, less than {0} minutes ago. Please wait some more time.
           </stringMessage>
         </label>
         <label name="wonotinitiated">
@@ -6824,7 +6824,7 @@
         </label>
         <label name="ThepaletteIDdoesnotexistorisnotlocated">
           <stringMessage>
-            The palette ID does not exist or is not located
+            The pallet ID does not exist or is not located
           </stringMessage>
         </label>
         <label name="Lotcodedoesntexist">
@@ -6871,7 +6871,7 @@
         </label>
         <label name="ThepaletteIDdoesnotexistorisnotlocated">
           <stringMessage>
-            The palette ID does not exist or is not located
+            The pallet ID does not exist or is not located
           </stringMessage>
         </label>
         <label name="Lotcodedoesntexist">

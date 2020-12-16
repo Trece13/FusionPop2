@@ -249,7 +249,7 @@ If Not objrs.EOF Then
                             sec = strord+"-"+relleno+convert.tostring(sec8)
                         end if
                         session("sec") =  sec
-                        Session("strmsg") = "Previous palette has not been announced. Please announce the pallet first."
+                            Session("strmsg") = "Previous pallet has not been announced. Please announce the pallet first."
     	                Response.Redirect("whInvLabelPalletTagsPartial.aspx?flag=Y") 
                     End If
                 else                    
