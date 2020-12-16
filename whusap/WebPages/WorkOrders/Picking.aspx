@@ -372,7 +372,7 @@
 
     </form>
     <div id="MyEtiqueta" style="display:none">
-        <table style="margin: auto; >
+        <table style="margin: auto" >
             <tr>
                 <td>
                     <%--<label style="font-size: 11px">
@@ -459,7 +459,7 @@
         </table>
         <br />
         <br />
-        <table style="margin: auto; >
+        <table style="margin: auto" >
             <tr>
                <td>
                     <%--<label style="font-size: 11px">
@@ -753,10 +753,10 @@
 
         function ShowCurrentTime() {
             if ($("#Contenido_lblCNPK").html() != "1") {
-                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + $("#Contenido_lblQuantity").val() + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val() )+ "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
             }
             else {
-                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + $("#Contenido_lblQuantity").val() + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID%>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val()) + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID%>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
             }
 
             //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
@@ -781,7 +781,9 @@
                         $('#LblUnit').html($('#Contenido_lblQuantityDesc').html());
 
                         $('#Contenido_CBLot').attr("src", myObj.CLOT_URL);
-                        myObj.CLOT_URL.trim()==""?$('#Contenido_CBLot').hide():$('#Contenido_CBLot').show();
+                        if(myObj.CLOT_URL!=undefined){
+                            myObj.CLOT_URL.trim()==""?$('#Contenido_CBLot').hide():$('#Contenido_CBLot').show();
+                        }
                         //$('#LblDate').html();
 
                         $('#Contenido_CBPalletNO2').attr("src",myObj.PAID_URL);
@@ -791,14 +793,15 @@
                         $('#LblUnit2').html($('#Contenido_lblQuantityDesc').html());
 
                         $('#Contenido_CBLot2').attr("src", myObj.CLOT_URL);
-                        myObj.CLOT_URL.trim()==""?$('#Contenido_CBLot2').hide():$('#Contenido_CBLot2').show();
-
+                        if(myObj.CLOT_URL!=undefined){
+                            myObj.CLOT_URL.trim()==""?$('#Contenido_CBLot2').hide():$('#Contenido_CBLot2').show();
+                        }
                         //$('#LblDate2').html();
                         var newCant = parseFloat($("#Contenido_lblQuantity").val());
                         var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
                         alert("Information saved successfully");
 
-                        if ((oldCant - newCant ) > 0) {
+                        if (myObj.qtyaG > 0) {
                             printDiv("MyEtiqueta");
                         }
 

@@ -47,7 +47,6 @@ namespace whusap.WebPages.InvFloor
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
             {
                 if (Session["user"] == null)
@@ -86,9 +85,6 @@ namespace whusap.WebPages.InvFloor
 
             }
             lstWarehouses = ListWarehouses();
-
-
-
         }
 
         [WebMethod]

@@ -229,5 +229,7 @@ namespace whusa.Entidades
         public string QTYC1_URL { get; set; }
 
         public string UNIC_URL { get; set; }
+
+        public decimal qtyaG { get; set; }
     }
 }
