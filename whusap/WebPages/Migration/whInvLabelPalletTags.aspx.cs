@@ -226,7 +226,7 @@ namespace whusap.WebPages.Migration
                         var DoubleWindermachine = ConfigurationManager.AppSettings["DoubleWindermachine"].ToString().Split('|');
                         if (Convert.ToInt32(dif_min) <= (tiempo / 60) && DoubleWindermachine.Contains(maquina) == false)
                         {
-                            lblError.Text = String.Format(mensajes("announcedago"), (tiempo / 60));
+                            lblError.Text = String.Format(mensajes("announcedago"), (tiempo / 60) - Convert.ToInt32(dif_min)-1);
                             lblConfirm.Text = string.Empty;
                             return;
                         }

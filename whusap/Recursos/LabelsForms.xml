@@ -1346,7 +1346,7 @@
         </label>
         <label name="announcedago">
           <stringMessage>
-            Previous pallet has been announced, less than {0} minutes ago. Please wait some more time.
+            Previous pallet has been announced, Please wait {0} minutes to continue.
           </stringMessage>
         </label>
         <label name="wonotinitiated">
