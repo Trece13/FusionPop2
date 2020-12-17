@@ -224,7 +224,8 @@ namespace whusap.WebPages.Migration
 
                         if (Convert.ToInt32(dif_min) <= (tiempo / 60))
                         {
-                            lblError.Text = String.Format(mensajes("announcedago"), (tiempo / 60) - Convert.ToInt32(dif_min)-1);
+                            //lblError.Text = String.Format(mensajes("announcedago"), (tiempo / 60) - Convert.ToInt32(dif_min)-1);
+                            lblError.Text = String.Format(mensajes("announcedago"), (tiempo / 60) - Convert.ToInt32(dif_min));
                             return;
                         }
 
