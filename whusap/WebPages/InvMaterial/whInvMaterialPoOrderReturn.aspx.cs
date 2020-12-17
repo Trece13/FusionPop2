@@ -397,7 +397,7 @@ namespace whusap.WebPages.InvMaterial
                     PRNT = "1",// llenar en 1
                     DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
                     NPRT = "1",//conteo de reimpresiones 
-                    LOGN = _operator,// nombre de ususario de la session
+                    LOGN = HttpContext.Current.Session["user"].ToString(),// nombre de ususario de la session
                     LOGT = " ",//llena baan
                     STAT = "0",// LLENAR EN 1  
                     DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString(),
@@ -432,7 +432,7 @@ namespace whusap.WebPages.InvMaterial
                     UNIT = MyObj.UNIT,
                     PRIO = PRIO.ToString(),
                     PAID = PALLET,
-                    LOGN = _operator,
+                    LOGN = HttpContext.Current.Session["user"].ToString(),
                 };
                 bool InsertSuccess = Itticol082.InsertarregistroItticol082(Objtticol082);
                 if (InsertSuccess)

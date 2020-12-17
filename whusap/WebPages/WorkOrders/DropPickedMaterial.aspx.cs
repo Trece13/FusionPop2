@@ -69,7 +69,7 @@ namespace whusap.WebPages.WorkOrders
                 string strError = string.Empty;
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString().Trim(),
                     refcntd = 0,
                     refcntu = 0
                 };
@@ -175,7 +175,7 @@ namespace whusap.WebPages.WorkOrders
 
             if (TableIttccol307.Rows.Count > 0)
             {
-                if (TableIttccol307.Rows[0]["USRR"].ToString().Trim() != _operator.Trim())
+                if (TableIttccol307.Rows[0]["USRR"].ToString().Trim() != HttpContext.Current.Session["user"].ToString().Trim())
                 {
                     PalletAsignado = true;
                     MyObj.Error = true;

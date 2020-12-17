@@ -91,7 +91,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -289,11 +289,11 @@ namespace whusap.WebPages.Migration
                 rejt = Convert.ToInt32(slRejectType.SelectedValue),
                 clot = slLot.SelectedValue == "" ? " " : slLot.SelectedValue.Trim().ToUpper(),
                 obse = txtExactReasons.InnerText,
-                logr = _operator,
+                logr = HttpContext.Current.Session["user"].ToString(),
                 disp = 4,
                 proc = 1,
                 Unit = txtUnit.Text,
-                logn = _operator,
+                logn = HttpContext.Current.Session["user"].ToString(),
                 mess = "0"
 
             };

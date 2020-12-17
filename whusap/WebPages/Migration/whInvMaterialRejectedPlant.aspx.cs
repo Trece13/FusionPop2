@@ -82,7 +82,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -217,7 +217,7 @@ namespace whusap.WebPages.Migration
                         rejt = Convert.ToInt32(rejectType),
                         clot = pdno,
                         obse = exactReasons,
-                        logr = _operator,
+                        logr = HttpContext.Current.Session["user"].ToString(),
                         dsca = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper(),
                         cwar = _validarOrden.Rows[i]["CWAR"].ToString().Trim().ToUpper(),
                         paid = txtWorkOrder.Text.Trim().ToUpper(),

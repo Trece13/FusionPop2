@@ -107,7 +107,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = "Inventory per Pallet Id",
                     refcntd = 0,
                     refcntu = 0
@@ -644,7 +644,7 @@ namespace whusap.WebPages.InvReceipts
             ObjTwhcol019.CLOT = CLOT.Trim() == "" ? " " : CLOT.Trim();   
             ObjTwhcol019.QTDL = QTYD;   
             ObjTwhcol019.CUNI   = UNIT;
-            ObjTwhcol019.LOGN = USER.Trim()!=""?USER.Trim():_operator.Trim();   
+            ObjTwhcol019.LOGN = USER.Trim() != "" ? USER.Trim() : HttpContext.Current.Session["user"].ToString().Trim();   
             ObjTwhcol019.DATE   = new DateTime();
             ObjTwhcol019.COUN = Convert.ToInt32(SecuenciaConteo);
             ObjTwhcol019.PROC   = 0;   

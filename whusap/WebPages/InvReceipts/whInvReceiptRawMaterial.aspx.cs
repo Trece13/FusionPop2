@@ -88,7 +88,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -197,7 +197,7 @@ namespace whusap.WebPages.InvReceipts
                             PRNT = "1",// llenar en 1
                             DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
                             NPRT = "1",//conteo de reimpresiones 
-                            LOGN = _operator,// nombre de ususario de la session
+                            LOGN = HttpContext.Current.Session["user"].ToString(),// nombre de ususario de la session
                             LOGT = " ",//llena baan
                             STAT = "0",// LLENAR EN 1  
                             ALLO = "0",
@@ -324,7 +324,7 @@ namespace whusap.WebPages.InvReceipts
                             PRNT = "1",// llenar en 1
                             DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
                             NPRT = "1",//conteo de reimpresiones 
-                            LOGN = _operator,// nombre de ususario de la session
+                            LOGN = HttpContext.Current.Session["user"].ToString(),// nombre de ususario de la session
                             LOGT = " ",//llena baan
                             STAT = "0",// LLENAR EN 1   
                             ALLO = "0",

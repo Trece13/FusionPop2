@@ -77,7 +77,7 @@ namespace whusap.WebPages.InvLogistica
 
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = mensajes("encabezado"),
                         refcntd = 0,
                         refcntu = 0
@@ -232,7 +232,7 @@ namespace whusap.WebPages.InvLogistica
                         qtdl = qtdl,
                         cuni = cuni,
                         mess = " ",
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         refcntd = 0,
                         refcntu = 0
                     };
@@ -244,7 +244,7 @@ namespace whusap.WebPages.InvLogistica
 
                         Ent_tticol022 data022 = new Ent_tticol022()
                         {
-                            log1 = _operator,
+                            log1 = HttpContext.Current.Session["user"].ToString(),
                             qtd1 = Convert.ToInt32(data025.qtdl),
                             pdno = pdno,
                             sqnb = sqnb
@@ -259,7 +259,7 @@ namespace whusap.WebPages.InvLogistica
                             lblError.Text = String.Empty;
                             divTable.Visible = false;
                             txtNumeroOrden.Text = String.Empty;
-                            _idaltticol022.ActualizarCantidadAlmacenRegistroTicol222(_operator, data022.qtd1, LOCA, CWAR, data022.sqnb);
+                            _idaltticol022.ActualizarCantidadAlmacenRegistroTicol222(HttpContext.Current.Session["user"].ToString(), data022.qtd1, LOCA, CWAR, data022.sqnb);
                             return;
                         }
                         else

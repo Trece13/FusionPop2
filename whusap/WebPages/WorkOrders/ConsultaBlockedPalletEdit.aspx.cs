@@ -66,7 +66,7 @@ namespace whusap.WebPages.WorkOrders
 
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = strTitulo,
                         refcntd = 0,
                         refcntu = 0
@@ -124,7 +124,7 @@ namespace whusap.WebPages.WorkOrders
 
                 foreach (Ent_tticol082 item in lstGuardar)
                 {
-                    item.LOGN = _operator;
+                    item.LOGN = HttpContext.Current.Session["user"].ToString();
                     actualizarTablas(item);
                 }
                 

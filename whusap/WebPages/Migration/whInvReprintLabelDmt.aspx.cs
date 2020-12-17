@@ -84,7 +84,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -180,7 +180,7 @@ namespace whusap.WebPages.Migration
                 lblValueWorkOrder.Text = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
                 //lblValueProductDescription.Text = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper();
                 //lblValueDate.Text = DateTime.Now.ToString();
-                lblValuePrintedBy.Text = _operator;
+                lblValuePrintedBy.Text = HttpContext.Current.Session["user"].ToString();
                 lblValueReason.Text = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
                 //lblValueObs.Text = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
 
@@ -203,7 +203,7 @@ namespace whusap.WebPages.Migration
                 lblValueProductCode2.Text = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
                 lblValueProductDescription2.Text = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper();
                 lblValueDate2.Text = DateTime.Now.ToString();
-                lblValuePrintedBy2.Text = _operator;
+                lblValuePrintedBy2.Text = HttpContext.Current.Session["user"].ToString();
                 lblValueWorkOrder2.Text = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
                 lblValueInternalMaterial.Text = consultaInformacion.Rows[0]["CLOT"].ToString().Trim().ToUpper();
                 lblValueReason2.Text = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();

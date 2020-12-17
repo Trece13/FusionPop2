@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="Picking.aspx.cs" Inherits="whusap.WebPages.WorkOrders.Picking" EnableEventValidation="true" %>
+    CodeBehind="Picking.aspx.cs" Inherits="whusap.WebPages.WorkOrders.Picking" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -13,9 +13,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style type="text/css">
-        .swal2-popup {
+        .swal2-popup {   
             width: 850px !important;
-        }
+        }  
 
         #MyEtiqueta {
             font-size: 14px;
@@ -25,7 +25,7 @@
             font-size: 15px;
         }
 
-        #LblDated {
+        #LblDated { 
             font-size: 14px !important;
         }
 
@@ -145,6 +145,9 @@
     </script>
     <form id="form1" class="container">
         <div class="form-group row">
+            <input id="getusers1" type="button" class="btn btn-primary btn-lg" onclick="getusers()"
+                value="Get user session" style="display:none"/>
+
             <label class="col-sm-2 col-form-label-lg hidebutton" for="txQuantity">
                 Pallet ID</label>
             <div class="col-sm-4">
@@ -155,141 +158,143 @@
         <div id="blocked">
             <div class="row">
                 <div id="MyEtiqueta2" class="col-6">
-                <table class="table2">
-                    <tr>
-                        <asp:Label ID="lblCNPK" runat="server" CssClass=""></asp:Label>
-                    </tr>
-                    <tr>
-                        ADVS:
-                <asp:Label ID="lblADVS" runat="server" CssClass=""></asp:Label>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <label class="" id="Label1">
-                                Pallet ID</label>
-                        </td>
-                        <td>
-                            <asp:Label ID="lblPalletID" runat="server" CssClass=""></asp:Label>
-                        </td>
-                        <td>
-                            <asp:TextBox ID="txtPalletID" MaxLength="20" Style="text-transform: uppercase;" runat="server"
-                                CssClass="form-control" onkeyup="validarPallet();" Font-Size="Medium"></asp:TextBox>
-                            <asp:Button ID="Reload" runat="server" Text="Next Picking" OnClick="Reload_Click"
-                                class="btn btn-primary btn-lg mt-3" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <label class="">
-                                Item</label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="lblItemID" runat="server" CssClass=""></asp:Label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="lblItemDesc" runat="server" CssClass=""></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <label class="">
-                                Lot</label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="LblLotId" runat="server" CssClass=""></asp:Label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="LblLotIdDesc" runat="server" CssClass=""></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <label class="">
-                                Warehouse</label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="lblWarehouse" runat="server" CssClass=""></asp:Label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="lblWareDescr" runat="server" CssClass=""></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <label class="">
-                                Location</label>
-                        </td>
-                        <td class="">
-                            <asp:Label ID="lbllocation" runat="server" CssClass=""></asp:Label>
-                        </td>
-                        <td class="">
-                            <%--<asp:TextBox ID="txtlocation" MaxLength="20" Style="text-transform: uppercase;" runat="server"
+                    <table class="table2">
+                        <tr>
+                            <asp:Label ID="lblCNPK" runat="server" CssClass=""></asp:Label>
+                        </tr>
+                        <tr>
+                            ADVS:
+                            <asp:Label ID="lblDetail" runat="server" CssClass=""></asp:Label>
+                            <asp:Label ID="lblADVS" runat="server" CssClass=""></asp:Label>
+
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <label class="" id="Label1">
+                                    Pallet ID</label>
+                            </td>
+                            <td>
+                                <asp:Label ID="lblPalletID" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtPalletID" MaxLength="20" Style="text-transform: uppercase;" runat="server"
+                                    CssClass="form-control" onkeyup="validarPallet();" Font-Size="Medium"></asp:TextBox>
+                                <asp:Button ID="Reload" runat="server" Text="Next Picking" OnClick="Reload_Click"
+                                    class="btn btn-primary btn-lg mt-3" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <label class="">
+                                    Item</label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblItemID" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblItemDesc" runat="server" CssClass=""></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <label class="">
+                                    Lot</label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="LblLotId" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="LblLotIdDesc" runat="server" CssClass=""></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <label class="">
+                                    Warehouse</label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblWarehouse" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lblWareDescr" runat="server" CssClass=""></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <label class="">
+                                    Location</label>
+                            </td>
+                            <td class="">
+                                <asp:Label ID="lbllocation" runat="server" CssClass=""></asp:Label>
+                            </td>
+                            <td class="">
+                                <%--<asp:TextBox ID="txtlocation" MaxLength="20" Style="text-transform: uppercase;" runat="server"
                         CssClass="form-control" onkeyup="validarLocation();" Font-Size="Medium"></asp:TextBox>--%>
-                            <%--<asp:TextBox ID="txtlocation" MaxLength="20" runat="server"
+                                <%--<asp:TextBox ID="txtlocation" MaxLength="20" runat="server"
                          Font-Size="Medium"></asp:TextBox>--%>
-                            <input type="text" id="txtlocation" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="">
-                            <label class="">
-                                Quantity</label>
-                        </td>
-                        <td class="">
-                            <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
-                            <asp:TextBox ID="lblQuantity" CssClass="" runat="server" type="number"></asp:TextBox>
-                            <asp:Label ID="lblQuantityAux" runat="server" Text=""></asp:Label>
-                            <asp:Label ID="lblQuantityOld" runat="server" Text=""></asp:Label>
-                        </td>
-                        <td>
-                            <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
-                        </td>
-                    </tr>
-                    <tr id="HideReason">
-                        <td class="">
-                            <label class="">
-                                Reason</label>
-                        </td>
-                        <td>
-                            <%-- <asp:DropDownList ID="listRegrind" runat="server"  Width="100%" height="100%" CssClass="DropDownList"    AutoPostBack="false" Font-Size="Larger" OnSelectedIndexChanged="listRegrind_SelectedIndexChanged">
+                                <input type="text" id="txtlocation" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="">
+                                <label class="">
+                                    Quantity</label>
+                            </td>
+                            <td class="">
+                                <%--<asp:Label ID="lblQuantity" runat="server" CssClass=""></asp:Label>--%>
+                                <asp:TextBox ID="lblQuantity" CssClass="" runat="server" type="number"></asp:TextBox>
+                                <asp:Label ID="lblQuantityAux" runat="server" Text=""></asp:Label>
+                                <asp:Label ID="lblQuantityOld" runat="server" Text=""></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="lblQuantityDesc" runat="server" CssClass=""></asp:Label>
+                            </td>
+                        </tr>
+                        <tr id="HideReason">
+                            <td class="">
+                                <label class="">
+                                    Reason</label>
+                            </td>
+                            <td>
+                                <%-- <asp:DropDownList ID="listRegrind" runat="server"  Width="100%" height="100%" CssClass="DropDownList"    AutoPostBack="false" Font-Size="Larger" OnSelectedIndexChanged="listRegrind_SelectedIndexChanged">
                     </asp:DropDownList>--%>
-                            <select class="form-control form-control-lg" id="listCausal" tabindex="1">
-                                <option value="0">Select Reason</option>
-                                <option value="1">Wrong Lot</option>
-                                <option value="2">Aisle Blocked</option>
-                                <option value="3">Wrong Location</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input id="bntChange" type="button" class="btn btn-primary btn-lg" onclick="IngresarCausales()"
-                                value="CHANGE" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input id="btnconfirPKG" type="button" class="btn btn-primary btn-lg" onclick="ShowCurrentTime()"
-                                value="Confirm" />
-                        </td>
-                        <td></td>
-                        <td>
-                            <%--<input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
+                                <select class="form-control form-control-lg" id="listCausal" tabindex="1">
+                                    <option value="0">Select Reason</option>
+                                    <option value="1">Wrong Lot</option>
+                                    <option value="2">Aisle Blocked</option>
+                                    <option value="3">Wrong Location</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="bntChange" type="button" class="btn btn-primary btn-lg" onclick="IngresarCausales()"
+                                    value="CHANGE" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="btnconfirPKG" type="button" class="btn btn-primary btn-lg" onclick="ShowCurrentTime()"
+                                    value="Confirm" />
+                            </td>
+                            <td></td>
+                            <td>
+                                <%--<input id="btnNotPKG" type="button" class="btn btn-primary btn-lg ml-20"
                         onclick="ShowCurrentOptions()" value="Pallet Can't be picked" />--%>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <label id="LblError">
-                            </label>
-                        </td>
-                    </tr>
-                </table>
-                
-            </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <label id="LblError">
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
                 <div id="divTable" class="col-6">
                 </div>
 
             </div>
-            
+
             <div class="hidetable">
                 <div class="">
                     <table border="1">
@@ -371,8 +376,8 @@
         </div>
 
     </form>
-    <div id="MyEtiqueta" style="display:none">
-        <table style="margin: auto" >
+    <div id="MyEtiqueta" style="display: none">
+        <table style="margin: auto">
             <tr>
                 <td>
                     <%--<label style="font-size: 11px">
@@ -396,8 +401,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                </td>
+                <td></td>
                 <td align="center">
                     <label id="lblItemDesc" style="font-size: 14px">
                     </label>
@@ -409,18 +413,16 @@
                         QUANTITY</label>
                 </td>
                 <td colspan="4">
-                    
+
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
                         vspace="5" style="width: 1in; height: .5in; margin: 0px !important" />
                     <label id="LblQuantity" style="display: none; font-size: 11px">
                     </label>
                 </td>
-                <td>
-                </td>
+                <td></td>
             </tr>
             <tr>
-                <td>
-                </td>
+                <td></td>
                 <td align="center">
                     <label id="LblUnit" style="font-size: 11px">
                     </label>
@@ -459,9 +461,9 @@
         </table>
         <br />
         <br />
-        <table style="margin: auto" >
+        <table style="margin: auto">
             <tr>
-               <td>
+                <td>
                     <%--<label style="font-size: 11px">
                         Pallet ID</label>--%>
                 </td>
@@ -483,8 +485,7 @@
                 </td>
             </tr>
             <tr>
-                <td>
-                </td>
+                <td></td>
                 <td align="center">
                     <label id="lblItemDesc2" style="font-size: 14px">
                     </label>
@@ -496,18 +497,16 @@
                         QUANTITY</label>
                 </td>
                 <td colspan="4">
-                    
+
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity2" alt="" hspace="60"
                         vspace="5" style="width: 1in; height: .5in; margin: 0px !important" />
                     <label id="LblQuantity2" style="display: none; font-size: 11px">
                     </label>
                 </td>
-                <td>
-                </td>
+                <td></td>
             </tr>
             <tr>
-                <td>
-                </td>
+                <td></td>
                 <td align="center">
                     <label id="LblUnit2" style="font-size: 11px">
                     </label>
@@ -547,6 +546,7 @@
     </div>
     <script type="text/javascript">
 
+
         function EventoAjax(Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
@@ -584,6 +584,13 @@
             LblDate = $('#LblDate');
             LblReprint = $('#LblReprint');
             LblReprintInd = $('#LblReprintInd');
+        }
+        function imprimir(r) {
+            console.log(r.d)
+        }
+
+        function getusers() {
+            EventoAjax("getusers", '{}', imprimir)
         }
 
         function formatDate(date) {
@@ -753,10 +760,10 @@
 
         function ShowCurrentTime() {
             if ($("#Contenido_lblCNPK").html() != "1") {
-                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val() )+ "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val()) + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "', 'ADVSP':'" + $('#Contenido_lblADVS').html().trim() + "'}";
             }
             else {
-                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val()) + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID%>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'}";
+                dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val()) + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID%>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "', 'ADVSP':'" + $('#Contenido_lblADVS').html().trim() + "'}";
             }
 
             //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
@@ -769,37 +776,38 @@
                 success: function (response) {
                     var myObj = JSON.parse(response.d)
                     if (myObj.Error == false) {
-                        
+
                         ////window.location = "/WebPages/Login/whMenuI.aspx";
                         var newCant = parseFloat($("#Contenido_lblQuantity").val());
                         var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
 
-                        $('#Contenido_CBPalletNO').attr("src",  myObj.PAID_OLD_URL);
+                        $('#Contenido_CBPalletNO').attr("src", myObj.PAID_OLD_URL);
                         $('#Contenido_CBItem').attr("src", myObj.ITEM_URL);
                         $('#lblItemDesc').html($('#Contenido_lblItemDesc').html());
                         $('#Contenido_CBQuantity').attr("src", myObj.QTYC_URL);
                         $('#LblUnit').html($('#Contenido_lblQuantityDesc').html());
 
                         $('#Contenido_CBLot').attr("src", myObj.CLOT_URL);
-                        if(myObj.CLOT_URL!=undefined){
-                            myObj.CLOT_URL.trim()==""?$('#Contenido_CBLot').hide():$('#Contenido_CBLot').show();
+                        if (myObj.CLOT_URL != undefined) {
+                            myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot').hide() : $('#Contenido_CBLot').show();
                         }
                         //$('#LblDate').html();
 
-                        $('#Contenido_CBPalletNO2').attr("src",myObj.PAID_URL);
+                        $('#Contenido_CBPalletNO2').attr("src", myObj.PAID_URL);
                         $('#Contenido_CBItem2').attr("src", myObj.ITEM_URL);
                         $('#lblItemDesc2').html($('#Contenido_lblItemDesc').html());
                         $('#Contenido_CBQuantity2').attr("src", myObj.QTYC1_URL);
                         $('#LblUnit2').html($('#Contenido_lblQuantityDesc').html());
 
                         $('#Contenido_CBLot2').attr("src", myObj.CLOT_URL);
-                        if(myObj.CLOT_URL!=undefined){
-                            myObj.CLOT_URL.trim()==""?$('#Contenido_CBLot2').hide():$('#Contenido_CBLot2').show();
+                        if (myObj.CLOT_URL != undefined) {
+                            myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot2').hide() : $('#Contenido_CBLot2').show();
                         }
                         //$('#LblDate2').html();
                         var newCant = parseFloat($("#Contenido_lblQuantity").val());
                         var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-                        alert("Information saved successfully");
+                        alert("Information saved successfully " + myObj.urpt);
+                        console.log(myObj.urpt);
 
                         if (myObj.qtyaG > 0) {
                             printDiv("MyEtiqueta");
@@ -808,7 +816,7 @@
 
 
 
-                        $('#Contenido_lblPalletID').html(""); 
+                        $('#Contenido_lblPalletID').html("");
                         $('#Contenido_lblItemID').html("");
                         $('#Contenido_LblLotId').html("");
                         $('#Contenido_lblWarehouse').html("");
@@ -819,7 +827,7 @@
                         $('#Contenido_lblQuantityDesc').html("");
                         $('#Contenido_txtPalletID').val("");
                         $('#txtlocation').val("");
-                        
+
                     }
                     else {
                         alert(myObj.errorMsg);
@@ -842,6 +850,21 @@
                 }
             });
         }
+
+        function clearForm() {
+            $('#Contenido_lblPalletID').html("");
+            $('#Contenido_lblItemID').html("");
+            $('#Contenido_LblLotId').html("");
+            $('#Contenido_lblWarehouse').html("");
+            $('#Contenido_lbllocation').html("");
+            $('#Contenido_lblQuantity').html("");
+            $('#Contenido_lblItemDesc').html("");
+            $('#Contenido_lblWareDescr').html("");
+            $('#Contenido_lblQuantityDesc').html("");
+            $('#Contenido_txtPalletID').val("");
+            $('#txtlocation').val("");
+        }
+
         function OnSuccess(response) {
             alert(response.d);
         }
@@ -866,49 +889,49 @@
 
 
             //$("#divTable").append(tableOptions);
-                        $.ajax({
-                            type: "POST",
+            $.ajax({
+                type: "POST",
 
-                            url: "Picking.aspx/ShowCurrentOptions",
-                            data: "{}",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            success: function (response) {
-                                myObj = JSON.parse(response.d);
-                                window.localStorage.setItem('MyPalletList',JSON.stringify(myObj));
-                                for (var i = 0; i < myObj.length; i++) {
-                                    bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
-                                }
-                                var tableOptions = "<table class='table' style='width:100%'>" +
-                                                            "<thead>" +
-                                                              "<tr>" +
-                                                                "<th scope='col'>Pallet</th>" +
-                                                                "<th scope='col'>Location</th>" +
-                                                                "<th scope='col'>Item</th>" +
-                                                                "<th scope='col'>Description</th>" +
-                                                                "<th scope='col'>Quantity</th>" +
-                                                                "<th scope='col'>Unit</th>" +
-                                                            "</tr>" +
-                                                           "</thead>" +
-                                                           "<tbody>" +
-                                                           bodyRows
-                                "</tbody>" +
-                                                        "</table>";
+                url: "Picking.aspx/ShowCurrentOptions",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    myObj = JSON.parse(response.d);
+                    window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
+                    for (var i = 0; i < myObj.length; i++) {
+                        bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                    }
+                    var tableOptions = "<table class='table' style='width:100%'>" +
+                                                "<thead>" +
+                                                  "<tr>" +
+                                                    "<th scope='col'>Pallet</th>" +
+                                                    "<th scope='col'>Location</th>" +
+                                                    "<th scope='col'>Item</th>" +
+                                                    "<th scope='col'>Description</th>" +
+                                                    "<th scope='col'>Quantity</th>" +
+                                                    "<th scope='col'>Unit</th>" +
+                                                "</tr>" +
+                                               "</thead>" +
+                                               "<tbody>" +
+                                               bodyRows
+                    "</tbody>" +
+                                            "</table>";
 
 
-                                $("#divTable").append(tableOptions);
-            //                    Swal.fire({
-            //                        title: '<strong>Options</strong>',
-            //                        icon: 'info',
-            //                        html: tableOptions,
-            //                        showCloseButton: false,
-            //                        showCancelButton: false,
-            //                        focusConfirm: false
-            //                    });
-                            },
-                            failure: function (response) {
-                                alert(response.d);
-                            }
+                    $("#divTable").append(tableOptions);
+                    //                    Swal.fire({
+                    //                        title: '<strong>Options</strong>',
+                    //                        icon: 'info',
+                    //                        html: tableOptions,
+                    //                        showCloseButton: false,
+                    //                        showCancelButton: false,
+                    //                        focusConfirm: false
+                    //                    });
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
             });
         }
         function OnSuccess(response) {

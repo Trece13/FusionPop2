@@ -74,7 +74,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -125,7 +125,7 @@ namespace whusap.WebPages.Migration
                 lblValueTotalQty.Text = qtyr;
                 lblValueUnit.Text = consultaInformacion.Rows[0]["CUNI"].ToString().Trim().ToUpper();
 
-                lblValuePrintedBy.Text = _operator;
+                lblValuePrintedBy.Text = HttpContext.Current.Session["user"].ToString();
                 lblValueDate.Text = DateTime.Now.ToString();
 
                 divTable.Visible = true;

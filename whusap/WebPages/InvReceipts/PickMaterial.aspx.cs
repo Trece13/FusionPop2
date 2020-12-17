@@ -72,7 +72,7 @@ namespace whusap.WebPages.InvReceipts
                 string strError = string.Empty;
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -98,8 +98,8 @@ namespace whusap.WebPages.InvReceipts
 
             try
             {
-                string retorno = string.Empty;  
-                string USRR = _operator;
+                string retorno = string.Empty;
+                string USRR = HttpContext.Current.Session["user"].ToString();
                 DataTable DTtccol307PalletID = twhcol130DAL.Consultarttccol307(PAID, USRR);
 
 
@@ -149,7 +149,7 @@ namespace whusap.WebPages.InvReceipts
 
                                     string PICK = "1";
                                     string DATK = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-                                    string LOGP = _operator;
+                                    string LOGP = HttpContext.Current.Session["user"].ToString();
                                     string STAT = "2";
 
                                     twhcol130DAL.ActualizacionPickMaterialWhcol130(PAID, PICK, DATK, LOGP, STAT);

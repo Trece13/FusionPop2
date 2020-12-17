@@ -161,7 +161,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = "",
                     refcntd = 0,
                     refcntu = 0
@@ -710,7 +710,7 @@ protected void save_Click(object sender, EventArgs e)
                     pdno = CLOT == "" ? cyclecountLabel : CLOT,
                     sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet,
                     proc = 2,
-                    logn = _operator,
+                    logn = HttpContext.Current.Session["user"].ToString(),
                     mitm = ITEM.Trim(),
                     qtdl = Convert.ToDecimal(QTYS),
                     cuni = CUNI,
@@ -727,7 +727,7 @@ protected void save_Click(object sender, EventArgs e)
                     refcntd = 0,
                     refcntu = 0,
                     drpt = DateTime.Now,
-                    urpt = _operator,
+                    urpt = HttpContext.Current.Session["user"].ToString(),
                     acqt = Convert.ToDecimal(QTYS),
                     cwaf = CWAR,
                     cwat = CWAR,
@@ -768,7 +768,7 @@ protected void save_Click(object sender, EventArgs e)
                     pdno = CLOT == "" ? cyclecountLabel : CLOT,
                     sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet,
                     proc = 2,
-                    logn = _operator,
+                    logn = HttpContext.Current.Session["user"].ToString(),
                     mitm = ITEM.Trim(),
                     qtdl = Convert.ToDecimal(QTYS),
                     cuni = CUNI,
@@ -785,7 +785,7 @@ protected void save_Click(object sender, EventArgs e)
                     refcntd = 0,
                     refcntu = 0,
                     drpt = DateTime.Now,
-                    urpt = _operator,
+                    urpt = HttpContext.Current.Session["user"].ToString(),
                     acqt = Convert.ToDouble(QTYS),
                     cwaf = CWAR,
                     cwat = CWAR,

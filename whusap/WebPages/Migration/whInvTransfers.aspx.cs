@@ -76,7 +76,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = mensajes("encabezado"),
                     refcntd = 0,
                     refcntu = 0
@@ -107,7 +107,7 @@ namespace whusap.WebPages.Migration
                     clot = CLOT
                 };
 
-                Ent_tticol127 dataticol127 = new Ent_tticol127() { user = _operator };
+                Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
 
                 var validaAlmacenUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
 
@@ -337,7 +337,7 @@ namespace whusap.WebPages.Migration
                     lode = txtUbicacionDestino.Text.Trim().ToUpper(),
                     qtdl = double.Parse(txtCantidadTrasnferir.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat),
                     cuni = txtCantidadUnidad.Text.Split('-').Last().Trim(),
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     refcntd = 0,
                     refcntu = 0
                 };

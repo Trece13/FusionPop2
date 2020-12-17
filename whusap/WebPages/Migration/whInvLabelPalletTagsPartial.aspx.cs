@@ -82,7 +82,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = mensajes("encabezado"),
                     refcntd = 0,
                     refcntu = 0
@@ -252,7 +252,7 @@ namespace whusap.WebPages.Migration
                                 pdno = PDNO,
                                 sqnb = sqnb,
                                 proc = 2,
-                                logn = _operator,
+                                logn = HttpContext.Current.Session["user"].ToString(),
                                 mitm = item,
                                 qtdl = 0,
                                 cuni = unidad,
@@ -317,7 +317,7 @@ namespace whusap.WebPages.Migration
                         pdno = PDNO,
                         sqnb = sqnb,
                         proc = 2,
-                        logn = _operator,
+                        logn = HttpContext.Current.Session["user"].ToString(),
                         mitm = item,
                         qtdl = 0,
                         cuni = unidad,
@@ -525,7 +525,7 @@ namespace whusap.WebPages.Migration
                         qtdl = enterqty,
                         cuni = cuni,
                         mess = " ",
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         refcntd = 0,
                         refcntu = 0
                     };

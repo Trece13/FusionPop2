@@ -74,7 +74,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -168,7 +168,7 @@ namespace whusap.WebPages.Migration
                 lode = loca,
                 qtdl = qtdl,
                 cuni = cuni,
-                user = _operator,
+                user = HttpContext.Current.Session["user"].ToString(),
                 refcntd = 0,
                 refcntu = 0
             };

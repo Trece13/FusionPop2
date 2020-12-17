@@ -73,7 +73,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -214,7 +214,7 @@ namespace whusap.WebPages.Migration
                 data1.cwar = cwar.Trim() == String.Empty ? " " : cwar.Trim();
                 data1.unit = unit.Trim();
                 data1.qana = double.Parse(txtQuantity1.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-                data1.logn = _operator;
+                data1.logn = HttpContext.Current.Session["user"].ToString();
                 data1.proc = 2;
 
                 listaDatos.Add(data1);
@@ -238,7 +238,7 @@ namespace whusap.WebPages.Migration
                 data2.cwar = cwar.Trim() == String.Empty ? " " : cwar.Trim();
                 data2.unit = unit.Trim();
                 data2.qana = double.Parse(txtQuantity2.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-                data2.logn = _operator;
+                data2.logn = HttpContext.Current.Session["user"].ToString();
                 data2.proc = 2;
 
                 listaDatos.Add(data2);
@@ -261,7 +261,7 @@ namespace whusap.WebPages.Migration
                 data3.cwar = cwar.Trim() == String.Empty ? " " : cwar.Trim();
                 data3.unit = unit.Trim();
                 data3.qana = double.Parse(txtQuantity3.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-                data3.logn = _operator;
+                data3.logn = HttpContext.Current.Session["user"].ToString();
                 data3.proc = 2;
 
                 listaDatos.Add(data3);
@@ -285,7 +285,7 @@ namespace whusap.WebPages.Migration
                 data4.cwar = cwar.Trim() == String.Empty ? " " : cwar.Trim();
                 data4.unit = unit.Trim();
                 data4.qana = double.Parse(txtQuantity4.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-                data4.logn = _operator;
+                data4.logn = HttpContext.Current.Session["user"].ToString();
                 data4.proc = 2;
 
                 listaDatos.Add(data4);
@@ -308,7 +308,7 @@ namespace whusap.WebPages.Migration
                 data5.cwar = cwar.Trim() == String.Empty ? " " : cwar.Trim();
                 data5.unit = unit.Trim();
                 data5.qana = double.Parse(txtQuantity5.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-                data5.logn = _operator;
+                data5.logn = HttpContext.Current.Session["user"].ToString();
                 data5.proc = 2;
                 listaDatos.Add(data5);
 

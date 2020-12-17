@@ -34,7 +34,7 @@ namespace whusap.WebPages.InvTrans
             private static string _UNIQUEID;
             public static bool loadLocation;
             string strError = string.Empty;
-            protected static string _operator;
+            string _operator;
             private static string _idioma;
             private static string formName;
             private static string globalMessages = "GlobalMessages";

@@ -80,7 +80,7 @@ namespace whusap.WebPages.InvLogistica
 
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = mensajes("encabezado"),
                         refcntd = 0,
                         refcntu = 0
@@ -235,7 +235,7 @@ namespace whusap.WebPages.InvLogistica
                             qtdl = Convert.ToDecimal(QTDL),
                             cuni = lblValueUnit.Text,
                             mess = " ",
-                            user = _operator,
+                            user = HttpContext.Current.Session["user"].ToString(),
                             refcntd = 0,
                             refcntu = 0
                         };
@@ -249,7 +249,7 @@ namespace whusap.WebPages.InvLogistica
                         {
                             Ent_tticol022 data022 = new Ent_tticol022()
                             {
-                                log2 = _operator,
+                                log2 = HttpContext.Current.Session["user"].ToString(),
                                 qtd2 = Convert.ToInt32(data030.qtdl),
                                 loca = data030.loca,
                                 pdno = data030.pdno,

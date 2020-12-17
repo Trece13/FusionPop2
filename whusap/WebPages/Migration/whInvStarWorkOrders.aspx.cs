@@ -78,7 +78,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -192,10 +192,10 @@ namespace whusap.WebPages.Migration
                 Ent_tticol011 data011 = new Ent_tticol011()
                 {
                     stat = Convert.ToInt32(slAction.SelectedValue),
-                    inib = _operator,
+                    inib = HttpContext.Current.Session["user"].ToString(),
                     pdno = lblValueOrder.Text.Trim().ToUpper(),
                     mcno = lblValueMachine.Text.Trim().ToUpper(),
-                    comb = _operator
+                    comb = HttpContext.Current.Session["user"].ToString()
                 };
 
                 switch (stat)

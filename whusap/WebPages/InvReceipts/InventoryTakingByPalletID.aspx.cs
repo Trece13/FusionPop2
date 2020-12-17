@@ -85,7 +85,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = "",
                     refcntd = 0,
                     refcntu = 0
@@ -360,8 +360,8 @@ namespace whusap.WebPages.InvReceipts
             ObjTwhcol019.ITEM   = ITEM;   
             ObjTwhcol019.CLOT   = CLOT;   
             ObjTwhcol019.QTDL   = Convert.ToDecimal(QTYS.ToString().Trim());   
-            ObjTwhcol019.CUNI   = UNIT;   
-            ObjTwhcol019.LOGN   = _operator;   
+            ObjTwhcol019.CUNI   = UNIT;
+            ObjTwhcol019.LOGN = HttpContext.Current.Session["user"].ToString();   
             ObjTwhcol019.DATE   = new DateTime();   
             ObjTwhcol019.COUN   = 0;   
             ObjTwhcol019.PROC   = 0;   

@@ -76,7 +76,7 @@ namespace whusap.WebPages.InvProductos
                     //Guarda log de ingreso
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = mensajes("encabezado"),
                         refcntd = 0,
                         refcntu = 0
@@ -898,7 +898,7 @@ namespace whusap.WebPages.InvProductos
                     Ent_tticol180 dataDoc = new Ent_tticol180()
                     {
                         docn = _documento,
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         path = output.Name,
                         mssh = " "
                     };
@@ -1424,7 +1424,7 @@ namespace whusap.WebPages.InvProductos
                     Ent_tticol180 dataDoc = new Ent_tticol180()
                     {
                         docn = _documento,
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         path = output.Name,
                         mssh = " "
                     };

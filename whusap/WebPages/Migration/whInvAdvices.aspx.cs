@@ -86,7 +86,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = mensajes("encabezado"),
                     refcntd = 0,
                     refcntu = 0
@@ -189,7 +189,7 @@ namespace whusap.WebPages.Migration
                 qana = double.Parse(cantidad, CultureInfo.InvariantCulture.NumberFormat),
                 cuni = _validateRecord.Rows[0]["ATUN"].ToString(),
                 clot = CLOT == String.Empty ? " " : CLOT,
-                logn = _operator,
+                logn = HttpContext.Current.Session["user"].ToString(),
                 orig = 3
             };
 

@@ -77,7 +77,7 @@ namespace whusap.WebPages.SalesOrders
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -296,7 +296,7 @@ namespace whusap.WebPages.SalesOrders
                                 cwar = myObj.SFCO.Trim(),
                                 //qune = Convert.ToDecimal(CantidadPorCiclo(QUANTITYCUNI, Convert.ToInt32(MyConvertionFactor.FactorD), ciclosADVS, i).ToString()),
                                 qune = Convert.ToDecimal(QUANTITYCUNI),
-                                logn = _operator,
+                                logn = HttpContext.Current.Session["user"].ToString(),
                                 proc = 2,
                                 pick = 1,
                                 clot = " ",

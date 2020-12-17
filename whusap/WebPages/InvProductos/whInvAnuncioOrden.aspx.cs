@@ -105,7 +105,7 @@ namespace whusap.WebPages.InvAnunciosProd
                     //Guarda log de ingreso
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = strTitulo,
                         refcntd = 0,
                         refcntu = 0
@@ -232,7 +232,7 @@ namespace whusap.WebPages.InvAnunciosProd
                             dsca = lblDescripcionItem.Text.ToUpper(),
                             qtdl = float.Parse(txtConfirmado.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat),
                             cuni = lblUnidad.Text.ToUpper(),
-                            user = _operator
+                            user = HttpContext.Current.Session["user"].ToString()
                         };
 
                         validateSave = _idalticol025.insertarRegistro(ref dataticol025, ref strError);
@@ -248,7 +248,7 @@ namespace whusap.WebPages.InvAnunciosProd
                             qtdl = Convert.ToDecimal(txtAnunciado.Text.Trim()),
                             cuni = lblUnidad.Text.ToUpper(),
                             mess = " ",
-                            user = _operator
+                            user = HttpContext.Current.Session["user"].ToString()
                         };
 
                         List<Ent_tticol020> listData = new List<Ent_tticol020>();

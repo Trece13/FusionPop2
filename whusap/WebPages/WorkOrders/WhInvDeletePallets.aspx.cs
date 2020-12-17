@@ -87,7 +87,7 @@ namespace whusap.WebPages.WorkOrders
                 string strError = string.Empty;
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -188,7 +188,7 @@ namespace whusap.WebPages.WorkOrders
                 var DATE = string.Empty;
 
                 string retorno = string.Empty;
-                string USRR = _operator;
+                string USRR = HttpContext.Current.Session["user"].ToString().Trim();
                 DataTable DTtccol307PalletID = twhcol130DAL.Consultarttccol307(PAID, string.Empty);
 
 
@@ -285,7 +285,7 @@ namespace whusap.WebPages.WorkOrders
                                         obj080.item = ITEM;
                                         obj080.cwar = CWAT;
                                         obj080.qune = Convert.ToDecimal(ACQT);
-                                        obj080.logn = _operator;
+                                        obj080.logn = HttpContext.Current.Session["user"].ToString().Trim();
                                         obj080.date = DATE;
                                         obj080.proc = Convert.ToInt16(PROC);
                                         obj080.refcntd = 0;

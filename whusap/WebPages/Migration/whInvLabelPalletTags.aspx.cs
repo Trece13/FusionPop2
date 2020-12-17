@@ -98,7 +98,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -256,7 +256,7 @@ namespace whusap.WebPages.Migration
                                 pdno = PDNO,
                                 sqnb = sqnb,
                                 proc = 2,
-                                logn = _operator,
+                                logn = HttpContext.Current.Session["user"].ToString(),
                                 mitm = item,
                                 qtdl = 0,
                                 cuni = unidad,
@@ -320,7 +320,7 @@ namespace whusap.WebPages.Migration
                         pdno = PDNO,
                         sqnb = sqnb,
                         proc = 2,
-                        logn = _operator,
+                        logn = HttpContext.Current.Session["user"].ToString(),
                         mitm = item,
                         qtdl = 0,
                         cuni = unidad,
@@ -520,7 +520,7 @@ namespace whusap.WebPages.Migration
                         qtdl = enterqty,
                         cuni = cuni,
                         mess = " ",
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         refcntd = 0,
                         refcntu = 0
                     };
@@ -627,7 +627,7 @@ namespace whusap.WebPages.Migration
                 lblValueShift.Text = "A,B,C,D";
                 lblValueCasePerPallet.Text = qtdl;
                 lblValueMadeIn.Text = madein;
-                lblValueInspectorInitial.Text = "REPRINT by: "+_operator;
+                lblValueInspectorInitial.Text = "REPRINT by: " + HttpContext.Current.Session["user"].ToString();
                 divTable.Visible = true;
                 tdBtnExit.Visible = false;
                 divBotones.Visible = true;

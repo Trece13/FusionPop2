@@ -81,7 +81,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -146,7 +146,7 @@ namespace whusap.WebPages.Migration
                 tarifaHoraria = Request.Form["slHoursLaborType"].ToString(),
                 horas = hours,
                 comentario = Request.Form["slComments"].ToString(),
-                usuario = _operator,
+                usuario = HttpContext.Current.Session["user"].ToString(),
                 procesado = 2,
                 chequeado = 2,
                 fecha = DateTime.Now,

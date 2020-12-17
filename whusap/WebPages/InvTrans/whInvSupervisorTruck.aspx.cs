@@ -127,7 +127,7 @@ namespace whusap.WebPages.InvTrans
 
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = mensajes("encabezado"),
                         refcntd = 0,
                         refcntu = 0

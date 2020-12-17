@@ -110,7 +110,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -299,7 +299,7 @@ namespace whusap.WebPages.Migration
                     qtyr = Convert.ToDouble(cantidad),
                     cdis = cdis,
                     obse = obse == String.Empty ? " " : obse,
-                    logr = _operator,
+                    logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno
                 };
                 var validInsertaux = _idaltticol116.insertarRegistro(ref data116, ref strError);
@@ -323,7 +323,7 @@ namespace whusap.WebPages.Migration
 
                     lblValueDescription.Text = hdfDescItem.Value;
                     lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
-                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", _operator);
+                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", HttpContext.Current.Session["user"].ToString());
                     lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
                     lblComments.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                     lblValueReason.Text = reasondesc;
@@ -348,7 +348,7 @@ namespace whusap.WebPages.Migration
                     qtyr = cantidad,
                     cdis = cdis,
                     obse = obse == String.Empty ? " " : obse,
-                    logr = _operator,
+                    logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno
                 };
 
@@ -373,7 +373,7 @@ namespace whusap.WebPages.Migration
 
                     lblValueDescription.Text = hdfDescItem.Value;
                     lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
-                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", _operator);
+                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", HttpContext.Current.Session["user"].ToString());
                     lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
                     lblComments.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                     lblValueReason.Text = reasondesc;

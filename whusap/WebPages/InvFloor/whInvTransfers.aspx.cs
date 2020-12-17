@@ -72,7 +72,7 @@ namespace whusap.WebPages.InvFloor
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -130,7 +130,7 @@ namespace whusap.WebPages.InvFloor
                     objWhcol020.loor = Transferencias.Rows[0]["T$LOCA"].ToString().Trim();
                     objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
                     objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
-                    objWhcol020.user = _operator;
+                    objWhcol020.user = HttpContext.Current.Session["user"].ToString();
                 }
                 //}
             }
@@ -234,7 +234,7 @@ namespace whusap.WebPages.InvFloor
 
                             objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
                             objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
-                            objWhcol020.user = _operator;
+                            objWhcol020.user = HttpContext.Current.Session["user"].ToString();
 
 
 
@@ -243,7 +243,7 @@ namespace whusap.WebPages.InvFloor
 
                             if (ExistenciaTransfer.Rows.Count > 0)
                             {
-                                bool TransferenciasU = Transfers.ActualizarTransferencia(PAID, CurrentWarehouse, CurrentLocation, TargetWarehouse, TargetLocation, _operator);
+                                bool TransferenciasU = Transfers.ActualizarTransferencia(PAID, CurrentWarehouse, CurrentLocation, TargetWarehouse, TargetLocation, HttpContext.Current.Session["user"].ToString());
                                 if (TransferenciasU)
                                 {
                                     if (TransferenciasU)

@@ -905,7 +905,7 @@ namespace whusap.WebPages.Migration
                         rejt = Convert.ToInt32(rejectType),
                         clot = pdno,
                         obse = exactReasons,
-                        logr = _operator,
+                        logr = HttpContext.Current.Session["user"].ToString(),
                         dsca = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper(),
                         cwar = cwar,
                         paid = paid
@@ -1027,7 +1027,7 @@ namespace whusap.WebPages.Migration
                     qtyr = cantidad,
                     cdis = cdis,
                     obse = obse == String.Empty ? " " : obse,
-                    logr = _operator,
+                    logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno,
                     paid = paid,
                     cwam = cwam
@@ -1038,7 +1038,7 @@ namespace whusap.WebPages.Migration
 
                     paid = paid,
                     cwar = warehouse,
-                    logr = _operator,
+                    logr = HttpContext.Current.Session["user"].ToString(),
                 };
                 var validInsertaux = _idaltticol116.insertarRegistro(ref data116, ref strError);
 
@@ -1092,7 +1092,7 @@ namespace whusap.WebPages.Migration
 
                     lblValueDescription.Text = hdfDescItem.Value;
                     lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
-                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", _operator);
+                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", HttpContext.Current.Session["user"].ToString());
                     lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
                     lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                     lblValueReasonLocated.Text = reasondesc;
@@ -1128,7 +1128,7 @@ namespace whusap.WebPages.Migration
                     qtyr = cantidad,
                     cdis = cdis,
                     obse = obse == String.Empty ? " " : obse,
-                    logr = _operator,
+                    logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno,
                     paid = paid,
                     cwam = cwam
@@ -1138,7 +1138,7 @@ namespace whusap.WebPages.Migration
                    
                     paid = paid,
                     cwar = cwam,
-                    logr = _operator,
+                    logr = HttpContext.Current.Session["user"].ToString(),
                 };
                 var validInsert = _idaltticol116.insertarRegistro(ref data116, ref strError);
 
@@ -1193,7 +1193,7 @@ namespace whusap.WebPages.Migration
 
                         lblValueDescription.Text = hdfDescItem.Value;
                         lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
-                        lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", _operator);
+                        lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", HttpContext.Current.Session["user"].ToString());
                         lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
                         lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                         lblValueReasonLocated.Text = reasondesc;
@@ -1370,11 +1370,11 @@ namespace whusap.WebPages.Migration
                 rejt = Convert.ToInt32(slRejectType.SelectedValue),
                 clot = slLot.Text == "" ? " " : slLot.Text.Trim().ToUpper(),
                 obse = txtExactReasons.InnerText,
-                logr = _operator,
+                logr = HttpContext.Current.Session["user"].ToString(),
                 disp = 4,
                 proc = 1,
                 Unit = txtUnit.Text,
-                logn = _operator,
+                logn = HttpContext.Current.Session["user"].ToString(),
                 mess = "0",
                 cwar = cwar,
                 paid = paid

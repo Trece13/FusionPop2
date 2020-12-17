@@ -274,13 +274,13 @@ namespace whusa.Interfases
 
        
 
-        public int actRegtticol082140(string user ,string pallet, string Location, int stat,string t,string OORG,string ORNO,string OSET,string PONO,string SQNB,string ADVS)
+        public int actRegtticol082140(string user ,string pallet, string Location, int stat,string t,string OORG,string ORNO,string OSET,string PONO,string SQNB,string ADVS,ref string sentencia)
         {
 
             string strError = string.Empty;
             try
             {
-                int DTwhcolo131 = dal.actRegtticol082140(user, pallet, Location, stat, t, OORG, ORNO, OSET, PONO, SQNB, ADVS);
+                int DTwhcolo131 = dal.actRegtticol082140(user, pallet, Location, stat, t, OORG, ORNO, OSET, PONO, SQNB, ADVS,ref sentencia);
                 return DTwhcolo131;
 
             }
@@ -432,9 +432,9 @@ namespace whusa.Interfases
 
         }
 
-        public bool EliminarTccol307140(string PAID)
+        public bool EliminarTccol307140(string PAID, ref string sentencia)
         {
-            return dal.EliminarTccol307140(PAID);
+            return dal.EliminarTccol307140(PAID,ref sentencia);
 
         }
 

@@ -615,6 +615,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col222.t$cwat
           inner join {0}.tticol082{1} col082
           on col082.t$item = col022.t$mitm
+          and col082.t$paid = col022.t$sqnb
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col022.t$mitm
           where col022.t$dele = 8 -- 8-Asignado
@@ -650,6 +651,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col242.t$cwat
           inner join {0}.tticol082{1} col082
           on col082.t$item = col042.t$mitm
+          and col082.t$paid = col042.t$sqnb
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col042.t$mitm
           where col042.t$dele = 8 -- 8-Asignado
@@ -679,6 +681,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col131.t$cwaa
           inner join {0}.tticol082{1} col082
           on col082.t$item = col131.t$item
+          and col082.t$paid = col131.t$paid
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
           where (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado

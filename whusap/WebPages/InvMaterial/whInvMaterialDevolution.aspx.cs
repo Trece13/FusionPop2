@@ -267,7 +267,7 @@ namespace whusap.WebPages.InvMaterial
                     DataTable dt022 = Itticol022.SecuenciaMayorRT(txtWorkOrder.Text.Trim().ToUpperInvariant());
                     if (dt022.Rows.Count > 0)
                     {
-                        paid = dt022.Rows[0]["T$SQNB"].ToString().Trim();
+                        paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper(); ;
                         sec = paid.Substring(12, 2);
                         sec022 = Convert.ToInt32(sec);
                         sec = addZero(sec022 + 1);
@@ -283,12 +283,12 @@ namespace whusap.WebPages.InvMaterial
                             Ent_twhcol130131 MyObj = new Ent_twhcol130131();
 
                             MyObj.OORG = "4";
-                            MyObj.ORNO = txtWorkOrder.Text.Trim().ToUpperInvariant();
-                            MyObj.ITEM = row.Cells[1].Text.ToUpperInvariant();
-                            MyObj.PAID = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+                            MyObj.ORNO = txtWorkOrder.Text.Trim().ToUpper();
+                            MyObj.ITEM = row.Cells[1].Text.ToUpper();
+                            MyObj.PAID = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             MyObj.PONO = Convert.ToInt32(row.Cells[0].Text).ToString();
                             MyObj.SEQN = "0";
-                            MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
+                            MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper();
                             MyObj.CWAR = row.Cells[3].Text.ToUpperInvariant();
                             MyObj.QTYS = toreturn;// cantidad escaneada view 
                             MyObj.UNIT = row.Cells[5].Text.Trim();
@@ -303,7 +303,7 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.PRNT = "1";// llenar en 1
                             MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
                             MyObj.NPRT = "1";//conteo de reimpresiones 
-                            MyObj.LOGN = _operator;// nombre de ususario de la session
+                            MyObj.LOGN = HttpContext.Current.Session["user"].ToString();// nombre de ususario de la session
                             MyObj.LOGT = " ";//llena baan
                             MyObj.STAT = "1";// LLENAR EN 1  
                             MyObj.DSCA = row.Cells[2].Text.ToUpperInvariant();
@@ -320,12 +320,12 @@ namespace whusap.WebPages.InvMaterial
 
                             Ent_tticol022 obj022 = new Ent_tticol022();
                             List<Ent_tticol022> list022 = new List<Ent_tticol022>();
-                            
-                            obj022.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
-                            obj022.sqnb = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+
+                            obj022.pdno = txtWorkOrder.Text.Trim().ToUpper();
+                            obj022.sqnb = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             obj022.proc = 1;
-                            obj022.logn = _operator;
-                            obj022.mitm = row.Cells[1].Text.ToUpperInvariant().Trim();
+                            obj022.logn = HttpContext.Current.Session["user"].ToString();
+                            obj022.mitm = row.Cells[1].Text.ToUpper().Trim();
                             obj022.qtdl = Convert.ToDecimal(toreturn);
                             obj022.cuni = row.Cells[5].Text.Trim();
                             obj022.log1 = "NONE";
@@ -341,10 +341,10 @@ namespace whusap.WebPages.InvMaterial
                             obj022.refcntd = 0;
                             obj022.refcntu = 0;
                             obj022.drpt = DateTime.Now;
-                            obj022.urpt = _operator;
+                            obj022.urpt = HttpContext.Current.Session["user"].ToString();
                             obj022.acqt = Convert.ToDecimal(toreturn);
-                            obj022.cwaf = row.Cells[3].Text.ToUpperInvariant();
-                            obj022.cwat = row.Cells[3].Text.ToUpperInvariant();
+                            obj022.cwaf = row.Cells[3].Text.ToUpper();
+                            obj022.cwat = row.Cells[3].Text.ToUpper();
                             obj022.aclo = "";
                             obj022.allo = 0;
                             
@@ -357,12 +357,12 @@ namespace whusap.WebPages.InvMaterial
                         {
                             Ent_tticol042 obj042 = new Ent_tticol042();
                             List<Ent_tticol042> list042 = new List<Ent_tticol042>();
-                            
-                            obj042.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
-                            obj042.sqnb = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+
+                            obj042.pdno = txtWorkOrder.Text.Trim().ToUpper();
+                            obj042.sqnb = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             obj042.proc = 1;
-                            obj042.logn = _operator;
-                            obj042.mitm = row.Cells[1].Text.ToUpperInvariant().Trim();
+                            obj042.logn = HttpContext.Current.Session["user"].ToString();
+                            obj042.mitm = row.Cells[1].Text.ToUpper().Trim();
                             obj042.pono = Convert.ToInt32(Pos);
                             obj042.qtdl = Convert.ToDecimal(toreturn);
                             obj042.cuni = row.Cells[5].Text.Trim();
@@ -379,10 +379,10 @@ namespace whusap.WebPages.InvMaterial
                             obj042.refcntd = 0; 
                             obj042.refcntu = 0;
                             obj042.drpt = DateTime.Now;
-                            obj042.urpt = _operator;
+                            obj042.urpt = HttpContext.Current.Session["user"].ToString();
                             obj042.acqt = Convert.ToDouble(toreturn);
-                            obj042.cwaf = row.Cells[3].Text.ToUpperInvariant();
-                            obj042.cwat = row.Cells[3].Text.ToUpperInvariant();
+                            obj042.cwaf = row.Cells[3].Text.ToUpper();
+                            obj042.cwat = row.Cells[3].Text.ToUpper();
                             obj042.aclo = "";
                             obj042.allo = 0;
 
@@ -393,11 +393,11 @@ namespace whusap.WebPages.InvMaterial
                         }
 
                     obj = new Ent_tticol125();
-                    obj.pdno = txtWorkOrder.Text.Trim().ToUpperInvariant();
+                    obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
                     obj.pono = Convert.ToInt32(row.Cells[0].Text);
-                    obj.item = row.Cells[1].Text.ToUpperInvariant(); //.Trim();
-                    obj.cwar = row.Cells[3].Text.ToUpperInvariant(); //.Trim();
-                    obj.paid = txtWorkOrder.Text.Trim().ToUpperInvariant() + "-RT" + sec;
+                    obj.item = row.Cells[1].Text.ToUpper(); //.Trim();
+                    obj.cwar = row.Cells[3].Text.ToUpper(); //.Trim();
+                    obj.paid = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                     obj.clot = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
                     obj.reqt = Decimal.Parse(toreturn, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToInt32(toreturn);
                     obj.refcntd = "0";

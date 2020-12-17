@@ -76,7 +76,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = mensajes("encabezado"),
                     refcntd = 0,
                     refcntu = 0
@@ -94,7 +94,7 @@ namespace whusap.WebPages.Migration
             divTable.InnerHtml = String.Empty;
             if (txtUbicacion.Text.Trim().ToUpper() != String.Empty)
             {
-                Ent_tticol127 dataticol127 = new Ent_tticol127() { user = _operator };
+                Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
                 _consultaLoteUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
 
                 if (_consultaLoteUsuario.Rows.Count > 0)

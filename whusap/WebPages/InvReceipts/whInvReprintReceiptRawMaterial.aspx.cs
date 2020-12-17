@@ -68,7 +68,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -87,10 +87,10 @@ namespace whusap.WebPages.InvReceipts
         {
             try
             {
-                List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion(PAID, _operator, RequestUrlAuthority);
+                List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion(PAID, HttpContext.Current.Session["user"].ToString(), RequestUrlAuthority);
                 if (LstPallet.Count == 0)
                 {
-                    LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion131(PAID, _operator, RequestUrlAuthority);
+                    LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion131(PAID, HttpContext.Current.Session["user"].ToString(), RequestUrlAuthority);
                 }
                 return JsonConvert.SerializeObject(LstPallet[0]);
             }

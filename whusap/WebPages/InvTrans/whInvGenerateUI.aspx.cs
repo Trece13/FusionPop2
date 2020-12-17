@@ -23,7 +23,7 @@ namespace whusap.WebPages.InvTrans
             private static Mensajes _mensajesForm = new Mensajes();
             private static LabelsText _textoLabels = new LabelsText();
             public static string _idioma;
-            protected static string _operator;
+            protected string _operator;
             string strError = string.Empty;
             private static string formName;
             private static string globalMessages = "GlobalMessages";
@@ -96,7 +96,7 @@ namespace whusap.WebPages.InvTrans
 
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = mensajes("encabezado"),
                         refcntd = 0,
                         refcntu = 0
@@ -109,7 +109,7 @@ namespace whusap.WebPages.InvTrans
 
                     var username = Session["username"] == null ? Request.QueryString["Valor3"].ToString() : Session["username"].ToString();
 
-                    txtOperator.Text = _operator + " - " + username;
+                    txtOperator.Text = HttpContext.Current.Session["user"].ToString() + " - " + username;
                     divUniqueIdentifier.Visible = false;
                     lblHora.Text = DateTime.Now.ToString();
                 }
@@ -161,7 +161,7 @@ namespace whusap.WebPages.InvTrans
                         {
                             unid = ui,
                             date = dateNow.ToString(),
-                            logn = _operator,
+                            logn = HttpContext.Current.Session["user"].ToString(),
                             idtr = txtTruckID.Text.Trim().ToUpper(),
                             whso = txtSourceWareHouse.Text.Trim().ToUpper(),
                             whta = txtDestinationWareHouse.Text.Trim().ToUpper(),

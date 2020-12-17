@@ -107,7 +107,7 @@ namespace whusap.WebPages
 
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
-                        user = _operator,
+                        user = HttpContext.Current.Session["user"].ToString(),
                         come = mensajes("encabezado"),
                         refcntd = 0,
                         refcntu = 0
@@ -351,7 +351,7 @@ namespace whusap.WebPages
                             qtdl = Convert.ToDecimal(QTDL),
                             cuni = lblValueUnit.Text,
                             mess = " ",
-                            user = _operator,
+                            user = HttpContext.Current.Session["user"].ToString(),
                             refcntd = 0,
                             refcntu = 0
 

@@ -81,7 +81,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = mensajes("encabezado"),
                     refcntd = 0,
                     refcntu = 0
@@ -153,7 +153,7 @@ namespace whusap.WebPages.Migration
                 refcntd = 0,
                 refcntu = 0,
                 orno = txtNumeroRecepcion.Text.Trim().ToUpper(),
-                logn = _operator,
+                logn = HttpContext.Current.Session["user"].ToString(),
                 esti = Convert.ToInt32(quantConvert)
             };
 

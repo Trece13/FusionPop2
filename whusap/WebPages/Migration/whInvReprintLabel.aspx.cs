@@ -72,7 +72,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -137,7 +137,7 @@ namespace whusap.WebPages.Migration
                 lblValueOperator.Text = user;
                 lblValueRollWinder.Text = " " + roll;
                 lblValueShift2.Text = "R - L";
-                lblValueReprintedBy.Text = " " + _operator;
+                lblValueReprintedBy.Text = " " + HttpContext.Current.Session["user"].ToString();
                 lblValueMachine.Text = machine;
 
                 divTable.Visible = true;

@@ -79,7 +79,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -163,7 +163,7 @@ namespace whusap.WebPages.InvReceipts
 
                                     if (errorInsertTwhcol020 == string.Empty)
                                     {
-                                        bool DeleteSucces = twhcol130DAL.Eliminartccol307(LstPallet[0].PAID, _operator);
+                                        bool DeleteSucces = twhcol130DAL.Eliminartccol307(LstPallet[0].PAID, HttpContext.Current.Session["user"].ToString());
                                         if (DeleteSucces == true)
                                         {
                                             MyObj = LstPallet[0];
@@ -204,7 +204,7 @@ namespace whusap.WebPages.InvReceipts
                 }
                 else
                 {
-                    List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletID(PAID, string.Empty, _operator);
+                    List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletID(PAID, string.Empty, HttpContext.Current.Session["user"].ToString());
 
                     if (LstPallet.Count > 0)
                     {
@@ -230,7 +230,7 @@ namespace whusap.WebPages.InvReceipts
                                 bool Delete130 = twhcol130DAL.Eliminartccol130(MyObj);
                             }
 
-                            bool DeleteSucces = twhcol130DAL.Eliminartccol307(MyObj.PAID, _operator);
+                            bool DeleteSucces = twhcol130DAL.Eliminartccol307(MyObj.PAID, HttpContext.Current.Session["user"].ToString());
                             if (DeleteSucces == true)
                             {
                                 MyObj = LstPallet[0];
@@ -269,7 +269,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 Ent_twhcol130131 MyObj = new Ent_twhcol130131();
 
-                List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletID(PAID, "", _operator);
+                List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletID(PAID, "", HttpContext.Current.Session["user"].ToString());
                 if (LstPallet.Count > 0)
                 {
                     MyObj = LstPallet[0];

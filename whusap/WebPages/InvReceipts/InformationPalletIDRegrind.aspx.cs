@@ -87,7 +87,7 @@ namespace whusap.WebPages.InvReceipts
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = _operator,
+                    user = HttpContext.Current.Session["user"].ToString(),
                     come = "",
                     refcntd = 0,
                     refcntu = 0
@@ -344,7 +344,7 @@ namespace whusap.WebPages.InvReceipts
             Ent_tticol042 ObjTticol042 = new Ent_tticol042();
             ObjTticol042.pdno = ORNO;
             ObjTticol042.sqnb = PAID;
-            ObjTticol042.urpt = _operator;
+            ObjTticol042.urpt = HttpContext.Current.Session["user"].ToString();
             ObjTticol042.acqt = Convert.ToDouble(QTYS);
             ObjTticol042.cwaf = CWAR;
             ObjTticol042.cwat = CWAR;
@@ -357,7 +357,7 @@ namespace whusap.WebPages.InvReceipts
             bool res = _idaltticol042.insertarRegistroTticon242(ref Listtticol042, ref strError);
             if (res == false)
             {
-                _idaltticol042.ActualizarCantidadAlmacenRegistroTicol242(_operator, ObjTticol042.acqt, ObjTticol042.aclo, ObjTticol042.cwaf, ObjTticol042.sqnb);
+                _idaltticol042.ActualizarCantidadAlmacenRegistroTicol242(HttpContext.Current.Session["user"].ToString(), ObjTticol042.acqt, ObjTticol042.aclo, ObjTticol042.cwaf, ObjTticol042.sqnb);
             }
 
             return JsonConvert.SerializeObject(ObjTticol042);

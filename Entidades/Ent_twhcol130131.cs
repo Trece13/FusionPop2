@@ -99,5 +99,7 @@ namespace whusa
         public bool Error { get; set; }
 
         public decimal qtyaG { get; set; }
+
+        public string urpt { get; set; }
     }
 }
