@@ -806,7 +806,7 @@
                         //$('#LblDate2').html();
                         var newCant = parseFloat($("#Contenido_lblQuantity").val());
                         var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-                        alert("Information saved successfully ");
+                        alert("Information saved successfully");
                         console.log(myObj.urpt);
 
                         if (myObj.qtyaG > 0) {
