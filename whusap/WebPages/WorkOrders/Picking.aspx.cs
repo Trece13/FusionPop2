@@ -124,7 +124,7 @@ namespace whusap.WebPages.WorkOrders
             }
             if (DT082STATPENDING.Rows.Count > 0 )
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('User has a picking pending');clearForm();", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('User has this pallet " + DT082STATPENDING.Rows[0]["T$PAID"].ToString().Trim() + " pending to Drop');clearForm();", true);
                 return;
             }
 
