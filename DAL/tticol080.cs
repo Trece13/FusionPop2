@@ -56,7 +56,7 @@ namespace whusa.DAL
                     paramList.Add(":T$PONO", reg.pono);
                     paramList.Add(":T$CWAR", reg.cwar);
                     paramList.Add(":T$ITEM", "         "+reg.item.Trim());
-                    paramList.Add(":T$QUNE", reg.qune);
+                    paramList.Add(":T$QUNE", reg.qune);//En ambiente local no funciona . con solo esta tabla(080), este funcionamiento es correcto en fusionpub.
                     paramList.Add(":T$LOGN", reg.logn);
                     paramList.Add(":T$DATE", reg.date);
                     paramList.Add(":T$PROC", reg.proc);

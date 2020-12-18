@@ -408,12 +408,12 @@ namespace whusa.Interfases
             }
         }
 
-        public bool ActualizarCantidadRegistroTicol222(decimal ACQT, string PDNO)
+        public bool ActualizarCantidadRegistroTicol222(decimal ACQT, string SQNB)
         {
             string strError = string.Empty;
             try
             {
-                bool retorno = dal.ActualizarCantidadRegistroTicol222(ACQT, PDNO);
+                bool retorno = dal.ActualizarCantidadRegistroTicol222(ACQT, SQNB);
                 return retorno;
             }
             catch (Exception ex)

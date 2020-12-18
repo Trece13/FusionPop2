@@ -48,8 +48,8 @@ namespace whusap.WebPages.Balance
         protected void Page_Load(object sender, EventArgs e)
         {
             // Cambiar cultura para manejo de separador decimal
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -206,12 +206,10 @@ namespace whusap.WebPages.Balance
             //decimal cantidad decimal.TryParse(txtQuantity.Text.Trim().Replace(".", ","), style, System.Globalization.CultureInfo.InvariantCulture, out cantidad);
             decimal cantidad;
             string cantidads;
-            cantidads = txtQuantity.Text.Replace(".", ",");
-            //bool convert = decimal.TryParse(txtQuantity.Text.Trim(), out cantidad);
-            bool convert = decimal.TryParse(cantidads, out cantidad);
-            var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
-            var value = Decimal.Parse(cantidads, numberFormatInfo);
-            decimal valueP = Convert .ToDecimal(value.ToString().Replace(",", "."));
+            cantidads = txtQuantity.Text;
+            cantidad = Convert.ToDecimal(cantidads);
+            var value = Convert.ToDecimal(cantidad);
+            decimal valueP = Convert .ToDecimal(value.ToString());
 
             if (String.IsNullOrEmpty(listRegrind.SelectedValue.Trim())) { lblError.Text = mensajes("fillform"); return; }
             if (cantidad <= 0) { lblError.Text = mensajes("quantityzero"); return; }

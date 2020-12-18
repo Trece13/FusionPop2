@@ -34,8 +34,8 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
             // Cambiar cultura para manejo de separador decimal
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -185,6 +185,7 @@ namespace whusap.WebPages.Migration
                 if (validateUpdate)
                 {
                     _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(),"11", strError);
+                    _idaltticol022.ActualizarCantidadRegistroTicol222(0,txtRollNumber.Text.Trim());
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjupdate");
                     trItem.Visible = false;
@@ -209,6 +210,7 @@ namespace whusap.WebPages.Migration
                 var isTag = String.Empty;
 
                 var validaInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref isTag);
+                _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
                 _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
                 if (validaInsert > 0)
                 {

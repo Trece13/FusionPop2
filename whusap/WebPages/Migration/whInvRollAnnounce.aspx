@@ -20,8 +20,8 @@
         };
 
         function validarRoll() {
-            var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
-            var re = new RegExp(regex);
+            //var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
+            //var re = new RegExp(regex);
             var numeroOrden = document.getElementById('txtRollNumber').value.trim();
             var orden = numeroOrden.substr(9, 1);
             var guion = numeroOrden.substr(9, 1);
@@ -63,7 +63,7 @@
             </td>
             <td style="width: 250px; padding:5px;">
                 <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtRollNumber" onblur="validarRoll();" CssClass="TextBoxBig" ClientIDMode="Static" />
+                    <asp:TextBox runat="server" ID="txtRollNumber" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>

@@ -48,8 +48,8 @@ namespace whusap.WebPages.Balance
         protected void Page_Load(object sender, EventArgs e)
         {
             // Cambiar cultura para manejo de separador decimal
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -163,12 +163,13 @@ namespace whusap.WebPages.Balance
 
             decimal cantidad;
             string cantidads;
-            cantidads = txtQuantity.Text.Replace(".", ",");
+            cantidads = txtQuantity.Text;
             //bool convert = decimal.TryParse(txtQuantity.Text.Trim(), out cantidad);
-            bool convert = decimal.TryParse(cantidads, out cantidad);
-            var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
-            var value = Decimal.Parse(cantidads, numberFormatInfo);
-            decimal valueP = Convert.ToDecimal(value.ToString().Replace(",", "."));
+            //bool convert = decimal.TryParse(cantidads, out cantidad);
+            //var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
+            var value = Decimal.Parse(cantidads);
+             cantidad = Decimal.Parse(cantidads);
+            decimal valueP = value;
 
             if (MAXR < cantidad)
             {

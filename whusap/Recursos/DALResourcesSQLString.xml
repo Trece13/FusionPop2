@@ -378,6 +378,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT ticol022.T$PDNO AS LOT,ticol022.T$MITM AS ITEM, ticol022.T$QTDL AS QUANTITY, ticol022.T$CUNI AS UNIDAD, ticol022.T$PRO1 AS PRO1, ticol022.T$PRO2 AS PRO2,T$DRPT, ticol222.T$URPT as URPT, ticol222.T$ACQT as ACQT, ticol222.T$CWAF as CWAF, ticol222.T$CWAT as CWAT, ticol222.T$ACLO as ACLO, ticol222.T$REFCNTD as REFCNTD, ticol222.T$REFCNTU as REFCNTU FROM {2} ticol022
           inner join {0}.tticol222{1} ticol222 on ticol222.T$SQNB = ticol022.T$SQNB
           WHERE ticol022.T$SQNB = '[:T$SQNB]'
+          AND   ticol022.T$DELE = '7'
         </stringSQL>
       </operationName>
       <operationName name="actualizaRegistroSugUbicaciones">
@@ -1356,7 +1357,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT,T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap from {0}.twhcol130{1} col130
           UNION
           select 'ticol042' AS  TBL,T$SQNB AS PAID,T$QTDL AS QTYT, T$CUNI AS UNIT,T$MITM  AS ITEM,t$dele as stap  from {0}.tticol042{1} col042
-          ) ConGlobal INNER JOIN {0}.tticol082{1} ticol082 ON ConGlobal.PAID = ticol082.t$PAID INNER JOIN {0}.ttirou002{1} tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
+          ) ConGlobal INNER JOIN {0}.tticol082{1} ticol082 ON ConGlobal.PAID = ticol082.t$PAID AND ticol082.T$STAT =  2 INNER JOIN {0}.ttirou002{1} tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
         </stringSQL>

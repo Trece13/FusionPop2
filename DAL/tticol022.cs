@@ -845,8 +845,8 @@ namespace whusa.DAL
 
             return retorno;
         }
-        
-        public bool ActualizarCantidadRegistroTicol222(decimal ACQT, string PDNO)
+
+        public bool ActualizarCantidadRegistroTicol222(decimal ACQT, string SQNB)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
@@ -854,8 +854,8 @@ namespace whusa.DAL
             try
             {
                 paramList = new Dictionary<string, object>();
-                paramList.Add(":T$ACQT", ACQT.ToString().Contains(".") == true ? ACQT.ToString().Replace(".", ",") : ACQT.ToString().Replace(",", "."));
-                paramList.Add(":T$SQNB", PDNO.ToUpper());
+                paramList.Add(":T$ACQT", ACQT);
+                paramList.Add(":T$SQNB", SQNB.ToUpper());
 
 
                 strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, tabla222, paramList);
