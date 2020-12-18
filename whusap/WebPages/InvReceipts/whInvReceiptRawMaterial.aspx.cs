@@ -459,7 +459,7 @@ namespace whusap.WebPages.InvReceipts
 
                 twhinh210Old ttwhinh210 = new twhinh210Old();
                 ttwhinh210.OQUA = row["OQUA"].ToString().Trim();
-                ttwhinh210.TERM = AsignadorTerm(row["RTDP"].ToString().Trim(), row["RTDM"].ToString().Trim(), row["TERM"].ToString().Trim(), Convert.ToDateTime(row["PRDT"]));
+                ttwhinh210.TERM = AsignadorTerm(row["RTDP"].ToString().Trim(), row["RTDM"].ToString().Trim(), row["TERM"].ToString().Trim(), Convert.ToDateTime(row["PRDT"].ToString(),CultureInfo.InvariantCulture));
                 ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
                 ttwhinh210.ITEM = row["ITEM"].ToString().Trim();
                 ttwhinh210.KLTC = row["KLTC"].ToString().Trim();
