@@ -84,9 +84,9 @@ namespace whusap.WebPages.InvMaterial
                 Ent_tticol125 obj = new Ent_tticol125();
                 string strError = string.Empty;
     
-                obj.pdno = txtWorkOrder.Text.ToUpperInvariant();
+                obj.pdno = txtWorkOrder.Text.ToUpper();
                 obj.conf = 2;   // CONFIRMED = NO
-                obj.paid = txtPalletId.Text.ToUpperInvariant();
+                obj.paid = txtPalletId.Text.ToUpper();
                 lblResult.Text = string.Empty;
             //
                 
@@ -126,7 +126,7 @@ namespace whusap.WebPages.InvMaterial
                         if (Convert.ToInt32(lista.SelectedValue) == 1)
                         {
                             obj = new Ent_tticol125();
-                            obj.pdno = txtWorkOrder.Text.Trim();
+                            obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
                             obj.pono = Convert.ToInt32(fila.Cells[0].Text);
                             obj.item = fila.Cells[1].Text;
                             obj.cwar = fila.Cells[3].Text.Trim();
@@ -135,8 +135,8 @@ namespace whusap.WebPages.InvMaterial
                             obj.refcntd = "0";
                             obj.refcntu = "0";
                             obj.mess = " ";
-                            
-                            obj.paid = txtPalletId.Text.Trim();
+
+                            obj.paid = txtPalletId.Text.Trim().ToUpper();
                             obj.prin = Convert.ToInt32(((Label)fila.Cells[8].FindControl("prin")).Text);
                             obj.conf = Convert.ToInt32(lista.SelectedValue); ;
                             obj.idrecord = grdRecords.DataKeys[fila.RowIndex].Value.ToString();
