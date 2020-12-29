@@ -1940,7 +1940,7 @@
         </label>
         <label name="lblRollNumber">
           <stringMessage>
-            Roll Number
+            Pallet ID
           </stringMessage>
         </label>
         <label name="lblDate">
@@ -2022,7 +2022,7 @@
         </label>
         <label name="lblRollNumber">
           <stringMessage>
-            Número de rollo
+            Número de Pallet
           </stringMessage>
         </label>
         <label name="lblDate">
@@ -2231,7 +2231,7 @@
       <Idiom name="INGLES">
         <label name="lblRollNumber">
           <stringMessage>
-            Roll number:
+            Pallet ID:
           </stringMessage>
         </label>
         <label name="lblWorkOrder">
@@ -2263,7 +2263,7 @@
       <Idiom name="ESPAÑOL">
         <label name="lblRollNumber">
           <stringMessage>
-            Número de rollo:
+            Número de Pallet:
           </stringMessage>
         </label>
         <label name="lblWorkOrder">
