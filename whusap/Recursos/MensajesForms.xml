@@ -1683,7 +1683,7 @@
         </operationName>
         <operationName name="rollnotexists">
           <stringMessage>
-            Roll Number doesn't exist.
+            Pallet ID doesn't exist.
           </stringMessage>
         </operationName>
       </Idiom>
@@ -1705,7 +1705,7 @@
         </operationName>
         <operationName name="rollnotexists">
           <stringMessage>
-            Numero de rollo no existe.
+            Numero de Pallet ID no existe.
           </stringMessage>
         </operationName>
       </Idiom>
