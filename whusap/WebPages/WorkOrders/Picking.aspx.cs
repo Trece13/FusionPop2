@@ -989,7 +989,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.OORG = "2";// Order type escaneada view 
                             MyObj.ORNO = ORNO;
                             MyObj.ITEM = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
-                            MyObj.PAID = ORNO + "-" + SecuenciaPallet;
+                            MyObj.PAID = ORNO + "-P" + SecuenciaPallet;
                             MyObj.PONO = "1";
                             MyObj.SEQN = "1";
                             MyObj.CLOT = CLOT;//CLOT.ToUpper();// lote VIEW
