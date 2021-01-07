@@ -281,7 +281,7 @@ namespace whusap.WebPages.WorkOrders
                     lblWarehouse.Text = MyObj.WRH.ToString();
                     lblWareDescr.Text = MyObj.DESCWRH.ToString();
                     lbllocation.Text = MyObj.LOCA.ToString();
-                    lblQuantity.Text = MyObj.QTY.ToString();
+                    lblQuantity.Text = MyObj.QTYT.ToString();
                     lblQuantityAux.Text = MyObj.QTY.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
@@ -404,8 +404,8 @@ namespace whusap.WebPages.WorkOrders
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
-                lblQuantityAux.Text = MyObj.QTY.ToString();
-                lblQuantityOld.Text = MyObj.QTY.ToString();
+                lblQuantityAux.Text = MyObj.QTYT.ToString();
+                lblQuantityOld.Text = MyObj.QTYT.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                 HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                 HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
@@ -941,7 +941,7 @@ namespace whusap.WebPages.WorkOrders
                     if (cnpk != 1)
                     {
 
-                        twhcolDAL.updatetwhcol131Quantity(pallet, qtyt_act, qtyt_old);
+                        twhcolDAL.updatetwhcol131Quantity(pallet, qtyt, qtyt);
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
@@ -966,7 +966,7 @@ namespace whusap.WebPages.WorkOrders
                                     errorlog += "la cadena a recortar es esta: " + item["T$PAID"].ToString().Trim() + " \n";
                                     errorlog += "la cadena extraida es : " + item["T$PAID"].ToString().Trim().Substring(10, 3) + " \n";
 
-                                    consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(10, 3)) + 1;
+                                    consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(11, 3)) + 1;
                                     errorlog += "realiza substring de pallet para tener la secuencia:" + consecutivoPalletID + "\n";
                                     if (consecutivoPalletID.ToString().Length == 1)
                                     {

@@ -12,6 +12,8 @@ using System.Configuration;
 using whusa.Entidades;
 using System.Data;
 using System.Web.Configuration;
+using System.Text.RegularExpressions;
+
 
 namespace whusap.WebPages.Migration
 {
@@ -181,7 +183,9 @@ namespace whusap.WebPages.Migration
                 if (consultaSecuencia.Count > 0)
                 {
                     var palletActual = consultaSecuencia[0]["SQNB"].ToString().Trim();
-                    secuencia = palletActual.Substring(10, 3);
+                    secuencia = palletActual.Substring((palletActual.IndexOf("-") + 1), ((palletActual.Length) - (palletActual.IndexOf("-") + 1)));
+                    string ComplemenSecuencia = Regex.Replace(secuencia, "[0-9]", "");
+                    string numberSecuencia = Regex.Replace(secuencia, "[^0-9.]", "");
                     var dele = consultaSecuencia[0]["DELE"].ToString();
                     var fecha = consultaSecuencia[0]["FECHA"].ToString();
 
@@ -192,23 +196,37 @@ namespace whusap.WebPages.Migration
                         return;
                     }
 
-                    var validaSecuencia = Convert.ToInt32(secuencia)+1;
+                    var validaSecuencia = Convert.ToInt32(numberSecuencia) + 1;
 
-                    if (validaSecuencia < 10)
+                    if (ComplemenSecuencia.Trim() == string.Empty)
                     {
-                        secuencia = String.Concat("00", validaSecuencia);
-                    }
-                    else if (validaSecuencia> 9 && validaSecuencia < 99)
-                    {
-                        secuencia = String.Concat("0", validaSecuencia);
+                        if (validaSecuencia < 10)
+                        {
+                            secuencia = String.Concat("00", validaSecuencia);
+                        }
+                        else if (validaSecuencia> 9 && validaSecuencia < 99)
+                        {
+                            secuencia = String.Concat("0", validaSecuencia);
+                        }
+                        else
+                        {
+                            secuencia = (validaSecuencia).ToString();
+                        }
                     }
                     else
                     {
-                        secuencia = (validaSecuencia).ToString();
+                        if (validaSecuencia < 10)
+                        {
+                            secuencia = String.Concat("0", validaSecuencia);
+                        }
+                        else
+                        {
+                            secuencia = (validaSecuencia).ToString();
+                        }
                     }
 
                     palletNumber = (validaSecuencia).ToString();
-                    sqnb = String.Concat(PDNO, "-", secuencia);
+                    sqnb = String.Concat(PDNO, "-",ComplemenSecuencia, secuencia);
 
                     var mbpl = _idaltticol022.consultambpl(ref strError).Rows[0]["MBPL"];//ConfigurationManager.AppSettings["MBPL"].ToString();
 

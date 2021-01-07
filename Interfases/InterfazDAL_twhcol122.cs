@@ -541,6 +541,7 @@ namespace whusa.Interfases
                         WRH = MyRow["WRH"].ToString(),
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
+                        QTYT = MyRow["QTYT"].ToString(),
                         UN = MyRow["UN"].ToString(),
                         PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
@@ -614,7 +615,7 @@ namespace whusa.Interfases
                         //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
-
+                        QTYT = MyRow["QTYT"].ToString()
                     };
 
                     Lstwhcol131.Add(MyObjet);

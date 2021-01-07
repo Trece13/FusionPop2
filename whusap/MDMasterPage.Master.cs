@@ -139,7 +139,7 @@ namespace whusap
                     if (Session["logok"] == null)
                         Session["logok"] = logokReq.Trim();
 
-                    if (logokReq.ToString() != "OKYes" || string.IsNullOrEmpty(accessFrom))
+                    if (Session["logok"].ToString() != "OKYes" || string.IsNullOrEmpty(accessFrom))
                     {
                         Session["Message"] = "You must login first, before use this session.";
                         Response.Redirect(rutaServ + "whlogini.aspx", false);

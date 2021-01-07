@@ -98,7 +98,12 @@ namespace whusap.WebPages.WorkOrders
                     QTYT = myObjDt["QTYT"].ToString(),
                     UNIT = myObjDt["UNIT"].ToString(),
                     ITEM = myObjDt["ITEM"].ToString(),
-                    DSCA = myObjDt["DSCA"].ToString()
+                    DSCA = myObjDt["DSCA"].ToString(),
+                    PRIO = myObjDt["PRIO"].ToString(),
+                    ADVS = myObjDt["ADVS"].ToString(),
+                    PONO = myObjDt["PONO"].ToString(),
+                    ORNO = myObjDt["ORNO"].ToString(),
+                    QTYC = myObjDt["QTYA"].ToString()
                 };
                 bool ActalizacionExitosa = false;
                 switch (MyObj.TBL)
@@ -106,7 +111,7 @@ namespace whusap.WebPages.WorkOrders
                     case "ticol022":
                         Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
-                        ActalizacionExitosa = Itticol082.Actualizartticol022(MyObj);
+                        if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartticol022(MyObj); } else { ActalizacionExitosa = false; }
                         break;
                     //case "ticol222":
                     //    Itwhcol130.Eliminartccol307(MyObj.PAID, "");
@@ -123,20 +128,28 @@ namespace whusap.WebPages.WorkOrders
                     case "whcol131":
                         Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
-                        ActalizacionExitosa = Itticol082.Actualizartwhcol131(MyObj);
+                        if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartwhcol131(MyObj); } else { ActalizacionExitosa = false; }
+
                         break;
                     case "whcol130":
                         Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
-                        ActalizacionExitosa = Itticol082.Actualizartwhcol130(MyObj);
+                        if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartwhcol130(MyObj); } else { ActalizacionExitosa = false; }
                         break;
                     case "ticol042":
                         Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
-                        ActalizacionExitosa = Itticol082.Actualizartticol042(MyObj);
+                        if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartticol042(MyObj); } else { ActalizacionExitosa = false; }
                         break;
                 }
                 if (ActalizacionExitosa)
+                {
+                    MyObj.Error = false;
+                    MyObj.TipeMsgJs = "alert";
+                    MyObj.SuccessMsg = Thedropprocessissuccess;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                }
+                else if ( MyObj.QTYC.Trim() != "0" )
                 {
                     MyObj.Error = false;
                     MyObj.TipeMsgJs = "alert";
