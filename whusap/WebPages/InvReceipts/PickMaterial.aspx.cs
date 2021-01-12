@@ -129,7 +129,7 @@ namespace whusap.WebPages.InvReceipts
 
                         if (LstPallet.Count > 0)
                         {
-                            if (LstPallet[0].STAT == "1")
+                            if (LstPallet[0].STAT == "1" && LstPallet[0].RCNO.ToString().Trim() != "")
                             {
 
 
