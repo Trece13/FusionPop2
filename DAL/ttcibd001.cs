@@ -192,6 +192,26 @@ namespace whusa.DAL
             return (retorno);
         }
 
+        public String CantidadDevueltaStockPallet(string PAID)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", PAID.Trim().ToUpper());
+
+            strSQL = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSQL, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            string retorno = string.IsNullOrEmpty(consulta.Rows[0]["QTYR"].ToString()) || string.IsNullOrWhiteSpace(consulta.Rows[0]["QTYR"].ToString()) ? "0" : consulta.Rows[0]["QTYR"].ToString();
+            return (retorno);
+        }
         public String CantidadDevueltaStocknotlocation(string ITEM, string CLOT, string CWAR)
         {
             method = MethodBase.GetCurrentMethod();

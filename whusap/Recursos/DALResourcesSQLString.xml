@@ -2413,6 +2413,22 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     </Module>
     <Module name="ttcibd001">
       <!--NEW-->
+      <operationName name="CantidadDevueltaStockPallet">
+        <stringSQL>
+          SELECT TO_CHAR((NVL(SUM(QTYR),0)), '999999999.999') AS QTYR
+          FROM
+          (
+          SELECT SUM(T$ACQT) AS QTYR
+          FROM  BAAN.TTICOL222140
+          WHERE TRIM(T$SQNB) = TRIM('[:T$PAID]')
+          UNION
+          SELECT SUM(T$QTYA) AS QTYR
+          FROM  BAAN.TWHCOL131140
+          WHERE TRIM(T$PAID) = TRIM('[:T$PAID]')
+          )
+          --SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and T$CLOT = '[:T$CLOT]' and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
+        </stringSQL>
+      </operationName>
       <operationName name="CantidadDevueltaStock">
         <stringSQL>
           SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and T$CLOT = '[:T$CLOT]' and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
@@ -2787,17 +2803,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="vallidatePalletIDMRB">
         <stringSQL>
           SELECT * FROM (
-          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$PAID,ticol222.T$ACQT AS T$qtyc,
+          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$PAID,ticol022.T$QTDL AS T$qtyc,
           ticol022.T$MITM AS T$ITEM,ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,ticol222.T$ACLO AS T$LOCA, ticol022.t$dele as t$stat,ticol022.t$pdno as t$clot
           FROM {0}.tticol022{1} ticol022
           LEFT JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           UNION
-          SELECT 'whcol131' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA,T$STAT as t$stat,
+          SELECT 'whcol131' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID,T$QTYC AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA,T$STAT as t$stat,
           T$CLOT as t$clot
           FROM {0}.tWhcol131{1}
           )
-          WHERE T$qtyc > 0
-          AND TRIM(T$PAID) = '[p1]'
+          --WHERE T$qtyc > 0
+          WHERE TRIM(T$PAID) = '[p1]'
           AND ROWNUM = 1
           ORDER BY T$PAID ASC
         </stringSQL>
