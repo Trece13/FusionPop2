@@ -68,8 +68,8 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
 
             txtPalletId.Focus();
             Page.Form.DefaultButton = btnSend.UniqueID;
@@ -479,7 +479,7 @@ namespace whusap.WebPages.Migration
                                          txtUnit.Text = _validaItem.Rows[0]["UNID"].ToString().Trim().ToUpper();
                                          txtkltc.Value = _validaItem.Rows[0]["KLTC"].ToString().Trim().ToUpper();
 
-                                         txtpono.Value = _consultaInformacionPedido.Rows[0]["PONO"].ToString();
+                                         txtpono.Value = item["PONO"].ToString();
                                          //hdfQuantity.Value = _consultaInformacionPedido.Rows[0]["CANTIDAD"].ToString();
                                          hdfQuantity.Value = Pqty.ToString();
 
@@ -646,7 +646,8 @@ namespace whusap.WebPages.Migration
         protected void makeTableLocated(string loc, string lot)
         {
             var table = String.Empty;
-            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStockPallet(txtPalletId.Text.Trim());
+            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), lot.Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(), loc.Trim());
+            _stock = Convert.ToDecimal(_idalttcibd001.CantidadDevueltaStockPallet(txtPalletId.Text.Trim()));
             //Fila cwar
             table += String.Format("<hr /><div style='margin-bottom: 100px;'><table class='table table-bordered' style='width:1200px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");
 
