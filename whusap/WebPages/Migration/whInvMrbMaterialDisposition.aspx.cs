@@ -324,6 +324,7 @@ namespace whusap.WebPages.Migration
             string tableName = string.Empty;
             string qty = string.Empty;
             lblError.Text = string.Empty;
+            lblError1.Text = string.Empty;
             lblResult.Text = string.Empty;
             if (resultado.Rows.Count < 1)
             {
@@ -470,12 +471,28 @@ namespace whusap.WebPages.Migration
                 DataTable DTMyRegrind = new DataTable();
 
                 Session["MyRegrind"] = ((DropDownList)grdRecords.Rows[0].Cells[1].FindControl("Regrind")).SelectedValue.ToString().Trim();
-                if (stockw == String.Empty)
+                if (stockw == String.Empty && Convert.ToInt32(disposition) == 3)
+                {
+                    corregible = true;
+                    strError = _textoLabels.readStatement(formName, _idioma, "lblWarehouseNull");
+                    lblError1.Text = strError;
+                    return;    
+                }
+                if (stockw == String.Empty && Convert.ToInt32(disposition) != 3)
                 {
                     stockw = "NA";
                 }
+
+
                 string regrind = ((DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Regrind")).SelectedValue;
-                if (regrind == String.Empty)
+                if (regrind == String.Empty && Convert.ToInt32(disposition) == 4)
+                {
+                    corregible = true;
+                    strError = _textoLabels.readStatement(formName, _idioma, "lblItemNull");
+                    lblError1.Text = strError;
+                    return;   
+                }
+                if (stockw == String.Empty && Convert.ToInt32(disposition) != 4)
                 {
                     regrind = "NA";
                 }
@@ -819,6 +836,7 @@ namespace whusap.WebPages.Migration
                     //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "alert('Information Saved Successfully.');", true);
                     lblResult.Text = mensajes("msjupdt");
                     lblResult.Visible = true;
+                    lblError1.Text = String.Empty;
                 }
 
 

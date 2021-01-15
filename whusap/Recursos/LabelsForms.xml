@@ -3032,13 +3032,21 @@
             The lot does not exist
           </stringMessage>
         </label>
-
         <label name="lblReasoNull">
           <stringMessage>
             The reason cannot be null.
           </stringMessage>
         </label>
-
+        <label name="lblWarehouseNull">
+          <stringMessage>
+            The warehouse cannot be null.
+          </stringMessage>
+        </label>
+        <label name="lblItemNull">
+          <stringMessage>
+            The regrind item cannot be null.
+          </stringMessage>
+        </label>
         <label name="lblFactorNull">
           <stringMessage>
             The conversion factor cannot be null.
@@ -3196,6 +3204,16 @@
         <label name="lblReasoNull">
           <stringMessage>
             LA razon no puede ser nula.
+          </stringMessage>
+        </label>
+        <label name="lblWarehouseNull">
+          <stringMessage>
+            La Bodega no puede ser nula.
+          </stringMessage>
+        </label>
+        <label name="lblItemNull">
+          <stringMessage>
+            El Item no puede ser nulo.
           </stringMessage>
         </label>
         <label name="lblFactorNull">

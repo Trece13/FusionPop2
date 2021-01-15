@@ -4786,9 +4786,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="listaRegrind_ParamV2">
         <stringSQL>
           select distinct ticol001.t$item item, ticol001.t$dsca descri, trim(ticol001.t$item)||' - '||trim(ticol001.t$dsca) descrc
-          from {0}.ttcibd0011{1} ticol001
-          INNER JOIN {0}.tticol135{1} ticol135 ON ticol135.T$RGRN = ticol001.T$ITEM"
-          WHERE TRIM(ticol135.T$ITEM) = '[:T$ITEM] '
+          from {0}.ttcibd001{1} ticol001
+          INNER JOIN {0}.tticol135{1} ticol135 ON ticol135.T$RGRN = ticol001.T$ITEM
+          WHERE TRIM(ticol135.T$ITEM) = '[:T$ITEM]'
         </stringSQL>
       </operationName>
       <operationName name="listaRegrind_Param">
