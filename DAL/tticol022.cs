@@ -46,8 +46,9 @@ namespace whusa.DAL
                 log.escribirError(strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
                 foreach (Ent_tticol022 reg in parametros)
                 {
-                    if (!invLabel_tiempoGrabacion(reg, ref strError))
-                        break;
+                    // Se quita esta validación del tiempo, ahora se valida con el parametro de la tabla ticol000 mbrl
+                    //if (!invLabel_tiempoGrabacion(reg, ref strError))
+                    //    break;
 
                     // Inicia la insercion del registro
                     parametrosIn = AdicionaParametrosComunes(reg);
@@ -781,7 +782,7 @@ namespace whusa.DAL
                 strError = "Error to the search sequence [tticol022]. Try again or contact your administrator \n ";
                 log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
-
+            log.escribirError(strError + Console.Out.NewLine + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             return consulta;
         }
 
