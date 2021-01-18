@@ -228,7 +228,7 @@ namespace whusap.WebPages.Balance
             obj022.log1 = "NONE";
             obj022.log2 = "NONE";
             obj022.logd = "NONE";
-            obj022.dele = 2;
+            obj022.dele = 7;
             obj022.qtd1 = 0;
             obj022.norp = 1;
             obj022.loca = " ";
@@ -240,7 +240,7 @@ namespace whusap.WebPages.Balance
             //obj022.acqt = Convert.ToDouble(obj022.qtdl);
             obj022.acqt = value;
             obj022.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
-            obj022.cwat = " ";
+            obj022.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
             obj022.aclo = " ";
             parameterCollection022.Add(obj022);
 
