@@ -217,7 +217,7 @@ namespace whusap.WebPages.Balance
             obj042.logn = Session["user"].ToString();
             obj042.mitm = "         " + listRegrind.SelectedValue;
             obj042.pono = Convert.ToInt32(ConsecPos);
-            obj042.qtdl = value;
+            obj042.qtdl = Convert.ToDouble(value);
             obj042.cuni = unityItem;
             obj042.log1 = " ";
             obj042.qtd1 = 0;

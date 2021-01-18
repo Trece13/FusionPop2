@@ -49,7 +49,7 @@ namespace whusa.DAL
             }
             catch (Exception ex)
             {
-                strError = MsgstrError + "Error when inserting data [col118]. Try again or contact your administrator";
+                strError = ex.Message + "Error when inserting data [col118]. Try again or contact your administrator";
                 log.escribirError(strError + " - " + ex.Message, stackTrace.GetFrame(2).GetMethod().Name, metodo, method.ReflectedType.Name); 
             }
             return Convert.ToInt32(retorno);

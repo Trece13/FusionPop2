@@ -114,8 +114,6 @@ namespace whusap.WebPages.Migration
             generateWarehouseData();
         }
 
-
-
         protected void generateWarehouseData()
         {
 
@@ -152,7 +150,6 @@ namespace whusap.WebPages.Migration
 
         }
        
-
         //protected void Form_Unload(object sender, EventArgs e)
         //{
         //    //Session["FilaImprimir"] = null;
@@ -172,6 +169,7 @@ namespace whusap.WebPages.Migration
 
             return retorno;
         }
+
         protected void CargarIdioma()
         {
             lblMrbWarehouse.Text = _textoLabels.readStatement(formName, _idioma, "lblMrbWarehouse");
@@ -286,7 +284,6 @@ namespace whusap.WebPages.Migration
                 listproveedor.Items.Insert(0, new ListItem(_idioma == "INGLES" ? "Select Supplier here..." : "Seleccione un proveedor...", string.Empty));
             }
         }
-
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
@@ -525,7 +522,7 @@ namespace whusap.WebPages.Migration
                     obj.cwar =dropDownWarehouse.Text.ToUpperInvariant();
                     //obj.clot = row.Cells[3].Text.ToUpperInvariant();
                     obj.clot = Session["Lote"].ToString();
-                    obj.qtyr = Double.Parse(toreturn, System.Globalization.CultureInfo.InvariantCulture);//Convert.ToDecimal(toreturn);
+                    obj.qtyr = Double.Parse(toreturn);//Convert.ToDecimal(toreturn);
                     obj.cdis = reason;
                     obj.obse = obse;
                     obj.logr = Session["user"].ToString();
@@ -547,9 +544,9 @@ namespace whusap.WebPages.Migration
                 string cantidads;
                 cantidads = toreturn.Replace(".", ",");
                 //bool convert = decimal.TryParse(txtQuantity.Text.Trim(), out cantidad);
-                bool convert = decimal.TryParse(cantidads, out cantidad);
-                var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
-                var value = Decimal.Parse(cantidads, numberFormatInfo);
+                //bool convert = decimal.TryParse(cantidads, out cantidad);
+                //var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
+                var value = Decimal.Parse(toreturn/*, numberFormatInfo*/);
                 if (Convert.ToInt32(disposition) == 4) //Regrid
                 {
                     string strTagId = string.Empty;
@@ -569,7 +566,7 @@ namespace whusap.WebPages.Migration
                     obj042.mitm = regrind;
                     obj042.pono = 10;
                     //Convert.ToDouble(fila.ItemArray[3]) * Convert.ToDouble(fila.ItemArray[7])) / 2.2046
-                    obj042.qtdl = Math.Round((Convert.ToDecimal((value * Convert.ToDecimal(reg.ItemArray[1])) / Convert.ToDecimal(2.2046))), 2);
+                    obj042.qtdl = Convert.ToDouble(Math.Round((Convert.ToDecimal((value * Convert.ToDecimal(reg.ItemArray[1])) / Convert.ToDecimal(2.2046))), 2));
                     //obj042.qtdl = Convert.ToDecimal(value) / Convert.ToDecimal(2.2046);
                     obj042.cuni = "Kg";
                     obj042.log1 = Session["user"].ToString();
@@ -636,7 +633,12 @@ namespace whusap.WebPages.Migration
             else
             {
                 idal.insertarRegistro(ref parameterCollection, ref strError);
-
+                if (strError != string.Empty)
+                {
+                    strError = _textoLabels.readStatement(formName, _idioma, "lblCommentsNull");
+                    lblError1.Text = strError;
+                    return;
+                }
                 if (Convert.ToInt32(disposition) == 3) //Return to Stock
                 {
 
@@ -703,6 +705,7 @@ namespace whusap.WebPages.Migration
             }
             else
             {
+                lblError1.Text = string.Empty;
                 printResult.Visible = true;
                 /*   <asp:ListItem Value="2">Return to Vendor</asp:ListItem>
                                     <asp:ListItem Value="3">Return to Stock</asp:ListItem>
@@ -843,6 +846,7 @@ namespace whusap.WebPages.Migration
             }
 
         }
+
         protected void printLabel_Click(object sender, EventArgs e)
         {
 

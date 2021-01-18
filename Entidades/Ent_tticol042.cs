@@ -43,7 +43,7 @@ namespace whusa.Entidades
 
         [DataMember(Order = 7)]        
         [Column(Name = "QTDL")]        
-        public decimal qtdl { get; set; }
+        public double qtdl { get; set; }
 
         [DataMember(Order = 8)]        
         [Column(Name = "CUNI")]        
@@ -162,7 +162,7 @@ namespace whusa.Entidades
             refcntu = 0;
         }
 
-        public Ent_tticol042(string _pdno,  string _sqnb,  int _proc,     string _logn,  string _date,  string _mitm,  int _pono,     decimal _qtdl,
+        public Ent_tticol042(string _pdno,  string _sqnb,  int _proc,     string _logn,  string _date,  string _mitm,  int _pono,     double _qtdl,
                              string _cuni,  string _log1,  string _datc,  decimal _qtd1, int _pro1,     string _log2,  string _datu,  decimal _qtd2,  
                              int _pro2,     string _loca,  int _norp,     string _dlrp,  int _dele,     string _logd,  string _datd,  int _refcntd,
                              int _refcntu, string _wreg)

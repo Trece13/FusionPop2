@@ -14,11 +14,11 @@ namespace whusa.Entidades
             //this.sqnb = string.Empty;
             this.drpt = DateTime.Now;
             this.urpt = string.Empty;
-            this.acqt = decimal.MinValue;
+            this.acqt = 0;
             this.cwaf = string.Empty;
             this.cwat = string.Empty;
             this.aclo = string.Empty;
-            this.allo = decimal.MinValue;
+            this.allo = 0;
                
               /*drpt
                 urpt

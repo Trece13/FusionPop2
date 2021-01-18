@@ -364,7 +364,7 @@ namespace whusap.WebPages.InvMaterial
                             obj042.logn = HttpContext.Current.Session["user"].ToString();
                             obj042.mitm = row.Cells[1].Text.ToUpper().Trim();
                             obj042.pono = Convert.ToInt32(Pos);
-                            obj042.qtdl = Convert.ToDecimal(toreturn);
+                            obj042.qtdl = Convert.ToDouble(toreturn);
                             obj042.cuni = row.Cells[5].Text.Trim();
                             obj042.log1 = "NONE";
                             obj042.qtd1 = Convert.ToDecimal(toreturn);

@@ -537,7 +537,7 @@ namespace whusa.DAL
                     
                     paramList.Add(":T$PDNO", reg.pdno);
                     paramList.Add(":T$SQNB", reg.sqnb);
-                    paramList.Add(":T$ACQT", reg.qtdl.ToString());
+                    paramList.Add(":T$ACQT", reg.qtdl.ToString().Contains(".") ? reg.qtdl.ToString().Replace(".", ",") : reg.qtdl.ToString().Replace(",", "."));
                     //paramList.Add(":T$ACQT", reg.qtdl);
                     paramList.Add(":T$CWAF", reg.cwaf);
                     paramList.Add(":T$CWAT", reg.cwaf);
