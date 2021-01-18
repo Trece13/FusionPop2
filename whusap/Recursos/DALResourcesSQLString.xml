@@ -492,7 +492,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="validateTimeSaveRecord">
         <stringSQL>
-          SELECT T$SQNB AS SQNB FROM {2} WHERE T$PDNO = '[:T$PDNO]' AND T$DATE BETWEEN (sysdate+5/24) - [:T$TIME]/1000 AND sysdate+5/24
+          SELECT T$SQNB AS SQNB FROM {2} WHERE T$PDNO = '[:T$PDNO]' AND T$DATE BETWEEN (sysdate+5/24) - ([:T$TIME]*60)/86400 AND sysdate+5/24
         </stringSQL>
       </operationName>
       <operationName name="consultambrl">
