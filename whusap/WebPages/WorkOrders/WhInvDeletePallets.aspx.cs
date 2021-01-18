@@ -147,7 +147,7 @@ namespace whusap.WebPages.WorkOrders
                     ObjTticol042.date = MyRow["DATEA"].ToString();
                     ObjTticol042.mitm = MyRow["ITEM"].ToString();
                     ObjTticol042.dsca = MyRow["DSCA"].ToString();
-                    ObjTticol042.qtdl = Convert.ToDecimal(MyRow["ACQT"].ToString() == String.Empty ? "0" : MyRow["ACQT"].ToString());
+                    ObjTticol042.qtdl = Convert.ToDouble(MyRow["ACQT"].ToString() == String.Empty ? "0" : MyRow["ACQT"].ToString());
                     ObjTticol042.cuni = MyRow["CUNI"].ToString();
                     ObjTticol042.dele = Convert.ToInt32(MyRow["STAT"].ToString());
                     ObjTticol042.Error = false;

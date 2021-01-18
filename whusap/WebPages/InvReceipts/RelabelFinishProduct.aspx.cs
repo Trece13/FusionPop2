@@ -770,7 +770,7 @@ protected void save_Click(object sender, EventArgs e)
                     proc = 2,
                     logn = HttpContext.Current.Session["user"].ToString(),
                     mitm = ITEM.Trim(),
-                    qtdl = Convert.ToDecimal(QTYS),
+                    qtdl = Convert.ToDouble(QTYS),
                     cuni = CUNI,
                     log1 = "NONE",
                     qtd1 = Convert.ToDecimal(QTYS),

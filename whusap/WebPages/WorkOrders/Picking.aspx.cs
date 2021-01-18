@@ -876,7 +876,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.proc = 2;
                             MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
                             MyObj.mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
-                            MyObj.qtdl = Convert.ToDecimal(qtyt.ToString());
+                            MyObj.qtdl = Convert.ToDouble(qtyt.ToString());
                             MyObj.cuni = CUNI;//CUNI;
                             MyObj.log1 = "NONE";
                             MyObj.qtd1 = Convert.ToDecimal(qtyt.ToString());
