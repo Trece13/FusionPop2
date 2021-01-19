@@ -3032,9 +3032,9 @@
             The lot does not exist
           </stringMessage>
         </label>
-        <label name="lblReasoNull">
+        <label name="lblCommentsNull">
           <stringMessage>
-            The reason cannot be null.
+            The comments cannot be empty.
           </stringMessage>
         </label>
         <label name="lblWarehouseNull">
@@ -3194,6 +3194,11 @@
         <label name="PalletIDdoesntavailablefordisposition">
           <stringMessage>
             Pallet Id no disponible para disposición
+          </stringMessage>
+        </label>
+        <label name="lblCommentsNull">
+          <stringMessage>
+            TLos comentarios no pueden estar vacios
           </stringMessage>
         </label>
         <label name="lblLotError">

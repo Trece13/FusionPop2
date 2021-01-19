@@ -246,6 +246,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
     </Module>
     <Module name="tticol022">
+      <operationName name="getloca">
+        <stringSQL>
+          select t$loca as LOCA
+          from baan.twhwmd300140
+          where t$cwar = '[:T$CWAR]'
+          and t$loct = 5
+          and t$prio &lt; 999
+          and rownum = 1
+          group by t$loca
+        </stringSQL>
+      </operationName>
       <operationName name="SecuenciaMayor022">
         <stringSQL>
           select max(t$sqnb) t$sqnb from (select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-C%' union select t$sqnb from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-C%') order by t$sqnb desc

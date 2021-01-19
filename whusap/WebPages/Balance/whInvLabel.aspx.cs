@@ -133,11 +133,11 @@ namespace whusap.WebPages.Balance
             decimal cantidad;
             string cantidads;
 
-            cantidads = txtQuantity.Text.Contains(",") == true ? txtQuantity.Text.Replace(",", "."):txtQuantity.Text.Replace(".", ",");
+            cantidads = txtQuantity.Text;
             //bool convert = decimal.TryParse(txtQuantity.Text.Trim(), out cantidad);
             bool convert = decimal.TryParse(cantidads, out cantidad);
             cantidads = cantidad.ToString();
-            var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
+            //var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "," };
             var value = Decimal.Parse(cantidads);
 
             lblError.Text = string.Empty;
@@ -241,7 +241,7 @@ namespace whusap.WebPages.Balance
             obj022.acqt = value;
             obj022.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
             obj022.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
-            obj022.aclo = " ";
+            obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString():" ";
             parameterCollection022.Add(obj022);
 
             //ActiveOrderMachine = obj022.sqnb;
