@@ -156,7 +156,7 @@ namespace whusa.DAL
             paramList.Add(":T$PDNO", parametros.pdno.Trim().ToUpper());
             paramList.Add(":T$SQNB", parametros.sqnb.Trim().ToUpper());
             paramList.Add(":T$URPT", parametros.urpt.ToUpper());
-            paramList.Add(":T$ACQT", parametros.acqt.ToString());
+            paramList.Add(":T$ACQT", parametros.acqt);
             paramList.Add(":T$CWAF", parametros.cwaf.ToUpper().Trim());
             paramList.Add(":T$CWAT", parametros.cwat.ToUpper().Trim()==string.Empty?" ":parametros.cwat.ToUpper().Trim());
             //paramList.Add(":T$ACLO", parametros.aclo.ToUpper());
