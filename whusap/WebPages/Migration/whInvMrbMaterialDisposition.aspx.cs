@@ -489,6 +489,9 @@ namespace whusap.WebPages.Migration
                     lblError1.Text = strError;
                     return;   
                 }
+                else if (regrind == String.Empty) {
+                    regrind = " ";
+                }
                 if (stockw == String.Empty && Convert.ToInt32(disposition) != 4)
                 {
                     regrind = "NA";
@@ -497,6 +500,11 @@ namespace whusap.WebPages.Migration
                 if (obse.Length > 255)
                 {
                     obse = ((TextBox)grdRecords.Rows[0].Cells[3].FindControl("Comments")).Text.Substring(1, 255);
+                }
+                else if (obse.Trim().Length < 1 )
+                {
+                    lblError1.Text = _textoLabels.readStatement(formName, _idioma, "lblCommentsNull");;
+                    return;
                 }
                 string supplier = ((DropDownList)grdRecords.Rows[0].Cells[0].FindControl("Supplier")).SelectedValue;
                 
@@ -635,7 +643,6 @@ namespace whusap.WebPages.Migration
                 idal.insertarRegistro(ref parameterCollection, ref strError);
                 if (strError != string.Empty)
                 {
-                    strError = _textoLabels.readStatement(formName, _idioma, "lblCommentsNull");
                     lblError1.Text = strError;
                     return;
                 }

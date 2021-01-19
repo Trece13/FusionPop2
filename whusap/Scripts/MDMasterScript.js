@@ -12,7 +12,7 @@
             "November", "December"
         ];
     setInterval(function () {
-        $('.carousel').carousel('pause');
+        
         var HoraActual = new Date();
         var Format = "Date : " + HoraActual.getDate() + " " + months[HoraActual.getMonth()] + " " + HoraActual.getFullYear() + ", " + HoraActual.getHours() + ":" + (HoraActual.getMinutes() >= 10 ? HoraActual.getMinutes() : "0" + HoraActual.getMinutes()) + " " + (HoraActual.getHours() >= 12 ? 'PM' : 'AM');
         hora.html(Format);
