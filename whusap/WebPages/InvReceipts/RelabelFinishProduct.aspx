@@ -76,7 +76,7 @@
         </label>
     </div>
     <div class="form-group row">
-        <asp:Button  class="btn btn-primary btn-lg" ID="Button1" runat="server" onclick="save_Click" Text="Save" />
+        <asp:Button  class="btn btn-primary btn-lg" ID="Button1" runat="server" onclick="Save_Click" Text="Save" />
     </div>
     <div class="form-group row">
         <label id="lblError"></label>
@@ -567,7 +567,7 @@
         var Click_Save = function () {
 
             var Data = "{'CWAR':'" + $('#txWarehouse').val().trim() + "','ITEM':'" + $('#txItem').val().trim().toUpperCase() + "','CLOT':'" + $('#txLot').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYS':'" + $('#txQuantity').val().trim() + "','UNIT':'" + $('#lblQuantity').html() + "'}";
-            sendAjax("Click_Save", Data, SuccesClick_Save);
+            sendAjax("Save_Click", Data, SuccesClick_Save);
 
         }
 
@@ -612,9 +612,9 @@
             timer = setTimeout("VerificarQuantity()", 1000);
         });
 
-        btnSave.bind('click', function () {
-            Click_Save();
-        });
+//        btnSave.bind('click', function () {
+//            Click_Save();
+//        });
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

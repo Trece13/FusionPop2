@@ -118,9 +118,12 @@ namespace whusap.WebPages.InvReceipts
         {
 
             RequestUrlAuthority = (string)Request.Url.Authority;
-
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            //Remoto
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+            //Local
+            //Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -629,7 +632,7 @@ namespace whusap.WebPages.InvReceipts
         //    }
         //}
 
-        protected void save_Click(object sender, EventArgs e)
+        protected void Save_Click(object sender, EventArgs e)
         {
             string ITEM = HttpContext.Current.Session["ITEM"].ToString();
             string CWAR = HttpContext.Current.Session["CWAR"].ToString();
@@ -755,6 +758,13 @@ namespace whusap.WebPages.InvReceipts
                     script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
                     script.Append("ventanaImp.moveTo(30, 0);");
                     //script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+                }
+                else
+                {
+                    StringBuilder script = new StringBuilder();
+                    string alert ="alert('"+validateSave+" "+validateSaveTicol222+"')";
+                    script.Append(alert);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                 }
             }

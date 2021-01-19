@@ -114,6 +114,10 @@
         };
 
         $(function () {
+            setInterval(function () {
+                $('.carousel').carousel('pause');
+            },
+            100);
             TamTabletitle();
             RedimencionExplorer1();
 
