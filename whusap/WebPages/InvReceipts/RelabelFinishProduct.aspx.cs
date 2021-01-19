@@ -205,7 +205,7 @@ namespace whusap.WebPages.InvReceipts
                 {
                     ObjTtcibd001.Error = true;
                     ObjTtcibd001.TypeMsgJs = "label";
-                    
+
                     ObjTtcibd001.ErrorMsg = ItemcodeisnotManufacturingType;
 
                 }
@@ -214,7 +214,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 ObjTtcibd001.Error = true;
                 ObjTtcibd001.TypeMsgJs = "label";
-                
+
                 ObjTtcibd001.ErrorMsg = Itemcodedoesntexist
 ;
             }
@@ -318,7 +318,7 @@ namespace whusap.WebPages.InvReceipts
                     {
                         Obj_twhwmd200.Error = false;
                         Obj_twhwmd200.TypeMsgJs = "console";
-                        
+
                         Obj_twhwmd200.SuccessMsg = "Location Encontrado";
                         HttpContext.Current.Session["LOCA"] = LOCA.Trim();
                     }
@@ -326,7 +326,7 @@ namespace whusap.WebPages.InvReceipts
                     {
                         Obj_twhwmd200.Error = true;
                         Obj_twhwmd200.TypeMsgJs = "label";
-                        
+
                         Obj_twhwmd200.ErrorMsg = Locationblockedinbound;
                     }
 
@@ -335,7 +335,7 @@ namespace whusap.WebPages.InvReceipts
                 {
                     Obj_twhwmd200.Error = true;
                     Obj_twhwmd200.TypeMsgJs = "label";
-                    
+
                     Obj_twhwmd200.ErrorMsg = Locationcodedoesntexist;
                 }
 
@@ -344,7 +344,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 Obj_twhwmd200.Error = true;
                 Obj_twhwmd200.TypeMsgJs = "label";
-                
+
                 Obj_twhwmd200.ErrorMsg = codedoesntexist;
             }
 
@@ -378,7 +378,7 @@ namespace whusap.WebPages.InvReceipts
                     ObjTtwhinr140.stks = stks;
                     ObjTtwhinr140.Error = false;
                     ObjTtwhinr140.TypeMsgJs = "label";
-                    
+
                     ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
                     HttpContext.Current.Session["QTYS"] = QTYS;
                     if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
@@ -419,7 +419,7 @@ namespace whusap.WebPages.InvReceipts
                 {
                     ObjTtwhinr140.Error = true;
                     ObjTtwhinr140.TypeMsgJs = "label";
-                    
+
                     ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
                 }
             }
@@ -427,7 +427,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 ObjTtwhinr140.Error = true;
                 ObjTtwhinr140.TypeMsgJs = "label";
-                
+
                 ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
             }
 
@@ -629,7 +629,7 @@ namespace whusap.WebPages.InvReceipts
         //    }
         //}
 
-protected void save_Click(object sender, EventArgs e)
+        protected void save_Click(object sender, EventArgs e)
         {
             string ITEM = HttpContext.Current.Session["ITEM"].ToString();
             string CWAR = HttpContext.Current.Session["CWAR"].ToString();
@@ -705,35 +705,33 @@ protected void save_Click(object sender, EventArgs e)
             if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
             {
 
-                data022 = new Ent_tticol022()
-                {
-                    pdno = CLOT == "" ? cyclecountLabel : CLOT,
-                    sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet,
-                    proc = 2,
-                    logn = HttpContext.Current.Session["user"].ToString(),
-                    mitm = ITEM.Trim(),
-                    qtdl = Convert.ToDecimal(QTYS),
-                    cuni = CUNI,
-                    log1 = "NONE",
-                    qtd1 = Convert.ToInt32(QTYS),
-                    pro1 = 2,
-                    log2 = "NONE",
-                    qtd2 = Convert.ToInt32(QTYS),
-                    pro2 = 2,
-                    loca = " ",
-                    norp = 1,
-                    dele = 2,
-                    logd = "NONE",
-                    refcntd = 0,
-                    refcntu = 0,
-                    drpt = DateTime.Now,
-                    urpt = HttpContext.Current.Session["user"].ToString(),
-                    acqt = Convert.ToDecimal(QTYS),
-                    cwaf = CWAR,
-                    cwat = CWAR,
-                    aclo = LOCA,
-                    allo = 0
-                };
+                data022 = new Ent_tticol022();
+                data022.pdno = CLOT == "" ? cyclecountLabel : CLOT;
+                data022.sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet;
+                data022.proc = 2;
+                data022.logn = HttpContext.Current.Session["user"].ToString();
+                data022.mitm = ITEM.Trim();
+                data022.qtdl = Convert.ToDecimal(QTYS);
+                data022.cuni = CUNI;
+                data022.log1 = "NONE";
+                data022.qtd1 = Convert.ToInt32(Convert.ToDecimal(QTYS));
+                data022.pro1 = 2;
+                data022.log2 = "NONE";
+                data022.qtd2 = Convert.ToInt32(Convert.ToDecimal(QTYS));
+                data022.pro2 = 2;
+                data022.loca = " ";
+                data022.norp = 1;
+                data022.dele = 2;
+                data022.logd = "NONE";
+                data022.refcntd = 0;
+                data022.refcntu = 0;
+                data022.drpt = DateTime.Now;
+                data022.urpt = HttpContext.Current.Session["user"].ToString();
+                data022.acqt = Convert.ToDecimal(QTYS);
+                data022.cwaf = CWAR;
+                data022.cwat = CWAR;
+                data022.aclo = LOCA;
+                data022.allo = 0;
 
                 HttpContext.Current.Session["strOrden"] = data022.pdno;
                 HttpContext.Current.Session["strSecuen"] = data022.sqnb;
@@ -821,7 +819,7 @@ protected void save_Click(object sender, EventArgs e)
 
         }
 
-        
+
         protected static string mensajes(string tipoMensaje)
         {
             string idioma = "INGLES";

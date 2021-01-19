@@ -70,7 +70,7 @@
         <label class="col-sm-2 col-form-label-lg" for="txQuantity">
             Quantity</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern="\d+(\.\d{2})?">
+            <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern="\d+(\.\d)?">
         </div>
         <label id="lblQuantity" for="txQuantity">
         </label>
