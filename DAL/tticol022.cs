@@ -156,12 +156,12 @@ namespace whusa.DAL
             paramList.Add(":T$PDNO", parametros.pdno.Trim().ToUpper());
             paramList.Add(":T$SQNB", parametros.sqnb.Trim().ToUpper());
             paramList.Add(":T$URPT", parametros.urpt.ToUpper());
-            paramList.Add(":T$ACQT", parametros.acqt.ToString().Contains(",") == true ? parametros.acqt.ToString().Replace(",", ".") : parametros.acqt.ToString().Replace(".", ","));
+            paramList.Add(":T$ACQT", parametros.acqt.ToString());
             paramList.Add(":T$CWAF", parametros.cwaf.ToUpper().Trim());
             paramList.Add(":T$CWAT", parametros.cwat.ToUpper().Trim()==string.Empty?" ":parametros.cwat.ToUpper().Trim());
             //paramList.Add(":T$ACLO", parametros.aclo.ToUpper());
             paramList.Add(":T$ACLO", parametros.aclo.ToUpper().Trim() == string.Empty ? " " : parametros.aclo.ToUpper().Trim());
-            paramList.Add(":T$ALLO", parametros.allo.ToString().Contains(",") == true ? parametros.allo.ToString().Replace(",", ".") : parametros.allo.ToString().Replace(".", ","));
+            paramList.Add(":T$ALLO", parametros.allo.ToString());
    
             try
             {
@@ -1062,6 +1062,27 @@ namespace whusa.DAL
             return consulta;
         }
 
+
+        public DataTable getloca(string cwar, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            //string strError = "";
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$CWAR", cwar);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to the search sequence [tticol022]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
     }
     
 }

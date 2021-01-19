@@ -254,7 +254,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and t$loct = 5
           and t$prio &lt; 999
           and rownum = 1
-          group by t$loca
+          group by t$loca 
         </stringSQL>
       </operationName>
       <operationName name="SecuenciaMayor022">

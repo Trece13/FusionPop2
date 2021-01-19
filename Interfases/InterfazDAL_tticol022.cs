@@ -515,6 +515,19 @@ namespace whusa.Interfases
             }
         }
 
+
+        public DataTable getloca(string cwar, ref string strError)
+        {
+            try
+            {
+                DataTable retorno = dal.getloca(cwar, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
     }
 
 
