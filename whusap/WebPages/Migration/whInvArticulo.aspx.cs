@@ -103,8 +103,8 @@ namespace whusap.WebPages.Migration
                         var lote = txtLote.Text.Trim().ToUpper();
                         _consultaItem = _idalttisfc001.findByPdnoArticulo(ref lote, ref strError);
 
-                        //if (_consultaItem.Rows.Count > 0)
-                        //{
+                        if (_consultaItem.Rows.Count > 0)
+                        {
                             //var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
                         var cwar = string.Empty;
                             var item = _consultaItem.Rows[0]["MITM"].ToString();
@@ -121,12 +121,12 @@ namespace whusap.WebPages.Migration
                                 lblError.Text = String.Format(mensajes("nodata"), "", item);
                                 return;
                             }
-                        //}
-                        //else
-                        //{
-                        //    lblError.Text = mensajes("itemnotexists");
-                        //    return;
-                        //}
+                        }
+                        else
+                        {
+                            lblError.Text = mensajes("itemnotexists");
+                            return;
+                        }
                     //}
                     //else
                     //{
