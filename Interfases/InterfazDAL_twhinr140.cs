@@ -33,13 +33,13 @@ namespace whusa.Interfases
             }
         }
 
-        public DataTable consultaPorAlmacenItem(ref string cwar, ref string item, ref string strError)
+        public DataTable consultaPorAlmacenItem( ref string item, ref string strError)
         {
             //int retorno = -1;
             DataTable retorno;
             try
             {
-                retorno = dal.consultaPorAlmacenItem(ref cwar, ref item, ref strError);
+                retorno = dal.consultaPorAlmacenItem(ref item, ref strError);
                 return retorno;
             }
             catch (Exception ex)
@@ -48,13 +48,13 @@ namespace whusa.Interfases
             }
         }
 
-        public DataTable consultaCantidadItemLote(ref string cwar, ref string item, ref string strError)
+        public DataTable consultaCantidadItemLote(ref string cwar, ref string item, ref string strError,bool withoutWarehouse = false)
         {
             //int retorno = -1;
             DataTable retorno;
             try
             {
-                retorno = dal.consultaCantidadItemLote(ref cwar, ref item, ref strError);
+                retorno = dal.consultaCantidadItemLote(ref cwar, ref item, ref strError, withoutWarehouse);
                 return retorno;
             }
             catch (Exception ex)

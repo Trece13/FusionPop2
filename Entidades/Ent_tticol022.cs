@@ -212,24 +212,32 @@ namespace whusa.Entidades
             this.idrecord = pidrecord;
             this.Error = false;
         }
-
-
+        [DataMember(Order = 30)]
+        [Column(Name = "PAID_URL")]
         public string PAID_URL { get; set; }
-
+        [DataMember(Order = 31)]
+        [Column(Name = "PAID_OLD_URL")]
         public string PAID_OLD_URL { get; set; }
-
+        [DataMember(Order = 32)]
+        [Column(Name = "ORNO_URL")]
         public string ORNO_URL { get; set; }
-
+        [DataMember(Order = 33)]
+        [Column(Name = "ITEM_URL")]
         public string ITEM_URL { get; set; }
-
+        [DataMember(Order = 34)]
+        [Column(Name = "CLOT_URL")]
         public string CLOT_URL { get; set; }
-
+        [DataMember(Order = 35)]
+        [Column(Name = "QTYC_URL")]
         public string QTYC_URL { get; set; }
-
+        [DataMember(Order = 36)]
+        [Column(Name = "QTYC1_URL")]
         public string QTYC1_URL { get; set; }
-
+        [DataMember(Order = 37)]
+        [Column(Name = "UNIC_URL")]
         public string UNIC_URL { get; set; }
-
+        [DataMember(Order = 38)]
+        [Column(Name = "QTYAG")]
         public decimal qtyaG { get; set; }
     }
 }

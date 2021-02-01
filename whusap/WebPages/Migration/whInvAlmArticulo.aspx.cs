@@ -110,7 +110,7 @@ namespace whusap.WebPages.Migration
                         var itemdesc = _consultaItem.Rows[0]["DESCRIPCION"].ToString();
                         var unidad = _consultaItem.Rows[0]["UNID"].ToString();
 
-                        _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref cwar, ref item, ref strError);
+                        _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref item, ref strError);
 
                         if (_consultaInformacion.Rows.Count > 0)
                         {

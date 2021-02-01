@@ -7,6 +7,7 @@ namespace whusa
 {
     public class Ent_twhcol130131
     {
+        public string QTYA;
         public Ent_twhcol130131()
         {
             this.TERM = string.Empty;

@@ -1103,6 +1103,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND  T$ADVS = '[:T$ADVS]'
         </stringSQL>
       </operationName>
+      <operationName name="UpdatePalletTbl082">
+        <stringSQL>
+          update  {0}.tticol082{1}
+          set T$PAID ='[:T$PAIDNEW]'
+          WHERE   T$PAID ='[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="UpdateTbl082Paid">
         <stringSQL>
           update  {0}.tticol082{1}
@@ -3401,17 +3408,26 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="consultaPorAlmacenItem">
         <stringSQL>
-          SELECT T$ITEM AS ITEM, T$CWAR AS CWAR,
-          T$LOCA AS LOCA, T$CLOT AS CLOT,
-          T$STKS AS STKS
-          FROM {2}
-          WHERE T$CWAR = '[:T$CWAR]' AND TRIM(T$ITEM) = '[:T$ITEM]'
+          SELECT TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
+          TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
+          TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
+          FROM {2} TBL1
+          INNER JOIN {0}.ttcmcs003{1} ttcmcs003
+          ON ttcmcs003.T$CWAR = TBL1.T$CWAR
+          WHERE TRIM(T$ITEM) = '[:T$ITEM]'
         </stringSQL>
       </operationName>
+      
       <operationName name="consultaCantidadItemLote">
         <stringSQL>
           SELECT NVL(SUM(T$STKS),0) AS STKS
           FROM {2} WHERE T$CWAR = '[:T$CWAR]' AND TRIM(T$ITEM) = '[:T$ITEM]'
+        </stringSQL>
+      </operationName>
+      <operationName name="consultaCantidadItemLoteSinAlmacen">
+        <stringSQL>
+          SELECT NVL(SUM(T$STKS),0) AS STKS
+          FROM {2} WHERE TRIM(T$ITEM) = '[:T$ITEM]'
         </stringSQL>
       </operationName>
       <operationName name="consultaPorAlmacenUbicacion">

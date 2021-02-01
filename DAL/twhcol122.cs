@@ -413,7 +413,7 @@ namespace whusa.DAL
         }
 
 
-        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string QTYT, string ADVS, ref string sentencia)
+        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string QTYT, string ADVS, string sentencia, bool invertPallet = false, string newPallet = "")
         {
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
@@ -431,10 +431,18 @@ namespace whusa.DAL
             //paramList.Add(":T$SQNB", SQNB.Trim());
             paramList.Add(":T$ADVS", ADVS.Trim());
             paramList.Add(":T$QTYT", QTYT.Trim());
-
+            paramList.Add(":T$PAIDNEW", newPallet.Trim());
             string tabla = ".tticol082";
-            string name1 = "UpdateTbl082";
+            string name1 = string.Empty;
 
+            if (!invertPallet)
+            {
+                name1 = "UpdateTbl082";
+            }
+            else
+            {
+                name1 = "UpdatePalletTbl082";
+            }
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
             sentencia = strSentencia;

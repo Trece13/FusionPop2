@@ -96,42 +96,43 @@ namespace whusap.WebPages.Migration
                 if (txtLote.Text.Trim().ToUpper() != String.Empty)
                 {
                     Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
-                    _consultaLoteUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
+                    //_consultaLoteUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
 
-                    if (_consultaLoteUsuario.Rows.Count > 0)
-                    {
+                    //if (_consultaLoteUsuario.Rows.Count > 0)
+                    //{
                         var lote = txtLote.Text.Trim().ToUpper();
                         _consultaItem = _idalttisfc001.findByPdnoArticulo(ref lote, ref strError);
 
-                        if (_consultaItem.Rows.Count > 0)
-                        {
-                            var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
+                        //if (_consultaItem.Rows.Count > 0)
+                        //{
+                            //var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
+                        var cwar = string.Empty;
                             var item = _consultaItem.Rows[0]["MITM"].ToString();
 
-                            _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref cwar, ref item, ref strError);
+                            _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref item, ref strError);
 
                             if (_consultaInformacion.Rows.Count > 0)
                             {
-                                _consultaCantidadLote = _idaltwhinr140.consultaCantidadItemLote(ref cwar, ref item, ref strError);
+                                _consultaCantidadLote = _idaltwhinr140.consultaCantidadItemLote(ref cwar, ref item, ref strError, true);
                                 divTable.InnerHtml = makeTableReceipt();
                             }
                             else
                             {
-                                lblError.Text = String.Format(mensajes("nodata"), cwar, item);
+                                lblError.Text = String.Format(mensajes("nodata"), "", item);
                                 return;
                             }
-                        }
-                        else
-                        {
-                            lblError.Text = mensajes("itemnotexists");
-                            return;
-                        }
-                    }
-                    else
-                    {
-                        lblError.Text = mensajes("usernotwarehouse");
-                        return;
-                    }
+                        //}
+                        //else
+                        //{
+                        //    lblError.Text = mensajes("itemnotexists");
+                        //    return;
+                        //}
+                    //}
+                    //else
+                    //{
+                    //    lblError.Text = mensajes("usernotwarehouse");
+                    //    return;
+                    //}
                 }
                 else
                 {
@@ -164,24 +165,24 @@ namespace whusap.WebPages.Migration
 
             protected string makeTableReceipt()
             {
-                var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
-                var cwardesc = _consultaLoteUsuario.Rows[0]["DSCA"].ToString();
+                //var cwar = _consultaInformacion.Rows[0]["CWAR"].ToString();
+                //var cwardesc = _consultaInformacion.Rows[0]["DSCA"].ToString();
                 var item = _consultaItem.Rows[0]["MITM"].ToString();
                 var itemdesc = _consultaItem.Rows[0]["DSCA"].ToString();
                 var cantidadlote = _consultaCantidadLote.Rows[0]["STKS"].ToString();
 
                 var table = String.Empty;
 
-                table += String.Format("<hr/><table class='table table-bordered' style='font-size:13px; border:3px solid; border-style:outset;'><tr style='background-color: darkblue; color: white; font-weight:bold;'><td>{0}</td>"
-                    + "<td colspan='2'>{1}</td></tr>", _idioma == "ESPAÑOL" ? "Almacen: " : "Warehouse: ", cwar + " - " + cwardesc);
+                table += "<hr/><table class='table table-bordered' style='font-size:13px; border:3px solid; border-style:outset;'><tr style='background-color: darkblue; color: white; font-weight:bold;'>";
 
-                table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan='2'>{1}</td></tr>"
+                table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan='3'>{1}</td></tr>"
                         , _idioma == "ESPAÑOL" ? "Articulo: " : "Item: ", item + " - " + itemdesc);
 
-                table += String.Format("<tr style='background-color: white;'><td style='font-weight: bold;'>{0}</td><td colspan='2'>{1}</td></tr>"
+                table += String.Format("<tr style='background-color: white;'><td style='font-weight: bold;'>{0}</td><td colspan='3'>{1}</td></tr>"
                         , _idioma == "ESPAÑOL" ? "Inventario total: " : "Total inventory: ", cantidadlote);
 
-                table += String.Format("<tr style='background-color: lightgray; font-weight:bold;'><b><td>{0}</td><td>{1}</td><td>{2}</td></b></tr>",
+                table += String.Format("<tr style='background-color: lightgray; font-weight:bold;'><b><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></b></tr>",
+                    _idioma == "ESPAÑOL" ? "Almacen " : "Warehouse ",
                         _idioma == "ESPAÑOL" ? "Ubicación " : "Location "
                         , _idioma == "ESPAÑOL" ? "Lote " : "Lot "
                         , _idioma == "ESPAÑOL" ? "Cantidad " : "Quantity");
@@ -189,8 +190,9 @@ namespace whusap.WebPages.Migration
                 for (int i = 0; i < _consultaInformacion.Rows.Count; i++)
                 {
                     //tr Articulo
-                    table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>",
-                        _consultaInformacion.Rows[i]["LOCA"].ToString()
+                    table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                        _consultaInformacion.Rows[i]["CWAR"].ToString()
+                        ,_consultaInformacion.Rows[i]["LOCA"].ToString()
                         , _consultaInformacion.Rows[i]["CLOT"].ToString()
                         , _consultaInformacion.Rows[i]["STKS"].ToString());
                 }

@@ -290,7 +290,8 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.SEQN = "0";
                             MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper();
                             MyObj.CWAR = row.Cells[3].Text.ToUpperInvariant();
-                            MyObj.QTYS = toreturn;// cantidad escaneada view 
+                            MyObj.QTYS = toreturn;// cantidad escaneada view
+                            MyObj.QTYA = toreturn;
                             MyObj.UNIT = row.Cells[5].Text.Trim();
                             MyObj.QTYC = toreturn;//cantidad escaneada view aplicando factor
                             MyObj.UNIC = row.Cells[5].Text.Trim();

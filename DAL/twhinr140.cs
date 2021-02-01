@@ -52,12 +52,12 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable consultaPorAlmacenItem(ref string cwar, ref string item, ref string strError)
+        public DataTable consultaPorAlmacenItem(ref string item, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
-            paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
+            //paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
             paramList.Add(":T$ITEM", item.Trim().ToUpper());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
@@ -75,7 +75,7 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable consultaCantidadItemLote(ref string cwar, ref string item, ref string strError)
+        public DataTable consultaCantidadItemLote(ref string cwar, ref string item, ref string strError, bool withoutWarehouse = false)
         {
             method = MethodBase.GetCurrentMethod();
 
@@ -83,7 +83,15 @@ namespace whusa.DAL
             paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
             paramList.Add(":T$ITEM", item.Trim().ToUpper());
 
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            
+            
+            if (!withoutWarehouse)
+            {
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            }
+            else{
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, "consultaCantidadItemLoteSinAlmacen", ref owner, ref env, tabla, paramList);
+            }
 
             try
             {

@@ -349,6 +349,7 @@ namespace whusap.WebPages.InvReceipts
                 CLOT = CLOT.ToUpper(),// lote VIEW
                 CWAR = CWAR.ToUpper(),
                 QTYS = QTYS,// cantidad escaneada view 
+                QTYA = QTYS,
                 UNIT = UNIT,//unit escaneada view
                 QTYC = QTYS,//cantidad escaneada view aplicando factor
                 UNIC = UNIT,//unidad view stock

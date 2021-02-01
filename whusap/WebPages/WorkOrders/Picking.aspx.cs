@@ -205,6 +205,7 @@ namespace whusap.WebPages.WorkOrders
                     lblWareDescr.Text = MyObj.DESCWRH.ToString();
                     lbllocation.Text = MyObj.LOCA.ToString();
                     lblQuantity.Text = MyObj.QTY.ToString();
+                    HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                     lblQuantityAux.Text = MyObj.QTY.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
@@ -244,6 +245,7 @@ namespace whusap.WebPages.WorkOrders
                     lblWareDescr.Text = MyObj.DESCWRH.ToString();
                     lbllocation.Text = MyObj.LOCA.ToString();
                     lblQuantity.Text = MyObj.QTY.ToString();
+                    HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                     lblQuantityAux.Text = MyObj.QTY.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
@@ -282,6 +284,7 @@ namespace whusap.WebPages.WorkOrders
                     lblWareDescr.Text = MyObj.DESCWRH.ToString();
                     lbllocation.Text = MyObj.LOCA.ToString();
                     lblQuantity.Text = MyObj.QTYT.ToString();
+                    HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                     lblQuantityAux.Text = MyObj.QTY.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
@@ -317,6 +320,7 @@ namespace whusap.WebPages.WorkOrders
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
+                HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                 lblQuantityAux.Text = MyObj.QTY.ToString();
                 lblQuantityOld.Text = MyObj.QTY.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
@@ -340,7 +344,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag042"] = 0;
 
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(),ref sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(),sentencia);
             }
             else if (LstPallet042.Count > 0)
             {
@@ -356,6 +360,7 @@ namespace whusap.WebPages.WorkOrders
                 lblWarehouse.Text = MyObj.WRH.ToString();
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
+                HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
                 lblQuantityAux.Text = MyObj.QTY.ToString();
                 lblQuantityOld.Text = MyObj.QTY.ToString();
@@ -379,7 +384,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag131"] = 0;
                 HttpContext.Current.Session["flag042"] = 1;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(),ref sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
 
                 ////                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
@@ -404,6 +409,7 @@ namespace whusap.WebPages.WorkOrders
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
+                HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                 lblQuantityAux.Text = MyObj.QTYT.ToString();
                 lblQuantityOld.Text = MyObj.QTYT.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
@@ -426,7 +432,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag131"] = 1;
                 HttpContext.Current.Session["flag042"] = 0;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(),ref sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
 
                 ////twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
@@ -703,7 +709,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Ent_tticol022 MyObj = new Ent_tticol022();
 
-                    int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP,ref sentencia);
+                    int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
                     bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
                     MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() +" "+res+" "+res1+
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + pallet.ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP+
@@ -712,7 +718,7 @@ namespace whusap.WebPages.WorkOrders
 
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act, qtyt_old);
+                        twhcolDAL.updatetticol222Quantity(pallet, qtyt_act, Convert.ToDecimal(HttpContext.Current.Session["originalQTY"]));
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
@@ -776,7 +782,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.log2 = "NONE";
                             MyObj.qtd2 = Convert.ToInt32(qtyt.ToString());
                             MyObj.pro2 = 2;
-                            MyObj.loca = LOCA;
+                            MyObj.loca = LOCA.Trim();
                             MyObj.norp = 1;
                             MyObj.dele = 9;
                             MyObj.logd = "NONE";
@@ -784,14 +790,20 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.refcntu = 0;
                             MyObj.drpt = DateTime.Now;
                             MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                            MyObj.acqt = Convert.ToDecimal(qtyt.ToString());
+                            MyObj.acqt = 0;
                             MyObj.cwaf = CWAR;//CWAR;
                             MyObj.cwat = CWAR;//CWAR;
                             MyObj.aclo = LOCA;
-                            MyObj.allo = 0;
+                            MyObj.allo = Convert.ToDecimal(qtyt.ToString());;
 
                             var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
                             var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
+
+                            if (validateSave > 0)
+                            {
+                                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia, true, MyObj.sqnb);
+
+                            }
 
                             if (validateSave > 0 && Convert.ToDecimal(qtyaG) != 0)
                             {
@@ -817,7 +829,7 @@ namespace whusap.WebPages.WorkOrders
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag042"].ToString().Trim()) == 1)
                 {
                     Ent_tticol042 MyObj = new Ent_tticol042();
-                    int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP,ref sentencia);
+                    int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP,sentencia);
                     bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(),ref sentencia1);
                     MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + res1 +
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + pallet.ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP +
@@ -825,7 +837,7 @@ namespace whusap.WebPages.WorkOrders
                         "\n" + sentencia1; 
                     if (cnpk != 1)
                     {
-                        twhcolDAL.updatetticol242Quantity(pallet, qtyt_act, qtyt_old);
+                        twhcolDAL.updatetticol242Quantity(pallet, qtyt_act, Convert.ToDecimal(HttpContext.Current.Session["originalQTY"]));
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
@@ -884,7 +896,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.log2 = "NONE";
                             MyObj.qtd2 = Convert.ToDecimal(qtyt.ToString());
                             MyObj.pro2 = 2;
-                            MyObj.loca = LOCA;
+                            MyObj.loca = LOCA.Trim();
                             MyObj.norp = 1;
                             MyObj.dele = 9;
                             MyObj.logd = "NONE";
@@ -892,15 +904,21 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.refcntu = 0;
                             MyObj.drpt = DateTime.Now;
                             MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                            MyObj.acqt = Convert.ToDouble(qtyt_act.ToString());
+                            MyObj.acqt = 0;
                             MyObj.cwaf = CWAR;//CWAR;
                             MyObj.cwat = CWAR;//CWAR;
                             MyObj.aclo = LOCA;
-                            MyObj.allo = 0;
+                            MyObj.allo = Convert.ToDecimal(qtyt.ToString());//Convert.ToDecimal(qtyt_act.ToString());
 
 
                             var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj, ref strError);
                             var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
+
+                            if (validateSave > 0)
+                            {
+                                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia, true, MyObj.sqnb);
+
+                            }
 
                             if (validateSave > 0 && Convert.ToDecimal(qtyaG) != 0)
                             {
@@ -930,7 +948,7 @@ namespace whusap.WebPages.WorkOrders
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
                 {
                     errorlog = "-Entro en 131\n";
-                    int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP,ref sentencia);
+                    int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP,sentencia);
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
                     bool res1  = twhcolDAL.EliminarTccol307140(pallet.Trim(),ref sentencia1);
                     MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + res1;
@@ -941,7 +959,7 @@ namespace whusap.WebPages.WorkOrders
                     if (cnpk != 1)
                     {
 
-                        twhcolDAL.updatetwhcol131Quantity(pallet, qtyt, qtyt);
+                        twhcolDAL.updatetwhcol131Quantity(pallet, qtyt,Convert.ToDecimal(HttpContext.Current.Session["originalQTY"]));
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
@@ -986,7 +1004,7 @@ namespace whusap.WebPages.WorkOrders
                             }
                             errorlog += "genero secuencia,";
 
-                            MyObj.OORG = "2";// Order type escaneada view 
+                            MyObj.OORG = OORG;// Order type escaneada view 
                             MyObj.ORNO = ORNO;
                             MyObj.ITEM = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
                             MyObj.PAID = ORNO + "-P" + SecuenciaPallet;
@@ -997,6 +1015,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.QTYS = qtyt.ToString();//QTYS;// cantidad escaneada view 
                             MyObj.UNIT = CUNI;//UNIT;//unit escaneada view
                             MyObj.QTYC = qtyt.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                            MyObj.QTYA = "";//QTYS;//cantidad escaneada view aplicando factor
                             MyObj.UNIC = CUNI;//UNIT;//unidad view stock
                             MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
                             MyObj.CONF = "1";
@@ -1014,9 +1033,16 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.COTP = " ";
                             MyObj.FIRE = "2";
                             MyObj.PSLIP = " ";
-                            MyObj.ALLO = "0";
+                            MyObj.ALLO = qtyt.ToString();
+
 
                             bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+
+                            if (Insertsucces)
+                            {
+                                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia, true, MyObj.PAID);
+
+                            }
 
                             if (Insertsucces && qtyt_act != 0)
                             {
