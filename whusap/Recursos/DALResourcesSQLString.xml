@@ -3432,10 +3432,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="consultaPorAlmacenUbicacion">
         <stringSQL>
-          SELECT TRIM(twhinr140.T$ITEM) AS ITEM, TRIM(tcibd001.T$DSCA) AS DSCA, twhinr140.T$CLOT AS CLOT, twhinr140.T$STKS AS STKS
-          FROM {2} twhinr140
-          INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.T$ITEM = twhinr140.T$ITEM
-          WHERE twhinr140.T$CWAR = '[:T$CWAR]' AND twhinr140.T$LOCA = '[:T$LOCA]'
+          SELECT TRIM(twhinr140.T$ITEM) AS ITEM, TRIM(tcibd001.T$DSCA) AS DSCA, twhinr140.T$CLOT AS CLOT, twhinr140.T$STKS AS STKS,twhinr140.T$CWAR AS CWAR,ttcmcs003.T$DSCA AS DSCA
+          FROM baan.twhinr140140 twhinr140
+          INNER JOIN baan.ttcibd001140 tcibd001 ON tcibd001.T$ITEM = twhinr140.T$ITEM
+          INNER JOIN baan.ttcmcs003140 ttcmcs003 ON ttcmcs003.T$CWAR = twhinr140.T$CWAR
+          WHERE twhinr140.T$LOCA = '[:T$LOCA]'
         </stringSQL>
       </operationName>
       <operationName name="consultaStks">
@@ -5104,7 +5105,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT T$DSCA, T$BOUT AS BOUT, T$CWAR AS CWAR,
           T$LOCA AS LOCA, T$LOCT AS LOCT, T$BTRR AS BTRR, T$DSCA AS DSCA
           FROM {2}
-          WHERE T$LOCA = '[:T$LOCA]' AND T$CWAR = '[:T$CWAR]'
+          WHERE T$LOCA = '[:T$LOCA]'
+          --AND T$CWAR = '[:T$CWAR]'
         </stringSQL>
       </operationName>
       <operationName name="validaLocationWithPdno">

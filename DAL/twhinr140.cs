@@ -111,7 +111,7 @@ namespace whusa.DAL
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
-            paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
+            //paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
             paramList.Add(":T$LOCA", loca.Trim().ToUpper());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);

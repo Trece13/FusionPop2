@@ -95,17 +95,18 @@ namespace whusap.WebPages.Migration
             if (txtArticulo.Text.Trim().ToUpper() != String.Empty)
             {
                 Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
-                _consultaLoteUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
+                //_consultaLoteUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
 
-                if (_consultaLoteUsuario.Rows.Count > 0)
-                {
+                //if (_consultaLoteUsuario.Rows.Count > 0)
+                //{
                     Ent_ttcibd001 data001 = new Ent_ttcibd001() { item = txtArticulo.Text.Trim().ToUpper() };
                     _consultaItem = _idalttcibd001.listaRegistro_ObtieneDescripcionUnidad(ref data001, ref strError);
 
                     if (_consultaItem.Rows.Count > 0)
                     {
-                        var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
-                        var cwardesc = _consultaLoteUsuario.Rows[0]["DSCA"].ToString();
+                        var cwar = string.Empty;
+                        //var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
+                        //var cwardesc = _consultaLoteUsuario.Rows[0]["DSCA"].ToString();
                         var item = txtArticulo.Text.Trim().ToUpper();
                         var itemdesc = _consultaItem.Rows[0]["DESCRIPCION"].ToString();
                         var unidad = _consultaItem.Rows[0]["UNID"].ToString();
@@ -127,12 +128,12 @@ namespace whusap.WebPages.Migration
                         lblError.Text = mensajes("itemnotexists");
                         return;
                     }
-                }
-                else
-                {
-                    lblError.Text = mensajes("usernotwarehouse");
-                    return;
-                }
+                //}
+                //else
+                //{
+                //    lblError.Text = mensajes("usernotwarehouse");
+                //    return;
+                //}
             }
             else
             {
@@ -165,33 +166,34 @@ namespace whusap.WebPages.Migration
 
         protected string makeTableReceipt()
         {
-            var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
-            var cwardesc = _consultaLoteUsuario.Rows[0]["DSCA"].ToString();
+            //var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
+            //var cwardesc = _consultaLoteUsuario.Rows[0]["DSCA"].ToString();
             var item = txtArticulo.Text.Trim().ToUpper();
             var itemdesc = _consultaItem.Rows[0]["DESCRIPCION"].ToString();
             var unidad = _consultaItem.Rows[0]["UNID"].ToString();
 
             var table = String.Empty;
 
-            table += String.Format("<hr/><table class='table table-bordered' style='font-size:13px; border:3px solid; border-style:outset;'><tr style='background-color: darkblue; color: white; font-weight:bold;'><td>{0}</td>"
-                + "<td colspan='2'>{1}</td></tr>", _idioma == "ESPAÑOL" ? "Almacen: " : "Warehouse: ", cwar + " - " + cwardesc);
+            table +="<hr/><table class='table table-bordered' style='font-size:13px; border:3px solid; border-style:outset;'><tr style='background-color: darkblue; color: white; font-weight:bold;'>";
 
-            table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan='2'>{1}</td></tr>"
+            table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan='3'>{1}</td></tr>"
                     , _idioma == "ESPAÑOL" ? "Articulo: " : "Item: ", item + " - " + itemdesc);
 
-            table += String.Format("<tr style='background-color: white;'><td style='font-weight: bold;'>{0}</td><td colspan='2'>{1}</td></tr>"
+            table += String.Format("<tr style='background-color: white;'><td style='font-weight: bold;'>{0}</td><td colspan='3'>{1}</td></tr>"
                     , _idioma == "ESPAÑOL" ? "Unidad: " : "Unit: ", unidad);
 
-            table += String.Format("<tr style='background-color: lightgray;'><b><td>{0}</td><td>{1}</td><td>{2}</td></b></tr>",
-                    _idioma == "ESPAÑOL" ? "Ubicación " : "Location "
+            table += String.Format("<tr style='background-color: lightgray;'><b><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></b></tr>",
+                    _idioma == "ESPAÑOL" ? "Alamacen " : "Warehouse"
+                    ,_idioma == "ESPAÑOL" ? "Ubicación " : "Location "
                     , _idioma == "ESPAÑOL" ? "Lote " : "Lot "
                     , _idioma == "ESPAÑOL" ? "Unidad " : "Unit");
 
             for (int i = 0; i < _consultaInformacion.Rows.Count; i++)
             {
                 //tr Articulo
-                table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td></tr>",
-                    _consultaInformacion.Rows[i]["LOCA"].ToString()
+                table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
+                    _consultaInformacion.Rows[i]["CWAR"].ToString()
+                    ,_consultaInformacion.Rows[i]["LOCA"].ToString()
                     , _consultaInformacion.Rows[i]["CLOT"].ToString()
                     , _consultaInformacion.Rows[i]["STKS"].ToString());
             }
