@@ -1242,26 +1242,26 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarRegistrosBloquedos">
         <stringSQL>
-          SELECT TBL,PAID, CWAR, LOCA, ITEM, QTYC, CUNI, T$DSCA AS DSCA,STAT FROM (
-          SELECT 'whcol130' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,T$QTYA AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT FROM {0}.tWhcol130{1}
+          SELECT TBL,PAID, CWAR, LOCA, ITEM, LOTE, QTYC, CUNI, T$DSCA AS DSCA,STAT FROM (
+          SELECT 'whcol130' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,T$CLOT as LOTE,T$QTYA AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT FROM BAAN.tWhcol130140
           WHERE T$STAT ='10'
           UNION
-          SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,T$QTYA AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT FROM {0}.tWhcol131{1}
+          SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,T$CLOT as LOTE,T$QTYA AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT FROM BAAN.tWhcol131140
           WHERE T$STAT ='10'
           UNION
-          SELECT 'ticol022' AS TBL,ticol022.T$SQNB AS PAID,ticol222.T$CWAT AS CWAR,ticol222.T$ACLO AS LOCA,ticol022.T$MITM AS ITEM,ticol222.T$ACQT AS qtyc,
+          SELECT 'ticol022' AS TBL,ticol022.T$SQNB AS PAID,ticol222.T$CWAT AS CWAR,ticol222.T$ACLO AS LOCA,ticol022.T$MITM AS ITEM,ticol022.T$PDNO AS LOTE,ticol222.T$ACQT AS qtyc,
           ticol022.T$CUNI AS CUNI,ticol022.T$DELE AS STAT
-          FROM {0}.tticol022{1} ticol022
-          INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          FROM BAAN.tticol022140 ticol022
+          INNER JOIN BAAN.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           WHERE ticol022.T$DELE ='12'
           UNION
-          SELECT 'ticol042' AS TBL,ticol042.T$SQNB AS PAID,ticol242.T$CWAT AS CWAR,ticol242.T$ACLO AS LOCA,ticol042.T$MITM AS ITEM,ticol242.T$ACQT AS qtyc,
+          SELECT 'ticol042' AS TBL,ticol042.T$SQNB AS PAID,ticol242.T$CWAT AS CWAR,ticol242.T$ACLO AS LOCA,ticol042.T$MITM AS ITEM,ticol042.T$PDNO AS LOTE,ticol242.T$ACQT AS qtyc,
           ticol042.T$CUNI AS CUNI,ticol042.T$DELE AS STAT
-          FROM {0}.tticol042{1} ticol042
-          INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          FROM BAAN.tticol042140 ticol042
+          INNER JOIN BAAN.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           WHERE ticol042.T$DELE ='12'
           )ConGlobal
-          LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
         </stringSQL>
       </operationName>
       <operationName name="Actualizartticol222Cant">

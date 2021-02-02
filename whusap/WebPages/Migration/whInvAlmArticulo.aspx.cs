@@ -186,7 +186,7 @@ namespace whusap.WebPages.Migration
                     _idioma == "ESPAÑOL" ? "Alamacen " : "Warehouse"
                     ,_idioma == "ESPAÑOL" ? "Ubicación " : "Location "
                     , _idioma == "ESPAÑOL" ? "Lote " : "Lot "
-                    , _idioma == "ESPAÑOL" ? "Unidad " : "Unit");
+                    , _idioma == "ESPAÑOL" ? "Cantidad " : "Quantity");
 
             for (int i = 0; i < _consultaInformacion.Rows.Count; i++)
             {

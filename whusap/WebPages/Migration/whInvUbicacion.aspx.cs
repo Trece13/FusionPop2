@@ -177,7 +177,7 @@ namespace whusap.WebPages.Migration
             table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan=4'>{1}</td></tr>"
                     , _idioma == "ESPAÑOL" ? "Ubicacion: " : "Location: ", loca + " - " + locadesc);
 
-            table += String.Format("<tr style='background-color: white; font-weight:bold;'><b><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></b></tr>",
+            table += String.Format("<tr style='background-color: white; font-weight:bold;'><b><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></b></tr>",
                     _idioma == "ESPAÑOL" ? "Almacen " : "Warehouse "
                     ,_idioma == "ESPAÑOL" ? "Articulo " : "Item "
                     , _idioma == "ESPAÑOL" ? "Descripción " : "Description: "

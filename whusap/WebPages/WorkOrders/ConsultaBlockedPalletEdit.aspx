@@ -242,6 +242,7 @@
                                     "<th scope='col'>Warehouse</th>" +
                                     "<th scope='col'>Location</th>" +
                                     "<th scope='col'>Item</th>" +
+                                    "<th scope='col'>Lot</th>" +
                                     "<th scope='col'>Description</th>" +
                                     "<th scope='col'>Quantity</th>" +
                                     "<th scope='col'>Unit</th>" +
@@ -274,6 +275,7 @@
                                     '<td>' + item.CWAR + '</td>' +
                                     '<td>' + item.LOCA + '</td>' +
                                     '<td>' + item.ITEM + '</td>' +
+                                    '<td>' + item.LOTE + '</td>' +
                                     '<td>' + item.DSCA + '</td>' +
                                     '<td>' + item.QTYC + '</td>' +
                                     '<td>' + item.CUNI + '</td><td>';
