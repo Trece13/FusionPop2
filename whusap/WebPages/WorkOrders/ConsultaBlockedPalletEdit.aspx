@@ -281,7 +281,7 @@
                                     '<td>' + item.CUNI + '</td><td>';
                     //                    newRowEditButton = '<input type="button" id =' + IdBtnEdit + ' value="Edit" class="btn btn-primary bouton-image" onclick="HabilitarPrioridad(' + idInput + ',' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ',' + IdBtnEdit + ')"></input>&nbsp';
                     newRowCancelButton = '<input type="button" id =' + IdBtnCancel + ' value="Cancel" class="btn btn-danger bouton-image"onclick="DeshabilitarPrioridad(' + id + ',' + IdBtnSave + ',' + IdBtnCancel + ')"></input>&nbsp';
-                    newRowSaveButton = '<input type="button" id =' + IdBtnSave + ' value="Change State to Located" class="btn btn-success bouton-image" onclick="AgregrarPrioridad(' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ')"></input>';
+                    newRowSaveButton = '<input type="button" id =' + IdBtnSave + ' value="Change Status to: Located" class="btn btn-success bouton-image" onclick="AgregrarPrioridad(' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ')"></input>';
                     newRowEnd = '</td></tr>';
 
 
