@@ -381,6 +381,7 @@
         }
 
         var SelectWarehouse = function (idpland) {
+            $('.table').remove();
             //alert(idpland);
             //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
             $('#DdWarehouse').find('option[value!="0"]').remove();

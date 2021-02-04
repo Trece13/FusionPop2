@@ -124,7 +124,7 @@ namespace whusap.WebPages.Migration
                         }
                         else
                         {
-                            lblError.Text = mensajes("itemnotexists");
+                            lblError.Text = mensajes("Lotnotexists");
                             return;
                         }
                     //}

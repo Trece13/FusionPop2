@@ -943,6 +943,11 @@
             Item not exists
           </stringMessage>
         </operationName>
+        <operationName name="Lotnotexists">
+          <stringMessage>
+            Lot not exists
+          </stringMessage>
+        </operationName>
         <operationName name="usernotwarehouse">
           <stringMessage>
             User has not defined warehouse or this not exists, please contact Administrator.
