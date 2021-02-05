@@ -272,15 +272,15 @@ namespace whusa.Interfases
             }
         }
 
-       
 
-        public int actRegtticol082140(string user ,string pallet, string Location, int stat,string t,string OORG,string ORNO,string OSET,string PONO,string SQNB,string ADVS,string sentencia, bool invertPallet = false, string newPallet = "")
+
+        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string SQNB, string ADVS, string sentencia, bool invertPallet = false, string newPallet = "", string PRIO = "")
         {
 
             string strError = string.Empty;
             try
             {
-                int DTwhcolo131 = dal.actRegtticol082140(user, pallet, Location, stat, t, OORG, ORNO, OSET, PONO, SQNB, ADVS, sentencia, invertPallet,newPallet);
+                int DTwhcolo131 = dal.actRegtticol082140(user, pallet, Location, stat, t, OORG, ORNO, OSET, PONO, SQNB, ADVS, sentencia, invertPallet, newPallet, PRIO);
                 return DTwhcolo131;
 
             }

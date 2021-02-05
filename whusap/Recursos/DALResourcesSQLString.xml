@@ -1105,9 +1105,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="UpdatePalletTbl082">
         <stringSQL>
-          update  {0}.tticol082{1}
+          update {0}.tticol082{1}
           set T$PAID ='[:T$PAIDNEW]'
-          WHERE   T$PAID ='[:T$PAID]'
+          WHERE T$PAID ='[:T$PAID]'
+          AND T$ADVS = '[:T$ADVS]'
+          AND T$ORNO = '[:T$ORNO]'
+          AND T$PONO = '[:T$PONO]'
+          AND T$PRIO = '[:T$PRIO]'
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl082Paid">
