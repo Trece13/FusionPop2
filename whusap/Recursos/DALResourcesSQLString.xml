@@ -187,6 +187,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(A.T$SQNB) = '[:T$SQNB]'
         </stringSQL>
       </operationName>
+      <operationName name="selectTticol000">
+        <stringSQL>
+          select * from  {0}.tticol000{1}
+        </stringSQL>
+      </operationName>
       <operationName name="actualizaRegistro_ConfirmedRegrind">
         <stringSQL>
           UPDATE {0}.tticol042{1}

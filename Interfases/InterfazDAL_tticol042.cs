@@ -232,8 +232,8 @@ namespace whusa.Interfases
             bool retorno = false;
             //try
             //{
-                retorno = dal.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
-                return retorno;
+            retorno = dal.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
+            return retorno;
             //}
             //catch (Exception ex)
             //{
@@ -316,7 +316,7 @@ namespace whusa.Interfases
 
         }
 
-    public DataTable SecuenciaMayorRT(string id)
+        public DataTable SecuenciaMayorRT(string id)
         {
             string strError = "";
             DataTable retorno;
@@ -331,5 +331,19 @@ namespace whusa.Interfases
             }
         }
 
+
+        public DataTable selectTticol000(ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.selectTticol000(ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
     }
 }

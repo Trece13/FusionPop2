@@ -27,6 +27,7 @@ namespace whusap.WebPages.Balance
         Ent_twhcol072 obj072 = new Ent_twhcol072();
         Ent_ttccol301 obj301 = new Ent_ttccol301();
         DataTable resultado = new DataTable();
+        DataTable resultado1 = new DataTable();
         string strError = string.Empty;
         string strConteo = string.Empty;
 
@@ -92,27 +93,29 @@ namespace whusap.WebPages.Balance
             obj042.sqnb = txtSQNB.Text.Trim().ToUpperInvariant();
             obj042.dele = 1;
             resultado = idal042.listaRegistroXSQNB_ConfirmedRegrind(ref obj042, ref strError);
+            resultado1 = idal042.selectTticol000(ref strError);
+            string RGVL = resultado1.Rows[0]["T$RGVL"].ToString();
 
-            if (resultado.Rows.Count < 1)
-            {
-                lblError.Visible = true;
-                lblError.Text = mensajes("regrindnotexists");
-                return;
-            }
+                if (resultado.Rows.Count < 1)
+                {
+                    lblError.Visible = true;
+                    lblError.Text = mensajes("regrindnotexists");
+                    return;
+                }
 
-            if (resultado.Rows[0]["T$DELE"].ToString() != "4")
-            {
-                lblError.Visible = true;
-                lblError.Text = mensajes("regrindwrapped");
-                return;
-            }
+                if (resultado.Rows[0]["T$DELE"].ToString() != "4" && RGVL != "2")
+                {
+                    lblError.Visible = true;
+                    lblError.Text = mensajes("regrindwrapped");
+                    return;
+                }
 
-            if (resultado.Rows[0]["T$PRO1"].ToString() == "1")
-            {
-                lblError.Visible = true;
-                lblError.Text = mensajes("regrindconfirmed");
-                return;
-            }
+                if (resultado.Rows[0]["T$PRO1"].ToString() == "1")
+                {
+                    lblError.Visible = true;
+                    lblError.Text = mensajes("regrindconfirmed");
+                    return;
+                }
 
             lblWorkOrder.Text = resultado.Rows[0]["T$PDNO"].ToString();
             lblRegrindSequence.Text = resultado.Rows[0]["T$SQNB"].ToString();

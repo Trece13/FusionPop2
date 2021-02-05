@@ -742,6 +742,29 @@ namespace whusa.DAL
             }
             return consulta;
         }
+
+            public DataTable selectTticol000(ref string strError)
+            {
+                method = MethodBase.GetCurrentMethod();
+                //string strSecuencia = Parametros.sqnb.Trim().ToUpperInvariant();
+
+                paramList = new Dictionary<string, object>();
+                //paramList.Add(":T$SQNB", strSecuencia);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                try
+                {
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                    
+                }
+                catch (Exception ex)
+                {
+                    //strError = "Error to the search sequence [tticol042]. Try again or contact your administrator \n " + strSentencia;
+                    log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                }
+                return consulta;
+            }
     }
 }
 
