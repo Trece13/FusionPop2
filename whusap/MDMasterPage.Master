@@ -21,6 +21,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
     <script type="text/javascript" src="../..\Scripts\jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <asp:ContentPlaceHolder ID="Encabezado" runat="server">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
         <script type="text/javascript" src="../..\Scripts\jquery-1.11.3.js"></script>
@@ -124,7 +125,6 @@
     </div>
     </form>
     <script type="text/javascript" src="../../Scripts/MDMasterScript.js"></script>
-    
     <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

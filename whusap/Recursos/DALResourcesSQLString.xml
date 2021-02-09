@@ -1251,7 +1251,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarRegistrosBloquedos">
         <stringSQL>
-          SELECT TBL,PAID, CWAR, LOCA, ITEM, LOTE, QTYC, CUNI, T$DSCA AS DSCA,STAT FROM (
+          SELECT TBL,PAID, CWAR, LOCA, ITEM, LOTE, QTYC, CUNI, T$DSCA AS DSCA,STAT,cibd001.T$KLTC AS KLTC FROM (
           SELECT 'whcol130' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,T$CLOT as LOTE,T$QTYA AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT FROM {0}.tWhcol130{1}
           WHERE T$STAT ='10'
           UNION

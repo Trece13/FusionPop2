@@ -2,8 +2,7 @@
     CodeBehind="ConsultaBlockedPallet.aspx.cs" Inherits="whusap.WebPages.WorkOrders.ConsultaBlockedPallet" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style>
@@ -369,4 +368,6 @@
 
 
     </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </asp:Content>
