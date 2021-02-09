@@ -78,13 +78,13 @@ namespace whusa.Interfases
             }
         }
 
-        public DataTable findByPdnoArticulo(ref string pdno, ref string strError)
+        public DataTable findByPdnoArticulo(ref string PDNO, ref string PAID, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
-            paramList.Add(":T$PDNO", pdno);
-
+            paramList.Add(":T$PDNO", PDNO.Trim() == string.Empty ? "" : PDNO.Trim());
+            paramList.Add(":T$PAID", PAID.Trim() == string.Empty ? "" : PAID.Trim());
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try

@@ -3417,16 +3417,53 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="consultaPorAlmacenItem">
         <stringSQL>
-          SELECT TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
+          SELECT G1.PAIDS,TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
+          TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
+          TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
+          FROM baan.twhinr140140 TBL1
+          INNER JOIN baan.ttcmcs003140 ttcmcs003
+          ON ttcmcs003.T$CWAR = TBL1.T$CWAR
+          LEFT JOIN
+          (SELECT  LISTAGG(PAID,';')WITHIN GROUP (ORDER BY CLOT) AS PAIDS,CLOT FROM(
+          SELECT 'ticol022' AS TBL,T$SQNB AS PAID,T$PDNO AS CLOT FROM baan.tticol222140
+          UNION
+          SELECT 'ticol042' AS TBL,T$SQNB AS PAID,T$PDNO AS CLOT FROM baan.tticol242140
+          UNION
+          SELECT 'whcol130' AS TBL,T$PAID AS PAID,T$CLOT AS CLOT FROM baan.tWhcol130140
+          UNION
+          SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CLOT AS CLOT FROM baan.tWhcol131140
+          ) GROUP BY CLOT) G1 ON TRIM(G1.CLOT) = TRIM(TBL1.T$CLOT)
+          WHERE TRIM(T$ITEM) = '[:T$ITEM]'
+          <!--SELECT TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
           TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
           TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
           FROM {2} TBL1
           INNER JOIN {0}.ttcmcs003{1} ttcmcs003
           ON ttcmcs003.T$CWAR = TBL1.T$CWAR
-          WHERE TRIM(T$ITEM) = '[:T$ITEM]'
+          WHERE TRIM(T$ITEM) = '[:T$ITEM]'-->
         </stringSQL>
       </operationName>
-      
+      <operationName name="consultaPalletPorLot">
+        <stringSQL>
+          SELECT *
+          FROM (
+          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS CLOT,ticol022.T$SQNB AS PAID,ticol222.T$CWAT AS CWAR, ticol222.T$ACLO AS LOCA
+          FROM baan.tticol022140 ticol022
+          INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          UNION
+          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS CLOT,ticol042.T$SQNB AS PAID,ticol242.T$CWAT AS CWAR, ticol242.T$ACLO AS LOCA
+          FROM baan.tticol042140 ticol042
+          INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          UNION
+          SELECT 'whcol130' AS TBL, T$CLOT AS CLOT, T$PAID AS PAID,T$CWAR AS CWAR ,T$LOCA AS LOCA
+          FROM baan.tWhcol130140
+          UNION
+          SELECT 'whcol131' AS TBL,T$CLOT AS CLOT, T$PAID AS PAID,T$CWAR AS CWAR ,T$LOCA AS LOCA
+          FROM baan.tWhcol131140
+          ) query1
+          where CLOT = '[:T$CLOT]'
+        </stringSQL>
+      </operationName>
       <operationName name="consultaCantidadItemLote">
         <stringSQL>
           SELECT NVL(SUM(T$STKS),0) AS STKS
@@ -5324,10 +5361,29 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="findByPdnoArticulo">
         <stringSQL>
-          SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA
+          SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
+          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
+          FROM baan.tticol022140 ticol022
+          INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          UNION
+          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$CLOT,ticol042.T$SQNB AS T$PAID
+          FROM baan.tticol042140 ticol042
+          INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          UNION
+          SELECT 'whcol130' AS TBL, T$CLOT, T$PAID AS T$PAID
+          FROM baan.tWhcol130140
+          UNION
+          SELECT 'whcol131' AS TBL, T$CLOT, T$PAID AS T$PAID
+          FROM baan.tWhcol131140
+          ) global
+          INNER JOIN baan.ttisfc001140 tisfc001170 ON tisfc001170.T$PDNO = global.T$CLOT
+          INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = tisfc001170.T$MITM
+          WHERE TRIM(tisfc001170.T$PDNO) = NVL('[:T$PDNO]',TRIM(tisfc001170.T$PDNO))
+          AND TRIM(global.T$PAID) = NVL('[:T$PAID]',TRIM(global.T$PAID))
+          <!--SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA
           FROM {2} tisfc001170
           INNER JOIN {0}.ttcibd001{1} tcibd001170 ON tcibd001170.T$ITEM = tisfc001170.T$MITM
-          WHERE TRIM(T$PDNO) = '[:T$PDNO]'
+          WHERE TRIM(T$PDNO) = '[:T$PDNO]'-->
         </stringSQL>
       </operationName>
       <operationName name="findByOrderNumberAnuncioOrd">

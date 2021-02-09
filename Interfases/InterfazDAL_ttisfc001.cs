@@ -47,13 +47,13 @@ namespace whusa.Interfases
             }
         }
 
-        public DataTable findByPdnoArticulo(ref string pdno, ref string strError)
+        public DataTable findByPdnoArticulo(ref string pdno, ref string paid, ref string strError)
         {
             //int retorno = -1;
             DataTable retorno;
             try
             {
-                retorno = dal.findByPdnoArticulo(ref pdno, ref strError);
+                retorno = dal.findByPdnoArticulo(ref pdno, ref paid, ref strError);
                 return retorno;
             }
             catch (Exception ex)

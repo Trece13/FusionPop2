@@ -17,190 +17,188 @@ namespace whusap.WebPages.Migration
     public partial class whInvArticulo : System.Web.UI.Page
     {
         #region Propiedades
-            private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
-            private static InterfazDAL_tticol127 _idaltticol127 = new InterfazDAL_tticol127();
-            private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
-            private static InterfazDAL_twhinr140 _idaltwhinr140 = new InterfazDAL_twhinr140();
-            private static Mensajes _mensajesForm = new Mensajes();
-            private static LabelsText _textoLabels = new LabelsText();
-            private static string _operator;
-            public static string _idioma;
-            private static string strError;
-            private static string formName;
-            private static string globalMessages = "GlobalMessages";
-            private DataTable _consultaLoteUsuario = new DataTable();
-            private DataTable _consultaItem = new DataTable();
-            private DataTable _consultaInformacion = new DataTable();
-            private DataTable _consultaCantidadLote = new DataTable();
+        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
+        private static InterfazDAL_tticol127 _idaltticol127 = new InterfazDAL_tticol127();
+        private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
+        private static InterfazDAL_twhinr140 _idaltwhinr140 = new InterfazDAL_twhinr140();
+        private static Mensajes _mensajesForm = new Mensajes();
+        private static LabelsText _textoLabels = new LabelsText();
+        private static string _operator;
+        public static string _idioma;
+        private static string strError;
+        private static string formName;
+        private static string globalMessages = "GlobalMessages";
+        private DataTable _consultaLoteUsuario = new DataTable();
+        private DataTable _consultaItem = new DataTable();
+        private DataTable _consultaInformacion = new DataTable();
+        private DataTable _consultaCantidadLote = new DataTable();
         #endregion
 
         #region Eventos
 
-            protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            // Cambiar cultura para manejo de separador decimal
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            base.InitializeCulture();
+
+            if (!IsPostBack)
             {
-                // Cambiar cultura para manejo de separador decimal
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
-                base.InitializeCulture();
-
-                if (!IsPostBack)
+                formName = Request.Url.AbsoluteUri.Split('/').Last();
+                if (formName.Contains('?'))
                 {
-                    formName = Request.Url.AbsoluteUri.Split('/').Last();
-                    if (formName.Contains('?'))
-                    {
-                        formName = formName.Split('?')[0];
-                    }
-                    Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
-                    lblError.Text = "";
-                    lblConfirm.Text = "";
-
-                    if (Session["user"] == null)
-                    {
-                        Response.Redirect(ConfigurationManager.AppSettings["UrlBase"] + "/WebPages/Login/whLogIni.aspx");
-                    }
-
-                    _operator = Session["user"].ToString();
-
-                    try
-                    {
-                        _idioma = Session["ddlIdioma"].ToString();
-                    }
-                    catch (Exception)
-                    {
-                        _idioma = "INGLES";
-                    }
-
-                    CargarIdioma();
-
-                    string strTitulo = mensajes("encabezado");
-                    control.Text = strTitulo;
-
-                    Ent_ttccol301 data = new Ent_ttccol301()
-                    {
-                        user = HttpContext.Current.Session["user"].ToString(),
-                        come = mensajes("encabezado"),
-                        refcntd = 0,
-                        refcntu = 0
-                    };
-
-                    List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
-                    datalog.Add(data);
-
-                    _idalttccol301.insertarRegistro(ref datalog, ref strError);
+                    formName = formName.Split('?')[0];
                 }
-            }
+                Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
+                lblError.Text = "";
+                lblConfirm.Text = "";
 
-            protected void btnConsultar_Click(object sender, EventArgs e)
-            {
-                divTable.InnerHtml = String.Empty;
-                if (txtLote.Text.Trim().ToUpper() != String.Empty)
+                if (Session["user"] == null)
                 {
-                    Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
-                    //_consultaLoteUsuario = _idaltticol127.listaRegistro_ObtieneAlmacen(ref dataticol127, ref strError);
+                    Response.Redirect(ConfigurationManager.AppSettings["UrlBase"] + "/WebPages/Login/whLogIni.aspx");
+                }
 
-                    //if (_consultaLoteUsuario.Rows.Count > 0)
-                    //{
-                        var lote = txtLote.Text.Trim().ToUpper();
-                        _consultaItem = _idalttisfc001.findByPdnoArticulo(ref lote, ref strError);
+                _operator = Session["user"].ToString();
 
-                        if (_consultaItem.Rows.Count > 0)
-                        {
-                            //var cwar = _consultaLoteUsuario.Rows[0]["BODEGA"].ToString();
-                        var cwar = string.Empty;
-                            var item = _consultaItem.Rows[0]["MITM"].ToString();
+                try
+                {
+                    _idioma = Session["ddlIdioma"].ToString();
+                }
+                catch (Exception)
+                {
+                    _idioma = "INGLES";
+                }
 
-                            _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref item, ref strError);
+                CargarIdioma();
 
-                            if (_consultaInformacion.Rows.Count > 0)
-                            {
-                                _consultaCantidadLote = _idaltwhinr140.consultaCantidadItemLote(ref cwar, ref item, ref strError, true);
-                                divTable.InnerHtml = makeTableReceipt();
-                            }
-                            else
-                            {
-                                lblError.Text = String.Format(mensajes("nodata"), "", item);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            lblError.Text = mensajes("Lotnotexists");
-                            return;
-                        }
-                    //}
-                    //else
-                    //{
-                    //    lblError.Text = mensajes("usernotwarehouse");
-                    //    return;
-                    //}
+                string strTitulo = mensajes("encabezado");
+                control.Text = strTitulo;
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = HttpContext.Current.Session["user"].ToString(),
+                    come = mensajes("encabezado"),
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                _idalttccol301.insertarRegistro(ref datalog, ref strError);
+            }
+        }
+
+        protected void btnConsultar_Click(object sender, EventArgs e)
+        {
+            lblError.Text = string.Empty;
+            divTable.InnerHtml = String.Empty;
+
+
+            if (txtLote.Text.Trim().ToUpper() != String.Empty || txtPallet.Text.Trim().ToUpper() != String.Empty)
+            {
+                Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
+                var lote = txtLote.Text.Trim().ToUpper();
+                var paid = txtPallet.Text.Trim().ToUpper();
+                _consultaItem = _idalttisfc001.findByPdnoArticulo(ref lote, ref paid, ref strError);
+                if (_consultaItem.Rows.Count > 0)
+                {
+                    var cwar = string.Empty;
+                    var item = _consultaItem.Rows[0]["MITM"].ToString();
+
+                    _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref item, ref strError);
+                    //_idaltwhinr140.consultaPalletPorLot(lote, ref strError);
+                    if (_consultaInformacion.Rows.Count > 0)
+                    {
+                        _consultaCantidadLote = _idaltwhinr140.consultaCantidadItemLote(ref cwar, ref item, ref strError, true);
+                        divTable.InnerHtml = makeTableReceipt();
+                    }
+                    else
+                    {
+                        lblError.Text = String.Format(mensajes("nodata"), "", item);
+                        return;
+                    }
                 }
                 else
                 {
-                    lblError.Text = mensajes("formempty");
+                    lblError.Text = mensajes("LotPalletnotexists");
                     return;
                 }
             }
+            else if (txtPallet.Text.Trim().ToUpper() != String.Empty)
+            {
+
+            }
+            else
+            {
+                lblError.Text = mensajes("formemptyAny");
+                return;
+            }
+        }
 
         #endregion
 
         #region Metodos
 
-            protected void CargarIdioma()
+        protected void CargarIdioma()
+        {
+            lblLote.Text = _textoLabels.readStatement(formName, _idioma, "lblLote");
+            btnConsultar.Text = _textoLabels.readStatement(formName, _idioma, "btnConsultar");
+        }
+
+        protected string mensajes(string tipoMensaje)
+        {
+            var retorno = _mensajesForm.readStatement(formName, _idioma, ref tipoMensaje);
+
+            if (retorno.Trim() == String.Empty)
             {
-                lblLote.Text = _textoLabels.readStatement(formName, _idioma, "lblLote");
-                btnConsultar.Text = _textoLabels.readStatement(formName, _idioma, "btnConsultar");
+                retorno = _mensajesForm.readStatement(globalMessages, _idioma, ref tipoMensaje);
             }
 
-            protected string mensajes(string tipoMensaje)
+            return retorno;
+        }
+
+        protected string makeTableReceipt()
+        {
+            //var cwar = _consultaInformacion.Rows[0]["CWAR"].ToString();
+            //var cwardesc = _consultaInformacion.Rows[0]["DSCA"].ToString();
+            var item = _consultaItem.Rows[0]["MITM"].ToString();
+            var itemdesc = _consultaItem.Rows[0]["DSCA"].ToString();
+            var cantidadlote = _consultaCantidadLote.Rows[0]["STKS"].ToString();
+
+            var table = String.Empty;
+
+            table += "<hr/><table class='table table-bordered' style='font-size:13px; border:3px solid; border-style:outset;'><tr style='background-color: darkblue; color: white; font-weight:bold;'>";
+
+            table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan='4'>{1}</td></tr>"
+                    , _idioma == "ESPAÑOL" ? "Articulo: " : "Item: ", item + " - " + itemdesc);
+
+            table += String.Format("<tr style='background-color: white;'><td style='font-weight: bold;'>{0}</td><td colspan='4'>{1}</td></tr>"
+                    , _idioma == "ESPAÑOL" ? "Inventario total: " : "Total inventory: ", cantidadlote);
+
+            table += String.Format("<tr style='background-color: lightgray; font-weight:bold;'><b><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></b></tr>",
+                _idioma == "ESPAÑOL" ? "Almacen " : "Warehouse ",
+                    _idioma == "ESPAÑOL" ? "Ubicación " : "Location "
+                    , _idioma == "ESPAÑOL" ? "Lote " : "Lot "
+                    , _idioma == "ESPAÑOL" ? "Pallets " : "Pallets "
+                    , _idioma == "ESPAÑOL" ? "Cantidad " : "Quantity");
+
+            for (int i = 0; i < _consultaInformacion.Rows.Count; i++)
             {
-                var retorno = _mensajesForm.readStatement(formName, _idioma, ref tipoMensaje);
-
-                if (retorno.Trim() == String.Empty)
-                {
-                    retorno = _mensajesForm.readStatement(globalMessages, _idioma, ref tipoMensaje);
-                }
-
-                return retorno;
+                //tr Articulo
+                table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td style='font-size:11px;'>{3}</td><td>{4}</td></tr>",
+                    _consultaInformacion.Rows[i]["CWAR"].ToString()
+                    , _consultaInformacion.Rows[i]["LOCA"].ToString()
+                    , _consultaInformacion.Rows[i]["CLOT"].ToString()
+                    ,_consultaInformacion.Rows[i]["PAIDS"].ToString()
+                    ,_consultaInformacion.Rows[i]["STKS"].ToString());
             }
 
-            protected string makeTableReceipt()
-            {
-                //var cwar = _consultaInformacion.Rows[0]["CWAR"].ToString();
-                //var cwardesc = _consultaInformacion.Rows[0]["DSCA"].ToString();
-                var item = _consultaItem.Rows[0]["MITM"].ToString();
-                var itemdesc = _consultaItem.Rows[0]["DSCA"].ToString();
-                var cantidadlote = _consultaCantidadLote.Rows[0]["STKS"].ToString();
+            table += "</table>";
 
-                var table = String.Empty;
-
-                table += "<hr/><table class='table table-bordered' style='font-size:13px; border:3px solid; border-style:outset;'><tr style='background-color: darkblue; color: white; font-weight:bold;'>";
-
-                table += String.Format("<tr style='background-color: lightgray;'><td style='font-weight: bold;'>{0}</td><td colspan='3'>{1}</td></tr>"
-                        , _idioma == "ESPAÑOL" ? "Articulo: " : "Item: ", item + " - " + itemdesc);
-
-                table += String.Format("<tr style='background-color: white;'><td style='font-weight: bold;'>{0}</td><td colspan='3'>{1}</td></tr>"
-                        , _idioma == "ESPAÑOL" ? "Inventario total: " : "Total inventory: ", cantidadlote);
-
-                table += String.Format("<tr style='background-color: lightgray; font-weight:bold;'><b><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></b></tr>",
-                    _idioma == "ESPAÑOL" ? "Almacen " : "Warehouse ",
-                        _idioma == "ESPAÑOL" ? "Ubicación " : "Location "
-                        , _idioma == "ESPAÑOL" ? "Lote " : "Lot "
-                        , _idioma == "ESPAÑOL" ? "Cantidad " : "Quantity");
-
-                for (int i = 0; i < _consultaInformacion.Rows.Count; i++)
-                {
-                    //tr Articulo
-                    table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td></tr>",
-                        _consultaInformacion.Rows[i]["CWAR"].ToString()
-                        ,_consultaInformacion.Rows[i]["LOCA"].ToString()
-                        , _consultaInformacion.Rows[i]["CLOT"].ToString()
-                        , _consultaInformacion.Rows[i]["STKS"].ToString());
-                }
-
-                table += "</table>";
-
-                return table;
-            }
+            return table;
+        }
 
         #endregion
     }

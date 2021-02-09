@@ -350,6 +350,11 @@
             Please, enter all fields.
           </stringMessage>
         </operationName>
+        <operationName name="formemptyAny">
+          <stringMessage>
+            Please, enter any fields.
+          </stringMessage>
+        </operationName>
         <operationName name="ordernotactive">
           <stringMessage>
             Production order is not active.
@@ -946,6 +951,11 @@
         <operationName name="Lotnotexists">
           <stringMessage>
             Lot not exists
+          </stringMessage>
+        </operationName>
+        <operationName name="LotPalletnotexists">
+          <stringMessage>
+            lot or pallet does not exist or does not have associated items
           </stringMessage>
         </operationName>
         <operationName name="usernotwarehouse">

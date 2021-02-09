@@ -19,6 +19,18 @@
             </td>
         </tr>
         <tr>
+            <td style="text-align:left;">
+                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                <b style="font-size: 11px;">
+                    <asp:Label runat="server" ID="lblPallet" />Pallet ID</b></span>
+            </td>
+            <td style="width: 250px; padding:5px;">
+                <span style="vertical-align: middle;">
+                    <asp:TextBox runat="server" ID="txtPallet" CssClass="TextBoxBig" ClientIDMode="Static" />
+                </span>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2" style="text-align:center;">
                 <hr />  
                 <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
