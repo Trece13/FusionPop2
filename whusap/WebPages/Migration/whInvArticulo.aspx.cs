@@ -116,7 +116,7 @@ namespace whusap.WebPages.Migration
                     }
                     else
                     {
-                        lblError.Text = String.Format(mensajes("nodata"), "", item);
+                        lblError.Text = String.Format(mensajes("nodata"),item);
                         return;
                     }
                 }

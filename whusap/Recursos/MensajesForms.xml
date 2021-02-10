@@ -940,7 +940,7 @@
         </operationName>
         <operationName name="nodata">
           <stringMessage>
-            No data found for warehouse ( {0} ) and item ( {1} )
+            No data found for item ( {0} )
           </stringMessage>
         </operationName>
         <operationName name="itemnotexists">
@@ -972,7 +972,7 @@
         </operationName>
         <operationName name="nodata">
           <stringMessage>
-            No se encontraron datos para el almacen ( {0} ) y el articulo ( {1} )
+            No se encontraron datos para el articulo ( {0} )
           </stringMessage>
         </operationName>
         <operationName name="itemnotexists">
