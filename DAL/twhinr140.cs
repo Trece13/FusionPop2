@@ -52,13 +52,38 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable consultaPorAlmacenItem(ref string item, ref string strError)
+        public DataTable consultaPorAlmacenItem(ref string item,ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
             //paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
             paramList.Add(":T$ITEM", item.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "That Lot doesn't have Item Asociated."; }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [twhinr140]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
+        public DataTable consultaPorAlmacenItemPallet(ref string item, ref string clot, ref string paid, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
+            paramList.Add(":T$ITEM", item.Trim().ToUpper());
+            paramList.Add(":T$PAID", paid.Trim().ToUpper());
+            paramList.Add(":T$CLOT", clot.Trim().ToUpper());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 

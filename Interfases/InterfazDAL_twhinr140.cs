@@ -48,6 +48,21 @@ namespace whusa.Interfases
             }
         }
 
+        public DataTable consultaPorAlmacenItemPallet(ref string item, ref string clot, ref string paid, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.consultaPorAlmacenItemPallet(ref item, ref clot, ref paid, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         public DataTable consultaCantidadItemLote(ref string cwar, ref string item, ref string strError,bool withoutWarehouse = false)
         {
             //int retorno = -1;
