@@ -107,7 +107,7 @@ namespace whusap.WebPages.Migration
                     var cwar = string.Empty;
                     var item = _consultaItem.Rows[0]["MITM"].ToString();
 
-                    _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItem(ref item, ref strError);
+                    _consultaInformacion = _idaltwhinr140.consultaPorAlmacenItemPallet(ref item, ref lote, ref paid, ref strError);
                     //_idaltwhinr140.consultaPalletPorLot(lote, ref strError);
                     if (_consultaInformacion.Rows.Count > 0)
                     {

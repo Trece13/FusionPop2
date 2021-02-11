@@ -3415,9 +3415,33 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           GROUP BY T$ITEM
         </stringSQL>
       </operationName>
-      <operationName name="consultaPorAlmacenItem">
+      <operationName name="consultaPorAlmacenItemPallet">
         <stringSQL>
-          SELECT G1.PAIDS,TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
+          select  warehouse as CWAR , location as LOCA, item, lot as CLOT, palletid as PAIDS, quantity as STKS
+          from
+          (
+          select  t$cwat warehouse, t$aclo location, col022.t$pdno lot, t$acqt quantity, col022.t$sqnb palletid, col022.t$mitm item
+          from    baan.tticol222140 col222
+          inner join baan.tticol022140 col022
+          on col022.t$pdno = col222.t$pdno
+          and col022.t$sqnb = col222.t$sqnb
+          union
+          select  t$cwat warehouse, t$aclo location, col042.t$pdno lot, t$acqt quantity, col042.t$sqnb palletid, col042.t$mitm item
+          from    baan.tticol242140 col242
+          inner join baan.tticol042140 col042
+          on col042.t$pdno = col242.t$pdno
+          and col042.t$sqnb = col242.t$sqnb
+          union
+          select t$cwaa warehouse, t$loaa location, t$clot lot, t$qtya quantity, t$paid palletid, t$item item
+          from   baan.twhcol130140
+          union
+          select t$cwaa warehouse, t$loaa location, t$clot lot, t$qtya quantity, t$paid palletid, t$item item
+          from   baan.twhcol131140
+          )
+          where trim(lot) = NVL(trim('[:T$CLOT]'),trim(lot))
+          and trim(palletid) = NVL(trim('[:T$PAID]'),trim(palletid))
+          and trim(item) = trim('[:T$ITEM]')
+          <!--SELECT G1.PAIDS,TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
           TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
           TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
           FROM baan.twhinr140140 TBL1
@@ -3433,7 +3457,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UNION
           SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CLOT AS CLOT FROM baan.tWhcol131140
           ) GROUP BY CLOT) G1 ON TRIM(G1.CLOT) = TRIM(TBL1.T$CLOT)
-          WHERE TRIM(T$ITEM) = '[:T$ITEM]'
+          WHERE TRIM(T$ITEM) = '[:T$ITEM]'-->
           <!--SELECT TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
           TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
           TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
@@ -3441,6 +3465,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.ttcmcs003{1} ttcmcs003
           ON ttcmcs003.T$CWAR = TBL1.T$CWAR
           WHERE TRIM(T$ITEM) = '[:T$ITEM]'-->
+        </stringSQL>
+      </operationName>
+      <operationName name="consultaPorAlmacenItem">
+        <stringSQL>
+          SELECT TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
+          TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
+          TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
+          FROM {2} TBL1
+          INNER JOIN {0}.ttcmcs003{1} ttcmcs003
+          ON ttcmcs003.T$CWAR = TBL1.T$CWAR
+          WHERE TRIM(T$ITEM) = '[:T$ITEM]'
         </stringSQL>
       </operationName>
       <operationName name="consultaPalletPorLot">
