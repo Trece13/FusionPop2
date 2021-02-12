@@ -10,7 +10,8 @@ using whusa.Entidades;
 using System.Configuration;
 using System.Threading;
 using System.Globalization;
-using System.Data;  
+using System.Data;
+using whusa;  
 
 namespace whusap.WebPages.Migration
 {
@@ -24,6 +25,9 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_tticst001 _idaltticst001 = new InterfazDAL_tticst001();
         private static InterfazDAL_tticol080 _idaltticol080 = new InterfazDAL_tticol080();
         private static InterfazDAL_tticol110 _idaltticol110 = new InterfazDAL_tticol110();
+        private static InterfazDAL_tticol132 _idaltticol132 = new InterfazDAL_tticol132();
+        protected static InterfazDAL_tticol011 idal011 = new InterfazDAL_tticol011();
+        Ent_tticol011 obj011 = new Ent_tticol011();
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string _operator;
@@ -96,27 +100,39 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+
             Session["orno"] = txtOrder.Text.Trim().ToUpper();
+            Session["mcno"] = txtMachine.Text.Trim().ToUpper();
+
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
 
             var order = txtOrder.Text.Trim().ToUpper();
+            var machine = txtMachine.Text.Trim().ToUpper();
 
-            if (order != String.Empty)
+            if (machine != String.Empty)
             {
+            //if (order != String.Empty)
+            //{
                 Ent_tticol090 data090 = new Ent_tticol090() { fpdn = order };
-                var consultaOrden = _idaltticol090.lineClearance_verificaOrdenes_Param(ref data090, ref strError);
+                Ent_ttirou002 tirou002 = new Ent_ttirou002() { mcno = machine };
+                //var consultaOrden = _idaltticol090.lineClearance_verificaOrdenes_Param(ref data090, ref strError);
+                obj011.mcno = machine;
+                DataTable consultaOrden = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
+                var validarMaquina = _idaltticol132.ValidarMaquina(machine, ref strError);
 
-                if (consultaOrden.Rows.Count > 0)
+                if (validarMaquina.Rows.Count > 0)
                 {
                     if (valstatwo)
                     {
                         if (consultaOrden.Rows[0]["STAT"].ToString() != "2")
                         {
-                            lblError.Text = WorkorderhasnotbeeninitiatedPOP;
-                            return;
+                            //lblError.Text = WorkorderhasnotbeeninitiatedPOP;
+                            lblError.Text = "Work Order not Initiated for this Machine";
                         }
                     }
+                    Session["orno"] = consultaOrden.Rows[0]["orden"].ToString().Trim();
+                    order = consultaOrden.Rows[0]["orden"].ToString().Trim();
                     _consultarTurno = _idaltticol111.findRecordByPdno(ref order, ref strError);
 
                     if (_consultarTurno.Rows.Count > 0)
@@ -190,6 +206,7 @@ namespace whusap.WebPages.Migration
                 else
                 {
                     lblError.Text = mensajes("ordernotexists");
+                    lblError.Text = "Machine not defined";
                     return;
                 }
             }

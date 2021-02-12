@@ -24,6 +24,9 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol020 _idaltticol020 = new InterfazDAL_tticol020();
+        private static InterfazDAL_tticol132 _idaltticol132 = new InterfazDAL_tticol132();
+        protected static InterfazDAL_tticol011 idal011 = new InterfazDAL_tticol011();
+        Ent_tticol011 obj011 = new Ent_tticol011();
         private static DataTable _consultaInformacionOrden = new DataTable();
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
@@ -104,6 +107,7 @@ namespace whusap.WebPages.Migration
         {
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
+            var machine = txtMachine.Text.Trim().ToUpper();
 
             if (Convert.ToInt32(txtQuantity.Text.Trim()) == 0)
             {
@@ -115,18 +119,22 @@ namespace whusap.WebPages.Migration
             divBotones.Visible = false;
             var PDNO = txtOrder.Text.Trim().ToUpper();
             var DELE = "2";
-            var consultaOrden = _idalttisfc001.findByOrderNumberPalletTags(ref PDNO, ref strError).Rows;
             var qtdlzero = "";
             var enterQuantity = double.Parse(txtQuantity.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
 
-            if (consultaOrden.Count > 0)
+            var validarMaquina = _idaltticol132.ValidarMaquina(machine, ref strError);
+
+            if (validarMaquina.Rows.Count > 0)
             {
-                if (consultaOrden[0]["STAT"].ToString().Trim() != "2")
+                DataTable consultaOrdenMcno = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
+                if (consultaOrdenMcno.Rows[0]["STAT"].ToString().Trim() != "2")
                 {
-                    lblError.Text = WorkorderhasnotbeeninitiatedPOP;
+                    //lblError.Text = WorkorderhasnotbeeninitiatedPOP;
+                    lblError.Text = "Work Order not Initiated for this Machine";
                     return;
                 }
-
+                PDNO = consultaOrdenMcno.Rows[0]["orden"].ToString().Trim();
+                var consultaOrden = _idalttisfc001.findByOrderNumberPalletTags(ref PDNO, ref strError).Rows;
                 var madein = consultaOrden[0]["NAME"].ToString().ToUpper();
                 var item = consultaOrden[0]["MITM"].ToString();
                 var descripcion = consultaOrden[0]["DSCA"].ToString();
@@ -406,6 +414,7 @@ namespace whusap.WebPages.Migration
             }
             else
             {
+                lblError.Text = "Machine not defined";
                 lblError.Text = mensajes("ordernotexists");
                 lblConfirm.Text = string.Empty;
 

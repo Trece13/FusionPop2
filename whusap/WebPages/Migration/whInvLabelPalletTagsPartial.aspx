@@ -68,7 +68,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <asp:Label Text="" runat="server" ID="lblInfo" style="color:Black; font-size:medium;" />
      <table border="0">
-        <tr>
+        <tr style="display:none">
             <td style="text-align:left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
@@ -77,6 +77,18 @@
             <td style="width: 250px; padding:5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtOrder" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
+                </span>
+            </td>
+        </tr>
+         <tr>
+            <td style="text-align: left;">
+                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="Label1" />Machine:</b></span>
+            </td>
+            <td style="width: 250px; padding: 5px;">
+                <span style="vertical-align: middle;">
+                    <asp:TextBox runat="server" ID="txtMachine" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>

@@ -21,6 +21,8 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_tticol127 _idaltticol127 = new InterfazDAL_tticol127();
         private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
         private static InterfazDAL_twhinr140 _idaltwhinr140 = new InterfazDAL_twhinr140();
+        protected static InterfazDAL_twhltc100 idal100 = new InterfazDAL_twhltc100();
+        Ent_twhltc100 obj100 = new Ent_twhltc100();
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string _operator;
@@ -101,9 +103,15 @@ namespace whusap.WebPages.Migration
                 Ent_tticol127 dataticol127 = new Ent_tticol127() { user = HttpContext.Current.Session["user"].ToString() };
                 var lote = txtLote.Text.Trim().ToUpper();
                 var paid = txtPallet.Text.Trim().ToUpper();
+                if (txtLote.Text.Trim().ToUpper() != String.Empty)
+                {
+                    VerificarExistenciaLote();
+                }
                 _consultaItem = _idalttisfc001.findByPdnoArticulo(ref lote, ref paid, ref strError);
                 if (_consultaItem.Rows.Count > 0)
                 {
+                    VerificarExistenciaLote();
+
                     var cwar = string.Empty;
                     var item = _consultaItem.Rows[0]["MITM"].ToString();
 
@@ -141,6 +149,16 @@ namespace whusap.WebPages.Migration
 
         #region Metodos
 
+        protected void VerificarExistenciaLote()
+        {
+            obj100.clot = txtLote.Text.Trim().ToUpper();
+            DataTable LotExist = idal100.listaRegistro_SiExiste(ref obj100, ref strError);
+            if (LotExist.Rows.Count == 0)
+            {
+                lblError.Text = "Lot not found";
+                return;
+            }
+        }
         protected void CargarIdioma()
         {
             lblLote.Text = _textoLabels.readStatement(formName, _idioma, "lblLote");
@@ -181,8 +199,9 @@ namespace whusap.WebPages.Migration
                 _idioma == "ESPAÑOL" ? "Almacen " : "Warehouse ",
                     _idioma == "ESPAÑOL" ? "Ubicación " : "Location "
                     , _idioma == "ESPAÑOL" ? "Lote " : "Lot "
+                    //, _idioma == "ESPAÑOL" ? "IItem " : "Item" 
                     , _idioma == "ESPAÑOL" ? "Pallets " : "Pallets "
-                    , _idioma == "ESPAÑOL" ? "Cantidad " : "Quantity");
+                    , _idioma == "ESPAÑOL" ? "Cantidad " : "Quantity ");
 
             for (int i = 0; i < _consultaInformacion.Rows.Count; i++)
             {
@@ -191,6 +210,7 @@ namespace whusap.WebPages.Migration
                     _consultaInformacion.Rows[i]["CWAR"].ToString()
                     , _consultaInformacion.Rows[i]["LOCA"].ToString()
                     , _consultaInformacion.Rows[i]["CLOT"].ToString()
+                    //,_consultaInformacion.Rows[i]["ITEM"].ToString()
                     ,_consultaInformacion.Rows[i]["PAIDS"].ToString()
                     ,_consultaInformacion.Rows[i]["STKS"].ToString());
             }

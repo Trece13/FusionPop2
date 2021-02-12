@@ -38,7 +38,7 @@
         </tr>
     </table>
 
-    <div runat="server" id="divTable" style="max-height:500px; overflow-y:scroll;">
+    <div runat="server" id="divTable" style="max-height:300px; overflow-y:scroll;">
     </div>
 
     <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
