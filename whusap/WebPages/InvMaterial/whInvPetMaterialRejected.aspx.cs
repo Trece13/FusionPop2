@@ -373,7 +373,7 @@ namespace whusap.WebPages.InvMaterial
             if (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString().Trim()) < Convert.ToDecimal(QTYS.Trim()))
             {
                 MyObj.Error = true;
-                MyObj.TypeMsgJs = "alert";
+                MyObj.TypeMsgJs = "label";
                 
                 MyObj.ErrorMsg = QuantitymustbelowerthanPalletIDquantity;
                 return JsonConvert.SerializeObject(MyObj);

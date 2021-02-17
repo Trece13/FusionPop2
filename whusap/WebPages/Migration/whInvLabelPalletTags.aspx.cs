@@ -438,7 +438,7 @@ namespace whusap.WebPages.Migration
                 }
                 else
                 {
-                    lblInfo.Text = mensajes("MachineNotdefined");
+                    lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
 
                     return;
                 }
@@ -446,7 +446,7 @@ namespace whusap.WebPages.Migration
             else
             {
                 //lblError.Text = mensajes("ordernotexists");
-                lblInfo.Text = mensajes("MachineNotdefined");
+                lblError.Text = mensajes("MachineNotdefined");
                 lblConfirm.Text = string.Empty;
                 return;
             }

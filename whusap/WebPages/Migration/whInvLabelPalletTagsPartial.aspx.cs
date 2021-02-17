@@ -126,6 +126,7 @@ namespace whusap.WebPages.Migration
 
             if (validarMaquina.Rows.Count > 0)
             {
+                obj011.mcno = machine;
                 DataTable consultaOrdenMcno = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
                 if (consultaOrdenMcno.Rows.Count > 0)
                 {
@@ -417,7 +418,7 @@ namespace whusap.WebPages.Migration
                 }
                 else
                 {
-                    lblError.Text = mensajes("MachineNotdefined");
+                    lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
                     lblConfirm.Text = string.Empty;
                     return;
                 }
