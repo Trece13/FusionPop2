@@ -137,7 +137,7 @@ namespace whusa.DAL
             try
             {
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$TGID", DbType.String, parametros.tgid);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, "T$ITEM", DbType.String, "         " + parametros.item);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, "T$ITEM", DbType.String,  parametros.item);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, "T$QTDL", DbType.Decimal, Convert.ToDecimal(System.Math.Abs(parametros.qtdl)).ToString("#.##0,0000"));
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CUNI", DbType.String, parametros.cuni);

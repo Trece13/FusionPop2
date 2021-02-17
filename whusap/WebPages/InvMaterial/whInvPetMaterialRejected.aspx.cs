@@ -250,7 +250,7 @@ namespace whusap.WebPages.InvMaterial
             string strError = string.Empty;
             Ent_ttcibd001 ObjTtcibd001 = new Ent_ttcibd001();
             string myPdno = PDNO.ToUpper().Trim();
-            string myItem = "         " + ITEM.ToUpper().Trim();
+            string myItem =  ITEM.ToUpper().Trim();
 
             DataTable dtTticst001 = ITticst001.findByItemAndPdno(ref myPdno, ref myItem, ref strError);
             if (dtTticst001.Rows.Count > 0)
@@ -368,7 +368,7 @@ namespace whusap.WebPages.InvMaterial
             Ent_tticol080 MyObj = new Ent_tticol080();
             string strError = string.Empty;
             string myPdno = PDNO.ToUpper().Trim();
-            string myItem = "         " + ITEM.ToUpper().Trim();
+            string myItem =  ITEM.ToUpper().Trim();
 
             if (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString().Trim()) < Convert.ToDecimal(QTYS.Trim()))
             {

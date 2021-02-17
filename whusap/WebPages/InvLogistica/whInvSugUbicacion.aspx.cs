@@ -228,7 +228,7 @@ namespace whusap.WebPages.InvLogistica
                         {
                             pdno = numeroOrden,
                             sqnb = consecutivo,
-                            mitm = "         " + item,
+                            mitm =  item,
                             dsca = dsca,
                             cwar = cwar,
                             loca = lblValueLocation2.Text,

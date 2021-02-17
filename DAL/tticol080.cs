@@ -55,7 +55,7 @@ namespace whusa.DAL
                     paramList.Add(":T$ORNO", reg.orno);
                     paramList.Add(":T$PONO", reg.pono);
                     paramList.Add(":T$CWAR", reg.cwar);
-                    paramList.Add(":T$ITEM", "         "+reg.item.Trim());
+                    paramList.Add(":T$ITEM", reg.item.Trim());
                     paramList.Add(":T$QUNE", reg.qune);//En ambiente local no funciona . con solo esta tabla(080), este funcionamiento es correcto en fusionpub.
                     paramList.Add(":T$LOGN", reg.logn);
                     paramList.Add(":T$DATE", reg.date);
@@ -330,7 +330,7 @@ namespace whusa.DAL
             {
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ORNO", DbType.String, parametros.orno);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PONO", DbType.String, parametros.pono);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.item.Trim().ToUpperInvariant());
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item.Trim().ToUpperInvariant());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QUNE", DbType.Decimal, Convert.ToDecimal(parametros.qune).ToString("#.##0,0000"));
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOGN", DbType.String, parametros.logn);

@@ -84,7 +84,7 @@ namespace whusa.DAL
                 ////T$PAID, T$ITEM, T$LOCA, T$CLOT, T$QTYA, T$UNIT, T$DATE, T$LOGN,T$CDIS, T$EMNO, T$PROC, T$REFCNTD,T$REFCNTU
 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PAID", DbType.String, parametros.PAID);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.ITEM.Trim());
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.ITEM.Trim());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOCA", DbType.String, parametros.LOCA);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.CLOT);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYA", DbType.Int32, parametros.QTYA);

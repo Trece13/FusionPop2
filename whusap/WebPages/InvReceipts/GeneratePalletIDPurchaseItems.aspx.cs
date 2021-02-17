@@ -342,7 +342,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 OORG = "2",// Order type escaneada view 
                 ORNO = "INITIAPOP",
-                ITEM = "         " + ITEM.ToUpper(),
+                ITEM =  ITEM.ToUpper(),
                 PAID = "INITIAPOP" + "-" + SecuenciaPallet,
                 PONO = "1",
                 SEQN = "1",

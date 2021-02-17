@@ -773,7 +773,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
                             MyObj.proc = 2;
                             MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
-                            MyObj.mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
+                            MyObj.mitm =  HttpContext.Current.Session["ITEM"].ToString().Trim();
                             MyObj.qtdl = Convert.ToDecimal(qtyt.ToString());
                             MyObj.cuni = CUNI;//CUNI;
                             MyObj.log1 = "NONE";
@@ -887,7 +887,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
                             MyObj.proc = 2;
                             MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
-                            MyObj.mitm = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
+                            MyObj.mitm =  HttpContext.Current.Session["ITEM"].ToString().Trim();
                             MyObj.qtdl = Convert.ToDouble(qtyt.ToString());
                             MyObj.cuni = CUNI;//CUNI;
                             MyObj.log1 = "NONE";
@@ -1006,7 +1006,7 @@ namespace whusap.WebPages.WorkOrders
 
                             MyObj.OORG = OORG;// Order type escaneada view 
                             MyObj.ORNO = ORNO;
-                            MyObj.ITEM = "         " + HttpContext.Current.Session["ITEM"].ToString().Trim();
+                            MyObj.ITEM =  HttpContext.Current.Session["ITEM"].ToString().Trim();
                             MyObj.PAID = ORNO + "-P" + SecuenciaPallet;
                             MyObj.PONO = "1";
                             MyObj.SEQN = "1";

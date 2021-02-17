@@ -95,7 +95,7 @@ namespace whusa.DAL
 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MCNO", DbType.String, parametros.mcno);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SEQN", DbType.Int32, parametros.seqn);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.item);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$UNIT", DbType.String, parametros.unit);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QANA", DbType.Double, parametros.qana);

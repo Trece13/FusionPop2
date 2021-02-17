@@ -2669,7 +2669,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE {0}.tticol125{1} SET
           T$FPDN = :T$FPDN,
-          T$ITEM = :T$ITEM,
+          T$ITEM = {0}.F_ITEM_POP(:T$ITEM),
           T$QANA = :T$QANA,
           T$LOGN = :T$LOGN,
           T$DATE = :T$DATE,
@@ -2907,7 +2907,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {2} SET
           T$PDNO = :T$PDNO,
           T$PONO = :T$PONO,
-          T$ITEM = :T$ITEM,
+          T$ITEM = {0}.F_ITEM_POP(:T$ITEM),
           T$CWAR = :T$CWAR,
           T$CLOT = :T$CLOT,
           T$PRIN = :T$PRIN,
@@ -3047,7 +3047,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE {2} SET
           T$ORNO = :T$ORNO,
-          T$ITEM = :T$ITEM,
+          T$ITEM = {0}.F_ITEM_POP(:T$ITEM),
           T$LOCA = :T$LOCA,
           T$CWAR = :T$CWAR,
           T$QDEL = :T$QDEL,
@@ -3225,7 +3225,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE {2} SET
           T$TGID = :T$TGID,
-          T$ITEM = :T$ITEM,
+          T$ITEM = {0}.F_ITEM_POP(TRIM(:T$ITEM)),
           T$CLOT = :T$CLOT,
           T$QTDL = :T$QTDL,
           T$CUNI = :T$CUNI,
@@ -4488,7 +4488,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {2} SET
           T$ORNO = :T$ORNO,
           T$PONO = :T$PONO,
-          T$ITEM = :T$ITEM,
+          T$ITEM = {0}.F_ITEM_POP(:T$ITEM),
           T$CWAR = :T$CWAR,
           T$QUNE = ((T$QUNE) + :T$QUNE),
           T$LOGN = :T$LOGN,

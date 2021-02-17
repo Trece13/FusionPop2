@@ -136,7 +136,7 @@ namespace whusa.Interfases
 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SQNB", DbType.String, parametros.sqnb);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String, "         " + parametros.mitm);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String,  parametros.mitm);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DSCA", DbType.String, parametros.dsca);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWOR", DbType.String, parametros.cwor);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOOR", DbType.String, parametros.loor);

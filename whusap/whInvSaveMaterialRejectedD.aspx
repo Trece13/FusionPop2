@@ -76,7 +76,7 @@ End if
 %>
 <!-- #include file="include/dbxcononusa.inc" -->
 <%
-    vitem = "         " + vitem
+    vitem =  vitem
     strSQL = "select  t$item, t$cwar, t$clot from baan.tticol118" & session("env") & " " & _
     " where t$item = '" + vitem + "'" & _
     " and t$cwar  = '" + vwarehouse + "'" & _

@@ -245,7 +245,7 @@ namespace whusap.WebPages.InvMaterial
                 if (!toreturn.Equals(string.Empty))
                 {
                     obj = new Ent_tticol118();
-                    obj.item = "         " + Session["txtItem"].ToString().Trim().ToUpperInvariant();
+                    obj.item =  Session["txtItem"].ToString().Trim().ToUpperInvariant();
                     obj.cwar = row.Cells[2].Text.ToUpperInvariant();
                     //obj.clot = row.Cells[3].Text.ToUpperInvariant();
                     obj.clot = Session["Lote"].ToString();

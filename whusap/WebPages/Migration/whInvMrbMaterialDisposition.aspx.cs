@@ -526,7 +526,7 @@ namespace whusap.WebPages.Migration
                 if (!toreturn.Equals(string.Empty))
                 {
                     obj = new Ent_tticol118();
-                    obj.item = "         " + Session["Item"].ToString().Trim().ToUpperInvariant();
+                    obj.item =  Session["Item"].ToString().Trim().ToUpperInvariant();
                     obj.cwar =dropDownWarehouse.Text.ToUpperInvariant();
                     //obj.clot = row.Cells[3].Text.ToUpperInvariant();
                     obj.clot = Session["Lote"].ToString();

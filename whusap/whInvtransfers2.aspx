@@ -47,13 +47,13 @@ if strflag = "Y" then
   strund = Session("strund")
   strmsg = Session("strmsg")
   strqtyp = Session("strqpend") 
-  Session("strart")  = "         "+strart 
+  Session("strart")  = strart 
 else
 
 strord = ucase(trim(Request.Form("txtorden")))
 strart = ucase(trim(Request.Form("txtart")))
 Session("strord")  = strord 
-Session("strart")  = "         "+strart 
+Session("strart")  = strart 
 strmsg  = " "
 
 'Conect to database and execute sp
@@ -104,7 +104,7 @@ strSQL = "select t$cwar bodega from baan.tticol127" & session("env") & " where u
                 Response.Redirect("whInvTransfers.aspx?flag=") 
             end if
     else
-                strart = "         "+Ucase(strart)
+                strart = Ucase(strart)
                 strSQL = "select ibd001.t$item item, ibd001.t$dsca descr, t$cuni unid, ibd003.t$conv factor from baan.ttcibd001" & session("env") & _
                 " ibd001 left join baan.ttcibd003" & Session("env") & _
                 " ibd003 on ibd003.t$item = ibd001.t$item " & _

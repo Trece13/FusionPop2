@@ -227,7 +227,7 @@ namespace whusap.WebPages.InvLogistica
                     {
                         pdno = pdno,
                         sqnb = consecutivo,
-                        mitm = "         " + item.Trim().ToUpper(),
+                        mitm =  item.Trim().ToUpper(),
                         dsca = dsca,
                         qtdl = qtdl,
                         cuni = cuni,

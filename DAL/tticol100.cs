@@ -48,7 +48,7 @@ namespace whusa.DAL
                 paramList.Add(":T$SEQN", parametro.seqn);
                 paramList.Add(":T$MCNO", parametro.mcno);
                 paramList.Add(":T$SHIF", parametro.shif.ToUpper());
-                paramList.Add(":T$ITEM", "         "+parametro.item);
+                paramList.Add(":T$ITEM", parametro.item);
                 paramList.Add(":T$QTYR", parametro.qtyr);
                 paramList.Add(":T$CDIS", parametro.cdis);
                 paramList.Add(":T$REJT", parametro.rejt);
@@ -421,7 +421,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SEQN", DbType.Int32, parametros.seqn);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MCNO", DbType.String, parametros.mcno.ToUpper());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SHIF", DbType.String, parametros.shif.ToUpper());
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.item.ToUpper());
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item.ToUpper());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYR", DbType.Double, parametros.qtyr);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CDIS", DbType.String, parametros.cdis.ToUpper());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REJT", DbType.Int32, parametros.rejt);
