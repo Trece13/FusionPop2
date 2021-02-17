@@ -123,7 +123,7 @@ namespace whusap.WebPages.Migration
             var enterQuantity = double.Parse(txtQuantity.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
 
             var validarMaquina = _idaltticol132.ValidarMaquina(machine, ref strError);
-
+ 
             if (validarMaquina.Rows.Count > 0)
             {
                 DataTable consultaOrdenMcno = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
