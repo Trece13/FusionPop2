@@ -76,6 +76,15 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
+        /// divTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTable;
+        
+        /// <summary>
         /// divBtnGuardar control.
         /// </summary>
         /// <remarks>
@@ -92,14 +101,5 @@ namespace whusap.WebPages.Migration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardar;
-        
-        /// <summary>
-        /// divTable control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTable;
     }
 }
