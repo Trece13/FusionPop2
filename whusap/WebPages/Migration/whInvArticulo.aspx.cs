@@ -155,7 +155,7 @@ namespace whusap.WebPages.Migration
             DataTable LotExist = idal100.listaRegistro_SiExiste(ref obj100, ref strError);
             if (LotExist.Rows.Count == 0)
             {
-                lblError.Text = "Lot not found";
+                lblError.Text = mensajes("LotNotFound");
                 return;
             }
         }

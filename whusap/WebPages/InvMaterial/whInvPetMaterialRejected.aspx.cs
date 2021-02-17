@@ -84,8 +84,8 @@ namespace whusap.WebPages.InvMaterial
             RequestUrlAuthority = (string)Request.Url.Authority;
 
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -462,7 +462,7 @@ namespace whusap.WebPages.InvMaterial
                 if (res == 1)
                 {
                     MyObj.Error = false;
-                    MyObj.TypeMsgJs = "alert";
+                    MyObj.TypeMsgJs = "label";
                     
                     MyObj.SuccessMsg = Insertsuccess;
 
