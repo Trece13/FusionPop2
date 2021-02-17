@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MDMasterPage.Master"  AutoEventWireup="true" CodeBehind="whInvLabelPalletTags.aspx.cs" Inherits="whusap.WebPages.Migration.whInvLabelPalletTags" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="whInvLabelPalletTags.aspx.cs" Inherits="whusap.WebPages.Migration.whInvLabelPalletTags" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script type="text/javascript">
@@ -8,7 +8,7 @@
         function validarOrden() {
             if (document.getElementById("txtOrder").value != "") {
                 if (document.getElementById("txtOrder").value.length < 9 || document.getElementById("txtOrder").value.length > 9) {
-                    alert(_idioma == "INGLES" ? "Please use this format WORKORDER, remember only 9 characters" 
+                    alert(_idioma == "INGLES" ? "Please use this format WORKORDER, remember only 9 characters"
                     : "Por favor use el forma de order de trabajo, solo 9 caracteres.");
                     document.getElementById("txtOrder").focus();
                     document.getElementById("txtOrder").value = "";
@@ -74,17 +74,22 @@
             }
         };
     </script>
+    <style>
+        #divTable{
+            margin-bottom:250px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <asp:Label Text="" runat="server" ID="lblInfo" style="color:Black; font-size:medium;" />
+    <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />
     <table border="0">
-        <tr style="display:none">
-            <td style="text-align:left;">
+        <tr style="display: none">
+            <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblOrder" /></b></span>
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="lblOrder" /></b></span>
             </td>
-            <td style="width: 250px; padding:5px;">
+            <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtOrder" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
@@ -103,70 +108,89 @@
             </td>
         </tr>
         <tr runat="server" id="trSecuence" visible="false">
-            <td style="text-align:left;">
+            <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblSecuence" /></b></span>
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="lblSecuence" /></b></span>
             </td>
-            <td style="width: 250px; padding:5px;">
+            <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtSecuence" onblur="validarSecuencia()" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="text-align:center;">
-                <hr />  
-                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
+            <td colspan="2" style="text-align: center;">
+                <hr />
+                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
             </td>
         </tr>
     </table>
     <hr />
-    <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+    <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+    <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
 
     <div runat="server" id="divTable" visible="false" clientidmode="Static">
-    <hr />
-        <table style="width: 5.8in; height: 3.8in; text-align:center; font-weight:bold;" border="1" cellspacing="0" cellpadding="0">
+        <hr />
+        <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;" border="1" cellspacing="0" cellpadding="0">
             <tr>
-                <td colspan="2"><asp:Label runat="server" ID="lblDescItem"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblMadeIn"></asp:Label> <asp:Label runat="server" ID="lblValueMadeIn"></asp:Label></td>
+                <td colspan="2">
+                    <asp:Label runat="server" ID="lblDescItem"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblMadeIn"></asp:Label>
+                    <asp:Label runat="server" ID="lblValueMadeIn"></asp:Label></td>
             </tr>
             <tr>
-                <td colspan="3"><img src="~/images/logophoenix_login.jpg" runat="server" id="imgCodeItem" alt="" hspace="60" vspace="5" style="width: 3in; height: .5in;"/></td>
+                <td colspan="3">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="imgCodeItem" alt="" hspace="60" vspace="5" style="width: 3in; height: .5in;" /></td>
             </tr>
             <tr>
-                <td colspan="3"><asp:Label runat="server" ID="lblItem"></asp:Label></td>
+                <td colspan="3">
+                    <asp:Label runat="server" ID="lblItem"></asp:Label></td>
             </tr>
             <tr>
-                <td colspan="3"><img src="~/images/logophoenix_login.jpg" runat="server" id="imgCodeSqnb" alt="" hspace="60" vspace="5" style="width: 3in; height: .5in;"/></td>
+                <td colspan="3">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="imgCodeSqnb" alt="" hspace="60" vspace="5" style="width: 3in; height: .5in;" /></td>
             </tr>
             <tr>
-                <td><asp:Label runat="server" ID="lblWorkOrder"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblPalletNumber"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblInspectorInitial"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblWorkOrder"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblPalletNumber"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblInspectorInitial"></asp:Label></td>
             </tr>
             <tr>
-                <td><asp:Label runat="server" ID="lblValueWorkOrder"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblValuePalletNumber"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblValueInspectorInitial"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblValueWorkOrder"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblValuePalletNumber"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblValueInspectorInitial"></asp:Label></td>
             </tr>
             <tr>
-                <td><asp:Label runat="server" ID="lblDate"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblShift"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblCasePerPallet"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblDate"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblShift"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblCasePerPallet"></asp:Label></td>
             </tr>
             <tr>
-                <td><asp:Label runat="server" ID="lblValueDate" ClientIDMode="Static"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblValueShift"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblValueCasePerPallet"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblValueDate" ClientIDMode="Static"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblValueShift"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblValueCasePerPallet"></asp:Label></td>
+            </tr>
+        </table>
+        <table runat="server" id="divBotones" visible="false" style="margin-bottom: 10px; width: 5.8in; text-align: center; font-weight: bold;" border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td colspan="2"><a href="#" onclick="javascript:printDiv('divTable')" runat="server" id="linkPrint"></a></td>
+                <td runat="server" id="tdBtnExit">
+                    <asp:Button class="buttonMenu" runat="server" ID="btnSalir" OnClick="btnExit_Click" AutoPostBack="true" /></td>
             </tr>
         </table>
     </div>
-    <table runat="server" id="divBotones" visible="false" style="margin-bottom:10px; width: 5.8in; text-align:center; font-weight:bold;" border="1" cellspacing="0" cellpadding="0">
-        <tr>
-            <td colspan="2"><a href="#" onclick="javascript:printDiv('divTable')" runat="server" id="linkPrint"></a></td>
-            <td runat="server" id="tdBtnExit"><asp:Button class="buttonMenu" runat="server" ID="btnSalir" OnClick="btnExit_Click" AutoPostBack="true" /></td>
-        </tr>
-    </table>
 </asp:Content>

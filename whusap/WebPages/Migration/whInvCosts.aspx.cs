@@ -11,7 +11,7 @@ using System.Configuration;
 using System.Threading;
 using System.Globalization;
 using System.Data;
-using whusa;  
+using whusa;
 
 namespace whusap.WebPages.Migration
 {
@@ -112,8 +112,8 @@ namespace whusap.WebPages.Migration
 
             if (machine != String.Empty)
             {
-            //if (order != String.Empty)
-            //{
+                //if (order != String.Empty)
+                //{
                 Ent_tticol090 data090 = new Ent_tticol090() { fpdn = order };
                 Ent_ttirou002 tirou002 = new Ent_ttirou002() { mcno = machine };
                 //var consultaOrden = _idaltticol090.lineClearance_verificaOrdenes_Param(ref data090, ref strError);
@@ -123,90 +123,100 @@ namespace whusap.WebPages.Migration
 
                 if (validarMaquina.Rows.Count > 0)
                 {
-                    if (valstatwo)
+                    if (consultaOrden.Rows.Count > 0)
                     {
-                        if (consultaOrden.Rows[0]["STAT"].ToString() != "2")
+
+                        if (valstatwo)
                         {
-                            //lblError.Text = WorkorderhasnotbeeninitiatedPOP;
-                            lblError.Text = "Work Order not Initiated for this Machine";
+                            if (consultaOrden.Rows[0]["STAT"].ToString() != "2")
+                            {
+                                //lblError.Text = WorkorderhasnotbeeninitiatedPOP;
+
+                                lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
+                            }
                         }
-                    }
-                    Session["orno"] = consultaOrden.Rows[0]["orden"].ToString().Trim();
-                    order = consultaOrden.Rows[0]["orden"].ToString().Trim();
-                    _consultarTurno = _idaltticol111.findRecordByPdno(ref order, ref strError);
+                        Session["orno"] = consultaOrden.Rows[0]["orden"].ToString().Trim();
+                        order = consultaOrden.Rows[0]["orden"].ToString().Trim();
+                        _consultarTurno = _idaltticol111.findRecordByPdno(ref order, ref strError);
 
-                    if (_consultarTurno.Rows.Count > 0)
-                    {
-                        string shift = _consultarTurno.Rows[0]["shif"].ToString().Trim();
-
-                        _consultaMateriales = _idaltticst001.findByPdnoCosts(ref order, ref shift, ref strError);
-
-                        if (_consultaMateriales.Rows.Count > 0)
+                        if (_consultarTurno.Rows.Count > 0)
                         {
-                            LstTable.Clear();
-                            foreach (DataRow item in _consultaMateriales.Rows)
+                            string shift = _consultarTurno.Rows[0]["shif"].ToString().Trim();
+
+                            _consultaMateriales = _idaltticst001.findByPdnoCosts(ref order, ref shift, ref strError);
+
+                            if (_consultaMateriales.Rows.Count > 0)
                             {
-
-
-                                MyLioEntidad MyLioEntidadObj = new MyLioEntidad();
-
-                                MyLioEntidadObj.PDNO = item["PDNO"].ToString();
-                                MyLioEntidadObj.PONO = item["PONO"].ToString();
-                                MyLioEntidadObj.CWAR = item["CWAR"].ToString();
-                                MyLioEntidadObj.CLOT = item["CLOT"].ToString();
-                                MyLioEntidadObj.SITM = item["SITM"].ToString();
-                                MyLioEntidadObj.DSCA = item["DSCA"].ToString();
-                                MyLioEntidadObj.CUNI = item["CUNI"].ToString();
-                                MyLioEntidadObj.CANT_EST = item["CANT_EST"].ToString();
-                                MyLioEntidadObj.ACT_CANT = item["ACT_CANT"].ToString();
-                                MyLioEntidadObj.ISWH = item["ISWH"].ToString().Trim() == "" ? "0" : item["ISWH"].ToString().Trim();
-                                MyLioEntidadObj.OQMF = item["OQMF"].ToString();
-                                MyLioEntidadObj.CANTD = item["CANTD"].ToString();
-                                MyLioEntidadObj.MCNO = item["MCNO"].ToString();
-                                //MyLioEntidadObj.cant_hidden = "";
-                                DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
-                                DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
-
-                                if (dt022044131.Rows.Count > 0)
+                                LstTable.Clear();
+                                foreach (DataRow item in _consultaMateriales.Rows)
                                 {
-                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+
+
+                                    MyLioEntidad MyLioEntidadObj = new MyLioEntidad();
+
+                                    MyLioEntidadObj.PDNO = item["PDNO"].ToString();
+                                    MyLioEntidadObj.PONO = item["PONO"].ToString();
+                                    MyLioEntidadObj.CWAR = item["CWAR"].ToString();
+                                    MyLioEntidadObj.CLOT = item["CLOT"].ToString();
+                                    MyLioEntidadObj.SITM = item["SITM"].ToString();
+                                    MyLioEntidadObj.DSCA = item["DSCA"].ToString();
+                                    MyLioEntidadObj.CUNI = item["CUNI"].ToString();
+                                    MyLioEntidadObj.CANT_EST = item["CANT_EST"].ToString();
+                                    MyLioEntidadObj.ACT_CANT = item["ACT_CANT"].ToString();
+                                    MyLioEntidadObj.ISWH = item["ISWH"].ToString().Trim() == "" ? "0" : item["ISWH"].ToString().Trim();
+                                    MyLioEntidadObj.OQMF = item["OQMF"].ToString();
+                                    MyLioEntidadObj.CANTD = item["CANTD"].ToString();
+                                    MyLioEntidadObj.MCNO = item["MCNO"].ToString();
+                                    //MyLioEntidadObj.cant_hidden = "";
+                                    DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
+                                    DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
+
+                                    if (dt022044131.Rows.Count > 0)
+                                    {
+                                        MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+                                    }
+
+                                    if (dt215.Rows.Count > 0)
+                                    {
+                                        MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                    }
+
+                                    LstTable.Add(MyLioEntidadObj);
                                 }
 
-                                if (dt215.Rows.Count > 0)
+                                foreach (MyLioEntidad item in LstTable)
                                 {
-                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                    item.cant_reg = quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg");
+                                    item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
+                                    item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
                                 }
-
-                                LstTable.Add(MyLioEntidadObj);
+                                makeTable();
+                                divBtnGuardar.Visible = true;
+                                lblError.Text = String.Empty;
                             }
-
-                            foreach (MyLioEntidad item in LstTable)
+                            else
                             {
-                                item.cant_reg = quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg");
-                                item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
-                                item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
+                                lblError.Text = mensajes("nomaterials");
+                                return;
                             }
-                            makeTable();
-                            divBtnGuardar.Visible = true;
-                            lblError.Text = String.Empty;
+
                         }
                         else
                         {
-                            lblError.Text = mensajes("nomaterials");
+                            lblError.Text = mensajes("machinenotexists");
                             return;
                         }
-
                     }
                     else
                     {
-                        lblError.Text = mensajes("machinenotexists");
+                        lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
                         return;
                     }
                 }
                 else
                 {
-                    lblError.Text = mensajes("ordernotexists");
-                    lblError.Text = "Machine not defined";
+                    //lblError.Text = mensajes("ordernotexists");
+                    lblError.Text = mensajes("MachineNotdefined");
                     return;
                 }
             }
@@ -231,7 +241,7 @@ namespace whusap.WebPages.Migration
                 if ((txtQuantity.Trim() != string.Empty && txtQuantity.Trim() != "0") || (txtQuantityHidden.Trim() != string.Empty && txtQuantityHidden.Trim() != "0"))
                 {
                     var orno = Convert.ToString(Session["orno"]);
-                    var qune = double.Parse((txtQuantity.Trim() == "" ? "0" : txtQuantity.Trim()),CultureInfo.InvariantCulture.NumberFormat) == 0 ? double.Parse(txtQuantityHidden, CultureInfo.InvariantCulture.NumberFormat) : double.Parse(txtQuantity, CultureInfo.InvariantCulture.NumberFormat);
+                    var qune = double.Parse((txtQuantity.Trim() == "" ? "0" : txtQuantity.Trim()), CultureInfo.InvariantCulture.NumberFormat) == 0 ? double.Parse(txtQuantityHidden, CultureInfo.InvariantCulture.NumberFormat) : double.Parse(txtQuantity, CultureInfo.InvariantCulture.NumberFormat);
                     var pono = LstTable[i].PONO.ToString().Trim();
                     var item = LstTable[i].SITM.ToString().Trim();
                     var cwar = LstTable[i].CWAR.ToString().Trim();
@@ -248,7 +258,7 @@ namespace whusap.WebPages.Migration
                     {
                         orno = orno,
                         pono = Convert.ToInt32(pono),
-                        item = "         "+item,
+                        item = "         " + item,
                         cwar = cwar,
                         qune = Convert.ToDecimal(qune),
                         logn = HttpContext.Current.Session["user"].ToString(),
@@ -280,7 +290,7 @@ namespace whusap.WebPages.Migration
                         _idaltticol090.InsertTticol088(data088, ref strError);
                         lblError.Text += "[" + item + "] Available quantity not enough for your request <br/>";
                         tticol088 = true;
-                        
+
                     }
                     if (tticol088 == false)
                     {
@@ -304,24 +314,24 @@ namespace whusap.WebPages.Migration
                         //}
                         //else
                         //{
-                            List<Ent_tticol080> lista = new List<Ent_tticol080>();
-                            lista.Add(data080);
-                            var tag = String.Empty;
-                            var validInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref tag);
+                        List<Ent_tticol080> lista = new List<Ent_tticol080>();
+                        lista.Add(data080);
+                        var tag = String.Empty;
+                        var validInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref tag);
 
-                            if (validInsert > 0)
-                            {
-                                //lblError.Text = String.Empty;
-                                lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
-                                //divTable.InnerHtml = String.Empty;
-                                divBtnGuardar.Visible = false;
-                                //txtOrder.Text = String.Empty;
-                            }
-                            else
-                            {
-                                lblError.Text += "[" + item + "]" + mensajes("errorsave") + "<br/>";
-                               
-                            }
+                        if (validInsert > 0)
+                        {
+                            //lblError.Text = String.Empty;
+                            lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
+                            //divTable.InnerHtml = String.Empty;
+                            divBtnGuardar.Visible = false;
+                            //txtOrder.Text = String.Empty;
+                        }
+                        else
+                        {
+                            lblError.Text += "[" + item + "]" + mensajes("errorsave") + "<br/>";
+
+                        }
                         //}
                     }
                 }
@@ -366,7 +376,7 @@ namespace whusap.WebPages.Migration
 
             table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='6'>{1}</td></tr>"
                 , _idioma == "INGLES" ? "Order:" : "Orden:"
-                , txtOrder.Text.Trim().ToUpper());
+                , Session["orno"].ToString());
 
             table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td style='display:none'>{7}</td></tr>"
                 , _idioma == "INGLES" ? "Item" : "Articulo"

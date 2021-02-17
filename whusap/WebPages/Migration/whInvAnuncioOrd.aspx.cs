@@ -307,7 +307,7 @@ namespace whusap.WebPages.Migration
 
         protected void CargarIdioma()
             {
-                lblOrderNumber.Text = _textoLabels.readStatement(formName, _idioma, "lblOrderNumber");
+                //lblOrderNumber.Text = _textoLabels.readStatement(formName, _idioma, "lblOrderNumber");
                 btnConsultar.Text = _textoLabels.readStatement(formName, _idioma, "btnConsultar");
                 lblOrden.Text = _textoLabels.readStatement(formName, _idioma, "lblOrden");
                 lblArticulo.Text = _textoLabels.readStatement(formName, _idioma, "lblArticulo");

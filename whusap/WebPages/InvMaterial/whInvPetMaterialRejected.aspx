@@ -75,7 +75,7 @@
             <label class="col-sm-2 col-form-label-lg" for="txQuantity">
                 Quantity</label>
             <div class="col-sm-4">
-                <input type="numeric" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity">
+                <input type="number" step="any" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity">
             </div>
             <label id="lblQuantity" for="txQuantity">
             </label>
@@ -270,16 +270,18 @@
                 $('#txQuantity').val("");
 
             } else {
-                $('#divDetalle').hide('slow');
-                alert(MyObject.ErrorMsg);
-                BloquearComponentes();
+                //$('#divDetalle').hide('slow');
+                ImprimirMensaje(MyObject.TypeMsgJs, MyObject.ErrorMsg);
+                //BloquearComponentes();
 
-                $('#txWorkorder').val("");
-                $('#txPalletId').val("");
-                $('#txWarehouse').val("");
-                $('#txItem').val("");
-                $('#txLot').val("");
+                //$('#txWorkorder').val("");
+                //$('#txPalletId').val("");
+                //$('#txWarehouse').val("");
+                //$('#txItem').val("");
+                //$('#txLot').val("");
                 $('#txQuantity').val("");
+                $('#txQuantity').focus();
+                $('#btnSave').prop("disabled", true);
 
             }
 

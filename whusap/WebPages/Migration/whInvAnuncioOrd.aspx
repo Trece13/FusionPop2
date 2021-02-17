@@ -43,7 +43,7 @@
             <td style="text-align:left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                 <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblOrderNumber" /></b></span>
+                    <asp:Label runat="server" ID="txtPalletID" />Pallet Id:</b></span>
             </td>
             <td style="width: 250px; padding:5px;">
                 <span style="vertical-align: middle;">

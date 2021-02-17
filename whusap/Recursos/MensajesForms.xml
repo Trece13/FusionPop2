@@ -933,6 +933,16 @@
 
     <Module name="whInvArticulo.aspx">
       <Idiom name="INGLES">
+        <operationName name="LotNotFound">
+          <stringMessage>
+            Lot not found
+          </stringMessage>
+        </operationName>
+        <operationName name="encabezado">
+          <stringMessage>
+            Inventory query by lot
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Inventory query by lot
@@ -965,6 +975,11 @@
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <operationName name="LotNotFound">
+          <stringMessage>
+            Lot not found
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Consulta inventario por lote
@@ -1144,6 +1159,16 @@
 
     <Module name="whInvLabelPalletTagsPartial.aspx">
       <Idiom name="INGLES">
+        <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
+        <operationName name="MachineNotdefined">
+          <stringMessage>
+            Machine Not defined
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Print pallet tags partial.
@@ -1236,6 +1261,16 @@
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
+        <operationName name="MachineNotdefined">
+          <stringMessage>
+            Machine Not defined
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Imprimir etiqueta pallet parcial.
@@ -1331,6 +1366,16 @@
 
     <Module name="whInvLabelPalletTags.aspx">
       <Idiom name="INGLES">
+        <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
+        <operationName name="MachineNotdefined">
+          <stringMessage>
+            Machine Not defined
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Print tag pallet.
@@ -1353,7 +1398,7 @@
         </operationName>
         <operationName name="announcedago">
           <stringMessage>
-           Previous pallet has been announced, Please wait {0} minutes to continue.
+            Previous pallet has been announced, Please wait {0} minutes to continue.
           </stringMessage>
         </operationName>
         <operationName name="previouspalette">
@@ -2262,6 +2307,16 @@
     <!--Smita Ends -->
     <Module name="whInvCosts.aspx">
       <Idiom name="INGLES">
+        <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
+        <operationName name="MachineNotdefined">
+          <stringMessage>
+            Machine Not defined
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Material Request
@@ -2284,6 +2339,16 @@
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
+        <operationName name="MachineNotdefined">
+          <stringMessage>
+            Machine Not defined
+          </stringMessage>
+        </operationName>
         <operationName name="encabezado">
           <stringMessage>
             Solicitud de materiales
@@ -5011,7 +5076,7 @@
         </operationName>
         <operationName name="Insertsuccess">
           <stringMessage>
-            Insert success
+            Saved Success
           </stringMessage>
         </operationName>
         <operationName name="Insertfail">
@@ -5073,7 +5138,7 @@
         </operationName>
         <operationName name="Insertsuccess">
           <stringMessage>
-            Insert success
+            Saved Success
           </stringMessage>
         </operationName>
         <operationName name="Insertfail">
@@ -5482,7 +5547,7 @@
         </operationName>
       </Idiom>
     </Module>
-    
+
     <Module name="RelabelFinishProduct.aspx">
       <Idiom name="INGLES">
         <operationName name="ItemcodeisnotManufacturingType">
@@ -5680,7 +5745,7 @@
         </operationName>
       </Idiom>
     </Module>
-    
+
     <Module name="whInvSpareDeliveryConfirm.aspx">
       <Idiom name="INGLES">
         <operationName name="Recordswassavedsuccesfully">
