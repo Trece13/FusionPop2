@@ -716,7 +716,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOGN", DbType.String, parametros.logn);
 
                 //Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DATE", DbType.String, parametros.date);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String, "         " + parametros.mitm);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String,  parametros.mitm);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTDL", DbType.Decimal, Convert.ToDecimal(parametros.qtdl).ToString("#.##0,0000"));
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CUNI", DbType.String, parametros.cuni);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOG1", DbType.String, parametros.log1);

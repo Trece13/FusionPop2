@@ -76,7 +76,7 @@ End if
 
 
 Session("item") = Trim(Session("item"))
-Session("item") = "         "+Ucase(Session("item"))
+Session("item") = Ucase(Session("item"))
 ' Verificar si ya existe un registro para esta orden
 IF (Session("lote") <> "") then
 strSQL = "select nvl(max(T$SQNB),0) Seq from baan.twhcol015" & Session("env") & " where T$CWAR='" + Session("almacen") + "' and t$loca='" + Session("ubicacion") + "' and T$PDNO='" + Session("lote") + "' and t$mitm = '" + Session("item") + "'"

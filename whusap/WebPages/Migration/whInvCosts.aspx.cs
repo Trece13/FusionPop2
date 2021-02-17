@@ -258,7 +258,7 @@ namespace whusap.WebPages.Migration
                     {
                         orno = orno,
                         pono = Convert.ToInt32(pono),
-                        item = "         " + item,
+                        item =  item,
                         cwar = cwar,
                         qune = Convert.ToDecimal(qune),
                         logn = HttpContext.Current.Session["user"].ToString(),
@@ -274,7 +274,7 @@ namespace whusap.WebPages.Migration
                     {
                         orno = orno,
                         pono = Convert.ToInt32(pono),
-                        item = "         " + item,
+                        item =  item,
                         cwar = cwar,
                         qune = Convert.ToDecimal(qune),
                         logn = HttpContext.Current.Session["user"].ToString(),

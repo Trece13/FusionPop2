@@ -100,7 +100,7 @@ namespace whusa.DAL
             try
             {
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PDNO", DbType.String, parametros.pdno);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String, "         " + parametros.mitm); 
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String,  parametros.mitm); 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DSCA", DbType.String, parametros.dsca); 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTDL", DbType.Decimal, parametros.qtdl); 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CUNI", DbType.String, parametros.cuni); 

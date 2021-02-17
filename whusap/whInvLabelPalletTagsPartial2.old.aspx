@@ -166,7 +166,7 @@ If Not objrs.EOF Then
         end if
         
             strSQL1 = "insert into baan.tticol022" & Session("env") & " (t$pdno,t$sqnb,t$proc,t$logn, t$date,t$mitm, t$qtdl,t$cuni,t$pro1, t$pro2, t$log1, t$datc, t$qtd1, t$log2, t$datu, t$qtd2, t$loca, t$norp, t$dlrp, t$dele, t$logd, t$datd, t$refcntd,t$refcntu) " & _
-		    " values('" + strord + "','" + sec + "',2,'" + Session("user") + "',sysdate+5/24,'" + "         "+stritem + "', 0,'" + struni + "', 2, 2, 'NONE',sysdate+5/24,0, 'NONE', sysdate+5/24, 0, ' ', 1, sysdate+5/24,2,'NONE',sysdate+5/24,0,0)" 
+		    " values('" + strord + "','" + sec + "',2,'" + Session("user") + "',sysdate+5/24,'" + stritem + "', 0,'" + struni + "', 2, 2, 'NONE',sysdate+5/24,0, 'NONE', sysdate+5/24, 0, ' ', 1, sysdate+5/24,2,'NONE',sysdate+5/24,0,0)" 
     	    objrs=Server.CreateObject("ADODB.recordset")
 	    	objrs.Open (strSQL1, Odbcon)
     Else
@@ -287,7 +287,7 @@ If Not objrs.EOF Then
                     End If
                     
                     strSQL1 = "insert into baan.tticol022" & Session("env") & " (t$pdno,t$sqnb,t$proc,t$logn, t$date,t$mitm, t$qtdl,t$cuni,t$pro1, t$pro2, t$log1, t$datc, t$qtd1, t$log2, t$datu, t$qtd2, t$loca, t$norp, t$dlrp, t$dele, t$logd, t$datd, t$refcntd,t$refcntu) " & _
-		    	    " values('" + strord + "','" + session("sec") + "',2,'" + Session("user") + "',sysdate+5/24,'" + "         "+stritem + "', 0,'" + struni + "', 2, 2, 'NONE',sysdate+5/24,0, 'NONE', sysdate+5/24, 0, ' ', 1,sysdate+5/24,2, 'NONE',sysdate+5/24,0,0)" 
+		    	    " values('" + strord + "','" + session("sec") + "',2,'" + Session("user") + "',sysdate+5/24,'" + stritem + "', 0,'" + struni + "', 2, 2, 'NONE',sysdate+5/24,0, 'NONE', sysdate+5/24, 0, ' ', 1,sysdate+5/24,2, 'NONE',sysdate+5/24,0,0)" 
     	            objrs=Server.CreateObject("ADODB.recordset")
 	    	        objrs.Open (strSQL1, Odbcon)
                 end if               

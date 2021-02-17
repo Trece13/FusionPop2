@@ -184,7 +184,7 @@ namespace whusap.WebPages.Balance
             cantidad = cantidad * (-1);
             obj080.pono = Convert.ToInt32(ConsecPos);
             obj080.orno = txtWorkOrder.Text;
-            obj080.item = "         " + listRegrind.SelectedValue;
+            obj080.item =  listRegrind.SelectedValue;
             obj080.qune = cantidad;
             obj080.cwar = BodegaItem;
             obj080.logn = Session["user"].ToString();
@@ -215,7 +215,7 @@ namespace whusap.WebPages.Balance
             obj042.sqnb = strTagId;
             obj042.proc = 1;
             obj042.logn = Session["user"].ToString();
-            obj042.mitm = "         " + listRegrind.SelectedValue;
+            obj042.mitm =  listRegrind.SelectedValue;
             obj042.pono = Convert.ToInt32(ConsecPos);
             obj042.qtdl = Convert.ToDouble(value);
             obj042.cuni = unityItem;

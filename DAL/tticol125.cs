@@ -680,7 +680,7 @@ namespace whusa.DAL
             {
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PDNO", DbType.String, parametros.pdno);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PONO", DbType.Int32, parametros.pono);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.item.Trim());
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item.Trim());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REQT", DbType.Decimal, Convert.ToDecimal(parametros.reqt).ToString("#.##0,0000")); //DbType.Int32, parametros.reqt);

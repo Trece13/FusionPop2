@@ -76,7 +76,7 @@ If objrs.EOF Then
     Response.Redirect("whInvtransfers2.aspx?flag=Y") 
 End if
 
-Session("item") = "         "+stritem
+Session("item") = stritem
 strSQL = "select t$cwar, t$loca, t$loct, t$btri, " & _
 " (select nvl(sum(T$STKS),0)  from baan.twhinr140" & Session("env") & " where t$cwar=w.t$cwar and t$loca=w.t$loca and t$clot='" + Session("strord") + "'" & _
 " and t$item = '" + Session("item") + "' ) qtydisp " & _ 

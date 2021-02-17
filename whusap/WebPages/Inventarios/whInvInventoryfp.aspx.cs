@@ -329,7 +329,7 @@ namespace whusap.WebPages.Inventarios
                     }
 
                     obj015.sqnb = Convert.ToInt32(lblstrseq.Text.ToUpper());
-                    obj015.mitm = "         " + ddlItem.SelectedValue.Trim().ToUpper();
+                    obj015.mitm =  ddlItem.SelectedValue.Trim().ToUpper();
                     obj015.dsca = lblItem.Text.Trim().ToUpper();
                     obj015.qtdl = cantidad;
                     obj015.cuni = lblUnity.Text.Trim().ToUpper();

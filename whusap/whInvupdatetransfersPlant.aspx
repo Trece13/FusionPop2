@@ -109,7 +109,7 @@ else
 end if
 
 strqty = replace(strqtyt,",","")
-Session("stritem") = "         "+Session("stritem")
+Session("stritem") = Session("stritem")
 strSQL = "insert into baan.twhcol010" & Session("env") & " (t$clot,t$sqnb,t$mitm,t$dsca,t$cwor,t$loor,t$cwde,t$lode,t$qtdl,t$cuni,t$date,t$mess,t$user,t$refcntd,t$refcntu) " & _
 " values(' ','"  +  Cstr(strseq) + "','" + Session("stritem") + "','" + Session("strdescr") + "','" + Session("stralmaceno") + "',' ','" + Session("stralmacend") + "','" + Session("strubicaciond") + "',"+ Cstr(strqty) + ",'" + Session("strund") +  "',sysdate+5/24,' ','" + Session("user") + "',0,0)"
 objrs=Server.CreateObject("ADODB.recordset")

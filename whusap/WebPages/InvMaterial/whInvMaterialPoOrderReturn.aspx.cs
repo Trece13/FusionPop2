@@ -425,7 +425,7 @@ namespace whusap.WebPages.InvMaterial
                     PONO = MyObj.PONO,
                     SQNB = MyObj.SEQN,
                     ADVS = i.ToString(),
-                    ITEM = "         " + MyObj.ITEM,
+                    ITEM =  MyObj.ITEM,
                     STAT = "2",
                     QTYT = QUANTITYAUX.ToString("0.00"),
                     CWAR = DTOrdencompra.Rows[0]["T$CWAR"].ToString(),

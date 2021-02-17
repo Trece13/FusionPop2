@@ -216,7 +216,7 @@ namespace whusa.DAL
 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ZONE", DbType.String, parametros.zone);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LABL", DbType.String, parametros.labl);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.item);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYR", DbType.Decimal, Convert.ToDecimal(parametros.qtyr).ToString("#.##0,0000") );

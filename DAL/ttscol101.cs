@@ -42,7 +42,7 @@ namespace whusa.DAL
             try
             {
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ORNO", DbType.String, parametros.orno.ToUpperInvariant());
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, "         " + parametros.item.Trim().ToUpperInvariant());
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item.Trim().ToUpperInvariant());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOCA", DbType.String, parametros.loca);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar.ToUpperInvariant());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QDEL", DbType.Decimal, Convert.ToDecimal(parametros.qdel).ToString("#.##0,0000"));

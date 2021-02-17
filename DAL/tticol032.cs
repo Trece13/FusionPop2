@@ -113,7 +113,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$OSET", DbType.Int32, Convert.ToInt32(parametros.oset));
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PONO", DbType.Int32, Convert.ToInt32(parametros.pono));
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SEQN", DbType.Int32, Convert.ToInt32(parametros.seqn));
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String, "         " + parametros.mitm);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String,  parametros.mitm);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DSCA", DbType.String, parametros.dsca);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOCA", DbType.String, parametros.loca);

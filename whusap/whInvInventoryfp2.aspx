@@ -128,7 +128,7 @@ Else
                     objrs.Open (strSQL, Odbcon)
                     If Not objrs.EOF Then
                         stritem = objrs.Fields("item").Value
-                        'Session("item") = "         "+stritem
+                        'Session("item") = stritem
                         Session("item") = stritem
                         strSQL = "select t$dsca Descripcion, t$cuni unid from baan.ttcibd001" & Session("env") & " where t$item='" + stritem + "'"      
                         objrs=Server.CreateObject("ADODB.recordset")
@@ -145,7 +145,7 @@ Else
                         Response.Redirect("whInvInventoryfp.aspx?flag=") 
                     End If
                 Else
-                    'stritem = "         "+Ucase(stritem)
+                    'stritem = Ucase(stritem)
                     strSQL = "select t$dsca Descripcion, t$cuni unid from baan.ttcibd001" & Session("env") & " where t$kltc <> 1 and t$item='" + stritem + "'"      
                     objrs=Server.CreateObject("ADODB.recordset")
                     objrs.Open (strSQL, Odbcon)
@@ -162,7 +162,7 @@ Else
                 End If
             Else
                 'Articulo que no maneja lote
-                'stritem = "         "+Ucase(stritem)
+                'stritem = Ucase(stritem)
                 strSQL = "select t$dsca Descripcion, t$cuni unid from baan.ttcibd001" & Session("env") & " where t$kltc <> 1 and t$item='" + stritem + "'"      
                 objrs=Server.CreateObject("ADODB.recordset")
                 objrs.Open (strSQL, Odbcon)
