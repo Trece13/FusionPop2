@@ -424,6 +424,7 @@
             MylistWarehouse = JSON.parse(r.d);
             if ($('#DdPlant').val()=="0")
             {
+                $('#lblMsg').html("");
                 $('#btnQuery').hide(700);
             }
             else{
