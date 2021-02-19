@@ -191,11 +191,13 @@ namespace whusap.WebPages.Migration
                                 }
                                 makeTable();
                                 
-                                divBtnGuardar.Visible = true;
+                                
                                 lblError.Text = String.Empty;
                             }
                             else
                             {
+                                divTable.Visible = false;
+                                divBtnGuardar.Visible = false;
                                 lblError.Text = mensajes("nomaterials");
                                 return;
                             }
@@ -204,6 +206,7 @@ namespace whusap.WebPages.Migration
                         else
                         {
                             divTable.Visible = false;
+                            divBtnGuardar.Visible = false;
                             lblError.Text = mensajes("machinenotexists");
                             return;
                         }
@@ -211,6 +214,7 @@ namespace whusap.WebPages.Migration
                     else
                     {
                         divTable.Visible = false;
+                        divBtnGuardar.Visible = false;
                         lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
                         return;
                     }
@@ -218,6 +222,7 @@ namespace whusap.WebPages.Migration
                 else
                 {
                     divTable.Visible = false;
+                    divBtnGuardar.Visible = false;
                     //lblError.Text = mensajes("ordernotexists");
                     lblError.Text = mensajes("MachineNotdefined");
                     return;
@@ -225,6 +230,7 @@ namespace whusap.WebPages.Migration
             }
             else
             {
+                divBtnGuardar.Visible = false;
                 lblError.Text = mensajes("formempty");
                 return;
             }
@@ -327,9 +333,9 @@ namespace whusap.WebPages.Migration
                         if (validInsert > 0)
                         {
                             //lblError.Text = String.Empty;
-                            lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
+                            lblError.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
                             //divTable.InnerHtml = String.Empty;
-                            divBtnGuardar.Visible = false;
+                            //divBtnGuardar.Visible = false;
                             //txtOrder.Text = String.Empty;
                         }
                         else
@@ -437,6 +443,7 @@ namespace whusap.WebPages.Migration
 
             divTable.InnerHtml = table;
             divTable.Visible = true;
+            divBtnGuardar.Visible = true;
         }
 
         protected void CargarIdioma()

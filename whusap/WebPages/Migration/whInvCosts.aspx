@@ -6,8 +6,7 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
     <style>
-        #lblConfirm, #lblError
-        {
+        #lblConfirm, #lblError {
             text-align: left !important;
         }
     </style>
@@ -55,31 +54,31 @@
                 field.value = "";
                 $('#btnAlert-'+index).show(1500);
             }
-//            debugger;
-//            var dividendo = field.value;
-//            var residuo = 0;
-//            var cantmx = cantm;
-//            var canrg = cantr;
-//            var totalcant = parseFloat(dividendo) + parseFloat(cantr)
-//            var total = cantmx - totalcant
-//            var regex = /^-?\d*[0-9]*[,.]?[0-9]*$/;
-//            var re = new RegExp(regex);
-//            if (field.value.match(re)) {
-//                residuo = dividendo % factor;
-//                if (total < 0) {
-//                    alert(_idioma == "INGLES" ? "Quantity exceed the quanity by shift" : "Cantidad excede la cantidad para cambio");
-//                    this.focus();
-//                    field.value = 0;
-//                }
-//                if ((dividendo % factor) != 0) {
-//                    alert(_idioma == "INGLES" ? "Is not an order quantity multiple" : "No es una cantidad multiple de la orden");
-//                }
-//            }
-//            else {
-//                this.focus();
-//                field.value = 0;
-//                alert(_idioma == "INGLES" ? "Only numbers here" : "Solo números.");
-//            }
+            //            debugger;
+            //            var dividendo = field.value;
+            //            var residuo = 0;
+            //            var cantmx = cantm;
+            //            var canrg = cantr;
+            //            var totalcant = parseFloat(dividendo) + parseFloat(cantr)
+            //            var total = cantmx - totalcant
+            //            var regex = /^-?\d*[0-9]*[,.]?[0-9]*$/;
+            //            var re = new RegExp(regex);
+            //            if (field.value.match(re)) {
+            //                residuo = dividendo % factor;
+            //                if (total < 0) {
+            //                    alert(_idioma == "INGLES" ? "Quantity exceed the quanity by shift" : "Cantidad excede la cantidad para cambio");
+            //                    this.focus();
+            //                    field.value = 0;
+            //                }
+            //                if ((dividendo % factor) != 0) {
+            //                    alert(_idioma == "INGLES" ? "Is not an order quantity multiple" : "No es una cantidad multiple de la orden");
+            //                }
+            //            }
+            //            else {
+            //                this.focus();
+            //                field.value = 0;
+            //                alert(_idioma == "INGLES" ? "Only numbers here" : "Solo números.");
+            //            }
         };
         function clickAlert(index){  
             var txtQuantityHidden = $('#txtQuantityHidden-'+index); 
@@ -124,7 +123,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <table border="0">
-        <tr style="display:none">
+        <tr style="display: none">
             <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                     <b style="font-size: 11px;">
@@ -154,20 +153,19 @@
                 <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click"
                     CssClass="ButtonsSendSave" Style="height: 30px;" />
                 <br />
-                <asp:Label Text="" class="infoLabels" runat="server" ID="lblConfirm" Style="color: green;
-                    font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
-                <asp:Label Text="" class="infoLabels" runat="server" ID="lblError" Style="color: red;
-                    font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                <asp:Label Text="" class="infoLabels" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;"
+                    ClientIDMode="Static" />
+                <asp:Label Text="" class="infoLabels" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;"
+                    ClientIDMode="Static" />
             </td>
         </tr>
     </table>
-    
-    <div runat="server" id="divTable">
-        <div runat="server" id="divBtnGuardar" visible="false">
+    <div runat="server" id="divBtnGuardar" visible="false">
         <hr />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validarFormulario();"
             CssClass="ButtonsSendSave" />
     </div>
+    <div runat="server" id="divTable" visible="false">
     </div>
 </asp:Content>
