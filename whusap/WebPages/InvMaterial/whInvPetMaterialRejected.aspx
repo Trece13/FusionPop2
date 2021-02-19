@@ -335,7 +335,7 @@
 
         var Click_Save = function () {
 
-            var Data = "{'PDNO':'" + $('#txWorkorder').val().trim().toUpperCase() + "','ITEM':'" + $('#txItem').val().trim().toUpperCase() + "','CLOT':'" + $('#txLot').val().trim() + "','QTYS':'" + $('#txQuantity').val().trim().replace('.', ',') + "','UNIT':'" + $('#lblQuantity').html() + "'}";
+            var Data = "{'PDNO':'" + $('#txWorkorder').val().trim().toUpperCase() + "','ITEM':'" + $('#txItem').val().trim().toUpperCase() + "','CLOT':'" + $('#txLot').val().trim() + "','QTYS':'" + $('#txQuantity').val().trim().replace(',', '.') + "','UNIT':'" + $('#lblQuantity').html() + "'}";
             sendAjax("Click_Save", Data, SuccesClick_Save);
 
         }

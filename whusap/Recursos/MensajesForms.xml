@@ -2307,6 +2307,11 @@
     <!--Smita Ends -->
     <Module name="whInvCosts.aspx">
       <Idiom name="INGLES">
+        <operationName name=" Availablequantitynotenoughforyourrequest">
+          <stringMessage>
+            [{0}] Available quantity not enough for your request 
+          </stringMessage>
+        </operationName>
         <operationName name="WorkOrdernotInitiatedforthisMachine">
           <stringMessage>
             Work Order not Initiated for this Machine

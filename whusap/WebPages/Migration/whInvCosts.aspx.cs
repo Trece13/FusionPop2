@@ -100,7 +100,6 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-
             Session["orno"] = txtOrder.Text.Trim().ToUpper();
             Session["mcno"] = txtMachine.Text.Trim().ToUpper();
 
@@ -191,6 +190,7 @@ namespace whusap.WebPages.Migration
                                     item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
                                 }
                                 makeTable();
+                                
                                 divBtnGuardar.Visible = true;
                                 lblError.Text = String.Empty;
                             }
@@ -203,18 +203,21 @@ namespace whusap.WebPages.Migration
                         }
                         else
                         {
+                            divTable.Visible = false;
                             lblError.Text = mensajes("machinenotexists");
                             return;
                         }
                     }
                     else
                     {
+                        divTable.Visible = false;
                         lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
                         return;
                     }
                 }
                 else
                 {
+                    divTable.Visible = false;
                     //lblError.Text = mensajes("ordernotexists");
                     lblError.Text = mensajes("MachineNotdefined");
                     return;
@@ -229,6 +232,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
+            
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
 
@@ -288,7 +292,8 @@ namespace whusap.WebPages.Migration
                     if ((Convert.ToDecimal(stock.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantityHidden.Trim()))
                     {
                         _idaltticol090.InsertTticol088(data088, ref strError);
-                        lblError.Text += "[" + item + "] Available quantity not enough for your request <br/>";
+                        lblError.Text += string.Format(mensajes("Availablequantitynotenoughforyourrequest"), item);
+                        lblError.Text += "<br/>";
                         tticol088 = true;
 
                     }
@@ -372,7 +377,7 @@ namespace whusap.WebPages.Migration
         {
             var table = String.Empty;
 
-            table += String.Format("<hr /><table class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");
+            table += String.Format("<hr /><table id='dataTable' class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");
 
             table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='6'>{1}</td></tr>"
                 , _idioma == "INGLES" ? "Order:" : "Orden:"
@@ -431,6 +436,7 @@ namespace whusap.WebPages.Migration
             table += "</table>";
 
             divTable.InnerHtml = table;
+            divTable.Visible = true;
         }
 
         protected void CargarIdioma()
