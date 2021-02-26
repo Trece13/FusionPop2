@@ -624,7 +624,7 @@ namespace whusap.WebPages.Migration
 
             if (pdno == String.Empty || sec == String.Empty)
             {
-                lblError.Text = mensajes("");
+                lblError.Text = mensajes("MachineandSequenceSpecified");
                 lblConfirm.Text = string.Empty;
                 return;
             }

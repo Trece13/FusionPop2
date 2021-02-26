@@ -5,6 +5,12 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <script type="text/javascript">
+        function printLabel(){
+            var Data = "{'BarTenderLabel':'Label_Receptions.btw','ID':1212','ITEM':'12','LOT':'111','QTY':'121212'}";
+            WebMethod = "http://localhost:1111/Integration/WebServiceIntegration/Execute";
+            sendAjax(WebMethod, Data, ConsultarSumatoria,true,false);
+        }
+
         function printDiv(divID) {
 
             var monthNames = [
@@ -253,6 +259,8 @@
             <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
                 Print</button>&nbsp
+            <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()">
+                Print</button>&nbsp
             <!--<button id="btnMyEtiquetaOC" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiquetaOC')">
             Print</button>-->
         </div>
@@ -472,10 +480,10 @@
 
         }
 
-        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
+        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl = true) {
             var options = {
                 type: "POST",
-                url: "whInvReceiptRawMaterial.aspx/" + WebMethod,
+                url: dynamicUrl == true ? "whInvReceiptRawMaterial.aspx/" + WebMethod : WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -636,6 +644,9 @@
                 DeshabilitarLimpiarControles();
                 printDiv('MyEtiqueta');
 
+                var Data = "{'BarTenderLabel':'Label_Receptions.btw','ID':'" + MyObject.ORNO + "','ITEM':'" + MyObject.ITEM + "','LOT':'" + MyObject.CLOT + "','QTY':'" + MyObject.QTYC + "'}";
+                WebMethod = "http://localhost:1111/Integration/WebServiceIntegration/Execute";
+                sendAjax(WebMethod, Data, ConsultarSumatoria,true,false);
 
             }
             else {

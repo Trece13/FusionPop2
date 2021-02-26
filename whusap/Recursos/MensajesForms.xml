@@ -1366,6 +1366,11 @@
 
     <Module name="whInvLabelPalletTags.aspx">
       <Idiom name="INGLES">
+        <operationName name="MachineandSequenceSpecified">
+          <stringMessage>
+            the machine and the sequence must be specified
+          </stringMessage>
+        </operationName>
         <operationName name="WorkOrdernotInitiatedforthisMachine">
           <stringMessage>
             Work Order not Initiated for this Machine
