@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <script type="text/javascript">
         function printLabel(){
-            var Data = "{'BarTenderLabel':'Label_Receptions.btw','ID':1212','ITEM':'12','LOT':'111','QTY':'121212'}";
+            var Data = "{'BarTenderLabel':'Label_Receptions.btw','PrinterName':'HP00BC6D (HP Smart Tank 510 series)','ID':1212','ITEM':'12','LOT':'111','QTY':'121212'}";
             WebMethod = "http://localhost:1111/Integration/WebServiceIntegration/Execute";
             sendAjax(WebMethod, Data, ConsultarSumatoria,true,false);
         }
@@ -482,13 +482,14 @@
 
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl = true) {
             var options = {
-                type: "POST",
+                type: "GET",
                 url: dynamicUrl == true ? "whInvReceiptRawMaterial.aspx/" + WebMethod : WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
                 dataType: "json",
-                success: FuncitionSucces
+                success: FuncitionSucces,
+                headers: {'Access-Control-Allow-Origin': '*'}
             };
             $.ajax(options);
 
