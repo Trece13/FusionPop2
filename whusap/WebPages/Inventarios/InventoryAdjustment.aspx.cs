@@ -31,6 +31,9 @@ namespace whusap.WebPages.Inventarios
         private static string formName;
         public static string _idioma;
         public static double Pquantity;
+        public string emno;
+        public string cdis;
+        
         #endregion
 
         #region Eventos
@@ -144,6 +147,7 @@ namespace whusap.WebPages.Inventarios
             obj.paid = txtPalletId.Text.ToUpperInvariant();
             //lblResult.Text = string.Empty;
             DataTable resultado = idal.invGetPalletInfo(ref obj, ref strError);
+            DataTable resultadoSerie = idal.invGetPalletInfoSerie(ref strError);
 
             if (resultado == null || resultado.Rows.Count == 0)
             {
@@ -163,8 +167,20 @@ namespace whusap.WebPages.Inventarios
 
             string palletId, item, warehouse, lot, location, quantity, dsca, unit, waredesc;
 
-            if (resultado.Rows.Count == 1) 
+            if (resultado.Rows.Count == 1)
             {
+                if (resultadoSerie.Rows.Count >0 )
+                {
+                    Session["emno"] = resultadoSerie.Rows[0]["EMNO"].ToString();
+                    Session["cdis"] = resultadoSerie.Rows[0]["CDIS"].ToString();
+                    lblReason.Text = resultadoSerie.Rows[0]["EMNO"].ToString() + " - " + resultadoSerie.Rows[0]["NAMA"].ToString();
+                    lblCost.Text = resultadoSerie.Rows[0]["CDIS"].ToString() + " - " + resultadoSerie.Rows[0]["DSCA"].ToString();
+                }
+                else{
+                    lblReason.Text = string.Empty;
+                    lblCost.Text =   string.Empty;
+                }
+
                 DataRow dr = resultado.Rows[0];
                 palletId = dr.ItemArray[2].ToString();
                 quantity = dr.ItemArray[3].ToString();
@@ -324,8 +340,8 @@ namespace whusap.WebPages.Inventarios
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-
-            if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) < 0)
+            txtAdjustmentQuantity.Text = txtAdjustmentQuantity.Text.Trim() == string.Empty ? "0" : txtAdjustmentQuantity.Text.Trim();
+            if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) <= 0)
             {
 
                 lblError.Text = Adjustmentquantitycannotbezero;
@@ -334,6 +350,18 @@ namespace whusap.WebPages.Inventarios
                 btnSend.Visible = true;
                 return;
             }
+            else{
+                if (Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()) >= (Convert.ToDecimal(lblQuantityValue.Text.Trim()) * 2))
+                {
+                    lblError.Text = "New quantity value doesnt allow";
+                    txtPalletId.Enabled = true;
+                    txtPalletId.Text = String.Empty;
+                    btnSend.Visible = true;
+                    return;
+                }
+            }
+
+            
             //if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) > Convert.ToInt32(lblQuantityValue.Text.Trim()))
             //{
             //    lblError.Text = AdjustmentquantityshouldbelessthanexistingQty;
@@ -357,8 +385,10 @@ namespace whusap.WebPages.Inventarios
             obj.QTYA = Convert.ToDouble(txtAdjustmentQuantity.Text.Trim()) - Pquantity;
             obj.UNIT = lblUnitValue.Text.Trim();
             obj.LOGN = Session["user"].ToString(); ;
-            obj.CDIS = dropDownReasonCodes.SelectedItem.Value;
-            obj.EMNO = dropDownCostCenters.SelectedItem.Value; 
+            //obj.CDIS = dropDownReasonCodes.SelectedItem.Value;
+            //obj.EMNO = dropDownCostCenters.SelectedItem.Value; 
+            obj.CDIS = Session["cdis"].ToString();
+            obj.EMNO = Session["emno"].ToString();
             obj.PROC = 2;
             obj.ORNO = " ";
             obj.PONO = 0;
@@ -378,6 +408,8 @@ namespace whusap.WebPages.Inventarios
                 txtAdjustmentQuantity.Text = String.Empty;
                 dropDownCostCenters.Items.Clear();
                 dropDownReasonCodes.Items.Clear();
+                lblCost.Text = string.Empty;
+                lblReason.Text = string.Empty;
                 btnSend.Visible = true;
                 return;
             }

@@ -391,10 +391,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="validarRegistroByPalletId">
         <stringSQL>
-          SELECT ticol022.T$PDNO AS LOT,ticol022.T$MITM AS ITEM, ticol022.T$QTDL AS QUANTITY, ticol022.T$CUNI AS UNIDAD, ticol022.T$PRO1 AS PRO1, ticol022.T$PRO2 AS PRO2,T$DRPT, ticol222.T$URPT as URPT, ticol222.T$ACQT as ACQT, ticol222.T$CWAF as CWAF, ticol222.T$CWAT as CWAT, ticol222.T$ACLO as ACLO, ticol222.T$REFCNTD as REFCNTD, ticol222.T$REFCNTU as REFCNTU FROM {2} ticol022
-          inner join {0}.tticol222{1} ticol222 on ticol222.T$SQNB = ticol022.T$SQNB
-          WHERE ticol022.T$SQNB = '[:T$SQNB]'
-          AND   ticol022.T$DELE = '7'
+          select * from (SELECT
+          ticol022.T$PDNO AS LOT,ticol022.T$MITM AS ITEM, ticol022.T$QTDL AS QUANTITY, ticol022.T$CUNI AS UNIDAD,
+          ticol022.T$PRO1 AS PRO1, ticol022.T$PRO2 AS PRO2,T$DRPT, ticol222.T$URPT as URPT, ticol222.T$ACQT as ACQT,
+          ticol222.T$CWAF as CWAF, ticol222.T$CWAT as CWAT, ticol222.T$ACLO as ACLO, ticol222.T$REFCNTD as REFCNTD,
+          ticol222.T$REFCNTU as REFCNTU , ticol022.T$DELE as DELE, ticol022.T$SQNB as SQNB
+          FROM baan.tticol022140 ticol022
+          inner join baan.tticol222140 ticol222 on ticol222.T$SQNB = ticol022.T$SQNB
+          union
+          SELECT ticol042.T$PDNO AS LOT,ticol042.T$MITM AS ITEM, ticol042.T$QTDL AS QUANTITY, ticol042.T$CUNI AS UNIDAD,
+          ticol042.T$PRO1 AS PRO1, ticol042.T$PRO2 AS PRO2,T$DRPT, ticol242.T$URPT as URPT, ticol242.T$ACQT as ACQT,
+          ticol242.T$CWAF as CWAF, ticol242.T$CWAT as CWAT, ticol242.T$ACLO as ACLO, ticol242.T$REFCNTD as REFCNTD,
+          ticol242.T$REFCNTU as REFCNTU, ticol042.T$DELE as DELE, ticol042.T$SQNB as SQNB
+          FROM baan.tticol042140 ticol042
+          inner join baan.tticol242140 ticol242 on ticol242.T$SQNB = ticol042.T$SQNB) GlobalC
+          WHERE GlobalC.DELE in ('5','7') and GlobalC.SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="actualizaRegistroSugUbicaciones">
@@ -2764,6 +2775,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <!-- Smita End-->
     <Module name="tticol125">
       <!-- Smita Begins-->
+      <operationName name="invGetPalletInfoSerie">
+        <stringSQL>
+          SELECT tccom001.T$EMNO EMNO, tccom001.T$NAMA NAMA, tmcs005.T$CDIS CDIS, tmcs005.T$DSCA DSCA FROM baan.twhcol027140 whcol027
+          inner join baan.ttccom001140 tccom001 on tccom001.T$EMNO = whcol027.T$EMNO
+          inner join baan.ttcmcs005140 tmcs005  on tmcs005.t$CDIS = whcol027.T$CDIS
+        </stringSQL>
+      </operationName>
       <operationName name="updataPalletStatus022">
         <stringSQL>
           UPDATE {0}.tticol022{1} SET T$DELE ='[p3]' WHERE T$SQNB = '[p1]'

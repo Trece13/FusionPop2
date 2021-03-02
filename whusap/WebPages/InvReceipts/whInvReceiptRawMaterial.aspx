@@ -5,12 +5,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <script type="text/javascript">
-        function printLabel(){
-            var Data = "{'BarTenderLabel':'Label_Receptions.btw','PrinterName':'HP00BC6D (HP Smart Tank 510 series)','ID':1212','ITEM':'12','LOT':'111','QTY':'121212'}";
-            WebMethod = "http://localhost:1111/Integration/WebServiceIntegration/Execute";
-            sendAjax(WebMethod, Data, ConsultarSumatoria,true,false);
-        }
-
         function printDiv(divID) {
 
             var monthNames = [
@@ -259,7 +253,7 @@
             <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
                 Print</button>&nbsp
-            <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()">
+            <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()" style="display:none">
                 Print</button>&nbsp
             <!--<button id="btnMyEtiquetaOC" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiquetaOC')">
             Print</button>-->
@@ -496,6 +490,10 @@
             WebMethod = "";
         }
 
+            function resBartender(res){
+                console.log(res);
+            }
+
         function IniciarControles() {
 
             btnEnviar = $('#btnEnviar');
@@ -645,10 +643,7 @@
                 DeshabilitarLimpiarControles();
                 printDiv('MyEtiqueta');
 
-                var Data = "{'BarTenderLabel':'Label_Receptions.btw','ID':'" + MyObject.ORNO + "','ITEM':'" + MyObject.ITEM + "','LOT':'" + MyObject.CLOT + "','QTY':'" + MyObject.QTYC + "'}";
-                WebMethod = "http://localhost:1111/Integration/WebServiceIntegration/Execute";
-                sendAjax(WebMethod, Data, ConsultarSumatoria,true,false);
-
+                
             }
             else {
                 console.log("El registro no se realizo");
@@ -658,6 +653,14 @@
 
         }
 
+        function printLabel(){
+            //var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'" + MyObject.ORNO + "','ITEM':'" + MyObject.ITEM + "','LOT':'" + MyObject.CLOT + "','QTY':'" + MyObject.QTYC + "'}";
+            var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'jjhjhj','ITEM':'aaaaa','LOT':'aaaaa','QTY':'aaaa'}";
+            WebMethod = "http://susavgabart01:82/Integration/WebServiceIntegration/Execute";
+            sendAjax(WebMethod, Data, resBartender,true,false);
+        }
+
+        
         var SuccesQuantityUnity = function (r) {
 
             lstFactor = JSON.parse(r.d);
