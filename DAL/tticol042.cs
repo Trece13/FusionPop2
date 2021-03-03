@@ -685,9 +685,9 @@ namespace whusa.DAL
 
         }
 
-        public DataTable ActualizacionPalletId(string PAID, string STAT, string strError)
+        public bool ActualizacionPalletId(string PAID, string STAT, string strError)
         {
-
+            bool consulta = false;
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -702,7 +702,7 @@ namespace whusa.DAL
             try
             {
 
-                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
 
             }
 
@@ -764,6 +764,36 @@ namespace whusa.DAL
                     log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
                 }
                 return consulta;
+            }
+
+            public bool ActualizarCantidadRegistroTicol242(decimal ACQT, string SQNB)
+            {
+                method = MethodBase.GetCurrentMethod();
+                bool retorno = false;
+                string strError = string.Empty;
+                try
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$ACQT", ACQT);
+                    paramList.Add(":T$SQNB", SQNB.ToUpper());
+
+
+                    strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, tabla2, paramList);
+
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                    return retorno;
+                }
+
+                catch (Exception ex)
+                {
+                    strError = ex.InnerException != null ?
+                        ex.Message + " (" + ex.InnerException + ")" :
+                        ex.Message;
+
+                }
+
+                return retorno;
             }
     }
 }

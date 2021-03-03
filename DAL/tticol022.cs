@@ -948,10 +948,10 @@ namespace whusa.DAL
 
  
 
-        public DataTable ActualizacionPalletId(string PAID,string STAT, string strError)
+        public bool ActualizacionPalletId(string PAID,string STAT, string strError)
 
         {
-
+            bool consulta = false;
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -966,8 +966,7 @@ namespace whusa.DAL
             try
 
             {
-
-                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
 
             }
 

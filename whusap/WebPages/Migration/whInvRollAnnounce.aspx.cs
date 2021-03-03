@@ -17,6 +17,7 @@ namespace whusap.WebPages.Migration
     {
         #region Propiedades
             private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+            private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
             private static InterfazDAL_tticol080 _idaltticol080 = new InterfazDAL_tticol080();
             private static InterfazDAL_tticst001 _idaltticst001 = new InterfazDAL_tticst001();
             private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
@@ -186,6 +187,8 @@ namespace whusap.WebPages.Migration
                 {
                     _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(),"11", strError);
                     _idaltticol022.ActualizarCantidadRegistroTicol222(0,txtRollNumber.Text.Trim());
+                    _idaltticol042.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
+                    _idaltticol042.ActualizarCantidadRegistroTicol242(0, txtRollNumber.Text.Trim());
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjupdate");
                     trItem.Visible = false;
@@ -211,7 +214,7 @@ namespace whusap.WebPages.Migration
 
                 var validaInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref isTag);
                 _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
-                _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
+                _idaltticol042.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
                 if (validaInsert > 0)
                 {
                     lblError.Text = String.Empty;

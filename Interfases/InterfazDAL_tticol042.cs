@@ -310,9 +310,7 @@ namespace whusa.Interfases
         public bool ActualizacionPalletId(string PAID, string STAT, string strError)
         {
 
-            DataTable DT = dal.ActualizacionPalletId(PAID, STAT, strError);
-
-            return true;
+            return dal.ActualizacionPalletId(PAID, STAT, strError);
 
         }
 
@@ -343,6 +341,20 @@ namespace whusa.Interfases
             catch (Exception ex)
             {
                 throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public bool ActualizarCantidadRegistroTicol242(decimal ACQT, string SQNB)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.ActualizarCantidadRegistroTicol242(ACQT, SQNB);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
     }

@@ -464,9 +464,8 @@ namespace whusa.Interfases
         public bool ActualizacionPalletId(string PAID, string STAT, string strError)
         {
 
-            DataTable DT = dal.ActualizacionPalletId(PAID, STAT, strError);
+            return dal.ActualizacionPalletId(PAID, STAT, strError);
 
-            return true;
 
         }
 
