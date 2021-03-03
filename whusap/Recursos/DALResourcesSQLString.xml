@@ -1482,7 +1482,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultaPlantTticol082">
         <stringSQL>
-          select  col002.t$tite TITE, col002.t$dsca DSCA from  {0}.tticol082{1} col082 left join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite group by col002.t$tite, col002.t$dsca order by T$DSCA
+          select  col002.t$tite TITE, col002.t$dsca DSCA from  {0}.tticol082{1} col082 left join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite where col082.t$stat = 1 group by col002.t$tite, col002.t$dsca order by T$DSCA
         </stringSQL>
       </operationName>
       <operationName name="ConsultaWarehouseTticol082">
