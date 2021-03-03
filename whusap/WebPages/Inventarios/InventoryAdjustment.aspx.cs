@@ -147,7 +147,7 @@ namespace whusap.WebPages.Inventarios
             obj.paid = txtPalletId.Text.ToUpperInvariant();
             //lblResult.Text = string.Empty;
             DataTable resultado = idal.invGetPalletInfo(ref obj, ref strError);
-            //DataTable resultadoSerie = idal.invGetPalletInfoSerie(ref strError);
+            DataTable resultadoSerie = idal.invGetPalletInfoSerie(ref strError);
 
             if (resultado == null || resultado.Rows.Count == 0)
             {
