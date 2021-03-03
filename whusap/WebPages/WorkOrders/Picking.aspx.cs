@@ -206,7 +206,7 @@ namespace whusap.WebPages.WorkOrders
                     lbllocation.Text = MyObj.LOCA.ToString();
                     lblQuantity.Text = MyObj.QTY.ToString();
                     HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
-                    lblQuantityAux.Text = MyObj.QTY.ToString();
+                    lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                     //lblQuantity.Visible = false; 
@@ -246,7 +246,7 @@ namespace whusap.WebPages.WorkOrders
                     lbllocation.Text = MyObj.LOCA.ToString();
                     lblQuantity.Text = MyObj.QTY.ToString();
                     HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
-                    lblQuantityAux.Text = MyObj.QTY.ToString();
+                    lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                     //HttpContext.Current.Session["QTY"] = MyObj.QTYT.ToString();
@@ -285,7 +285,7 @@ namespace whusap.WebPages.WorkOrders
                     lbllocation.Text = MyObj.LOCA.ToString();
                     lblQuantity.Text = MyObj.QTYT.ToString();
                     HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
-                    lblQuantityAux.Text = MyObj.QTY.ToString();
+                    lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                     //HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
@@ -321,7 +321,7 @@ namespace whusap.WebPages.WorkOrders
                 lbllocation.Text = MyObj.LOCA.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
                 HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
-                lblQuantityAux.Text = MyObj.QTY.ToString();
+                lblQuantityAux.Text = MyObj.QTYT.ToString();
                 lblQuantityOld.Text = MyObj.QTY.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                 HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
@@ -362,7 +362,7 @@ namespace whusap.WebPages.WorkOrders
                 lbllocation.Text = MyObj.LOCA.ToString();
                 HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
-                lblQuantityAux.Text = MyObj.QTY.ToString();
+                lblQuantityAux.Text = MyObj.QTYT.ToString();
                 lblQuantityOld.Text = MyObj.QTY.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                 HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
