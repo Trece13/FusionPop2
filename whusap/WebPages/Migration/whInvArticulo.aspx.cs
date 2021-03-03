@@ -110,7 +110,7 @@ namespace whusap.WebPages.Migration
                 _consultaItem = _idalttisfc001.findByPdnoArticulo(ref lote, ref paid, ref strError);
                 if (_consultaItem.Rows.Count > 0)
                 {
-                    VerificarExistenciaLote();
+                    //VerificarExistenciaLote();
 
                     var cwar = string.Empty;
                     var item = _consultaItem.Rows[0]["MITM"].ToString();

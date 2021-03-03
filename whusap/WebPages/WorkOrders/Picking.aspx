@@ -586,7 +586,7 @@
             LblReprintInd = $('#LblReprintInd');
         }
         function imprimir(r) {
-            console.log(r.d)
+            //console.log(r.d)
         }
 
         function getusers() {
@@ -613,7 +613,7 @@
         }
 
         var FuncitionSuccesReprint = function (r) {
-            console.log(r.d);
+            //console.log(r.d);
             MyEtiqueta.hide('slow');
 
             var MyObject = JSON.parse(r.d);
@@ -807,7 +807,7 @@
                         var newCant = parseFloat($("#Contenido_lblQuantity").val());
                         var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
                         alert("Information saved successfully");
-                        console.log(myObj.urpt);
+                        //console.log(myObj.urpt);
 
                         if (myObj.qtyaG > 0) {
                             printDiv("MyEtiqueta");

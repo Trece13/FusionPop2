@@ -164,7 +164,8 @@
                 <asp:Label runat="server" ID="lblReasonCode" text="Reason Code" style="font-size:13px;" value="" /></b></span>
             </asp:TableCell><asp:TableCell ID="TableCell16" runat="server" style="padding-top:5px;">
                <span style="vertical-align: middle;">
-                    <asp:DropDownList runat="server" ID="dropDownReasonCodes" CssClass="TextBoxBig"></asp:DropDownList>
+                    <asp:DropDownList runat="server" ID="dropDownReasonCodes" CssClass="TextBoxBig" Visible="false"></asp:DropDownList>
+                    <strong><asp:Label class="" ID="lblReason" Text="Item" runat="server" /></strong>
                 </span>
             </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow9" runat="server" style="padding-top:15px;">
             <asp:TableCell ID="TableCell17" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">
@@ -173,7 +174,8 @@
                 <asp:Label runat="server" ID="lblCostCenter" text="Cost Center" style="font-size:13px;" value="" /></b></span>
             </asp:TableCell><asp:TableCell ID="TableCell18" runat="server" style="padding-top:5px;">
                <span style="vertical-align: middle;">
-                    <asp:DropDownList runat="server" ID="dropDownCostCenters" CssClass="TextBoxBig"></asp:DropDownList>
+                    <asp:DropDownList runat="server" ID="dropDownCostCenters" CssClass="TextBoxBig" Visible="false"></asp:DropDownList>
+                    <strong><asp:Label class="" ID="lblCost" Text="Item" runat="server" /></strong>
                 </span>
             </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow10" runat="server">
             <asp:TableCell ID="TableCell19" runat="server" style="text-align: left; padding: 5px 0px 5px; width: 200px;">

@@ -481,6 +481,15 @@ namespace whusap.WebPages.Inventarios {
         protected global::System.Web.UI.WebControls.DropDownList dropDownReasonCodes;
         
         /// <summary>
+        /// lblReason control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblReason;
+        
+        /// <summary>
         /// TableRow9 control.
         /// </summary>
         /// <remarks>
@@ -524,6 +533,15 @@ namespace whusap.WebPages.Inventarios {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dropDownCostCenters;
+        
+        /// <summary>
+        /// lblCost control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCost;
         
         /// <summary>
         /// TableRow10 control.

@@ -333,7 +333,8 @@ namespace whusap.WebPages.Migration
                         if (validInsert > 0)
                         {
                             //lblError.Text = String.Empty;
-                            lblError.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
+                            
+                            lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
                             //divTable.InnerHtml = String.Empty;
                             //divBtnGuardar.Visible = false;
                             //txtOrder.Text = String.Empty;
