@@ -251,7 +251,7 @@ namespace whusa.Interfases
             bool retorno;
             try
             {
-                retorno = dal.updataPalletStatus131(paid,stat);
+                retorno = dal.updataPalletStatus131(paid, stat);
                 return retorno;
             }
             catch (Exception ex)
@@ -372,6 +372,21 @@ namespace whusa.Interfases
             try
             {
                 DataTable retorno = dal.ConsultarQtdl(obj, strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public DataTable invGetPalletInfoSerie(ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.invGetPalletInfoSerie(ref strError);
                 return retorno;
             }
             catch (Exception ex)

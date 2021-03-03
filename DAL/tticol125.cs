@@ -801,5 +801,26 @@ namespace whusa.DAL
 
             return retorno;
         }
+
+        public DataTable invGetPalletInfoSerie(ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            string tableName = string.Empty;
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name,ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [twhcol027]. Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
     }
 }
