@@ -476,13 +476,14 @@
 
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl = true) {
             var options = {
-                type: "GET",
+                type: "POST",
                 url: dynamicUrl == true ? "whInvReceiptRawMaterialTest.aspx/" + WebMethod : WebMethod,
                 data: Data,
-                contentType: "application/json; charset=utf-8",
-                async: asyncMode != undefined ? asyncMode : true,
-                dataType: "json",
-                success: FuncitionSucces,
+                contentType: "xml",
+                jsonp:false,
+                async: false,
+                dataType: "jsonp",
+                success: resBartender,
                 headers: {'Access-Control-Allow-Origin': '*'}
             };
             $.ajax(options);
@@ -491,7 +492,7 @@
         }
 
             function resBartender(res){
-                console.log(res);
+                console.log("aaa");
             }
 
         function IniciarControles() {
@@ -655,7 +656,7 @@
 
         function printLabel(){
             //var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'" + MyObject.ORNO + "','ITEM':'" + MyObject.ITEM + "','LOT':'" + MyObject.CLOT + "','QTY':'" + MyObject.QTYC + "'}";
-            var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'jjhjhj','ITEM':'aaaaa','LOT':'aaaaa','QTY':'aaaa'}";
+            var Data = {PrinterName:'\\\\scolbogprint\\BMPrima',BarTenderLabel:'Label_Receptions.btw',ID:'jjhjhj',ITEM:'aaaaa',LOT:'aaaaa',QTY:'aaaa'};
             WebMethod = "http://susavgabart01:82/Integration/WebServiceIntegration/Execute";
             sendAjax(WebMethod, Data, resBartender,true,false);
         }
