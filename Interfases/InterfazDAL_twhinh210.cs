@@ -10,7 +10,7 @@ namespace whusa.Interfases
 {
     public class InterfazDAL_twhinh210
     {
-         twhinh210 dal = new twhinh210();
+        whusa.DAL.twhinh210 dal = new whusa.DAL.twhinh210();
 
          public InterfazDAL_twhinh210()
         {

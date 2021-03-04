@@ -477,7 +477,7 @@
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl = true) {
             var options = {
                 type: "GET",
-                url: dynamicUrl == true ? "whInvReceiptRawMaterial.aspx/" + WebMethod : WebMethod,
+                url: dynamicUrl == true ? "whInvReceiptRawMaterialTest.aspx/" + WebMethod : WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,

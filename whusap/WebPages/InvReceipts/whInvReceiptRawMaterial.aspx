@@ -476,14 +476,13 @@
 
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl = true) {
             var options = {
-                type: "GET",
+                type: "POST",
                 url: dynamicUrl == true ? "whInvReceiptRawMaterial.aspx/" + WebMethod : WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
                 dataType: "json",
-                success: FuncitionSucces,
-                headers: {'Access-Control-Allow-Origin': '*'}
+                success: FuncitionSucces
             };
             $.ajax(options);
 

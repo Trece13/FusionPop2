@@ -18,7 +18,7 @@ using whusa.Utilidades;
 using System.Web.Configuration;
 
 namespace whusap.WebPages.InvReceipts
-{   
+{
     public partial class whInvReceiptRawMaterialNew : System.Web.UI.Page
     {
         public static bool qtylabelsrec = Convert.ToBoolean(WebConfigurationManager.AppSettings["qtylabelsrec"].ToString().ToLower());
@@ -829,40 +829,5 @@ namespace whusap.WebPages.InvReceipts
             return retorno;
         }
 
-    }
-
-
-    public class tcibd001
-    {
-        public string ITEM { get; set; }
-        public string KLTC { get; set; }
-        public string CUNI { get; set; }
-        public string PONO { get; set; }
-    }
-
-    public class twhinh210
-    {
-        public string TERM { get; set; }
-        public string ORNO { get; set; }
-        public string STUN { get; set; }
-        public string ITEM { get; set; }
-        public string KLTC { get; set; }
-        public string PONO { get; set; }
-        public string CUNI { get; set; }
-        public string CWAR { get; set; }
-        public string OQUA { get; set; }
-        public string RTQP { get; set; }
-        public string MLOT { get; set; }
-        public string LSEL { get; set; }
-        public string SEQNR { get; set; }
-        public string DSCA { get; set; }
-        public string PRDT { get; set; }
-        public string QSTR { get; set; }
-    }
-
-    public class Unidad
-    {
-        public string CUNI { get; set; }
-        public string DSCA { get; set; }
     }
 }

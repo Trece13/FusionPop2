@@ -108,7 +108,7 @@ namespace whusap.WebPages.InvReceipts
             PSLIP = PSLIP.Trim() == string.Empty ? " " : PSLIP.Trim();
             decimal QUANTITYAUX = QUANTITY;
             string Retrono = "El Registro no se ha insertado";
-            FactorOld MyConvertionFactor = new FactorOld { };
+            Factor MyConvertionFactor = new Factor { };
 
             if (CUNI != STUN)
             {
@@ -383,11 +383,11 @@ namespace whusap.WebPages.InvReceipts
             DdUnit.DataBind();
 
 
-            List<UnidadOld> LstUnidadesMedida = new List<UnidadOld>();
+            List<Unidad> LstUnidadesMedida = new List<Unidad>();
 
             foreach (DataRow IUnidad in DTUnidades.Rows)
             {
-                UnidadOld unidad = new UnidadOld();
+                Unidad unidad = new Unidad();
                 unidad.CUNI = IUnidad["CUNI"].ToString();
                 unidad.DSCA = IUnidad["DSCA"].ToString();
 
@@ -405,14 +405,14 @@ namespace whusap.WebPages.InvReceipts
             DataTable DtListaTransferOrder = LstDataTable[1];
             DataTable DtListaPurchaseOrders = LstDataTable[2];
 
-            List<twhinh210Old> LstSalesOrder = new List<twhinh210Old>();
-            List<twhinh210Old> LstTransferOrder = new List<twhinh210Old>();
-            List<twhinh210Old> LstPurchaseOrders = new List<twhinh210Old>();
+            List<twhinh210> LstSalesOrder = new List<twhinh210>();
+            List<twhinh210> LstTransferOrder = new List<twhinh210>();
+            List<twhinh210> LstPurchaseOrders = new List<twhinh210>();
 
 
             foreach (DataRow row in DtSalesOrder.Rows)
             {
-                twhinh210Old ttwhinh210 = new twhinh210Old();
+                twhinh210 ttwhinh210 = new twhinh210();
                 ttwhinh210.TERM = row["TERM"].ToString().Trim();
                 ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
                 ttwhinh210.ITEM = row["ITEM"].ToString().Trim();
@@ -434,7 +434,7 @@ namespace whusap.WebPages.InvReceipts
 
             foreach (DataRow row in DtListaTransferOrder.Rows)
             {
-                twhinh210Old ttwhinh210 = new twhinh210Old();
+                twhinh210 ttwhinh210 = new twhinh210();
 
                 ttwhinh210.TERM = row["TERM"].ToString().Trim();
                 ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
@@ -457,7 +457,7 @@ namespace whusap.WebPages.InvReceipts
             foreach (DataRow row in DtListaPurchaseOrders.Rows)
             {
 
-                twhinh210Old ttwhinh210 = new twhinh210Old();
+                twhinh210 ttwhinh210 = new twhinh210();
                 ttwhinh210.OQUA = row["OQUA"].ToString().Trim();
                 ttwhinh210.TERM = AsignadorTerm(row["RTDP"].ToString().Trim(), row["RTDM"].ToString().Trim(), row["TERM"].ToString().Trim(), Convert.ToDateTime(row["PRDT"].ToString(),CultureInfo.InvariantCulture));
                 ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
@@ -526,7 +526,7 @@ namespace whusap.WebPages.InvReceipts
             Ent_twhcol130 twhcol130 = new Ent_twhcol130();
             twhcol130.ORNO = ORNO;
             DataTable consulta = twhcol130DAL.ValidarOrderID(twhcol130);
-            twhinh210Old twhinh210 = new twhinh210Old();
+            twhinh210 twhinh210 = new twhinh210();
             if (consulta.Rows.Count > 0)
             {
                 foreach (DataRow row in consulta.Rows)
@@ -547,7 +547,7 @@ namespace whusap.WebPages.InvReceipts
             twhcol130.ORNO = ORNO;
             DataTable consulta = twhcol130DAL.ValidarItem(twhcol130);
 
-            tcibd001Old tcibd001 = new tcibd001Old();
+            tcibd001 tcibd001 = new tcibd001();
             if (consulta.Rows.Count > 0)
             {
 
@@ -581,9 +581,9 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string ConsultafactoresporItem(string ITEM)
         {
-            List<FactorOld> lstFatoresItemError = new List<FactorOld>();
+            List<Factor> lstFatoresItemError = new List<Factor>();
 
-            FactorOld MyobjetNew = new FactorOld
+            Factor MyobjetNew = new Factor
             {
                 Error = true,
                 ErrorMsg = "No tiene factor de Conversion"
@@ -593,14 +593,14 @@ namespace whusap.WebPages.InvReceipts
 
             string retorno = JsonConvert.SerializeObject(lstFatoresItemError);
             DataTable DTFactoresItem = twhcol130DAL.ConsultafactoresporItem(ITEM);
-            List<FactorOld> lstFatoresItem = new List<FactorOld>();
+            List<Factor> lstFatoresItem = new List<Factor>();
 
             if (DTFactoresItem.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTFactoresItem.Rows)
                 {
 
-                    FactorOld Myobjet = new FactorOld
+                    Factor Myobjet = new Factor
                     {
 
                         BASU = MyRow["BASU"].ToString(),
@@ -628,9 +628,9 @@ namespace whusap.WebPages.InvReceipts
             return twhcol130DAL.ConsultarSumatoriaCantidades130(ORNO, PONO);
         }
 
-        public static FactorOld FactorConversion(string ITEM, string STUN, string CUNI)
+        public static Factor FactorConversion(string ITEM, string STUN, string CUNI)
         {
-            FactorOld MyFactor = new FactorOld
+            Factor MyFactor = new Factor
             {
                 MsgError = "No Tiene Factor",
                 FactorD = null,
@@ -701,61 +701,5 @@ namespace whusap.WebPages.InvReceipts
         }
 
         
-    }
-
-    public class FactorOld
-    {
-        public FactorOld()
-        {
-            this.FactorD = null;
-            this.FactorB = null;
-            this.ErrorMsg = "";
-            this.Error = false;
-        }
-
-        public string Tipo { get; set; }
-        public decimal? FactorD { get; set; }
-        public decimal? FactorB { get; set; }
-        public string MsgError { get; set; }
-        public string BASU { get; set; }
-        public string UNIT { get; set; }
-        public string POTENCIA { get; set; }
-        public string FACTOR { get; set; }
-        public string ErrorMsg { get; set; }
-        public bool Error { get; set; }
-    }
-
-    public class tcibd001Old
-    {
-        public string ITEM { get; set; }
-        public string KLTC { get; set; }
-        public string CUNI { get; set; }
-        public string PONO { get; set; }
-    }
-
-    public class twhinh210Old
-    {
-        public string TERM { get; set; }
-        public string ORNO { get; set; }
-        public string STUN { get; set; }
-        public string ITEM { get; set; }
-        public string KLTC { get; set; }
-        public string PONO { get; set; }
-        public string CUNI { get; set; }
-        public string CWAR { get; set; }
-        public string OQUA { get; set; }
-        public string RTQP { get; set; }
-        public string MLOT { get; set; }
-        public string LSEL { get; set; }
-        public string SEQNR { get; set; }
-        public string DSCA { get; set; }
-        public string PRDT { get; set; }
-        public string QSTR { get; set; }
-    }
-
-    public class UnidadOld
-    {
-        public string CUNI { get; set; }
-        public string DSCA { get; set; }
     }
 }

@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace whusap.WebPages.InvReceipts {
-    
-    
-    public partial class whInvReceiptRawMaterial {
+
+
+    public partial class whInvReceiptRawMaterial{
         
         /// <summary>
         /// DdUnit control.
