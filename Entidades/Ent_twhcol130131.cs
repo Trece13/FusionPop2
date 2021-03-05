@@ -37,6 +37,7 @@ namespace whusa
             this.STAT = string.Empty;
             this.COTP = string.Empty;
             this.FIRE = string.Empty;
+            this.NAMA = string.Empty;
             this.PSLIP = string.Empty;
             this.ALLO = "0";
             this.PAID_URL = string.Empty;
@@ -92,6 +93,7 @@ namespace whusa
         public string errorMsg { get; set; }
         public string DSCA { get; set; }
         public string FIRE { get; set; }
+        public string NAMA { get; set; }
         public string QTYC1_URL { get; set; }
         public string PAID_OLD_URL { get; set; }
 

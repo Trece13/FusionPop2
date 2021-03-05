@@ -203,11 +203,12 @@ namespace whusap.WebPages.InvReceipts
                             ALLO = "0",
                             DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString(),
                             COTP = DTOrdencompra.Rows[0]["T$COTP"].ToString(),
+                            NAMA = DTOrdencompra.Rows[0]["T$NAMA"].ToString(),
                             FIRE = FIRE,
                             PSLIP = PSLIP.ToUpper(),
+                            ITEM_URL = DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + " - " + DTOrdencompra.Rows[0]["DSCA"].ToString().Trim().ToUpper(),
                             PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
-                            ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
-                            ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96",
+                            ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",                            
                             CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "",
                             QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96",
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
@@ -329,10 +330,11 @@ namespace whusap.WebPages.InvReceipts
                             STAT = "0",// LLENAR EN 1   
                             ALLO = "0",
                             DSCA = DTNOOrdencompra.Rows[0]["T$DSCA"].ToString(),
+                            NAMA = DTNOOrdencompra.Rows[0]["T$NAMA"].ToString(),
                             FIRE = FIRE,
+                            ITEM_URL = DTNOOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + " - " + DTNOOrdencompra.Rows[0]["DSCA"].ToString().Trim().ToUpper(),
                             PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
-                            ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
-                            ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96",
+                            ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",                            
                             CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "",
                             QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96",
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"

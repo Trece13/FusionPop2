@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace whusap.WebPages.InvReceipts {
-
-
-    public partial class whInvReceiptRawMaterial{
+    
+    
+    public partial class whInvReceiptRawMaterial {
         
         /// <summary>
         /// DdUnit control.
@@ -29,33 +29,6 @@ namespace whusap.WebPages.InvReceipts {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage CBPalletNO;
-        
-        /// <summary>
-        /// CBItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBItem;
-        
-        /// <summary>
-        /// CBQuantity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBQuantity;
-        
-        /// <summary>
-        /// CBLot control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBLot;
         
         /// <summary>
         /// CBPurchaseOrder control.
