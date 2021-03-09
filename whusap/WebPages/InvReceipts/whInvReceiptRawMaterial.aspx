@@ -264,11 +264,11 @@
             </div>
         </div>
         <div class="form-group row">
-            <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
+            <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp;
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
-                Print</button>&nbsp
+                Print</button>&nbsp;
             <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()" style="display:none">
-                Print</button>&nbsp
+                Print</button>&nbsp;
             <!--<button id="btnMyEtiquetaOC" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiquetaOC')">
             Print</button>-->
         </div>
@@ -473,7 +473,7 @@
 
         }
 
-        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl = true) {
+        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl) {
             var options = {
                 type: "POST",
                 url: dynamicUrl == true ? "whInvReceiptRawMaterial.aspx/" + WebMethod : WebMethod,
@@ -993,7 +993,7 @@
 
                 var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
                 WebMethod = "ConsultarSumatoriaCantidades130";
-                sendAjax(WebMethod, Data, ConsultarSumatoria, false);
+                sendAjax(WebMethod, Data, ConsultarSumatoria, false, true);
 
             }
 
@@ -1001,7 +1001,7 @@
 
                 var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "'}";
                 WebMethod = "ConsultarSumatoriaCantidades130";
-                sendAjax(WebMethod, Data, ConsultarSumatoria, false);
+                sendAjax(WebMethod, Data, ConsultarSumatoria, false,true);
 
             }
 
@@ -1009,7 +1009,7 @@
 
                 var Data = "{'ITEM':'" + $('#txItem').val().trim() + "'}";
                 WebMethod = "ConsultafactoresporItem";
-                sendAjax(WebMethod, Data, SuccesQuantityUnity, false);
+                sendAjax(WebMethod, Data, SuccesQuantityUnity, false,true);
 
             }
 
@@ -1042,7 +1042,7 @@
                         console.log(MyObject);
 
                         var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
-                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false);
+                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
                     } else {
                     }
                 }
@@ -1077,7 +1077,7 @@
                             console.log(MyObject);
 
                             var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
-                            sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false);
+                            sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
                         }
                         else {
 
@@ -1113,7 +1113,7 @@
 
 
                         var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
-                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false);
+                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
 
                     } else {
 

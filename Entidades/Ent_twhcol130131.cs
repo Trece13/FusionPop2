@@ -89,8 +89,7 @@ namespace whusa
         public string CLOT_URL { get; set; }
         public string QTYC_URL { get; set; }
         public string UNIC_URL { get; set; }
-        public bool error { get; set; }
-        public string errorMsg { get; set; }
+        
         public string DSCA { get; set; }
         public string FIRE { get; set; }
         public string NAMA { get; set; }
@@ -100,9 +99,17 @@ namespace whusa
 
 
         public bool Error { get; set; }
+        public bool error { get; set; }
+        public string errorMsg { get; set; }
+
+        public string TipeMsgJs { get; set; }
+        public string ErrorMsg { get; set; }
+        public string SuccessMsg { get; set; }
 
         public decimal qtyaG { get; set; }
 
         public string urpt { get; set; }
+
+        public string DSCAW { get; set; }
     }
 }
