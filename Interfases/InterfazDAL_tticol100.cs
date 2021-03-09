@@ -137,5 +137,19 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public DataTable selecthandletwhwmd200(ref Ent_tticol100 parametro, ref string strError)
+        {
+            DataTable retorno = new DataTable();
+            try
+            {
+                retorno = dal.selecthandletwhwmd200(ref parametro, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
     }
 }

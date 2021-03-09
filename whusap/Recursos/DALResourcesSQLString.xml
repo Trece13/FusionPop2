@@ -224,20 +224,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <!--<operationName name="actualizaRegistro_LocationRegrind">
         <stringSQL>
           UPDATE {0}.tticol042{1}
@@ -1642,7 +1628,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="transfer">
       <operationName name="ConsultarWarehouse">
         <stringSQL>
-          SELECT T$CWAR CWAR from {0}.twhwmd300{1} WHERE trim(T$LOCA) = trim('[:T$LOCA]')
+          SELECT T$CWAR CWAR,T$LOCA LOCA,T$BALL BALL  from {0}.twhwmd300{1} WHERE trim(T$LOCA) = trim('[:T$LOCA]')
         </stringSQL>
       </operationName>
       <operationName name="ConsultaTransferencia">
@@ -1832,14 +1818,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="VerificarPalletID">   
         <stringSQL>
-          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,ALLO FROM (
-          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO from {0}.tticol022{1} col022
+          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
+          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO, col022.T$PDNO as LOT from {0}.tticol022{1} col022
           INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           UNION
-          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT AS CWAT ,col242.T$ACLO  AS ACLO, col242.T$ALLO AS ALLO from {0}.tticol042{1} col042
+          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT AS CWAT ,col242.T$ACLO  AS ACLO, col242.T$ALLO AS ALLO, col042.T$PDNO as LOT from {0}.tticol042{1} col042
           INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
           UNION
-          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA,T$ALLO AS ALLO from {0}.twhcol131{1} col131
+          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA,T$ALLO AS ALLO, T$CLOT as LOT from {0}.twhcol131{1} col131
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar

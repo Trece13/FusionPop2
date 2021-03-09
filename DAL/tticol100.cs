@@ -453,5 +453,27 @@ namespace whusa.DAL
             }
             return parameterCollection;
         }
+
+        public DataTable selecthandletwhwmd200(ref Ent_tticol100 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable consulta = new DataTable();
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$SWAR", parametro.cwar.Trim().ToUpper());
+                //strSentencia = "select  t$cwar warehosue, t$sloc handle_locations from   " + owner + ".twhwmd200" + env + "   where   t$cwar = '" + stockw.Trim().ToUpper() + "'";
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecthandletwhwmd200", ref owner, ref env, tabla, paramList);
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return consulta;
+        }
     }
 }
