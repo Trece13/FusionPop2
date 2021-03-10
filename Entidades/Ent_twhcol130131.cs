@@ -111,5 +111,7 @@ namespace whusa
         public string urpt { get; set; }
 
         public string DSCAW { get; set; }
+
+        public string KTLC { get; set; }
     }
 }

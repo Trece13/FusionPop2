@@ -23,3 +23,16 @@ function CallFailed(res, destCtrl) {
     alert(res.get_message());
     return false;
 }
+
+function  sendAjax(WebMethod, Data, FuncitionSucces){
+    var options = {
+        type: "POST",
+        url: WebMethod,
+        data: Data,
+        contentType: "application/json; charset=utf-8",
+        async: true,
+        dataType: "json",
+        success: FuncitionSucces
+    };
+    $.ajax(options);
+}

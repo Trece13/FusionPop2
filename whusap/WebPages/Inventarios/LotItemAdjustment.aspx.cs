@@ -96,21 +96,54 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string verifyItem(string ITEM)
         {
-            //DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
             Ent_ttwhcol016 obj016 = new Ent_ttwhcol016();
             obj016.item = ITEM.ToUpper().Trim();
-            dal016.TakeMaterialInv_verificaItem_Param(ref obj016, ref strError);
+            DataTable DTItemt = dal016.TakeMaterialInv_verificaItem_Param(ref obj016, ref strError);
 
-            return JsonConvert.SerializeObject("MyObj"); ;
+            if (DTItemt.Rows.Count > 0)
+            {
+                var MyObjDT = DTItemt.Rows[0];
+
+                MyObj.KTLC = MyObjDT["LOTE"].ToString();
+                MyObj.ITEM = MyObjDT["t$item"].ToString();
+                MyObj.DSCA = MyObjDT["DESCRIPCION"].ToString();
+                MyObj.Error = false;
+                MyObj.errorMsg = string.Empty;
+                MyObj.TipeMsgJs = string.Empty;
+            }
+            else
+            {
+                MyObj.Error = true;
+                MyObj.errorMsg = "Item code doesn´t exist";
+                MyObj.TipeMsgJs = "Label";
+
+            }
+
+            return JsonConvert.SerializeObject(MyObj); ;
         }
 
         [WebMethod]
         public static string verifyLot(string ITEM,string LOT)
         {
             Ent_twhltc100 data100 = new Ent_twhltc100() { item = ITEM, clot = LOT };
-            var validaLote = dal100.listaRegistro_Clot(ref data100, ref strError);
+            var DTLot = dal100.listaRegistro_Clot(ref data100, ref strError);
 
-            return JsonConvert.SerializeObject("MyObj");
+            if (DTLot.Rows.Count > 0)
+            {
+                var MyObjDT = DTLot.Rows[0];
+                MyObj.Error = false;
+                MyObj.errorMsg = string.Empty;
+                MyObj.TipeMsgJs = string.Empty;
+            }
+            else
+            {
+                MyObj.Error = true;
+                MyObj.errorMsg = "Lot code doesn´t exist";
+                MyObj.TipeMsgJs = "Label";
+
+            }
+
+            return JsonConvert.SerializeObject(MyObj);
         }
 
 
@@ -121,7 +154,24 @@ namespace whusap.WebPages.Inventarios
             myObj100.cwar = CWAR.Trim().ToUpper();
             DataTable DTWare = dalticol100.selecthandletwhwmd200(ref myObj100, ref strError);
 
-            return JsonConvert.SerializeObject("MyObj");
+            if (DTWare.Rows.Count > 0)
+            {
+                var MyObjDT = DTWare.Rows[0];
+                MyObj.CWAR = MyObjDT["warehosue"].ToString();
+                MyObj.SLOC = MyObjDT["handle_locations"].ToString();
+                MyObj.Error = false;
+                MyObj.errorMsg = string.Empty;
+                MyObj.TipeMsgJs = string.Empty;
+            }
+            else
+            {
+                MyObj.Error = true;
+                MyObj.errorMsg = "Warehouse code doesn´t exist";
+                MyObj.TipeMsgJs = "Label";
+
+            }
+
+            return JsonConvert.SerializeObject(MyObj);
         }
 
         [WebMethod]
@@ -129,7 +179,22 @@ namespace whusap.WebPages.Inventarios
         {
             DataTable DTLoca = dalTransfer.ConsultarWarehouse(LOCA);
 
-            return JsonConvert.SerializeObject("MyObj");
+            if (DTLoca.Rows.Count > 0)
+            {
+                var MyObjDT = DTLoca.Rows[0];
+                MyObj.Error = false;
+                MyObj.errorMsg = string.Empty;
+                MyObj.TipeMsgJs = string.Empty;
+            }
+            else
+            {
+                MyObj.Error = true;
+                MyObj.errorMsg = "Location code doesn´t exist";
+                MyObj.TipeMsgJs = "Label";
+
+            }
+
+            return JsonConvert.SerializeObject(MyObj);
         }
 
 
