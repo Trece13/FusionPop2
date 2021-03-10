@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <script type="text/javascript">
+    +<script type="text/javascript">
         function printDiv(divID) {
 
             var monthNames = [
@@ -66,12 +66,9 @@
 
             return true;
         };
-    </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
-
-    <style type="text/css">
+        crossorigin="anonymous"><style type="text/css">
         
         #ShowModal
         {
@@ -113,8 +110,7 @@
             text-align: center;
             border: 1px solid black;
         }       
-    </style>
-    <script type="text/javascript">
+    </style><script type="text/javascript">
         function IniciarListasOrderType() {
 
             LstSalesOrder = JSON.parse('<%= LstSalesOrderJSON%>');
@@ -126,8 +122,7 @@
         }
 
         IniciarListasOrderType();
-    </script>
-    <form id="form1" class="container col-sm-12">
+    </script><form id="form1" class="container col-sm-12">
 
     
     <button  id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
@@ -308,7 +303,7 @@
     <label id="lblError" class="col-sm-12">
     </label>
     <div id="MyEtiqueta">
-        <table style="width: 5in; height: 3in; margin: 0px; border:1px solid black">
+        <table style="width: 6in; height: 4in; margin: 0px; border:1px solid black">
             <tr>
                 <td colspan="4" style="border:1px solid black;" align="center">
                 <label id="lblItemID">

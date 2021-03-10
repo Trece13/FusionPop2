@@ -24,12 +24,19 @@
                 "/" +
                 d.getFullYear() +
                 " " +
-                d.getHours() +
+                addZero(d.getHours()) +
                 ":" +
-                d.getMinutes() +
+                addZero(d.getMinutes()) +
                 ":" +
-                d.getSeconds()
+                addZero(d.getSeconds())
                 );
+
+            function addZero(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            };
 
             var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
@@ -56,7 +63,7 @@
         #btnMyEtiquetaOC, #btnMyEtiqueta
         {
             display: none;
-        }
+        }     
     </style>
     <form id="form1" class="container">
     <div class="form-group row">
@@ -76,86 +83,83 @@
     </div>
     </form>
     <div id="MyEtiqueta">
-        <table style="margin:auto">
+        <table style="width: 6in; height: 4in; margin: 0px; border:1px solid black">
             <tr>
-                <td colspan="4">
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
-                        vspace="5" style="width: 4in; height: .5in;" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style = "font-size : 14px">
-                        ITEM</label>
-                </td>
-                <td>
-                    <label id="lblItemID" style="display:none">
+                <td colspan="4" style="border:1px solid black;" align="center">
+                <label id="lblItemID">
                     </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
-                        vspace="5" style="width: 3in; height: .5in;" />
-                </td>
-  
-            </tr>
-            <tr>
-                <td></td>
-                <td><label id="lblItemDesc" style="font-size : 14px">
-                    </label></td>
-            </tr>
-
-            <tr>
-                <td>
-                    <label style = "font-size : 14px">
-                        QUANTITY</label>
-                </td>
-                <td>
-                    <label id="LblQuantity" style="display:none;font-size : 11px">
-                    </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
-                        vspace="5" style="width: 1.5in; height: .5in;" />
-
-                        <label style = "font-size : 14px" id="lblUnit"/>
-                        
-                </td>
-            </tr>
-             <tr>
-                <td>
-                </td>
-                <td>
-                      <label id="LblUnit" style="display:none">
-                    </label>  
                 </td>
             </tr>
             <tr>
-                <td>
-                    <label style = "font-size : 14px">
+                <td colspan="4" style="border:1px solid black;" align="center">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="Contenido_CBPalletNO" alt="" hspace="60"
+                        vspace="5" style="width: 4in; height: 0.7in; margin: 0px !important" />
+                </td>
+            </tr>
+            <tr>
+                <td style="border:1px solid black;" align="left">
+                    <label>
                         LOT</label>
                 </td>
-                <td>
-                    <label id="LblLotId" style="display:none; font-size : 11px">
+                <td style="border:1px solid black;" align="center">                   
+                    <label id="LblOriginalLot">
                     </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot" alt="" hspace="60"
-                        vspace="5" style="width: 3in; height: .5in;" />
+                </td>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Quantity</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblQuantity">
+                    </label>
+                    <label id="LblUnit">
+                    </label>
                 </td>
             </tr>
             <tr>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Origin Lot</label>
+                </td>
+                <td style="border:1px solid black;" align="center">                   
+                    <label id="LblLotId">
+                    </label>
+                </td>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Supplier</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblSupplier">
+                    </label>
+                </td>
             </tr>
             <tr>
-                <td>
-                    <label style = "font-size : 14px">
-                        RECEIPT DATE:</label>
+                <td style="border:1px solid black;" align="left">
+                        <label>
+                        Received By</label>
                 </td>
-                <td>
-                    <label id="LblDate" style = "font-size : 14px">
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblLogn">
                     </label>
                 </td>
-                <td>
-                    <label style = "font-size : 14px">
-                        REPRINT:</label><label id="LblReprint" style = "font-size : 14px">
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Received On</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblDate">
                     </label>
                 </td>
+            </tr>
+            <tr>
+            <td colspan="4" style="border:1px solid black; height:20px" align="center">
+                <label>
+                REPRINTED</label>
+            </td>
             </tr>
         </table>
-    </div>
+    </div>  
     <div id="MyEtiquetaOC">
         <table>
             <tr>
@@ -298,14 +302,15 @@
 
             lblItemID = $('#lblItemID');
             lblItemDesc = $('#lblItemDesc');
-
+            LblOriginalLot = $('#LblOriginalLot');
             LblQuantity = $('#LblQuantity');
             LblUnit = $('#LblUnit');
 
             LblLotId = $('#LblLotId');
             LblDate = $('#LblDate');
             LblReprint = $('#LblReprint');
-
+            LblLogn = $('#LblLogn');
+            LblSupplier = $('#LblSupplier');
         }
 
         var FuncitionSuccesReprint = function (r) {
@@ -337,12 +342,14 @@
 
                 Contenido_CBPalletNO.attr("src", MyObject.PAID_URL)
 
-                lblItemID.html(MyObject.ITEM);
+                //lblItemID.html(MyObject.ITEM);
+                lblItemID.html(MyObject.ITEM_URL);
                 lblItemDesc.html(MyObject.DSCA);
-
+                LblOriginalLot.html(MyObject.ORNO);
                 LblQuantity.html(MyObject.QTYC);
                 LblUnit.html(MyObject.UNIT);
-
+                LblLogn.html(MyObject.LOGN);
+                LblSupplier.html(MyObject.NAMA);
                 LblLotId.html(MyObject.CLOT);
                 //LblDate.html();
                 LblReprint.html(MyObject.NPRT);
