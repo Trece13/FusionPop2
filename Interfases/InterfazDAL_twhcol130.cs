@@ -172,10 +172,12 @@ namespace whusa.Interfases
                          LOGT = MyRow["LOGT"].ToString(),
                          STAT = MyRow["T$STAT"].ToString(),
                          DSCA = MyRow["DSCA"].ToString(),
+                         NAMA = MyRow["T$NAMA"].ToString(),
 
                          PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID+ "&code=Code128&dpi=96",
                          ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["OORG"].ToString() + "&code=Code128&dpi=96",
-                         ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
+                         //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
+                         ITEM_URL = MyRow["ITEM"].ToString().Trim().ToUpper() + " - " + MyRow["DSCA"].ToString().Trim().ToUpper(),
                          CLOT_URL = MyRow["CLOT"].ToString() == "" ? "" : (UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["CLOT"].ToString() + "&code=Code128&dpi=96"),
                          QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96",
                          UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96"
@@ -227,10 +229,12 @@ namespace whusa.Interfases
                         LOGT = MyRow["LOGT"].ToString(),
                         STAT = MyRow["T$STAT"].ToString(),
                         DSCA = MyRow["DSCA"].ToString(),
+                        NAMA = MyRow["T$NAMA"].ToString(),
 
                         PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96",
                         ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["OORG"].ToString() + "&code=Code128&dpi=96",
-                        ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
+                        //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
+                        ITEM_URL = MyRow["ITEM"].ToString().Trim().ToUpper() + " - " + MyRow["DSCA"].ToString().Trim().ToUpper(),
                         CLOT_URL = MyRow["CLOT"].ToString() == "" ? "" : (UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["CLOT"].ToString() + "&code=Code128&dpi=96"),
                         QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96",
                         UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96"
@@ -314,7 +318,8 @@ namespace whusa.Interfases
                         SLOC = MyRow["SLOC"].ToString(),
                         ALLO = MyRow["ALLO"].ToString(),
                         ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["OORG"].ToString() + "&code=Code128&dpi=96",
-                        ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
+                        //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
+                        ITEM_URL = MyRow["ITEM"].ToString().Trim().ToUpper() + " - " + MyRow["DSCA"].ToString().Trim().ToUpper(),
                         CLOT_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["CLOT"].ToString() + "&code=Code128&dpi=96",
                         QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96",
                         UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["UNIC"].ToString() + "&code=Code128&dpi=96"

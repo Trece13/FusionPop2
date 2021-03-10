@@ -13,40 +13,13 @@ namespace whusap.WebPages.InvReceipts {
     public partial class whInvReprintReceiptRawMaterial {
         
         /// <summary>
-        /// CBPalletNO control.
+        /// Contenido_CBPalletNO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBPalletNO;
-        
-        /// <summary>
-        /// CBItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBItem;
-        
-        /// <summary>
-        /// CBQuantity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBQuantity;
-        
-        /// <summary>
-        /// CBLot control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBLot;
+        protected global::System.Web.UI.HtmlControls.HtmlImage Contenido_CBPalletNO;
         
         /// <summary>
         /// CBPurchaseOrder control.
