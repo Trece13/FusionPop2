@@ -148,7 +148,7 @@
                         Received On</label>
                 </td>
                 <td style="border:1px solid black;" align="center">
-                    <label id="LblDate">
+                    <label id="LblDater">
                     </label>
                 </td>
             </tr>
@@ -307,7 +307,7 @@
             LblUnit = $('#LblUnit');
 
             LblLotId = $('#LblLotId');
-            LblDate = $('#LblDate');
+            LblDater = $('#LblDater');
             LblReprint = $('#LblReprint');
             LblLogn = $('#LblLogn');
             LblSupplier = $('#LblSupplier');
@@ -351,7 +351,7 @@
                 LblLogn.html(MyObject.LOGN);
                 LblSupplier.html(MyObject.NAMA);
                 LblLotId.html(MyObject.CLOT);
-                //LblDate.html();
+                LblDater.html(MyObject.DATE);
                 LblReprint.html(MyObject.NPRT);
 
                 if (MyObject.OORG.trim() == "2") {
