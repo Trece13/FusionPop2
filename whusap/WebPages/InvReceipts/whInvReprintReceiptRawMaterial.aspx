@@ -92,7 +92,7 @@
             </tr>
             <tr>
                 <td colspan="4" style="border:1px solid black;" align="center">
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="Contenido_CBPalletNO" alt="" hspace="60"
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
                         vspace="5" style="width: 4in; height: 0.7in; margin: 0px !important" />
                 </td>
             </tr>
