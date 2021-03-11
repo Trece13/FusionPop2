@@ -288,8 +288,8 @@
             Obj028.REFCNTD = "0";
             Obj028.REFCNTU = "0";
 
-            var Data = JSON.parse(JSON.stringify(Obj028));
-            sendAjax("LotItemAdjustment.aspx/save", Data, saveSuccess);
+            var Data = "{twhcol028:" + JSON.stringify(Obj028) + "}";
+            sendAjax("LotItemAdjustment.aspx/Save", Data, saveSuccess);
         }
 
         var sendPallet = function (e) {

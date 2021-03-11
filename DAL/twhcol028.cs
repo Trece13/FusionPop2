@@ -40,7 +40,6 @@ namespace whusa.DAL
             {
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":T$PAID", Obj028.PAID.Trim().ToUpper());
-                paramList.Add(":T$PAID", Obj028.PAID.Trim().ToUpper());
                 paramList.Add(":T$CDIS", Obj028.CDIS.Trim().ToUpper());
                 paramList.Add(":T$EMNO", Obj028.EMNO.Trim().ToUpper());
                 paramList.Add(":T$SITM", Obj028.SITM.Trim().ToUpper());
