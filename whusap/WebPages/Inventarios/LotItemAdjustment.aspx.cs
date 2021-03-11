@@ -31,6 +31,7 @@ namespace whusap.WebPages.Inventarios
         private static InterfazDAL_twhltc100 dal100 = new InterfazDAL_twhltc100();
         private static InterfazDAL_tticol100 dalticol100 = new InterfazDAL_tticol100();
         private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
+        private static InterfazDAL_twhcol028 _idaltwhcol028 = new InterfazDAL_twhcol028();
         private static IntefazDAL_transfer dalTransfer = new IntefazDAL_transfer();
         
         protected void Page_Load(object sender, EventArgs e)
@@ -74,10 +75,12 @@ namespace whusap.WebPages.Inventarios
             {
                 var MyObjDT = DTPallet.Rows[0];
                 MyObj.ITEM = MyObjDT["ITEM"].ToString();
+                MyObj.KTLC = MyObjDT["KLTC"].ToString();
                 MyObj.CLOT = MyObjDT["LOT"].ToString();
                 MyObj.QTYA = MyObjDT["QTYT"].ToString();
                 MyObj.UNIT = MyObjDT["UNIT"].ToString();
                 MyObj.CWAR = MyObjDT["CWAT"].ToString();
+                MyObj.SLOC = MyObjDT["SLOC"].ToString();
                 MyObj.LOCA = MyObjDT["ACLO"].ToString();
                 MyObj.DSCA = MyObjDT["DSCA"].ToString();
                 MyObj.DSCAW = MyObjDT["DESCAW"].ToString();
@@ -107,6 +110,7 @@ namespace whusap.WebPages.Inventarios
                 MyObj.KTLC = MyObjDT["LOTE"].ToString();
                 MyObj.ITEM = MyObjDT["t$item"].ToString();
                 MyObj.DSCA = MyObjDT["DESCRIPCION"].ToString();
+                MyObj.UNIT = MyObjDT["UNIDAD"].ToString();
                 MyObj.Error = false;
                 MyObj.errorMsg = string.Empty;
                 MyObj.TipeMsgJs = string.Empty;
@@ -190,6 +194,29 @@ namespace whusap.WebPages.Inventarios
             {
                 MyObj.Error = true;
                 MyObj.errorMsg = "Location code doesn´t exist";
+                MyObj.TipeMsgJs = "Label";
+
+            }
+
+            return JsonConvert.SerializeObject(MyObj);
+        }
+
+        [WebMethod]
+        public static string Save(Ent_twhcol028 twhcol028)
+        {
+            bool Res = _idaltwhcol028.insertRegistertwhcol028(ref twhcol028, ref strError);
+
+            if (Res)
+            {
+                MyObj.Error = false;
+                MyObj.errorMsg = "No se inserto correctamente";
+                MyObj.SuccessMsg = "Se inserto ok";
+                MyObj.TipeMsgJs = "Label";
+            }
+            else
+            {
+                MyObj.Error = true;
+                MyObj.errorMsg = "No se inserto correctamente";
                 MyObj.TipeMsgJs = "Label";
 
             }

@@ -29,23 +29,28 @@
             border-color: red;
         }
 
-        #loadWarehouse{
-            display:none;
+        #loadWarehouse {
+            display: none;
         }
-        .fa-check{
-            color:green
+
+        .fa-check {
+            color: green;
         }
-        .fa-times{
-            color:red;
+
+        .fa-times {
+            color: red;
         }
-        #checkItem,#checkLot,#checkWarehouse,#checkLoca{
-            display:none;
+
+        #checkItem, #checkLot, #checkWarehouse, #checkLoca {
+            display: none;
         }
-        #exItem,#exLot,#exWarehouse,#exLoca{
-            display:none;
+
+        #exItem, #exLot, #exWarehouse, #exLoca {
+            display: none;
         }
-        #loadItem,#loadLot,#loadWarehouse,#loadLoca{
-            display:none;
+
+        #loadItem, #loadLot, #loadWarehouse, #loadLoca {
+            display: none;
         }
     </style>
     <form id="form1" class="container">
@@ -66,6 +71,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col" colspan="2">Item</th>
+                    <th scope="col"></th>
                     <th scope="col" colspan="2">Lot</th>
                     <th scope="col">Actual Qty</th>
                     <th scope="col">Unit</th>
@@ -78,6 +84,7 @@
                     <th scope="row" colspan="2">Actual Data</th>
                     <td id="lbItemActual">OOBPW-00600014</td>
                     <td></td>
+                    <td id="lbItemDscaActual">OOBPW-00600014</td>
                     <td id="lbLotActual">OO0003923</td>
                     <td></td>
                     <td id="lbQtyActual">18</td>
@@ -93,6 +100,7 @@
                     <td><i id="btnRestart" class="fas fa-undo"></i></td>
                     <td id="lbItemAdjusted" contenteditable="true">OOBPW-00600014</td>
                     <td><i id="checkItem" class="fas fa-check"></i><i id="exItem" class="fas fa-times"></i><i id="loadItem" class="fas fa-spinner fa-pulse"></i></td>
+                    <td id="lbItemDscaAdjusted">OOBPW-00600014</td>
                     <td id="lbLotAdjusted" contenteditable="true">OO0003923</td>
                     <td><i id="checkLot" class="fas fa-check"></i><i id="exLot" class="fas fa-times"></i><i id="loadLot" class="fas fa-spinner fa-pulse"></i></td>
                     <td id="lbQtyAdjusted">18</td>
@@ -104,12 +112,14 @@
                 </tr>
                 <tr>
                     <th scope="row">Reason Code</th>
-                    <td colspan="2">
+                    <td></td>
+                    <td colspan="3">
                         <asp:DropDownList runat="server" ID="dropDownReasonCodes" CssClass="TextBoxBig"></asp:DropDownList></td>
                 </tr>
                 <tr style="border-top: none">
                     <th scope="row">Cost Center</th>
-                    <td colspan="2">
+                    <td></td>
+                    <td colspan="3">
                         <asp:DropDownList runat="server" ID="dropDownCostCenters" CssClass="TextBoxBig"></asp:DropDownList></td>
                 </tr>
                 <tr style="border-top: none">
@@ -120,6 +130,57 @@
         </table>
     </div>
     <script type="text/javascript">
+        //var twhcol028 = {
+        //    PAID: "",
+        //    CDIS: "",
+        //    EMNO: "",
+        //    SITM: "",
+        //    SWAR: "",
+        //    SLOC: "",
+        //    SLOT: "",
+        //    SQTY: "",
+        //    TITM: "",
+        //    TWAR: "",
+        //    TLOC: "",
+        //    TLOT: "",
+        //    TQTY: "",
+        //    LOGN: "",
+        //    DATR: "",
+        //    PROC: "",
+        //    SORN: "",
+        //    SPON: "",
+        //    TORN: "",
+        //    TPON: "",
+        //    MESS: "",
+        //    REFCNTD: "",
+        //    REFCNTU: ""
+        //}
+        class Ent_twhcol028  {
+            PAID    = "0";
+            CDIS    = "0";
+            EMNO    = "0";
+            SITM    = "0";
+            SWAR    = "0";
+            SLOC    = "0";
+            SLOT    = "0";
+            SQTY    = "0";
+            TITM    = "0";
+            TWAR    = "0";
+            TLOC    = "0";
+            TLOT    = "0";
+            TQTY    = "0";
+            LOGN    = "0";
+            DATR    = "0";
+            PROC    = "0";
+            SORN    = "0";
+            SPON    = "0";
+            TORN    = "0";
+            TPON    = "0";
+            MESS    = "0";
+            REFCNTD = "0";
+            REFCNTU = "0";
+        }
+
         var restart = false;
         var waitSecontsPallet;
         var timeOutPallet = 0;
@@ -136,12 +197,14 @@
             //Formulario
             txPalletID = document.getElementById("txPalletID");
             lbItemActual = document.getElementById("lbItemActual");
+            lbItemDscaActual = document.getElementById("lbItemDscaActual");
             lbLotActua = document.getElementById("lbLotActua");
             lbQtyActual = document.getElementById("lbQtyActual");
             lbUnitActual = document.getElementById("lbUnitActual");
             lbWarehouseActual = document.getElementById("lbWarehouseActual");
             lbLocaActual = document.getElementById("lbLocaActual");
             lbItemAdjusted = document.getElementById("lbItemAdjusted");
+            lbItemDscaAdjusted = document.getElementById("lbItemDscaAdjusted");
             lbLotAdjusted = document.getElementById("lbLotAdjusted");
             lbQtyAdjusted = document.getElementById("lbQtyAdjusted");
             lbUnitAdjusted = document.getElementById("lbUnitAdjusted");
@@ -174,14 +237,14 @@
 
         }
 
-        var handerTimeout = function (currentTimeOut,currentMethod) {
+        var handerTimeout = function (currentTimeOut, currentMethod) {
             clearTimeout(currentTimeOut);
             return setTimeout(currentMethod, 2000);
         }
 
         var restartInfo = function (e) {
             restart = true;
-            while(restart){
+            while (restart) {
                 lbItemAdjusted.textContent = lbItemActual.textContent;
                 lbLotAdjusted.textContent = lbLotActual.textContent;
                 lbWarehouseAdjusted.textContent = lbWarehouseActual.textContent;
@@ -200,7 +263,33 @@
         }
 
         var sendInfo = function (e) {
-            console.log(e.data);
+            var Obj028 = new Ent_twhcol028();
+            Obj028.PAID = txPalletID.value.trim().toUpperCase();
+            Obj028.CDIS = "0";
+            Obj028.EMNO = "0";
+            Obj028.SITM = "0";
+            Obj028.SWAR = "0";
+            Obj028.SLOC = "0";
+            Obj028.SLOT = "0";
+            Obj028.SQTY = "0";
+            Obj028.TITM = "0";
+            Obj028.TWAR = "0";
+            Obj028.TLOC = "0";
+            Obj028.TLOT = "0";
+            Obj028.TQTY = "0";
+            Obj028.LOGN = "0";
+            Obj028.DATR = "0";
+            Obj028.PROC = "0";
+            Obj028.SORN = "0";
+            Obj028.SPON = "0";
+            Obj028.TORN = "0";
+            Obj028.TPON = "0";
+            Obj028.MESS = "0";
+            Obj028.REFCNTD = "0";
+            Obj028.REFCNTU = "0";
+
+            var Data = JSON.parse(JSON.stringify(Obj028));
+            sendAjax("LotItemAdjustment.aspx/save", Data, saveSuccess);
         }
 
         var sendPallet = function (e) {
@@ -208,25 +297,25 @@
         }
 
         var sendItem = function (e) {
-                timeOutItem = handerTimeout(timeOutItem, verifyItem);
+            timeOutItem = handerTimeout(timeOutItem, verifyItem);
         }
-        
+
         var sendLot = function (e) {
-                timeOutLot = handerTimeout(timeOutLot, verifyLot);
+            timeOutLot = handerTimeout(timeOutLot, verifyLot);
         }
 
         var sendWarehouse = function (e) {
-                timeOutPallet = handerTimeout(timeOutWarehouse, verifyWarehouse);
+            timeOutPallet = handerTimeout(timeOutWarehouse, verifyWarehouse);
         }
 
         var sendLoca = function (e) {
-                timeOutPallet = handerTimeout(timeOutLoca, verifyLoca);
+            timeOutPallet = handerTimeout(timeOutLoca, verifyLoca);
         }
 
         var verifyPallet = function (e) {
-            var Data = "{'PAID':'" + lbItemAdjusted.textContent.trim().toUpperCase() + "'}";
+            var Data = "{'PAID':'" + txPalletID.value.trim().toUpperCase() + "'}";
             sendAjax("LotItemAdjustment.aspx/verifyPallet", Data, verifyPalletSuccess);
-            
+
         }
 
         var verifyItem = function (e) {
@@ -241,7 +330,7 @@
 
         var verifyWarehouse = function (e) {
             var Data = "{'CWAR':'" + lbWarehouseAdjusted.textContent.trim().toUpperCase() + "'}";
-            sendAjax("LotItemAdjustment.aspx/verifyWarehouse", Data, verifyWarehouseSuccess);            
+            sendAjax("LotItemAdjustment.aspx/verifyWarehouse", Data, verifyWarehouseSuccess);
         }
 
         var verifyLoca = function (e) {
@@ -249,16 +338,32 @@
             sendAjax("LotItemAdjustment.aspx/verifyLoca", Data, verifyLocaSuccess)
         }
 
+
+
         var verifyPalletSuccess = function (res) {
             var MyObj = JSON.parse(res.d);
-            lbItemActual.textContent = MyObj.ITEM + " - " + MyObj.DSCA;
+            lbItemActual.textContent = MyObj.ITEM;
+            lbItemDscaActual.textContent = MyObj.DSCA;
             lbItemActual.setAttribute("KTLC", MyObj.KTLC);
-            lbItemAdjusted.setAttribute("KTLC", MyObj.KTLC);
             lbLotActual.textContent = MyObj.CLOT;
             lbQtyActual.textContent = MyObj.QTYA;
             lbUnitActual.textContent = MyObj.UNIT;
-            lbWarehouseActual.textContent = MyObj.CWAR + " - " + MyObj.DSCAW;
+            lbWarehouseActual.textContent = MyObj.CWAR;
+            lbWarehouseActual.setAttribute("sloc", MyObj.SLOC);
             lbLocaActual.textContent = MyObj.LOCA;
+
+            lbItemAdjusted.textContent = MyObj.ITEM;
+            lbItemDscaAdjusted.textContent = MyObj.DSCA;
+            lbItemAdjusted.setAttribute("KTLC", MyObj.KTLC);
+            lbLotAdjusted.textContent = MyObj.CLOT;
+            lbQtyAdjusted.textContent = MyObj.QTYA;
+            lbUnitAdjusted.textContent = MyObj.UNIT;
+            lbWarehouseAdjusted.textContent = MyObj.CWAR;
+            lbWarehouseAdjusted.setAttribute("sloc", MyObj.SLOC);
+            lbLocaAdjusted.textContent = MyObj.LOCA;
+        }
+        var saveSuccess = function (res) {
+            console.log("save ok")
         }
 
         var verifyItemSuccess = function (res) {
@@ -275,6 +380,7 @@
                 lbLotAdjusted.setAttribute("contentEditable", false);
                 lbLotAdjusted.classList.remove("isValid");
                 lbLotAdjusted.classList.remove("isNotValid");
+                lbItemDscaAdjusted.textContent = "";
             }
             else {
                 checkItem.style.display = "inline-block";
@@ -282,6 +388,8 @@
                 lbItemAdjusted.classList.remove("isNotValid");
                 lbItemAdjusted.classList.add("isValid");
                 lbItemAdjusted.setAttribute("ktlc", MyObj.KTLC);
+                lbItemDscaAdjusted.textContent = MyObj.DSCA;
+                lbUnitAdjusted.textContent = MyObj.UNIT;
                 if (MyObj.KTLC == "1") {
                     lbLotAdjusted.setAttribute("contentEditable", true);
                     lbLotAdjusted.focus();
@@ -317,7 +425,7 @@
         }
 
         var verifyWarehouseSuccess = function (res) {
-            
+
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
                 checkWarehouse.style.display = "none";

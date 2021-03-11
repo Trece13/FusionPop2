@@ -552,7 +552,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
-
     <Module name="tticol082">
       <operationName name="ActualizarCantidades222">
         <stringSQL>
@@ -5767,6 +5766,114 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT T$CDIS AS CDIS, T$DSCA AS DSCA FROM {2}
           WHERE T$RSTP = [:T$RSTP] ORDER BY T$DSCA
+        </stringSQL>
+      </operationName>
+    </Module>
+    <Module name="twhcol027">
+      <operationName name="insertRegistertwhcol027">
+        <stringSQL>
+          INSERT INTO {0}.twhcol027{1}
+          (T$PAID,
+          T$CDIS,
+          T$EMNO,
+          T$SITM,
+          T$SWAR,
+          T$SLOC,
+          T$SLOT,
+          T$SQTY,
+          T$TITM,
+          T$TWAR,
+          T$TLOC,
+          T$TLOT,
+          T$TQTY,
+          T$LOGN,
+          T$DATR,
+          T$PROC,
+          T$SORN,
+          T$SPON,
+          T$TORN,
+          T$TPON,
+          T$MESS,
+          T$REFCNTD,
+          T$REFCNTU)
+          VALUES
+          ('[:T$PAID]',
+          '[:T$CDIS]',
+          '[:T$EMNO]',
+          '[:T$SITM]',
+          '[:T$SWAR]',
+          '[:T$SLOC]',
+          '[:T$SLOT]',
+          '[:T$SQTY]',
+          '[:T$TITM]',
+          '[:T$TWAR]',
+          '[:T$TLOC]',
+          '[:T$TLOT]',
+          '[:T$TQTY]',
+          '[:T$LOGN]',
+          '[:T$DATR]',
+          '[:T$PROC]',
+          '[:T$SORN]',
+          '[:T$SPON]',
+          '[:T$TORN]',
+          '[:T$TPON]',
+          '[:T$MESS]',
+          '[:T$REFCNTD]',
+          '[:T$REFCNTU]')
+        </stringSQL>
+      </operationName>
+    </Module>
+    <Module name="twhcol028">
+      <operationName name="insertRegistertwhcol028">
+        <stringSQL>
+          INSERT INTO {0}.twhcol028{1}
+          (T$PAID,
+          T$CDIS,
+          T$EMNO,
+          T$SITM,
+          T$SWAR,
+          T$SLOC,
+          T$SLOT,
+          T$SQTY,
+          T$TITM,
+          T$TWAR,
+          T$TLOC,
+          T$TLOT,
+          T$TQTY,
+          T$LOGN,
+          T$DATR,
+          T$PROC,
+          T$SORN,
+          T$SPON,
+          T$TORN,
+          T$TPON,
+          T$MESS,
+          T$REFCNTD,
+          T$REFCNTU)
+          VALUES
+          ('[:T$PAID]',
+          '[:T$CDIS]',
+          '[:T$EMNO]',
+          '[:T$SITM]',
+          '[:T$SWAR]',
+          '[:T$SLOC]',
+          '[:T$SLOT]',
+          '[:T$SQTY]',
+          '[:T$TITM]',
+          '[:T$TWAR]',
+          '[:T$TLOC]',
+          '[:T$TLOT]',
+          '[:T$TQTY]',
+          '[:T$LOGN]',
+          '[:T$DATR]',
+          '[:T$PROC]',
+          '[:T$SORN]',
+          '[:T$SPON]',
+          '[:T$TORN]',
+          '[:T$TPON]',
+          '[:T$MESS]',
+          '[:T$REFCNTD]',
+          '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
     </Module>
