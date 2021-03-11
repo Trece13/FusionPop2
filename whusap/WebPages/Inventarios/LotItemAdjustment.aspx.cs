@@ -32,16 +32,22 @@ namespace whusap.WebPages.Inventarios
         private static InterfazDAL_tticol100 dalticol100 = new InterfazDAL_tticol100();
         private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
         private static InterfazDAL_twhcol028 _idaltwhcol028 = new InterfazDAL_twhcol028();
+        public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
         private static IntefazDAL_transfer dalTransfer = new IntefazDAL_transfer();
+        public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
+        private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
         
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["TBL"] = string.Empty;
             generateDropDownReasonCodes();
             generateDropDownCostCenters();
             var ctrlName = Request.Params[Page.postEventSourceID];
             var args = Request.Params[Page.postEventArgumentID];
             if (!IsPostBack)
             {
+                Session["TBL"] = string.Empty;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
                 if (formName.Contains('?'))
                 {
@@ -74,6 +80,8 @@ namespace whusap.WebPages.Inventarios
             if (DTPallet.Rows.Count > 0 )
             {
                 var MyObjDT = DTPallet.Rows[0];
+                HttpContext.Current.Session["TBL"] = MyObjDT["TBL"].ToString().Trim();
+                MyObj.TBL = MyObjDT["TBL"].ToString();
                 MyObj.ITEM = MyObjDT["ITEM"].ToString();
                 MyObj.KTLC = MyObjDT["KLTC"].ToString();
                 MyObj.CLOT = MyObjDT["LOT"].ToString();
@@ -209,9 +217,13 @@ namespace whusap.WebPages.Inventarios
             if (Res)
             {
                 MyObj.Error = false;
-                MyObj.errorMsg = "No se inserto correctamente";
+                MyObj.errorMsg = "Se inserto correctamente";
                 MyObj.SuccessMsg = "Se inserto ok";
                 MyObj.TipeMsgJs = "Label";
+                saveOriginTable(twhcol028);
+                string strOldSequence = getSequence(twhcol028);
+                string strNewSequence = currentSequience(strOldSequence);
+                saveNewPalletOriginTable(twhcol028, strNewSequence);
             }
             else
             {
@@ -224,7 +236,184 @@ namespace whusap.WebPages.Inventarios
             return JsonConvert.SerializeObject(MyObj);
         }
 
+        private static void saveNewPalletOriginTable(Ent_twhcol028 twhcol028, string NewSequence)
+        {
+            int indexSeparator = twhcol028.PAID.IndexOf("-");
+            string SQNB = twhcol028.PAID.Substring(0, indexSeparator);
+            string PAID = SQNB + "-" + NewSequence;
+            twhcol028.PAID = PAID;
 
+            switch (HttpContext.Current.Session["TBL"].ToString())
+            {
+                case "ticol022":
+                    Ent_tticol022 obj022 = new Ent_tticol022();
+                    List<Ent_tticol022> list022 = new List<Ent_tticol022>();
+                    obj022.pdno = string.IsNullOrEmpty(twhcol028.TLOT) ? " " : twhcol028.TLOT.ToUpper().Trim();
+                    obj022.sqnb = PAID;
+                    obj022.proc = 1;
+                    obj022.logn = HttpContext.Current.Session["user"].ToString();
+                    obj022.mitm = twhcol028.TITM;
+                    obj022.qtdl = Convert.ToDecimal(twhcol028.TQTY);
+                    obj022.cuni = "kg";
+                    obj022.log1 = "NONE";
+                    obj022.qtd1 = Convert.ToInt32(twhcol028.TQTY);
+                    obj022.pro1 = 1;
+                    obj022.log2 = "NONE";
+                    obj022.qtd2 = Convert.ToInt32(twhcol028.TQTY);
+                    obj022.pro2 = 2;
+                    obj022.loca = " ";
+                    obj022.norp = 1;
+                    obj022.dele = 2;
+                    obj022.logd = "NONE";
+                    obj022.refcntd = 0;
+                    obj022.refcntu = 0;
+                    obj022.drpt = DateTime.Now;
+                    obj022.urpt = HttpContext.Current.Session["user"].ToString();
+                    obj022.acqt = Convert.ToDecimal(twhcol028.TQTY);
+                    obj022.cwaf = twhcol028.TWAR;
+                    obj022.cwat = twhcol028.TWAR;
+                    obj022.aclo = "";
+                    obj022.allo = 0;
+                    list022.Add(obj022);
+                    _idaltticol022.insertarRegistroSimple(ref obj022, ref strError);
+                    _idaltticol022.InsertarRegistroTicol222(ref obj022, ref strError);
+                    break;
+                case "ticol042":
+                    Ent_tticol042 obj042 = new Ent_tticol042();
+                    List<Ent_tticol042> list042 = new List<Ent_tticol042>();
+                    obj042.pdno = string.IsNullOrEmpty(twhcol028.TLOT) ? " " : twhcol028.TLOT.ToUpper().Trim();
+                    obj042.sqnb = PAID;
+                    obj042.proc = 1;
+                    obj042.logn = HttpContext.Current.Session["user"].ToString();
+                    obj042.mitm = twhcol028.TITM;
+                    obj042.qtdl = Convert.ToDouble(twhcol028.TQTY);
+                    obj042.cuni = "kg";
+                    obj042.log1 = "NONE";
+                    obj042.qtd1 = Convert.ToInt32(twhcol028.TQTY);
+                    obj042.pro1 = 1;
+                    obj042.log2 = "NONE";
+                    obj042.qtd2 = Convert.ToInt32(twhcol028.TQTY);
+                    obj042.pro2 = 2;
+                    obj042.loca = " ";
+                    obj042.norp = 1;
+                    obj042.dele = 2;
+                    obj042.logd = "NONE";
+                    obj042.refcntd = 0;
+                    obj042.refcntu = 0;
+                    obj042.drpt = DateTime.Now;
+                    obj042.urpt = HttpContext.Current.Session["user"].ToString();
+                    obj042.acqt = Convert.ToDouble(twhcol028.TQTY);
+                    obj042.cwaf = twhcol028.TWAR;
+                    obj042.cwat = twhcol028.TWAR;
+                    obj042.aclo = "";
+                    obj042.allo = 0;
+                    list042.Add(obj042);
+                    _idaltticol042.insertarRegistroSimple(ref obj042, ref strError);
+                    _idaltticol042.InsertarRegistroTicol242(ref obj042, ref strError);
+                    break;
+                case "whcol131":
+                    Ent_twhcol130131 obj131 = new Ent_twhcol130131();
+                    Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+                    MyObj131.OORG = "4";
+                    MyObj131.ORNO = SQNB.Trim().ToUpper();
+                    MyObj131.ITEM = twhcol028.TITM;
+                    MyObj131.PAID = PAID;
+                    MyObj131.PONO = "0";
+                    MyObj131.SEQN = "0";
+                    MyObj131.CLOT = string.IsNullOrEmpty(twhcol028.TLOT) ? " " : twhcol028.TLOT.ToUpper();
+                    MyObj131.CWAR = twhcol028.TWAR;
+                    MyObj131.QTYS = twhcol028.TQTY;// cantidad escaneada view
+                    MyObj131.QTYA = twhcol028.TQTY;
+                    MyObj131.UNIT = "KG";
+                    MyObj131.QTYC = twhcol028.TQTY;//cantidad escaneada view aplicando factor
+                    MyObj131.UNIC = "KG";
+                    MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                    MyObj131.CONF = "1";
+                    MyObj131.RCNO = " ";//llena baan
+                    MyObj131.DATR = "01/01/70";//llena baan
+                    MyObj131.LOCA = " ";// enviamos vacio
+                    MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                    MyObj131.PRNT = "1";// llenar en 1
+                    MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    MyObj131.NPRT = "1";//conteo de reimpresiones 
+                    MyObj131.LOGN = HttpContext.Current.Session["user"].ToString();// nombre de ususario de la session
+                    MyObj131.LOGT = " ";//llena baan
+                    MyObj131.STAT = "1";// LLENAR EN 1  
+                    MyObj131.DSCA = "0";
+                    MyObj131.COTP = "0";
+                    MyObj131.FIRE = "1";
+                    MyObj131.PSLIP = " ";
+                    MyObj131.ALLO = "0";
+                    _idaltwhcol130.Insertartwhcol131(MyObj);
+                    break;
+
+            }
+        }
+
+        private static string currentSequience(string strOldSequence)
+        {
+            string strNewSequence = string.Empty;
+            int newSequence = Convert.ToInt32(strOldSequence)+1;
+            if (newSequence <= 9)
+            {
+                strNewSequence = "00" + newSequence.ToString();
+            }
+            else if (newSequence > 9 && newSequence <= 99)
+            {
+                strNewSequence = "0" + newSequence.ToString();
+            }
+            else if (newSequence > 99)
+            {
+                strNewSequence = newSequence.ToString();
+            }
+            return strNewSequence;
+        }
+
+        public static bool saveOriginTable(Ent_twhcol028 twhcol028)
+        {
+            bool ActalizacionExitosa = false;
+            Ent_tticol082 MyObj82 = new Ent_tticol082();
+            MyObj82.PAID = twhcol028.PAID;
+            MyObj82.QTYC = "0";
+            switch (HttpContext.Current.Session["TBL"].ToString())
+            {
+                case "ticol022":
+                    ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
+                    break;
+                case "ticol042":
+                    ActalizacionExitosa = Itticol082.Actualizartticol242Cant(MyObj82);
+                    break;
+                case "whcol131":
+                    ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
+                    break;
+                case "whcol130":
+                    ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
+                    break;
+                
+            }
+            return ActalizacionExitosa;
+        }
+
+        public static string getSequence(Ent_twhcol028 twhcol028)
+        {
+            string sequence = string.Empty;
+            int indexSeparator = twhcol028.PAID.IndexOf("-");
+            string SQNB = twhcol028.PAID.Substring(0, indexSeparator);
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB);
+            if (dtMaxSec.Rows.Count > 0)
+            {
+                string PAID = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
+                int indexIni = (PAID.Length - 1)-2;
+                int positions = (PAID.Length)-indexIni;
+                sequence = PAID.Substring(indexIni,positions);
+            }
+            else
+            {
+                sequence = "000";
+            }
+            return sequence;
+        }
+        
         protected void generateDropDownCostCenters()
         {
 

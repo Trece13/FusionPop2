@@ -1449,6 +1449,26 @@ namespace whusa.Interfases
 
             return Retorno;
         }
+        public DataTable maximaSecuenciaUnion(string SQNB)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", SQNB.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return Retorno;
+        }
     }
 
     

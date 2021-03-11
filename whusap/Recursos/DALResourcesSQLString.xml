@@ -245,7 +245,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and t$loct = 5
           and t$prio &lt; 999
           and rownum = 1
-          group by t$loca 
+          group by t$loca
         </stringSQL>
       </operationName>
       <operationName name="SecuenciaMayor022">
@@ -573,13 +573,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE BAAN.twhcol131140 SET
           T$QTYA = CASE WHEN '[:OLD]' = 'True'
-            THEN ((select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))+(select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))) 
-            ELSE (select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')) END,
+          THEN ((select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))+(select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')))
+          ELSE (select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')) END,
           T$ALLO = CASE WHEN '[:OLD]' = 'True'
-            THEN 0
-            ELSE (select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')) END
+          THEN 0
+          ELSE (select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')) END
           WHERE  TRIM(T$PAID) = TRIM('[:T$SQNB]')
-          
+
           <!--UPDATE BAAN.twhcol131140 SET
           T$QTYA = (select T$ALLO from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]')),
           T$ALLO = (select T$QTYA from BAAN.twhcol131140 where TRIM(T$PAID) = TRIM('[:T$SQNB]'))
@@ -1523,7 +1523,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="TraerOrdenesCustomer">
         <stringSQL>
           select  inh220.t$orno ORNO, inh220.t$oset OSET, inh220.t$pono PONO, inh220.t$seqn SEQN, inh220.t$item ITEM,
-          ibd001.t$dsca DSCA, inh220.t$qstr QSTR, inh220.t$qstk QSTK, inh220.t$stun STUN, wmd215.t$stoc STOC, 
+          ibd001.t$dsca DSCA, inh220.t$qstr QSTR, inh220.t$qstk QSTK, inh220.t$stun STUN, wmd215.t$stoc STOC,
           ibd001.t$cuni CUNI, inh220.t$pddt PDDT, inh200.t$stad STAD,inh200.t$sfco SFCO,inh200.t$oorg OORG
           from    {0}.twhinh220{1} inh220
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inh220.t$item
@@ -1804,18 +1804,29 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
       <operationName name="maximaSecuencia">
-      <stringSQL>
-        SELECT T$PAID  FROM(
-        SELECT t$PAID FROM {0}.twhcol131{1} WHERE T$paid LIKE '%[:T$ORNO]%' order by t$PAID desc
-        ) WHERE ROWNUM =1
-      </stringSQL>
-    </operationName>
+        <stringSQL>
+          SELECT T$PAID  FROM(
+          SELECT t$PAID FROM {0}.twhcol131{1} WHERE T$paid LIKE '%[:T$ORNO]%' order by t$PAID desc
+          ) WHERE ROWNUM =1
+        </stringSQL>
+      </operationName>
+      <operationName name="maximaSecuenciaUnion">
+        <stringSQL>
+          select max(sqnb) sqnb from (
+          select 'ticol042' tbl, t$sqnb sqnb from baan.tticol042140 where T$SQNB LIKE '%[:T$SQNB]%'
+          union
+          select 'ticol022' tbl,t$sqnb sqnb from baan.tticol022140 where T$SQNB LIKE '%[:T$SQNB]%'
+          union
+          select 'whcol131' tbl,t$paid sqnb FROM baan.twhcol131140 WHERE T$paid LIKE '%[:T$SQNB]%')
+          order by sqnb desc
+        </stringSQL>
+      </operationName>
       <operationName name="VerificarZoneCode">
         <stringSQL>
           SELECT * FROM {0}.twhwmd310{1} wmd310 left join {0}.twhwmd200{1} wmd200 on wmd200.T$CWAR = wmd310.T$CWAR left join baan.ttcmcs003140 mcs003 on mcs003.T$CWAR = wmd310.T$CWAR WHERE wmd310.T$ZONE = '[:ZONE]'
         </stringSQL>
       </operationName>
-      <operationName name="VerificarPalletID">   
+      <operationName name="VerificarPalletID">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO, col022.T$PDNO as LOT from {0}.tticol022{1} col022
@@ -2664,7 +2675,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INSERT INTO {0}.tticol088{1} (T$ORNO,T$PONO,T$ITEM,T$QUNE,T$LOGN,T$DATE,T$PROC,T$REFCNTD,T$REFCNTU,T$OORG) VALUES ('[:T$ORNO]','[:T$PONO]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QUNE]','[:T$LOGN]',SYSDATE,'[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]','[:T$OORG]')
         </stringSQL>
       </operationName>
-      
+
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2}

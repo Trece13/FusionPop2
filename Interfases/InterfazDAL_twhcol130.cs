@@ -430,5 +430,10 @@ namespace whusa.Interfases
         {
             return dal.maximaSecuencia(ORNO);
         }
+
+        public DataTable maximaSecuenciaUnion(string SQNB)
+        {
+            return dal.maximaSecuenciaUnion(SQNB);
+        }
     }
 }

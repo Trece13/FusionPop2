@@ -113,5 +113,7 @@ namespace whusa
         public string DSCAW { get; set; }
 
         public string KTLC { get; set; }
+
+        public string TBL { get; set; }
     }
 }

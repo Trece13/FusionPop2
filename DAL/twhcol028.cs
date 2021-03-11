@@ -52,16 +52,16 @@ namespace whusa.DAL
                 paramList.Add(":T$TLOC", Obj028.TLOC.Trim().ToUpper());
                 paramList.Add(":T$TLOT", Obj028.TLOT.Trim().ToUpper());
                 paramList.Add(":T$TQTY", Obj028.TQTY.Trim().ToUpper());
-                paramList.Add(":T$LOGN", Obj028.LOGN.Trim().ToUpper());
-                paramList.Add(":T$DATR", Obj028.DATR.Trim().ToUpper());
-                paramList.Add(":T$PROC", Obj028.PROC.Trim().ToUpper());
-                paramList.Add(":T$SORN", Obj028.SORN.Trim().ToUpper());
-                paramList.Add(":T$SPON", Obj028.SPON.Trim().ToUpper());
-                paramList.Add(":T$TORN", Obj028.TORN.Trim().ToUpper());
-                paramList.Add(":T$TPON", Obj028.TPON.Trim().ToUpper());
-                paramList.Add(":T$MESS", Obj028.MESS.Trim().ToUpper());
-                paramList.Add(":T$REFCNTD", Obj028.REFCNTD.Trim().ToUpper());
-                paramList.Add(":T$REFCNTU", Obj028.REFCNTD.Trim().ToUpper());
+                paramList.Add(":T$LOGN", Obj028.LOGN.Trim().ToUpper() == string.Empty ? "0" : Obj028.LOGN.Trim().ToUpper());
+                paramList.Add(":T$DATR", Obj028.DATR.Trim().ToUpper() == string.Empty ? "0" : Obj028.DATR.Trim().ToUpper());
+                paramList.Add(":T$PROC", Obj028.PROC.Trim().ToUpper() == string.Empty ? "0" : Obj028.PROC.Trim().ToUpper());
+                paramList.Add(":T$SORN", Obj028.SORN.Trim().ToUpper() == string.Empty ? "0" : Obj028.SORN.Trim().ToUpper());
+                paramList.Add(":T$SPON", Obj028.SPON.Trim().ToUpper() == string.Empty ? "0" : Obj028.SPON.Trim().ToUpper());
+                paramList.Add(":T$TORN", Obj028.TORN.Trim().ToUpper() == string.Empty ? "0" : Obj028.TORN.Trim().ToUpper());
+                paramList.Add(":T$TPON", Obj028.TPON.Trim().ToUpper() == string.Empty ? "0" : Obj028.TPON.Trim().ToUpper());
+                paramList.Add(":T$MESS", Obj028.MESS.Trim().ToUpper() == string.Empty ? "0" : Obj028.MESS.Trim().ToUpper());
+                paramList.Add(":T$REFCNTD", Obj028.REFCNTD.Trim().ToUpper() == string.Empty ? "0" : Obj028.REFCNTD.Trim().ToUpper());
+                paramList.Add(":T$REFCNTU", Obj028.REFCNTD.Trim().ToUpper() == string.Empty ? "0" : Obj028.REFCNTD.Trim().ToUpper());
 
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
