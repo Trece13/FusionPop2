@@ -147,6 +147,12 @@
             animation-timing-function: linear;
         }
 
+        #saveSection {
+            display: none;
+        }
+         .notBorderBottom{
+             border-bottom: none;
+         }
         @keyframes spin {
             from {
                 transform: rotate(0deg);
@@ -186,18 +192,23 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col" colspan="2">Item</th>
+                    <th scope="col" colspan="">Item</th>
                     <th scope="col"></th>
-                    <th scope="col" colspan="2">Lot</th>
+                    <th scope="col"></th>
+                    <th scope="col" colspan="">Lot</th>
+                    <th scope="col"></th>
                     <th scope="col">Actual Qty</th>
                     <th scope="col">Unit</th>
-                    <th scope="col" colspan="2">Warehouse</th>
-                    <th scope="col" colspan="2">Location</th>
+                    <th scope="col" colspan="">Warehouse</th>
+                    <th scope="col"></th>
+                    <th scope="col" colspan="">Location</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row" colspan="2">Actual Data</th>
+                    <th scope="row" class="alingLeft">Actual Data</th>
+                    <td></td>
                     <td id="lbItemActual">OOBPW-00600014</td>
                     <td></td>
                     <td id="lbItemDscaActual">OOBPW-00600014</td>
@@ -212,7 +223,7 @@
 
                 </tr>
                 <tr>
-                    <th scope="row">Adjusted Data</th>
+                    <th scope="row" class="alingLeft">Adjusted Data</th>
                     <td><i id="btnRestartForm" class="fas fa-undo"></i></td>
                     <td id="lbItemAdjusted" contenteditable="true">OOBPW-00600014</td>
                     <td><i id="checkItem" class="fas fa-check"></i><i id="exItem" class="fas fa-times"></i><i id="loadItem" class="fas fa-ellipsis-h"></i></td>
@@ -227,22 +238,22 @@
                     <td><i id="checkLoca" class="fas fa-check"></i><i id="exLoca" class="fas fa-times"></i><i id="loadLoca" class="fas fa-ellipsis-h"></i></td>
                 </tr>
                 <tr>
-                    <th scope="row">Reason Code</th>
+                    <th scope="row" class="alingLeft">Reason Code</th>
                     <td></td>
                     <td colspan="3">
                         <asp:DropDownList runat="server" ID="dropDownReasonCodes" CssClass="TextBoxBig"></asp:DropDownList>
                     </td>
                 </tr>
                 <tr style="border-top: none">
-                    <th scope="row">Cost Center</th>
+                    <th scope="row" class="alingLeft">Cost Center</th>
                     <td></td>
                     <td colspan="3">
                         <asp:DropDownList runat="server" ID="dropDownCostCenters" CssClass="TextBoxBig"></asp:DropDownList>
                     </td>
                 </tr>
-                <tr style="border-top: none">
-                    <th scope="row" colspan="2">
-                        <button id="btnSave" type="button" class="btn btn-primary col-8">Save</button></th>
+                <tr style="border-top: none" id="saveSection" class="notBorderBottom">
+                    <th scope="row" colspan="3" class="notBorderBottom">
+                        <button id="btnSave" type="button" class="btn btn-primary col-12">Save</button></th>
                 </tr>
             </tbody>
         </table>
@@ -461,31 +472,31 @@
             $("#checkPaid").hide(500);
             $("#exPaid").hide(500);
             $("#loadPaid").hide(500);
-            while (restart) {
-                txPalletID.value = "";
-                lblError.textContent = "";
-                lbItemActual.textContent        = "";
-                lbLocaActual.textContent        = "";
-                lbLotActual.textContent         = "";
-                lbWarehouseActual.textContent   = "";
-                lbLocaActual.textContent        = "";
-                lbItemDscaActual.textContent    = "";
-                lbItemAdjusted.textContent      = "";
-                lbLocaAdjusted.textContent      = "";
-                lbLotAdjusted.textContent       = "";
-                lbWarehouseAdjusted.textContent = "";
-                lbLocaAdjusted.textContent      = "";
-                lbItemDscaAdjusted.textContent  = "";
-                lbItemAdjusted.classList.remove("isNotValid");
-                lbItemAdjusted.classList.remove("isValid");
-                lbLotAdjusted.classList.remove("isNotValid");
-                lbLotAdjusted.classList.remove("isValid");
-                lbWarehouseAdjusted.classList.remove("isNotValid");
-                lbWarehouseAdjusted.classList.remove("isValid");
-                lbLocaAdjusted.classList.remove("isNotValid");
-                lbLocaAdjusted.classList.remove("isValid");
-                restart = false;
-            }
+            txPalletID.value = "";
+            lblError.textContent = "";
+            lbItemActual.textContent        = "";
+            lbLocaActual.textContent        = "";
+            lbLotActual.textContent         = "";
+            lbWarehouseActual.textContent   = "";
+            lbLocaActual.textContent        = "";
+            lbItemDscaActual.textContent    = "";
+            lbItemAdjusted.textContent      = "";
+            lbLocaAdjusted.textContent      = "";
+            lbLotAdjusted.textContent       = "";
+            lbWarehouseAdjusted.textContent = "";
+            lbLocaAdjusted.textContent      = "";
+            lbItemDscaAdjusted.textContent  = "";
+            lbItemAdjusted.classList.remove("isNotValid");
+            lbItemAdjusted.classList.remove("isValid");
+            lbLotAdjusted.classList.remove("isNotValid");
+            lbLotAdjusted.classList.remove("isValid");
+            lbWarehouseAdjusted.classList.remove("isNotValid");
+            lbWarehouseAdjusted.classList.remove("isValid");
+            lbLocaAdjusted.classList.remove("isNotValid");
+            lbLocaAdjusted.classList.remove("isValid");
+            $("#Contenido_dropDownReasonCodes").val("");
+            $("#Contenido_dropDownCostCenters").val("")
+            txPalletID.focus();
         }
 
         var restartInfo = function(e) {
@@ -632,18 +643,40 @@
                 lbItemAdjusted.textContent = MyObj.ITEM;
                 lbItemDscaAdjusted.textContent = MyObj.DSCA;
                 lbItemAdjusted.setAttribute("KTLC", MyObj.KTLC);
+                if (MyObj.KTLC == "1") {
+                    lbLotAdjusted.setAttribute("contentEditable", true);
+                    lbLotAdjusted.focus();
+                    checkLot.style.display = "none";
+                    exLot.style.display = "none";
+                } else {
+                    lbLotAdjusted.textContent = "";
+                    lbLotAdjusted.setAttribute("contentEditable", false);
+                    checkLot.style.display = "none";
+                    exLot.style.display = "none";
+                }
                 lbLotAdjusted.textContent = MyObj.CLOT;
                 lbQtyAdjusted.textContent = MyObj.QTYA;
                 lbUnitAdjusted.textContent = MyObj.UNIT;
                 lbWarehouseAdjusted.textContent = MyObj.CWAR;
                 lbWarehouseAdjusted.setAttribute("sloc", MyObj.SLOC);
+                if (MyObj.SLOC == "1") {
+                    lbLocaAdjusted.setAttribute("contentEditable", true);
+                    checkLoca.style.display = "none";
+                    exLoca.style.display = "none";
+                    lbLocaAdjusted.focus();
+
+                } else {
+                    lbLocaAdjusted.textContent = "";
+                    lbLocaAdjusted.setAttribute("contentEditable", false);
+                    checkLoca.style.display = "none";
+                    exLoca.style.display = "none";
+                }
                 lbLocaAdjusted.textContent = MyObj.LOCA;
                 lblError.innerHTML = "";
                 $('#editTable').show(500);
             }
             else{
                 lblError.innerHTML = MyObj.errorMsg;
-                
                 $("#printContainer").hide(500);
                 $('#editTable').hide(500);
                 $("#loadPaid").hide(300);
@@ -677,6 +710,7 @@
         var verifyItemSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
+                lbItemAdjusted.textContent = lbItemAdjusted.textContent.trim()
                 $("#loadItem").hide(500);
                 $("#checkItem").hide(500);
                 $("#checkLot").hide(500);
@@ -691,7 +725,9 @@
                 lbLotAdjusted.classList.remove("isValid");
                 lbLotAdjusted.classList.remove("isNotValid");
                 lbItemDscaAdjusted.textContent = "";
+                verifyInfoForm();
             } else {
+                lbItemAdjusted.textContent = lbItemAdjusted.textContent.trim()
                 $("#loadItem").hide(500);
                 $("#checkItem").show(500);
                 $("#checkLot").hide(500);
@@ -702,6 +738,7 @@
                 lbItemAdjusted.setAttribute("ktlc", MyObj.KTLC);
                 lbItemDscaAdjusted.textContent = MyObj.DSCA;
                 lbUnitAdjusted.textContent = MyObj.UNIT;
+                lbLotAdjusted.textContent = "";
                 if (MyObj.KTLC == "1") {
                     lbLotAdjusted.setAttribute("contentEditable", true);
                     lbLotAdjusted.focus();
@@ -714,24 +751,29 @@
                     exLot.style.display = "none";
                 }
                 console.log("Exito Item");
+                verifyInfoForm();
             }
         }
 
         var verifyLotSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
+                lbLotAdjusted.textContent = lbLotAdjusted.textContent.trim()
                 $("#loadLot").hide(500);
                 $("#checkLot").hide(500);
                 $("#exLot").show(500);
                 lbLotAdjusted.classList.remove("isValid");
                 lbLotAdjusted.classList.add("isNotValid");
+                verifyInfoForm();
             } else {
+                lbLotAdjusted.textContent = lbLotAdjusted.textContent.trim()
                 $("#loadLot").hide(500);
                 $("#checkLot").show(500);
                 $("#exLot").hide(500);
                 lbLotAdjusted.classList.remove("isNotValid");
                 lbLotAdjusted.classList.add("isValid");
                 console.log("Exito Lot");
+                verifyInfoForm();
             }
         }
 
@@ -739,6 +781,7 @@
 
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
+                lbWarehouseAdjusted.textContent = lbWarehouseAdjusted.textContent.trim()
                 $("#loadWarehouse").hide(500);
                 $("#checkWarehouse").hide(500);
                 $("#checkLoca").hide(500);
@@ -751,17 +794,21 @@
                 lbLocaAdjusted.setAttribute("contentEditable", false);
                 lbLocaAdjusted.classList.remove("isValid");
                 lbLocaAdjusted.classList.remove("isNotValid");
+                verifyInfoForm();
             } else {
+                lbWarehouseAdjusted.textContent = lbWarehouseAdjusted.textContent.trim()
                 $("#exLoca").hide(500);
                 $("#checkLoca").hide(500);
                 $("#loadWarehouse").hide(500);
                 $("#exWarehouse").hide(500);
                 $("#checkWarehouse").show(500);
-
                 checkWarehouse.style.display = "inline-block";
                 exWarehouse.style.display = "none";
+                lbLocaAdjusted.textContent = "";
                 lbWarehouseAdjusted.classList.remove("isNotValid");
                 lbWarehouseAdjusted.classList.add("isValid");
+                lbLocaAdjusted.classList.remove("isValid");
+                lbLocaAdjusted.classList.remove("isNotValid");
                 lbWarehouseAdjusted.setAttribute("sloc", MyObj.SLOC);
                 if (MyObj.SLOC == "1") {
                     lbLocaAdjusted.setAttribute("contentEditable", true);
@@ -776,12 +823,14 @@
                     exLoca.style.display = "none";
                 }
                 console.log("Exito Warehouse");
+                verifyInfoForm();
             }
         }
 
         var verifyLocaSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
+                lbLocaAdjusted.textContent = lbLocaAdjusted.textContent.trim()
                 $("#loadLoca").hide(500);
                 $("#checkLoca").hide(500);
                 $("#exLoca").show(500);
@@ -790,7 +839,9 @@
                 console.log(MyObj.errorMsg);
                 lbLocaAdjusted.classList.remove("isValid");
                 lbLocaAdjusted.classList.add("isNotValid");
+                verifyInfoForm();
             } else {
+                lbLocaAdjusted.textContent = lbLocaAdjusted.textContent.trim()
                 $("#loadLoca").hide(500);
                 $("#checkLoca").show(500);
                 $("#exLoca").hide(500);
@@ -799,6 +850,159 @@
                 lbLocaAdjusted.classList.remove("isNotValid");
                 lbLocaAdjusted.classList.add("isValid");
                 console.log("Exito Loca");
+                verifyInfoForm();
+            }
+        }
+        $("#Contenido_dropDownReasonCodes").change(
+            function(){verifyInfoForm();}
+            );
+
+        $("#Contenido_dropDownCostCenters").change(
+            function(){verifyInfoForm();}
+            );
+        var verifyInfoForm = function (){
+
+            var sameItemLot = false;
+            var sameWarehouseLoca = false;
+            var combinationItemValid = false;
+            var combinationWarehouseValid = false;
+            var itemValid   = false;
+            var lotValid    = false;
+            var warehouseValid   = false;
+            var itemNotValid       = false; 
+            var lotNotValid        = false; 
+            var warehouseNotValid  = false; 
+            var locaNotValid       = false; 
+            var locaValid   = false;
+            var reasonValid = false;
+            var codeValid = false;
+
+            var ktlc = lbItemAdjusted.getAttribute("ktlc");
+            var sloc = lbWarehouseAdjusted.getAttribute("sloc");
+            
+
+            itemNotValid        = lbItemAdjusted.classList.contains("isNotValid");
+            lotNotValid         = lbLotAdjusted.classList.contains("isNotValid");
+            warehouseNotValid   = lbWarehouseAdjusted.classList.contains("isNotValid");;
+            locaNotValid        = lbLocaAdjusted.classList.contains("isNotValid");
+
+            itemValid = lbItemAdjusted.classList.contains("isValid");
+            lotValid = lbLotAdjusted.classList.contains("isValid");
+            warehouseValid = lbWarehouseAdjusted.classList.contains("isValid");;
+            locaValid = lbLocaAdjusted.classList.contains("isValid");
+
+            reasonValid  = $("#Contenido_dropDownReasonCodes").val() == "" ? false : true;
+            codeValid = $("#Contenido_dropDownCostCenters").val()  == "" ? false : true;
+
+            if(ktlc === "1"){
+                if(lbItemAdjusted.textContent.trim().toUpperCase() == lbItemActual.textContent.trim().toUpperCase()){
+                    if(lbLotAdjusted.textContent.trim().toUpperCase() == lbLotActual.textContent.trim().toUpperCase()){
+                        sameItemLot = true;
+                    }
+                }
+            }
+            else{
+                if(lbItemAdjusted.textContent.trim().toUpperCase() == lbItemActual.textContent.trim().toUpperCase()){
+                    sameItemLot = true;
+                }
+            }
+
+            if(sloc === "1"){
+                if(lbWarehouseAdjusted.textContent.trim().toUpperCase() == lbWarehouseActual.textContent.trim().toUpperCase()){
+                    if(lbLocaAdjusted.textContent.trim().toUpperCase() == lbLocaActual.textContent.trim().toUpperCase()){
+                        sameWarehouseLoca = true;
+                    }
+                }
+            }
+            else{
+                if(lbWarehouseAdjusted.textContent.trim().toUpperCase() == lbWarehouseActual.textContent.trim().toUpperCase()){
+                    sameWarehouseLoca = true;
+                }
+            }
+
+            if(sameItemLot === true && sameWarehouseLoca === true){
+                $("#saveSection").hide(500);
+                lblError.textContent = "Los datos de adjusted son iguales"
+                return;
+            }
+            else if(sameItemLot === true && sameWarehouseLoca === false){
+                combinationItemValid = true;
+                lblError.textContent = ""
+            }
+            else if(sameItemLot === false  && sameWarehouseLoca === true){
+                combinationWarehouseValid = true;
+                lblError.textContent = "";
+            }
+            else if(sameItemLot === false  && sameWarehouseLoca === false ){
+                lblError.textContent = ""
+            }
+
+            if(itemValid && combinationItemValid == false){
+                if(ktlc === "1"){
+                    if(lotValid){
+                        combinationItemValid = true;
+                    }
+                    else{
+                        combinationItemValid = false;
+                        lbLotAdjusted.focus();
+                        $("#saveSection").hide(500);
+                        return;
+                    }
+                }   
+                else{
+                    combinationItemValid = true;
+                }
+            }
+            else if (combinationItemValid == true){
+
+            }
+            else{
+                lbItemAdjusted.focus();
+                $("#saveSection").hide(500);
+                return;
+            }
+
+            if(warehouseValid && combinationWarehouseValid == false){
+                if(sloc === "1"){
+                    if(locaValid){
+                        combinationWarehouseValid = true;
+                    }
+                    else{
+                        combinationWarehouseValid = false;
+                        lbLocaAdjusted.focus();
+                        $("#saveSection").hide(500);
+                        return;
+                    }
+                }   
+                else{
+                    combinationWarehouseValid = true;
+                }
+            }
+            else if (combinationWarehouseValid == true){
+
+            }
+            else{
+                lbWarehouseAdjusted.focus();
+                $("#saveSection").hide(500);
+                return;
+            }
+            if(!reasonValid){
+                $("#Contenido_dropDownReasonCodes").focus();
+                $("#saveSection").hide(500);
+                return;
+            }
+
+            if(!codeValid){
+                $("#Contenido_dropDownCostCenters").focus();
+                $("#saveSection").hide(500);
+                return;
+            }
+
+            if( combinationItemValid === true && combinationWarehouseValid === true && reasonValid === true && codeValid === true ){
+                $("#saveSection").show(500);
+            }
+            else{
+                $("#saveSection").hide(500);
             }
         }
 

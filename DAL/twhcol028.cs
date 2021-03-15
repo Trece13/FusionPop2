@@ -44,13 +44,13 @@ namespace whusa.DAL
                 paramList.Add(":T$EMNO", Obj028.EMNO.Trim().ToUpper());
                 paramList.Add(":T$SITM", Obj028.SITM.Trim().ToUpper());
                 paramList.Add(":T$SWAR", Obj028.SWAR.Trim().ToUpper());
-                paramList.Add(":T$SLOC", Obj028.SLOC.Trim().ToUpper());
-                paramList.Add(":T$SLOT", Obj028.SLOT.Trim().ToUpper());
+                paramList.Add(":T$SLOC", Obj028.SLOC.Trim().ToUpper().Trim() == string.Empty ? " ":Obj028.SLOC.Trim().ToUpper().Trim());
+                paramList.Add(":T$SLOT", Obj028.SLOT.Trim().ToUpper().Trim() == string.Empty ? " ":Obj028.SLOT.Trim().ToUpper().Trim());
                 paramList.Add(":T$SQTY", Obj028.SQTY.Trim().ToUpper());
                 paramList.Add(":T$TITM", Obj028.TITM.Trim().ToUpper());
                 paramList.Add(":T$TWAR", Obj028.TWAR.Trim().ToUpper());
-                paramList.Add(":T$TLOC", Obj028.TLOC.Trim().ToUpper());
-                paramList.Add(":T$TLOT", Obj028.TLOT.Trim().ToUpper());
+                paramList.Add(":T$TLOC", Obj028.TLOC.Trim().ToUpper().Trim() == string.Empty ? " ":Obj028.TLOC.Trim().ToUpper().Trim());
+                paramList.Add(":T$TLOT", Obj028.TLOT.Trim().ToUpper().Trim() == string.Empty ? " ":Obj028.TLOT.Trim().ToUpper().Trim());
                 paramList.Add(":T$TQTY", Obj028.TQTY.Trim().ToUpper());
                 paramList.Add(":T$LOGN", Obj028.LOGN.Trim().ToUpper() == string.Empty ? "0" : Obj028.LOGN.Trim().ToUpper());
                 paramList.Add(":T$DATR", Obj028.DATR.Trim().ToUpper() == string.Empty ? "0" : Obj028.DATR.Trim().ToUpper());
