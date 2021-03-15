@@ -459,6 +459,45 @@ namespace whusa.Utilidades
             }
             return siDescargo;
         }
-    
+
+        public string GenerateNewPallet(string Paid, string Separator)
+        {
+            int IndexSeparator = Paid.IndexOf(Separator);
+            string Secuence = Paid.Substring(IndexSeparator + 1);
+            string Orno = Paid.Substring(0, IndexSeparator);
+            string Complement = SeparatorAlphaNumeric(ref Secuence);
+            string NewSecuence = IncrementToSecuence(Secuence);
+            string NewSecuenceWithZeros = addZerosSecuence(Secuence, NewSecuence);
+            return Orno + Separator + Complement + NewSecuenceWithZeros;
+        }
+
+        public string SeparatorAlphaNumeric(ref string Secuence)
+        {
+            string Complement = string.Empty;
+            foreach (char x in Secuence)
+            {
+                if (!char.IsNumber(x))
+                {
+                    Complement += x;
+                    Secuence = Secuence.Remove(Secuence.IndexOf(x), 1);
+                }
+            }
+            return Complement;
+        }
+
+        protected string IncrementToSecuence(string strNumberSecuence)
+        {
+            return (Convert.ToInt32(strNumberSecuence) + 1).ToString();
+        }
+
+        protected string addZerosSecuence(string OldSecuence, string NewSecuence)
+        {
+            int NumZeros = OldSecuence.Length - NewSecuence.Length;
+            for (int i = 0; i < NumZeros; i++)
+            {
+                NewSecuence = "0" + NewSecuence;
+            }
+            return NewSecuence;
+        }
     }
 }

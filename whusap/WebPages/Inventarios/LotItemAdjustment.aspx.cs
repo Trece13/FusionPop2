@@ -25,6 +25,7 @@ namespace whusap.WebPages.Inventarios
         private static string globalMessages = "GlobalMessages";
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
+        public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
 
         private static  Ent_twhcol130131 MyObj = new Ent_twhcol130131();
         private static InterfazDAL_ttwhcol016 dal016 = new InterfazDAL_ttwhcol016();
@@ -80,6 +81,7 @@ namespace whusap.WebPages.Inventarios
             if (DTPallet.Rows.Count > 0 )
             {
                 var MyObjDT = DTPallet.Rows[0];
+                MyObj.Error = false;
                 HttpContext.Current.Session["TBL"] = MyObjDT["TBL"].ToString().Trim();
                 MyObj.TBL = MyObjDT["TBL"].ToString();
                 MyObj.ITEM = MyObjDT["ITEM"].ToString();
@@ -212,44 +214,55 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string Save(Ent_twhcol028 twhcol028)
         {
+            //twhcol028.EMNO =
             bool Res = _idaltwhcol028.insertRegistertwhcol028(ref twhcol028, ref strError);
 
             if (Res)
             {
-                MyObj.Error = false;
-                MyObj.errorMsg = "Se inserto correctamente";
-                MyObj.SuccessMsg = "Se inserto ok";
-                MyObj.TipeMsgJs = "Label";
+                
                 saveOriginTable(twhcol028);
-                string strOldSequence = getSequence(twhcol028);
-                string strNewSequence = currentSequience(strOldSequence);
-                saveNewPalletOriginTable(twhcol028, strNewSequence);
+                string strMaxSequence = getSequence(twhcol028.PAID);
+                //string strNewSequence = currentSequience(strOldSequence);
+                bool createSuccessNewPaller = saveNewPalletOriginTable(ref twhcol028, strMaxSequence);
+                if (createSuccessNewPaller)
+                {
+                    twhcol028.Error = false;
+                    twhcol028.ErrorMsg = "Se inserto correctamente";
+                    twhcol028.SuccessMsg = "Se inserto ok";
+                    twhcol028.TypeMsgJs = "Label";
+                }
+                else
+                {
+                    twhcol028.Error = true;
+                    twhcol028.ErrorMsg = "No se inserto correctamente el nuevo pallet";
+                    twhcol028.TypeMsgJs = "Label";
+                }
             }
             else
             {
-                MyObj.Error = true;
-                MyObj.errorMsg = "No se inserto correctamente";
-                MyObj.TipeMsgJs = "Label";
+                twhcol028.Error = true;
+                twhcol028.ErrorMsg = "No se inserto correctamente";
+                twhcol028.TypeMsgJs = "Label";
 
             }
 
-            return JsonConvert.SerializeObject(MyObj);
+            return JsonConvert.SerializeObject(twhcol028);
         }
 
-        private static void saveNewPalletOriginTable(Ent_twhcol028 twhcol028, string NewSequence)
+        private static bool saveNewPalletOriginTable( ref Ent_twhcol028 twhcol028, string MaxSequence)
         {
-            int indexSeparator = twhcol028.PAID.IndexOf("-");
-            string SQNB = twhcol028.PAID.Substring(0, indexSeparator);
-            string PAID = SQNB + "-" + NewSequence;
-            twhcol028.PAID = PAID;
 
+            bool res = false;
+            string separator = "-";
+            twhcol028.PAID = recursos.GenerateNewPallet(MaxSequence, separator);
+            string SQNB = twhcol028.PAID.Substring(0, twhcol028.PAID.IndexOf(separator));
             switch (HttpContext.Current.Session["TBL"].ToString())
             {
                 case "ticol022":
                     Ent_tticol022 obj022 = new Ent_tticol022();
                     List<Ent_tticol022> list022 = new List<Ent_tticol022>();
                     obj022.pdno = string.IsNullOrEmpty(twhcol028.TLOT) ? " " : twhcol028.TLOT.ToUpper().Trim();
-                    obj022.sqnb = PAID;
+                    obj022.sqnb = twhcol028.PAID;
                     obj022.proc = 1;
                     obj022.logn = HttpContext.Current.Session["user"].ToString();
                     obj022.mitm = twhcol028.TITM;
@@ -275,14 +288,15 @@ namespace whusap.WebPages.Inventarios
                     obj022.aclo = "";
                     obj022.allo = 0;
                     list022.Add(obj022);
-                    _idaltticol022.insertarRegistroSimple(ref obj022, ref strError);
-                    _idaltticol022.InsertarRegistroTicol222(ref obj022, ref strError);
+                    bool insert022 = Convert.ToBoolean(_idaltticol022.insertarRegistroSimple(ref obj022, ref strError));
+                    bool insert222 = Convert.ToBoolean(_idaltticol022.InsertarRegistroTicol222(ref obj022, ref strError));
+                    res = (insert222 == true && insert022 == true) ? true : false; 
                     break;
                 case "ticol042":
                     Ent_tticol042 obj042 = new Ent_tticol042();
                     List<Ent_tticol042> list042 = new List<Ent_tticol042>();
                     obj042.pdno = string.IsNullOrEmpty(twhcol028.TLOT) ? " " : twhcol028.TLOT.ToUpper().Trim();
-                    obj042.sqnb = PAID;
+                    obj042.sqnb = twhcol028.PAID;
                     obj042.proc = 1;
                     obj042.logn = HttpContext.Current.Session["user"].ToString();
                     obj042.mitm = twhcol028.TITM;
@@ -308,8 +322,9 @@ namespace whusap.WebPages.Inventarios
                     obj042.aclo = "";
                     obj042.allo = 0;
                     list042.Add(obj042);
-                    _idaltticol042.insertarRegistroSimple(ref obj042, ref strError);
-                    _idaltticol042.InsertarRegistroTicol242(ref obj042, ref strError);
+                    bool insert042 = Convert.ToBoolean(_idaltticol042.insertarRegistroSimple(ref obj042, ref strError));
+                    bool insert242 = Convert.ToBoolean(_idaltticol042.InsertarRegistroTicol242(ref obj042, ref strError));
+                    res = (insert242 == true && insert042 == true) ? true : false; 
                     break;
                 case "whcol131":
                     Ent_twhcol130131 obj131 = new Ent_twhcol130131();
@@ -317,7 +332,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.OORG = "4";
                     MyObj131.ORNO = SQNB.Trim().ToUpper();
                     MyObj131.ITEM = twhcol028.TITM;
-                    MyObj131.PAID = PAID;
+                    MyObj131.PAID = twhcol028.PAID;
                     MyObj131.PONO = "0";
                     MyObj131.SEQN = "0";
                     MyObj131.CLOT = string.IsNullOrEmpty(twhcol028.TLOT) ? " " : twhcol028.TLOT.ToUpper();
@@ -344,10 +359,11 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.FIRE = "1";
                     MyObj131.PSLIP = " ";
                     MyObj131.ALLO = "0";
-                    _idaltwhcol130.Insertartwhcol131(MyObj);
+                    res = _idaltwhcol130.Insertartwhcol131(MyObj131);
                     break;
 
             }
+            return res;
         }
 
         private static string currentSequience(string strOldSequence)
@@ -394,22 +410,17 @@ namespace whusap.WebPages.Inventarios
             return ActalizacionExitosa;
         }
 
-        public static string getSequence(Ent_twhcol028 twhcol028)
+        public static string getSequence(string PAIDOld)
         {
             string sequence = string.Empty;
-            int indexSeparator = twhcol028.PAID.IndexOf("-");
-            string SQNB = twhcol028.PAID.Substring(0, indexSeparator);
-            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB);
+            int indexSeparator = PAIDOld.IndexOf("-");
+            string SQNB = PAIDOld.Substring(0, indexSeparator);
+            string SEC = PAIDOld.Substring(indexSeparator + 1);
+            string complement = recursos.SeparatorAlphaNumeric(ref SEC);
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB+"-"+complement);
             if (dtMaxSec.Rows.Count > 0)
             {
-                string PAID = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
-                int indexIni = (PAID.Length - 1)-2;
-                int positions = (PAID.Length)-indexIni;
-                sequence = PAID.Substring(indexIni,positions);
-            }
-            else
-            {
-                sequence = "000";
+                sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
             }
             return sequence;
         }

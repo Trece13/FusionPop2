@@ -1812,13 +1812,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="maximaSecuenciaUnion">
         <stringSQL>
-          select max(sqnb) sqnb from (
+          select * from (select sqnb from (
           select 'ticol042' tbl, t$sqnb sqnb from baan.tticol042140 where T$SQNB LIKE '%[:T$SQNB]%'
           union
           select 'ticol022' tbl,t$sqnb sqnb from baan.tticol022140 where T$SQNB LIKE '%[:T$SQNB]%'
           union
           select 'whcol131' tbl,t$paid sqnb FROM baan.twhcol131140 WHERE T$paid LIKE '%[:T$SQNB]%')
-          order by sqnb desc
+          order by sqnb desc ) WHERE  rownum &lt;= 1
         </stringSQL>
       </operationName>
       <operationName name="VerificarZoneCode">

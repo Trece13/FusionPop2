@@ -79,5 +79,13 @@ namespace whusa.Entidades
         [DataMember(Order = 22)]
         [Column(Name = "REFCNTU")]
         public string REFCNTU{ get; set; }
+        [DataMember(Order = 23)]
+        public bool Error { get; set; }
+        [DataMember(Order = 24)]
+        public string ErrorMsg { get; set; }
+        [DataMember(Order = 25)]
+        public string SuccessMsg { get; set; }
+        [DataMember(Order = 26)]
+        public string TypeMsgJs { get; set; }
     }
 }

@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style type="text/css">
@@ -29,10 +30,6 @@
             border-color: red;
         }
 
-        #loadWarehouse {
-            display: none;
-        }
-
         .fa-check {
             color: green;
         }
@@ -44,21 +41,24 @@
         #checkItem,
         #checkLot,
         #checkWarehouse,
-        #checkLoca {
+        #checkLoca,
+        #checkPaid {
             display: none;
         }
 
         #exItem,
         #exLot,
         #exWarehouse,
-        #exLoca {
+        #exLoca,
+        #exPaid {
             display: none;
         }
 
         #loadItem,
         #loadLot,
         #loadWarehouse,
-        #loadLoca {
+        #loadLoca,
+        #loadPaid {
             display: none;
         }
 
@@ -122,22 +122,65 @@
         .borderTop {
             border-top: solid 1px gray;
         }
-        #printContainer{
-            margin-bottom:100px;
+
+        #printContainer {
+            margin-bottom: 100px;
+            display: none;
+        }
+
+        #editTable {
+            display: none;
+        }
+
+        #lblError {
+            color: red;
+            font-size: 13px;
+        }
+
+        .load {
+            width: 10px;
+            height: 10px;
+            align-content: center;
+            animation-name: spin;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
     <form id="form1" class="container">
+        <br />
+        <br />
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label-lg" for="txPalletID">
+            <label class="col-sm-1 col-form-label-lg" for="txPalletID">
                 Pallet ID</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txPalletID" placeholder="Pallet ID">
+            <div class="col-sm-1 alingRight">
+                <button type="button" class="btn btn-link col-4" id="btnRestart"><i class="fas fa-undo-alt fa-2x"></i></button>
+            </div>
+            <div class="col-sm-4 alingRight">
+                <input type="text" class="form-control form-control-lg" id="txPalletID" placeholder="">
+                <label class="col-sm-12 col-form-label-md" id="lblError"></label>
+            </div>
+            <div class="col-1 fa-2x">
+                <i id="checkPaid" class="fas fa-check"></i>
+                <i id="exPaid" class="fas fa-times"></i>
+                <i id="loadPaid" class="fas fa-circle-notch fa-spin"></i>
             </div>
         </div>
     </form>
     <br />
     <hr />
-    <div>
+    <br />
+    <div id="editTable">
         <table class="table">
             <thead>
                 <tr>
@@ -170,18 +213,18 @@
                 </tr>
                 <tr>
                     <th scope="row">Adjusted Data</th>
-                    <td><i id="btnRestart" class="fas fa-undo"></i></td>
+                    <td><i id="btnRestartForm" class="fas fa-undo"></i></td>
                     <td id="lbItemAdjusted" contenteditable="true">OOBPW-00600014</td>
-                    <td><i id="checkItem" class="fas fa-check"></i><i id="exItem" class="fas fa-times"></i><i id="loadItem" class="fas fa-spinner fa-pulse"></i></td>
+                    <td><i id="checkItem" class="fas fa-check"></i><i id="exItem" class="fas fa-times"></i><i id="loadItem" class="fas fa-ellipsis-h"></i></td>
                     <td id="lbItemDscaAdjusted">OOBPW-00600014</td>
                     <td id="lbLotAdjusted" contenteditable="true">OO0003923</td>
-                    <td><i id="checkLot" class="fas fa-check"></i><i id="exLot" class="fas fa-times"></i><i id="loadLot" class="fas fa-spinner fa-pulse"></i></td>
+                    <td><i id="checkLot" class="fas fa-check"></i><i id="exLot" class="fas fa-times"></i><i id="loadLot" class="fas fa-ellipsis-h"></i></td>
                     <td id="lbQtyAdjusted">18</td>
                     <td id="lbUnitAdjusted">CJ</td>
                     <td id="lbWarehouseAdjusted" contenteditable="true">WFV900</td>
-                    <td><i id="checkWarehouse" class="fas fa-check"></i><i id="exWarehouse" class="fas fa-times"></i><i id="loadWarehouse" class="fas fa-spinner fa-pulse"></i></td>
+                    <td><i id="checkWarehouse" class="fas fa-check"></i><i id="exWarehouse" class="fas fa-times"></i><i id="loadWarehouse" class="fas fa-ellipsis-h"></i></td>
                     <td id="lbLocaAdjusted" contenteditable="true">D300110303</td>
-                    <td><i id="checkLoca" class="fas fa-check"></i><i id="exLoca" class="fas fa-times"></i><i id="loadLoca" class="fas fa-spinner fa-pulse"></i></td>
+                    <td><i id="checkLoca" class="fas fa-check"></i><i id="exLoca" class="fas fa-times"></i><i id="loadLoca" class="fas fa-ellipsis-h"></i></td>
                 </tr>
                 <tr>
                     <th scope="row">Reason Code</th>
@@ -208,19 +251,20 @@
         <div id="myLabel" class="container">
             <div class="row">
                 <div class="col-6 alingLeft">
-                    <label id="lblDesc">LBRT ORG BLACK CHERRY 105</label>
+                    <label id="lblitemDesc">LBRT ORG BLACK CHERRY 105</label>
                 </div>
                 <div class="col-6 alingRight">
                     <label id="lblMadein">MADE IN: DUBLIN - VA</label>
                 </div>
             </div>
+            <br />
             <div class="col-12 divDesc">
                 <img id="codeItem" />
-                <label id="itemDesc">1/2 KNOCK OUT SEAS</label>
             </div>
             <div class="col-12 borderTop">
                 <img id="codePaid" />
             </div>
+            <br />
             <div>
                 <table class="table">
                     <thead>
@@ -232,9 +276,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>OM00180016</td>
-                            <td>1</td>
-                            <td></td>
+                            <td id="lblWorkOrder">OM00180016</td>
+                            <td id="lblPalletNum">1</td>
+                            <td id="lblInspector"></td>
                         </tr>
                     </tbody>
                     <thead>
@@ -246,9 +290,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Date</td>
-                            <td>A,B,C,D</td>
-                            <td>18</td>
+                            <td id="lblDate">Date</td>
+                            <td id="lblShift">A,B,C,D</td>
+                            <td id="lblQuantity">18</td>
                         </tr>
                     </tbody>
                 </table>
@@ -345,18 +389,42 @@
             dropDownCostCenters = document.getElementById("dropDownCostCenters");
             btnSave = document.getElementById("btnSave");
             btnRestart = document.getElementById("btnRestart");
+            btnRestartForm = document.getElementById("btnRestartForm");
 
             loadWarehouse = document.getElementById("loadWarehouse");
+            loadItem = document.getElementById("loadItem");
+            loadLot = document.getElementById("loadLot");
+            loadLoca = document.getElementById("loadLoca");
+            loadPaid = document.getElementById("loadPaid");
 
             checkItem = document.getElementById("checkItem");
             checkLot = document.getElementById("checkLot");
             checkWarehouse = document.getElementById("checkWarehouse");
             checkLoca = document.getElementById("checkLoca");
+            checkPaid = document.getElementById("checkPaid");
 
             exItem = document.getElementById("exItem");
             exLot = document.getElementById("exLot");
             exWarehouse = document.getElementById("exWarehouse");
             exLoca = document.getElementById("exLoca");
+            exPaid = document.getElementById("exPaid");
+
+            editTable = document.getElementById("editTable");
+            printContainer = document.getElementById("printContainer");
+
+
+            lblError = document.getElementById("lblError");
+            //Label
+
+            codeItem         = document.getElementById("codeItem");
+            codePaid         = document.getElementById("codePaid");
+            lblitemDesc      = document.getElementById("lblitemDesc");
+            lblWorkOrder     = document.getElementById("lblWorkOrder");
+            lblPalletNum     = document.getElementById("lblPalletNum");
+            lblInspector     = document.getElementById("lblInspector");
+            lblDate          = document.getElementById("lblDate");
+            lblShift         = document.getElementById("lblShift");
+            lblQuantity      = document.getElementById("lblQuantity");
 
             txPalletID.addEventListener("input", sendPallet, false);
             lbItemAdjusted.addEventListener("input", sendItem, false);
@@ -364,7 +432,8 @@
             lbWarehouseAdjusted.addEventListener("input", sendWarehouse, false);
             lbLocaAdjusted.addEventListener("input", sendLoca, false);
             btnSave.addEventListener("click", sendInfo, false);
-            btnRestart.addEventListener("click", restartInfo, false);
+            btnRestart.addEventListener("click", restartAll, false);
+            btnRestartForm.addEventListener("click", restartInfo, false);
 
         }
 
@@ -373,14 +442,73 @@
             return setTimeout(currentMethod, 2000);
         }
 
+        var restartAll = function(e) {
+            restart = true;
+            $("#editTable").hide(500);
+            $("#printContainer").hide(500);
+            $("#checkItem").hide(500);
+            $("#exItem").hide(500);
+            $("#loadItem").hide(500);
+            $("#checkLot").hide(500);
+            $("#exLot").hide(500);
+            $("#loadLot").hide(500);
+            $("#checkWarehouse").hide(500);
+            $("#exWarehouse").hide(500);
+            $("#loadWarehouse").hide(500);
+            $("#checkLoca").hide(500);
+            $("#exLoca").hide(500);
+            $("#loadLoca").hide(500);
+            $("#checkPaid").hide(500);
+            $("#exPaid").hide(500);
+            $("#loadPaid").hide(500);
+            while (restart) {
+                txPalletID.value = "";
+                lblError.textContent = "";
+                lbItemActual.textContent        = "";
+                lbLocaActual.textContent        = "";
+                lbLotActual.textContent         = "";
+                lbWarehouseActual.textContent   = "";
+                lbLocaActual.textContent        = "";
+                lbItemDscaActual.textContent    = "";
+                lbItemAdjusted.textContent      = "";
+                lbLocaAdjusted.textContent      = "";
+                lbLotAdjusted.textContent       = "";
+                lbWarehouseAdjusted.textContent = "";
+                lbLocaAdjusted.textContent      = "";
+                lbItemDscaAdjusted.textContent  = "";
+                lbItemAdjusted.classList.remove("isNotValid");
+                lbItemAdjusted.classList.remove("isValid");
+                lbLotAdjusted.classList.remove("isNotValid");
+                lbLotAdjusted.classList.remove("isValid");
+                lbWarehouseAdjusted.classList.remove("isNotValid");
+                lbWarehouseAdjusted.classList.remove("isValid");
+                lbLocaAdjusted.classList.remove("isNotValid");
+                lbLocaAdjusted.classList.remove("isValid");
+                restart = false;
+            }
+        }
+
         var restartInfo = function(e) {
             restart = true;
+            $("#checkItem").hide(500);
+            $("#exItem").hide(500);
+            $("#loadItem").hide(500);
+            $("#checkLot").hide(500);
+            $("#exLot").hide(500);
+            $("#loadLot").hide(500);
+            $("#checkWarehouse").hide(500);
+            $("#exWarehouse").hide(500);
+            $("#loadWarehouse").hide(500);
+            $("#checkLoca").hide(500);
+            $("#exLoca").hide(500);
+            $("#loadLoca").hide(500);
             while (restart) {
                 lbItemAdjusted.textContent = lbItemActual.textContent;
+                lbLocaAdjusted.textContent = lbLocaActual.textContent;
                 lbLotAdjusted.textContent = lbLotActual.textContent;
                 lbWarehouseAdjusted.textContent = lbWarehouseActual.textContent;
                 lbLocaAdjusted.textContent = lbLocaActual.textContent;
-
+                lbItemDscaAdjusted.textContent = lbItemDscaActual.textContent;
                 lbItemAdjusted.classList.remove("isNotValid");
                 lbItemAdjusted.classList.remove("isValid");
                 lbLotAdjusted.classList.remove("isNotValid");
@@ -396,8 +524,8 @@
         var sendInfo = function(e) {
             var Obj028 = new Ent_twhcol028();
             Obj028.PAID = txPalletID.value.trim().toUpperCase();
-            Obj028.CDIS = "0";
-            Obj028.EMNO = "0";
+            Obj028.CDIS = $("#Contenido_dropDownReasonCodes").val();
+            Obj028.EMNO = $("#Contenido_dropDownCostCenters").val();
             Obj028.SITM = lbItemActual.textContent.trim();
             Obj028.SWAR = lbWarehouseActual.textContent.trim();
             Obj028.SLOC = lbLocaActual.textContent.trim();
@@ -423,22 +551,37 @@
         }
 
         var sendPallet = function(e) {
+            $("#checkPaid").hide(500);
+            $("#exPaid").hide(500);
+            $('#loadPaid').css("display","inline-block");
             timeOutPallet = handerTimeout(timeOutPallet, verifyPallet);
         }
 
         var sendItem = function(e) {
+            $("#checkItem").hide(500);
+            $("#exItem").hide(500);
+            $("#loadItem").show(500);
             timeOutItem = handerTimeout(timeOutItem, verifyItem);
         }
 
         var sendLot = function(e) {
+            $("#checkLot").hide(500);
+            $("#exLot").hide(500);
+            $("#loadLot").show(500);
             timeOutLot = handerTimeout(timeOutLot, verifyLot);
         }
 
         var sendWarehouse = function(e) {
+            $("#checkWarehouse").hide(500);
+            $("#exWarehouse").hide(500);
+            $("#loadWarehouse").show(500);
             timeOutPallet = handerTimeout(timeOutWarehouse, verifyWarehouse);
         }
 
         var sendLoca = function(e) {
+            $("#checkLoca").hide(500);
+            $("#exLoca").hide(500);
+            $("#loadLoca").show(500);
             timeOutPallet = handerTimeout(timeOutLoca, verifyLoca);
         }
 
@@ -472,37 +615,74 @@
 
         var verifyPalletSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
-            lbItemActual.textContent = MyObj.ITEM;
-            lbItemDscaActual.textContent = MyObj.DSCA;
-            lbItemActual.setAttribute("KTLC", MyObj.KTLC);
-            lbLotActual.textContent = MyObj.CLOT;
-            lbQtyActual.textContent = MyObj.QTYA;
-            lbUnitActual.textContent = MyObj.UNIT;
-            lbWarehouseActual.textContent = MyObj.CWAR;
-            lbWarehouseActual.setAttribute("sloc", MyObj.SLOC);
-            lbLocaActual.textContent = MyObj.LOCA;
+            if(MyObj.Error == false){
+                $("#loadPaid").hide(300);
+                $("#exPaid").hide(500);
+                $("#printContainer").hide(500);
+                $("#checkPaid").show(500);
+                lbItemActual.textContent = MyObj.ITEM;
+                lbItemDscaActual.textContent = MyObj.DSCA;
+                lbItemActual.setAttribute("KTLC", MyObj.KTLC);
+                lbLotActual.textContent = MyObj.CLOT;
+                lbQtyActual.textContent = MyObj.QTYA;
+                lbUnitActual.textContent = MyObj.UNIT;
+                lbWarehouseActual.textContent = MyObj.CWAR;
+                lbWarehouseActual.setAttribute("sloc", MyObj.SLOC);
+                lbLocaActual.textContent = MyObj.LOCA;
+                lbItemAdjusted.textContent = MyObj.ITEM;
+                lbItemDscaAdjusted.textContent = MyObj.DSCA;
+                lbItemAdjusted.setAttribute("KTLC", MyObj.KTLC);
+                lbLotAdjusted.textContent = MyObj.CLOT;
+                lbQtyAdjusted.textContent = MyObj.QTYA;
+                lbUnitAdjusted.textContent = MyObj.UNIT;
+                lbWarehouseAdjusted.textContent = MyObj.CWAR;
+                lbWarehouseAdjusted.setAttribute("sloc", MyObj.SLOC);
+                lbLocaAdjusted.textContent = MyObj.LOCA;
+                lblError.innerHTML = "";
+                $('#editTable').show(500);
+            }
+            else{
+                lblError.innerHTML = MyObj.errorMsg;
+                
+                $("#printContainer").hide(500);
+                $('#editTable').hide(500);
+                $("#loadPaid").hide(300);
+                $("#checkPaid").hide(500);
+                $("#exPaid").show(500);
 
-            lbItemAdjusted.textContent = MyObj.ITEM;
-            lbItemDscaAdjusted.textContent = MyObj.DSCA;
-            lbItemAdjusted.setAttribute("KTLC", MyObj.KTLC);
-            lbLotAdjusted.textContent = MyObj.CLOT;
-            lbQtyAdjusted.textContent = MyObj.QTYA;
-            lbUnitAdjusted.textContent = MyObj.UNIT;
-            lbWarehouseAdjusted.textContent = MyObj.CWAR;
-            lbWarehouseAdjusted.setAttribute("sloc", MyObj.SLOC);
-            lbLocaAdjusted.textContent = MyObj.LOCA;
+            }
         }
         var saveSuccess = function(res) {
-            console.log("save ok")
+            var MyObjTwhcol028 = JSON.parse(res.d);
+            if(MyObjTwhcol028.Error == false){
+                
+                JsBarcode("#codePaid", MyObjTwhcol028.PAID);
+                JsBarcode("#codeItem", MyObjTwhcol028.SITM);
+                lblitemDesc.textContent = lbItemDscaAdjusted.textContent;
+                lblWorkOrder.textContent = MyObjTwhcol028.PAID.substring(0,(MyObjTwhcol028.PAID.indexOf("-")));;
+                lblPalletNum.textContent =  MyObjTwhcol028.PAID.substring((MyObjTwhcol028.PAID.indexOf("-"))+1);
+                lblInspector.textContent = "JCUBILLOS";
+                lblDate.textContent = "01-01-2021";
+                lblShift.textContent = "A";
+                lblQuantity.textContent = lbQtyAdjusted.textContent;
+                $("#editTable").hide(500);
+                $('#printContainer').show(500);
+            }
+            else{
+                alert("error no insert");
+                $('#printContainer').hide(500);
+            }
         }
 
         var verifyItemSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
-                checkItem.style.display = "none";
-                exItem.style.display = "inline-block";
-                checkLot.style.display = "none";
-                exLot.style.display = "none";
+                $("#loadItem").hide(500);
+                $("#checkItem").hide(500);
+                $("#checkLot").hide(500);
+                $("#exLot").hide(500);
+                $("#checkLot").hide(500);
+                $("#exItem").show(500);
                 console.log(MyObj.errorMsg);
                 lbItemAdjusted.classList.remove("isValid");
                 lbItemAdjusted.classList.add("isNotValid");
@@ -512,8 +692,11 @@
                 lbLotAdjusted.classList.remove("isNotValid");
                 lbItemDscaAdjusted.textContent = "";
             } else {
-                checkItem.style.display = "inline-block";
-                exItem.style.display = "none";
+                $("#loadItem").hide(500);
+                $("#checkItem").show(500);
+                $("#checkLot").hide(500);
+                $("#exLot").hide(500);
+                $("#exItem").hide(500);
                 lbItemAdjusted.classList.remove("isNotValid");
                 lbItemAdjusted.classList.add("isValid");
                 lbItemAdjusted.setAttribute("ktlc", MyObj.KTLC);
@@ -537,14 +720,15 @@
         var verifyLotSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
-                checkLot.style.display = "none";
-                exLot.style.display = "inline-block";
-                console.log(MyObj.errorMsg);
+                $("#loadLot").hide(500);
+                $("#checkLot").hide(500);
+                $("#exLot").show(500);
                 lbLotAdjusted.classList.remove("isValid");
                 lbLotAdjusted.classList.add("isNotValid");
             } else {
-                checkLot.style.display = "inline-block";
-                exLot.style.display = "none";
+                $("#loadLot").hide(500);
+                $("#checkLot").show(500);
+                $("#exLot").hide(500);
                 lbLotAdjusted.classList.remove("isNotValid");
                 lbLotAdjusted.classList.add("isValid");
                 console.log("Exito Lot");
@@ -555,10 +739,11 @@
 
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
-                checkWarehouse.style.display = "none";
-                exWarehouse.style.display = "inline-block";
-                checkLoca.style.display = "none";
-                exLoca.style.display = "none";
+                $("#loadWarehouse").hide(500);
+                $("#checkWarehouse").hide(500);
+                $("#checkLoca").hide(500);
+                $("#exLoca").hide(500);
+                $("#exWarehouse").show(500);
                 console.log(MyObj.errorMsg);
                 lbWarehouseAdjusted.classList.remove("isValid");
                 lbWarehouseAdjusted.classList.add("isNotValid");
@@ -567,6 +752,12 @@
                 lbLocaAdjusted.classList.remove("isValid");
                 lbLocaAdjusted.classList.remove("isNotValid");
             } else {
+                $("#exLoca").hide(500);
+                $("#checkLoca").hide(500);
+                $("#loadWarehouse").hide(500);
+                $("#exWarehouse").hide(500);
+                $("#checkWarehouse").show(500);
+
                 checkWarehouse.style.display = "inline-block";
                 exWarehouse.style.display = "none";
                 lbWarehouseAdjusted.classList.remove("isNotValid");
@@ -591,12 +782,18 @@
         var verifyLocaSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
+                $("#loadLoca").hide(500);
+                $("#checkLoca").hide(500);
+                $("#exLoca").show(500);
                 checkLoca.style.display = "none";
                 exLoca.style.display = "inline-block";
                 console.log(MyObj.errorMsg);
                 lbLocaAdjusted.classList.remove("isValid");
                 lbLocaAdjusted.classList.add("isNotValid");
             } else {
+                $("#loadLoca").hide(500);
+                $("#checkLoca").show(500);
+                $("#exLoca").hide(500);
                 checkLoca.style.display = "inline-block";
                 exLoca.style.display = "none";
                 lbLocaAdjusted.classList.remove("isNotValid");
@@ -608,8 +805,6 @@
         $(function() {
 
             IdentificarControles();
-            JsBarcode("#codePaid", "OM0018016-001");
-            JsBarcode("#codeItem", "OMVTN-00600045");
         });
     </script>
     <script src="../../Scripts/script.js"></script>
