@@ -27,7 +27,7 @@ namespace whusap.WebPages.Inventarios
         private static LabelsText _textoLabels = new LabelsText();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
 
-        private static  Ent_twhcol130131 MyObj = new Ent_twhcol130131();
+        private static Ent_twhcol130131 MyObj = new Ent_twhcol130131();
         private static InterfazDAL_ttwhcol016 dal016 = new InterfazDAL_ttwhcol016();
         private static InterfazDAL_twhltc100 dal100 = new InterfazDAL_twhltc100();
         private static InterfazDAL_tticol100 dalticol100 = new InterfazDAL_tticol100();
@@ -38,7 +38,7 @@ namespace whusap.WebPages.Inventarios
         public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["TBL"] = string.Empty;
@@ -75,10 +75,11 @@ namespace whusap.WebPages.Inventarios
         }
 
         [WebMethod]
-        public static string verifyPallet(string PAID){
+        public static string verifyPallet(string PAID)
+        {
             DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
 
-            if (DTPallet.Rows.Count > 0 )
+            if (DTPallet.Rows.Count > 0)
             {
                 var MyObjDT = DTPallet.Rows[0];
                 MyObj.Error = false;
@@ -94,13 +95,40 @@ namespace whusap.WebPages.Inventarios
                 MyObj.LOCA = MyObjDT["ACLO"].ToString();
                 MyObj.DSCA = MyObjDT["DSCA"].ToString();
                 MyObj.DSCAW = MyObjDT["DESCAW"].ToString();
+                MyObj.STAT = MyObjDT["STAT"].ToString();
+                if (MyObj.TBL == "whcol131")
+                {
+                    if (MyObj.STAT != "3")
+                    {
+                        MyObj.Error = true;
+                        MyObj.errorMsg = "Pallet ID Status doesn´t allow adjustment";
+                        MyObj.TipeMsgJs = "Label";
+                    }
+                    else
+                    {
+                        MyObj.Error = false;
+                    }
+                }
+                else
+                {
+                    if (MyObj.STAT != "7")
+                    {
+                        MyObj.Error = true;
+                        MyObj.errorMsg = "Pallet ID Status doesn´t allow adjustment";
+                        MyObj.TipeMsgJs = "Label";
+                    }
+                    else
+                    {
+                        MyObj.Error = false;
+                    }
+                }
             }
             else
             {
                 MyObj.Error = true;
                 MyObj.errorMsg = "Pallet ID doesn´t exist";
                 MyObj.TipeMsgJs = "Label";
-                
+
             }
 
             return JsonConvert.SerializeObject(MyObj);
@@ -137,7 +165,7 @@ namespace whusap.WebPages.Inventarios
         }
 
         [WebMethod]
-        public static string verifyLot(string ITEM,string LOT)
+        public static string verifyLot(string ITEM, string LOT)
         {
             Ent_twhltc100 data100 = new Ent_twhltc100() { item = ITEM, clot = LOT };
             var DTLot = dal100.listaRegistro_Clot(ref data100, ref strError);
@@ -189,25 +217,31 @@ namespace whusap.WebPages.Inventarios
         }
 
         [WebMethod]
-        public static string verifyLoca(string LOCA)
+        public static string verifyLoca(string CWAR, string LOCA)
         {
-            DataTable DTLoca = dalTransfer.ConsultarWarehouse(LOCA);
-
+            DataTable DTLoca = dalTransfer.ConsultarLocation(CWAR, LOCA);
             if (DTLoca.Rows.Count > 0)
             {
                 var MyObjDT = DTLoca.Rows[0];
-                MyObj.Error = false;
-                MyObj.errorMsg = string.Empty;
-                MyObj.TipeMsgJs = string.Empty;
+                if (MyObjDT["BINB"].ToString().Trim() != "2")
+                {
+                    MyObj.Error = true;
+                    MyObj.errorMsg = "Location blocked";
+                    MyObj.TipeMsgJs = "Label";
+                }
+                else
+                {
+                    MyObj.Error = false;
+                    MyObj.errorMsg = string.Empty;
+                    MyObj.TipeMsgJs = string.Empty;
+                }
             }
             else
             {
                 MyObj.Error = true;
                 MyObj.errorMsg = "Location code doesn´t exist";
                 MyObj.TipeMsgJs = "Label";
-
             }
-
             return JsonConvert.SerializeObject(MyObj);
         }
 
@@ -219,7 +253,7 @@ namespace whusap.WebPages.Inventarios
 
             if (Res)
             {
-                
+
                 saveOriginTable(twhcol028);
                 string strMaxSequence = getSequence(twhcol028.PAID);
                 //string strNewSequence = currentSequience(strOldSequence);
@@ -249,13 +283,15 @@ namespace whusap.WebPages.Inventarios
             return JsonConvert.SerializeObject(twhcol028);
         }
 
-        private static bool saveNewPalletOriginTable( ref Ent_twhcol028 twhcol028, string MaxSequence)
+        private static bool saveNewPalletOriginTable(ref Ent_twhcol028 twhcol028, string MaxSequence)
         {
 
             bool res = false;
             string separator = "-";
             twhcol028.PAID = recursos.GenerateNewPallet(MaxSequence, separator);
             string SQNB = twhcol028.PAID.Substring(0, twhcol028.PAID.IndexOf(separator));
+            twhcol028.LOGN = HttpContext.Current.Session["user"].ToString();
+            twhcol028.DATR = DateTime.Now.ToString("MM/dd/yyyy");
             switch (HttpContext.Current.Session["TBL"].ToString())
             {
                 case "ticol022":
@@ -264,10 +300,10 @@ namespace whusap.WebPages.Inventarios
                     obj022.pdno = SQNB;
                     obj022.sqnb = twhcol028.PAID;
                     obj022.proc = 1;
-                    obj022.logn = HttpContext.Current.Session["user"].ToString();
+                    obj022.logn = twhcol028.LOGN;
                     obj022.mitm = twhcol028.TITM;
                     obj022.qtdl = Convert.ToDecimal(twhcol028.TQTY);
-                    obj022.cuni = "kg";
+                    obj022.cuni = twhcol028.UNIT;
                     obj022.log1 = "NONE";
                     obj022.qtd1 = Convert.ToInt32(twhcol028.TQTY);
                     obj022.pro1 = 1;
@@ -281,7 +317,7 @@ namespace whusap.WebPages.Inventarios
                     obj022.refcntd = 0;
                     obj022.refcntu = 0;
                     obj022.drpt = DateTime.Now;
-                    obj022.urpt = HttpContext.Current.Session["user"].ToString();
+                    obj022.urpt = twhcol028.LOGN;
                     obj022.acqt = Convert.ToDecimal(twhcol028.TQTY);
                     obj022.cwaf = twhcol028.TWAR;
                     obj022.cwat = twhcol028.TWAR;
@@ -290,7 +326,7 @@ namespace whusap.WebPages.Inventarios
                     list022.Add(obj022);
                     bool insert022 = Convert.ToBoolean(_idaltticol022.insertarRegistroSimple(ref obj022, ref strError));
                     bool insert222 = Convert.ToBoolean(_idaltticol022.InsertarRegistroTicol222(ref obj022, ref strError));
-                    res = (insert222 == true && insert022 == true) ? true : false; 
+                    res = (insert222 == true && insert022 == true) ? true : false;
                     break;
                 case "ticol042":
                     Ent_tticol042 obj042 = new Ent_tticol042();
@@ -298,10 +334,10 @@ namespace whusap.WebPages.Inventarios
                     obj042.pdno = SQNB;
                     obj042.sqnb = twhcol028.PAID;
                     obj042.proc = 1;
-                    obj042.logn = HttpContext.Current.Session["user"].ToString();
+                    obj042.logn = twhcol028.LOGN;
                     obj042.mitm = twhcol028.TITM;
                     obj042.qtdl = Convert.ToDouble(twhcol028.TQTY);
-                    obj042.cuni = "kg";
+                    obj042.cuni = twhcol028.UNIT;
                     obj042.log1 = "NONE";
                     obj042.qtd1 = Convert.ToInt32(twhcol028.TQTY);
                     obj042.pro1 = 1;
@@ -315,7 +351,7 @@ namespace whusap.WebPages.Inventarios
                     obj042.refcntd = 0;
                     obj042.refcntu = 0;
                     obj042.drpt = DateTime.Now;
-                    obj042.urpt = HttpContext.Current.Session["user"].ToString();
+                    obj042.urpt = twhcol028.LOGN;
                     obj042.acqt = Convert.ToDouble(twhcol028.TQTY);
                     obj042.cwaf = twhcol028.TWAR;
                     obj042.cwat = twhcol028.TWAR;
@@ -324,7 +360,7 @@ namespace whusap.WebPages.Inventarios
                     list042.Add(obj042);
                     bool insert042 = Convert.ToBoolean(_idaltticol042.insertarRegistroSimple(ref obj042, ref strError));
                     bool insert242 = Convert.ToBoolean(_idaltticol042.InsertarRegistroTicol242(ref obj042, ref strError));
-                    res = (insert242 == true && insert042 == true) ? true : false; 
+                    res = (insert242 == true && insert042 == true) ? true : false;
                     break;
                 case "whcol131":
                     Ent_twhcol130131 obj131 = new Ent_twhcol130131();
@@ -339,9 +375,9 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.CWAR = twhcol028.TWAR;
                     MyObj131.QTYS = twhcol028.TQTY;// cantidad escaneada view
                     MyObj131.QTYA = twhcol028.TQTY;
-                    MyObj131.UNIT = "KG";
+                    MyObj131.UNIT = twhcol028.UNIT;
                     MyObj131.QTYC = twhcol028.TQTY;//cantidad escaneada view aplicando factor
-                    MyObj131.UNIC = "KG";
+                    MyObj131.UNIC = twhcol028.UNIT;
                     MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
                     MyObj131.CONF = "1";
                     MyObj131.RCNO = " ";//llena baan
@@ -351,7 +387,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.PRNT = "1";// llenar en 1
                     MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
                     MyObj131.NPRT = "1";//conteo de reimpresiones 
-                    MyObj131.LOGN = HttpContext.Current.Session["user"].ToString();// nombre de ususario de la session
+                    MyObj131.LOGN = twhcol028.LOGN;// nombre de ususario de la session
                     MyObj131.LOGT = " ";//llena baan
                     MyObj131.STAT = "1";// LLENAR EN 1  
                     MyObj131.DSCA = "0";
@@ -369,7 +405,7 @@ namespace whusap.WebPages.Inventarios
         private static string currentSequience(string strOldSequence)
         {
             string strNewSequence = string.Empty;
-            int newSequence = Convert.ToInt32(strOldSequence)+1;
+            int newSequence = Convert.ToInt32(strOldSequence) + 1;
             if (newSequence <= 9)
             {
                 strNewSequence = "00" + newSequence.ToString();
@@ -405,7 +441,7 @@ namespace whusap.WebPages.Inventarios
                 case "whcol130":
                     ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                     break;
-                
+
             }
             return ActalizacionExitosa;
         }
@@ -417,14 +453,14 @@ namespace whusap.WebPages.Inventarios
             string SQNB = PAIDOld.Substring(0, indexSeparator);
             string SEC = PAIDOld.Substring(indexSeparator + 1);
             string complement = recursos.SeparatorAlphaNumeric(ref SEC);
-            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB+"-"+complement);
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
             if (dtMaxSec.Rows.Count > 0)
             {
                 sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
             }
             return sequence;
         }
-        
+
         protected void generateDropDownCostCenters()
         {
 
@@ -437,7 +473,7 @@ namespace whusap.WebPages.Inventarios
                 int rowIndex = 0;
                 ListItem itemS = null;
                 itemS = new ListItem();
-                itemS.Text = _idioma == "INGLES" ? "-- Select an option -- " : " -- Seleccione --";
+                itemS.Text = _idioma == "INGLES" ? "-- Select an Cost Center -- " : " -- Seleccione --";
                 itemS.Value = "";
                 dropDownCostCenters.Items.Insert(rowIndex, itemS);
 

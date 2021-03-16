@@ -311,60 +311,68 @@
         </div>
         <br />
         <div id="printButton" class="container">
-            <button type="button" class="btn btn-link col-12"><i class="fas fa-print"></i></button>
+            <button type="button" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
         </div>
     </div>
     <script type="text/javascript">
-        //var twhcol028 = {
-        //    PAID: "",
-        //    CDIS: "",
-        //    EMNO: "",
-        //    SITM: "",
-        //    SWAR: "",
-        //    SLOC: "",
-        //    SLOT: "",
-        //    SQTY: "",
-        //    TITM: "",
-        //    TWAR: "",
-        //    TLOC: "",
-        //    TLOT: "",
-        //    TQTY: "",
-        //    LOGN: "",
-        //    DATR: "",
-        //    PROC: "",
-        //    SORN: "",
-        //    SPON: "",
-        //    TORN: "",
-        //    TPON: "",
-        //    MESS: "",
-        //    REFCNTD: "",
-        //    REFCNTU: ""
-        //}
-            class Ent_twhcol028 {
-                PAID = "0";
-                CDIS = "0";
-                EMNO = "0";
-                SITM = "0";
-                SWAR = "0";
-                SLOC = "0";
-                SLOT = "0";
-                SQTY = "0";
-                TITM = "0";
-                TWAR = "0";
-                TLOC = "0";
-                TLOT = "0";
-                TQTY = "0";
-                LOGN = "0";
-                DATR = "0";
-                PROC = "0";
-                SORN = "0";
-                SPON = "0";
-                TORN = "0";
-                TPON = "0";
-                MESS = "0";
-                REFCNTD = "0";
-                REFCNTU = "0";
-            }
+        function printDiv(divID) {
+
+            //            //Get the HTML of div
+            //            var divElements = document.getElementById(divID).innerHTML;
+            //            //Get the HTML of whole page
+            //            var oldPage = document.body.innerHTML;
+            //            //Reset the page's HTML with div's HTML only
+            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
+            //            //Print Page
+            //            window.print();
+            //            //Restore orignal HTML
+            //            document.body.innerHTML = oldPage;
+            //            window.close();
+            //            return true;
+
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body >');
+            //mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+        };
+        class Ent_twhcol028 {
+            PAID = "0";
+            CDIS = "0";
+            EMNO = "0";
+            SITM = "0";
+            SWAR = "0";
+            SLOC = "0";
+            SLOT = "0";
+            SQTY = "0";
+            TITM = "0";
+            TWAR = "0";
+            TLOC = "0";
+            TLOT = "0";
+            TQTY = "0";
+            LOGN = "0";
+            DATR = "0";
+            PROC = "0";
+            SORN = "0";
+            SPON = "0";
+            TORN = "0";
+            TPON = "0";
+            MESS = "0";
+            REFCNTD = "0";
+            REFCNTU = "0";
+            UNIT = "";
+            USER = ""
+        }
 
         var restart = false;
         var waitSecontsPallet;
@@ -375,12 +383,7 @@
         var timeOutLoca = 0;
 
         function IdentificarControles() {
-
-
-            //MyEtiquetaOC = $('#MyEtiquetaOC');
-            //MyEtiqueta = $('#MyEtiqueta');
-
-            //Formulario
+            //Form
             txPalletID = document.getElementById("txPalletID");
             lbItemActual = document.getElementById("lbItemActual");
             lbItemDscaActual = document.getElementById("lbItemDscaActual");
@@ -401,7 +404,8 @@
             btnSave = document.getElementById("btnSave");
             btnRestart = document.getElementById("btnRestart");
             btnRestartForm = document.getElementById("btnRestartForm");
-
+            btnPrint = document.getElementById("btnPrint");
+            
             loadWarehouse = document.getElementById("loadWarehouse");
             loadItem = document.getElementById("loadItem");
             loadLot = document.getElementById("loadLot");
@@ -445,7 +449,12 @@
             btnSave.addEventListener("click", sendInfo, false);
             btnRestart.addEventListener("click", restartAll, false);
             btnRestartForm.addEventListener("click", restartInfo, false);
+            btnPrint.addEventListener("click",printLabel, false);
+            
+        }
 
+        var printLabel = function(){
+            printDiv("printContainer");
         }
 
         var handerTimeout = function(currentTimeOut, currentMethod) {
@@ -548,6 +557,7 @@
             Obj028.TLOC = lbLocaAdjusted.textContent.trim();
             Obj028.TLOT = lbLotAdjusted.textContent.trim();
             Obj028.TQTY = lbQtyActual.textContent.trim();
+            Obj028.UNIT = lbUnitAdjusted.textContent.trim();
             Obj028.LOGN = "";
             Obj028.PROC = "2";
             Obj028.SORN = " ";
@@ -600,7 +610,6 @@
         var verifyPallet = function(e) {
             var Data = "{'PAID':'" + txPalletID.value.trim().toUpperCase() + "'}";
             sendAjax("LotItemAdjustment.aspx/verifyPallet", Data, verifyPalletSuccess);
-
         }
 
         var verifyItem = function(e) {
@@ -619,11 +628,9 @@
         }
 
         var verifyLoca = function(e) {
-            var Data = "{'LOCA':'" + lbLocaAdjusted.textContent.trim().toUpperCase() + "'}";
+            var Data = "{'CWAR':'" + lbWarehouseAdjusted.textContent.trim().toUpperCase() + "','LOCA':'" + lbLocaAdjusted.textContent.trim().toUpperCase() + "'}";
             sendAjax("LotItemAdjustment.aspx/verifyLoca", Data, verifyLocaSuccess)
         }
-
-
 
         var verifyPalletSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
@@ -686,6 +693,7 @@
 
             }
         }
+
         var saveSuccess = function(res) {
             var MyObjTwhcol028 = JSON.parse(res.d);
             if(MyObjTwhcol028.Error == false){
@@ -695,9 +703,9 @@
                 lblitemDesc.textContent = lbItemDscaAdjusted.textContent;
                 lblWorkOrder.textContent = MyObjTwhcol028.PAID.substring(0,(MyObjTwhcol028.PAID.indexOf("-")));;
                 lblPalletNum.textContent =  MyObjTwhcol028.PAID.substring((MyObjTwhcol028.PAID.indexOf("-"))+1);
-                lblInspector.textContent = "JCUBILLOS";
-                lblDate.textContent = "01-01-2021";
-                lblShift.textContent = "A";
+                lblInspector.textContent = MyObjTwhcol028.LOGN;
+                lblDate.textContent = MyObjTwhcol028.DATR;
+                lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
                 lblQuantity.textContent = lbQtyAdjusted.textContent;
                 $("#editTable").hide(500);
                 $('#printContainer').show(500);
@@ -711,6 +719,7 @@
         var verifyItemSuccess = function(res) {
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
+                lblError.innerHTML = MyObj.errorMsg;
                 lbItemAdjusted.textContent = lbItemAdjusted.textContent.trim()
                 $("#loadItem").hide(500);
                 $("#checkItem").hide(500);
@@ -728,6 +737,7 @@
                 lbItemDscaAdjusted.textContent = "";
                 verifyInfoForm();
             } else {
+                lblError.innerHTML.replace(MyObj.errorMsg,"");
                 lbItemAdjusted.textContent = lbItemAdjusted.textContent.trim()
                 $("#loadItem").hide(500);
                 $("#checkItem").show(500);
@@ -779,7 +789,6 @@
         }
 
         var verifyWarehouseSuccess = function(res) {
-
             var MyObj = JSON.parse(res.d);
             if (MyObj.Error) {
                 lbWarehouseAdjusted.textContent = lbWarehouseAdjusted.textContent.trim()
@@ -840,6 +849,7 @@
                 console.log(MyObj.errorMsg);
                 lbLocaAdjusted.classList.remove("isValid");
                 lbLocaAdjusted.classList.add("isNotValid");
+                lblError.innerHTML = MyObj.errorMsg;
                 verifyInfoForm();
             } else {
                 lbLocaAdjusted.textContent = lbLocaAdjusted.textContent.trim()
@@ -851,6 +861,7 @@
                 lbLocaAdjusted.classList.remove("isNotValid");
                 lbLocaAdjusted.classList.add("isValid");
                 console.log("Exito Loca");
+                lblError.innerHTML = "";
                 verifyInfoForm();
             }
         }
@@ -861,8 +872,8 @@
         $("#Contenido_dropDownCostCenters").change(
             function(){verifyInfoForm();}
             );
-        var verifyInfoForm = function (){
 
+        var verifyInfoForm = function (){
             var sameItemLot = false;
             var sameWarehouseLoca = false;
             var combinationItemValid = false;
@@ -877,10 +888,8 @@
             var locaValid   = false;
             var reasonValid = false;
             var codeValid = false;
-
             var ktlc = lbItemAdjusted.getAttribute("ktlc");
             var sloc = lbWarehouseAdjusted.getAttribute("sloc");
-            
 
             itemNotValid        = lbItemAdjusted.classList.contains("isNotValid");
             lotNotValid         = lbLotAdjusted.classList.contains("isNotValid");
@@ -923,19 +932,16 @@
 
             if(sameItemLot === true && sameWarehouseLoca === true){
                 $("#saveSection").hide(500);
-                lblError.textContent = "Los datos de adjusted son iguales"
+                lblError.textContent = "Actual Data and Adjusted Data cann't be the same";
                 return;
             }
             else if(sameItemLot === true && sameWarehouseLoca === false){
                 combinationItemValid = true;
-                lblError.textContent = ""
             }
             else if(sameItemLot === false  && sameWarehouseLoca === true){
                 combinationWarehouseValid = true;
-                lblError.textContent = "";
             }
             else if(sameItemLot === false  && sameWarehouseLoca === false ){
-                lblError.textContent = ""
             }
 
             if(itemValid && combinationItemValid == false){
@@ -1011,6 +1017,7 @@
 
             IdentificarControles();
         });
+
     </script>
     <script src="../../Scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
