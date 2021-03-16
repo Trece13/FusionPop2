@@ -348,6 +348,10 @@ namespace whusap.WebPages.Inventarios
                 txtPalletId.Enabled = true;
                 txtPalletId.Text = String.Empty;
                 btnSend.Visible = true;
+                tblPalletInfo.Visible = true;
+                btnSave.Visible = true;
+                txtAdjustmentQuantity.Text = "";
+                txtAdjustmentQuantity.Focus();
                 return;
             }
             else{
@@ -356,7 +360,11 @@ namespace whusap.WebPages.Inventarios
                     lblError.Text = "New quantity value doesnt allow";
                     txtPalletId.Enabled = true;
                     txtPalletId.Text = String.Empty;
-                    btnSend.Visible = true;
+                    btnSave.Visible = true;
+                    tblPalletInfo.Visible = true;
+                    btnSave.Visible = true;
+                    txtAdjustmentQuantity.Text = "";
+                    txtAdjustmentQuantity.Focus();
                     return;
                 }
             }

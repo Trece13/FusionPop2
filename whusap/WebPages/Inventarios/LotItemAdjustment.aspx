@@ -170,7 +170,7 @@
             <label class="col-sm-1 col-form-label-lg" for="txPalletID">
                 Pallet ID</label>
             <div class="col-sm-1 alingRight">
-                <button type="button" class="btn btn-link col-4" id="btnRestart"><i class="fas fa-undo-alt fa-2x"></i></button>
+                <button type="button" class="btn btn-link col-4" id="btnRestart"><i class="fas fa-undo-alt fa-1x"></i></button>
             </div>
             <div class="col-sm-4 alingRight">
                 <input type="text" class="form-control form-control-lg" id="txPalletID" placeholder="">
@@ -501,6 +501,7 @@
 
         var restartInfo = function(e) {
             restart = true;
+            $("#saveSection").hide(500);
             $("#checkItem").hide(500);
             $("#exItem").hide(500);
             $("#loadItem").hide(500);
