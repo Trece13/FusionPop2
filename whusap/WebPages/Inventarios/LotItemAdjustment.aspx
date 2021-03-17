@@ -78,6 +78,14 @@
             border-radius: 12px;
         }
 
+        .alingRight {
+            text-align: right;
+        }
+
+        .alingLeft {
+            text-align: left;
+        }
+
         #printButton {
             width: 6in;
         }
@@ -111,13 +119,6 @@
         #lblMadein {
         }
 
-        .alingRight {
-            text-align: right;
-        }
-
-        .alingLeft {
-            text-align: left;
-        }
 
         .borderTop {
             border-top: solid 1px gray;
@@ -150,9 +151,11 @@
         #saveSection {
             display: none;
         }
-         .notBorderBottom{
-             border-bottom: none;
-         }
+
+        .notBorderBottom {
+            border-bottom: none;
+        }
+
         @keyframes spin {
             from {
                 transform: rotate(0deg);
@@ -259,93 +262,65 @@
         </table>
     </div>
     <div id="printContainer">
-        <div id="myLabel" class="container">
-            <div class="row">
-                <div class="col-6 alingLeft">
-                    <label id="lblitemDesc">LBRT ORG BLACK CHERRY 105</label>
+        <div id="printSpace">
+            <div id="myLabel" class="container">
+                <div class="row">
+                    <div class="col-6 alingLeft">
+                        <label id="lblitemDesc">LBRT ORG BLACK CHERRY 105</label>
+                    </div>
+                    <div class="col-6 alingRight">
+                        <label id="lblMadein">MADE IN: DUBLIN - VA</label>
+                    </div>
                 </div>
-                <div class="col-6 alingRight">
-                    <label id="lblMadein">MADE IN: DUBLIN - VA</label>
+                <br />
+                <div class="col-12 divDesc">
+                    <img id="codeItem" />
                 </div>
-            </div>
-            <br />
-            <div class="col-12 divDesc">
-                <img id="codeItem" />
-            </div>
-            <div class="col-12 borderTop">
-                <img id="codePaid" />
-            </div>
-            <br />
-            <div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Work Order Lot</th>
-                            <th scope="col">Pallet Number</th>
-                            <th scope="col">Inspector Initial</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="lblWorkOrder">OM00180016</td>
-                            <td id="lblPalletNum">1</td>
-                            <td id="lblInspector"></td>
-                        </tr>
-                    </tbody>
-                    <thead>
-                        <tr>
-                            <th scope="col">Date</th>
-                            <th scope="col">Shift</th>
-                            <th scope="col">Case Per Pallet</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td id="lblDate">Date</td>
-                            <td id="lblShift">A,B,C,D</td>
-                            <td id="lblQuantity">18</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="col-12 borderTop">
+                    <img id="codePaid" />
+                </div>
+                <br />
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Work Order Lot</th>
+                                <th scope="col">Pallet Number</th>
+                                <th scope="col">Inspector Initial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="lblWorkOrder">OM00180016</td>
+                                <td id="lblPalletNum">1</td>
+                                <td id="lblInspector"></td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Shift</th>
+                                <th scope="col">Case Per Pallet</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="lblDate">Date</td>
+                                <td id="lblShift">A,B,C,D</td>
+                                <td id="lblQuantity">18</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <br />
         <div id="printButton" class="container">
-            <button type="button" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
+            <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint" ></i></button>
         </div>
     </div>
     <script type="text/javascript">
-        function printDiv(divID) {
-
-            //            //Get the HTML of div
-            //            var divElements = document.getElementById(divID).innerHTML;
-            //            //Get the HTML of whole page
-            //            var oldPage = document.body.innerHTML;
-            //            //Reset the page's HTML with div's HTML only
-            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
-            //            //Print Page
-            //            window.print();
-            //            //Restore orignal HTML
-            //            document.body.innerHTML = oldPage;
-            //            window.close();
-            //            return true;
-
-            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-            mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('</head><body >');
-            //mywindow.document.write('<h1>' + document.title + '</h1>');
-            mywindow.document.write(document.getElementById(divID).innerHTML);
-            mywindow.document.write('</body></html>');
-
-            mywindow.document.close(); // necessary for IE >= 10
-            mywindow.focus(); // necessary for IE >= 10*/
-
-            mywindow.print();
-            mywindow.close();
-
-            return true;
-        };
+        
         class Ent_twhcol028 {
             PAID = "0";
             CDIS = "0";
@@ -449,12 +424,40 @@
             btnSave.addEventListener("click", sendInfo, false);
             btnRestart.addEventListener("click", restartAll, false);
             btnRestartForm.addEventListener("click", restartInfo, false);
-            btnPrint.addEventListener("click",printLabel, false);
             
         }
 
+        function printDiv(divID) {
+
+            //            //Get the HTML of div
+            //            var divElements = document.getElementById(divID).innerHTML;
+            //            //Get the HTML of whole page
+            //            var oldPage = document.body.innerHTML;
+            //            //Reset the page's HTML with div's HTML only
+            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
+            //            //Print Page
+            //            window.print();
+            //            //Restore orignal HTML
+            //            document.body.innerHTML = oldPage;
+            //            window.close();
+            //            return true;
+
+            var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
+            mywindow.document.write('<html><head>');
+            mywindow.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">');
+            mywindow.document.write('<style>*{font-size: small !important;} #codePaid {display: block;margin: auto;height: 75px;width: 400px;} #codeItem {display: block;margin: auto;height: 75px;width: 400px;} #myLabel {width: 6in;height: 4in;padding: 20px;border: 1px solid black;border-radius: 12px;}.alingRight {text-align: right;}.alingLeft {text-align: left;}</style>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            return true;
+        };
+
         var printLabel = function(){
-            printDiv("printContainer");
+            printDiv("printSpace");
         }
 
         var handerTimeout = function(currentTimeOut, currentMethod) {
