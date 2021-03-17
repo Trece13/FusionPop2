@@ -44,6 +44,7 @@ namespace whusap.WebPages.WorkOrders
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
+        public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
         string formName = string.Empty;
         //public static string _operator = string.Empty;
         string _idioma = string.Empty;
@@ -971,43 +972,48 @@ namespace whusap.WebPages.WorkOrders
                         if (Convert.ToDecimal(qtyaG) > 0)
                         {
                             int consecutivoPalletID = 0;
-                            DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO, true);
-                            errorlog += "-Modifico trablas\n";
-                            string SecuenciaPallet = "001";
-                            errorlog += "-Realiza conteo de busqueda pallet max: " + DTPalletContinue.Rows.Count + "\n";
-                            if (DTPalletContinue.Rows.Count > 0)
-                            {
-                                errorlog += "-Verifica si la catidad max es mato a 0\n";
-                                foreach (DataRow item in DTPalletContinue.Rows)
-                                {
-                                    errorlog += "-Entro a for each\n";
-                                    errorlog += "la cadena a recortar es esta: " + item["T$PAID"].ToString().Trim() + " \n";
-                                    errorlog += "la cadena extraida es : " + item["T$PAID"].ToString().Trim().Substring(10, 3) + " \n";
+                            string strMaxSequence = getSequence(PAID,"P");
+                            string separator = "-";
+                            string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+                            string SQNB = PAID.Substring(0, PAID.IndexOf(separator));
 
-                                    consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(11, 3)) + 1;
-                                    errorlog += "realiza substring de pallet para tener la secuencia:" + consecutivoPalletID + "\n";
-                                    if (consecutivoPalletID.ToString().Length == 1)
-                                    {
-                                        SecuenciaPallet = "00" + consecutivoPalletID;
-                                    }
-                                    if (consecutivoPalletID.ToString().Length == 2)
-                                    {
-                                        SecuenciaPallet = "0" + consecutivoPalletID;
-                                    }
-                                    if (consecutivoPalletID.ToString().Length == 3)
-                                    {
-                                        SecuenciaPallet = consecutivoPalletID.ToString();
-                                    }
+                            //DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO, true);
+                            //errorlog += "-Modifico trablas\n";
+                            //string SecuenciaPallet = "001";
+                            //errorlog += "-Realiza conteo de busqueda pallet max: " + DTPalletContinue.Rows.Count + "\n";
+                            //if (DTPalletContinue.Rows.Count > 0)
+                            //{
+                            //    errorlog += "-Verifica si la catidad max es mato a 0\n";
+                            //    foreach (DataRow item in DTPalletContinue.Rows)
+                            //    {
+                            //        errorlog += "-Entro a for each\n";
+                            //        errorlog += "la cadena a recortar es esta: " + item["T$PAID"].ToString().Trim() + " \n";
+                            //        errorlog += "la cadena extraida es : " + item["T$PAID"].ToString().Trim().Substring(10, 3) + " \n";
 
-                                }
+                            //        consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(11, 3)) + 1;
+                            //        errorlog += "realiza substring de pallet para tener la secuencia:" + consecutivoPalletID + "\n";
+                            //        if (consecutivoPalletID.ToString().Length == 1)
+                            //        {
+                            //            SecuenciaPallet = "00" + consecutivoPalletID;
+                            //        }
+                            //        if (consecutivoPalletID.ToString().Length == 2)
+                            //        {
+                            //            SecuenciaPallet = "0" + consecutivoPalletID;
+                            //        }
+                            //        if (consecutivoPalletID.ToString().Length == 3)
+                            //        {
+                            //            SecuenciaPallet = consecutivoPalletID.ToString();
+                            //        }
 
-                            }
-                            errorlog += "genero secuencia,";
+                            //    }
+
+                            //}
+                            //errorlog += "genero secuencia,";
 
                             MyObj.OORG = OORG;// Order type escaneada view 
                             MyObj.ORNO = ORNO;
                             MyObj.ITEM =  HttpContext.Current.Session["ITEM"].ToString().Trim();
-                            MyObj.PAID = ORNO + "-P" + SecuenciaPallet;
+                            MyObj.PAID = newPallet;
                             MyObj.PONO = "1";
                             MyObj.SEQN = "1";
                             MyObj.CLOT = CLOT;//CLOT.ToUpper();// lote VIEW
@@ -1274,5 +1280,28 @@ namespace whusap.WebPages.WorkOrders
 
         }
 
+        public static string getSequence(string PAIDOld, string complement = "")
+        {
+            string sequence = string.Empty;
+            int indexSeparator = PAIDOld.IndexOf("-");
+            string SQNB = PAIDOld.Substring(0, indexSeparator);
+            string SEC = PAIDOld.Substring(indexSeparator + 1);
+            
+            if(complement == ""){
+                complement = recursos.SeparatorAlphaNumeric(ref SEC);
+            }
+
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
+            if (dtMaxSec.Rows.Count > 0)
+            {
+                sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
+            }
+            else
+            {
+                sequence = SQNB + "-" + complement + "000";
+            }
+
+            return sequence;
+        }
     }
 }

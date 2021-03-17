@@ -200,45 +200,43 @@ namespace whusa.Interfases
                 foreach (DataRow MyRow in DTwhcol130.Rows)
                 {
 
-                    Ent_twhcol130131 MyObjet = new Ent_twhcol130131
-                    {
+                    Ent_twhcol130131 MyObjet = new Ent_twhcol130131();
 
 
-                        OORG = MyRow["OORG"].ToString(),
-                        ORNO = MyRow["ORNO"].ToString(),
-                        ITEM = MyRow["ITEM"].ToString(),
-                        PAID = MyRow["PAID"].ToString(),
-                        PONO = MyRow["PONO"].ToString(),
-                        SEQN = MyRow["SEQN"].ToString(),
-                        CLOT = MyRow["CLOT"].ToString(),
-                        CWAR = MyRow["CWAR"].ToString(),
-                        QTYS = MyRow["QTYS"].ToString(),
-                        UNIT = MyRow["UNIT"].ToString(),
-                        QTYC = MyRow["QTYC"].ToString(),
-                        UNIC = MyRow["UNIC"].ToString(),
-                        DATE = MyRow["T$DATE"].ToString(),
-                        CONF = MyRow["CONF"].ToString(),
-                        RCNO = MyRow["RCNO"].ToString(),
-                        DATR = MyRow["DATR"].ToString(),
-                        LOCA = MyRow["LOCA"].ToString(),
-                        DATL = MyRow["DATL"].ToString(),
-                        PRNT = MyRow["PRNT"].ToString(),
-                        DATP = MyRow["DATP"].ToString(),
-                        NPRT = (Convert.ToInt32(MyRow["NPRT"])).ToString(),
-                        LOGN = MyRow["LOGN"].ToString(),
-                        LOGT = MyRow["LOGT"].ToString(),
-                        STAT = MyRow["T$STAT"].ToString(),
-                        DSCA = MyRow["DSCA"].ToString(),
-                        NAMA = MyRow["T$NAMA"].ToString(),
+                        MyObjet.OORG = MyRow["OORG"].ToString();
+                        MyObjet.ORNO = MyRow["ORNO"].ToString();
+                        MyObjet.ITEM = MyRow["ITEM"].ToString();
+                        MyObjet.PAID = MyRow["PAID"].ToString();
+                        MyObjet.PONO = MyRow["PONO"].ToString();
+                        MyObjet.SEQN = MyRow["SEQN"].ToString();
+                        MyObjet.CLOT = MyRow["CLOT"].ToString();
+                        MyObjet.CWAR = MyRow["CWAR"].ToString();
+                        MyObjet.QTYS = MyRow["QTYS"].ToString();
+                        MyObjet.UNIT = MyRow["UNIT"].ToString();
+                        MyObjet.QTYC = MyRow["QTYC"].ToString();
+                        MyObjet.UNIC = MyRow["UNIC"].ToString();
+                        MyObjet.DATE = MyRow["T$DATE"].ToString();
+                        MyObjet.CONF = MyRow["CONF"].ToString();
+                        MyObjet.RCNO = MyRow["RCNO"].ToString();
+                        MyObjet.DATR = MyRow["DATR"].ToString();
+                        MyObjet.LOCA = MyRow["LOCA"].ToString();
+                        MyObjet.DATL = MyRow["DATL"].ToString();
+                        MyObjet.PRNT = MyRow["PRNT"].ToString();
+                        MyObjet.DATP = MyRow["DATP"].ToString();
+                        MyObjet.NPRT = (Convert.ToInt32(MyRow["NPRT"])).ToString();
+                        MyObjet.LOGN = MyRow["LOGN"].ToString();
+                        MyObjet.LOGT = MyRow["LOGT"].ToString();
+                        MyObjet.STAT = MyRow["T$STAT"].ToString();
+                        MyObjet.DSCA = MyRow["DSCA"].ToString();
+                        MyObjet.NAMA = MyRow["T$NAMA"].ToString();
 
-                        PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96",
-                        ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["OORG"].ToString() + "&code=Code128&dpi=96",
-                        //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96",
-                        ITEM_URL = MyRow["ITEM"].ToString().Trim().ToUpper() + " - " + MyRow["DSCA"].ToString().Trim().ToUpper(),
-                        CLOT_URL = MyRow["CLOT"].ToString() == "" ? "" : (UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["CLOT"].ToString() + "&code=Code128&dpi=96"),
-                        QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96",
-                        UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96"
-                    };
+                        MyObjet.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
+                        MyObjet.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["OORG"].ToString() + "&code=Code128&dpi=96";
+                        //ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["ITEM"].ToString() + "&code=Code128&dpi=96";
+                        MyObjet.ITEM_URL = MyRow["ITEM"].ToString().Trim().ToUpper() + " - " + MyRow["DSCA"].ToString().Trim().ToUpper();
+                        MyObjet.CLOT_URL = MyRow["CLOT"].ToString() == "" ? "" : (UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["CLOT"].ToString() + "&code=Code128&dpi=96");
+                        MyObjet.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96";
+                        MyObjet.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyRow["QTYC"].ToString() + "&code=Code128&dpi=96";
 
                     Lstwhcol130.Add(MyObjet);
                 }

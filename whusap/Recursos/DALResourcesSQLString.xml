@@ -1800,7 +1800,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol130">
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
-          UPDATE  {0}.twhcol131{1} SET T$QTYA = T$QTYA -'[:T$QTYA]',T$AllO = T$AllO - '[:T$ALLO]' WHERE trim(T$PAID) = trim('[:T$PAID]')
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO = T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="maximaSecuencia">
@@ -1968,8 +1968,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHCOL130.T$STAT T$STAT, WHCOL130.T$REFCNTD REFCNTD, WHCOL130.T$REFCNTU  REFCNTU, COM100.T$NAMA
           FROM  {0}.twhcol130{1} WHCOL130
           INNER JOIN {0}.TTCIBD001{1} TCIBD001 ON WHCOL130.T$ITEM = TCIBD001.T$ITEM
-          INNER JOIN {0}.TTDPUR400{1} PUR400 ON PUR400.T$ORNO = WHCOL130.T$ORNO
-          INNER JOIN {0}.TTCCOM100{1} COM100 ON COM100.T$BPID = PUR400.T$OTBP
+          LEFT JOIN {0}.TTDPUR400{1} PUR400 ON PUR400.T$ORNO = WHCOL130.T$ORNO
+          LEFT JOIN {0}.TTCCOM100{1} COM100 ON COM100.T$BPID = PUR400.T$OTBP
           WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
@@ -1981,9 +1981,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHCOL131.T$DATE-5/24 T$DATE, WHCOL131.T$CONF CONF, WHCOL131.T$RCNO RCNO, WHCOL131.T$DATR DATR, WHCOL131.T$LOCA LOCA, WHCOL131.T$DATL DATL,
           WHCOL131.T$PICK PICK, WHCOL131.T$DATK DATK, WHCOL131.T$PRNT PRNT, WHCOL131.T$DATP DATP, WHCOL131.T$NPRT NPRT, WHCOL131.T$LOGN LOGN,
           WHCOL131.T$LOGP LOGP, WHCOL131.T$LOGT LOGT, WHCOL131.T$DAFR DAFR, WHCOL131.T$MES1 MES1, WHCOL131.T$DAFL DAFL, WHCOL131.T$MES2 MES2,
-          WHCOL131.T$STAT T$STAT, WHCOL131.T$REFCNTD REFCNTD, WHCOL131.T$REFCNTU  REFCNTU
+          WHCOL131.T$STAT T$STAT, WHCOL131.T$REFCNTD REFCNTD, WHCOL131.T$REFCNTU  REFCNTU, COM100.T$NAMA
           FROM  {0}.twhcol131{1} WHCOL131
           INNER JOIN {0}.TTCIBD001{1} TCIBD001 ON WHCOL131.T$ITEM = TCIBD001.T$ITEM
+          LEFT JOIN {0}.TTDPUR400{1} PUR400 ON PUR400.T$ORNO = WHCOL131.T$ORNO
+          LEFT JOIN {0}.TTCCOM100{1} COM100 ON COM100.T$BPID = PUR400.T$OTBP
           WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
@@ -2713,7 +2715,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="lineClearance_listaRegistrosOrden_Param">
         <stringSQL>
-          SELECT DISTINCT ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
+          SELECT NVL(TB2.REQT,0) AS REQT1,GLOBAL.PONO,GLOBAL.ORDEN,GLOBAL.ALMACEN,GLOBAL.LOTE,GLOBAL.ARTICULO,GLOBAL.DESCRIPCION,GLOBAL.UNIDAD,GLOBAL.CANT_EST,(GLOBAL.ACT_CANT-NVL(TB2.REQT,0)) AS ACT_CANT,GLOBAL.ISS_WAREH,GLOBAL.FACTOR,GLOBAL.IND_LOTE,GLOBAL.ID FROM(SELECT DISTINCT rec.T$PONO PONO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
+          art.t$dsca DESCRIPCION, art.t$cuni UNIDAD, CANT_EST, ACT_CANT,
+          '' ISS_WAREH, 0 FACTOR, art.t$kltc IND_LOTE, '' ID
+          FROM BAAN.tticst001140 rec
+          INNER JOIN BAAN.ttcibd001140 art ON rec.t$sitm = art.t$item
+          INNER JOIN BAAN.ttcibd200140 ibd200 ON art.t$item = ibd200.t$item
+          INNER JOIN BAAN.ttisfc001140 sfc ON rec.t$pdno = sfc.t$pdno
+          RIGHT JOIN ( SELECT rec.t$pdno ORDEN, rec.t$sitm ARTICULO, SUM(rec.t$ques) CANT_EST, sum(rec.t$qucs) ACT_CANT FROM BAAN.tticst001140 rec WHERE TRIM(rec.t$pdno)='[p1]'  GROUP BY rec.t$pdno, rec.t$sitm) TB1 ON TRIM(TB1.ARTICULO) = TRIM(rec.t$sitm)
+          AND sfc.t$osta in('5','7','9')
+          AND TRIM(rec.t$pdno)='[p1]') GLOBAL
+          lEFT JOIN ( select T$PONO, T$ITEM,sum(T$REQT) REQT from baan.tticol125140 GROUP BY T$PONO, T$ITEM) TB2 ON TRIM(TB2.T$PONO) = TRIM(GLOBAL.PONO) AND TRIM(TB2.T$ITEM) = TRIM(GLOBAL.ARTICULO)
+
+          <!--SELECT DISTINCT rec.T$PONO PONO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
           art.t$dsca DESCRIPCION, art.t$cuni UNIDAD, CANT_EST, ACT_CANT,
           '' ISS_WAREH, 0 FACTOR, art.t$kltc IND_LOTE, '' ID
           FROM {0}.tticst001{1} rec INNER JOIN
@@ -2724,7 +2738,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticst001{1} rec
           WHERE TRIM(rec.t$pdno)='[p1]'  GROUP BY rec.t$pdno, rec.t$sitm) TB1 ON TRIM(TB1.ARTICULO) = TRIM(rec.t$sitm)
           WHERE sfc.t$osta in('5','7','9')
-          AND TRIM(rec.t$pdno)='[p1]'
+          AND TRIM(rec.t$pdno)='[p1]'-->
         </stringSQL>
       </operationName>
       <!--<operationName name="lineClearance_listaRegistrosOrden_Param">

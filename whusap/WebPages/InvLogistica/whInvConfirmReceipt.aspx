@@ -41,67 +41,84 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <table border="0">
         <tr>
-            <td style="text-align:left;">
+            <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblNumeroOrden" /></b></span>
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="lblNumeroOrden" /></b></span>
             </td>
-            <td style="width: 250px; padding:5px;">
+            <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtNumeroOrden" CssClass="TextBoxBig" onblur="validarOrden();" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="text-align:center;">
-                <hr />  
-                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
+            <td colspan="2" style="text-align: center;">
+                <hr />
+                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
             </td>
         </tr>
     </table>
 
     <div runat="server" id="divTable" visible="false">
-        <hr />  
-        <table class="table table-bordered" style='font-size:13px; border:3px solid; border-style:outset;'>
-            <tr style='background-color: darkblue; color: white; font-weight:bold;'>
-                <td><b><asp:Label runat="server" ID="lblOrden"></asp:Label></b></td>
-                <td colspan="4"><asp:Label runat="server" ID="lblValueOrden" /></td>
+        <hr />
+        <div style="text-align: left;">
+            <asp:Button Text="" runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
+        </div>
+        <br />
+        <table class="table table-bordered" style='font-size: 13px; border: 3px solid; border-style: outset;'>
+            <tr style='background-color: darkblue; color: white; font-weight: bold;'>
+                <td><b>
+                    <asp:Label runat="server" ID="lblOrden"></asp:Label></b></td>
+                <td colspan="4">
+                    <asp:Label runat="server" ID="lblValueOrden" /></td>
             </tr>
             <tr style="background-color: lightgray;">
-                <td><b><asp:Label runat="server" ID="lblArticulo"></asp:Label></b></td>
-                <td colspan="4"><asp:Label runat="server" ID="lblValueArticulo" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblArticulo"></asp:Label></b></td>
+                <td colspan="4">
+                    <asp:Label runat="server" ID="lblValueArticulo" /></td>
             </tr>
             <tr>
-                <td><b><asp:Label runat="server" ID="lblWareHouse"></asp:Label></b></td>
-                <td><asp:Label Text="" runat="server" ID="lblValueWareHouse" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblWareHouse"></asp:Label></b></td>
+                <td>
+                    <asp:Label Text="" runat="server" ID="lblValueWareHouse" /></td>
             </tr>
             <tr>
-                <td><b><asp:Label runat="server" ID="lblTotal"></asp:Label></b></td>
-                <td><asp:Label Text="" runat="server" ID="lblValueTotal" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblTotal"></asp:Label></b></td>
+                <td>
+                    <asp:Label Text="" runat="server" ID="lblValueTotal" /></td>
             </tr>
             <tr>
-                <td><b><asp:Label runat="server" ID="lblDelivered"></asp:Label></b></td>
-                <td><asp:Label Text="" runat="server" ID="lblValueDelivered" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblDelivered"></asp:Label></b></td>
+                <td>
+                    <asp:Label Text="" runat="server" ID="lblValueDelivered" /></td>
             </tr>
             <tr>
-                <td><b><asp:Label runat="server" ID="lblToReceive"></asp:Label></b></td>
-                <td><asp:Label Text="" runat="server" ID="lblValueToReceive" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblToReceive"></asp:Label></b></td>
+                <td>
+                    <asp:Label Text="" runat="server" ID="lblValueToReceive" /></td>
             </tr>
             <tr>
-                <td><b><asp:Label runat="server" ID="lblConfirmed"></asp:Label></b></td>
-                <td><asp:Label Text="" runat="server" ID="lblValueConfirmed" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblConfirmed"></asp:Label></b></td>
+                <td>
+                    <asp:Label Text="" runat="server" ID="lblValueConfirmed" /></td>
             </tr>
             <tr>
-                <td><b><asp:Label runat="server" ID="lblUnit"></asp:Label></b></td>
-                <td><asp:Label Text="" runat="server" ID="lblValueUnit" /></td>
+                <td><b>
+                    <asp:Label runat="server" ID="lblUnit"></asp:Label></b></td>
+                <td>
+                    <asp:Label Text="" runat="server" ID="lblValueUnit" /></td>
             </tr>
         </table>
-        <div style="text-align:right;">
-            <asp:Button Text="" runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
-        </div>
     </div>
 
-    <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+    <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+    <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
 </asp:Content>
 

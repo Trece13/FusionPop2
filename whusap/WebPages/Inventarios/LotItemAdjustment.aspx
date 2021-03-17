@@ -316,7 +316,7 @@
         </div>
         <br />
         <div id="printButton" class="container">
-            <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint" ></i></button>
+            <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
         </div>
     </div>
     <script type="text/javascript">
@@ -449,9 +449,10 @@
             mywindow.document.write('</head><body >');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
-
-            mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
+            mywindow.print();
+            mywindow.document.close(); // necessary for IE >= 10
+            
 
             return true;
         };
@@ -912,11 +913,20 @@
                     if(lbLotAdjusted.textContent.trim().toUpperCase() == lbLotActual.textContent.trim().toUpperCase()){
                         sameItemLot = true;
                     }
+                    else{
+                        sameItemLot = false;
+                    }
+                }
+                else{
+                    sameItemLot = false;
                 }
             }
             else{
                 if(lbItemAdjusted.textContent.trim().toUpperCase() == lbItemActual.textContent.trim().toUpperCase()){
                     sameItemLot = true;
+                }
+                else{
+                    sameItemLot = false;
                 }
             }
 
@@ -925,11 +935,20 @@
                     if(lbLocaAdjusted.textContent.trim().toUpperCase() == lbLocaActual.textContent.trim().toUpperCase()){
                         sameWarehouseLoca = true;
                     }
+                    else{
+                        sameWarehouseLoca = false;
+                    }
+                }
+                else{
+                    sameWarehouseLoca = false;
                 }
             }
             else{
                 if(lbWarehouseAdjusted.textContent.trim().toUpperCase() == lbWarehouseActual.textContent.trim().toUpperCase()){
                     sameWarehouseLoca = true;
+                }
+                else{
+                    sameWarehouseLoca = false;
                 }
             }
 
@@ -1021,6 +1040,18 @@
             IdentificarControles();
         });
 
+        function  sendAjax(WebMethod, Data, FuncitionSucces){
+            var options = {
+                type: "POST",
+                url: WebMethod,
+                data: Data,
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                dataType: "json",
+                success: FuncitionSucces
+            };
+            $.ajax(options);
+        }
     </script>
     <script src="../../Scripts/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
