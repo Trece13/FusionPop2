@@ -959,11 +959,15 @@
             }
             else if(sameItemLot === true && sameWarehouseLoca === false){
                 combinationItemValid = true;
+                lblError.textContent = "";
             }
             else if(sameItemLot === false  && sameWarehouseLoca === true){
                 combinationWarehouseValid = true;
+                lblError.textContent = "";
+
             }
             else if(sameItemLot === false  && sameWarehouseLoca === false ){
+                lblError.textContent = "";
             }
 
             if(itemValid && combinationItemValid == false){
@@ -982,13 +986,8 @@
                     combinationItemValid = true;
                 }
             }
-            else if (combinationItemValid == true){
-
-            }
-            else{
-                lbItemAdjusted.focus();
-                $("#saveSection").hide(500);
-                return;
+            else if(lotValid && combinationItemValid == false){
+                combinationItemValid = true;
             }
 
             if(warehouseValid && combinationWarehouseValid == false){
@@ -1007,14 +1006,12 @@
                     combinationWarehouseValid = true;
                 }
             }
-            else if (combinationWarehouseValid == true){
+            else if(locaValid && combinationWarehouseValid == false){
+                combinationWarehouseValid = true;
+            }
 
-            }
-            else{
-                lbWarehouseAdjusted.focus();
-                $("#saveSection").hide(500);
-                return;
-            }
+
+
             if(!reasonValid){
                 $("#Contenido_dropDownReasonCodes").focus();
                 $("#saveSection").hide(500);

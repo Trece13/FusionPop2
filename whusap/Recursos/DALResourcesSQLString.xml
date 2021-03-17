@@ -1800,7 +1800,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol130">
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
-          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO = T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - (T$AllO - '[:T$QTYA]') WHERE trim(T$PAID) =  trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="maximaSecuencia">
@@ -2715,7 +2715,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="lineClearance_listaRegistrosOrden_Param">
         <stringSQL>
-          SELECT NVL(TB2.REQT,0) AS REQT1,GLOBAL.PONO,GLOBAL.ORDEN,GLOBAL.ALMACEN,GLOBAL.LOTE,GLOBAL.ARTICULO,GLOBAL.DESCRIPCION,GLOBAL.UNIDAD,GLOBAL.CANT_EST,(GLOBAL.ACT_CANT-NVL(TB2.REQT,0)) AS ACT_CANT,GLOBAL.ISS_WAREH,GLOBAL.FACTOR,GLOBAL.IND_LOTE,GLOBAL.ID FROM(SELECT DISTINCT rec.T$PONO PONO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
+          SELECT GLOBAL.PDNO,NVL(TB2.REQT,0) AS REQT1,GLOBAL.ORDEN,GLOBAL.ALMACEN,GLOBAL.LOTE,GLOBAL.ARTICULO,GLOBAL.DESCRIPCION,GLOBAL.UNIDAD,GLOBAL.CANT_EST,(GLOBAL.ACT_CANT-NVL(TB2.REQT,0)) AS ACT_CANT,GLOBAL.ISS_WAREH,GLOBAL.FACTOR,GLOBAL.IND_LOTE,GLOBAL.ID
+          FROM(SELECT DISTINCT rec.t$pdno PDNO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
           art.t$dsca DESCRIPCION, art.t$cuni UNIDAD, CANT_EST, ACT_CANT,
           '' ISS_WAREH, 0 FACTOR, art.t$kltc IND_LOTE, '' ID
           FROM BAAN.tticst001140 rec
@@ -2725,7 +2726,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           RIGHT JOIN ( SELECT rec.t$pdno ORDEN, rec.t$sitm ARTICULO, SUM(rec.t$ques) CANT_EST, sum(rec.t$qucs) ACT_CANT FROM BAAN.tticst001140 rec WHERE TRIM(rec.t$pdno)='[p1]'  GROUP BY rec.t$pdno, rec.t$sitm) TB1 ON TRIM(TB1.ARTICULO) = TRIM(rec.t$sitm)
           AND sfc.t$osta in('5','7','9')
           AND TRIM(rec.t$pdno)='[p1]') GLOBAL
-          lEFT JOIN ( select T$PONO, T$ITEM,sum(T$REQT) REQT from baan.tticol125140 GROUP BY T$PONO, T$ITEM) TB2 ON TRIM(TB2.T$PONO) = TRIM(GLOBAL.PONO) AND TRIM(TB2.T$ITEM) = TRIM(GLOBAL.ARTICULO)
+          lEFT JOIN ( select T$PONO, T$PDNO,T$ITEM,sum(T$REQT) REQT from baan.tticol125140 GROUP BY T$PDNO,T$PONO, T$ITEM) TB2 ON TRIM(TB2.T$ITEM) = TRIM(GLOBAL.ARTICULO) and TRIM(TB2.T$PDNO) = TRIM('[p1]')
 
           <!--SELECT DISTINCT rec.T$PONO PONO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
           art.t$dsca DESCRIPCION, art.t$cuni UNIDAD, CANT_EST, ACT_CANT,

@@ -49,6 +49,15 @@ namespace whusap.WebPages.InvLogistica {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divTable;
         
         /// <summary>
+        /// btnGuardar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        
+        /// <summary>
         /// lblOrden control.
         /// </summary>
         /// <remarks>
@@ -191,15 +200,6 @@ namespace whusap.WebPages.InvLogistica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblValueUnit;
-        
-        /// <summary>
-        /// btnGuardar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
         
         /// <summary>
         /// lblError control.
