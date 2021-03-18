@@ -343,7 +343,7 @@ namespace whusap.WebPages.Inventarios
             txtAdjustmentQuantity.Text = txtAdjustmentQuantity.Text.Trim() == string.Empty ? "0" : txtAdjustmentQuantity.Text.Trim();
             if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) <= 0)
             {
-
+                lblError.Text = "";
                 lblError.Text = Adjustmentquantitycannotbezero;
                 txtPalletId.Enabled = true;
                 txtPalletId.Text = String.Empty;
@@ -355,11 +355,10 @@ namespace whusap.WebPages.Inventarios
                 return;
             }
             else{
-                if (Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()) >= (Convert.ToDecimal(lblQuantityValue.Text.Trim()) * 2))
+                if (Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()) > (Convert.ToDecimal(lblQuantityValue.Text.Trim()) * 2))
                 {
                     lblError.Text = "New quantity value doesnt allow";
                     txtPalletId.Enabled = true;
-                    txtPalletId.Text = String.Empty;
                     btnSave.Visible = true;
                     tblPalletInfo.Visible = true;
                     btnSave.Visible = true;
@@ -409,6 +408,7 @@ namespace whusap.WebPages.Inventarios
 
             if (validSave > 0)
             {
+                lblError.Text = "";
                 lblConfirm.Text = mensajes("msjsave");
                 //divTable.Visible = false;
                 txtPalletId.Enabled = true;
@@ -423,6 +423,7 @@ namespace whusap.WebPages.Inventarios
             }
             else
             {
+                lblConfirm.Text = "";
                 lblError.Text = mensajes("errorsave");
                 return;
             }

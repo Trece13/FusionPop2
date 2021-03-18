@@ -23,10 +23,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <span style="vertical-align: middle" />
+    <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />    
     <div style="height: 15px" align="center">
     </div>
     <div align="center" id="divTabla" runat="server" style="width: 80%">
-        <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />        
         <table style="width: 80%">
             <tr style="margin-buttom: 15px;">
                 <td>

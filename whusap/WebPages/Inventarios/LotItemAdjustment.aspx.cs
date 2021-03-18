@@ -249,6 +249,7 @@ namespace whusap.WebPages.Inventarios
         public static string Save(Ent_twhcol028 twhcol028)
         {
             //twhcol028.EMNO =
+            twhcol028.LOGN = HttpContext.Current.Session["user"].ToString();
             bool Res = _idaltwhcol028.insertRegistertwhcol028(ref twhcol028, ref strError);
 
             if (Res)
