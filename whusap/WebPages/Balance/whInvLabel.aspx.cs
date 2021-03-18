@@ -24,18 +24,21 @@ namespace whusap.WebPages.Balance
         #region Propiedades
         protected static InterfazDAL_tticol011 idal = new InterfazDAL_tticol011();
         protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
+        protected static InterfazDAL_tticol025 idal025 = new InterfazDAL_tticol025();
+        public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         Ent_tticol020 obj020 = new Ent_tticol020();
         Ent_tticol022 obj022 = new Ent_tticol022();
         Ent_tticol011 obj = new Ent_tticol011();
         DataTable resultado = new DataTable();
         string strError = string.Empty;
-
+        private static bool _procesoAutomatico = Convert.ToBoolean(ConfigurationManager.AppSettings["anuncioAutomaticorollos"].ToString());
         ////Manejo idioma
         public string Pleaseselectrollwinder = string.Empty;
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string formName;
         private static string globalMessages = "GlobalMessages";
+        public static string _tipoFormulario;
         public static string _idioma;
         #endregion
 
@@ -67,10 +70,15 @@ namespace whusap.WebPages.Balance
                     _idioma = "INGLES";
                 }
 
+                if (Request.QueryString["tipoFormulario"] != null)
+                {
+                    _tipoFormulario = Request.QueryString["tipoFormulario"].ToString().ToUpper();
+                }
+
                 CargarIdioma();
 
                 // Determinar existencia de las maquinas en web.config
-                string[] opciones = new string [5];
+                string[] opciones = new string[5];
                 opciones[0] = (_idioma == "INGLES" ? "-- Select --" : "-- Seleccione --");
                 opciones[1] = "1";
                 opciones[2] = "2";
@@ -99,7 +107,13 @@ namespace whusap.WebPages.Balance
                 control.Text = strTitulo;
                 Page.Form.DefaultButton = btnSend.UniqueID;
 
+                if (_procesoAutomatico && _tipoFormulario != "rolltags")
+                {
+                    lblInfo.Text = "The process of automatic announcement is active.";
+                }
             }
+
+
         }
 
         protected void listMachine_SelectedIndexChanged(object sender, EventArgs e)
@@ -154,7 +168,7 @@ namespace whusap.WebPages.Balance
                 lblError.ForeColor = System.Drawing.Color.Red;
                 return;
             }
-//            Session["rollwinder"] = txtRollWinder.Text.ToString();
+            //            Session["rollwinder"] = txtRollWinder.Text.ToString();
             Session["rollwinder"] = RollWinder;
 
             if (!convert || cantidad < 1)
@@ -180,7 +194,7 @@ namespace whusap.WebPages.Balance
             if (Convert.ToDecimal(resultado.Rows[0]["maxr"].ToString()) < Convert.ToDecimal(cantidads))
             {
                 lblError.Visible = true;
-                lblError.Text = "Roll weight cannot be higher than "+Convert.ToDecimal(resultado.Rows[0]["maxr"].ToString())+" Kg";
+                lblError.Text = "Roll weight cannot be higher than " + Convert.ToDecimal(resultado.Rows[0]["maxr"].ToString()) + " Kg";
                 lblError.ForeColor = System.Drawing.Color.Red;
                 return;
             }
@@ -189,7 +203,7 @@ namespace whusap.WebPages.Balance
 
             var tiempo = Convert.ToInt32(mbrl);
 
-            var validaTiempoGuardado = idal022.validateTimeSaveRecord(ref pdno, ref tiempo,  ref strError);
+            var validaTiempoGuardado = idal022.validateTimeSaveRecord(ref pdno, ref tiempo, ref strError);
 
             if (validaTiempoGuardado.Rows.Count > 0)
             {
@@ -241,7 +255,7 @@ namespace whusap.WebPages.Balance
             obj022.acqt = value;
             obj022.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
             obj022.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
-            obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString():" ";
+            obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
             parameterCollection022.Add(obj022);
 
             //ActiveOrderMachine = obj022.sqnb;
@@ -256,9 +270,25 @@ namespace whusap.WebPages.Balance
             }
 
             if (retorno > 0)
+            {
+                Ent_tticol025 objTticol025 = new Ent_tticol025();
+                objTticol025.pdno=obj022.pdno;
+                objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-")+1)));
+                objTticol025.mitm=obj022.mitm;
+                objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm); ;
+                objTticol025.qtdl= (float)obj022.qtdl;
+                objTticol025.cuni=obj022.cuni;
+                objTticol025.date= DateTime.Now.ToString();
+                objTticol025.mess="0";
+                objTticol025.user=obj022.logn;
+                objTticol025.refcntd=obj022.refcntd;
+                objTticol025.refcntu=obj022.refcntu;
+
                 lblError.Visible = true;
                 lblError.Text = mensajes("rollsaved");
+                int res = idal025.insertarRegistro(ref objTticol025,ref strError);
 
+            }
 
             txtQuantity.Text = string.Empty;
 

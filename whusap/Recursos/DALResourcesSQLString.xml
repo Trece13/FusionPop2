@@ -1562,7 +1562,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="updatetticol242Quantity">
         <stringSQL>
           <!--UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
-          UPDATE  {0}.tticol242{1} SET T$ACQT = T$ACQT +'[:T$ACQT]',T$AllO = T$AllO - '[:T$ALLO]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+          UPDATE  {0}.tticol242{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:T$ACQT]',T$AllO = T$AllO - '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarRegistroTticon242">
@@ -1591,8 +1591,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol222">
       <operationName name="updatetticol222Quantity">
         <stringSQL>
-          UPDATE  {0}.tticol222{1} SET T$ACQT = T$ACQT +'[:T$ACQT]',T$AllO = T$AllO - '[:T$ALLO]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
-
+          UPDATE  {0}.tticol222{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:T$ACQT]',T$AllO = T$AllO - '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
           <!--UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
         </stringSQL>
       </operationName>
@@ -1637,7 +1636,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="DescripcionItem">
         <stringSQL>
-          SELECT T$DSCA DSCA FROM {0}.TTCIBD001{1} WHERE T$ITEM like '%[:T$ITEM]%' AND ROWNUM = 1
+          SELECT T$DSCA DSCA FROM {0}.TTCIBD001{1} WHERE TRIM(T$ITEM) like TRIM('%[:T$ITEM]%') AND ROWNUM = 1
         </stringSQL>
       </operationName>
       <operationName name="ListWarehouses">
@@ -1764,7 +1763,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           INSERT INTO {2} (T$CLOT, T$SQNB, T$MITM, T$DSCA, T$CWOR, T$LOOR, T$CWDE, T$LODE, T$QTDL, T$CUNI, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU,T$RCNO)
           VALUES(:T$CLOT,:T$SQNB,{0}.F_ITEM_POP(TRIM(:T$MITM)) ,:T$DSCA,:T$CWOR,:T$LOOR,:T$CWDE,:T$LODE,:T$QTDL,:T$CUNI, sysdate+5/24, ' ', :T$USER, :T$REFCNTD, :T$REFCNTU,' ')
-        </stringSQL>
+        </stringSQL>131Quantity
       </operationName>
       <operationName name="consultarConsecutivoRegistro">
         <stringSQL>
@@ -1800,7 +1799,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol130">
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
-          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - (T$AllO - '[:T$QTYA]') WHERE trim(T$PAID) =  trim('[:T$PAID]')
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="maximaSecuencia">

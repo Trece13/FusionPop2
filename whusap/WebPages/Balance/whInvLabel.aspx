@@ -4,8 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <style type="text/css">
-        .style7
-        {
+        .style7 {
             font-family: Arial;
             font-size: xx-small;
         }
@@ -27,6 +26,7 @@
     <div style="height: 15px" align="center">
     </div>
     <div align="center" id="divTabla" runat="server" style="width: 80%">
+        <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />        
         <table style="width: 80%">
             <tr style="margin-buttom: 15px;">
                 <td>
@@ -144,7 +144,7 @@
 
             var re = new RegExp(regex);
 
-                var strp = RollWinder.val().toUpperCase();
+            var strp = RollWinder.val().toUpperCase();
 
             if (strp.match(re)) {
                 return;
@@ -162,9 +162,9 @@
 
         });
 
- 
 
- 
+
+
     </script>
     </span></span>
 </asp:Content>
