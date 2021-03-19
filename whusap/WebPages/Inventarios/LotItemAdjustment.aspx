@@ -528,8 +528,9 @@
             $("#exLoca").hide(500);
             $("#loadLoca").hide(500);
             while (restart) {
+                lbItemActual.getAttribute("ktlc").trim() == "1" ? lbLotAdjusted.setAttribute("contentEditable", true) : lbLotAdjusted.setAttribute("contentEditable", false);
+                lbWarehouseActual.getAttribute("sloc").trim() == "1" ? lbLocaAdjusted.setAttribute("contentEditable", true) : lbLocaAdjusted.setAttribute("contentEditable", false);
                 lbItemAdjusted.textContent = lbItemActual.textContent;
-                lbLocaAdjusted.textContent = lbLocaActual.textContent;
                 lbLotAdjusted.textContent = lbLotActual.textContent;
                 lbWarehouseAdjusted.textContent = lbWarehouseActual.textContent;
                 lbLocaAdjusted.textContent = lbLocaActual.textContent;

@@ -96,6 +96,15 @@ namespace whusap.WebPages.Inventarios
                 MyObj.DSCA = MyObjDT["DSCA"].ToString();
                 MyObj.DSCAW = MyObjDT["DESCAW"].ToString();
                 MyObj.STAT = MyObjDT["STAT"].ToString();
+                
+                if (MyObj.QTYA.trim() == "0")
+                {
+                    MyObj.Error = true;
+                    MyObj.errorMsg = "Pallet ID doesn´t exist or Quantity available is zero";
+                    MyObj.TipeMsgJs = "Label";
+                    return JsonConvert.SerializeObject(MyObj);
+                }
+
                 if (MyObj.TBL == "whcol131")
                 {
                     if (MyObj.STAT != "3")

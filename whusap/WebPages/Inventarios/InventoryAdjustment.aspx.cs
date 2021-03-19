@@ -82,6 +82,7 @@ namespace whusap.WebPages.Inventarios
             }
             //generateDropDownReasonCodes();
             //generateDropDownCostCenters();
+            divPrint.Visible = true;
             btnSave.Visible = false;
             tblPalletInfo.Visible = false;
         }
@@ -92,7 +93,7 @@ namespace whusap.WebPages.Inventarios
             //TextBox palletIdTextBox = (TextBox)e.Row.Cells[10].FindControl("palletId");
             //
             //quantityToReturn = "2";
-
+            divPrint.Visible = true;
             InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
             Ent_tticol125 obj = new Ent_tticol125();
             string strError = string.Empty;
@@ -135,6 +136,8 @@ namespace whusap.WebPages.Inventarios
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
+            divPrint.Visible = true;
+
             string retorno = string.Empty;
 
             if (string.IsNullOrEmpty(txtPalletId.Text.Trim()))
@@ -439,7 +442,7 @@ namespace whusap.WebPages.Inventarios
                 lblInspector.Text =obj.LOGN;
                 lblDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 lblShift.Text =Session["shif"].ToString();
-                lblQuantityL.Text = obj.QTYA.ToString();
+                lblQuantityL.Text = lblQuantityValue.Text;
                 codeItem.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +obj.ITEM.Trim()+ "&code=Code128&dpi=96";
                 codePaid.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + obj.PAID.Trim() + "&code=Code128&dpi=96";
 
