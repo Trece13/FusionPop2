@@ -109,7 +109,7 @@ namespace whusap.WebPages.Balance
 
                 if (_procesoAutomatico && _tipoFormulario != "rolltags")
                 {
-                    lblInfo.Text = "The process of automatic announcement is active.";
+                    lblInfo.Text = "The process of automatic announcement / confirm is active.";
                 }
             }
 

@@ -853,8 +853,8 @@
                 console.log(MyObj.errorMsg);
                 lbLocaAdjusted.classList.remove("isValid");
                 lbLocaAdjusted.classList.add("isNotValid");
-                lblError.innerHTML = MyObj.errorMsg;
                 verifyInfoForm();
+                lblError.innerHTML = MyObj.errorMsg;
             } else {
                 lbLocaAdjusted.textContent = lbLocaAdjusted.textContent.trim()
                 $("#loadLoca").hide(500);
