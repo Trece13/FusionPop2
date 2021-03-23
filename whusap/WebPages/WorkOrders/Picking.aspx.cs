@@ -1010,7 +1010,7 @@ namespace whusap.WebPages.WorkOrders
                             //}
                             //errorlog += "genero secuencia,";
 
-                            MyObj.OORG = OORG;// Order type escaneada view 
+                            MyObj.OORG = "2";// Order type escaneada view 
                             MyObj.ORNO = ORNO;
                             MyObj.ITEM =  HttpContext.Current.Session["ITEM"].ToString().Trim();
                             MyObj.PAID = newPallet;
