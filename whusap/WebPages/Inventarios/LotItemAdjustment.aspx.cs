@@ -39,6 +39,16 @@ namespace whusap.WebPages.Inventarios
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
 
+        
+        public static string PalletIDdoesntexistorQuantityavailableiszero = string.Empty;
+        public static string PalletIDStatusdoesntallowadjustmen           = string.Empty;
+        public static string PalletIDdoesntexist                          = string.Empty;
+        public static string Itemcodedoesntexist                          = string.Empty;
+        public static string Lotcodedoesntexist                           = string.Empty;
+        public static string Warehousecodedoesntexist                     = string.Empty;
+        public static string Locationblocked                              = string.Empty;
+        public static string Locationcodedoesntexist                      = string.Empty;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["TBL"] = string.Empty;
@@ -67,7 +77,14 @@ namespace whusap.WebPages.Inventarios
                 CargarIdioma();
 
                 String strTitulo = mensajes("encabezado");
-
+                PalletIDdoesntexistorQuantityavailableiszero = mensajes("PalletIDdoesntexistorQuantityavailableiszero");
+                PalletIDStatusdoesntallowadjustmen = mensajes("PalletIDStatusdoesntallowadjustment");
+                PalletIDdoesntexist = mensajes("PalletIDdoesntexist");
+                Itemcodedoesntexist = mensajes("Itemcodedoesntexist");
+                Lotcodedoesntexist = mensajes("Lotcodedoesntexist");
+                Warehousecodedoesntexist = mensajes("Warehousecodedoesntexist");
+                Locationblocked = mensajes("Locationblocked");
+                Locationcodedoesntexist = mensajes("Locationcodedoesntexist");
 
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 if (control != null) { control.Text = strTitulo; }
@@ -97,10 +114,10 @@ namespace whusap.WebPages.Inventarios
                 MyObj.DSCAW = MyObjDT["DESCAW"].ToString();
                 MyObj.STAT = MyObjDT["STAT"].ToString();
                 
-                if (MyObj.QTYA.trim() == "0")
+                if (MyObj.QTYA.Trim() == "0")
                 {
                     MyObj.Error = true;
-                    MyObj.errorMsg = "Pallet ID doesn´t exist or Quantity available is zero";
+                    MyObj.errorMsg = PalletIDdoesntexistorQuantityavailableiszero;
                     MyObj.TipeMsgJs = "Label";
                     return JsonConvert.SerializeObject(MyObj);
                 }
@@ -110,7 +127,7 @@ namespace whusap.WebPages.Inventarios
                     if (MyObj.STAT != "3")
                     {
                         MyObj.Error = true;
-                        MyObj.errorMsg = "Pallet ID Status doesn´t allow adjustment";
+                        MyObj.errorMsg = PalletIDStatusdoesntallowadjustmen;
                         MyObj.TipeMsgJs = "Label";
                     }
                     else
@@ -123,7 +140,7 @@ namespace whusap.WebPages.Inventarios
                     if (MyObj.STAT != "7")
                     {
                         MyObj.Error = true;
-                        MyObj.errorMsg = "Pallet ID Status doesn´t allow adjustment";
+                        MyObj.errorMsg = PalletIDStatusdoesntallowadjustmen;
                         MyObj.TipeMsgJs = "Label";
                     }
                     else
@@ -135,7 +152,7 @@ namespace whusap.WebPages.Inventarios
             else
             {
                 MyObj.Error = true;
-                MyObj.errorMsg = "Pallet ID doesn´t exist";
+                MyObj.errorMsg = PalletIDdoesntexist;
                 MyObj.TipeMsgJs = "Label";
 
             }
@@ -165,7 +182,7 @@ namespace whusap.WebPages.Inventarios
             else
             {
                 MyObj.Error = true;
-                MyObj.errorMsg = "Item code doesn´t exist";
+                MyObj.errorMsg = Itemcodedoesntexist;
                 MyObj.TipeMsgJs = "Label";
 
             }
@@ -189,7 +206,7 @@ namespace whusap.WebPages.Inventarios
             else
             {
                 MyObj.Error = true;
-                MyObj.errorMsg = "Lot code doesn´t exist";
+                MyObj.errorMsg = Lotcodedoesntexist;
                 MyObj.TipeMsgJs = "Label";
 
             }
@@ -217,7 +234,7 @@ namespace whusap.WebPages.Inventarios
             else
             {
                 MyObj.Error = true;
-                MyObj.errorMsg = "Warehouse code doesn´t exist";
+                MyObj.errorMsg = Warehousecodedoesntexist;
                 MyObj.TipeMsgJs = "Label";
 
             }
@@ -235,7 +252,7 @@ namespace whusap.WebPages.Inventarios
                 if (MyObjDT["BINB"].ToString().Trim() != "2")
                 {
                     MyObj.Error = true;
-                    MyObj.errorMsg = "Location blocked";
+                    MyObj.errorMsg = Locationblocked;
                     MyObj.TipeMsgJs = "Label";
                 }
                 else
@@ -248,7 +265,7 @@ namespace whusap.WebPages.Inventarios
             else
             {
                 MyObj.Error = true;
-                MyObj.errorMsg = "Location code doesn´t exist";
+                MyObj.errorMsg = Locationcodedoesntexist;
                 MyObj.TipeMsgJs = "Label";
             }
             return JsonConvert.SerializeObject(MyObj);

@@ -3,6 +3,51 @@
   <Modules>
     <!--Global Messages-->
 
+    <Module name="LotItemAdjustment.aspx">
+      <Idiom name="INGLES">
+        <operationName name="PalletIDdoesntexistorQuantityavailableiszero">
+          <stringMessage>
+            Pallet ID doesn´t exist or Quantity available is zero
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDStatusdoesntallowadjustment">
+          <stringMessage>
+            Pallet ID Status doesn´t allow adjustment
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDdoesntexist">
+          <stringMessage>
+            Pallet ID doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Itemcodedoesntexist">
+          <stringMessage>
+            Item code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Lotcodedoesntexist">
+          <stringMessage>
+            Lot code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Warehousecodedoesntexist">
+          <stringMessage>
+            Warehouse code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationblocked">
+          <stringMessage>
+            Location blocked
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationcodedoesntexist">
+          <stringMessage>
+            Location code doesn´t exist
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
+    
     <Module name="PickMaterial.aspx">
       <Idiom name="INGLES">
         <operationName name="TheIDpalledPendingToLocateByUser">

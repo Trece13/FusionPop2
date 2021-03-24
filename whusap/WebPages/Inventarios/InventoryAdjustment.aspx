@@ -474,7 +474,8 @@
                 </table>
 
             </div>
-            <div id="divPrint" runat="server" visible="false">
+            <div></div>
+            <div ID="divPrint" runat="server" visible="false">
                 <div id="printContainer">
                 <div id="printSpace">
                     <div id="myLabel" class="container">

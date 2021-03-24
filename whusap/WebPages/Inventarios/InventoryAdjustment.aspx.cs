@@ -82,7 +82,7 @@ namespace whusap.WebPages.Inventarios
             }
             //generateDropDownReasonCodes();
             //generateDropDownCostCenters();
-            divPrint.Visible = true;
+            divPrint.Visible = false;
             btnSave.Visible = false;
             tblPalletInfo.Visible = false;
         }
@@ -93,7 +93,6 @@ namespace whusap.WebPages.Inventarios
             //TextBox palletIdTextBox = (TextBox)e.Row.Cells[10].FindControl("palletId");
             //
             //quantityToReturn = "2";
-            divPrint.Visible = true;
             InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
             Ent_tticol125 obj = new Ent_tticol125();
             string strError = string.Empty;
@@ -136,7 +135,7 @@ namespace whusap.WebPages.Inventarios
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
-            divPrint.Visible = true;
+            divPrint.Visible = false;
 
             string retorno = string.Empty;
 

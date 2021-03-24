@@ -14,7 +14,7 @@
         #LblDate {
             font-size: 14px !important;
         }
-
+         
         #LblReprintInd,
         #LblReprint {
             display: none;
