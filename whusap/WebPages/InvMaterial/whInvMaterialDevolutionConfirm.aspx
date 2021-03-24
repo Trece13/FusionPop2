@@ -42,9 +42,9 @@
         <tr>
             <td style="text-align: left;">
                 <strong>
-                    <asp:Label class="" ID="lblWorkOrder" runat="server" /></strong>
+                    <asp:Label class="" ID="lblWorkOrder" runat="server"  Visible="false"/></strong>
             </td>
-            <td style="width: 250px; padding: 5px;">
+            <td style="width: 250px; padding: 5px; display:none;">
                 <asp:TextBox ID="txtWorkOrder" class="form-control form-control-lg" runat="server"
                     CausesValidation="True" MaxLength="9" CssClass="TextBoxBig" TabIndex="1" ToolTip="Enter work order number"></asp:TextBox>
             </td>

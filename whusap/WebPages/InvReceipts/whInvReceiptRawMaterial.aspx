@@ -763,8 +763,15 @@
             });
 
             txQuantity.bind("keyup paste", function (e) {
-
-
+                
+                if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
+                    var straux = "";
+                    str = $('#txQuantity').val();
+                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                        straux += str.charAt(i).replace(",","").replace(".","");
+                    }
+                    $('#txQuantity').val(straux);
+                }
                 if (TxOrderType.val() == "1") {
                     //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
                     LstSalesOrder.forEach(function (x) {

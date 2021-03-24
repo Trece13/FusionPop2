@@ -2963,7 +2963,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$REQT retQty, t125.T$USER, t125.T$PRIN, t125.T$CONF, t125.T$REFCNTD, t125.T$REFCNTU, t125.T$MESS,
           ART.T$DSCA DESCRIPCION, ART.T$CUNI UNIDAD,T$PAID as palletID
           FROM {0}.tticol125{1} t125 LEFT JOIN {0}.ttcibd001{1} art ON TRIM(t125.T$ITEM) = TRIM(art.t$item)
-          WHERE T$PDNO ='[p1]' AND T$CONF = '[p2]' AND T$PAID = '[p3]'
+          WHERE T$CONF = '[p2]' AND T$PAID = '[p3]'
         </stringSQL>
       </operationName>
       <!-- Smita Ends-->
