@@ -198,5 +198,10 @@ namespace whusa.Interfases
         {
             return dal.ConsultarTticol082PorPlantPono(plant,prio,advs);
         }
+
+        public DataTable ConsultarRegistrosBloquedos(string _operator)
+        {
+            return dal.ConsultarRegistrosBloquedos(_operator);
+        }
     }
 }

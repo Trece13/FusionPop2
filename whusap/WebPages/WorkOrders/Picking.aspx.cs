@@ -205,7 +205,7 @@ namespace whusap.WebPages.WorkOrders
                     lblWarehouse.Text = MyObj.WRH.ToString();
                     lblWareDescr.Text = MyObj.DESCWRH.ToString();
                     lbllocation.Text = MyObj.LOCA.ToString();
-                    lblQuantity.Text = MyObj.QTY.ToString();
+                    lblQuantity.Text = MyObj.QTYT.ToString();
                     HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                     lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();
@@ -245,7 +245,7 @@ namespace whusap.WebPages.WorkOrders
                     lblWarehouse.Text = MyObj.WRH.ToString();
                     lblWareDescr.Text = MyObj.DESCWRH.ToString();
                     lbllocation.Text = MyObj.LOCA.ToString();
-                    lblQuantity.Text = MyObj.QTY.ToString();
+                    lblQuantity.Text = MyObj.QTYT.ToString();
                     HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                     lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTY.ToString();

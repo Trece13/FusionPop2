@@ -1148,5 +1148,30 @@ namespace whusa.DAL
             }
             return retorno;
         }
+
+        public DataTable ConsultarRegistrosBloquedos(string _operator)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":USER", _operator);
+
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
     }
 }
