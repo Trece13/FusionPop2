@@ -92,7 +92,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 Console.WriteLine("Entro en ClickQuery...");
                 string strError = string.Empty;
-                DataTable ListaRegistroCustomer = Itticol082.ConsultarRegistrosBloquedos();
+                DataTable ListaRegistroCustomer = Itticol082.ConsultarRegistrosBloquedos(_operator);
                 if (strError == string.Empty)
                 {
                     return JsonConvert.SerializeObject(ListaRegistroCustomer);

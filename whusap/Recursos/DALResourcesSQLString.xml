@@ -1267,6 +1267,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE ticol042.T$DELE ='12'
           )ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          INNER JOIN {0}.tticol136{1} col136 on  col136.T$CWAR =  ConGlobal.CWAR and TRIM(col136.t$USER) = NVL(TRIM('[:USER]'),TRIM(col136.t$USER))
         </stringSQL>
       </operationName>
       <operationName name="Actualizartticol222Cant">
