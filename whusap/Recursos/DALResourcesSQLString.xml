@@ -5443,7 +5443,27 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="findByPdnoArticulo">
         <stringSQL>
-          SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
+          SELECT whltc100.T$ITEM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
+          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
+          FROM baan.tticol022140 ticol022
+          INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          UNION
+          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$CLOT,ticol042.T$SQNB AS T$PAID
+          FROM baan.tticol042140 ticol042
+          INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          UNION
+          SELECT 'whcol130' AS TBL, T$CLOT, T$PAID AS T$PAID
+          FROM baan.tWhcol130140
+          UNION
+          SELECT 'whcol131' AS TBL, T$CLOT, T$PAID AS T$PAID
+          FROM baan.tWhcol131140
+          ) global
+          INNER JOIN baan.twhltc100140 whltc100 ON whltc100.T$CLOT = NVL('[:T$PDNO]',TRIM(whltc100.T$CLOT))
+          INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = whltc100.T$item
+          WHERE TRIM(whltc100.T$CLOT) = NVL('[:T$PDNO]',TRIM(whltc100.T$CLOT))
+          AND TRIM(global.T$PAID) = NVL('[:T$PAID]',TRIM(global.T$PAID))
+          
+          <!--SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
           FROM baan.tticol022140 ticol022
           INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
@@ -5461,7 +5481,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN baan.ttisfc001140 tisfc001170 ON tisfc001170.T$PDNO = global.T$CLOT
           INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = tisfc001170.T$MITM
           WHERE TRIM(tisfc001170.T$PDNO) = NVL('[:T$PDNO]',TRIM(tisfc001170.T$PDNO))
-          AND TRIM(global.T$PAID) = NVL('[:T$PAID]',TRIM(global.T$PAID))
+          AND TRIM(global.T$PAID) = NVL('[:T$PAID]',TRIM(global.T$PAID))-->
           <!--SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA
           FROM {2} tisfc001170
           INNER JOIN {0}.ttcibd001{1} tcibd001170 ON tcibd001170.T$ITEM = tisfc001170.T$MITM
