@@ -759,6 +759,13 @@
         }
 
         function ShowCurrentTime() {
+
+            if (parseFloat($("#Contenido_lblQuantity").val()) <= 0) {
+                $("#Contenido_lblQuantity").focus();
+                $('#LblError').html("The quantity cann´t be empty, zero less than zero");
+                return;
+            }
+
             if ($("#Contenido_lblCNPK").html() != "1") {
                 dataS = "{'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','PAID':'" + $("#<%=txtPalletID.ClientID%>")[0].value.toUpperCase() + "', 'LOCA':'" + $('#txtlocation').val().toUpperCase() + "','OORG':'" + document.getElementById("<%=lblOORG.ClientID %>").innerHTML.toString() + "','ORNO':'" + document.getElementById("<%=lblORNO.ClientID %>").innerHTML.toString() + "','PONO':'" + document.getElementById("<%=lblPONO.ClientID %>").innerHTML.toString() + "' ,'QTYT':'" + ($("#Contenido_lblQuantity").val() == undefined ? $("#Contenido_lblQuantityAux").html() : $("#Contenido_lblQuantity").val()) + "' ,'QTYT_OLD':'" + document.getElementById("<%=lblQuantityAux.ClientID %>").innerHTML.toString() + "','CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "', 'ADVSP':'" + $('#Contenido_lblADVS').html().trim() + "'}";
             }
