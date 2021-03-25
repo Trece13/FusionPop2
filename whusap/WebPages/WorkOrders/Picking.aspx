@@ -984,7 +984,6 @@
             window.location.href = "/WebPages/Login/whMenuI.aspx";
         }
 
-
         function delayTimer() {
             var timer;
             return function (fun, time) {
@@ -1172,8 +1171,35 @@
             //document.getElementById("Contenido_lblCNPK").innerText == "1" ? document.getElementById("Contenido_lblQuantity").disabled = true : document.getElementById("Contenido_lblQuantity").disabled = false;
             document.getElementById("<%=txtPalletID.ClientID %>").focus();
             document.getElementById('btnconfirPKG').disabled = true;
+            txlblQuantity = document.getElementById('Contenido_lblQuantity');
+            txlblQuantity.addEventListener('input',removeDecimal,false)
             ShowCurrentOptions();
+
+
         });
+
+        var removeDecimal = function (){
+            if ($('#Contenido_lblQuantityDesc').html().toUpperCase().trim() == "UN") {
+                var straux = "";
+                str = txlblQuantity.value;
+                for (var i = 0; i < txlblQuantity.value.length; i++) {
+                    straux += str.charAt(i).replace(",", "").replace(".", "");
+                }
+                txlblQuantity.value = straux;
+            }
+
+            var newCant = parseFloat(txlblQuantity.value);
+            var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
+            if (newCant > 0 && newCant != null) {
+                if (newCant <= oldCant) {
+
+                }
+                else {
+                    txlblQuantity.value = $("#Contenido_lblQuantityOld").html();
+                }
+            }
+        }
+
         var selectNewPalletSuccess = function (r) {
             PalletIDSuccess(r);
         }
@@ -1181,20 +1207,6 @@
             currentRow = currentRow.cells[0].innerHTML.toString().trim();
             EventoAjax("VerificarPalletID", "{'PAID_NEW':'" + currentRow + "', 'PAID_OLD':'" + $('#Contenido_lblPalletID').html() + "','selectOptionPallet':'true'}", selectNewPalletSuccess);
         }
-        $("#Contenido_lblQuantity").bind("change paste keyup",
-            function () {
-                var newCant = parseFloat($("#Contenido_lblQuantity").val());
-                var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-                if (newCant > 0 && newCant != null) {
-                    if (newCant <= oldCant) {
-
-                    }
-                    else {
-                        $("#Contenido_lblQuantity").val($("#Contenido_lblQuantityOld").html());
-                    }
-                }
-            }
-        );
 
     </script>
 </asp:Content>
