@@ -746,7 +746,7 @@
                 $('#Contenido_lblWarehouse').html(MyObj.WRH.toString())
                 $('#Contenido_lblWareDescr').html(MyObj.DESCWRH.toString())
                 $('#Contenido_lbllocation').html(MyObj.LOCA.toString())
-                $('#Contenido_lblQuantityAux').html(MyObj.QTY.toString())
+                $('#Contenido_lblQuantityAux').html(MyObj.QTY.toString().replace(",","."))
                 $('#Contenido_lblQuantityDesc').html(MyObj.UN.toString())
 
                 document.getElementById("bntChange").disabled = true;
@@ -1188,8 +1188,8 @@
                 txlblQuantity.value = straux;
             }
 
-            var newCant = parseFloat(txlblQuantity.value);
-            var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
+            var newCant = parseFloat(txlblQuantity.value.replace(",", "."));
+            var oldCant = parseFloat($("#Contenido_lblQuantityAux").html().replace(",","."));
             if (newCant > 0 && newCant != null) {
                 if (newCant <= oldCant) {
 
