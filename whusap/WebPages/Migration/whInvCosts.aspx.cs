@@ -11,7 +11,6 @@ using System.Configuration;
 using System.Threading;
 using System.Globalization;
 using System.Data;
-using whusa;
 
 namespace whusap.WebPages.Migration
 {
@@ -25,9 +24,6 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_tticst001 _idaltticst001 = new InterfazDAL_tticst001();
         private static InterfazDAL_tticol080 _idaltticol080 = new InterfazDAL_tticol080();
         private static InterfazDAL_tticol110 _idaltticol110 = new InterfazDAL_tticol110();
-        private static InterfazDAL_tticol132 _idaltticol132 = new InterfazDAL_tticol132();
-        protected static InterfazDAL_tticol011 idal011 = new InterfazDAL_tticol011();
-        Ent_tticol011 obj011 = new Ent_tticol011();
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string _operator;
@@ -85,7 +81,7 @@ namespace whusap.WebPages.Migration
 
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
-                    user = HttpContext.Current.Session["user"].ToString(),
+                    user = _operator,
                     come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
@@ -101,136 +97,104 @@ namespace whusap.WebPages.Migration
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
             Session["orno"] = txtOrder.Text.Trim().ToUpper();
-            Session["mcno"] = txtMachine.Text.Trim().ToUpper();
-
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
 
             var order = txtOrder.Text.Trim().ToUpper();
-            var machine = txtMachine.Text.Trim().ToUpper();
 
-            if (machine != String.Empty)
+            if (order != String.Empty)
             {
-                //if (order != String.Empty)
-                //{
                 Ent_tticol090 data090 = new Ent_tticol090() { fpdn = order };
-                Ent_ttirou002 tirou002 = new Ent_ttirou002() { mcno = machine };
-                //var consultaOrden = _idaltticol090.lineClearance_verificaOrdenes_Param(ref data090, ref strError);
-                obj011.mcno = machine;
-                DataTable consultaOrden = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-                var validarMaquina = _idaltticol132.ValidarMaquina(machine, ref strError);
+                var consultaOrden = _idaltticol090.lineClearance_verificaOrdenes_Param(ref data090, ref strError);
 
-                if (validarMaquina.Rows.Count > 0)
+                if (consultaOrden.Rows.Count > 0)
                 {
-                    if (consultaOrden.Rows.Count > 0)
+                    if (valstatwo)
                     {
-
-                        if (valstatwo)
+                        if (consultaOrden.Rows[0]["STAT"].ToString() != "2")
                         {
-                            if (consultaOrden.Rows[0]["STAT"].ToString() != "2")
-                            {
-                                //lblError.Text = WorkorderhasnotbeeninitiatedPOP;
-
-                                lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
-                            }
-                        }
-                        Session["orno"] = consultaOrden.Rows[0]["orden"].ToString().Trim();
-                        order = consultaOrden.Rows[0]["orden"].ToString().Trim();
-                        _consultarTurno = _idaltticol111.findRecordByPdno(ref order, ref strError);
-
-                        if (_consultarTurno.Rows.Count > 0)
-                        {
-                            string shift = _consultarTurno.Rows[0]["shif"].ToString().Trim();
-
-                            _consultaMateriales = _idaltticst001.findByPdnoCosts(ref order, ref shift, ref strError);
-
-                            if (_consultaMateriales.Rows.Count > 0)
-                            {
-                                LstTable.Clear();
-                                foreach (DataRow item in _consultaMateriales.Rows)
-                                {
-
-
-                                    MyLioEntidad MyLioEntidadObj = new MyLioEntidad();
-
-                                    MyLioEntidadObj.PDNO = item["PDNO"].ToString();
-                                    MyLioEntidadObj.PONO = item["PONO"].ToString();
-                                    MyLioEntidadObj.CWAR = item["CWAR"].ToString();
-                                    MyLioEntidadObj.CLOT = item["CLOT"].ToString();
-                                    MyLioEntidadObj.SITM = item["SITM"].ToString();
-                                    MyLioEntidadObj.DSCA = item["DSCA"].ToString();
-                                    MyLioEntidadObj.CUNI = item["CUNI"].ToString();
-                                    MyLioEntidadObj.CANT_EST = item["CANT_EST"].ToString();
-                                    MyLioEntidadObj.ACT_CANT = item["ACT_CANT"].ToString();
-                                    MyLioEntidadObj.ISWH = item["ISWH"].ToString().Trim() == "" ? "0" : item["ISWH"].ToString().Trim();
-                                    MyLioEntidadObj.OQMF = item["OQMF"].ToString();
-                                    MyLioEntidadObj.CANTD = item["CANTD"].ToString();
-                                    MyLioEntidadObj.MCNO = item["MCNO"].ToString();
-                                    //MyLioEntidadObj.cant_hidden = "";
-                                    DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
-                                    DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
-
-                                    if (dt022044131.Rows.Count > 0)
-                                    {
-                                        MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
-                                    }
-
-                                    if (dt215.Rows.Count > 0)
-                                    {
-                                        MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
-                                    }
-
-                                    LstTable.Add(MyLioEntidadObj);
-                                }
-
-                                foreach (MyLioEntidad item in LstTable)
-                                {
-                                    item.cant_reg = quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg");
-                                    item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
-                                    item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
-                                }
-                                makeTable();
-                                
-                                
-                                lblError.Text = String.Empty;
-                            }
-                            else
-                            {
-                                divTable.Visible = false;
-                                divBtnGuardar.Visible = false;
-                                lblError.Text = mensajes("nomaterials");
-                                return;
-                            }
-
-                        }
-                        else
-                        {
-                            divTable.Visible = false;
-                            divBtnGuardar.Visible = false;
-                            lblError.Text = mensajes("machinenotexists");
+                            lblError.Text = WorkorderhasnotbeeninitiatedPOP;
                             return;
                         }
                     }
+                    _consultarTurno = _idaltticol111.findRecordByPdno(ref order, ref strError);
+
+                    if (_consultarTurno.Rows.Count > 0)
+                    {
+                        string shift = _consultarTurno.Rows[0]["shif"].ToString().Trim();
+
+                        _consultaMateriales = _idaltticst001.findByPdnoCosts(ref order, ref shift, ref strError);
+
+                        if (_consultaMateriales.Rows.Count > 0)
+                        {
+                            LstTable.Clear();
+                            foreach (DataRow item in _consultaMateriales.Rows)
+                            {
+
+
+                                MyLioEntidad MyLioEntidadObj = new MyLioEntidad();
+
+                                MyLioEntidadObj.PDNO = item["PDNO"].ToString();
+                                MyLioEntidadObj.PONO = item["PONO"].ToString();
+                                MyLioEntidadObj.CWAR = item["CWAR"].ToString();
+                                MyLioEntidadObj.CLOT = item["CLOT"].ToString();
+                                MyLioEntidadObj.SITM = item["SITM"].ToString();
+                                MyLioEntidadObj.DSCA = item["DSCA"].ToString();
+                                MyLioEntidadObj.CUNI = item["CUNI"].ToString();
+                                MyLioEntidadObj.CANT_EST = item["CANT_EST"].ToString();
+                                MyLioEntidadObj.ACT_CANT = item["ACT_CANT"].ToString();
+                                MyLioEntidadObj.ISWH = item["ISWH"].ToString().Trim() == "" ? "0" : item["ISWH"].ToString().Trim();
+                                MyLioEntidadObj.OQMF = item["OQMF"].ToString();
+                                MyLioEntidadObj.CANTD = item["CANTD"].ToString();
+                                MyLioEntidadObj.MCNO = item["MCNO"].ToString();
+                                //MyLioEntidadObj.cant_hidden = "";
+                                DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
+                                DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
+
+                                if (dt022044131.Rows.Count > 0)
+                                {
+                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+                                }
+
+                                if (dt215.Rows.Count > 0)
+                                {
+                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                }
+
+                                LstTable.Add(MyLioEntidadObj);
+                            }
+
+                            foreach (MyLioEntidad item in LstTable)
+                            {
+                                item.cant_reg = quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg");
+                                item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
+                                item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
+                            }
+                            makeTable();
+                            divBtnGuardar.Visible = true;
+                            lblError.Text = String.Empty;
+                        }
+                        else
+                        {
+                            lblError.Text = mensajes("nomaterials");
+                            return;
+                        }
+
+                    }
                     else
                     {
-                        divTable.Visible = false;
-                        divBtnGuardar.Visible = false;
-                        lblError.Text = mensajes("WorkOrdernotInitiatedforthisMachine");
+                        lblError.Text = mensajes("machinenotexists");
                         return;
                     }
                 }
                 else
                 {
-                    divTable.Visible = false;
-                    divBtnGuardar.Visible = false;
-                    //lblError.Text = mensajes("ordernotexists");
-                    lblError.Text = mensajes("MachineNotdefined");
+                    lblError.Text = mensajes("ordernotexists");
                     return;
                 }
             }
             else
             {
-                divBtnGuardar.Visible = false;
                 lblError.Text = mensajes("formempty");
                 return;
             }
@@ -238,7 +202,6 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
 
@@ -268,10 +231,10 @@ namespace whusap.WebPages.Migration
                     {
                         orno = orno,
                         pono = Convert.ToInt32(pono),
-                        item =  item,
+                        item = "         " + item,
                         cwar = cwar,
                         qune = Convert.ToDecimal(qune),
-                        logn = HttpContext.Current.Session["user"].ToString(),
+                        logn = _operator,
                         proc = 2,
                         refcntd = 0,
                         refcntu = 0,
@@ -284,10 +247,10 @@ namespace whusap.WebPages.Migration
                     {
                         orno = orno,
                         pono = Convert.ToInt32(pono),
-                        item =  item,
+                        item = "         " + item,
                         cwar = cwar,
                         qune = Convert.ToDecimal(qune),
-                        logn = HttpContext.Current.Session["user"].ToString(),
+                        logn = _operator,
                         proc = 1,
                         refcntd = 0,
                         refcntu = 0,
@@ -298,8 +261,7 @@ namespace whusap.WebPages.Migration
                     if ((Convert.ToDecimal(stock.Trim()) - Convert.ToDecimal(iswh.Trim())) < Convert.ToDecimal(txtQuantityHidden.Trim()))
                     {
                         _idaltticol090.InsertTticol088(data088, ref strError);
-                        lblError.Text += string.Format(mensajes("Availablequantitynotenoughforyourrequest"), item);
-                        lblError.Text += "<br/>";
+                        lblError.Text += "[" + item + "] Available quantity not enough for your request <br/>";
                         tticol088 = true;
 
                     }
@@ -333,10 +295,9 @@ namespace whusap.WebPages.Migration
                         if (validInsert > 0)
                         {
                             //lblError.Text = String.Empty;
-                            
                             lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
                             //divTable.InnerHtml = String.Empty;
-                            //divBtnGuardar.Visible = false;
+                            divBtnGuardar.Visible = false;
                             //txtOrder.Text = String.Empty;
                         }
                         else
@@ -384,11 +345,11 @@ namespace whusap.WebPages.Migration
         {
             var table = String.Empty;
 
-            table += String.Format("<hr /><table id='dataTable' class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");
+            table += String.Format("<hr /><table class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");
 
             table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='6'>{1}</td></tr>"
                 , _idioma == "INGLES" ? "Order:" : "Orden:"
-                , Session["orno"].ToString());
+                , txtOrder.Text.Trim().ToUpper());
 
             table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td style='display:none'>{7}</td></tr>"
                 , _idioma == "INGLES" ? "Item" : "Articulo"
@@ -396,7 +357,7 @@ namespace whusap.WebPages.Migration
                 , _idioma == "INGLES" ? "Actual Quantity" : "Cantidad Actual"
                 , _idioma == "INGLES" ? "To Issue by Warehousing" : "Para emitir por almacenaje"
                 , _idioma == "INGLES" ? "Stock" : "Stock"
-                , _idioma == "INGLES" ? "Quantity" : "Cantidad"
+                , _idioma == "INGLES" ? "To Issue" : "Para emitir"
                 , _idioma == "INGLES" ? "Unit" : "Unidad"
                 , _idioma == "Hidden");
 
@@ -443,8 +404,6 @@ namespace whusap.WebPages.Migration
             table += "</table>";
 
             divTable.InnerHtml = table;
-            divTable.Visible = true;
-            divBtnGuardar.Visible = true;
         }
 
         protected void CargarIdioma()

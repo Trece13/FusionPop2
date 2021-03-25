@@ -6,7 +6,8 @@
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
     <style>
-        #lblConfirm, #lblError {
+        #lblConfirm, #lblError
+        {
             text-align: left !important;
         }
     </style>
@@ -123,7 +124,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <table border="0">
-        <tr style="display: none">
+        <tr>
             <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                     <b style="font-size: 11px;">
@@ -136,27 +137,15 @@
             </td>
         </tr>
         <tr>
-            <td style="text-align: left;">
-                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                    <b style="font-size: 11px;">
-                        <asp:Label runat="server" ID="Label1" />Machine:</b></span>
-            </td>
-            <td style="width: 250px; padding: 5px;">
-                <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtMachine" CssClass="TextBoxBig" ClientIDMode="Static" />
-                </span>
-            </td>
-        </tr>
-        <tr>
             <td colspan="2" style="text-align: center;">
                 <hr />
                 <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click"
                     CssClass="ButtonsSendSave" Style="height: 30px;" />
                 <br />
-                <asp:Label Text="" class="infoLabels" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;"
-                    ClientIDMode="Static" />
-                <asp:Label Text="" class="infoLabels" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;"
-                    ClientIDMode="Static" />
+                <asp:Label Text="" class="infoLabels" runat="server" ID="lblConfirm" Style="color: green;
+                    font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                <asp:Label Text="" class="infoLabels" runat="server" ID="lblError" Style="color: red;
+                    font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
             </td>
         </tr>
     </table>
@@ -166,6 +155,6 @@
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" OnClientClick="return validarFormulario();"
             CssClass="ButtonsSendSave" />
     </div>
-    <div runat="server" id="divTable" visible="false">
+    <div runat="server" id="divTable">
     </div>
 </asp:Content>
