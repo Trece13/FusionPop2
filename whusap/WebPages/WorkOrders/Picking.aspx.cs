@@ -345,7 +345,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag042"] = 0;
 
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(),sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTYT.ToString(), MyObj.ADVS.ToString(), sentencia);
             }
             else if (LstPallet042.Count > 0)
             {
@@ -385,7 +385,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag131"] = 0;
                 HttpContext.Current.Session["flag042"] = 1;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTYT.ToString(), MyObj.ADVS.ToString(), sentencia);
 
                 ////                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
@@ -433,7 +433,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag131"] = 1;
                 HttpContext.Current.Session["flag042"] = 0;
                 //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTYT.ToString(), MyObj.ADVS.ToString(), sentencia);
 
                 ////twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
                 //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
