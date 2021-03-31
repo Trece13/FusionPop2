@@ -616,22 +616,13 @@ namespace whusap.WebPages.Inventarios {
         protected global::System.Web.UI.WebControls.Label lblWorkOrder;
         
         /// <summary>
-        /// lblPalletNum control.
+        /// lblQuantityL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPalletNum;
-        
-        /// <summary>
-        /// lblInspector control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblInspector;
+        protected global::System.Web.UI.WebControls.Label lblQuantityL;
         
         /// <summary>
         /// lblDate control.
@@ -643,22 +634,40 @@ namespace whusap.WebPages.Inventarios {
         protected global::System.Web.UI.WebControls.Label lblDate;
         
         /// <summary>
-        /// lblShift control.
+        /// Label2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblShift;
+        protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// lblQuantityL control.
+        /// lblInspector control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQuantityL;
+        protected global::System.Web.UI.WebControls.Label lblInspector;
+        
+        /// <summary>
+        /// lblPalletNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPalletNum;
+        
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// btnGetObj control.

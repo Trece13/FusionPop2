@@ -183,8 +183,8 @@ namespace whusap.WebPages.Inventarios
                 {
                     Session["emno"] = resultadoSerie.Rows[0]["EMNO"].ToString();
                     Session["cdis"] = resultadoSerie.Rows[0]["CDIS"].ToString();
-                    lblReason.Text = resultadoSerie.Rows[0]["EMNO"].ToString() + " - " + resultadoSerie.Rows[0]["NAMA"].ToString();
-                    lblCost.Text = resultadoSerie.Rows[0]["CDIS"].ToString() + " - " + resultadoSerie.Rows[0]["DSCA"].ToString();
+                    lblReason.Text = resultadoSerie.Rows[0]["CDIS"].ToString() + " - " + resultadoSerie.Rows[0]["DSCA"].ToString();
+                    lblCost.Text = resultadoSerie.Rows[0]["EMNO"].ToString() + " - " + resultadoSerie.Rows[0]["NAMA"].ToString();
                 }
                 else
                 {
