@@ -31,6 +31,8 @@ namespace whusap.WebPages.Inventarios
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         public static Ent_twhcol025 obj = new Ent_twhcol025();
+        public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
+        private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
 
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
@@ -397,8 +399,14 @@ namespace whusap.WebPages.Inventarios
             string strError = string.Empty;
             List<Ent_twhcol025> parameterCollection025 = new List<Ent_twhcol025>();
             //T$PAID, T$ITEM, T$LOCA, T$CLOT, T$QTYA, T$UNIT, T$DATE, T$LOGN, T$EMNO, T$PROC, T$REFCNTD,T$REFCNTU
+            string PAID = txtPalletId.Text.ToUpperInvariant().Trim();
+            int consecutivoPalletID = 0;
+            string strMaxSequence = getSequence(PAID, "A");
+            string separator = "-";
+            string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+            string SQNB = PAID.Substring(0, PAID.IndexOf(separator));
 
-            obj.PAID = txtPalletId.Text.ToUpperInvariant();
+            obj.PAID = newPallet;
             obj.ITEM = lblItemValue.Text.Trim().ToUpper();
             //obj.LOCA = lblLocationValue.Text.Trim().ToUpper();
             obj.CWAR = lblWarehouseValue.Text;
@@ -437,11 +445,11 @@ namespace whusap.WebPages.Inventarios
 
                 lblitemDesc.Text = Transfers.DescripcionItem(obj.ITEM); ;
                 lblWorkOrder.Text = obj.PAID.Substring(0, obj.PAID.IndexOf("-"));
-                lblPalletNum.Text =obj.PAID;
+                lblPalletNum.Text = obj.PAID.Substring(obj.PAID.IndexOf("-")+1);
                 lblInspector.Text =obj.LOGN;
                 lblDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
-                lblShift.Text =Session["shif"].ToString();
-                lblQuantityL.Text = lblQuantityValue.Text;
+                //lblShift.Text =Session["shif"].ToString();
+                lblQuantityL.Text = obj.QTYA.ToString() + " " + lblUnitValue.Text.Trim();
                 codeItem.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +obj.ITEM.Trim()+ "&code=Code128&dpi=96";
                 codePaid.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + obj.PAID.Trim() + "&code=Code128&dpi=96";
 
@@ -468,6 +476,31 @@ namespace whusap.WebPages.Inventarios
             }
 
             return retorno;
+        }
+
+        public static string getSequence(string PAIDOld, string complement = "")
+        {
+            string sequence = string.Empty;
+            int indexSeparator = PAIDOld.IndexOf("-");
+            string SQNB = PAIDOld.Substring(0, indexSeparator);
+            string SEC = PAIDOld.Substring(indexSeparator + 1);
+
+            if (complement == "")
+            {
+                complement = recursos.SeparatorAlphaNumeric(ref SEC);
+            }
+
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
+            if (dtMaxSec.Rows.Count > 0)
+            {
+                sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
+            }
+            else
+            {
+                sequence = SQNB + "-" + complement + "000";
+            }
+
+            return sequence;
         }
 
     }

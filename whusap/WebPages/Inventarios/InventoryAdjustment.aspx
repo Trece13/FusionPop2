@@ -93,15 +93,15 @@
         .codePaid {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 400px;
+            height: 121px;
+            width: 438px;
         }
 
         .codeItem {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 400px;
+            height: 50px;
+            width: 150px;
         }
 
         #itemDesc {
@@ -481,55 +481,56 @@
                     <div id="myLabel" class="container">
                         <div class="row">
                             <div class="col-6 alingLeft">
-                                <asp:Label ID="lblitemDesc" runat="server" Text="Label"></asp:Label>
+                                <strong><asp:Label ID="lblitemDesc" runat="server" Text="Label"></asp:Label></strong>
                             </div>
                             <div class="col-6 alingRight">
-                                <label id="lblMadein">MADE IN: DUBLIN - VA</label>
+                                <asp:Image ID="codeItem" CssClass="codeItem" runat="server" />
                             </div>
                         </div>
                         <br />
-                        <div class="col-12 divDesc">
-                            <asp:Image ID="codeItem" CssClass="codeItem" runat="server" />
-                        </div>
                         <div class="col-12 borderTop">
+                            <br />
                             <asp:Image ID="codePaid" CssClass="codePaid" runat="server" />
                         </div>
                         <br />
                         <div>
                             <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Work Order Lot</th>
-                                        <th scope="col">Pallet Number</th>
-                                        <th scope="col">Inspector Initial</th>
-                                    </tr>
-                                </thead>
                                 <tbody>
                                     <tr>
                                         <td id="">
-                                            <asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label>
+                                            <strong>WO Lot</strong>&nbsp;&nbsp;<asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label>
+                                        </td>
+                                        <td id="" rowspan="2" colspan="2">
+                                            <strong>Quantity</strong>&nbsp;&nbsp;<asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label>
+                                        </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td id="">
+                                            <strong>Date</strong>&nbsp;&nbsp;<asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td id="">
+                                            <strong>Machine</strong>&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
                                         </td>
                                         <td id="">
-                                            <asp:Label ID="lblPalletNum" runat="server" Text="Label"></asp:Label></td>
+                                            <strong>Operator</strong>&nbsp;&nbsp;<asp:Label ID="lblInspector" runat="server" Text="Label"></asp:Label>
+                                        </td>
                                         <td id="">
-                                            <asp:Label ID="lblInspector" runat="server" Text="Label"></asp:Label></td>
+                                            <strong></strong>&nbsp;&nbsp;
+                                        </td>
                                     </tr>
-                                </tbody>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Shift</th>
-                                        <th scope="col">Case Per Pallet</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
                                     <tr>
                                         <td id="">
-                                            <asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label></td>
+                                            <strong>Pallet #</strong>&nbsp;&nbsp;<asp:Label ID="lblPalletNum" runat="server" Text="Label"></asp:Label>
+                                        </td>
                                         <td id="">
-                                            <asp:Label ID="lblShift" runat="server" Text="Label"></asp:Label></td>
-                                        <td id="">
-                                            <asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label></td>
+                                            <strong></strong>&nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Text="Made in Dublin VA"></asp:Label>
+                                        </td>
+                                        <td id="" style="width: 151px;">
+                                            <strong>&nbsp;&nbsp;</strong>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
