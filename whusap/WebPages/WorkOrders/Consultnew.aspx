@@ -14,7 +14,7 @@
         }
         .flotante
         {
-            display: scroll;
+            display: scroll;     
             position: fixed;
             bottom: 50px;
             right: 10px;
