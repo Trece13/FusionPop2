@@ -2887,7 +2887,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="vallidatePalletInfo">
         <stringSQL>
-          SELECT * FROM
+          SELECT sGlobal.TBL,sGlobal.T$ORNO, sGlobal.T$PAID, sGlobal.T$QTYC, sGlobal.T$ITEM, sGlobal.DSCA, sGlobal.T$CUNI, sGlobal.T$CWAR, sGlobal.DESCW, sGlobal.T$LOCA, sGlobal.T$CLOT,tisfc010.T$MCNO
+          FROM
           (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$paid,ticol222.T$ACQT AS T$qtyc,
           ticol022.T$MITM AS T$ITEM, tcibd001.t$dsca AS DSCA, ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAF AS T$CWAR,
@@ -2913,7 +2914,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
           INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAF
-          WHERE ticol042.T$DELE = '7')
+          WHERE ticol042.T$DELE = '7') sGlobal
+          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
           WHERE T$qtyc > 0
           AND T$paid = '[p1]'
           AND ROWNUM = 1
