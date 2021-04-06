@@ -115,5 +115,7 @@ namespace whusa
         public string KTLC { get; set; }
 
         public string TBL { get; set; }
+
+        public string MCNO { get; set; }
     }
 }
