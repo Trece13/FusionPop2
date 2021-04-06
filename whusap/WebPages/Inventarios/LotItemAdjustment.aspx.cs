@@ -113,7 +113,9 @@ namespace whusap.WebPages.Inventarios
                 MyObj.DSCA = MyObjDT["DSCA"].ToString();
                 MyObj.DSCAW = MyObjDT["DESCAW"].ToString();
                 MyObj.STAT = MyObjDT["STAT"].ToString();
-                
+                MyObj.MCNO = MyObjDT["MCNO"].ToString();
+                HttpContext.Current.Session["ORNO"] = MyObjDT["ORNO"].ToString();
+
                 if (MyObj.QTYA.Trim() == "0")
                 {
                     MyObj.Error = true;
@@ -214,7 +216,6 @@ namespace whusap.WebPages.Inventarios
             return JsonConvert.SerializeObject(MyObj);
         }
 
-
         [WebMethod]
         public static string verifyWarehouse(string CWAR)
         {
@@ -282,7 +283,7 @@ namespace whusap.WebPages.Inventarios
             {
 
                 saveOriginTable(twhcol028);
-                string strMaxSequence = getSequence(twhcol028.PAID);
+                string strMaxSequence = getSequence(HttpContext.Current.Session["ORNO"].ToString() + "-A");
                 //string strNewSequence = currentSequience(strOldSequence);
                 bool createSuccessNewPaller = saveNewPalletOriginTable(ref twhcol028, strMaxSequence);
                 if (createSuccessNewPaller)
@@ -315,7 +316,7 @@ namespace whusap.WebPages.Inventarios
 
             bool res = false;
             string separator = "-";
-            twhcol028.PAID = recursos.GenerateNewPallet(MaxSequence, separator);
+            twhcol028.PAID = recursos.GenerateNewPallet( MaxSequence, separator);
             string SQNB = twhcol028.PAID.Substring(0, twhcol028.PAID.IndexOf(separator));
             twhcol028.LOGN = HttpContext.Current.Session["user"].ToString();
             twhcol028.DATR = DateTime.Now.ToString("MM/dd/yyyy");
@@ -339,7 +340,7 @@ namespace whusap.WebPages.Inventarios
                     obj022.pro2 = 2;
                     obj022.loca = " ";
                     obj022.norp = 1;
-                    obj022.dele = 2;
+                    obj022.dele = 7;
                     obj022.logd = "NONE";
                     obj022.refcntd = 0;
                     obj022.refcntu = 0;
@@ -373,7 +374,7 @@ namespace whusap.WebPages.Inventarios
                     obj042.pro2 = 2;
                     obj042.loca = " ";
                     obj042.norp = 1;
-                    obj042.dele = 2;
+                    obj042.dele = 7;
                     obj042.logd = "NONE";
                     obj042.refcntd = 0;
                     obj042.refcntu = 0;
@@ -416,7 +417,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.NPRT = "1";//conteo de reimpresiones 
                     MyObj131.LOGN = twhcol028.LOGN;// nombre de ususario de la session
                     MyObj131.LOGT = " ";//llena baan
-                    MyObj131.STAT = "1";// LLENAR EN 1  
+                    MyObj131.STAT = "5";// LLENAR EN 1  
                     MyObj131.DSCA = "0";
                     MyObj131.COTP = "0";
                     MyObj131.FIRE = "1";
@@ -453,19 +454,24 @@ namespace whusap.WebPages.Inventarios
             bool ActalizacionExitosa = false;
             Ent_tticol082 MyObj82 = new Ent_tticol082();
             MyObj82.PAID = twhcol028.PAID;
+            MyObj82.STAT = "14";
             MyObj82.QTYC = "0";
             switch (HttpContext.Current.Session["TBL"].ToString())
             {
                 case "ticol022":
+                    twhcolDAL.ActCausalTICOL022(MyObj82.PAID, 14);
                     ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
                     break;
                 case "ticol042":
+                    twhcolDAL.ActCausalTICOL042(MyObj82.PAID, 14);
                     ActalizacionExitosa = Itticol082.Actualizartticol242Cant(MyObj82);
                     break;
                 case "whcol131":
+                    twhcolDAL.ActCausalcol131140(MyObj82.PAID, 14);
                     ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                     break;
                 case "whcol130":
+                    twhcolDAL.ActCausalcol131140(MyObj82.PAID, 14);
                     ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                     break;
 
@@ -478,12 +484,17 @@ namespace whusap.WebPages.Inventarios
             string sequence = string.Empty;
             int indexSeparator = PAIDOld.IndexOf("-");
             string SQNB = PAIDOld.Substring(0, indexSeparator);
+            string separator = PAIDOld.Substring(indexSeparator,1);
             string SEC = PAIDOld.Substring(indexSeparator + 1);
             string complement = recursos.SeparatorAlphaNumeric(ref SEC);
             DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
             if (dtMaxSec.Rows.Count > 0)
             {
                 sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
+            }
+            else
+            {
+                sequence = SQNB + separator +complement+"000";
             }
             return sequence;
         }
