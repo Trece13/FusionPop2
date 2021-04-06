@@ -3462,28 +3462,28 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select  warehouse as CWAR , location as LOCA, item, lot as CLOT, palletid as PAIDS, quantity as STKS
           from
           (
-          select  t$cwat warehouse, t$aclo location, col022.t$pdno lot, t$acqt quantity, col022.t$sqnb palletid, col022.t$mitm item
+          select  t$cwat warehouse, t$aclo location, case when col022.t$pdno = '                    ' then 'Not Lot' else col022.t$pdno end lot, t$acqt quantity, col022.t$sqnb palletid, col022.t$mitm item
           from    baan.tticol222140 col222
           inner join baan.tticol022140 col022
           on col022.t$pdno = col222.t$pdno
           and col022.t$sqnb = col222.t$sqnb
           union
-          select  t$cwat warehouse, t$aclo location, col042.t$pdno lot, t$acqt quantity, col042.t$sqnb palletid, col042.t$mitm item
+          select  t$cwat warehouse, t$aclo location,  case when col042.t$pdno = '                    ' then 'Not Lot' else col042.t$pdno end lot, t$acqt quantity, col042.t$sqnb palletid, col042.t$mitm item
           from    baan.tticol242140 col242
           inner join baan.tticol042140 col042
           on col042.t$pdno = col242.t$pdno
           and col042.t$sqnb = col242.t$sqnb
           union
-          select t$cwaa warehouse, t$loaa location, t$clot lot, t$qtya quantity, t$paid palletid, t$item item
+          select t$cwaa warehouse, t$loaa location, case when t$clot = '                    ' then 'Not Lot' else t$clot end lot, t$qtya quantity, t$paid palletid, t$item item
           from   baan.twhcol130140
           union
-          select t$cwaa warehouse, t$loaa location, t$clot lot, t$qtya quantity, t$paid palletid, t$item item
+          select t$cwaa warehouse, t$loaa location, case when t$clot = '                    ' then 'Not Lot' else t$clot end lot, t$qtya quantity, t$paid palletid, t$item item
           from   baan.twhcol131140
           )
           where trim(lot) = NVL(trim('[:T$CLOT]'),trim(lot))
           and trim(palletid) = NVL(trim('[:T$PAID]'),trim(palletid))
           --and trim(item) = trim('[:T$ITEM]')
-          and quantity != 0
+          --and quantity != 0
           <!--SELECT G1.PAIDS,TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
           TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
           TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
@@ -5445,26 +5445,25 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="findByPdnoArticulo">
         <stringSQL>
-          SELECT whltc100.T$ITEM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
-          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
+          SELECT global.T$ITEM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
+          SELECT 'ticol022' AS TBL,case when ticol022.T$PDNO = '                    ' then 'Not Lot' else ticol022.T$PDNO end  AS T$CLOT,ticol022.T$SQNB AS T$PAID,ticol022.T$MITM AS T$ITEM
           FROM baan.tticol022140 ticol022
           INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           UNION
-          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$CLOT,ticol042.T$SQNB AS T$PAID
+          SELECT 'ticol042' AS TBL,case when ticol042.T$PDNO = '                    ' then 'Not Lot' else ticol042.T$PDNO end AS T$CLOT,ticol042.T$SQNB AS T$PAID,ticol042.T$MITM AS T$ITEM
           FROM baan.tticol042140 ticol042
           INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           UNION
-          SELECT 'whcol130' AS TBL, T$CLOT, T$PAID AS T$PAID
+          SELECT 'whcol130' AS TBL, case when T$CLOT = '                    ' then 'Not Lot' else T$CLOT end, T$PAID AS T$PAID,T$ITEM AS T$ITEM
           FROM baan.tWhcol130140
           UNION
-          SELECT 'whcol131' AS TBL, T$CLOT, T$PAID AS T$PAID
+          SELECT 'whcol131' AS TBL, case when T$CLOT = '                    ' then 'Not Lot' else T$CLOT end, T$PAID AS T$PAID,T$ITEM AS T$ITEM
           FROM baan.tWhcol131140
           ) global
-          INNER JOIN baan.twhltc100140 whltc100 ON whltc100.T$CLOT = NVL('[:T$PDNO]',TRIM(whltc100.T$CLOT))
-          INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = whltc100.T$item
-          WHERE TRIM(whltc100.T$CLOT) = NVL('[:T$PDNO]',TRIM(whltc100.T$CLOT))
+          INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = global.T$ITEM
+          WHERE TRIM(global.T$CLOT) = NVL('[:T$PDNO]',TRIM(global.T$CLOT))
           AND TRIM(global.T$PAID) = NVL('[:T$PAID]',TRIM(global.T$PAID))
-          
+
           <!--SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
           FROM baan.tticol022140 ticol022
