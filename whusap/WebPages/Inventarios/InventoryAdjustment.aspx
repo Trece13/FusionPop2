@@ -324,7 +324,7 @@
                                     <asp:Label runat="server" ID="lblAdjustmentQuantity" Text="New Quantity" Style="font-size: 13px;" /></b></span>
                         </asp:TableCell><asp:TableCell ID="TableCell14" runat="server">
                             <span style="vertical-align: middle;">
-                                <asp:TextBox runat="server" ID="txtAdjustmentQuantity" CssClass="TextBoxBig" onChange="validarAdjustQty(this.value);" ClientIDMode="Static" Style="width: 80%" value="" />
+                                <asp:TextBox runat="server" ID="txtAdjustmentQuantity"  CssClass="TextBoxBig" onChange="validarAdjustQty(this.value);" ClientIDMode="Static" Style="width: 80%" value="" />
                                 <asp:Label class="" ID="lblUnitValue1" Text="Unit" runat="server" Style="padding-left: 15px;" />
                             </span>
                         </asp:TableCell>
@@ -362,8 +362,7 @@
                     </asp:TableRow>
                     <asp:TableRow ID="TableRow11" runat="server">
                         <asp:TableCell ID="TableCell20" runat="server" Style="text-align: left;">
-                            <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
-                            <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                           
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
@@ -507,7 +506,7 @@
                                             <td id="">
                                                 <strong>WO Lot</strong>&nbsp;&nbsp;<asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label>
                                             </td>
-                                            <td id="" rowspan="2" colspan="2">
+                                            <td id="" rowspan="2" colspan="2" class="h3">
                                                 <strong>Quantity</strong>&nbsp;&nbsp;<asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label>
                                             </td>
 
@@ -551,6 +550,8 @@
                     </div>
                 </div>
             </div>
+             <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                            <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
         </ContentTemplate>
     </asp:UpdatePanel>
     <!--<asp:Button ID="btnGetObj" runat="server" Text="Save" CssClass="ButtonsSendSave" OnClientClick="getObj(); return false;" />-->

@@ -463,7 +463,7 @@ namespace whusap.WebPages.Inventarios
             {
                 if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
                 {
-                    twhcolDAL.ActCausalTICOL022(PAID, 5);
+                    twhcolDAL.ActCausalTICOL022(PAID, 14);
 
                     Ent_tticol022 MyObj = new Ent_tticol022();
                     MyObj.pdno = obj.CLOT;
@@ -498,7 +498,7 @@ namespace whusap.WebPages.Inventarios
                 }
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag042"].ToString().Trim()) == 1)
                 {
-                    twhcolDAL.ActCausalTICOL042(PAID, 5);
+                    twhcolDAL.ActCausalTICOL042(PAID, 14);
 
                     Ent_tticol042 MyObj = new Ent_tticol042();
                     MyObj.pdno = obj.CLOT;
@@ -575,15 +575,6 @@ namespace whusap.WebPages.Inventarios
                 lblError.Text = "";
                 lblConfirm.Text = mensajes("msjsave");
                 //divTable.Visible = false;
-                txtPalletId.Enabled = true;
-                txtPalletId.Text = String.Empty;
-                txtAdjustmentQuantity.Text = String.Empty;
-                dropDownCostCenters.Items.Clear();
-                dropDownReasonCodes.Items.Clear();
-                lblCost.Text = string.Empty;
-                lblReason.Text = string.Empty;
-                btnSend.Visible = true;
-
                 lblitemDesc.Text = Transfers.DescripcionItem(obj.ITEM); ;
                 lblWorkOrder.Text = obj.PAID.Substring(0, obj.PAID.IndexOf("-"));
                 lblPalletNum.Text = obj.PAID.Substring(obj.PAID.IndexOf("-")+1);
@@ -592,9 +583,18 @@ namespace whusap.WebPages.Inventarios
                 //lblShift.Text =Session["shif"].ToString();
                 lblQuantityL.Text = txtAdjustmentQuantity.Text.Trim() + "  " + lblUnitValue.Text.Trim();
                 codeItem.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +obj.ITEM.Trim()+ "&code=Code128&dpi=96";
-                codePaid.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + obj.PAID.Trim() + "&code=Code128&dpi=96";
+                codePaid.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + newPallet.Trim() + "&code=Code128&dpi=96";
 
                 divPrint.Visible = true;
+
+                txtPalletId.Enabled = true;
+                txtPalletId.Text = String.Empty;
+                txtAdjustmentQuantity.Text = String.Empty;
+                dropDownCostCenters.Items.Clear();
+                dropDownReasonCodes.Items.Clear();
+                lblCost.Text = string.Empty;
+                lblReason.Text = string.Empty;
+                btnSend.Visible = true;
 
             }
             else
