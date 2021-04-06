@@ -1828,7 +1828,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="VerificarPalletID">
         <stringSQL>
-          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
+          SELECT distinct TBL,tisfc010.T$MCNO as MCNO,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO, col022.T$PDNO as LOT from {0}.tticol022{1} col022
           INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           UNION
@@ -1840,6 +1840,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
           LEFT JOIN {0}.twhwmd200{1}  wmd200 on ConGlobal.CWAT = wmd200.t$cwar
+          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(ConGlobal.ITEM)
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
         </stringSQL>
       </operationName>
