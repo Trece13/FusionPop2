@@ -360,6 +360,12 @@
                             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="ButtonsSendSave" />
                         </asp:TableCell>
                     </asp:TableRow>
+                    <asp:TableRow ID="TableRow11" runat="server">
+                        <asp:TableCell ID="TableCell20" runat="server" Style="text-align: left;">
+                            <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                            <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                        </asp:TableCell>
+                    </asp:TableRow>
                 </asp:Table>
                 <table border="0">
 
@@ -475,73 +481,75 @@
 
             </div>
             <div></div>
-            <div ID="divPrint" runat="server" visible="false">
+            <div id="divPrint" runat="server" visible="false">
                 <div id="printContainer">
-                <div id="printSpace">
-                    <div id="myLabel" class="container">
-                        <div class="row">
-                            <div class="col-6 alingLeft">
-                                <strong><asp:Label ID="lblitemDesc" runat="server" Text="Label"></asp:Label></strong>
+                    <div id="printSpace">
+                        <div id="myLabel" class="container">
+                            <div class="row">
+                                <div class="col-6 alingLeft">
+                                    <strong>
+                                        <asp:Label ID="lblitemDesc" class="h4" runat="server" Text="Label"></asp:Label></strong>
+                                </div>
+                                <div class="col-6 alingRight">
+                                    <asp:Image ID="codeItem" CssClass="codeItem" runat="server" />
+                                </div>
                             </div>
-                            <div class="col-6 alingRight">
-                                <asp:Image ID="codeItem" CssClass="codeItem" runat="server" />
-                            </div>
-                        </div>
-                        <br />
-                        <div class="col-12 borderTop">
                             <br />
-                            <asp:Image ID="codePaid" CssClass="codePaid" runat="server" />
-                        </div>
-                        <br />
-                        <div>
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td id="">
-                                            <strong>WO Lot</strong>&nbsp;&nbsp;<asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                        <td id="" rowspan="2" colspan="2">
-                                            <strong>Quantity</strong>&nbsp;&nbsp;<asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td id="">
-                                            <strong>Date</strong>&nbsp;&nbsp;<asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td id="">
-                                            <strong>Machine</strong>&nbsp;&nbsp;<asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                        <td id="">
-                                            <strong>Operator</strong>&nbsp;&nbsp;<asp:Label ID="lblInspector" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                        <td id="">
-                                            <strong></strong>&nbsp;&nbsp;
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td id="">
-                                            <strong>Pallet #</strong>&nbsp;&nbsp;<asp:Label ID="lblPalletNum" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                        <td id="">
-                                            <strong></strong>&nbsp;&nbsp;<asp:Label ID="Label3" runat="server" Text="Made in Dublin VA"></asp:Label>
-                                        </td>
-                                        <td id="" style="width: 151px;">
-                                            <strong>&nbsp;&nbsp;</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="col-12 borderTop">
+                                <br />
+                                <asp:Image ID="codePaid" CssClass="codePaid" runat="server" />
+                            </div>
+                            <br />
+                            <div>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td id="">
+                                                <strong>WO Lot</strong>&nbsp;&nbsp;<asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label>
+                                            </td>
+                                            <td id="" rowspan="2" colspan="2">
+                                                <strong>Quantity</strong>&nbsp;&nbsp;<asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td id="">
+                                                <strong>Date</strong>&nbsp;&nbsp;<asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="">
+                                                <strong>Machine</strong>&nbsp;&nbsp;<asp:Label ID="lblMachine" runat="server" Text="Label"></asp:Label>
+                                            </td>
+                                            <td id="">
+                                                <strong>Operator</strong>&nbsp;&nbsp;<asp:Label ID="lblInspector" runat="server" Text="Label"></asp:Label>
+                                            </td>
+                                            <td id="">
+                                                <strong></strong>&nbsp;&nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td id="">
+                                                <strong>Pallet #</strong>&nbsp;&nbsp;<asp:Label ID="lblPalletNum" runat="server" Text="Label"></asp:Label>
+                                            </td>
+                                            <td id="">
+                                                <strong>
+                                                    <asp:Label ID="Label3" runat="server" Text="Made in Dublin VA"></asp:Label></strong>
+                                            </td>
+                                            <td id="" style="width: 151px;">
+                                                <strong>&nbsp;&nbsp;</strong>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                    <br />
+                    <div id="printButton" class="container">
+                        <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
+                    </div>
                 </div>
-                <br />
-                <div id="printButton" class="container">
-                    <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
-                </div>
-            </div>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -549,8 +557,7 @@
     <!--<button id="btnGetObj" type="button">getObj</button>-->
 
 
-    <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+
     <script>
         function printDiv(divID) {
 

@@ -14,6 +14,7 @@ using whusa.Utilidades;
 using System.Web.Services;
 using Newtonsoft.Json;
 using System.Web.Configuration;
+using whusa;
 
 namespace whusap.WebPages.Inventarios
 {
@@ -33,6 +34,10 @@ namespace whusap.WebPages.Inventarios
         public static Ent_twhcol025 obj = new Ent_twhcol025();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
         private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
+        public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
+        private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
+        public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
 
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
@@ -137,6 +142,9 @@ namespace whusap.WebPages.Inventarios
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
+            HttpContext.Current.Session["flag022"] = 0;
+            HttpContext.Current.Session["flag042"] = 0;
+            HttpContext.Current.Session["flag131"] = 0;
             divPrint.Visible = false;
 
             string retorno = string.Empty;
@@ -175,7 +183,7 @@ namespace whusap.WebPages.Inventarios
 
 
 
-            string palletId, item, warehouse, lot, location, quantity, dsca, unit, waredesc;
+            string palletId, item, warehouse, lot, location, quantity, dsca, unit, waredesc,machine,tbl;
 
             if (resultado.Rows.Count == 1)
             {
@@ -193,6 +201,26 @@ namespace whusap.WebPages.Inventarios
                 }
 
                 DataRow dr = resultado.Rows[0];
+                tbl = dr.ItemArray[0].ToString();
+                if (tbl.Trim() == "ticol022")
+                {
+                    HttpContext.Current.Session["flag022"] = 1;
+                    HttpContext.Current.Session["flag131"] = 0;
+                    HttpContext.Current.Session["flag042"] = 0;
+                }
+                else if (tbl.Trim() == "whcol131")
+                {
+                    HttpContext.Current.Session["flag022"] = 0;
+                    HttpContext.Current.Session["flag131"] = 1;
+                    HttpContext.Current.Session["flag042"] = 0;
+                }
+                else if (tbl.Trim() == "ticol042")
+                {
+                    HttpContext.Current.Session["flag022"] = 0;
+                    HttpContext.Current.Session["flag131"] = 0;
+                    HttpContext.Current.Session["flag042"] = 1;
+                }
+
                 palletId = dr.ItemArray[2].ToString();
                 quantity = dr.ItemArray[3].ToString();
                 item = dr.ItemArray[4].ToString();
@@ -203,6 +231,7 @@ namespace whusap.WebPages.Inventarios
                 lot = dr.ItemArray[10].ToString();
                 location = dr.ItemArray[9].ToString();
                 Pquantity = Convert.ToDouble(quantity);
+                machine = dr.ItemArray[11].ToString();
 
                 lblPalletId1Value.Text = palletId;
                 lblItemValue.Text = item;
@@ -217,6 +246,7 @@ namespace whusap.WebPages.Inventarios
                 tblPalletInfo.Visible = true;
                 btnSend.Visible = false;
                 btnSave.Visible = true;
+                lblMachine.Text = machine;
                 generateDropDownReasonCodes();
                 generateDropDownCostCenters();
 
@@ -375,7 +405,7 @@ namespace whusap.WebPages.Inventarios
             else{
                 if (Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()) > (Convert.ToDecimal(lblQuantityValue.Text.Trim()) * 2))
                 {
-                    lblError.Text = "New quantity value doesnt allow";
+                    lblError.Text = "New quantity not allowed, máximum double”";
                     txtPalletId.Enabled = true;
                     btnSave.Visible = true;
                     tblPalletInfo.Visible = true;
@@ -406,7 +436,7 @@ namespace whusap.WebPages.Inventarios
             string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
             string SQNB = PAID.Substring(0, PAID.IndexOf(separator));
 
-            obj.PAID = newPallet;
+            obj.PAID = PAID;
             obj.ITEM = lblItemValue.Text.Trim().ToUpper();
             //obj.LOCA = lblLocationValue.Text.Trim().ToUpper();
             obj.CWAR = lblWarehouseValue.Text;
@@ -431,6 +461,117 @@ namespace whusap.WebPages.Inventarios
 
             if (validSave > 0)
             {
+                if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
+                {
+                    twhcolDAL.ActCausalTICOL022(PAID, 5);
+
+                    Ent_tticol022 MyObj = new Ent_tticol022();
+                    MyObj.pdno = obj.CLOT;
+                    MyObj.sqnb = newPallet;
+                    MyObj.proc = 2;
+                    MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj.mitm = obj.ITEM.Trim();
+                    MyObj.qtdl = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());
+                    MyObj.cuni = obj.UNIT;//CUNI;
+                    MyObj.log1 = "NONE";
+                    MyObj.qtd1 = Convert.ToInt32(txtAdjustmentQuantity.Text.Trim());
+                    MyObj.pro1 = 2;
+                    MyObj.log2 = "NONE";
+                    MyObj.qtd2 = Convert.ToInt32(txtAdjustmentQuantity.Text.Trim());
+                    MyObj.pro2 = 2;
+                    MyObj.loca = obj.LOCA;
+                    MyObj.norp = 1;
+                    MyObj.dele = 9;
+                    MyObj.logd = "NONE";
+                    MyObj.refcntd = 0;
+                    MyObj.refcntu = 0;
+                    MyObj.drpt = DateTime.Now;
+                    MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj.acqt = 0;
+                    MyObj.cwaf = obj.CWAR;//CWAR;
+                    MyObj.cwat = obj.CWAR;//CWAR;
+                    MyObj.aclo = obj.LOCA;
+                    MyObj.allo = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                    var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
+                    var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
+                }
+                else if (Convert.ToInt32(HttpContext.Current.Session["flag042"].ToString().Trim()) == 1)
+                {
+                    twhcolDAL.ActCausalTICOL042(PAID, 5);
+
+                    Ent_tticol042 MyObj = new Ent_tticol042();
+                    MyObj.pdno = obj.CLOT;
+                    MyObj.sqnb = newPallet;
+                    MyObj.proc = 2;
+                    MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj.mitm = obj.ITEM.Trim();
+                    MyObj.qtdl = Convert.ToDouble(txtAdjustmentQuantity.Text.Trim());
+                    MyObj.cuni = obj.UNIT;//CUNI;
+                    MyObj.log1 = "NONE";
+                    MyObj.qtd1 = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());
+                    MyObj.pro1 = 2;
+                    MyObj.log2 = "NONE";
+                    MyObj.qtd2 = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());
+                    MyObj.pro2 = 2;
+                    MyObj.loca = obj.LOCA;
+                    MyObj.norp = 1;
+                    MyObj.dele = 9;
+                    MyObj.logd = "NONE";
+                    MyObj.refcntd = 0;
+                    MyObj.refcntu = 0;
+                    MyObj.drpt = DateTime.Now;
+                    MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj.acqt = 0;
+                    MyObj.cwaf = obj.CWAR;//CWAR;
+                    MyObj.cwat = obj.CWAR;//CWAR;
+                    MyObj.aclo = obj.LOCA;
+                    MyObj.allo = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());//Convert.ToDecimal(qtyt_act.ToString());
+
+
+                    var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj, ref strError);
+                    var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
+
+                }
+                else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
+                {
+                    twhcolDAL.ActCausalcol131140(PAID, 5);
+                    Ent_twhcol130131 MyObj = new Ent_twhcol130131();
+                    MyObj.OORG = "2";// Order type escaneada view 
+                    MyObj.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
+                    MyObj.ITEM = obj.ITEM.Trim();
+                    MyObj.PAID = newPallet;
+                    MyObj.PONO = "1";
+                    MyObj.SEQN = "1";
+                    MyObj.CLOT = obj.CLOT;//CLOT.ToUpper();// lote VIEW
+                    MyObj.CWAR = obj.CWAR;//CWAR.ToUpper();
+                    MyObj.QTYS = txtAdjustmentQuantity.Text.Trim().ToString();//QTYS;// cantidad escaneada view 
+                    MyObj.UNIT = obj.UNIT;//UNIT;//unit escaneada view
+                    MyObj.QTYC = txtAdjustmentQuantity.Text.Trim().ToString();//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj.QTYA = "";//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj.UNIC = obj.UNIT;//UNIT;//unidad view stock
+                    MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                    MyObj.CONF = "1";
+                    MyObj.RCNO = " ";//llena baan
+                    MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    MyObj.LOCA = obj.LOCA;//LOCA.ToUpper();// enviamos vacio 
+                    MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                    MyObj.PRNT = "1";// llenar en 1
+                    MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    MyObj.NPRT = "1";//conteo de reimpresiones 
+                    MyObj.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
+                    MyObj.LOGT = " ";//llena baan
+                    MyObj.STAT = "7";// LLENAR EN 3 
+                    MyObj.DSCA = " ";
+                    MyObj.COTP = " ";
+                    MyObj.FIRE = "2";
+                    MyObj.PSLIP = " ";
+                    MyObj.ALLO = txtAdjustmentQuantity.Text.Trim();
+
+
+                    bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+                }
+
                 lblError.Text = "";
                 lblConfirm.Text = mensajes("msjsave");
                 //divTable.Visible = false;
@@ -449,7 +590,7 @@ namespace whusap.WebPages.Inventarios
                 lblInspector.Text =obj.LOGN;
                 lblDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 //lblShift.Text =Session["shif"].ToString();
-                lblQuantityL.Text = obj.QTYA.ToString() + " " + lblUnitValue.Text.Trim();
+                lblQuantityL.Text = txtAdjustmentQuantity.Text.Trim() + "  " + lblUnitValue.Text.Trim();
                 codeItem.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +obj.ITEM.Trim()+ "&code=Code128&dpi=96";
                 codePaid.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + obj.PAID.Trim() + "&code=Code128&dpi=96";
 
