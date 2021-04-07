@@ -604,7 +604,7 @@
         }
 
         var IdentificarControles = function () {
-            //var btnGetObj = document.getElementById("Contenido_btnGetObj");
+            //var btnGetObj = document.getElementById("Contenido_btnGetObj"); 
             //btnGetObj.addEventListener("click", getObj, false);
         }
 

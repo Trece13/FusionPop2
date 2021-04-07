@@ -540,7 +540,7 @@ namespace whusap.WebPages.Inventarios
 
                     var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj, ref strError);
                     var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
-                    var ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
+                    var ActalizacionExitosa = Itticol082.Actualizartticol242Cant(MyObj82);
 
                 }
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
@@ -571,7 +571,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj.NPRT = "1";//conteo de reimpresiones 
                     MyObj.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
                     MyObj.LOGT = " ";//llena baan
-                    MyObj.STAT = "7";// LLENAR EN 3 
+                    MyObj.STAT = "3";// LLENAR EN 3 
                     MyObj.DSCA = " ";
                     MyObj.COTP = " ";
                     MyObj.FIRE = "2";
@@ -580,7 +580,7 @@ namespace whusap.WebPages.Inventarios
 
 
                     bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
-                    var ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
+                    var ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                 }
 
                 lblError.Text = "";
@@ -588,7 +588,7 @@ namespace whusap.WebPages.Inventarios
                 //divTable.Visible = false;
                 lblitemDesc.Text = Transfers.DescripcionItem(obj.ITEM); ;
                 lblWorkOrder.Text = obj.PAID.Substring(0, obj.PAID.IndexOf("-"));
-                lblPalletNum.Text = obj.PAID.Substring(obj.PAID.IndexOf("-")+1);
+                lblPalletNum.Text = newPallet.Substring(obj.PAID.IndexOf("-") + 1);
                 lblInspector.Text =obj.LOGN;
                 lblDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 //lblShift.Text =Session["shif"].ToString();
