@@ -563,6 +563,7 @@
         }
 
         var sendInfo = function(e) {
+            $("#btnSave").hide(500);
             var Obj028 = new Ent_twhcol028();
             Obj028.PAID = txPalletID.value.trim().toUpperCase();
             Obj028.CDIS = $("#Contenido_dropDownReasonCodes").val();
@@ -726,7 +727,7 @@
                 lblInspector.textContent = MyObjTwhcol028.LOGN;
                 lblMachine.textContent = MyObjTwhcol028.MCNO;
                 lblDate.textContent = MyObjTwhcol028.DATR;
-                lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
+                //lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
                 lblQuantity.textContent = lbQtyAdjusted.textContent;
                 $("#editTable").hide(500);
                 $('#printContainer').show(500);
@@ -735,6 +736,7 @@
                 alert("error no insert");
                 $('#printContainer').hide(500);
             }
+            $("#btnSave").show(500);
         }
 
         var verifyItemSuccess = function(res) {
