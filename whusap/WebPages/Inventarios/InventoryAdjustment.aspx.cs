@@ -33,6 +33,7 @@ namespace whusap.WebPages.Inventarios
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         public static Ent_twhcol025 obj = new Ent_twhcol025();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
+        public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
         private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
         public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
@@ -183,7 +184,7 @@ namespace whusap.WebPages.Inventarios
 
 
 
-            string palletId, item, warehouse, lot, location, quantity, dsca, unit, waredesc,machine,tbl;
+            string palletId, item, warehouse, lot, location, quantity, dsca, unit, waredesc, machine, tbl, pono;
 
             if (resultado.Rows.Count == 1)
             {
@@ -232,6 +233,8 @@ namespace whusap.WebPages.Inventarios
                 location = dr.ItemArray[9].ToString();
                 Pquantity = Convert.ToDouble(quantity);
                 machine = dr.ItemArray[11].ToString();
+                pono = dr.ItemArray[12].ToString();
+                HttpContext.Current.Session["pono"] = pono;
 
                 lblPalletId1Value.Text = palletId;
                 lblItemValue.Text = item;
@@ -436,6 +439,10 @@ namespace whusap.WebPages.Inventarios
             string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
             string SQNB = PAID.Substring(0, PAID.IndexOf(separator));
 
+            Ent_tticol082 MyObj82 = new Ent_tticol082();
+            MyObj82.PAID = PAID;
+            MyObj82.QTYC = "0";
+
             obj.PAID = PAID;
             obj.ITEM = lblItemValue.Text.Trim().ToUpper();
             //obj.LOCA = lblLocationValue.Text.Trim().ToUpper();
@@ -451,7 +458,7 @@ namespace whusap.WebPages.Inventarios
             obj.EMNO = Session["emno"].ToString();
             obj.PROC = 2;
             obj.ORNO = " ";
-            obj.PONO = 0;
+            obj.PONO = Convert.ToInt32(HttpContext.Current.Session["pono"].ToString());
             obj.MESS = " ";
             obj.REFCNTD = 0;
             obj.REFCNTU = 0;
@@ -481,20 +488,22 @@ namespace whusap.WebPages.Inventarios
                     MyObj.pro2 = 2;
                     MyObj.loca = obj.LOCA;
                     MyObj.norp = 1;
-                    MyObj.dele = 9;
+                    MyObj.dele = 7;
                     MyObj.logd = "NONE";
                     MyObj.refcntd = 0;
                     MyObj.refcntu = 0;
                     MyObj.drpt = DateTime.Now;
                     MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                    MyObj.acqt = 0;
+                    MyObj.acqt = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());
                     MyObj.cwaf = obj.CWAR;//CWAR;
                     MyObj.cwat = obj.CWAR;//CWAR;
                     MyObj.aclo = obj.LOCA;
-                    MyObj.allo = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+                    MyObj.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
 
                     var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
                     var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
+                    var ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
+
                 }
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag042"].ToString().Trim()) == 1)
                 {
@@ -516,21 +525,22 @@ namespace whusap.WebPages.Inventarios
                     MyObj.pro2 = 2;
                     MyObj.loca = obj.LOCA;
                     MyObj.norp = 1;
-                    MyObj.dele = 9;
+                    MyObj.dele = 7;
                     MyObj.logd = "NONE";
                     MyObj.refcntd = 0;
                     MyObj.refcntu = 0;
                     MyObj.drpt = DateTime.Now;
                     MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                    MyObj.acqt = 0;
+                    MyObj.acqt = Convert.ToDouble(txtAdjustmentQuantity.Text.Trim());
                     MyObj.cwaf = obj.CWAR;//CWAR;
                     MyObj.cwat = obj.CWAR;//CWAR;
                     MyObj.aclo = obj.LOCA;
-                    MyObj.allo = Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());//Convert.ToDecimal(qtyt_act.ToString());
+                    MyObj.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim());//Convert.ToDecimal(qtyt_act.ToString());
 
 
                     var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj, ref strError);
                     var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
+                    var ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
 
                 }
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
@@ -541,14 +551,14 @@ namespace whusap.WebPages.Inventarios
                     MyObj.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
                     MyObj.ITEM = obj.ITEM.Trim();
                     MyObj.PAID = newPallet;
-                    MyObj.PONO = "1";
+                    MyObj.PONO = HttpContext.Current.Session["pono"].ToString();
                     MyObj.SEQN = "1";
                     MyObj.CLOT = obj.CLOT;//CLOT.ToUpper();// lote VIEW
                     MyObj.CWAR = obj.CWAR;//CWAR.ToUpper();
                     MyObj.QTYS = txtAdjustmentQuantity.Text.Trim().ToString();//QTYS;// cantidad escaneada view 
                     MyObj.UNIT = obj.UNIT;//UNIT;//unit escaneada view
                     MyObj.QTYC = txtAdjustmentQuantity.Text.Trim().ToString();//QTYS;//cantidad escaneada view aplicando factor
-                    MyObj.QTYA = "";//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj.QTYA = txtAdjustmentQuantity.Text.Trim().ToString();//QTYS;//cantidad escaneada view aplicando factor
                     MyObj.UNIC = obj.UNIT;//UNIT;//unidad view stock
                     MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
                     MyObj.CONF = "1";
@@ -566,10 +576,11 @@ namespace whusap.WebPages.Inventarios
                     MyObj.COTP = " ";
                     MyObj.FIRE = "2";
                     MyObj.PSLIP = " ";
-                    MyObj.ALLO = txtAdjustmentQuantity.Text.Trim();
+                    MyObj.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
 
 
                     bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+                    var ActalizacionExitosa = Itticol082.Actualizartticol222Cant(MyObj82);
                 }
 
                 lblError.Text = "";
