@@ -325,7 +325,8 @@ namespace whusap.WebPages.Inventarios
                 case "ticol022":
                     Ent_tticol022 obj022 = new Ent_tticol022();
                     List<Ent_tticol022> list022 = new List<Ent_tticol022>();
-                    obj022.pdno = SQNB;
+                    twhcol028.WHLOT = twhcol028.TLOT; 
+                    obj022.pdno = twhcol028.TLOT;
                     obj022.sqnb = twhcol028.PAID;
                     obj022.proc = 1;
                     obj022.logn = twhcol028.LOGN;
@@ -359,7 +360,8 @@ namespace whusap.WebPages.Inventarios
                 case "ticol042":
                     Ent_tticol042 obj042 = new Ent_tticol042();
                     List<Ent_tticol042> list042 = new List<Ent_tticol042>();
-                    obj042.pdno = SQNB;
+                    twhcol028.WHLOT = twhcol028.TLOT; 
+                    obj042.pdno = twhcol028.TLOT;
                     obj042.sqnb = twhcol028.PAID;
                     obj042.proc = 1;
                     obj042.logn = twhcol028.LOGN;
@@ -393,6 +395,7 @@ namespace whusap.WebPages.Inventarios
                 case "whcol131":
                     Ent_twhcol130131 obj131 = new Ent_twhcol130131();
                     Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+                    twhcol028.WHLOT = twhcol028.PAID.Substring(0,(twhcol028.PAID.IndexOf("-"))); 
                     MyObj131.OORG = "4";
                     MyObj131.ORNO = SQNB.Trim().ToUpper();
                     MyObj131.ITEM = twhcol028.TITM;
@@ -417,7 +420,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.NPRT = "1";//conteo de reimpresiones 
                     MyObj131.LOGN = twhcol028.LOGN;// nombre de ususario de la session
                     MyObj131.LOGT = " ";//llena baan
-                    MyObj131.STAT = "5";// LLENAR EN 1  
+                    MyObj131.STAT = "3";// LLENAR EN 1  
                     MyObj131.DSCA = "0";
                     MyObj131.COTP = "0";
                     MyObj131.FIRE = "1";
@@ -467,11 +470,11 @@ namespace whusap.WebPages.Inventarios
                     ActalizacionExitosa = Itticol082.Actualizartticol242Cant(MyObj82);
                     break;
                 case "whcol131":
-                    twhcolDAL.ActCausalcol131140(MyObj82.PAID, 14);
+                    twhcolDAL.ActCausalcol131140(MyObj82.PAID, 5);
                     ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                     break;
                 case "whcol130":
-                    twhcolDAL.ActCausalcol131140(MyObj82.PAID, 14);
+                    twhcolDAL.ActCausalcol131140(MyObj82.PAID, 5);
                     ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                     break;
 

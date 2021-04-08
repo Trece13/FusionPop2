@@ -482,7 +482,12 @@
         }
 
         var restartAll = function(e) {
+            txPalletID.value="";
+            restartForm();
+        }
+        var restartForm = function(e) {
             restart = true;
+            $("#saveSection").hide(500);
             $("#editTable").hide(500);
             $("#printContainer").hide(500);
             $("#checkItem").hide(500);
@@ -500,7 +505,6 @@
             $("#checkPaid").hide(500);
             $("#exPaid").hide(500);
             $("#loadPaid").hide(500);
-            txPalletID.value = "";
             lblError.textContent = "";
             lbItemActual.textContent        = "";
             lbLocaActual.textContent        = "";
@@ -563,7 +567,7 @@
         }
 
         var sendInfo = function(e) {
-            $("#btnSave").hide(500);
+            $("#saveSection").hide(500);
             var Obj028 = new Ent_twhcol028();
             Obj028.PAID = txPalletID.value.trim().toUpperCase();
             Obj028.CDIS = $("#Contenido_dropDownReasonCodes").val();
@@ -654,6 +658,7 @@
         }
 
         var verifyPalletSuccess = function(res) {
+            restartForm();
             var MyObj = JSON.parse(res.d);
             if(MyObj.Error == false){
                 $("#loadPaid").hide(300);
@@ -722,13 +727,13 @@
                 JsBarcode("#codePaid", MyObjTwhcol028.PAID);
                 JsBarcode("#codeItem", MyObjTwhcol028.SITM);
                 lblitemDesc.textContent = lbItemDscaAdjusted.textContent;
-                lblWorkOrder.textContent = MyObjTwhcol028.PAID.substring(0,(MyObjTwhcol028.PAID.indexOf("-")));;
+                lblWorkOrder.textContent = MyObjTwhcol028.WHLOT;
                 lblPalletNum.textContent =  MyObjTwhcol028.PAID.substring((MyObjTwhcol028.PAID.indexOf("-"))+1);
                 lblInspector.textContent = MyObjTwhcol028.LOGN;
                 lblMachine.textContent = MyObjTwhcol028.MCNO;
                 lblDate.textContent = MyObjTwhcol028.DATR;
                 //lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
-                lblQuantity.textContent = lbQtyAdjusted.textContent;
+                lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
                 $("#editTable").hide(500);
                 $('#printContainer').show(500);
             }
@@ -736,7 +741,7 @@
                 alert("error no insert");
                 $('#printContainer').hide(500);
             }
-            $("#btnSave").show(500);
+            $("#saveSection").show(500);
         }
 
         var verifyItemSuccess = function(res) {
