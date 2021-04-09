@@ -336,7 +336,7 @@ namespace whusap.WebPages.Migration
                         refcntu = 0,
                         drpt = DateTime.Now,
                         urpt = " ",
-                        acqt = 0,//_procesoAutomatico == true ? enterQuantity : 0,
+                        acqt = _procesoAutomatico == true ? Convert.ToDecimal(factor) : 0,
                         cwaf = _idaltticol022.WharehouseTisfc001(PDNO, ref strError),
                         cwat = " ",
                         aclo = " ",

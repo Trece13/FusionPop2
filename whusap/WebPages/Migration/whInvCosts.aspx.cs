@@ -33,7 +33,8 @@ namespace whusap.WebPages.Migration
         private static string globalMessages = "GlobalMessages";
         private static DataTable _consultarTurno;
         public static DataTable _consultaMateriales = new DataTable();
-        public static List<MyLioEntidad> LstTable = new List<MyLioEntidad>();
+
+        
         public bool valstatwo = Convert.ToBoolean(ConfigurationManager.AppSettings["valstatwo"]);
         #endregion
 
@@ -41,6 +42,7 @@ namespace whusap.WebPages.Migration
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["numReg"] = "0";
             // Cambiar cultura para manejo de separador decimal
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
@@ -96,6 +98,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            List<MyLioEntidad> LstTable = new List<MyLioEntidad>();
             Session["orno"] = txtOrder.Text.Trim().ToUpper();
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
@@ -170,6 +173,8 @@ namespace whusap.WebPages.Migration
                                 item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
                                 item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
                             }
+                            Session["LstTable"] = LstTable;
+                            Session["numReg"] = LstTable.Count();
                             makeTable();
                             divBtnGuardar.Visible = true;
                             lblError.Text = String.Empty;
@@ -204,7 +209,9 @@ namespace whusap.WebPages.Migration
         {
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
-
+            List<MyLioEntidad> LstTable = new List<MyLioEntidad>();
+            LstTable = (List<MyLioEntidad>) Session["LstTable"];
+            Session["numReg"] = LstTable.Count();
             for (int i = 0; i < LstTable.Count; i++)
             {
                 bool tticol088 = false;
@@ -343,6 +350,9 @@ namespace whusap.WebPages.Migration
 
         protected void makeTable()
         {
+            List<MyLioEntidad> LstTable = new List<MyLioEntidad>();
+            LstTable = (List<MyLioEntidad>)Session["LstTable"];
+            Session["numReg"] = LstTable.Count();
             var table = String.Empty;
 
             table += String.Format("<hr /><table class='table table-bordered' style='width:1000px; font-size:13px; border-style:outset; text-align:center; margin-bottom: 200px; border: none;'>");

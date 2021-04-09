@@ -13,7 +13,7 @@
     </style>
     <script type="text/javascript">
         var _idioma = '<%= _idioma %>';
-        var numeroRegistros = <%= LstTable.Count %>;
+        var numeroRegistros = <%= Convert.ToInt32(Session["numReg"].ToString()) %>;
         function validarCantidad(field, factor, cantm, cantr) {
             debugger;
             var dividendo = field.value;
