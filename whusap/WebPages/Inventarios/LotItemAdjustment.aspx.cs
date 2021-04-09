@@ -325,7 +325,7 @@ namespace whusap.WebPages.Inventarios
                 case "ticol022":
                     Ent_tticol022 obj022 = new Ent_tticol022();
                     List<Ent_tticol022> list022 = new List<Ent_tticol022>();
-                    twhcol028.WHLOT = twhcol028.TLOT; 
+                    twhcol028.WHLOT = twhcol028.TLOT.Trim() == string.Empty ? " " : twhcol028.TLOT.Trim();
                     obj022.pdno = twhcol028.TLOT;
                     obj022.sqnb = twhcol028.PAID;
                     obj022.proc = 1;
@@ -360,8 +360,8 @@ namespace whusap.WebPages.Inventarios
                 case "ticol042":
                     Ent_tticol042 obj042 = new Ent_tticol042();
                     List<Ent_tticol042> list042 = new List<Ent_tticol042>();
-                    twhcol028.WHLOT = twhcol028.TLOT; 
-                    obj042.pdno = twhcol028.TLOT;
+                    twhcol028.WHLOT = twhcol028.TLOT;
+                    obj042.pdno = twhcol028.TLOT.Trim() == string.Empty ? " " : twhcol028.TLOT.Trim();
                     obj042.sqnb = twhcol028.PAID;
                     obj042.proc = 1;
                     obj042.logn = twhcol028.LOGN;

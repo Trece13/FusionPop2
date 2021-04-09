@@ -534,7 +534,34 @@
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
             mywindow.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">');
-            mywindow.document.write('<style>*{font-size: small !important;} #codePaid {display: block;margin: auto;height: 75px;width: 400px;} #codeItem {display: block;margin: auto;height: 75px;width: 400px;} #myLabel {width: 6in;height: 4in;padding: 20px;border: 1px solid black;border-radius: 12px;}.alingRight {text-align: right;}.alingLeft {text-align: left;}</style>');
+            mywindow.document.write('<style>*{font-size: small !important;}#MyEtiqueta label {font-size: 15px;}'
+                                    + '#LblDate {font-size: 14px !important; }'
+                                    +'#LblReprintInd,#LblReprint {display: none;}'
+                                    +'.isValid {border-bottom: solid; border-color: green;}'
+                                    +'.isNotValid {border-bottom: solid;border-color: red;}'
+                                    +'.fa-check {color: green;}'
+                                    +'.fa-times {color: red;}'
+                                    +'#checkItem,#checkLot,#checkWarehouse,#checkLoca,#checkPaid {display: none;}'
+                                    +'#exItem,#exLot,#exWarehouse,#exLoca,#exPaid {display: none;}'
+                                    +'#loadItem,#loadLot,#loadWarehouse,#loadLoca,#loadPaid {display: none;}'
+                                    +'tr {text-align: center;}'
+                                    +'th {text-align: center;}'
+                                    +'#myLabel {width: 6in;height: 4in;padding: 20px;border: 1px solid black;border-radius: 12px;}'
+                                    +'.alingRight {text-align: right;}'
+                                    +'.alingLeft {text-align: left;}'
+                                    +'#printButton {width: 6in;}'
+                                    +'.codePaid {display: block;margin: auto;height: 121px;width: 438px;}'
+                                    +'.codeItem {display: block;margin: auto;height: 50px;width: 150px;}'
+                                    +'#itemDesc {vertical-align: middle;font-size: 21px;}'
+                                    +'.divDesc {text-align: center;}'
+                                    +'.borderTop {border-top: solid 1px gray;}'
+                                    +'#printContainer {margin-bottom: 100px;--display: none;}'
+                                    +'#editTable {display: none;}'
+                                    +'#lblError {color: red;font-size: 13px;}'
+                                    +'.load {width: 10px;height: 10px;align-content: center;animation-name: spin;animation-duration: 5000ms;animation-iteration-count: infinite;animation-timing-function: linear;}'
+                                    +'#saveSection {display: none;}'
+                                    +'.notBorderBottom {border-bottom: none;}</style>');
+
             mywindow.document.write('</head><body >');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');

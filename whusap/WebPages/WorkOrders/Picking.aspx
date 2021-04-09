@@ -1172,7 +1172,7 @@
             document.getElementById("<%=txtPalletID.ClientID %>").focus();
             document.getElementById('btnconfirPKG').disabled = true;
             txlblQuantity = document.getElementById('Contenido_lblQuantity');
-            txlblQuantity.addEventListener('input',removeDecimal,false)
+            txlblQuantity != null ?txlblQuantity.addEventListener('input',removeDecimal,false):"";
             ShowCurrentOptions();
 
 
