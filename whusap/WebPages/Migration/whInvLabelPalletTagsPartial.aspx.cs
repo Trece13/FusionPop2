@@ -197,7 +197,7 @@ namespace whusap.WebPages.Migration
                     {
                         secuencia = String.Concat("00", validaSecuencia);
                     }
-                    else if (validaSecuencia > 9 && validaSecuencia < 99)
+                    else if (validaSecuencia > 9 && validaSecuencia <= 99)
                     {
                         secuencia = String.Concat("0", validaSecuencia);
                     }
