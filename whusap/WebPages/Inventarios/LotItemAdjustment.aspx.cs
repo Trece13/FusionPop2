@@ -334,10 +334,10 @@ namespace whusap.WebPages.Inventarios
                     obj022.qtdl = Convert.ToDecimal(twhcol028.TQTY);
                     obj022.cuni = twhcol028.UNIT;
                     obj022.log1 = "NONE";
-                    obj022.qtd1 = Convert.ToInt32(twhcol028.TQTY);
+                    obj022.qtd1 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
                     obj022.pro1 = 1;
                     obj022.log2 = "NONE";
-                    obj022.qtd2 = Convert.ToInt32(twhcol028.TQTY);
+                    obj022.qtd2 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
                     obj022.pro2 = 2;
                     obj022.loca = " ";
                     obj022.norp = 1;
@@ -369,10 +369,10 @@ namespace whusap.WebPages.Inventarios
                     obj042.qtdl = Convert.ToDouble(twhcol028.TQTY);
                     obj042.cuni = twhcol028.UNIT;
                     obj042.log1 = "NONE";
-                    obj042.qtd1 = Convert.ToInt32(twhcol028.TQTY);
+                    obj042.qtd1 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
                     obj042.pro1 = 1;
                     obj042.log2 = "NONE";
-                    obj042.qtd2 = Convert.ToInt32(twhcol028.TQTY);
+                    obj042.qtd2 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
                     obj042.pro2 = 2;
                     obj042.loca = " ";
                     obj042.norp = 1;

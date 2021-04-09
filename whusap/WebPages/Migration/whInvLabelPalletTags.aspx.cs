@@ -191,13 +191,13 @@ namespace whusap.WebPages.Migration
                         return;
                     }
 
-                    var validaSecuencia = Convert.ToInt32(secuencia) + 1;
+                    var validaSecuencia = Convert.ToInt32(secuencia) + 1; 
 
                     if (validaSecuencia < 10)
                     {
                         secuencia = String.Concat("00", validaSecuencia);
                     }
-                    else if (validaSecuencia > 9 && validaSecuencia < 99)
+                    else if (validaSecuencia > 9 && validaSecuencia <= 99)
                     {
                         secuencia = String.Concat("0", validaSecuencia);
                     }
