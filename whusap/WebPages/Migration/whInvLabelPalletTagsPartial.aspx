@@ -75,6 +75,11 @@
                 </span>
             </td>
         </tr>
+         <tr runat="server">
+            <td>
+                <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
+            </td>
+        </tr>
         <tr>
             <td style="text-align:left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
@@ -91,11 +96,6 @@
             <td colspan="2" style="text-align:center;">
                 <hr />  
                 <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
-            </td>
-        </tr>
-         <tr runat="server">
-            <td>
-                <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
             </td>
         </tr>
     </table>
