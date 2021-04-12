@@ -90,6 +90,11 @@
                 </span>
             </td>
         </tr>
+        <tr runat="server">
+            <td>
+                <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
+            </td>
+        </tr>
         <tr runat="server" id="trSecuence" visible="false">
             <td style="text-align:left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">

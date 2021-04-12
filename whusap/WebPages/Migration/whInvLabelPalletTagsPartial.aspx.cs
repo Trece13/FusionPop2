@@ -34,6 +34,7 @@ namespace whusap.WebPages.Migration
         private static bool _procesoAutomatico = Convert.ToBoolean(ConfigurationManager.AppSettings["anuncioAutomatico"].ToString());
         private static string globalMessages = "GlobalMessages";
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        public static string lblMsgMcnoActiveStr = string.Empty;
         #endregion
 
         #region Eventos
@@ -98,6 +99,8 @@ namespace whusap.WebPages.Migration
                     lblInfo.Text = mensajes("automaticannounced");
                 }
             }
+            lblMsgMcnoActive.Visible = false;
+            lblMsgMcnoActive.Text = string.Empty;
         }
 
         protected void btnConsultar_Click(object sender, EventArgs e)
@@ -143,6 +146,9 @@ namespace whusap.WebPages.Migration
                 double factorD = double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat);
 
                 factor = factor.Trim() == String.Empty ? "1" : factor;
+
+                lblMsgMcnoActive.Text = lblMsgMcnoActiveStr + " " + maquina;
+                lblMsgMcnoActive.Visible = true;
 
                 //qtyord = ((qtyord - qtyreh) * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())) - qtyanu - qtyann;
                 qtyord = qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString());
@@ -581,6 +587,7 @@ namespace whusap.WebPages.Migration
             lblCasePerPallet.Text = _textoLabels.readStatement(formName, _idioma, "lblCasePerPallet");
             linkPrint.InnerText = _textoLabels.readStatement(formName, _idioma, "linkPrint");
             btnSalir.Text = _textoLabels.readStatement(formName, _idioma, "btnExit");
+            lblMsgMcnoActiveStr = _textoLabels.readStatement(formName, _idioma, "MachineLbl");
         }
 
         protected string mensajes(string tipoMensaje)

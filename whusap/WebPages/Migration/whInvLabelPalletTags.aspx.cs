@@ -35,6 +35,7 @@ namespace whusap.WebPages.Migration
         private static string globalMessages = "GlobalMessages";
         public static string _tipoFormulario;
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        public static string lblMsgMcnoActiveStr = string.Empty;
         #endregion
 
         #region Eventos
@@ -114,6 +115,8 @@ namespace whusap.WebPages.Migration
                     lblInfo.Text = mensajes("automaticannounced");
                 }
             }
+            lblMsgMcnoActive.Visible = false;
+            lblMsgMcnoActive.Text = string.Empty;
         }
 
         protected void btnConsultar_Click(object sender, EventArgs e)
@@ -153,7 +156,8 @@ namespace whusap.WebPages.Migration
                 var qtyanu = double.Parse(consultaOrden[0]["QDLV"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 var qtypconf = double.Parse(consultaOrden[0]["QTYPCONF"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
                 var qtyann = double.Parse(consultaOrden[0]["QTYANN"].ToString(), CultureInfo.InvariantCulture.NumberFormat);
-
+                lblMsgMcnoActive.Text += lblMsgMcnoActiveStr + " " + maquina;
+                lblMsgMcnoActive.Visible = true;
                 factor = factor.Trim() == String.Empty ? "1" : factor;
 
                 //qtyord = (qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())) / double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat);
@@ -571,6 +575,7 @@ namespace whusap.WebPages.Migration
             lblCasePerPallet.Text = _textoLabels.readStatement(formName, _idioma, "lblCasePerPallet");
             linkPrint.InnerText = _textoLabels.readStatement(formName, _idioma, "linkPrint");
             btnSalir.Text = _textoLabels.readStatement(formName, _idioma, "btnExit");
+            lblMsgMcnoActiveStr = _textoLabels.readStatement(formName, _idioma, "MachineLbl");
         }
 
         protected void formRePrintLabel()

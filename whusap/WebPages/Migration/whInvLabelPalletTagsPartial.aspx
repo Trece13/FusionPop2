@@ -93,6 +93,11 @@
                 <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
             </td>
         </tr>
+         <tr runat="server">
+            <td>
+                <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
+            </td>
+        </tr>
     </table>
     <hr />
     <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
