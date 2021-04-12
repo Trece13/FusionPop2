@@ -87,9 +87,11 @@ namespace whusa.Entidades
         public string SuccessMsg { get; set; }
         [DataMember(Order = 26)]
         public string TypeMsgJs { get; set; }
-
+        [DataMember(Order = 27)]
         public string UNIT { get; set; }
-
+        [DataMember(Order = 28)]
         public string USER { get; set; }
+        [DataMember(Order = 29)]
+        public string WHLOT { get; set; }
     }
 }

@@ -93,15 +93,15 @@
         .codePaid {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 400px;
+            height: 121px;
+            width: 438px;
         }
 
         .codeItem {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 400px;
+            height: 50px;
+            width: 150px;
         }
 
         #itemDesc {
@@ -167,6 +167,9 @@
         }
     </style>
     <script type="text/javascript">
+        function replaceDecimal(val) {
+
+        }
 
         function validaPaid(val) {
             //var parametrosEnviar = "{ 'valor':'" + args.value + "', 'quantityToReturn': '" + quantityToReturn + "'}";
@@ -196,10 +199,17 @@
             });
         }
         function validarAdjustQty(qty) {
+
             if (qty <= 0) {
 
                 alert("Adjustment quantity: cannot be zero (0)");
                 // $("#txtAdjustmentQuantity").val('');
+                $("#txtAdjustmentQuantity").focus();
+                return false;
+            }
+
+            if ($("#Contenido_lblUnitValue1").html().trim().toUpperCase() == "UN") {
+                $("#txtAdjustmentQuantity").val($("#txtAdjustmentQuantity").val().replace(".", "").replace(",", ""));
                 $("#txtAdjustmentQuantity").focus();
                 return false;
             }
@@ -232,7 +242,7 @@
                     </td>
                     <td style="width: 250px; padding: 5px;">
                         <asp:TextBox ID="txtPalletId" class="form-control form-control-lg" runat="server"
-                            CausesValidation="True" MaxLength="20" CssClass="TextBoxBig" TabIndex="1" ToolTip="Enter pallet Id" onChange="validaPaid(this.value);"></asp:TextBox>
+                            CausesValidation="True" MaxLength="20" CssClass="TextBoxBig" TabIndex="1" ToolTip="Enter pallet Id"></asp:TextBox>
                     </td>
                     <td style="text-align: left;">
                         <span>
@@ -264,9 +274,7 @@
                         </asp:TableCell><asp:TableCell ID="TableCell2" runat="server">
                             <strong>
                                 <asp:Label class="" ID="lblPalletId1Value" Text="Item" runat="server" /></strong>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow2" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow2" runat="server">
                         <asp:TableCell ID="TableCell3" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <strong>
                                 <asp:Label class="" ID="lblItem" Text="Item" runat="server" Style="font-size: 13px;" /></strong>
@@ -275,9 +283,7 @@
                                 <asp:Label class="" ID="lblItemValue" Text="Lot" runat="server" />
                                 <asp:Label class="" ID="lblItemDescValue" Text="Item Desc" runat="server" Style="padding-left: 15px;" />
                             </strong>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow3" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow3" runat="server">
                         <asp:TableCell ID="TableCell5" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <strong>
                                 <asp:Label class="" ID="lblWarehouse" Text="Warehouse" runat="server" Style="font-size: 13px;" /></strong>
@@ -286,27 +292,21 @@
                                 <asp:Label class="" ID="lblWarehouseValue" Text="warehouse" runat="server" />
                                 <asp:Label class="" ID="lblWarehouseDescValue" Text="warehouse Description" runat="server" Style="padding-left: 15px;" />
                             </strong>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow5" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow5" runat="server">
                         <asp:TableCell ID="TableCell9" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <strong>
                                 <asp:Label class="" ID="lblLocation" Text="Location" runat="server" Style="font-size: 13px;" /></strong>
                         </asp:TableCell><asp:TableCell ID="TableCell10" runat="server">
                             <strong>
                                 <asp:Label class="" ID="lblLocationValue" Text="Location" runat="server" /></strong>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow4" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow4" runat="server">
                         <asp:TableCell ID="TableCell7" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <strong>
                                 <asp:Label class="" ID="lblLot" Text="Lot" runat="server" /></strong>
                         </asp:TableCell><asp:TableCell ID="TableCell8" runat="server">
                             <strong>
                                 <asp:Label class="" ID="lblLotValue" Text="Lot" runat="server" Style="font-size: 13px;" /></strong>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow6" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow6" runat="server">
                         <asp:TableCell ID="TableCell11" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <strong>
                                 <asp:Label class="" ID="lblQuantity" Text="Quantity" runat="server" Style="font-size: 13px;" /></strong>
@@ -315,21 +315,17 @@
                                 <asp:Label class="" ID="lblQuantityValue" Text="Qty" runat="server" />
                                 <asp:Label class="" ID="lblUnitValue" Text="Unit" runat="server" Style="padding-left: 15px;" />
                             </strong>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow7" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow7" runat="server">
                         <asp:TableCell ID="TableCell13" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                                 <b style="font-size: 11px;">
                                     <asp:Label runat="server" ID="lblAdjustmentQuantity" Text="New Quantity" Style="font-size: 13px;" /></b></span>
                         </asp:TableCell><asp:TableCell ID="TableCell14" runat="server">
                             <span style="vertical-align: middle;">
-                                <asp:TextBox runat="server" ID="txtAdjustmentQuantity" CssClass="TextBoxBig" onChange="validarAdjustQty(this.value);" ClientIDMode="Static" Style="width: 80%" value="" />
+                                <asp:TextBox runat="server" ID="txtAdjustmentQuantity"  CssClass="TextBoxBig" onInput="validarAdjustQty(this.value);" ClientIDMode="Static" Style="width: 80%" value="" />
                                 <asp:Label class="" ID="lblUnitValue1" Text="Unit" runat="server" Style="padding-left: 15px;" />
                             </span>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow8" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow8" runat="server">
                         <asp:TableCell ID="TableCell15" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                                 <b style="font-size: 11px;">
@@ -340,9 +336,7 @@
                                 <strong>
                                     <asp:Label class="" ID="lblReason" Text="Item" runat="server" /></strong>
                             </span>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow9" runat="server" Style="padding-top: 15px;">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow9" runat="server" Style="padding-top: 15px;">
                         <asp:TableCell ID="TableCell17" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                                 <b style="font-size: 11px;">
@@ -353,15 +347,13 @@
                                 <strong>
                                     <asp:Label class="" ID="lblCost" Text="Item" runat="server" /></strong>
                             </span>
-                        </asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow ID="TableRow10" runat="server">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow10" runat="server">
                         <asp:TableCell ID="TableCell19" runat="server" Style="text-align: left; padding: 5px 0px 5px; width: 200px;">
                             <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="ButtonsSendSave" />
-                        </asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
-                <table border="0">
+                        </asp:TableCell></asp:TableRow><asp:TableRow ID="TableRow11" runat="server">
+                        <asp:TableCell ID="TableCell20" runat="server" Style="text-align: left;">
+                           
+                        </asp:TableCell></asp:TableRow></asp:Table><table border="0">
 
                     <%--<tr>
             <td style="text-align: left; padding: 5px 0px 5px; width: 200px;">
@@ -475,81 +467,54 @@
 
             </div>
             <div></div>
-            <div ID="divPrint" runat="server" visible="false">
+            <div id="divPrint" runat="server" visible="false">
                 <div id="printContainer">
-                <div id="printSpace">
-                    <div id="myLabel" class="container">
-                        <div class="row">
-                            <div class="col-6 alingLeft">
-                                <asp:Label ID="lblitemDesc" runat="server" Text="Label"></asp:Label>
+                    <div id="printSpace" class="container">
+                        <div id="myLabel">
+                            <div class="row">
+                                <div class="col-6 alingLeft">
+                                    <strong>
+                                        <asp:Label ID="lblitemDesc" class="h4" runat="server" Text="Label"></asp:Label></strong></div><div class="col-6 alingRight">
+                                    <asp:Image ID="codeItem" CssClass="codeItem" runat="server" />
+                                </div>
                             </div>
-                            <div class="col-6 alingRight">
-                                <label id="lblMadein">MADE IN: DUBLIN - VA</label>
+                            <br />
+                            <div class="col-12 borderTop">
+                                <br />
+                                <asp:Image ID="codePaid" CssClass="codePaid" runat="server" />
                             </div>
-                        </div>
-                        <br />
-                        <div class="col-12 divDesc">
-                            <asp:Image ID="codeItem" CssClass="codeItem" runat="server" />
-                        </div>
-                        <div class="col-12 borderTop">
-                            <asp:Image ID="codePaid" CssClass="codePaid" runat="server" />
-                        </div>
-                        <br />
-                        <div>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Work Order Lot</th>
-                                        <th scope="col">Pallet Number</th>
-                                        <th scope="col">Inspector Initial</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td id="">
-                                            <asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label>
-                                        </td>
-                                        <td id="">
-                                            <asp:Label ID="lblPalletNum" runat="server" Text="Label"></asp:Label></td>
-                                        <td id="">
-                                            <asp:Label ID="lblInspector" runat="server" Text="Label"></asp:Label></td>
-                                    </tr>
-                                </tbody>
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Shift</th>
-                                        <th scope="col">Case Per Pallet</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td id="">
-                                            <asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label></td>
-                                        <td id="">
-                                            <asp:Label ID="lblShift" runat="server" Text="Label"></asp:Label></td>
-                                        <td id="">
-                                            <asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                            <br />
+                            <div>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td id="">
+                                                <strong>WO Lot</strong>&nbsp;&nbsp;<asp:Label ID="lblWorkOrder" runat="server" Text="Label"></asp:Label></td><td id="" rowspan="2" colspan="2" class="h3">
+                                                <strong>Quantity</strong>&nbsp;&nbsp;<asp:Label ID="lblQuantityL" runat="server" Text="Label"></asp:Label></td></tr><tr>
+                                            <td id="">
+                                                <strong>Date</strong>&nbsp;&nbsp;<asp:Label ID="lblDate" runat="server" Text="Label"></asp:Label></td></tr><tr>
+                                            <td id="">
+                                                <strong>Machine</strong>&nbsp;&nbsp;<asp:Label ID="lblMachine" runat="server" Text="Label"></asp:Label></td><td id="">
+                                                <strong>Operator</strong>&nbsp;&nbsp;<asp:Label ID="lblInspector" runat="server" Text="Label"></asp:Label></td><td id="">
+                                                <strong></strong>&nbsp;&nbsp; </td></tr><tr>
+                                            <td id="">
+                                                <strong>Pallet #</strong>&nbsp;&nbsp;<asp:Label ID="lblPalletNum" runat="server" Text="Label"></asp:Label></td><td id="">
+                                                <strong>
+                                                    <asp:Label ID="Label3" runat="server" Text="Made in Dublin VA"></asp:Label></strong></td><td id="" style="width: 151px;">
+                                                <strong>&nbsp;&nbsp;</strong> </td></tr></tbody></table></div></div></div><br /><div id="printButton" class="container">
+                        <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
                     </div>
                 </div>
-                <br />
-                <div id="printButton" class="container">
-                    <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
-                </div>
             </div>
-            </div>
+             <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                            <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
         </ContentTemplate>
     </asp:UpdatePanel>
     <!--<asp:Button ID="btnGetObj" runat="server" Text="Save" CssClass="ButtonsSendSave" OnClientClick="getObj(); return false;" />-->
     <!--<button id="btnGetObj" type="button">getObj</button>-->
 
 
-    <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+
     <script>
         function printDiv(divID) {
 
@@ -568,15 +533,17 @@
 
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
-            mywindow.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">');
-            mywindow.document.write('<style>*{font-size: small !important;} #codePaid {display: block;margin: auto;height: 75px;width: 400px;} #codeItem {display: block;margin: auto;height: 75px;width: 400px;} #myLabel {width: 6in;height: 4in;padding: 20px;border: 1px solid black;border-radius: 12px;}.alingRight {text-align: right;}.alingLeft {text-align: left;}</style>');
-            mywindow.document.write('</head><body >');
+            mywindow.document.write('</head><body>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
+            mywindow.document.write('<link rel="stylesheet" href="styleLabel.css">');
             mywindow.document.write('</body></html>');
             mywindow.focus(); // necessary for IE >= 10*/
-            mywindow.print();
+            setTimeout(function () {
+                mywindow.print();
+            }, 3000);
             mywindow.document.close(); // necessary for IE >= 10
-
+            c
 
             return true;
         };
@@ -595,8 +562,8 @@
         }
 
         var IdentificarControles = function () {
-            var btnGetObj = document.getElementById("Contenido_btnGetObj");
-            btnGetObj.addEventListener("click", getObj, false);
+            //var btnGetObj = document.getElementById("Contenido_btnGetObj"); 
+            //btnGetObj.addEventListener("click", getObj, false);
         }
 
         $(function () {

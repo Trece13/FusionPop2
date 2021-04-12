@@ -87,7 +87,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.ITEM.Trim());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOCA", DbType.String, parametros.LOCA);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.CLOT);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYA", DbType.Int32, parametros.QTYA);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYA", DbType.Double, parametros.QTYA);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$UNIT", DbType.String, parametros.UNIT);
                 //Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DATE", DbType.String, parametros.DATE);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DATE", DbType.String, parametros.DATE);

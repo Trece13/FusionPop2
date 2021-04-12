@@ -1159,7 +1159,7 @@ namespace whusap.WebPages.WorkOrders
                 if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
                 {
                     stat = 12;
-                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), txtPallet, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
+                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     //twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
                     //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
@@ -1173,7 +1173,7 @@ namespace whusap.WebPages.WorkOrders
                 {
 
                     stat = 12;
-                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), txtPallet, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
+                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     //twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
                     //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
@@ -1188,7 +1188,7 @@ namespace whusap.WebPages.WorkOrders
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
                 {
                     stat = 10;
-                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), txtPallet, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
+                    twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     //twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
                     //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())

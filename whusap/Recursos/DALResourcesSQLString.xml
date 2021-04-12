@@ -1458,7 +1458,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
       <operationName name="ConsultarTticol082PorPlant">
         <stringSQL>
-          SELECT  col002.t$tite tite, col002.t$dsca dsca,col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$PONO as PONO, col082.T$PAID as SQNB, col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME-5/24 as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU from  {0}.tticol082{1} col082 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM where t$STAT =1  and col002.t$tite = '[:T$TITE]' and col082.T$CWAR = nvl('[:T$CWAR]',col082.T$CWAR) and col082.T$MCNO = nvl('[:T$MCNO]',col082.T$MCNO) order by col082.T$CWAR desc,col082.T$MCNO desc,t$prio
+          SELECT  col002.t$tite tite, col002.t$dsca dsca,col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$PONO as PONO, col082.T$PAID as SQNB, col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME-5/24 as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU from  {0}.tticol082{1} col082 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM where t$STAT =1  and col002.t$tite = '[:T$TITE]' and col082.T$CWAR = nvl('[:T$CWAR]',col082.T$CWAR) and col082.T$MCNO = nvl('[:T$MCNO]',col082.T$MCNO) order by t$prio,col082.T$CWAR desc,col082.T$MCNO desc
         </stringSQL>
       </operationName>
       <operationName name="ConsultarTticol082PorPlantPono">
@@ -1828,7 +1828,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="VerificarPalletID">
         <stringSQL>
-          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
+          SELECT distinct TBL,tisfc010.T$MCNO as MCNO,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO, col022.T$PDNO as LOT from {0}.tticol022{1} col022
           INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           UNION
@@ -1840,6 +1840,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
           LEFT JOIN {0}.twhwmd200{1}  wmd200 on ConGlobal.CWAT = wmd200.t$cwar
+          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(ConGlobal.ITEM)
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
         </stringSQL>
       </operationName>
@@ -2887,33 +2888,35 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="vallidatePalletInfo">
         <stringSQL>
-          SELECT * FROM
+          SELECT sGlobal.TBL,sGlobal.T$ORNO, sGlobal.T$PAID, sGlobal.T$QTYC, sGlobal.T$ITEM, sGlobal.DSCA, sGlobal.T$CUNI, sGlobal.T$CWAR, sGlobal.DESCW, sGlobal.T$LOCA, sGlobal.T$CLOT,tisfc010.T$MCNO,T$PONO
+          FROM
           (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$paid,ticol222.T$ACQT AS T$qtyc,
-          ticol022.T$MITM AS T$ITEM, tcibd001.t$dsca AS DSCA, ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAF AS T$CWAR,
-          tcmcs003.t$dsca as DESCW, ticol222.T$ACLO AS T$LOCA, ticol022.T$PDNO AS T$CLOT
+          ticol022.T$MITM AS T$ITEM, tcibd001.t$dsca AS DSCA, ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,
+          tcmcs003.t$dsca as DESCW, ticol222.T$ACLO AS T$LOCA, ticol022.T$PDNO AS T$CLOT, 0 as T$PONO
           FROM {0}.tticol022{1} ticol022
           INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol022.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAF
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
           WHERE ticol022.T$DELE = '7'
           UNION
           SELECT 'whcol131' AS TBL,whcol131.T$ORNO AS T$ORNO,whcol131.T$PAID AS T$paid,whcol131.T$QTYA AS T$qtyc,
-          whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAR AS T$CWAR,
-          tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT
+          whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAA AS T$CWAR,
+          tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT,whcol131.T$PONO
           FROM {0}.tWhcol131{1} whcol131
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAR
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
           WHERE whcol131.T$STAT = '3'
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
-          ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAF AS T$CWAR,
-          tcmcs003.t$dsca as DSCAW, ticol242.T$ACLO AS T$LOCA, ticol042.T$PDNO AS T$CLOT
+          ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAT AS T$CWAR,
+          tcmcs003.t$dsca as DSCAW, ticol242.T$ACLO AS T$LOCA, ticol042.T$PDNO AS T$CLOT,ticol042.T$PONO
           FROM {0}.tticol042{1} ticol042
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAF
-          WHERE ticol042.T$DELE = '7')
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT
+          WHERE ticol042.T$DELE = '7') sGlobal
+          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
           WHERE T$qtyc > 0
           AND T$paid = '[p1]'
           AND ROWNUM = 1
@@ -3460,28 +3463,28 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select  warehouse as CWAR , location as LOCA, item, lot as CLOT, palletid as PAIDS, quantity as STKS
           from
           (
-          select  t$cwat warehouse, t$aclo location, col022.t$pdno lot, t$acqt quantity, col022.t$sqnb palletid, col022.t$mitm item
+          select  t$cwat warehouse, t$aclo location, case when col022.t$pdno = '                    ' then 'Not Lot' else col022.t$pdno end lot, t$acqt quantity, col022.t$sqnb palletid, col022.t$mitm item
           from    baan.tticol222140 col222
           inner join baan.tticol022140 col022
           on col022.t$pdno = col222.t$pdno
           and col022.t$sqnb = col222.t$sqnb
           union
-          select  t$cwat warehouse, t$aclo location, col042.t$pdno lot, t$acqt quantity, col042.t$sqnb palletid, col042.t$mitm item
+          select  t$cwat warehouse, t$aclo location,  case when col042.t$pdno = '                    ' then 'Not Lot' else col042.t$pdno end lot, t$acqt quantity, col042.t$sqnb palletid, col042.t$mitm item
           from    baan.tticol242140 col242
           inner join baan.tticol042140 col042
           on col042.t$pdno = col242.t$pdno
           and col042.t$sqnb = col242.t$sqnb
           union
-          select t$cwaa warehouse, t$loaa location, t$clot lot, t$qtya quantity, t$paid palletid, t$item item
+          select t$cwaa warehouse, t$loaa location, case when t$clot = '                    ' then 'Not Lot' else t$clot end lot, t$qtya quantity, t$paid palletid, t$item item
           from   baan.twhcol130140
           union
-          select t$cwaa warehouse, t$loaa location, t$clot lot, t$qtya quantity, t$paid palletid, t$item item
+          select t$cwaa warehouse, t$loaa location, case when t$clot = '                    ' then 'Not Lot' else t$clot end lot, t$qtya quantity, t$paid palletid, t$item item
           from   baan.twhcol131140
           )
           where trim(lot) = NVL(trim('[:T$CLOT]'),trim(lot))
           and trim(palletid) = NVL(trim('[:T$PAID]'),trim(palletid))
           --and trim(item) = trim('[:T$ITEM]')
-          and quantity != 0
+          --and quantity != 0
           <!--SELECT G1.PAIDS,TBL1.T$ITEM AS ITEM, TBL1.T$CWAR AS CWAR,
           TBL1.T$LOCA AS LOCA, TBL1.T$CLOT AS CLOT,
           TBL1.T$STKS AS STKS,ttcmcs003.T$DSCA AS DSCA
@@ -5443,26 +5446,25 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="findByPdnoArticulo">
         <stringSQL>
-          SELECT whltc100.T$ITEM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
-          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
+          SELECT global.T$ITEM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
+          SELECT 'ticol022' AS TBL,case when ticol022.T$PDNO = '                    ' then 'Not Lot' else ticol022.T$PDNO end  AS T$CLOT,ticol022.T$SQNB AS T$PAID,ticol022.T$MITM AS T$ITEM
           FROM baan.tticol022140 ticol022
           INNER JOIN baan.tticol222140 ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           UNION
-          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$CLOT,ticol042.T$SQNB AS T$PAID
+          SELECT 'ticol042' AS TBL,case when ticol042.T$PDNO = '                    ' then 'Not Lot' else ticol042.T$PDNO end AS T$CLOT,ticol042.T$SQNB AS T$PAID,ticol042.T$MITM AS T$ITEM
           FROM baan.tticol042140 ticol042
           INNER JOIN baan.tticol242140 ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           UNION
-          SELECT 'whcol130' AS TBL, T$CLOT, T$PAID AS T$PAID
+          SELECT 'whcol130' AS TBL, case when T$CLOT = '                    ' then 'Not Lot' else T$CLOT end, T$PAID AS T$PAID,T$ITEM AS T$ITEM
           FROM baan.tWhcol130140
           UNION
-          SELECT 'whcol131' AS TBL, T$CLOT, T$PAID AS T$PAID
+          SELECT 'whcol131' AS TBL, case when T$CLOT = '                    ' then 'Not Lot' else T$CLOT end, T$PAID AS T$PAID,T$ITEM AS T$ITEM
           FROM baan.tWhcol131140
           ) global
-          INNER JOIN baan.twhltc100140 whltc100 ON whltc100.T$CLOT = NVL('[:T$PDNO]',TRIM(whltc100.T$CLOT))
-          INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = whltc100.T$item
-          WHERE TRIM(whltc100.T$CLOT) = NVL('[:T$PDNO]',TRIM(whltc100.T$CLOT))
+          INNER JOIN baan.ttcibd001140 tcibd001170 ON tcibd001170.T$ITEM = global.T$ITEM
+          WHERE TRIM(global.T$CLOT) = NVL('[:T$PDNO]',TRIM(global.T$CLOT))
           AND TRIM(global.T$PAID) = NVL('[:T$PAID]',TRIM(global.T$PAID))
-          
+
           <!--SELECT tisfc001170.T$MITM AS MITM, tcibd001170.T$DSCA AS DSCA, global.T$CLOT AS CLOT, global.T$PAID AS PAID FROM (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$CLOT,ticol022.T$SQNB AS T$PAID
           FROM baan.tticol022140 ticol022

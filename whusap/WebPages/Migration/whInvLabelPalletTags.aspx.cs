@@ -191,13 +191,13 @@ namespace whusap.WebPages.Migration
                         return;
                     }
 
-                    var validaSecuencia = Convert.ToInt32(secuencia) + 1;
+                    var validaSecuencia = Convert.ToInt32(secuencia) + 1; 
 
                     if (validaSecuencia < 10)
                     {
                         secuencia = String.Concat("00", validaSecuencia);
                     }
-                    else if (validaSecuencia > 9 && validaSecuencia < 99)
+                    else if (validaSecuencia > 9 && validaSecuencia <= 99)
                     {
                         secuencia = String.Concat("0", validaSecuencia);
                     }
@@ -336,7 +336,7 @@ namespace whusap.WebPages.Migration
                         refcntu = 0,
                         drpt = DateTime.Now,
                         urpt = " ",
-                        acqt = 0,//_procesoAutomatico == true ? enterQuantity : 0,
+                        acqt = _procesoAutomatico == true ? Convert.ToDecimal(factor) : 0,
                         cwaf = _idaltticol022.WharehouseTisfc001(PDNO, ref strError),
                         cwat = " ",
                         aclo = " ",

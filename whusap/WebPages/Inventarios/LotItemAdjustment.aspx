@@ -14,7 +14,7 @@
         #LblDate {
             font-size: 14px !important;
         }
-         
+
         #LblReprintInd,
         #LblReprint {
             display: none;
@@ -93,15 +93,15 @@
         #codePaid {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 400px;
+            height: 121px;
+            width: 438px;
         }
 
         #codeItem {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 400px;
+            height: 50px;
+            width: 150px;
         }
 
         #itemDesc {
@@ -262,52 +262,68 @@
         </table>
     </div>
     <div id="printContainer">
-        <div id="printSpace">
-            <div id="myLabel" class="container">
+        <div id="printSpace"class="container">
+            <div id="myLabel" >
                 <div class="row">
                     <div class="col-6 alingLeft">
-                        <label id="lblitemDesc">LBRT ORG BLACK CHERRY 105</label>
+                        <label id="lblitemDesc" class="h4">LBRT ORG BLACK CHERRY 105</label>
                     </div>
                     <div class="col-6 alingRight">
-                        <label id="lblMadein">MADE IN: DUBLIN - VA</label>
+                        <img id="codeItem" />
                     </div>
                 </div>
                 <br />
-                <div class="col-12 divDesc">
-                    <img id="codeItem" />
-                </div>
                 <div class="col-12 borderTop">
                     <img id="codePaid" />
                 </div>
                 <br />
                 <div>
                     <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Work Order Lot</th>
-                                <th scope="col">Pallet Number</th>
-                                <th scope="col">Inspector Initial</th>
-                            </tr>
-                        </thead>
                         <tbody>
                             <tr>
-                                <td id="lblWorkOrder">OM00180016</td>
-                                <td id="lblPalletNum">1</td>
-                                <td id="lblInspector"></td>
+                                <td id="">
+                                    <strong>WO Lot</strong>&nbsp;&nbsp;
+                                        <label id="lblWorkOrder" class="h6">
+                                            OM00180016<label>
+                                </td>
+                                <td id="" rowspan="2" colspan="2">
+                                    <strong class="h3">Quantity</strong>&nbsp;&nbsp;
+                                        <label class="h3" id="lblQuantity">1</label>
+                                </td>
+
                             </tr>
-                        </tbody>
-                        <thead>
                             <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Shift</th>
-                                <th scope="col">Case Per Pallet</th>
+                                <td id="">
+                                    <strong>Date</strong>&nbsp;&nbsp;
+                                        <label id="lblDate" class="h6">Date</label>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
                             <tr>
-                                <td id="lblDate">Date</td>
-                                <td id="lblShift">A,B,C,D</td>
-                                <td id="lblQuantity">18</td>
+                                <td id="">
+                                    <strong>Machine</strong>&nbsp;&nbsp;
+                                        <label id="lblMachine" class="h6"></label>
+                                </td>
+                                <td id="">
+                                    <strong>Operator</strong>&nbsp;&nbsp;
+                                        <label id="lblInspector" class="h6"></label>
+                                </td>
+                                <td id="">
+                                    <strong></strong>&nbsp;&nbsp;
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="">
+                                    <strong>Pallet #</strong>&nbsp;&nbsp;
+                                        <label id="lblPalletNum" class="h6">
+                                            <label>
+                                </td>
+                                <td id="">
+                                    <strong>
+                                        <label>Made in Dublin VA</label></strong>
+                                </td>
+                                <td id="" style="width: 151px;">
+                                    <strong>&nbsp;&nbsp;</strong>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -412,8 +428,9 @@
             lblWorkOrder     = document.getElementById("lblWorkOrder");
             lblPalletNum     = document.getElementById("lblPalletNum");
             lblInspector     = document.getElementById("lblInspector");
+            lblMachine       = document.getElementById("lblMachine");
             lblDate          = document.getElementById("lblDate");
-            lblShift         = document.getElementById("lblShift");
+            //lblShift         = document.getElementById("lblShift");
             lblQuantity      = document.getElementById("lblQuantity");
 
             txPalletID.addEventListener("input", sendPallet, false);
@@ -444,13 +461,15 @@
 
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
-            mywindow.document.write('<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">');
-            mywindow.document.write('<style>*{font-size: small !important;} #codePaid {display: block;margin: auto;height: 75px;width: 400px;} #codeItem {display: block;margin: auto;height: 75px;width: 400px;} #myLabel {width: 6in;height: 4in;padding: 20px;border: 1px solid black;border-radius: 12px;}.alingRight {text-align: right;}.alingLeft {text-align: left;}</style>');
-            mywindow.document.write('</head><body >');
+            mywindow.document.write('</head><body>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
+            mywindow.document.write('<link rel="stylesheet" href="styleLabel.css">');
             mywindow.document.write('</body></html>');
             mywindow.focus(); // necessary for IE >= 10*/
-            mywindow.print();
+            setTimeout(function() {
+                mywindow.print();
+            }, 3000);
             mywindow.document.close(); // necessary for IE >= 10
             
 
@@ -467,7 +486,12 @@
         }
 
         var restartAll = function(e) {
+            txPalletID.value="";
+            restartForm();
+        }
+        var restartForm = function(e) {
             restart = true;
+            $("#saveSection").hide(500);
             $("#editTable").hide(500);
             $("#printContainer").hide(500);
             $("#checkItem").hide(500);
@@ -485,7 +509,6 @@
             $("#checkPaid").hide(500);
             $("#exPaid").hide(500);
             $("#loadPaid").hide(500);
-            txPalletID.value = "";
             lblError.textContent = "";
             lbItemActual.textContent        = "";
             lbLocaActual.textContent        = "";
@@ -548,6 +571,7 @@
         }
 
         var sendInfo = function(e) {
+            $("#saveSection").hide(500);
             var Obj028 = new Ent_twhcol028();
             Obj028.PAID = txPalletID.value.trim().toUpperCase();
             Obj028.CDIS = $("#Contenido_dropDownReasonCodes").val();
@@ -638,6 +662,7 @@
         }
 
         var verifyPalletSuccess = function(res) {
+            restartForm();
             var MyObj = JSON.parse(res.d);
             if(MyObj.Error == false){
                 $("#loadPaid").hide(300);
@@ -706,12 +731,13 @@
                 JsBarcode("#codePaid", MyObjTwhcol028.PAID);
                 JsBarcode("#codeItem", MyObjTwhcol028.SITM);
                 lblitemDesc.textContent = lbItemDscaAdjusted.textContent;
-                lblWorkOrder.textContent = MyObjTwhcol028.PAID.substring(0,(MyObjTwhcol028.PAID.indexOf("-")));;
+                lblWorkOrder.textContent = MyObjTwhcol028.WHLOT;
                 lblPalletNum.textContent =  MyObjTwhcol028.PAID.substring((MyObjTwhcol028.PAID.indexOf("-"))+1);
                 lblInspector.textContent = MyObjTwhcol028.LOGN;
+                lblMachine.textContent = MyObjTwhcol028.MCNO;
                 lblDate.textContent = MyObjTwhcol028.DATR;
-                lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
-                lblQuantity.textContent = lbQtyAdjusted.textContent;
+                //lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
+                lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
                 $("#editTable").hide(500);
                 $('#printContainer').show(500);
             }
@@ -719,6 +745,7 @@
                 alert("error no insert");
                 $('#printContainer').hide(500);
             }
+            $("#saveSection").show(500);
         }
 
         var verifyItemSuccess = function(res) {
