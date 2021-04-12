@@ -1339,6 +1339,11 @@
 
     <Module name="whInvLabelPalletTags.aspx">
       <Idiom name="INGLES">
+        <label name="MachineLbl">
+          <stringMessage>
+            Machine :
+          </stringMessage>
+        </label>
         <label name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
             Work order has not been initiated on P.O.P.
@@ -1481,6 +1486,11 @@
 
     <Module name="whInvLabelPalletTagsPartial.aspx">
       <Idiom name="INGLES">
+        <label name="MachineLbl">
+          <stringMessage>
+            Machine :
+          </stringMessage>
+        </label>
         <label name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
             Work order has not been initiated on P.O.P.

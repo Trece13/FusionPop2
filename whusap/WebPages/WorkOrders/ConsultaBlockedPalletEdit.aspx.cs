@@ -93,6 +93,9 @@ namespace whusap.WebPages.WorkOrders
                 Console.WriteLine("Entro en ClickQuery...");
                 string strError = string.Empty;
                 DataTable ListaRegistroCustomer = Itticol082.ConsultarRegistrosBloquedos(_operator);
+                foreach(DataRow row in ListaRegistroCustomer.Rows){
+                    row["DSCA"] = row["DSCA"].ToString().Replace("\"","");
+                }
                 if (strError == string.Empty)
                 {
                     return JsonConvert.SerializeObject(ListaRegistroCustomer);

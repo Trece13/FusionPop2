@@ -896,7 +896,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
           --where loc082.t$stat = 1)
           --and col082.t$stat = 1
-          order by col022.t$date
+          order by col022.t$date,palletid
           )
           where rown &lt;= 3
         </stringSQL>
@@ -932,7 +932,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
           --where loc082.t$stat = 1)
           --and col082.t$stat = 1
-          order by col042.t$date
+          order by col042.t$date,palletid
           )
           where rown &lt;= 3
         </stringSQL>
@@ -965,7 +965,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
           --where loc082.t$stat = 1)
           --and col082.t$stat = 1
-          order by col131.t$date)
+          order by col131.t$date, palletid)
           where rown &lt;= 3
         </stringSQL>
       </operationName>
@@ -996,7 +996,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
           --where loc082.t$stat = 1)
           --and col082.t$stat = 1
-          order by col130.t$date)
+          order by col130.t$date,palletid)
           where rown  &lt;= 1
         </stringSQL>
       </operationName>
