@@ -282,12 +282,7 @@
                                     '<td>' + item.CUNI + '</td><td>';
                     //                    newRowEditButton = '<input type="button" id =' + IdBtnEdit + ' value="Edit" class="btn btn-primary bouton-image" onclick="HabilitarPrioridad(' + idInput + ',' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ',' + IdBtnEdit + ')"></input>&nbsp';
                     newRowCancelButton = '<input type="button" id =' + IdBtnCancel + ' value="Cancel" class="btn btn-danger bouton-image"onclick="DeshabilitarPrioridad(' + id + ',' + IdBtnSave + ',' + IdBtnCancel + ')"></input>&nbsp';
-<<<<<<< HEAD
-                    newRowSaveButton = item.KLTC == 1 ? '<input type="button" id =' + IdBtnSave + ' value="Change Status to: Unblock" class="btn btn-success bouton-image" onclick="AgregrarPrioridad(' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ')"></input>' : '<input type="button" id =' + IdBtnSave + ' value="Does not handle locations" class="btn btn-light bouton-image" onclick="" disabled></input>';
-=======
-                    //newRowSaveButton = item.KLTC == 1 ? '<input type="button" id =' + IdBtnSave + ' value="Change Status to: Located" class="btn btn-success bouton-image" onclick="AgregrarPrioridad(' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ')"></input>' : '<input type="button" id =' + IdBtnSave + ' value="Does not handle locations" class="btn btn-light bouton-image" onclick="" disabled></input>';
-                    newRowSaveButton = '<input type="button" id =' + IdBtnSave + ' value="Change Status to: Located" class="btn btn-success bouton-image" onclick="AgregrarPrioridad(' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ')"></input>';
->>>>>>> 7d8506dae75f3e6025726affb4604b34015cde8a
+                    newRowSaveButton = '<input type="button" id =' + IdBtnSave + ' value="Change Status to: Unblock" class="btn btn-success bouton-image" onclick="AgregrarPrioridad(' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ')"></input>';
                     newRowEnd = '</td></tr>';
 
 
