@@ -4976,6 +4976,11 @@
             Pallet ID not valid for take to MFG
           </stringMessage>
         </operationName>
+        <operationName name="PalletIdAlreadyPicked">
+          <stringMessage>
+            Pallet ID already Picked
+          </stringMessage>
+        </operationName>
       </Idiom>
     </Module>
 
