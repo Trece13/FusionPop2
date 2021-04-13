@@ -24,7 +24,8 @@ namespace whusap.WebPages.WorkOrders
         public static string Thepickedisnotsuccess = mensajes("Thepickedisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
         public static string PalletIDnotvalidfortaketoMFG = mensajes("PalletIDnotvalidfortaketoMFG");
-
+        public static string PalletIdAlreadyPicked = mensajes("PalletIdAlreadyPicked");
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -46,36 +47,61 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.UNIT = myObjDt["UNIT"].ToString();
                 MyObj.ITEM = myObjDt["ITEM"].ToString();
                 MyObj.DSCA = myObjDt["DSCA"].ToString();
+                MyObj.STAP = myObjDt["STAP"].ToString();
 
                 bool ActalizacionExitosa = false;
                 switch (MyObj.TBL)
                 {
                     case "ticol022":
+                        if (MyObj.STAP.ToString().Trim() == "11")
+                        {
+                            MyObj.Error = true;
+                            MyObj.TipeMsgJs = "alert";
+                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+
+                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            return ObjRetorno;
+                        }
                         ActalizacionExitosa = Itticol082.Actualizartticol022MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
                         break;
-                    //case "ticol222":
-                    //    ActalizacionExitosa = Itticol082.Actualizartticol222MFG(MyObj);
-                    //    Itticol082.Actualizartticol083MFG(MyObj);                        
-                    //    break;
-                    //case "ticol242":
-                    //    ActalizacionExitosa = Itticol082.Actualizartticol242MFG(MyObj);
-                    //    Itticol082.Actualizartticol083MFG(MyObj);                        
-                    //    break;
-                    //case "ticol082":
-                    //    ActalizacionExitosa = Itticol082.Actualizartticol082MFG(MyObj);
-                    //    Itticol082.Actualizartticol083MFG(MyObj);                        
-                    //    break;
                     case "whcol130":
+                        if (MyObj.STAP.ToString().Trim() == "9")
+                        {
+                            MyObj.Error = true;
+                            MyObj.TipeMsgJs = "alert";
+                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+
+                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            return ObjRetorno;
+                        }
                         ActalizacionExitosa = Itticol082.Actualizartwhcol130MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
                         break;
                     case "whcol131":
+                        if (MyObj.STAP.ToString().Trim() == "9")
+                        {
+                            MyObj.Error = true;
+                            MyObj.TipeMsgJs = "alert";
+                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+
+                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            return ObjRetorno;
+                        }
                         ActalizacionExitosa = Itticol082.Actualizartwhcol131MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
 
                         break;
                     case "ticol042":
+                        if (MyObj.STAP.ToString().Trim() == "11")
+                        {
+                            MyObj.Error = true;
+                            MyObj.TipeMsgJs = "alert";
+                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+
+                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            return ObjRetorno;
+                        }
                         ActalizacionExitosa = Itticol082.Actualizartticol042MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
                         break;
