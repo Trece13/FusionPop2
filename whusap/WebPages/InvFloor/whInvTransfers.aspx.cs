@@ -41,6 +41,7 @@ namespace whusap.WebPages.InvFloor
         public static string NotInserted = string.Empty;
         public static string TargetLocationNotExist = string.Empty;
         public static string CurrentNotExist = string.Empty;
+        public static string PalletIdAlreadyTransferAndPendingToProcess = string.Empty;
 
         private static Mensajes _mensajesForm = new Mensajes();
         private static string globalMessages = "GlobalMessages";
@@ -243,28 +244,31 @@ namespace whusap.WebPages.InvFloor
 
                             if (ExistenciaTransfer.Rows.Count > 0)
                             {
-                                bool TransferenciasU = Transfers.ActualizarTransferencia(PAID, CurrentWarehouse, CurrentLocation, TargetWarehouse, TargetLocation, HttpContext.Current.Session["user"].ToString());
-                                if (TransferenciasU)
-                                {
-                                    if (TransferenciasU)
-                                    {
-                                        objWhcol020.Success = true;
+                                objWhcol020.Error = true;
+                                objWhcol020.ErrorMsg = PalletIdAlreadyTransferAndPendingToProcess;
+                                objWhcol020.TipeMsgJs = "lbl";
+                                //bool TransferenciasU = Transfers.ActualizarTransferencia(PAID, CurrentWarehouse, CurrentLocation, TargetWarehouse, TargetLocation, HttpContext.Current.Session["user"].ToString());
+                                //if (TransferenciasU)
+                                //{
+                                //    if (TransferenciasU)
+                                //    {
+                                //        objWhcol020.Success = true;
 
-                                        objWhcol020.SuccessMsg = Thetransferwassuccessful;
-                                    }
-                                    else
-                                    {
-                                        objWhcol020.Error = true;
-                                        objWhcol020.ErrorMsg = TransferNotUpdated;
-                                        objWhcol020.TipeMsgJs = "lbl";
-                                    }
-                                }
-                                else
-                                {
-                                    objWhcol020.Error = true;
-                                    objWhcol020.ErrorMsg = NotInserted;
-                                    objWhcol020.TipeMsgJs = "lbl";
-                                }
+                                //        objWhcol020.SuccessMsg = Thetransferwassuccessful;
+                                //    }
+                                //    else
+                                //    {
+                                //        objWhcol020.Error = true;
+                                //        objWhcol020.ErrorMsg = TransferNotUpdated;
+                                //        objWhcol020.TipeMsgJs = "lbl";
+                                //    }
+                                //}
+                                //else
+                                //{
+                                //    objWhcol020.Error = true;
+                                //    objWhcol020.ErrorMsg = NotInserted;
+                                //    objWhcol020.TipeMsgJs = "lbl";
+                                //}
                             }
                             else
                             {
@@ -366,6 +370,7 @@ namespace whusap.WebPages.InvFloor
             NotInserted = mensajes("NotInserted");
             TargetLocationNotExist = mensajes("TargetLocationNotExist");
             CurrentNotExist = mensajes("CurrentNotExist");
+            PalletIdAlreadyTransferAndPendingToProcess = mensajes("PalletIdAlreadyTransferAndPendingToProcess");
         }
 
         protected string mensajes(string tipoMensaje)

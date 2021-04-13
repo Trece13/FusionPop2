@@ -262,6 +262,11 @@
 
     <Module name="NewWhInvTransfers.aspx">
       <Idiom name="INGLES">
+        <operationName name="PalletIdAlreadyTransferAndPendingToProcess">
+          <stringMessage>
+            Pallet Id already transfer and pending to process
+          </stringMessage>
+        </operationName>
         <operationName name="Thetransferwassuccessful">
           <stringMessage>
             The transfer was successful
