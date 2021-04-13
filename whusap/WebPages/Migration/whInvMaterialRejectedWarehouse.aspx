@@ -48,7 +48,7 @@
             var re = new RegExp(regex);
             if (field.value.match(re)) {
                 if (((cantidad + CantidadDevuelta) > stock)) {
-                    alert(_idioma == "INGLES" ? 'Quantity is greater that stock by item, warehouse and lot, only have ' + (stock - (CantidadDevuelta + cantidad)) : 'Cantidad mayor a la cantidad existente por item, almacen y lote, solo hay ' + (stock - (CantidadDevuelta + cantidad)));
+                    alert(_idioma == "INGLES" ? 'Quantity is greater that stock by item, warehouse and lot, only have ' + (stock) : 'Cantidad mayor a la cantidad existente por item, almacen y lote, solo hay ' + (stock));
                     this.focus();
                     field.value = 0;
                 }
