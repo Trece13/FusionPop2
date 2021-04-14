@@ -4959,6 +4959,11 @@
             Pallet ID has not been dropped or discounted
           </stringMessage>
         </operationName>
+        <operationName name="PalletIdAlreadyPicked">
+          <stringMessage>
+            Pallet ID already Picked
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="Thepickedissuccess">

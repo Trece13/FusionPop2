@@ -609,7 +609,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking22140PAID">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT
+          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT,QTYOK,CWAROK
           from
           (
           select col020.t$cnpk cnpk,col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
@@ -617,7 +617,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
           col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
           --rank() over (partition by col082.t$oorg,col082.t$orno, col082.t$pono, col082.t$oset, col082.t$sqnb, col082.t$advs
-          rank() over(order by col082.t$prio) rown
+          rank() over(order by col082.t$prio) rown,
+          case when col222.t$acqt+col222.t$allo >= col082.t$qtyt then 'true' else 'false' end as QTYOK,
+          case when col222.t$cwat = col082.t$cwar then 'true' else 'false' end as CWAROK
           from {0}.tticol022{1} col022
           inner join {0}.tticol222{1} col222
           on col222.t$pdno = col022.t$pdno
@@ -632,11 +634,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col022.t$mitm
           where col022.t$dele = 8 -- 8-Asignado
-          and (col222.t$acqt+col222.t$allo) >= col082.t$qtyt
-          and col222.t$cwat = col082.t$cwar
+          --and (col222.t$acqt+col222.t$allo) >= col082.t$qtyt
+          --and col222.t$cwat = col082.t$cwar
           --and col082.t$stat = 1
           and col022.t$sqnb = '[:PAID]'
-          and col082.t$stat ='5'
+          and col082.t$stat ='[:STAT]'
           --order by col082.t$prio
           )
           where rown = 1
@@ -647,13 +649,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking042PAID">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT
+          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT,QTYOK,CWAROK
           from
           (
           select col020.t$cnpk cnpk,col042.t$sqnb palletid,col042.t$dele stat, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,col082.t$QTYT QTYT,
           mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
           col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono,/* col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          rank() over(order by col082.t$prio) rown
+          rank() over(order by col082.t$prio) rown,
+          case when (col242.t$acqt+col242.t$allo) >= col082.t$qtyt then 'true' else 'false' end as QTYOK,
+          case when ol242.t$cwat = col082.t$cwar then 'true' else 'false' end as CWAROK
           from {0}.tticol042{1} col042
           inner join {0}.tticol242{1} col242
           on col242.t$pdno = col042.t$pdno
@@ -668,10 +672,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col042.t$mitm
           where col042.t$dele = 8 -- 8-Asignado
-          and (col242.t$acqt+col242.t$allo) >= col082.t$qtyt
-          and col242.t$cwat = col082.t$cwar
+          --and (col242.t$acqt+col242.t$allo) >= col082.t$qtyt
+          --and col242.t$cwat = col082.t$cwar
           and col042.t$sqnb = '[:PAID]'
-          and col082.t$stat ='5'
+          and col082.t$stat ='[:STAT]'
           order by col042.t$date
           )
           where rown = 1
@@ -680,13 +684,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking131PAID">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT
+          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT,QTYOK,CWAROK
           from
           (
           select col020.t$cnpk cnpk,col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,col082.t$QTYT QTYT,
           mcs003.t$dsca descwrh, col131.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
           col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs, col131.t$stat stat,
-          rank() over(order by col082.t$prio) rown
+          rank() over(order by col082.t$prio) rown,
+          case when (col131.t$qtya+col131.t$allo) >= col082.t$qtyt then 'true' else 'false' end as QTYOK,
+          case when col131.t$cwaa = col082.t$cwar then 'true' else 'false' end as CWAROK
           from {0}.twhcol131{1} col131
           inner join {0}.ttcibd001{1} ibd001
           on ibd001.t$item = col131.t$item
@@ -698,10 +704,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
           where (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
-          and (col131.t$qtya+col131.t$allo) >= col082.t$qtyt
-          and col131.t$cwaa = col082.t$cwar
+          --and (col131.t$qtya+col131.t$allo) >= col082.t$qtyt
+          --and col131.t$cwaa = col082.t$cwar
           and col131.t$paid = '[:PAID]'
-          and col082.t$stat ='5'
+          and col082.t$stat ='[:STAT]'
           order by col131.t$date
           )
           where rown = 1
