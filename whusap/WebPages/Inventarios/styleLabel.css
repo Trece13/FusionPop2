@@ -1,0 +1,81 @@
+#LblDate {
+    font-size: 14px !important;
+}
+
+tr {
+    text-align: center;
+}
+
+th {
+    text-align: center;
+}
+
+#myLabel {
+    width: 6in;
+    height: 4in;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
+.alingRight {
+    text-align: right;
+}
+
+.alingLeft {
+    text-align: left;
+}
+
+#printButton {
+    width: 6in;
+}
+
+#codePaid {
+    display: block;
+    margin: auto;
+    height: 121px;
+    width: 438px;
+}
+
+#codeItem {
+    display: block;
+    margin: auto;
+    height: 50px;
+    width: 150px;
+}
+
+.codePaid {
+    display: block;
+    margin: auto;
+    height: 121px;
+    width: 438px;
+}
+
+.codeItem {
+    display: block;
+    margin: auto;
+    height: 50px;
+    width: 150px;
+}
+
+#itemDesc {
+    vertical-align: middle;
+    font-size: 21px;
+}
+
+.borderTop {
+    border-top: solid 1px gray;
+}
+
+#printContainer {
+    margin-bottom: 100px;
+    --display: none;
+}
+
+.notBorderBottom {
+    border-bottom: none;
+}
+
+* {
+    font-size: 11px;
+}
