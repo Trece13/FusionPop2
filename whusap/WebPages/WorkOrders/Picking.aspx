@@ -286,6 +286,12 @@
                                 <label id="LblError">
                                 </label>
                             </td>
+                            
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <asp:Label ID="LblErrorSv" runat="server" Text="Label"></asp:Label>
+                            </td>
                         </tr>
                     </table>
 
