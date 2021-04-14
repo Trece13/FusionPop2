@@ -752,12 +752,13 @@ namespace whusa.DAL
             return Retorno;
         }
 
-        public DataTable ConsultarPalletPicking22PAID(string PAID, string USER)
+        public DataTable ConsultarPalletPicking22PAID(string PAID, string USER , string STAT)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID", PAID.Trim());
+            paramList.Add(":STAT", STAT.Trim());
             string tabla = owner + ".tticol222140";
             string name1 = "ConsultarPalletPicking22140PAID";
             //strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
@@ -777,12 +778,13 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking042PAID(string PAID, string USER)
+        public DataTable ConsultarPalletPicking042PAID(string PAID, string USER, string STAT)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID", PAID.Trim());
+            paramList.Add(":STAT", STAT.Trim());
             string tabla = owner + ".tticol042140";
             string name1 = "ConsultarPalletPicking042PAID";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
@@ -800,12 +802,13 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking131PAID(string PAID, string USER)
+        public DataTable ConsultarPalletPicking131PAID(string PAID, string USER, string STAT)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID", PAID.Trim());
+            paramList.Add(":STAT", STAT.Trim());
             string tabla = owner + ".twhcol131140";
             string name1 = "ConsultarPalletPicking131PAID";
 

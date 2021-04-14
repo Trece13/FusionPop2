@@ -438,10 +438,10 @@ namespace whusa.Interfases
 
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking22PAID(string PAID, string UrlBaseBarcode, string USER)
+        public List<EntidadPicking> ConsultarPalletPicking22PAID(string PAID, string UrlBaseBarcode, string USER,string STAT)
         {
             List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
-            DataTable DTwhcol122 = dal.ConsultarPalletPicking22PAID(PAID, USER);
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22PAID(PAID, USER,STAT);
             if (DTwhcol122.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcol122.Rows)
@@ -469,6 +469,8 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
+                        QTYOK = MyRow["QTYOK"].ToString(),
+                        CWAROK = MyRow["CWAROK"].ToString()
                     };
 
                     Lstwhcol122.Add(MyObjet);
@@ -478,10 +480,10 @@ namespace whusa.Interfases
             return Lstwhcol122;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking042PAID(string PAID, string UrlBaseBarcode, string USER)
+        public List<EntidadPicking> ConsultarPalletPicking042PAID(string PAID, string UrlBaseBarcode, string USER,string STAT)
         {
             List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
-            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042PAID(PAID, USER);
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042PAID(PAID, USER,STAT);
             if (DTwhcolo42.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo42.Rows)
@@ -510,6 +512,8 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
+                        QTYOK = MyRow["QTYOK"].ToString(),
+                        CWAROK = MyRow["CWAROK"].ToString()
 
                     };
 
@@ -521,10 +525,10 @@ namespace whusa.Interfases
         }
 
 
-        public List<EntidadPicking> ConsultarPalletPicking131PAID(string PAID, string UrlBaseBarcode, string USER)
+        public List<EntidadPicking> ConsultarPalletPicking131PAID(string PAID, string UrlBaseBarcode, string USER, string STAT)
         {
             List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
-            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131PAID(PAID, USER);
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131PAID(PAID,USER,STAT);
             if (DTwhcolo131.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo131.Rows)
@@ -554,6 +558,8 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
+                        QTYOK = MyRow["QTYOK"].ToString(),
+                        CWAROK = MyRow["CWAROK"].ToString()
 
                     };
 

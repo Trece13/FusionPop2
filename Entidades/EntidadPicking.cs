@@ -69,5 +69,9 @@ namespace whusa
         public string SLOC { get; set; }
 
         public string ALLO { get; set; }
+
+        public string QTYOK { get; set; }
+
+        public string CWAROK { get; set; }
     }
 }

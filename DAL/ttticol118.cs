@@ -39,7 +39,7 @@ namespace whusa.DAL
             try
             {
                 strSentencia = "INSERT INTO " + tabla + " ( T$ITEM, T$CWAR, T$CLOT, T$QTYR, T$CDIS, T$OBSE, T$LOGR, T$DATR, T$DISP, T$STOC, T$RITM, T$PROC, T$MESS, T$SUNO, T$REFCNTD, T$REFCNTU,T$PAID) " +
-                                           "VALUES (:T$ITEM, :T$CWAR, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+(5/24), :T$DISP, :T$STOC, :T$RITM, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU, UPPER(:T$PAID))";
+                                           "VALUES (BAAN.F_ITEM_POP(TRIM(:T$ITEM)), :T$CWAR, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+(5/24), :T$DISP, :T$STOC, :T$RITM, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU, UPPER(:T$PAID))";
                 foreach (Ent_tticol118 reg in parametros)
                 {
                     parametrosIn = AdicionaParametrosComunes(reg);
