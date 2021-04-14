@@ -234,7 +234,7 @@ namespace whusap.WebPages.Migration
                 listregrind.Enabled = false;
                 listproveedor.Enabled = false;
                 liststock.Enabled = true;
-                listreason.Enabled = false;
+                listreason.Enabled = true;
 
             }
             if (listdispo.SelectedValue == "4")
