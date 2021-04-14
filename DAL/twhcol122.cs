@@ -413,7 +413,7 @@ namespace whusa.DAL
         }
 
 
-        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string QTYT, string ADVS, string sentencia, bool invertPallet = false, string newPallet = "",string PRIO="")
+        public int actRegtticol082140(string user, string pallet, string Location, int stat, string t, string OORG, string ORNO, string OSET, string PONO, string QTYT, string ADVS, string sentencia, bool invertPallet = false, string newPallet = "", string PRIO = "")
         {
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
@@ -502,6 +502,52 @@ namespace whusa.DAL
 
         }
 
+        public int UpdateTtico082(Ent_tticol082 myObj)
+        {
+            bool retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$OORG", myObj.OORG);
+            paramList.Add(":T$ORNO", myObj.ORNO);
+            paramList.Add(":T$PONO", myObj.PONO);
+            paramList.Add(":T$ADVS", myObj.ADVS);
+            paramList.Add(":T$ITEM", myObj.ITEM);
+            paramList.Add(":T$QTYT", myObj.QTYT);
+            paramList.Add(":T$UNIT", myObj.UNIT);
+            paramList.Add(":T$CWAR", myObj.CWAR);
+            paramList.Add(":T$MCNO", myObj.MCNO);
+            paramList.Add(":T$TIME", myObj.TIME);
+            paramList.Add(":T$PRIO", myObj.PRIO);
+            paramList.Add(":T$PICK", string.Empty);
+            paramList.Add(":T$PAID", myObj.PAID);
+            paramList.Add(":T$LOCA", myObj.LOCA);
+            paramList.Add(":T$LOGN", myObj.LOGN);
+            paramList.Add(":T$STAT", myObj.STAT);
+            paramList.Add(":T$REFCNTD", string.Empty);
+            paramList.Add(":T$REFCNTU", string.Empty);
+
+            string tabla = ".tticol082";
+            string name1 = "UpdateTtico082";
+
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, null, paramList);
+
+            try
+            {
+                bool Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                log.escribirError("ejecucion:" + Retorno + " " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol082140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return Convert.ToInt32(retorno);
+
+
+        }
 
         public int InsertRegCausalCOL084(string pallet, string user, int statCausal)
         {
@@ -752,7 +798,7 @@ namespace whusa.DAL
             return Retorno;
         }
 
-        public DataTable ConsultarPalletPicking22PAID(string PAID, string USER , string STAT)
+        public DataTable ConsultarPalletPicking22PAID(string PAID, string USER, string STAT)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
@@ -1084,14 +1130,14 @@ namespace whusa.DAL
 
         public void updatetwhcol131Quantity(string pallet, decimal qtyt_act, decimal qtyt_old)
         {
-            string allo = qtyt_old.ToString();
+            string qtyOld = qtyt_old.ToString();
             string qtyt = qtyt_act.ToString();
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$PAID", pallet.Trim());
             paramList.Add(":T$QTYA", qtyt /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
-            paramList.Add(":T$ALLO", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+            paramList.Add(":T$QTYOLD", qtyOld /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
 
             strSentencia = recursos.readStatement("twhcol130", method.Name, ref owner, ref env, "twhcol130", paramList);
             try
@@ -1229,6 +1275,76 @@ namespace whusa.DAL
             return Retorno;
 
         }
+
+        public void updatetwhcol131QuantityFirst(string pallet, decimal qtyt_act, decimal qtyt_old)
+        {
+            string qtyOld = qtyt_old.ToString();
+            string qtyt = qtyt_act.ToString();
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", pallet.Trim());
+            paramList.Add(":T$QTYA", qtyt /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+            paramList.Add(":T$QTYOLD", qtyOld /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+
+            strSentencia = recursos.readStatement("twhcol130", method.Name, ref owner, ref env, "twhcol130", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+        }
+
+        public void updatetticol242QuantityFist(string pallet, decimal sqnb_act, decimal qtyt_old)
+        {
+            string allo = qtyt_old.ToString();
+            string qtyt = sqnb_act.ToString();
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", pallet.Trim());
+            paramList.Add(":T$ACQT", qtyt);
+            paramList.Add(":T$QTYOLD", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+
+            strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, "tticol242", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+        }
+
+        public void updatetticol222QuantityFirst(string pallet, decimal sqnb_act, decimal qtyt_old)
+        {
+            string allo = qtyt_old.ToString();
+            string qtyt = sqnb_act.ToString();
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", pallet.Trim());
+            paramList.Add(":T$ACQT", qtyt);
+            paramList.Add(":T$QTYOLD", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
+
+            strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, "tticol222", paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+        }
     }
 }
+
 

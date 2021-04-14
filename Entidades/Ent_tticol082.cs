@@ -11,6 +11,29 @@ namespace whusa.Entidades
         public Ent_tticol082()
         {
             this.Error = false;
+            this.OORG = string.Empty;
+            this.ORNO = string.Empty;
+            this.OSET = string.Empty;
+            this.PONO = string.Empty;
+            this.SQNB = string.Empty;
+            this.ADVS = string.Empty;
+            this.ITEM = string.Empty;
+            this.QTYT = string.Empty;
+            this.UNIT = string.Empty;
+            this.CWAR = string.Empty;
+            this.PRIO = string.Empty;
+            this.PRIT = string.Empty;
+            this.LOGN = string.Empty;
+            this.STAT = string.Empty;
+            this.TIME = string.Empty;
+            this.TBL  = string.Empty;
+            this.PAID = string.Empty;
+            this.DSCA = string.Empty;
+            this.MCNO = string.Empty;
+            this.DSCAM= string.Empty;
+            this.LOCA = string.Empty;
+            this.CUNI = string.Empty;
+            this.QTYC = string.Empty;
         }
 
         public string OORG { get; set; }

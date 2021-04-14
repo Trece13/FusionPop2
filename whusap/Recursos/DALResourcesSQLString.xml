@@ -1086,8 +1086,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col131.t$item
-          where   (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
-          and     col307.T$PAID IS NULL
+          --where   (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
+          --and     col307.T$PAID IS NULL
+          where col307.T$PAID IS NULL
           and     col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1)
           and     col082.t$stat = 1)
           where   rown = 1
@@ -1119,6 +1120,37 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND T$ORNO = '[:T$ORNO]'
           AND T$PONO = '[:T$PONO]'
           AND T$PRIO = '[:T$PRIO]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTtico082">
+        <stringSQL>
+          UPDATE {0}.tticol082{1} SET
+          T$OORG =NVL('[:T$OORG]',T$OORG),
+          T$ORNO =NVL('[:T$ORNO]',T$ORNO),
+          T$PONO =NVL('[:T$PONO]',T$PONO),
+          T$ADVS =NVL('[:T$ADVS]',T$ADVS),
+          T$ITEM =NVL('[:T$ITEM]',T$ITEM),
+          T$QTYT =NVL('[:T$QTYT]',T$QTYT),
+          T$UNIT =NVL('[:T$UNIT]',T$UNIT),
+          T$CWAR =NVL('[:T$CWAR]',T$CWAR),
+          T$MCNO =NVL('[:T$MCNO]',T$MCNO),
+          T$TIME =NVL('[:T$TIME]',T$TIME),
+          T$PRIO =NVL('[:T$PRIO]',T$PRIO),
+          T$PICK =NVL('[:T$PICK]',T$PICK),
+          T$PAID =NVL('[:T$PAID]',T$PAID),
+          T$LOCA =NVL('[:T$LOCA]',T$LOCA),
+          T$LOGN =NVL('[:T$LOGN]',T$LOGN),
+          T$STAT =NVL('[:T$STAT]',T$STAT),
+          T$REFCNTD =NVL('[:T$REFCNTD]',T$REFCNTD),
+          T$REFCNTU =NVL('[:T$REFCNTU]',T$REFCNTU)
+          WHERE
+          T$OORG =NVL('[:T$OORG]',T$OORG)AND
+          T$ORNO =NVL('[:T$ORNO]',T$ORNO)AND
+          T$PONO =NVL('[:T$PONO]',T$PONO)AND
+          T$ADVS =NVL('[:T$ADVS]',T$ADVS)AND
+          T$ITEM =NVL('[:T$ITEM]',T$ITEM)AND
+          T$PRIO =NVL('[:T$PRIO]',T$PRIO)AND
+          T$PAID =NVL('[:T$PAID]',T$PAID)
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl082Paid">
@@ -1572,6 +1604,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE  {0}.tticol242{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:T$ACQT]',T$AllO = T$AllO - '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
         </stringSQL>
       </operationName>
+      <operationName name="updatetticol242QuantityFirst">
+        <stringSQL>
+          <!--UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
+          UPDATE  {0}.tticol242{1} SET T$ACQT = ('[:T$QTYOLD]' - '[:T$ACQT]') + T$ACQT,T$AllO = T$AllO - ''[:T$QTYOLD]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+        </stringSQL>
+      </operationName>
       <operationName name="ActualizarRegistroTticon242">
         <stringSQL>
           UPDATE {0}.tticol242{1} SET T$URPT = '[:T$URPT]',T$DRPT = SYSDATE WHERE T$SQNB = '[:T$SQNB]'
@@ -1599,6 +1637,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="updatetticol222Quantity">
         <stringSQL>
           UPDATE  {0}.tticol222{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:T$ACQT]',T$AllO = T$AllO - '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+          <!--UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
+        </stringSQL>
+      </operationName>
+      <operationName name="updatetticol222QuantityFirst">
+        <stringSQL>
+          UPDATE  {0}.tticol222{1} SET T$ACQT = ('[:T$QTYOLD]' - '[:T$ACQT]') + T$ACQT,T$AllO = T$AllO - ''[:T$QTYOLD]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
           <!--UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
         </stringSQL>
       </operationName>
@@ -1804,6 +1848,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="updatetwhcol131QuantityFirst">
+        <stringSQL>
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = ('[:T$QTYOLD]' - '[:T$QTYA]') + T$QTYA ,T$AllO =T$AllO - '[:T$QTYOLD]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
           UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
@@ -5934,3 +5983,4 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <!--End of new developing-->
   </Modules>
 </DALResources>
+

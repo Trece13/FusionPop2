@@ -306,6 +306,21 @@ namespace whusa.Interfases
             }
         }
 
+        public int UpdateTtico082(Ent_tticol082 myObj82)
+        {
+
+            string strError = string.Empty;
+            try
+            {
+                int updateTticol082 = dal.UpdateTtico082(myObj82);
+                return updateTticol082;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
       
 
        
@@ -621,7 +636,8 @@ namespace whusa.Interfases
                         //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
-                        QTYT = MyRow["QTYT"].ToString()
+                        QTYT = MyRow["QTYT"].ToString(),
+                        STAT = MyRow["STAT"].ToString()
                     };
 
                     Lstwhcol131.Add(MyObjet);
@@ -883,6 +899,21 @@ namespace whusa.Interfases
         public bool ActualizarCantidades131(string PAID,bool OLD = true )
         {
             return dal.ActualizarCantidades131(PAID,OLD);
+        }
+
+        public void updatetwhcol131QuantityFirst(string pallet, decimal sqnb_act, decimal qtyt_old)
+        {
+            dal.updatetwhcol131QuantityFirst(pallet, sqnb_act, qtyt_old);
+        }
+
+        public void updatetticol242QuantityFist(string pallet, decimal sqnb_act, decimal qtyt_old)
+        {
+            dal.updatetticol242QuantityFist(pallet, sqnb_act, qtyt_old);
+
+        }
+        public void updatetticol222QuantityFirst(string pallet, decimal sqnb_act, decimal qtyt_old)
+        {
+            dal.updatetticol222QuantityFirst(pallet, sqnb_act, qtyt_old);
         }
     }
 }
