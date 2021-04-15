@@ -36,7 +36,6 @@ namespace whusap.WebPages.WorkOrders
         public static string errorlog = string.Empty;
         public static string ADVS = string.Empty;
         public object GObject = new object();
-        public EventArgs Ge = new EventArgs();
         private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
@@ -45,15 +44,14 @@ namespace whusap.WebPages.WorkOrders
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
         private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
+        public EventArgs Ge = new EventArgs();
+        DataTable resultado = new DataTable();
+        private static Mensajes _mensajesForm = new Mensajes();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
         string sentencia1 = string.Empty;
         string formName = string.Empty;
-        //public static string _operator = string.Empty;
         string _idioma = string.Empty;
-        private static Mensajes _mensajesForm = new Mensajes();
         private static string globalMessages = "GlobalMessages";
-        //public static int flag022, flag042, flag131, flag307;
-        DataTable resultado = new DataTable();
         public static string descombo = "";
         public static string qtyaG = "0";
 
@@ -64,11 +62,10 @@ namespace whusap.WebPages.WorkOrders
             GObject = sender;
             Ge = e;
             string sentencia = string.Empty;
-            //_operator = Session["user"].ToString();
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('"+HttpContext.Current.Session["user"].ToString().Trim()+"')", true);
             string PAID = "";
             string mensaje = Clic_Pick(PAID);
             LblErrorSv.Text = string.Empty;
+
             if (!IsPostBack)
             {
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
@@ -108,11 +105,13 @@ namespace whusap.WebPages.WorkOrders
                 _idalttccol301.insertarRegistro(ref datalog, ref strError);
 
             }
+
             EntidadPicking MyObj = new EntidadPicking();
             Ent_ttccol307 MyObj307 = new Ent_ttccol307();
             MyObj307.PAID = PAID;
             MyObj307.USRR = Session["user"].ToString();
             DataTable DTttccol307 = twhcolDAL.ConsultarTt307140(MyObj307);
+
             List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
@@ -183,13 +182,12 @@ namespace whusap.WebPages.WorkOrders
                 }
 
 
-                //LstPallet042 = twhcolDAL.ConsultarPalletPicking042(PAID, string.Empty, _operator);
                 LstPallet042 = twhcolDAL.ConsultarPalletPicking042With082(PAID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
                 if (LstPallet042.Count > 0)
                 {
                     MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
                     EntidadPicking MyObjLst042 = LstPallet042[0];
-                    if (MyObjLst042.STAT.Trim() == "6" || MyObjLst042.STAT.Trim() == "3")
+                    if (MyObjLst042.STAT.Trim() == "7" || MyObjLst042.STAT.Trim() == "8")
                     {
                         LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(MyObj.PALLETID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
                         if (LstPallet042PAID.Count > 0)
@@ -230,16 +228,15 @@ namespace whusap.WebPages.WorkOrders
                 }
 
 
-                //LstPallet22 = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, _operator);
                 LstPallet22 = twhcolDAL.ConsultarPalletPicking22With082(PAID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
                 if (LstPallet22.Count > 0)
                 {
                     MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
                     EntidadPicking MyObjLst022 = LstPallet22[0];
-                    if (MyObjLst022.STAT.Trim() == "6" || MyObjLst022.STAT.Trim() == "3")
+                    if (MyObjLst022.STAT.Trim() == "7" || MyObjLst022.STAT.Trim() == "8")
                     {
                         LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(MyObj.PALLETID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
-                        if (LstPallet042PAID.Count > 0)
+                        if (LstPallet22PAID.Count > 0)
                         {
                             EntidadPicking MyObjLst = LstPallet22PAID[0];
                             if (MyObjLst.QTYOK != "true")
@@ -289,9 +286,9 @@ namespace whusap.WebPages.WorkOrders
             limpiarControles();
             if (DTttccol307.Rows.Count > 0)
             {
-                LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(DTttccol307.Rows[0]["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "5");
-                LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(DTttccol307.Rows[0]["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "5");
-                LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID(DTttccol307.Rows[0]["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "5");
+                LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(DTttccol307.Rows[0]["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(DTttccol307.Rows[0]["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID(DTttccol307.Rows[0]["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
                 if (LstPallet22PAID.Count > 0)
                 {
                     MyObj = LstPallet22PAID[0];
@@ -311,14 +308,11 @@ namespace whusap.WebPages.WorkOrders
                     lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTYT.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
-                    //lblQuantity.Visible = false; 
-                    //HttpContext.Current.Session["QTY"] = MyObj.QTYT.ToString();
                     HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                     HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
                     lblQuantityDesc.Text = MyObj.UN.ToString();
                     lblOORG.Text = MyObj.OORG.ToString();
                     lblORNO.Text = MyObj.ORNO.ToString();
-                    //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
                     lblSQNB.Text = MyObj.SQNB.ToString();
                     lblOORGAUX.Text = MyObj.OORG.ToString();
@@ -351,19 +345,15 @@ namespace whusap.WebPages.WorkOrders
                     lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTYT.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
-                    //HttpContext.Current.Session["QTY"] = MyObj.QTYT.ToString();
                     HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                     HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
                     lblQuantityDesc.Text = MyObj.UN.ToString();
                     lblOORG.Text = MyObj.OORG.ToString();
                     lblORNO.Text = MyObj.ORNO.ToString();
-                    //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
-                    //lblSQNB.Text = MyObj.SQNB.ToString();
                     lblOORGAUX.Text = MyObj.OORG.ToString();
                     lblORNOAUX.Text = MyObj.ORNO.ToString();
                     lblPONOAUX.Text = MyObj.PONO.ToString();
-                    //lblSQNBAUX.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString();// +" PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     lblDetail.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
@@ -390,15 +380,12 @@ namespace whusap.WebPages.WorkOrders
                     lblQuantityAux.Text = MyObj.QTYT.ToString();
                     lblQuantityOld.Text = MyObj.QTYT.ToString();
                     if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
-                    //HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                     HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                     HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
                     lblQuantityDesc.Text = MyObj.UN.ToString();
                     lblOORG.Text = MyObj.OORG.ToString();
                     lblORNO.Text = MyObj.ORNO.ToString();
-                    //lblOSET.Text = MyObj.OSET.ToString();
                     lblPONO.Text = MyObj.PONO.ToString();
-                    //lblSQNB.Text = MyObj.SQNB.ToString();
                     lblADVS.Text = MyObj.ADVS.ToString();// +" PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     lblDetail.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                     ADVS = MyObj.ADVS.ToString();
@@ -422,31 +409,27 @@ namespace whusap.WebPages.WorkOrders
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
-                HttpContext.Current.Session["originalQTY"] = MyObj.QTYT.ToString();
-                lblQuantityAux.Text = MyObj.QTYT.ToString();
-                lblQuantityOld.Text = MyObj.QTYT.ToString();
+                HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
+                lblQuantityAux.Text = MyObj.QTY.ToString();
+                lblQuantityOld.Text = MyObj.QTY.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                 HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                 HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
                 lblQuantityDesc.Text = MyObj.UN.ToString();
                 lblOORG.Text = MyObj.OORG.ToString();
                 lblORNO.Text = MyObj.ORNO.ToString();
-                //lblOSET.Text = MyObj.OSET.ToString();
                 lblPONO.Text = MyObj.PONO.ToString();
                 lblSQNB.Text = MyObj.SQNB.ToString();
                 lblOORGAUX.Text = MyObj.OORG.ToString();
                 lblORNOAUX.Text = MyObj.ORNO.ToString();
                 lblPONOAUX.Text = MyObj.PONO.ToString();
-                //lblSQNBAUX.Text = MyObj.SQNB.ToString();
                 lblADVS.Text = MyObj.ADVS.ToString();// +" PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 lblDetail.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 ADVS = MyObj.ADVS.ToString();
                 HttpContext.Current.Session["flag022"] = 1;
                 HttpContext.Current.Session["flag131"] = 0;
                 HttpContext.Current.Session["flag042"] = 0;
-
-                //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTYT.ToString(), MyObj.ADVS.ToString(), sentencia);
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
             }
             else if (LstPallet042.Count > 0)
             {
@@ -462,38 +445,28 @@ namespace whusap.WebPages.WorkOrders
                 lblWarehouse.Text = MyObj.WRH.ToString();
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
-                HttpContext.Current.Session["originalQTY"] = MyObj.QTYT.ToString();
+                HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
                 lblQuantity.Text = MyObj.QTY.ToString();
-                lblQuantityAux.Text = MyObj.QTYT.ToString();
-                lblQuantityOld.Text = MyObj.QTYT.ToString();
+                lblQuantityAux.Text = MyObj.QTY.ToString();
+                lblQuantityOld.Text = MyObj.QTY.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                 HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                 HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
                 lblQuantityDesc.Text = MyObj.UN.ToString();
                 lblOORG.Text = MyObj.OORG.ToString();
                 lblORNO.Text = MyObj.ORNO.ToString();
-                //lblOSET.Text = MyObj.OSET.ToString();
                 lblPONO.Text = MyObj.PONO.ToString();
                 lblSQNB.Text = MyObj.SQNB.ToString();
                 lblOORGAUX.Text = MyObj.OORG.ToString();
                 lblORNOAUX.Text = MyObj.ORNO.ToString();
                 lblPONOAUX.Text = MyObj.PONO.ToString();
-                //lblSQNBAUX.Text = MyObj.SQNB.ToString();
                 lblADVS.Text = MyObj.ADVS.ToString();// +" PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 lblDetail.Text = MyObj.ADVS.ToString() + " PRIO:" + MyObj.PRIO.ToString() + " PONO:" + MyObj.PONO.ToString() + " ORNO:" + MyObj.ORNO.ToString();
                 ADVS = MyObj.ADVS.ToString();
                 HttpContext.Current.Session["flag022"] = 0;
                 HttpContext.Current.Session["flag131"] = 0;
                 HttpContext.Current.Session["flag042"] = 1;
-                //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTYT.ToString(), MyObj.ADVS.ToString(), sentencia);
-
-                ////                twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
-                //if (res == false)
-                //{
-                //    Page_Load(sender, e);
-                //}
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
             }
             else if (LstPallet131.Count > 0)
             {
@@ -511,16 +484,15 @@ namespace whusap.WebPages.WorkOrders
                 lblWareDescr.Text = MyObj.DESCWRH.ToString();
                 lbllocation.Text = MyObj.LOCA.ToString();
                 lblQuantity.Text = MyObj.QTYT.ToString();
-                HttpContext.Current.Session["originalQTY"] = MyObj.QTYT.ToString();
-                lblQuantityAux.Text = MyObj.QTYT.ToString();
-                lblQuantityOld.Text = MyObj.QTYT.ToString();
+                HttpContext.Current.Session["originalQTY"] = MyObj.QTY.ToString();
+                lblQuantityAux.Text = MyObj.QTY.ToString();
+                lblQuantityOld.Text = MyObj.QTY.ToString();
                 if (MyObj.CNPK.ToString().Trim() == "1") { lblQuantity.Visible = false; } else { lblQuantityAux.Visible = true; };
                 HttpContext.Current.Session["QTY"] = MyObj.QTY.ToString();
                 HttpContext.Current.Session["PRIO"] = MyObj.PRIO.ToString();
                 lblQuantityDesc.Text = MyObj.UN.ToString();
                 lblOORG.Text = MyObj.OORG.ToString();
                 lblORNO.Text = MyObj.ORNO.ToString();
-                //lblOSET.Text = MyObj.OSET.ToString();
                 lblPONO.Text = MyObj.PONO.ToString();
                 lblSQNB.Text = MyObj.SQNB.ToString();
                 lblOORGAUX.Text = MyObj.OORG.ToString();
@@ -533,21 +505,11 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["flag022"] = 0;
                 HttpContext.Current.Session["flag131"] = 1;
                 HttpContext.Current.Session["flag042"] = 0;
-                //twhcolDAL.actRegtticol082140(_operator, " ", " ", 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTYT.ToString(), MyObj.ADVS.ToString(), sentencia);
-
-                ////twhcolDAL.actRegtticol082140(_operator, MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, maximo, MyObj.OORG.ToString(), MyObj.ORNO.ToString(), MyObj.OSET.ToString(), MyObj.PONO.ToString(), MyObj.SQNB.ToString(), MyObj.ADVS.ToString());
-                //bool res = twhcolDAL.InsertarTccol307140(_operator, "1", MyObj.PALLETID.ToString(), "7", "0", "0");
-                //if (res == false)
-                //{
-                //    Page_Load(sender, e);
-                //}
+                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), MyObj.PALLETID.ToString(), MyObj.LOCA.ToString(), 5, " ", MyObj.OORG.ToString(), MyObj.ORNO.ToString(), "", MyObj.PONO.ToString(), MyObj.QTY.ToString(), MyObj.ADVS.ToString(), sentencia);
             }
             if ((LstPallet22.Count == 0) && (LstPallet042.Count == 0) && (LstPallet131.Count == 0) && (DTttccol307.Rows.Count == 0))
             {
                 mensaje = thereisnotPalletavailable;
-                //Response.Write("<script language=javascript>alert('" + mensaje + "');window.location = '/WebPages/Login/whMenuI.aspx';</script>");
-
             }
             else
             {
@@ -592,6 +554,13 @@ namespace whusap.WebPages.WorkOrders
             lblPONOAUX.Text = "";
             lblSQNBAUX.Text = "";
         }
+
+        [WebMethod]
+        public static void ReloadPage()
+        {
+
+        }
+
         [WebMethod]
         public static bool VerificarLocate(string CWAR, string LOCA)
         {
@@ -609,8 +578,6 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string VerificarPalletID(string PAID_NEW, string PAID_OLD, string selectOptionPallet = "false")
         {
-
-
 
             EntidadPicking ObjPicking = new EntidadPicking();
 
@@ -632,9 +599,7 @@ namespace whusap.WebPages.WorkOrders
                         ObjPicking.QTY = DTPalletID.Rows[0]["QTYT"].ToString();
                         ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
                         ObjPicking.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
-                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#LblQuantity').html(" + ObjPicking.QTY + ") ", true);
                         bool ret = false;
-                        //ret = twhcolDAL.Actualizar307(PAID_NEW, PAID_OLD);
                         ret = twhcolDAL.Actualizar307Proc(PAID_NEW, PAID_OLD, HttpContext.Current.Session["user"].ToString().Trim());
 
                         if (ret)
@@ -741,43 +706,43 @@ namespace whusap.WebPages.WorkOrders
             }
         }
 
-        [WebMethod]
-        public static string Click_Query(string PAID)
-        {
-            HttpContext.Current.Session["flag022"] = 0;
-            HttpContext.Current.Session["flag042"] = 0;
-            HttpContext.Current.Session["flag131"] = 0;
+        //[WebMethod]
+        //public static string Click_Query(string PAID)
+        //{
+        //    HttpContext.Current.Session["flag022"] = 0;
+        //    HttpContext.Current.Session["flag042"] = 0;
+        //    HttpContext.Current.Session["flag131"] = 0;
 
-            try
-            {
-                EntidadPicking MyObj = new EntidadPicking();
+        //    try
+        //    {
+        //        EntidadPicking MyObj = new EntidadPicking();
 
-                List<EntidadPicking> LstPallet = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
-                if (LstPallet.Count > 0)
-                {
-                    MyObj = LstPallet[0];
+        //        List<EntidadPicking> LstPallet = twhcolDAL.ConsultarPalletPicking22(PAID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
+        //        if (LstPallet.Count > 0)
+        //        {
+        //            MyObj = LstPallet[0];
 
-                    if (string.IsNullOrEmpty(MyObj.PALLETID) || string.IsNullOrEmpty(MyObj.LOCA))
-                    {
-                        MyObj.error = true;
-                        MyObj.errorMsg = ThePallethasalreadylocate;
-                    }
-                }
-                else
-                {
-                    MyObj.error = true;
-                    MyObj.errorMsg = ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus;
-                }
+        //            if (string.IsNullOrEmpty(MyObj.PALLETID) || string.IsNullOrEmpty(MyObj.LOCA))
+        //            {
+        //                MyObj.error = true;
+        //                MyObj.errorMsg = ThePallethasalreadylocate;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            MyObj.error = true;
+        //            MyObj.errorMsg = ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus;
+        //        }
 
-                return JsonConvert.SerializeObject(MyObj);
+        //        return JsonConvert.SerializeObject(MyObj);
 
-            }
-            catch (Exception e)
-            {
-                return ThePalletIDdoesnotexist;
-            }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return ThePalletIDdoesnotexist;
+        //    }
 
-        }
+        //}
 
         public static decimal ConvertToDecimal(string inputQtyStr)
         {
@@ -811,7 +776,6 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
         public static string Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string PONO, string QTYT, string QTYT_OLD, string CUNI, string CWAR, string CLOT, string ADVSP)
         {
             try
@@ -858,11 +822,6 @@ namespace whusap.WebPages.WorkOrders
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                         _idaltticol125.updataPalletStatus022(PAID, qtyaG == "0" ? "9" : "7");
-                        //if (qtyt_act==0)
-                        //{
-                        //    return true;
-                        //}
-
 
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
@@ -872,37 +831,27 @@ namespace whusap.WebPages.WorkOrders
 
                             string id = ORNO;
                             DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
-                            if (Dtticol022.Rows.Count > 0)
-                            {
-
-                                if (Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() != "")
-                                {
+                            if (Dtticol022.Rows.Count > 0){
+                                if (Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() != ""){
                                     consecutivo = Convert.ToInt32(Dtticol022.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
                                 }
-                                else
-                                {
+                                else{
                                     consecutivo = 1;
                                 }
-
                             }
-                            else
-                            {
+                            else{
                                 consecutivo = 0;
                             }
 
-                            if (consecutivo.ToString().Length == 1)
-                            {
+                            if (consecutivo.ToString().Length == 1){
                                 SecuenciaPallet = "C00" + consecutivo.ToString();
                             }
-                            if (consecutivo.ToString().Length == 2)
-                            {
+                            if (consecutivo.ToString().Length == 2){
                                 SecuenciaPallet = "C0" + consecutivo.ToString();
                             }
-                            if (consecutivo.ToString().Length == 3)
-                            {
+                            if (consecutivo.ToString().Length == 3){
                                 SecuenciaPallet = "C0" + consecutivo.ToString();
                             }
-
 
                             MyObj.pdno = ORNO;
                             MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
@@ -980,10 +929,7 @@ namespace whusap.WebPages.WorkOrders
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
                         int consecutivo = 0;
-                        //if (qtyt_act == 0)
-                        //{
-                        //    return true;
-                        //}
+
                         if (Convert.ToDecimal(qtyaG) > 0)
                         {
                             string id = ORNO;
@@ -1099,10 +1045,7 @@ namespace whusap.WebPages.WorkOrders
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                         _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "7" : "3");
-                        //if (qtyt_act == 0)
-                        //{
-                        //    return true;
-                        //}
+
                         if (Convert.ToDecimal(qtyaG) > 0)
                         {
                             int consecutivoPalletID = 0;
@@ -1110,39 +1053,6 @@ namespace whusap.WebPages.WorkOrders
                             string separator = "-";
                             string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
                             string SQNB = PAID.Substring(0, PAID.IndexOf(separator));
-
-                            //DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO, true);
-                            //errorlog += "-Modifico trablas\n";
-                            //string SecuenciaPallet = "001";
-                            //errorlog += "-Realiza conteo de busqueda pallet max: " + DTPalletContinue.Rows.Count + "\n";
-                            //if (DTPalletContinue.Rows.Count > 0)
-                            //{
-                            //    errorlog += "-Verifica si la catidad max es mato a 0\n";
-                            //    foreach (DataRow item in DTPalletContinue.Rows)
-                            //    {
-                            //        errorlog += "-Entro a for each\n";
-                            //        errorlog += "la cadena a recortar es esta: " + item["T$PAID"].ToString().Trim() + " \n";
-                            //        errorlog += "la cadena extraida es : " + item["T$PAID"].ToString().Trim().Substring(10, 3) + " \n";
-
-                            //        consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(11, 3)) + 1;
-                            //        errorlog += "realiza substring de pallet para tener la secuencia:" + consecutivoPalletID + "\n";
-                            //        if (consecutivoPalletID.ToString().Length == 1)
-                            //        {
-                            //            SecuenciaPallet = "00" + consecutivoPalletID;
-                            //        }
-                            //        if (consecutivoPalletID.ToString().Length == 2)
-                            //        {
-                            //            SecuenciaPallet = "0" + consecutivoPalletID;
-                            //        }
-                            //        if (consecutivoPalletID.ToString().Length == 3)
-                            //        {
-                            //            SecuenciaPallet = consecutivoPalletID.ToString();
-                            //        }
-
-                            //    }
-
-                            //}
-                            //errorlog += "genero secuencia,";
 
                             MyObj.OORG = "2";// Order type escaneada view 
                             MyObj.ORNO = ORNO;
@@ -1223,17 +1133,12 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        //public static bool Click_confirPKG(string PAID_OLD, string PAID, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB)
         public static string ShowCurrentOptions()
         {
 
             string ITEM = HttpContext.Current.Session["ITEM"].ToString().Trim();
             string QTY = HttpContext.Current.Session["QTY"].ToString().Trim();
             string PRIO = HttpContext.Current.Session["PRIO"].ToString().Trim();
-
-            //string ITEM = "";
-            //string QTY  = "";
-            //string PRIO = "";
 
             List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
@@ -1260,9 +1165,9 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        //public static bool Click_confirCausal(string PAID, string Causal, string txtPallet, string LOCA, string OORG, string ORNO, string OSET, string PONO, string SQNB, string ADVS)
         public static bool Click_confirCausal(string PAID, string Causal, string txtPallet, string LOCA, string OORG, string ORNO, string PONO, string SQNB, string ADVS)
         {
+            string sentencia1 = string.Empty;
             String pallet = PAID;
             String Location = LOCA.ToUpper();
             LOCA = LOCA.ToUpper();
@@ -1286,20 +1191,23 @@ namespace whusap.WebPages.WorkOrders
             }
             try
             {
+                string strError = string.Empty;
                 Random generator = new Random();
                 int t = generator.Next(1, 1000000);
                 string maximo = string.Format("{0:0000000000}", t);
+                Ent_tticol082 myObj082 = new Ent_tticol082();
+                myObj082.STAT = "3";
+                myObj082.PRIO = HttpContext.Current.Session["PRIO"].ToString();
+                
 
                 if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
                 {
                     stat = 12;
                     twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
-                    //twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
-                    //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
-                    //{
-                    //    twhcolDAL.ActCausalTICOL022(pallet, stat);
-                    //}
+                    _idaltticol022.ActualizacionPalletId(PAID,stat.ToString(),strError);
+                    twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    _idaltwhcol122.UpdateTtico082(myObj082);
                     return true;
 
                 }
@@ -1308,13 +1216,10 @@ namespace whusap.WebPages.WorkOrders
 
                     stat = 12;
                     twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
-                    //twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
-                    //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
-                    //{
-                    //    twhcolDAL.ActCausalTICOL042(pallet, stat);
-                    //}
-
+                    _idaltticol042.ActualizacionPalletId(PAID, stat.ToString(), strError);
+                    twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    _idaltwhcol122.UpdateTtico082(myObj082);
                     return true;
 
                 }
@@ -1323,12 +1228,10 @@ namespace whusap.WebPages.WorkOrders
                 {
                     stat = 10;
                     twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
-                    //twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet, Location, 2, maximo, OORG, ORNO, OSET, PONO, SQNB, ADVS);
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
-                    //if (HttpContext.Current.Session["originalPallet"].ToString() != PAID.ToString())
-                    //{
-                    //    twhcolDAL.ActCausalcol131140(pallet, stat);
-                    //}
+                    _idaltticol125.updataPalletStatus131(PAID,stat.ToString());
+                    twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    _idaltwhcol122.UpdateTtico082(myObj082);
                     return true;
                 }
                 else

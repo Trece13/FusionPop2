@@ -1107,9 +1107,11 @@
         var LocateSuccess = function (r) {
             if (r.d == true) {
                 document.getElementById("btnconfirPKG").disabled = false;
+                $('#LblError').html("");
             }
             else if (r.d == false) {
                 document.getElementById("btnconfirPKG").disabled = true;
+                $('#LblError').html("The location is not valid");
             }
         }
 
@@ -1117,10 +1119,12 @@
             if (r.d == true) {
                 HideReason.style.display = "";
                 document.getElementById("btnconfirPKG").disabled = true;
+                $('#LblError').html("");
             }
             else if (r.d == false) {
                 document.getElementById("btnconfirPKG").disabled = true;
                 HideReason.style.display = "none";
+                $('#LblError').html("The location is not valid");
             }
         }
 
@@ -1130,22 +1134,6 @@
 
             Method = "VerificarLocate"
             Data = "{'CWAR':'" + $('#Contenido_lblWarehouse').html().trim().toUpperCase() + "','LOCA':'" + $('#txtlocation').val().trim().toUpperCase() + "'}";
-            //            if($('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase())
-            //            {
-            //                document.getElementById('btnconfirPKG').disabled = false;
-            //            }
-            //            else if($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase())
-            //            {
-            //            }
-            //            else if($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase())
-            //            {
-            //                document.getElementById('btnconfirPKG').disabled = false;
-            //                EventoAjax(Method, Data, LocateSuccess)
-            //            }
-            //            else if ($('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase() && $('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase()) 
-            //            { 
-            //            }  
-
 
             if ($('#txtlocation').val().trim().toUpperCase() == $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
 
@@ -1153,6 +1141,7 @@
                 document.getElementById("bntChange").disabled = true;
                 document.getElementById("txtlocation").disabled = false;
                 document.getElementById('btnconfirPKG').disabled = false;
+                $('#LblError').html("");
             }
             else if ($('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
 
