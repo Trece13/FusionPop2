@@ -478,11 +478,12 @@ namespace whusa.Interfases
                         ROWN = MyRow["ROWN"].ToString(),
                         OORG = MyRow["OORG"].ToString(),
                         ORNO = MyRow["ORNO"].ToString(),
+                        //QTYT = MyRow["QTYT"].ToString(),
                         //OSET = MyRow["OSET"].ToString(),
                         PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
-                        //QTYT = MyRow["QTYT"].ToString(),
+                        QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString()
@@ -525,7 +526,7 @@ namespace whusa.Interfases
                         PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
-                        //QTYT = MyRow["QTYT"].ToString(),
+                        QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString()
@@ -719,7 +720,7 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
-
+                        STAT = MyRow["STAT"].ToString()
                     };
 
                     Lstwhcol122.Add(MyObjet);
@@ -759,6 +760,7 @@ namespace whusa.Interfases
                         PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
+                        STAT = MyRow["STAT"].ToString()
 
                     };
 
