@@ -26,6 +26,7 @@ namespace whusap.WebPages.InvMaterial
             private static string formName;
             private static string globalMessages = "GlobalMessages";
             public static string _idioma;
+            public static string Order;
         #endregion
 
         #region Eventos
@@ -84,15 +85,15 @@ namespace whusap.WebPages.InvMaterial
                 Ent_tticol125 obj = new Ent_tticol125();
                 string strError = string.Empty;
     
-                obj.pdno = txtWorkOrder.Text.ToUpper();
+                //obj.pdno = txtWorkOrder.Text.ToUpper();
                 obj.conf = 2;   // CONFIRMED = NO
                 obj.paid = txtPalletId.Text.ToUpper();
                 lblResult.Text = string.Empty;
             //
                 
                 DataTable resultado = idal.listaRegistrosporConfirmar_Param(ref obj, ref strError);
-
-
+                obj.pdno = resultado.Rows[0]["T$PDNO"].ToString().Trim();
+                Order = obj.pdno;
                 // Validar si el numero de orden trae registros
                 if (strError != string.Empty)
                 {
@@ -126,7 +127,8 @@ namespace whusap.WebPages.InvMaterial
                         if (Convert.ToInt32(lista.SelectedValue) == 1)
                         {
                             obj = new Ent_tticol125();
-                            obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
+                            //obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
+                            obj.pdno = Order;
                             obj.pono = Convert.ToInt32(fila.Cells[0].Text);
                             obj.item = fila.Cells[1].Text;
                             obj.cwar = fila.Cells[3].Text.Trim();
