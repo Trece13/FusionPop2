@@ -92,8 +92,7 @@ namespace whusap.WebPages.InvMaterial
             //
                 
                 DataTable resultado = idal.listaRegistrosporConfirmar_Param(ref obj, ref strError);
-                obj.pdno = resultado.Rows[0]["T$PDNO"].ToString().Trim();
-                Order = obj.pdno;
+
                 // Validar si el numero de orden trae registros
                 if (strError != string.Empty)
                 {
@@ -106,6 +105,8 @@ namespace whusap.WebPages.InvMaterial
                     return;
                 }
                 lblOrder.Text = _idioma == "INGLES" ? "Order: " : "Orden: " + obj.pdno;
+                obj.pdno = resultado.Rows[0]["T$PDNO"].ToString().Trim();
+                Order = obj.pdno;
                 grdRecords.DataSource = resultado;
                 grdRecords.DataBind();
 

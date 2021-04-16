@@ -2853,6 +2853,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <!-- Smita End-->
     <Module name="tticol125">
       <!-- Smita Begins-->
+      <operationName name="updateFieldPrint">
+        <stringSQL>
+          UPDATE {2} SET T$PRIN = 1
+          WHERE T$PAID = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="queryFieldPrint">
+        <stringSQL>
+          SELECT T$PRIN FROM {2}
+          WHERE T$PAID = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="invGetPalletInfoSerie">
         <stringSQL>
           SELECT tccom001.T$EMNO EMNO, tccom001.T$NAMA NAMA, tmcs005.T$CDIS CDIS, tmcs005.T$DSCA DSCA FROM baan.twhcol027140 whcol027

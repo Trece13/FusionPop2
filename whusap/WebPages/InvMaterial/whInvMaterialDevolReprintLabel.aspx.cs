@@ -28,6 +28,7 @@ namespace whusap.WebPages.InvMaterial
             private static string formName;
             private static string globalMessages = "GlobalMessages";
             public static string _idioma;
+            public static string valueprint;
         #endregion
 
         #region Eventos
@@ -140,12 +141,31 @@ namespace whusap.WebPages.InvMaterial
 
         protected void grdRecords_RowDataBound(object sender, GridViewRowEventArgs e)
             {
+                InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
+                Ent_tticol125 obj = new Ent_tticol125();
+                string strError = string.Empty;
+
                 if (e.Row.RowType == DataControlRowType.DataRow)
                 {
-                    string prin = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PRIN"].ToString();
+                    //string prin = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PRIN"].ToString();
+                    string paid = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PAID"].ToString();
+                    var printed = idal.queryFieldPrint(ref paid, ref strError);
+                    string prin = printed.Rows[0]["T$PRIN"].ToString().Trim();
+                    valueprint = prin;
+                    //obj.prin = idal.Rows[0].["T$PRIN"]
+
                     // ((Button)e.Row.Cells[7].FindControl("btnPrint")).OnClientClick = "printTag(" + FilaSerializada.Trim() + ")";
                     ((Button)e.Row.Cells[7].FindControl("btnPrint")).Text = (prin.Trim().Equals("2")
                         ? _idioma == "INGLES" ? "Print" : "Imprimir" : _idioma == "INGLES" ? "Reprint" : "Reimprimir");
+                    //Cambia el estado del campo print en la tabla ticol125
+                    if (prin.Trim().Equals("2"))
+                    {
+                        idal.updateFieldPrint(ref paid, ref strError);
+                        if (strError != string.Empty)
+                        {
+                            OrderError.IsValid = false; 
+                        }
+                    }
                 }
             }
 
@@ -162,6 +182,7 @@ namespace whusap.WebPages.InvMaterial
                         {
                             resultado = (DataTable)Session["resultado"];
                             grdRecords.DataSource = resultado;
+                            resultado.Rows[0]["T$PRIN"] = valueprint;
                             grdRecords.DataBind();
                             reg = resultado.Rows[index];
                             Session["FilaImprimir"] = reg;

@@ -44,6 +44,36 @@ namespace whusa.Interfases
             }
         }
 
+        public bool updateFieldPrint(ref string paid, ref string strError)
+        {
+            bool retorno = false;
+            try
+            {
+                retorno = dal.updateFieldPrint(ref paid, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public DataTable queryFieldPrint(ref string paid, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.queryFieldPrint(ref paid, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+
+        }
+
         public int enviaDatos(string nit, string NombreCliente, string ApellidoCliente, string Nit)
         {
             return 0;

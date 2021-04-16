@@ -156,6 +156,56 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
+        public bool updateFieldPrint(ref string paid, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$PAID", paid.Trim());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                return retorno;
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+
+            return retorno;
+        }
+
+        public DataTable queryFieldPrint(ref string paid, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", paid.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException.ToString();
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+
+        }
+        
         public int listaRegistrosPendConfItem_Param(ref Ent_tticol125 ParametrosIn, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
