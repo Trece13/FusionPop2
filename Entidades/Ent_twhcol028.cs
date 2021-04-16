@@ -93,5 +93,9 @@ namespace whusa.Entidades
         public string USER { get; set; }
         [DataMember(Order = 29)]
         public string WHLOT { get; set; }
+        [DataMember(Order = 30)]
+        public string KTLC { get; set; }
+        [DataMember(Order = 31)]
+        public string SUBI { get; set; }
     }
 }

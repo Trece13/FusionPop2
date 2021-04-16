@@ -27,7 +27,6 @@ namespace whusap.WebPages.Inventarios
         private static LabelsText _textoLabels = new LabelsText();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
 
-        private static Ent_twhcol130131 MyObj = new Ent_twhcol130131();
         private static InterfazDAL_ttwhcol016 dal016 = new InterfazDAL_ttwhcol016();
         private static InterfazDAL_twhltc100 dal100 = new InterfazDAL_twhltc100();
         private static InterfazDAL_tticol100 dalticol100 = new InterfazDAL_tticol100();
@@ -39,15 +38,15 @@ namespace whusap.WebPages.Inventarios
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
 
-        
+
         public static string PalletIDdoesntexistorQuantityavailableiszero = string.Empty;
-        public static string PalletIDStatusdoesntallowadjustmen           = string.Empty;
-        public static string PalletIDdoesntexist                          = string.Empty;
-        public static string Itemcodedoesntexist                          = string.Empty;
-        public static string Lotcodedoesntexist                           = string.Empty;
-        public static string Warehousecodedoesntexist                     = string.Empty;
-        public static string Locationblocked                              = string.Empty;
-        public static string Locationcodedoesntexist                      = string.Empty;
+        public static string PalletIDStatusdoesntallowadjustmen = string.Empty;
+        public static string PalletIDdoesntexist = string.Empty;
+        public static string Itemcodedoesntexist = string.Empty;
+        public static string Lotcodedoesntexist = string.Empty;
+        public static string Warehousecodedoesntexist = string.Empty;
+        public static string Locationblocked = string.Empty;
+        public static string Locationcodedoesntexist = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -94,13 +93,14 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string verifyPallet(string PAID)
         {
+            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
             DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
 
             if (DTPallet.Rows.Count > 0)
             {
                 var MyObjDT = DTPallet.Rows[0];
                 MyObj.Error = false;
-                HttpContext.Current.Session["TBL"] = MyObjDT["TBL"].ToString().Trim();
+
                 MyObj.TBL = MyObjDT["TBL"].ToString();
                 MyObj.ITEM = MyObjDT["ITEM"].ToString();
                 MyObj.KTLC = MyObjDT["KLTC"].ToString();
@@ -114,7 +114,11 @@ namespace whusap.WebPages.Inventarios
                 MyObj.DSCAW = MyObjDT["DESCAW"].ToString();
                 MyObj.STAT = MyObjDT["STAT"].ToString();
                 MyObj.MCNO = MyObjDT["MCNO"].ToString();
-                HttpContext.Current.Session["ORNO"] = MyObjDT["ORNO"].ToString();
+                MyObj.ORNO = MyObjDT["ORNO"].ToString();
+
+                HttpContext.Current.Session["TBL"] = MyObjDT["TBL"].ToString().Trim();
+                HttpContext.Current.Session["MyOriginalPallet"] = MyObj;
+                //HttpContext.Current.Session["ORNO"] = MyObjDT["ORNO"].ToString();
 
                 if (MyObj.QTYA.Trim() == "0")
                 {
@@ -165,21 +169,33 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string verifyItem(string ITEM)
         {
+            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
             Ent_ttwhcol016 obj016 = new Ent_ttwhcol016();
             obj016.item = ITEM.ToUpper().Trim();
             DataTable DTItemt = dal016.TakeMaterialInv_verificaItem_Param(ref obj016, ref strError);
 
             if (DTItemt.Rows.Count > 0)
             {
+                Ent_twhcol130131 MyOriginalPallet = (Ent_twhcol130131)HttpContext.Current.Session["MyOriginalPallet"];
                 var MyObjDT = DTItemt.Rows[0];
 
-                MyObj.KTLC = MyObjDT["LOTE"].ToString();
-                MyObj.ITEM = MyObjDT["t$item"].ToString();
-                MyObj.DSCA = MyObjDT["DESCRIPCION"].ToString();
-                MyObj.UNIT = MyObjDT["UNIDAD"].ToString();
-                MyObj.Error = false;
-                MyObj.errorMsg = string.Empty;
-                MyObj.TipeMsgJs = string.Empty;
+                if (MyObjDT["UNIDAD"].ToString().Trim() == MyOriginalPallet.UNIT.Trim())
+                {
+                    MyObj.KTLC = MyObjDT["LOTE"].ToString();
+                    MyObj.ITEM = MyObjDT["T$ITEM"].ToString();
+                    MyObj.DSCA = MyObjDT["DESCRIPCION"].ToString();
+                    MyObj.UNIT = MyObjDT["UNIDAD"].ToString();
+                    MyObj.Error = false;
+                    MyObj.errorMsg = string.Empty;
+                    MyObj.TipeMsgJs = string.Empty;
+                }
+                else
+                {
+                    MyObj.Error = true;
+                    MyObj.errorMsg = "Item not allowed to adjust, due the unit is different";
+                    MyObj.TipeMsgJs = "alert";
+                }
+
             }
             else
             {
@@ -195,6 +211,7 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string verifyLot(string ITEM, string LOT)
         {
+            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
             Ent_twhltc100 data100 = new Ent_twhltc100() { item = ITEM, clot = LOT };
             var DTLot = dal100.listaRegistro_Clot(ref data100, ref strError);
 
@@ -219,6 +236,7 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string verifyWarehouse(string CWAR)
         {
+            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
             Ent_tticol100 myObj100 = new Ent_tticol100();
             myObj100.cwar = CWAR.Trim().ToUpper();
             DataTable DTWare = dalticol100.selecthandletwhwmd200(ref myObj100, ref strError);
@@ -246,6 +264,7 @@ namespace whusap.WebPages.Inventarios
         [WebMethod]
         public static string verifyLoca(string CWAR, string LOCA)
         {
+            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
             DataTable DTLoca = dalTransfer.ConsultarLocation(CWAR, LOCA);
             if (DTLoca.Rows.Count > 0)
             {
@@ -283,9 +302,44 @@ namespace whusap.WebPages.Inventarios
             {
 
                 saveOriginTable(twhcol028);
-                string strMaxSequence = getSequence(HttpContext.Current.Session["ORNO"].ToString() + "-A");
-                //string strNewSequence = currentSequience(strOldSequence);
+                Ent_twhcol130131 MyOriginalPallet = (Ent_twhcol130131)HttpContext.Current.Session["MyOriginalPallet"];
+
+
+                string strMaxSequence = string.Empty;
+                switch (MyOriginalPallet.TBL)
+                {
+                    case "ticol022":
+                    case "ticol042":
+                        if (twhcol028.KTLC == "1")
+                        {
+                            if (twhcol028.TLOT.Trim().ToUpper() == twhcol028.SLOT.Trim().ToUpper())
+                            {
+                                strMaxSequence = getSequence(twhcol028.SLOT.Trim().ToUpper() + "-A");
+                            }
+                            else
+                            {
+                                strMaxSequence = getSequence(twhcol028.TLOT.Trim().ToUpper() + "-A");
+                            }
+                        }
+                        else if (twhcol028.KTLC != "1")
+                        {
+                            if (twhcol028.TLOT.Trim().ToUpper() == twhcol028.SLOT.Trim().ToUpper())
+                            {
+                                strMaxSequence = getSequence(MyOriginalPallet.ORNO + "-A");
+                            }
+                            else
+                            {
+                                strMaxSequence = getSequence(twhcol028.SLOT.Trim() + "-A");
+                            }
+                        }
+                        break;
+                    case "whcol131":
+                        strMaxSequence = getSequence(MyOriginalPallet.ORNO + "-A");
+                        break;
+                }
+
                 bool createSuccessNewPaller = saveNewPalletOriginTable(ref twhcol028, strMaxSequence);
+
                 if (createSuccessNewPaller)
                 {
                     twhcol028.Error = false;
@@ -316,7 +370,7 @@ namespace whusap.WebPages.Inventarios
 
             bool res = false;
             string separator = "-";
-            twhcol028.PAID = recursos.GenerateNewPallet( MaxSequence, separator);
+            twhcol028.PAID = recursos.GenerateNewPallet(MaxSequence, separator);
             string SQNB = twhcol028.PAID.Substring(0, twhcol028.PAID.IndexOf(separator));
             twhcol028.LOGN = HttpContext.Current.Session["user"].ToString();
             twhcol028.DATR = DateTime.Now.ToString("MM/dd/yyyy");
@@ -326,7 +380,7 @@ namespace whusap.WebPages.Inventarios
                     Ent_tticol022 obj022 = new Ent_tticol022();
                     List<Ent_tticol022> list022 = new List<Ent_tticol022>();
                     twhcol028.WHLOT = twhcol028.TLOT.Trim() == string.Empty ? " " : twhcol028.TLOT.Trim();
-                    obj022.pdno = twhcol028.TLOT;
+                    obj022.pdno = SQNB;
                     obj022.sqnb = twhcol028.PAID;
                     obj022.proc = 1;
                     obj022.logn = twhcol028.LOGN;
@@ -361,7 +415,7 @@ namespace whusap.WebPages.Inventarios
                     Ent_tticol042 obj042 = new Ent_tticol042();
                     List<Ent_tticol042> list042 = new List<Ent_tticol042>();
                     twhcol028.WHLOT = twhcol028.TLOT;
-                    obj042.pdno = twhcol028.TLOT.Trim() == string.Empty ? " " : twhcol028.TLOT.Trim();
+                    obj042.pdno = SQNB;
                     obj042.sqnb = twhcol028.PAID;
                     obj042.proc = 1;
                     obj042.logn = twhcol028.LOGN;
@@ -395,7 +449,7 @@ namespace whusap.WebPages.Inventarios
                 case "whcol131":
                     Ent_twhcol130131 obj131 = new Ent_twhcol130131();
                     Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
-                    twhcol028.WHLOT = twhcol028.PAID.Substring(0,(twhcol028.PAID.IndexOf("-"))); 
+                    twhcol028.WHLOT = twhcol028.PAID.Substring(0, (twhcol028.PAID.IndexOf("-")));
                     MyObj131.OORG = "4";
                     MyObj131.ORNO = SQNB.Trim().ToUpper();
                     MyObj131.ITEM = twhcol028.TITM;
@@ -454,12 +508,13 @@ namespace whusap.WebPages.Inventarios
 
         public static bool saveOriginTable(Ent_twhcol028 twhcol028)
         {
+            Ent_twhcol130131 MyOriginalPallet = (Ent_twhcol130131)HttpContext.Current.Session["MyOriginalPallet"];
             bool ActalizacionExitosa = false;
             Ent_tticol082 MyObj82 = new Ent_tticol082();
             MyObj82.PAID = twhcol028.PAID;
             MyObj82.STAT = "14";
             MyObj82.QTYC = "0";
-            switch (HttpContext.Current.Session["TBL"].ToString())
+            switch (MyOriginalPallet.TBL)
             {
                 case "ticol022":
                     twhcolDAL.ActCausalTICOL022(MyObj82.PAID, 14);
@@ -487,7 +542,7 @@ namespace whusap.WebPages.Inventarios
             string sequence = string.Empty;
             int indexSeparator = PAIDOld.IndexOf("-");
             string SQNB = PAIDOld.Substring(0, indexSeparator);
-            string separator = PAIDOld.Substring(indexSeparator,1);
+            string separator = PAIDOld.Substring(indexSeparator, 1);
             string SEC = PAIDOld.Substring(indexSeparator + 1);
             string complement = recursos.SeparatorAlphaNumeric(ref SEC);
             DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
@@ -497,7 +552,7 @@ namespace whusap.WebPages.Inventarios
             }
             else
             {
-                sequence = SQNB + separator +complement+"000";
+                sequence = SQNB + separator + complement + "000";
             }
             return sequence;
         }

@@ -1350,7 +1350,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Actualizartticol082MFG">
         <stringSQL>
-          update {0}.tticol082{1} set t$STAT = 5 where T$PAID =  '[:PAID]'
+          update {0}.tticol083{1} set t$STAT = 6 where T$PAID =  '[:PAID]'
         </stringSQL>
       </operationName>
       <operationName name="Actualizartticol022MFG">
@@ -1970,7 +1970,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Consultarttccol307">
         <stringSQL>
-          SELECT T$USER USRR, T$STAT STAT, T$PAID PAID, T$REFCNTD REFCNTD, T$REFCNTU REFCNTU FROM {0}.ttccol307{1} where  TRIM(T$USER) = NVL('[:T$USER]',TRIM(T$USER)) AND TRIM(T$PAID) = NVL('[:T$PAID]',TRIM(T$PAID))
+          SELECT T$USER USRR, T$STAT STAT, T$PAID PAID, T$REFCNTD REFCNTD, T$REFCNTU REFCNTU FROM {0}.ttccol307{1} where  TRIM(T$USER) = NVL('[:T$USER]',TRIM(T$USER)) AND TRIM(T$PAID) = NVL('[:T$PAID]',TRIM(T$PAID)) AND T$STAT = 3
         </stringSQL>
       </operationName>
       <operationName name="Insertarttccol307">

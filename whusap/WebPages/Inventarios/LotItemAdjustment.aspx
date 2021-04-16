@@ -331,7 +331,7 @@
             </div>
         </div>
         <br />
-        <div id="printButton" class="container">
+        <div id="printButton">
             <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
         </div>
     </div>
@@ -362,7 +362,9 @@
             REFCNTD = "0";
             REFCNTU = "0";
             UNIT = "";
-            USER = ""
+            USER = "";
+            KTLC = "";
+            SUBI = ""
         }
 
         var restart = false;
@@ -594,6 +596,8 @@
             Obj028.TORN = " ";
             Obj028.TPON = " ";
             Obj028.MESS = " ";
+            Obj028.KTLC = lbItemAdjusted.getAttribute("ktlc").trim();
+            Obj028.SUBI = lbWarehouseAdjusted.getAttribute("sloc").trim();
             Obj028.REFCNTD = " ";
             Obj028.REFCNTU = " ";
 
@@ -767,6 +771,9 @@
                 lbLotAdjusted.classList.remove("isValid");
                 lbLotAdjusted.classList.remove("isNotValid");
                 lbItemDscaAdjusted.textContent = "";
+                if(MyObj.TipeMsgJs == "alert"){
+                    alert(MyObj.errorMsg);
+                }
                 verifyInfoForm();
             } else {
                 lblError.innerHTML.replace(MyObj.errorMsg,"");
