@@ -360,7 +360,7 @@ namespace whusap.WebPages.InvMaterial
                             Ent_tticol042 obj042 = new Ent_tticol042();
                             List<Ent_tticol042> list042 = new List<Ent_tticol042>();
 
-                            obj042.pdno = txtWorkOrder.Text.Trim().ToUpper();
+                            obj042.pdno = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper().Trim();
                             obj042.sqnb = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             obj042.proc = 1;
                             obj042.logn = HttpContext.Current.Session["user"].ToString();

@@ -138,7 +138,7 @@ namespace whusa.DAL
 
             paramList = new Dictionary<string, object>();
 
-            paramList.Add(":T$PDNO", parametros.pdno.Trim().ToUpper());
+            paramList.Add(":T$PDNO", parametros.pdno.ToUpper());
             paramList.Add(":T$SQNB", parametros.sqnb.Trim().ToUpper());
             paramList.Add(":T$URPT", parametros.urpt.ToUpper());
             paramList.Add(":T$ACQT", parametros.acqt.ToString());
