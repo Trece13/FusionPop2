@@ -404,7 +404,7 @@ namespace whusap.WebPages.Inventarios
                     obj022.acqt = Convert.ToDecimal(twhcol028.TQTY);
                     obj022.cwaf = twhcol028.TWAR;
                     obj022.cwat = twhcol028.TWAR;
-                    obj022.aclo = "";
+                    obj022.aclo = twhcol028.SLOC;
                     obj022.allo = 0;
                     list022.Add(obj022);
                     bool insert022 = Convert.ToBoolean(_idaltticol022.insertarRegistroSimple(ref obj022, ref strError));
@@ -439,7 +439,7 @@ namespace whusap.WebPages.Inventarios
                     obj042.acqt = Convert.ToDouble(twhcol028.TQTY);
                     obj042.cwaf = twhcol028.TWAR;
                     obj042.cwat = twhcol028.TWAR;
-                    obj042.aclo = "";
+                    obj042.aclo = twhcol028.SLOC;
                     obj042.allo = 0;
                     list042.Add(obj042);
                     bool insert042 = Convert.ToBoolean(_idaltticol042.insertarRegistroSimple(ref obj042, ref strError));
@@ -467,7 +467,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.CONF = "1";
                     MyObj131.RCNO = " ";//llena baan
                     MyObj131.DATR = "01/01/70";//llena baan
-                    MyObj131.LOCA = " ";// enviamos vacio
+                    MyObj131.LOCA = twhcol028.SLOC;// enviamos vacio
                     MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
                     MyObj131.PRNT = "1";// llenar en 1
                     MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan

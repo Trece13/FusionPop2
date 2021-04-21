@@ -962,7 +962,7 @@
                     HideReason.style.display = "none";
                     if (response.d == true) {
                         $('#txtlocation').removeAttr('disabled');
-                        document.getElementById("btnconfirPKG").disabled = false;
+                        document.getElementById("btnconfirPKG").disabled = true;
                         alert("Reason saved");
                         //window.location = "/WebPages/Login/whMenuI.aspx";
                         //                        if ($('#txtlocation').val().trim().toUpperCase() != $('#Contenido_lbllocation').html().trim().toUpperCase() && $('#Contenido_txtPalletID').val().trim().toUpperCase() == $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
@@ -972,6 +972,7 @@
                         if ($('#Contenido_txtPalletID').val().trim().toUpperCase() != $('#Contenido_lblPalletID').html().trim().toUpperCase()) {
                             $("#btnNotPKG").show();
                         }
+                        location.reload();
                     }
                     else {
                         document.getElementById("btnconfirPKG").disabled = true;

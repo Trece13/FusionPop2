@@ -454,7 +454,7 @@ namespace whusap.WebPages.Inventarios
                 return;
             }
             else{
-                if (inputQty > (inputQty * 2))
+                if (inputQty > (Convert.ToDecimal(lblQuantityValue.Text) * 2))
                 {
                     lblError.Text = "New quantity not allowed, máximum double”";
                     txtPalletId.Enabled = true;
