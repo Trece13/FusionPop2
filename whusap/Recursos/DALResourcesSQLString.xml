@@ -434,7 +434,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$SQNB AS SQNB, SYSDATE AS FECHA, T$DELE AS DELE
           FROM {2}
           WHERE T$PDNO = '[:T$PDNO]'
-          AND T$SQNB = (SELECT MAX(T$SQNB) FROM {2} WHERE T$PDNO = '[:T$PDNO]'and T$SQNB not like '%RT%')
+          --AND T$SQNB = (SELECT MAX(T$SQNB) FROM {2} WHERE T$PDNO = '[:T$PDNO]'and T$SQNB not like '%RT%')
+          AND T$SQNB = (SELECT MAX(T$SQNB) FROM {2} WHERE T$PDNO = '[:T$PDNO]' AND REGEXP_LIKE(SUBSTR(T$SQNB,11,1), '[^A-Za-z]'))
         </stringSQL>
       </operationName>
       <operationName name="selectDatesBySqnbPdno">
