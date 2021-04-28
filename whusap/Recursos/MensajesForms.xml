@@ -1214,6 +1214,11 @@
             Work Order not Initiated for this Machine
           </stringMessage>
         </operationName>
+        <operationName name="WorkorderhasnotbeeninitiatedPOP">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
         <operationName name="MachineNotdefined">
           <stringMessage>
             Machine Not defined
@@ -1312,6 +1317,11 @@
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
+        <operationName name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
             Work Order not Initiated for this Machine
           </stringMessage>
@@ -1426,6 +1436,11 @@
             Work Order not Initiated for this Machine
           </stringMessage>
         </operationName>
+        <operationName name="WorkorderhasnotbeeninitiatedPOP">
+          <stringMessage>
+            Work Order not Initiated for this Machine
+          </stringMessage>
+        </operationName>
         <operationName name="MachineNotdefined">
           <stringMessage>
             Machine Not defined
@@ -1531,6 +1546,16 @@
         <operationName name="encabezadoreprint">
           <stringMessage>
             Reimprimir etiqueta pallet.
+          </stringMessage>
+        </operationName>
+        <operationName name="WorkOrdernotInitiatedforthisMachine">
+          <stringMessage>
+            Work Order no inicializada para esta maquina
+          </stringMessage>
+        </operationName>
+        <operationName name="WorkorderhasnotbeeninitiatedPOP">
+          <stringMessage>
+            Work Order no inicializada para esta maquina
           </stringMessage>
         </operationName>
         <operationName name="palletexceed">

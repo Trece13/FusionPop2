@@ -126,7 +126,7 @@ namespace whusap.WebPages.Migration
             {
                 if (consultaOrden[0]["STAT"].ToString().Trim() != "2")
                 {
-                    lblError.Text = WorkorderhasnotbeeninitiatedPOP;
+                    lblError.Text = mensajes("WorkorderhasnotbeeninitiatedPOP");
                     return;
                 }
 
