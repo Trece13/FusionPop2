@@ -249,10 +249,10 @@
             </td>
         </tr>
     </table>
-    <div runat="server" id="divLabel" visible="false" clientidmode="Static" style="zoom: 80%;
+    <div runat="server" id="divLabel" visible="false" clientidmode="Static" style="zoom: 100%;
         margin-bottom: 70px">
         <hr />
-        <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;"
+        <table style="width: 6in; height: 4in; text-align: center; font-weight: bold;"
             border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <td colspan="3">
