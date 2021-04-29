@@ -266,13 +266,19 @@ namespace whusap.WebPages.InvMaterial
             {
                 obj.item = valor.Trim().ToUpperInvariant();
                 resultado = idal.TakeMaterialInv_verificaItem_Param(ref obj, ref strError);
-                strError = _idioma == "INGLES" ? "Item code doesn´t exist. Cannot continue" : "Codigo de articulo no existe. No se puede continuar";
+                if (resultado.Rows.Count <= 0)
+                {
+                    strError = _idioma == "INGLES" ? "Item code doesn´t exist. Cannot continue" : "Codigo de articulo no existe. No se puede continuar";
+                }
             }
             if (tipo == "4") // Lote
             {
                 obj.clot = valor.Trim().ToUpperInvariant();
                 resultado = idal.TakeMaterialInv_verificaLote_Param(ref obj, ref strError);
-                strError = _idioma == "INGLES" ? "Lot Code doesn´t exist. Cannot Continue" : "Codigo de lote no existe. No se puede continuar";
+                if (resultado.Rows.Count <= 0)
+                {
+                    strError = _idioma == "INGLES" ? "Lot Code doesn´t exist. Cannot Continue" : "Codigo de lote no existe. No se puede continuar";
+                }
             }
 
 
