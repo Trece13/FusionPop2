@@ -17,16 +17,16 @@ namespace whusap.WebPages.Migration
     public partial class whInvReprintLabel : System.Web.UI.Page
     {
         #region Propiedades
-            private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
-            private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
-            private static Mensajes _mensajesForm = new Mensajes();
-            private static LabelsText _textoLabels = new LabelsText();
-            private static string _operator;
-            public static string _idioma;
-            private static string strError;
-            private static string formName;
-            private static string globalMessages = "GlobalMessages";
-            public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
+        private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        private static Mensajes _mensajesForm = new Mensajes();
+        private static LabelsText _textoLabels = new LabelsText();
+        private static string _operator;
+        public static string _idioma;
+        private static string strError;
+        private static string formName;
+        private static string globalMessages = "GlobalMessages";
+        public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
         #region Eventos
@@ -90,9 +90,9 @@ namespace whusap.WebPages.Migration
             var pdno = txtOrder.Text.Trim().ToUpper();
             var sec = txtSecuence.Text.Trim().ToUpper();
             var roll = txtRollWinder.Text.Trim().ToUpper();
-            var sqnb = String.Concat(pdno,'-',sec);
+            var sqnb = String.Concat(pdno, '-', sec);
 
-            if (pdno == String.Empty || sec == String.Empty  || roll == String.Empty )
+            if (pdno == String.Empty || sec == String.Empty || roll == String.Empty)
             {
                 lblError.Text = mensajes("formempty");
                 return;
@@ -119,6 +119,17 @@ namespace whusap.WebPages.Migration
                 var machine = consultaInformacion[0]["MCNO"].ToString().Trim();
                 var norp = Convert.ToInt32(consultaInformacion[0]["NORP"].ToString().Trim());
 
+                Session["MaterialDesc"] = consultaInformacion[0]["DSCA"].ToString().Trim();
+                Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.ToUpper() + "&code=Code128&dpi=96";
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.ToUpper() + "&code=Code128&dpi=96";
+                Session["Lot"] = pdno;
+                Session["Quantity"] = quantity + " " + unit;
+                Session["Date"] = DateTime.Now.ToString();
+                Session["Machine"] = machine;
+                Session["Operator"] = HttpContext.Current.Session["user"].ToString();
+                Session["Winder"] = string.Empty;
+                Session["Pallet"] = sqnb.ToUpper();
+
                 //imgItem
                 var rutaServItem = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.ToUpper() + "&code=Code128&dpi=96";
                 imgItem.Src = !string.IsNullOrEmpty(item) ? rutaServItem : "";
@@ -143,7 +154,7 @@ namespace whusap.WebPages.Migration
                 divTable.Visible = true;
                 divBotones.Visible = true;
                 //modificaciones jc
-                _idaltticol022.ActualizarRegistroTicol222(Session["user"].ToString(), pdno,sqnb);
+                _idaltticol022.ActualizarRegistroTicol222(Session["user"].ToString(), pdno, sqnb);
                 Ent_tticol022 Obj_tticol022 = new Ent_tticol022
                 {
                     sqnb = sqnb,
@@ -151,7 +162,7 @@ namespace whusap.WebPages.Migration
                 };
                 bool ActualizacionTticol022 = _idaltticol022.ActualizarNorpTicol022(Obj_tticol022);
             }
-            else 
+            else
             {
                 divTable.Visible = false;
                 divBotones.Visible = false;

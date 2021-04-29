@@ -17,16 +17,16 @@ namespace whusap.WebPages.Migration
     public partial class whInvReprintLabelMaterialRejectedM : System.Web.UI.Page
     {
         #region Propiedades
-            private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
-            private static InterfazDAL_tticol101 _idaltticol101 = new InterfazDAL_tticol101();
-            private static Mensajes _mensajesForm = new Mensajes();
-            private static LabelsText _textoLabels = new LabelsText();
-            private static string _operator;
-            public static string _idioma;
-            private static string strError;
-            private static string formName;
-            private static string globalMessages = "GlobalMessages";
-            public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
+        private static InterfazDAL_tticol101 _idaltticol101 = new InterfazDAL_tticol101();
+        private static Mensajes _mensajesForm = new Mensajes();
+        private static LabelsText _textoLabels = new LabelsText();
+        private static string _operator;
+        public static string _idioma;
+        private static string strError;
+        private static string formName;
+        private static string globalMessages = "GlobalMessages";
+        public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
         #region Eventos
@@ -86,21 +86,24 @@ namespace whusap.WebPages.Migration
         }
 
 
-        private string addZero(int MyNum ){
-            
-            string MyNumReturn = MyNum.ToString(); 
+        private string addZero(int MyNum)
+        {
 
-            if(MyNum < 10){
-                        MyNumReturn = "00"+ MyNumReturn;
+            string MyNumReturn = MyNum.ToString();
+
+            if (MyNum < 10)
+            {
+                MyNumReturn = "00" + MyNumReturn;
             }
-            else if(MyNum >= 10 && MyNum <100){
-                MyNumReturn = "0"+ MyNumReturn;
+            else if (MyNum >= 10 && MyNum < 100)
+            {
+                MyNumReturn = "0" + MyNumReturn;
             }
 
             return MyNumReturn;
         }
 
-        protected void btnConsultar_Click(object sender, EventArgs e) 
+        protected void btnConsultar_Click(object sender, EventArgs e)
         {
             var pdno = txtOrder.Text.Trim().ToUpper();
             var clot = txtLot.Text.Trim().ToUpper();
@@ -129,7 +132,7 @@ namespace whusap.WebPages.Migration
                 var reasons = consultaInformacion[0]["DSCACDIS"].ToString().Trim();
                 var comments = consultaInformacion[0]["OBSE"].ToString().Trim();
 
-                lblOrdPonoSeqn.Text = String.Concat(pdno,'-',pono,'-',seqn);
+                lblOrdPonoSeqn.Text = String.Concat(pdno, '-', pono, '-', seqn);
 
                 // imgOrdPonoSeqn
                 var rutaServOrdPonoSeqn = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";
@@ -142,7 +145,7 @@ namespace whusap.WebPages.Migration
                 lblValueDescripcion.Text = descitem;
                 lblValueQuantity.Text = quantity;
                 lblValueUnit.Text = unit;
-                
+
                 //imgQuantity
                 var rutaServQuant = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + quantity.ToUpper() + "&code=Code128&dpi=96";
                 imgQuantity.Src = !string.IsNullOrEmpty(quantity) ? rutaServQuant : "";
@@ -166,8 +169,22 @@ namespace whusap.WebPages.Migration
 
                 divTable.Visible = true;
                 divBotones.Visible = true;
+
+                Session["WorkOrder"] = pdno;
+                Session["lblReason"] = consultaInformacion[0]["DSCACDIS"].ToString().Trim();
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["ProductDesc"] = consultaInformacion[0]["DSCA"].ToString().Trim();
+                Session["ProductCode"] = consultaInformacion[0]["ITEM"].ToString().Trim();
+                Session["Date"] = DateTime.Now.ToString();
+                Session["Quantity"] = consultaInformacion[0]["QTYR"].ToString().Trim() + " " + consultaInformacion[0]["CUNI"].ToString().Trim();
+                Session["Finished"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
+                Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
+                Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
+                Session["Machine"] = machine;
+                Session["Comments"] = comments;
+
             }
-            else 
+            else
             {
                 divBotones.Visible = false;
                 divTable.Visible = false;

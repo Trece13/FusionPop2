@@ -154,7 +154,7 @@ namespace whusap.WebPages.Migration
 
 
                 lblValueProductCode2.Text = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
-                lblValueDescripcion.Text = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); ;
+                lblValueDescripcion.Text = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
 
                 // imgItem
                 var rutaServItem = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + consultaInformacion.Rows[0]["ITEM"].ToString().Trim() + "&code=Code128&dpi=96";
@@ -184,15 +184,26 @@ namespace whusap.WebPages.Migration
                 lblValueReason.Text = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
                 //lblValueObs.Text = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
 
-                LblMachineId.Text = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper(); ;
+                LblMachineId.Text = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper(); 
                 LblDispositionValue.Text = "Review" ;
-                lblValueComments.Text = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper(); ;
+                lblValueComments.Text = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper(); 
 
                 divTableFinish.Visible = true;
                 divTableRaw.Visible = false;
                 divBotones.Visible = true;
 
-
+                Session["WorkOrder"] = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
+                Session["lblReason"] = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["ProductDesc"]  = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
+                Session["ProductCode"]  = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
+                Session["Date"] =  DateTime.Now.ToString();
+                Session["Quantity"] = consultaInformacion.Rows[0]["QTYR"].ToString().Trim().ToUpper() + " " + consultaInformacion.Rows[0]["UNIT"].ToString().Trim().ToUpper();
+                Session["Finished"]     = lblOrdPonoSeqn.Text.Trim().ToUpper();
+                Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
+                Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
+                Session["Machine"] = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper();
+                Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
 
 
 
@@ -208,6 +219,21 @@ namespace whusap.WebPages.Migration
                 lblValueInternalMaterial.Text = consultaInformacion.Rows[0]["CLOT"].ToString().Trim().ToUpper();
                 lblValueReason2.Text = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
                 lblValueObs2.Text = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
+
+
+                Session["WorkOrder"] = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
+                Session["lblReason"] = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + String.Concat(pdno, "-", "0", "-", seqn) + "&code=Code128&dpi=96";
+                Session["ProductDesc"] = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
+                Session["ProductCode"] = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
+                Session["Date"] = DateTime.Now.ToString();
+                Session["Quantity"] = consultaInformacion.Rows[0]["QTYR"].ToString().Trim().ToUpper() + " " + consultaInformacion.Rows[0]["UNIT"].ToString().Trim().ToUpper();
+                Session["Finished"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
+                Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
+                Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
+                Session["Machine"] = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper();
+                Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();   
+
 
                 divTableFinish.Visible = false;
                 divTableRaw.Visible = true;

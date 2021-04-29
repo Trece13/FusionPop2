@@ -91,7 +91,7 @@
          <a href="#" runat="server" id="linkPrint" onclick="javascript:printDiv('divTableFinish')" style="color: #000000; font-size: medium"><button class="buttonMenu" runat="server" id="btnPrint" style="width:25%;"></button></a>
     </div>
 
-    <div id="divTableFinish" runat="server" visible="false" clientidmode="static">
+    <div id="divTableFinish" runat="server" clientidmode="static">
                 <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <td><asp:Label runat="server" ID="lblDmtNumber"></asp:Label></td>
@@ -153,7 +153,7 @@
 
     </div>
 
-    <div id="divTableRaw" runat="server" visible="false" clientidmode="static">
+    <div id="divTableRaw" runat="server" clientidmode="static">
         <table class='table table-bordered' style='font-weight:bold;max-width:500px;font-size:13px; border:3px solid; border-style:outset; text-align:center;'>
             <tr>
                 <td colspan="2"><asp:Label ID="lblDefectiveMaterial2" runat="server" /></td>

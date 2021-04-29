@@ -14,6 +14,7 @@ using System.Threading;
 using whusa.Entidades;
 using whusa.Interfases;
 using whusa.Utilidades;
+using System.Web.Configuration;
 
 namespace whusap.WebPages.Balance
 {
@@ -21,21 +22,21 @@ namespace whusap.WebPages.Balance
     {
         #region Propiedades
 
-            protected static InterfazDAL_tticol042 idal042 = new InterfazDAL_tticol042();
-            protected static InterfazDAL_ttccol301 idal301 = new InterfazDAL_ttccol301();
-            Ent_ttccol301 obj301 = new Ent_ttccol301();
-            Ent_tticol042 obj042 = new Ent_tticol042();
-            DataTable resultado = new DataTable();
-            DataTable reimpresion = new DataTable();
-            string strError = string.Empty;
-            string strConteo = string.Empty;
-
-            //Manejo idioma
-            private static Mensajes _mensajesForm = new Mensajes();
-            private static LabelsText _textoLabels = new LabelsText();
-            private static string formName;
-            private static string globalMessages = "GlobalMessages";
-            public static string _idioma;
+        protected static InterfazDAL_tticol042 idal042 = new InterfazDAL_tticol042();
+        protected static InterfazDAL_ttccol301 idal301 = new InterfazDAL_ttccol301();
+        Ent_ttccol301 obj301 = new Ent_ttccol301();
+        Ent_tticol042 obj042 = new Ent_tticol042();
+        DataTable resultado = new DataTable();
+        DataTable reimpresion = new DataTable();
+        string strError = string.Empty;
+        string strConteo = string.Empty;
+        public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        //Manejo idioma
+        private static Mensajes _mensajesForm = new Mensajes();
+        private static LabelsText _textoLabels = new LabelsText();
+        private static string formName;
+        private static string globalMessages = "GlobalMessages";
+        public static string _idioma;
 
         #endregion
 
@@ -82,71 +83,82 @@ namespace whusap.WebPages.Balance
         }
 
         protected void btnSend_Click(object sender, EventArgs e)
+        {
+            InsertarIngresoPagina();
+
+            lblError.Visible = false;
+            lblError.Text = string.Empty;
+            obj042 = new Ent_tticol042();
+
+            strError = string.Empty;
+            strConteo = string.Empty;
+            obj042.sqnb = txtSQNB.Text.Trim().ToUpperInvariant();
+            obj042.urpt = Session["user"].ToString();
+            resultado = idal042.ListaRegistro_ReprintRegrind(ref obj042, ref strError);
+
+            if (resultado.Rows.Count < 1)
             {
-                InsertarIngresoPagina();
+                lblError.Visible = true;
+                lblError.Text = String.Format(mensajes("itemnotfound"), obj042.sqnb.Trim());
+                return;
+            }
 
-                lblError.Visible = false;
-                lblError.Text = string.Empty;
-                obj042 = new Ent_tticol042();
+            List<Ent_tticol042> parameterCollection042 = new List<Ent_tticol042>();
 
-                strError = string.Empty;
-                strConteo = string.Empty;
-                obj042.sqnb = txtSQNB.Text.Trim().ToUpperInvariant();
-                obj042.urpt = Session["user"].ToString();
-                resultado = idal042.ListaRegistro_ReprintRegrind(ref obj042, ref strError);
+            strConteo = resultado.Rows[0]["T$NORP"].ToString();
+            obj042.norp = Convert.ToInt32(strConteo) + 1;
+            obj042.urpt = Session["user"].ToString();
+            parameterCollection042.Add(obj042);
 
-                if (resultado.Rows.Count < 1)
+            int retorno = idal042.ActualizaRegistro_ReprintRegrind(ref parameterCollection042, ref strError);
+            bool ValidarActualizacion242 = idal042.ActualizarRegistroTticon242(ref parameterCollection042, ref strError);
+
+            if (!string.IsNullOrEmpty(strError))
+            {
+                lblError.Visible = true;
+                lblError.Text = mensajes("errorupdt");
+                return;
+            }
+
+            if (retorno > 0)
+            {
+                reimpresion = idal042.ListaRegistro_ReprintRegrind(ref obj042, ref strError);
+
+                if (reimpresion.Rows.Count < 1)
                 {
                     lblError.Visible = true;
                     lblError.Text = String.Format(mensajes("itemnotfound"), obj042.sqnb.Trim());
                     return;
                 }
+                DataRow filaImprimir = reimpresion.Rows[0];
 
-                List<Ent_tticol042> parameterCollection042 = new List<Ent_tticol042>();
+                Session["FilaImprimir"] = filaImprimir;
+                Session["descItem"] = reimpresion.Rows[0]["T$DSCA"];
+                Session["unidad"] = reimpresion.Rows[0]["T$CUNI"];
+                Session["machineItem"] = reimpresion.Rows[0]["T$MCNO"];
+                Session["strTagid"] = reimpresion.Rows[0]["T$SQNB"];
+                Session["reprinted"] = "1";
 
-                strConteo = resultado.Rows[0]["T$NORP"].ToString();
-                obj042.norp = Convert.ToInt32(strConteo) + 1;
-                obj042.urpt = Session["user"].ToString();
-                parameterCollection042.Add(obj042);
 
-                int retorno = idal042.ActualizaRegistro_ReprintRegrind(ref parameterCollection042, ref strError);
-                bool ValidarActualizacion242 = idal042.ActualizarRegistroTticon242(ref parameterCollection042, ref strError);
-                
-                if (!string.IsNullOrEmpty(strError))
-                {
-                    lblError.Visible = true;
-                    lblError.Text = mensajes("errorupdt");
-                    return;
-                }
+                Session["MaterialDesc"] = reimpresion.Rows[0]["T$DSCA"];
+                Session["Material"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + filaImprimir.ItemArray[2].ToString().Trim() + "&code=Code128&dpi=96";
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reimpresion.Rows[0]["T$SQNB"] + "&code=Code128&dpi=96"; 
+                Session["Lot"] = filaImprimir.ItemArray[0].ToString();
+                Session["Quantity"] = filaImprimir.ItemArray[3].ToString().Trim()+" "+reimpresion.Rows[0]["T$CUNI"];
+                Session["Date"] = filaImprimir.ItemArray[6].ToString().Trim();
+                Session["Machine"] = reimpresion.Rows[0]["T$MCNO"];
+                Session["Operator"] = Session["user"].ToString();
+                Session["Pallet"] = reimpresion.Rows[0]["T$SQNB"];
 
-                if (retorno > 0)
-                {
-                    reimpresion = idal042.ListaRegistro_ReprintRegrind(ref obj042, ref strError);
-
-                    if (reimpresion.Rows.Count < 1)
-                    {
-                        lblError.Visible = true;
-                        lblError.Text = String.Format(mensajes("itemnotfound"), obj042.sqnb.Trim());
-                        return;
-                    }
-                    DataRow filaImprimir = reimpresion.Rows[0];
-
-                    Session["FilaImprimir"] = filaImprimir;
-                    Session["descItem"] = reimpresion.Rows[0]["T$DSCA"];
-                    Session["unidad"] = reimpresion.Rows[0]["T$CUNI"];
-                    Session["machineItem"] = reimpresion.Rows[0]["T$MCNO"];
-                    Session["strTagid"] = reimpresion.Rows[0]["T$SQNB"];
-                    Session["reprinted"] = "1";
-
-                    StringBuilder script = new StringBuilder();
-                    script.Append("ventanaImp = window.open('../Labels/whInvLabelRegrind.aspx', ");
-                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-                    script.Append("ventanaImp.moveTo(30, 0);");
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-                }
-
-                txtSQNB.Text = string.Empty;
+                StringBuilder script = new StringBuilder();
+                script.Append("ventanaImp = window.open('../Labels/whInvLabelRegrind.aspx', ");
+                script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+                script.Append("ventanaImp.moveTo(30, 0);");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
             }
+
+            txtSQNB.Text = string.Empty;
+        }
 
         #endregion
 

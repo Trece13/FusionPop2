@@ -13,6 +13,7 @@ using whusa.Interfases;
 using System.Threading;
 using System.IO;
 using whusa.Utilidades;
+using System.Web.Configuration;
 
 namespace whusap.WebPages.InvMaterial
 {
@@ -29,6 +30,7 @@ namespace whusap.WebPages.InvMaterial
             private static string globalMessages = "GlobalMessages";
             public static string _idioma;
             public static string valueprint;
+            public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
         #region Eventos
@@ -186,6 +188,17 @@ namespace whusap.WebPages.InvMaterial
                             grdRecords.DataBind();
                             reg = resultado.Rows[index];
                             Session["FilaImprimir"] = reg;
+
+
+                            Session["MaterialDesc"] = reg.ItemArray[15].ToString().Trim();
+                            Session["MaterialCode"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg.ItemArray[2].ToString().Trim() +"&code=Code128&dpi=96";
+                            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg.ItemArray[13].ToString().Trim() +"&code=Code128&dpi=96";
+                            Session["Lot"] = reg.ItemArray[4].ToString().Trim();
+                            Session["Quantity"] = reg.ItemArray[5].ToString().Trim() + " " + reg.ItemArray[14].ToString().Trim();
+                            Session["Origin"] = String.Empty;
+                            Session["Supplier"] = reg.ItemArray[6].ToString().Trim();
+                            Session["RecibedBy"] = Session["User"].ToString();
+                            Session["RecibedOn"] = DateTime.Now.ToString();
 
                             StringBuilder script = new StringBuilder();
                             script.Append("ventanaImp = window.open('../Labels/whInvPrintLabel.aspx', ");

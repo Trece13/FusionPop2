@@ -383,6 +383,16 @@ namespace whusap.WebPages.Migration
                 lblValueCasePerPallet.Text = factor;
                 lblValueMadeIn.Text = madein;
 
+                Session["MaterialDesc"] =  descripcion;
+                Session["codeMaterial"] =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codePaid"]     =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["lblLot"]       =  PDNO;
+                Session["lblQuantity"] = factor + " " + unidad;
+                Session["lblDate"]      =  DateTime.Now.ToString();
+                Session["lblPallet"]    =  sqnb.Trim().ToUpper();
+                Session["lblMachine"]   =  maquina;
+                Session["lblOperator"] = _operator;
+
                 divTable.Visible = true;
                 divBotones.Visible = true;
 
@@ -631,6 +641,17 @@ namespace whusap.WebPages.Migration
                 lblValueCasePerPallet.Text = qtdl;
                 lblValueMadeIn.Text = madein;
                 lblValueInspectorInitial.Text = "REPRINT by: " + _operator;
+
+                Session["MaterialDesc"] = desc;
+                Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["lblLot"] = pdno;
+                Session["lblQuantity"] = qtdl + " " + unit;
+                Session["lblDate"] = DateTime.Now.ToString();
+                Session["lblPallet"] = sqnb.Trim().ToUpper();
+                Session["lblMachine"] = maq;
+                Session["lblOperator"] = _operator;
+
                 divTable.Visible = true;
                 tdBtnExit.Visible = false;
                 divBotones.Visible = true;
