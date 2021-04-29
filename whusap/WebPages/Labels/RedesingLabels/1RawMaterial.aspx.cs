@@ -35,6 +35,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                 lblSupplier.Text = Session["Supplier"].ToString();
                 lblRecibedBy.Text = Session["RecibedBy"].ToString();
                 lblRecibedOn.Text = Session["RecibedOn"].ToString();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
             }
             catch(Exception ex){
                 CrearLabel();

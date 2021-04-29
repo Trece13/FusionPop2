@@ -25,6 +25,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
             lblPrintedBy.InnerText = Session["PrintedBy"].ToString();
             lblMachine.InnerText = Session["Machine"].ToString();
             lblComments.InnerText = Session["Comments"].ToString();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
         }
 
         private void CrearLabel()

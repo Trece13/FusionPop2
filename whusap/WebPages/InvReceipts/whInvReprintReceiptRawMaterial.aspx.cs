@@ -104,6 +104,7 @@ namespace whusap.WebPages.InvReceipts
                     HttpContext.Current.Session["Supplier"] = LstPallet[0].NAMA.ToString();
                     HttpContext.Current.Session["RecibedBy"] = LstPallet[0].LOGN.ToString();
                     HttpContext.Current.Session["RecibedOn"] = LstPallet[0].DATE.ToString();
+
                 }
                 return JsonConvert.SerializeObject(LstPallet[0]);
             }

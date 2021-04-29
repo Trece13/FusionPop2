@@ -33,6 +33,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
             lblMachine.InnerHtml = Session["Machine"].ToString();
             lblOperator.InnerHtml = Session["Operator"].ToString();
             lblPallet.InnerHtml = Session["Pallet"].ToString();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
         }
 
         private void CrearLabel()

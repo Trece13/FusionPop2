@@ -12,6 +12,7 @@ using System.Configuration;
 using whusa.Entidades;
 using System.Data;
 using System.Web.Configuration;
+using System.Text;
 
 namespace whusap.WebPages.Migration
 {
@@ -204,7 +205,11 @@ namespace whusap.WebPages.Migration
                 Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
                 Session["Machine"] = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper();
                 Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
-
+                
+                StringBuilder script = new StringBuilder();
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=600,height=450');");
+                script.Append("ventanaImp.moveTo(30, 0);");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
             }
@@ -232,7 +237,12 @@ namespace whusap.WebPages.Migration
                 Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
                 Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
                 Session["Machine"] = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper();
-                Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();   
+                Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
+
+                StringBuilder script = new StringBuilder();
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=600,height=450');");
+                script.Append("ventanaImp.moveTo(30, 0);");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
                 divTableFinish.Visible = false;

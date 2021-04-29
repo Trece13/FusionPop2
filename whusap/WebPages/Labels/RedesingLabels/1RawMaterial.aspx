@@ -178,6 +178,31 @@
             text-align: left;
         }
     </style>
+    <script type="text/javascript">
+        function printDiv(divID) {
+            var divElements = document.getElementById(divID).innerHTML;
+            var oldPage = document.body.innerHTML;
+            document.body.innerHTML = "<html";
+            document.body.innerHTML += "><head";
+            document.body.innerHTML += "><title";
+            document.body.innerHTML += "></title"
+            document.body.innerHTML += "></head";
+            document.body.innerHTML += "><body";
+            document.body.innerHTML += ">" + divElements;
+            document.body.innerHTML += "</body>";
+
+            window.print();
+            document.body.innerHTML = oldPage;
+            //setTimeout(window.close(),15000);
+        };
+    
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        };       
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">

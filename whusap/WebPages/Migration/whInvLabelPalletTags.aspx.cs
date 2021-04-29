@@ -12,6 +12,7 @@ using System.Configuration;
 using whusa.Entidades;
 using System.Data;
 using System.Web.Configuration;
+using System.Text;
 
 namespace whusap.WebPages.Migration
 {
@@ -392,6 +393,11 @@ namespace whusap.WebPages.Migration
                 Session["lblPallet"]    =  sqnb.Trim().ToUpper();
                 Session["lblMachine"]   =  maquina;
                 Session["lblOperator"] = _operator;
+
+                StringBuilder script = new StringBuilder();
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCups.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=600,height=450');");
+                script.Append("ventanaImp.moveTo(30, 0);");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                 divTable.Visible = true;
                 divBotones.Visible = true;

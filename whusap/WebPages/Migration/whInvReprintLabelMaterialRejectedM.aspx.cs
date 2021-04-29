@@ -11,6 +11,7 @@ using System.Configuration;
 using whusa.Entidades;
 using System.Globalization;
 using System.Web.Configuration;
+using System.Text;
 
 namespace whusap.WebPages.Migration
 {
@@ -182,6 +183,11 @@ namespace whusap.WebPages.Migration
                 Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
                 Session["Machine"] = machine;
                 Session["Comments"] = comments;
+
+                StringBuilder script = new StringBuilder();
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=600,height=450');");
+                script.Append("ventanaImp.moveTo(30, 0);");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
             }
             else
