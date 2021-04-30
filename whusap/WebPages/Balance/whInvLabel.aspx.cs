@@ -40,6 +40,7 @@ namespace whusap.WebPages.Balance
         private static string globalMessages = "GlobalMessages";
         public static string _tipoFormulario;
         public static string _idioma;
+        public static string UrlBaseBarcode = System.Web.Configuration.WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
         #region Eventos
@@ -302,7 +303,7 @@ namespace whusap.WebPages.Balance
             Session["MaterialDesc"] = obj020.dsca;
             Session["codeMaterial"] = reg[""].ToString();
             Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["SECUENCIA"].ToString() + "&code=Code128&dpi=96";
-            Session["Lot"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["ORDEN"].ToString(); +"&code=Code128&dpi=96"; 
+            Session["Lot"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["ORDEN"].ToString() +"&code=Code128&dpi=96"; 
             Session["Quantity"]     =   reg["PESO"].ToString();
             Session["Date"]         =   reg["FECHA"].ToString();
             Session["Machine"]      =   reg[""].ToString();

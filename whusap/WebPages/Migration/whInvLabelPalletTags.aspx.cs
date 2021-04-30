@@ -387,12 +387,12 @@ namespace whusap.WebPages.Migration
                 Session["MaterialDesc"] =  descripcion;
                 Session["codeMaterial"] =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
                 Session["codePaid"]     =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
-                Session["lblLot"]       =  PDNO;
-                Session["lblQuantity"] = factor + " " + unidad;
-                Session["lblDate"]      =  DateTime.Now.ToString();
-                Session["lblPallet"]    =  sqnb.Trim().ToUpper();
-                Session["lblMachine"]   =  maquina;
-                Session["lblOperator"] = _operator;
+                Session["Lot"]       =  PDNO;
+                Session["Quantity"] = factor + " " + unidad;
+                Session["Date"]      =  DateTime.Now.ToString();
+                Session["Pallet"]    =  sqnb.Trim().ToUpper();
+                Session["Machine"]   =  maquina;
+                Session["Operator"] = _operator;
 
                 StringBuilder script = new StringBuilder();
                 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
