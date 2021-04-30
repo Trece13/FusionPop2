@@ -26,6 +26,7 @@ namespace whusap.WebPages.Balance
         protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
         protected static InterfazDAL_tticol025 idal025 = new InterfazDAL_tticol025();
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
+        public static string UrlBaseBarcode = System.Web.Configuration.WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         Ent_tticol020 obj020 = new Ent_tticol020();
         Ent_tticol022 obj022 = new Ent_tticol022();
         Ent_tticol011 obj = new Ent_tticol011();
@@ -300,12 +301,12 @@ namespace whusap.WebPages.Balance
             Session["unidad"] = hidden.Value;
 
             Session["MaterialDesc"] = obj020.dsca;
-            Session["codeMaterial"] = reg[""].ToString();
+            Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +  obj022.mitm +"&code=Code128&dpi=96";
             Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["SECUENCIA"].ToString() + "&code=Code128&dpi=96";
-            Session["Lot"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["ORDEN"].ToString(); +"&code=Code128&dpi=96"; 
+            Session["Lot"] = reg["ORDEN"].ToString();
             Session["Quantity"]     =   reg["PESO"].ToString();
             Session["Date"]         =   reg["FECHA"].ToString();
-            Session["Machine"]      =   reg[""].ToString();
+            Session["Machine"] = string.Empty;
             Session["Operator"]     =   reg["USUARIO"].ToString();
             Session["Winder"]       =   string.Empty;
             Session["Pallet"]       =   reg["SECUENCIA"].ToString();

@@ -387,19 +387,19 @@ namespace whusap.WebPages.Migration
                 Session["MaterialDesc"] =  descripcion;
                 Session["codeMaterial"] =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
                 Session["codePaid"]     =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
-                Session["lblLot"]       =  PDNO;
-                Session["lblQuantity"] = factor + " " + unidad;
-                Session["lblDate"]      =  DateTime.Now.ToString();
-                Session["lblPallet"]    =  sqnb.Trim().ToUpper();
-                Session["lblMachine"]   =  maquina;
-                Session["lblOperator"] = _operator;
+                Session["Lot"]       =  PDNO;
+                Session["Quantity"] = factor + " " + unidad;
+                Session["Date"]      =  DateTime.Now.ToString();
+                Session["Pallet"]    =  sqnb.Trim().ToUpper();
+                Session["Machine"]   =  maquina;
+                Session["Operator"] = _operator;
 
                 StringBuilder script = new StringBuilder();
                 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
-                divTable.Visible = true;
-                divBotones.Visible = true;
+                divTable.Visible = false;
+                divBotones.Visible = false;
 
                 lblError.Text = String.Empty;
 
@@ -408,7 +408,7 @@ namespace whusap.WebPages.Migration
                 if (_procesoAutomatico)
                 {
                     tdBtnExit.Visible = false;
-                    divTable.Visible = true;
+                    divTable.Visible = false;
 
 
                     var validaAnuncio = ConsultaAnuncioAutomatico(sqnb, PDNO);
@@ -416,8 +416,8 @@ namespace whusap.WebPages.Migration
                     if (!validaAnuncio)
                     {
                         lblInfo.Text = mensajes("errorannouncement");
-                        divBotones.Visible = true;
-                        tdBtnExit.Visible = true;
+                        divBotones.Visible = false;
+                        tdBtnExit.Visible = false;
                     }
                 }
             }
@@ -650,12 +650,12 @@ namespace whusap.WebPages.Migration
                 Session["MaterialDesc"] = desc;
                 Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
                 Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
-                Session["lblLot"] = pdno;
-                Session["lblQuantity"] = qtdl + " " + unit;
-                Session["lblDate"] = DateTime.Now.ToString();
-                Session["lblPallet"] = sqnb.Trim().ToUpper();
-                Session["lblMachine"] = maq;
-                Session["lblOperator"] = _operator;
+                Session["Lot"] = pdno;
+                Session["Quantity"] = qtdl + " " + unit;
+                Session["Date"] = DateTime.Now.ToString();
+                Session["Pallet"] = sqnb.Trim().ToUpper();
+                Session["Machine"] = maq;
+                Session["Operator"] = _operator;
 
 
                 StringBuilder script = new StringBuilder();
@@ -663,9 +663,9 @@ namespace whusap.WebPages.Migration
                 script.Append("ventanaImp.moveTo(30, 0);");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
-                divTable.Visible = true;
+                divTable.Visible = false;
                 tdBtnExit.Visible = false;
-                divBotones.Visible = true;
+                divBotones.Visible = false;
 
                 //MODIFICCACIONES JC
                 _idaltticol022.ActualizarRegistroTicol222(Session["user"].ToString(), pdno, sqnb);
@@ -681,7 +681,7 @@ namespace whusap.WebPages.Migration
             else
             {
                 divTable.Visible = false;
-                tdBtnExit.Visible = true;
+                tdBtnExit.Visible = false;
                 divBotones.Visible = false;
                 lblError.Text = mensajes("ordenocreated");
                 lblConfirm.Text = string.Empty;

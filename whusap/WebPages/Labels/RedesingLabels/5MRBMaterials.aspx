@@ -217,9 +217,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="printContainer">
+        <div id="printContainer"  class="container">
         <div id="printSpace">
-            <div id="myLabel" class="container">
+            <div id="myLabel">
                 <div class="row">
                     <div class="col-4 alingLeft">
                         <strong>WO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
@@ -283,7 +283,7 @@
             </div>
         </div>
         <br />
-        <div id="printButton" class="container">
+        <div id="printButton">
             <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
         </div>
     </div>

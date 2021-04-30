@@ -78,8 +78,8 @@
     </div>
     <div class="form-group row">
         <input id="btnEnviar" type="button" class="btn btn-primary btn-lg" value="Query" />&nbsp
-        <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="javascript:printDiv('MyEtiqueta')">
-            Print</button>&nbsp
+        <!--<button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="javascript:printDiv('MyEtiqueta')">
+            Print</button>&nbsp-->
     </div>
     </form>
     <div id="MyEtiqueta">
@@ -354,21 +354,21 @@
                 LblDater.html(MyObject.DATE);
                 LblReprint.html(MyObject.NPRT);
 
-                if (MyObject.OORG.trim() == "2") {
-                    MyEtiqueta.show('slow');
-                    //MyEtiqueta.hide('slow');
+                //if (MyObject.OORG.trim() == "2") {
+                //    MyEtiqueta.show('slow');
+                //    //MyEtiqueta.hide('slow');
 
-                    //btnMyEtiqueta.hide('slow');
-                    btnMyEtiqueta.show('slow');
-                }
-                else {
-                    MyEtiqueta.show('slow');
-                    //MyEtiquetaOC.hide('slow');
+                //    //btnMyEtiqueta.hide('slow');
+                //    btnMyEtiqueta.show('slow');
+                //}
+                //else {
+                //    MyEtiqueta.show('slow');
+                //    //MyEtiquetaOC.hide('slow');
 
 
-                    btnMyEtiqueta.show('slow');
-                    //btnMyEtiquetaOC.hide('slow');
-                }
+                //    btnMyEtiqueta.show('slow');
+                //    //btnMyEtiquetaOC.hide('slow');
+                //}
 
                 ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterial.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');
                 ventanaImp.moveTo(30, 0);

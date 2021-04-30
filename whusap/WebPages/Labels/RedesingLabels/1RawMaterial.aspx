@@ -209,9 +209,9 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="printContainer">
+    <div id="printContainer" class="container">
         <div id="printSpace">
-            <div id="myLabel" class="container">
+            <div id="myLabel" >
                 <div class="row">
                     <div class="col-6 alingLeft">
                         <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
@@ -250,7 +250,7 @@
             </div>
         </div>
         <br />
-        <div id="printButton" class="container" runat="server">
+        <div id="printButton" runat="server">
             <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
         </div>
     </div>

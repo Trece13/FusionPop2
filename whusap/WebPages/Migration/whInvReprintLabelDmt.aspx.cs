@@ -191,7 +191,7 @@ namespace whusap.WebPages.Migration
 
                 divTableFinish.Visible = false;
                 divTableRaw.Visible = false;
-                divBotones.Visible = true;
+                divBotones.Visible = false;
 
                 Session["WorkOrder"] = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
                 Session["lblReason"] = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
@@ -248,7 +248,7 @@ namespace whusap.WebPages.Migration
 
                 divTableFinish.Visible = false;
                 divTableRaw.Visible = false;
-                divBotones.Visible = true;
+                divBotones.Visible = false;
             }
         }
 

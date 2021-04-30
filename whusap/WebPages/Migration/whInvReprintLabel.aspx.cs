@@ -152,8 +152,8 @@ namespace whusap.WebPages.Migration
                 lblValueReprintedBy.Text = " " + HttpContext.Current.Session["user"].ToString();
                 lblValueMachine.Text = machine;
 
-                divTable.Visible = true;
-                divBotones.Visible = true;
+                divTable.Visible = false;
+                divBotones.Visible = false;
                 //modificaciones jc
                 _idaltticol022.ActualizarRegistroTicol222(Session["user"].ToString(), pdno, sqnb);
                 Ent_tticol022 Obj_tticol022 = new Ent_tticol022
