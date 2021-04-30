@@ -10,7 +10,7 @@
 namespace whusap.WebPages.Labels.RedesingLabels {
     
     
-    public partial class _6Inventory_Label {
+    public partial class _6InventoryLabel {
         
         /// <summary>
         /// form1 control.

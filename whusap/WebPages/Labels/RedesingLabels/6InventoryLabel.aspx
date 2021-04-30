@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="6InventoryLabel.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._6Inventory_Label" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="6InventoryLabel.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._6InventoryLabel" %>
 
 <!DOCTYPE html>
 

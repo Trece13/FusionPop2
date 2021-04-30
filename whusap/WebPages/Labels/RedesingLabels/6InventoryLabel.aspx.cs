@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace whusap.WebPages.Labels.RedesingLabels
 {
-    public partial class _6Inventory_Label : System.Web.UI.Page
+    public partial class _6InventoryLabel : System.Web.UI.Page
     { 
         //Params
         /*

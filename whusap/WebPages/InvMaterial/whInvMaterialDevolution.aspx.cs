@@ -323,7 +323,7 @@ namespace whusap.WebPages.InvMaterial
                             List<Ent_tticol022> list022 = new List<Ent_tticol022>();
 
                             //obj022.pdno = txtWorkOrder.Text.Trim().ToUpper();
-                            obj022.pdno = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper().Trim();
+                            obj022.pdno = string.IsNullOrEmpty(toLot) ? txtWorkOrder.Text.Trim().ToUpper() : toLot.ToUpper().Trim();
                             obj022.sqnb = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             obj022.proc = 1;
                             obj022.logn = HttpContext.Current.Session["user"].ToString();
