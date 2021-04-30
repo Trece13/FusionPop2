@@ -168,8 +168,8 @@ namespace whusap.WebPages.Migration
                 lblValueReason.Text = reasons;
                 lblValueComments.Text = comments;
 
-                divTable.Visible = true;
-                divBotones.Visible = true;
+                divTable.Visible = false;
+                divBotones.Visible = false;
 
                 Session["WorkOrder"] = pdno;
                 Session["lblReason"] = consultaInformacion[0]["DSCACDIS"].ToString().Trim();

@@ -194,13 +194,11 @@
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;
-            document.body.innerHTML = "<html";
-            document.body.innerHTML += "><head";
-            document.body.innerHTML += "><title";
-            document.body.innerHTML += "></title"
-            document.body.innerHTML += "></head";
-            document.body.innerHTML += "><body";
-            document.body.innerHTML += ">" + divElements;
+            document.body.innerHTML = "<html>";
+            document.body.innerHTML += "<head>";
+            document.body.innerHTML += "</head>";
+            document.body.innerHTML += "<body>";
+            document.body.innerHTML +=  divElements;
             document.body.innerHTML += "</body>";
 
             window.print();

@@ -110,7 +110,7 @@
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div runat="server" id="divTable" clientidmode="Static">
+    <div runat="server" id="divTable" clientidmode="Static" visible="false">
         <hr />
         <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;" border="1" cellspacing="0" cellpadding="0">
             <tr>
