@@ -299,11 +299,25 @@ namespace whusap.WebPages.Balance
             Session["descItem"] = obj020.dsca;
             Session["unidad"] = hidden.Value;
 
+            Session["MaterialDesc"] = obj020.dsca;
+            Session["codeMaterial"] = reg[""].ToString();
+            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["SECUENCIA"].ToString() + "&code=Code128&dpi=96";
+            Session["Lot"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["ORDEN"].ToString(); +"&code=Code128&dpi=96"; 
+            Session["Quantity"]     =   reg["PESO"].ToString();
+            Session["Date"]         =   reg["FECHA"].ToString();
+            Session["Machine"]      =   reg[""].ToString();
+            Session["Operator"]     =   reg["USUARIO"].ToString();
+            Session["Winder"]       =   string.Empty;
+            Session["Pallet"]       =   reg["SECUENCIA"].ToString();
+
             StringBuilder script = new StringBuilder();
-            script.Append("ventanaImp = window.open('../Labels/whInvLabel.aspx', ");
+            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', ");
             script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
             script.Append("ventanaImp.moveTo(30, 0);");
-            //script.Append("setTimeout (ventanaImp.close(), 20000);");
+            //script.Append("ventanaImp = window.open('../Labels/whInvLabel.aspx', ");
+            //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+            //script.Append("ventanaImp.moveTo(30, 0);");
+            ////script.Append("setTimeout (ventanaImp.close(), 20000);");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
         }

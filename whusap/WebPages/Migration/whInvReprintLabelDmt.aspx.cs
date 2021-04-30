@@ -189,7 +189,7 @@ namespace whusap.WebPages.Migration
                 LblDispositionValue.Text = "Review" ;
                 lblValueComments.Text = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper(); 
 
-                divTableFinish.Visible = true;
+                divTableFinish.Visible = false;
                 divTableRaw.Visible = false;
                 divBotones.Visible = true;
 
@@ -207,11 +207,11 @@ namespace whusap.WebPages.Migration
                 Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
                 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=600,height=450');");
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
                 script.Append("ventanaImp.moveTo(30, 0);");
+                //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-
-
+                //myLabelFrame.Attributes.Add("src", "../Labels/RedesingLabels/5MRBMaterials.aspx");
             }
             else 
             {
@@ -240,13 +240,14 @@ namespace whusap.WebPages.Migration
                 Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=600,height=450');");
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
                 script.Append("ventanaImp.moveTo(30, 0);");
+                //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
                 divTableFinish.Visible = false;
-                divTableRaw.Visible = true;
+                divTableRaw.Visible = false;
                 divBotones.Visible = true;
             }
         }

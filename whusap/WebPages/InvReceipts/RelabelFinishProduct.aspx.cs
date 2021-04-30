@@ -753,12 +753,30 @@ namespace whusap.WebPages.InvReceipts
                 //return JsonConvert.SerializeObject(data022);
                 if (Convert.ToBoolean(validateSave) && Convert.ToBoolean(validateSaveTicol222))
                 {
+
+                    Session["MaterialDesc"] = data022.mitm;
+                    Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.mitm + "&code=Code128&dpi=96";
+                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.sqnb + "&code=Code128&dpi=96"; 
+                    Session["Lot"]          = CLOT;
+                    Session["Quantity"]     = data022.acqt+" "+data022.cuni;
+                    Session["Date"]         = DateTime.Now.ToString();
+                    Session["Pallet"]       = data022.sqnb;
+                    Session["Machine"] = String.Empty;
+                    Session["Operator"]     = _operator;
+
+
                     StringBuilder script = new StringBuilder();
-                    script.Append("ventanaImp = window.open('../Labels/whInvLabelFinishProduct.aspx', ");
-                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCups.aspx', ");
+                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=700,height=450');");
                     script.Append("ventanaImp.moveTo(30, 0);");
                     //script.Append("setTimeout (ventanaImp.close(), 20000);");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+                    //StringBuilder script = new StringBuilder();
+                    //script.Append("ventanaImp = window.open('../Labels/whInvLabelFinishProduct.aspx', ");
+                    //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+                    //script.Append("ventanaImp.moveTo(30, 0);");
+                    ////script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                 }
                 else
                 {

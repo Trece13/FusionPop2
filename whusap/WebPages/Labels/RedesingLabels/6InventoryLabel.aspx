@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="1RawMaterial.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._1RawMaterial" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="6InventoryLabel.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._6Inventory_Label" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,7 +9,7 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
         crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
-     <style type="text/css">
+    <style type="text/css">
         #MyEtiqueta label {
             font-size: 15px;
         }
@@ -95,8 +96,15 @@
         #codePaid {
             display: block;
             margin: auto;
-            height: 170px;
+            height: 140px;
             width: 500px;
+        }
+        
+        #codeMaterial {
+            display: block;
+            margin: auto;
+            height: 50px;
+            width: 220px;
         }
         
         #codeItem {
@@ -155,7 +163,7 @@
         }
         
         #divBarcode {
-            height: 186px;
+            height: 160px;
             padding: inherit;
         }
         
@@ -175,10 +183,16 @@
         .table td,
         .table th {
             padding: .1rem;
-            vertical-align: top;
             border-top: 1px solid #dee2e6;
             font-size: 12px;
             text-align: left;
+            vertical-align: middle;
+            padding-left: 1em;
+        }
+        
+        .row {
+            margin-right: 0px !important;
+            margin-left: 0px !important;
         }
     </style>
     <script type="text/javascript">
@@ -214,10 +228,11 @@
             <div id="myLabel" class="container">
                 <div class="row">
                     <div class="col-6 alingLeft">
-                        <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
+                        <label><strong><label id="lblMaterialDesc"  runat="server">MATERIAL DESCRIPTION</label></strong>
+                        </label>
                     </div>
                     <div class="col-6 alingRight">
-                        <label id="lblMaterialCode" runat="server"><strong>MATERIAL CODE</strong></label>
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="codeMaterial" alt="" />
                     </div>
                 </div>
                 <br />
@@ -228,21 +243,30 @@
                 <div>
                     <table class="table">
                         <tbody>
-                            <tr>
-                                <td><strong>LOT</strong>&nbsp;&nbsp;<asp:Label id="lblLot" runat="server"></asp:Label></td>
-                                <td><strong>Quantity</strong>&nbsp;&nbsp;<asp:Label id="lblQuantity"  runat="server"></asp:Label></td>
+                            <tr class="row">
+                                <td class="col-12">
+                                    <div class="row">
+                                        <div class="col-6"><strong>WO Lot</strong><label id="lblLot" runat="server"></label></div>
+                                        <div class="col-6"><strong>Quantity</strong><label id="lblQuantity" runat="server"></label></div>
+                                    </div>
+                                </td>
                             </tr>
-                        </tbody>
-                        <thead>
-                            <tr>
-                                <td><strong>Origin Lot</strong>&nbsp;&nbsp;<asp:Label id="lblOrigin" runat="server"></asp:Label></td>
-                                <td><strong>Supplier</strong>&nbsp;&nbsp;<asp:Label id="lblSupplier" runat="server"></asp:Label></td>
+                            <tr class="row">
+                                <td class="col-12">
+                                    <div class="row">
+                                        <div class="col-8"><strong>Date</strong><label id="lblDate" runat="server"></label></div>
+                                        <div class="col-4"><strong>Pallet #</strong><label id="lbPallet" runat="server"></label></div>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Received By</strong>&nbsp;&nbsp;<asp:Label id="lblRecibedBy" runat="server"></asp:Label></td>
-                                <td><strong>Received On</strong>&nbsp;&nbsp;<asp:Label id="lblRecibedOn" runat="server"></asp:Label></td>
+                            <tr class="row">
+                                <td class="col-12">
+                                    <div class="row">
+                                        <div class="col-4"><strong>Machine</strong><label id="lblMachine" runat="server"></label></div>
+                                        <div class="col-4"><strong>Made id Dublin VA</strong></div>
+                                        <div class="col-4"><strong>Operator</strong><label id="lblOperator" runat="server"></label></div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -250,7 +274,7 @@
             </div>
         </div>
         <br />
-        <div id="printButton" class="container" runat="server">
+        <div id="printButton" class="container">
             <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
         </div>
     </div>

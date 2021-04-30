@@ -386,6 +386,20 @@ namespace whusap.WebPages.Migration
                 lblValueCasePerPallet.Text = enterQuantity.ToString();
                 lblValueMadeIn.Text = madein;
 
+                Session["MaterialDesc"] = descripcion;
+                Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["lblLot"] = PDNO;
+                Session["lblQuantity"] = enterQuantity.ToString()+" "+unidad;
+                Session["lblDate"] = DateTime.Now.ToString();
+                Session["lblPallet"] = sqnb.Trim().ToUpper();
+                Session["lblMachine"] = maquina;
+                Session["lblOperator"]  = _operator;
+
+                StringBuilder script = new StringBuilder();
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
                 divTable.Visible = true;
                 divBotones.Visible = true;
 

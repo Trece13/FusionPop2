@@ -202,7 +202,7 @@ namespace whusap.WebPages.InvMaterial
 
                             StringBuilder script = new StringBuilder();
                             script.Append("ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterial.aspx', ");
-                            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+                            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=700,height=450');");
                             script.Append("ventanaImp.moveTo(30, 0);");
                             //script.Append("ventanaImp = window.open('../Labels/whInvPrintLabel.aspx', ");
                             //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");

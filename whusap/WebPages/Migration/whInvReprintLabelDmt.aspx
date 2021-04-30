@@ -10,7 +10,7 @@
 
             }
             return i;
-        }; 
+        };
 
         function printDiv(divID) {
 
@@ -19,7 +19,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
@@ -55,78 +55,90 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <table border="0">
         <tr>
-            <td style="text-align:left;">
+            <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblWorkOrder" /></b></span>
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="lblWorkOrder" /></b></span>
             </td>
-            <td style="width: 250px; padding:5px;">
+            <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtWorkOrder" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
         <tr>
-            <td style="text-align:left;">
+            <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                <b style="font-size: 11px;">
-                    <asp:Label runat="server" ID="lblSequence" /></b></span>
+                    <b style="font-size: 11px;">
+                        <asp:Label runat="server" ID="lblSequence" /></b></span>
             </td>
-            <td style="width: 250px; padding:5px;">
+            <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
                     <asp:TextBox runat="server" ID="txtSequence" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="text-align:center;">
-                <hr />  
-                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" style="height:30px;" />
+            <td colspan="2" style="text-align: center;">
+                <hr />
+                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
             </td>
         </tr>
     </table>
 
-    <div runat="server" id="divBotones" style="text-align:left;" visible="false">
+    <div runat="server" id="divBotones" style="text-align: left;" visible="false">
         <hr />
-         <a href="#" runat="server" id="linkPrint" onclick="javascript:printDiv('divTableFinish')" style="color: #000000; font-size: medium"><button class="buttonMenu" runat="server" id="btnPrint" style="width:25%;"></button></a>
+        <a href="#" runat="server" id="linkPrint" onclick="javascript:printDiv('divTableFinish')" style="color: #000000; font-size: medium">
+            <button class="buttonMenu" runat="server" id="btnPrint" style="width: 25%;"></button>
+        </a>
     </div>
-
-    <div id="divTableFinish" runat="server" clientidmode="static">
-                <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
+    <div id="divTableFinish" runat="server" clientidmode="static" visible="false">
+        <table style="font-size: small; font-weight: bold; text-align: center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
             <tr>
-                <td><asp:Label runat="server" ID="lblDmtNumber"></asp:Label></td>
-                <td><asp:Label runat="server" ID="lblOrdPonoSeqn"></asp:Label></td>
-                <td><img src="~/images/logophoenix_login.jpg" runat="server" id="imgOrdPonoSeqn" alt="" hspace="60" vspace="5" style="width: 2in; height: .5in;  margin:0px;" /></td>
+                <td>
+                    <asp:Label runat="server" ID="lblDmtNumber"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblOrdPonoSeqn"></asp:Label></td>
+                <td>
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="imgOrdPonoSeqn" alt="" hspace="60" vspace="5" style="width: 2in; height: .5in; margin: 0px;" /></td>
             </tr>
             <tr>
-                <td colspan="3"><img src="~/images/logophoenix_login.jpg" runat="server" id="imgItem" alt="" hspace="60" vspace="5" style="width: 4in; height: .5in; margin:0px;"/></td>
+                <td colspan="3">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="imgItem" alt="" hspace="60" vspace="5" style="width: 4in; height: .5in; margin: 0px;" /></td>
             </tr>
             <tr>
-                <td><asp:Label runat="server" ID="lblDescription"></asp:Label></td>
-                <td colspan="2"><asp:Label runat="server" ID="lblValueDescripcion"></asp:Label></td>
+                <td>
+                    <asp:Label runat="server" ID="lblDescription"></asp:Label></td>
+                <td colspan="2">
+                    <asp:Label runat="server" ID="lblValueDescripcion"></asp:Label></td>
             </tr>
             <tr>
-                <td style="border-bottom:0px;">
+                <td style="border-bottom: 0px;">
                     <asp:Label ID="lblMachineTitle" runat="server"></asp:Label>
                     -<asp:Label ID="LblMachineId" runat="server"></asp:Label>
                 </td>
                 <td>
-                    <asp:Label runat="server" ID="lblRejected"></asp:Label> -
-                    <asp:Label ID="lblValueQuantity" runat="server"></asp:Label> -
+                    <asp:Label runat="server" ID="lblRejected"></asp:Label>
+                    -
+                    <asp:Label ID="lblValueQuantity" runat="server"></asp:Label>
+                    -
                     <asp:Label ID="lblValueUnit" runat="server"></asp:Label>
                 </td>
-                <td><img src="~/images/logophoenix_login.jpg" runat="server" id="imgQuantity" alt="" hspace="60" vspace="5" style="width: 2in; height: .5in;  margin:0px;"/></td>
+                <td>
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="imgQuantity" alt="" hspace="60" vspace="5" style="width: 2in; height: .5in; margin: 0px;" /></td>
             </tr>
             <tr>
-                <td style="border-top:0px;">
+                <td style="border-top: 0px;">
                     <asp:Label ID="LblDisposition" runat="server"></asp:Label>
                     -<asp:Label ID="LblDispositionValue" runat="server"></asp:Label>
                 </td>
                 <td>
-                    <asp:Label runat="server" ID="LblWorkOrderTitle" /> -
+                    <asp:Label runat="server" ID="LblWorkOrderTitle" />
+                    -
                     <asp:Label ID="lblValueWorkOrder" runat="server" />
                 </td>
-                <td><img src="~/images/logophoenix_login.jpg" runat="server" id="imgWorkOrder" alt="" hspace="60" vspace="5" style="width: 2in; height: .5in;  margin:0px;"/></td>
+                <td>
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="imgWorkOrder" alt="" hspace="60" vspace="5" style="width: 2in; height: .5in; margin: 0px;" /></td>
             </tr>
             <tr>
                 <td>
@@ -136,12 +148,14 @@
                 <td colspan="2">
                     <asp:Label ID="lblValueFecha" runat="server" />
                     <asp:Label ID="lblFecha" runat="server" />
-                    
+
                 </td>
-              </tr>
+            </tr>
             <tr>
-                <td><asp:Label ID="lblReason" runat="server" /></td>
-                <td colspan="2"><asp:Label ID="lblValueReason" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblReason" runat="server" /></td>
+                <td colspan="2">
+                    <asp:Label ID="lblValueReason" runat="server" /></td>
             </tr>
             <tr>
                 <td colspan="3" rowspan="2">
@@ -153,55 +167,73 @@
 
     </div>
 
-    <div id="divTableRaw" runat="server" clientidmode="static">
-        <table class='table table-bordered' style='font-weight:bold;max-width:500px;font-size:13px; border:3px solid; border-style:outset; text-align:center;'>
+    <div id="divTableRaw" runat="server" clientidmode="static" visible="false">
+        <table class='table table-bordered' style='font-weight: bold; max-width: 500px; font-size: 13px; border: 3px solid; border-style: outset; text-align: center;'>
             <tr>
-                <td colspan="2"><asp:Label ID="lblDefectiveMaterial2" runat="server" /></td>
-                <td><asp:Label ID="lblDmtNumber2" runat="server" /></td>
+                <td colspan="2">
+                    <asp:Label ID="lblDefectiveMaterial2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblDmtNumber2" runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="2"><asp:Label ID="lblPurchased" runat="server" /></td>
-                <td><asp:Label ID="lblOrderSeqn2" runat="server" /></td>
+                <td colspan="2">
+                    <asp:Label ID="lblPurchased" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblOrderSeqn2" runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="3"><asp:Label ID="lblProductCode2" runat="server" /></td>
+                <td colspan="3">
+                    <asp:Label ID="lblProductCode2" runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="3"><asp:Label ID="lblValueProductCode2" runat="server" /></td>
+                <td colspan="3">
+                    <asp:Label ID="lblValueProductCode2" runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="2"><asp:Label ID="lblProductDescription2" runat="server" /></td>
-                <td><asp:Label ID="lblDate2" runat="server" /></td>
+                <td colspan="2">
+                    <asp:Label ID="lblProductDescription2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblDate2" runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="2"><asp:Label ID="lblValueProductDescription2" runat="server" /></td>
-                <td><asp:Label ID="lblValueDate2" runat="server" ClientIDMode="Static" /></td>
+                <td colspan="2">
+                    <asp:Label ID="lblValueProductDescription2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblValueDate2" runat="server" ClientIDMode="Static" /></td>
             </tr>
             <tr>
-                <td><asp:Label ID="lblPrintedBy2" runat="server" /></td>
-                <td><asp:Label ID="lblWorkOrder2" runat="server" /></td>
-                <td><asp:Label ID="lblInternalMaterial" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblPrintedBy2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblWorkOrder2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblInternalMaterial" runat="server" /></td>
             </tr>
             <tr>
-                <td><asp:Label ID="lblValuePrintedBy2" runat="server" /></td>
-                <td><asp:Label ID="lblValueWorkOrder2" runat="server" /></td>
-                <td><asp:Label ID="lblValueInternalMaterial" runat="server" /></td>
-            </tr>
-             <tr>
-                <td><asp:Label ID="lblReason2" runat="server" /></td>
-                <td colspan="2"><asp:Label ID="lblValueReason2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblValuePrintedBy2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblValueWorkOrder2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblValueInternalMaterial" runat="server" /></td>
             </tr>
             <tr>
-                <td colspan="3"><asp:Label ID="lblValueObs2" runat="server" /></td>
+                <td>
+                    <asp:Label ID="lblReason2" runat="server" /></td>
+                <td colspan="2">
+                    <asp:Label ID="lblValueReason2" runat="server" /></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <asp:Label ID="lblValueObs2" runat="server" /></td>
             </tr>
         </table>
     </div>
 
-    <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+    <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+    <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
     <script type="text/javascript">
-        function InicilizarObjetos()
-        {
+        function InicilizarObjetos() {
             lblDescription = $('#lblDescription');
             //-------------------------------------
             lblMachineTitle = $('#MachineTitle');

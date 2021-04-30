@@ -14,12 +14,12 @@ namespace whusap.WebPages.Labels.RedesingLabels
            Session["MaterialDesc"] 
            Session["codeMaterial"] 
            Session["codePaid"]     
-           Session["lblLot"]       
-           Session["lblQuantity"]  
-           Session["lblDate"]      
-           Session["lblPallet"]    
-           Session["lblMachine"]   
-           Session["lblOperator"]  
+           Session["Lot"]       
+           Session["Quantity"]  
+           Session["Date"]      
+           Session["Pallet"]    
+           Session["Machine"]   
+           Session["Operator"]  
          */
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -27,12 +27,12 @@ namespace whusap.WebPages.Labels.RedesingLabels
             lblMaterialDesc.InnerHtml = Session["MaterialDesc"].ToString();
             codeMaterial.Src = Session["codeMaterial"].ToString();
             codePaid.Src = Session["codePaid"].ToString();
-            lblLot.InnerHtml = Session["lblLot"].ToString();
-            lblQuantity.InnerHtml = Session["lblQuantity"].ToString();
-            lblDate.InnerHtml = Session["lblDate"].ToString();
-            lblPallet.InnerHtml = Session["lblPallet"].ToString();
-            lblMachine.InnerHtml = Session["lblMachine"].ToString();
-            lblOperator.InnerHtml = Session["lblOperator"].ToString();
+            lblLot.InnerHtml = Session["Lot"].ToString();
+            lblQuantity.InnerHtml = Session["Quantity"].ToString();
+            lblDate.InnerHtml = Session["Date"].ToString();
+            lblPallet.InnerHtml = Session["Pallet"].ToString();
+            lblMachine.InnerHtml = Session["Machine"].ToString();
+            lblOperator.InnerHtml = Session["Operator"].ToString();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
         }
 

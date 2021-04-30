@@ -132,6 +132,7 @@ namespace whusap.WebPages.InvFloor
                     objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
                     objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
                     objWhcol020.user = HttpContext.Current.Session["user"].ToString();
+
                 }
                 //}
             }

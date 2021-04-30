@@ -9,6 +9,21 @@ namespace whusap.WebPages.Labels.RedesingLabels
 {
     public partial class _5MRBMaterials : System.Web.UI.Page
     {
+        //Params
+        /*
+            Session["WorkOrder"]
+            Session["lblReason"]
+            Session["codePaid"]
+            Session["ProductDesc"]
+            Session["ProductCode"]
+            Session["Date"]
+            Session["Quantity"]
+            Session["Finished"]
+            Session["Pallet"]
+            Session["PrintedBy"]
+            Session["Machine"]
+            Session["Comments"]
+         */
         protected void Page_Load(object sender, EventArgs e)
         {
             CrearLabel();

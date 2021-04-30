@@ -9,7 +9,20 @@ namespace whusap.WebPages.Labels.RedesingLabels
 {
     public partial class _2RollStock : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        //params
+        /*
+            Session["MaterialDesc"]
+            Session["codeMaterial"]
+            Session["codePaid"]
+            Session["Lot"]
+            Session["Quantity"]
+            Session["Date"]
+            Session["Machine"]
+            Session["Operator"]
+            Session["Winder"]
+            Session["Pallet"]
+         */
+protected void Page_Load(object sender, EventArgs e)
         {
             CrearLabel();
             lblMaterialDesc.InnerHtml = Session["MaterialDesc"].ToString();
