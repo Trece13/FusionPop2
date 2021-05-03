@@ -35,7 +35,11 @@ protected void Page_Load(object sender, EventArgs e)
             lblOperator.InnerHtml = Session["Operator"].ToString();
             lblWinder.InnerHtml = Session["Winder"].ToString();
             lblPallet.InnerHtml = Session["Pallet"].ToString();
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+            if (Session["Reprint"].ToString() == "yes")
+            {
+                printButton.Visible = false;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+            }
         }
 
         private void CrearLabel()

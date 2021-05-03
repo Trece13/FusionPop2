@@ -440,17 +440,11 @@ namespace whusa.Interfases
 
             try
             {
-                //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, true) .ToString();
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
-                //DataTable Existencia = ConsultarPorPalletIDReimpresion(MyObj.PAID);
-                //if (Existencia.Rows.Count > 0)
-                //{
-                //    retorno = "true";
-                //}
             }
             catch (Exception ex)
             {
-                log.escribirError("My Query"+strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                log.escribirError("My Query" + strSentencia + ex.Message, "InsertarReseiptRawMaterial", "InsertarReseiptRawMaterial", "InsertarReseiptRawMaterial");
 
             }
 

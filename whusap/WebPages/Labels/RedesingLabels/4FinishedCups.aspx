@@ -13,34 +13,34 @@
         #MyEtiqueta label {
             font-size: 15px;
         }
-        
+
         #LblDate {
             font-size: 14px !important;
         }
-        
+
         #LblReprintInd,
         #LblReprint {
             display: none;
         }
-        
+
         .isValid {
             border-bottom: solid;
             border-color: green;
         }
-        
+
         .isNotValid {
             border-bottom: solid;
             border-color: red;
         }
-        
+
         .fa-check {
             color: green;
         }
-        
+
         .fa-times {
             color: red;
         }
-        
+
         #checkItem,
         #checkLot,
         #checkWarehouse,
@@ -48,7 +48,7 @@
         #checkPaid {
             display: none;
         }
-        
+
         #exItem,
         #exLot,
         #exWarehouse,
@@ -56,7 +56,7 @@
         #exPaid {
             display: none;
         }
-        
+
         #loadItem,
         #loadLot,
         #loadWarehouse,
@@ -64,15 +64,15 @@
         #loadPaid {
             display: none;
         }
-        
+
         tr {
             text-align: center;
         }
-        
+
         th {
             text-align: center;
         }
-        
+
         #myLabel {
             width: 6in;
             height: 4in;
@@ -80,70 +80,72 @@
             border: 1px solid black;
             border-radius: 12px;
         }
-        
+
         .alingRight {
             text-align: right;
         }
-        
+
         .alingLeft {
             text-align: left;
         }
-        
+
         #printButton {
             width: 6in;
         }
-        
+
         #codePaid {
             display: block;
             margin: auto;
             height: 100px;
             width: 500px;
         }
-        
+
         #codeMaterial {
             display: block;
             margin: auto;
             height: 50px;
             width: 220px;
         }
-        
+
         #codeItem {
             display: block;
             margin: auto;
             height: 75px;
             width: 250px;
         }
-        
+
         #itemDesc {
             vertical-align: middle;
             font-size: 21px;
         }
-        
+
         .divDesc {
             text-align: center;
         }
-        
-        #lblDesc {}
-        
-        #lblMadein {}
-        
+
+        #lblDesc {
+        }
+
+        #lblMadein {
+        }
+
         .borderTop {
             border-top: solid 1px gray;
         }
-        
+
         #printContainer {
             margin-bottom: 100px;
         }
-        
+
         #editTable {
             display: none;
         }
-        
+
         #lblError {
             color: red;
             font-size: 13px;
         }
-        
+
         .load {
             width: 10px;
             height: 10px;
@@ -153,33 +155,34 @@
             animation-iteration-count: infinite;
             animation-timing-function: linear;
         }
-        
+
         #saveSection {
             display: none;
         }
-        
+
         .notBorderBottom {
             border-bottom: none;
         }
-        
+
         #divBarcode {
             height: 160px;
             padding: inherit;
         }
-        
+
         @keyframes spin {
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
         }
-        
+
         #table {
             font-size: 10px;
         }
-        
+
         .table td,
         .table th {
             padding: .1rem;
@@ -198,74 +201,76 @@
             document.body.innerHTML += "<head>";
             document.body.innerHTML += "</head>";
             document.body.innerHTML += "<body>";
-            document.body.innerHTML +=  divElements;
+            document.body.innerHTML += divElements;
             document.body.innerHTML += "</body>";
 
             window.print();
             document.body.innerHTML = oldPage;
             //setTimeout(window.close(),15000);
         };
-    
+
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;
             }
             return i;
-        };       
+        };
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="printContainer"  class="container">
-        <div id="printSpace">
-            <div id="myLabel">
-                <div class="row">
-                    <div class="col-6 alingLeft">
-                        <label><strong><label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
-                        </label>
+        <div id="printContainer" class="container">
+            <div id="printButton" runat="server">
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+            </div>
+            <br />
+            <div id="printSpace">
+                <div id="myLabel">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
+                            <label>
+                                <strong>
+                                    <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
+                            </label>
+                        </div>
+                        <div class="col-6 alingRight">
+                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
+                        </div>
                     </div>
-                    <div class="col-6 alingRight">
-                        <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
+                    <br />
+                    <div class="col-12 borderTop" id="divBarcode">
+                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                </div>
-                <br />
-                <div class="col-12 borderTop" id="divBarcode">
-                    <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server"/>
-                </div>
-                <div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
 
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
-                                <td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></td>
-                                <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
-                                <td><strong>Made in Dublin VA</strong></td>
-                                <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
+                                    <td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></td>
+                                    <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
+                                    <td><strong>Made in Dublin VA</strong></td>
+                                    <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <br />
-        <div id="printButton">
-            <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
-        </div>
-    </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>

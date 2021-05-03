@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using whusa;
-using DAL;
+using whusa.DAL;
 using System.Data;
 
 namespace Interfases

@@ -52,8 +52,8 @@ namespace whusap.WebPages.InvReceipts
             RequestUrlAuthority = (string)Request.Url.Authority;
 
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)

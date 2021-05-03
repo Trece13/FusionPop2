@@ -206,87 +206,89 @@
             document.body.innerHTML = oldPage;
             //setTimeout(window.close(),15000);
         };
-    
+
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;
             }
             return i;
-        };       
+        };
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="printContainer"  class="container">
-        <div id="printSpace">
-            <div id="myLabel">
-                <div class="row">
-                    <div class="col-4 alingLeft">
-                        <strong>WO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
+        <div id="printContainer" class="container">
+            <div id="printButton" runat="server">
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+            </div>
+            <br />
+            <div id="printSpace">
+                <div id="myLabel">
+                    <div class="row">
+                        <div class="col-4 alingLeft">
+                            <strong>WO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
+                        </div>
+                        <div class="col-8 alingLeft">
+                            <strong>Reason&nbsp;</strong><label id="lblReason" runat="server"></label>
+                        </div>
                     </div>
-                    <div class="col-8 alingLeft">
-                        <strong>Reason&nbsp;</strong><label id="lblReason" runat="server"></label>
+                    <div class="row">
+                        <div class="col-12 alingCenter">
+                            <strong>
+                                <label id="lblMaterialDesc" runat="server">THIS PRODUCT IS ON HOLD PENDING DISPOSITION</label></strong>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 alingCenter">
-                        <strong><label id="lblMaterialDesc" runat="server">THIS PRODUCT IS ON HOLD PENDING DISPOSITION</label></strong>
+                    <div class="col-12 borderTop" id="divBarcode">
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
                     </div>
-                </div>
-                <div class="col-12 borderTop" id="divBarcode">
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
-                </div>
-                <div>
-                    <table class="table">
-                        <tbody>
-                            <tr class="row">
-                                <td class="col-12">
-                                    <div class="row">
-                                        <div class="col-12 alingCenter"><strong><label id="lblProductDesc" runat="server">XXXXXXXXXXXXXXXXXXXXXXXXX</label>-<label id="lblProductCode" runat="server">XXXXXXXXXXX</label></strong></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <td class="col-12">
-                                    <div class="row">
-                                        <div class="col-6"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></div>
-                                        <div class="col-6"><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <td class="col-12">
-                                    <div class="row">
-                                        <div class="col-7"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished" runat="server"></label></div>
-                                        <div class="col-5"><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <td class="col-12">
-                                    <div class="row">
-                                        <div class="col-6"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy" runat="server"></label></div>
-                                        <div class="col-6"><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="row">
-                                <td class="col-12">
-                                    <div class="row">
-                                        <div class="col-12"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div>
+                        <table class="table">
+                            <tbody>
+                                <tr class="row">
+                                    <td class="col-12">
+                                        <div class="row">
+                                            <div class="col-12 alingCenter"><strong>
+                                                <label id="lblProductDesc" runat="server">XXXXXXXXXXXXXXXXXXXXXXXXX</label>-<label id="lblProductCode" runat="server">XXXXXXXXXXX</label></strong></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-12">
+                                        <div class="row">
+                                            <div class="col-6"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></div>
+                                            <div class="col-6"><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-12">
+                                        <div class="row">
+                                            <div class="col-7"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished" runat="server"></label></div>
+                                            <div class="col-5"><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-12">
+                                        <div class="row">
+                                            <div class="col-6"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy" runat="server"></label></div>
+                                            <div class="col-6"><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="row">
+                                    <td class="col-12">
+                                        <div class="row">
+                                            <div class="col-12"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <br />
-        <div id="printButton">
-            <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
-        </div>
-    </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
