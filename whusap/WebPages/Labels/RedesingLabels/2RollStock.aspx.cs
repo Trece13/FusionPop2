@@ -22,23 +22,31 @@ namespace whusap.WebPages.Labels.RedesingLabels
             Session["Winder"]
             Session["Pallet"]
          */
-protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
             CrearLabel();
-            lblMaterialDesc.InnerHtml = Session["MaterialDesc"].ToString();
-            codeMaterial.Src = Session["codeMaterial"].ToString();
-            codePaid.Src = Session["codePaid"].ToString();
-            lblLot.InnerHtml = Session["Lot"].ToString();
-            lblQuantity.InnerHtml = Session["Quantity"].ToString();
-            lblDate.InnerHtml = Session["Date"].ToString();
-            lblMachine.InnerHtml = Session["Machine"].ToString();
-            lblOperator.InnerHtml = Session["Operator"].ToString();
-            lblWinder.InnerHtml = Session["Winder"].ToString();
-            lblPallet.InnerHtml = Session["Pallet"].ToString();
-            if (Session["Reprint"].ToString() == "yes")
+            try
             {
-                printButton.Visible = false;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                lblMaterialDesc.InnerHtml = Session["MaterialDesc"].ToString();
+                codeMaterial.Src = Session["codeMaterial"].ToString();
+                codePaid.Src = Session["codePaid"].ToString();
+                lblLot.InnerHtml = Session["Lot"].ToString();
+                lblQuantity.InnerHtml = Session["Quantity"].ToString();
+                lblDate.InnerHtml = Session["Date"].ToString();
+                lblMachine.InnerHtml = Session["Machine"].ToString();
+                lblOperator.InnerHtml = Session["Operator"].ToString();
+                lblWinder.InnerHtml = Session["Winder"].ToString();
+                lblPallet.InnerHtml = Session["Pallet"].ToString();
+                if (Session["Reprint"].ToString() == "yes")
+                {
+                    printButton.Visible = false;
+                    lblReprint.Visible = true;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                CrearLabel();
             }
         }
 
