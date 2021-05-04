@@ -165,7 +165,7 @@
         }
 
         #divBarcode {
-            height: 160px;
+            height: 140px;
             padding: inherit;
         }
 
@@ -242,15 +242,7 @@
                         <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
                     <div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-
-                            </thead>
+                        <table class="table mw-100">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
@@ -267,6 +259,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div id="lblReprint" class="col-12 text-right" runat="server">
+                        <label><strong>REPRINT</strong></label>
                     </div>
                 </div>
             </div>
