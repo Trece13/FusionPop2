@@ -165,7 +165,7 @@
         }
 
         #divBarcode {
-            height: 160px;
+            height: 140px;
             padding: inherit;
         }
 
@@ -197,75 +197,78 @@
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;
-            document.body.innerHTML = "<html";
-            document.body.innerHTML += "><head";
-            document.body.innerHTML += "><title";
-            document.body.innerHTML += "></title"
-            document.body.innerHTML += "></head";
-            document.body.innerHTML += "><body";
-            document.body.innerHTML += ">" + divElements;
+            document.body.innerHTML = "<html>";
+            document.body.innerHTML += "<head>";
+            document.body.innerHTML += "</head>";
+            document.body.innerHTML += "<body>";
+            document.body.innerHTML += divElements;
             document.body.innerHTML += "</body>";
 
             window.print();
             document.body.innerHTML = oldPage;
             //setTimeout(window.close(),15000);
         };
-    
+
         function addZero(i) {
             if (i < 10) {
                 i = "0" + i;
             }
             return i;
-        };       
+        };
     </script>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="printContainer"  class="container">
-        <div id="printButton" runat="server">
-            <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
-        </div>
-        <br />
-        <div id="printSpace">
-            <div id="myLabel">
-                <div class="row">
-                    <div class="col-6 alingLeft">
-                        <label><strong><label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
-                        </label>
+        <div id="printContainer" class="container">
+            <div id="printButton" runat="server">
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+            </div>
+            <br />
+            <div id="printSpace">
+                <div id="myLabel">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
+                            <label>
+                                <strong>
+                                    <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
+                            </label>
+                        </div>
+                        <div class="col-6 alingRight">
+                            <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
+                        </div>
                     </div>
-                    <div class="col-6 alingRight">
-                        <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server"/>
+                    <br />
+                    <div class="col-12 borderTop" id="divBarcode">
+                        <img src="~/images/logophoenix_login.jpg" id="codePaid" runat="server" />
                     </div>
-                </div>
-                <br />
-                <div class="col-12 borderTop" id="divBarcode">
-                    <img src="~/images/logophoenix_login.jpg" id="codePaid" runat="server"/>
-                </div>
-                <div>
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
-                                <td rowspan="2" colspan="2"><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
-                                <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
-                                <td rowspan="2"></td>
-                            </tr>
-                            <tr>
-                                <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
-                                <td><strong>Made in Dublin VA</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div>
+                        <table class="table mw-100">
+                            <tbody>
+                                <tr>
+                                    <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
+                                    <td rowspan="2" colspan="2"><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
+                                    <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
+                                    <td rowspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
+                                    <td><strong>Made in Dublin VA</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="lblReprint" class="col-12 text-right" runat="server">
+                        <label><strong>REPRINT</strong></label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
