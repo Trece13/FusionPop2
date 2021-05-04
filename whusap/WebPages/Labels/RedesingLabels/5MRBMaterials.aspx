@@ -193,13 +193,11 @@
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;
-            document.body.innerHTML = "<html";
-            document.body.innerHTML += "><head";
-            document.body.innerHTML += "><title";
-            document.body.innerHTML += "></title"
-            document.body.innerHTML += "></head";
-            document.body.innerHTML += "><body";
-            document.body.innerHTML += ">" + divElements;
+            document.body.innerHTML = "<html>";
+            document.body.innerHTML += "<head>";
+            document.body.innerHTML += "</head>";
+            document.body.innerHTML += "<body>";
+            document.body.innerHTML += divElements;
             document.body.innerHTML += "</body>";
 
             window.print();
@@ -241,8 +239,8 @@
                     <div class="col-12 borderTop" id="divBarcode">
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
                     </div>
-                    <div>
-                        <table class="table">
+                    <div class="col-12 m-0 justify-content-center">
+                        <table class="table col-auto p-5 mw-100">
                             <tbody>
                                 <tr class="row">
                                     <td class="col-12">
@@ -255,7 +253,7 @@
                                 <tr class="row">
                                     <td class="col-12">
                                         <div class="row">
-                                            <div class="col-6"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></div>
+                                            <div class="col-6 pl-4"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></div>
                                             <div class="col-6"><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></div>
                                         </div>
                                     </td>
@@ -263,7 +261,7 @@
                                 <tr class="row">
                                     <td class="col-12">
                                         <div class="row">
-                                            <div class="col-7"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished" runat="server"></label></div>
+                                            <div class="col-7 pl-4"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished" runat="server"></label></div>
                                             <div class="col-5"><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></div>
                                         </div>
                                     </td>
@@ -271,7 +269,7 @@
                                 <tr class="row">
                                     <td class="col-12">
                                         <div class="row">
-                                            <div class="col-6"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy" runat="server"></label></div>
+                                            <div class="col-6 pl-4"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy" runat="server"></label></div>
                                             <div class="col-6"><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></div>
                                         </div>
                                     </td>
@@ -279,12 +277,15 @@
                                 <tr class="row">
                                     <td class="col-12">
                                         <div class="row">
-                                            <div class="col-12"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
+                                            <div class="col-12 pl-4"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div id="lblReprint" class="col-12 text-right" runat="server">
+                        <label><strong>REPRINT</strong></label>
                     </div>
                 </div>
             </div>

@@ -27,23 +27,31 @@ namespace whusap.WebPages.Labels.RedesingLabels
         protected void Page_Load(object sender, EventArgs e)
         {
             CrearLabel();
-            lblWorkOrder.InnerText = Session["WorkOrder"].ToString();
-            lblReason.InnerText = Session["lblReason"].ToString();
-            lblMaterialDesc.InnerText = "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
-            codePaid.Src = Session["codePaid"].ToString();
-            lblProductDesc.InnerText = Session["ProductDesc"].ToString();
-            lblProductCode.InnerText = Session["ProductCode"].ToString();
-            lblDate.InnerText = Session["Date"].ToString();
-            lblQuantity.InnerText = Session["Quantity"].ToString();
-            lblFinished.InnerText = Session["Finished"].ToString();
-            lblPallet.InnerText = Session["Pallet"].ToString();
-            lblPrintedBy.InnerText = Session["PrintedBy"].ToString();
-            lblMachine.InnerText = Session["Machine"].ToString();
-            lblComments.InnerText = Session["Comments"].ToString();
-            if (Session["Reprint"].ToString() == "yes")
+            try
             {
-                printButton.Visible = false;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                lblWorkOrder.InnerText = Session["WorkOrder"].ToString();
+                lblReason.InnerText = Session["lblReason"].ToString();
+                lblMaterialDesc.InnerText = "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
+                codePaid.Src = Session["codePaid"].ToString();
+                lblProductDesc.InnerText = Session["ProductDesc"].ToString();
+                lblProductCode.InnerText = Session["ProductCode"].ToString();
+                lblDate.InnerText = Session["Date"].ToString();
+                lblQuantity.InnerText = Session["Quantity"].ToString();
+                lblFinished.InnerText = Session["Finished"].ToString();
+                lblPallet.InnerText = Session["Pallet"].ToString();
+                lblPrintedBy.InnerText = Session["PrintedBy"].ToString();
+                lblMachine.InnerText = Session["Machine"].ToString();
+                lblComments.InnerText = Session["Comments"].ToString();
+                if (Session["Reprint"].ToString() == "yes")
+                {
+                    printButton.Visible = false;
+                    lblReprint.Visible = true;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                CrearLabel();
             }
         }
 
