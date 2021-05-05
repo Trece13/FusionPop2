@@ -171,6 +171,7 @@ namespace whusap.WebPages.Migration
                 divTable.Visible = false;
                 divBotones.Visible = false;
 
+                Session["Reprint"] = "yes";
                 Session["WorkOrder"] = pdno;
                 Session["lblReason"] = consultaInformacion[0]["DSCACDIS"].ToString().Trim();
                 Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";

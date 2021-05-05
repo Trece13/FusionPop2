@@ -384,6 +384,7 @@ namespace whusap.WebPages.Migration
                 lblValueCasePerPallet.Text = factor;
                 lblValueMadeIn.Text = madein;
 
+                Session["Reprint"] = "no";
                 Session["MaterialDesc"] =  descripcion;
                 Session["codeMaterial"] =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
                 Session["codePaid"]     =  UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";

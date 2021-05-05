@@ -192,7 +192,8 @@ namespace whusap.WebPages.Migration
                 divTableFinish.Visible = false;
                 divTableRaw.Visible = false;
                 divBotones.Visible = false;
-
+                
+                Session["Reprint"] = "yes";
                 Session["WorkOrder"] = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
                 Session["lblReason"] = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
                 Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";
@@ -238,6 +239,7 @@ namespace whusap.WebPages.Migration
                 Session["PrintedBy"] = HttpContext.Current.Session["user"].ToString();
                 Session["Machine"] = consultaInformacion.Rows[0]["MCNO"].ToString().Trim().ToUpper();
                 Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
+                Session["Reprint"] = "yes";
 
                 StringBuilder script = new StringBuilder();
                 script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");

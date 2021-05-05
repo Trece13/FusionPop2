@@ -120,6 +120,7 @@ namespace whusap.WebPages.Migration
                 var machine = consultaInformacion[0]["MCNO"].ToString().Trim();
                 var norp = Convert.ToInt32(consultaInformacion[0]["NORP"].ToString().Trim());
 
+                Session["Reprint"] = "yes";
                 Session["MaterialDesc"] = consultaInformacion[0]["DSCA"].ToString().Trim();
                 Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.ToUpper() + "&code=Code128&dpi=96";
                 Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.ToUpper() + "&code=Code128&dpi=96";

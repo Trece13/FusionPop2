@@ -1849,6 +1849,35 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="ConsultaSumatoriaCantidadesTwhinh210140">
+        <stringSQL>
+          select t$orno ord, t$pono, t$item, t$stun, t$qstr, t$qstk
+          from {0}.twhinh210{1}
+          where t$orno = '[:T$ORNO]'
+          and t$pono = '[:T$PONO]'
+          and t$item = '[:T$ITEM]'
+          and t$seqn = 0
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultaSumatoriaCantidadesTticol130131">
+        <stringSQL>
+          select  sum(qtys) qtys, sum(qtyc) qtyc, ord, pos, item
+          from
+          (
+          select  sum(t$qtys) qtys, sum(t$qtyc) qtyc, t$orno ord, t$pono pos, t$item item
+          from    {0}.twhcol130{1}
+          group by t$orno, t$pono, t$item
+          union
+          select  sum(t$qtys) qtys, sum(t$qtyc), t$orno, t$pono, t$item item
+          from    {0}.twhcol131{1}
+          group by t$orno, t$pono, t$item
+          )
+          where ord = '[:T$ORNO]'
+          and pos = '[:T$PONO]'
+          and item = '[:T$ITEM]'
+          group by ord, pos, item
+        </stringSQL>
+      </operationName>
       <operationName name="updatetwhcol131QuantityFirst">
         <stringSQL>
           UPDATE  {0}.twhcol131{1} SET T$QTYA = ('[:T$QTYOLD]' - '[:T$QTYA]') + T$QTYA ,T$AllO =T$AllO - '[:T$QTYOLD]' WHERE trim(T$PAID) =  trim('[:T$PAID]')

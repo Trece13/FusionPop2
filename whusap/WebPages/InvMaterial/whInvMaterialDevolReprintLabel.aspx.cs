@@ -189,7 +189,7 @@ namespace whusap.WebPages.InvMaterial
                             reg = resultado.Rows[index];
                             Session["FilaImprimir"] = reg;
 
-
+                            Session["Reprint"] = "yes";
                             Session["MaterialDesc"] = reg.ItemArray[15].ToString().Trim();
                             Session["MaterialCode"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg.ItemArray[2].ToString().Trim() +"&code=Code128&dpi=96";
                             Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg.ItemArray[13].ToString().Trim() +"&code=Code128&dpi=96";

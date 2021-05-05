@@ -95,6 +95,7 @@ namespace whusap.WebPages.InvReceipts
 
                 if (LstPallet.Count > 0)
                 {
+                    HttpContext.Current.Session["Reprint"] = "yes";
                     HttpContext.Current.Session["MaterialDesc"] = LstPallet[0].DSCA.ToString();
                     HttpContext.Current.Session["MaterialCode"] = LstPallet[0].ITEM.ToString();
                     HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + LstPallet[0].PAID_URL.ToString();

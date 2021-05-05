@@ -753,7 +753,7 @@ namespace whusap.WebPages.InvReceipts
                 //return JsonConvert.SerializeObject(data022);
                 if (Convert.ToBoolean(validateSave) && Convert.ToBoolean(validateSaveTicol222))
                 {
-
+                    Session["Reprint"] = "yes";
                     Session["MaterialDesc"] = data022.mitm;
                     Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.mitm + "&code=Code128&dpi=96";
                     Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.sqnb + "&code=Code128&dpi=96"; 

@@ -1463,6 +1463,53 @@ namespace whusa.Interfases
 
             return Retorno;
         }
+
+        public DataTable ConsultaSumatoriaCantidadesTwhinh210(Ent_twhcol130131 MyObj)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ORNO", MyObj.ORNO);
+            paramList.Add(":T$PONO", MyObj.PONO);
+            paramList.Add(":T$ITEM", MyObj.ITEM);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return Retorno;
+        }
+
+        public DataTable ConsultaSumatoriaCantidadesTticol130131(Ent_twhcol130131 MyObj)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ORNO", MyObj.ORNO);
+            paramList.Add(":T$PONO", MyObj.PONO);
+            paramList.Add(":T$ITEM", MyObj.ITEM);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Retorno;
+        }
     }
 
     

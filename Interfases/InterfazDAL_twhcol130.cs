@@ -433,5 +433,15 @@ namespace whusa.Interfases
         {
             return dal.maximaSecuenciaUnion(SQNB);
         }
+
+        public DataTable ConsultaSumatoriaCantidadesTticol130131(Ent_twhcol130131 MyObj)
+        {
+            return dal.ConsultaSumatoriaCantidadesTticol130131(MyObj);
+        }
+
+        public DataTable ConsultaSumatoriaCantidadesTwhinh210(Ent_twhcol130131 MyObj)
+        {
+            return dal.ConsultaSumatoriaCantidadesTwhinh210(MyObj);
+        }
     }
 }

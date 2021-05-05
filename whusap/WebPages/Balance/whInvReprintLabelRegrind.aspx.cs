@@ -139,7 +139,7 @@ namespace whusap.WebPages.Balance
                 Session["strTagid"] = reimpresion.Rows[0]["T$SQNB"];
                 Session["reprinted"] = "1";
 
-
+                Session["Reprint"] = "yes";
                 Session["MaterialDesc"] = reimpresion.Rows[0]["T$DSCA"];
                 Session["Material"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + filaImprimir.ItemArray[2].ToString().Trim() + "&code=Code128&dpi=96";
                 Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reimpresion.Rows[0]["T$SQNB"] + "&code=Code128&dpi=96"; 

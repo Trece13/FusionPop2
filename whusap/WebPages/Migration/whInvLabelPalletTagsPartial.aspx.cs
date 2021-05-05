@@ -394,7 +394,7 @@ namespace whusap.WebPages.Migration
                 Session["Date"] = DateTime.Now.ToString();
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maquina;
-                Session["Operator"]  = _operator;
+                Session["Reprint"] = "no";
 
                 StringBuilder script = new StringBuilder();
                 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");

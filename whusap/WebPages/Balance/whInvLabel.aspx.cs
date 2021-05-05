@@ -300,6 +300,7 @@ namespace whusap.WebPages.Balance
             Session["descItem"] = obj020.dsca;
             Session["unidad"] = hidden.Value;
 
+            HttpContext.Current.Session["Reprint"] = "no";
             Session["MaterialDesc"] = obj020.dsca;
             Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +  obj022.mitm +"&code=Code128&dpi=96"; 
             Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["SECUENCIA"].ToString() + "&code=Code128&dpi=96";
