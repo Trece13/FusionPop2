@@ -47,6 +47,10 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     printButton.Visible = true;
                     lblReprint.Visible = false;
                 }
+                if (Session["AutoPrint"].ToString() == "yes")
+                {
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                }
             }
             catch (Exception ex)
             {

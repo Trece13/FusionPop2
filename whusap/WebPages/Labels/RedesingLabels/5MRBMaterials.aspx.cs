@@ -23,6 +23,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
             Session["PrintedBy"]
             Session["Machine"]
             Session["Comments"]
+            Session["Reprint"]
          */
         protected void Page_Load(object sender, EventArgs e)
         {

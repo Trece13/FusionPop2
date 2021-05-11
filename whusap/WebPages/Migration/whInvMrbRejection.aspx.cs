@@ -1507,6 +1507,20 @@ namespace whusap.WebPages.Migration
             lblMachinetitle.Text = "Machine";
             lblMachine.Text = Objtticol100.mcno;
             lblValueCommentsDelivered.Text = txtExactReasons.InnerText;
+
+            Session["WorkOrder"]   = sqnb ;
+            Session["lblReason"]   = slReason.SelectedItem.Text.Substring(7);
+            Session["codePaid"]    = sqnb;
+            Session["ProductDesc"] = dsca;
+            Session["ProductCode"] = mitm;
+            Session["Date"]        = DateTime.Now.ToString();
+            Session["Quantity"]    = qtyr;
+            Session["Finished"]    = sqnb;
+            Session["Pallet"]      = Objtticol100.proc;
+            Session["PrintedBy"]   = _operator;
+            Session["Machine"]     = "";
+            Session["Comments"]    = txtExactReasons.InnerText;
+            Session["Reprint"]     = "no";
         }
 
         #endregion

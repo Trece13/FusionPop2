@@ -365,6 +365,18 @@ namespace whusap.WebPages.InvReceipts
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
                         };
 
+                        HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["T$DSCA"].ToString();
+                        HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
+                        HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96";
+                        HttpContext.Current.Session["Lot"] = LOT;
+                        HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
+                        HttpContext.Current.Session["Origin"] = LOT;
+                        HttpContext.Current.Session["Supplier"] = _operator;
+                        HttpContext.Current.Session["RecibedBy"] = _operator;
+                        HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
+                        HttpContext.Current.Session["Reprint"] = "no";
+                        HttpContext.Current.Session["AutoPrint"] = "yes";
+
                         if (MyObj.FIRE == "1")
                         {
                             twhcol130DAL.ConsultaSumatoriaCantidadesTticol130131(MyObj);
@@ -497,6 +509,18 @@ namespace whusap.WebPages.InvReceipts
                             QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITY.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96",
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
                         };
+
+                        HttpContext.Current.Session["MaterialDesc"] = DTNOOrdencompra.Rows[0]["T$DSCA"].ToString();
+                        HttpContext.Current.Session["MaterialCode"] = DTNOOrdencompra.Rows[0]["T$ITEM"].ToString();
+                        HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96";
+                        HttpContext.Current.Session["Lot"] = LOT;
+                        HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
+                        HttpContext.Current.Session["Origin"] = LOT;
+                        HttpContext.Current.Session["Supplier"] = _operator;
+                        HttpContext.Current.Session["RecibedBy"] = _operator;
+                        HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
+                        HttpContext.Current.Session["Reprint"] = "no";
+                        HttpContext.Current.Session["AutoPrint"] = "yes";
 
                         if (MyObj.FIRE == "1")
                         {

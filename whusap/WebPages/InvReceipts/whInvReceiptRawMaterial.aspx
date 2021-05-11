@@ -69,7 +69,9 @@
     </script><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous"><style type="text/css">
-        
+        #myLabelFrame{
+            display:none;
+        }
         #ShowModal
         {
             display:none;
@@ -452,6 +454,14 @@
             </tr>
         </table>
     </div>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class ="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- Referencias de estilo-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -641,7 +651,8 @@
                 }
 
                 DeshabilitarLimpiarControles();
-                printDiv('MyEtiqueta');
+                myLabelFrame = document.getElementById('myLabelFrame');
+                myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
 
                 
             }
