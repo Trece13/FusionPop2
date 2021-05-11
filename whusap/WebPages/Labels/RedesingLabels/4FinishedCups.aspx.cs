@@ -50,6 +50,8 @@ namespace whusap.WebPages.Labels.RedesingLabels
 
         private void ClearLabel()
         {
+            printButton.Visible = true;
+            lblReprint.Visible = false;
             lblMaterialDesc.InnerHtml = string.Empty;
             codeMaterial.Src = string.Empty;
             codePaid.Src = string.Empty;

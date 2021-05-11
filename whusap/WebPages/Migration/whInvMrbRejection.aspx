@@ -406,7 +406,7 @@
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click_announce" OnClientClick="return validarFormularioAnnounce();" CssClass="ButtonsSendSave"/>
     </div>
 
-     <div runat="server" id="divLabelAnnounce" clientidmode="Static" visible="false">
+     <div runat="server" id="divLabelAnnounce" clientidmode="Static" >
         
         <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
             <tr>
@@ -501,7 +501,7 @@
             </td>
         </tr>
     </table>
-     <div runat="server" id="divLabel" visible="false" clientidmode="Static" style="zoom: 80%;
+     <div runat="server" id="divLabel"  clientidmode="Static" style="zoom: 80%;
         margin-bottom: 70px">
         <hr />
         <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;"
@@ -580,7 +580,7 @@
         <hr />
         <asp:Button ID="btnGuardarDelivered" runat="server" OnClick="btnGuardar_Click_Delivered" OnClientClick="return validarFormularioDelivered();" CssClass="ButtonsSendSave"/>
     </div>
-      <div runat="server" id="divTableDelivered" visible="false" style="overflow-y:scroll; width:150%;">
+      <div runat="server" id="divTableDelivered"  style="overflow-y:scroll; width:150%;">
         <hr />
         <table class='table table-bordered' style='max-width:1200px;font-size:13px; border:3px solid; border-style:outset; text-align:center;'>
             <tr style='font-weight:bold; background-color:lightgray;'>
@@ -623,7 +623,7 @@
                     AutoPostBack="true" /></td>
         </tr>
     </table>
-     <div runat="server" id="divLabelDelivered" clientidmode="Static" visible="false">
+     <div runat="server" id="divLabelDelivered" clientidmode="Static" >
         
         <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
             <tr>

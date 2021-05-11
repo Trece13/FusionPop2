@@ -28,7 +28,7 @@ namespace whusap.WebPages.InvReceipts
         private static string globalMessages = "GlobalMessages";
 
         public static string ItemcodeisnotPurchaseType = mensajes("ItemcodeisnotPurchaseType");
-        public static string Itemcodedoesntexist = mensajes("Itemcodedoesn´texist");
+        public static string Itemcodedoesntexist = mensajes("Itemcodedoesntexist");
         public static string Lotcodedoesntexist = mensajes("Lotcodedoesntexist");
         public static string Warehousecodedoesntexist = mensajes("Warehousecodedoesntexist");
         public static string Locationblockedinbound = mensajes("Locationblockedinbound");
@@ -294,7 +294,6 @@ namespace whusap.WebPages.InvReceipts
                 {
                     ObjTtwhinr140.Error = true;
                     ObjTtwhinr140.TypeMsgJs = "label";
-                    
                     ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
                 }
             }
@@ -302,7 +301,6 @@ namespace whusap.WebPages.InvReceipts
             {
                 ObjTtwhinr140.Error = true;
                 ObjTtwhinr140.TypeMsgJs = "label";
-                
                 ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
             }
 
@@ -378,7 +376,29 @@ namespace whusap.WebPages.InvReceipts
                 UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UNIT + "&code=Code128&dpi=96"
             };
 
+            
             bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+
+            if (Insertsucces)
+            {
+                HttpContext.Current.Session["MaterialDesc"] = "XXXXX XXX XXX XX";
+                HttpContext.Current.Session["MaterialCode"] = MyObj.ITEM;
+                HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
+                HttpContext.Current.Session["Lot"] = MyObj.CLOT;
+                HttpContext.Current.Session["Quantity"] = MyObj.QTYS;
+                HttpContext.Current.Session["Origin"] = MyObj.CLOT;
+                HttpContext.Current.Session["Supplier"] = MyObj.LOGN;
+                HttpContext.Current.Session["RecibedBy"] = MyObj.LOGN;
+                HttpContext.Current.Session["RecibedOn"] = MyObj.LOGN;
+                HttpContext.Current.Session["Reprint"] = "no";
+            }
+            else
+            {
+                MyObj.error = true;
+                MyObj.TypeMsgJs = "label";
+                MyObj.errorMsg = "Error insert";
+            }
+
 
             return JsonConvert.SerializeObject(MyObj);
 

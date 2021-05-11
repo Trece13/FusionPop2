@@ -262,7 +262,6 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string VerificarWarehouse(string CWAR)
         {
-
             string strError = string.Empty;
 
             Ent_ttwhcol016 Obj_twhcol016 = new Ent_ttwhcol016();
@@ -305,8 +304,6 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string VerificarLocation(string CWAR, string LOCA)
         {
-
-
             string strError = string.Empty;
             Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
             Obj_twhwmd200.cwar = CWAR;
@@ -438,200 +435,6 @@ namespace whusap.WebPages.InvReceipts
 
         }
 
-        //[WebMethod]
-        //public static string Click_Save(string CWAR, string ITEM, string CLOT, string LOCA, string QTYS, string UNIT)
-        //{
-        //    RelabelFinishProduct RFP = new RelabelFinishProduct();
-        //    string strOrden = "";
-        //    string strSecuen = "";
-        //    string itemId = "";
-        //    string cantidad = "";
-        //    string bodega = "";
-        //    string usuario = "";
-        //    string fecha = "";
-        //    string descItem = "";
-        //    string unidad = "";
-        //    string strMachine = "";
-        //    string strTagId = "";
-
-        //    RelabelFinishProduct rfP = new RelabelFinishProduct();
-        //    Ent_tticol022 data022;
-        //    Ent_tticol042 data042;
-        //    string strError = string.Empty;
-        //    int consecutivoPalletID = 0;
-        //    DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(CLOT == "" ? ITEM.Trim() : CLOT.Trim());
-        //    string SecuenciaPallet = "C001";
-        //    if (DTPalletContinue.Rows.Count > 0)
-        //    {
-        //        foreach (DataRow item in DTPalletContinue.Rows)
-        //        {
-        //            consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(11, 3)) + 1;
-        //            if (consecutivoPalletID.ToString().Length == 1)
-        //            {
-        //                SecuenciaPallet = "C00" + consecutivoPalletID;
-        //            }
-        //            if (consecutivoPalletID.ToString().Length == 2)
-        //            {
-        //                SecuenciaPallet = "C0" + consecutivoPalletID;
-        //            }
-        //            if (consecutivoPalletID.ToString().Length == 3)
-        //            {
-        //                SecuenciaPallet = consecutivoPalletID.ToString();
-        //            }
-
-        //        }
-
-        //    }
-
-        //    if (HttpContext.Current.Session["myItemType"].ToString() == "RET")
-        //    {
-
-        //        data022 = new Ent_tticol022()
-        //        {
-        //            pdno = CLOT == "" ? ITEM : CLOT,
-        //            sqnb = (CLOT == "" ? ITEM : CLOT) + "-" + SecuenciaPallet,
-        //            proc = 2,
-        //            logn = _operator,
-        //            mitm = ITEM,
-        //            qtdl = 0,
-        //            cuni = "CJ",
-        //            log1 = "NONE",
-        //            qtd1 = 0,
-        //            pro1 = 2,
-        //            log2 = "NONE",
-        //            qtd2 = 0,
-        //            pro2 = 2,
-        //            loca = " ",
-        //            norp = 1,
-        //            dele = 2,
-        //            logd = "NONE",
-        //            refcntd = 0,
-        //            refcntu = 0,
-        //            drpt = DateTime.Now,
-        //            urpt = _operator,
-        //            acqt = Convert.ToDecimal(QTYS),
-        //            cwaf = CWAR,
-        //            cwat = CWAR,
-        //            aclo = LOCA
-        //        };
-
-        //        HttpContext.Current.Session["strOrden"] = data022.pdno;
-        //        HttpContext.Current.Session["strSecuen"] = data022.sqnb;
-        //        HttpContext.Current.Session["itemId"] = data022.mitm;
-        //        HttpContext.Current.Session["cantidad"] = data022.acqt;
-        //        HttpContext.Current.Session["bodega"] = data022.cwaf;
-        //        HttpContext.Current.Session["usuario"] = data022.urpt;
-        //        HttpContext.Current.Session["fecha"] = data022.drpt;
-        //        HttpContext.Current.Session["descItem"] = data022.mitm;
-        //        HttpContext.Current.Session["unidad"] = data022.cuni;
-        //        HttpContext.Current.Session["strTagId"] = "";
-
-        //        var validateSave = _idaltticol022.insertarRegistroSimple(ref data022, ref strError);
-        //        //if (validateSave < 1)
-        //        //{
-        //        //    lblError.Text = mensajes("errorsave");
-        //        //    lblConfirm.Text = string.Empty;
-
-        //        //    return;
-        //        //}
-        //        //else
-        //        //{
-        //        var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref data022, ref strError);
-        //        //if (validateSaveTicol222 < 1)
-        //        //{
-        //        //    lblError.Text = mensajes("errorsave Ticol222");
-        //        //    lblConfirm.Text = string.Empty;
-
-        //        //    return;
-        //        //}
-        //        //}
-        //        //rfP.printTag();
-        //        //StringBuilder script = new StringBuilder();
-        //        //script.Append("ventanaImp = window.open('../Labels/whInvLabelFinishProduct.aspx', ");
-        //        //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-        //        //script.Append("ventanaImp.moveTo(30, 0);");
-        //        ////script.Append("setTimeout (ventanaImp.close(), 20000);");
-        //        //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-        //        strOrden = HttpContext.Current.Session["strOrden"].ToString();
-        //        strSecuen = HttpContext.Current.Session["strSecuen"].ToString();
-        //        itemId = HttpContext.Current.Session["itemId"].ToString();
-        //        cantidad = HttpContext.Current.Session["cantidad"].ToString();
-        //        bodega = HttpContext.Current.Session["bodega"].ToString();
-        //        usuario = HttpContext.Current.Session["usuario"].ToString();
-        //        fecha = HttpContext.Current.Session["fecha"].ToString();
-        //        descItem = HttpContext.Current.Session["descItem"].ToString();
-        //        unidad = HttpContext.Current.Session["unidad"].ToString();
-        //        strMachine = "";
-        //        strTagId = HttpContext.Current.Session["strTagId"].ToString();
-
-        //        RFP.cargarEtiqueta();
-        //        return JsonConvert.SerializeObject(data022);
-        //    }
-        //    else
-        //    {
-
-        //        data042 = new Ent_tticol042()
-        //        {
-        //            pdno = CLOT == "" ? ITEM : CLOT,
-        //            sqnb = (CLOT == "" ? ITEM : CLOT) + "-" + SecuenciaPallet,
-        //            proc = 2,
-        //            logn = _operator,
-        //            mitm = ITEM,
-        //            qtdl = 0,
-        //            cuni = "CJ",
-        //            log1 = "NONE",
-        //            qtd1 = 0,
-        //            pro1 = 2,
-        //            log2 = "NONE",
-        //            qtd2 = 0,
-        //            pro2 = 2,
-        //            loca = " ",
-        //            norp = 1,
-        //            dele = 2,
-        //            logd = "NONE",
-        //            refcntd = 0,
-        //            refcntu = 0,
-        //            drpt = DateTime.Now,
-        //            urpt = _operator,
-        //            acqt = Convert.ToDouble(QTYS),
-        //            cwaf = CWAR,
-        //            cwat = CWAR,
-        //            aclo = LOCA
-        //        };
-
-        //        HttpContext.Current.Session["strOrden"] = data042.pdno;
-        //        HttpContext.Current.Session["strSecuen"] = data042.sqnb;
-        //        HttpContext.Current.Session["itemId"] = data042.mitm;
-        //        HttpContext.Current.Session["cantidad"] = data042.acqt;
-        //        HttpContext.Current.Session["bodega"] = data042.cwaf;
-        //        HttpContext.Current.Session["usuario"] = data042.urpt;
-        //        HttpContext.Current.Session["fecha"] = data042.drpt;
-        //        HttpContext.Current.Session["descItem"] = data042.mitm;
-        //        HttpContext.Current.Session["unidad"] = data042.cuni;
-        //        HttpContext.Current.Session["strTagId"] = "";
-
-        //        var validateSave = _idaltticol042.insertarRegistroSimple(ref data042, ref strError);
-
-        //        var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref data042, ref strError);
-
-        //        strOrden = HttpContext.Current.Session["strOrden"].ToString();
-        //        strSecuen = HttpContext.Current.Session["strSecuen"].ToString();
-        //        itemId = HttpContext.Current.Session["itemId"].ToString();
-        //        cantidad = HttpContext.Current.Session["cantidad"].ToString();
-        //        bodega = HttpContext.Current.Session["bodega"].ToString();
-        //        usuario = HttpContext.Current.Session["usuario"].ToString();
-        //        fecha = HttpContext.Current.Session["fecha"].ToString();
-        //        descItem = HttpContext.Current.Session["descItem"].ToString();
-        //        unidad = HttpContext.Current.Session["unidad"].ToString();
-        //        strMachine = "";
-        //        strTagId = HttpContext.Current.Session["strTagId"].ToString();
-
-        //        RFP.cargarEtiqueta();
-        //        return JsonConvert.SerializeObject(data042);
-
-        //    }
-        //}
-
         protected void Save_Click(object sender, EventArgs e)
         {
             string ITEM = HttpContext.Current.Session["ITEM"].ToString();
@@ -753,24 +556,30 @@ namespace whusap.WebPages.InvReceipts
                 //return JsonConvert.SerializeObject(data022);
                 if (Convert.ToBoolean(validateSave) && Convert.ToBoolean(validateSaveTicol222))
                 {
-                    Session["Reprint"] = "yes";
-                    Session["MaterialDesc"] = data022.mitm;
-                    Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.mitm + "&code=Code128&dpi=96";
-                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.sqnb + "&code=Code128&dpi=96"; 
-                    Session["Lot"]          = CLOT;
-                    Session["Quantity"]     = data022.acqt+" "+data022.cuni;
-                    Session["Date"]         = DateTime.Now.ToString();
-                    Session["Pallet"]       = data022.sqnb;
-                    Session["Machine"] = String.Empty;
-                    Session["Operator"]     = _operator;
+
+                    HttpContext.Current.Session["MaterialDesc"] = data022.mitm;
+                    HttpContext.Current.Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.mitm + "&code=Code128&dpi=96";
+                    HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.sqnb + "&code=Code128&dpi=96";
+                    HttpContext.Current.Session["Lot"] = CLOT;
+                    HttpContext.Current.Session["Quantity"] = data022.acqt + " " + data022.cuni;
+                    HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
+                    HttpContext.Current.Session["Pallet"] = data022.sqnb;
+                    HttpContext.Current.Session["Machine"] = String.Empty;
+                    HttpContext.Current.Session["Operator"] = _operator;
+                    HttpContext.Current.Session["Reprint"] = "no";
 
 
                     StringBuilder script = new StringBuilder();
-                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCups.aspx', ");
-                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=700,height=450');");
-                    script.Append("ventanaImp.moveTo(30, 0);");
-                    //script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+                    //StringBuilder script = new StringBuilder();
+                    //script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCups.aspx', ");
+                    //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=700,height=450');");
+                    //script.Append("ventanaImp.moveTo(30, 0);");
+                    ////script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
                     //StringBuilder script = new StringBuilder();
                     //script.Append("ventanaImp = window.open('../Labels/whInvLabelFinishProduct.aspx', ");
                     //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
@@ -836,17 +645,30 @@ namespace whusap.WebPages.InvReceipts
                 //return JsonConvert.SerializeObject(data042);
                 if (Convert.ToBoolean(validateSave) && Convert.ToBoolean(validateSaveTicol242))
                 {
+                    HttpContext.Current.Session["MaterialDesc"] = data042.mitm;
+                    HttpContext.Current.Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data042.mitm + "&code=Code128&dpi=96";
+                    HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data042.sqnb + "&code=Code128&dpi=96";
+                    HttpContext.Current.Session["Lot"] = CLOT;
+                    HttpContext.Current.Session["Quantity"] = data042.acqt + " " + data042.cuni;
+                    HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
+                    HttpContext.Current.Session["Pallet"] = data042.sqnb;
+                    HttpContext.Current.Session["Machine"] = String.Empty;
+                    HttpContext.Current.Session["Operator"] = _operator;
+
                     StringBuilder script = new StringBuilder();
-                    script.Append("ventanaImp = window.open('../Labels/whInvLabelFinishProduct.aspx', ");
-                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-                    script.Append("ventanaImp.moveTo(30, 0);");
-                    //script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+                    //StringBuilder script = new StringBuilder();
+                    //script.Append("ventanaImp = window.open('../Labels/whInvLabelFinishProduct.aspx', ");
+                    //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+                    //script.Append("ventanaImp.moveTo(30, 0);");
+                    ////script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                 }
             }
 
         }
-
 
         protected static string mensajes(string tipoMensaje)
         {

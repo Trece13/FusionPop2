@@ -137,9 +137,9 @@ namespace whusap.WebPages.Migration
             divTableAnnounce.Visible = false;
             divTableLocated.Visible = false;
 
-            divLabelAnnounce.Visible = false;
-            divLabel.Visible = false;
-            divLabelDelivered.Visible = false;
+            divLabelAnnounce.Visible = true;
+            divLabel.Visible = true;
+            divLabelDelivered.Visible = true;
 
             //btnSalirAnnounce.Visible = false;
             //btnSalirDelivered.Visible = false;

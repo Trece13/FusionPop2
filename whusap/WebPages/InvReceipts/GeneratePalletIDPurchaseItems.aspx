@@ -72,6 +72,14 @@
         <label id="lblError">
         </label>
     </div>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class ="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <div class="form-group row">
         <div id="MyEtiqueta">
             <table style="margin: auto">
@@ -303,10 +311,11 @@
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
-                $('#btnSave').prop("disabled", true);
-
+            $('#btnSave').prop("disabled", true);
         };
+
         BloquearComponentes();
+
         var SuccesVerificarItem = function (r) {
             BloquearComponentes();
             $('#lblWarehouse').html("");
@@ -498,7 +507,10 @@
                 }
 
                 //DeshabilitarLimpiarControles();
-                printDiv('MyEtiqueta');
+                //printDiv('MyEtiqueta');
+                myLabelFrame = document.getElementById('myLabelFrame'); 
+                myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
+
                 $('#btnSave').prop("disabled", true);
 
             }

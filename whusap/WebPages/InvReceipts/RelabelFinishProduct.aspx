@@ -84,6 +84,14 @@
     <!--<div class="form-group row">
         <input id="btnSave" type="button" class="btn btn-primary btn-lg" value="SAVE" />
     </div>-->
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="" class ="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <div class="form-group row">
         <div id="MyEtiqueta">
             <table style="margin: auto">

@@ -191,7 +191,7 @@ namespace whusap.WebPages.InvMaterial
 
                             Session["Reprint"] = "yes";
                             Session["MaterialDesc"] = reg.ItemArray[15].ToString().Trim();
-                            Session["MaterialCode"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg.ItemArray[2].ToString().Trim() +"&code=Code128&dpi=96";
+                            Session["MaterialCode"] = reg.ItemArray[2].ToString().Trim();
                             Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg.ItemArray[13].ToString().Trim() +"&code=Code128&dpi=96";
                             Session["Lot"] = reg.ItemArray[4].ToString().Trim();
                             Session["Quantity"] = reg.ItemArray[5].ToString().Trim() + " " + reg.ItemArray[14].ToString().Trim();

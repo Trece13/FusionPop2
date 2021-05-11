@@ -19,7 +19,8 @@ namespace whusap.WebPages.Labels.RedesingLabels
             Session["Origin"]           
             Session["Supplier"]         
             Session["RecibedBy"]        
-            Session["RecibedOn"]        
+            Session["RecibedOn"]   
+            Session["Reprint"]
          */
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,6 +41,11 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     printButton.Visible = false;
                     lblReprint.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                }
+                else
+                {
+                    printButton.Visible = true;
+                    lblReprint.Visible = false;
                 }
             }
             catch (Exception ex)

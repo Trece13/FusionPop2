@@ -368,7 +368,7 @@ namespace whusap.WebPages.InvReceipts
                         if (MyObj.FIRE == "1")
                         {
                             twhcol130DAL.ConsultaSumatoriaCantidadesTticol130131(MyObj);
-                            twhcol130DAL.ConsultaSumatoriaCantidadesTwhinh210140(MyObj);
+                            twhcol130DAL.ConsultaSumatoriaCantidadesTwhinh210(MyObj);
                         }
 
                         if (OrdenImportacion)

@@ -2,6 +2,50 @@
 <FormResources>
   <Modules>
     <!--Global Messages-->
+    <Module name="GeneratePalletIDPurchaseItems.aspx">
+      <Idiom name="INGLES">
+        <operationName name="ItemcodeisnotPurchaseType">
+          <stringMessage>
+            Item code is not Purchase Type
+          </stringMessage>
+        </operationName>
+        <operationName name="Itemcodedoesntexist">
+          <stringMessage>
+            Item code doesn't exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Lotcodedoesntexist">
+          <stringMessage>
+            Lot code doesn't exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Warehousecodedoesntexist">
+          <stringMessage>
+            Warehouse code doesn't exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationblockedinbound">
+          <stringMessage>
+            Location blocked inbound
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationcodedoesntexist">
+          <stringMessage>
+            Location code doesn't exist
+          </stringMessage>
+        </operationName>
+        <operationName name="codedoesntexist">
+          <stringMessage>
+            Code doesn't exist
+          </stringMessage>
+        </operationName>
+        <operationName name="RegisteredquantitynotavilableonBaaninventory">
+          <stringMessage>
+            Registered quantity not avilable on Baan inventory
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
 
     <Module name="LotItemAdjustment.aspx">
       <Idiom name="INGLES">
@@ -47,7 +91,7 @@
         </operationName>
       </Idiom>
     </Module>
-    
+
     <Module name="PickMaterial.aspx">
       <Idiom name="INGLES">
         <operationName name="TheIDpalledPendingToLocateByUser">
@@ -2389,7 +2433,7 @@
       <Idiom name="INGLES">
         <operationName name=" Availablequantitynotenoughforyourrequest">
           <stringMessage>
-            [{0}] Available quantity not enough for your request 
+            [{0}] Available quantity not enough for your request
           </stringMessage>
         </operationName>
         <operationName name="WorkOrdernotInitiatedforthisMachine">

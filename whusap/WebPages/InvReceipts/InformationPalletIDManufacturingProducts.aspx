@@ -70,7 +70,14 @@
         <label id="lblError">
         </label>
     </div>
-
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="" class ="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 
     <script>
         var ktlc = ""; 
@@ -283,7 +290,6 @@
             }
         }
 
-
         function ImprimirMensaje(type, msg) {
             switch (type) {
                 case "alert":
@@ -297,6 +303,7 @@
                     break;
             }
         }
+
         var SuccesClick_Save = function (r) {
             MyObject = JSON.parse(r.d);
 
@@ -311,22 +318,24 @@
                 $('#lblQuantity').html("");
                 $('#btnSave').prop("disabled", true);
                 alert("Registration was successful");
+                myLabelFrame = document.getElementById('myLabelFrame');
+                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCups.aspx';
 
             }
             else {
                 console.log("El registro no se realizo");
                 alert(MyObject.errorMsg);
+                myLabelFrame = document.getElementById('myLabelFrame');
+                myLabelFrame.src = '';
             }
 
         }
-
 
         var VerificarPalletID = function () {
             $('#btnSave').prop("disabled", true);
             var Data = "{'PAID':'" + $('#txPalletID').val() + "'}";
             sendAjax("VerificarPalletID", Data, SuccesVerificarPalletID)
         }
-
 
         var VerificarItem = function () {
             $('#btnSave').prop("disabled", true);

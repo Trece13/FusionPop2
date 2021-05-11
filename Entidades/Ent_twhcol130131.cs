@@ -117,5 +117,7 @@ namespace whusa
         public string TBL { get; set; }
 
         public string MCNO { get; set; }
+
+        public string TypeMsgJs { get; set; }
     }
 }

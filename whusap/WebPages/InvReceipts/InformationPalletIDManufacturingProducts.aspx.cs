@@ -186,8 +186,6 @@ namespace whusap.WebPages.InvReceipts
 
             return JsonConvert.SerializeObject(ObjTtcibd001);
         }
-
-
         [WebMethod]
         public static string VerificarLote(string ITEM, string CLOT)
         {
@@ -258,7 +256,6 @@ namespace whusap.WebPages.InvReceipts
 
             return JsonConvert.SerializeObject(Obj_twhcol016);
         }
-
         [WebMethod]
         public static string VerificarLocation(string CWAR, string LOCA)
         {
@@ -347,10 +344,7 @@ namespace whusap.WebPages.InvReceipts
             return JsonConvert.SerializeObject(ObjTtwhinr140);
 
         }
-
         [WebMethod]
-
-
         public static string Click_Save(string PAID, string ORNO, string ITEM, string CWAR, string LOCA, string UNIT, string QTYS)
         {
 
@@ -367,11 +361,23 @@ namespace whusap.WebPages.InvReceipts
             ObjTticol022.aclo = LOCA;
             ObjTticol022.Error = false;
             ObjTticol022.allo = 0;
-            int res = _idaltticol022.InsertarRegistroTicol222(ref ObjTticol022, ref strError);
+            int res = 1;//_idaltticol022.InsertarRegistroTicol222(ref ObjTticol022, ref strError);
             if (res == 0)
             {
                 _idaltticol022.ActualizarCantidadAlmacenRegistroTicol222(HttpContext.Current.Session["user"].ToString(), ObjTticol022.acqt, ObjTticol022.aclo, ObjTticol022.cwaf, ObjTticol022.sqnb);
             }
+
+            HttpContext.Current.Session["MaterialDesc"] = ITEM;
+            HttpContext.Current.Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ITEM.Trim().ToUpper() + "&code=Code128&dpi=96";
+            HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID.Trim().ToUpper() + "&code=Code128&dpi=96";
+            HttpContext.Current.Session["Lot"] = ORNO;
+            HttpContext.Current.Session["Quantity"] = QTYS.ToString() + " " + UNIT;
+            HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
+            HttpContext.Current.Session["Pallet"] = PAID.Trim().ToUpper();
+            HttpContext.Current.Session["Machine"] = "";
+            HttpContext.Current.Session["Operator"] = HttpContext.Current.Session["user"].ToString();
+            HttpContext.Current.Session["Reprint"] = "no";
+
             return JsonConvert.SerializeObject(ObjTticol022);
 
         }

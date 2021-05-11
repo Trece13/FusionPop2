@@ -793,15 +793,31 @@ namespace whusap.WebPages.Migration
                     //paramurl.Append("valor3=" + Request.QueryString[2].ToString());
 
                     Session["IsPreviousPage"] = "";
+                    DataRow row = (DataRow)Session["FilaImprimir"];
+
+                    Session["MaterialDesc"] = row["DESCI"].ToString();
+                    Session["MaterialCode"] = row["ITEM"].ToString();
+                    Session["codePaid"] = row["PAID"].ToString();
+                    Session["Lot"] = row["LOTE"].ToString();
+                    Session["Quantity"] = row["CANTIDAD"].ToString();
+                    Session["Origin"] = row["LOTE"].ToString();
+                    Session["Supplier"] = Session["user"].ToString();
+                    Session["RecibedBy"] = Session["user"].ToString();
+                    Session["RecibedOn"] = DateTime.Now.ToString();
+                    Session["Reprint"] = "no";
 
                     StringBuilder script = new StringBuilder();
-
-                    script.Append("ventanaImp = window.open('../Labels/whInvLabelMaterialRejectedMRB.aspx', ");
-                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-                    script.Append("ventanaImp.moveTo(30, 0);");
-                    //script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "alert('Information Saved Successfully.');", true);
+
+                    //StringBuilder script = new StringBuilder();
+
+                    //script.Append("ventanaImp = window.open('../Labels/whInvLabelMaterialRejectedMRB.aspx', ");
+                    //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+                    //script.Append("ventanaImp.moveTo(30, 0);");
+                    ////script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+                    ////ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "alert('Information Saved Successfully.');", true);
                     lblResult.Text = mensajes("msjupdt");
                     lblResult.Visible = true;
                 }
@@ -822,28 +838,25 @@ namespace whusap.WebPages.Migration
                     resultadop.Rows[0]["FactorKG"] = FactorKG.Trim();
 
                     Session["resultadop"] = resultadop;
-
-                    StringBuilder paramurl = new StringBuilder();
-
-                    //paramurl.Append("?");
-
-                    //paramurl.Append("valor1=" + Request.QueryString[0].ToString() + "&");
-
-                    //paramurl.Append("valor2=" + Request.QueryString[1].ToString() + "&");
-
-                    //paramurl.Append("valor3=" + Request.QueryString[2].ToString());
-
                     Session["IsPreviousPage"] = "";
 
-                    StringBuilder script = new StringBuilder();
+                    DataRow row = (DataRow)Session["FilaImprimir"];
 
-                    script.Append("ventanaImp = window.open('../Labels/whInvLabelMRBReturnToStock.aspx', ");
-                    script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-                    script.Append("ventanaImp.moveTo(30, 0);");
-                    //script.Append("setTimeout (ventanaImp.close(), 20000);");
+                    Session["MaterialDesc"] =  row["DESCI"].ToString();  
+                    Session["MaterialCode"] =  row["ITEM"].ToString();  
+                    Session["codePaid"]     =  row["PAID"].ToString();  
+                    Session["Lot"]          =  row["LOTE"].ToString();  
+                    Session["Quantity"]     =  row["CANTIDAD"].ToString();  
+                    Session["Origin"]       =  row["LOTE"].ToString();  
+                    Session["Supplier"]     = Session["user"].ToString();
+                    Session["RecibedBy"]        = Session["user"].ToString();
+                    Session["RecibedOn"]    = DateTime.Now.ToString();
+                    Session["Reprint"]      = "no";
+
+                    StringBuilder script = new StringBuilder();
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
-                    //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "alert('Information Saved Successfully.');", true);
                     lblResult.Text = mensajes("msjupdt");
                     lblResult.Visible = true;
                     lblError1.Text = String.Empty;
@@ -875,12 +888,29 @@ namespace whusap.WebPages.Migration
             paramurl.Append("valor3=" + Request.QueryString[2].ToString());
             Session["IsPreviousPage"] = "";
 
+            DataRow row = (DataRow)Session["FilaImprimir"];
+
+            Session["MaterialDesc"] = row["DESCI"].ToString();
+            Session["MaterialCode"] = row["ITEM"].ToString();
+            Session["codePaid"] = row["PAID"].ToString();
+            Session["Lot"] = row["LOTE"].ToString();
+            Session["Quantity"] = row["CANTIDAD"].ToString();
+            Session["Origin"] = row["LOTE"].ToString();
+            Session["Supplier"] = Session["user"].ToString();
+            Session["RecibedBy"] = Session["user"].ToString();
+            Session["RecibedOn"] = DateTime.Now.ToString();
+            Session["Reprint"] = "no";
+
             StringBuilder script = new StringBuilder();
-            script.Append("ventanaImp = window.open('../Labels/whInvLabelMaterialRejectedDMRB.aspx', ");
-            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-            script.Append("ventanaImp.moveTo(30, 0);");
-            //script.Append("setTimeout (ventanaImp.close(), 20000);");
+            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+            //StringBuilder script = new StringBuilder();
+            //script.Append("ventanaImp = window.open('../Labels/whInvLabelMaterialRejectedDMRB.aspx', ");
+            //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+            //script.Append("ventanaImp.moveTo(30, 0);");
+            ////script.Append("setTimeout (ventanaImp.close(), 20000);");
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
 
         protected void grdRecords_RowDataBound(object sender, GridViewRowEventArgs e)
