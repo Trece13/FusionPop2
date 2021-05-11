@@ -365,7 +365,7 @@ namespace whusap.WebPages.InvReceipts
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
                         };
 
-                        HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["T$DSCA"].ToString();
+                        HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
                         HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
                         HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96";
                         HttpContext.Current.Session["Lot"] = LOT;

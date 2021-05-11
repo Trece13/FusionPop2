@@ -60,6 +60,8 @@ namespace whusap.WebPages.Labels.RedesingLabels
 
         private void CrearLabel()
         {
+            printButton.Visible = false;
+            lblReprint.Visible = false;
             lblMaterialDesc.InnerText = string.Empty;
             lblMaterialCode.InnerText = string.Empty;
             codePaid.Src = string.Empty;
