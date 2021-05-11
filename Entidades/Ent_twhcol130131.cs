@@ -119,5 +119,7 @@ namespace whusa
         public string MCNO { get; set; }
 
         public string TypeMsgJs { get; set; }
+
+        public decimal QSTK { get; set; }
     }
 }

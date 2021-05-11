@@ -51,6 +51,7 @@ namespace whusap.WebPages.InvReceipts
         public static int ToleranciaMaximaDias = Convert.ToInt32(WebConfigurationManager.AppSettings["ToleranciaMaximaDias"].ToString());
         public static int ToleranciaMinimaDias = Convert.ToInt32(WebConfigurationManager.AppSettings["ToleranciaMinimaDias"].ToString());
         private static Mensajes _mensajesForm = new Mensajes();
+        public static decimal QUANTITYAUX_COMPLETADA;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -113,6 +114,7 @@ namespace whusap.WebPages.InvReceipts
         {
             if (INIT == true)
             {
+                QUANTITYAUX_COMPLETADA = 0;
                 CiclePrintBegin = 0;
                 MyInsert.Clear();
             }
@@ -130,6 +132,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
                 QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
             }
 
 
@@ -259,11 +262,31 @@ namespace whusap.WebPages.InvReceipts
                         }
                         else
                         {
+                            QUANTITYAUX_COMPLETADA = QUANTITYAUX_COMPLETADA + Convert.ToDecimal(MyObj.QTYC);
+
+                            if (CiclePrintBegin == CiclePrintEnd - 1)
+                            {
+                                decimal QTYCOMPLETADA, QTYFINAL = 0;
+                                decimal LIMITE = 0.05m;
+                                decimal QTYLIMITE = 0;
+                                QTYLIMITE = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTR"].ToString());
+                                if (QUANTITY <= QTYLIMITE)
+                                {
+                                    QTYCOMPLETADA = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString()) - QUANTITYAUX_COMPLETADA;
+                                    if (QTYCOMPLETADA < LIMITE)
+                                    {
+                                        QTYFINAL = Convert.ToDecimal(MyObj.QTYC) + QTYCOMPLETADA;
+                                        MyObj.QTYC = QTYFINAL.ToString();
+                                    }
+                                }
+                            }
+
                             bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
 
                             if (Insertsucces)
                             {
                                 CiclePrintBegin++;
+
                                 MyInsert.Add(MyObj);
 
                                 if (CiclePrintBegin < CiclePrintEnd && CiclePrintEnd > 1)

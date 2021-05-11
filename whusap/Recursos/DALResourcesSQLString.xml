@@ -2164,7 +2164,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select pur401.t$orno, pur401.t$pono, pur401.t$sqnb, pur401.t$oqua, pur401.t$bqua,
           pur401.t$item, ibd001.T$dsca dsca, pur401.t$ddtb, inh210.t$oset, ipu001.t$rtdp, ipu001.t$rtdm,
           ipu001.t$rtqp, ipu001.t$rtqm, pur401.t$oltp, pur401.t$cwar,inh210.t$seqn T$SQNBR, pur400.t$cotp,
-          com100.t$nama
+          com100.t$nama, inh210.t$qstk, inh210.t$qstr
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001
           on ipu001.t$item = pur401.t$item
