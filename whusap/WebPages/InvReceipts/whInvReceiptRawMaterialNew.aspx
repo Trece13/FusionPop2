@@ -40,46 +40,154 @@
 
             var mywindow = window.open('','targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=400')
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('<style>                   '
-                                    +'#MyDynamicEtiqueta {      '
-                                    +'width: 100%;              '
-                                    +'height: 100%;             '
-                                    +'margin: 0;                '
-                                    +'padding: 0;               '
-                                    +'background-color: #FAFAFA;'
-                                    +'font: 12pt "Tahoma";      '
-                                    +'}                         '
-                                    +'                          '
-                                    +'                         '
-                                    +'@page {                  '
-                                    +'size: 6in 4in;           '
-                                    +'margin: 0mm;    '
-                                    +'}                        '
-                                    +'                         '
-                                    +'@media print {           '
-                                    +'html,                    '
-                                    +'body {                   '
-                                    +'width: 6in;              '
-                                    +'height: 4in;             '
-                                    +'}                        '
-                                    +'.page {                  '
-                                    +'margin: auto !important;  '
-                                    +'width: 3in;               '
-                                    +'min-height: 3in;          '
-                                    +'padding: 0px;           '
-                                    +'border: 0px;'
-                                    +'border-radius: 5px;       '
-                                    +'background: white;        '
-                                    +'box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);'
-                                    +'border-radius: initial;  '
-                                    +'width: initial;          '
-                                    +'min-height: initial;     '
-                                    +'box-shadow: initial;     '
-                                    +'background: initial;     '
-                                    +'page-break-after: always;'
-                                    +'}                        '
-                                    +'}                        '
-                                    +'</style>'+
+
+            
+            mywindow.document.write('<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />'+
+                                    '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">'+
+                                    '<style type="text/css">' +
+                                    '#MyEtiqueta label {'+
+                                    'font-size: 15px;'+
+                                    '}'+
+                                    '#LblDate {'+
+                                    'font-size: 14px !important;'+
+                                    '}'+
+                                    '#LblReprintInd,'+
+                                    '#LblReprint {'+
+                                    'display: none;'+
+                                    '}'+
+                                    '.isValid {'+
+                                    'border-bottom: solid;'+
+                                    'border-color: green;'+
+                                    '}'+
+                                    '.isNotValid {'+
+                                    'border-bottom: solid;'+
+                                    'border-color: red;'+
+                                    '}'+
+                                    '.fa-check {'+
+                                    'color: green;'+
+                                    '}'+
+                                    '.fa-times {'+
+                                    'color: red;'+
+                                    '}'+
+                                    '#checkItem,'+
+                                    '#checkLot,'+
+                                    '#checkWarehouse,'+
+                                    '#checkLoca,'+
+                                    '#checkPaid {'+
+                                    'display: none;'+
+                                    '}'+
+                                    '#exItem,'+
+                                    '#exLot,'+
+                                    '#exWarehouse,'+
+                                    '#exLoca,'+
+                                    '#exPaid {'+
+                                    'display: none;'+
+                                    '}'+
+                                    '#loadItem,'+
+                                    '#loadLot,'+
+                                    '#loadWarehouse,'+
+                                    '#loadLoca,'+
+                                    '#loadPaid {'+
+                                    'display: none;'+
+                                    '}'+
+                                    'tr {'+
+                                    'text-align: center;'+
+                                    '}'+
+                                    'th {'+
+                                    'text-align: center;'+
+                                    '}'+
+                                    '#myLabel {'+
+                                    'width: 6in;'+
+                                    'height: 4in;'+
+                                    'padding: 20px;'+
+                                    'border: 1px solid black;'+
+                                    'border-radius: 12px;'+
+                                    '}'+
+                                    '.alingRight {'+
+                                    'text-align: right;'+
+                                    '}'+
+                                    '.alingLeft {'+
+                                    'text-align: left;'+
+                                    '}'+
+                                    '#printButton {'+
+                                    'width: 6in;'+
+                                    '}'+
+                                    '#codePaid {'+
+                                    'display: block;'+
+                                    'margin: auto;'+
+                                    'height: 150px;'+
+                                    'width: 500px;'+
+                                    '}'+
+                                    '#codeItem {'+
+                                    'display: block;'+
+                                    'margin: auto;'+
+                                    'height: 75px;'+
+                                    'width: 250px;'+
+                                    '}'+
+                                    '#itemDesc {'+
+                                    'vertical-align: middle;'+
+                                    'font-size: 21px;'+
+                                    '}'+
+                                    '.divDesc {'+
+                                    'text-align: center;'+
+                                    '}'+
+                                    '#lblDesc {'+
+                                    '}'+
+                                    '#lblMadein {'+
+                                    '}'+
+                                    '.borderTop {'+
+                                    'border-top: solid 1px gray;'+
+                                    '}'+
+                                    '#printContainer {'+
+                                    'margin-bottom: 100px;'+
+                                    '}'+
+                                    '#editTable {'+
+                                    'display: none;'+
+                                    '}'+
+                                    '#lblError {'+
+                                    'color: red;'+
+                                    'font-size: 13px;'+
+                                    '}'+
+                                    '.load {'+
+                                    'width: 10px;'+
+                                    'height: 10px;'+
+                                    'align-content: center;'+
+                                    'animation-name: spin;'+
+                                    'animation-duration: 5000ms;'+
+                                    'animation-iteration-count: infinite;'+
+                                    'animation-timing-function: linear;'+
+                                    '}'+
+                                    '#saveSection {'+
+                                    'display: none;'+
+                                    '}'+
+                                    '.notBorderBottom {'+
+                                    'border-bottom: none;'+
+                                    '}'+
+                                    '#divBarcode {'+
+                                    '--height: 186px;'+
+                                    'padding: inherit;'+
+                                    '}'+
+                                    '@keyframes spin {'+
+                                    'from {'+
+                                    'transform: rotate(0deg);'+
+                                    '}'+
+                                    'to {'+
+                                    'transform: rotate(360deg);'+
+                                    '}'+
+                                    '}'+
+                                    '#table {'+
+                                    'font-size: 10px;'+
+                                    '}'+
+                                    '.table td,'+
+                                    '.table th {'+
+                                    'padding: .1rem;'+
+                                    'border-top: 1px solid #dee2e6;'+
+                                    'font-size: 12px;'+
+                                    'text-align: left;'+
+                                    'vertical-align: middle;'+
+                                    'padding-left: 1em;'+
+                                    '}'+
+                                    '</style>'+
                                     '</head><body>');
 
             mywindow.document.write(document.getElementById(divID).innerHTML);
@@ -154,10 +262,185 @@
         {
             display:none;
         }
-        
-        
+        <style type="text/css">
+        #MyEtiqueta label {
+            font-size: 15px;
+        }
 
+        #LblDate {
+            font-size: 14px !important;
+        }
+
+        #LblReprintInd,
+        #LblReprint {
+            display: none;
+        }
+
+        .isValid {
+            border-bottom: solid;
+            border-color: green;
+        }
+
+        .isNotValid {
+            border-bottom: solid;
+            border-color: red;
+        }
+
+        .fa-check {
+            color: green;
+        }
+
+        .fa-times {
+            color: red;
+        }
+
+        #checkItem,
+        #checkLot,
+        #checkWarehouse,
+        #checkLoca,
+        #checkPaid {
+            display: none;
+        }
+
+        #exItem,
+        #exLot,
+        #exWarehouse,
+        #exLoca,
+        #exPaid {
+            display: none;
+        }
+
+        #loadItem,
+        #loadLot,
+        #loadWarehouse,
+        #loadLoca,
+        #loadPaid {
+            display: none;
+        }
+
+        tr {
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        #myLabel {
+            width: 6in;
+            height: 4in;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 12px;
+        }
+
+        .alingRight {
+            text-align: right;
+        }
+
+        .alingLeft {
+            text-align: left;
+        }
+
+        #printButton {
+            width: 6in;
+        }
+
+        #codePaid {
+            display: block;
+            margin: auto;
+            height: 150px;
+            width: 500px;
+        }
+
+        #codeItem {
+            display: block;
+            margin: auto;
+            height: 75px;
+            width: 250px;
+        }
+
+        #itemDesc {
+            vertical-align: middle;
+            font-size: 21px;
+        }
+
+        .divDesc {
+            text-align: center;
+        }
+
+        #lblDesc {
+        }
+
+        #lblMadein {
+        }
+
+        .borderTop {
+            border-top: solid 1px gray;
+        }
+
+        #printContainer {
+            margin-bottom: 100px;
+        }
+
+        #editTable {
+            display: none;
+        }
+
+        #lblError {
+            color: red;
+            font-size: 13px;
+        }
+
+        .load {
+            width: 10px;
+            height: 10px;
+            align-content: center;
+            animation-name: spin;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        #saveSection {
+            display: none;
+        }
+
+        .notBorderBottom {
+            border-bottom: none;
+        }
+
+        #divBarcode {
+            --height: 186px;
+            padding: inherit;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #table {
+            font-size: 10px;
+        }
+
+        .table td,
+        .table th {
+            padding: .1rem;
+            border-top: 1px solid #dee2e6;
+            font-size: 12px;
+            text-align: left;
+            vertical-align: middle;
+            padding-left: 1em;
+        }
     </style>
+        
+      
     <script type="text/javascript">
 //        function IniciarListasOrderType() {
 
@@ -720,6 +1003,7 @@
                 }
             }
             else {
+                for(i = 0; i < 10; i++){
                 MyList.forEach(function (MyObject) {
 
                     CBPalletNOd = MyObject.PAID_URL;
@@ -738,94 +1022,120 @@
                     LblLotOCd = MyObject.CLOT;
                     LblUnitOCd = MyObject.UNIT;
                     LblQuantityOCd = MyObject.QTYC;
+                    LblUser = MyObject.LOGN;
 
 
-                    //                    if (MyObject.CLOT_URL == "") {
-                    //                        CBLot.hide(;
-                    //                    }
-                    //                    else {
-                    //                        CBLot.show(;
-                    //                    }
 
                     var etiqueta =
-                            '<div class="page" style="padding:0; margin: auto; height:4in;width:6in"><table style="margin: auto">                                                               ' +
-                            '<tr>                                                                                       ' +
-                            '<td colspan="4"><br><br>                                                                          ' +
-                            '<img src="' + CBPalletNOd + '" id="CBPalletNOd" alt="" hspace="60"' +
-                            'vspace="5" style="width: 4in; height: .5in;" />                                            ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '<tr>                                                                                       ' +
-                            '<td>                                                                                       ' +
-                            '<label style="font-size: 11px">                                                            ' +
-                            'ITEM</label>                                                                               ' +
-                            '</td>                                                                                      ' +
-                            '<td>                                                                                       ' +
-                            '<label id="lblItemIDd" style="display: none; font-size: 10px">                              ' +
-                            '' + lblItemIDd + '</label>                                                                                   ' +
-                            '<img src="' + CBItem + '" id="CBItem" alt="" hspace="60"    ' +
-                            'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '<tr>                                                                                       ' +
-                            '<td>                                                                                       ' +
-                            '</td>                                                                                      ' +
-                            '<td align="center">                                                                        ' +
-                            '<label id="lblItemDescd" style="font-size: 11px">                                           ' +
-                            '' + lblItemDescd + '</label>                                                                                   ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '<tr>                                                                                       ' +
-                            '<td>                                                                                       ' +
-                            '<label style="font-size: 11px">                                                            ' +
-                            'QUANTITY</label>                                                                           ' +
-                            '</td>                                                                                      ' +
-                            '<td>                                                                                       ' +
-                            '<label id="LblQuantityd" style="display: none; font-size: 11px">                            ' +
-                            '' + LblQuantityd + '</label>                                                                                   ' +
-                            '<img src="' + CBQuantityd + '" id="CBQuantityd" alt="" hspace="60"' +
-                            'vspace="5" style="width: 2in; height: .5in;" />                                            ' +
-                            '</td>                                                                                      ' +
-                            '<td>                                                                                       ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '<tr>                                                                                       ' +
-                            '<td>                                                                                       ' +
-                            '</td>                                                                                      ' +
-                            '<td align="center">                                                                        ' +
-                            '<label id="LblUnitd" style="font-size: 11px">                                               ' +
-                            '' + LblUnitd + '</label>                                                                                   ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '<tr>                                                                                       ' +
-                            '<td>                                                                                       ' +
-                            '<label style="font-size: 11px">                                                            ' +
-                            'LOT</label>                                                                                ' +
-                            '</td>                                                                                      ' +
-                            '<td>                                                                                       ' +
-                            '<label id="LblLotIdd" style="display: none; font-size: 11px">                               ' +
-                            '' + LblLotIdd + '</label>                                                                                   ' +
-                            '<img src="' + CBLotd + '" id="CBLotd" alt="" hspace="60"     ' +
-                            'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '<tr>                                                                                       ' +
-                            '<td>                                                                                       ' +
-                            '<label style="font-size: 11px">                                                            ' +
-                            'RECEIPT DATE</label>                                                                       ' +
-                            '</td>                                                                                      ' +
-                            '<td>                                                                                       ' +
-                            '<label class="LblDate" style="font-size: 11px">                                               ' +
-                            '</label>                                                                                   ' +
-                            '</td>                                                                                      ' +
-                            '</tr>                                                                                      ' +
-                            '</table>'+
-                            '</div>';
+                        '<div id="myLabel">' +
+                        '<div class="row">' +
+                        '<div class="col-6 alingLeft">' +
+                        '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
+                        '</div>' +
+                        '<div class="col-6 alingRight">' +
+                        '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<br />' +
+                        '<div class="col-12 borderTop" id="divBarcode">' +
+                        '<img src="' + CBPalletNOd + '" id="codePaid" alt="" />' +
+                        '</div>' +
+                        '<div>' +
+                        '<table class="table mw-100">' +
+                        '<tbody>' +
+                        '<tr>' +
+                        '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + LblQuantityd + '</label></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
+                        '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblUser + '</label></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
+                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate"></label></td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>' +
+                        '</div>' +
+                        '</div>';
 
-
-
+                            //'<div class="page" style="padding:0; margin: auto; height:4in;width:6in"><table style="margin: auto">                                                               ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td colspan="4"><br><br>' +
+                            //'<img src="' + CBPalletNOd + '" id="CBPalletNOd" alt="" hspace="60"' +
+                            //'vspace="5" style="width: 4in; height: .5in;" />                                            ' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td>                                                                                       ' +
+                            //'<label style="font-size: 11px">                                                            ' +
+                            //'ITEM</label>                                                                               ' +
+                            //'</td>                                                                                      ' +
+                            //'<td>                                                                                       ' +
+                            //'<label id="lblItemIDd" style="display: none; font-size: 10px">                              ' +
+                            //'' + lblItemIDd + '</label>' +
+                            //'<img src="' + CBItem + '" id="CBItem" alt="" hspace="60"    ' +
+                            //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td>                                                                                       ' +
+                            //'</td>                                                                                      ' +
+                            //'<td align="center">                                                                        ' +
+                            //'<label id="lblItemDescd" style="font-size: 11px">                                           ' +
+                            //'' + lblItemDescd + '</label>' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td>                                                                                       ' +
+                            //'<label style="font-size: 11px">                                                            ' +
+                            //'QUANTITY</label>                                                                           ' +
+                            //'</td>                                                                                      ' +
+                            //'<td>                                                                                       ' +
+                            //'<label id="LblQuantityd" style="display: none; font-size: 11px">                            ' +
+                            //'' + LblQuantityd + '</label>' +
+                            //'<img src="' + CBQuantityd + '" id="CBQuantityd" alt="" hspace="60"' +
+                            //'vspace="5" style="width: 2in; height: .5in;" />                                            ' +
+                            //'</td>                                                                                      ' +
+                            //'<td>                                                                                       ' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td>                                                                                       ' +
+                            //'</td>                                                                                      ' +
+                            //'<td align="center">                                                                        ' +
+                            //'<label id="LblUnitd" style="font-size: 11px">                                               ' +
+                            //'' + LblUnitd + '</label>' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td>                                                                                       ' +
+                            //'<label style="font-size: 11px">                                                            ' +
+                            //'LOT</label>                                                                                ' +
+                            //'</td>                                                                                      ' +
+                            //'<td>                                                                                       ' +
+                            //'<label id="LblLotIdd" style="display: none; font-size: 11px">                               ' +
+                            //'' + LblLotIdd + '</label>                                                                                   ' +
+                            //'<img src="' + CBLotd + '" id="CBLotd" alt="" hspace="60"     ' +
+                            //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'<tr>                                                                                       ' +
+                            //'<td>                                                                                       ' +
+                            //'<label style="font-size: 11px">                                                            ' +
+                            //'RECEIPT DATE</label>                                                                       ' +
+                            //'</td>                                                                                      ' +
+                            //'<td>                                                                                       ' +
+                            //'<label class="LblDate" style="font-size: 11px">                                               ' +
+                            //'</label>                                                                                   ' +
+                            //'</td>                                                                                      ' +
+                            //'</tr>                                                                                      ' +
+                            //'</table>'+
+                            //'</div>';
                     $('#MyDynamicEtiqueta').append(etiqueta);
-                });
+               }
+            );
 
                 DeshabilitarLimpiarControles();
                 printDiv('MyDynamicEtiqueta');
