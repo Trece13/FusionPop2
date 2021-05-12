@@ -24,6 +24,8 @@ namespace whusap.WebPages.InvReceipts
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         public static InterfazDAL_twhwmd200 twhwmd200 = new InterfazDAL_twhwmd200();
+        public static int CiclePrintBegin = 0;
+        public static int CiclePrintEnd = 1;
         public string LstSalesOrderJSON = string.Empty;
         public string LstTransferOrderJSON = string.Empty;
         public string LstPurchaseOrdersJSON = string.Empty;
@@ -44,6 +46,7 @@ namespace whusap.WebPages.InvReceipts
         public static int ToleranciaMinimaDias = Convert.ToInt32(WebConfigurationManager.AppSettings["ToleranciaMinimaDias"].ToString());
         private static Mensajes _mensajesForm = new Mensajes();
         private static string globalMessages = "GlobalMessages";
+        public static decimal QUANTITYAUX_COMPLETADA;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -259,9 +262,10 @@ namespace whusap.WebPages.InvReceipts
             decimal QUANTITYAUX = QUANTITY;
             string Retrono = "El Registro no se ha insertado";
             Factor MyConvertionFactor = new Factor { };
-
+            QUANTITYAUX_COMPLETADA = 0;
             if (CUNI != STUN)
             {
+                
                 MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
                 QUANTITY = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
             }
@@ -410,6 +414,25 @@ namespace whusap.WebPages.InvReceipts
                         }
                         else
                         {
+                            QUANTITYAUX_COMPLETADA = QUANTITYAUX_COMPLETADA + Convert.ToDecimal(MyObj.QTYC);
+
+                            if (CiclePrintBegin == CiclePrintEnd - 1)
+                            {
+                                decimal QTYCOMPLETADA, QTYFINAL = 0;
+                                decimal LIMITE = 0.05m;
+                                decimal QTYLIMITE = 0;
+                                QTYLIMITE = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTR"].ToString());
+                                if (QUANTITY <= QTYLIMITE)
+                                {
+                                    QTYCOMPLETADA = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString()) - QUANTITYAUX_COMPLETADA;
+                                    if (QTYCOMPLETADA < LIMITE)
+                                    {
+                                        QTYFINAL = Convert.ToDecimal(MyObj.QTYC) + QTYCOMPLETADA;
+                                        MyObj.QTYC = QTYFINAL.ToString();
+                                    }
+                                }
+                            }
+
                             bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
 
                             if (Insertsucces)
