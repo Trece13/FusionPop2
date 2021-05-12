@@ -46,6 +46,7 @@ namespace whusap.WebPages.Migration
         private static string formName;
         public string PalletIDdoesntexistsCannotcontinue    = string.Empty;
         public string PalletIDdoesntavailablefordisposition = string.Empty;
+        public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
 
         //Manejo idioma
         private static Mensajes _mensajesForm = new Mensajes();
@@ -843,8 +844,8 @@ namespace whusap.WebPages.Migration
                     DataRow row = (DataRow)Session["FilaImprimir"];
 
                     Session["MaterialDesc"] =  row["DESCI"].ToString();  
-                    Session["MaterialCode"] =  row["ITEM"].ToString();  
-                    Session["codePaid"]     =  row["PAID"].ToString();  
+                    Session["MaterialCode"] =  row["ITEM"].ToString();
+                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + row["PAID"].ToString() + "&code=Code128&dpi=96";  
                     Session["Lot"]          =  row["LOTE"].ToString();  
                     Session["Quantity"]     =  row["CANTIDAD"].ToString();  
                     Session["Origin"]       =  row["LOTE"].ToString();  
@@ -892,7 +893,7 @@ namespace whusap.WebPages.Migration
 
             Session["MaterialDesc"] = row["DESCI"].ToString();
             Session["MaterialCode"] = row["ITEM"].ToString();
-            Session["codePaid"] = row["PAID"].ToString();
+            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + row["PAID"].ToString() + "&code=Code128&dpi=96";
             Session["Lot"] = row["LOTE"].ToString();
             Session["Quantity"] = row["CANTIDAD"].ToString();
             Session["Origin"] = row["LOTE"].ToString();

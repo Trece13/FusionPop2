@@ -138,8 +138,8 @@ namespace whusap.WebPages.Migration
             divTableLocated.Visible = false;
 
             divLabelAnnounce.Visible = true;
-            divLabel.Visible = true;
-            divLabelDelivered.Visible = true;
+            divLabel.Visible = false;
+            divLabelDelivered.Visible = false;
 
             //btnSalirAnnounce.Visible = false;
             //btnSalirDelivered.Visible = false;
@@ -506,8 +506,8 @@ namespace whusap.WebPages.Migration
                                          slRejectType.Items.Insert(slRejectType.Items.Count, intern);
                                          slRejectType.Items.Insert(slRejectType.Items.Count, retur);
 
-                                         divTableDelivered.Visible = true;
-                                         divBtnGuardarDelivered.Visible = true;
+                                         divTableDelivered.Visible = false;
+                                         divBtnGuardarDelivered.Visible = false;
                                          lblErrorDelivered.Visible = false;
                                          encontrado = true;
 
@@ -1109,8 +1109,24 @@ namespace whusap.WebPages.Migration
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
                     }
 
-                    divLabel.Visible = true;
-                    divBotonesLocated.Visible = true;
+                    Session["Reprint"] = "no";
+                    Session["MaterialDesc"] = "";
+                    Session["Material"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
+                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
+                    Session["Lot"] = lot == String.Empty ? " " : lot;
+                    Session["Quantity"] = cantidad.ToString().Trim().ToUpper();
+                    Session["Date"] = DateTime.Now.ToString();
+                    Session["Machine"] = "";
+                    Session["Operator"] = Session["user"].ToString();
+                    Session["Pallet"] = paid.Trim().ToUpper();
+
+                    StringBuilder script = new StringBuilder();
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+
+                    divLabel.Visible = false;
+                    divBotonesLocated.Visible = false;
                 }
                 else
                 {
@@ -1199,6 +1215,22 @@ namespace whusap.WebPages.Migration
                         lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                         lblValueReasonLocated.Text = reasondesc;
 
+                        Session["Reprint"]      = "no";
+                        Session["MaterialDesc"] = "";
+                        Session["Material"]     = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
+                        Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
+                        Session["Lot"] = lot == String.Empty ? " " : lot;
+                        Session["Quantity"]     = cantidad.ToString().Trim().ToUpper();
+                        Session["Date"]         = DateTime.Now.ToString();
+                        Session["Machine"]      = "";
+                        Session["Operator"]     = Session["user"].ToString();
+                        Session["Pallet"] = paid.Trim().ToUpper();
+
+                        StringBuilder script = new StringBuilder();
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+
                     divLabel.Visible = true;
                     divBotonesLocated.Visible = true;
                 }
@@ -1267,6 +1299,24 @@ namespace whusap.WebPages.Migration
             lblPdno.Text = pdno;
             var rutaPdno = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + pdno.ToUpper() + "&code=Code128&dpi=96";
             imgBCPdno.Src = !string.IsNullOrEmpty(pdno) ? rutaPdno : String.Empty;
+
+            Session["WorkOrder"] = pdno.ToUpper();
+            Session["lblReason"] = ObjReason.dsca;
+            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb + "&code=Code128&dpi=96";
+            Session["ProductDesc"] = dsca;
+            Session["ProductCode"] = mitm;
+            Session["Date"] = DateTime.Now.ToString();
+            Session["Quantity"] = qtyr;
+            Session["Finished"] = sqnb;
+            Session["Pallet"] = sqnb;
+            Session["PrintedBy"] = _operator;
+            Session["Machine"] = "";
+            Session["Comments"] = Objtticol100.obse;
+            Session["Reprint"] = "no";
+
+            StringBuilder script = new StringBuilder();
+            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
         protected void btnExit_Click(object sender, EventArgs e)
         {
@@ -1407,8 +1457,8 @@ namespace whusap.WebPages.Migration
                 txtPalletId.Text = String.Empty;
                 TxtOrder.Text = string.Empty;
                 MakeLabelDelivered(dataticol100);
-                divLabelDelivered.Visible = true;
-                divBotonesDelivered.Visible = true;
+                divLabelDelivered.Visible = false;
+                divBotonesDelivered.Visible = false;
             }
             else
             {
@@ -1510,7 +1560,7 @@ namespace whusap.WebPages.Migration
 
             Session["WorkOrder"]   = sqnb ;
             Session["lblReason"]   = slReason.SelectedItem.Text.Substring(7);
-            Session["codePaid"]    = sqnb;
+            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb + "&code=Code128&dpi=96";
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
             Session["Date"]        = DateTime.Now.ToString();
@@ -1521,6 +1571,12 @@ namespace whusap.WebPages.Migration
             Session["Machine"]     = "";
             Session["Comments"]    = txtExactReasons.InnerText;
             Session["Reprint"]     = "no";
+
+            StringBuilder script = new StringBuilder();
+            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+            script.Append("ventanaImp.moveTo(30, 0);");
+            //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
 
         #endregion

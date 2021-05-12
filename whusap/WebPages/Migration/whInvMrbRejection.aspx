@@ -501,7 +501,7 @@
             </td>
         </tr>
     </table>
-     <div runat="server" id="divLabel"  clientidmode="Static" style="zoom: 80%;
+    <div runat="server" id="divLabel"  clientidmode="Static" style="zoom: 80%;
         margin-bottom: 70px">
         <hr />
         <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;"
@@ -580,7 +580,7 @@
         <hr />
         <asp:Button ID="btnGuardarDelivered" runat="server" OnClick="btnGuardar_Click_Delivered" OnClientClick="return validarFormularioDelivered();" CssClass="ButtonsSendSave"/>
     </div>
-      <div runat="server" id="divTableDelivered"  style="overflow-y:scroll; width:150%;">
+     <div runat="server" id="divTableDelivered"  style="overflow-y:scroll; width:150%;">
         <hr />
         <table class='table table-bordered' style='max-width:1200px;font-size:13px; border:3px solid; border-style:outset; text-align:center;'>
             <tr style='font-weight:bold; background-color:lightgray;'>
@@ -693,4 +693,11 @@
     <asp:Label Text="" runat="server" ID="lblErrorDelivered" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
     <asp:Label Text="" runat="server" ID="lblConfirmDelivered" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
    <%-- end Logic for Delivered status --%>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>
