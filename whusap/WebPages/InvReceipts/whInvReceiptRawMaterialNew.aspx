@@ -1003,7 +1003,6 @@
                 }
             }
             else {
-                for(i = 0; i < 10; i++){
                 MyList.forEach(function (MyObject) {
 
                     CBPalletNOd = MyObject.PAID_URL;
