@@ -385,11 +385,11 @@ namespace whusap.WebPages.InvReceipts
                 HttpContext.Current.Session["MaterialCode"] = MyObj.ITEM;
                 HttpContext.Current.Session["codePaid"] =  MyObj.PAID ;
                 HttpContext.Current.Session["Lot"] = MyObj.CLOT;
-                HttpContext.Current.Session["Quantity"] = MyObj.QTYS;
+                HttpContext.Current.Session["Quantity"] = MyObj.QTYS + " " + UNIT;
                 HttpContext.Current.Session["Origin"] = MyObj.CLOT;
-                HttpContext.Current.Session["Supplier"] = MyObj.LOGN;
+                HttpContext.Current.Session["Supplier"] = "";
                 HttpContext.Current.Session["RecibedBy"] = MyObj.LOGN;
-                HttpContext.Current.Session["RecibedOn"] = MyObj.LOGN;
+                HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
                 HttpContext.Current.Session["Reprint"] = "no";
             }
             else
