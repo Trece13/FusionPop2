@@ -371,7 +371,7 @@ namespace whusap.WebPages.InvReceipts
 
                         HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
                         HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
-                        HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96";
+                        HttpContext.Current.Session["codePaid"] =  DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
                         HttpContext.Current.Session["Lot"] = LOT;
                         HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
                         HttpContext.Current.Session["Origin"] = LOT;
@@ -535,7 +535,7 @@ namespace whusap.WebPages.InvReceipts
 
                         HttpContext.Current.Session["MaterialDesc"] = DTNOOrdencompra.Rows[0]["T$DSCA"].ToString();
                         HttpContext.Current.Session["MaterialCode"] = DTNOOrdencompra.Rows[0]["T$ITEM"].ToString();
-                        HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96";
+                        HttpContext.Current.Session["codePaid"] = DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet ;
                         HttpContext.Current.Session["Lot"] = LOT;
                         HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
                         HttpContext.Current.Session["Origin"] = LOT;

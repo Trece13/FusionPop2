@@ -174,7 +174,7 @@ namespace whusap.WebPages.Migration
                 Session["Reprint"] = "yes";
                 Session["WorkOrder"] = pdno;
                 Session["lblReason"] = consultaInformacion[0]["DSCACDIS"].ToString().Trim();
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codePaid"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
                 Session["ProductDesc"] = consultaInformacion[0]["DSCA"].ToString().Trim();
                 Session["ProductCode"] = consultaInformacion[0]["ITEM"].ToString().Trim();
                 Session["Date"] = DateTime.Now.ToString();

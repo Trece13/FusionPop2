@@ -21,6 +21,7 @@ namespace whusap.WebPages.InvReceipts
     public partial class InformationPalletIDManufacturingProducts : System.Web.UI.Page
     {
         public static string RequestUrlAuthority = string.Empty;
+        protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
         //private static LabelsText _textoLabels = new LabelsText();
         string formName = string.Empty;
         public static string _operator = string.Empty;
@@ -368,13 +369,13 @@ namespace whusap.WebPages.InvReceipts
             }
 
             HttpContext.Current.Session["MaterialDesc"] = ITEM;
-            HttpContext.Current.Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ITEM.Trim().ToUpper() + "&code=Code128&dpi=96";
-            HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID.Trim().ToUpper() + "&code=Code128&dpi=96";
+            HttpContext.Current.Session["codeMaterial"] = ITEM.Trim().ToUpper();
+            HttpContext.Current.Session["codePaid"] = PAID.Trim().ToUpper();
             HttpContext.Current.Session["Lot"] = ORNO;
             HttpContext.Current.Session["Quantity"] = QTYS.ToString() + " " + UNIT;
             HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
             HttpContext.Current.Session["Pallet"] = PAID.Trim().ToUpper();
-            HttpContext.Current.Session["Machine"] = "";
+            HttpContext.Current.Session["Machine"] = idal022.getMachine(ORNO, ITEM.Trim().ToUpper(), ref strError); ; ;
             HttpContext.Current.Session["Operator"] = HttpContext.Current.Session["user"].ToString();
             HttpContext.Current.Session["Reprint"] = "no";
 

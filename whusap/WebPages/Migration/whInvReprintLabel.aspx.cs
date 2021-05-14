@@ -122,8 +122,8 @@ namespace whusap.WebPages.Migration
 
                 Session["Reprint"] = "yes";
                 Session["MaterialDesc"] = consultaInformacion[0]["DSCA"].ToString().Trim();
-                Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.ToUpper() + "&code=Code128&dpi=96";
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.ToUpper() + "&code=Code128&dpi=96";
+                Session["codeMaterial"] =  item.ToUpper();
+                Session["codePaid"]     =  sqnb.ToUpper();
                 Session["Lot"] = pdno;
                 Session["Quantity"] = quantity + " " + unit;
                 Session["Date"] = DateTime.Now.ToString();

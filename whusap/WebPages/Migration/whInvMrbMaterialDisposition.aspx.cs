@@ -798,11 +798,11 @@ namespace whusap.WebPages.Migration
 
                     Session["MaterialDesc"] = row["DESCI"].ToString();
                     Session["MaterialCode"] = row["ITEM"].ToString();
-                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + row["PAID"].ToString() + "&code=Code128&dpi=96";
+                    Session["codePaid"] = row["PAID"].ToString();
                     Session["Lot"] = row["LOTE"].ToString();
                     Session["Quantity"] = row["CANTIDAD"].ToString();
                     Session["Origin"] = row["LOTE"].ToString();
-                    Session["Supplier"] = Session["user"].ToString();
+                    Session["Supplier"] = "";
                     Session["RecibedBy"] = Session["user"].ToString();
                     Session["RecibedOn"] = DateTime.Now.ToString();
                     Session["Reprint"] = "no";
@@ -845,11 +845,11 @@ namespace whusap.WebPages.Migration
 
                     Session["MaterialDesc"] =  row["DESCI"].ToString();  
                     Session["MaterialCode"] =  row["ITEM"].ToString();
-                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + row["PAID"].ToString() + "&code=Code128&dpi=96";  
+                    Session["codePaid"] = row["PAID"].ToString();  
                     Session["Lot"]          =  row["LOTE"].ToString();  
                     Session["Quantity"]     =  row["CANTIDAD"].ToString();  
                     Session["Origin"]       =  row["LOTE"].ToString();  
-                    Session["Supplier"]     = Session["user"].ToString();
+                    Session["Supplier"]     = "";
                     Session["RecibedBy"]        = Session["user"].ToString();
                     Session["RecibedOn"]    = DateTime.Now.ToString();
                     Session["Reprint"]      = "no";
@@ -893,11 +893,11 @@ namespace whusap.WebPages.Migration
 
             Session["MaterialDesc"] = row["DESCI"].ToString();
             Session["MaterialCode"] = row["ITEM"].ToString();
-            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + row["PAID"].ToString() + "&code=Code128&dpi=96";
+            Session["codePaid"] = row["PAID"].ToString();
             Session["Lot"] = row["LOTE"].ToString();
             Session["Quantity"] = row["CANTIDAD"].ToString();
             Session["Origin"] = row["LOTE"].ToString();
-            Session["Supplier"] = Session["user"].ToString();
+            Session["Supplier"] = "";
             Session["RecibedBy"] = Session["user"].ToString();
             Session["RecibedOn"] = DateTime.Now.ToString();
             Session["Reprint"] = "no";

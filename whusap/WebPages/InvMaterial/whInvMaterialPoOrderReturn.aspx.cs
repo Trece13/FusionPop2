@@ -442,11 +442,11 @@ namespace whusap.WebPages.InvMaterial
 
                     HttpContext.Current.Session["MaterialDesc"] = MyObj.ITEM;    
                     HttpContext.Current.Session["MaterialCode"] = MyObj.ITEM;
-                    HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID.ToString() + "&code=Code128&dpi=96";    
+                    HttpContext.Current.Session["codePaid"] = MyObj.PAID.ToString() ;    
                     HttpContext.Current.Session["Lot"]          = MyObj.ORNO;    
                     HttpContext.Current.Session["Quantity"]     = MyObj.QTYS+" "+MyObj.UNIT;    
-                    HttpContext.Current.Session["Origin"]       = MyObj.ORNO;    
-                    HttpContext.Current.Session["Supplier"]     = HttpContext.Current.Session["user"].ToString();    
+                    HttpContext.Current.Session["Origin"]       = MyObj.ORNO;
+                    HttpContext.Current.Session["Supplier"] = ""; 
                     HttpContext.Current.Session["RecibedBy"]    = HttpContext.Current.Session["user"].ToString();    
                     HttpContext.Current.Session["RecibedOn"]    = DateTime.Now.ToString();
                     HttpContext.Current.Session["Reprint"]      = "no";

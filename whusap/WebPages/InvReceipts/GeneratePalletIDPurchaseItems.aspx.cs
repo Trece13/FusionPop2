@@ -383,7 +383,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 HttpContext.Current.Session["MaterialDesc"] = "XXXXX XXX XXX XX";
                 HttpContext.Current.Session["MaterialCode"] = MyObj.ITEM;
-                HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
+                HttpContext.Current.Session["codePaid"] =  MyObj.PAID ;
                 HttpContext.Current.Session["Lot"] = MyObj.CLOT;
                 HttpContext.Current.Session["Quantity"] = MyObj.QTYS;
                 HttpContext.Current.Session["Origin"] = MyObj.CLOT;

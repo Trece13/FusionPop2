@@ -172,7 +172,7 @@
 
                 // Etiqueta orden de compra
 
-                $("#MyEtiqueta").show()
+                //$("#MyEtiqueta").show()
                 CBPurchaseOrder = $('#Contenido_CBPurchaseOrder');
                 CBItem = $('#Contenido_CBItem');
                 CBLot = $('#Contenido_CBLot');

@@ -237,6 +237,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
     </Module>
     <Module name="tticol022">
+      <operationName name="getMachine">
+        <stringSQL>
+          SELECT tisfc001.T$PDNO,tisfc010.T$MCNO as MCNO FROM baan.ttisfc001140 tisfc001
+          INNER JOIN baan.ttisfc010140 tisfc010
+          ON tisfc001.T$PDNO = tisfc010.t$PDNO
+          WHERE trim(tisfc001.T$PDNO) = nvl('[:T$PDNO]',trim(tisfc001.T$PDNO))
+          AND trim(tisfc001.T$MITM) = nvl('[:T$MITM]',trim(tisfc001.T$MITM))
+          ORDER BY tisfc001.T$PDNO
+        </stringSQL>
+      </operationName>
       <operationName name="getloca">
         <stringSQL>
           select t$loca as LOCA

@@ -24,6 +24,7 @@ namespace whusap.WebPages.InvMaterial
 
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         protected static InterfazDAL_ttwhcol016 idal = new InterfazDAL_ttwhcol016();
+        protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
         Ent_ttwhcol016 obj = new Ent_ttwhcol016();
         DataTable resultado = new DataTable();
         string DefaultZone = string.Empty;
@@ -197,13 +198,13 @@ namespace whusap.WebPages.InvMaterial
             //Session["unidad"] = hi_unityItem.Value;
 
             Session["MaterialDesc"] = reg["T$ITEM"];
-            Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["T$ITEM"].ToString().Trim() + "&code=Code128&dpi=96";
-            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["T$LABL"].ToString().Trim() + "&code=Code128&dpi=96";
-            Session["Lot"] = "";
-            Session["Quantity"] = hi_descItem.Value + " " + hi_unityItem.Value;
+            Session["codeMaterial"] = reg["T$ITEM"].ToString().Trim();
+            Session["codePaid"] = reg["T$LABL"].ToString().Trim();
+            Session["Lot"] = obj.clot;
+            Session["Quantity"] = obj.qtyr + " " + hi_unityItem.Value;
             Session["Date"] = DateTime.Now.ToString();
-            Session["Pallet"] = "";
-            Session["Machine"] = "";
+            Session["Pallet"] = reg["T$LABL"].ToString().Trim();
+            Session["Machine"] = idal022.getMachine(obj.clot, reg["T$ITEM"].ToString().Trim(), ref strError); ;
             Session["Operator"] = Session["user"].ToString();
             Session["Reprint"] = "no";
 

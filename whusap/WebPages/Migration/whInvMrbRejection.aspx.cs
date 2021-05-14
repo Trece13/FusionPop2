@@ -953,7 +953,7 @@ namespace whusap.WebPages.Migration
 
                         Session["WorkOrder"] = pdno.ToUpper();
                         Session["lblReason"] = exactReasons;
-                        Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid + "&code=Code128&dpi=96";
+                        Session["codePaid"] = paid ;
                         Session["ProductDesc"] = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper();
                         Session["ProductCode"] = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString();
@@ -1142,12 +1142,12 @@ namespace whusap.WebPages.Migration
 
                     Session["Reprint"] = "no";
                     Session["MaterialDesc"] = "";
-                    Session["Material"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
-                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
+                    Session["Material"] = item.Trim().ToUpper();
+                    Session["codePaid"] = paid.Trim().ToUpper();
                     Session["Lot"] = lot == String.Empty ? " " : lot;
                     Session["Quantity"] = cantidad.ToString().Trim().ToUpper();
                     Session["Date"] = DateTime.Now.ToString();
-                    Session["Machine"] = "";
+                    Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                     Session["Operator"] = Session["user"].ToString();
                     Session["Pallet"] = paid.Trim().ToUpper();
 
@@ -1248,12 +1248,12 @@ namespace whusap.WebPages.Migration
 
                         Session["Reprint"]      = "no";
                         Session["MaterialDesc"] = "";
-                        Session["Material"]     = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
-                        Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
+                        Session["Material"]     =  item.Trim().ToUpper() ;
+                        Session["codePaid"]     =  paid.Trim().ToUpper() ;
                         Session["Lot"] = lot == String.Empty ? " " : lot;
                         Session["Quantity"]     = cantidad.ToString().Trim().ToUpper();
                         Session["Date"]         = DateTime.Now.ToString();
-                        Session["Machine"]      = "";
+                        Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                         Session["Operator"]     = Session["user"].ToString();
                         Session["Pallet"] = paid.Trim().ToUpper();
 
@@ -1333,7 +1333,7 @@ namespace whusap.WebPages.Migration
 
             Session["WorkOrder"] = pdno.ToUpper();
             Session["lblReason"] = ObjReason.dsca;
-            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb + "&code=Code128&dpi=96";
+            Session["codePaid"] =  sqnb ;
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
             Session["Date"] = DateTime.Now.ToString();
@@ -1341,7 +1341,7 @@ namespace whusap.WebPages.Migration
             Session["Finished"] = sqnb;
             Session["Pallet"] = sqnb;
             Session["PrintedBy"] = _operator;
-            Session["Machine"] = " ";
+            Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
             Session["Comments"] = Objtticol100.obse;
             Session["Reprint"] = "no";
 
@@ -1591,7 +1591,7 @@ namespace whusap.WebPages.Migration
 
             Session["WorkOrder"]   = sqnb ;
             Session["lblReason"]   = slReason.SelectedItem.Text.Substring(7);
-            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb + "&code=Code128&dpi=96";
+            Session["codePaid"] = sqnb;
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
             Session["Date"]        = DateTime.Now.ToString();
@@ -1599,7 +1599,7 @@ namespace whusap.WebPages.Migration
             Session["Finished"]    = sqnb;
             Session["Pallet"]      = Objtticol100.proc;
             Session["PrintedBy"]   = _operator;
-            Session["Machine"]     = "";
+            Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
             Session["Comments"]    = txtExactReasons.InnerText;
             Session["Reprint"]     = "no";
 

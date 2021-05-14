@@ -294,6 +294,22 @@ namespace whusa.Interfases
             }
         }
 
+        public string getMachine(string pdno, string item, ref string strError)
+        {
+            //int retorno = -1;
+            string retorno;
+            try
+            {
+                retorno = dal.getMachine(pdno, item,ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+        
+
         public DataTable wrapValidation_listaRegistroSec_param(ref Ent_tticol022 Parametros, ref string strError)
         {
             //int retorno = -1;

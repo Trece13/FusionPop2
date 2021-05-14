@@ -141,8 +141,8 @@ namespace whusap.WebPages.Balance
 
                 Session["Reprint"] = "yes";
                 Session["MaterialDesc"] = reimpresion.Rows[0]["T$DSCA"];
-                Session["Material"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + filaImprimir.ItemArray[2].ToString().Trim() + "&code=Code128&dpi=96";
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reimpresion.Rows[0]["T$SQNB"] + "&code=Code128&dpi=96"; 
+                Session["Material"] = filaImprimir.ItemArray[2].ToString().Trim();
+                Session["codePaid"] = reimpresion.Rows[0]["T$SQNB"] ; 
                 Session["Lot"] = filaImprimir.ItemArray[0].ToString();
                 Session["Quantity"] = filaImprimir.ItemArray[3].ToString().Trim()+" "+reimpresion.Rows[0]["T$CUNI"];
                 Session["Date"] = filaImprimir.ItemArray[6].ToString().Trim();

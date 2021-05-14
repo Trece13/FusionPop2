@@ -276,7 +276,7 @@ namespace whusap.WebPages.Balance
                 objTticol025.pdno=obj022.pdno;
                 objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-")+1)));
                 objTticol025.mitm=obj022.mitm;
-                objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm); ;
+                objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
                 objTticol025.qtdl= (float)obj022.qtdl;
                 objTticol025.cuni=obj022.cuni;
                 objTticol025.date= DateTime.Now.ToString();
@@ -302,12 +302,12 @@ namespace whusap.WebPages.Balance
 
             HttpContext.Current.Session["Reprint"] = "no";
             Session["MaterialDesc"] = obj020.dsca;
-            Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +  obj022.mitm +"&code=Code128&dpi=96"; 
-            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["SECUENCIA"].ToString() + "&code=Code128&dpi=96";
+            Session["codeMaterial"] = obj022.mitm ; 
+            Session["codePaid"] =  reg["SECUENCIA"].ToString() ;
             Session["Lot"] = reg["ORDEN"].ToString();
             Session["Quantity"]     =   reg["PESO"].ToString();
             Session["Date"]         =   reg["FECHA"].ToString();
-            Session["Machine"] = string.Empty;
+            Session["Machine"]      =   idal022.getMachine(reg["ORDEN"].ToString(), obj022.mitm,ref strError);
             Session["Operator"]     =   reg["USUARIO"].ToString();
             Session["Winder"]       =   string.Empty;
             Session["Pallet"]       =   reg["SECUENCIA"].ToString();

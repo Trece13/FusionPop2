@@ -387,8 +387,8 @@ namespace whusap.WebPages.Migration
                 lblValueMadeIn.Text = madein;
 
                 Session["MaterialDesc"] = descripcion;
-                Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codeMaterial"] =  item.Trim().ToUpper() ;
+                Session["codePaid"]     =  sqnb.Trim().ToUpper() ;
                 Session["Lot"] = PDNO;
                 Session["Quantity"] = enterQuantity.ToString()+" "+unidad;
                 Session["Date"] = DateTime.Now.ToString();

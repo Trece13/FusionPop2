@@ -196,7 +196,7 @@ namespace whusap.WebPages.Migration
                 Session["Reprint"] = "yes";
                 Session["WorkOrder"] = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
                 Session["lblReason"] = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + lblOrdPonoSeqn.Text.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codePaid"] = lblOrdPonoSeqn.Text.Trim().ToUpper() ;
                 Session["ProductDesc"]  = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
                 Session["ProductCode"]  = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
                 Session["Date"] =  DateTime.Now.ToString();
@@ -229,7 +229,7 @@ namespace whusap.WebPages.Migration
 
                 Session["WorkOrder"] = consultaInformacion.Rows[0]["PDNO"].ToString().Trim().ToUpper();
                 Session["lblReason"] = consultaInformacion.Rows[0]["DSCACDIS"].ToString().Trim().ToUpper();
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + String.Concat(pdno, "-", "0", "-", seqn) + "&code=Code128&dpi=96";
+                Session["codePaid"] =String.Concat(pdno, "-", "0", "-", seqn) ;
                 Session["ProductDesc"] = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
                 Session["ProductCode"] = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
                 Session["Date"] = DateTime.Now.ToString();

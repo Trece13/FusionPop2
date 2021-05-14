@@ -93,6 +93,7 @@ namespace whusap.WebPages.InvReceipts
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static string cyclecountLabel = WebConfigurationManager.AppSettings["cyclecountLabel"].ToString();
 
+
         public static string ItemcodeisnotManufacturingType = mensajes("ItemcodeisnotManufacturingType");
         public static string Itemcodedoesntexist = mensajes("Itemcodedoesntexist");
         public static string Lotcodedoesntexist = mensajes("Lotcodedoesntexist");
@@ -558,13 +559,13 @@ namespace whusap.WebPages.InvReceipts
                 {
 
                     HttpContext.Current.Session["MaterialDesc"] = data022.mitm;
-                    HttpContext.Current.Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.mitm + "&code=Code128&dpi=96";
-                    HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data022.sqnb + "&code=Code128&dpi=96";
+                    HttpContext.Current.Session["codeMaterial"] = data022.mitm;
+                    HttpContext.Current.Session["codePaid"] = data022.sqnb;
                     HttpContext.Current.Session["Lot"] = CLOT;
                     HttpContext.Current.Session["Quantity"] = data022.acqt + " " + data022.cuni;
                     HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
                     HttpContext.Current.Session["Pallet"] = data022.sqnb;
-                    HttpContext.Current.Session["Machine"] = String.Empty;
+                    HttpContext.Current.Session["Machine"] = _idaltticol022.getMachine(CLOT, ITEM.Trim().ToUpper(), ref strError);
                     HttpContext.Current.Session["Operator"] = _operator;
                     HttpContext.Current.Session["Reprint"] = "no";
 
@@ -646,14 +647,15 @@ namespace whusap.WebPages.InvReceipts
                 if (Convert.ToBoolean(validateSave) && Convert.ToBoolean(validateSaveTicol242))
                 {
                     HttpContext.Current.Session["MaterialDesc"] = data042.mitm;
-                    HttpContext.Current.Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data042.mitm + "&code=Code128&dpi=96";
-                    HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + data042.sqnb + "&code=Code128&dpi=96";
+                    HttpContext.Current.Session["codeMaterial"] = data042.mitm;
+                    HttpContext.Current.Session["codePaid"] =  data042.sqnb ;
                     HttpContext.Current.Session["Lot"] = CLOT;
                     HttpContext.Current.Session["Quantity"] = data042.acqt + " " + data042.cuni;
                     HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
                     HttpContext.Current.Session["Pallet"] = data042.sqnb;
-                    HttpContext.Current.Session["Machine"] = String.Empty;
+                    HttpContext.Current.Session["Machine"] = _idaltticol022.getMachine(CLOT, ITEM.Trim().ToUpper(), ref strError); ;
                     HttpContext.Current.Session["Operator"] = _operator;
+                    HttpContext.Current.Session["Reprint"] = "no";
 
                     StringBuilder script = new StringBuilder();
                     script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");

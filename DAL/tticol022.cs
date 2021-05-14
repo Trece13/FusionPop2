@@ -454,6 +454,35 @@ namespace whusa.DAL
             return consulta;
         }
 
+        public string getMachine (string pdno, string item, ref string strError)
+        {
+            string result = string.Empty;
+            method = MethodBase.GetCurrentMethod();
+            string strSentenciaS = string.Empty;
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PDNO", pdno.Trim().ToUpperInvariant());
+            paramList.Add(":T$MITM", item.Trim().ToUpperInvariant());
+
+            strSentenciaS = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentenciaS, ref parametersOut, null, true);
+                if (consulta.Rows.Count > 0)
+                {
+                    result = consulta.Rows[0]["MCNO"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to search information to print [tticol022]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return result;
+        }
+
+
         public DataTable wrapValidation_listaRegistroSec_param(ref Ent_tticol022 Parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

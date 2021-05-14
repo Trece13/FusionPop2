@@ -4,11 +4,15 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using whusa.Interfases;
+using System.Web.Configuration;
 
 namespace whusap.WebPages.Labels.RedesingLabels
 {
     public partial class _1RawMaterial : System.Web.UI.Page
     {
+        public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
+        public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         //Params
         /*
             Session["MaterialDesc"]     
@@ -21,44 +25,59 @@ namespace whusap.WebPages.Labels.RedesingLabels
             Session["RecibedBy"]        
             Session["RecibedOn"]   
             Session["Reprint"]
+            Session["AutoPrint"]
          */
         protected void Page_Load(object sender, EventArgs e)
         {
             CrearLabel();
-            try
+
+            lblMaterialDesc.InnerText   = Session["MaterialCode"]   != null ? Transfers.DescripcionItem(Session["MaterialCode"].ToString().Trim()) : string.Empty;
+            lblMaterialCode.InnerText   = Session["MaterialCode"]   != null ? Session["MaterialCode"].ToString() : string.Empty;
+            codePaid.Src                = Session["codePaid"]       != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid"].ToString() + "&code=Code128&dpi=96" : string.Empty;
+            lblLot.Text                 = Session["Lot"]            != null ? Session["Lot"].ToString()         : string.Empty;
+            lblQuantity.Text            = Session["Quantity"]       != null ? Session["Quantity"].ToString()    : string.Empty;
+            lblOrigin.Text              = Session["Origin"]         != null ? Session["Origin"].ToString()      : string.Empty;
+            lblSupplier.Text            = Session["Supplier"]       != null ? Session["Supplier"].ToString()    : string.Empty;
+            lblRecibedBy.Text           = Session["RecibedBy"]      != null ? Session["RecibedBy"].ToString()   : string.Empty;
+            lblRecibedOn.Text           = Session["RecibedOn"]      != null ? Session["RecibedOn"].ToString()   : string.Empty;
+
+            if (Session["Reprint"] != null)
             {
-                lblMaterialDesc.InnerText = Session["MaterialDesc"].ToString();
-                lblMaterialCode.InnerText = Session["MaterialCode"].ToString();
-                codePaid.Src = Session["codePaid"].ToString();
-                lblLot.Text = Session["Lot"].ToString();
-                lblQuantity.Text = Session["Quantity"].ToString();
-                lblOrigin.Text = Session["Origin"].ToString();
-                lblSupplier.Text = Session["Supplier"].ToString();
-                lblRecibedBy.Text = Session["RecibedBy"].ToString();
-                lblRecibedOn.Text = Session["RecibedOn"].ToString();
                 if (Session["Reprint"].ToString() == "yes")
                 {
                     printButton.Visible = false;
                     lblReprint.Visible = true;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                    EliminarVariablesSession();
                 }
                 else
                 {
-                    printButton.Visible = true;
-                    lblReprint.Visible = false;
-                }
-                if (Session["AutoPrint"] != null)
-                {
-                    if (Session["AutoPrint"] == "yes")
+                    if (Session["AutoPrint"] != null)
                     {
-                        printButton.Visible = false;
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                        if (Session["AutoPrint"] == "yes")
+                        {
+                            printButton.Visible = false;
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                            EliminarVariablesSession();
+                        }
+                        else
+                        {
+                            printButton.Visible = true;
+                            lblReprint.Visible = false;
+                            EliminarVariablesSession();
+                        }
+                    }
+                    else
+                    {
+                        printButton.Visible = true;
+                        lblReprint.Visible = false;
+                        EliminarVariablesSession();
                     }
                 }
             }
-            catch (Exception ex)
+            else
             {
-                CrearLabel();
+                EliminarVariablesSession();
             }
         }
 
@@ -73,6 +92,23 @@ namespace whusap.WebPages.Labels.RedesingLabels
             lblSupplier.Text = string.Empty;
             lblRecibedBy.Text = string.Empty;
             lblRecibedOn.Text = string.Empty;
+        }
+
+        private void EliminarVariablesSession()
+        {
+
+            Session["MaterialDesc"] = null;
+            Session["MaterialCode"] = null;
+            Session["codePaid"] = null;
+            Session["Lot"] = null;
+            Session["Quantity"] = null;
+            Session["Origin"] = null;
+            Session["Supplier"] = null;
+            Session["RecibedBy"] = null;
+            Session["RecibedOn"] = null;
+            Session["Reprint"] = null;
+            Session["AutoPrint"] = null;
+
         }
     }
 }
