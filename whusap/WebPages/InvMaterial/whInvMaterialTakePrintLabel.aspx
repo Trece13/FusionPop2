@@ -207,7 +207,13 @@
     <div style="padding: 1%; height:35px; vertical-align:middle; width:50%; text-align: center;" align="center">
         <asp:Button ID="btnSend" runat="server" Text="Print" CssClass="ButtonsSendSave" Width="107px" Height="24px" onclick="btnSend_Click" TabIndex="6" /> 
     </div>
-
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class ="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <asp:HiddenField ID="hidden" runat="server" />
     <asp:HiddenField ID="hi_indLote" runat="server" />
     <asp:HiddenField ID="hi_descItem" runat="server" />

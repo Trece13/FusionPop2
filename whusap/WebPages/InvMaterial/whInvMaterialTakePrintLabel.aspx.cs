@@ -197,8 +197,8 @@ namespace whusap.WebPages.InvMaterial
             //Session["unidad"] = hi_unityItem.Value;
 
             Session["MaterialDesc"] = reg["T$ITEM"];
-            Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["T$ITEM"].ToString() + "&code=Code128&dpi=96";
-            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["T$LABL"] + "&code=Code128&dpi=96";
+            Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["T$ITEM"].ToString().Trim() + "&code=Code128&dpi=96";
+            Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + reg["T$LABL"].ToString().Trim() + "&code=Code128&dpi=96";
             Session["Lot"] = "";
             Session["Quantity"] = hi_descItem.Value + " " + hi_unityItem.Value;
             Session["Date"] = DateTime.Now.ToString();

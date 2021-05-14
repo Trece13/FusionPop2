@@ -336,6 +336,7 @@ namespace whusap.WebPages.InvMaterial
             //var QUANTITYAUX = Convert.ToInt32(lblqtyValue1.Value.ToString());
 
             //var ITEM = lblItemValue1.Value.Trim().ToString().ToUpper();
+            Ent_twhcol130131 MyObj = new Ent_twhcol130131();
             decimal QUANTITYAUX = QUANTITY;
             LOT = LOT.Trim() == string.Empty ? " " : LOT.Trim();
 
@@ -374,44 +375,42 @@ namespace whusap.WebPages.InvMaterial
                 // var OORG = 2;
                 var FIRE = 2;
 
-                Ent_twhcol130131 MyObj = new Ent_twhcol130131
-                {
-                    OORG = OORG.ToString(),// Order type escaneada view 
-                    ORNO = DTOrdencompra.Rows[0]["T$ORNO"].ToString(),
-                    ITEM = DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim(),
-                    PAID = PALLET,
-                    PONO = DTOrdencompra.Rows[0]["T$PONO"].ToString(),
-                    SEQN = DTOrdencompra.Rows[0]["T$SQNBR"].ToString(),
-                    CLOT = LOT,// lote VIEW
-                    CWAR = DTOrdencompra.Rows[0]["T$CWAR"].ToString(),
-                    QTYS = QUANTITYAUX.ToString("0.00"),// cantidad escaneada view 
-                    UNIT = STUN,//unit escaneada view
-                    QTYC = QUANTITYAUX.ToString("0.00"),//cantidad escaneada view aplicando factor
-                    UNIC = UNIT,//unidad view stock
-                    DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
-                    CONF = "1",
-                    RCNO = " ",//llena baan
-                    DATR = "01/01/70",//llena baan
-                    LOCA = LOCAL,// enviamos vacio
-                    DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llenar con fecha de hoy
-                    PRNT = "1",// llenar en 1
-                    DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
-                    NPRT = "1",//conteo de reimpresiones 
-                    LOGN = HttpContext.Current.Session["user"].ToString(),// nombre de ususario de la session
-                    LOGT = " ",//llena baan
-                    STAT = "0",// LLENAR EN 1  
-                    DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString(),
-                    COTP = DTOrdencompra.Rows[0]["T$COTP"].ToString(),
-                    FIRE = FIRE.ToString(),
-                    PSLIP = "",
-                    ALLO = "0",
-                    PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PALLET.ToString() + "&code=Code128&dpi=96",
-                    ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
-                    ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96",
-                    CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "",
-                    QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITYAUX.ToString("0.00").Trim().ToUpper() + "&code=Code128&dpi=96",
-                    UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UNIT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
-                };
+                
+                MyObj.OORG = OORG.ToString();// Order type escaneada view 
+                MyObj.ORNO = DTOrdencompra.Rows[0]["T$ORNO"].ToString();
+                MyObj.ITEM = DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim();
+                MyObj.PAID = PALLET;
+                MyObj.PONO = DTOrdencompra.Rows[0]["T$PONO"].ToString();
+                MyObj.SEQN = DTOrdencompra.Rows[0]["T$SQNBR"].ToString();
+                MyObj.CLOT = LOT;// lote VIEW
+                MyObj.CWAR = DTOrdencompra.Rows[0]["T$CWAR"].ToString();
+                MyObj.QTYS = QUANTITYAUX.ToString("0.00");// cantidad escaneada view 
+                MyObj.UNIT = STUN;//unit escaneada view
+                MyObj.QTYC = QUANTITYAUX.ToString("0.00");//cantidad escaneada view aplicando factor
+                MyObj.UNIC = UNIT;//unidad view stock
+                MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                MyObj.CONF = "1";
+                MyObj.RCNO = " ";//llena baan
+                MyObj.DATR = "01/01/70";//llena baan
+                MyObj.LOCA = LOCAL;// enviamos vacio
+                MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                MyObj.PRNT = "1";// llenar en 1
+                MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                MyObj.NPRT = "1";//conteo de reimpresiones 
+                MyObj.LOGN = HttpContext.Current.Session["user"].ToString();// nombre de ususario de la session
+                MyObj.LOGT = " ";//llena baan
+                MyObj.STAT = "0";// LLENAR EN 1  
+                MyObj.DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString();
+                MyObj.COTP = DTOrdencompra.Rows[0]["T$COTP"].ToString();
+                MyObj.FIRE = FIRE.ToString();
+                MyObj.PSLIP = "";
+                MyObj.ALLO = "0";
+                MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PALLET.ToString() + "&code=Code128&dpi=96";
+                MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96";
+                MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+                MyObj.CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "";
+                MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + QUANTITYAUX.ToString("0.00").Trim().ToUpper() + "&code=Code128&dpi=96";
+                MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UNIT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
 
                 //if (OrdenImportacion)
                 //{
@@ -460,10 +459,11 @@ namespace whusap.WebPages.InvMaterial
                     MyObj.errorMsg = "la insercion fue: " + InsertSuccess.ToString();
                     Retrono = JsonConvert.SerializeObject(MyObj);
                 }
-
-
-                // }
-
+            }
+            else{
+                MyObj.error = true;
+                MyObj.errorMsg = Retrono;
+                Retrono = JsonConvert.SerializeObject(MyObj);
             }
             return Retrono;
 

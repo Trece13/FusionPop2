@@ -798,7 +798,7 @@ namespace whusap.WebPages.Migration
 
                     Session["MaterialDesc"] = row["DESCI"].ToString();
                     Session["MaterialCode"] = row["ITEM"].ToString();
-                    Session["codePaid"] = row["PAID"].ToString();
+                    Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + row["PAID"].ToString() + "&code=Code128&dpi=96";
                     Session["Lot"] = row["LOTE"].ToString();
                     Session["Quantity"] = row["CANTIDAD"].ToString();
                     Session["Origin"] = row["LOTE"].ToString();

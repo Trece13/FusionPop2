@@ -393,8 +393,8 @@
     
 
    <%-- Logic for Announced status --%>
-       <div runat="server" id="divTableAnnounce" clientidmode="Static" visible="false"></div>
-    <table runat="server" id="divBotonesAnnounce" visible="False" style="margin-bottom:10px; text-align:center; font-weight:bold;" cellspacing="0" cellpadding="0">
+       <div runat="server" id="divTableAnnounce" clientidmode="Static" ></div>
+    <table runat="server" id="divBotonesAnnounce"  style="margin-bottom:10px; text-align:center; font-weight:bold;" cellspacing="0" cellpadding="0" visible="false">
         <tr>
             <td><button class="btn btn-primary btn-lg" type="button"  onclick="javascript:printDivAnnounce('divLabelAnnounce')">Print</button></td>
             <td><asp:Button class="btn btn-primary btn-lg" runat="server" ID="btnSalirAnnounce" OnClick="btnExit_Click" style="margin-left:5px;"
@@ -406,7 +406,7 @@
         <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click_announce" OnClientClick="return validarFormularioAnnounce();" CssClass="ButtonsSendSave"/>
     </div>
 
-     <div runat="server" id="divLabelAnnounce" clientidmode="Static" >
+     <div runat="server" id="divLabelAnnounce" clientidmode="Static" visible="false" >
         
         <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
             <tr>
@@ -485,11 +485,11 @@
             CssClass="ButtonsSendSave" />
             <input type = "text" id= "txSloc" runat = "server" style = " display:none"/>
     </div>
-    <div runat="server" id="divTableLocated">
+    <div runat="server" id="divTableLocated"  visible="false">
     </div>
     
-    <table runat="server" id="divBotonesLocated" visible="false" style="margin-bottom: 10px;
-        text-align: center; font-weight: bold;" cellspacing="0" cellpadding="0">
+    <table runat="server" id="divBotonesLocated" style="margin-bottom: 10px;
+        text-align: center; font-weight: bold;" cellspacing="0" cellpadding="0" visible="false">
         <tr>
             <td>
                 <button class="btn btn-primary btn-lg" type="button" onclick="javascript:printDivLocate('divLabel')">
@@ -502,7 +502,7 @@
         </tr>
     </table>
     <div runat="server" id="divLabel"  clientidmode="Static" style="zoom: 80%;
-        margin-bottom: 70px">
+        margin-bottom: 70px" visible="false">
         <hr />
         <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;"
             border="1" cellspacing="0" cellpadding="0">
@@ -576,11 +576,11 @@
    <%-- end Logic for located status --%>
       
    <%-- Logic for Delivered status --%>
-      <div runat="server" id="divBtnGuardarDelivered" visible="false">
+     <div runat="server" id="divBtnGuardarDelivered" visible="false">
         <hr />
         <asp:Button ID="btnGuardarDelivered" runat="server" OnClick="btnGuardar_Click_Delivered" OnClientClick="return validarFormularioDelivered();" CssClass="ButtonsSendSave"/>
     </div>
-     <div runat="server" id="divTableDelivered"  style="overflow-y:scroll; width:150%;">
+     <div runat="server" id="divTableDelivered"  style="overflow-y:scroll; width:150%;" visible="false">
         <hr />
         <table class='table table-bordered' style='max-width:1200px;font-size:13px; border:3px solid; border-style:outset; text-align:center;'>
             <tr style='font-weight:bold; background-color:lightgray;'>
@@ -616,14 +616,14 @@
         </table>
 
     </div>
-     <table runat="server" id="divBotonesDelivered" visible="False" style="margin-bottom:10px; text-align:center; font-weight:bold;" cellspacing="0" cellpadding="0">
+     <table runat="server" id="divBotonesDelivered" style="margin-bottom:10px; text-align:center; font-weight:bold;" cellspacing="0" cellpadding="0" visible="false">
         <tr>
             <td><button class="btn btn-primary btn-lg" type="button"  onclick="javascript:printDivDelivered('divLabelDelivered')">Print</button></td>
             <td> <asp:Button class="btn btn-primary btn-lg" runat="server" ID="btnSalirDelivered" OnClick="btnExit_Click" style="margin-left:5px;"
                     AutoPostBack="true" /></td>
         </tr>
     </table>
-     <div runat="server" id="divLabelDelivered" clientidmode="Static" >
+     <div runat="server" id="divLabelDelivered" clientidmode="Static" visible ="false">
         
         <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
             <tr>

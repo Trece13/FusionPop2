@@ -316,7 +316,7 @@ namespace whusap.WebPages.InvReceipts
 
             if (DtTtwhinr140.Rows.Count > 0)
             {
-                if (Convert.ToInt32(DtTtwhinr140.Rows[0]["STKS"].ToString()) < 1)
+                if (Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString()) < 1)
                 {
                     ObjTtwhinr140.Error = true;
                     ObjTtwhinr140.TypeMsgJs = "label";
@@ -325,7 +325,7 @@ namespace whusap.WebPages.InvReceipts
                 }
                 else
                 {
-                    ObjTtwhinr140.stks = Convert.ToInt32(DtTtwhinr140.Rows[0]["STKS"].ToString());
+                    ObjTtwhinr140.stks = Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString());
                     ObjTtwhinr140.Error = false;
                     ObjTtwhinr140.TypeMsgJs = "label";
                     

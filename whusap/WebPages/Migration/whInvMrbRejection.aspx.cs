@@ -100,7 +100,24 @@ namespace whusap.WebPages.Migration
                 CargarIdioma();
 
                 String strTitulo = mensajes("encabezado");
-                _operator = Session["user"].ToString();
+                if (Session["user"] == null)
+                {
+                    if (Request.QueryString["Valor1"] == null || Request.QueryString["Valor1"] == "")
+                    {
+                        Response.Redirect(ConfigurationManager.AppSettings["UrlBase"] + "/WebPages/Login/whLogIni.aspx");
+                    }
+                    else
+                    {
+                        _operator = Request.QueryString["Valor1"];
+                        Session["user"] = _operator;
+                        Session["logok"] = "OKYes";
+                        //txtNumeroOrden.Enabled = false;
+                    }
+                }
+                else
+                {
+                    _operator = Session["user"].ToString();
+                }
 
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 if (control != null) { control.Text = strTitulo; }
@@ -137,7 +154,7 @@ namespace whusap.WebPages.Migration
             divTableAnnounce.Visible = false;
             divTableLocated.Visible = false;
 
-            divLabelAnnounce.Visible = true;
+            divLabelAnnounce.Visible = false;
             divLabel.Visible = false;
             divLabelDelivered.Visible = false;
 
@@ -506,8 +523,8 @@ namespace whusap.WebPages.Migration
                                          slRejectType.Items.Insert(slRejectType.Items.Count, intern);
                                          slRejectType.Items.Insert(slRejectType.Items.Count, retur);
 
-                                         divTableDelivered.Visible = false;
-                                         divBtnGuardarDelivered.Visible = false;
+                                         divTableDelivered.Visible = true;
+                                         divBtnGuardarDelivered.Visible = true;
                                          lblErrorDelivered.Visible = false;
                                          encontrado = true;
 
@@ -802,9 +819,7 @@ namespace whusap.WebPages.Migration
 
         protected void Form_Unload(object sender, EventArgs e)
         {
-            Session["FilaImprimir"] = null;
             Session["resultado"] = null;
-            Session["WorkOrder"] = null;
         }
 
         #endregion
@@ -877,6 +892,8 @@ namespace whusap.WebPages.Migration
                 var consecutivo = 1;
 
 
+
+
                 if (shift != String.Empty && exactReasons != String.Empty)
                 {
                     var findMachine = _idaltticol011.findRecordByPdno(ref pdno, ref strError);
@@ -933,6 +950,20 @@ namespace whusap.WebPages.Migration
                         {
                             validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError);
                         }
+
+                        Session["WorkOrder"] = pdno.ToUpper();
+                        Session["lblReason"] = exactReasons;
+                        Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid + "&code=Code128&dpi=96";
+                        Session["ProductDesc"] = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper();
+                        Session["ProductCode"] = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper();
+                        Session["Date"] = DateTime.Now.ToString();
+                        Session["Quantity"] = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                        Session["Finished"] = paid;
+                        Session["Pallet"] = paid;
+                        Session["PrintedBy"] = _operator;
+                        Session["Machine"] = machine;
+                        Session["Comments"] = exactReasons;
+                        Session["Reprint"] = "no";
                     }
 
 
@@ -947,8 +978,8 @@ namespace whusap.WebPages.Migration
                 divBtnGuardarAnnouce.Visible = false;
                 txtPalletId.Text = String.Empty;
                 MakeLabel(Objdata100);
-                divLabelAnnounce.Visible = true;
-                divBotonesAnnounce.Visible = true;
+                divLabelAnnounce.Visible = false;
+                divBotonesAnnounce.Visible = false;
             }
             else
             {
@@ -1231,8 +1262,8 @@ namespace whusap.WebPages.Migration
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
-                    divLabel.Visible = true;
-                    divBotonesLocated.Visible = true;
+                    divLabel.Visible = false;
+                    divBotonesLocated.Visible = false;
                 }
                 else
                 {
@@ -1310,7 +1341,7 @@ namespace whusap.WebPages.Migration
             Session["Finished"] = sqnb;
             Session["Pallet"] = sqnb;
             Session["PrintedBy"] = _operator;
-            Session["Machine"] = "";
+            Session["Machine"] = " ";
             Session["Comments"] = Objtticol100.obse;
             Session["Reprint"] = "no";
 
