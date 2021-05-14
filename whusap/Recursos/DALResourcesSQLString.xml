@@ -1544,8 +1544,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="InsertarregistroItticol082">
         <stringSQL>
-          INSERT INTO {0}.tticol082{1}(T$OORG,T$ORNO,T$OSET,T$PONO,T$SQNB,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU)
-          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$OSET]','[:T$PONO]','[:T$SQNB]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
+          INSERT INTO {0}.tticol082{1}(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU)
+          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
         </stringSQL>
       </operationName>
       <operationName name="ConsultarTticol082">
@@ -2162,15 +2162,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultaOrdencompra">
         <stringSQL>
           select pur401.t$orno, pur401.t$pono, pur401.t$sqnb, pur401.t$oqua, pur401.t$bqua,
-          pur401.t$item, ibd001.T$dsca dsca, pur401.t$ddtb, inh210.t$oset, ipu001.t$rtdp, ipu001.t$rtdm,
-          ipu001.t$rtqp, ipu001.t$rtqm, pur401.t$oltp, pur401.t$cwar,inh210.t$seqn T$SQNBR, pur400.t$cotp,
-          com100.t$nama, inh210.t$qstk, inh210.t$qstr
+          pur401.t$item, ibd001.T$dsca dsca, pur401.t$ddtb, inh220.t$oset, ipu001.t$rtdp, ipu001.t$rtdm,
+          ipu001.t$rtqp, ipu001.t$rtqm, pur401.t$oltp, pur401.t$cwar,inh220.t$seqn T$SQNBR, pur400.t$cotp,
+          com100.t$nama, inh220.t$qstk, inh220.t$qstr
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001
           on ipu001.t$item = pur401.t$item
-          inner join {0}.twhinh210{1} inh210
-          on inh210.t$orno = pur401.t$orno
-          and inh210.t$pono = pur401.t$pono
+          inner join {0}.twhinh220{1} inh220
+          on inh220.t$orno = pur401.t$orno
+          and inh220.t$pono = pur401.t$pono
           --and inh210.t$seqn/100000 = pur401.t$sqnb
           inner join {0}.ttcibd001{1} ibd001
           on ibd001.t$item = pur401.t$item
@@ -2186,8 +2186,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --and 1500  between 0 /*(pur401.t$oqua * (1 - ipu001.t$rtqp/100))*/ and  (pur401.t$oqua * (1 + ipu001.t$rtqp/100)) --Cantidad escaneada con tolerancia - o +
           --and pur401.t$item like '%[:T$ITEM]%' --Item escaneado
           --and pur401.t$clot = 'JG' --Lote escaneado
-          and inh210.t$lsta = 5 --Linea en estado abierto en la orden de almacenaje
-          and inh210.t$blck = 2
+          and inh220.t$lsta = 5 --Linea en estado abierto en la orden de almacenaje
+          and inh220.t$blck = 2
           order by pur401.t$orno, pur401.t$pono, pur401.t$ddtb
         </stringSQL>
       </operationName>
