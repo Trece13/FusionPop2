@@ -2172,6 +2172,38 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultaOrdencompra">
         <stringSQL>
           select pur401.t$orno, pur401.t$pono, pur401.t$sqnb, pur401.t$oqua, pur401.t$bqua,
+          pur401.t$item, ibd001.T$dsca dsca, pur401.t$ddtb, inh210.t$oset, ipu001.t$rtdp, ipu001.t$rtdm,
+          ipu001.t$rtqp, ipu001.t$rtqm, pur401.t$oltp, pur401.t$cwar,inh210.t$seqn T$SQNBR, pur400.t$cotp,
+          com100.t$nama, inh210.t$qstk, inh210.t$qstr
+          from {0}.ttdpur401{1} pur401
+          inner join {0}.ttdipu001{1} ipu001
+          on ipu001.t$item = pur401.t$item
+          inner join {0}.twhinh210{1} inh210
+          on inh210.t$orno = pur401.t$orno
+          and inh210.t$pono = pur401.t$pono
+          --and inh210.t$seqn/100000 = pur401.t$sqnb
+          inner join {0}.ttcibd001{1} ibd001
+          on ibd001.t$item = pur401.t$item
+          inner join {0}.ttdpur400{1} pur400
+          on pur400.t$orno = pur401.t$orno
+          inner join {0}.ttccom100{1} com100
+          on com100.t$bpid = pur401.t$otbp
+          --where  TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD') and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD')  -- Tolerancia en dias atras y adelante
+          where pur401.t$oltp != 3 --No tomar retroordenes
+          --*/and pur401.t$bqua = 0 --No tomo lineas que tenga retroorden
+          and pur401.t$orno = '[:T$ORNO]' --Orden que esten digitando
+          and pur401.t$pono = '[:T$PONO]'--Posicion que esten digitando.
+          --and 1500  between 0 /*(pur401.t$oqua * (1 - ipu001.t$rtqp/100))*/ and  (pur401.t$oqua * (1 + ipu001.t$rtqp/100)) --Cantidad escaneada con tolerancia - o +
+          --and pur401.t$item like '%[:T$ITEM]%' --Item escaneado
+          --and pur401.t$clot = 'JG' --Lote escaneado
+          and inh210.t$lsta = 5 --Linea en estado abierto en la orden de almacenaje
+          and inh210.t$blck = 2
+          order by pur401.t$orno, pur401.t$pono, pur401.t$ddtb
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultaPOReturn">
+        <stringSQL>
+          select pur401.t$orno, pur401.t$pono, pur401.t$sqnb, pur401.t$oqua, pur401.t$bqua,
           pur401.t$item, ibd001.T$dsca dsca, pur401.t$ddtb, inh220.t$oset, ipu001.t$rtdp, ipu001.t$rtdm,
           ipu001.t$rtqp, ipu001.t$rtqm, pur401.t$oltp, pur401.t$cwar,inh220.t$seqn T$SQNBR, pur400.t$cotp,
           com100.t$nama, inh220.t$qstk, inh220.t$qstr
@@ -2181,14 +2213,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.twhinh220{1} inh220
           on inh220.t$orno = pur401.t$orno
           and inh220.t$pono = pur401.t$pono
-          --and inh210.t$seqn/100000 = pur401.t$sqnb
+          --and inh220.t$seqn/100000 = pur401.t$sqnb
           inner join {0}.ttcibd001{1} ibd001
           on ibd001.t$item = pur401.t$item
           inner join {0}.ttdpur400{1} pur400
           on pur400.t$orno = pur401.t$orno
           inner join {0}.ttccom100{1} com100
           on com100.t$bpid = pur401.t$otbp
-          --where  TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD') and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD')  -- Tolerancia en dias atras y adelante
+          --where  TO_CHAR(inh220.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD') and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD')  -- Tolerancia en dias atras y adelante
           where pur401.t$oltp != 3 --No tomar retroordenes
           --*/and pur401.t$bqua = 0 --No tomo lineas que tenga retroorden
           and pur401.t$orno = '[:T$ORNO]' --Orden que esten digitando

@@ -342,6 +342,7 @@ namespace whusap.WebPages.InvMaterial
 
             string Retrono = "El Registro no se ha insertado";
             DataTable DTOrdencompra = ConsultaOrdencompra(ORNO, PONO, QUANTITYAUX, ITEM, "");
+            //DataTable DTOrdencompra = ConsultaPOReturn(ORNO, PONO, QUANTITYAUX, ITEM, "");
             if (DTOrdencompra.Rows.Count > 0) //Changes
             {
                 bool OrdenImportacion = false;
@@ -475,6 +476,14 @@ namespace whusap.WebPages.InvMaterial
             consulta = twhcol130DAL.ConsultaOrdencompra(ORNO, PONO, CANT, ITEM, CLOT);
             return consulta;
         }
+
+        public static DataTable ConsultaPOReturn(string ORNO, string PONO, decimal CANT, string ITEM, string CLOT)
+        {
+            DataTable consulta = new DataTable();
+            consulta = twhcol130DAL.ConsultaOrdencompra(ORNO, PONO, CANT, ITEM, CLOT);
+            return consulta;
+        }
+
         public void validaBackend(object sender, EventArgs e)
         {
             TextBox txt = (TextBox)sender;

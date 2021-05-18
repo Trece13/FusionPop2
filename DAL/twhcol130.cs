@@ -724,6 +724,31 @@ namespace whusa.Interfases
             return consulta;
         }
 
+        public DataTable ConsultaPOReturn(string ORNO, string PONO, decimal CANT, string ITEM, string CLOT)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ORNO", ORNO.ToUpper().Trim());
+            paramList.Add(":T$PONO", PONO.Trim());
+            paramList.Add(":T$CANT", CANT.ToString().Replace(",", "."));
+            paramList.Add(":T$ITEM", ITEM.Trim());
+            paramList.Add(":T$CLOT", CLOT == "" ? " " : CLOT);
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to select purchase orders. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
 
         public DataTable Insertar130(string ORNO, string PONO, decimal CANT, string ITEM, string CLOT)
         {

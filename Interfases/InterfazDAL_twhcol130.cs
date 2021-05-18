@@ -75,6 +75,11 @@ namespace whusa.Interfases
             return dal.ConsultaOrdencompra( ORNO,  PONO,  CANT,  ITEM,  CLOT);
         }
 
+        public DataTable ConsultaPOReturn(string ORNO, string PONO, decimal CANT, string ITEM, string CLOT)
+        {
+            return dal.ConsultaPOReturn(ORNO, PONO, CANT, ITEM, CLOT);
+        }
+
         public bool InsertarReseiptRawMaterial(Ent_twhcol130131 myObj)
         {
             return dal.InsertarReseiptRawMaterial(myObj);
