@@ -265,7 +265,7 @@ namespace whusap.WebPages.InvReceipts
             QUANTITYAUX_COMPLETADA = 0;
             if (CUNI != STUN)
             {
-                
+
                 MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
                 QUANTITY = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
             }
@@ -371,7 +371,7 @@ namespace whusap.WebPages.InvReceipts
 
                         HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
                         HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
-                        HttpContext.Current.Session["codePaid"] =  DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
+                        HttpContext.Current.Session["codePaid"] = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
                         HttpContext.Current.Session["Lot"] = LOT;
                         HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
                         HttpContext.Current.Session["Origin"] = LOT;
@@ -383,8 +383,20 @@ namespace whusap.WebPages.InvReceipts
 
                         if (MyObj.FIRE == "1")
                         {
-                            twhcol130DAL.ConsultaSumatoriaCantidadesTticol130131(MyObj);
-                            twhcol130DAL.ConsultaSumatoriaCantidadesTwhinh210(MyObj);
+                            DataTable x131 = twhcol130DAL.ConsultaSumatoriaCantidadesTticol130131(MyObj);
+                            DataTable x210 = twhcol130DAL.ConsultaSumatoriaCantidadesTwhinh210(MyObj);
+
+                            QUANTITYAUX_COMPLETADA = QUANTITYAUX_COMPLETADA + Convert.ToDecimal(MyObj.QTYC);
+
+                            decimal LIMITE = 0.05m;
+                            decimal TotalRecibido = Convert.ToDecimal(DTOrdencompra.Rows[0]["RECIBIDO"].ToString());
+                            decimal QTYCActual = Convert.ToDecimal(MyObj.QTYC);
+                            decimal CantidadMaxima = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString());
+                            decimal Restante = ( CantidadMaxima - (TotalRecibido + QTYCActual) );
+                            if ( Restante <= LIMITE )
+                            {
+                                MyObj.QTYC = Convert.ToString( CantidadMaxima - TotalRecibido );
+                            }
                         }
 
                         if (OrdenImportacion)
@@ -414,25 +426,6 @@ namespace whusap.WebPages.InvReceipts
                         }
                         else
                         {
-                            QUANTITYAUX_COMPLETADA = QUANTITYAUX_COMPLETADA + Convert.ToDecimal(MyObj.QTYC);
-
-                            if (CiclePrintBegin == CiclePrintEnd - 1)
-                            {
-                                decimal QTYCOMPLETADA, QTYFINAL = 0;
-                                decimal LIMITE = 0.05m;
-                                decimal QTYLIMITE = 0;
-                                QTYLIMITE = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTR"].ToString());
-                                if (QUANTITY <= QTYLIMITE)
-                                {
-                                    QTYCOMPLETADA = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString()) - QUANTITYAUX_COMPLETADA;
-                                    if (QTYCOMPLETADA < LIMITE)
-                                    {
-                                        QTYFINAL = Convert.ToDecimal(MyObj.QTYC) + QTYCOMPLETADA;
-                                        MyObj.QTYC = QTYFINAL.ToString();
-                                    }
-                                }
-                            }
-
                             bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
 
                             if (Insertsucces)
@@ -535,7 +528,7 @@ namespace whusap.WebPages.InvReceipts
 
                         HttpContext.Current.Session["MaterialDesc"] = DTNOOrdencompra.Rows[0]["T$DSCA"].ToString();
                         HttpContext.Current.Session["MaterialCode"] = DTNOOrdencompra.Rows[0]["T$ITEM"].ToString();
-                        HttpContext.Current.Session["codePaid"] = DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet ;
+                        HttpContext.Current.Session["codePaid"] = DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
                         HttpContext.Current.Session["Lot"] = LOT;
                         HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
                         HttpContext.Current.Session["Origin"] = LOT;
@@ -553,7 +546,7 @@ namespace whusap.WebPages.InvReceipts
                             {
                                 double qtyc = Convert.ToDouble(CantidadesTticol130131.Rows[0]["QTYC"].ToString());
                                 double qstk = Convert.ToDouble(CantidadesTwhinh210.Rows[0]["T$QSTK"].ToString());
-                                
+
                             }
                         }
 
@@ -584,7 +577,8 @@ namespace whusap.WebPages.InvReceipts
             return Retrono;
         }
 
-        public static double diferencia (double a, double b){
+        public static double diferencia(double a, double b)
+        {
             double retorno = 0;
             if (a != b)
             {
@@ -594,7 +588,7 @@ namespace whusap.WebPages.InvReceipts
                 }
                 else
                 {
-                    retorno = b - a ;
+                    retorno = b - a;
                 }
             }
             return retorno;

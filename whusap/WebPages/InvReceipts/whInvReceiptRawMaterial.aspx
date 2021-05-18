@@ -249,6 +249,8 @@
             </div>
             <label id="lblUnis" for="txQuantity">
             </label>
+            <label id="lblMyCant" for="txQuantity">
+            </label>
         </div>
         <div class="form-group row" id="finalReceipt">
             <label class="col-sm-4 col-form-label-lg" for="">
@@ -811,6 +813,7 @@
                 }
 
                 var mycant = parseFloat(MyObject.OQUA);
+                $('#lblMyCant').html(mycant);
                 //var rangBajo = parseFloat(MyObject.OQUA) * (1 - parseFloat(MyObject.RTQP) / 100);
                 var rangAlto = parseFloat(MyObject.OQUA) * (1 + parseFloat(MyObject.RTQP) / 100);
 
@@ -1729,7 +1732,7 @@
                                 txQuantity.attr('disabled', false);
 
                                 var mycant = parseFloat(Item.OQUA);
-
+                                $('#lblMyCant').html(mycant);
                                 if (SumatoriaDevuelta == mycant) {
                                     txQuantity.attr('disabled', true);
                                     btnEnviar.attr('disabled', true);
@@ -1892,6 +1895,7 @@
                                 DdUnis.attr('disabled', true);
                                 txQuantity.attr('disabled', false);
                                 var mycant = parseFloat(Item.OQUA);
+                                $('#lblMyCant').html(mycant);
                                 if (SumatoriaDevuelta == mycant) {
                                     txQuantity.attr('disabled', true);
                                     btnEnviar.attr('disabled', true);
