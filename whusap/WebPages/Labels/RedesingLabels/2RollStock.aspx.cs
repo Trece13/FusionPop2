@@ -53,6 +53,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     }
                     else
                     {
+                        lblReprint.Visible = false;
                         if (Session["AutoPrint"] != null)
                         {
                             if (Session["AutoPrint"] == "yes")
@@ -64,14 +65,12 @@ namespace whusap.WebPages.Labels.RedesingLabels
                             else
                             {
                                 printButton.Visible = true;
-                                lblReprint.Visible = false;
                                 EliminarVariablesSession();
                             }
                         }
                         else
                         {
                             printButton.Visible = true;
-                            lblReprint.Visible = false;
                             EliminarVariablesSession();
                         }
                     }
