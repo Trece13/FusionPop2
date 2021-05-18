@@ -104,7 +104,7 @@
             <td style="text-align: left;">
                 <span>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtPalletId"
-                        ErrorMessage="Pallet ID can Have More than 12 But less than 21 Characters." ValidationExpression="^[a-zA-Z0-9'@&#-.\/\s]{12,20}$"
+                        ErrorMessage="Pallet ID can Have More than 12 But less than 21 Characters." ValidationExpression="^[a-zA-Z0-9'@&#-.\/\s]{11,20}$"
                         CssClass="errorMsg" SetFocusOnError="True" Display="Dynamic" />
                 </span>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Pallet Id is required"

@@ -98,7 +98,7 @@ namespace whusap.WebPages.InvReceipts
                     HttpContext.Current.Session["Reprint"] = "yes";
                     HttpContext.Current.Session["MaterialDesc"] = LstPallet[0].DSCA.ToString();
                     HttpContext.Current.Session["MaterialCode"] = LstPallet[0].ITEM.ToString();
-                    HttpContext.Current.Session["codePaid"] = UrlBaseBarcode + LstPallet[0].PAID_URL.ToString();
+                    HttpContext.Current.Session["codePaid"] = LstPallet[0].PAID.ToString();
                     HttpContext.Current.Session["Lot"] = LstPallet[0].CLOT.ToString();
                     HttpContext.Current.Session["Quantity"] = LstPallet[0].QTYC.ToString() + " " + LstPallet[0].UNIT.ToString();
                     HttpContext.Current.Session["Origin"] = LstPallet[0].ORNO.ToString();

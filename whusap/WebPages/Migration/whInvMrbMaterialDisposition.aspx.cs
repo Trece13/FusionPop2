@@ -797,7 +797,7 @@ namespace whusap.WebPages.Migration
                     DataRow row = (DataRow)Session["FilaImprimir"];
 
                     Session["MaterialDesc"] = row["DESCI"].ToString();
-                    Session["MaterialCode"] = row["ITEM"].ToString();
+                    Session["MaterialCode"] = obj.item;
                     Session["codePaid"] = row["PAID"].ToString();
                     Session["Lot"] = row["LOTE"].ToString();
                     Session["Quantity"] = row["CANTIDAD"].ToString();
@@ -843,8 +843,8 @@ namespace whusap.WebPages.Migration
 
                     DataRow row = (DataRow)Session["FilaImprimir"];
 
-                    Session["MaterialDesc"] =  row["DESCI"].ToString();  
-                    Session["MaterialCode"] =  row["ITEM"].ToString();
+                    Session["MaterialDesc"] =  row["DESCI"].ToString();
+                    Session["MaterialCode"] = obj.item;
                     Session["codePaid"] = row["PAID"].ToString();  
                     Session["Lot"]          =  row["LOTE"].ToString();  
                     Session["Quantity"]     =  row["CANTIDAD"].ToString();  
@@ -892,7 +892,7 @@ namespace whusap.WebPages.Migration
             DataRow row = (DataRow)Session["FilaImprimir"];
 
             Session["MaterialDesc"] = row["DESCI"].ToString();
-            Session["MaterialCode"] = row["ITEM"].ToString();
+            Session["MaterialCode"] = obj.item;
             Session["codePaid"] = row["PAID"].ToString();
             Session["Lot"] = row["LOTE"].ToString();
             Session["Quantity"] = row["CANTIDAD"].ToString();

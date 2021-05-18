@@ -205,7 +205,7 @@
         <asp:Label ID="lblError" runat="server" Text="" CssClass="style2"></asp:Label>
     </div>
     <div style="padding: 1%; height:35px; vertical-align:middle; width:50%; text-align: center;" align="center">
-        <asp:Button ID="btnSend" runat="server" Text="Print" CssClass="ButtonsSendSave" Width="107px" Height="24px" onclick="btnSend_Click" TabIndex="6" /> 
+        <asp:Button ID="btnSend" runat="server" Text="Send" CssClass="ButtonsSendSave" Width="107px" Height="24px" onclick="btnSend_Click" TabIndex="6" /> 
     </div>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
