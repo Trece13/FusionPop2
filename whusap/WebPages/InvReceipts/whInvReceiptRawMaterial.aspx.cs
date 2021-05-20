@@ -369,18 +369,6 @@ namespace whusap.WebPages.InvReceipts
                             UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
                         };
 
-                        HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
-                        HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
-                        HttpContext.Current.Session["codePaid"] = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
-                        HttpContext.Current.Session["Lot"] = LOT;
-                        HttpContext.Current.Session["Quantity"] = QUANTITY.ToString("0.0000") + " " + CUNI;
-                        HttpContext.Current.Session["Origin"] = LOT;
-                        HttpContext.Current.Session["Supplier"] = _operator;
-                        HttpContext.Current.Session["RecibedBy"] = _operator;
-                        HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
-                        HttpContext.Current.Session["Reprint"] = "no";
-                        HttpContext.Current.Session["AutoPrint"] = "yes";
-
                         if (MyObj.FIRE == "1")
                         {
                             DataTable x131 = twhcol130DAL.ConsultaSumatoriaCantidadesTticol130131(MyObj);
@@ -398,6 +386,18 @@ namespace whusap.WebPages.InvReceipts
                                 MyObj.QTYC = Convert.ToString( CantidadMaxima - TotalRecibido );
                             }
                         }
+
+                        HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
+                        HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
+                        HttpContext.Current.Session["codePaid"] = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
+                        HttpContext.Current.Session["Lot"] = LOT;
+                        HttpContext.Current.Session["Quantity"] = MyObj.QTYC + " " + CUNI;
+                        HttpContext.Current.Session["Origin"] = LOT;
+                        HttpContext.Current.Session["Supplier"] = DTOrdencompra.Rows[0]["T$NAMA"].ToString();
+                        HttpContext.Current.Session["RecibedBy"] = _operator;
+                        HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
+                        HttpContext.Current.Session["Reprint"] = "no";
+                        HttpContext.Current.Session["AutoPrint"] = "yes";
 
                         if (OrdenImportacion)
                         {

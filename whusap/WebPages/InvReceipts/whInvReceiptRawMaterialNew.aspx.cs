@@ -293,6 +293,20 @@ namespace whusap.WebPages.InvReceipts
                                 {
                                     InsertarReseiptRawMaterial(OORG, ORNO, ITEM, PONO, LOT, QUANTITY, STUN, CUNI, CWAR, FIRE, PSLIP,CICLE,false);
                                 }
+                                else if (CiclePrintEnd == 1)
+                                {
+                                    HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
+                                    HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
+                                    HttpContext.Current.Session["codePaid"] = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
+                                    HttpContext.Current.Session["Lot"] = LOT;
+                                    HttpContext.Current.Session["Quantity"] = MyObj.QTYC + " " + CUNI;
+                                    HttpContext.Current.Session["Origin"] = LOT;
+                                    HttpContext.Current.Session["Supplier"] = DTOrdencompra.Rows[0]["T$NAMA"].ToString();
+                                    HttpContext.Current.Session["RecibedBy"] = _operator;
+                                    HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
+                                    HttpContext.Current.Session["Reprint"] = "no";
+                                    HttpContext.Current.Session["AutoPrint"] = "yes";
+                                }
 
                                 Retrono = CiclePrintEnd > 1 ? JsonConvert.SerializeObject(MyInsert) : JsonConvert.SerializeObject(MyObj);
                               

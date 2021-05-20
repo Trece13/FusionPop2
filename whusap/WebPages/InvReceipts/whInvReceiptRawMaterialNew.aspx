@@ -19,7 +19,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
@@ -38,156 +38,156 @@
                 d.getSeconds()
                 );
 
-            var mywindow = window.open('','targetWindow','toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=400')
+            var mywindow = window.open('', 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=400')
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
 
-            
-            mywindow.document.write('<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />'+
-                                    '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">'+
+
+            mywindow.document.write('<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />' +
+                                    '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">' +
                                     '<style type="text/css">' +
-                                    '#MyEtiqueta label {'+
-                                    'font-size: 15px;'+
-                                    '}'+
-                                    '#LblDate {'+
-                                    'font-size: 14px !important;'+
-                                    '}'+
-                                    '#LblReprintInd,'+
-                                    '#LblReprint {'+
-                                    'display: none;'+
-                                    '}'+
-                                    '.isValid {'+
-                                    'border-bottom: solid;'+
-                                    'border-color: green;'+
-                                    '}'+
-                                    '.isNotValid {'+
-                                    'border-bottom: solid;'+
-                                    'border-color: red;'+
-                                    '}'+
-                                    '.fa-check {'+
-                                    'color: green;'+
-                                    '}'+
-                                    '.fa-times {'+
-                                    'color: red;'+
-                                    '}'+
-                                    '#checkItem,'+
-                                    '#checkLot,'+
-                                    '#checkWarehouse,'+
-                                    '#checkLoca,'+
-                                    '#checkPaid {'+
-                                    'display: none;'+
-                                    '}'+
-                                    '#exItem,'+
-                                    '#exLot,'+
-                                    '#exWarehouse,'+
-                                    '#exLoca,'+
-                                    '#exPaid {'+
-                                    'display: none;'+
-                                    '}'+
-                                    '#loadItem,'+
-                                    '#loadLot,'+
-                                    '#loadWarehouse,'+
-                                    '#loadLoca,'+
-                                    '#loadPaid {'+
-                                    'display: none;'+
-                                    '}'+
-                                    'tr {'+
-                                    'text-align: center;'+
-                                    '}'+
-                                    'th {'+
-                                    'text-align: center;'+
-                                    '}'+
-                                    '#myLabel {'+
-                                    'width: 6in;'+
-                                    'height: 4in;'+
-                                    'padding: 20px;'+
-                                    'border: 1px solid black;'+
-                                    'border-radius: 12px;'+
-                                    '}'+
-                                    '.alingRight {'+
-                                    'text-align: right;'+
-                                    '}'+
-                                    '.alingLeft {'+
-                                    'text-align: left;'+
-                                    '}'+
-                                    '#printButton {'+
-                                    'width: 6in;'+
-                                    '}'+
-                                    '#codePaid {'+
-                                    'display: block;'+
-                                    'margin: auto;'+
-                                    'height: 150px;'+
-                                    'width: 500px;'+
-                                    '}'+
-                                    '#codeItem {'+
-                                    'display: block;'+
-                                    'margin: auto;'+
-                                    'height: 75px;'+
-                                    'width: 250px;'+
-                                    '}'+
-                                    '#itemDesc {'+
-                                    'vertical-align: middle;'+
-                                    'font-size: 21px;'+
-                                    '}'+
-                                    '.divDesc {'+
-                                    'text-align: center;'+
-                                    '}'+
-                                    '#lblDesc {'+
-                                    '}'+
-                                    '#lblMadein {'+
-                                    '}'+
-                                    '.borderTop {'+
-                                    'border-top: solid 1px gray;'+
-                                    '}'+
-                                    '#printContainer {'+
-                                    'margin-bottom: 100px;'+
-                                    '}'+
-                                    '#editTable {'+
-                                    'display: none;'+
-                                    '}'+
-                                    '#lblError {'+
-                                    'color: red;'+
-                                    'font-size: 13px;'+
-                                    '}'+
-                                    '.load {'+
-                                    'width: 10px;'+
-                                    'height: 10px;'+
-                                    'align-content: center;'+
-                                    'animation-name: spin;'+
-                                    'animation-duration: 5000ms;'+
-                                    'animation-iteration-count: infinite;'+
-                                    'animation-timing-function: linear;'+
-                                    '}'+
-                                    '#saveSection {'+
-                                    'display: none;'+
-                                    '}'+
-                                    '.notBorderBottom {'+
-                                    'border-bottom: none;'+
-                                    '}'+
-                                    '#divBarcode {'+
-                                    '--height: 186px;'+
-                                    'padding: inherit;'+
-                                    '}'+
-                                    '@keyframes spin {'+
-                                    'from {'+
-                                    'transform: rotate(0deg);'+
-                                    '}'+
-                                    'to {'+
-                                    'transform: rotate(360deg);'+
-                                    '}'+
-                                    '}'+
-                                    '#table {'+
-                                    'font-size: 10px;'+
-                                    '}'+
-                                    '.table td,'+
-                                    '.table th {'+
-                                    'padding: .1rem;'+
-                                    'border-top: 1px solid #dee2e6;'+
-                                    'font-size: 12px;'+
-                                    'text-align: left;'+
-                                    'vertical-align: middle;'+
-                                    'padding-left: 1em;'+
-                                    '}'+
-                                    '</style>'+
+                                    '#MyEtiqueta label {' +
+                                    'font-size: 15px;' +
+                                    '}' +
+                                    '#LblDate {' +
+                                    'font-size: 14px !important;' +
+                                    '}' +
+                                    '#LblReprintInd,' +
+                                    '#LblReprint {' +
+                                    'display: none;' +
+                                    '}' +
+                                    '.isValid {' +
+                                    'border-bottom: solid;' +
+                                    'border-color: green;' +
+                                    '}' +
+                                    '.isNotValid {' +
+                                    'border-bottom: solid;' +
+                                    'border-color: red;' +
+                                    '}' +
+                                    '.fa-check {' +
+                                    'color: green;' +
+                                    '}' +
+                                    '.fa-times {' +
+                                    'color: red;' +
+                                    '}' +
+                                    '#checkItem,' +
+                                    '#checkLot,' +
+                                    '#checkWarehouse,' +
+                                    '#checkLoca,' +
+                                    '#checkPaid {' +
+                                    'display: none;' +
+                                    '}' +
+                                    '#exItem,' +
+                                    '#exLot,' +
+                                    '#exWarehouse,' +
+                                    '#exLoca,' +
+                                    '#exPaid {' +
+                                    'display: none;' +
+                                    '}' +
+                                    '#loadItem,' +
+                                    '#loadLot,' +
+                                    '#loadWarehouse,' +
+                                    '#loadLoca,' +
+                                    '#loadPaid {' +
+                                    'display: none;' +
+                                    '}' +
+                                    'tr {' +
+                                    'text-align: center;' +
+                                    '}' +
+                                    'th {' +
+                                    'text-align: center;' +
+                                    '}' +
+                                    '#myLabel {' +
+                                    'width: 6in;' +
+                                    'height: 4in;' +
+                                    'padding: 20px;' +
+                                    'border: 1px solid black;' +
+                                    'border-radius: 12px;' +
+                                    '}' +
+                                    '.alingRight {' +
+                                    'text-align: right;' +
+                                    '}' +
+                                    '.alingLeft {' +
+                                    'text-align: left;' +
+                                    '}' +
+                                    '#printButton {' +
+                                    'width: 6in;' +
+                                    '}' +
+                                    '#codePaid {' +
+                                    'display: block;' +
+                                    'margin: auto;' +
+                                    'height: 150px;' +
+                                    'width: 500px;' +
+                                    '}' +
+                                    '#codeItem {' +
+                                    'display: block;' +
+                                    'margin: auto;' +
+                                    'height: 75px;' +
+                                    'width: 250px;' +
+                                    '}' +
+                                    '#itemDesc {' +
+                                    'vertical-align: middle;' +
+                                    'font-size: 21px;' +
+                                    '}' +
+                                    '.divDesc {' +
+                                    'text-align: center;' +
+                                    '}' +
+                                    '#lblDesc {' +
+                                    '}' +
+                                    '#lblMadein {' +
+                                    '}' +
+                                    '.borderTop {' +
+                                    'border-top: solid 1px gray;' +
+                                    '}' +
+                                    '#printContainer {' +
+                                    'margin-bottom: 100px;' +
+                                    '}' +
+                                    '#editTable {' +
+                                    'display: none;' +
+                                    '}' +
+                                    '#lblError {' +
+                                    'color: red;' +
+                                    'font-size: 13px;' +
+                                    '}' +
+                                    '.load {' +
+                                    'width: 10px;' +
+                                    'height: 10px;' +
+                                    'align-content: center;' +
+                                    'animation-name: spin;' +
+                                    'animation-duration: 5000ms;' +
+                                    'animation-iteration-count: infinite;' +
+                                    'animation-timing-function: linear;' +
+                                    '}' +
+                                    '#saveSection {' +
+                                    'display: none;' +
+                                    '}' +
+                                    '.notBorderBottom {' +
+                                    'border-bottom: none;' +
+                                    '}' +
+                                    '#divBarcode {' +
+                                    '--height: 186px;' +
+                                    'padding: inherit;' +
+                                    '}' +
+                                    '@keyframes spin {' +
+                                    'from {' +
+                                    'transform: rotate(0deg);' +
+                                    '}' +
+                                    'to {' +
+                                    'transform: rotate(360deg);' +
+                                    '}' +
+                                    '}' +
+                                    '#table {' +
+                                    'font-size: 10px;' +
+                                    '}' +
+                                    '.table td,' +
+                                    '.table th {' +
+                                    'padding: .1rem;' +
+                                    'border-top: 1px solid #dee2e6;' +
+                                    'font-size: 12px;' +
+                                    'text-align: left;' +
+                                    'vertical-align: middle;' +
+                                    'padding-left: 1em;' +
+                                    '}' +
+                                    '</style>' +
                                     '</head><body>');
 
             mywindow.document.write(document.getElementById(divID).innerHTML);
@@ -205,65 +205,61 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style type="text/css">
-        #loadingIcon
-        {
-            display:none;
+        #myLabelFrame {
+            display: none;
         }
-        
-        #ShowModal
-        {
-            display:none;
+
+        #loadingIcon {
+            display: none;
         }
-        #ShowModalMsg
-        {
-            display:none;
+
+        #ShowModal {
+            display: none;
         }
-        .form-group
-        {
+
+        #ShowModalMsg {
+            display: none;
+        }
+
+        .form-group {
             margin-bottom: 0.5rem;
         }
-        
-        #MyEtiqueta
-        {
+
+        #MyEtiqueta {
             display: none;
             padding-left: 50px;
         }
-        
-        #MyEtiquetaOC
-        {
+
+        #MyEtiquetaOC {
             display: none;
         }
-        
-        #lblError
-        {
+
+        #lblError {
             color: Red;
             font-size: 24px;
         }
-        
-        .FontPopUp
-        {
-            font-size:15px;
+
+        .FontPopUp {
+            font-size: 15px;
         }
-        
-        #LabelQuantityDiv
-        {
-            display:none;
+
+        #LabelQuantityDiv {
+            display: none;
         }
-        
-        #MyDynamicEtiqueta
-        {
-            margin-top:0;
-            margin-bottom:0;
-            padding-top:0;
-            padding-bottom:0;
-            display:none;
+
+        #MyDynamicEtiqueta {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            display: none;
         }
-        #lblsItemDesc
-        {
-            display:none;
+
+        #lblsItemDesc {
+            display: none;
         }
-        <style type="text/css">
-        #MyEtiqueta label {
+
+        <style type="text/css" > #MyEtiqueta label {
             font-size: 15px;
         }
 
@@ -439,375 +435,370 @@
             padding-left: 1em;
         }
     </style>
-        
-      
+
+
     <script type="text/javascript">
-//        function IniciarListasOrderType() {
+        //        function IniciarListasOrderType() {
 
-//            LstSalesOrder = JSON.parse('<%= Session["LstSalesOrderJSON"]%>');
-//            LstTransferOrder = JSON.parse('<%=Session["LstTransferOrderJSON"]%>');
-//            LstPurchaseOrders = JSON.parse('<%= Session["LstPurchaseOrdersJSON"]%>');
-////            console.log(LstSalesOrder);
-////            console.log(LstTransferOrder);
-////            console.log(LstPurchaseOrders);
-//        }
+        //            LstSalesOrder = JSON.parse('<%= Session["LstSalesOrderJSON"]%>');
+        //            LstTransferOrder = JSON.parse('<%=Session["LstTransferOrderJSON"]%>');
+        //            LstPurchaseOrders = JSON.parse('<%= Session["LstPurchaseOrdersJSON"]%>');
+        ////            console.log(LstSalesOrder);
+        ////            console.log(LstTransferOrder);
+        ////            console.log(LstPurchaseOrders);
+        //        }
 
-//        IniciarListasOrderType();
+        //        IniciarListasOrderType();
     </script>
     <form id="form1" class="container col-sm-12">
 
-    
-    <button  id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1Label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body FontPopUp">
-          <label id="label1"></label>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Modal2">Yes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="Modal2Label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body FontPopUp">
-                Packing Slip Number
-            <input type="text" id="pslip"/>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="BtnSavePslip" class="btn btn-primary" data-dismiss="modal" data-toggle="modal">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <button  id="ShowModalMsg" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Modal3">
-    </button>
 
-    <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body FontPopUp">
-            It could be final receipt, total receivedquantity equal to total ordered quantity
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
-          </div>
+        <button id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body FontPopUp">
+                        <label id="label1"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Modal2">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+
+        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="Modal2Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body FontPopUp">
+                        Packing Slip Number
+            <input type="text" id="pslip" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="BtnSavePslip" class="btn btn-primary" data-dismiss="modal" data-toggle="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="ShowModalMsg" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal3">
+        </button>
+
+        <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body FontPopUp">
+                        It could be final receipt, total receivedquantity equal to total ordered quantity
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-    <div class="col-sm-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
-                Order Type</label>
-            <div class="col-sm-6">
-                <select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
-                    <option value="0">Select Order Type</option>
-                    <option value="1">Sales Order Return</option>
-                    <option value="2">Purchase orders</option>
-                    <option value="22">Transfer Order</option>
-                </select>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
+                    Order Type</label>
+                <div class="col-sm-6">
+                    <select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
+                        <option value="0">Select Order Type</option>
+                        <option value="1">Sales Order Return</option>
+                        <option value="2">Purchase orders</option>
+                        <option value="22">Transfer Order</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txOrderID">
-                Order ID</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
-                    data-method="ValidarOrderID" tabindex="1" maxlength="9">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="txOrderID">
+                    Order ID</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
+                        data-method="ValidarOrderID" tabindex="1" maxlength="9">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txPosition">
-                Position</label>
-            <div class="col-sm-6" style ="display:none">
-                <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
-                    data-method="ValidarPosition" tabindex="1">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="txPosition">
+                    Position</label>
+                <div class="col-sm-6" style="display: none">
+                    <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
+                        data-method="ValidarPosition" tabindex="1">
+                </div>
+                <div class="col-sm-6">
+                    <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
+                        <option value="0">Select Position</option>
+                    </select>
+                </div>
             </div>
-            <div class="col-sm-6" >
-                <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
-                    <option value="0">Select Position</option>
-                </select>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="txItem">
+                    Item</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
+                        data-method="ValidarItem" tabindex="1">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txItem">
-                Item</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
-                    data-method="ValidarItem" tabindex="1">
+            <div class="form-group row" id="lblsItemDesc">
+                <label class="col-sm-4 col-form-label-lg">
+                </label>
+                <div class="col-sm-6">
+                    <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
+                        -</label>
+                    <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
+                        -</label>
+                </div>
             </div>
-        </div>
-        <div class="form-group row" id="lblsItemDesc">
-            <label class="col-sm-4 col-form-label-lg">
-            </label>
-            <div class="col-sm-6">
-                <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
-                    -</label>
-                <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
-                    -</label>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="txLot">
+                    Lot</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
+                        data-method="ValidarLote" tabindex="1">
+                </div>
             </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txLot">
-                Lot</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
-                    data-method="ValidarLote" tabindex="1">
-            </div>
-        </div>
-        <div class="form-group row" style="display:none">
-            <label class="col-sm-4 col-form-label-lg" for="DdUnit">
-                Unit</label>
-            <div class="col-sm-6">
-                <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
-                </asp:DropDownList>
-            </div>
-            <label id="Label1" for="txUnit">
-            </label>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txQuantity">
-                Quantity</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity"
-                    data-method="ValidarQuantity" tabindex="1">
-            </div>
-            <label id="lblUnis" for="txQuantity">
-            </label>
-        </div>
-        <div class="form-group row" id="LabelQuantityDiv">
-            <label class="col-sm-4 col-form-label-lg" for="txQuantity">
-                Label quantity</label>
-            <div class="col-sm-6">
-                <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
-            </div>
-            <label id="Label2" for="txQuantity">
-            </label>
-        </div>
-         
-        <div class="form-group row" id="finalReceipt">
-            <label class="col-sm-4 col-form-label-lg" for="">
-            </label>
-            <div class=" col-sm-6">
-                <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
-                <label class="" for="ChkfinalReceipt">
-                    Final Receipt
+            <div class="form-group row" style="display: none">
+                <label class="col-sm-4 col-form-label-lg" for="DdUnit">
+                    Unit</label>
+                <div class="col-sm-6">
+                    <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
+                    </asp:DropDownList>
+                </div>
+                <label id="Label1" for="txUnit">
                 </label>
             </div>
-        </div>
-        <div class="form-group row">
-            <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm"/>&nbsp
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="txQuantity">
+                    Quantity</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity"
+                        data-method="ValidarQuantity" tabindex="1">
+                </div>
+                <label id="lblUnis" for="txQuantity">
+                </label>
+            </div>
+            <div class="form-group row" id="LabelQuantityDiv">
+                <label class="col-sm-4 col-form-label-lg" for="txQuantity">
+                    Label quantity</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
+                </div>
+                <label id="Label2" for="txQuantity">
+                </label>
+            </div>
+
+            <div class="form-group row" id="finalReceipt">
+                <label class="col-sm-4 col-form-label-lg" for="">
+                </label>
+                <div class=" col-sm-6">
+                    <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
+                    <label class="" for="ChkfinalReceipt">
+                        Final Receipt
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
                 Print</button>&nbsp
                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw" id="loadingIcon"></i>
-            
 
+
+            </div>
         </div>
-    </div>
-    
-    <div class="col-sm-6">
-        <table class="table">
-            <thead>
+
+        <div class="col-sm-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Order Number
+                        </th>
+                        <th>Position
+                        </th>
+                        <th>Item Code
+                        </th>
+                        <th>Description
+                        </th>
+                        <th>PI.Re Date
+                        </th>
+                        <th colspan="2" style="text-align: center">Expected
+                        </th>
+                        <th>Warehouse
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="DetailBody">
+                </tbody>
+            </table>
+        </div>
+
+        <label id="lblError" class="col-sm-12">
+        </label>
+        <div id="MyEtiqueta">
+            <table style="margin: auto">
                 <tr>
-                    <th>
-                        Order Number
-                    </th>
-                    <th>
-                        Position
-                    </th>
-                    <th>
-                        Item Code
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        PI.Re Date
-                    </th>
-                    <th colspan="2" style="text-align: center">
-                        Expected
-                    </th>
-                    <th>
-                        Warehouse
-                    </th>
+                    <td>
+                        <label style="font-size: 11px">
+                            ID</label>
+                    </td>
+                    <td colspan="4">
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
+                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
+                    </td>
                 </tr>
-            </thead>
-            <tbody id="DetailBody">
-            </tbody>
-        </table>
-    </div>
-    
-    <label id="lblError" class="col-sm-12">
-    </label>
-    <div id="MyEtiqueta">
-        <table style="margin: auto">
-            <tr>
-                <td>
-                    <label style="font-size: 11px">
-                        ID</label>
-                </td>
-                <td colspan="4">
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
-                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="font-size: 11px">
-                        ITEM</label>
-                </td>
-                <td colspan="4">
-                    <label id="lblItemID" style="display: none; font-size: 11px">
-                    </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
-                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td align="center">
-                    <label id="lblItemDesc" style="font-size: 11px">
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="font-size: 11px">
-                        QUANTITY</label>
-                </td>
-                <td colspan="4">
-                    <label id="LblQuantity" style="display: none; font-size: 11px">
-                    </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
-                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                </td>
-                <td>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td align="center">
-                    <label id="LblUnit" style="font-size: 11px">
-                    </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="font-size: 11px">
-                        LOT</label>
-                </td>
-                <td colspan="4">
-                    <label id="LblLotId" style="display: none; font-size: 11px">
-                    </label>
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot" alt="" hspace="60"
-                        vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label style="font-size: 9px">
-                        RECEIPT DATE</label>
-                </td>
-                <td>
-                    <label id="LblDate" style="font-size: 9px">
-                    </label>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div id="MyDynamicEtiqueta">
-    </div>
-    <div id="MyEtiquetaOC">
-        <table>
-            <tr>
-                <td colspan="2">
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPurchaseOrder" alt=""
-                        hspace="60" vspace="5" style="width: 2in; height: .5in;" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <center>
+                <tr>
+                    <td>
+                        <label style="font-size: 11px">
+                            ITEM</label>
+                    </td>
+                    <td colspan="4">
+                        <label id="lblItemID" style="display: none; font-size: 11px">
+                        </label>
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
+                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center">
+                        <label id="lblItemDesc" style="font-size: 11px">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="font-size: 11px">
+                            QUANTITY</label>
+                    </td>
+                    <td colspan="4">
+                        <label id="LblQuantity" style="display: none; font-size: 11px">
+                        </label>
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
+                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center">
+                        <label id="LblUnit" style="font-size: 11px">
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="font-size: 11px">
+                            LOT</label>
+                    </td>
+                    <td colspan="4">
+                        <label id="LblLotId" style="display: none; font-size: 11px">
+                        </label>
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot" alt="" hspace="60"
+                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label style="font-size: 9px">
+                            RECEIPT DATE</label>
+                    </td>
+                    <td>
+                        <label id="LblDate" style="font-size: 9px">
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="MyDynamicEtiqueta">
+        </div>
+        <div id="MyEtiquetaOC">
+            <table>
+                <tr>
+                    <td colspan="2">
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPurchaseOrder" alt=""
+                            hspace="60" vspace="5" style="width: 2in; height: .5in;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
                         <label>
                             PURCHASE ORDER</label>
                         <label style="display: none" id="LblPurchaseOC">
                         </label>
                     </center>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
                         <label>
                             ITEM</label>
                         <label style="display: none" id="LblItemOC">
                         </label>
                     </center>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
                         <label>
                             LOT</label>
                         <label style="display: none" id="LblLotOC">
                         </label>
                     </center>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
                         <label>
                             UNIT</label>
                         <label style="display: none" id="LblUnitOC">
                         </label>
                     </center>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBUnit" alt="" hspace="60"
-                        vspace="5" style="width: 2in; height: .5in;" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBUnit" alt="" hspace="60"
+                            vspace="5" style="width: 2in; height: .5in;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <center>
                         <label>
                             QUANTITY</label>
                         <label style="display: none" id="LblQuantityOC">
                         </label>
                     </center>
-                </td>
-            </tr>
-        </table>
-    </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                <div class="container">
+                    <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </form>
     <!-- Referencias de estilo-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -890,10 +881,10 @@
 
         }
 
-        
 
-        $('#BtnSavePslip').click(function(){                
-            if(finalReceiptAuto){
+
+        $('#BtnSavePslip').click(function () {
+            if (finalReceiptAuto) {
                 $('#ShowModalMsg').click();
             }
         });
@@ -940,8 +931,8 @@
             limpiarPosition();
             txQuantity.val("");
             DdUnis.val("");
-            
-            
+
+
         }
 
 
@@ -993,7 +984,8 @@
                     //                }
 
                     DeshabilitarLimpiarControles();
-                    printDiv('MyEtiqueta');
+                    myLabelFrame = document.getElementById('myLabelFrame');
+                    myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
 
 
                 }
@@ -1044,7 +1036,7 @@
                         '<tbody>' +
                         '<tr>' +
                         '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + LblQuantityd.replace(",",".") + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + LblQuantityd.replace(",", ".") + " " + MyObject.UNIC + '</label></td>' +
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
@@ -1059,81 +1051,81 @@
                         '</div>' +
                         '</div>';
 
-                            //'<div class="page" style="padding:0; margin: auto; height:4in;width:6in"><table style="margin: auto">                                                               ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td colspan="4"><br><br>' +
-                            //'<img src="' + CBPalletNOd + '" id="CBPalletNOd" alt="" hspace="60"' +
-                            //'vspace="5" style="width: 4in; height: .5in;" />                                            ' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td>                                                                                       ' +
-                            //'<label style="font-size: 11px">                                                            ' +
-                            //'ITEM</label>                                                                               ' +
-                            //'</td>                                                                                      ' +
-                            //'<td>                                                                                       ' +
-                            //'<label id="lblItemIDd" style="display: none; font-size: 10px">                              ' +
-                            //'' + lblItemIDd + '</label>' +
-                            //'<img src="' + CBItem + '" id="CBItem" alt="" hspace="60"    ' +
-                            //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td>                                                                                       ' +
-                            //'</td>                                                                                      ' +
-                            //'<td align="center">                                                                        ' +
-                            //'<label id="lblItemDescd" style="font-size: 11px">                                           ' +
-                            //'' + lblItemDescd + '</label>' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td>                                                                                       ' +
-                            //'<label style="font-size: 11px">                                                            ' +
-                            //'QUANTITY</label>                                                                           ' +
-                            //'</td>                                                                                      ' +
-                            //'<td>                                                                                       ' +
-                            //'<label id="LblQuantityd" style="display: none; font-size: 11px">                            ' +
-                            //'' + LblQuantityd + '</label>' +
-                            //'<img src="' + CBQuantityd + '" id="CBQuantityd" alt="" hspace="60"' +
-                            //'vspace="5" style="width: 2in; height: .5in;" />                                            ' +
-                            //'</td>                                                                                      ' +
-                            //'<td>                                                                                       ' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td>                                                                                       ' +
-                            //'</td>                                                                                      ' +
-                            //'<td align="center">                                                                        ' +
-                            //'<label id="LblUnitd" style="font-size: 11px">                                               ' +
-                            //'' + LblUnitd + '</label>' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td>                                                                                       ' +
-                            //'<label style="font-size: 11px">                                                            ' +
-                            //'LOT</label>                                                                                ' +
-                            //'</td>                                                                                      ' +
-                            //'<td>                                                                                       ' +
-                            //'<label id="LblLotIdd" style="display: none; font-size: 11px">                               ' +
-                            //'' + LblLotIdd + '</label>                                                                                   ' +
-                            //'<img src="' + CBLotd + '" id="CBLotd" alt="" hspace="60"     ' +
-                            //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'<tr>                                                                                       ' +
-                            //'<td>                                                                                       ' +
-                            //'<label style="font-size: 11px">                                                            ' +
-                            //'RECEIPT DATE</label>                                                                       ' +
-                            //'</td>                                                                                      ' +
-                            //'<td>                                                                                       ' +
-                            //'<label class="LblDate" style="font-size: 11px">                                               ' +
-                            //'</label>                                                                                   ' +
-                            //'</td>                                                                                      ' +
-                            //'</tr>                                                                                      ' +
-                            //'</table>'+
-                            //'</div>';
+                    //'<div class="page" style="padding:0; margin: auto; height:4in;width:6in"><table style="margin: auto">                                                               ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td colspan="4"><br><br>' +
+                    //'<img src="' + CBPalletNOd + '" id="CBPalletNOd" alt="" hspace="60"' +
+                    //'vspace="5" style="width: 4in; height: .5in;" />                                            ' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td>                                                                                       ' +
+                    //'<label style="font-size: 11px">                                                            ' +
+                    //'ITEM</label>                                                                               ' +
+                    //'</td>                                                                                      ' +
+                    //'<td>                                                                                       ' +
+                    //'<label id="lblItemIDd" style="display: none; font-size: 10px">                              ' +
+                    //'' + lblItemIDd + '</label>' +
+                    //'<img src="' + CBItem + '" id="CBItem" alt="" hspace="60"    ' +
+                    //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td>                                                                                       ' +
+                    //'</td>                                                                                      ' +
+                    //'<td align="center">                                                                        ' +
+                    //'<label id="lblItemDescd" style="font-size: 11px">                                           ' +
+                    //'' + lblItemDescd + '</label>' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td>                                                                                       ' +
+                    //'<label style="font-size: 11px">                                                            ' +
+                    //'QUANTITY</label>                                                                           ' +
+                    //'</td>                                                                                      ' +
+                    //'<td>                                                                                       ' +
+                    //'<label id="LblQuantityd" style="display: none; font-size: 11px">                            ' +
+                    //'' + LblQuantityd + '</label>' +
+                    //'<img src="' + CBQuantityd + '" id="CBQuantityd" alt="" hspace="60"' +
+                    //'vspace="5" style="width: 2in; height: .5in;" />                                            ' +
+                    //'</td>                                                                                      ' +
+                    //'<td>                                                                                       ' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td>                                                                                       ' +
+                    //'</td>                                                                                      ' +
+                    //'<td align="center">                                                                        ' +
+                    //'<label id="LblUnitd" style="font-size: 11px">                                               ' +
+                    //'' + LblUnitd + '</label>' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td>                                                                                       ' +
+                    //'<label style="font-size: 11px">                                                            ' +
+                    //'LOT</label>                                                                                ' +
+                    //'</td>                                                                                      ' +
+                    //'<td>                                                                                       ' +
+                    //'<label id="LblLotIdd" style="display: none; font-size: 11px">                               ' +
+                    //'' + LblLotIdd + '</label>                                                                                   ' +
+                    //'<img src="' + CBLotd + '" id="CBLotd" alt="" hspace="60"     ' +
+                    //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'<tr>                                                                                       ' +
+                    //'<td>                                                                                       ' +
+                    //'<label style="font-size: 11px">                                                            ' +
+                    //'RECEIPT DATE</label>                                                                       ' +
+                    //'</td>                                                                                      ' +
+                    //'<td>                                                                                       ' +
+                    //'<label class="LblDate" style="font-size: 11px">                                               ' +
+                    //'</label>                                                                                   ' +
+                    //'</td>                                                                                      ' +
+                    //'</tr>                                                                                      ' +
+                    //'</table>'+
+                    //'</div>';
                     $('#MyDynamicEtiqueta').append(etiqueta);
-               }
+                }
             );
 
                 DeshabilitarLimpiarControles();
@@ -1259,7 +1251,7 @@
                         straux += str.charAt(i).replace(",", "").replace(".", "");
                     }
                     $('#txQuantity').val(straux);
-                }else {
+                } else {
                     var straux = "";
                     str = $('#txQuantity').val();
                     for (var i = 0; i < $('#txQuantity').val().length; i++) {
@@ -1777,7 +1769,7 @@
 
                         }
                     }
-                }
+        }
             });
 
 
@@ -1895,7 +1887,7 @@
                             $('#txItem').focus();
                         }
                     }
-                }
+        }
             });
 
             txPosition.bind("change paste keyup", function (e) {
@@ -2162,18 +2154,18 @@
                             $(MyElemnt).focus();
                         }
                     }
-                }
-                else {
+        }
+        else {
 
-                    txLot.attr('disabled', true);
-                    DdUnis.attr('disabled', true);
-                    txQuantity.attr('disabled', true);
+            txLot.attr('disabled', true);
+            DdUnis.attr('disabled', true);
+            txQuantity.attr('disabled', true);
 
-                    txItem.val("");
-                    txLot.val("");
-                    DdUnis.val("");
-                    txQuantity.val("");
-                }
+            txItem.val("");
+            txLot.val("");
+            DdUnis.val("");
+            txQuantity.val("");
+        }
             });
 
             $('#ChkfinalReceipt').click(function () {
@@ -2227,113 +2219,113 @@
         });
 
 
-        $('#DdPosition').bind("change", function (e) {
+$('#DdPosition').bind("change", function (e) {
 
-            txPosition.val($('#DdPosition').val());
-            txPosition.change();
+    txPosition.val($('#DdPosition').val());
+    txPosition.change();
+});
+
+
+function addOption() {
+
+    var options = [];
+    var unique = [];
+
+    $('.rowTable').remove();
+    $('#DdPosition option').remove(0);
+    $('#DdPosition').append("<option value='0'>Select Position</option>");
+
+    if (TxOrderType.val() == "1") {
+        LstSalesOrder.forEach(function (x) {
+            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                optionValue = x.PONO.trim();
+                options.push(optionValue);
+            }
+        });
+    }
+    else if (TxOrderType.val() == "2") {
+
+        LstPurchaseOrders.forEach(function (x) {
+            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                optionValue = x.PONO.trim();
+                options.push(optionValue);
+            }
         });
 
+    }
+    else if (TxOrderType.val() == "22") {
 
-        function addOption() {
-
-            var options = [];
-            var unique = [];
-
-            $('.rowTable').remove();
-            $('#DdPosition option').remove(0);
-            $('#DdPosition').append("<option value='0'>Select Position</option>");
-
-            if (TxOrderType.val() == "1") {
-                LstSalesOrder.forEach(function (x) {
-                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                        optionValue = x.PONO.trim();
-                        options.push(optionValue);
-                    }
-                });
+        LstTransferOrder.forEach(function (x) {
+            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                optionValue = x.PONO.trim();
+                options.push(optionValue);
             }
-            else if (TxOrderType.val() == "2") {
-
-                LstPurchaseOrders.forEach(function (x) {
-                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                        optionValue = x.PONO.trim();
-                        options.push(optionValue);
-                    }
-                });
-
-            }
-            else if (TxOrderType.val() == "22") {
-
-                LstTransferOrder.forEach(function (x) {
-                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                        optionValue = x.PONO.trim();
-                        options.push(optionValue);
-                    }
-                });
-            }
+        });
+    }
 
 
 
-            unique = options.filter(onlyUnique);
+    unique = options.filter(onlyUnique);
 
-            function onlyUnique(value, index, self) {
-                return self.indexOf(value) === index;
-            }
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
 
-            unique.forEach(function (x) {
-                optionValueX = x;
-                $('#DdPosition').append("<option value=" + optionValueX + ">" + optionValueX + "</option>");
+    unique.forEach(function (x) {
+        optionValueX = x;
+        $('#DdPosition').append("<option value=" + optionValueX + ">" + optionValueX + "</option>");
 
+    });
+
+    unique.forEach(function (x) {
+        CurrentOption = x;
+        PonoAnt = "";
+
+        if (TxOrderType.val() == "1") {
+
+            LstSalesOrder.forEach(function (x) {
+                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                    PonoAnt = x.PONO.toUpperCase().trim();
+                }
+            });
+        }
+        else if (TxOrderType.val() == "2") {
+
+            LstPurchaseOrders.forEach(function (x) {
+                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                    PonoAnt = x.PONO.toUpperCase().trim();
+                }
             });
 
-            unique.forEach(function (x) {
-                CurrentOption = x;
-                PonoAnt = "";
+        }
+        else if (TxOrderType.val() == "22") {
 
-                if (TxOrderType.val() == "1") {
 
-                    LstSalesOrder.forEach(function (x) {
-                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                            PonoAnt = x.PONO.toUpperCase().trim();
-                        }
-                    });
+
+            LstTransferOrder.forEach(function (x) {
+                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                    PonoAnt = x.PONO.toUpperCase().trim();
                 }
-                else if (TxOrderType.val() == "2") {
-
-                    LstPurchaseOrders.forEach(function (x) {
-                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                            PonoAnt = x.PONO.toUpperCase().trim();
-                        }
-                    });
-
-                }
-                else if (TxOrderType.val() == "22") {
-
-
-
-                    LstTransferOrder.forEach(function (x) {
-                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                            PonoAnt = x.PONO.toUpperCase().trim();
-                        }
-                    });
-                }
-
-
-
-
             });
-
-            options = [];
-            unique = []
         }
 
-        function limpiarPosition() {
-            $('#DdPosition option').remove(0);
-            $('#DdPosition').append("<option value='0'>Select Position</option>");
-            $('.rowTable').remove();
-        }
+
+
+
+    });
+
+    options = [];
+    unique = []
+}
+
+function limpiarPosition() {
+    $('#DdPosition option').remove(0);
+    $('#DdPosition').append("<option value='0'>Select Position</option>");
+    $('.rowTable').remove();
+}
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
