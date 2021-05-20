@@ -373,7 +373,7 @@ namespace whusap.WebPages.InvReceipts
                         HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
                         HttpContext.Current.Session["codePaid"] = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
                         HttpContext.Current.Session["Lot"] = LOT;
-                        HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
+                        HttpContext.Current.Session["Quantity"] = QUANTITY.ToString("0.0000") + " " + CUNI;
                         HttpContext.Current.Session["Origin"] = LOT;
                         HttpContext.Current.Session["Supplier"] = _operator;
                         HttpContext.Current.Session["RecibedBy"] = _operator;
@@ -530,7 +530,7 @@ namespace whusap.WebPages.InvReceipts
                         HttpContext.Current.Session["MaterialCode"] = DTNOOrdencompra.Rows[0]["T$ITEM"].ToString();
                         HttpContext.Current.Session["codePaid"] = DTNOOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
                         HttpContext.Current.Session["Lot"] = LOT;
-                        HttpContext.Current.Session["Quantity"] = QUANTITYAUX.ToString("0.0000");
+                        HttpContext.Current.Session["Quantity"] = QUANTITY.ToString("0.0000") + " " + CUNI;
                         HttpContext.Current.Session["Origin"] = LOT;
                         HttpContext.Current.Session["Supplier"] = _operator;
                         HttpContext.Current.Session["RecibedBy"] = _operator;
