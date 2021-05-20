@@ -1014,7 +1014,7 @@
                     LblUnitOCd = MyObject.UNIT;
                     LblQuantityOCd = MyObject.QTYC;
                     LblUser = MyObject.LOGN;
-
+                    LblSup = MyObject.NAMA;
 
 
                     var etiqueta =
@@ -1040,11 +1040,11 @@
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblUser + '</label></td>' +
+                        '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblSup + '</label></td>' +
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
-                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate"></label></td>' +
+                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyObject.DATE + '</label></td>' +
                         '</tr>' +
                         '</tbody>' +
                         '</table>' +

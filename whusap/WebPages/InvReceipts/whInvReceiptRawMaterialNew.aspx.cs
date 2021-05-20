@@ -224,6 +224,7 @@ namespace whusap.WebPages.InvReceipts
                             DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString(),
                             COTP = DTOrdencompra.Rows[0]["T$COTP"].ToString(),
                             FIRE = FIRE,
+                            NAMA = DTOrdencompra.Rows[0]["T$NAMA"].ToString(),
                             PSLIP = PSLIP.ToUpper(),
                             PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
                             ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
