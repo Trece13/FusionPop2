@@ -17,6 +17,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 <DALResources>
   <Modules>
     <Module name="tticol042">
+      <operationName name="SelectRegister">
+        <stringSQL>
+          select * from baan.tticol042140 ticol042
+          inner join baan.tticol242140 ticol242 on ticol042.T$PDNO = ticol242.T$PDNO
+          where trim(ticol242.T$SQNB) = trim('[:T$SQNB]')
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarPorPalletID">
         <stringSQL>
           SELECT  col042.T$PDNO PDNO,col042.T$DATE DATEA,col042.T$PONO PONO, col042.T$SQNB SQNB,col242.T$CWAT CWAT,col042.T$PRO1 PROC, col042.T$MITM ITEM, ibd001.T$DSCA DSCA, col242.T$ACQT ACQT, col042.T$CUNI CUNI, col042.T$DELE STAT
@@ -25,7 +32,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.tticol242{1} col242 ON col242.T$PDNO = col042.T$PDNO AND col242.T$SQNB = col042.T$SQNB
           WHERE col042.T$SQNB = '[p1]'
         </stringSQL>
-      </operationName>
+      </operationName>   
       <operationName name="ActualizacionPalletId">
         <stringSQL>
           UPDATE {2} SET T$DELE = '[:STAT]' WHERE T$SQNB = '[p1]'  --13. To Delete
@@ -4793,6 +4800,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           VALUES('[:T$PDNO]', '[:T$PONO]', '[:T$SEQN]', '[:T$MCNO]', '[:T$SHIF]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , '[:T$QTYR]', '[:T$CDIS]', '[:T$REJT]', '[:T$CLOT]', '[:T$OBSE]', '[:T$LOGR]', sysdate+5/24, '[:T$DISP]', '[:T$LOGN]', sysdate+5/24, '[:T$PROC]', '[:T$MESS]', '[:T$REFCNTD]', '[:T$REFCNTU]','[:T$CWAR]','[:T$PAID]')
         </stringSQL>
       </operationName>
+      <operationName name="SelectRegister">
+        <stringSQL>
+          select * from {0}.tticol100{1} where trim(T$PAID) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="ActualizaRegistro_ticol022">
         <stringSQL>
           UPDATE {0}.tticol022{1} SET T$DELE = [:T$DELE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
@@ -5045,8 +5057,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           VALUES({0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+5/24 ,:T$DISP, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU,:T$CWAM,:T$PAID)
         </stringSQL>
       </operationName>
+      <operationName name="SelectRegister">
+        <stringSQL>
+          select * from {0}.tticol116{1} where trim(T$PAID) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
     </Module>
     <Module name="tticol118">
+      <operationName name="SelectRegister">
+        <stringSQL>
+          select * from baan.tticol118140 where trim(T$PAID) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="invRegrid_Indentifier">
         <stringSQL>
           select count(*) cnt from {0}.tticol118{1} WHERE T$PAID= '[:T$PAID]' and T$DISP = '[:T$DISP]'

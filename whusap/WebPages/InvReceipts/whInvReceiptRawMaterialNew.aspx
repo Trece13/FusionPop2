@@ -1044,7 +1044,7 @@
                         '<tbody>' +
                         '<tr>' +
                         '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + LblQuantityd + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + LblQuantityd.replace(",",".") + '</label></td>' +
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
@@ -1250,13 +1250,20 @@
                 }
             });
 
-            txQuantity.bind("keyup paste", function (e) {
+            txQuantity.bind("input paste", function (e) {
 
                 if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
                     var straux = "";
                     str = $('#txQuantity').val();
                     for (var i = 0; i < $('#txQuantity').val().length; i++) {
                         straux += str.charAt(i).replace(",", "").replace(".", "");
+                    }
+                    $('#txQuantity').val(straux);
+                }else {
+                    var straux = "";
+                    str = $('#txQuantity').val();
+                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                        straux += str.charAt(i).replace(",", ".");
                     }
                     $('#txQuantity').val(straux);
                 }

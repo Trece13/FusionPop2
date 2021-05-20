@@ -245,8 +245,10 @@
                                 <tr class="row">
                                     <td class="col-12">
                                         <div class="row">
-                                            <div class="col-12 alingCenter"><strong>
-                                                <label id="lblProductDesc" runat="server">XXXXXXXXXXXXXXXXXXXXXXXXX</label>-<label id="lblProductCode" runat="server">XXXXXXXXXXX</label></strong></div>
+                                            <div class="col-12 alingCenter">
+                                                <strong>
+                                                    <label id="lblProductDesc" runat="server">XXXXXXXXXXXXXXXXXXXXXXXXX</label>-<label id="lblProductCode" runat="server">XXXXXXXXXXX</label></strong>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -275,17 +277,19 @@
                                     </td>
                                 </tr>
                                 <tr class="row">
-                                    <td class="col-12">
+                                    <td class="col-10">
                                         <div class="row">
                                             <div class="col-12 pl-4"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
+                                        </div>
+                                    </td>
+                                    <td class="col-2">
+                                        <div id="lblReprint" class="col-12 text-right" runat="server">
+                                            <label><strong>REPRINT</strong></label>
                                         </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div id="lblReprint" class="col-12 text-right" runat="server">
-                        <label><strong>REPRINT</strong></label>
                     </div>
                 </div>
             </div>

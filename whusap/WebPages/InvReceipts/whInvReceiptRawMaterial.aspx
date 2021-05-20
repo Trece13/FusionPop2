@@ -244,7 +244,7 @@
             <label class="col-sm-4 col-form-label-lg" for="txQuantity">
                 Quantity</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity"
+                <input class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern = "[0-9]"
                     data-method="ValidarQuantity" tabindex="1">
             </div>
             <label id="lblUnis" for="txQuantity">
@@ -555,7 +555,7 @@
 
         $('#BtnSavePslip').click(function(){                
             if(finalReceiptAuto){
-                $('#ShowModalMsg').click();
+                $('#ShowModalMsg').click();   
             }
         });
 
@@ -775,13 +775,20 @@
                 }
             });
 
-            txQuantity.bind("keyup paste", function (e) {
+            txQuantity.bind("input paste", function (e) {
                 
                 if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
                     var straux = "";
                     str = $('#txQuantity').val();
                     for (var i = 0; i < $('#txQuantity').val().length; i++) {
                         straux += str.charAt(i).replace(",","").replace(".","");
+                    }
+                    $('#txQuantity').val(straux);
+                } else {
+                    var straux = "";
+                    str = $('#txQuantity').val();
+                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                        straux += str.charAt(i).replace(",", ".");
                     }
                     $('#txQuantity').val(straux);
                 }

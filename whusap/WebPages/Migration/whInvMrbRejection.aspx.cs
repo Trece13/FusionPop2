@@ -30,11 +30,11 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
         private static InterfazDAL_ttcmcs005 _idalttcmcs005 = new InterfazDAL_ttcmcs005();
         private static InterfazDAL_tticol011 _idaltticol011 = new InterfazDAL_tticol011();
-        private static InterfazDAL_tticol100 _idaltticol100 = new InterfazDAL_tticol100();
         private static InterfazDAL_twhwmd200 _idaltwhwmd200 = new InterfazDAL_twhwmd200();
         private static InterfazDAL_twhwmd300 _idaltwhwmd300 = new InterfazDAL_twhwmd300();
         private static InterfazDAL_twhltc100 _idaltwhltc100 = new InterfazDAL_twhltc100();
         private static InterfazDAL_twhinr140 _idaltwhinr140 = new InterfazDAL_twhinr140();
+        private static InterfazDAL_tticol100 _idaltticol100 = new InterfazDAL_tticol100();
         private static InterfazDAL_tticol116 _idaltticol116 = new InterfazDAL_tticol116();
         string strError = string.Empty;
         string Aplicacion = "WEBAPP";
@@ -125,7 +125,46 @@ namespace whusap.WebPages.Migration
             generateWarehouseData();
         }
 
-       
+        protected void Form_Unload(object sender, EventArgs e)
+        {
+            Session["resultado"] = null;
+        }
+
+        protected void generateWarehouseData()
+        {
+
+            InterfazDAL_ttcmcs003 idal = new InterfazDAL_ttcmcs003();
+          //  Ent_ttcmcs003 obj = new Ent_ttcmcs003();
+            DataTable resultado = idal.listRecordCwar(ref strError);
+          //  dropDownWarehouse.Items.Clear();
+            if (dropDownWarehouse.Items.Count <= 0)
+            {
+
+                if (resultado.Rows.Count > 0)
+                {
+                    int rowIndex = 0;
+                    ListItem itemS = null;
+                    itemS = new ListItem();
+                    itemS.Text = _idioma == "INGLES" ? "-- Select an option -- " : " -- Seleccione --";
+                    itemS.Value = "";
+                    dropDownWarehouse.Items.Insert(rowIndex, itemS);
+
+                    foreach (DataRow dr in resultado.Rows)
+                    {
+                        itemS = new ListItem();
+                        rowIndex = (int)resultado.Rows.IndexOf(dr);
+                        itemS.Value = dr.ItemArray[0].ToString();
+                        itemS.Text = dr.ItemArray[0].ToString() + "-" + dr.ItemArray[1].ToString();
+                        dropDownWarehouse.Items.Insert(rowIndex + 1, itemS);
+                    }
+                }
+            }
+
+
+
+
+        }
+
         protected void btnSend_Click(object sender, EventArgs e)
         {
            
@@ -659,6 +698,28 @@ namespace whusap.WebPages.Migration
              }
         }
 
+        protected void OptionList_value(object sender, EventArgs e)
+        {
+            DropDownList ddl = (DropDownList)sender;
+            if (ddl.SelectedIndex == 0)
+            {
+                return;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        protected void grdRecords_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string prin = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PRIN"].ToString();
+                // ((Button)e.Row.Cells[7].FindControl("btnPrint")).OnClientClick = "printTag(" + FilaSerializada.Trim() + ")";
+                ((Label)e.Row.Cells[8].FindControl("prin")).Text = prin;
+            }
+        }
 
         protected void makeTableLocated(string loc, string lot)
         {
@@ -727,7 +788,7 @@ namespace whusap.WebPages.Migration
             divTableLocated.Visible = true;
         }
 
-         protected void makeTableAnnounce()
+        protected void makeTableAnnounce()
          {
              var rstp = "10";
              listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
@@ -794,85 +855,158 @@ namespace whusap.WebPages.Migration
              divTableAnnounce.InnerHtml = table;
              divTableAnnounce.Visible = true;
          }
-        protected void OptionList_value(object sender, EventArgs e)
+
+        protected void MakeLabel(Ent_tticol100 Objtticol100)
         {
-            DropDownList ddl = (DropDownList)sender;
-            if (ddl.SelectedIndex == 0)
+            var rstp = "10";
+            listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
+            IList<Reason> lstReasons = new List<Reason>();
+            foreach (DataRow item in listaReasons.Rows)
             {
-                return;
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        protected void grdRecords_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                string prin = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PRIN"].ToString();
-                // ((Button)e.Row.Cells[7].FindControl("btnPrint")).OnClientClick = "printTag(" + FilaSerializada.Trim() + ")";
-                ((Label)e.Row.Cells[8].FindControl("prin")).Text = prin;
-            }
-        }
-
-        protected void Form_Unload(object sender, EventArgs e)
-        {
-            Session["resultado"] = null;
-        }
-
-        #endregion
-
-        #region Metodos
-
-        protected void CargarIdioma()
-        {
-            lblMrbWarehouse.Text = _textoLabels.readStatement(formName, _idioma, "lblMrbWarehouse");
-            btnSend.Text = _textoLabels.readStatement(formName, _idioma, "btnSend");
-            btnSalirLocate.Text = _textoLabels.readStatement(formName, _idioma, "btnSalirLocate");
-            btnSalirAnnounce.Text = _textoLabels.readStatement(formName, _idioma, "btnSalirAnnounce");
-            btnSalirDelivered.Text = _textoLabels.readStatement(formName, _idioma, "btnSalirDelivered");
-            btnGuardar.Text = _textoLabels.readStatement(formName, _idioma, "btnGuardar");
-            btnGuardarDelivered.Text = _textoLabels.readStatement(formName, _idioma, "btnGuardarDelivered");
-            btnGuardarLocated.Text = _textoLabels.readStatement(formName, _idioma, "btnGuardarLocated");
-            lblOrder.Text = _textoLabels.readStatement(formName, _idioma, "lblOrder");
-            lblDescription.Text = _textoLabels.readStatement(formName, _idioma, "lblDescription");
-            lblDescriptionDelivered.Text = _textoLabels.readStatement(formName, _idioma, "lblDescriptionDelivered");
-            lblQty.Text = _textoLabels.readStatement(formName, _idioma, "lblQty");
-            lblUnit.Text = _textoLabels.readStatement(formName, _idioma, "lblUnit");
-            lblLot.Text = _textoLabels.readStatement(formName, _idioma, "lblLot");
-            lblShift.Text = _textoLabels.readStatement(formName, _idioma, "lblShift");
-            lblReasonDelivered.Text = _textoLabels.readStatement(formName, _idioma, "lblReasonDelivered");
-            lblRejectedType.Text = _textoLabels.readStatement(formName, _idioma, "lblRejectedType");
-            lblExactReason.Text = _textoLabels.readStatement(formName, _idioma, "lblExactReason");
-            lblItem.Text = _textoLabels.readStatement(formName, _idioma, "lblItem");
-          //  btnSave.Text = _textoLabels.readStatement(formName, _idioma, "btnSave");
-            //minlenght.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "regularWorkOrder");
-            //RequiredField.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "requiredWorkOrder");
-            //OrderError.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "customWorkOrder");
-            //grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPosition");
-            //grdRecords.Columns[1].HeaderText = _textoLabels.readStatement(formName, _idioma, "headItem");
-            //grdRecords.Columns[2].HeaderText = _textoLabels.readStatement(formName, _idioma, "headDescription");
-            //grdRecords.Columns[3].HeaderText = _textoLabels.readStatement(formName, _idioma, "headWarehouse");
-            //grdRecords.Columns[4].HeaderText = _textoLabels.readStatement(formName, _idioma, "headLot");
-            //grdRecords.Columns[5].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPalletID");
-            //grdRecords.Columns[6].HeaderText = _textoLabels.readStatement(formName, _idioma, "headReturnQty");
-            //grdRecords.Columns[7].HeaderText = _textoLabels.readStatement(formName, _idioma, "headUnit");
-            //grdRecords.Columns[8].HeaderText = _textoLabels.readStatement(formName, _idioma, "headConfirmed");
-        }
-
-        protected string mensajes(string tipoMensaje)
-        {
-            var retorno = _mensajesForm.readStatement(formName, _idioma, ref tipoMensaje);
-
-            if (retorno.Trim() == String.Empty)
-            {
-                retorno = _mensajesForm.readStatement(globalMessages, _idioma, ref tipoMensaje);
+                Reason reason = new Reason
+                {
+                    cdis = item["CDIS"].ToString(),
+                    dsca = item["DSCA"].ToString()
+                };
+                lstReasons.Add(reason);
             }
 
-            return retorno;
+            var ObjReason = lstReasons.Where(x => x.cdis.Trim().ToUpper() == Objtticol100.cdis.Trim().ToUpper()).Single();
+
+            var sqnb = _validarOrden.Rows[0]["SQNB"].ToString().Trim().ToUpper();
+            var mitm = _validarOrden.Rows[0]["MITM"].ToString().Trim().ToUpper();
+            var dsca = _validarOrden.Rows[0]["DSCA"].ToString().Trim().ToUpper();
+            var qtyr = _validarOrden.Rows[0]["QTDL"].ToString().Trim().ToUpper();
+            var pdno = _validarOrden.Rows[0]["PDNO"].ToString().Trim().ToUpper();
+            //T$SQNB
+            lblDmtNumber.Text = "DMT-NUMBER";
+            lblDescription.Text = "Description";
+            lblRejected.Text = "Rejected Qty";
+            Label1.Text = "WorkOrder";
+            lblTitleMachine.Text = "Machine";
+            Label2.Text = "Disposition - Review";
+            lblPrintedBy.Text = "Printed By";
+            lblReason.Text = "Reason";
+            lblFecha.Text = "Date:";
+            lblValueReason.Text = "Adhesion";
+            lblComments.Text = "Comments";
+
+            lblDescMachine.Text = Objtticol100.mcno;
+
+            lblValueComments.Text = Objtticol100.obse;
+            lblValuePrintedBy.Text = Objtticol100.logr;
+            lblValueReason.Text = ObjReason.dsca;
+            LblSqnb.Text = sqnb;
+            var rutaSqnb = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.ToUpper() + "&code=Code128&dpi=96";
+            imgCBSqnb.Src = !string.IsNullOrEmpty(sqnb) ? rutaSqnb : String.Empty;
+            //T$MITM
+            lblDsca.Text = mitm;
+            var rutaMitm = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + mitm.ToUpper() + "&code=Code128&dpi=96";
+            imgCBMitm.Src = !string.IsNullOrEmpty(mitm) ? rutaMitm : String.Empty;
+            //T$DSCA
+            lblDsca.Text = dsca;
+            //T$QTDL
+            lblValueQuantity.Text = Convert.ToString(qtyr);
+            lblQtdl.Text = Objtticol100.Unit;
+            var rutaQtdl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Convert.ToString(qtyr).ToUpper() + "&code=Code128&dpi=96";
+            imgBCQtdl.Src = !string.IsNullOrEmpty(Convert.ToString(qtyr)) ? rutaQtdl : String.Empty;
+            //T$PDNO
+            lblPdno.Text = pdno;
+            var rutaPdno = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + pdno.ToUpper() + "&code=Code128&dpi=96";
+            imgBCPdno.Src = !string.IsNullOrEmpty(pdno) ? rutaPdno : String.Empty;
+
+            Session["WorkOrder"] = pdno.ToUpper();
+            Session["lblReason"] = ObjReason.dsca;
+            Session["codePaid"] =  sqnb ;
+            Session["ProductDesc"] = dsca;
+            Session["ProductCode"] = mitm;
+            Session["Date"] = DateTime.Now.ToString();
+            Session["Quantity"] = qtyr;
+            Session["Finished"] = sqnb;
+            Session["Pallet"] = sqnb;
+            Session["PrintedBy"] = _operator;
+            Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
+            Session["Comments"] = Objtticol100.obse;
+            Session["Reprint"] = "no";
+
+            StringBuilder script = new StringBuilder();
+            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
+        
+        protected void MakeLabelDelivered(Ent_tticol100 Objtticol100)
+        {
+
+            var sqnb = Objtticol100.pdno + "-" + Objtticol100.pono + "-" + Objtticol100.proc;
+            var mitm = Objtticol100.item;
+            var dsca = txtDescription.Text;
+            var qtyr = Objtticol100.qtyr + "-" + Objtticol100.Unit;
+            var pdno = Objtticol100.pdno;
+            var clot = Objtticol100.clot;
+
+            //T$SQNB
+            lblDmtNumberDelivered.Text = "DMT-NUMBER";
+            Label1Delivered.Text = "Description";
+            lblRejectedDelivered.Text = "Rejected Qty";
+            Label11Delivered.Text = "WorkOrder";
+            lblDescLot.Text = "Lot";
+            //Label2.Text = "Disposition - Review";
+            lblPrintedByDelivered.Text = "Printed By";
+            lblReason.Text = "Reason";
+            lblFechaDelivered.Text = "Date";
+            lblCommentsDelivered.Text = "Comments";
+            Label3Delivered.Text = "Reason";
+            lblValuePrintedByDelivered.Text = Objtticol100.logr;
+            lblDscaDelivered.Text = qtyr;
+            LblSqnbDElivered.Text = sqnb;
+            lblValueReasonDelivered.Text = slReason.SelectedItem.Text.Substring(7);
+
+
+            var rutaLot = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + clot.ToUpper() + "&code=Code128&dpi=96";
+            imgBCClot.Src = string.IsNullOrWhiteSpace(clot) ? string.Empty : rutaLot;
+
+            var rutaSqnb = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb + "&code=Code128&dpi=96";
+            imgCBSqnbDelivered.Src = !string.IsNullOrEmpty(sqnb) ? rutaSqnb : String.Empty;
+            //T$MITM
+            var rutaMitm = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + mitm.ToUpper() + "&code=Code128&dpi=96";
+            imgCBMitmDelivered.Src = !string.IsNullOrEmpty(mitm) ? rutaMitm : String.Empty;
+            //T$DSCA
+            lblDsca.Text = dsca;
+            lblDscaDelivered.Text = dsca;
+            //T$QTDL
+            lblQtdlDelivered.Text = Convert.ToString(qtyr);
+            var rutaQtdl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Convert.ToString(Objtticol100.qtyr).ToUpper() + "&code=Code128&dpi=96";
+            imgBCQtdlDelivered.Src = !string.IsNullOrEmpty(Convert.ToString(Objtticol100.qtyr)) ? rutaQtdl : String.Empty;
+            //T$PDNO
+            lblPdnoDelivered.Text = pdno;
+            var rutaPdno = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + pdno.ToUpper() + "&code=Code128&dpi=96";
+            imgBCPdnoDelivered.Src = !string.IsNullOrEmpty(pdno) ? rutaPdno : String.Empty;
+
+            lblMachinetitle.Text = "Machine";
+            lblMachine.Text = Objtticol100.mcno;
+            lblValueCommentsDelivered.Text = txtExactReasons.InnerText;
+
+            Session["WorkOrder"]   = sqnb ;
+            Session["lblReason"]   = slReason.SelectedItem.Text.Substring(7);
+            Session["codePaid"] = sqnb;
+            Session["ProductDesc"] = dsca;
+            Session["ProductCode"] = mitm;
+            Session["Date"]        = DateTime.Now.ToString();
+            Session["Quantity"]    = qtyr;
+            Session["Finished"]    = sqnb;
+            Session["Pallet"]      = Objtticol100.proc;
+            Session["PrintedBy"]   = _operator;
+            Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
+            Session["Comments"]    = txtExactReasons.InnerText;
+            Session["Reprint"]     = "no";
+
+            StringBuilder script = new StringBuilder();
+            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+            script.Append("ventanaImp.moveTo(30, 0);");
+            //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+        }
+
         protected void btnGuardar_Click_announce(object sender, EventArgs e)
         {
             var validInsert = 0;
@@ -987,7 +1121,6 @@ namespace whusap.WebPages.Migration
                 return;
             }
         }
-
 
         protected void btnGuardar_Click_located(object sender, EventArgs e)
         {
@@ -1272,91 +1405,7 @@ namespace whusap.WebPages.Migration
                 }
             }
         }
-        protected void MakeLabel(Ent_tticol100 Objtticol100)
-        {
-            var rstp = "10";
-            listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
-            IList<Reason> lstReasons = new List<Reason>();
-            foreach (DataRow item in listaReasons.Rows)
-            {
-                Reason reason = new Reason
-                {
-                    cdis = item["CDIS"].ToString(),
-                    dsca = item["DSCA"].ToString()
-                };
-                lstReasons.Add(reason);
-            }
 
-            var ObjReason = lstReasons.Where(x => x.cdis.Trim().ToUpper() == Objtticol100.cdis.Trim().ToUpper()).Single();
-
-            var sqnb = _validarOrden.Rows[0]["SQNB"].ToString().Trim().ToUpper();
-            var mitm = _validarOrden.Rows[0]["MITM"].ToString().Trim().ToUpper();
-            var dsca = _validarOrden.Rows[0]["DSCA"].ToString().Trim().ToUpper();
-            var qtyr = _validarOrden.Rows[0]["QTDL"].ToString().Trim().ToUpper();
-            var pdno = _validarOrden.Rows[0]["PDNO"].ToString().Trim().ToUpper();
-            //T$SQNB
-            lblDmtNumber.Text = "DMT-NUMBER";
-            lblDescription.Text = "Description";
-            lblRejected.Text = "Rejected Qty";
-            Label1.Text = "WorkOrder";
-            lblTitleMachine.Text = "Machine";
-            Label2.Text = "Disposition - Review";
-            lblPrintedBy.Text = "Printed By";
-            lblReason.Text = "Reason";
-            lblFecha.Text = "Date:";
-            lblValueReason.Text = "Adhesion";
-            lblComments.Text = "Comments";
-
-            lblDescMachine.Text = Objtticol100.mcno;
-
-            lblValueComments.Text = Objtticol100.obse;
-            lblValuePrintedBy.Text = Objtticol100.logr;
-            lblValueReason.Text = ObjReason.dsca;
-            LblSqnb.Text = sqnb;
-            var rutaSqnb = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.ToUpper() + "&code=Code128&dpi=96";
-            imgCBSqnb.Src = !string.IsNullOrEmpty(sqnb) ? rutaSqnb : String.Empty;
-            //T$MITM
-            lblDsca.Text = mitm;
-            var rutaMitm = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + mitm.ToUpper() + "&code=Code128&dpi=96";
-            imgCBMitm.Src = !string.IsNullOrEmpty(mitm) ? rutaMitm : String.Empty;
-            //T$DSCA
-            lblDsca.Text = dsca;
-            //T$QTDL
-            lblValueQuantity.Text = Convert.ToString(qtyr);
-            lblQtdl.Text = Objtticol100.Unit;
-            var rutaQtdl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Convert.ToString(qtyr).ToUpper() + "&code=Code128&dpi=96";
-            imgBCQtdl.Src = !string.IsNullOrEmpty(Convert.ToString(qtyr)) ? rutaQtdl : String.Empty;
-            //T$PDNO
-            lblPdno.Text = pdno;
-            var rutaPdno = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + pdno.ToUpper() + "&code=Code128&dpi=96";
-            imgBCPdno.Src = !string.IsNullOrEmpty(pdno) ? rutaPdno : String.Empty;
-
-            Session["WorkOrder"] = pdno.ToUpper();
-            Session["lblReason"] = ObjReason.dsca;
-            Session["codePaid"] =  sqnb ;
-            Session["ProductDesc"] = dsca;
-            Session["ProductCode"] = mitm;
-            Session["Date"] = DateTime.Now.ToString();
-            Session["Quantity"] = qtyr;
-            Session["Finished"] = sqnb;
-            Session["Pallet"] = sqnb;
-            Session["PrintedBy"] = _operator;
-            Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
-            Session["Comments"] = Objtticol100.obse;
-            Session["Reprint"] = "no";
-
-            StringBuilder script = new StringBuilder();
-            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-        }
-        protected void btnExit_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("whInvMrbRejection.aspx");
-        }
-
-
-
-       
         protected void btnGuardar_Click_Delivered(object sender, EventArgs e)
         {
               var validUpdate = 0;
@@ -1497,120 +1546,70 @@ namespace whusap.WebPages.Migration
                 return;
             }
         }
-        protected void generateWarehouseData()
+
+        protected void btnExit_Click(object sender, EventArgs e)
         {
+            Response.Redirect("whInvMrbRejection.aspx");
+        }
+        
+        
+        #endregion
 
-            InterfazDAL_ttcmcs003 idal = new InterfazDAL_ttcmcs003();
-          //  Ent_ttcmcs003 obj = new Ent_ttcmcs003();
-            DataTable resultado = idal.listRecordCwar(ref strError);
-          //  dropDownWarehouse.Items.Clear();
-            if (dropDownWarehouse.Items.Count <= 0)
+        #region Metodos
+        protected string mensajes(string tipoMensaje)
+        {
+            var retorno = _mensajesForm.readStatement(formName, _idioma, ref tipoMensaje);
+
+            if (retorno.Trim() == String.Empty)
             {
-
-                if (resultado.Rows.Count > 0)
-                {
-                    int rowIndex = 0;
-                    ListItem itemS = null;
-                    itemS = new ListItem();
-                    itemS.Text = _idioma == "INGLES" ? "-- Select an option -- " : " -- Seleccione --";
-                    itemS.Value = "";
-                    dropDownWarehouse.Items.Insert(rowIndex, itemS);
-
-                    foreach (DataRow dr in resultado.Rows)
-                    {
-                        itemS = new ListItem();
-                        rowIndex = (int)resultado.Rows.IndexOf(dr);
-                        itemS.Value = dr.ItemArray[0].ToString();
-                        itemS.Text = dr.ItemArray[0].ToString() + "-" + dr.ItemArray[1].ToString();
-                        dropDownWarehouse.Items.Insert(rowIndex + 1, itemS);
-                    }
-                }
+                retorno = _mensajesForm.readStatement(globalMessages, _idioma, ref tipoMensaje);
             }
 
-
-
-
+            return retorno;
         }
+
+        protected void CargarIdioma()
+        {
+            lblMrbWarehouse.Text = _textoLabels.readStatement(formName, _idioma, "lblMrbWarehouse");
+            btnSend.Text = _textoLabels.readStatement(formName, _idioma, "btnSend");
+            btnSalirLocate.Text = _textoLabels.readStatement(formName, _idioma, "btnSalirLocate");
+            btnSalirAnnounce.Text = _textoLabels.readStatement(formName, _idioma, "btnSalirAnnounce");
+            btnSalirDelivered.Text = _textoLabels.readStatement(formName, _idioma, "btnSalirDelivered");
+            btnGuardar.Text = _textoLabels.readStatement(formName, _idioma, "btnGuardar");
+            btnGuardarDelivered.Text = _textoLabels.readStatement(formName, _idioma, "btnGuardarDelivered");
+            btnGuardarLocated.Text = _textoLabels.readStatement(formName, _idioma, "btnGuardarLocated");
+            lblOrder.Text = _textoLabels.readStatement(formName, _idioma, "lblOrder");
+            lblDescription.Text = _textoLabels.readStatement(formName, _idioma, "lblDescription");
+            lblDescriptionDelivered.Text = _textoLabels.readStatement(formName, _idioma, "lblDescriptionDelivered");
+            lblQty.Text = _textoLabels.readStatement(formName, _idioma, "lblQty");
+            lblUnit.Text = _textoLabels.readStatement(formName, _idioma, "lblUnit");
+            lblLot.Text = _textoLabels.readStatement(formName, _idioma, "lblLot");
+            lblShift.Text = _textoLabels.readStatement(formName, _idioma, "lblShift");
+            lblReasonDelivered.Text = _textoLabels.readStatement(formName, _idioma, "lblReasonDelivered");
+            lblRejectedType.Text = _textoLabels.readStatement(formName, _idioma, "lblRejectedType");
+            lblExactReason.Text = _textoLabels.readStatement(formName, _idioma, "lblExactReason");
+            lblItem.Text = _textoLabels.readStatement(formName, _idioma, "lblItem");
+          //  btnSave.Text = _textoLabels.readStatement(formName, _idioma, "btnSave");
+            //minlenght.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "regularWorkOrder");
+            //RequiredField.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "requiredWorkOrder");
+            //OrderError.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "customWorkOrder");
+            //grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPosition");
+            //grdRecords.Columns[1].HeaderText = _textoLabels.readStatement(formName, _idioma, "headItem");
+            //grdRecords.Columns[2].HeaderText = _textoLabels.readStatement(formName, _idioma, "headDescription");
+            //grdRecords.Columns[3].HeaderText = _textoLabels.readStatement(formName, _idioma, "headWarehouse");
+            //grdRecords.Columns[4].HeaderText = _textoLabels.readStatement(formName, _idioma, "headLot");
+            //grdRecords.Columns[5].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPalletID");
+            //grdRecords.Columns[6].HeaderText = _textoLabels.readStatement(formName, _idioma, "headReturnQty");
+            //grdRecords.Columns[7].HeaderText = _textoLabels.readStatement(formName, _idioma, "headUnit");
+            //grdRecords.Columns[8].HeaderText = _textoLabels.readStatement(formName, _idioma, "headConfirmed");
+        }
+        #endregion
+
         public class Reason
         {
             public string cdis { get; set; }
             public string dsca { get; set; }
         };
-
-        protected void MakeLabelDelivered(Ent_tticol100 Objtticol100)
-        {
-
-            var sqnb = Objtticol100.pdno + "-" + Objtticol100.pono + "-" + Objtticol100.proc;
-            var mitm = Objtticol100.item;
-            var dsca = txtDescription.Text;
-            var qtyr = Objtticol100.qtyr + "-" + Objtticol100.Unit;
-            var pdno = Objtticol100.pdno;
-            var clot = Objtticol100.clot;
-
-            //T$SQNB
-            lblDmtNumberDelivered.Text = "DMT-NUMBER";
-            Label1Delivered.Text = "Description";
-            lblRejectedDelivered.Text = "Rejected Qty";
-            Label11Delivered.Text = "WorkOrder";
-            lblDescLot.Text = "Lot";
-            //Label2.Text = "Disposition - Review";
-            lblPrintedByDelivered.Text = "Printed By";
-            lblReason.Text = "Reason";
-            lblFechaDelivered.Text = "Date";
-            lblCommentsDelivered.Text = "Comments";
-            Label3Delivered.Text = "Reason";
-            lblValuePrintedByDelivered.Text = Objtticol100.logr;
-            lblDscaDelivered.Text = qtyr;
-            LblSqnbDElivered.Text = sqnb;
-            lblValueReasonDelivered.Text = slReason.SelectedItem.Text.Substring(7);
-
-
-            var rutaLot = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + clot.ToUpper() + "&code=Code128&dpi=96";
-            imgBCClot.Src = string.IsNullOrWhiteSpace(clot) ? string.Empty : rutaLot;
-
-            var rutaSqnb = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb + "&code=Code128&dpi=96";
-            imgCBSqnbDelivered.Src = !string.IsNullOrEmpty(sqnb) ? rutaSqnb : String.Empty;
-            //T$MITM
-            var rutaMitm = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + mitm.ToUpper() + "&code=Code128&dpi=96";
-            imgCBMitmDelivered.Src = !string.IsNullOrEmpty(mitm) ? rutaMitm : String.Empty;
-            //T$DSCA
-            lblDsca.Text = dsca;
-            lblDscaDelivered.Text = dsca;
-            //T$QTDL
-            lblQtdlDelivered.Text = Convert.ToString(qtyr);
-            var rutaQtdl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Convert.ToString(Objtticol100.qtyr).ToUpper() + "&code=Code128&dpi=96";
-            imgBCQtdlDelivered.Src = !string.IsNullOrEmpty(Convert.ToString(Objtticol100.qtyr)) ? rutaQtdl : String.Empty;
-            //T$PDNO
-            lblPdnoDelivered.Text = pdno;
-            var rutaPdno = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + pdno.ToUpper() + "&code=Code128&dpi=96";
-            imgBCPdnoDelivered.Src = !string.IsNullOrEmpty(pdno) ? rutaPdno : String.Empty;
-
-            lblMachinetitle.Text = "Machine";
-            lblMachine.Text = Objtticol100.mcno;
-            lblValueCommentsDelivered.Text = txtExactReasons.InnerText;
-
-            Session["WorkOrder"]   = sqnb ;
-            Session["lblReason"]   = slReason.SelectedItem.Text.Substring(7);
-            Session["codePaid"] = sqnb;
-            Session["ProductDesc"] = dsca;
-            Session["ProductCode"] = mitm;
-            Session["Date"]        = DateTime.Now.ToString();
-            Session["Quantity"]    = qtyr;
-            Session["Finished"]    = sqnb;
-            Session["Pallet"]      = Objtticol100.proc;
-            Session["PrintedBy"]   = _operator;
-            Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
-            Session["Comments"]    = txtExactReasons.InnerText;
-            Session["Reprint"]     = "no";
-
-            StringBuilder script = new StringBuilder();
-            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
-            script.Append("ventanaImp.moveTo(30, 0);");
-            //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-        }
-
-        #endregion
 
     }
 }

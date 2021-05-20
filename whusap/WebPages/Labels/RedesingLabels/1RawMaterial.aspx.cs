@@ -35,7 +35,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
             lblMaterialCode.InnerText   = Session["MaterialCode"]   != null ? Session["MaterialCode"].ToString() : string.Empty;
             codePaid.Src                = Session["codePaid"]       != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid"].ToString() + "&code=Code128&dpi=96" : string.Empty;
             lblLot.Text                 = Session["Lot"]            != null ? Session["Lot"].ToString()         : string.Empty;
-            lblQuantity.Text            = Session["Quantity"]       != null ? Session["Quantity"].ToString()    : string.Empty;
+            lblQuantity.Text            = Session["Quantity"]       != null ? Session["Quantity"].ToString().Replace(",",".")    : string.Empty;
             lblOrigin.Text              = Session["Origin"]         != null ? Session["Origin"].ToString()      : string.Empty;
             lblSupplier.Text            = Session["Supplier"]       != null ? Session["Supplier"].ToString()    : string.Empty;
             lblRecibedBy.Text           = Session["RecibedBy"]      != null ? Session["RecibedBy"].ToString()   : string.Empty;

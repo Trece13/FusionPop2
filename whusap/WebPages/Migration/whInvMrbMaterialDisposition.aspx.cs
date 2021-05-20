@@ -32,6 +32,7 @@ namespace whusap.WebPages.Migration
         InterfazDAL_tticol127 idal127 = new InterfazDAL_tticol127();
         public List<Ent_tticol127> ListaItems = new List<Ent_tticol127>();
         public List<Ent_tticol127> ListaLotes = new List<Ent_tticol127>();
+        private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         Ent_tticol042 obj042 = new Ent_tticol042();
         public string ListaItemsJSON = string.Empty;
         public string ListaLotesJSON = string.Empty;
@@ -641,6 +642,7 @@ namespace whusap.WebPages.Migration
             }
             else
             {
+                //Primer insert
                 idal.insertarRegistro(ref parameterCollection, ref strError);
                 if (strError != string.Empty)
                 {
@@ -696,7 +698,7 @@ namespace whusap.WebPages.Migration
 
                     //insert a new record on tables ticol042 and ticol242 and whcol020.
                  
-
+                    //Segundo insert
                     int retornoRegrind = idal042.insertarRegistro(ref parameterCollectionRegrind, ref strError);
                     bool retornoRegrindTticon242 = idal042.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
                     bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
@@ -785,14 +787,6 @@ namespace whusap.WebPages.Migration
 
                     StringBuilder paramurl = new StringBuilder();
 
-                    //paramurl.Append("?");
-
-                    //paramurl.Append("valor1=" + Request.QueryString[0].ToString() + "&");
-
-                    //paramurl.Append("valor2=" + Request.QueryString[1].ToString() + "&");
-
-                    //paramurl.Append("valor3=" + Request.QueryString[2].ToString());
-
                     Session["IsPreviousPage"] = "";
                     DataRow row = (DataRow)Session["FilaImprimir"];
 
@@ -811,14 +805,6 @@ namespace whusap.WebPages.Migration
                     script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
-                    //StringBuilder script = new StringBuilder();
-
-                    //script.Append("ventanaImp = window.open('../Labels/whInvLabelMaterialRejectedMRB.aspx', ");
-                    //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-                    //script.Append("ventanaImp.moveTo(30, 0);");
-                    ////script.Append("setTimeout (ventanaImp.close(), 20000);");
-                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-                    ////ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Notify", "alert('Information Saved Successfully.');", true);
                     lblResult.Text = mensajes("msjupdt");
                     lblResult.Visible = true;
                 }
@@ -843,19 +829,19 @@ namespace whusap.WebPages.Migration
 
                     DataRow row = (DataRow)Session["FilaImprimir"];
 
-                    Session["MaterialDesc"] =  row["DESCI"].ToString();
-                    Session["MaterialCode"] = obj.item;
-                    Session["codePaid"] = row["PAID"].ToString();  
-                    Session["Lot"]          =  row["LOTE"].ToString();  
-                    Session["Quantity"]     =  row["CANTIDAD"].ToString();  
-                    Session["Origin"]       =  row["LOTE"].ToString();  
-                    Session["Supplier"]     = "";
-                    Session["RecibedBy"]        = Session["user"].ToString();
-                    Session["RecibedOn"]    = DateTime.Now.ToString();
-                    Session["Reprint"]      = "no";
+                    Session["Reprint"] = "no";
+                    Session["MaterialDesc"] = "";
+                    Session["Material"] = obj.item;
+                    Session["codePaid"] = row["PAID"].ToString();
+                    Session["Lot"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
+                    Session["Quantity"] = row["CANTIDAD"].ToString();
+                    Session["Date"] = DateTime.Now.ToString();
+                    Session["Machine"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
+                    Session["Operator"] = Session["user"].ToString();
+                    Session["Pallet"] = row["PAID"].ToString();
 
                     StringBuilder script = new StringBuilder();
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                     lblResult.Text = mensajes("msjupdt");

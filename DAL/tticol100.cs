@@ -475,5 +475,25 @@ namespace whusa.DAL
             }
             return consulta;
         }
+
+        public DataTable SelectRegister(string PAID, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable consulta = new DataTable();
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$PAID", PAID.Trim().ToUpper());
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to the search sequence [tticol100]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
     }
 }

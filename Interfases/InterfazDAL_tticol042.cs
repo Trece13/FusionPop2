@@ -357,5 +357,19 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public DataTable SelectRegister(string PAID, ref string strError)
+        {
+            DataTable retorno = new DataTable();
+            try
+            {
+                retorno = dal.SelectRegister(ref PAID, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
     }
 }

@@ -499,6 +499,24 @@ namespace whusa.DAL
             }
             return parameterCollection;
         }
+
+        public DataTable SelectRegister(ref string PAID, ref string strError)
+        {
+            Dictionary<string, object> paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", PAID);
+
+            string strSentenciaS = recursos.readStatement(method.ReflectedType.Name, "SelectRegister", ref owner, ref env, tabla, paramList);
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentenciaS, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error al buscar informacion para imprimir [tticol118]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
     }
 }
 
