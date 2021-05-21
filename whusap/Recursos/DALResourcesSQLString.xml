@@ -2943,6 +2943,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT T$PRIN FROM {2}
           WHERE T$PAID = '[:T$PAID]'
+          UNION
+          SELECT T$PRIN FROM {0}.tticol126{1}
+          WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="invGetPalletInfoSerie">
