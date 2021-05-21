@@ -391,7 +391,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"]     =  sqnb.Trim().ToUpper() ;
                 Session["Lot"] = PDNO;
                 Session["Quantity"] = enterQuantity.ToString()+" "+unidad;
-                Session["Date"] = DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maquina;
                 Session["Reprint"] = "no";

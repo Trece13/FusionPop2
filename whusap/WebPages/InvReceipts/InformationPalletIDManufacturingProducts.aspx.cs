@@ -373,7 +373,7 @@ namespace whusap.WebPages.InvReceipts
             HttpContext.Current.Session["codePaid"] = PAID.Trim().ToUpper();
             HttpContext.Current.Session["Lot"] = ORNO;
             HttpContext.Current.Session["Quantity"] = QTYS.ToString() + " " + UNIT;
-            HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
+            HttpContext.Current.Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
             HttpContext.Current.Session["Pallet"] = PAID.Trim().ToUpper();
             HttpContext.Current.Session["Machine"] = idal022.getMachine(ORNO, ITEM.Trim().ToUpper(), ref strError); ; ;
             HttpContext.Current.Session["Operator"] = HttpContext.Current.Session["user"].ToString();

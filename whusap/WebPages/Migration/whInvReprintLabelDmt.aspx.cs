@@ -199,7 +199,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"] = lblOrdPonoSeqn.Text.Trim().ToUpper() ;
                 Session["ProductDesc"]  = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
                 Session["ProductCode"]  = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
-                Session["Date"] =  DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Quantity"] = consultaInformacion.Rows[0]["QTYR"].ToString().Trim().ToUpper() + " " + consultaInformacion.Rows[0]["UNIT"].ToString().Trim().ToUpper();
                 Session["Finished"]     = lblOrdPonoSeqn.Text.Trim().ToUpper();
                 Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
@@ -232,7 +232,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"] =String.Concat(pdno, "-", "0", "-", seqn) ;
                 Session["ProductDesc"] = consultaInformacion.Rows[0]["DSCA"].ToString().Trim().ToUpper(); 
                 Session["ProductCode"] = consultaInformacion.Rows[0]["ITEM"].ToString().Trim().ToUpper();
-                Session["Date"] = DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Quantity"] = consultaInformacion.Rows[0]["QTYR"].ToString().Trim().ToUpper() + " " + consultaInformacion.Rows[0]["UNIT"].ToString().Trim().ToUpper();
                 Session["Finished"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
                 Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();

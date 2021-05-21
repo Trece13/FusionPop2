@@ -202,7 +202,7 @@ namespace whusap.WebPages.InvMaterial
             Session["codePaid"] = reg["T$LABL"].ToString().Trim();
             Session["Lot"] = obj.clot;
             Session["Quantity"] = obj.qtyr + " " + hi_unityItem.Value;
-            Session["Date"] = DateTime.Now.ToString();
+            Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
             Session["Pallet"] = reg["T$LABL"].ToString().Trim();
             Session["Machine"] = idal022.getMachine(obj.clot, reg["T$ITEM"].ToString().Trim(), ref strError); ;
             Session["Operator"] = Session["user"].ToString();

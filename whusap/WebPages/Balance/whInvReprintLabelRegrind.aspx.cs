@@ -145,7 +145,7 @@ namespace whusap.WebPages.Balance
                 Session["codePaid"] = reimpresion.Rows[0]["T$SQNB"] ; 
                 Session["Lot"] = filaImprimir.ItemArray[0].ToString();
                 Session["Quantity"] = filaImprimir.ItemArray[3].ToString().Trim()+" "+reimpresion.Rows[0]["T$CUNI"];
-                Session["Date"] = filaImprimir.ItemArray[6].ToString().Trim();
+                Session["Date"] = Convert.ToDateTime(filaImprimir.ItemArray[6].ToString().Trim()).ToString("MM/dd/yyyy");
                 Session["Machine"] = reimpresion.Rows[0]["T$MCNO"];
                 Session["Operator"] = Session["user"].ToString();
                 Session["Pallet"] = reimpresion.Rows[0]["T$SQNB"];

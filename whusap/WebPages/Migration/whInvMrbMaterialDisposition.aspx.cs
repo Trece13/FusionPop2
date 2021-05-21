@@ -835,7 +835,7 @@ namespace whusap.WebPages.Migration
                     Session["codePaid"] = row["PAID"].ToString();
                     Session["Lot"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
                     Session["Quantity"] = row["CANTIDAD"].ToString();
-                    Session["Date"] = DateTime.Now.ToString();
+                    Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                     Session["Machine"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                     Session["Operator"] = Session["user"].ToString();
                     Session["Pallet"] = row["PAID"].ToString();

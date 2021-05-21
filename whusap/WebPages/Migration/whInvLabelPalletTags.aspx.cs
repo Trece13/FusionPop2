@@ -390,7 +390,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"]     =  sqnb.Trim().ToUpper();
                 Session["Lot"]       =  PDNO;
                 Session["Quantity"] = factor + " " + unidad;
-                Session["Date"]      =  DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"]    =  sqnb.Trim().ToUpper();
                 Session["Machine"]   =  maquina;
                 Session["Operator"] = _operator;
@@ -654,7 +654,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"] = sqnb.Trim().ToUpper();
                 Session["Lot"] = pdno;
                 Session["Quantity"] = qtdl + " " + unit;
-                Session["Date"] = DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maq;
                 Session["Operator"] = _operator;

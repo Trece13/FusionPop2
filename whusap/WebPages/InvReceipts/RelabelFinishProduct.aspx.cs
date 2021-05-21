@@ -563,7 +563,7 @@ namespace whusap.WebPages.InvReceipts
                     HttpContext.Current.Session["codePaid"] = data022.sqnb;
                     HttpContext.Current.Session["Lot"] = CLOT;
                     HttpContext.Current.Session["Quantity"] = data022.acqt + " " + data022.cuni;
-                    HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
+                    HttpContext.Current.Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                     HttpContext.Current.Session["Pallet"] = data022.sqnb;
                     HttpContext.Current.Session["Machine"] = _idaltticol022.getMachine(CLOT, ITEM.Trim().ToUpper(), ref strError);
                     HttpContext.Current.Session["Operator"] = _operator;
@@ -651,7 +651,7 @@ namespace whusap.WebPages.InvReceipts
                     HttpContext.Current.Session["codePaid"] =  data042.sqnb ;
                     HttpContext.Current.Session["Lot"] = CLOT;
                     HttpContext.Current.Session["Quantity"] = data042.acqt + " " + data042.cuni;
-                    HttpContext.Current.Session["Date"] = DateTime.Now.ToString();
+                    HttpContext.Current.Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                     HttpContext.Current.Session["Pallet"] = data042.sqnb;
                     HttpContext.Current.Session["Machine"] = _idaltticol022.getMachine(CLOT, ITEM.Trim().ToUpper(), ref strError); ;
                     HttpContext.Current.Session["Operator"] = _operator;

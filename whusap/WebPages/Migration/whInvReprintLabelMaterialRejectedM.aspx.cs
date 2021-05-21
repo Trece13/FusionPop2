@@ -177,7 +177,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
                 Session["ProductDesc"] = consultaInformacion[0]["DSCA"].ToString().Trim();
                 Session["ProductCode"] = consultaInformacion[0]["ITEM"].ToString().Trim();
-                Session["Date"] = DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Quantity"] = consultaInformacion[0]["QTYR"].ToString().Trim() + " " + consultaInformacion[0]["CUNI"].ToString().Trim();
                 Session["Finished"] = lblOrdPonoSeqn.Text.Trim().ToUpper();
                 Session["Pallet"] = lblOrdPonoSeqn.Text.Trim().ToUpper();

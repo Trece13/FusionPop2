@@ -126,7 +126,7 @@ namespace whusap.WebPages.Migration
                 Session["codePaid"]     =  sqnb.ToUpper();
                 Session["Lot"] = pdno;
                 Session["Quantity"] = quantity + " " + unit;
-                Session["Date"] = DateTime.Now.ToString();
+                Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Machine"] = machine;
                 Session["Operator"] = HttpContext.Current.Session["user"].ToString();
                 Session["Winder"] = roll;

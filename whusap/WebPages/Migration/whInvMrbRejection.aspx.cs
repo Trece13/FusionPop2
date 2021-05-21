@@ -920,7 +920,7 @@ namespace whusap.WebPages.Migration
             Session["codePaid"] =  sqnb ;
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
-            Session["Date"] = DateTime.Now.ToString();
+            Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
             Session["Quantity"] = qtyr;
             Session["Finished"] = sqnb;
             Session["Pallet"] = sqnb;
@@ -991,7 +991,7 @@ namespace whusap.WebPages.Migration
             Session["codePaid"] = sqnb;
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
-            Session["Date"]        = DateTime.Now.ToString();
+            Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
             Session["Quantity"]    = qtyr;
             Session["Finished"]    = sqnb;
             Session["Pallet"]      = Objtticol100.proc;
@@ -1090,7 +1090,7 @@ namespace whusap.WebPages.Migration
                         Session["codePaid"] = paid ;
                         Session["ProductDesc"] = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper();
                         Session["ProductCode"] = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper();
-                        Session["Date"] = DateTime.Now.ToString();
+                        Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                         Session["Quantity"] = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat);
                         Session["Finished"] = paid;
                         Session["Pallet"] = paid;
@@ -1279,7 +1279,7 @@ namespace whusap.WebPages.Migration
                     Session["codePaid"] = paid.Trim().ToUpper();
                     Session["Lot"] = lot == String.Empty ? " " : lot;
                     Session["Quantity"] = cantidad.ToString().Trim().ToUpper();
-                    Session["Date"] = DateTime.Now.ToString();
+                    Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                     Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                     Session["Operator"] = Session["user"].ToString();
                     Session["Pallet"] = paid.Trim().ToUpper();
@@ -1385,7 +1385,7 @@ namespace whusap.WebPages.Migration
                         Session["codePaid"]     =  paid.Trim().ToUpper() ;
                         Session["Lot"] = lot == String.Empty ? " " : lot;
                         Session["Quantity"]     = cantidad.ToString().Trim().ToUpper();
-                        Session["Date"]         = DateTime.Now.ToString();
+                        Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                         Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                         Session["Operator"]     = Session["user"].ToString();
                         Session["Pallet"] = paid.Trim().ToUpper();
