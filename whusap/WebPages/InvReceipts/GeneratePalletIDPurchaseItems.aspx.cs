@@ -389,7 +389,7 @@ namespace whusap.WebPages.InvReceipts
                 HttpContext.Current.Session["Origin"] = MyObj.CLOT;
                 HttpContext.Current.Session["Supplier"] = "";
                 HttpContext.Current.Session["RecibedBy"] = MyObj.LOGN;
-                HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
+                HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString("MM/dd/yyyy");
                 HttpContext.Current.Session["Reprint"] = "no";
             }
             else

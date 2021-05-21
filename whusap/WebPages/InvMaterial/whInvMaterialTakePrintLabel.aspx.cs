@@ -327,7 +327,7 @@ namespace whusap.WebPages.InvMaterial
             lblDescItem.Text = _textoLabels.readStatement(formName, _idioma, "lblDescItem");
             lblDescLotCode.Text = _textoLabels.readStatement(formName, _idioma, "lblDescLotCode");
             lblDescQuantity.Text = _textoLabels.readStatement(formName, _idioma, "lblDescQuantity");
-            btnSend.Text = _textoLabels.readStatement(formName, _idioma, "btnSend");
+            //btnSend.Text = _textoLabels.readStatement(formName, _idioma, "btnSend");
             validateReturn.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "regularQuantity");
         }
 

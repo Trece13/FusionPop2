@@ -513,8 +513,8 @@ namespace whusap.WebPages.InvReceipts
             {
 
                 data022 = new Ent_tticol022();
-                data022.pdno = CLOT == "" ? cyclecountLabel : CLOT;
-                data022.sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet;
+                data022.pdno = CLOT == "" ? cyclecountLabel : CLOT.Trim();
+                data022.sqnb = (CLOT == "" ? cyclecountLabel : CLOT.Trim()) + "-" + SecuenciaPallet;
                 data022.proc = 2;
                 data022.logn = HttpContext.Current.Session["user"].ToString();
                 data022.mitm = ITEM.Trim();
@@ -591,7 +591,7 @@ namespace whusap.WebPages.InvReceipts
                 else
                 {
                     StringBuilder script = new StringBuilder();
-                    string alert ="alert('"+validateSave+" "+validateSaveTicol222+"')";
+                    string alert = "alert('" + strError.Replace("\n","") + "')";
                     script.Append(alert);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                 }
