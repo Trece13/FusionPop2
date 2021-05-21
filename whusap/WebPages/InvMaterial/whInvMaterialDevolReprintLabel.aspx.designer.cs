@@ -40,15 +40,6 @@ namespace whusap.WebPages.InvMaterial {
         protected global::System.Web.UI.WebControls.TextBox txtWorkOrder;
         
         /// <summary>
-        /// minlenght control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator minlenght;
-        
-        /// <summary>
         /// RequiredField control.
         /// </summary>
         /// <remarks>

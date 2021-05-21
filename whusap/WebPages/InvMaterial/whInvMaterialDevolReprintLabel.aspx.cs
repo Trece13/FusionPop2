@@ -99,9 +99,9 @@ namespace whusap.WebPages.InvMaterial
             {
                 if (string.IsNullOrEmpty(txtWorkOrder.Text.Trim()))
                 {
-                    minlenght.Enabled = true;
-                    minlenght.ErrorMessage = mensajes("workrequired");
-                    minlenght.IsValid = false;
+                    //minlenght.Enabled = true;
+                    //minlenght.ErrorMessage = mensajes("workrequired");
+                    //minlenght.IsValid = false;
 
                     return;
                 }
@@ -190,13 +190,13 @@ namespace whusap.WebPages.InvMaterial
                             Session["FilaImprimir"] = reg;
 
                             Session["Reprint"] = "yes";
-                            Session["MaterialDesc"] = reg.ItemArray[15].ToString().Trim();
-                            Session["MaterialCode"] = reg.ItemArray[2].ToString().Trim();
-                            Session["codePaid"] = reg.ItemArray[13].ToString().Trim();
-                            Session["Lot"] = reg.ItemArray[4].ToString().Trim();
-                            Session["Quantity"] = reg.ItemArray[5].ToString().Trim() + " " + reg.ItemArray[14].ToString().Trim();
-                            Session["Origin"] = String.Empty;
-                            Session["Supplier"] = reg.ItemArray[6].ToString().Trim();
+                            Session["MaterialDesc"] = reg["DESCRIPCION"].ToString().Trim();
+                            Session["MaterialCode"] = reg["T$ITEM"].ToString().Trim();
+                            Session["codePaid"] = reg["T$PAID"].ToString().Trim();
+                            Session["Lot"] = reg["T$PDNO"].ToString().Trim();
+                            Session["Quantity"] = reg["T$REQT"].ToString().Trim() + " " + reg["UNIDAD"].ToString().Trim();
+                            Session["Origin"] = reg["T$PDNO"].ToString().Trim();
+                            Session["Supplier"] = reg["T$USER"].ToString().Trim();
                             Session["RecibedBy"] = Session["User"].ToString();
                             Session["RecibedOn"] = DateTime.Now.ToString();
 
@@ -220,9 +220,9 @@ namespace whusap.WebPages.InvMaterial
 
         protected void CargarIdioma()
         {
-            lblWorkOrder.Text = _textoLabels.readStatement(formName, _idioma, "lblWorkOrder");
+            //lblWorkOrder.Text = _textoLabels.readStatement(formName, _idioma, "lblWorkOrder");
             btnSend.Text = _textoLabels.readStatement(formName, _idioma, "btnSend");
-            minlenght.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "regularWorkOrder");
+            //minlenght.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "regularWorkOrder");
             RequiredField.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "requiredWorkOrder");
             OrderError.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "customWorkOrder");
             grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPosition");

@@ -31,20 +31,20 @@
         <tr>
             <td style="text-align: left;">
                 <span class="style2"><b>
-                    <asp:Label ID="lblWorkOrder" runat="server" />
+                    <asp:Label ID="lblWorkOrder" runat="server" Text="Pallet ID"/>
                 </b></span>
             </td>
             <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle">
-                    <asp:TextBox ID="txtWorkOrder" runat="server" CausesValidation="False" MaxLength="9"
-                     CssClass="TextBoxBig" ToolTip="Enter work order number"></asp:TextBox>
+                    <asp:TextBox ID="txtWorkOrder" runat="server" CausesValidation="False" 
+                     CssClass="TextBoxBig" ToolTip="Enter Pallert ID"></asp:TextBox>
                 </span>
             </td>
             <td style="text-align: left;">
                 <span>
-                    <asp:RegularExpressionValidator ID="minlenght" runat="server" ControlToValidate="txtWorkOrder"
-                        ErrorMessage="Remember 9 characters" ValidationExpression="^[a-zA-Z0-9'@&#.\s]{9,9}$"
-                        CssClass="errorMsg" SetFocusOnError="false" Display="Dynamic" />
+<%--                    <asp:RegularExpressionValidator ID="minlenght" runat="server" ControlToValidate="txtWorkOrder"
+                       ErrorMessage=""  <%--ValidationExpression="^[a-zA-Z0-9'@&#.\s]{9,9}$"
+                        CssClass="errorMsg" SetFocusOnError="false" Display="Dynamic" />--%>
                     <asp:RequiredFieldValidator ID="RequiredField" runat="server" ErrorMessage="Work Order is required"
                         SetFocusOnError="false" ControlToValidate="txtWorkOrder" CssClass="errorMsg"
                         Enabled="false"></asp:RequiredFieldValidator>

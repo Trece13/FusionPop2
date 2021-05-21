@@ -237,7 +237,6 @@
                             <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
                         </div>
                     </div>
-                    <br />
                     <div class="col-12 borderTop" id="divBarcode">
                         <img src="~/images/logophoenix_login.jpg" id="codePaid" runat="server" />
                     </div>
@@ -260,11 +259,17 @@
                                     <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
                                     <td><strong>Made in Dublin VA</strong></td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                    </td>
+                                    <td>
+                                        <div id="lblReprint" class="col-12 text-right" runat="server">
+                                            <label><strong>REPRINT</strong></label>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div id="lblReprint" class="col-12 text-right" runat="server">
-                        <label><strong>REPRINT</strong></label>
                     </div>
                 </div>
             </div>

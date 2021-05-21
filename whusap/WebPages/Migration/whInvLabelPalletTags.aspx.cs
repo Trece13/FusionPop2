@@ -650,15 +650,15 @@ namespace whusap.WebPages.Migration
                 lblValueInspectorInitial.Text = "REPRINT by: " + _operator;
 
                 Session["MaterialDesc"] = desc;
-                Session["codeMaterial"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
-                Session["codePaid"] = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + sqnb.Trim().ToUpper() + "&code=Code128&dpi=96";
+                Session["codeMaterial"] = item.Trim().ToUpper() ;
+                Session["codePaid"] = sqnb.Trim().ToUpper();
                 Session["Lot"] = pdno;
                 Session["Quantity"] = qtdl + " " + unit;
                 Session["Date"] = DateTime.Now.ToString();
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maq;
                 Session["Operator"] = _operator;
-                Session["Reprint"] = "no";
+                Session["Reprint"] = "yes";
 
 
                 StringBuilder script = new StringBuilder();

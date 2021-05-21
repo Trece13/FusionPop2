@@ -129,7 +129,7 @@ namespace whusap.WebPages.Migration
                 Session["Date"] = DateTime.Now.ToString();
                 Session["Machine"] = machine;
                 Session["Operator"] = HttpContext.Current.Session["user"].ToString();
-                Session["Winder"] = string.Empty;
+                Session["Winder"] = roll;
                 Session["Pallet"] = sqnb.ToUpper();
 
                 //imgItem

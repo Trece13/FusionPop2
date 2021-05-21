@@ -3171,13 +3171,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           TO_CHAR(((T125.T$DATE)-5/24), 'DD/MM/YYYY hh24:mi:ss') T$DATE, T125.T$PRIN,
           T125.T$CONF, T125.T$REFCNTD, T125.T$REFCNTU, T125.T$MESS, art.t$cuni Unidad, ART.T$DSCA DESCRIPCION, T125.ROWID ID,  '125' TABLA
           FROM {0}.tticol125{1} T125 LEFT JOIN {0}.ttcibd001{1} ART  ON TRIM(T125.T$ITEM) = TRIM(ART.t$item)
-          WHERE T125.T$PDNO = '[p1]'
+          WHERE T125.T$PAID = '[p1]'
           UNION
           SELECT T125.T$PAID,T125.T$PDNO, T125.T$PONO, T125.T$ITEM, T125.T$CWAR, T125.T$CLOT, T125.T$REQT, T125.T$USER,
           TO_CHAR(((T125.T$DATE)-5/24), 'DD/MM/YYYY hh24:mi:ss') T$DATE, T125.T$PRIN,
           T125.T$CONF, T125.T$REFCNTD, T125.T$REFCNTU, T125.T$MESS, art.t$cuni Unidad, ART.T$DSCA DESCRIPCION, T125.ROWID ID,  '126' TABLA
           FROM {0}.tticol126{1} T125 LEFT JOIN {0}.ttcibd001{1} ART ON TRIM(T125.T$ITEM) = TRIM(ART.t$item)
-          WHERE T125.T$PDNO = '[p1]'
+          WHERE T125.T$PAID = '[p1]'
         </stringSQL>
       </operationName>
       <operationName name="listaRegistrosLoteItem_Param">

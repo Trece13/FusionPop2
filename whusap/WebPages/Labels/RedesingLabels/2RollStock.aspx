@@ -261,11 +261,17 @@
                                     <td><strong>Made in Dublin VA</strong></td>
                                     <td><strong>L-R</strong></td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <div id="lblReprint" class="col-12 text-right" runat="server">
+                                            <label><strong>REPRINT</strong></label>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                    </div>
-                    <div id="lblReprint" class="col-12 text-right" runat="server">
-                        <label><strong>REPRINT</strong></label>
                     </div>
                 </div>
             </div>
