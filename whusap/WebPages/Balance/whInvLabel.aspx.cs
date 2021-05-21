@@ -305,7 +305,7 @@ namespace whusap.WebPages.Balance
             Session["codeMaterial"] = obj022.mitm ; 
             Session["codePaid"] =  reg["SECUENCIA"].ToString() ;
             Session["Lot"] = reg["ORDEN"].ToString();
-            Session["Quantity"] = reg["PESO"].ToString() + " " + Session["unidad"].ToString();
+            Session["Quantity"] = reg["PESO"].ToString() + " " + obj020.cuni;
             Session["Date"] = reg["FECHA"].ToString();
             Session["Machine"]      =   idal022.getMachine(reg["ORDEN"].ToString(), obj022.mitm,ref strError);
             Session["Operator"]     =   reg["USUARIO"].ToString();

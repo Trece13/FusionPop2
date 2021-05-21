@@ -394,6 +394,7 @@ namespace whusap.WebPages.Migration
                 Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maquina;
+                Session["Operator"] = _operator;
                 Session["Reprint"] = "no";
 
                 StringBuilder script = new StringBuilder();

@@ -878,6 +878,7 @@ namespace whusap.WebPages.Migration
             var dsca = _validarOrden.Rows[0]["DSCA"].ToString().Trim().ToUpper();
             var qtyr = _validarOrden.Rows[0]["QTDL"].ToString().Trim().ToUpper();
             var pdno = _validarOrden.Rows[0]["PDNO"].ToString().Trim().ToUpper();
+            var cuni = _validarOrden.Rows[0]["CUNI"].ToString().Trim().ToUpper();
             //T$SQNB
             lblDmtNumber.Text = "DMT-NUMBER";
             lblDescription.Text = "Description";
@@ -921,7 +922,7 @@ namespace whusap.WebPages.Migration
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-            Session["Quantity"] = qtyr;
+            Session["Quantity"] = qtyr + " " + cuni;
             Session["Finished"] = sqnb;
             Session["Pallet"] = sqnb;
             Session["PrintedBy"] = _operator;
@@ -1091,7 +1092,7 @@ namespace whusap.WebPages.Migration
                         Session["ProductDesc"] = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper();
                         Session["ProductCode"] = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity"] = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                        Session["Quantity"] = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat) + " " + _validarOrden.Rows[i]["CUNI"].ToString();
                         Session["Finished"] = paid;
                         Session["Pallet"] = paid;
                         Session["PrintedBy"] = _operator;

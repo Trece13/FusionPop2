@@ -794,7 +794,7 @@ namespace whusap.WebPages.Migration
                     Session["MaterialCode"] = obj.item;
                     Session["codePaid"] = row["PAID"].ToString();
                     Session["Lot"] = row["LOTE"].ToString();
-                    Session["Quantity"] = row["CANTIDAD"].ToString();
+                    Session["Quantity"] = row["CANTIDAD"].ToString() + " " + Session["Unit"].ToString();
                     Session["Origin"] = row["LOTE"].ToString();
                     Session["Supplier"] = "";
                     Session["RecibedBy"] = Session["user"].ToString();
@@ -834,7 +834,7 @@ namespace whusap.WebPages.Migration
                     Session["Material"] = obj.item;
                     Session["codePaid"] = row["PAID"].ToString();
                     Session["Lot"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
-                    Session["Quantity"] = row["CANTIDAD"].ToString();
+                    Session["Quantity"] = row["CANTIDAD"].ToString() + " " + Session["Unit"].ToString();
                     Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                     Session["Machine"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                     Session["Operator"] = Session["user"].ToString();
@@ -881,7 +881,7 @@ namespace whusap.WebPages.Migration
             Session["MaterialCode"] = obj.item;
             Session["codePaid"] = row["PAID"].ToString();
             Session["Lot"] = row["LOTE"].ToString();
-            Session["Quantity"] = row["CANTIDAD"].ToString();
+            Session["Quantity"] = row["CANTIDAD"].ToString() + " " + Session["Unit"].ToString();
             Session["Origin"] = row["LOTE"].ToString();
             Session["Supplier"] = "";
             Session["RecibedBy"] = Session["user"].ToString();

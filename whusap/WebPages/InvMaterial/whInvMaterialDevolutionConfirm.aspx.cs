@@ -33,6 +33,9 @@ namespace whusap.WebPages.InvMaterial
 
         protected void Page_Load(object sender, EventArgs e)
             {
+                txtPalletId.Text = string.Empty;
+                grdRecords.DataSource = null;
+                grdRecords.DataBind();
                 txtPalletId.Focus();
                 Page.Form.DefaultButton = btnSend.UniqueID;
 
