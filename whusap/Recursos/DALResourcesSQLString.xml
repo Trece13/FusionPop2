@@ -32,7 +32,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.tticol242{1} col242 ON col242.T$PDNO = col042.T$PDNO AND col242.T$SQNB = col042.T$SQNB
           WHERE col042.T$SQNB = '[p1]'
         </stringSQL>
-      </operationName>   
+      </operationName>
       <operationName name="ActualizacionPalletId">
         <stringSQL>
           UPDATE {2} SET T$DELE = '[:STAT]' WHERE T$SQNB = '[p1]'  --13. To Delete
@@ -606,7 +606,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTticol082porStat">
         <stringSQL>
-          select * from {0}.tticol082{1} where UPPER(T$LOGN) = UPPER('[:T$LOGN]') and T$STAT = '[:T$STAT]'
+          select * from {0}.tticol082{1}
+          where UPPER(T$LOGN) = NVL(UPPER('[:T$LOGN]'),T$LOGN)
+          and T$STAT in([:T$STAT])
+          and T$PICK = NVL('[:T$PICK]',T$PICK)
+          and T$CWAR = NVL('[:T$CWAR]',T$CWAR)
+          order by T$PRIO asc
         </stringSQL>
       </operationName>
       <operationName name="Actualizar307">
@@ -616,7 +621,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Actualizar307proc">
         <stringSQL>
-          UPDATE {0}.ttccol307{1} SET T$PAID = '[:PAID_NEW]' where T$USER = '[:USER]' AND T$PROC = '[:PROC]'
+          UPDATE {0}.ttccol307{1} SET T$PAID = NVL('[:PAID_NEW]',T$PAID), T$STAT = NVL('[:STAT]',T$STAT) where T$PAID = NVL('[:PAID]',T$PAID) AND T$USER = NVL('[:USER]',T$USER)  AND T$PROC = NVL('[:PROC]',T$PROC)
         </stringSQL>
       </operationName>
       <operationName name="EliminarTccol307140">
@@ -627,108 +632,142 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking22140PAID">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT,QTYOK,CWAROK
-          from
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK
+          FROM
           (
-          select col020.t$cnpk cnpk,col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
-          col022.t$pdno lot, col222.t$cwat wrh,
-          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          --rank() over (partition by col082.t$oorg,col082.t$orno, col082.t$pono, col082.t$oset, col082.t$sqnb, col082.t$advs
-          rank() over(order by col082.t$prio) rown,
-          case when col222.t$acqt+col222.t$allo >= col082.t$qtyt then 'true' else 'false' end as QTYOK,
-          case when col222.t$cwat = col082.t$cwar then 'true' else 'false' end as CWAROK
-          from {0}.tticol022{1} col022
-          inner join {0}.tticol222{1} col222
-          on col222.t$pdno = col022.t$pdno
-          and col222.t$sqnb = col022.t$sqnb
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col022.t$mitm
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col222.t$cwat
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col022.t$mitm
-          and col082.t$paid = col022.t$sqnb
-          left join {0}.ttccol020{1} col020
-          on col020.T$ITEM = col022.t$mitm
-          where col022.t$dele = 8 -- 8-Asignado
-          --and (col222.t$acqt+col222.t$allo) >= col082.t$qtyt
-          --and col222.t$cwat = col082.t$cwar
-          --and col082.t$stat = 1
-          and col022.t$sqnb = '[:PAID]'
-          and col082.t$stat ='[:STAT]'
-          --order by col082.t$prio
+          SELECT
+          COL020.T$CNPK CNPK,
+          COL022.T$SQNB PALLETID,
+          COL022.T$DELE STAT,
+          COL022.T$PDNO LOT,
+          COL022.T$MITM ITEM,
+          COL222.T$CWAT WRH,
+          COL222.T$ACLO LOCA,
+          IBD001.T$DSCA DESCRIPTION,
+          IBD001.T$CUNI UN,
+          MCS003.T$DSCA DESCWRH,
+          COL082.T$QTYT QTYT,
+          COL082.T$QTYT QTY,
+          COL082.T$PRIO PRIO,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          COL082.T$PICK PICK,
+          RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
+          CASE WHEN COL222.T$ACQT+COL222.T$ALLO >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
+          CASE WHEN COL222.T$CWAT = COL082.T$CWAR THEN 'TRUE' ELSE 'FALSE' END AS CWAROK
+          FROM {0}.TTICOL022{1} COL022
+          INNER JOIN {0}.TTICOL222{1} COL222
+          ON COL222.T$PDNO = COL022.T$PDNO
+          AND COL222.T$SQNB = COL022.T$SQNB
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL022.T$MITM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL222.T$CWAT
+          INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL022.T$MITM
+          AND COL082.T$PAID = COL022.T$SQNB
+          LEFT JOIN {0}.TTCCOL020{1} COL020
+          ON COL020.T$ITEM = COL022.T$MITM
+          WHERE COL022.T$DELE = 8
+          AND COL022.T$SQNB = '[:PAID]'
+          AND COL082.T$STAT IN('1','2')
           )
-          where rown = 1
-
-
+          WHERE ROWN = 1
         </stringSQL>
       </operationName>
 
       <operationName name="ConsultarPalletPicking042PAID">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT,QTYOK,CWAROK
-          from
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK
+          FROM
           (
-          select col020.t$cnpk cnpk,col042.t$sqnb palletid,col042.t$dele stat, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,col082.t$QTYT QTYT,
-          mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono,/* col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          rank() over(order by col082.t$prio) rown,
-          case when (col242.t$acqt+col242.t$allo) >= col082.t$qtyt then 'true' else 'false' end as QTYOK,
-          case when ol242.t$cwat = col082.t$cwar then 'true' else 'false' end as CWAROK
-          from {0}.tticol042{1} col042
-          inner join {0}.tticol242{1} col242
-          on col242.t$pdno = col042.t$pdno
-          and col242.t$sqnb = col042.t$sqnb
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col042.t$mitm
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col242.t$cwat
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col042.t$mitm
-          and col082.t$paid = col042.t$sqnb
-          left join {0}.ttccol020{1} col020
-          on col020.T$ITEM = col042.t$mitm
-          where col042.t$dele = 8 -- 8-Asignado
-          --and (col242.t$acqt+col242.t$allo) >= col082.t$qtyt
-          --and col242.t$cwat = col082.t$cwar
-          and col042.t$sqnb = '[:PAID]'
-          and col082.t$stat ='[:STAT]'
-          order by col042.t$date
+          SELECT
+          COL020.T$CNPK CNPK,
+          COL042.T$SQNB PALLETID,
+          COL042.T$DELE STAT,
+          COL042.T$MITM ITEM,
+          COL042.T$PDNO LOT,
+          COL242.T$CWAT WRH,
+          COL242.T$ACLO LOCA,
+          IBD001.T$DSCA DESCRIPTION,
+          IBD001.T$CUNI UN,
+          MCS003.T$DSCA DESCWRH,
+          COL082.T$QTYT QTYT,
+          COL082.T$QTYT QTY,
+          COL082.T$PRIO PRIO,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          COL082.T$PICK PICK,
+          RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
+          CASE WHEN (COL242.T$ACQT+COL242.T$ALLO) >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
+          CASE WHEN COL242.T$CWAT = COL082.T$CWAR THEN 'TRUE' ELSE 'FALSE' END AS CWAROK
+          FROM {0}.TTICOL042{1} COL042
+          INNER JOIN {0}.TTICOL242{1} COL242
+          ON COL242.T$PDNO = COL042.T$PDNO
+          AND COL242.T$SQNB = COL042.T$SQNB
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL042.T$MITM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL242.T$CWAT
+          INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL042.T$MITM
+          AND COL082.T$PAID = COL042.T$SQNB
+          LEFT JOIN {0}.TTCCOL020{1} COL020
+          ON COL020.T$ITEM = COL042.T$MITM
+          WHERE COL042.T$DELE = 8
+          AND COL042.T$SQNB = '[:PAID]'
+          AND COL082.T$STAT IN('1','2')
           )
-          where rown = 1
+          WHERE ROWN = 1
         </stringSQL>
       </operationName>
 
       <operationName name="ConsultarPalletPicking131PAID">
         <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown,QTYT,QTYOK,CWAROK
-          from
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK
+          FROM
           (
-          select col020.t$cnpk cnpk,col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,col082.t$QTYT QTYT,
-          mcs003.t$dsca descwrh, col131.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
-          col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs, col131.t$stat stat,
-          rank() over(order by col082.t$prio) rown,
-          case when (col131.t$qtya+col131.t$allo) >= col082.t$qtyt then 'true' else 'false' end as QTYOK,
-          case when col131.t$cwaa = col082.t$cwar then 'true' else 'false' end as CWAROK
-          from {0}.twhcol131{1} col131
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col131.t$item
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col131.t$cwaa
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col131.t$item
-          and col082.t$paid = col131.t$paid
-          left join {0}.ttccol020{1} col020
-          on col020.T$ITEM = col131.t$item
-          where (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
-          --and (col131.t$qtya+col131.t$allo) >= col082.t$qtyt
-          --and col131.t$cwaa = col082.t$cwar
-          and col131.t$paid = '[:PAID]'
-          and col082.t$stat ='[:STAT]'
-          order by col131.t$date
+          SELECT
+          COL020.T$CNPK CNPK,
+          COL131.T$PAID PALLETID,
+          COL131.T$STAT STAT,
+          COL131.T$CLOT LOT,
+          COL131.T$ITEM ITEM,
+          COL131.T$CWAA WRH,
+          COL131.T$LOAA LOCA,
+          IBD001.T$DSCA DESCRIPTION,
+          IBD001.T$CUNI UN,
+          MCS003.T$DSCA DESCWRH,
+          COL082.T$QTYT QTYT,
+          COL131.T$QTYA QTY,
+          COL082.T$PRIO PRIO,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          COL082.T$PICK PICK,
+          RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
+          CASE WHEN (COL131.T$QTYA+COL131.T$ALLO) >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
+          CASE WHEN COL131.T$CWAA = COL082.T$CWAR THEN 'TRUE' ELSE 'FALSE' END AS CWAROK
+          FROM {0}.TWHCOL131{1} COL131
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL131.T$ITEM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL131.T$CWAA
+          INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL131.T$ITEM
+          AND COL082.T$PAID = COL131.T$PAID
+          LEFT JOIN {0}.TTCCOL020{1} COL020
+          ON COL020.T$ITEM = COL131.T$ITEM
+          WHERE (COL131.T$STAT = 6 OR COL131.T$STAT = 3)
+          AND COL131.T$PAID = '[:PAID]'
+          AND COL082.T$STAT IN('1','2')
           )
-          where rown = 1
+          WHERE ROWN = 1
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking22140">
@@ -890,107 +929,141 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22ItemQty">
         <stringSQL>
-          select    stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/  pono,  /*sqnb,*/ advs, rown,QTYT
-          from
+          SELECT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT
+          FROM
           (
-          select  col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description,col082.t$QTYT QTYT,
-          col022.t$pdno lot, col222.t$cwat wrh,
-          mcs003.t$dsca descwrh, col222.t$acqt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          rank() over(order by col022.t$sqnb, col022.t$date) rown
-          from {0}.tticol022{1} col022
-          left join {0}.ttccol307{1} col307
-          on col022.t$sqnb = col307.T$PAID
-          inner join {0}.tticol222{1} col222
-          on col222.t$pdno = col022.t$pdno
-          and col222.t$sqnb = col022.t$sqnb
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col022.t$mitm
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col222.t$cwat
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col022.t$mitm
-          where col022.t$dele = 7 -- 7-Located
-          and col307.T$PAID IS NULL
-          and col222.t$acqt >= col082.t$qtyt
-          and col222.t$cwat = col082.t$cwar
-          and col222.t$acqt >= '[:QTYT]'
-          and trim(col022.t$mitm) = trim('[:ITEM]')
-          and col082.t$prio = '[:PRIO]'
-          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          --where loc082.t$stat = 1)
-          --and col082.t$stat = 1
-          order by col022.t$date,palletid
+          SELECT
+          COL022.T$DELE STAT,
+          COL022.T$SQNB PALLETID,
+          COL022.T$MITM ITEM,
+          IBD001.T$DSCA DESCRIPTION,
+          COL082.T$QTYT QTYT,
+          COL022.T$PDNO LOT,
+          COL222.T$CWAT WRH,
+          COL222.T$ACQT QTY,
+          MCS003.T$DSCA DESCWRH,
+          IBD001.T$CUNI UN,
+          COL082.T$PRIO PRIO,
+          COL222.T$ACLO LOCA,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          RANK() OVER(ORDER BY COL022.T$SQNB, COL022.T$DATE) ROWN
+          FROM {0}.TTICOL022{1} COL022
+          LEFT JOIN {0}.TTCCOL307{1} COL307
+          ON COL022.T$SQNB = COL307.T$PAID
+          INNER JOIN {0}.TTICOL222{1} COL222
+          ON COL222.T$PDNO = COL022.T$PDNO
+          AND COL222.T$SQNB = COL022.T$SQNB
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL022.T$MITM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL222.T$CWAT
+          INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL022.T$MITM
+          WHERE COL022.T$DELE = 7
+          AND COL307.T$PAID IS NULL
+          AND COL222.T$ACQT >= COL082.T$QTYT
+          AND COL222.T$CWAT = COL082.T$CWAR
+          AND COL222.T$ACQT >= '[:QTYT]'
+          AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
+          AND COL082.T$PRIO = '[:PRIO]'
+          ORDER BY COL022.T$DATE,PALLETID
           )
-          where rown &lt;= 3
+          WHERE ROWN &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042ItemQty">
         <stringSQL>
-          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown
-          from
+          SELECT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT
+          FROM
           (
-          select col042.t$dele stat,col042.t$sqnb palletid, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,
-          mcs003.t$dsca descwrh, col242.t$acqt qty, ibd001.t$cuni un, col082.t$prio prio,col242.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, /*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          rank() over(order by col042.t$date) rown
-          from {0}.tticol042{1} col042
-          left join {0}.ttccol307{1} col307
-          on col042.t$sqnb = col307.T$PAID
-          inner join {0}.tticol242{1} col242
-          on col242.t$pdno = col042.t$pdno
-          and col242.t$sqnb = col042.t$sqnb
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col042.t$mitm
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col242.t$cwat
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col042.t$mitm
-          where col042.t$dele = 7 -- 7-Located
-          and col307.T$PAID IS NULL
-          and col242.t$acqt >= col082.t$qtyt
-          and col242.t$cwat = col082.t$cwar
-          and col242.t$acqt >= '[:QTYT]'
-          and trim(col042.t$mitm) = trim('[:ITEM]')
-          and col082.t$prio = '[:PRIO]'
-          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          --where loc082.t$stat = 1)
-          --and col082.t$stat = 1
-          order by col042.t$date,palletid
+          SELECT
+          COL042.T$DELE STAT,
+          COL042.T$SQNB PALLETID,
+          COL042.T$MITM ITEM,
+          IBD001.T$DSCA DESCRIPTION,
+          COL082.T$QTYT QTYT,
+          COL042.T$PDNO LOT,
+          COL242.T$CWAT WRH,
+          COL242.T$ACQT QTY,
+          MCS003.T$DSCA DESCWRH,
+          IBD001.T$CUNI UN,
+          COL082.T$PRIO PRIO,
+          COL242.T$ACLO LOCA,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          RANK() OVER(ORDER BY COL042.T$SQNB, COL042.T$DATE) ROWN
+          FROM {0}.TTICOL042{1} COL042
+          LEFT JOIN {0}.TTCCOL307{1} COL307
+          ON COL042.T$SQNB = COL307.T$PAID
+          INNER JOIN {0}.TTICOL242{1} COL242
+          ON COL242.T$PDNO = COL042.T$PDNO
+          AND COL242.T$SQNB = COL042.T$SQNB
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL042.T$MITM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL242.T$CWAT
+          INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL042.T$MITM
+          WHERE COL042.T$DELE = 7
+          AND COL307.T$PAID IS NULL
+          AND COL242.T$ACQT >= COL082.T$QTYT
+          AND COL242.T$CWAT = COL082.T$CWAR
+          AND COL242.T$ACQT >= '[:QTYT]'
+          AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
+          AND COL082.T$PRIO = '[:PRIO]'
+          ORDER BY COL042.T$DATE,PALLETID
           )
-          where rown &lt;= 3
+          WHERE ROWN &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131ItemQty">
         <stringSQL>
-          select stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, /*oset,*/ pono, /*sqnb,*/ advs, rown
-          from
+          SELECT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN
+          FROM
           (
-          select col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
-          mcs003.t$dsca descwrh, col131.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
-          col082.t$orno orno,/*col082.t$oset oset,*/ col082.t$pono pono, /*col082.t$sqnb sqnb,*/ col082.t$advs advs,
-          col131.t$date-5/24, rownum rown
-          from {0}.twhcol131{1} col131
-          left join {0}.ttccol307{1} col307
-          on col131.t$paid = col307.T$PAID
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col131.t$item
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col131.t$cwaa
-          inner join {0}.tticol082{1} col082
-          on col082.t$item = col131.t$item
-          where col131.t$stat = 3 -- 3-Located
-          and col307.T$PAID IS NULL
-          and col131.t$qtya >= col082.t$qtyt
-          and col131.t$cwaa = col082.t$cwar
-          and col131.t$qtya >= '[:QTYT]'
-          and trim(col131.t$item) = trim('[:ITEM]')
-          and col082.t$prio = '[:PRIO]'
-          --and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082
-          --where loc082.t$stat = 1)
-          --and col082.t$stat = 1
-          order by col131.t$date, palletid)
-          where rown &lt;= 3
+          SELECT
+          COL131.T$STAT STAT,
+          COL131.T$PAID PALLETID,
+          COL131.T$ITEM ITEM,
+          IBD001.T$DSCA DESCRIPTION,
+          COL082.T$QTYT QTYT,
+          COL131.T$CLOT LOT,
+          COL131.T$CWAA WRH,
+          COL131.T$QTYA QTY,
+          MCS003.T$DSCA DESCWRH,
+          IBD001.T$CUNI UN,
+          COL082.T$PRIO PRIO,
+          COL131.T$LOAA LOCA,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          COL131.T$DATE-5/24,
+          ROWNUM ROWN
+          FROM {0}.TWHCOL131{1} COL131
+          LEFT JOIN {0}.TTCCOL307{1} COL307
+          ON COL131.T$PAID = COL307.T$PAID
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL131.T$ITEM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL131.T$CWAA
+          INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL131.T$ITEM
+          WHERE COL131.T$STAT = 3
+          AND COL307.T$PAID IS NULL
+          AND COL131.T$QTYA >= COL082.T$QTYT
+          AND COL131.T$CWAA = COL082.T$CWAR
+          AND COL131.T$QTYA >= '[:QTYT]'
+          AND TRIM(COL131.T$ITEM) = TRIM('[:ITEM]')
+          AND COL082.T$PRIO = '[:PRIO]'
+          ORDER BY COL131.T$DATE, PALLETID
+          )
+          WHERE ROWN &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking130ItemQty">
@@ -1026,35 +1099,141 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22With082">
         <stringSQL>
-          select  cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs, rown
-          from(select  col020.T$CNPK CNPK,col022.t$dele stat,col022.t$sqnb palletid, col022.t$mitm item, ibd001.t$dsca description, col022.t$pdno lot,
-          col222.t$cwat wrh, mcs003.t$dsca descwrh, col082.t$qtyt qty, ibd001.t$cuni un, col082.t$prio prio,col222.t$aclo loca,
-          col082.t$oorg oorg, col082.t$orno orno, col082.t$pono pono, col082.t$advs advs, rank() over(order by col082.t$prio) rown
-          from    {0}.tticol082{1} col082
-          inner join {0}.tticol022{1} col022
-          on col022.t$sqnb = col082.t$paid
-          left join {0}.ttccol307{1} col307
-          on col022.t$sqnb = col307.T$PAID
-          inner join {0}.tticol222{1} col222
-          on col222.t$pdno = col022.t$pdno
-          and col222.t$sqnb = col022.t$sqnb
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col022.t$mitm
-          inner join {0}.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col222.t$cwat
-          inner join {0}.tticol136{1} col136
-          on col136.t$cwar = col082.t$cwar
-          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
-          left join {0}.ttccol020{1} col020
-          on col020.T$ITEM = col022.t$mitm
-          where   col022.t$dele = 8 -- 8-Asignado
-          and     col307.T$PAID IS NULL
-          and col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1 )
-          and col082.t$stat = 1)
-          where   rown = 1
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK
+          FROM(SELECT
+          COL020.T$CNPK CNPK,
+          COL022.T$DELE STAT,
+          COL022.T$SQNB PALLETID,
+          COL022.T$MITM ITEM,
+          IBD001.T$DSCA DESCRIPTION,
+          COL022.T$PDNO LOT,
+          COL222.T$CWAT WRH,
+          MCS003.T$DSCA DESCWRH,
+          COL082.T$QTYT QTY,
+          IBD001.T$CUNI UN,
+          COL082.T$PRIO PRIO,
+          COL222.T$ACLO LOCA,
+          COL082.T$PICK PICK,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
+          FROM BAAN.TTICOL082140 COL082
+          INNER JOIN BAAN.TTICOL022140 COL022
+          ON COL022.T$SQNB = COL082.T$PAID
+          LEFT JOIN BAAN.TTCCOL307140 COL307
+          ON COL082.T$PICK = COL307.T$PAID
+          AND COL307.T$CWAR = COL082.T$CWAR
+          INNER JOIN BAAN.TTICOL222140 COL222
+          ON COL222.T$PDNO = COL022.T$PDNO
+          AND COL222.T$SQNB = COL022.T$SQNB
+          INNER JOIN BAAN.TTCIBD001140 IBD001
+          ON IBD001.T$ITEM = COL022.T$MITM
+          INNER JOIN BAAN.TTCMCS003140 MCS003
+          ON MCS003.T$CWAR = COL222.T$CWAT
+          INNER JOIN BAAN.TTICOL136140 COL136
+          ON COL136.T$CWAR = COL082.T$CWAR
+          LEFT JOIN BAAN.TTCCOL020140 COL020
+          ON COL020.T$ITEM = COL022.T$MITM
+          WHERE COL022.T$DELE = 8
+          AND COL307.T$PAID IS NULL
+          AND COL082.T$STAT = 1
+          AND COL222.T$CWAT = NVL('[:T$CWAR]',COL222.T$CWAT))
+          WHERE   ROWN = 1
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042With082">
+        <stringSQL>
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK
+          FROM(SELECT
+          COL020.T$CNPK CNPK,
+          COL042.T$DELE STAT,
+          COL042.T$SQNB PALLETID,
+          COL042.T$MITM ITEM,
+          IBD001.T$DSCA DESCRIPTION,
+          COL042.T$PDNO LOT,
+          COL242.T$CWAT WRH,
+          MCS003.T$DSCA DESCWRH,
+          COL082.T$QTYT QTY,
+          IBD001.T$CUNI UN,
+          COL082.T$PRIO PRIO,
+          COL242.T$ACLO LOCA,
+          COL082.T$PICK PICK,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
+          FROM {0}.TTICOL082{1} COL082
+          INNER JOIN {0}.TTICOL042{1} COL042
+          ON COL042.T$SQNB = COL082.T$PAID
+          LEFT JOIN {0}.TTCCOL307{1} COL307
+          ON COL082.T$PICK = COL307.T$PAID
+          AND COL307.T$CWAR = COL082.T$CWAR
+          INNER JOIN {0}.TTICOL242{1} COL242
+          ON COL242.T$PDNO = COL042.T$PDNO
+          AND COL242.T$SQNB = COL042.T$SQNB
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL042.T$MITM
+          INNER JOIN {0}.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL242.T$CWAT
+          INNER JOIN {0}.TTICOL136{1} COL136
+          ON COL136.T$CWAR = COL082.T$CWAR
+          LEFT JOIN {0}.TTCCOL020{1} COL020
+          ON COL020.T$ITEM = COL042.T$MITM
+          WHERE COL042.T$DELE = 8
+          AND COL307.T$PAID IS NULL
+          AND COL082.T$STAT = 1
+          AND COL242.T$CWAT = NVL('[:T$CWAR]',COL242.T$CWAT))
+          WHERE   ROWN = 1
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPalletPicking131With082">
+        <stringSQL>
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,QTYT,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK
+          FROM(SELECT
+          COL020.T$CNPK CNPK,
+          COL131.T$STAT STAT,
+          COL131.T$PAID PALLETID,
+          COL131.T$ITEM ITEM,
+          IBD001.T$DSCA DESCRIPTION,
+          COL131.T$CLOT LOT,
+          COL131.T$CWAA WRH,
+          MCS003.T$DSCA DESCWRH,
+          COL131.T$QTYA QTY,
+          COL082.T$QTYT QTYT,
+          IBD001.T$CUNI UN,
+          COL082.T$PRIO PRIO,
+          COL131.T$LOAA LOCA,
+          COL082.T$OORG OORG,
+          COL082.T$ORNO ORNO,
+          COL082.T$PONO PONO,
+          COL082.T$ADVS ADVS,
+          COL082.T$PICK PICK,
+          RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
+          FROM    {0}.TTICOL082{1} COL082
+          INNER JOIN {0}.TWHCOL131{1} COL131
+          ON COL082.T$PICK = COL082.T$PAID
+          LEFT JOIN {0}.TTCCOL307{1} COL307
+          ON COL082.T$PICK = COL307.T$PAID
+          AND COL307.T$CWAR = COL082.T$CWAR
+          INNER JOIN {0}.TTCIBD001{1} IBD001
+          ON IBD001.T$ITEM = COL131.T$ITEM
+          INNER JOIN BAAN.TTCMCS003{1} MCS003
+          ON MCS003.T$CWAR = COL131.T$CWAA
+          INNER JOIN {0}.TTICOL136{1} COL136
+          ON COL136.T$CWAR = COL082.T$CWAR
+          LEFT JOIN {0}.TTCCOL020{1} COL020
+          ON COL020.T$ITEM = COL131.T$ITEM
+          WHERE COL307.T$PAID IS NULL
+          AND COL082.T$STAT = 1
+          AND COL131.T$CWAA = NVL('[:T$CWAR]',COL131.T$CWAA))
+          WHERE   ROWN = 1
+        </stringSQL>
+      </operationName>
+
+      <operationName name="ConsultarPalletPickingGlobal">
         <stringSQL>
           select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, un, prio, loca, oorg, orno, pono, advs, rown
           from(select  col020.t$cnpk cnpk,col042.t$dele stat,col042.t$sqnb palletid, col042.t$mitm item, ibd001.t$dsca description, col042.t$pdno lot, col242.t$cwat wrh,
@@ -1074,59 +1253,33 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           on mcs003.t$cwar = col242.t$cwat
           inner join {0}.tticol136{1} col136
           on col136.t$cwar = col082.t$cwar
-          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
+          --and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
           left join {0}.ttccol020{1} col020
           on col020.T$ITEM = col042.t$mitm
           where   col042.t$dele = 8 -- 8-Asignado
           and     col307.T$PAID IS NULL
           and     col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1)
-          and     col082.t$stat = 1)
+          and     col082.t$stat = 1
+          and col242.t$cwat = NVL('[:T$CWAR]',col242.t$cwat))
           where   rown = 1
         </stringSQL>
       </operationName>
-      <operationName name="ConsultarPalletPicking131With082">
-        <stringSQL>
-          select cnpk,stat, palletid, item, description, lot, wrh, descwrh, qty, qtyt, un, prio, loca, oorg, orno, pono, advs,rown
-          from(select  col020.t$cnpk cnpk,col131.t$stat stat, col131.t$paid palletid, col131.t$item item, ibd001.t$dsca description, col131.t$clot lot, col131.t$cwaa wrh,
-          mcs003.t$dsca descwrh, col082.t$qtyt qtyt,col131.t$qtya qty, ibd001.t$cuni un, col082.t$prio prio,col131.t$loaa loca,col082.t$oorg oorg,
-          col082.t$orno orno, col082.t$pono pono, col082.t$advs advs, rank() over(order by col082.t$prio) rown
-          from    {0}.tticol082{1} col082
-          inner join {0}.twhcol131{1} col131
-          on col131.t$paid = col082.t$paid
-          left join {0}.ttccol307{1} col307
-          on col131.t$paid = col307.T$PAID
-          inner join {0}.ttcibd001{1} ibd001
-          on ibd001.t$item = col131.t$item
-          inner join baan.ttcmcs003{1} mcs003
-          on mcs003.t$cwar = col131.t$cwaa
-          inner join {0}.tticol136{1} col136
-          on col136.t$cwar = col082.t$cwar
-          and col136.t$user = '[:T$LOGP]'  --USUARIO QUE ESTE LOGUEADO EN LA APLICACION
-          left join {0}.ttccol020{1} col020
-          on col020.T$ITEM = col131.t$item
-          --where   (col131.t$stat = 6 or col131.t$stat = 3)-- 6-Asignado
-          --and     col307.T$PAID IS NULL
-          where col307.T$PAID IS NULL
-          and     col082.t$prio = (select min(loc082.t$prio) from {0}.tticol082{1} loc082 where loc082.t$stat = 1)
-          and     col082.t$stat = 1)
-          where   rown = 1
-        </stringSQL>
-      </operationName>
+
       <operationName name="UpdateTbl082">
         <stringSQL>
           update  {0}.tticol082{1}
           set T$STAT = '[:T$STAT]',
           t$LOGN= '[:T$LOGN]',
           T$LOCA ='[:T$LOCA]',
-          T$PICK ='[:T$PICK]',
-          T$PAID ='[:T$PAID]',
+          --T$PICK ='[:T$PICK]',
           T$QTYT ='[:T$QTYT]'
-          WHERE   T$OORG = '[:T$OORG]'
-          AND  T$ORNO = '[:T$ORNO]'
+          WHERE   T$PAID ='[:T$PAID]'
+          AND T$OORG = '[:T$OORG]'
+          AND T$ORNO = '[:T$ORNO]'
           --AND  T$OSET = '[:T$OSET]'
-          AND  T$PONO ='[:T$PONO]'
+          AND T$PONO ='[:T$PONO]'
           --AND  T$SQNB = '[:T$SQNB]'
-          AND  T$ADVS = '[:T$ADVS]'
+          AND T$ADVS = '[:T$ADVS]'
         </stringSQL>
       </operationName>
       <operationName name="UpdatePalletTbl082">
@@ -1179,6 +1332,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$LOCA ='[:T$LOCA]'
           WHERE T$STAT = '[:T$STAT]'
           AND T$PRIO = '[:T$PRIO]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTbl082ByPaid">
+        <stringSQL>
+          update  {0}.tticol082{1}
+          set
+          T$PAID ='[:PAID_NEW]'
+          WHERE T$PAID = '[:PAID_OLD]'
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl022">
@@ -1619,7 +1780,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="updatetticol242Quantity">
         <stringSQL>
           <!--UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
-          UPDATE  {0}.tticol242{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:T$ACQT]',T$AllO = T$AllO - '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:QTYT_ACT]',T$AllO = T$AllO - '[:QTYT_OLD]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="updatetticol242QuantityFirst">
@@ -1654,7 +1815,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol222">
       <operationName name="updatetticol222Quantity">
         <stringSQL>
-          UPDATE  {0}.tticol222{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:T$ACQT]',T$AllO = T$AllO - '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
+          UPDATE  {0}.tticol222{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:QTYT_ACT]',T$AllO = T$AllO - '[:QTYT_OLD]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')
           <!--UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
         </stringSQL>
       </operationName>
@@ -1854,6 +2015,30 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="ttccol307">
+      <operationName name="ActualizarTccol307">
+        <stringSQL>
+          UPDATE BAAN.TTCCOL307140 SET
+          T$USER = NVL('[:T$USER]',T$USER),
+          T$STAT = NVL('[:T$STAT]',T$STAT),
+          T$PAID = NVL('[:T$PAID]',T$PAID),
+          T$PROC = NVL('[:T$PROC]',T$PROC),
+          T$CWAR = NVL('[:T$CWAR]',T$CWAR)
+          WHERE
+          T$USER = NVL('[:USER]',T$USER) AND
+          T$STAT = NVL('[:STAT]',T$STAT) AND
+          T$PAID like NVL('%[:PAID]%',T$PAID) AND
+          T$PROC = NVL('[:PROC]',T$PROC) AND
+          T$CWAR = NVL('[:CWAR]',T$CWAR)
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPendientesTccol307">
+        <stringSQL>
+          SELECT * FROM BAAN.TTCCOL307140
+          WHERE
+          T$STAT IN([:T$STAT])
+          AND T$CWAR = NVL('[:T$CWAR]',T$CWAR)
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarRegistrotccol307">
         <stringSQL>
           SELECT T$USER AS USSR,T$STAT AS STAT,T$PAID AS PAID FROM {0}.ttccol307{1} WHERE T$PAID = '[:PAID]'
@@ -1866,6 +2051,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="GetWarehouse">
+        <stringSQL>
+          SELECT * FROM baan.tticol136140 tcol136
+          INNER JOIN baan.ttcmcs003140 tcmcs003
+          ON tcmcs003.T$CWAR = tcol136.T$CWAR
+          WHERE tcol136.T$USER = '[:T$USER]'
+          AND tcmcs003.T$TYPW = '[:T$TYPW]'
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultaSumatoriaCantidadesTwhinh210140">
         <stringSQL>
           select t$orno ord, t$pono, t$item, t$stun, t$qstr, t$qstk
@@ -4089,12 +4283,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol122">
       <operationName name="InsertarTccol307140">
         <stringSQL>
-          insert into {0}.ttccol307{1} (T$USER,T$STAT,T$PAID,T$PROC,T$REFCNTD,T$REFCNTU) values ('[:T$USER]','[:T$STAT]','[:T$PAID]','[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
+          insert into {0}.ttccol307{1} (T$USER,T$STAT,T$PAID,T$CWAR,T$PROC,T$REFCNTD,T$REFCNTU) values ('[:T$USER]','[:T$STAT]','[:T$PAID]','[:T$CWAR]','[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
         </stringSQL>
       </operationName>
       <operationName name="VerificarPalletID">
         <stringSQL>
-          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW, LOT,ALLO FROM (
+          SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW, LOT,ALLO,col020.T$CNPK CNPK FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col022.T$PDNO AS LOT,col222.T$ALLO AS ALLO  from BAAN.tticol022140 col022
           INNER JOIN BAAN.tticol222140 col222 on col222.t$sqnb = col022.t$sqnb WHERE col022.T$DELE ='7'
           UNION
@@ -4108,6 +4302,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttccol307{1} col307 on ConGlobal.PAID = col307.T$PAID
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
+          LEFT JOIN {0}.ttccol020{1} col020 ON col020.T$ITEM = ConGlobal.ITEM
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]') AND col307.T$PAID IS NULL
         </stringSQL>
       </operationName>
@@ -4118,7 +4313,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTt307140">
         <stringSQL>
-          select * from {0}.ttccol307{1} where t$proc = 7 and t$user = '[:T$USER]'
+          select * from {0}.ttccol307{1}
+          where t$proc = 7
+          and T$USER = NVL('[:T$USER]',T$USER)
+          and T$PAID = NVL('[:T$PAID]',T$PAID)
+          and T$CWAR = NVL('[:T$CWAR]',T$CWAR)
+          and T$STAT = NVL('[:T$STAT]',T$STAT)
         </stringSQL>
       </operationName>
       <operationName name="insertarRegistro">

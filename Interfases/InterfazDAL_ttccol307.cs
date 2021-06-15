@@ -22,6 +22,15 @@ namespace whusa.Interfases
             return dal.ActualizarUsuariotccol307(ObjTtccol307);
         }
 
+        public bool ActualizarTccol307(Ent_ttccol307 ObjTtccol307)
+        {
+            return dal.ActualizarTccol307(ObjTtccol307);
+        }
 
+        public DataTable ConsultarPendientesTccol307(string STAT0, string STAT1)
+        {
+            return dal.ConsultarPendientesTccol307(STAT0,STAT1);
+        }
+        
     }
 }

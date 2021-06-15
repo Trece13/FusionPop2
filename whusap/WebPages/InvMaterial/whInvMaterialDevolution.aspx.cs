@@ -475,6 +475,7 @@ namespace whusap.WebPages.InvMaterial
             //lblOrder.Text = _idioma == "INGLES" ? "Order: " : "Orden: " + obj.pdno;
 
             Session["resultado"] = resultado;
+            Session["RemotePrint"] = "yes";
             StringBuilder paramurl = new StringBuilder();
             paramurl.Append("?");
             paramurl.Append("valor1=" + Request.QueryString[0].ToString() + "&");

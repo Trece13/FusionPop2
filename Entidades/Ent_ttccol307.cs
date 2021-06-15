@@ -14,6 +14,16 @@ namespace whusa
         {
             this.Error = false;
             this.ErrorMsg = string.Empty;
+            this.USRR_AUX = string.Empty;
+            this.STAT_AUX = string.Empty;
+            this.PAID_AUX = string.Empty;
+            this.PROC_AUX = string.Empty;
+            this.CWAR_AUX = string.Empty;
+            this.USRR = string.Empty;
+            this.STAT = string.Empty;
+            this.PAID = string.Empty;
+            this.PROC = string.Empty;
+            this.CWAR = string.Empty;
         }
 
         [DataMember(Order = 2)]
@@ -43,10 +53,47 @@ namespace whusa
         [Column(Name = "PROC")]
         public string PROC { get; set; }
 
+        [DataMember(Order = 8)]
+        [Column(Name = "CWAR")]
+        public string CWAR { get; set; }
+
+        [DataMember(Order = 9)]
+        [Column(Name = "USRR_AUX")]
+        public string USRR_AUX { get; set; }
+
+
+        [DataMember(Order = 10)]
+        [Column(Name = "STAT_AUX")]
+        public string STAT_AUX { get; set; }
+
+
+        [DataMember(Order = 11)]
+        [Column(Name = "PAID_AUX")]
+        public string PAID_AUX { get; set; }
+
+
+        [DataMember(Order = 12)]
+        [Column(Name = "REFCNTD_AUX")]
+        public int REFCNTD_AUX { get; set; }
+
+
+        [DataMember(Order = 13)]
+        [Column(Name = "REFCNTU_AUX")]
+        public int REFCNTU_AUX { get; set; }
+
+
+        [DataMember(Order = 14)]
+        [Column(Name = "PROC_AUX")]
+        public string PROC_AUX { get; set; }
+
+
+        [DataMember(Order = 15)]
+        [Column(Name = "CWAR_AUX")]
+        public string CWAR_AUX { get; set; }
+
         public bool Error { get; set; }
         public string TypeMsgJs { get; set; }
         public string ErrorMsg { get; set; }
         public string SuccessMsg { get; set; }
-
     }
 }

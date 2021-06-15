@@ -126,6 +126,7 @@ namespace whusap.WebPages.GenericProducts
                 return;
             }
             Session["resultado"] = resultado;
+            Session["RemotePrint"] = "yes";
             lblOrder.Text = "Order: " + pdno;
             grdRecords.DataSource = resultado;
             grdRecords.DataBind();

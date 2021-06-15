@@ -321,8 +321,24 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nError: " + ex.Message);
             }
         }
-      
 
+        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD)
+        {
+
+            string strError = string.Empty;
+            try
+            {
+                bool updateTticol082 = dal.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD);
+                return updateTticol082;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
+      
+        
        
          public int InsertRegCausalCOL084(string pallet,string user, int statCausal)
         {
@@ -441,9 +457,9 @@ namespace whusa.Interfases
         //    throw new NotImplementedException();
         //}
 
-        public bool InsertarTccol307140(string USER, string STAT, string PAID, string PROC, string REFCNTD, string REFCNTU)
+        public bool InsertarTccol307140(string USER, string STAT, string PAID, string CWAR, string PROC, string REFCNTD, string REFCNTU)
         {
-            return dal.InsertarTccol307140(USER, STAT, PAID, PROC, REFCNTD, REFCNTU);
+            return dal.InsertarTccol307140(USER, STAT, PAID, CWAR, PROC, REFCNTD, REFCNTU);
 
         }
 
@@ -486,7 +502,8 @@ namespace whusa.Interfases
                         QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
-                        CWAROK = MyRow["CWAROK"].ToString()
+                        CWAROK = MyRow["CWAROK"].ToString(),
+                        PICK = MyRow["PICK"].ToString()
                     };
 
                     Lstwhcol122.Add(MyObjet);
@@ -529,7 +546,9 @@ namespace whusa.Interfases
                         QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
-                        CWAROK = MyRow["CWAROK"].ToString()
+                        CWAROK = MyRow["CWAROK"].ToString(),
+                        PICK = MyRow["PICK"].ToString()
+
 
                     };
 
@@ -575,7 +594,9 @@ namespace whusa.Interfases
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
-                        CWAROK = MyRow["CWAROK"].ToString()
+                        CWAROK = MyRow["CWAROK"].ToString(),
+                        PICK = MyRow["PICK"].ToString()
+
 
                     };
 
@@ -606,10 +627,10 @@ namespace whusa.Interfases
             }
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking131With082(string PAID, string p, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking131With082(string CWAR, string p, string _operator)
         {
             List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
-            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131With082(PAID, _operator);
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131With082(CWAR, _operator);
             if (DTwhcolo131.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo131.Rows)
@@ -648,10 +669,10 @@ namespace whusa.Interfases
             return Lstwhcol131;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking042With082(string PAID, string p, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking042With082(string CWAR, string p, string _operator)
         {
             List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
-            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042With082(PAID, _operator);
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042With082(CWAR, _operator);
             if (DTwhcolo42.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo42.Rows)
@@ -679,6 +700,8 @@ namespace whusa.Interfases
                         //SQNB = MyRow["SQNB"].ToString(),
                         ADVS = MyRow["ADVS"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
+                        STAT = MyRow["STAT"].ToString(),
+                        PICK = MyRow["PICK"].ToString()
 
                     };
 
@@ -689,10 +712,10 @@ namespace whusa.Interfases
             return Lstwhcol042;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking22With082(string PAID, string p, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking22With082(string CWAR, string p, string _operator)
         {
             List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
-            DataTable DTwhcol122 = dal.ConsultarPalletPicking22With082(PAID, _operator);
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22With082(CWAR, _operator);
             if (DTwhcol122.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcol122.Rows)
@@ -707,7 +730,7 @@ namespace whusa.Interfases
                         LOT = MyRow["LOT"].ToString(),
                         WRH = MyRow["WRH"].ToString(),
                         DESCWRH = MyRow["DESCWRH"].ToString(),
-                        QTY = MyRow["QTY"].ToString(),
+                        QTYT = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
                         PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
@@ -720,7 +743,8 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
-                        STAT = MyRow["STAT"].ToString()
+                        STAT = MyRow["STAT"].ToString(),
+                        PICK = MyRow["PICK"].ToString()
                     };
 
                     Lstwhcol122.Add(MyObjet);
@@ -866,9 +890,9 @@ namespace whusa.Interfases
             return dal.Actualizar307proc(PAID_NEW, PAID_OLD, _operator);
         }
 
-        public void updatetticol222Quantity(string pallet, decimal sqnb_act, decimal qtyt_old)
+        public void updatetticol222Quantity(string pallet, decimal qtyt_act, decimal qtyt_old)
         {
-            dal.updatetticol222Quantity(pallet, sqnb_act, qtyt_old);
+            dal.updatetticol222Quantity(pallet, qtyt_act, qtyt_old);
         }
 
         public void updatetticol242Quantity(string pallet, decimal sqnb_act, decimal qtyt_old)
@@ -883,9 +907,9 @@ namespace whusa.Interfases
 
         }
 
-        public DataTable ConsultarTticol082porStat(string _operator, int stat)
+        public DataTable ConsultarTticol082porStat(string _operator, string stat, string PICK = "", string CWAR = "")
         {
-            return dal.ConsultarTticol082porStat(_operator, stat);
+            return dal.ConsultarTticol082porStat(_operator, stat, PICK, CWAR);
         }
 
         public bool ActualizarCantidades222(string PAID)
@@ -916,6 +940,47 @@ namespace whusa.Interfases
         public void updatetticol222QuantityFirst(string pallet, decimal sqnb_act, decimal qtyt_old)
         {
             dal.updatetticol222QuantityFirst(pallet, sqnb_act, qtyt_old);
+        }
+
+        public List<EntidadPicking> ConsultarPalletPickingGlobal(string CWAR, string p, string _operator)
+        {
+            List<EntidadPicking> lstGlobal = new List<EntidadPicking>();
+            DataTable DtGlobal = dal.ConsultarPalletPickingGlobal(CWAR, _operator);
+            if (DtGlobal.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DtGlobal.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        ROWN = MyRow["ROWN"].ToString(),
+                        OORG = MyRow["OORG"].ToString(),
+                        ORNO = MyRow["ORNO"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
+                        PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        ADVS = MyRow["ADVS"].ToString(),
+                        //QTYT = MyRow["QTYT"].ToString(),
+                        CNPK = MyRow["CNPK"].ToString(),
+                        STAT = MyRow["STAT"].ToString()
+                    };
+
+                    lstGlobal.Add(MyObjet);
+                }
+
+            }
+            return lstGlobal;
         }
     }
 }

@@ -73,5 +73,7 @@ namespace whusa
         public string QTYOK { get; set; }
 
         public string CWAROK { get; set; }
+
+        public string PICK { get; set; }
     }
 }

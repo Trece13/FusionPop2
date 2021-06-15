@@ -185,6 +185,11 @@
             vertical-align: middle;
             padding-left: 1em;
         }
+
+        #lblMaterialDesc, #lblMaterialCode{
+            font-size: ;
+        }
+        @page printSpace { size: A3; margin: 0; } 
     </style>
     <script type="text/javascript">
         function printDiv(divID) {

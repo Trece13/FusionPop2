@@ -67,5 +67,7 @@ namespace whusa.Entidades
         public string SuccessMsg { get; set; }
 
         public string STAP { get; set; }
+
+        public string PICK { get; set; }
     }
 }

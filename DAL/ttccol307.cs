@@ -82,5 +82,62 @@ namespace whusa.DAL
             }
             return Consulta;
         }
+
+        public bool ActualizarTccol307(Ent_ttccol307 ObjTtccol307)
+        {
+            string strError = string.Empty;
+            bool Resultado = false;
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$USER",ObjTtccol307.USRR_AUX);
+            paramList.Add(":T$STAT",ObjTtccol307.STAT_AUX);
+            paramList.Add(":T$PAID",ObjTtccol307.PAID_AUX);
+            paramList.Add(":T$PROC",ObjTtccol307.PROC_AUX);
+            paramList.Add(":T$CWAR",ObjTtccol307.CWAR_AUX);
+            paramList.Add(":USER",ObjTtccol307.USRR);
+            paramList.Add(":STAT",ObjTtccol307.STAT);
+            paramList.Add(":PAID",ObjTtccol307.PAID);
+            paramList.Add(":PROC",ObjTtccol307.PROC);
+            paramList.Add(":CWAR",ObjTtccol307.CWAR);
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Resultado = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [ttccol307]. Try again or contact your administrator";
+                //throw ex;
+            }
+            return Resultado;
+        }
+
+        public DataTable ConsultarPendientesTccol307(string STAT, string CWAR)
+        {
+            string strError = string.Empty;
+            DataTable Resultado = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$STAT", STAT);
+            paramList.Add(":T$CWAR", CWAR);
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Resultado = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [ttccol307]. Try again or contact your administrator";
+                //throw ex;
+            }
+            return Resultado;
+        }
     }
 }
+
+
+

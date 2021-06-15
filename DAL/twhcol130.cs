@@ -1535,6 +1535,29 @@ namespace whusa.Interfases
 
             return Retorno;
         }
+
+        public DataTable GetWarehouse(string USER, string TYPW)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$USER", USER.ToUpper().Trim());
+            paramList.Add(":T$TYPW", TYPW.ToUpper().Trim());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Retorno;
+        }
     }
 
     

@@ -312,24 +312,27 @@ namespace whusap.WebPages.InvReceipts
         public static string Click_Save(string CWAR, string ITEM, string CLOT, string LOCA, string QTYS, string UNIT)
         {
             int consecutivoPalletID = 0;
-            DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130("INITIAPOP");
+            DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130("INITIAPOP-P");
             string SecuenciaPallet = "001";
             if (DTPalletContinue.Rows.Count > 0)
             {
                 foreach (DataRow item in DTPalletContinue.Rows)
                 {
-                    consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(10, 3)) + 1;
+                    string paid = item["T$PAID"].ToString().Trim();
+                    int indesSep = item["T$PAID"].ToString().Trim().IndexOf("-P");
+                    string secuence = paid.Substring(indesSep + 1);
+                    consecutivoPalletID = Convert.ToInt32(secuence)+1;
                     if (consecutivoPalletID.ToString().Length == 1)
                     {
-                        SecuenciaPallet = "00" + consecutivoPalletID;
+                        SecuenciaPallet = "P00" + consecutivoPalletID;
                     }
                     if (consecutivoPalletID.ToString().Length == 2)
                     {
-                        SecuenciaPallet = "0" + consecutivoPalletID;
+                        SecuenciaPallet = "P0" + consecutivoPalletID;
                     }
                     if (consecutivoPalletID.ToString().Length == 3)
                     {
-                        SecuenciaPallet = consecutivoPalletID.ToString();
+                        SecuenciaPallet = "P"+consecutivoPalletID.ToString();
                     }
 
                 }
@@ -340,7 +343,7 @@ namespace whusap.WebPages.InvReceipts
             {
                 OORG = "2",// Order type escaneada view 
                 ORNO = "INITIAPOP",
-                ITEM =  ITEM.ToUpper(),
+                ITEM = ITEM.ToUpper(),
                 PAID = "INITIAPOP" + "-" + SecuenciaPallet,
                 PONO = "1",
                 SEQN = "1",
@@ -376,14 +379,14 @@ namespace whusap.WebPages.InvReceipts
                 UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UNIT + "&code=Code128&dpi=96"
             };
 
-            
+
             bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
 
             if (Insertsucces)
             {
                 HttpContext.Current.Session["MaterialDesc"] = "XXXXX XXX XXX XX";
                 HttpContext.Current.Session["MaterialCode"] = MyObj.ITEM;
-                HttpContext.Current.Session["codePaid"] =  MyObj.PAID ;
+                HttpContext.Current.Session["codePaid"] = MyObj.PAID;
                 HttpContext.Current.Session["Lot"] = MyObj.CLOT;
                 HttpContext.Current.Session["Quantity"] = MyObj.QTYS + " " + UNIT;
                 HttpContext.Current.Session["Origin"] = MyObj.CLOT;

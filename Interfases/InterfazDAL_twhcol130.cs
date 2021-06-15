@@ -11,6 +11,14 @@ namespace whusa.Interfases
     {
         twhcol130 dal = new twhcol130();
 
+        public DataTable GetWarehouse(string USER, string TYPW)
+        {
+            DataTable retorno = new DataTable();
+            retorno = dal.GetWarehouse(USER,TYPW);
+            return retorno;
+
+        }
+
         public DataTable ValidarOrderID(Ent_twhcol130 whcol130)
         {
             DataTable retorno = new DataTable();

@@ -450,47 +450,42 @@ namespace whusap.WebPages.InvReceipts
             string strError = string.Empty;
             string SecuenciaPallet = "C001";
             int consecutivo = 0;
+            string id = CLOT.Trim() == "" ? cyclecountLabel : CLOT.Trim();
 
             if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
             {
-                //string id = CLOT.Trim() == "" ? cyclecountLabel : CLOT.Trim();
-                string id = cyclecountLabel;
+                //string id = cyclecountLabel;
                 DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
                 if (Dtticol022.Rows.Count > 0)
                 {
-                    if (CLOT.Trim() != string.Empty)
-                    {
-                        consecutivo = Convert.ToInt32(Dtticol022.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
-                    }
-                    else
-                    {
-                        consecutivo = Convert.ToInt32(Dtticol022.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
-                    }
+
+                        int res;
+                        string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
+                        int iSep = sqnb.IndexOf("-");
+                        string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C","");
+                        consecutivo = Convert.ToInt32(CurrentSecuence)+1;
                 }
                 else
                 {
-                    consecutivo = 0;
+                    consecutivo = 1;
                 }
             }
             else
             {
                 //string id = CLOT.Trim() == "" ? ITEM.Trim() : CLOT.Trim();
-                string id = cyclecountLabel;
+                //string id = cyclecountLabel;
                 DataTable Dtticol042 = _idaltticol042.SecuenciaMayor(id);
                 if (Dtticol042.Rows.Count > 0)
                 {
-                    if (CLOT.Trim() != string.Empty)
-                    {
-                        consecutivo = Convert.ToInt32(Dtticol042.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
-                    }
-                    else
-                    {
-                        consecutivo = Convert.ToInt32(Dtticol042.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
-                    }
+                    int res;
+                    string sqnb = Dtticol042.Rows[0]["T$SQNB"].ToString().Trim();
+                    int iSep = sqnb.IndexOf("-");
+                    string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C", "");
+                    consecutivo = Convert.ToInt32(CurrentSecuence)+1;
                 }
                 else
                 {
-                    consecutivo = 0;
+                    consecutivo = 1;
                 }
             }
 
