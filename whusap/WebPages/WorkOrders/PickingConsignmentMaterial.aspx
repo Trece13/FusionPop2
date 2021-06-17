@@ -27,9 +27,67 @@
             font-size: 10px;
         }
     </style>
+    <script>
+        function printDiv(divID) {
+
+            var monthNames = [
+                "1", "2", "3",
+                "4", "5", "6", "7",
+                "8", "9", "10",
+                "11", "12"
+            ];
+
+            //PRINT LOCAL HOUR
+            var d = new Date();
+            var dateNow = (monthNames[d.getMonth()] +
+                "/" +
+                d.getDate() +
+                "/" +
+                d.getFullYear() +
+                " " +
+                d.getHours() +
+                ":" +
+                d.getMinutes() +
+                ":" +
+                d.getSeconds());
+            var LbdDate = $("#LblDate");
+            LbdDate.html(dateNow);
+
+            var LbdDate2 = $("#LblDate2");
+            LbdDate2.html(dateNow);
+
+            //            //Get the HTML of div
+            //            var divElements = document.getElementById(divID).innerHTML;
+            //            //Get the HTML of whole page
+            //            var oldPage = document.body.innerHTML;
+            //            //Reset the page's HTML with div's HTML only
+            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
+            //            //Print Page
+            //            window.print();
+            //            //Restore orignal HTML
+            //            document.body.innerHTML = oldPage;
+            //            window.close();
+            //            return true;
+
+            var mywindow = window.open('', 'PRINT');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body >');
+            //mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+
+            return true;
+        };
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <div class="container-fluid col-11 animate__animated animate__fadeInLeft">
+    <div class="container-fluid col-11 animate__animated animate__fadeInLeft" style="margin-bottom:500px">
         <div class="row" id="formWarehouse">
             <div class="col-5">
                 <form>
@@ -160,8 +218,11 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm">Confirm</button>
-                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking">Skip Picking</button>
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;">Confirm</button>
+                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;">Skip Picking</button>
+                    </div>
+                    <div class="row">
+                        <label id="lblError" style="color:red"></label>
                     </div>
                 </form>
             </div>
@@ -349,6 +410,7 @@
         var paidOk = false;
         var locaOk = false;
         var qtytOk = false;
+        var DisttinctLocaValid = false;
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
@@ -387,7 +449,6 @@
             //var tblPickingsToBeProcessedWarehouse = document.getElementById("tblPickingsToBeProcessedWarehouse");
 
             btnStarPicking.addEventListener("click", loadPage);
-            btnConfirm.addEventListener("click", Confirm);
             //btnSkipPicking.addEventListener("click", );
             //btnNextPicking.addEventListener("click", loadPage);
             //btnEndPicking.addEventListener("click", );f
@@ -424,8 +485,10 @@
             var NewPaid = txPaid.value.trim();
             if (CurrentPaid == NewPaid) {
                 paidValid();
+                $("#lblError").html("");
             }
             else {
+                $("#lblError").html("");
                 console.log("Pallet NO Igual");
                 Method = "VerificarExistenciaPalletID"
                 Data = "{'PAID_NEW':'" + NewPaid + "'}";
@@ -445,7 +508,7 @@
             }
             else if (MyObj.error == true) {
                 paidInvalid();
-                console.log("Pallet not exists");
+                $("#lblError").html("Pallet not exists");
             }
         }
 
@@ -453,6 +516,7 @@
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
                 console.log("ESTADOS CAMBIADOS");
+                ClearFormPicking();
                 cnpk = MyObj.CNPK;
                 lblPick.innerHTML = MyObj.PICK;
                 lblPaid.innerHTML = MyObj.PALLETID;
@@ -462,7 +526,6 @@
                 lblQtyc.innerHTML = MyObj.QTYT;
                 lblUnit.innerHTML = MyObj.UN;
                 //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
-                ClearFormPicking();
                 ShowCurrentOptionsItem();
                 ShowCurrentOptionsWarehouse();
             }
@@ -530,11 +593,11 @@
                     for (var i = 0; i < myObj.length; i++) {
 
                         if (myObj[i].T$STAT == 1) {
-                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td></td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
+                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
                         }
                         else {
                             dropPending = true;
-                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td></td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-danger col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
+                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-danger col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
                         }
                     }
                     var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
@@ -579,6 +642,8 @@
                 $('#divPicketPending').hide(100);
                 lblPick.innerHTML = MyObj.PICK;
                 if (MyObj.PICK != null) {
+                    sessionStorage.setItem('PICK', MyObj.PICK);
+                    sessionStorage.setItem('CWAR', MyObj.WRH);
                     lblPaid.innerHTML = MyObj.PALLETID;
                     LblItem.innerHTML = MyObj.ITEM;
                     lblLoca.innerHTML = MyObj.LOCA;
@@ -591,7 +656,7 @@
                     $("#formPicking").show(500);
                     ShowCurrentOptionsItem();
                 } else {
-                    
+                    $("#formPicking").hide(500);
                     divTables.classList.remove("col-7");
                     divTables.classList.add("col-12");
                 }
@@ -649,10 +714,16 @@
 
         var selectPicksPending = function (e) {
             ClearFormPicking();
-            EventoAjax("ClickPickingPending", "{'PICK':'" + e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
+            if (e != undefined) {
+                EventoAjax("ClickPickingPending", "{'PICK':'" +  e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
+            }
+            else{
+                EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR')+ "'}", LoadPageSuccess);
+            }
         }
 
         var ClearFormPicking = function () {
+            paidInvalid();
             txPaid.value = "";
             txQtyc.value = "";
             txLoca.value = "";
@@ -664,7 +735,6 @@
             lblWare.innerHTML = "";
             lblQtyc.innerHTML = "";
             lblUnit.innerHTML = "";
-            paidInvalid();
             NeutroInputText(txPaid);
             NeutroInputText(txQtyc);
             NeutroInputText(txLoca);
@@ -701,9 +771,12 @@
             var NewLoca = txLoca.value.trim();
             if (CurrentLoca == NewLoca) {
                 locaValid();
+                $('#lblError').html('');
+                DisttinctLocaValid = false;
             }
             else {
                 console.log("Pallet NO Igual");
+                $('#lblError').html('')
                 Method = "VerificarLocate"
                 Data = "{'CWAR':'" + lblWare.innerHTML.trim() + "','LOCA':'" + txLoca.value.trim() + "'}";
                 EventoAjax(Method, Data, SucceessVerifyLocation)
@@ -716,10 +789,13 @@
                 locaValid();
                 hideShowNeutroSelect(ddReason, true);
                 hideShowNeutroInputText(txQtyc, false);
+                DisttinctLocaValid = true;
             }
             else {
                 console.log("Location no valida");
                 locaInvalid();
+                $('#lblError').html('Location invalid');
+                DisttinctLocaValid = false;
             }
         }
 
@@ -728,16 +804,20 @@
             var qtycNew = parseFloat(txQtyc.value.trim());
             if (qtycAct >= qtycNew && qtycNew > 0) {
                 qtytValid();
+                $('#lblError').html('')
             }
             else {
                 qtytInvalid();
+                $('#lblError').html('Quantity invalid')
             }
         }
 
         var SucceessVerifyQuantity = function () {
 
         }
-
+        var SkipPicking = function(){
+            EventoAjax("SkipPicking", "{}", LoadPageSuccess);
+        }
         var Confirm = function () {
             if (parseFloat($("#Contenido_lblQuantity").val()) <= 0) {
                 $("#Contenido_lblQuantity").focus();
@@ -808,6 +888,8 @@
                         $('#Contenido_txtPalletID').val("");
                         $('#txtlocation').val("");
 
+                        selectPicksPending();
+
                     }
                     else {
                         alert(myObj.errorMsg);
@@ -823,6 +905,8 @@
                         $('#Contenido_txtPalletID').val("");
                         $('#txtlocation').val("");
 
+                        selectPicksPending();
+
                     }
                 },
                 failure: function (response) {
@@ -835,13 +919,6 @@
 
         }
 
-        var SkipPicking = function () {
-
-        }
-
-        var SucceessSkipPicking = function () {
-
-        }
 
 
         var paidInvalid = function () {
@@ -994,11 +1071,11 @@
                 data: "{'PAID':'" + txPaid.value.toString() +
                       "','Causal':'" + document.getElementById("ddReason").value +
                       "','txtPallet':'" + txPaid.value +
-                      "','LOCA':'" + lblLoca.innerHTML.toString() + "'}",
+                      "','LOCA':'" + txLoca.value.toString().trim() + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    if (response.d == true) {
+                    if (response.d == true && DisttinctLocaValid == false) {
                         var CurrentPaid = lblPaid.innerHTML.trim();
                         var NewPaid = txPaid.value.trim();
                         Method = "VerificarPalletID"
@@ -1006,6 +1083,8 @@
                         EventoAjax(Method, Data, VerificarPalletIDSuccess);
                     }
                     else {
+                        ClearFormPicking();
+                        StartComponents();
                     }
                 },
                 failure: function (response) {
