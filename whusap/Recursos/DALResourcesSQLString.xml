@@ -606,12 +606,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTticol082porStat">
         <stringSQL>
-          select * from {0}.tticol082{1}
-          where UPPER(T$LOGN) = NVL(UPPER('[:T$LOGN]'),T$LOGN)
-          and T$STAT in([:T$STAT])
-          and T$PICK = NVL('[:T$PICK]',T$PICK)
-          and T$CWAR = NVL('[:T$CWAR]',T$CWAR)
-          order by T$PRIO asc
+          select ticol082.T$ORNO, ticol082.T$PONO, ticol082.T$ADVS, ticol082.T$ITEM,tcibd001.T$DSCA, ticol082.T$QTYT, ticol082.T$OORG, ticol082.T$UNIT, ticol082.T$CWAR, ticol082.T$MCNO, ticol082.T$TIME, ticol082.T$PRIO, ticol082.T$PICK, ticol082.T$PAID, ticol082.T$LOCA, ticol082.T$LOGN, ticol082.T$STAT from baan.tticol082140 ticol082
+          left join BAAN.ttcibd001140 tcibd001
+          on tcibd001.T$ITEM = ticol082.T$ITEM
+          where UPPER(ticol082.T$LOGN) = NVL(UPPER('[:T$LOGN]'),ticol082.T$LOGN)
+          and ticol082.T$STAT in([:T$STAT])
+          and ticol082.T$PICK = NVL('[:T$PICK]',ticol082.T$PICK)
+          and ticol082.T$CWAR = NVL('[:T$CWAR]',ticol082.T$CWAR)
+          order by ticol082.T$PRIO asc
         </stringSQL>
       </operationName>
       <operationName name="Actualizar307">
@@ -1322,6 +1324,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$ITEM =NVL('[:T$ITEM]',T$ITEM)AND
           T$PRIO =NVL('[:T$PRIO]',T$PRIO)AND
           T$PAID =NVL('[:T$PAID]',T$PAID)
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTtico082Stat">
+        <stringSQL>
+          UPDATE {0}.tticol082{1} SET
+          T$STAT = '[:T$STAT]'
+          WHERE
+          trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl082Paid">

@@ -884,24 +884,6 @@
 
         function ShowCurrentOptions() {
             var bodyRows = ""
-            //var tableOptions = "<table class='table' style='width:100%'>" +
-            //                                    "<thead>" +
-            //                                      "<tr>" +
-            //                                        "<th scope='col'>Pallet</th>" +
-            //                                        "<th scope='col'>Location</th>" +
-            //                                        "<th scope='col'>Item</th>" +
-            //                                        "<th scope='col'>Description</th>" +
-            //                                        "<th scope='col'>Quantity</th>" +
-            //                                        "<th scope='col'>Unit</th>" +
-            //                                    "</tr>" +
-            //                                   "</thead>" +
-            //                                   "<tbody>" +
-            //                                   bodyRows
-            //"</tbody>" +
-            //                        "</table>";
-
-
-            //$("#divTable").append(tableOptions);
             $.ajax({
                 type: "POST",
 
@@ -933,14 +915,6 @@
 
 
                     $("#divTable").append(tableOptions);
-                    //                    Swal.fire({
-                    //                        title: '<strong>Options</strong>',
-                    //                        icon: 'info',
-                    //                        html: tableOptions,
-                    //                        showCloseButton: false,
-                    //                        showCancelButton: false,
-                    //                        focusConfirm: false
-                    //                    });
                 },
                 failure: function (response) {
                     alert(response.d);

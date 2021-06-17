@@ -26,6 +26,14 @@
         td, th {
             font-size: 10px;
         }
+
+        #lblConsigment {
+            margin-left: 20px;
+        }
+
+        #txPaid, #txLoca, #txQtyc {
+            height: 30px;
+        }
     </style>
     <script>
         function printDiv(divID) {
@@ -87,9 +95,9 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <div class="container-fluid col-11 animate__animated animate__fadeInLeft" style="margin-bottom:500px">
+    <div class="container-fluid col-12 animate__animated animate__fadeInLeft" style="margin-bottom: 200px">
         <div class="row" id="formWarehouse">
-            <div class="col-5">
+            <div class="col-6">
                 <form>
                     <div class="row">
                         <div class="col-12">
@@ -98,9 +106,13 @@
                                     <label for="ddWare">Warehouse</label>
                                 </div>
                                 <div class="col-6">
-                                    <div class="col-7 float-right">
+                                    <%--                                 <div class="col-11 float-right">
                                         <input type="checkbox" class="form-check-input" id="chkConsigment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label float-right" for="chkConsigment">Consigment</label>
+                                    </div>--%>
+                                    <div class="form-check float-right">
+                                        <input type="checkbox" class="form-check-input" id="chkConsigment">
+                                        <label class="form-check-label" for="chkConsigment" id="lblConsigment">Consigment</label>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +150,7 @@
             <div class="col-5">
                 <form id="formPicking">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <label>Pick ID</label>
                         </div>
                         <div class="col-2">
@@ -147,37 +159,37 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <label>Pallet ID</label>
                         </div>
                         <div class="col-4" id="lblPaid">
                         </div>
-                        <div class="col-6">
-                            <input type="text" class="col-12 form-control" id="txPaid" required>
+                        <div class="col-5 p-0">
+                            <input type="text" class="col-12 form-control" id="txPaid" placeholder="Pallet ID" required>
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-2">
-                            <label>ITEM</label>
+                        <div class="col-3">
+                            <label>Item</label>
                         </div>
-                        <div class="col-10" id="LblItem">
+                        <div class="col-9" id="LblItem">
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <label>Location</label>
                         </div>
                         <div class="col-4" id="lblLoca">
                         </div>
-                        <div class="col-6">
+                        <div class="col-5 p-0">
                             <input type="text" class="col-12 form-control" id="txLoca" required>
                         </div>
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <label>Warehouse</label>
                         </div>
                         <div class="col-2" id="lblWare">
@@ -185,14 +197,14 @@
                     </div>
                     <br>
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-3">
                             <label>Quantity</label>
                         </div>
                         <div class="col-2" id="lblQtyc">
                         </div>
                         <div class="col-2" id="lblUnit">
                         </div>
-                        <div class="col-6">
+                        <div class="col-5  p-0">
                             <input type="text" class="col-12 form-control" id="txQtyc" required>
                         </div>
                     </div>
@@ -218,11 +230,11 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;">Confirm</button>
-                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;">Skip Picking</button>
+                        <input class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" type="button" value="Confirm">
+                        <input class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;" type="button" value="Skip Picking">
                     </div>
                     <div class="row">
-                        <label id="lblError" style="color:red"></label>
+                        <label id="lblError" style="color: red"></label>
                     </div>
                 </form>
             </div>
@@ -334,7 +346,7 @@
                     <tr>
                         <td>
                             <label style="font-size: 11px">
-                                ITEM</label>
+                                Item</label>
                         </td>
                         <td colspan="4">
                             <label id="lblItemID" style="display: none; font-size: 11px">
@@ -400,6 +412,40 @@
                     <label id="LblReprint">
                     </label>
                 </td>-->
+                    </tr>
+                </table>
+            </div>
+            <div id="MyEtiquetaDrop" style="display:none; width: 6in; height:4in; border:solid 1px;">
+                <table style="margin: auto">
+                    <tr>
+                        <td>
+                        <label style="font-size: 30px">
+                        Pick ID</label>
+                        </td>
+                        <td colspan="4">
+                            <img src="~/images/logophoenix_login.jpg" runat="server" id="bcPick" alt="" hspace="60"
+                                vspace="5" style="width: 3in; height: 1in; margin: 0px !important" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Machine</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 30px" id="lbMcno">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Pallet(s) </label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 30px" id="lbPaid">
+                             </label>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -597,7 +643,7 @@
                         }
                         else {
                             dropPending = true;
-                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-danger col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
+                            bodyRows += "<tr onClick='Drop(this,false)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-danger col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
                         }
                     }
                     var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
@@ -618,7 +664,7 @@
                                                bodyRows +
                     "</tbody>" +
                                             "</table>";
-                    dropPending == true ? tableOptions += "<button class='btn btn-danger col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "'>Drop</button>" : tableOptions;
+                    dropPending == true ? tableOptions += "<input type='button' onClick='Drop(this,true)' class='btn btn-danger col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "' value ='End Picking'>" : tableOptions;
 
 
                     $("#divTableWarehouse").append(tableOptions);
@@ -642,6 +688,7 @@
                 $('#divPicketPending').hide(100);
                 lblPick.innerHTML = MyObj.PICK;
                 if (MyObj.PICK != null) {
+                    cnpk = MyObj.CNPK;
                     sessionStorage.setItem('PICK', MyObj.PICK);
                     sessionStorage.setItem('CWAR', MyObj.WRH);
                     lblPaid.innerHTML = MyObj.PALLETID;
@@ -660,7 +707,7 @@
                     divTables.classList.remove("col-7");
                     divTables.classList.add("col-12");
                 }
-                   
+
                 ShowCurrentOptionsWarehouse();
             }
             else {
@@ -702,7 +749,7 @@
                         bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
                     }
                     else {
-                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "' disabled>Take</button></td>";
+                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
                     }
                 });
             }
@@ -715,10 +762,10 @@
         var selectPicksPending = function (e) {
             ClearFormPicking();
             if (e != undefined) {
-                EventoAjax("ClickPickingPending", "{'PICK':'" +  e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
+                EventoAjax("ClickPickingPending", "{'PICK':'" + e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
             }
-            else{
-                EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR')+ "'}", LoadPageSuccess);
+            else {
+                EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR') + "'}", LoadPageSuccess);
             }
         }
 
@@ -745,6 +792,48 @@
         var ClearFormWarehouse = function () {
 
         }
+
+        var Drop = function (e, multi) {
+            if (multi == false) {
+                localStorage.setItem('paid', e.children[7].innerHTML.trim());
+                EventoAjax("Drop", "{'PAID':'" + e.children[7].innerHTML.trim() + "'}", DropSuccess);
+            }
+            else {
+                var myList = JSON.parse(localStorage.getItem('MyPalletList'));
+                var flag1 = false;
+                var Paids = ""
+                myList.forEach(function (x) {
+                    if (x.T$STAT == 2) {
+                        EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "'}", DropMultipleSuccess);
+                        Paids += x.T$PAID+" ";
+                        flag1 = true;
+                    }
+                });
+                if (flag1 = true) {
+                    $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
+                    $("#lbPaid").html(Paids);
+                    
+                }
+            }
+            printDiv("MyEtiquetaDrop");
+        }
+
+        var DropMultipleSuccess = function (r) {
+            if (r.d != "") {
+                $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+            }
+        }
+
+        var DropSuccess = function (r) {
+            if (r.d != "") {
+                $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
+                $("#lbPaid").html(localStorage.getItem('paid'))
+                printDiv("MyEtiquetaDrop");
+            }            
+        }
+
+
 
         var SuccessGetWarehouse = function () {
 
@@ -815,7 +904,7 @@
         var SucceessVerifyQuantity = function () {
 
         }
-        var SkipPicking = function(){
+        var SkipPicking = function () {
             EventoAjax("SkipPicking", "{}", LoadPageSuccess);
         }
         var Confirm = function () {
@@ -825,7 +914,7 @@
                 return;
             }
 
-            dataS = "{}";
+            dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "'}";
 
             //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
             $.ajax({
@@ -914,6 +1003,8 @@
                 }
             });
         }
+
+
 
         var SucceessConfirm = function () {
 

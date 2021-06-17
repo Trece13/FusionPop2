@@ -148,8 +148,8 @@ namespace whusap.WebPages.WorkOrders
             List<EntidadPicking> LstPallet042PAID = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet131PAID = new List<EntidadPicking>();
 
-            DataTable DT082STAT = twhcolDAL.ConsultarTticol082porStat(Session["user"].ToString().Trim(), 5);
-            DataTable DT082STATPENDING = twhcolDAL.ConsultarTticol082porStat(Session["user"].ToString().Trim(), 2);
+            DataTable DT082STAT = twhcolDAL.ConsultarTticol082porStat(Session["user"].ToString().Trim(), "5");
+            DataTable DT082STATPENDING = twhcolDAL.ConsultarTticol082porStat(Session["user"].ToString().Trim(), "2");
 
             if (DT082STAT.Rows.Count > 0)
             {
@@ -189,7 +189,7 @@ namespace whusap.WebPages.WorkOrders
                             };
 
                             Session["originalPallet"] = MyObj.PALLETID;
-                            bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+                            bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObj.PALLETID.ToString(),"", "7", "0", "0");
                             if (res == false)
                             {
                                 ReloadPage();
@@ -235,7 +235,7 @@ namespace whusap.WebPages.WorkOrders
                             };
 
                             Session["originalPallet"] = MyObj.PALLETID;
-                            bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+                            bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObj.PALLETID.ToString(),"", "7", "0", "0");
                             if (res == false)
                             {
                                 ReloadPage();
@@ -279,7 +279,7 @@ namespace whusap.WebPages.WorkOrders
                                 return;
                             };
                             Session["originalPallet"] = MyObj.PALLETID;
-                            bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObj.PALLETID.ToString(), "7", "0", "0");
+                            bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObj.PALLETID.ToString(), "", "7", "0", "0");
                             if (res == false)
                             {
                                 ReloadPage();

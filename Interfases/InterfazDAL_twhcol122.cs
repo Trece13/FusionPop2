@@ -982,5 +982,19 @@ namespace whusa.Interfases
             }
             return lstGlobal;
         }
+
+        public bool UpdateTtico082Stat(Ent_tticol082 Obj082)
+        {
+            string strError = string.Empty;
+            try
+            {
+                return dal.UpdateTtico082Stat(Obj082);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
     }
 }

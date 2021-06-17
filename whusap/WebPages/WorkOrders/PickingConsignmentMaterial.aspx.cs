@@ -56,6 +56,8 @@ namespace whusap.WebPages.WorkOrders
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             if (!IsPostBack)
             {
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
@@ -256,17 +258,6 @@ namespace whusap.WebPages.WorkOrders
             else
             {
                 //ScriptManager.RegisterStartupScript(this, this.GetType(), "script","ShowCurrentOptions()", true);
-            }
-
-            if (HttpContext.Current.Session["CNPK"].ToString().Trim() == "")
-            {
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').hide(500)", true);
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('additional data not defined')", true);
-
-            }
-            else
-            {
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "$('#btnconfirPKG').show(500)", true);
             }
 
             return MyObj;
@@ -564,7 +555,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string Click_confirPKG()
+        public static string Click_confirPKG(string QTYT)
         {
             try
             {
@@ -574,7 +565,7 @@ namespace whusap.WebPages.WorkOrders
                 string OORG = MySessionObjPicking.OORG;
                 string ORNO = MySessionObjPicking.ORNO;
                 string PONO = MySessionObjPicking.PONO;
-                string QTYT = MySessionObjPicking.QTY;
+                //string QTYT = MySessionObjPicking.QTY;
                 string QTYT_OLD = MySessionObjPicking.QTY;
                 string CUNI = MySessionObjPicking.UN;
                 string CWAR = MySessionObjPicking.WRH;
@@ -1034,6 +1025,23 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
+        public static string Drop(string PAID)
+        {
+            string res = string.Empty;
+            Ent_tticol082 Obj082 = new Ent_tticol082();
+            Obj082.STAT = "4";
+            Obj082.PAID = PAID.Trim();
+            if (_idaltwhcol122.UpdateTtico082Stat(Obj082) == true)
+            {
+                res = UrlBaseBarcode;
+            }
+            else{
+
+            }
+            return res;
+        }
+
+        [WebMethod]
         public static bool Click_confirCausal(string PAID, string Causal, string txtPallet, string LOCA)
         {
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
@@ -1087,7 +1095,7 @@ namespace whusap.WebPages.WorkOrders
                         Ent_tticol082 Obj082 = new Ent_tticol082();
                         Obj082.STAT = "3";
                         Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
-                        _idaltwhcol122.UpdateTtico082(Obj082);
+                        _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     }
                     return true;
 
@@ -1105,7 +1113,7 @@ namespace whusap.WebPages.WorkOrders
                         Ent_tticol082 Obj082 = new Ent_tticol082();
                         Obj082.STAT = "3";
                         Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
-                        _idaltwhcol122.UpdateTtico082(Obj082);
+                        _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     }
                     return true;
 
@@ -1123,7 +1131,7 @@ namespace whusap.WebPages.WorkOrders
                         Ent_tticol082 Obj082 = new Ent_tticol082();
                         Obj082.STAT = "3";
                         Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
-                        _idaltwhcol122.UpdateTtico082(Obj082);
+                        _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     }
                     return true;
                 }
