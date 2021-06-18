@@ -322,13 +322,13 @@ namespace whusa.Interfases
             }
         }
 
-        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD)
+        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, string QTYT)
         {
 
             string strError = string.Empty;
             try
             {
-                bool updateTticol082 = dal.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD);
+                bool updateTticol082 = dal.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, QTYT);
                 return updateTticol082;
 
             }
@@ -463,9 +463,9 @@ namespace whusa.Interfases
 
         }
 
-        public bool EliminarTccol307140(string PAID, ref string sentencia)
+        public bool EliminarTccol307140(string PAID, string CWAR, ref string sentencia)
         {
-            return dal.EliminarTccol307140(PAID,ref sentencia);
+            return dal.EliminarTccol307140(PAID,CWAR,ref sentencia);
 
         }
 
@@ -503,7 +503,8 @@ namespace whusa.Interfases
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString(),
-                        PICK = MyRow["PICK"].ToString()
+                        PICK = MyRow["PICK"].ToString(),
+                        SLOC = MyRow["SLOC"].ToString()
                     };
 
                     Lstwhcol122.Add(MyObjet);
@@ -547,7 +548,8 @@ namespace whusa.Interfases
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString(),
-                        PICK = MyRow["PICK"].ToString()
+                        PICK = MyRow["PICK"].ToString(),
+                        SLOC = MyRow["SLOC"].ToString()
 
 
                     };
@@ -595,7 +597,8 @@ namespace whusa.Interfases
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString(),
-                        PICK = MyRow["PICK"].ToString()
+                        PICK = MyRow["PICK"].ToString(),
+                        SLOC = MyRow["SLOC"].ToString()
 
 
                     };
@@ -659,7 +662,8 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYT = MyRow["QTYT"].ToString(),
-                        STAT = MyRow["STAT"].ToString()
+                        STAT = MyRow["STAT"].ToString(),
+                        SLOC = MyRow["SLOC"].ToString()
                     };
 
                     Lstwhcol131.Add(MyObjet);
@@ -701,7 +705,8 @@ namespace whusa.Interfases
                         ADVS = MyRow["ADVS"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         STAT = MyRow["STAT"].ToString(),
-                        PICK = MyRow["PICK"].ToString()
+                        PICK = MyRow["PICK"].ToString(),
+                        SLOC = MyRow["SLOC"].ToString()
 
                     };
 
@@ -744,7 +749,8 @@ namespace whusa.Interfases
                         //QTYT = MyRow["QTYT"].ToString(),
                         CNPK = MyRow["CNPK"].ToString(),
                         STAT = MyRow["STAT"].ToString(),
-                        PICK = MyRow["PICK"].ToString()
+                        PICK = MyRow["PICK"].ToString(),
+                        SLOC = MyRow["SLOC"].ToString()
                     };
 
                     Lstwhcol122.Add(MyObjet);

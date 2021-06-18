@@ -823,8 +823,8 @@ namespace whusap.WebPages.WorkOrders
                     Ent_tticol022 MyObj = new Ent_tticol022();
 
                     int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
-                    bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
-                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + res1 +
+                    //bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + 
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + pallet.ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP +
                         "\n" + sentencia + "\n" +
                         "\n" + sentencia1;
@@ -935,8 +935,8 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Ent_tticol042 MyObj = new Ent_tticol042();
                     int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
-                    bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
-                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + res1 +
+                    //bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + 
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + pallet.ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP +
                         "\n" + sentencia + "\n" +
                         "\n" + sentencia1;
@@ -1052,9 +1052,9 @@ namespace whusap.WebPages.WorkOrders
                     errorlog = "-Entro en 131\n";
                     int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), pallet.ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
-                    bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
-                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + res1;
-                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " + res1 +
+                    //bool res1 = twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " ";
+                    MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " +
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + pallet.ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP +
                         "\n" + sentencia + "\n" +
                         "\n" + sentencia1;
@@ -1227,7 +1227,7 @@ namespace whusap.WebPages.WorkOrders
                     twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
                     _idaltticol022.ActualizacionPalletId(PAID, stat.ToString(), strError);
-                    twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    //twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
                     _idaltwhcol122.UpdateTtico082(myObj082);
                     return true;
 
@@ -1239,7 +1239,7 @@ namespace whusap.WebPages.WorkOrders
                     twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
                     _idaltticol042.ActualizacionPalletId(PAID, stat.ToString(), strError);
-                    twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    //twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
                     _idaltwhcol122.UpdateTtico082(myObj082);
                     return true;
 
@@ -1251,7 +1251,7 @@ namespace whusap.WebPages.WorkOrders
                     twhcolDAL.ingRegTticol092140(maximo, HttpContext.Current.Session["originalPallet"].ToString().Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     twhcolDAL.InsertRegCausalCOL084(pallet, HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
                     _idaltticol125.updataPalletStatus131(PAID, stat.ToString());
-                    twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
+                    //twhcolDAL.EliminarTccol307140(pallet.Trim(), ref sentencia1);
                     _idaltwhcol122.UpdateTtico082(myObj082);
                     return true;
                 }

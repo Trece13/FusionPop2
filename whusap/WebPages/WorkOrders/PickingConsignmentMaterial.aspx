@@ -453,6 +453,7 @@
     </div>
     <script>
         var cnpk = "";
+        var sloc = "";
         var paidOk = false;
         var locaOk = false;
         var qtytOk = false;
@@ -689,6 +690,7 @@
                 lblPick.innerHTML = MyObj.PICK;
                 if (MyObj.PICK != null) {
                     cnpk = MyObj.CNPK;
+                    sloc = MyObj.SLOC;
                     sessionStorage.setItem('PICK', MyObj.PICK);
                     sessionStorage.setItem('CWAR', MyObj.WRH);
                     lblPaid.innerHTML = MyObj.PALLETID;
@@ -812,10 +814,10 @@
                 if (flag1 = true) {
                     $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                     $("#lbPaid").html(Paids);
-                    
+                    EventoAjax("Eliminar307", "{}", null);
                 }
             }
-            printDiv("MyEtiquetaDrop");
+            setTimeout(function(){printDiv("MyEtiquetaDrop")},3000);
         }
 
         var DropMultipleSuccess = function (r) {
@@ -962,9 +964,6 @@
                             printDiv("MyEtiqueta");
                         }
 
-
-
-
                         $('#Contenido_lblPalletID').html("");
                         $('#Contenido_lblItemID').html("");
                         $('#Contenido_LblLotId').html("");
@@ -1028,9 +1027,15 @@
         var paidValid = function () {
             if (txPaid.value.trim() != "") {
                 validElement(txPaid);
-                hideShowNeutroInputText(txLoca, true);
                 hideShowNeutroInputText(txQtyc, false);
                 hideShowNeutroSelect(ddReason, false);
+                if (sloc == "1") {
+                    hideShowNeutroInputText(txLoca, true);
+                }
+                else {
+                    hideShowNeutroInputText(txLoca, false);
+                    cnpk == "1" ? hideShowNeutroInputText(txQtyc, false) : hideShowNeutroInputText(txQtyc, true);
+                }
                 paidOk = true;
                 locaOk = false;
                 qtytOk = false;
@@ -1139,7 +1144,15 @@
         }
 
         function formValid() {
-            if (cnpk == "1") {
+            if (cnpk == "1" && sloc != "1") {
+                if (paidOk == true) {
+                    $('#btnConfirm').show(300);
+                }
+                else {
+                    $('#btnConfirm').hide(300);
+                }
+            }
+            else if (cnpk == "1" && sloc == "1") {
                 if (paidOk == true && locaOk == true) {
                     $('#btnConfirm').show(300);
                 }

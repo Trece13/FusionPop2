@@ -628,13 +628,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="EliminarTccol307140">
         <stringSQL>
-          delete from {0}.ttccol307{1} where t$PAID = '[:PAID]'
+          delete from {0}.ttccol307{1} where trim(T$PAID) = '[:PAID]' and trim(T$CWAR) = '[:CWAR]'
         </stringSQL>
       </operationName>
 
       <operationName name="ConsultarPalletPicking22140PAID">
         <stringSQL>
-          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,SLOC
           FROM
           (
           SELECT
@@ -656,6 +656,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
           CASE WHEN COL222.T$ACQT+COL222.T$ALLO >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
           CASE WHEN COL222.T$CWAT = COL082.T$CWAR THEN 'TRUE' ELSE 'FALSE' END AS CWAROK
@@ -672,6 +673,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL082.T$PAID = COL022.T$SQNB
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL022.T$MITM
+          LEFT JOIN {0}.TWHWMD200{1} WMD200
+          ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE COL022.T$DELE = 8
           AND COL022.T$SQNB = '[:PAID]'
           AND COL082.T$STAT IN('1','2')
@@ -682,7 +685,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking042PAID">
         <stringSQL>
-          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,SLOC
           FROM
           (
           SELECT
@@ -704,6 +707,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
           CASE WHEN (COL242.T$ACQT+COL242.T$ALLO) >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
           CASE WHEN COL242.T$CWAT = COL082.T$CWAR THEN 'TRUE' ELSE 'FALSE' END AS CWAROK
@@ -720,6 +724,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL082.T$PAID = COL042.T$SQNB
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL042.T$MITM
+          LEFT JOIN {0}.TWHWMD200{1} WMD200
+          ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE COL042.T$DELE = 8
           AND COL042.T$SQNB = '[:PAID]'
           AND COL082.T$STAT IN('1','2')
@@ -730,7 +736,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking131PAID">
         <stringSQL>
-          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,SLOC
           FROM
           (
           SELECT
@@ -752,6 +758,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
           CASE WHEN (COL131.T$QTYA+COL131.T$ALLO) >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
           CASE WHEN COL131.T$CWAA = COL082.T$CWAR THEN 'TRUE' ELSE 'FALSE' END AS CWAROK
@@ -765,6 +772,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL082.T$PAID = COL131.T$PAID
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL131.T$ITEM
+          LEFT JOIN {0}.TWHWMD200{1} WMD200
+          ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE (COL131.T$STAT = 6 OR COL131.T$STAT = 3)
           AND COL131.T$PAID = '[:PAID]'
           AND COL082.T$STAT IN('1','2')
@@ -1101,7 +1110,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22With082">
         <stringSQL>
-          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,SLOC
           FROM(SELECT
           COL020.T$CNPK CNPK,
           COL022.T$DELE STAT,
@@ -1120,6 +1129,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$ORNO ORNO,
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
+          WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
           FROM BAAN.TTICOL082140 COL082
           INNER JOIN BAAN.TTICOL022140 COL022
@@ -1138,6 +1148,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL136.T$CWAR = COL082.T$CWAR
           LEFT JOIN BAAN.TTCCOL020140 COL020
           ON COL020.T$ITEM = COL022.T$MITM
+          LEFT JOIN {0}.TWHWMD200{1} WMD200
+          ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE COL022.T$DELE = 8
           AND COL307.T$PAID IS NULL
           AND COL082.T$STAT = 1
@@ -1147,7 +1159,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking042With082">
         <stringSQL>
-          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,SLOC
           FROM(SELECT
           COL020.T$CNPK CNPK,
           COL042.T$DELE STAT,
@@ -1166,6 +1178,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$ORNO ORNO,
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
+          WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
           FROM {0}.TTICOL082{1} COL082
           INNER JOIN {0}.TTICOL042{1} COL042
@@ -1184,6 +1197,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL136.T$CWAR = COL082.T$CWAR
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL042.T$MITM
+          LEFT JOIN {0}.TWHWMD200{1} WMD200
+          ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE COL042.T$DELE = 8
           AND COL307.T$PAID IS NULL
           AND COL082.T$STAT = 1
@@ -1193,7 +1208,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking131With082">
         <stringSQL>
-          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,QTYT,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,QTYT,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,SLOC
           FROM(SELECT
           COL020.T$CNPK CNPK,
           COL131.T$STAT STAT,
@@ -1213,10 +1228,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
           FROM    {0}.TTICOL082{1} COL082
           INNER JOIN {0}.TWHCOL131{1} COL131
-          ON COL082.T$PICK = COL082.T$PAID
+          ON COL131.T$PAID = COL082.T$PAID
           LEFT JOIN {0}.TTCCOL307{1} COL307
           ON COL082.T$PICK = COL307.T$PAID
           AND COL307.T$CWAR = COL082.T$CWAR
@@ -1228,6 +1244,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL136.T$CWAR = COL082.T$CWAR
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL131.T$ITEM
+          LEFT JOIN {0}.TWHWMD200{1} WMD200
+          ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE COL307.T$PAID IS NULL
           AND COL082.T$STAT = 1
           AND COL131.T$CWAA = NVL('[:T$CWAR]',COL131.T$CWAA))
@@ -1348,7 +1366,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           update  {0}.tticol082{1}
           set
-          T$PAID ='[:PAID_NEW]'
+          T$PAID ='[:PAID_NEW]',
+          T$QTYT ='[:QTYT]'
           WHERE T$PAID = '[:PAID_OLD]'
         </stringSQL>
       </operationName>

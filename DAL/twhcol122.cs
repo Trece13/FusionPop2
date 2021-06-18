@@ -582,7 +582,7 @@ namespace whusa.DAL
 
         }
 
-        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD)
+        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, string QTYT)
         {
             bool retorno = false;
             method = MethodBase.GetCurrentMethod();
@@ -590,6 +590,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID_NEW", PAID_NEW);
             paramList.Add(":PAID_OLD", PAID_OLD);
+            paramList.Add(":QTYT", QTYT);
 
 
             string tabla = ".tticol082";
@@ -940,7 +941,7 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public bool EliminarTccol307140(string PAID, ref string sentencia)
+        public bool EliminarTccol307140(string PAID,string CWAR, ref string sentencia)
         {
             bool Retorno = false;
             method = MethodBase.GetCurrentMethod();
@@ -948,7 +949,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
 
             paramList.Add(":PAID", PAID.Trim());
-
+            paramList.Add(":CWAR", CWAR.Trim());
 
             strSentencia = recursos.readStatement(metodo2, method.Name, ref owner, ref env, tabla, paramList);
             sentencia = strSentencia;
