@@ -916,13 +916,14 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking131PAID(string PAID, string USER, string STAT)
+        public DataTable ConsultarPalletPicking131PAID(string PAID, string CWAR,string USER, string STAT)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID", PAID.Trim());
             paramList.Add(":STAT", STAT.Trim());
+            paramList.Add(":CWAR", CWAR.Trim());
             string tabla = owner + ".twhcol131140";
             string name1 = "ConsultarPalletPicking131PAID";
 
