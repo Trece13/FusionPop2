@@ -703,13 +703,13 @@
                     divTables.classList.add("col-7");
                     divTables.classList.remove("col-12");
                     $("#formPicking").show(500);
-                    ShowCurrentOptionsItem();
                 } else {
                     $("#formPicking").hide(500);
                     divTables.classList.remove("col-7");
                     divTables.classList.add("col-12");
                 }
 
+                ShowCurrentOptionsItem();
                 ShowCurrentOptionsWarehouse();
             }
             else {

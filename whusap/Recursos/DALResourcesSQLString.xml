@@ -669,8 +669,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.TTCMCS003{1} MCS003
           ON MCS003.T$CWAR = COL222.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
-          ON COL082.T$ITEM = COL022.T$MITM
-          AND COL082.T$PAID = COL022.T$SQNB
+          ON COL082.T$PAID = COL022.T$SQNB
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL022.T$MITM
           LEFT JOIN {0}.TWHWMD200{1} WMD200
@@ -720,8 +719,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.TTCMCS003{1} MCS003
           ON MCS003.T$CWAR = COL242.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
-          ON COL082.T$ITEM = COL042.T$MITM
-          AND COL082.T$PAID = COL042.T$SQNB
+          ON COL082.T$PAID = COL042.T$SQNB
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL042.T$MITM
           LEFT JOIN {0}.TWHWMD200{1} WMD200
@@ -768,14 +766,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.TTCMCS003{1} MCS003
           ON MCS003.T$CWAR = COL131.T$CWAA
           INNER JOIN {0}.TTICOL082{1} COL082
-          ON COL082.T$ITEM = COL131.T$ITEM
-          AND COL082.T$PAID = COL131.T$PAID
+          ON COL082.T$PAID = COL131.T$PAID
           LEFT JOIN {0}.TTCCOL020{1} COL020
           ON COL020.T$ITEM = COL131.T$ITEM
           LEFT JOIN {0}.TWHWMD200{1} WMD200
           ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE (COL131.T$STAT = 6 OR COL131.T$STAT = 3)
           AND COL131.T$PAID = '[:PAID]'
+          AND COL131.T$CWAA = NVL('[:CWAR]',COL131.T$CWAA)
           AND COL082.T$STAT IN('1','2')
           )
           WHERE ROWN = 1
@@ -940,7 +938,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22ItemQty">
         <stringSQL>
-          SELECT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,QTYT
           FROM
           (
           SELECT
@@ -954,16 +952,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL222.T$ACQT QTY,
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
-          COL082.T$PRIO PRIO,
           COL222.T$ACLO LOCA,
-          COL082.T$OORG OORG,
-          COL082.T$ORNO ORNO,
-          COL082.T$PONO PONO,
-          COL082.T$ADVS ADVS,
           RANK() OVER(ORDER BY COL022.T$SQNB, COL022.T$DATE) ROWN
           FROM {0}.TTICOL022{1} COL022
-          LEFT JOIN {0}.TTCCOL307{1} COL307
-          ON COL022.T$SQNB = COL307.T$PAID
           INNER JOIN {0}.TTICOL222{1} COL222
           ON COL222.T$PDNO = COL022.T$PDNO
           AND COL222.T$SQNB = COL022.T$SQNB
@@ -973,21 +964,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON MCS003.T$CWAR = COL222.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
           ON COL082.T$ITEM = COL022.T$MITM
-          WHERE COL022.T$DELE = 7
-          AND COL307.T$PAID IS NULL
           AND COL222.T$ACQT >= COL082.T$QTYT
           AND COL222.T$CWAT = COL082.T$CWAR
-          AND COL222.T$ACQT >= '[:QTYT]'
+          WHERE COL022.T$DELE = 7
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
-          AND COL082.T$PRIO = '[:PRIO]'
-          ORDER BY COL022.T$DATE,PALLETID
           )
           WHERE ROWN &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042ItemQty">
         <stringSQL>
-          SELECT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,QTYT
           FROM
           (
           SELECT
@@ -1001,16 +988,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL242.T$ACQT QTY,
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
-          COL082.T$PRIO PRIO,
           COL242.T$ACLO LOCA,
-          COL082.T$OORG OORG,
-          COL082.T$ORNO ORNO,
-          COL082.T$PONO PONO,
-          COL082.T$ADVS ADVS,
           RANK() OVER(ORDER BY COL042.T$SQNB, COL042.T$DATE) ROWN
           FROM {0}.TTICOL042{1} COL042
-          LEFT JOIN {0}.TTCCOL307{1} COL307
-          ON COL042.T$SQNB = COL307.T$PAID
           INNER JOIN {0}.TTICOL242{1} COL242
           ON COL242.T$PDNO = COL042.T$PDNO
           AND COL242.T$SQNB = COL042.T$SQNB
@@ -1020,21 +1000,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON MCS003.T$CWAR = COL242.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
           ON COL082.T$ITEM = COL042.T$MITM
-          WHERE COL042.T$DELE = 7
-          AND COL307.T$PAID IS NULL
           AND COL242.T$ACQT >= COL082.T$QTYT
           AND COL242.T$CWAT = COL082.T$CWAR
-          AND COL242.T$ACQT >= '[:QTYT]'
+          WHERE COL042.T$DELE = 7
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
-          AND COL082.T$PRIO = '[:PRIO]'
-          ORDER BY COL042.T$DATE,PALLETID
           )
           WHERE ROWN &lt;= 3
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131ItemQty">
         <stringSQL>
-          SELECT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA
           FROM
           (
           SELECT
@@ -1048,31 +1024,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL131.T$QTYA QTY,
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
-          COL082.T$PRIO PRIO,
           COL131.T$LOAA LOCA,
-          COL082.T$OORG OORG,
-          COL082.T$ORNO ORNO,
-          COL082.T$PONO PONO,
-          COL082.T$ADVS ADVS,
           COL131.T$DATE-5/24,
-          ROWNUM ROWN
+          RANK() OVER (PARTITION BY COL082.T$PICK ORDER BY COL131.T$DATE, COL131.T$PAID) ROWN
           FROM {0}.TWHCOL131{1} COL131
-          LEFT JOIN {0}.TTCCOL307{1} COL307
-          ON COL131.T$PAID = COL307.T$PAID
           INNER JOIN {0}.TTCIBD001{1} IBD001
           ON IBD001.T$ITEM = COL131.T$ITEM
           INNER JOIN {0}.TTCMCS003{1} MCS003
           ON MCS003.T$CWAR = COL131.T$CWAA
           INNER JOIN {0}.TTICOL082{1} COL082
           ON COL082.T$ITEM = COL131.T$ITEM
+          AND COL082.T$QTYT &lt;= COL131.T$QTYA
+          AND COL082.T$CWAR = COL131.T$CWAA
           WHERE COL131.T$STAT = 3
-          AND COL307.T$PAID IS NULL
-          AND COL131.T$QTYA >= COL082.T$QTYT
-          AND COL131.T$CWAA = COL082.T$CWAR
-          AND COL131.T$QTYA >= '[:QTYT]'
           AND TRIM(COL131.T$ITEM) = TRIM('[:ITEM]')
-          AND COL082.T$PRIO = '[:PRIO]'
-          ORDER BY COL131.T$DATE, PALLETID
           )
           WHERE ROWN &lt;= 3
         </stringSQL>
