@@ -5115,6 +5115,58 @@
       </Idiom>
     </Module>
 
+    <Module name="DropPickedMaterialOnTunnel.aspx">
+      <Idiom name="INGLES">
+        <operationName name="Thedropprocessissuccess">
+          <stringMessage>
+            Information saved successfully
+          </stringMessage>
+        </operationName>
+        <operationName name="Thedropprocessisnotsuccess">
+          <stringMessage>
+            The drop process is not success
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDDoesntexist">
+          <stringMessage>
+            Pick ID has been droped before
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDnotvalidfordropprocess">
+          <stringMessage>
+            Pick ID not valid for drop process
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="Thedropprocessissuccess">
+          <stringMessage>
+            Information saved successfully
+          </stringMessage>
+        </operationName>
+        <operationName name="Thedropprocessisnotsuccess">
+          <stringMessage>
+            The drop process is not success
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDDoesntexist">
+          <stringMessage>
+            Pick ID has been droped before
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDnotvalidfordropprocess">
+          <stringMessage>
+            Pick ID not valid for drop process
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDDoesntexist">
+          <stringMessage>
+            Pick ID has not been picked
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
+
     <Module name="InventoryTakingByPalletIDWarehousesNotControlledByLocation.aspx">
       <Idiom name="INGLES">
         <operationName name="ItemcodeisnotPurchaseType">
