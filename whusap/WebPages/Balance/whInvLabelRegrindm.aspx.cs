@@ -300,10 +300,27 @@ namespace whusap.WebPages.Balance
             Session["strTagid"] = strTagId;
 
             StringBuilder script = new StringBuilder();
-            script.Append("ventanaImp = window.open('../Labels/whInvLabelRegrind.aspx', ");
-            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+            //script.Append("ventanaImp = window.open('../Labels/whInvLabelRegrind.aspx', ");
+            //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+            //script.Append("ventanaImp.moveTo(30, 0);");
+            ////script.Append("setTimeout (ventanaImp.close(), 20000);");
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+
+            Session["Reprint"] = "yes";
+            Session["MaterialDesc"] = descItem;
+            Session["Material"] = filaImprimir.ItemArray[2].ToString().Trim();
+            Session["codePaid"] = strTagId;
+            Session["Lot"] = filaImprimir.ItemArray[0].ToString();
+            Session["Quantity"] = filaImprimir.ItemArray[3].ToString().Trim() + " " + unityItem;
+            Session["Date"] = Convert.ToDateTime(filaImprimir.ItemArray[6].ToString().Trim()).ToString("MM/dd/yyyy");
+            Session["Machine"] = ActiveMachine;
+            Session["Operator"] = Session["user"].ToString();
+            Session["Pallet"] = strTagId;
+
+            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/3Regrinds.aspx', ");
+            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
             script.Append("ventanaImp.moveTo(30, 0);");
-            //script.Append("setTimeout (ventanaImp.close(), 20000);");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
             listRegrind.Focus();

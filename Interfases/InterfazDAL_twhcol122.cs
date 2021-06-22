@@ -517,7 +517,7 @@ namespace whusa.Interfases
         public List<EntidadPicking> ConsultarPalletPicking042PAID(string PAID, string UrlBaseBarcode, string USER,string STAT)
         {
             List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
-            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042PAID(PAID, USER,STAT);
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042PAID(PAID,USER,STAT);
             if (DTwhcolo42.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo42.Rows)
@@ -562,10 +562,10 @@ namespace whusa.Interfases
         }
 
 
-        public List<EntidadPicking> ConsultarPalletPicking131PAID(string PAID, string UrlBaseBarcode, string USER, string STAT)
+        public List<EntidadPicking> ConsultarPalletPicking131PAID(string PAID,string CWAR, string UrlBaseBarcode, string USER, string STAT)
         {
             List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
-            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131PAID(PAID,USER,STAT);
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131PAID(PAID,CWAR,USER, STAT);
             if (DTwhcolo131.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo131.Rows)
@@ -663,7 +663,8 @@ namespace whusa.Interfases
                         CNPK = MyRow["CNPK"].ToString(),
                         QTYT = MyRow["QTYT"].ToString(),
                         STAT = MyRow["STAT"].ToString(),
-                        SLOC = MyRow["SLOC"].ToString()
+                        SLOC = MyRow["SLOC"].ToString(),
+                        PICK = MyRow["PICK"].ToString()
                     };
 
                     Lstwhcol131.Add(MyObjet);
@@ -781,15 +782,15 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        PRIO = MyRow["PRIO"].ToString(),
+                        //PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
-                        ROWN = MyRow["ROWN"].ToString(),
-                        OORG = MyRow["OORG"].ToString(),
-                        ORNO = MyRow["ORNO"].ToString(),
+                        //ROWN = MyRow["ROWN"].ToString(),
+                        //OORG = MyRow["OORG"].ToString(),
+                        //ORNO = MyRow["ORNO"].ToString(),
                         //OSET = MyRow["OSET"].ToString(),
-                        PONO = MyRow["PONO"].ToString(),
+                        //PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
-                        ADVS = MyRow["ADVS"].ToString(),
+                        //ADVS = MyRow["ADVS"].ToString(),
                         STAT = MyRow["STAT"].ToString()
 
                     };
@@ -822,15 +823,15 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        PRIO = MyRow["PRIO"].ToString(),
+                        //PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
-                        ROWN = MyRow["ROWN"].ToString(),
-                        OORG = MyRow["OORG"].ToString(),
-                        ORNO = MyRow["ORNO"].ToString(),
-                        //OSET = MyRow["OSET"].ToString(),
-                        PONO = MyRow["PONO"].ToString(),
+                        //ROWN = MyRow["ROWN"].ToString(),
+                        //OORG = MyRow["OORG"].ToString(),
+                        //ORNO = MyRow["ORNO"].ToString(),
+                        ////OSET = MyRow["OSET"].ToString(),
+                        //PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
-                        ADVS = MyRow["ADVS"].ToString(),
+                        //ADVS = MyRow["ADVS"].ToString(),
 
                     };
 
@@ -861,16 +862,16 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        PRIO = MyRow["PRIO"].ToString(),
+                        //PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
-                        ROWN = MyRow["ROWN"].ToString(),
-                        OORG = MyRow["OORG"].ToString(),
-                        ORNO = MyRow["ORNO"].ToString(),
+                        //ROWN = MyRow["ROWN"].ToString(),
+                        //OORG = MyRow["OORG"].ToString(),
+                        //ORNO = MyRow["ORNO"].ToString(),
                         //OSET = MyRow["OSET"].ToString(),
-                        PONO = MyRow["PONO"].ToString(),
+                        //PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
-                        ADVS = MyRow["ADVS"].ToString(),
-                        QTYT = MyRow["QTYT"].ToString(),
+                        //ADVS = MyRow["ADVS"].ToString(),
+                        //QTYT = MyRow["QTYT"].ToString(),
 
                     };
 

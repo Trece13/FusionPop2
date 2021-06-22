@@ -938,7 +938,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22ItemQty">
         <stringSQL>
-          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,QTYT
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN
           FROM
           (
           SELECT
@@ -946,14 +946,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL022.T$SQNB PALLETID,
           COL022.T$MITM ITEM,
           IBD001.T$DSCA DESCRIPTION,
-          COL082.T$QTYT QTYT,
           COL022.T$PDNO LOT,
           COL222.T$CWAT WRH,
           COL222.T$ACQT QTY,
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
           COL222.T$ACLO LOCA,
-          RANK() OVER(ORDER BY COL022.T$SQNB, COL022.T$DATE) ROWN
+          ROW_NUMBER() OVER( PARTITION BY COL022.T$SQNB ORDER BY COL022.T$SQNB, COL022.T$DATE ) ROWN 
           FROM {0}.TTICOL022{1} COL022
           INNER JOIN {0}.TTICOL222{1} COL222
           ON COL222.T$PDNO = COL022.T$PDNO
@@ -969,12 +968,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL022.T$DELE = 7
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN &lt;= 3
+          WHERE ROWN = 1 order by PALLETID asc
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042ItemQty">
         <stringSQL>
-          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,QTYT
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN
           FROM
           (
           SELECT
@@ -989,7 +988,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
           COL242.T$ACLO LOCA,
-          RANK() OVER(ORDER BY COL042.T$SQNB, COL042.T$DATE) ROWN
+          ROW_NUMBER() OVER( PARTITION BY COL042.T$SQNB ORDER BY COL042.T$SQNB, COL022.T$DATE ) ROWN 
           FROM {0}.TTICOL042{1} COL042
           INNER JOIN {0}.TTICOL242{1} COL242
           ON COL242.T$PDNO = COL042.T$PDNO
@@ -1005,7 +1004,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL042.T$DELE = 7
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN &lt;= 3
+          WHERE ROWN = 1 order by PALLETID asc
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131ItemQty">
@@ -1564,13 +1563,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="Actualizartticol082">
         <stringSQL>
           update {0}.tticol082{1} set t$stat = 4
-          where T$PICK = '[:PICK]'
-          and   T$STAT = '2'
-          --T$PAID =  '[:PAID]'
-          --AND T$PRIO = '[:PRIO]'
-          --AND T$ADVS = '[:ADVS]'
-          --AND T$PONO = '[:PONO]'
-          --AND T$ORNO = '[:ORNO]'
+          where
+          T$PAID =  '[:PAID]'
+          AND T$PRIO = '[:PRIO]'
+          AND T$ADVS = '[:ADVS]'
+          AND T$PONO = '[:PONO]'
+          AND T$ORNO = '[:ORNO]'
         </stringSQL>
       </operationName>
       <operationName name="Actualizartwhcol131">
@@ -1590,7 +1588,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletIDTticol082">
         <stringSQL>
-          SELECT distinct TBL,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
+          SELECT distinct TBL,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,
           ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO,stap FROM(
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol131140 col131
           UNION
@@ -1603,8 +1601,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN BAAN.tticol242140 T242 ON  T242.T$SQNB = T042.T$SQNB
           )ConGlobal INNER JOIN BAAN.tticol082140 ticol082 ON ConGlobal.PAID = ticol082.t$PAID AND ticol082.T$STAT =  2 INNER JOIN BAAN.ttirou002140 tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
           LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
-          --WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
-          WHERE TRIM(ticol082.T$PICK) = TRIM('[:PAID]')
+          WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
           <!--SELECT distinct TBL,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,
           ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO ORNO,STAP FROM (
           select 'ticol022' AS  TBL, T022.T$SQNB AS PAID,T022.T$QTDL AS QTYT,T022.T$CUNI AS UNIT, T022.T$MITM AS ITEM,T022.t$dele as stap, T222.T$ACQT AS QTYA from {0}.tticol022{1} T022

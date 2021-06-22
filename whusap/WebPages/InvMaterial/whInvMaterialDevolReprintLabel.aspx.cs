@@ -171,10 +171,6 @@ namespace whusap.WebPages.InvMaterial
                 }
             }
 
-        protected void Page_Unload(object sender, EventArgs e)
-        {
-            Session["resultado"] = null;
-        }
         protected void grdRecords_RowCommand(object sender, GridViewCommandEventArgs e)
             {
                 if (e.CommandName == "btnPrint_Click")
