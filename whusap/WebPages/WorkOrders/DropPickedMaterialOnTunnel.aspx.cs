@@ -107,7 +107,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     ORNO = myObjDt["ORNO"].ToString(),
                     QTYC = myObjDt["QTYA"].ToString(),
                     PICK = myObjDt["PICK"].ToString(),
-                    PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"].ToString() + "&code=Code128&dpi=96"
+                    PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"].ToString() + "&code=Code128&dpi=967"
                 };
                 bool ActalizacionExitosa = false;
                 switch (MyObj.TBL)
