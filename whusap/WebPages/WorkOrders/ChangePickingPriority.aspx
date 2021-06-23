@@ -10,4 +10,96 @@
         crossorigin="anonymous"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
+    <div class="container-fluid col-12 animate__animated animate__fadeInLeft" style="margin-bottom: 200px">
+        <div class="row" id="formWarehouse">
+            <div class="col-6">
+                <form>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="ddMachine">Machine</label>
+                                </div>
+                            </div>
+
+                            <select id="ddWare" class="form-control">
+                                <option value="0" selected>Select Machine</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="divStartPicking" class="row">
+                        <div class="col-6">
+                            <button class="btn btn-primary col-12 btn-sm" id="btnStarPicking" type="button">Start Picking</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr />
+        <br />
+        <div id="divPicketPrio" class="col-12">
+            <table id="tblPicketPending" class="table animate__animated animate__fadeInLeft" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Pick ID</th>
+                        <th scope="col">Work Order</th>
+                        <th scope="col">Requested On</th>
+                        <th scope="col">Priority</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="bdPicketPending">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var LoadControls = function () {
+
+        }
+
+        var loadPicks = function () {
+            if (ddWare.value == "0") {
+                $("#btnStarPicking").hide(100);
+                $('#divPicketPending').hide(100);
+                $("#formPicking").hide(100);
+                divTableWarehouse.innerHTML = '';
+                divTableItem.innerHTML = '';
+            }
+            else {
+                $("#formPicking").hide(100);
+                divTableWarehouse.innerHTML = '';
+                divTableItem.innerHTML = '';
+                EventoAjax("loadPicksPending", "{'CWAR':'" + ddWare.value + "'}", loadPicksSuccess);
+            }
+        }
+        var loadPicksSuccess = function (r) {
+
+            var MyObjLst = JSON.parse(r.d);
+            if (bdPicketPending.childElementCount > 0) {
+                for (let i = bdPicketPending.childElementCount - 1; i >= 0 ; i--) {
+                    bdPicketPending.children[i].remove()
+                }
+            }
+            $("#btnStarPicking").show(100);
+            var bodyRows = "";
+            if (MyObjLst.length > 0) {
+                $('#divPicketPending').show(100);
+                MyObjLst.forEach(function (item, i) {
+
+                    if (item.T$STAT == 1) {
+                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                    }
+                    else {
+                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                    }
+                });
+            }
+            else {
+                $('#divPicketPending').hide(100);
+            }
+            $("#bdPicketPending").append(bodyRows);
+        }
+    </script>
 </asp:Content>

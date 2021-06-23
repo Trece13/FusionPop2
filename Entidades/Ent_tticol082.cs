@@ -34,6 +34,7 @@ namespace whusa.Entidades
             this.LOCA = string.Empty;
             this.CUNI = string.Empty;
             this.QTYC = string.Empty;
+            this.PICK_URL = string.Empty;
         }
 
         public string OORG { get; set; }
@@ -60,7 +61,7 @@ namespace whusa.Entidades
         public string LOCA { get; set; }
         public string CUNI { get; set; }
         public string QTYC { get; set; }
-
+        public string PICK_URL { get; set; }
         public bool Error { get; set; }
         public string TipeMsgJs { get; set;}
         public string ErrorMsg { get; set; }

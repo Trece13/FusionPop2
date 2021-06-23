@@ -122,34 +122,40 @@
         </div>
     </div>
     <div id="LblEtiqueta">
-        <div id="diseño" style="width: 6in; height: 4in; border: solid 1px black;">
-            <div id="centrado" style="margin-top: 120px;">
-                <div class="form-group row datoEti" style="padding-left: 200px;">
-                    <label class="col-sm-2 col-form-label-lg" id="Label1" style="font-size:42px">
-                        Pick Id1: <label class="col-sm-12 col-form-label-lg" id="LblPickIdVal" style="font-size:42px"></label>
-                    </label>
-                    <div class="col-sm-3">
-                        
-                    </div>
-                </div>
-                <div class="form-group row datoEti" style="padding-left: 200px;">
-                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="Label4" style="font-size:42px">
-                        Machine: <label class="col-sm-12 col-form-label-lg" id="lblMachine" style="font-size:42px"></label>
-                    </label>
-                    <div class="col-sm-3">
-                        
-                    </div>
-                </div>
-                <div class="form-group row datoEti" style="padding-left: 200px;">
-                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="Label2" style="font-size:42px">
-                        Pallet(s): <label class="col-sm-12 col-form-label-lg" id="LblPalletsVal" style="font-size:42px"></label>
-                    </label>
-                    <div class="col-sm-3">
-                        
-                    </div>
-                </div>
+        <div id="MyEtiquetaDrop" style="display:none; width: 6in; height:4in; border:solid 1px;">
+                <table style="margin: auto">
+                    <tr>
+                        <td>
+                        <label style="font-size: 30px">
+                        Pick ID</label>
+                        </td>
+                        <td colspan="4">
+                            <img src="~/images/logophoenix_login.jpg" runat="server" id="LblPickIdVal" alt="" hspace="60"
+                                vspace="5" style="width: 3in; height: 1in; margin: 0px !important" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Machine</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 30px" id="lblMachine">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Pallet(s) </label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 30px" id="LblPalletsVal">
+                             </label>
+                        </td>
+                    </tr>
+                </table>
             </div>
-        </div>
     </div>
     <br />
     <label id="lblMsg">
@@ -308,7 +314,7 @@
                 LblMachineval.html(MyObj.MCNO);
                 LblMachinedes.html(MyObj.DSCAM);
                 LblPalletsVal.html(MyObj.PAID);
-                LblPickIdVal.html(MyObj.PICK);
+                $("#Contenido_LblPickIdVal").attr("src", MyObj.PICK_URL);
                 DetallePallet.show();
             }
         }

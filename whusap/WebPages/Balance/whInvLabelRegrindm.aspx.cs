@@ -307,7 +307,7 @@ namespace whusap.WebPages.Balance
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
-            Session["Reprint"] = "yes";
+            Session["Reprint"] = "no";
             Session["MaterialDesc"] = descItem;
             Session["Material"] = filaImprimir.ItemArray[2].ToString().Trim();
             Session["codePaid"] = strTagId;
