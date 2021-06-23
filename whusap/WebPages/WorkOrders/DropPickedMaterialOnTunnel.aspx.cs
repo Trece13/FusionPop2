@@ -116,22 +116,37 @@ namespace whusap.WebPages.WorkOrders.NewPages
                         //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
                         //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartticol022(MyObj); } else { ActalizacionExitosa = false; }
+                        if (MyObj.Error != true)
+                        {
+                            ActalizacionExitosa = true;
+                        }
                         break;
                      case "whcol131":
                         //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
                         //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartwhcol131(MyObj); } else { ActalizacionExitosa = false; }
-
+                        if (MyObj.Error != true)
+                        {
+                            ActalizacionExitosa = true;
+                        }
                         break;
                     case "whcol130":
                         //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
                         //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartwhcol130(MyObj); } else { ActalizacionExitosa = false; }
+                        if (MyObj.Error != true)
+                        {
+                            ActalizacionExitosa = true;
+                        }
                         break;
                     case "ticol042":
                         //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
                         Itticol082.Actualizartticol082(MyObj);
                         //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartticol042(MyObj); } else { ActalizacionExitosa = false; }
+                        if (MyObj.Error != true)
+                        {
+                            ActalizacionExitosa = true;
+                        }
                         break;
                 }
                 if (ActalizacionExitosa)
@@ -141,13 +156,13 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.SuccessMsg = Thedropprocessissuccess;
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
-                else if (MyObj.QTYC.Trim() != "0")
-                {
-                    MyObj.Error = false;
-                    MyObj.TipeMsgJs = "alert";
-                    MyObj.SuccessMsg = Thedropprocessissuccess;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                }
+                //else if (MyObj.QTYC.Trim() != "0")
+                //{
+                //    MyObj.Error = false;
+                //    MyObj.TipeMsgJs = "alert";
+                //    MyObj.SuccessMsg = Thedropprocessissuccess;
+                //    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                //}
                 else
                 {
                     MyObj.Error = true;

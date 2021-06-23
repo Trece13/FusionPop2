@@ -380,7 +380,8 @@ namespace whusa.DAL
             try
             {
                 paramList = new Dictionary<string, object>();
-                paramList.Add(":PAID", PalletID);
+                //paramList.Add(":PAID", PalletID);
+                paramList.Add(":PICK", PalletID);
 
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
@@ -501,6 +502,8 @@ namespace whusa.DAL
                     ex.Message;
 
             }
+            MyObj.Error = true;
+            MyObj.ErrorMsg = strError;
             return retorno;
         }
         public bool Actualizartwhcol131(Ent_tticol082 MyObj)
