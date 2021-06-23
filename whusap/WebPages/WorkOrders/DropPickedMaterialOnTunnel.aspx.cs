@@ -13,11 +13,13 @@ using System.Threading;
 using System.Globalization;
 using System.Configuration;
 using whusa.Utilidades;
+using System.Web.Configuration;
 
 namespace whusap.WebPages.WorkOrders.NewPages
 {
     public partial class DropPickedMaterialOnTunnel : System.Web.UI.Page
     {
+        public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         string formName = string.Empty;
@@ -104,7 +106,8 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     PONO = myObjDt["PONO"].ToString(),
                     ORNO = myObjDt["ORNO"].ToString(),
                     QTYC = myObjDt["QTYA"].ToString(),
-                    PICK = myObjDt["PICK"].ToString()
+                    PICK = myObjDt["PICK"].ToString(),
+                    PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"].ToString() + "&code=Code128&dpi=96"
                 };
                 bool ActalizacionExitosa = false;
                 switch (MyObj.TBL)
