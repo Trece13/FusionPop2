@@ -31,6 +31,8 @@ namespace whusap.WebPages.WorkOrders.NewPages
         public static string Thedropprocessisnotsuccess = mensajes("Thedropprocessisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
         public static string PalletIDnotvalidfordropprocess = mensajes("PalletIDnotvalidfordropprocess");
+        public static string Thepickhasawarehouseonconsignment = mensajes("Thepickhasawarehouseonconsignment");
+        public static string Thepickhasacwarehousewithoutconsignment = mensajes("Thepickhasacwarehousewithoutconsignment");
 
 
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
@@ -185,7 +187,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
         }
 
         [WebMethod]
-        public static string SearchPickID(string PickID)
+        public static string SearchPickID(string PickID, bool consigment = false)
         {
             Ent_tticol082 MyObj = new Ent_tticol082();
             DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082(PickID);
@@ -211,6 +213,23 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.ORNO = myObjDt["ORNO"].ToString();
                     MyObj.STAT = myObjDt["STAT"].ToString();
                     MyObj.STAP = myObjDt["STAP"].ToString();
+                    MyObj.TYPW = myObjDt["TYPW"].ToString();
+
+                    if (consigment == true && MyObj.TYPW != "21")
+                    {
+                        MyObj.Error = true;
+                        MyObj.TipeMsgJs = "alert";
+                        MyObj.ErrorMsg = Thepickhasacwarehousewithoutconsignment;
+                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    }
+                    else if (consigment == false && MyObj.TYPW != "1")
+                    {
+                        MyObj.Error = true;
+                        MyObj.TipeMsgJs = "alert";
+                        MyObj.ErrorMsg = Thepickhasawarehouseonconsignment;
+                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    }
+ 
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
             }

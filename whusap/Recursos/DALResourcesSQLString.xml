@@ -1589,7 +1589,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletIDTticol082">
         <stringSQL>
-          SELECT distinct TBL,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
+          SELECT distinct TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
           ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO,stap FROM(
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol131140 col131
           UNION
@@ -1602,22 +1602,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN BAAN.tticol242140 T242 ON  T242.T$SQNB = T042.T$SQNB
           )ConGlobal INNER JOIN BAAN.tticol082140 ticol082 ON ConGlobal.PAID = ticol082.t$PAID AND ticol082.T$STAT =  2 INNER JOIN BAAN.ttirou002140 tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
           LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          LEFT JOIN baan.ttcmcs003140 mcs003 ON mcs003.T$CWAR = ticol082.T$CWAR
           --WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
           WHERE TRIM(ticol082.T$PICK) = TRIM('[:PICK]')
-          <!--SELECT distinct TBL,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,
-          ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO ORNO,STAP FROM (
-          select 'ticol022' AS  TBL, T022.T$SQNB AS PAID,T022.T$QTDL AS QTYT,T022.T$CUNI AS UNIT, T022.T$MITM AS ITEM,T022.t$dele as stap, T222.T$ACQT AS QTYA from {0}.tticol022{1} T022
-          LEFT JOIN {0}.tticol222{1} T222 ON  T222.T$SQNB = T022.T$SQNB
-          UNION
-          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT,T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap from {0}.twhcol131{1} col131
-          UNION
-          select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT,T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap from {0}.twhcol130{1} col130
-          UNION
-          select 'ticol042' AS  TBL, T042.T$SQNB AS PAID,T042.T$QTDL AS QTYT,T042.T$CUNI AS UNIT, T042.T$MITM AS ITEM,T042.t$dele as stap, T242.T$ACQT AS QTYA from {0}.tticol042{1} T042
-          LEFT JOIN {0}.tticol242{1} T242 ON  T242.T$SQNB = T042.T$SQNB
-          ) ConGlobal INNER JOIN {0}.tticol082{1} ticol082 ON ConGlobal.PAID = ticol082.t$PAID AND ticol082.T$STAT =  2 INNER JOIN {0}.ttirou002{1} tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
-          LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
-          WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')-->
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletIDTticol083">

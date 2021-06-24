@@ -1,107 +1,103 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="DropPickedMaterialOnTunnel.aspx.cs" Inherits="whusap.WebPages.WorkOrders.NewPages.DropPickedMaterialOnTunnel" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <style>
-        .InputIncorrecto
-        {
+        #lblConsigment {
+            margin-left: 20px;
+        }
+        .InputIncorrecto {
             border-bottom: solid 3px red;
             color: Red;
         }
-        .InputIncorrecto:focus
-        {
-            color: red;
-        }
-        .InputCorrecto
-        {
+
+            .InputIncorrecto:focus {
+                color: red;
+            }
+
+        .InputCorrecto {
             border-bottom: solid 3px green;
             color: green;
         }
-        .InputCorrecto:focus
-        {
-            color: green;
-        }
-        #DetallePallet
-        {
+
+            .InputCorrecto:focus {
+                color: green;
+            }
+
+        #DetallePallet {
             display: none;
         }
-        #LblEtiqueta
-        {
+
+        #LblEtiqueta {
             display: none;
         }
-        #diseño
-        {
+
+        #diseño {
             width: 6in;
             height: 4in;
             border: solid 1px black;
         }
-        .datoEti
-        {
+
+        .datoEti {
             justify-content: center;
         }
-        #txPickID
-        {
-            width: 300px;
-        }
-        #centrado
-        {
+
+
+        #centrado {
             margin-top: 120px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <form id="form1" class="container">
-    <div id="divForm">
-        <div class="form-group row ">
-            <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="lblpickID">
-                Picking ID
-            </label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg col-sm-12" id="txPickID"
-                    placeholder="Pick ID" onkeyup="SearchPickIDTimer()" />
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="txPickID">Picking ID</label>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-check float-right">
+                            <input type="checkbox" class="form-check-input" id="chkConsigment">
+                            <label class="form-check-label" for="chkConsigment" id="lblConsigment">Consigment</label>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="text" class="form-control form-control-lg col-12" id="txPickID"
+                placeholder="Pick ID" onkeyup="SearchPickIDTimer()" />
             </div>
         </div>
-        <div id="DetallePallet">
-<%--            <div class="form-group row ">
-                <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="lblItem">
-                    Maquina
-                </label>
-                <div class="col-sm-3">
-                    <label class="col-sm-12 col-form-label-lg" for="txCustomer" id="lblItemID">
+        <div id="divForm" class="col-6">
+            <div id="DetallePallet">
+                <div class="form-group row ">
+                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachined">
+                        Machine
                     </label>
+                    <div class="col-sm-3">
+                        <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachineval">
+                        </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="col-sm-12 col-form-label-lg" for="txCustomer" id="LblMachinedes">
+                        </label>
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <label class="col-sm-12 col-form-label-lg" for="txCustomer" id="lblItemDesc">
+                <div class="form-group row ">
+                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="lblQuantity">
+                        Pallet(s)
                     </label>
-                </div>
-            </div>--%>
-            <div class="form-group row ">
-                <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachined">
-                Machine
-                </label>
-                <div class="col-sm-3">
-                    <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachineval">
-                    </label>
-                </div>
-                <div class="col-sm-3">
-                    <label class="col-sm-12 col-form-label-lg" for="txCustomer" id="LblMachinedes">
-                    </label>
-                </div>
-            </div>
-            <div class="form-group row ">
-                <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="lblQuantity">
-                    Pallet(s)
-                </label>
-                <div class="col-sm-3">
-                    <label class="col-sm-12 col-form-label-lg" id="LblPalletsVal">
-                    </label>
-                </div>
-<%--                <div class="col-sm-3">
+                    <div class="col-sm-3">
+                        <label class="col-sm-12 col-form-label-lg" id="LblPalletsVal">
+                        </label>
+                    </div>
+                    <%--                <div class="col-sm-3">
                     <label class="col-sm-12 col-form-label-lg" id="LblQuantityUnit">
                     </label>
                 </div>--%>
-            </div>
-<%--            <div class="form-group row ">
+                </div>
+                <%--            <div class="form-group row ">
                 <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblWorkOrderd">
                 WorkOrder
                 </label>
@@ -110,24 +106,24 @@
                     </label>
                 </div>
             </div>
---%>            
-            <div class="form-group row" id="divQueryAction">
-                <div class="col-sm-2">
-                </div>
-                <div class="col-sm-4">
-                    <input type="button" class="btn btn-primary btn-lg col-sm-7 " id="btnDropTagPick"
-                        value="Drop Pick ID" onclick="ClickDropTagPick()" />
+                --%>
+                <div class="form-group row" id="divQueryAction">
+                    <div class="col-sm-2">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="button" class="btn btn-primary btn-lg col-sm-7 " id="btnDropTagPick"
+                            value="Drop Pick ID" onclick="ClickDropTagPick()" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="LblEtiqueta">
-        <div id="MyEtiquetaDrop" style="display:none; width: 6in; height:4in; border:solid 1px;">
+        <div id="LblEtiqueta">
+            <div id="MyEtiquetaDrop" style="width: 6in; height: 4in; border: solid 1px;">
                 <table style="margin: auto">
                     <tr>
                         <td>
-                        <label style="font-size: 30px">
-                        Pick ID</label>
+                            <label style="font-size: 30px">
+                                Pick ID</label>
                         </td>
                         <td colspan="4">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="LblPickIdVal" alt="" hspace="60"
@@ -147,19 +143,20 @@
                     <tr>
                         <td>
                             <label style="font-size: 30px">
-                                Pallet(s) </label>
+                                Pallet(s)
+                            </label>
                         </td>
                         <td style="text-align: center;">
-                            <label style="font-size: 30px" id="LblPalletsVal">
-                             </label>
+                            <label style="font-size: 30px" id="LblPalletsValET">
+                            </label>
                         </td>
                     </tr>
                 </table>
             </div>
-    </div>
-    <br />
-    <label id="lblMsg">
-    </label>
+        </div>
+        <br />
+        <label id="lblMsg">
+        </label>
     </form>
     <script>
 
@@ -172,7 +169,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
@@ -257,17 +254,19 @@
             LblMachinedes = $('#LblMachinedes');
             btnDropTagPick = $('#btnDropTagPick');
             DetallePallet = $('#DetallePallet');
-
             LblEtiqueta = $('#LblEtiqueta');
             lblWorkOrder = $('#lblWorkOrder');
             lblMachine = $('#lblMachine');
             LblPalletsVal = $('#LblPalletsVal');
+            LblPalletsValET = $('#LblPalletsValET');
             LblPickIdVal = $('#LblPickId');
+            var chkConsigment = document.getElementById("chkConsigment");
         }
 
         var SearchPickID = function () {
             //var Data = "{'key':'" + value + "'}";
-            var Data = "{'PickID':'" + $('#txPickID').val().toUpperCase() + "'}";
+            var Data = chkConsigment.checked == true ? "{'PickID':'" + $('#txPickID').val().toUpperCase() + "','consigment':'true'}" : "{'PickID':'" + $('#txPickID').val().toUpperCase() + "','consigment':'false'}";
+            
             WebMethod = "SearchPickID";
             sendAjax(WebMethod, Data, SearchPickIDSuccess, false);
         }
@@ -314,6 +313,7 @@
                 LblMachineval.html(MyObj.MCNO);
                 LblMachinedes.html(MyObj.DSCAM);
                 LblPalletsVal.html(MyObj.PAID);
+                LblPalletsValET.html(MyObj.PAID);
                 $("#Contenido_LblPickIdVal").attr("src", MyObj.PICK_URL);
                 DetallePallet.show();
             }
@@ -339,6 +339,7 @@
                 LblMachineval.html("");
                 LblMachinedes.html("");
                 LblPalletsVal.html("");
+                LblPalletsValET.html("");
                 LblPickIdVal.html("");
                 lblItemDesc
 

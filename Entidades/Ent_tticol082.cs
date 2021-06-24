@@ -70,5 +70,7 @@ namespace whusa.Entidades
         public string STAP { get; set; }
 
         public string PICK { get; set; }
+
+        public string TYPW { get; set; }
     }
 }
