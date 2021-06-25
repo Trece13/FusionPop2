@@ -112,7 +112,7 @@ namespace whusap.WebPages.Balance
             lblRegrindSequence.Text = resultado.Rows[0]["T$SQNB"].ToString();
             lblRegrindCode.Text = resultado.Rows[0]["T$MITM"].ToString();
             lblRegrindDesc.Text = resultado.Rows[0]["T$DSCA"].ToString();
-            lblQuantity.Text = resultado.Rows[0]["T$QTDL"].ToString();
+            lblQuantity.Text = resultado.Rows[0]["T$ACQT"].ToString();
             lblUnit.Text = resultado.Rows[0]["T$CUNI"].ToString();
 
             Session["PONO"] = resultado.Rows[0]["T$PONO"].ToString();
@@ -131,6 +131,52 @@ namespace whusap.WebPages.Balance
 
                 obj042.sqnb = txtSQNB.Text.Trim().ToUpperInvariant();
                 obj042.loca = txtLocated.Text.Trim().ToUpperInvariant();
+                string CWAR = txtWarehouse.Text.Trim().ToUpperInvariant();
+
+                DataTable DtTwhcol042 = idal042.TakeMaterialInv_verificaBodega_Param(CWAR, ref strError);
+
+                if (DtTwhcol042.Rows.Count > 0)
+                {
+                    DtTwhcol042 = idal042.listaRegistro_ObtieneAlmacenLocation(CWAR, ref strError);
+
+                    if (DtTwhcol042.Rows.Count > 0)
+                    {
+                        if (DtTwhcol042.Rows[0]["LOC"].ToString() == "1")
+                        {
+                            DtTwhcol042 = idal042.listaRegistro_ObtieneLocation(CWAR, obj042.loca, ref strError);
+
+                            if (DtTwhcol042.Rows.Count > 0)
+                            {
+                                obj042.loca = txtLocated.Text.Trim().ToUpperInvariant();
+                            }
+                            else
+                            {
+                                lblError.Visible = true;
+                                lblError.Text = mensajes("locationinvalid");
+                                return;
+                            }
+
+                        }
+                        else
+                        {
+                            obj042.loca = " ";
+                            txtLocated.Text = "";
+                        }
+                    }
+                    else
+                    {
+                        lblError.Visible = true;
+                        lblError.Text = mensajes("locationinvalid");
+                        return;
+                    }
+                }
+                else
+                {
+                    lblError.Visible = true;
+                    lblError.Text = mensajes("notwarehosue");
+                    return;
+                }
+
                 //resultadoLocated = idal042.listaRegistroXSQNB_FindLocation(ref obj042, ref strError);
                 resultadoLocated = idal042.listaRegistroXSQNB_LocatedRegrind(ref obj042, ref strError);
 
@@ -163,9 +209,11 @@ namespace whusap.WebPages.Balance
                 obj030.sqnb = Convert.ToInt16(resultadoLocated.Rows[0]["T$SQNB"].ToString());
                 obj030.mitm = resultadoLocated.Rows[0]["T$MITM"].ToString();
                 obj030.dsca = resultadoLocated.Rows[0]["T$DSCA"].ToString();
-                obj030.cwar = resultadoLocated.Rows[0]["T$CWAR"].ToString();
-                obj030.loca = resultadoLocated.Rows[0]["T$LOCA"].ToString();
-                obj030.qtdl = Convert.ToDecimal(resultadoLocated.Rows[0]["T$QTDL"].ToString());
+                //obj030.cwar = resultadoLocated.Rows[0]["T$CWAR"].ToString();
+                obj030.cwar = CWAR;
+                //obj030.loca = resultadoLocated.Rows[0]["T$ACLO"].ToString();
+                obj030.loca = obj042.loca;
+                obj030.qtdl = Convert.ToDecimal(resultadoLocated.Rows[0]["T$ACQT"].ToString());
                 obj030.cuni = resultadoLocated.Rows[0]["T$CUNI"].ToString();
                 obj030.mess = " ";
                 obj030.user = Session["user"].ToString();
@@ -249,6 +297,7 @@ namespace whusap.WebPages.Balance
             lblDescRegrindCode.Text = _textoLabels.readStatement(formName, _idioma, "lblDescRegrindCode");
             lblQuantityConfirm.Text = _textoLabels.readStatement(formName, _idioma, "lblQuantityConfirm");
             lblLocation.Text = _textoLabels.readStatement(formName, _idioma, "lblLocation");
+            lblWarehouse.Text = _textoLabels.readStatement(formName, _idioma, "lblWarehouse");
             btnSave.Text = _textoLabels.readStatement(formName, _idioma, "btnSave");
         }
 

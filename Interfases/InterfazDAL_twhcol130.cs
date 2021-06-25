@@ -147,14 +147,16 @@ namespace whusa.Interfases
             return dal.ConsultafactoresporItem(ITEM);
         }
 
-        public List<Ent_twhcol130131> ConsultarPorPalletIDReimpresion(string PAID,string LOGR, string UrlBaseBarcode)
+        public List<Ent_twhcol130131> ConsultarPorPalletIDReimpresion(string PAID,string LOGR, string PROG, string UrlBaseBarcode)
         {
             List<Ent_twhcol130131> Lstwhcol130 = new List<Ent_twhcol130131>();
             DataTable DTwhcol130 = dal.ConsultarPorPalletIDReimpresion(PAID);
             if (DTwhcol130.Rows.Count > 0)
             {
-
-                dal.ActualizarConteoReimpresion(PAID, LOGR);
+                if (PROG != "Picking")
+                {
+                    dal.ActualizarConteoReimpresion(PAID, LOGR);
+                }
                 foreach(DataRow MyRow in DTwhcol130.Rows){
 
                      Ent_twhcol130131 MyObjet  = new Ent_twhcol130131{

@@ -371,5 +371,48 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public DataTable TakeMaterialInv_verificaBodega_Param(string CWAR, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.TakeMaterialInv_verificaBodega_Param(CWAR, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public DataTable listaRegistro_ObtieneAlmacenLocation(string CWAR, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.listaRegistro_ObtieneAlmacenLocation(CWAR, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public DataTable listaRegistro_ObtieneLocation(string CWAR, string LOCA, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.listaRegistro_ObtieneLocation(CWAR, LOCA, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
     }
 }

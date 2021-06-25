@@ -279,7 +279,7 @@ namespace whusa.DAL
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":T$PDNO", PDNO.ToUpper());
                 paramList.Add(":T$SQNB", SQNB.ToUpper());
-                paramList.Add(":T$ACLO", ACLO.ToUpper().Trim());
+                paramList.Add(":T$ACLO", ACLO.ToUpper().Trim() == string.Empty ? " " : ACLO.ToUpper().Trim());
                 paramList.Add(":T$CWAT", CWAR.ToUpper().Trim());
 
                 strSentencia = recursos.readStatement("tticol042", method.Name, ref owner, ref env, tabla2, paramList);
@@ -813,6 +813,75 @@ namespace whusa.DAL
                 }
                 return consulta;
             }
+
+            public DataTable TakeMaterialInv_verificaBodega_Param(string CWAR, ref string strError)
+            {
+                method = MethodBase.GetCurrentMethod();
+                paramList = new Dictionary<string, object>();
+                paramList.Add("p1", CWAR.Trim().ToUpperInvariant());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                try
+                {
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                    if (consulta.Rows.Count < 1) { strError = "Wharehouse code doesn´t exist. Cannot continue"; }
+                    return consulta;
+                }
+                catch (Exception ex)
+                {
+                    log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+                }
+                return consulta;
+            }
+
+            public DataTable listaRegistro_ObtieneAlmacenLocation(string CWAR, ref string strError)
+            {
+                method = MethodBase.GetCurrentMethod();
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$CWAR", CWAR.Trim());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                try
+                {
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                    if (consulta.Rows.Count < 1) { strError = "Warehouse incorrect, please check."; }
+                }
+                catch (Exception ex)
+                {
+                    strError = "Error to the search sequence [twhwmd200]. Try again or contact your administrator \n ";
+                    log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                }
+                return consulta;
+
+            }
+
+            public DataTable listaRegistro_ObtieneLocation(string CWAR, string LOCA, ref string strError)
+            {
+                method = MethodBase.GetCurrentMethod();
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$CWAR", CWAR.Trim());
+                paramList.Add(":T$LOCA", LOCA.Trim());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                try
+                {
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                    if (consulta.Rows.Count < 1) { strError = "Warehouse incorrect, please check."; }
+                }
+                catch (Exception ex)
+                {
+                    strError = "Error to the search sequence [twhwmd200]. Try again or contact your administrator \n ";
+                    log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                }
+                return consulta;
+
+            }
+
     }
 }
 

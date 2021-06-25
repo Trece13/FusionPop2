@@ -130,6 +130,19 @@
                         <span style="vertical-align: middle" />
                         <span class="style2" style="vertical-align: middle;">
                             <b style="font-size: 11px">
+                                <asp:Label ID="lblWarehouse" runat="server" />
+                            </b>
+                        </span>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtWarehouse" runat="server"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="vertical-align: middle" />
+                        <span class="style2" style="vertical-align: middle;">
+                            <b style="font-size: 11px">
                                 <asp:Label ID="lblLocation" runat="server" />
                             </b>
                         </span>
@@ -149,4 +162,5 @@
 
     <asp:HiddenField ID="hidden" runat="server" />
     <asp:HiddenField ID="hOrdenMachine" runat="server" />
+    </span></span></span></span>
 </asp:Content>

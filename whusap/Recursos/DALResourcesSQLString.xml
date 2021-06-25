@@ -17,6 +17,28 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 <DALResources>
   <Modules>
     <Module name="tticol042">
+      <operationName name="TakeMaterialInv_verificaBodega_Param">
+        <stringSQL>
+          SELECT t$cwar, t$dsca  DESCRIPCION
+          FROM {0}.ttcmcs003{1}
+          WHERE TRIM(t$cwar) = '[p1]'
+        </stringSQL>
+      </operationName>
+      <operationName name="listaRegistro_ObtieneAlmacenLocation">
+        <stringSQL>
+          SELECT T$CWAR ALM, T$SLOC LOC
+          FROM {0}.twhwmd200{1}
+          WHERE TRIM(T$CWAR) = UPPER(TRIM('[:T$CWAR]'))
+        </stringSQL>
+      </operationName>
+      <operationName name="listaRegistro_ObtieneLocation">
+        <stringSQL>
+          SELECT T$CWAR ALM, T$LOCA LOC
+          FROM {0}.twhwmd300{1}
+          WHERE TRIM(T$CWAR) = UPPER(TRIM('[:T$CWAR]'))
+          AND TRIM(T$LOCA) = UPPER(TRIM('[:T$LOCA]'))
+        </stringSQL>
+      </operationName>
       <operationName name="SelectRegister">
         <stringSQL>
           select * from baan.tticol042140 ticol042
@@ -125,7 +147,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActualizarUbicacionTicol242">
         <stringSQL>
-          UPDATE {0}.tticol242{1} SET T$CWAF = '[:T$CWAT]', T$ACLO = '[:T$ACLO]' WHERE T$SQNB = '[:T$SQNB]'
+          UPDATE {0}.tticol242{1} SET T$CWAF = '[:T$CWAT]', T$CWAT = '[:T$CWAT]', T$ACLO = '[:T$ACLO]' WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="actualizaRegistro_LocationRegrind">
@@ -212,11 +234,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="listaRegistroXSQNB_LocatedRegrind">
         <stringSQL>
-          SELECT A.T$PDNO, SUBSTR(TRIM(A.T$SQNB),-1,3) T$SQNB, A.T$MITM, A.T$QTDL,A.T$DELE, A.T$CUNI, A.T$PONO, A.T$PRO2, B.T$DSCA,B.T$KLTC,C.T$CWAR
+          SELECT A.T$PDNO, SUBSTR(TRIM(A.T$SQNB),-1,3) T$SQNB, A.T$MITM, D.T$ACQT,A.T$DELE, A.T$CUNI, A.T$PONO, A.T$PRO2, B.T$DSCA,B.T$KLTC,C.T$CWAR, D.T$ACLO
           FROM {0}.tticol042{1} A INNER JOIN
+          {0}.tticol242{1} D ON TRIM(D.T$SQNB) = TRIM(A.T$SQNB) INNER JOIN
           {0}.ttcibd001{1} B ON TRIM(A.T$MITM) = TRIM(B.T$ITEM) INNER JOIN
           {0}.tticst001{1} C ON A.T$PDNO = C.T$PDNO AND A.T$PONO = C.T$PONO
-          WHERE TRIM(A.T$SQNB) = '[:T$SQNB]'
+          WHERE TRIM(A.T$SQNB) = TRIM('[:T$SQNB]')
         </stringSQL>
       </operationName>
       <operationName name="listaRegistroXSQNB_FindLocation">
@@ -2200,7 +2223,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Insertarttccol307">
         <stringSQL>
-          INSERT INTO {0}.ttccol307{1} (T$USER,T$STAT,T$PAID,T$PROC,T$REFCNTD,T$REFCNTU) VALUES ('[:T$USER]','[:T$STAT]','[:T$PAID]','[:T$PROC]',0,0)
+          INSERT INTO {0}.ttccol307{1} (T$USER,T$STAT,T$PAID,T$PROC,T$CWAR,T$REFCNTD,T$REFCNTU) VALUES ('[:T$USER]','[:T$STAT]','[:T$PAID]','[:T$PROC]','[:T$CWAR]',0,0)
         </stringSQL>
       </operationName>
       <operationName name="Actualizartwhcol130">

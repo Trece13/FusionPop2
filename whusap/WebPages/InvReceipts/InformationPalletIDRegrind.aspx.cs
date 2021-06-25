@@ -22,6 +22,7 @@ namespace whusap.WebPages.InvReceipts
     {
 
         public static string PalletIdDoesntExist        = string.Empty;
+        public static string PalletIdNotLocated            = string.Empty;
         public static string ItemDodeIsNotPurchaseType  = string.Empty;
         public static string ItemCodeDoesntExist        = string.Empty;
         public static string LotCodeCoesntExist         = string.Empty;
@@ -124,16 +125,14 @@ namespace whusap.WebPages.InvReceipts
                 if (DTticol042.Rows[0]["T$DELE"].ToString() != "7")
                 {
                     ObjTticol042.Error = true;
-                    ObjTticol042.TypeMsgJs = "label";
-                    
-                    ObjTticol042.ErrorMsg = PalletIdDoesntExist;
+                    ObjTticol042.TypeMsgJs = "label";                   
+                    ObjTticol042.ErrorMsg = PalletIdNotLocated;
                 }
             }
             else
             {
                 ObjTticol042.Error = true;
-                ObjTticol042.TypeMsgJs = "label";
-                
+                ObjTticol042.TypeMsgJs = "label";               
                 ObjTticol042.ErrorMsg = PalletIdDoesntExist;
             }
 
@@ -305,7 +304,13 @@ namespace whusap.WebPages.InvReceipts
 
             if (DtTtwhinr140.Rows.Count > 0)
             {
-                if (Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString()) < 1)
+                string s = DtTtwhinr140.Rows[0]["STKS"].ToString().Trim();
+                if (s == ".000")
+                {
+                    s = "0";
+                }
+                //if (Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString()) < 1)
+                if (Convert.ToDecimal(s) < 1)
                 {
                     ObjTtwhinr140.Error = true;
                     ObjTtwhinr140.TypeMsgJs = "label";
@@ -368,6 +373,7 @@ namespace whusap.WebPages.InvReceipts
         {
 
             PalletIdDoesntExist = mensajes("PalletIdDoesntExist");
+            PalletIdNotLocated = mensajes("PalletIdNotLocated");
             ItemDodeIsNotPurchaseType = mensajes("ItemDodeIsNotPurchaseType");
             ItemCodeDoesntExist = mensajes("ItemCodeDoesntExist");
             LotCodeCoesntExist = mensajes("LotCodeCoesntExist");

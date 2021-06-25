@@ -199,6 +199,11 @@
             Pallet ID doesn´t exist
           </stringMessage>
         </operationName>
+        <operationName name="PalletIdNotLocated">
+          <stringMessage>
+            Pallet ID status not available for update
+          </stringMessage>
+        </operationName>
         <operationName name="ItemDodeIsNotPurchaseType">
           <stringMessage>
             Item code is not Purchase Type
@@ -3793,6 +3798,11 @@
         <operationName name="locationsuccess">
           <stringMessage>
             Location regrind succesfully.
+          </stringMessage>
+        </operationName>
+        <operationName name="notwarehosue">
+          <stringMessage>
+            Warehouse not exist.
           </stringMessage>
         </operationName>
       </Idiom>

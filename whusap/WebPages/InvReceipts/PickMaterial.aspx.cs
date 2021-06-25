@@ -124,8 +124,8 @@ namespace whusap.WebPages.InvReceipts
                     }
                     else
                     {
-
-                        List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion(PAID.Trim().ToUpper(), USRR, "");
+                        string PROG = "Picking";
+                        List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion(PAID.Trim().ToUpper(), USRR, PROG, "");
 
                         if (LstPallet.Count > 0)
                         {
@@ -140,6 +140,7 @@ namespace whusap.WebPages.InvReceipts
                                     REFCNTU = 0,
                                     STAT = "2",
                                     USRR = USRR,
+                                    CWAR = LstPallet[0].CWAR,
                                     PROC = "3"
                                 };
 

@@ -87,7 +87,8 @@ namespace whusap.WebPages.InvReceipts
         {
             try
             {
-                List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion(PAID, HttpContext.Current.Session["user"].ToString(), RequestUrlAuthority);
+                string PROG = "ReprintLabel";
+                List<Ent_twhcol130131> LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion(PAID, HttpContext.Current.Session["user"].ToString(), PROG, RequestUrlAuthority);
                 if (LstPallet.Count == 0)
                 {
                     LstPallet = twhcol130DAL.ConsultarPorPalletIDReimpresion131(PAID, HttpContext.Current.Session["user"].ToString(), RequestUrlAuthority);

@@ -955,6 +955,7 @@ namespace whusa.Interfases
             paramList.Add(":T$REFCNTD", tccol307.REFCNTD);
             paramList.Add(":T$REFCNTU", tccol307.REFCNTU);
             paramList.Add(":T$STAT", tccol307.STAT.Trim());
+            paramList.Add(":T$CWAR", tccol307.CWAR.Trim());
             paramList.Add(":T$PROC", tccol307.PROC.Trim());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
