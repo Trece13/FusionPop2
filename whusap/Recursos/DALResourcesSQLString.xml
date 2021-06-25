@@ -1564,6 +1564,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           update {0}.tticol082{1} set t$stat = 4
           where T$PICK =  '[:PICK]'
+          and T$CWAR =  nvl('[:CWAR]',T$CWAR)
           and T$STAT = '2'
           --T$PAID =  '[:PAID]'
           --AND T$PRIO = '[:PRIO]'
@@ -1572,6 +1573,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --AND T$ORNO = '[:ORNO]'
         </stringSQL>
       </operationName>
+      
       <operationName name="Actualizartwhcol131">
         <stringSQL>
           update  {0}.twhcol131{1} set t$stat = 8 where t$paid =  '[:PAID]'
@@ -1589,7 +1591,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletIDTticol082">
         <stringSQL>
-          SELECT distinct TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
+          SELECT distinct ticol082.T$CWAR CWAR,TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
           ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO,stap FROM(
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol131140 col131
           UNION

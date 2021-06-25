@@ -5122,14 +5122,14 @@
             Information saved successfully
           </stringMessage>
         </operationName>
-        <operationName name="Thepickhasawarehouseonconsignment">
+        <operationName name="Thepickdoesnothavewarehouses">
           <stringMessage>
-            The pick has a warehouse on consignment
+            The pick does not have warehouses
           </stringMessage>
         </operationName>
-        <operationName name="Thepickhasacwarehousewithoutconsignment">
+        <operationName name="Thepickdoesnothavewarehousesonconsignment">
           <stringMessage>
-            The pick has a warehouse without consignment
+            The pick does not have warehouses on consignment
           </stringMessage>
         </operationName>
         <operationName name="Thedropprocessisnotsuccess">

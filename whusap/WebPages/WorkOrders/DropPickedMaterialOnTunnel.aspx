@@ -111,7 +111,7 @@
                     <div class="col-sm-2">
                     </div>
                     <div class="col-sm-4">
-                        <input type="button" class="btn btn-primary btn-lg col-sm-7 " id="btnDropTagPick"
+                        <input type="button" class="btn btn-primary btn-lg col-sm-10 " id="btnDropTagPick"
                             value="Drop Pick ID" onclick="ClickDropTagPick()" />
                     </div>
                 </div>
@@ -200,7 +200,7 @@
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
 
-            mywindow.print();
+            setTimeout(mywindow.print(),3000);
             mywindow.close();
 
             return true;
@@ -308,13 +308,11 @@
                 LblQuantityVal.html(MyObj.QTYT);
                 LblQuantityUnit.html(MyObj.UNIT);
                 lblWorkOrder.html(MyObj.ORNO);
-                lblMachine.html(MyObj.MCNO);
                 LblWorkOrderval.html(MyObj.ORNO);
                 LblMachineval.html(MyObj.MCNO);
                 LblMachinedes.html(MyObj.DSCAM);
                 LblPalletsVal.html(MyObj.PAID);
-                LblPalletsValET.html(MyObj.PAID);
-                $("#Contenido_LblPickIdVal").attr("src", MyObj.PICK_URL);
+               
                 DetallePallet.show();
             }
         }
@@ -341,7 +339,9 @@
                 LblPalletsVal.html("");
                 LblPalletsValET.html("");
                 LblPickIdVal.html("");
-                lblItemDesc
+                lblMachine.html(MyObj.MCNO);
+                LblPalletsValET.html(MyObj.PAID);
+                $("#Contenido_LblPickIdVal").attr("src", MyObj.PICK_URL);
 
                 if (MyObj.TipeMsgJs == "alert") {
                     alert(MyObj.SuccessMsg);
