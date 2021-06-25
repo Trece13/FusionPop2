@@ -31,8 +31,8 @@ namespace whusap.WebPages.WorkOrders.NewPages
         public static string Thedropprocessisnotsuccess = mensajes("Thedropprocessisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
         public static string PalletIDnotvalidfordropprocess = mensajes("PalletIDnotvalidfordropprocess");
-        public static string Thepickhasawarehouseonconsignment = mensajes("Thepickhasawarehouseonconsignment");
-        public static string Thepickhasacwarehousewithoutconsignment = mensajes("Thepickhasacwarehousewithoutconsignment");
+        public static string Thepickdoesnothavewarehouses = mensajes("Thepickdoesnothavewarehouses");
+        public static string Thepickdoesnothavewarehousesonconsignment = mensajes("Thepickdoesnothavewarehousesonconsignment");
 
 
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
@@ -89,67 +89,44 @@ namespace whusap.WebPages.WorkOrders.NewPages
         [WebMethod]
         public static string ClickDropTagPick(string PickID)
         {
+            Ent_tticol082 MyObj = new Ent_tticol082();
             DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082(PickID);
             string ObjRetorno = string.Empty;
+            bool ActalizacionExitosa = false;
 
             if (ExistenciaData(TableItticol082))
             {
-                DataRow myObjDt = TableItticol082.Rows[0];
-                Ent_tticol082 MyObj = new Ent_tticol082
+                foreach (DataRow myObjDt in TableItticol082.Rows)
                 {
-                    TBL = myObjDt["TBL"].ToString(),
-                    PAID = myObjDt["PAID"].ToString(),
-                    QTYT = myObjDt["QTYT"].ToString(),
-                    UNIT = myObjDt["UNIT"].ToString(),
-                    ITEM = myObjDt["ITEM"].ToString(),
-                    DSCA = myObjDt["DSCA"].ToString(),
-                    PRIO = myObjDt["PRIO"].ToString(),
-                    ADVS = myObjDt["ADVS"].ToString(),
-                    PONO = myObjDt["PONO"].ToString(),
-                    ORNO = myObjDt["ORNO"].ToString(),
-                    QTYC = myObjDt["QTYA"].ToString(),
-                    PICK = myObjDt["PICK"].ToString(),
-                    PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"].ToString() + "&code=Code128&dpi=96"
-                };
-                bool ActalizacionExitosa = false;
-                switch (MyObj.TBL)
+                    MyObj.TBL = myObjDt["TBL"].ToString();
+                    MyObj.PAID = HttpContext.Current.Session["PAID"].ToString();
+                    MyObj.QTYT = myObjDt["QTYT"].ToString();
+                    MyObj.UNIT = myObjDt["UNIT"].ToString();
+                    MyObj.ITEM = myObjDt["ITEM"].ToString();
+                    MyObj.DSCA = myObjDt["DSCA"].ToString();
+                    MyObj.PRIO = myObjDt["PRIO"].ToString();
+                    MyObj.ADVS = myObjDt["ADVS"].ToString();
+                    MyObj.PONO = myObjDt["PONO"].ToString();
+                    MyObj.ORNO = myObjDt["ORNO"].ToString();
+                    MyObj.QTYC = myObjDt["QTYA"].ToString();
+                    MyObj.PICK = myObjDt["PICK"].ToString();
+                    MyObj.TYPW = myObjDt["TYPW"].ToString();
+                    MyObj.CWAR = myObjDt["CWAR"].ToString();
+                    MyObj.MCNO = HttpContext.Current.Session["MCNO"].ToString();
+                    MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"].ToString() + "&code=Code128&dpi=96";
+                    if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
+                    {
+                        Itticol082.Actualizartticol082(MyObj);
+                    }
+                    else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
+                    {
+                        Itticol082.Actualizartticol082(MyObj);
+                    }
+                }
+
+                if (MyObj.Error != true)
                 {
-                    case "ticol022":
-                        //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
-                        Itticol082.Actualizartticol082(MyObj);
-                        //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartticol022(MyObj); } else { ActalizacionExitosa = false; }
-                        if (MyObj.Error != true)
-                        {
-                            ActalizacionExitosa = true;
-                        }
-                        break;
-                     case "whcol131":
-                        //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
-                        Itticol082.Actualizartticol082(MyObj);
-                        //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartwhcol131(MyObj); } else { ActalizacionExitosa = false; }
-                        if (MyObj.Error != true)
-                        {
-                            ActalizacionExitosa = true;
-                        }
-                        break;
-                    case "whcol130":
-                        //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
-                        Itticol082.Actualizartticol082(MyObj);
-                        //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartwhcol130(MyObj); } else { ActalizacionExitosa = false; }
-                        if (MyObj.Error != true)
-                        {
-                            ActalizacionExitosa = true;
-                        }
-                        break;
-                    case "ticol042":
-                        //Itwhcol130.Eliminartccol307(MyObj.PAID, "");
-                        Itticol082.Actualizartticol082(MyObj);
-                        //if (MyObj.QTYC.Trim() == "0") { ActalizacionExitosa = Itticol082.Actualizartticol042(MyObj); } else { ActalizacionExitosa = false; }
-                        if (MyObj.Error != true)
-                        {
-                            ActalizacionExitosa = true;
-                        }
-                        break;
+                    ActalizacionExitosa = true;
                 }
                 if (ActalizacionExitosa)
                 {
@@ -158,13 +135,6 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.SuccessMsg = Thedropprocessissuccess;
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
-                //else if (MyObj.QTYC.Trim() != "0")
-                //{
-                //    MyObj.Error = false;
-                //    MyObj.TipeMsgJs = "alert";
-                //    MyObj.SuccessMsg = Thedropprocessissuccess;
-                //    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                //}
                 else
                 {
                     MyObj.Error = true;
@@ -175,12 +145,9 @@ namespace whusap.WebPages.WorkOrders.NewPages
             }
             else
             {
-                Ent_tticol082 MyObj = new Ent_tticol082
-                {
-                    Error = true,
-                    TipeMsgJs = "alert",
-                    ErrorMsg = ThePalletIDDoesntexist
-                };
+                MyObj.Error = true;
+                MyObj.TipeMsgJs = "alert";
+                MyObj.ErrorMsg = ThePalletIDDoesntexist;
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
             return ObjRetorno;
@@ -189,6 +156,9 @@ namespace whusap.WebPages.WorkOrders.NewPages
         [WebMethod]
         public static string SearchPickID(string PickID, bool consigment = false)
         {
+            bool consigmentPallets = false;
+            bool noConsigmentPallets = false;
+            HttpContext.Current.Session["consigment"] = consigment.ToString();
             Ent_tticol082 MyObj = new Ent_tticol082();
             DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082(PickID);
             string ObjRetorno = string.Empty;
@@ -198,12 +168,9 @@ namespace whusap.WebPages.WorkOrders.NewPages
             {
                 //foreach (DataRow dr1 in TableItticol082.Rows)
                 //{
-                  foreach (DataRow myObjDt in TableItticol082.Rows)
-                        //DataRow myObjDt = TableItticol082.Rows[0];
-                  {
+                foreach (DataRow myObjDt in TableItticol082.Rows)
+                {
                     MyObj.TBL = myObjDt["TBL"].ToString();
-                    //MyObj.PAID = myObjDt["PAID"].ToString().Trim() + "," + MyObj.PAID.Trim();
-                    MyObj.PAID = myObjDt.ItemArray[2].ToString().Trim() + "," + MyObj.PAID.Trim();
                     MyObj.QTYT = myObjDt["QTYT"].ToString();
                     MyObj.UNIT = myObjDt["UNIT"].ToString();
                     MyObj.ITEM = myObjDt["ITEM"].ToString();
@@ -214,24 +181,42 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.STAT = myObjDt["STAT"].ToString();
                     MyObj.STAP = myObjDt["STAP"].ToString();
                     MyObj.TYPW = myObjDt["TYPW"].ToString();
-
-                    if (consigment == true && MyObj.TYPW != "21")
+                    
+                    if (MyObj.TYPW == "21" && consigment == true)
                     {
-                        MyObj.Error = true;
-                        MyObj.TipeMsgJs = "alert";
-                        MyObj.ErrorMsg = Thepickhasacwarehousewithoutconsignment;
-                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                        MyObj.PAID += myObjDt["PAID"].ToString().Trim() + ",";
                     }
-                    else if (consigment == false && MyObj.TYPW != "1")
+                    else if (MyObj.TYPW == "1" && consigment == false)
                     {
-                        MyObj.Error = true;
-                        MyObj.TipeMsgJs = "alert";
-                        MyObj.ErrorMsg = Thepickhasawarehouseonconsignment;
-                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                        MyObj.PAID += myObjDt["PAID"].ToString().Trim() + ",";
                     }
- 
+                    HttpContext.Current.Session["PAID"] = MyObj.PAID;
+                    HttpContext.Current.Session["MCNO"] = MyObj.MCNO;
+                    if (MyObj.TYPW != "21")
+                    {
+                        noConsigmentPallets = true;
+                        
+                    }
+                    else if (MyObj.TYPW != "1")
+                    {
+                        consigmentPallets = true;
+                    }
+                }
+                if (consigment == true && consigmentPallets == false)
+                {
+                    MyObj.Error = true;
+                    MyObj.TipeMsgJs = "alert";
+                    MyObj.ErrorMsg = Thepickdoesnothavewarehousesonconsignment;
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
+                else if (consigment == false && noConsigmentPallets == false)
+                {
+                    MyObj.Error = true;
+                    MyObj.TipeMsgJs = "alert";
+                    MyObj.ErrorMsg = Thepickdoesnothavewarehouses;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                }
+                ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
             else if (PalletAsignado == false)
             {

@@ -460,7 +460,7 @@ namespace whusap.WebPages.InvReceipts
                 {
 
                         int res;
-                        string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
+                        string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() == "" ? SecuenciaPallet : Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
                         int iSep = sqnb.IndexOf("-");
                         string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C","");
                         consecutivo = Convert.ToInt32(CurrentSecuence)+1;
