@@ -43,7 +43,6 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["numReg"] = "0";
-            // Cambiar cultura para manejo de separador decimal
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
@@ -64,8 +63,6 @@ namespace whusap.WebPages.Migration
                     Response.Redirect(ConfigurationManager.AppSettings["UrlBase"] + "/WebPages/Login/whLogIni.aspx");
 
                 }
-
-                //_operator = Session["user"].ToString();
 
                 try
                 {
@@ -150,7 +147,6 @@ namespace whusap.WebPages.Migration
                                 MyLioEntidadObj.OQMF = item["OQMF"].ToString();
                                 MyLioEntidadObj.CANTD = item["CANTD"].ToString();
                                 MyLioEntidadObj.MCNO = item["MCNO"].ToString();
-                                //MyLioEntidadObj.cant_hidden = "";
                                 DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
 
@@ -163,7 +159,6 @@ namespace whusap.WebPages.Migration
                                 {
                                     MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
                                 }
-
                                 LstTable.Add(MyLioEntidadObj);
                             }
 
@@ -274,26 +269,6 @@ namespace whusap.WebPages.Migration
                     }
                     if (tticol088 == false)
                     {
-                        //if (consultaRegistro.Rows.Count > 0)
-                        //{
-                        //    var validaUptade = _idaltticol080.updateRecordCosts(ref data080, ref strError);
-
-                        //    if (validaUptade)
-                        //    {
-                        //        //lblError.Text = String.Empty;
-                        //        lblConfirm.Text += "[" + item + "]" + mensajes("msjupdate") + "<br/>";
-                        //        //divTable.InnerHtml = String.Empty;
-                        //        divBtnGuardar.Visible = false;
-                        //        //txtOrder.Text = String.Empty;
-                        //    }
-                        //    else
-                        //    {
-                        //        lblError.Text += "[" + item + "]" + mensajes("errorupdt") + "<br/>";
-                        //        return;
-                        //    }
-                        //}
-                        //else
-                        //{
                         List<Ent_tticol080> lista = new List<Ent_tticol080>();
                         lista.Add(data080);
                         var tag = String.Empty;
@@ -301,11 +276,8 @@ namespace whusap.WebPages.Migration
 
                         if (validInsert > 0)
                         {
-                            //lblError.Text = String.Empty;
                             lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
-                            //divTable.InnerHtml = String.Empty;
                             divBtnGuardar.Visible = false;
-                            //txtOrder.Text = String.Empty;
                         }
                         else
                         {
@@ -326,7 +298,6 @@ namespace whusap.WebPages.Migration
 
         public string quantity_reg_order_machine140(string SHIFT, string MCNO, string SITM, string PDNO, string PARA)
         {
-            //var RegProcesados = _idaltticst001.quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM);//Procesado   
             string Retorno = string.Empty;
             var RegProcesados = _idaltticst001.quantity_reg_order_machine140(SHIFT, MCNO, SITM, PDNO);//Procesado     
             if (RegProcesados.Rows.Count > 0)
@@ -338,7 +309,6 @@ namespace whusap.WebPages.Migration
         }
         public string maxquantity_per_shift140(string SHIFT, string MCNO, string SITM, string PDNO, string PARA)
         {
-            //var RegPendientesPorProcesar = _idaltticst001.maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM);//Pendiente por procesar
             string Retorno = string.Empty;
             var RegPendientesPorProcesar = _idaltticst001.maxquantity_per_shift140(SHIFT, MCNO, SITM, PDNO);//Pendiente por procesar
             if (RegPendientesPorProcesar.Rows.Count > 0)
@@ -375,9 +345,6 @@ namespace whusap.WebPages.Migration
 
             for (int i = 0; i < LstTable.Count; i++)
             {
-                //var cant_max = _consultaMateriales.Rows[i]["CANT_MAX"].ToString().Trim().ToUpper();
-                //var cant_reg = _consultaMateriales.Rows[i]["CANT_REG"].ToString().Trim().ToUpper();
-
                 table += String.Format("<tr><td>{0}</td><td>{1}</td><td style='text-align:left'>{2}</td><td style='text-align:left'>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td style='display:none'>{7}</td><td style='border-top: none;border-bottom: none;border-right: none;'>{8}</td></tr>"
                     , LstTable[i].SITM.ToString().Trim().ToUpper()
                     , LstTable[i].DSCA.ToString().Trim().ToUpper()
@@ -398,19 +365,6 @@ namespace whusap.WebPages.Migration
                                     , i)
                     );
             }
-
-            //foreach (DataRow item in _consultaMateriales.Rows)
-            //{
-            //    table += String.Format("<tr><td>{0}</td><td>{1]</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>"
-            //        , item["SITM"].ToString().Trim().ToUpper()
-            //        , item["DSCA"].ToString().Trim().ToUpper()
-            //        , item["ACT_CANT"].ToString().Trim().ToUpper()
-            //        , item["ISWH"].ToString().Trim().ToUpper()
-            //        , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidad(this,{1},{2})' />"
-            //        ,"txtQuantity-")
-            //        , item[""].ToString().Trim().ToUpper());
-            //}
-
             table += "</table>";
 
             divTable.InnerHtml = table;
