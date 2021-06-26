@@ -6091,6 +6091,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.ttcibd200{1} tcibd200 ON tcibd200.T$ITEM = tcibd001.T$ITEM
           INNER JOIN {0}.ttisfc001{1} tisfc001 ON tisfc001.T$PDNO = ticst001.T$PDNO
           INNER JOIN {0}.ttisfc010{1} tisfc010 ON tisfc010.T$PDNO = ticst001.T$PDNO AND tisfc010.T$OPNO = 10
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON ticst001.T$CWAR = tcmcs003.T$CWAR AND tcmcs003.T$TYPW = '21'
           LEFT JOIN {0}.tticol080{1} ticol080 ON ticol080.T$ORNO = ticst001.T$PDNO AND ticol080.T$PONO = ticst001.T$PONO
           LEFT JOIN webuser.maxquantity_per_shift{1} ON ORDEN = ticst001.T$PDNO AND MAQUINA = tisfc010.T$MCNO  --AND ARTICULO = ticst001.T$SITM
           WHERE tisfc001.T$OSTA IN ('5','7','9') AND ticst001.T$NNTS = 1 AND ticst001.T$PDNO = '[:T$PDNO]' AND TURNO = '[:T$SHIF]'
