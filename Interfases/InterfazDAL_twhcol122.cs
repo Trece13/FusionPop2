@@ -469,10 +469,10 @@ namespace whusa.Interfases
 
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking22PAID(string PAID, string UrlBaseBarcode, string USER,string STAT)
+        public List<EntidadPicking> ConsultarPalletPicking22PAID(string PAID, string UrlBaseBarcode, string USER, string STAT, string CWAR)
         {
             List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
-            DataTable DTwhcol122 = dal.ConsultarPalletPicking22PAID(PAID, USER,STAT);
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22PAID(PAID, USER, STAT, CWAR);
             if (DTwhcol122.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcol122.Rows)
@@ -514,10 +514,10 @@ namespace whusa.Interfases
             return Lstwhcol122;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking042PAID(string PAID, string UrlBaseBarcode, string USER,string STAT)
+        public List<EntidadPicking> ConsultarPalletPicking042PAID(string PAID, string UrlBaseBarcode, string USER, string STAT, string CWAR)
         {
             List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
-            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042PAID(PAID,USER,STAT);
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042PAID(PAID, USER, STAT, CWAR);
             if (DTwhcolo42.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo42.Rows)
@@ -562,10 +562,10 @@ namespace whusa.Interfases
         }
 
 
-        public List<EntidadPicking> ConsultarPalletPicking131PAID(string PAID,string CWAR, string UrlBaseBarcode, string USER, string STAT)
+        public List<EntidadPicking> ConsultarPalletPicking131PAID(string PAID, string CWAR, string UrlBaseBarcode, string USER, string STAT)
         {
             List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
-            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131PAID(PAID,CWAR,USER, STAT);
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131PAID(PAID, CWAR, USER, STAT);
             if (DTwhcolo131.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo131.Rows)

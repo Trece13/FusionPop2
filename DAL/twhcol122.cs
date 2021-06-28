@@ -866,12 +866,13 @@ namespace whusa.DAL
             return Retorno;
         }
 
-        public DataTable ConsultarPalletPicking22PAID(string PAID, string USER, string STAT)
+        public DataTable ConsultarPalletPicking22PAID(string PAID, string USER, string STAT,string CWAR)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID", PAID.Trim());
+            paramList.Add(":CWAR", CWAR.Trim());
             paramList.Add(":STAT", STAT.Trim());
             string tabla = owner + ".tticol222140";
             string name1 = "ConsultarPalletPicking22140PAID";
@@ -892,12 +893,13 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking042PAID(string PAID, string USER, string STAT)
+        public DataTable ConsultarPalletPicking042PAID(string PAID, string USER, string STAT, string CWAR)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID", PAID.Trim());
+            paramList.Add(":CWAR", CWAR.Trim());
             paramList.Add(":STAT", STAT.Trim());
             string tabla = owner + ".tticol042140";
             string name1 = "ConsultarPalletPicking042PAID";

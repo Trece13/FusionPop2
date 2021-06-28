@@ -163,7 +163,7 @@ namespace whusap.WebPages.WorkOrders
                     EntidadPicking MyObjLst042 = LstPallet042[0];
                     if (MyObjLst042.STAT.Trim() == "7" || MyObjLst042.STAT.Trim() == "8")
                     {
-                        LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(MyObj.PALLETID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                        LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(MyObj.PALLETID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", CWAR);
                         if (LstPallet042PAID.Count > 0)
                         {
                             EntidadPicking MyObjLst = LstPallet042PAID[0];
@@ -194,7 +194,7 @@ namespace whusap.WebPages.WorkOrders
                     EntidadPicking MyObjLst022 = LstPallet22[0];
                     if (MyObjLst022.STAT.Trim() == "7" || MyObjLst022.STAT.Trim() == "8")
                     {
-                        LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(MyObj.PALLETID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                        LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(MyObj.PALLETID, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(),"1",CWAR);
                         if (LstPallet22PAID.Count > 0)
                         {
                             EntidadPicking MyObjLst = LstPallet22PAID[0];
@@ -327,8 +327,8 @@ namespace whusap.WebPages.WorkOrders
 
             foreach (DataRow row in Dt082Pickied.Rows)
             {
-                List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(row["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
-                List<EntidadPicking> LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(row["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(row["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", CWAR);
+                List<EntidadPicking> LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(row["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", CWAR);
                 List<EntidadPicking> LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID(row["T$PAID"].ToString().Trim(), CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "5");
                 if (LstPallet22PAID.Count > 0)
                 {
@@ -958,7 +958,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     if (HttpContext.Current.Session["flag022"].ToString().Trim() == "1")
                     {
-                        List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID((DtPalletsPick.Rows[indexCurrent + 1]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                        List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID((DtPalletsPick.Rows[indexCurrent + 1]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1",(DtPalletsPick.Rows[indexCurrent + 1]["T$CWAR"].ToString()));
                         if (LstPallet22PAID.Count > 0)
                         {
                             HttpContext.Current.Session["MyObjPicking"] = LstPallet22PAID[0];
@@ -968,7 +968,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else if (HttpContext.Current.Session["flag042"].ToString().Trim() == "1")
                     {
-                        List<EntidadPicking> LstPallet42PAID = twhcolDAL.ConsultarPalletPicking042PAID((DtPalletsPick.Rows[indexCurrent + 1]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                        List<EntidadPicking> LstPallet42PAID = twhcolDAL.ConsultarPalletPicking042PAID((DtPalletsPick.Rows[indexCurrent + 1]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", (DtPalletsPick.Rows[indexCurrent + 1]["T$CWAR"].ToString()));
                         if (LstPallet42PAID.Count > 0)
                         {
                             HttpContext.Current.Session["MyObjPicking"] = LstPallet42PAID[0];
@@ -978,7 +978,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else if (HttpContext.Current.Session["flag131"].ToString().Trim() == "1")
                     {
-                        List<EntidadPicking> LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID((DtPalletsPick.Rows[indexCurrent + 1]["T$PAID"].ToString()),MySessionObjPicking.WRH, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
+                        List<EntidadPicking> LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID((DtPalletsPick.Rows[indexCurrent + 1]["T$PAID"].ToString()), MySessionObjPicking.WRH, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1");
                         if (LstPallet131PAID.Count > 0)
                         {
                             HttpContext.Current.Session["MyObjPicking"] = LstPallet131PAID[0];
