@@ -3008,7 +3008,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarCantidad215">
         <stringSQL>
-          SELECT * FROM {0}.twhwmd215{1} where TRIM(T$CWAR) = TRIM('[:T$CWAR]') and TRIM(T$ITEM) = TRIM('[:T$ITEM]')
+          --SELECT * FROM {0}.twhwmd215{1} where TRIM(T$CWAR) = TRIM('[:T$CWAR]') and TRIM(T$ITEM) = TRIM('[:T$ITEM]')
+          SELECT * FROM {0}.twhwmd215{1} wmd215
+          LEFT JOIN {0}.twhcol132{1} col132 on col132.t$item =  wmd215.t$item
+          where TRIM(wmd215.T$CWAR) = CASE WHEN (COL132.T$CWAC is null) THEN TRIM('[:T$CWAR]') else COL132.T$CWAC END
+          and TRIM(wmd215.T$ITEM) = TRIM('[:T$ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="InsertTticol088">
@@ -6093,7 +6097,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.ttcibd200{1} tcibd200 ON tcibd200.T$ITEM = tcibd001.T$ITEM
           INNER JOIN {0}.ttisfc001{1} tisfc001 ON tisfc001.T$PDNO = ticst001.T$PDNO
           INNER JOIN {0}.ttisfc010{1} tisfc010 ON tisfc010.T$PDNO = ticst001.T$PDNO AND tisfc010.T$OPNO = 10
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON ticst001.T$CWAR = tcmcs003.T$CWAR AND tcmcs003.T$TYPW = '21'
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON ticst001.T$CWAR = tcmcs003.T$CWAR --AND tcmcs003.T$TYPW = '21'
           LEFT JOIN {0}.tticol080{1} ticol080 ON ticol080.T$ORNO = ticst001.T$PDNO AND ticol080.T$PONO = ticst001.T$PONO
           LEFT JOIN webuser.maxquantity_per_shift{1} ON ORDEN = ticst001.T$PDNO AND MAQUINA = tisfc010.T$MCNO  --AND ARTICULO = ticst001.T$SITM
           WHERE tisfc001.T$OSTA IN ('5','7','9') AND ticst001.T$NNTS = 1 AND ticst001.T$PDNO = '[:T$PDNO]' AND TURNO = '[:T$SHIF]'
