@@ -34,6 +34,7 @@ namespace whusa.Entidades
             this.LOCA = string.Empty;
             this.CUNI = string.Empty;
             this.QTYC = string.Empty;
+            this.PICK = string.Empty;
             this.PICK_URL = string.Empty;
         }
 
