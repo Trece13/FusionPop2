@@ -2913,7 +2913,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="findRecordsSupplies">
         <stringSQL>
-          SELECT ibd001.T$ITEM AS ITEM, ibd001.T$DSCA AS DSCA, ibd001.T$CWAR AS CWAR, ibd001.T$CUNI AS CUNI, NVL(wmd215.T$STOC, 0) AS STOCK
+          SELECT ibd001.T$ITEM AS ITEM, ibd001.T$DSCA AS DSCA, ibd001.T$CWAR AS CWAR, ibd001.T$CUNI AS CUNI, TO_CHAR(NVL(wmd215.T$STOC, 0), '999999999.9999') AS STOCK
           FROM {2} ibd001
           LEFT JOIN {0}.twhwmd215{1} wmd215
           on wmd215.T$ITEM = ibd001.T$ITEM
