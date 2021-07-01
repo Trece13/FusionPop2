@@ -83,6 +83,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
         [WebMethod]
         public static void SavePrio( string PRIO , string PICK )
         {
+            string prioUsing307 = string.Empty;
             bool ExistNewPrio =ExistPrio(PRIO);
             if (ExistNewPrio)
             {
@@ -93,6 +94,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                    Ent_tticol082 MyObj082 = new Ent_tticol082();
                    MyObj082.PICK = item["PICK"].ToString();
                    MyObj082.PRIO = item["PRIO"].ToString();
+                   MyObj082.PAID = item["PAID"].ToString();
                    if (lstUpdatePicks.Count == 0)
                    {
                        lstUpdatePicks.Add(MyObj082);
@@ -117,9 +119,30 @@ namespace whusap.WebPages.WorkOrders.NewPages
                {
                    for (int i = (lstUpdatePicks.Count - 1); i >= 0; i--)
                    {
-                       UpdatePrio((Convert.ToInt32(lstUpdatePicks[i].PRIO) + 1).ToString(), lstUpdatePicks[i].PICK);
+                       if (lstUpdatePicks[i].PAID == string.Empty)
+                       {
+                           if (prioUsing307 == string.Empty)
+                           {
+                               UpdatePrio((Convert.ToInt32(lstUpdatePicks[i].PRIO) + 1).ToString(), lstUpdatePicks[i].PICK);
+                           }
+                           else
+                           {
+                               UpdatePrio((Convert.ToInt32(prioUsing307) + 1).ToString(), lstUpdatePicks[i].PICK);
+                               prioUsing307 = string.Empty;
+                           }
+                       }
+                       else
+                       {
+                           if (prioUsing307 == string.Empty)
+                           {
+                                prioUsing307 = lstUpdatePicks[i].PRIO;
+                           }
+                       }
                    }
-                   UpdatePrio(PRIO, PICK);
+                   if (prioUsing307 == string.Empty)
+                   {
+                    UpdatePrio(PRIO, PICK);
+                   }
                }
             }
             else

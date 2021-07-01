@@ -33,13 +33,13 @@
         </div>
         <hr />
         <br />
-        <div id="divPicketPrio" class="col-6">
-            <table id="tblPicketPending" class="table animate__animated animate__fadeInLeft col-12 col-sm-12">
+        <div id="divPicketPrio" class="col-6 p-0" style="display:none">
+            <table id="tblPicketPending" class="table animate__animated animate__fadeInLeft col-10 col-sm-12">
                 <thead>
                     <tr>
-                        <th scope="col">Pick ID</th>
-                        <th scope="col">Priority</th>
-                        <th scope="col"></th>
+                        <th scope="col" class="col-4">Pick ID</th>
+                        <th scope="col" class="col-4">Priority</th>
+                        <th scope="col" class="col-4"></th>
                     </tr>
                 </thead>
                 <tbody id="bdPicketPending">
@@ -82,6 +82,7 @@
 
         var loadPicks = function () {
             if (ddMcno.value == "0") {
+                $('#divPicketPrio').fadeOut(100);
                 if (bdPicketPending.childElementCount > 0) {
                     for (let i = bdPicketPending.childElementCount - 1; i >= 0 ; i--) {
                         bdPicketPending.children[i].remove()
@@ -99,20 +100,31 @@
         }
         var showButton = function (i) {
             for(var index = 0; index <= ig; index++){
-                $('#btnChangePrio' + index).hide(100);
+                $('#btnChangePrio' + index).fadeOut(100);
+                $('#inputNum' + index).attr("disabled", true);
+                $('#inputNum' + index).val("");
             }
-            $('#btnChangePrio' + i).show(100);
+            $('#btnChangePrio' + i).fadeIn(100);
+            $('#inputNum' + i).attr("disabled", false);
+            $('#inputNum' + i).val("");
+            $('#inputNum' + i).focus();
         }
 
         var SavePrio = function (PICK,i) {
             //alert("{'PRIO':'" + $('#inputNum' + i).val() + "','PICK':'" + PICK + "'}");
-            EventoAjax("SavePrio", "{'PRIO':'" + $('#inputNum' + i).val() + "','PICK':'" + PICK + "'}", SavePrioSuccess);
+            if ($('#inputNum' + i).attr('placeholder').trim() != $('#inputNum' + i).val().trim() && $('#inputNum' + i).val().trim() != "" && parseInt($('#inputNum' + i).val().trim()) >= 0) {
+                EventoAjax("SavePrio", "{'PRIO':'" + $('#inputNum' + i).val() + "','PICK':'" + PICK + "'}", SavePrioSuccess);
+            }
+            else {
+                $('#inputNum' + i).focus();
+            }
         }
+
         var SavePrioSuccess =  function(){
             loadPicks();
         }
-        var loadPicksSuccess = function (r) {
 
+        var loadPicksSuccess = function (r) {
             var MyObjLst = JSON.parse(r.d);
             if (bdPicketPending.childElementCount > 0) {
                 for (let i = bdPicketPending.childElementCount - 1; i >= 0 ; i--) {
@@ -122,16 +134,22 @@
             $("#btnStarPicking").show(100);
             var bodyRows = "";
             if (MyObjLst.length > 0) {
-                $('#divPicketPending').show(100);
                 MyObjLst.forEach(function (item, i) {
-                    bodyRows += "<tr row = '" + i + "' onmouseenter=showButton(" + i + ") id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.PICK + "</td><td><input id='inputNum" + i + "' type = 'number' value='" + item.PRIO + "'/></td><td><button class='btn btn-primary btn-sm' type='button' style='display:none; height:26px' id='btnChangePrio" + i + "' onclick= SavePrio('" + item.PICK + "','" + i + "')>Chage</button></td></tr>";
+                    bodyRows += "<tr row = '" + i + "' onmouseenter=showButton(" + i + ") id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft' style='display:none'><td>" + item.PICK + "</td><td><input id='inputNum" + i + "' class='form-control' type = 'number' value='" + item.PRIO + "' placeholder='" + item.PRIO + "' disabled/></td><td><button class='btn btn-success col-12 btn-sm' type='button' style='display:none; height:33px' id='btnChangePrio" + i + "' onclick= SavePrio('" + item.PICK + "','" + i + "')>Change</button></td></tr>";
                     ig = i;
-                });
+                });   
             }
             else {
-                $('#divPicketPending').hide(100);
+                $('#divPicketPrio').fadeOut(100);
             }
+
             $("#bdPicketPending").append(bodyRows);
+            for (var index = 0; index <= ig; index++) {
+                if (MyObjLst.length > 0) {
+                    $('#divPicketPrio').fadeIn(100);
+                    $('#rowNum' + index).fadeIn(1000);
+                }
+            }
         }
         LoadControls();
         GetMachine();
