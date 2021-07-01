@@ -49,21 +49,23 @@
 
             function ValidarStock(field1, i) {
                 debugger;
-                var inputCant = parseFloat($("#txtQuantity" + i).val());
-                var field = $("#slItem" + i);
-                var maxCant = parseFloat($(field)[0][$(field)[0].selectedIndex].getAttribute("stock"));
+                if ($("#txtQuantity" + i).val() != "") {
+                    var inputCant = parseFloat($("#txtQuantity" + i).val());
+                    var field = $("#slItem" + i);
+                    var maxCant = parseFloat($(field)[0][$(field)[0].selectedIndex].getAttribute("stock"));
 
-                if (inputCant > 0) {
-                    if (inputCant <= maxCant) {
-                        return;
+                    if (inputCant > 0) {
+                        if (inputCant <= maxCant) {
+                            return;
+                        } else {
+                            alert(_idioma == "INGLES" ? "Quantity can't be greather that stock available" : "La cantidad no puede ser mayor al stock disponible")
+                            $("#txtQuantity" + i).val("0")
+                            $("#txtQuantity" + i).focus()
+                        }
                     } else {
-                        alert(_idioma == "INGLES" ? "Quantity can't be greather that stock available" : "La cantidad no puede ser mayor al stock disponible")
                         $("#txtQuantity" + i).val("0")
                         $("#txtQuantity" + i).focus()
                     }
-                } else {
-                    $("#txtQuantity" + i).val("0")
-                    $("#txtQuantity" + i).focus()
                 }
             }
 
@@ -186,7 +188,7 @@
                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="slItem1" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,1);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" onkeyup="ValidarStock(this,1)" onchange="ValidarStock(this,1)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
+                        <asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,1)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
                         />
                     </td>
                     <td class="CampoOculto">
@@ -206,7 +208,7 @@
                         <asp:DropDownList ID="slItem2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,2);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup="ValidarStock(this,2)" onchange="ValidarStock(this,2)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
+                        <asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,2)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
                         />
                     </td>
                     <td class="CampoOculto">
@@ -222,7 +224,7 @@
                         <asp:DropDownList ID="slItem3" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,3);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ID="txtQuantity3" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup="ValidarStock(this,3)" onchange="ValidarStock(this,3)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
+                        <asp:TextBox min="0" step="any" ID="txtQuantity3" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,3)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
                         />
                     </td>
                     <td class="CampoOculto">
@@ -238,7 +240,7 @@
                         <asp:DropDownList ID="slItem4" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,4);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ID="txtQuantity4" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup="ValidarStock(this,4)" onchange="ValidarStock(this,4)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
+                        <asp:TextBox min="0" step="any" ID="txtQuantity4" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,4)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
                         />
                     </td>
                     <td class="CampoOculto">
@@ -254,7 +256,7 @@
                         <asp:DropDownList ID="slItem5" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,5);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ID="txtQuantity5" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onkeyup="ValidarStock(this,5)" onchange="ValidarStock(this,5)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
+                        <asp:TextBox min="0" step="any" ID="txtQuantity5" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,5)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
                         />
                     </td>
                     <td class="CampoOculto">

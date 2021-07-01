@@ -35,8 +35,8 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
             // Cambiar cultura para manejo de separador decimal
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
