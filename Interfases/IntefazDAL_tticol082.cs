@@ -203,5 +203,30 @@ namespace whusa.Interfases
         {
             return dal.ConsultarRegistrosBloquedos(_operator);
         }
+
+        public DataTable GetMachine()
+        {
+            return dal.GetMachine();
+        }
+
+        public DataTable GetPicks(Ent_tticol082 MyObj082)
+        {
+            return dal.GetPicks(MyObj082);
+        }
+
+        public bool UpdatePrio(Ent_tticol082 MyObj082)
+        {
+            return dal.UpdatePrio(MyObj082);
+        }
+
+        public DataTable getNextPrio(Ent_tticol082 MyObj082)
+        {
+            return dal.getNextPrio(MyObj082);
+        }
+
+        public DataTable ExistPrio(Ent_tticol082 MyObj082)
+        {
+            return dal.ExistPrio(MyObj082);
+        }
     }
 }
