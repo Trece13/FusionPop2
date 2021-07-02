@@ -148,6 +148,15 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.TextBox txtQuantity1;
         
         /// <summary>
+        /// validateReq1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validateReq1;
+        
+        /// <summary>
         /// txtMachine1 control.
         /// </summary>
         /// <remarks>
@@ -166,24 +175,6 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.TextBox txtValueSelect1;
         
         /// <summary>
-        /// txtMaxvalue1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMaxvalue1;
-        
-        /// <summary>
-        /// RangeValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RangeValidator RangeValidator1;
-        
-        /// <summary>
         /// slItem2 control.
         /// </summary>
         /// <remarks>
@@ -200,6 +191,15 @@ namespace whusap.WebPages.Migration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtQuantity2;
+        
+        /// <summary>
+        /// validateReq2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validateReq2;
         
         /// <summary>
         /// txtMachine2 control.
@@ -238,6 +238,15 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.TextBox txtQuantity3;
         
         /// <summary>
+        /// validateReq3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validateReq3;
+        
+        /// <summary>
         /// txtMachine3 control.
         /// </summary>
         /// <remarks>
@@ -274,6 +283,15 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.TextBox txtQuantity4;
         
         /// <summary>
+        /// validateReq4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validateReq4;
+        
+        /// <summary>
         /// txtMachine4 control.
         /// </summary>
         /// <remarks>
@@ -308,6 +326,15 @@ namespace whusap.WebPages.Migration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtQuantity5;
+        
+        /// <summary>
+        /// validateReq5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator validateReq5;
         
         /// <summary>
         /// txtMachine5 control.

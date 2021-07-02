@@ -49,23 +49,21 @@
 
             function ValidarStock(field1, i) {
                 debugger;
-                if ($("#txtQuantity" + i).val() != "") {
-                    var inputCant = parseFloat($("#txtQuantity" + i).val());
-                    var field = $("#slItem" + i);
-                    var maxCant = parseFloat($(field)[0][$(field)[0].selectedIndex].getAttribute("stock"));
+                var inputCant = parseFloat($("#txtQuantity" + i).val());
+                var field = $("#slItem" + i);
+                var maxCant = parseFloat($(field)[0][$(field)[0].selectedIndex].getAttribute("stock"));
 
-                    if (inputCant > 0) {
-                        if (inputCant <= maxCant) {
-                            return;
-                        } else {
-                            alert(_idioma == "INGLES" ? "Quantity can't be greather that stock available" : "La cantidad no puede ser mayor al stock disponible")
-                            $("#txtQuantity" + i).val("0")
-                            $("#txtQuantity" + i).focus()
-                        }
+                if (inputCant > 0) {
+                    if (inputCant <= maxCant) {
+                        return;
                     } else {
+                        alert(_idioma == "INGLES" ? "Quantity can't be greather that stock available" : "La cantidad no puede ser mayor al stock disponible")
                         $("#txtQuantity" + i).val("0")
                         $("#txtQuantity" + i).focus()
                     }
+                } else {
+                    $("#txtQuantity" + i).val("0")
+                    $("#txtQuantity" + i).focus()
                 }
             }
 
@@ -120,6 +118,17 @@
 
                 return validaFormulario;
             };
+
+            function fun_AllowOnlyAmountAndDot(txt) {
+                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+                    return true;
+                }
+                else {
+                    event.keyCode = 0;
+                    alert("Only Numbers with dot allowed !!");
+                    return false;
+                }
+            };
         </script>
     </asp:Content>
     <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
@@ -153,7 +162,7 @@
                     </td>
                     <td>
                         <asp:Label runat="server" ID="lblValueMachine" />
-                    </td>
+                   </td>
                     <td colspan="2">
                         <asp:Button ID="btnSaveOrder" OnClick="btnSaveOrder_Click" OnClientClick="return validarFormulario();" runat="server" CssClass="ButtonsSendSave" />
                     </td>
@@ -188,8 +197,12 @@
                         <asp:DropDownList runat="server" ClientIDMode="Static" ID="slItem1" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,1);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,1)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
-                        />
+                        <asp:TextBox TextMode="Number" ClientIDMode="Static" min="0" step="any" runat="server" ID="txtQuantity1" CssClass="TextBoxBig MyTextNum" onchange="ValidarStock(this,1)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)" onkeypress="return fun_AllowOnlyAmountAndDot(this);"/>
+                        <span style="vertical-align: middle; text-align: left;" />   
+                        <asp:RegularExpressionValidator ID="validateReq1" runat="server" ControlToValidate="txtQuantity1"
+                        ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
+                        ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
+                        Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>                    
                     </td>
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtMachine1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox>
@@ -197,10 +210,6 @@
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtValueSelect1" name="txtValueSelect1" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox>
                     </td>
-                    <!--<td>
-                        <asp:TextBox ID="txtMaxvalue1" name="txtMaxvalue" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyText" Enabled="false"></asp:TextBox>
-                    </td>
-                    <asp:RangeValidator ID="RangeValidator1" runat="server" CssClass="TextBoxBig MyDrop" ControlToValidate="txtQuantity1" ErrorMessage="ERROR" MaximumValue="30" MinimumValue="0" ForeColor="Red" SetFocusOnError="True"></asp:RangeValidator>-->
                 </tr>
                 <tr>
                     <td>2</td>
@@ -208,8 +217,11 @@
                         <asp:DropDownList ID="slItem2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,2);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,2)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
-                        />
+                        <asp:TextBox min="0" step="any" ClientIDMode="Static" ID="txtQuantity2" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onchange="ValidarStock(this,2)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)" onkeypress="return fun_AllowOnlyAmountAndDot(this);" />
+                        <asp:RegularExpressionValidator ID="validateReq2" runat="server" ControlToValidate="txtQuantity2"
+                        ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
+                        ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
+                        Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>
                     </td>
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtMachine2" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox>
@@ -224,8 +236,11 @@
                         <asp:DropDownList ID="slItem3" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,3);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ID="txtQuantity3" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,3)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
-                        />
+                        <asp:TextBox min="0" step="any" ID="txtQuantity3" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onchange="ValidarStock(this,3)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)" onkeypress="return fun_AllowOnlyAmountAndDot(this);" />
+                        <asp:RegularExpressionValidator ID="validateReq3" runat="server" ControlToValidate="txtQuantity3"
+                        ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
+                        ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
+                        Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>
                     </td>
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtMachine3" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"> </asp:TextBox>
@@ -240,8 +255,11 @@
                         <asp:DropDownList ID="slItem4" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,4);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ID="txtQuantity4" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,4)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
-                        />
+                        <asp:TextBox min="0" step="any" ID="txtQuantity4" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onchange="ValidarStock(this,4)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)" onkeypress="return fun_AllowOnlyAmountAndDot(this);" />
+                        <asp:RegularExpressionValidator ID="validateReq4" runat="server" ControlToValidate="txtQuantity4"
+                        ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
+                        ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
+                        Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>
                     </td>
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtMachine4" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox>
@@ -256,8 +274,11 @@
                         <asp:DropDownList ID="slItem5" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyDrop" onchange="obtenerValor(this,5);"></asp:DropDownList>
                     </td>
                     <td>
-                        <asp:TextBox min="0" step="any" ID="txtQuantity5" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" oninput="ValidarStock(this,5)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)"
-                        />
+                        <asp:TextBox min="0" step="any" ID="txtQuantity5" ClientIDMode="Static" TextMode="Number" runat="server" CssClass="TextBoxBig MyTextNum" onchange="ValidarStock(this,5)" onfocus="vaciarCampo(this)" onfocusout="asignarCero(this)" onkeypress="return fun_AllowOnlyAmountAndDot(this);" />
+                        <asp:RegularExpressionValidator ID="validateReq5" runat="server" ControlToValidate="txtQuantity5"
+                        ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
+                        ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
+                        Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>
                     </td>
                     <td class="CampoOculto">
                         <asp:TextBox ID="txtMachine5" ClientIDMode="Static" runat="server" CssClass="TextBoxBig MyTextNum"></asp:TextBox>
