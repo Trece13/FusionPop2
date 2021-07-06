@@ -147,9 +147,11 @@ namespace whusap.WebPages.Migration
                                 MyLioEntidadObj.OQMF = item["OQMF"].ToString();
                                 MyLioEntidadObj.CANTD = item["CANTD"].ToString();
                                 MyLioEntidadObj.MCNO = item["MCNO"].ToString();
+                                MyLioEntidadObj.CANT_PICK = item["CANT_PICK"].ToString();
                                 DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
-
+                                var Stock = Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString());
+                                var Cant_Pic = Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.CANT_PICK.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.CANT_PICK.Trim()));
                                 if (dt022044131.Rows.Count > 0)
                                 {
                                     MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
@@ -157,7 +159,7 @@ namespace whusap.WebPages.Migration
 
                                 if (dt215.Rows.Count > 0)
                                 {
-                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Cant_Pic - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
                                 }
                                 LstTable.Add(MyLioEntidadObj);
                             }
@@ -352,10 +354,13 @@ namespace whusap.WebPages.Migration
                     , LstTable[i].ISWH.ToString().Trim().ToUpper()
                     , LstTable[i].STOCK.ToString().Trim().ToUpper()
 
-                    , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
+                    , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox' onkeypress='return fun_AllowOnlyAmountAndDot(this)' onchange='validarCantidadLimiteArticuloMaquina(this,{1},{2},{3})' />"
                                     , "txtQuantity-" + i,
-                                    LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
-                                    LstTable[i].ISWH.ToString().Trim().ToUpper().Replace(",", "."),
+                                    //LstTable[i].STOCK.ToString().Trim().ToUpper().Replace(",", "."),
+                                    //LstTable[i].ISWH.ToString().Trim().ToUpper().Replace(",", "."),
+                                    LstTable[i].STOCK.ToString().Trim().ToUpper(),
+                                    LstTable[i].ISWH.ToString().Trim().ToUpper(),
+
                                     i)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox'  readonly/>"

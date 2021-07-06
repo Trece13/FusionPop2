@@ -120,6 +120,17 @@
 
             return validate;
         };
+
+       function fun_AllowOnlyAmountAndDot(txt) {
+                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+                    return true;
+                }
+                else {
+                    event.keyCode = 0;
+                    alert("Only Numbers with dot allowed !!");
+                    return false;
+                }
+            };
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">

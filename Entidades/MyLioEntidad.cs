@@ -31,6 +31,7 @@ namespace whusa.Entidades
         public string fecha { get; set; }
         public string Error { get; set; }
         public string STOCK { get; set; }
+        public string CANT_PICK { get; set; }
     }
 }
 
