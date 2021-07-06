@@ -58,6 +58,17 @@
             }
             return i;
         }
+
+        function fun_AllowOnlyAmountAndDot(txt) {
+            if (event.keyCode > 47 && event.keyCode < 58) {
+                return true;
+            }
+            else {
+                event.keyCode = 0;
+                alert("Only Numbers allowed.");
+                return false;
+            }
+        };
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
@@ -88,7 +99,7 @@
             </td>
             <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtQuantity" onblur="validarCantidad(this)" CssClass="TextBoxBig" ClientIDMode="Static" />
+                    <asp:TextBox runat="server" ID="txtQuantity" onkeypress="return fun_AllowOnlyAmountAndDot(this);" onblur="validarCantidad(this)" CssClass="TextBoxBig" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>

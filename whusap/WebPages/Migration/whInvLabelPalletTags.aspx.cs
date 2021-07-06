@@ -162,7 +162,7 @@ namespace whusap.WebPages.Migration
                 factor = factor.Trim() == String.Empty ? "1" : factor;
 
                 //qtyord = (qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())) / double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat);
-                qtyord = qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString());
+                qtyord = Math.Round((qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())), 4);
                 qtyord = qtyord == 0 ? 1 : qtyord;
 
                 if (((qtyanu + qtypconf + double.Parse(factor) + qtyann) - qtyreh) > qtyord)

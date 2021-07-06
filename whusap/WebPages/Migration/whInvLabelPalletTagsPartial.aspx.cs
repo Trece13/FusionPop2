@@ -151,7 +151,7 @@ namespace whusap.WebPages.Migration
                 lblMsgMcnoActive.Visible = true;
 
                 //qtyord = ((qtyord - qtyreh) * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())) - qtyanu - qtyann;
-                qtyord = qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString());
+                qtyord = Math.Round((qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())), 4);
                 qtyord = qtyord == 0 ? 1 : qtyord;
 
                 var qtyordpend = (qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())) / double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat);
