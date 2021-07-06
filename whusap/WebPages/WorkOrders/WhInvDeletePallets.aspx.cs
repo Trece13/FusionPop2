@@ -124,6 +124,7 @@ namespace whusap.WebPages.WorkOrders
                     ObjTticol022.qtdl = Convert.ToDecimal(MyRow["ACQT"].ToString() == String.Empty ? "0" : MyRow["ACQT"].ToString());
                     ObjTticol022.cuni = MyRow["CUNI"].ToString();
                     ObjTticol022.dele = Convert.ToInt32(MyRow["STAT"].ToString());
+                    ObjTticol022.date = MyRow["DATEA"].ToString();
                     ObjTticol022.Error = false;
                 }
                 else

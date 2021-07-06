@@ -315,7 +315,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPorPalletID">
         <stringSQL>
-          SELECT  col022.T$PRO1 PROC, col022.T$MITM ITEM, ibd001.T$DSCA DSCA, col222.T$ACQT ACQT, col022.T$CUNI CUNI, col022.T$DELE STAT
+          SELECT  col022.T$PRO1 PROC, col022.T$MITM ITEM, ibd001.T$DSCA DSCA, col222.T$ACQT ACQT, col022.T$CUNI CUNI, col022.T$DELE STAT, col022.T$DATE DATEA
           FROM  {2} col022
           INNER JOIN {0}.ttcibd001{1} ibd001 ON ibd001.T$ITEM = col022.T$MITM
           LEFT JOIN {0}.tticol222{1} col222 ON col222.T$PDNO = col022.T$PDNO AND col222.T$SQNB = col022.T$SQNB
