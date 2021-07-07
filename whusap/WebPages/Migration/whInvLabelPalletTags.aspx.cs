@@ -395,7 +395,8 @@ namespace whusap.WebPages.Migration
                 Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"]    =  sqnb.Trim().ToUpper();
                 Session["Machine"]   =  maquina;
-                Session["Operator"] = _operator;
+                //Session["Operator"] = _operator;
+                Session["Operator"] = HttpContext.Current.Session["user"].ToString().Trim();
                 Session["Reprint"] = "no";
 
                 StringBuilder script = new StringBuilder();
@@ -649,7 +650,8 @@ namespace whusap.WebPages.Migration
                 lblValueShift.Text = "A,B,C,D";
                 lblValueCasePerPallet.Text = qtdl;
                 lblValueMadeIn.Text = madein;
-                lblValueInspectorInitial.Text = "REPRINT by: " + _operator;
+                //lblValueInspectorInitial.Text = "REPRINT by: " + _operator;
+                lblValueInspectorInitial.Text = "REPRINT by: " + HttpContext.Current.Session["user"].ToString().Trim();
 
                 Session["MaterialDesc"] = desc;
                 Session["codeMaterial"] = item.Trim().ToUpper() ;
@@ -659,7 +661,8 @@ namespace whusap.WebPages.Migration
                 Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maq;
-                Session["Operator"] = _operator;
+                //Session["Operator"] = _operator;
+                Session["Operator"] = HttpContext.Current.Session["user"].ToString().Trim();
                 Session["Reprint"] = "yes";
 
 

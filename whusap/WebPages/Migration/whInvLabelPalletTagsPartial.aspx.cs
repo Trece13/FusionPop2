@@ -157,7 +157,8 @@ namespace whusap.WebPages.Migration
                 var qtyordpend = (qtyord * Convert.ToDouble(ConfigurationManager.AppSettings["calcLabelPalletTag"].ToString())) / double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat);
                 qtyordpend = qtyordpend > Convert.ToInt32(qtyordpend) ? Convert.ToInt32(qtyordpend) + 1 : qtyordpend;
 
-                if (((qtyanu + qtypconf + double.Parse(factor) + qtyann) - qtyreh) > qtyordo)
+                //if (((qtyanu + qtypconf + double.Parse(factor) + qtyann) - qtyreh) > qtyordo)
+                if (((qtyanu + qtypconf + enterQuantity + qtyann) - qtyreh) > qtyord)
                 {
                     lblError.Text = String.Format(mensajes("palletoverann"), qtyord);
                     return;
@@ -396,7 +397,8 @@ namespace whusap.WebPages.Migration
                 Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maquina;
-                Session["Operator"] = _operator;
+                //Session["Operator"] = _operator;
+                Session["Operator"] = HttpContext.Current.Session["user"].ToString().Trim();
                 Session["Reprint"] = "no";
 
                 StringBuilder script = new StringBuilder();
