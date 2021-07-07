@@ -40,6 +40,7 @@ namespace whusap.WebPages.Balance
         private static string globalMessages = "GlobalMessages";
         public static string _tipoFormulario;
         public static string _idioma;
+        public static string anuncioautomatico;
         public static string UrlBaseBarcode = System.Web.Configuration.WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
@@ -165,7 +166,7 @@ namespace whusap.WebPages.Balance
             }
             else
             {
-                lblError.Text = Pleaseselectrollwinder;
+                lblError.Text = mensajes("Pleaseselectrollwinder");
                 lblError.ForeColor = System.Drawing.Color.Red;
                 return;
             }
@@ -243,7 +244,7 @@ namespace whusap.WebPages.Balance
             obj022.log1 = "NONE";
             obj022.log2 = "NONE";
             obj022.logd = "NONE";
-            obj022.dele = 7;
+            obj022.dele = _procesoAutomatico ? 7 : 2;
             obj022.qtd1 = 0;
             obj022.norp = 1;
             obj022.loca = " ";
@@ -261,8 +262,16 @@ namespace whusap.WebPages.Balance
 
             //ActiveOrderMachine = obj022.sqnb;
 
+            if (_procesoAutomatico)
+            {
+                anuncioautomatico = "true";
+            }
+            else
+            {
+                anuncioautomatico = "false";
+            }
 
-            int retorno = idal022.insertarRegistro(ref parameterCollection022, ref parameterCollection020, ref strError);
+            int retorno = idal022.insertarRegistro(ref parameterCollection022, ref parameterCollection020, ref strError, ref anuncioautomatico);
 
             if (!string.IsNullOrEmpty(strError))
             {
@@ -270,26 +279,29 @@ namespace whusap.WebPages.Balance
                 return;
             }
 
-            if (retorno > 0)
+            if (anuncioautomatico == "true")
             {
-                Ent_tticol025 objTticol025 = new Ent_tticol025();
-                objTticol025.pdno=obj022.pdno;
-                objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-")+1)));
-                objTticol025.mitm=obj022.mitm;
-                objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
-                objTticol025.qtdl= (float)obj022.qtdl;
-                objTticol025.cuni=obj022.cuni;
-                objTticol025.date= DateTime.Now.ToString();
-                objTticol025.mess="0";
-                objTticol025.user=obj022.logn;
-                objTticol025.refcntd=obj022.refcntd;
-                objTticol025.refcntu=obj022.refcntu;
+                if (retorno > 0)
+                {
+                    Ent_tticol025 objTticol025 = new Ent_tticol025();
+                    objTticol025.pdno = obj022.pdno;
+                    objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
+                    objTticol025.mitm = obj022.mitm;
+                    objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
+                    objTticol025.qtdl = (float)obj022.qtdl;
+                    objTticol025.cuni = obj022.cuni;
+                    objTticol025.date = DateTime.Now.ToString();
+                    objTticol025.mess = "0";
+                    objTticol025.user = obj022.logn;
+                    objTticol025.refcntd = obj022.refcntd;
+                    objTticol025.refcntu = obj022.refcntu;
 
-                lblError.Visible = true;
-                lblError.Text = mensajes("rollsaved");
-                lblError.ForeColor = System.Drawing.Color.Green;
-                int res = idal025.insertarRegistro(ref objTticol025,ref strError);
+                    lblError.Visible = true;
+                    lblError.Text = mensajes("rollsaved");
+                    lblError.ForeColor = System.Drawing.Color.Green;
+                    int res = idal025.insertarRegistro(ref objTticol025, ref strError);
 
+                }
             }
 
             txtQuantity.Text = string.Empty;

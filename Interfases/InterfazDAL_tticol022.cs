@@ -16,12 +16,12 @@ namespace whusa.Interfases
         {
         }
 
-        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError)
+        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError, ref string anuncioautomatico)
         {
             int retorno = -1;
             try
             {
-                retorno = dal.insertarRegistro(ref parametros, ref parametros020, ref strError);
+                retorno = dal.insertarRegistro(ref parametros, ref parametros020, ref strError, ref anuncioautomatico);
                 return retorno;
             }
             catch (Exception ex)

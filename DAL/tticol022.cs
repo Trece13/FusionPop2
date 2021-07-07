@@ -35,9 +35,10 @@ namespace whusa.DAL
             parametrosIn.Clear();
         }
 
-        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError)
+        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError, ref string anuncioautomatico)
         {
             method = MethodBase.GetCurrentMethod();
+            var _anuncioautomatico = anuncioautomatico;
             bool retorno = false;
 
             try
@@ -55,8 +56,11 @@ namespace whusa.DAL
                     retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
                     if (retorno)
                     {
-                        DAL.tticol020 dal020 = new tticol020();
-                        int intRetorno = dal020.insertarRegistro(ref parametros020, ref strError);
+                        if (_anuncioautomatico == "true")
+                        {
+                            DAL.tticol020 dal020 = new tticol020();
+                            int intRetorno = dal020.insertarRegistro(ref parametros020, ref strError);
+                        }
                         Ent_tticol022 nreg = reg;
                         int retorno222 = InsertarRegistroTicol222(ref nreg, ref strError);
                     }

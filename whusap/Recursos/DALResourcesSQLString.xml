@@ -5987,7 +5987,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           TRIM(tcibd001.T$CUNI) AS CUNI, tisfc001.T$QDLV AS QDLV,ticol011.T$STAT STAT,
           CONCAT(CONCAT(TRIM(tccom130.T$NAME), ' - '),tccom130.T$CSTE)  AS NAME, tisfc001.t$qtdl QTYPCONF,
           NVL((select sum (t$qtdl) from  {0}.tticol020{1} where t$pdno='[:T$PDNO]'), 0) QTYANN,
-          NVL((select sum (t$qtdl) from  {0}.tticol022{1} where t$pdno='[:T$PDNO]' and t$dele in ('1','3','13')), 0) QTYREH
+          --NVL((select sum (t$qtdl) from  {0}.tticol022{1} where t$pdno='[:T$PDNO]' and t$dele in ('1','3','13')), 0) QTYREH
+          NVL((select sum (t$qtdl) from  {0}.tticol022{1} where t$pdno='[:T$PDNO]' and t$dele = '3'), 0) QTYREH
           FROM {2} tisfc001
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.T$ITEM = tisfc001.T$MITM
           INNER JOIN {0}.ttisfc010{1} tisfc010 ON tisfc010.T$PDNO = tisfc001.T$PDNO

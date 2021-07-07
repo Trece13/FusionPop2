@@ -464,7 +464,6 @@
             Quantity enter doesn't be less zero, please check.
           </stringMessage>
         </operationName>
-
         <operationName name="machinelist">
           <stringMessage>
             Machine List not found
@@ -500,7 +499,11 @@
             Another roll was announced ( {0} ) minutes before.
           </stringMessage>
         </operationName>
-
+        <operationName name="Pleaseselectrollwinder">
+          <stringMessage>
+            Please select a roll winder.
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="blanknumber">
@@ -551,6 +554,11 @@
         <operationName name="quantityzero">
           <stringMessage>
             Cantidad ingresada no puede ser menor o igual a cero, por favor verifique.
+          </stringMessage>
+        </operationName>
+        <operationName name="Pleaseselectrollwinder">
+          <stringMessage>
+            Por favor seleccione una bobina.
           </stringMessage>
         </operationName>
       </Idiom>
