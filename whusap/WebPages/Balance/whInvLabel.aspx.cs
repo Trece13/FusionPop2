@@ -287,6 +287,7 @@ namespace whusap.WebPages.Balance
 
                 lblError.Visible = true;
                 lblError.Text = mensajes("rollsaved");
+                lblError.ForeColor = System.Drawing.Color.Green;
                 int res = idal025.insertarRegistro(ref objTticol025,ref strError);
 
             }
