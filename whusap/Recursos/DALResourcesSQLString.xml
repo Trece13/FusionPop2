@@ -3227,8 +3227,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
       <operationName name="vallidatePalletID">
-        <stringSQL>
-          SELECT * FROM (
+        <stringSQL>     
+          <!--SELECT * FROM (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$PAID,ticol222.T$ACQT AS T$qtyc,
           ticol022.T$MITM AS T$ITEM,ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,ticol222.T$ACLO AS T$LOCA, ticol022.t$dele as t$stat,' ' AS T$CLOT
           FROM {0}.tticol022{1} ticol022
@@ -3244,6 +3244,33 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ticol242.T$CWAT AS T$CWAR,ticol242.T$ACLO AS T$LOCA,ticol042.t$dele as t$stat,' ' AS T$CLOT
           FROM {0}.tticol042{1} ticol042
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          ) global
+          LEFT JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = global.t$item
+          WHERE global.T$qtyc > 0
+          AND TRIM(global.T$PAID) = '[p1]'
+          AND ROWNUM = 1
+          ORDER BY global.T$PAID ASC-->
+          SELECT * FROM (
+          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$PAID,ticol222.T$ACQT AS T$qtyc,
+          ticol022.T$MITM AS T$ITEM,ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,ticol222.T$ACLO AS T$LOCA, ticol022.t$dele as t$stat,
+          CASE WHEN ibd001.t$kltc = 1 THEN ticol022.t$pdno ELSE ' ' END AS T$CLOT
+          FROM {0}.tticol022{1} ticol022
+          INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          INNER JOIN {0}.ttcibd001{1} ibd001 ON ibd001.T$ITEM = ticol022.T$MITM
+          UNION
+          SELECT 'whcol130' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,col130.T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA,T$STAT as t$stat,T$CLOT
+          FROM {0}.tWhcol130{1} col130
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.T$ITEM = col130.T$ITEM
+          UNION
+          SELECT 'whcol131' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,col131.T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA,T$STAT as t$stat,T$CLOT
+          FROM {0}.tWhcol131{1} col131
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.T$ITEM = col131.T$ITEM
+          UNION
+          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$PAID,ticol242.T$ACQT AS T$qtyc,ticol042.T$MITM AS T$ITEM,ticol042.T$CUNI AS T$CUNI,
+          ticol242.T$CWAT AS T$CWAR,ticol242.T$ACLO AS T$LOCA,ticol042.t$dele as t$stat,CASE WHEN ibd001.t$kltc = 1 THEN ticol042.t$pdno ELSE ' ' END AS T$CLOT
+          FROM {0}.tticol042{1} ticol042
+          INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
+          INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.T$ITEM = ticol042.T$MITM
           ) global
           LEFT JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = global.t$item
           WHERE global.T$qtyc > 0

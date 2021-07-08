@@ -137,7 +137,7 @@ namespace whusap.WebPages.InvMaterial
             Ent_tticol011 ObjTicol011 = new Ent_tticol011();
             ObjTicol011.pdno = PDNO.ToUpper().Trim();
             ObjTicol011.Acceso = false;
-
+            HttpContext.Current.Session["PDNO"] = ObjTicol011.pdno;
 
             DataTable dtTicol011 = Tticol011.invLabelRegrind_listaRegistrosOrdenParam(ref ObjTicol011, ref strError);
 
@@ -214,7 +214,7 @@ namespace whusap.WebPages.InvMaterial
                 }
 
                 HttpContext.Current.Session["PAID"] = PAID.ToString();
-                HttpContext.Current.Session["PDNO"] = myObj["T$ORNO"].ToString();
+                //HttpContext.Current.Session["PDNO"] = myObj["T$ORNO"].ToString();               
                 string PDNO = HttpContext.Current.Session["PDNO"].ToString();
                 string ITEM = Obj_tticol125.item.ToString();
 
@@ -370,14 +370,14 @@ namespace whusap.WebPages.InvMaterial
             string myPdno = PDNO.ToUpper().Trim();
             string myItem =  ITEM.ToUpper().Trim();
 
-            if (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString().Trim()) < Convert.ToDecimal(QTYS.Trim()))
-            {
-                MyObj.Error = true;
-                MyObj.TypeMsgJs = "label";
+            //if (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString().Trim()) < Convert.ToDecimal(QTYS.Trim()))
+            //{
+            //    MyObj.Error = true;
+            //    MyObj.TypeMsgJs = "label";
                 
-                MyObj.ErrorMsg = QuantitymustbelowerthanPalletIDquantity;
-                return JsonConvert.SerializeObject(MyObj);
-            }
+            //    MyObj.ErrorMsg = QuantitymustbelowerthanPalletIDquantity;
+            //    return JsonConvert.SerializeObject(MyObj);
+            //}
 
             DataTable dtTticst001 = ITticst001.findByItemAndPdno(ref myPdno, ref myItem, ref strError);
             if (dtTticst001.Rows.Count > 0)
@@ -401,8 +401,8 @@ namespace whusap.WebPages.InvMaterial
             MyObj.pono = Convert.ToInt32(HttpContext.Current.Session["PONO"].ToString().Trim());// VARIABLE GLOBAL
             MyObj.item = ITEM.ToUpper().Trim();
             MyObj.cwar = HttpContext.Current.Session["CWAR"].ToString().ToUpper();//VARIABLE GLOBAL
+            //MyObj.qune = Convert.ToDecimal(QTYS);
             MyObj.qune = Convert.ToDecimal(QTYS);
-
 
             MyObj.logn = HttpContext.Current.Session["user"].ToString();
             MyObj.date = "";
@@ -431,21 +431,21 @@ namespace whusap.WebPages.InvMaterial
                     MyObj.SuccessMsg = Updatesuccess;
 
 
-                    if ((Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())) == 0)
-                    {
+                    //if ((Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())) == 0)
+                    //{
                         actualizarTablas(MyObj);
                         Ent_tticol082 ObjTticol082 = new Ent_tticol082();
                         ObjTticol082.PAID = HttpContext.Current.Session["PAID"].ToString().Trim().ToUpper();
                         ObjTticol082.QTYC = (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())).ToString();
                         actualizarTablasCant(ObjTticol082);
-                    }
-                    else
-                    {
-                        Ent_tticol082 ObjTticol082 = new Ent_tticol082();
-                        ObjTticol082.PAID = HttpContext.Current.Session["PAID"].ToString().Trim().ToUpper();
-                        ObjTticol082.QTYC = (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())).ToString();
-                        actualizarTablasCant(ObjTticol082);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    Ent_tticol082 ObjTticol082 = new Ent_tticol082();
+                    //    ObjTticol082.PAID = HttpContext.Current.Session["PAID"].ToString().Trim().ToUpper();
+                    //    ObjTticol082.QTYC = (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())).ToString();
+                    //    actualizarTablasCant(ObjTticol082);
+                    //}
                     
                 }
                 else
@@ -466,21 +466,21 @@ namespace whusap.WebPages.InvMaterial
                     
                     MyObj.SuccessMsg = Insertsuccess;
 
-                    if ((Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())) == 0)
-                    {
+                    //if ((Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())) == 0)
+                    //{
                         actualizarTablas(MyObj);
                         Ent_tticol082 ObjTticol082 = new Ent_tticol082();
                         ObjTticol082.PAID = HttpContext.Current.Session["PAID"].ToString().Trim().ToUpper();
                         ObjTticol082.QTYC = (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())).ToString();
                         actualizarTablasCant(ObjTticol082);
-                    }
-                    else
-                    {
-                        Ent_tticol082 ObjTticol082 = new Ent_tticol082();
-                        ObjTticol082.PAID = HttpContext.Current.Session["PAID"].ToString().Trim().ToUpper();
-                        ObjTticol082.QTYC = (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())).ToString();
-                        actualizarTablasCant(ObjTticol082);
-                    }
+                    //}
+                    //else
+                    //{
+                    //    Ent_tticol082 ObjTticol082 = new Ent_tticol082();
+                    //    ObjTticol082.PAID = HttpContext.Current.Session["PAID"].ToString().Trim().ToUpper();
+                    //    ObjTticol082.QTYC = (Convert.ToDecimal(HttpContext.Current.Session["QTYC"].ToString()) - Convert.ToDecimal(QTYS.Trim())).ToString();
+                    //    actualizarTablasCant(ObjTticol082);
+                    //}
                 }
                 else
                 {

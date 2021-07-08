@@ -35,14 +35,14 @@
         <label class="col-sm-2 col-form-label-lg" for="txWorkorder">
             Work Order</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txWorkorder" placeholder="Work order">
+            <input type="text" class="form-control form-control-lg" id="txWorkorder" placeholder="Work order" />
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txWorkorder">
             Pallet ID</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txPalletId" placeholder="Pallet ID">
+            <input type="text" class="form-control form-control-lg" id="txPalletId" placeholder="Pallet ID" />
         </div>
     </div>
     <div id="divDetalle">
@@ -50,7 +50,7 @@
             <label class="col-sm-2 col-form-label-lg" for="txItem">
                 Item</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item">
+                <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item" />
             </div>
             <label id="lblItem" for="txItem">
             </label>
@@ -59,7 +59,7 @@
             <label class="col-sm-2 col-form-label-lg" for="txItem">
                 Warehouse</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txWarehouse" placeholder="Warehouse">
+                <input type="text" class="form-control form-control-lg" id="txWarehouse" placeholder="Warehouse" />
             </div>
             <label id="Label1" for="txWarehouse">
             </label>
@@ -68,14 +68,14 @@
             <label class="col-sm-2 col-form-label-lg" for="txLot">
                 Lot</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot">
+                <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot" />
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label-lg" for="txQuantity">
                 Quantity</label>
             <div class="col-sm-4">
-                <input type="number" step="any" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity">
+                <input type="text" step="any" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" />
             </div>
             <label id="lblQuantity" for="txQuantity">
             </label>
@@ -126,7 +126,7 @@
         function BloquearComponentesItem() {
 
             $('#txLot').prop("disabled", true);
-            $('#txQuantity').prop("disabled", true);
+            //JC HOY $('#txQuantity').prop("disabled", true);
             $('#btnSave').prop("disabled", true);
 
         };
@@ -193,14 +193,16 @@
                 $('#txItem').val(MyObj.item);
                 $('#txLot').val(MyObj.clot);
                 $('#txWarehouse').val(MyObj.cwar);
-                $('#txQuantity').val("");
+                //$('#txQuantity').val("");
+                $('#txQuantity').val(MyObj.qtyc);
                 $('#lblItem').html(MyObj.dsca);
                 $('#lblQuantity').html(MyObj.cuni);
 
                 $('#txItem').prop("disabled", true);
                 $('#txLot').prop("disabled", true);
-                $('#txQuantity').prop("disabled", false);
-                $('#btnSave').prop("disabled", true);
+                //$('#txQuantity').prop("disabled", false);
+                $('#txQuantity').prop("disabled", true);
+                $('#btnSave').prop("disabled", false);
 
                 $('#lblError').html("");
                 $('#divDetalle').show('slow');
@@ -212,7 +214,7 @@
             var MyObj = JSON.parse(r.d);
             if (MyObj.Error == true) {
                 $('#txLot').val("");
-                $('#txQuantity').val("");
+                //JC HOY $('#txQuantity').val("");
                 $('#lblItem').html("");
                 $('#lblQuantity').html("");
 
@@ -223,7 +225,7 @@
                 $('#lblError').html("");
 
                 $('#txLot').val("");
-                $('#txQuantity').val("");
+                //JC HOY $('#txQuantity').val("");
                 $('lblItem').html("");
                 $('lblQuantity').html("");
 
@@ -234,7 +236,7 @@
 
                 } else {
                     $('#txLot').prop("disabled", true);
-                    $('#txQuantity').prop("disabled", false);
+                    //JC HOY $('#txQuantity').prop("disabled", false);
                 }
             }
 
@@ -279,8 +281,8 @@
                 //$('#txWarehouse').val("");
                 //$('#txItem').val("");
                 //$('#txLot').val("");
-                $('#txQuantity').val("");
-                $('#txQuantity').focus();
+                //JCHOY $('#txQuantity').val("");
+                //JCHOY $('#txQuantity').focus();
                 $('#btnSave').prop("disabled", true);
 
             }
@@ -375,11 +377,11 @@
         //                timer = setTimeout("VerificarLote()", 1000);
         //            });
 
-        txQuantity.bind('paste keyup', function () {
-            VerificarQuantity();
+        //JC HOY txQuantity.bind('paste keyup', function () {
+        //JC HOY     VerificarQuantity();
             //                stoper();
             //                timer = setTimeout("VerificarQuantity()", 1000);
-        });
+        //JC HOY });
 
         btnSave.bind('click', function () {
             Click_Save();

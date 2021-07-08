@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,6 +30,7 @@ namespace whusap.WebPages.Balance
         DataTable resultado = new DataTable();
         string strError = string.Empty;
         private static bool _procesoAutomatico = Convert.ToBoolean(ConfigurationManager.AppSettings["anuncioAutomaticorollos"].ToString());
+        private static bool _procesConfirmacionAutomatica = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticarollos"].ToString());
         ////Manejo idioma
         public string Pleaseselectrollwinder = string.Empty;
         private static Mensajes _mensajesForm = new Mensajes();
@@ -41,6 +40,7 @@ namespace whusap.WebPages.Balance
         public static string _tipoFormulario;
         public static string _idioma;
         public static string anuncioautomatico;
+        public static string confirmacionautomatica;
         public static string UrlBaseBarcode = System.Web.Configuration.WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
@@ -111,8 +111,13 @@ namespace whusap.WebPages.Balance
 
                 if (_procesoAutomatico && _tipoFormulario != "rolltags")
                 {
-                    lblInfo.Text = "The process of automatic announcement / confirm is active.";
+                    lblInfo.Text = "The process of automatic announcement is active.";
                 }
+                if (_procesConfirmacionAutomatica && _tipoFormulario != "rolltags")
+                {
+                    lblInfo.Text = lblInfo.Text + "The process of confirm announcement is active.";
+                }
+
             }
 
 
@@ -279,7 +284,16 @@ namespace whusap.WebPages.Balance
                 return;
             }
 
-            if (anuncioautomatico == "true")
+            if (_procesConfirmacionAutomatica)
+            {
+                confirmacionautomatica = "true";
+            }
+            else
+            {
+                confirmacionautomatica = "false";
+            }
+
+            if (confirmacionautomatica == "true")
             {
                 if (retorno > 0)
                 {
