@@ -3357,7 +3357,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <!-- Smita Ends-->
       <operationName name="ConsultarQtdl">
         <stringSQL>
-          SELECT SUM(ticol125.T$REQT) REQT FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO
+          SELECT  REQT+NVL(COL090.T$QANA,0) REQT, PDNO, ITEM
+          FROM
+          (
+          SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO, T$ITEM
+          )global LEFT JOIN {0}.tticol090{1} col090 on col090.t$FPDN = global.PDNO and col090.t$ITEM = global.ITEM
+          <!--SELECT SUM(ticol125.T$REQT) REQT FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO-->
         </stringSQL>
       </operationName>
       <!--<operationName name="insertarRegistro">
