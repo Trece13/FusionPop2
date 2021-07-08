@@ -90,17 +90,40 @@ namespace whusap.WebPages.Balance
                 ddRollWinder.DataSource = opciones;
                 ddRollWinder.DataBind();
                 lblError.Visible = false;
-                if (ConfigurationManager.AppSettings.AllKeys.Contains("BalanceMachines"))
+                if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
                 {
-                    string machines = ConfigurationManager.AppSettings["BalanceMachines"];
+                    if (ConfigurationManager.AppSettings.AllKeys.Contains("BalanceMachines"))
+                    {
+                        string machines = ConfigurationManager.AppSettings["BalanceMachines"];
 
-                    var machineArray = machines.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
-                    machineArray.Insert(0, _idioma == "INGLES" ? "-- Select --" : "-- Seleccione --");
+                        var machineArray = machines.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+                        machineArray.Insert(0, _idioma == "INGLES" ? "-- Select --" : "-- Seleccione --");
 
-                    listMachine.DataSource = machineArray;
-                    listMachine.DataBind();
+                        listMachine.DataSource = machineArray;
+                        listMachine.DataBind();
+                    }
+                    else
+                    {
+                        lblError.Visible = true; lblError.Text = mensajes("machinelist");
+                    }
                 }
-                else { lblError.Visible = true; lblError.Text = mensajes("machinelist"); }
+                else
+                {
+                    if (ConfigurationManager.AppSettings.AllKeys.Contains("BalanceMachinesRetail"))
+                    {
+                        string machines = ConfigurationManager.AppSettings["BalanceMachinesRetail"];
+
+                        var machineArray = machines.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
+                        machineArray.Insert(0, _idioma == "INGLES" ? "-- Select --" : "-- Seleccione --");
+
+                        listMachine.DataSource = machineArray;
+                        listMachine.DataBind();
+                    }
+                    else
+                    {
+                        lblError.Visible = true; lblError.Text = mensajes("machinelist");
+                    }
+                }
 
                 if (Session["IsPreviousPage"] == null) { Session.Clear(); }
 
