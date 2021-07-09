@@ -453,7 +453,7 @@
     </div>
     <script>
         window.onbeforeunload = function (e) {
-           alert("sasasassas");
+           console.log("sasasassas");
         };
 
         var cnpk = "";
