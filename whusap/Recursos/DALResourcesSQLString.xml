@@ -672,7 +672,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and ticol082.T$STAT in([:T$STAT])
           and ticol082.T$PICK = NVL('[:T$PICK]',ticol082.T$PICK)
           and ticol082.T$CWAR = NVL('[:T$CWAR]',ticol082.T$CWAR)
-          order by ticol082.T$PRIO asc
+          order by ticol082.T$PONO,ticol082.T$ADVS asc
         </stringSQL>
       </operationName>
       <operationName name="Actualizar307">
@@ -1032,7 +1032,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL022.T$DELE = 7
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN = 1 order by PALLETID asc
+          WHERE ROWN &lt;= 3 order by PALLETID asc
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042ItemQty">
@@ -1068,7 +1068,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL042.T$DELE = 7
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN = 1 order by PALLETID asc
+          WHERE ROWN &lt;= 3 order by PALLETID asc
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131ItemQty">
@@ -3606,6 +3606,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT t$item, t$dsca DESCRIPCION, t$cuni UNIDAD, t$kltc LOTE
           FROM {0}.ttcibd001{1}
           WHERE TRIM(t$item) = '[p1]'
+        </stringSQL>
+      </operationName>
+      <operationName name="GetItemsStat">
+        <stringSQL>
+          SELECT t$item, t$dsca DESCRIPCION, t$cuni UNIDAD, t$kltc LOTE
+          FROM {0}.ttcibd001{1}
+          WHERE TRIM(T$CPCL) = '[stat]'
         </stringSQL>
       </operationName>
       <operationName name="TakeMaterialInv_verificaZona_Param">

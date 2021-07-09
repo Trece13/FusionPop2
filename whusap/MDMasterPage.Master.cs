@@ -12,6 +12,7 @@ using System.Collections;
 using System.Web.Configuration;
 using whusa.Interfases;
 using System.Data;
+using whusa;
 
 
 namespace whusap
@@ -19,6 +20,7 @@ namespace whusap
     public partial class MDMasterPage : System.Web.UI.MasterPage
     {
         protected static InterfazDAL_ttccol303 idal = new InterfazDAL_ttccol303();
+        private static IntefazDAL_ttccol307 _idaltccol307 = new IntefazDAL_ttccol307();
         private static whusa.Utilidades.Seguimiento log = new Seguimiento();
         private static StackTrace stackTrace = new StackTrace();
         private static MethodBase method = MethodBase.GetCurrentMethod();
@@ -33,6 +35,19 @@ namespace whusap
         string rutaRetorno = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["PICKUSING"].ToString() != string.Empty)
+            {
+                Ent_ttccol307 tccol307 = new Ent_ttccol307();
+                tccol307.PAID = HttpContext.Current.Session["PICKUSING"].ToString();
+                tccol307.CWAR = HttpContext.Current.Session["CWARUSING"].ToString();
+                tccol307.STAT_AUX = "1";
+                _idaltccol307.ActualizarTccol307(tccol307);
+
+                HttpContext.Current.Session["PICKUSING"] = null;
+                HttpContext.Current.Session["CWARUSING"] = null;
+            }
+            
+
             //log.escribirError("entra al page load","master","Load","master");
             string url = Request.Url.AbsolutePath.ToString().Trim();
             //string url = "/fusionpub/WebPages/InvReceipts/whInvReceiptRawMaterialNew.aspx";

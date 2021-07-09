@@ -100,6 +100,8 @@ namespace whusa.Entidades
         public bool error { get; set; }
         [DataMember(Order = 18)]
         public string errorMsg { get; set; }
+
+        public string stat { get; set; }
     }
 }
 

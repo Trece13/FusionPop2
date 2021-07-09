@@ -452,6 +452,10 @@
         </div>
     </div>
     <script>
+        window.onbeforeunload = function (e) {
+           alert("sasasassas");
+        };
+
         var cnpk = "";
         var sloc = "";
         var paidOk = false;
@@ -567,7 +571,7 @@
                 cnpk = MyObj.CNPK;
                 lblPick.innerHTML = MyObj.PICK;
                 lblPaid.innerHTML = MyObj.PALLETID;
-                LblItem.innerHTML = MyObj.ITEM + "" + MyObj.DSCA;
+                LblItem.innerHTML = MyObj.ITEM;
                 lblLoca.innerHTML = MyObj.LOCA;
                 lblWare.innerHTML = MyObj.WRH;
                 lblQtyc.innerHTML = MyObj.QTYT;
@@ -751,7 +755,7 @@
                         bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
                     }
                     else {
-                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
                     }
                 });
             }
@@ -891,6 +895,9 @@
         }
 
         var VerifyQuantity = function () {
+            if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
+                txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
+            }
             var qtycAct = parseFloat(lblQtyc.innerHTML.trim());
             var qtycNew = parseFloat(txQtyc.value.trim());
             if (qtycAct >= qtycNew && qtycNew > 0) {

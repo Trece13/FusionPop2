@@ -164,6 +164,27 @@ namespace whusa.DAL
             return consulta;
         }
 
+        public DataTable GetItemsStat(ref Ent_ttwhcol016 Parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add("stat", Parametros.stat.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Item code doesn´t exist. Cannot continue"; }
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
         public DataTable TakeMaterialInv_verificaZona_Param(ref Ent_ttwhcol016 Parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
