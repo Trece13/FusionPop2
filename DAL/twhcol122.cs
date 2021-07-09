@@ -1096,7 +1096,7 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking22ItemQty(string Item, string Cant, string Prio, string _operator)
+        public DataTable ConsultarPalletPicking22ItemQty(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
@@ -1105,6 +1105,9 @@ namespace whusa.DAL
             paramList.Add(":ITEM", Item.Trim());
             paramList.Add(":QTYT", Cant.Trim());
             paramList.Add(":PRIO", Prio.Trim());
+            paramList.Add(":ORNO", orno.Trim());
+            paramList.Add(":PONO", pono.Trim());
+            paramList.Add(":ADVS", advs.Trim());
             string tabla = ".tticol222";
             string name1 = "ConsultarPalletPicking22ItemQty";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
@@ -1125,7 +1128,7 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking042ItemQty(string Item, string Cant, string Prio, string _operator)
+        public DataTable ConsultarPalletPicking042ItemQty(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
@@ -1134,6 +1137,9 @@ namespace whusa.DAL
             paramList.Add(":ITEM", Item.Trim());
             paramList.Add(":QTYT", Cant.Trim());
             paramList.Add(":PRIO", Prio.Trim());
+            paramList.Add(":ORNO", orno.Trim());
+            paramList.Add(":PONO", pono.Trim());
+            paramList.Add(":ADVS", advs.Trim());
             string tabla = ".tticol042";
             string name1 = "ConsultarPalletPicking042ItemQty";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
@@ -1151,7 +1157,7 @@ namespace whusa.DAL
             return consulta;
         }
 
-        public DataTable ConsultarPalletPicking131ItemQty(string Item, string Cant, string Prio, string _operator)
+        public DataTable ConsultarPalletPicking131ItemQty(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
         {
             method = MethodBase.GetCurrentMethod();
             string metodo2 = "tticol082";
@@ -1160,6 +1166,9 @@ namespace whusa.DAL
             paramList.Add(":ITEM", Item.Trim());
             paramList.Add(":QTYT", Cant.Trim());
             paramList.Add(":PRIO", Prio.Trim());
+            paramList.Add(":ORNO", orno.Trim());
+            paramList.Add(":PONO", pono.Trim());
+            paramList.Add(":ADVS", advs.Trim());
             string tabla = ".twhcol131";
             string name1 = "ConsultarPalletPicking131ItemQty";
 

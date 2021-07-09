@@ -761,10 +761,10 @@ namespace whusa.Interfases
             return Lstwhcol122;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking131ItemQty(string Item, string Cant,string Prio, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking131ItemQty(string Item, string Cant,string Prio, string _operator, string orno, string pono, string advs)
         {
             List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
-            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131ItemQty(Item, Cant, Prio, _operator);
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131ItemQty(Item, Cant, Prio, _operator, orno, pono, advs);
             if (DTwhcolo131.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo131.Rows)
@@ -802,10 +802,10 @@ namespace whusa.Interfases
             return Lstwhcol131;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking042ItemQty(string Item, string Cant,string Prio, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking042ItemQty(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
         {
             List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
-            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042ItemQty(Item, Cant, Prio,_operator);
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042ItemQty(Item, Cant, Prio,_operator, orno, pono, advs);
             if (DTwhcolo42.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcolo42.Rows)
@@ -842,10 +842,10 @@ namespace whusa.Interfases
             return Lstwhcol042;
         }
 
-        public List<EntidadPicking> ConsultarPalletPicking22ItemQty(string Item, string Cant, string Prio, string _operator)
+        public List<EntidadPicking> ConsultarPalletPicking22ItemQty(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
         {
             List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
-            DataTable DTwhcol122 = dal.ConsultarPalletPicking22ItemQty(Item, Cant, Prio, _operator);
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22ItemQty(Item, Cant, Prio, _operator, orno, pono, advs);
             if (DTwhcol122.Rows.Count > 0)
             {
                 foreach (DataRow MyRow in DTwhcol122.Rows)

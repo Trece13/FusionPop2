@@ -1016,7 +1016,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
           COL222.T$ACLO LOCA,
-          ROW_NUMBER() OVER( PARTITION BY COL022.T$SQNB ORDER BY COL022.T$SQNB, COL022.T$DATE ) ROWN 
+          --ROW_NUMBER() OVER( PARTITION BY COL022.T$SQNB ORDER BY COL022.T$SQNB, COL022.T$DATE ) ROWN
+          ROW_NUMBER() OVER (ORDER BY COL022.T$DATE) ROWN
           FROM {0}.TTICOL022{1} COL022
           INNER JOIN {0}.TTICOL222{1} COL222
           ON COL222.T$PDNO = COL022.T$PDNO
@@ -1029,10 +1030,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL082.T$ITEM = COL022.T$MITM
           AND COL222.T$ACQT >= COL082.T$QTYT
           AND COL222.T$CWAT = COL082.T$CWAR
+          AND COL082.T$ORNO = '[:ORNO]'
+          AND COL082.T$PONO = '[:PONO]'
+          AND COL082.T$ADVS = '[:ADVS]'
           WHERE COL022.T$DELE = 7
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN &lt;= 3 order by PALLETID asc
+          WHERE ROWN &lt;= 3 
+          ORDER BY PALLETID ASC
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042ItemQty">
@@ -1052,7 +1057,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
           COL242.T$ACLO LOCA,
-          ROW_NUMBER() OVER( PARTITION BY COL042.T$SQNB ORDER BY COL042.T$SQNB, COL022.T$DATE ) ROWN 
+          --ROW_NUMBER() OVER( PARTITION BY COL042.T$SQNB ORDER BY COL042.T$SQNB, COL022.T$DATE ) ROWN
+          ROW_NUMBER() OVER (ORDER BY COL042.T$DATE) ROWN
           FROM {0}.TTICOL042{1} COL042
           INNER JOIN {0}.TTICOL242{1} COL242
           ON COL242.T$PDNO = COL042.T$PDNO
@@ -1065,15 +1071,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL082.T$ITEM = COL042.T$MITM
           AND COL242.T$ACQT >= COL082.T$QTYT
           AND COL242.T$CWAT = COL082.T$CWAR
+          AND COL082.T$ORNO = '[:ORNO]'
+          AND COL082.T$PONO = '[:PONO]'
+          AND COL082.T$ADVS = '[:ADVS]'
           WHERE COL042.T$DELE = 7
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN &lt;= 3 order by PALLETID asc
+          WHERE ROWN &lt;= 3 
+          ORDER BY PALLETID ASC
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131ItemQty">
         <stringSQL>
-          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN
           FROM
           (
           SELECT
@@ -1089,7 +1099,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           IBD001.T$CUNI UN,
           COL131.T$LOAA LOCA,
           COL131.T$DATE-5/24,
-          RANK() OVER (PARTITION BY COL082.T$PICK ORDER BY COL131.T$DATE, COL131.T$PAID) ROWN
+          --RANK() OVER (PARTITION BY COL082.T$PICK ORDER BY COL131.T$DATE, COL131.T$PAID) ROWN
+          ROW_NUMBER() OVER (ORDER BY COL131.T$DATE) ROWN
           FROM {0}.TWHCOL131{1} COL131
           INNER JOIN {0}.TTCIBD001{1} IBD001
           ON IBD001.T$ITEM = COL131.T$ITEM
@@ -1099,10 +1110,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL082.T$ITEM = COL131.T$ITEM
           AND COL082.T$QTYT &lt;= COL131.T$QTYA
           AND COL082.T$CWAR = COL131.T$CWAA
+          AND COL082.T$ORNO = '[:ORNO]'
+          AND COL082.T$PONO = '[:PONO]'
+          AND COL082.T$ADVS = '[:ADVS]'
           WHERE COL131.T$STAT = 3
           AND TRIM(COL131.T$ITEM) = TRIM('[:ITEM]')
           )
           WHERE ROWN &lt;= 3
+          ORDER BY PALLETID ASC
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking130ItemQty">
