@@ -90,6 +90,21 @@ namespace whusa.Interfases
             }
         }
 
+        public DataTable GetItemsStat(ref Ent_ttwhcol016 Parametros, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.GetItemsStat(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         public DataTable TakeMaterialInv_verificaZona_Param(ref Ent_ttwhcol016 Parametros, ref string strError)
         {
             //int retorno = -1;
