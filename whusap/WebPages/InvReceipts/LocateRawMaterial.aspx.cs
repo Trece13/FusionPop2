@@ -288,7 +288,7 @@ namespace whusap.WebPages.InvReceipts
 
                 return JsonConvert.SerializeObject(MyObj);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 return ThePalletIDdoesnotexist;
             }

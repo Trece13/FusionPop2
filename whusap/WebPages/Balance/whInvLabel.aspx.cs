@@ -268,7 +268,7 @@ namespace whusap.WebPages.Balance
             obj022.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
             obj022.mitm = resultado.Rows[0]["ITEM"].ToString();
             //obj022.qtdl = Decimal.Parse(txtQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToDecimal(txtQuantity.Text);
-            obj022.qtdl = cantidad;
+            obj022.qtdl = _procesConfirmacionAutomatica ? cantidad : 0;
             obj022.logn = Session["user"].ToString();
             obj022.proc = 2;
             obj022.pro1 = 2;
@@ -286,19 +286,26 @@ namespace whusap.WebPages.Balance
             obj022.drpt = DateTime.Now;
             obj022.urpt = " ";
             //obj022.acqt = Convert.ToDouble(obj022.qtdl);
-            obj022.acqt = value;
+            obj022.acqt = _procesConfirmacionAutomatica ? value : 0;
             obj022.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
             obj022.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
-            obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
+            if (_procesConfirmacionAutomatica)
+            {
+                obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
+            }
+            else
+            {
+                obj022.aclo = " ";
+            }
             parameterCollection022.Add(obj022);
-
+            parameterCollection042.Add(obj042);
 
             obj042.cuni = resultado.Rows[0]["UNIDAD"].ToString();
             obj042.pdno = resultado.Rows[0]["ORDEN"].ToString();
             obj042.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
             obj042.mitm = resultado.Rows[0]["ITEM"].ToString();
             //ob4022.qtdl = Decimal.DoParse(txtQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToDecimal(txtQuantity.Text);
-            obj042.qtdl = Convert.ToDouble(cantidad);
+            obj042.qtdl = _procesConfirmacionAutomatica ? Convert.ToDouble(cantidad) : 0;
             obj042.logn = Session["user"].ToString();
             obj042.proc = 2;
             obj042.pro1 = 2;
@@ -316,11 +323,19 @@ namespace whusap.WebPages.Balance
             obj042.drpt = DateTime.Now;
             obj042.urpt = " ";
             //ob4022.acqt = Convert.ToDouble(obj022.qtdl);
-            obj042.acqt = Convert.ToDouble(value);
+            obj042.acqt = _procesConfirmacionAutomatica ? Convert.ToDouble(value) : 0;
             obj042.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
             obj042.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
-            obj042.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
+            if (_procesConfirmacionAutomatica)
+            {
+                obj042.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
+            }
+            else
+            {
+                obj042.aclo = " ";
+            }
             parameterCollection022.Add(obj022);
+            parameterCollection042.Add(obj042);
             //ActiveOrderMachine = obj022.sqnb;
 
             if (_procesoAutomatico)
@@ -337,6 +352,7 @@ namespace whusap.WebPages.Balance
             {
                 idal042.insertarRegistro(ref parameterCollection042, ref strError);
                 idal042.insertarRegistroTticon242(ref parameterCollection042, ref strError);
+
                 if (anuncioautomatico == "true")
                 {
                     int intRetorno = idal020.insertarRegistro(ref parameterCollection020, ref strError);
