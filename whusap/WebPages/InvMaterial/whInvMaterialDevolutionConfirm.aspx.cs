@@ -32,8 +32,7 @@ namespace whusap.WebPages.InvMaterial
         #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
-            {
-                txtPalletId.Text = string.Empty;
+            {               
                 grdRecords.DataSource = null;
                 grdRecords.DataBind();
                 txtPalletId.Focus();
@@ -47,6 +46,7 @@ namespace whusap.WebPages.InvMaterial
                 
                 if (!IsPostBack)
                 {
+                    txtPalletId.Text = string.Empty;
                     formName = Request.Url.AbsoluteUri.Split('/').Last();
                     if (formName.Contains('?'))
                     {
