@@ -343,6 +343,7 @@ namespace whusap.WebPages.Migration
                     lot = dr.ItemArray[9].ToString().Trim().ToUpper();
                     unit = dr.ItemArray[5].ToString().Trim().ToUpper();
                     qty = dr.ItemArray[3].ToString();
+                    Session["qty"] = qty;
                     if ((tableName == "whcol131") && (status != 11))
                     {
                         //lblError.Text = PalletIDdoesntavailablefordisposition;
@@ -523,13 +524,15 @@ namespace whusap.WebPages.Migration
                 {
                     reason = " ";
                 }
-                
+
+                obj042.pdno = txtPalletId.Text.Substring(0, 9);
+                cantidadRegrind = idal042.listaCantidadRegrind(ref obj042, ref strError);
 
                 if (!toreturn.Equals(string.Empty))
                 {
                     obj = new Ent_tticol118();
-                    obj.item =  Session["Item"].ToString().Trim().ToUpperInvariant();
-                    obj.cwar =dropDownWarehouse.Text.ToUpperInvariant();
+                    obj.item = Session["Item"].ToString().Trim().ToUpperInvariant();
+                    obj.cwar = dropDownWarehouse.Text.ToUpperInvariant();
                     //obj.clot = row.Cells[3].Text.ToUpperInvariant();
                     obj.clot = Session["Lote"].ToString();
                     obj.qtyr = Double.Parse(toreturn);//Convert.ToDecimal(toreturn);
@@ -544,7 +547,7 @@ namespace whusap.WebPages.Migration
                     obj.suno = supplier;
                     obj.refcntd = 0;
                     obj.refcntu = 0 ;
-                    obj.paid = txtPalletId.Text.ToString();
+                    obj.paid = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString(); ;
                     parameterCollection.Add(obj);
                 }
 
@@ -559,14 +562,14 @@ namespace whusap.WebPages.Migration
                 var value = Decimal.Parse(toreturn/*, numberFormatInfo*/);
                 if (Convert.ToInt32(disposition) == 4) //Regrid
                 {
+                    string dscaitem = ((DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Regrind")).SelectedItem.Text.Substring(((DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Regrind")).SelectedItem.Text.IndexOf(" - ") + 2).Trim();
                     string strTagId = string.Empty;
 
                     DataTable resultado = idal.inv_datospesos(ref obj, ref strError);
                     DataRow reg = resultado.Rows[0];
 
                     //insert a new record on tables ticol042 and ticol242 and whcol020.
-                    obj042.pdno = txtPalletId.Text.Substring(0, 9);
-                    cantidadRegrind = idal042.listaCantidadRegrind(ref obj042, ref strError);
+                    
                     strTagId = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString();
                     Session["TagId"] = strTagId;
                     strError = string.Empty;
@@ -606,18 +609,18 @@ namespace whusap.WebPages.Migration
 
                     objWhcol020.tbl = lbltable.Value.ToString().Trim();
                     //CLOT = ,
-                    objWhcol020.clot = txtPalletId.Text.Substring(1, 9);
-                    objWhcol020.sqnb = txtPalletId.Text.ToString().Trim();
-                    objWhcol020.mitm = Session["Item"].ToString().Trim().ToUpperInvariant();
+                    objWhcol020.clot = txtPalletId.Text.Substring(0, txtPalletId.Text.IndexOf('-')-1);
+                    objWhcol020.sqnb = strTagId;
+                    objWhcol020.mitm = regrind.Trim().ToUpperInvariant();
                     //DSCA  = "",
-                    objWhcol020.dsca = Session["Item"].ToString().Trim().ToUpperInvariant();
+                    objWhcol020.dsca = dscaitem;
                     objWhcol020.cwor = dropDownWarehouse.Text.ToUpperInvariant();
                     objWhcol020.loor = " ";
-                    objWhcol020.cwde = stockw;
+                    objWhcol020.cwde = dropDownWarehouse.Text.ToUpperInvariant();
                     objWhcol020.lode = " ";
 
-                    objWhcol020.qtdl = Convert.ToDouble(value);
-                    objWhcol020.cuni = Session["Unit"].ToString();
+                    objWhcol020.qtdl = obj042.qtdl;
+                    objWhcol020.cuni = obj042.cuni;
                     //DATE  = ,
                     //MESS  = ,
                     objWhcol020.user = Session["user"].ToString();
@@ -924,7 +927,7 @@ namespace whusap.WebPages.Migration
                 var FilaSerializada = serializador.Serialize(fila);
 
                 ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MinimumValue = "0";
-                ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MaximumValue = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["stock"].ToString();
+                ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MaximumValue = Convert.ToDouble(Session["qty"].ToString()).ToString(); ;
 
                 //Llenar Stock Warehouse Dropdownlist
                 InterfazDAL_tticol118 idalp = new InterfazDAL_tticol118();

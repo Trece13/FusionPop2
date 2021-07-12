@@ -14,18 +14,21 @@ using System.Threading;
 using whusa.Entidades;
 using whusa.Interfases;
 using whusa.Utilidades;
-
+using whusa.DAL;
 namespace whusap.WebPages.Balance
 {
     public partial class whInvLabel : System.Web.UI.Page
     {
         #region Propiedades
         protected static InterfazDAL_tticol011 idal = new InterfazDAL_tticol011();
+        protected static InterfazDAL_tticol020 idal020 = new InterfazDAL_tticol020();
         protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
+        protected static InterfazDAL_tticol042 idal042 = new InterfazDAL_tticol042();
         protected static InterfazDAL_tticol025 idal025 = new InterfazDAL_tticol025();
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         Ent_tticol020 obj020 = new Ent_tticol020();
         Ent_tticol022 obj022 = new Ent_tticol022();
+        Ent_tticol042 obj042 = new Ent_tticol042();
         Ent_tticol011 obj = new Ent_tticol011();
         DataTable resultado = new DataTable();
         string strError = string.Empty;
@@ -245,6 +248,7 @@ namespace whusap.WebPages.Balance
 
             List<Ent_tticol020> parameterCollection020 = new List<Ent_tticol020>();
             List<Ent_tticol022> parameterCollection022 = new List<Ent_tticol022>();
+            List<Ent_tticol042> parameterCollection042 = new List<Ent_tticol042>();
 
             obj020.pdno = resultado.Rows[0]["ORDEN"].ToString();
             obj020.mitm = resultado.Rows[0]["ITEM"].ToString();
@@ -288,6 +292,35 @@ namespace whusap.WebPages.Balance
             obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
             parameterCollection022.Add(obj022);
 
+
+            obj042.cuni = resultado.Rows[0]["UNIDAD"].ToString();
+            obj042.pdno = resultado.Rows[0]["ORDEN"].ToString();
+            obj042.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
+            obj042.mitm = resultado.Rows[0]["ITEM"].ToString();
+            //ob4022.qtdl = Decimal.DoParse(txtQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToDecimal(txtQuantity.Text);
+            obj042.qtdl = Convert.ToDouble(cantidad);
+            obj042.logn = Session["user"].ToString();
+            obj042.proc = 2;
+            obj042.pro1 = 2;
+            obj042.pro2 = 2;
+            obj042.log1 = "NONE";
+            obj042.log2 = "NONE";
+            obj042.logd = "NONE";
+            obj042.dele = _procesoAutomatico ? 7 : 2;
+            obj042.qtd1 = 0;
+            obj042.norp = 1;
+            obj042.loca = " ";
+            obj042.qtd2 = 0;
+            obj042.refcntd = 0;
+            obj042.refcntu = 0;
+            obj042.drpt = DateTime.Now;
+            obj042.urpt = " ";
+            //ob4022.acqt = Convert.ToDouble(obj022.qtdl);
+            obj042.acqt = Convert.ToDouble(value);
+            obj042.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
+            obj042.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
+            obj042.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
+            parameterCollection022.Add(obj022);
             //ActiveOrderMachine = obj022.sqnb;
 
             if (_procesoAutomatico)
@@ -299,7 +332,20 @@ namespace whusap.WebPages.Balance
                 anuncioautomatico = "false";
             }
 
-            int retorno = idal022.insertarRegistro(ref parameterCollection022, ref parameterCollection020, ref strError, ref anuncioautomatico);
+            int retorno = 0;
+            if (_tipoFormulario == "GRINDER")
+            {
+                idal042.insertarRegistro(ref parameterCollection042, ref strError);
+                idal042.insertarRegistroTticon242(ref parameterCollection042, ref strError);
+                if (anuncioautomatico == "true")
+                {
+                    int intRetorno = idal020.insertarRegistro(ref parameterCollection020, ref strError);
+                }
+            }
+            else
+            {
+                idal022.insertarRegistro(ref parameterCollection022, ref parameterCollection020, ref strError, ref anuncioautomatico); 
+            }
 
             if (!string.IsNullOrEmpty(strError))
             {
