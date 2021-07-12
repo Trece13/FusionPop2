@@ -90,7 +90,7 @@ namespace whusap.WebPages.InvMaterial
     
                 //obj.pdno = txtWorkOrder.Text.ToUpper();
                 obj.conf = 2;   // CONFIRMED = NO
-                obj.paid = txtPalletId.Text.ToUpper();
+                obj.paid = txtWorkOrder.Text.ToUpper();
                 lblResult.Text = string.Empty;
             //
                 
