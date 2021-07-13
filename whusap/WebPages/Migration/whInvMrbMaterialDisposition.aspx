@@ -190,6 +190,10 @@
                             <ItemTemplate>
                                 <asp:TextBox ID="toReturn" runat="server" Width="12%" MaxLength="12" CausesValidation="True"
                                     CssClass="TextBox"  type="number"/>
+                                <asp:RegularExpressionValidator ID="validateReq1" runat="server" ControlToValidate="toReturn"
+                                ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
+                                ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
+                                Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>
                                 <asp:RangeValidator ID="validateQuantity" runat="server" Type="Double" ControlToValidate="toReturn"
                                     ErrorMessage="Quantity to return cannot be greater than Actual Quantity" Display="Dynamic"
                                     ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" SetFocusOnError="true"

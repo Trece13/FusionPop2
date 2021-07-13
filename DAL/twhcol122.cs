@@ -903,7 +903,6 @@ namespace whusa.DAL
             paramList.Add(":CWAR", CWAR.Trim());
             paramList.Add(":STAT", STAT.Trim());
             paramList.Add(":PICK", PICK.Trim());
-            paramList = new Dictionary<string, object>();
             string tabla = owner + ".tticol042140";
             string name1 = "ConsultarPalletPicking042PAID";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);

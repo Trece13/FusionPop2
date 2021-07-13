@@ -58,6 +58,7 @@ namespace whusa.DAL
 
         }
 
+
         public int insertarRegistroSimple(ref Ent_tticol042 parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
