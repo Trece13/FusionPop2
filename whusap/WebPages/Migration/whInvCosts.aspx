@@ -43,18 +43,35 @@
         };
 
         function validarCantidadLimiteArticuloMaquina(field,cant_max,cant_reg,index) {
-            if(parseFloat(cant_max) - parseFloat(cant_reg) >= parseFloat(field.value)){
-                $('#txtQuantityHidden-'+index).val("0");
-                $('#btnAlert-'+index).hide(1500);
+            
+            if(field.getAttribute('cantMax').trim() != ""){
+                if(parseFloat(field.getAttribute('cantMax').trim()) >= parseFloat(field.value)){
+                    $('#txtQuantityHidden-'+index).val("0");
+                    $('#btnAlert-'+index).hide(1500);
+                }
+                else{
+                    alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
+                    this.focus();
+                    $('#txtQuantityHidden-'+index).val(field.value);
+                    field.value = "";
+                    $('#btnAlert-'+index).show(1500);
+                }
             }
             else{
+                if(parseFloat(cant_max) - parseFloat(cant_reg) >= parseFloat(field.value)){
+                    $('#txtQuantityHidden-'+index).val("0");
+                    $('#btnAlert-'+index).hide(1500);
+                }
+                else{
 
-                alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
-                this.focus();
-                $('#txtQuantityHidden-'+index).val(field.value);
-                field.value = "";
-                $('#btnAlert-'+index).show(1500);
+                    alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
+                    this.focus();
+                    $('#txtQuantityHidden-'+index).val(field.value);
+                    field.value = "";
+                    $('#btnAlert-'+index).show(1500);
+                }
             }
+            
             //            debugger;
             //            var dividendo = field.value;
             //            var residuo = 0;
