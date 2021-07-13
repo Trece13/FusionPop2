@@ -24,6 +24,7 @@ namespace whusap.WebPages.Balance
         protected static InterfazDAL_tticol020 idal020 = new InterfazDAL_tticol020();
         protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
         protected static InterfazDAL_tticol042 idal042 = new InterfazDAL_tticol042();
+        public static InterfazDAL_tticol022 Itticol022 = new InterfazDAL_tticol022();
         protected static InterfazDAL_tticol025 idal025 = new InterfazDAL_tticol025();
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         Ent_tticol020 obj020 = new Ent_tticol020();
@@ -265,7 +266,19 @@ namespace whusap.WebPages.Balance
 
             obj022.cuni = resultado.Rows[0]["UNIDAD"].ToString();
             obj022.pdno = resultado.Rows[0]["ORDEN"].ToString();
-            obj022.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
+            int sec = 0;
+            DataTable dt022 = Itticol022.SecuenciaMayorR(obj022.pdno.Trim().ToUpperInvariant());
+            if (dt022.Rows.Count > 0)
+            {
+                string paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper();
+                sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-R")+2))+1;
+            }
+            else
+            {
+                sec = 1;
+            }
+
+            obj022.sqnb = obj022.pdno + "-R" + sec;
             obj022.mitm = resultado.Rows[0]["ITEM"].ToString();
             //obj022.qtdl = Decimal.Parse(txtQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToDecimal(txtQuantity.Text);
             obj022.qtdl = _procesConfirmacionAutomatica ? cantidad : 0;
@@ -297,12 +310,10 @@ namespace whusap.WebPages.Balance
             {
                 obj022.aclo = " ";
             }
-            parameterCollection022.Add(obj022);
-            parameterCollection042.Add(obj042);
 
             obj042.cuni = resultado.Rows[0]["UNIDAD"].ToString();
             obj042.pdno = resultado.Rows[0]["ORDEN"].ToString();
-            obj042.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
+            obj042.sqnb = obj022.pdno + "-R" + sec;
             obj042.mitm = resultado.Rows[0]["ITEM"].ToString();
             //ob4022.qtdl = Decimal.DoParse(txtQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToDecimal(txtQuantity.Text);
             obj042.qtdl = _procesConfirmacionAutomatica ? Convert.ToDouble(cantidad) : 0;
@@ -405,7 +416,14 @@ namespace whusap.WebPages.Balance
 
             txtQuantity.Text = string.Empty;
 
-            resultado = idal022.invLabel_registroImprimir_Param(ref obj022, ref strError);
+            if (_tipoFormulario == "GRINDER")
+            {
+                resultado = idal042.invLabel_registroImprimir_Param(ref obj042, ref strError);
+            }
+            else
+            {
+                resultado = idal022.invLabel_registroImprimir_Param(ref obj022, ref strError);
+            }
 
             DataRow reg = resultado.Rows[0];
             Session["FilaImprimir"] = reg;
@@ -473,6 +491,21 @@ namespace whusap.WebPages.Balance
 
             return retorno;
         }
+
+        private string addZero(int secint)
+        {
+            string secRet = string.Empty;
+            if (secint < 10)
+            {
+                secRet = "0" + (secint).ToString();
+            }
+            else
+            {
+                secRet = (secint).ToString();
+            }
+            return secRet;
+        }
+
 
         #endregion
     }

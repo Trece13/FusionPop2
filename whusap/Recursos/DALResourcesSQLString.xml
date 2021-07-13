@@ -17,6 +17,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 <DALResources>
   <Modules>
     <Module name="tticol042">
+      <operationName name="invLabel_registroImprimir_Param">
+        <stringSQL>
+          SELECT T$PDNO ORDEN, T$SQNB SECUENCIA, T$MITM ITEM, T$QTDL PESO, T$LOGN USUARIO, (T$DATE-5/24) FECHA
+          FROM {2}
+          WHERE TRIM(t$pdno) = '[p1]' AND TRIM(t$sqnb) = '[p2]'
+        </stringSQL>
+      </operationName>
       <operationName name="TakeMaterialInv_verificaBodega_Param">
         <stringSQL>
           SELECT t$cwar, t$dsca  DESCRIPCION
@@ -303,6 +310,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-RT%'
           union
           select t$paid as t$sqnb from {0}.twhcol131{1} where T$PAID LIKE '%[:T$SQNB]-RT%'
+          order by t$sqnb desc
+          )
+          where rownum = 1
+        </stringSQL>
+      </operationName>
+      <operationName name="SecuenciaMayor022R">
+        <stringSQL>
+          select t$sqnb from
+          (
+          select t$sqnb from {0}.tticol022{1} where T$SQNB LIKE '%[:T$SQNB]-R%'
+          union
+          select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-R%'
+          union
+          select t$paid as t$sqnb from {0}.twhcol131{1} where T$PAID LIKE '%[:T$SQNB]-R%'
           order by t$sqnb desc
           )
           where rownum = 1

@@ -414,5 +414,20 @@ namespace whusa.Interfases
             }
         }
 
+
+        public DataTable invLabel_registroImprimir_Param(ref Ent_tticol042 Parametros, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.invLabel_registroImprimir_Param(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
     }
 }

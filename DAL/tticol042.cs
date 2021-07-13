@@ -883,6 +883,31 @@ namespace whusa.DAL
 
             }
 
+
+            public DataTable invLabel_registroImprimir_Param(ref Ent_tticol042 Parametros, ref string strError)
+            {
+                method = MethodBase.GetCurrentMethod();
+                string strSentenciaS = string.Empty;
+                string strOrden = Parametros.pdno.Trim().ToUpperInvariant();
+                string strSecuencia = Parametros.sqnb.Trim().ToUpperInvariant(); ;
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add("p1", strOrden);
+                paramList.Add("p2", strSecuencia);
+
+                strSentenciaS = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                try
+                {
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentenciaS, ref parametersOut, null, true);
+                }
+                catch (Exception ex)
+                {
+                    strError = "Error to search information to print [tticol022]. Try again or contact your administrator \n " + strSentencia;
+                    log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                }
+                return consulta;
+            }
     }
 }
 

@@ -530,6 +530,20 @@ namespace whusa.Interfases
             }
         }
 
+        public DataTable SecuenciaMayorR(string id)
+        {
+            string strError = "";
+            DataTable retorno;
+            try
+            {
+                retorno = dal.SecuenciaMayor022R(id);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
 
         public DataTable getloca(string cwar, ref string strError)
         {
