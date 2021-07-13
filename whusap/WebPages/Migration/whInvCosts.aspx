@@ -121,15 +121,18 @@
             return validate;
         };
 
-       function fun_AllowOnlyAmountAndDot(txt) {
-                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
-                    return true;
+        function fun_AllowOnlyAmountAndDot(txt) {
+            if(txt.getAttribute("unit").trim() == "UN"){
+                    document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(",","").replace(".","");
                 }
-                else {
-                    event.keyCode = 0;
-                    alert("Only Numbers with dot allowed !!");
-                    return false;
-                }
+                //if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+                //    return true;
+                //}
+                //else {
+                //    event.keyCode = 0;
+                //    alert("Only Numbers with dot allowed !!");
+                //    return false;
+                //}
             };
     </script>
 </asp:Content>

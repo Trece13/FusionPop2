@@ -76,7 +76,7 @@
         #myLabel {
             width: 6in;
             height: 4in;
-            padding: 20px;
+            padding: 5px;
             border: 1px solid black;
             border-radius: 12px;
         }
@@ -96,7 +96,7 @@
         #codePaid {
             display: block;
             margin: auto;
-            height: 100px;
+            height:75px;
             width: 500px;
         }
 
