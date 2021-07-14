@@ -50,7 +50,7 @@
                     $('#btnAlert-'+index).hide(1500);
                 }
                 else{
-                    alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
+                    alert(_idioma == "INGLES" ? "Available quantity not enough for your request or Quantity higher than available per shift" : "Available quantity not enough for your request or Quantity higher than available per shift");
                     this.focus();
                     $('#txtQuantityHidden-'+index).val(field.value);
                     field.value = "";
@@ -64,7 +64,7 @@
                 }
                 else{
 
-                    alert(_idioma == "INGLES" ? "Available quantity not enough for your request" : "Available quantity not enough for your request");
+                    alert(_idioma == "INGLES" ? "Available quantity not enough for your request or Quantity higher than available per shift" : "Available quantity not enough for your request or Quantity higher than available per shift");
                     this.focus();
                     $('#txtQuantityHidden-'+index).val(field.value);
                     field.value = "";
