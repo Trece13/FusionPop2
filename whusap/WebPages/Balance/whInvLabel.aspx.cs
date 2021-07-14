@@ -267,18 +267,36 @@ namespace whusap.WebPages.Balance
             obj022.cuni = resultado.Rows[0]["UNIDAD"].ToString();
             obj022.pdno = resultado.Rows[0]["ORDEN"].ToString();
             int sec = 0;
-            DataTable dt022 = Itticol022.SecuenciaMayorR(obj022.pdno.Trim().ToUpperInvariant());
-            if (dt022.Rows.Count > 0)
+            if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
             {
-                string paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper();
-                sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-R")+2))+1;
+                obj022.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
+                //DataTable dt022 = Itticol022.SecuenciaMayorRollos(obj022.pdno.Trim().ToUpperInvariant());
+                //if (dt022.Rows.Count > 0)
+                //{
+                //    string paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper();
+                //    sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-") + 2)) + 1;
+                //    obj022.sqnb = obj022.pdno + "-" + sec;
+                //}
+                //else
+                //{
+                //    sec = 1;
+                //}
             }
             else
             {
-                sec = 1;
+                DataTable dt022 = Itticol022.SecuenciaMayorR(obj022.pdno.Trim().ToUpperInvariant());
+                if (dt022.Rows.Count > 0)
+                {
+                    string paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper();
+                    sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-R") + 2)) + 1;
+                    obj022.sqnb = obj022.pdno + "-R" + sec;
+                }
+                else
+                {
+                    sec = 1;
+                }
             }
-
-            obj022.sqnb = obj022.pdno + "-R" + sec;
+            
             obj022.mitm = resultado.Rows[0]["ITEM"].ToString();
             //obj022.qtdl = Decimal.Parse(txtQuantity.Text, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToDecimal(txtQuantity.Text);
             obj022.qtdl = _procesConfirmacionAutomatica ? cantidad : 0;
@@ -391,11 +409,18 @@ namespace whusap.WebPages.Balance
 
             if (confirmacionautomatica == "true")
             {
-                if (retorno > 0)
-                {
+                //if (retorno > 0)
+                //{
                     Ent_tticol025 objTticol025 = new Ent_tticol025();
                     objTticol025.pdno = obj022.pdno;
-                    objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
+                    if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
+                    {
+                        objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
+                    }
+                    else
+                    {
+                        objTticol025.sqnb = sec;
+                    }
                     objTticol025.mitm = obj022.mitm;
                     objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
                     objTticol025.qtdl = (float)obj022.qtdl;
@@ -411,7 +436,7 @@ namespace whusap.WebPages.Balance
                     lblError.ForeColor = System.Drawing.Color.Green;
                     int res = idal025.insertarRegistro(ref objTticol025, ref strError);
 
-                }
+                //}
             }
 
             txtQuantity.Text = string.Empty;

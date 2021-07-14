@@ -85,7 +85,7 @@
                     <span style="vertical-align: middle; text-align: left;" />
                     <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="txtQuantity"
                         ErrorMessage="Only numbers allowed and Quantity must be greater than zero" SetFocusOnError="true"
-                        ValidationExpression="[0-9]+(\.[0-9]{1,4})?" Display="Dynamic" ForeColor="Red"
+                        ValidationExpression="^\d+$" Display="Dynamic" ForeColor="Red"
                         Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false">
                     </asp:RegularExpressionValidator>
                 </td>

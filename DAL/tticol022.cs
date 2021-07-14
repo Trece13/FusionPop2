@@ -1116,7 +1116,6 @@ namespace whusa.DAL
             return consulta;
         }
 
-
         public DataTable getloca(string cwar, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
