@@ -13,7 +13,7 @@ using whusa.Utilidades;
 
 namespace whusap.WebPages.WorkOrders
 {
-    public partial class DropPickedMaterialMFG : System.Web.UI.Page
+    public partial class DropPickedMaterialOnTunnelMFG : System.Web.UI.Page
     {
         public static Ent_tticol082 MyObj = new Ent_tticol082();
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
@@ -33,14 +33,16 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string ClickDropTagPick(string PalletID)
+        public static string ClickDropTagPick(string PickID)
         {
-            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol083(PalletID);
+            DataTable TableItticol082 = Itticol082.ConsultarPalletIDOnTunnelTticol083(PickID);
             string ObjRetorno = string.Empty;
 
             if (ExistenciaData(TableItticol082))
             {
-                DataRow myObjDt = TableItticol082.Rows[0];
+                foreach (DataRow myObjDt in TableItticol082.Rows)
+                {
+                //DataRow myObjDt = TableItticol082.Rows[0];
                 MyObj.TBL = myObjDt["TBL"].ToString();
                 MyObj.PAID = myObjDt["PAID"].ToString();
                 MyObj.QTYT = myObjDt["QTYT"].ToString();
@@ -57,10 +59,10 @@ namespace whusap.WebPages.WorkOrders
                         {
                             MyObj.Error = true;
                             MyObj.TipeMsgJs = "alert";
-                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
 
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            return ObjRetorno;
+                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            //return ObjRetorno;
                         }
                         ActalizacionExitosa = Itticol082.Actualizartticol022MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
@@ -70,10 +72,10 @@ namespace whusap.WebPages.WorkOrders
                         {
                             MyObj.Error = true;
                             MyObj.TipeMsgJs = "alert";
-                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
 
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            return ObjRetorno;
+                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            //return ObjRetorno;
                         }
                         ActalizacionExitosa = Itticol082.Actualizartwhcol130MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
@@ -83,10 +85,10 @@ namespace whusap.WebPages.WorkOrders
                         {
                             MyObj.Error = true;
                             MyObj.TipeMsgJs = "alert";
-                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
 
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            return ObjRetorno;
+                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            //return ObjRetorno;
                         }
                         ActalizacionExitosa = Itticol082.Actualizartwhcol131MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
@@ -97,10 +99,10 @@ namespace whusap.WebPages.WorkOrders
                         {
                             MyObj.Error = true;
                             MyObj.TipeMsgJs = "alert";
-                            MyObj.ErrorMsg = PalletIdAlreadyPicked;
+                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
 
-                            ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            return ObjRetorno;
+                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                            //return ObjRetorno;
                         }
                         ActalizacionExitosa = Itticol082.Actualizartticol042MFG(MyObj);
                         Itticol082.Actualizartticol082MFG(MyObj);                        
@@ -121,6 +123,7 @@ namespace whusap.WebPages.WorkOrders
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
             }
+        }
             else
             {
                 MyObj.Error = true;
@@ -129,14 +132,15 @@ namespace whusap.WebPages.WorkOrders
 
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
+
             return ObjRetorno;
         }
 
         [WebMethod]
-        public static string SearchPalletID(string PalletID)
+        public static string SearchPickID(string PickID)
         {
 
-            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082MFG(PalletID);
+            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082OnTunnelMFG(PickID);
             string ObjRetorno = string.Empty;
 
             if (ExistenciaData(TableItticol082))
@@ -191,7 +195,7 @@ namespace whusap.WebPages.WorkOrders
             return ContieneDatos;
         }
 
-        public static bool VerificarStatPortabla_old(string tabla, string estado)
+        public static bool VerificarStatPortabla(string tabla, string estado)
         {
             bool retorno = false;
             switch (tabla)
@@ -218,7 +222,7 @@ namespace whusap.WebPages.WorkOrders
         {
             Mensajes mensajesForm = new Mensajes();
             string idioma = "INGLES";
-            var retorno = mensajesForm.readStatement("DropPickedMaterialMFG.aspx", idioma, ref tipoMensaje);
+            var retorno = mensajesForm.readStatement("DropPickedMaterialOnTunnelMFG.aspx", idioma, ref tipoMensaje);
 
             if (retorno.Trim() == String.Empty)
             {

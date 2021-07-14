@@ -66,6 +66,11 @@ namespace whusa.Interfases
             return dal.ConsultarPalletIDTticol083(PalletID);
         }
 
+        public DataTable ConsultarPalletIDOnTunnelTticol083(string PickID)
+        {
+            return dal.ConsultarPalletIDOnTunnelTticol083(PickID);
+        }
+
         public bool Actualizartticol022(Ent_tticol082 myObj)
         {
             return dal.Actualizartticol022(myObj);
@@ -99,6 +104,11 @@ namespace whusa.Interfases
         public DataTable ConsultarPalletIDTticol082MFG(string PalletID)
         {
             return dal.ConsultarPalletIDTticol082MFG(PalletID);
+        }
+
+        public DataTable ConsultarPalletIDTticol082OnTunnelMFG(string PickID)
+        {
+            return dal.ConsultarPalletIDTticol082OnTunnelMFG(PickID);
         }
 
         public bool Actualizartticol022MFG(Ent_tticol082 myObj)

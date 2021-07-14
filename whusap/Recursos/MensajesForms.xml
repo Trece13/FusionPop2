@@ -5080,7 +5080,67 @@
         </operationName>
       </Idiom>
     </Module>
-
+    <Module name="DropPickedMaterialOnTunnelMFG.aspx">
+      <Idiom name="INGLES">
+        <operationName name="Thepickedissuccess">
+          <stringMessage>
+            Information saved successfully
+          </stringMessage>
+        </operationName>
+        <operationName name="Thepickedisnotsuccess">
+          <stringMessage>
+            The picked is not success
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDDoesntexist">
+          <stringMessage>
+            Pallet ID has not been dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDnotvalidfortaketoMFG">
+          <stringMessage>
+            Pallet ID not valid for take to MFG
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDDoesntexist">
+          <stringMessage>
+            Pallet ID has not been dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIdAlreadyPicked">
+          <stringMessage>
+            Pallet ID already Picked
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="Thepickedissuccess">
+          <stringMessage>
+            Information saved successfully
+          </stringMessage>
+        </operationName>
+        <operationName name="Thepickedisnotsuccess">
+          <stringMessage>
+            The picked is not success
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDDoesntexist">
+          <stringMessage>
+            Pallet ID has not been dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDnotvalidfortaketoMFG">
+          <stringMessage>
+            Pallet ID not valid for take to MFG
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIdAlreadyPicked">
+          <stringMessage>
+            Pallet ID already Picked
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
     <Module name="DropPickedMaterial.aspx">
       <Idiom name="INGLES">
         <operationName name="Thedropprocessissuccess">
