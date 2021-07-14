@@ -10,6 +10,6 @@
 namespace whusap.WebPages.WorkOrders {
     
     
-    public partial class DropPickedMaterialMFG {
+    public partial class DropPickedMaterialOnTunnelMFG {
     }
 }
