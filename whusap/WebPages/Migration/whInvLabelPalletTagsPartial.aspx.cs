@@ -42,8 +42,8 @@ namespace whusap.WebPages.Migration
         protected void Page_Load(object sender, EventArgs e)
         {
             // Cambiar cultura para manejo de separador decimal
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
 
@@ -124,7 +124,7 @@ namespace whusap.WebPages.Migration
 
             if (consultaOrden.Count > 0)
             {
-                if (consultaOrden[0]["STAT"].ToString().Trim() != "2")
+                if (consultaOrden[0]["STAT"].ToString().Trim() != "2" && consultaOrden[0]["STAT"].ToString().Trim() != "4")
                 {
                     lblError.Text = mensajes("WorkorderhasnotbeeninitiatedPOP");
                     return;

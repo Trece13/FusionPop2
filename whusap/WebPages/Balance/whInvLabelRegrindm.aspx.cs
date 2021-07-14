@@ -120,8 +120,8 @@ namespace whusap.WebPages.Balance
             lblError.Text = string.Empty; ;
             obj011.mcno = ((TextBox)sender).Text.Trim().ToUpperInvariant(); ;  //listMachine.SelectedValue.Trim().ToUpperInvariant();
 
-            resultado = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-
+            //resultado = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
+            resultado = idal011.listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
             // Para este caso strError muestra los mensajes de resutado de la consulta para cuando no hay filas 
             // o cuando existe mas de una fila
 
@@ -138,7 +138,7 @@ namespace whusap.WebPages.Balance
             obj011.pdno = resultado.Rows[0]["ORDEN"].ToString().Trim().ToUpperInvariant();
             MAXG = Convert.ToDecimal(resultado.Rows[0]["MAXG"].ToString().Trim());
             resultado = idal011.invLabelRegrind_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-            if (!String.IsNullOrEmpty(strError)) { lblError.Text = resultado.Rows.Count <= 0 ? mensajes("ordermachine") : mensajes("moreoneorder"); return; }
+            //if (!String.IsNullOrEmpty(strError)) { lblError.Text = resultado.Rows.Count <= 0 ? mensajes("ordermachine") : mensajes("moreoneorder"); return; }
 
             ActiveMachine = obj011.mcno.Trim().ToUpperInvariant(); // 
             ActiveOrderMachine = resultado.Rows[0]["ORDEN"].ToString();

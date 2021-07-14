@@ -102,6 +102,21 @@ namespace whusa.Interfases
             }
         }
 
+        public DataTable listaRegistrosOrdenMaquina_Param(ref Ent_tticol011 Parametros, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.listaRegistrosOrdenMaquina_Param(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         public DataTable invLabel_listaRegistrosOrdenMaquina_Workorder(ref Ent_tticol011 Parametros, ref string strError)
         {
             //int retorno = -1;
