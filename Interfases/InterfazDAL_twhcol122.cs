@@ -1003,5 +1003,10 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nError: " + ex.Message);
             }
         }
+
+        public DataTable VerificarPalletIDItem(string PAID_NEW, string ITEM)
+        {
+            return dal.VerificarPalletIDItem(PAID_NEW, ITEM);
+        }
     }
 }
