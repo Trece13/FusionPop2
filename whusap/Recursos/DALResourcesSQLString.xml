@@ -686,14 +686,23 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTticol082porStat">
         <stringSQL>
-          select ticol082.T$ORNO, ticol082.T$PONO, ticol082.T$ADVS, ticol082.T$ITEM,tcibd001.T$DSCA, ticol082.T$QTYT, ticol082.T$OORG, ticol082.T$UNIT, ticol082.T$CWAR, ticol082.T$MCNO, ticol082.T$TIME, ticol082.T$PRIO, ticol082.T$PICK, ticol082.T$PAID, ticol082.T$LOCA, ticol082.T$LOGN, ticol082.T$STAT from baan.tticol082140 ticol082
+          SELECT * FROM (select (case when col022.T$dele IS NULL then 'no' else TO_CHAR(col022.T$dele) end) stat022,(case when col042.T$dele IS NULL then 'no' else TO_CHAR(col042.T$dele) end)  stat042,(case when col131.T$stat IS NULL then 'no' else TO_CHAR(col131.T$stat) end) stat131,ticol082.T$ORNO, ticol082.T$PONO, ticol082.T$ADVS, ticol082.T$ITEM,tcibd001.T$DSCA, ticol082.T$QTYT, ticol082.T$OORG, ticol082.T$UNIT, ticol082.T$CWAR, ticol082.T$MCNO, ticol082.T$TIME, ticol082.T$PRIO, ticol082.T$PICK, ticol082.T$PAID, ticol082.T$LOCA, ticol082.T$LOGN, ticol082.T$STAT from baan.tticol082140 ticol082
           left join BAAN.ttcibd001140 tcibd001
           on tcibd001.T$ITEM = ticol082.T$ITEM
+          LEFT JOIN baan.tticol022140 col022
+          ON col022.t$sqnb = ticol082.T$PAID
+          LEFT JOIN baan.tticol042140 col042
+          ON col042.t$sqnb = ticol082.T$PAID
+          LEFT JOIN baan.twhcol131140 col131
+          ON col131.T$paid = ticol082.T$PAID
           where UPPER(ticol082.T$LOGN) = NVL(UPPER('[:T$LOGN]'),ticol082.T$LOGN)
           and ticol082.T$STAT in([:T$STAT])
           and ticol082.T$PICK = NVL('[:T$PICK]',ticol082.T$PICK)
           and ticol082.T$CWAR = NVL('[:T$CWAR]',ticol082.T$CWAR)
-          order by ticol082.T$PONO,ticol082.T$ADVS asc
+          order by ticol082.T$PONO,ticol082.T$ADVS asc)
+          where stat022 != '12'
+          and stat042 != '12'
+          and stat131 != 10
         </stringSQL>
       </operationName>
       <operationName name="Actualizar307">
@@ -2121,10 +2130,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPendientesTccol307">
         <stringSQL>
-          SELECT * FROM BAAN.TTCCOL307140
+          SELECT DISTINCT COL307.T$USER, COL307.T$STAT, COL307.T$PAID, COL307.T$CWAR, COL307.T$PROC,COL082.T$MCNO FROM BAAN.TTCCOL307140 COL307
+          LEFT JOIN BAAN.TTICOL082140 COL082
+          on COL082.T$PICK  = COL307.T$PAID
+          and COL082.T$CWAR = COL307.T$CWAR
           WHERE
-          T$STAT IN([:T$STAT])
-          AND T$CWAR = NVL('[:T$CWAR]',T$CWAR)
+          COL307.T$STAT IN([:T$STAT])
+          AND COL307.T$CWAR = NVL('[:T$CWAR]',COL307.T$CWAR)
         </stringSQL>
       </operationName>
       <operationName name="ConsultarRegistrotccol307">

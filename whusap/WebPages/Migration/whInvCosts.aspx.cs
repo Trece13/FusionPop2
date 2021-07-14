@@ -362,7 +362,7 @@ namespace whusap.WebPages.Migration
                                     LstTable[i].ISWH.ToString().Trim().ToUpper(),
                                     i,
                                     LstTable[i].CUNI.ToString().Trim().ToUpper(),
-                                    LstTable[i].cant_max != Int16.MaxValue.ToString() ? LstTable[i].cant_max : string.Empty)
+                                    LstTable[i].cant_max != Int32.MaxValue.ToString() ? LstTable[i].cant_max : string.Empty)
                     , LstTable[i].CUNI.ToString().Trim().ToUpper()
                     , String.Format("<input type='number' step='any' id='{0}' name='{0}' class='TextBox'  readonly/>"
                                     , "txtQuantityHidden-" + i)

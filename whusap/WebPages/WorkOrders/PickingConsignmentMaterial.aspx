@@ -139,6 +139,8 @@
                     <tr>
                         <th scope="col">Picking ID</th>
                         <th scope="col">Warehouse</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Machine</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -415,12 +417,12 @@
                     </tr>
                 </table>
             </div>
-            <div id="MyEtiquetaDrop" style="display:none; width: 6in; height:4in; border:solid 1px;">
+            <div id="MyEtiquetaDrop" style="display: none; width: 6in; height: 4in; border: solid 1px;">
                 <table style="margin: auto">
                     <tr>
                         <td>
-                        <label style="font-size: 30px">
-                        Pick ID</label>
+                            <label style="font-size: 30px">
+                                Pick ID</label>
                         </td>
                         <td colspan="4">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="bcPick" alt="" hspace="60"
@@ -440,11 +442,12 @@
                     <tr>
                         <td>
                             <label style="font-size: 30px">
-                                Pallet(s) </label>
+                                Pallet(s)
+                            </label>
                         </td>
                         <td style="text-align: center;">
                             <label style="font-size: 30px" id="lbPaid">
-                             </label>
+                            </label>
                         </td>
                     </tr>
                 </table>
@@ -452,8 +455,12 @@
         </div>
     </div>
     <script>
+        var timer;
+        function stoper() {
+            clearTimeout(timer);
+        }
         window.onbeforeunload = function (e) {
-           console.log("sasasassas");
+            console.log("sasasassas");
         };
 
         var cnpk = "";
@@ -532,19 +539,23 @@
         }
 
         function verifyPallet() {
-            var CurrentPaid = lblPaid.innerHTML.trim();
-            var NewPaid = txPaid.value.trim();
-            if (CurrentPaid == NewPaid) {
-                paidValid();
-                $("#lblError").html("");
-            }
-            else {
-                $("#lblError").html("");
-                console.log("Pallet NO Igual");
-                Method = "VerificarExistenciaPalletID"
-                Data = "{'PAID_NEW':'" + NewPaid + "'}";
-                EventoAjax(Method, Data, PalletIDSuccess)
-            }
+            stoper();
+            timer = setTimeout(function () {
+                var CurrentPaid = lblPaid.innerHTML.trim();
+                var NewPaid = txPaid.value.trim();
+                if (CurrentPaid == NewPaid) {
+                    paidValid();
+                    $("#lblError").html("");
+                }
+                else {
+                    $("#lblError").html("");
+                    console.log("Pallet NO Igual");
+                    Method = "VerificarExistenciaPalletID"
+                    Data = "{'PAID_NEW':'" + NewPaid + "'}";
+                    EventoAjax(Method, Data, PalletIDSuccess)
+                }
+            }, 1500);
+            
         }
 
         var PalletIDSuccess = function (r) {
@@ -648,7 +659,7 @@
                         }
                         else {
                             dropPending = true;
-                            bodyRows += "<tr onClick='Drop(this,false)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-danger col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
+                            bodyRows += "<tr onClick='Drop(this,false)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
                         }
                     }
                     var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
@@ -669,7 +680,7 @@
                                                bodyRows +
                     "</tbody>" +
                                             "</table>";
-                    dropPending == true ? tableOptions += "<input type='button' onClick='Drop(this,true)' class='btn btn-danger col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "' value ='End Picking'>" : tableOptions;
+                    dropPending == true ? tableOptions += "<input type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "' value ='End Picking'>" : tableOptions;
 
 
                     $("#divTableWarehouse").append(tableOptions);
@@ -748,16 +759,22 @@
             $("#btnStarPicking").show(100);
             var bodyRows = "";
             if (MyObjLst.length > 0) {
-                $('#divPicketPending').show(100);
+                var validos = false;
                 MyObjLst.forEach(function (item, i) {
+                    if (parseInt(item.T$PAID.trim()).toString() != "NaN") {
 
-                    if (item.T$STAT == 1) {
-                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
-                    }
-                    else {
-                        bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                        if (item.T$STAT == 1) {
+                            bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                        }
+                        else {
+                            bodyRows += "<tr onClick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                        }
+                        validos = true;
                     }
                 });
+                if (validos) {
+                    $('#divPicketPending').show(100);
+                }
             }
             else {
                 $('#divPicketPending').hide(100);
@@ -811,7 +828,7 @@
                 myList.forEach(function (x) {
                     if (x.T$STAT == 2) {
                         EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "'}", DropMultipleSuccess);
-                        Paids += x.T$PAID+" ";
+                        Paids += x.T$PAID + " ";
                         flag1 = true;
                     }
                 });
@@ -821,7 +838,7 @@
                     EventoAjax("Eliminar307", "{}", null);
                 }
             }
-            setTimeout(function(){printDiv("MyEtiquetaDrop")},3000);
+            setTimeout(function () { printDiv("MyEtiquetaDrop") }, 3000);
         }
 
         var DropMultipleSuccess = function (r) {
@@ -836,7 +853,7 @@
                 $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                 $("#lbPaid").html(localStorage.getItem('paid'))
                 printDiv("MyEtiquetaDrop");
-            }            
+            }
         }
 
 
