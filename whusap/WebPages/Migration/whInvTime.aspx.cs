@@ -270,12 +270,12 @@ namespace whusap.WebPages.Migration
 
             //Parte de ordenes
             table += String.Format("<tr style='font-weight:bold;background-color: lightgray;'><td colspan='8'>{0}</td></tr>"
-                                    , String.Concat(_idioma == "INGLES" ? "Number of orders: " : "Número de ordenes: ", _ordersPdno.Rows.Count));
+                                    , String.Concat(_idioma == "INGLES" ? "Number of Records: " : "Número de Registros: ", _ordersPdno.Rows.Count));
 
             if (_ordersPdno.Rows.Count > 0)
             {
                 //Encabezado
-                table += String.Format("<tr style='font-weight:bold;background-color: white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
+                table += String.Format("<tr overflow-y:auto style='font-weight:bold;background-color: white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
                                         , _idioma == "INGLES" ? "User" : "Usuario"
                                         , _idioma == "INGLES" ? "Order" : "Orden"
                                         , _idioma == "INGLES" ? "Labor Type" : "Tipo de labor"
@@ -284,7 +284,7 @@ namespace whusap.WebPages.Migration
                                         , _idioma == "INGLES" ? "Date" : "Fecha"
                                         , _idioma == "INGLES" ? "Comments" : "Comentarios");
 
-                var horasTotales = 0;
+                var horasTotales = 0.00;
                 foreach (DataRow itemOrder in _ordersPdno.Rows)
                 {
                     table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
@@ -297,7 +297,7 @@ namespace whusap.WebPages.Migration
                         , itemOrder["COMM"].ToString().Trim().ToUpper());
 
                     //horasTotales += Convert.ToInt32(itemOrder["HREA"].ToString());
-                    horasTotales += Convert.ToInt32(itemOrder["HREA"]);
+                    horasTotales += Convert.ToDouble(itemOrder["HREA"]);
                 }
 
                 table += String.Format("<tr style='font-weight:bold;background-color: lightgray;'><td colspan='8'>{0}</td></tr>"
