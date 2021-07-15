@@ -56,6 +56,29 @@ namespace whusa.DAL
             return consulta;
         }
 
+        public DataTable listaRegistrosOrdenMaquina_Param(ref Ent_tticol011 ParametrosIn, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add("p1", ParametrosIn.mcno.Trim().ToUpperInvariant());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                //if (consulta.Rows.Count < 1) { strError = "Order doesn't initiated for machine. " + ParametrosIn.mcno.Trim().ToUpperInvariant(); }
+                //if (consulta.Rows.Count > 1) { strError = "More than one work order found"; }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [tticol011]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
         public DataTable invLabel_listaRegistrosOrdenMaquina_Workorder(ref Ent_tticol011 ParametrosIn, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

@@ -158,7 +158,7 @@ namespace whusap.WebPages.Migration
 
             if (consultaOrden.Count > 0)
             {
-                if (consultaOrden[0]["STAT"].ToString().Trim() != "2")
+                if (consultaOrden[0]["STAT"].ToString().Trim() != "2" && consultaOrden[0]["STAT"].ToString().Trim() != "4")
                 {
 
                     lblError.Text = mensajes("WorkorderhasnotbeeninitiatedPOP");

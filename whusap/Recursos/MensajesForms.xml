@@ -328,7 +328,7 @@
         </operationName>
         <operationName name="PalletNotExist">
           <stringMessage>
-            Pallet ID doesn't exist
+            Pallet ID blocked or doesn't exist
           </stringMessage>
         </operationName>
         <operationName name="LocationTransfeCannotEqual">
@@ -1273,7 +1273,7 @@
         </operationName>
         <operationName name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
-            Work Order not Initiated for this Machine
+            Work Order not Initiated or not On Hold for this Work Order
           </stringMessage>
         </operationName>
         <operationName name="MachineNotdefined">
@@ -1380,7 +1380,7 @@
         </operationName>
         <operationName name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
-            Work Order not Initiated for this Machine
+            Work Order not Initiated or not On Hold for this Work Order
           </stringMessage>
         </operationName>
         <operationName name="MachineNotdefined">
@@ -1495,7 +1495,7 @@
         </operationName>
         <operationName name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
-            Work Order not Initiated for this Machine
+            Work Order not Initiated or not On Hold for this Work Order
           </stringMessage>
         </operationName>
         <operationName name="MachineNotdefined">
@@ -1612,7 +1612,7 @@
         </operationName>
         <operationName name="WorkorderhasnotbeeninitiatedPOP">
           <stringMessage>
-            Work Order no inicializada para esta maquina
+            Work Order no inicializada o no esta retenida para esta orden de fabricacion
           </stringMessage>
         </operationName>
         <operationName name="palletexceed">
