@@ -186,18 +186,16 @@ namespace whusap.WebPages.Migration
         protected void makeTable()
         {
             var table = String.Empty;
-
+            string table2 = "<hr /><div style='overflow:scroll; height:400px;width:800px;'><table class='table table-bordered' style='width:800px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>";
             var machine = _machine;
             //Fila machine
             table += String.Format("<hr /><table class='table table-bordered' style='width:800px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");
 
-            table += String.Format("<tr style='font-weight:bold;background-color: lightgray;'><td>{0}</td><td colspan='2'>{1}</td><td>{2}</td><td colspan='4'>{3}</td></tr>"
-                                , _idioma == "INGLES" ? "Order:" : "Orden:"
-                                , txtWorkOrder.Text.Trim().ToUpper()
-                                , _idioma == "INGLES" ? "Machine:" : "Maquina:"
-                                , _machine);
+            table += String.Format("<tr style='font-weight:bold;background-color: lightgray;'><th colspan='3'>{0}</th><th colspan='3'>{1}</th></tr>"
+                                , _idioma == "INGLES" ? "Order:" + " " + txtWorkOrder.Text.Trim().ToUpper() : "Orden:" + " " + txtWorkOrder.Text.Trim().ToUpper()
+                                , _idioma == "INGLES" ? "Machine:"+" "+_machine : "Maquina:"+" "+_machine);
             //Fila task
-            table += String.Format("<tr style='font-weight:bold; background-color: white;'><td>{0}</td><td>{1}</td><td>{2}</td><td colspan='2'>{3}</td><td colspan='2'>{4}</td><td>{5}</td></tr>"
+            table += String.Format("<tr style='font-weight:bold; background-color: white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td></tr>"
                                 , _idioma == "INGLES" ? "Task" : "Tarea"
                                 , _idioma == "INGLES" ? "Description" : "Descripción"
                                 , _idioma == "INGLES" ? "Hourly Labor Type" : "Tipo de trabajo por hora"
@@ -213,7 +211,7 @@ namespace whusap.WebPages.Migration
             table += String.Format("<td>{0}</td>", _datosOrden.Rows[0]["DSCAOP"].ToString().Trim().ToUpper());
 
             //--Record Labor Type
-            table += String.Format("<td><select id='slHoursLaborType' name='slHoursLaborType' class='TextboxBig'><option value=''>{0}</option>"
+            table += String.Format("<td><select id='slHoursLaborType' name='slHoursLaborType' class='TextboxBig' style='width: 116px;'><option value=''>{0}</option>"
                 , _idioma == "INGLES" ? "-- Select an option --" : "-- Seleccione una opción --");
 
             foreach (DataRow itemType in _recordsLaborType.Rows)
@@ -226,7 +224,7 @@ namespace whusap.WebPages.Migration
             table += "</select></td>";
 
             //--Record Hours
-            table += String.Format("<td colspan='2'><select id='slHours' name='slHours' class='TextboxBig'><option value=''>{0}</option>"
+            table += String.Format("<td><select id='slHours' name='slHours' class='TextboxBig' style='width: 38px;'><option value=''>{0}</option>"
                 , _idioma == "INGLES" ? "-- Select an option --" : "-- Seleccione una opción --");
 
             for (int cont = 0; cont <= 12; cont++)
@@ -239,7 +237,7 @@ namespace whusap.WebPages.Migration
             table += "</select></td>";
 
             //--Record Minutes
-            table += String.Format("<td colspan='2'><select id='slMinutes' name='slMinutes' class='TextboxBig'><option value=''>{0}</option>"
+            table += String.Format("<td><select id='slMinutes' name='slMinutes' class='TextboxBig' style='width: 38px;'><option value=''>{0}</option>"
                 , _idioma == "INGLES" ? "-- Select an option --" : "-- Seleccione una opción --");
 
             for (int cont = 0; cont <= 55; cont += 5)
@@ -253,7 +251,7 @@ namespace whusap.WebPages.Migration
 
 
             //--Record Comments
-            table += String.Format("<td><select id='slComments' name='slComments' class='TextboxBig'><option value=''>{0}</option>"
+            table += String.Format("<td><select id='slComments' name='slComments' class='TextboxBig' style='width: 100px;'><option value=''>{0}</option>"
                 , _idioma == "INGLES" ? "-- Select an option --" : "-- Seleccione una opción --");
 
             foreach (DataRow itemType in _recordsComments.Rows)
@@ -275,7 +273,7 @@ namespace whusap.WebPages.Migration
             if (_ordersPdno.Rows.Count > 0)
             {
                 //Encabezado
-                table += String.Format("<tr overflow-y:auto style='font-weight:bold;background-color: white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
+                table2 += String.Format("<tr overflow-y:auto style='font-weight:bold;background-color: white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
                                         , _idioma == "INGLES" ? "User" : "Usuario"
                                         , _idioma == "INGLES" ? "Order" : "Orden"
                                         , _idioma == "INGLES" ? "Labor Type" : "Tipo de labor"
@@ -287,7 +285,7 @@ namespace whusap.WebPages.Migration
                 var horasTotales = 0.00;
                 foreach (DataRow itemOrder in _ordersPdno.Rows)
                 {
-                    table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
+                    table2 += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td></tr>"
                         , itemOrder["LOGN"].ToString().Trim().ToUpper()
                         , itemOrder["PDNO"].ToString().Trim().ToUpper()
                         , itemOrder["CWTT"].ToString().Trim().ToUpper()
@@ -305,6 +303,12 @@ namespace whusap.WebPages.Migration
             }
 
             table += "</table>";
+            
+            if (_ordersPdno.Rows.Count > 0)
+            {
+                table2 += "</table></div>";
+                table += table2;
+            }
 
             divTable.InnerHtml = table;
         }
