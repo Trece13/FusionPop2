@@ -124,24 +124,42 @@ namespace whusap.WebPages.Migration
         {
             DateTime localDate = DateTime.Now;
 
-            if(Session["TimeClick"] != null){
-                DateTime lastDateClick = (DateTime)Session["TimeClick"];
-                TimeSpan Tans = localDate - lastDateClick;
-                double segTrans = Tans.TotalSeconds;
-                if (segTrans < 20)
+            var PDNO = txtOrder.Text.Trim().ToUpper();
+            var DELE = "2";
+            var consultaOrden = _idalttisfc001.findByOrderNumberPalletTags(ref PDNO, ref strError).Rows;
+            if (consultaOrden.Count > 0)
+            {
+                if (Session["TimeClick"] != null)
                 {
-                    return;
+                    DateTime lastDateClick = (DateTime)Session["TimeClick"];
+                    TimeSpan Tans = localDate - lastDateClick;
+                    double segTrans = Tans.TotalSeconds;
+                    if (segTrans > 20)
+                    {
+
+                        Session["TimeClick"] = null;
+                        Prosess();
+                    }
+
                 }
                 else
                 {
-                    Session["TimeClick"] = null;
+                    Session["TimeClick"] = localDate;
+                    Prosess();
                 }
             }
             else
             {
-                Session["TimeClick"] = localDate;
+                lblError.Text = mensajes("ordernotexists");
+                lblConfirm.Text = string.Empty;
+                return;
             }
 
+
+        }
+
+        public void Prosess()
+        {
             divTable.Visible = false;
             divBotones.Visible = false;
 
@@ -418,6 +436,7 @@ namespace whusap.WebPages.Migration
                 //Session["Operator"] = _operator;
                 Session["Operator"] = HttpContext.Current.Session["user"].ToString().Trim();
                 Session["Reprint"] = "no";
+                Session["AutoPrint"] = "yes";
 
                 StringBuilder script = new StringBuilder();
                 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
@@ -674,7 +693,7 @@ namespace whusap.WebPages.Migration
                 lblValueInspectorInitial.Text = "REPRINT by: " + HttpContext.Current.Session["user"].ToString().Trim();
 
                 Session["MaterialDesc"] = desc;
-                Session["codeMaterial"] = item.Trim().ToUpper() ;
+                Session["codeMaterial"] = item.Trim().ToUpper();
                 Session["codePaid"] = sqnb.Trim().ToUpper();
                 Session["Lot"] = pdno;
                 Session["Quantity"] = qtdl + " " + unit;

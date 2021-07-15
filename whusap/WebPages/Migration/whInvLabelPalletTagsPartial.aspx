@@ -72,48 +72,52 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />
-    <table border="0">
-        <tr>
-            <td style="text-align: left;">
-                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                    <b style="font-size: 11px;">
-                        <asp:Label runat="server" ID="lblOrder" /></b></span>
-            </td>
-            <td style="width: 250px; padding: 5px;">
-                <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtOrder" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
-                </span>
-            </td>
-        </tr>
-        <tr runat="server">
-            <td>
-                <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: left;">
-                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                    <b style="font-size: 11px;">
-                        <asp:Label runat="server" ID="lblQuantity" /></b></span>
-            </td>
-            <td style="width: 250px; padding: 5px;">
-                <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtQuantity" onkeypress="return fun_AllowOnlyAmountAndDot(this);" onblur="validarCantidad(this)" CssClass="TextBoxBig" ClientIDMode="Static" />
-                </span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <hr />
-                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
-            </td>
-        </tr>
-    </table>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />
+            <table border="0">
+                <tr>
+                    <td style="text-align: left;">
+                        <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                            <b style="font-size: 11px;">
+                                <asp:Label runat="server" ID="lblOrder" /></b></span>
+                    </td>
+                    <td style="width: 250px; padding: 5px;">
+                        <span style="vertical-align: middle;">
+                            <asp:TextBox runat="server" ID="txtOrder" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
+                        </span>
+                    </td>
+                </tr>
+                <tr runat="server">
+                    <td>
+                        <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">
+                        <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                            <b style="font-size: 11px;">
+                                <asp:Label runat="server" ID="lblQuantity" /></b></span>
+                    </td>
+                    <td style="width: 250px; padding: 5px;">
+                        <span style="vertical-align: middle;">
+                            <asp:TextBox runat="server" ID="txtQuantity" onkeypress="return fun_AllowOnlyAmountAndDot(this);" onblur="validarCantidad(this)" CssClass="TextBoxBig" ClientIDMode="Static" />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <hr />
+                        <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <hr />
     <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
     <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="container">

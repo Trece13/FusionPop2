@@ -186,7 +186,7 @@ namespace whusap.WebPages.Migration
         protected void makeTable()
         {
             var table = String.Empty;
-            string table2 = "<hr /><div style='overflow:scroll; height:400px;width:800px;'><table class='table table-bordered' style='width:800px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>";
+            string table2 = "<hr /><div style='overflow:scroll; height:400px;width:800px; margin-bottom:100px;'><table class='table table-bordered' style='width:800px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>";
             var machine = _machine;
             //Fila machine
             table += String.Format("<hr /><table class='table table-bordered' style='width:800px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");

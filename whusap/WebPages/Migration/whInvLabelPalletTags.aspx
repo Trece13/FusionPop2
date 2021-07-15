@@ -76,56 +76,61 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
+
     <asp:Label Text="" runat="server" ID="lblInfo" Style="color: Black; font-size: medium;" />
-    <table border="0">
-        <tr>
-            <td style="text-align: left;">
-                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                    <b style="font-size: 11px;">
-                        <asp:Label runat="server" ID="lblOrder" /></b></span>
-            </td>
-            <td style="width: 250px; padding: 5px;">
-                <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtOrder" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
-                </span>
-            </td>
-        </tr>
-        <tr runat="server">
-            <td>
-                <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
-            </td>
-        </tr>
-        <tr runat="server" id="trSecuence" visible="false">
-            <td style="text-align: left;">
-                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
-                    <b style="font-size: 11px;">
-                        <asp:Label runat="server" ID="lblSecuence" /></b></span>
-            </td>
-            <td style="width: 250px; padding: 5px;">
-                <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtSecuence" onblur="validarSecuencia()" CssClass="TextBoxBig" ClientIDMode="Static" />
-                </span>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <hr />
-                <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
-            </td>
-        </tr>
-    </table>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <table border="0">
+                <tr>
+                    <td style="text-align: left;">
+                        <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                            <b style="font-size: 11px;">
+                                <asp:Label runat="server" ID="lblOrder" /></b></span>
+                    </td>
+                    <td style="width: 250px; padding: 5px;">
+                        <span style="vertical-align: middle;">
+                            <asp:TextBox runat="server" ID="txtOrder" onblur="validarOrden()" CssClass="TextBoxBig" ClientIDMode="Static" />
+                        </span>
+                    </td>
+                </tr>
+                <tr runat="server">
+                    <td>
+                        <asp:Label runat="server" ID="lblMsgMcnoActive"></asp:Label>
+                    </td>
+                </tr>
+                <tr runat="server" id="trSecuence" visible="false">
+                    <td style="text-align: left;">
+                        <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                            <b style="font-size: 11px;">
+                                <asp:Label runat="server" ID="lblSecuence" /></b></span>
+                    </td>
+                    <td style="width: 250px; padding: 5px;">
+                        <span style="vertical-align: middle;">
+                            <asp:TextBox runat="server" ID="txtSecuence" onblur="validarSecuencia()" CssClass="TextBoxBig" ClientIDMode="Static" />
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <hr />
+                        <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" AutoPostBack="false" />
+                    </td>
+                </tr>
+            </table>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <hr />
     <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
     <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="container">
-                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class ="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <div runat="server" id="divTable" clientidmode="Static" visible ="false">
+    <div runat="server" id="divTable" clientidmode="Static" visible="false">
         <hr />
         <table style="width: 5.8in; height: 3.8in; text-align: center; font-weight: bold;" border="1" cellspacing="0" cellpadding="0">
             <tr>

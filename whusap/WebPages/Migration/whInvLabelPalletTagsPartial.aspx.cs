@@ -105,27 +105,43 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+
             DateTime localDate = DateTime.Now;
 
-            if (Session["TimeClickPartial"] != null)
+            var PDNO = txtOrder.Text.Trim().ToUpper();
+            var DELE = "2";
+            var consultaOrden = _idalttisfc001.findByOrderNumberPalletTags(ref PDNO, ref strError).Rows;
+            if (consultaOrden.Count > 0)
             {
-                DateTime lastDateClick = (DateTime)Session["TimeClickPartial"];
-                TimeSpan Tans = localDate - lastDateClick;
-                double segTrans = Tans.TotalSeconds;
-                if (segTrans < 20)
+                if (Session["TimeClick"] != null)
                 {
-                    return;
+                    DateTime lastDateClick = (DateTime)Session["TimeClick"];
+                    TimeSpan Tans = localDate - lastDateClick;
+                    double segTrans = Tans.TotalSeconds;
+                    if (segTrans > 20)
+                    {
+
+                        Session["TimeClick"] = null;
+                        Process();
+                    }
+
                 }
                 else
                 {
-                    Session["TimeClickPartial"] = null;
+                    Session["TimeClick"] = localDate;
+                    Process();
                 }
             }
             else
             {
-                Session["TimeClickPartial"] = localDate;
+                lblError.Text = mensajes("ordernotexists");
+                lblConfirm.Text = string.Empty;
+                return;
             }
+        }
 
+        public void Process()
+        {
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
 
@@ -411,16 +427,17 @@ namespace whusap.WebPages.Migration
                 lblValueMadeIn.Text = madein;
 
                 Session["MaterialDesc"] = descripcion;
-                Session["codeMaterial"] =  item.Trim().ToUpper() ;
-                Session["codePaid"]     =  sqnb.Trim().ToUpper() ;
+                Session["codeMaterial"] = item.Trim().ToUpper();
+                Session["codePaid"] = sqnb.Trim().ToUpper();
                 Session["Lot"] = PDNO;
-                Session["Quantity"] = enterQuantity.ToString()+" "+unidad;
+                Session["Quantity"] = enterQuantity.ToString() + " " + unidad;
                 Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                 Session["Pallet"] = sqnb.Trim().ToUpper();
                 Session["Machine"] = maquina;
                 //Session["Operator"] = _operator;
                 Session["Operator"] = HttpContext.Current.Session["user"].ToString().Trim();
                 Session["Reprint"] = "no";
+                Session["AutoPrint"] = "yes";
 
                 StringBuilder script = new StringBuilder();
                 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
@@ -457,7 +474,6 @@ namespace whusap.WebPages.Migration
                 return;
             }
         }
-
         protected void btnExit_Click(object sender, EventArgs e)
         {
             Response.Redirect("whInvAnuncioOrd.aspx?tipoFormulario=quantity");
