@@ -587,10 +587,10 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string VerificarExistenciaPalletID(string PAID_NEW)
         {
-
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             EntidadPicking ObjPicking = new EntidadPicking();
 
-            DataTable DTPalletID = twhcolDAL.VerificarPalletID(PAID_NEW);
+            DataTable DTPalletID = twhcolDAL.VerificarPalletIDItem(PAID_NEW,MySessionObjPicking.ITEM);
             if (DTPalletID.Rows.Count > 0)
             {
                 ObjPicking.error = false;

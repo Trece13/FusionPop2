@@ -77,7 +77,7 @@
             //            window.close();
             //            return true;
 
-            var mywindow = window.open('', 'PRINT');
+            var mywindow = window.open('','PRINT');
 
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
             mywindow.document.write('</head><body >');
@@ -88,7 +88,7 @@
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
 
-            mywindow.print();
+            setTimeout(function(){mywindow.print()},3000);
 
             return true;
         };
@@ -609,7 +609,7 @@
                 dataType: "json",
                 success: function (response) {
                     myObj = JSON.parse(response.d);
-                    window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
+                    //window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
                     for (var i = 0; i < myObj.length; i++) {
                         bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
                     }
@@ -838,13 +838,15 @@
                     EventoAjax("Eliminar307", "{}", null);
                 }
             }
-            setTimeout(function () { printDiv("MyEtiquetaDrop") }, 3000);
+            
         }
 
         var DropMultipleSuccess = function (r) {
             if (r.d != "") {
                 $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                printDiv("MyEtiquetaDrop");
             }
+            
         }
 
         var DropSuccess = function (r) {
