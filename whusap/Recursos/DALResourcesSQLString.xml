@@ -698,7 +698,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           order by ticol082.T$PONO,ticol082.T$ADVS asc)
           where stat022 != '12'
           and stat042 != '12'
-          and stat131 != 10
+          and stat131 != '10'
         </stringSQL>
       </operationName>
       <operationName name="Actualizar307">
