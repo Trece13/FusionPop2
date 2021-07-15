@@ -105,6 +105,27 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            DateTime localDate = DateTime.Now;
+
+            if (Session["TimeClickPartial"] != null)
+            {
+                DateTime lastDateClick = (DateTime)Session["TimeClickPartial"];
+                TimeSpan Tans = localDate - lastDateClick;
+                double segTrans = Tans.TotalSeconds;
+                if (segTrans < 20)
+                {
+                    return;
+                }
+                else
+                {
+                    Session["TimeClickPartial"] = null;
+                }
+            }
+            else
+            {
+                Session["TimeClickPartial"] = localDate;
+            }
+
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
 

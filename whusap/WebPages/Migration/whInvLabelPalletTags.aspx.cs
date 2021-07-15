@@ -122,6 +122,26 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            DateTime localDate = DateTime.Now;
+
+            if(Session["TimeClick"] != null){
+                DateTime lastDateClick = (DateTime)Session["TimeClick"];
+                TimeSpan Tans = localDate - lastDateClick;
+                double segTrans = Tans.TotalSeconds;
+                if (segTrans < 20)
+                {
+                    return;
+                }
+                else
+                {
+                    Session["TimeClick"] = null;
+                }
+            }
+            else
+            {
+                Session["TimeClick"] = localDate;
+            }
+
             divTable.Visible = false;
             divBotones.Visible = false;
 
@@ -196,7 +216,7 @@ namespace whusap.WebPages.Migration
                         return;
                     }
 
-                    var validaSecuencia = Convert.ToInt32(secuencia) + 1; 
+                    var validaSecuencia = Convert.ToInt32(secuencia) + 1;
 
                     if (validaSecuencia < 10)
                     {
@@ -387,14 +407,14 @@ namespace whusap.WebPages.Migration
                 lblValueMadeIn.Text = madein;
 
                 Session["Reprint"] = "no";
-                Session["MaterialDesc"] =  descripcion;
-                Session["codeMaterial"] =  item.Trim().ToUpper();
-                Session["codePaid"]     =  sqnb.Trim().ToUpper();
-                Session["Lot"]       =  PDNO;
+                Session["MaterialDesc"] = descripcion;
+                Session["codeMaterial"] = item.Trim().ToUpper();
+                Session["codePaid"] = sqnb.Trim().ToUpper();
+                Session["Lot"] = PDNO;
                 Session["Quantity"] = factor + " " + unidad;
                 Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                Session["Pallet"]    =  sqnb.Trim().ToUpper();
-                Session["Machine"]   =  maquina;
+                Session["Pallet"] = sqnb.Trim().ToUpper();
+                Session["Machine"] = maquina;
                 //Session["Operator"] = _operator;
                 Session["Operator"] = HttpContext.Current.Session["user"].ToString().Trim();
                 Session["Reprint"] = "no";

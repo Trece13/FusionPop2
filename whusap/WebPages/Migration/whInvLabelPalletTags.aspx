@@ -188,4 +188,16 @@
                 <asp:Button class="buttonMenu" runat="server" ID="btnSalir" OnClick="btnExit_Click" AutoPostBack="true" /></td>
         </tr>
     </table>
+    <script>
+        //function iniciarComponents() {
+        //    var Contenido_btnConsultar = document.getElementById("Contenido_btnConsultar");
+        //    Contenido_btnConsultar.addEventListener('click',bloquearBoton)
+        //}
+        //function bloquearBoton() {
+        //    Contenido_btnConsultar.disabled = true;
+        //    setTimeout(function () { Contenido_btnConsultar.disabled = false; }, 18000)
+        //}
+
+        //iniciarComponents();
+    </script>
 </asp:Content>

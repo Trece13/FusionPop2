@@ -543,7 +543,6 @@
                 mywindow.print();
             }, 3000);
             mywindow.document.close(); // necessary for IE >= 10
-            c
 
             return true;
         };
