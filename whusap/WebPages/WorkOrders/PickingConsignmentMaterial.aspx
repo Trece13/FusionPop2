@@ -12,6 +12,190 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"
         integrity="sha512-aDa+VOyQu6doCaYbMFcBBZ1z5zro7l/aur7DgYpt7KzNS9bjuQeowEX0JyTTeBTcRd0wwN7dfg5OThSKIWYj3A=="
         crossorigin="anonymous"></script>
+    <style type="text/css">
+        #MyEtiqueta label {
+            font-size: 15px;
+        }
+
+        #LblDate {
+            font-size: 14px !important;
+        }
+
+        #LblReprintInd,
+        #LblReprint {
+            display: none;
+        }
+
+        .isValid {
+            border-bottom: solid;
+            border-color: green;
+        }
+
+        .isNotValid {
+            border-bottom: solid;
+            border-color: red;
+        }
+
+        .fa-check {
+            color: green;
+        }
+
+        .fa-times {
+            color: red;
+        }
+
+        #checkItem,
+        #checkLot,
+        #checkWarehouse,
+        #checkLoca,
+        #checkPaid {
+            display: none;
+        }
+
+        #exItem,
+        #exLot,
+        #exWarehouse,
+        #exLoca,
+        #exPaid {
+            display: none;
+        }
+
+        #loadItem,
+        #loadLot,
+        #loadWarehouse,
+        #loadLoca,
+        #loadPaid {
+            display: none;
+        }
+
+        tr {
+            text-align: center;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        #myLabel {
+            width: 6in;
+            height: 4in;
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 12px;
+        }
+
+        .alingRight {
+            text-align: right;
+        }
+
+        .alingLeft {
+            text-align: left;
+        }
+
+        #printButton {
+            width: 6in;
+        }
+
+        #codePaid {
+            display: block;
+            margin: auto;
+            height: 75px;
+            width: 500px;
+        }
+
+        #codeMaterial {
+            display: block;
+            margin: auto;
+            height: 50px;
+            width: 220px;
+        }
+
+        #codeItem {
+            display: block;
+            margin: auto;
+            height: 75px;
+            width: 250px;
+        }
+
+        #itemDesc {
+            vertical-align: middle;
+            font-size: 21px;
+        }
+
+        .divDesc {
+            text-align: center;
+        }
+
+        #lblDesc {
+        }
+
+        #lblMadein {
+        }
+
+        .borderTop {
+            border-top: solid 1px gray;
+        }
+
+        #printContainer {
+            margin-bottom: 100px;
+        }
+
+        #editTable {
+            display: none;
+        }
+
+        #lblError {
+            color: red;
+            font-size: 13px;
+        }
+
+        .load {
+            width: 10px;
+            height: 10px;
+            align-content: center;
+            animation-name: spin;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        #saveSection {
+            display: none;
+        }
+
+        .notBorderBottom {
+            border-bottom: none;
+        }
+
+        #divBarcode {
+            height: 140px;
+            padding: inherit;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #table {
+            font-size: 10px;
+        }
+
+        .table td,
+        .table th {
+            padding: .1rem;
+            border-top: 1px solid #dee2e6;
+            font-size: 12px;
+            text-align: left;
+            vertical-align: middle;
+            padding-left: 1em;
+        }
+    </style>
     <style>
         #ddWare {
             height: 40px;
@@ -249,173 +433,82 @@
             </div>
         </div>
         <div class="row">
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px; display:none" frameborder="0" src=""></iframe>
+            </div>
             <div id="MyEtiqueta">
-                <table style="margin: auto">
-                    <tr>
-                        <td>
-                            <%--<label style="font-size: 11px">
-                        Pallet ID</label>--%>
-                        </td>
-                        <td colspan="4">
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
-                                vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 11px">
-                                ITEM</label>
-                        </td>
-                        <td colspan="4">
-                            <label id="lblItemID" style="display: none; font-size: 11px">
+                <div id="myLabel">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
+                            <label>
+                                <strong>
+                                    <label id="lblItemDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
-                                vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td align="center">
-                            <label id="lblItemDesc" style="font-size: 14px">
+                        </div>
+                        <div class="col-6 alingRight">
+                            <img id="CBItem" src="~/images/logophoenix_login.jpg" runat="server" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-12 borderTop" id="divBarcode">
+                        <img id="CBPalletNO" src="~/images/logophoenix_login.jpg" runat="server" />
+                    </div>
+                    <div>
+                        <table class="table mw-100">
+                            <tbody>
+                                <tr>
+                                    <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="LblLotId" runat="server"></label></td>
+                                    <td><strong>Quantity</strong>&nbsp;&nbsp;<label id="LblQuantity" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Date</strong>&nbsp;&nbsp;<label id="LblDate" runat="server"></label></td>
+                                    <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
+                                    <td><strong>Made in Dublin VA</strong></td>
+                                    <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="myLabel">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
+                            <label>
+                                <strong>
+                                    <label id="lblItemDesc2" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 11px">
-                                QUANTITY</label>
-                        </td>
-                        <td colspan="4">
-
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
-                                vspace="5" style="width: 1in; height: .5in; margin: 0px !important" />
-                            <label id="LblQuantity" style="display: none; font-size: 11px">
-                            </label>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td align="center">
-                            <label id="LblUnit" style="font-size: 11px">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 11px">
-                                LOT</label>
-                        </td>
-                        <td>
-                            <label id="LblLotId" style="display: none; font-size: 11px">
-                            </label>
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot" alt="" hspace="60"
-                                vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 9px">
-                                RECEIPT DATE</label>
-                        </td>
-                        <td>
-                            <label id="LblDate" style="font-size: 9px">
-                            </label>
-                        </td>
-                        <!--<td>
-                    <label>
-                        REPRINT:</label>
-                </td>
-                <td>
-                    <label id="LblReprint">
-                    </label>
-                </td>-->
-                    </tr>
-                </table>
-                <br />
-                <br />
-                <table style="margin: auto">
-                    <tr>
-                        <td>
-                            <%--<label style="font-size: 11px">
-                        Pallet ID</label>--%>
-                        </td>
-                        <td colspan="4">
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO2" alt="" hspace="60"
-                                vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 11px">
-                                Item</label>
-                        </td>
-                        <td colspan="4">
-                            <label id="lblItemID" style="display: none; font-size: 11px">
-                            </label>
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem2" alt="" hspace="60"
-                                vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td align="center">
-                            <label id="lblItemDesc2" style="font-size: 14px">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 11px">
-                                QUANTITY</label>
-                        </td>
-                        <td colspan="4">
-
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity2" alt="" hspace="60"
-                                vspace="5" style="width: 1in; height: .5in; margin: 0px !important" />
-                            <label id="LblQuantity2" style="display: none; font-size: 11px">
-                            </label>
-                        </td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td align="center">
-                            <label id="LblUnit2" style="font-size: 11px">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 11px">
-                                LOT</label>
-                        </td>
-                        <td>
-                            <label id="LblLotId2" style="display: none; font-size: 11px">
-                            </label>
-                            <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot2" alt="" hspace="60"
-                                vspace="5" style="width: 4in; height: .5in; margin: 0px !important" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label style="font-size: 9px">
-                                RECEIPT DATE</label>
-                        </td>
-                        <td>
-                            <label id="LblDate2" style="font-size: 9px">
-                            </label>
-                        </td>
-                        <!--<td>
-                    <label>
-                        REPRINT:</label>
-                </td>
-                <td>
-                    <label id="LblReprint">
-                    </label>
-                </td>-->
-                    </tr>
-                </table>
+                        </div>
+                        <div class="col-6 alingRight">
+                            <img id="CBItem2" src="~/images/logophoenix_login.jpg" runat="server" />
+                        </div>
+                    </div>
+                    <br />
+                    <div class="col-12 borderTop" id="divBarcode">
+                        <img id="CBPalletNO2" src="~/images/logophoenix_login.jpg" runat="server" />
+                    </div>
+                    <div>
+                        <table class="table mw-100">
+                            <tbody>
+                                <tr>
+                                    <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="LblLotId2" runat="server"></label></td>
+                                    <td><strong>Quantity</strong>&nbsp;&nbsp;<label id="LblQuantity2" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><strong>Date</strong>&nbsp;&nbsp;<label id="LblDate2" runat="server"></label></td>
+                                    <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="Label5" runat="server"></label></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Machine</strong>&nbsp;&nbsp;<label id="Label6" runat="server"></label></td>
+                                    <td><strong>Made in Dublin VA</strong></td>
+                                    <td><strong>Operator</strong>&nbsp;&nbsp;<label id="Label7" runat="server"></label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div id="MyEtiquetaDrop" style="display: none; width: 6in; height: 4in; border: solid 1px;">
                 <table style="margin: auto">
@@ -647,7 +740,7 @@
             divTableWarehouse.innerHTML = '';
             $.ajax({
                 type: "POST",
-                async:false,
+                async: false,
                 url: "PickingConsignmentMaterial.aspx/GetAllsPAlletsPending",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
@@ -923,7 +1016,7 @@
                     Data = "{'CWAR':'" + lblWare.innerHTML.trim() + "','LOCA':'" + txLoca.value.trim().toUpperCase() + "'}";
                     EventoAjax(Method, Data, SucceessVerifyLocation)
                 }
-            },2000);
+            }, 2000);
         }
 
         var SucceessVerifyLocation = function (r) {
@@ -984,70 +1077,65 @@
                 success: function (response) {
                     var myObj = JSON.parse(response.d)
                     if (myObj.Error == false) {
-                        ////window.location = "/WebPages/Login/whMenuI.aspx";
-                        var newCant = parseFloat($("#Contenido_lblQuantity").val());
-                        var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-
-                        $('#Contenido_CBPalletNO').attr("src", myObj.PAID_OLD_URL);
-                        $('#Contenido_CBItem').attr("src", myObj.ITEM_URL);
-                        //$('#lblItemDesc').html($('#Contenido_lblItemDesc').html());
-                        $('#Contenido_CBQuantity').attr("src", myObj.QTYC_URL);
-                        $('#LblUnit').html($('#Contenido_lblQuantityDesc').html());
-
-                        $('#Contenido_CBLot').attr("src", myObj.CLOT_URL);
-                        if (myObj.CLOT_URL != undefined) {
-                            myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot').hide() : $('#Contenido_CBLot').show();
-                        }
-                        //$('#LblDate').html();
-
-                        $('#Contenido_CBPalletNO2').attr("src", myObj.PAID_URL);
-                        $('#Contenido_CBItem2').attr("src", myObj.ITEM_URL);
-                        $('#lblItemDesc2').html($('#Contenido_lblItemDesc').html());
-                        $('#Contenido_CBQuantity2').attr("src", myObj.QTYC1_URL);
-                        $('#LblUnit2').html($('#Contenido_lblQuantityDesc').html());
-
-                        $('#Contenido_CBLot2').attr("src", myObj.CLOT_URL);
-                        if (myObj.CLOT_URL != undefined) {
-                            myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot2').hide() : $('#Contenido_CBLot2').show();
-                        }
-                        //$('#LblDate2').html();
-                        var newCant = parseFloat($("#Contenido_lblQuantity").val());
-                        var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-                        alert("Information saved successfully");
-                        //console.log(myObj.urpt);
-
                         if (myObj.qtyaG > 0) {
-                            printDiv("MyEtiqueta");
+                            //    printDiv("MyEtiqueta");
+                            myLabelFrame = document.getElementById('myLabelFrame');
+                            myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
                         }
+                        //var newCant = parseFloat($("#Contenido_lblQuantity").val());
+                        //var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
 
-                        $('#Contenido_lblPalletID').html("");
-                        $('#Contenido_lblItemID').html("");
-                        $('#Contenido_LblLotId').html("");
-                        $('#Contenido_lblWarehouse').html("");
-                        $('#Contenido_lbllocation').html("");
-                        $('#Contenido_lblQuantity').html("");
-                        $('#Contenido_lblItemDesc').html("");
-                        $('#Contenido_lblWareDescr').html("");
-                        $('#Contenido_lblQuantityDesc').html("");
-                        $('#Contenido_txtPalletID').val("");
-                        $('#txtlocation').val("");
+                        //$('#Contenido_CBPalletNO').attr("src", myObj.PAID_OLD_URL);
+                        //$('#Contenido_CBItem').attr("src", myObj.ITEM_URL);
+                        //$('#Contenido_CBQuantity').attr("src", myObj.QTYC_URL);
+                        //$('#LblUnit').html($('#Contenido_lblQuantityDesc').html());
 
+                        //$('#Contenido_CBLot').attr("src", myObj.CLOT_URL);
+                        //if (myObj.CLOT_URL != undefined) {
+                        //    myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot').hide() : $('#Contenido_CBLot').show();
+                        //}
+
+                        //$('#Contenido_CBPalletNO2').attr("src", myObj.PAID_URL);
+                        //$('#Contenido_CBItem2').attr("src", myObj.ITEM_URL);
+                        //$('#lblItemDesc2').html($('#Contenido_lblItemDesc').html());
+                        //$('#Contenido_CBQuantity2').attr("src", myObj.QTYC1_URL);
+                        //$('#LblUnit2').html($('#Contenido_lblQuantityDesc').html());
+
+                        //$('#Contenido_CBLot2').attr("src", myObj.CLOT_URL);
+                        //if (myObj.CLOT_URL != undefined) {
+                        //    myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot2').hide() : $('#Contenido_CBLot2').show();
+                        //}
+
+                        //var newCant = parseFloat($("#Contenido_lblQuantity").val());
+                        //var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
+                        alert("Information saved successfully");
+                        //$('#Contenido_lblPalletID').html("");
+                        //$('#Contenido_lblItemID').html("");
+                        //$('#Contenido_LblLotId').html("");
+                        //$('#Contenido_lblWarehouse').html("");
+                        //$('#Contenido_lbllocation').html("");
+                        //$('#Contenido_lblQuantity').html("");
+                        //$('#Contenido_lblItemDesc').html("");
+                        //$('#Contenido_lblWareDescr').html("");
+                        //$('#Contenido_lblQuantityDesc').html("");
+                        //$('#Contenido_txtPalletID').val("");
+                        //$('#txtlocation').val("");
                         selectPicksPending();
 
                     }
                     else {
                         alert(myObj.errorMsg);
-                        $('#Contenido_lblPalletID').html("");
-                        $('#Contenido_lblItemID').html("");
-                        $('#Contenido_LblLotId').html("");
-                        $('#Contenido_lblWarehouse').html("");
-                        $('#Contenido_lbllocation').html("");
-                        $('#Contenido_lblQuantity').html("");
-                        $('#Contenido_lblItemDesc').html("");
-                        $('#Contenido_lblWareDescr').html("");
-                        $('#Contenido_lblQuantityDesc').html("");
-                        $('#Contenido_txtPalletID').val("");
-                        $('#txtlocation').val("");
+                        //$('#Contenido_lblPalletID').html("");
+                        //$('#Contenido_lblItemID').html("");
+                        //$('#Contenido_LblLotId').html("");
+                        //$('#Contenido_lblWarehouse').html("");
+                        //$('#Contenido_lbllocation').html("");
+                        //$('#Contenido_lblQuantity').html("");
+                        //$('#Contenido_lblItemDesc').html("");
+                        //$('#Contenido_lblWareDescr').html("");
+                        //$('#Contenido_lblQuantityDesc').html("");
+                        //$('#Contenido_txtPalletID').val("");
+                        //$('#txtlocation').val("");
 
                         selectPicksPending();
 

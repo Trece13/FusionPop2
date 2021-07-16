@@ -13,13 +13,13 @@ namespace whusap.WebPages.WorkOrders {
     public partial class PickingConsignmentMaterial {
         
         /// <summary>
-        /// CBPalletNO control.
+        /// lblItemDesc control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBPalletNO;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblItemDesc;
         
         /// <summary>
         /// CBItem control.
@@ -31,31 +31,76 @@ namespace whusap.WebPages.WorkOrders {
         protected global::System.Web.UI.HtmlControls.HtmlImage CBItem;
         
         /// <summary>
-        /// CBQuantity control.
+        /// CBPalletNO control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBQuantity;
+        protected global::System.Web.UI.HtmlControls.HtmlImage CBPalletNO;
         
         /// <summary>
-        /// CBLot control.
+        /// LblLotId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBLot;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblLotId;
         
         /// <summary>
-        /// CBPalletNO2 control.
+        /// LblQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBPalletNO2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblQuantity;
+        
+        /// <summary>
+        /// LblDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblDate;
+        
+        /// <summary>
+        /// lblPallet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPallet;
+        
+        /// <summary>
+        /// lblMachine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMachine;
+        
+        /// <summary>
+        /// lblOperator control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOperator;
+        
+        /// <summary>
+        /// lblItemDesc2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblItemDesc2;
         
         /// <summary>
         /// CBItem2 control.
@@ -67,22 +112,67 @@ namespace whusap.WebPages.WorkOrders {
         protected global::System.Web.UI.HtmlControls.HtmlImage CBItem2;
         
         /// <summary>
-        /// CBQuantity2 control.
+        /// CBPalletNO2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBQuantity2;
+        protected global::System.Web.UI.HtmlControls.HtmlImage CBPalletNO2;
         
         /// <summary>
-        /// CBLot2 control.
+        /// LblLotId2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage CBLot2;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblLotId2;
+        
+        /// <summary>
+        /// LblQuantity2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblQuantity2;
+        
+        /// <summary>
+        /// LblDate2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl LblDate2;
+        
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label5;
+        
+        /// <summary>
+        /// Label6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label6;
+        
+        /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Label7;
         
         /// <summary>
         /// bcPick control.

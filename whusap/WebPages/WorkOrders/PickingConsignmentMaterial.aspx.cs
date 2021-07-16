@@ -771,6 +771,19 @@ namespace whusap.WebPages.WorkOrders
 
                             if (validateSave > 0 && Convert.ToDecimal(qtyaG) != 0)
                             {
+                                HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
+                                HttpContext.Current.Session["codePaid"] = PAID;
+                                HttpContext.Current.Session["codePaid2"] = MyObj.sqnb;
+                                HttpContext.Current.Session["Lot"] = CLOT;
+                                HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
+                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
+                                HttpContext.Current.Session["Date"] = MyObj.date;
+                                HttpContext.Current.Session["Pallet"] = MyObj.sqnb;
+                                HttpContext.Current.Session["Machine"] = "";
+                                HttpContext.Current.Session["Operator"] = MyObj.logn;
+                                HttpContext.Current.Session["Reprint"] = "no";
+                                HttpContext.Current.Session["AutoPrint"] = "yes";
+
                                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
                                 MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                                 MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
@@ -883,6 +896,20 @@ namespace whusap.WebPages.WorkOrders
 
                             if (validateSave > 0 && Convert.ToDecimal(qtyaG) != 0)
                             {
+                                HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
+                                HttpContext.Current.Session["codePaid"] = MyObj.sqnb;
+                                HttpContext.Current.Session["codePaid2"] = PAID;
+                                HttpContext.Current.Session["Lot"] = CLOT;
+                                HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
+                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
+                                HttpContext.Current.Session["Date"] = MyObj.date;
+                                HttpContext.Current.Session["Pallet"] = MyObj.sqnb;
+                                HttpContext.Current.Session["Machine"] = "";
+                                HttpContext.Current.Session["Operator"] = MyObj.logn;
+                                HttpContext.Current.Session["Reprint"] = "no";
+
+                                HttpContext.Current.Session["AutoPrint"] = "yes";
+
                                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
                                 MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                                 MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
@@ -973,6 +1000,19 @@ namespace whusap.WebPages.WorkOrders
 
                             if (Insertsucces && qtyt_act != 0)
                             {
+                                HttpContext.Current.Session["codeMaterial"] =   MyObj.ITEM;
+                                HttpContext.Current.Session["codePaid"] = PAID;
+                                HttpContext.Current.Session["codePaid2"] = MyObj.PAID;
+                                HttpContext.Current.Session["Lot"]          =   MyObj.CLOT;
+                                HttpContext.Current.Session["Quantity"]     =   MyObj.QTYC;
+                                HttpContext.Current.Session["Quantity2"]     =  MyObj.qtyaG;
+                                HttpContext.Current.Session["Date"]         =   MyObj.DATE;
+                                HttpContext.Current.Session["Pallet"]       =   MyObj.PAID;
+                                HttpContext.Current.Session["Machine"]      =   "";
+                                HttpContext.Current.Session["Operator"]     =   MyObj.LOGN;
+                                HttpContext.Current.Session["Reprint"] = "no";
+                                HttpContext.Current.Session["AutoPrint"] = "yes";
+
                                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
                                 MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                                 MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
