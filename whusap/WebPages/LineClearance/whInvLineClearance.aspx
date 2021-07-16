@@ -155,7 +155,7 @@
                 Width="134px" Height="27px" OnClick="btnSave_Click" />
         </span>
     </div>
-    <div style="height: 10px; margin-bottom: 200px" align="center">
+    <div style="height: 10px; margin-bottom:700px" align="center">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
                 <asp:GridView ID="grdRecords" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
@@ -191,9 +191,9 @@
                             ControlStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
                             <ItemTemplate>
                                 <asp:TextBox runat="server" ID="toReturn" type="number" Width="10%" step="any"/>
-<%--                                <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="toReturn"
-                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="(\d{1,3}(,\d{3})*\.\d{2})|(\d+(\.\d{2})?)"
-                                    Display="Dynamic" ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" />--%>
+                               <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="toReturn"
+                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="^\d+$"
+                                    Display="Dynamic" ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" />
                                 <asp:CompareValidator ID="validateQuantity" runat="server" Operator="LessThanEqual"
                                     controltovalidate="toReturn" controltocompare="ActualQty"
                                     Display="Dynamic" Type="Double" SetFocusOnError="true" ErrorMessage="Quantity to return cannot be greater than Actual Quantity"

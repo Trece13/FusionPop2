@@ -120,7 +120,6 @@ namespace whusa.DAL
                     strCondicion = " WHERE ROWID = '" + reg.idrecord + "'";
                     parametrosIn = AdicionaParametrosComunesUpdate(reg);
                     retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia + strCondicion, ref parametersOut, parametrosIn, false);
-
                     //Requerimiento No. 46122.
                     //Insertar en la tabla ticol080 - Comentado por nuevos requerimientos 
                     //CChaverra 28/07/2017 - 09/03/2017

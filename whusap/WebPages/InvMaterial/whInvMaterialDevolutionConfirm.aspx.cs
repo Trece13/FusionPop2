@@ -33,8 +33,8 @@ namespace whusap.WebPages.InvMaterial
 
         protected void Page_Load(object sender, EventArgs e)
             {               
-                grdRecords.DataSource = null;
-                grdRecords.DataBind();
+                //grdRecords.DataSource = null;
+                //grdRecords.DataBind();
                 txtPalletId.Focus();
                 Page.Form.DefaultButton = btnSend.UniqueID;
 
@@ -150,10 +150,7 @@ namespace whusap.WebPages.InvMaterial
                             //Insertar en la tabla ticol080
                             //CChaverra 28/07/2017
                             obj.user = Session["user"].ToString();
-                            parameterCollection.Add(obj);
-
-                            
-
+                            parameterCollection.Add(obj);                       
                         }
                     }
                 }
