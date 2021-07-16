@@ -33,8 +33,7 @@ namespace whusap.WebPages.InvMaterial
 
         protected void Page_Load(object sender, EventArgs e)
             {               
-                grdRecords.DataSource = null;
-                grdRecords.DataBind();
+                
                 txtPalletId.Focus();
                 Page.Form.DefaultButton = btnSend.UniqueID;
 
@@ -46,6 +45,8 @@ namespace whusap.WebPages.InvMaterial
                 
                 if (!IsPostBack)
                 {
+                    grdRecords.DataSource = null;
+                    grdRecords.DataBind();
                     txtPalletId.Text = string.Empty;
                     formName = Request.Url.AbsoluteUri.Split('/').Last();
                     if (formName.Contains('?'))
