@@ -120,12 +120,12 @@
             };
 
             function fun_AllowOnlyAmountAndDot(txt) {
-                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+                if (event.keyCode > 47 && event.keyCode < 58) {
                     return true;
                 }
                 else {
                     event.keyCode = 0;
-                    alert("Only Numbers with dot allowed !!");
+                    alert("Only Numbers allowed !!");
                     return false;
                 }
             };
