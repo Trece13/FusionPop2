@@ -774,7 +774,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                 HttpContext.Current.Session["codePaid"] = PAID;
                                 HttpContext.Current.Session["codePaid2"] = MyObj.sqnb;
-                                HttpContext.Current.Session["Lot"] = CLOT;
+                                HttpContext.Current.Session["Lot"] = ORNO;
                                 HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.date;
@@ -899,7 +899,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                 HttpContext.Current.Session["codePaid"] = MyObj.sqnb;
                                 HttpContext.Current.Session["codePaid2"] = PAID;
-                                HttpContext.Current.Session["Lot"] = CLOT;
+                                HttpContext.Current.Session["Lot"] = ORNO;
                                 HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.date;
