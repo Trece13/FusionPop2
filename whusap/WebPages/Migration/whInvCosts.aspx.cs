@@ -227,10 +227,6 @@ namespace whusap.WebPages.Migration
                     var stock = LstTable[i].STOCK.ToString().Trim();
                     var consultaRegistro = _idaltticol080.findRecordByOrnoPono(ref orno, ref pono, ref strError);
 
-
-
-
-
                     Ent_tticol080 data080 = new Ent_tticol080()
                     {
                         orno = orno,
@@ -274,17 +270,33 @@ namespace whusap.WebPages.Migration
                         List<Ent_tticol080> lista = new List<Ent_tticol080>();
                         lista.Add(data080);
                         var tag = String.Empty;
-                        var validInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref tag);
-
-                        if (validInsert > 0)
+                        if (consultaRegistro.Rows.Count > 0)
                         {
-                            lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
-                            divBtnGuardar.Visible = false;
+                            var validUpdate = _idaltticol080.ActualizarRegistros(ref lista, ref strError, ref tag);
+                            if (validUpdate > 0)
+                            {
+                                lblConfirm.Text += "[" + item + "]" + mensajes("msjupdate") + "<br/>";
+                                divBtnGuardar.Visible = false;
+                            }
+                            else
+                            {
+                                lblError.Text += "[" + item + "]" + mensajes("errorsave") + "<br/>";
+
+                            }
                         }
                         else
                         {
-                            lblError.Text += "[" + item + "]" + mensajes("errorsave") + "<br/>";
+                            var validInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref tag);
+                            if (validInsert > 0)
+                            {
+                                lblConfirm.Text += "[" + item + "]" + mensajes("msjsave") + "<br/>";
+                                divBtnGuardar.Visible = false;
+                            }
+                            else
+                            {
+                                lblError.Text += "[" + item + "]" + mensajes("errorsave") + "<br/>";
 
+                            }
                         }
                         //}
                     }

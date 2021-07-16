@@ -30,6 +30,20 @@ namespace whusa.Interfases
             }
         }
 
+        public int ActualizarRegistros(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualizarRegistros(ref parametros, ref strError, ref strTagId);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+        
         public int insertarRegistro_regrindM(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
         {
             int retorno = -1;

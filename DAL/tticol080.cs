@@ -81,6 +81,55 @@ namespace whusa.DAL
 
         }
 
+        public int ActualizarRegistros(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            //Ent_twhcol018 obj018;
+            //twhcol018 dal018 = new twhcol018();
+
+            try
+            {
+                //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+                //int cant = parametros.Count;
+
+                foreach (Ent_tticol080 reg in parametros)
+                {
+                    //obj018 = new Ent_twhcol018();
+                    //parametrosIn = AdicionaParametrosComunes(reg);
+
+                    method = MethodBase.GetCurrentMethod();
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$ORNO", reg.orno);
+                    paramList.Add(":T$PONO", reg.pono);
+                    paramList.Add(":T$CWAR", reg.cwar);
+                    paramList.Add(":T$ITEM", reg.item.Trim());
+                    paramList.Add(":T$QUNE", reg.qune);//En ambiente local no funciona . con solo esta tabla(080), este funcionamiento es correcto en fusionpub.
+                    paramList.Add(":T$LOGN", reg.logn);
+                    paramList.Add(":T$DATE", reg.date);
+                    paramList.Add(":T$PROC", reg.proc);
+                    paramList.Add(":T$REFCNTD", reg.refcntd);
+                    paramList.Add(":T$REFCNTU", reg.refcntu);
+                    paramList.Add(":T$CLOT", reg.clot);
+                    paramList.Add(":T$OORG", reg.oorg);
+                    paramList.Add(":T$PICK", reg.pick);
+                    //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+                }
+                return Convert.ToInt32(retorno);
+            }
+
+            catch (Exception ex)
+            {
+                strError = "Error when inserting data [tticol080]. Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return Convert.ToInt32(retorno);
+
+        }
+
         public int insertarRegistro_regrindM(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
         {
             method = MethodBase.GetCurrentMethod();

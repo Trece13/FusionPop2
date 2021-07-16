@@ -5124,7 +5124,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="updateRecordCosts">
         <stringSQL>
-          UPDATE {2} SET T$QUNE = [:T$QUNE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
+          UPDATE {2} SET T$QUNE = T$QUNE + [:T$QUNE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
+          WHERE T$ORNO = '[:T$ORNO]' AND T$PONO = '[:T$PONO]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizarRegistros">
+        <stringSQL>
+          UPDATE {2} SET T$QUNE = T$QUNE + [:T$QUNE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
           WHERE T$ORNO = '[:T$ORNO]' AND T$PONO = '[:T$PONO]'
         </stringSQL>
       </operationName>
