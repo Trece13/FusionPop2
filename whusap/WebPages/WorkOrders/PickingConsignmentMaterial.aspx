@@ -77,7 +77,7 @@
             //            window.close();
             //            return true;
 
-            var mywindow = window.open('','PRINT');
+            var mywindow = window.open('', 'PRINT');
 
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
             mywindow.document.write('</head><body >');
@@ -88,7 +88,7 @@
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
 
-            setTimeout(function(){mywindow.print()},3000);
+            setTimeout(function () { mywindow.print() }, 3000);
 
             return true;
         };
@@ -456,6 +456,9 @@
     </div>
     <script>
         var timer;
+        var skip = false;
+        var drop = false;
+        var existPalletsPick = false;
         function stoper() {
             clearTimeout(timer);
         }
@@ -542,8 +545,8 @@
             stoper();
             timer = setTimeout(function () {
                 var CurrentPaid = lblPaid.innerHTML.trim();
-                var NewPaid = txPaid.value.trim();
-                if (CurrentPaid == NewPaid) {
+                var NewPaid = txPaid.value.trim().toUpperCase();
+                if (CurrentPaid.trim().toUpperCase() == NewPaid.trim().toUpperCase()) {
                     paidValid();
                     $("#lblError").html("");
                 }
@@ -555,7 +558,7 @@
                     EventoAjax(Method, Data, PalletIDSuccess)
                 }
             }, 1500);
-            
+
         }
 
         var PalletIDSuccess = function (r) {
@@ -602,7 +605,6 @@
             var bodyRows = ""
             $.ajax({
                 type: "POST",
-
                 url: "PickingConsignmentMaterial.aspx/ShowCurrentOptionsItem",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
@@ -610,27 +612,29 @@
                 success: function (response) {
                     myObj = JSON.parse(response.d);
                     //window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
-                    for (var i = 0; i < myObj.length; i++) {
-                        bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                    if (myObj.length > 0 && existPalletsPick == true) {
+                        for (var i = 0; i < myObj.length; i++) {
+                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                        }
+                        var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
+                                                    "<thead>" +
+                                                      "<tr>" +
+                                                        "<th scope='col'>Pallet</th>" +
+                                                        "<th scope='col'>Location</th>" +
+                                                        "<th scope='col'>Item</th>" +
+                                                        "<th scope='col'>Description</th>" +
+                                                        "<th scope='col'>Quantity</th>" +
+                                                        "<th scope='col'>Unit</th>" +
+                                                    "</tr>" +
+                                                   "</thead>" +
+                                                   "<tbody>" +
+                                                   bodyRows
+                        "</tbody>" +
+                                                "</table>";
+
+
+                        $("#divTableItem").append(tableOptions);
                     }
-                    var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
-                                                "<thead>" +
-                                                  "<tr>" +
-                                                    "<th scope='col'>Pallet</th>" +
-                                                    "<th scope='col'>Location</th>" +
-                                                    "<th scope='col'>Item</th>" +
-                                                    "<th scope='col'>Description</th>" +
-                                                    "<th scope='col'>Quantity</th>" +
-                                                    "<th scope='col'>Unit</th>" +
-                                                "</tr>" +
-                                               "</thead>" +
-                                               "<tbody>" +
-                                               bodyRows
-                    "</tbody>" +
-                                            "</table>";
-
-
-                    $("#divTableItem").append(tableOptions);
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -643,7 +647,7 @@
             divTableWarehouse.innerHTML = '';
             $.ajax({
                 type: "POST",
-
+                async:false,
                 url: "PickingConsignmentMaterial.aspx/GetAllsPAlletsPending",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
@@ -652,38 +656,48 @@
                     var dropPending = false;
                     myObj = JSON.parse(response.d);
                     window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
-                    for (var i = 0; i < myObj.length; i++) {
+                    if (myObj.length > 0) {
+                        existPalletsPick = true;
 
-                        if (myObj[i].T$STAT == 1) {
-                            bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
+                        for (var i = 0; i < myObj.length; i++) {
+
+                            if (myObj[i].T$STAT == 1) {
+                                bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
+                            }
+                            else {
+                                dropPending = true;
+                                bodyRows += "<tr onClick='Drop(this,false)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
+                            }
                         }
-                        else {
-                            dropPending = true;
-                            bodyRows += "<tr onClick='Drop(this,false)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
-                        }
+                        var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
+                                                    "<thead>" +
+                                                      "<tr>" +
+                                                        "<th scope='col'>Work Order</th>" +
+                                                        "<th scope='col'>Machine</th>" +
+                                                        "<th scope='col'>Warehouse</th>" +
+                                                        "<th scope='col'>Item</th>" +
+                                                        "<th scope='col'>Description</th>" +
+                                                        "<th scope='col'>Quantity</th>" +
+                                                        "<th scope='col'>Unit</th>" +
+                                                        "<th scope='col'>Pallet ID</th>" +
+                                                        "<th scope='col'></th>" +
+                                                    "</tr>" +
+                                                   "</thead>" +
+                                                   "<tbody>" +
+                                                   bodyRows +
+                        "</tbody>" +
+                                                "</table>";
+                        dropPending == true ? tableOptions += "<input type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "' value ='End Picking'>" : tableOptions;
+
+
+                        $("#divTableWarehouse").append(tableOptions);
                     }
-                    var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
-                                                "<thead>" +
-                                                  "<tr>" +
-                                                    "<th scope='col'>Work Order</th>" +
-                                                    "<th scope='col'>Machine</th>" +
-                                                    "<th scope='col'>Warehouse</th>" +
-                                                    "<th scope='col'>Item</th>" +
-                                                    "<th scope='col'>Description</th>" +
-                                                    "<th scope='col'>Quantity</th>" +
-                                                    "<th scope='col'>Unit</th>" +
-                                                    "<th scope='col'>Pallet ID</th>" +
-                                                    "<th scope='col'></th>" +
-                                                "</tr>" +
-                                               "</thead>" +
-                                               "<tbody>" +
-                                               bodyRows +
-                    "</tbody>" +
-                                            "</table>";
-                    dropPending == true ? tableOptions += "<input type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "' value ='End Picking'>" : tableOptions;
-
-
-                    $("#divTableWarehouse").append(tableOptions);
+                    else if (drop == false) {
+                        existPalletsPick = false;
+                        alert("No more pickings availables for this warehouse");
+                        divTableWarehouse.innerHTML = '';
+                        divTableItem.innerHTML = '';
+                    }
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -692,10 +706,12 @@
         }
 
         var loadPage = function () {
+            skip = false;
             EventoAjax("loadPage", "{'CWAR':'" + ddWare.value + "'}", LoadPageSuccess);
         }
 
         var LoadPageSuccess = function (r) {
+            ClearFormPicking();
             var divTables = document.getElementById('divTables');
             ddWare.value = 0;
             $("#btnStarPicking").hide(500);
@@ -723,9 +739,14 @@
                     divTables.classList.remove("col-7");
                     divTables.classList.add("col-12");
                 }
-
-                ShowCurrentOptionsItem();
-                ShowCurrentOptionsWarehouse();
+                if (skip == false) {
+                    ShowCurrentOptionsWarehouse();
+                    ShowCurrentOptionsItem();
+                }
+                else {
+                    divTableWarehouse.innerHTML = '';
+                    divTableItem.innerHTML = '';
+                }
             }
             else {
                 $("#formPicking").hide(100);
@@ -783,6 +804,7 @@
         }
 
         var selectPicksPending = function (e) {
+            skip = false;
             ClearFormPicking();
             if (e != undefined) {
                 EventoAjax("ClickPickingPending", "{'PICK':'" + e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
@@ -838,23 +860,27 @@
                     EventoAjax("Eliminar307", "{}", null);
                 }
             }
-            
+
         }
 
         var DropMultipleSuccess = function (r) {
             if (r.d != "") {
+                drop = true;
                 $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
                 printDiv("MyEtiquetaDrop");
+                selectPicksPending();
             }
-            
+
         }
 
         var DropSuccess = function (r) {
             if (r.d != "") {
+                drop = true;
                 $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
                 $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                 $("#lbPaid").html(localStorage.getItem('paid'))
                 printDiv("MyEtiquetaDrop");
+                selectPicksPending();
             }
         }
 
@@ -882,19 +908,22 @@
 
         var VerifyLocation = function () {
             var CurrentLoca = lblLoca.innerHTML.trim();
-            var NewLoca = txLoca.value.trim();
-            if (CurrentLoca == NewLoca) {
-                locaValid();
-                $('#lblError').html('');
-                DisttinctLocaValid = false;
-            }
-            else {
-                console.log("Pallet NO Igual");
-                $('#lblError').html('')
-                Method = "VerificarLocate"
-                Data = "{'CWAR':'" + lblWare.innerHTML.trim() + "','LOCA':'" + txLoca.value.trim() + "'}";
-                EventoAjax(Method, Data, SucceessVerifyLocation)
-            }
+            stoper();
+            timer = setTimeout(function () {
+                var NewLoca = txLoca.value.trim().toUpperCase();
+                if (CurrentLoca.trim() == NewLoca.trim()) {
+                    locaValid();
+                    $('#lblError').html('');
+                    DisttinctLocaValid = false;
+                }
+                else {
+                    console.log("Pallet NO Igual");
+                    $('#lblError').html('')
+                    Method = "VerificarLocate"
+                    Data = "{'CWAR':'" + lblWare.innerHTML.trim() + "','LOCA':'" + txLoca.value.trim().toUpperCase() + "'}";
+                    EventoAjax(Method, Data, SucceessVerifyLocation)
+                }
+            },2000);
         }
 
         var SucceessVerifyLocation = function (r) {
@@ -933,6 +962,7 @@
 
         }
         var SkipPicking = function () {
+            skip = true;
             EventoAjax("SkipPicking", "{}", LoadPageSuccess);
         }
         var Confirm = function () {
