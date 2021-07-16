@@ -192,18 +192,25 @@ namespace whusap.WebPages.Balance
 
             //string RollWinder = txtRollWinder.Text.ToString().ToUpper();
             string RollWinder = ddRollWinder.Text;
-            if (RollWinder.Trim() == "1" || RollWinder.Trim() == "2" || RollWinder.Trim() == "3" || RollWinder.Trim() == "4")
+            if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
             {
+                if (RollWinder.Trim() == "1" || RollWinder.Trim() == "2" || RollWinder.Trim() == "3" || RollWinder.Trim() == "4")
+                {
 
+                }
+                else
+                {
+                    lblError.Text = mensajes("Pleaseselectrollwinder");
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+                //            Session["rollwinder"] = txtRollWinder.Text.ToString();
+                Session["rollwinder"] = RollWinder;
             }
             else
             {
-                lblError.Text = mensajes("Pleaseselectrollwinder");
-                lblError.ForeColor = System.Drawing.Color.Red;
-                return;
+                Session["rollwinder"] = "";
             }
-            //            Session["rollwinder"] = txtRollWinder.Text.ToString();
-            Session["rollwinder"] = RollWinder;
 
             if (!convert || cantidad < 1)
             {
@@ -464,7 +471,14 @@ namespace whusap.WebPages.Balance
             Session["Date"] = reg["FECHA"].ToString();
             Session["Machine"]      =   idal022.getMachine(reg["ORDEN"].ToString(), obj022.mitm,ref strError);
             Session["Operator"]     =   reg["USUARIO"].ToString();
-            Session["Winder"]       = RollWinder;
+            if (_tipoFormulario == "GRINDER")
+            {
+                Session["Winder"] = "";
+            }
+            else
+            {
+                Session["Winder"] = RollWinder;
+            }
             Session["Pallet"]       =   reg["SECUENCIA"].ToString();
 
             StringBuilder script = new StringBuilder();

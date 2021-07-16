@@ -3177,19 +3177,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="lineClearance_listaRegistrosOrden_Param">
         <stringSQL>
-          SELECT GLOBAL.PDNO,NVL(TB2.REQT,0) AS REQT1,GLOBAL.ORDEN,GLOBAL.ALMACEN,GLOBAL.LOTE,GLOBAL.ARTICULO,GLOBAL.DESCRIPCION,GLOBAL.UNIDAD,GLOBAL.CANT_EST,(GLOBAL.ACT_CANT-NVL(TB2.REQT,0)) AS ACT_CANT,GLOBAL.ISS_WAREH,GLOBAL.FACTOR,GLOBAL.IND_LOTE,GLOBAL.ID
+          SELECT GLOBAL.PDNO,NVL(TB2.REQT,0) AS REQT1,GLOBAL.ORDEN,GLOBAL.ALMACEN,GLOBAL.LOTE,GLOBAL.ARTICULO,GLOBAL.DESCRIPCION,GLOBAL.UNIDAD,GLOBAL.CANT_EST,(GLOBAL.ACT_CANT-NVL(TB2.REQT,0)-NVL(TB3.QTYLC,0)) AS ACT_CANT,GLOBAL.ISS_WAREH,GLOBAL.FACTOR,GLOBAL.IND_LOTE,GLOBAL.ID
           FROM(SELECT DISTINCT rec.t$pdno PDNO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
           art.t$dsca DESCRIPCION, art.t$cuni UNIDAD, CANT_EST, ACT_CANT,
           '' ISS_WAREH, 0 FACTOR, art.t$kltc IND_LOTE, '' ID
-          FROM BAAN.tticst001140 rec
-          INNER JOIN BAAN.ttcibd001140 art ON rec.t$sitm = art.t$item
-          INNER JOIN BAAN.ttcibd200140 ibd200 ON art.t$item = ibd200.t$item
-          INNER JOIN BAAN.ttisfc001140 sfc ON rec.t$pdno = sfc.t$pdno
-          RIGHT JOIN ( SELECT rec.t$pdno ORDEN, rec.t$sitm ARTICULO, SUM(rec.t$ques) CANT_EST, sum(rec.t$qucs) ACT_CANT FROM BAAN.tticst001140 rec WHERE TRIM(rec.t$pdno)='[p1]'  GROUP BY rec.t$pdno, rec.t$sitm) TB1 ON TRIM(TB1.ARTICULO) = TRIM(rec.t$sitm)
+          FROM {0}.tticst001{1} rec
+          INNER JOIN {0}.ttcibd001{1} art ON rec.t$sitm = art.t$item
+          INNER JOIN {0}.ttcibd200{1} ibd200 ON art.t$item = ibd200.t$item
+          INNER JOIN {0}.ttisfc001{1} sfc ON rec.t$pdno = sfc.t$pdno
+          RIGHT JOIN ( SELECT rec.t$pdno ORDEN, rec.t$sitm ARTICULO, SUM(rec.t$ques) CANT_EST, sum(rec.t$qucs) ACT_CANT FROM {0}.tticst001{1} rec WHERE TRIM(rec.t$pdno)='[p1]'  GROUP BY rec.t$pdno, rec.t$sitm) TB1 ON TRIM(TB1.ARTICULO) = TRIM(rec.t$sitm)
           AND sfc.t$osta in('5','7','9')
           AND TRIM(rec.t$pdno)='[p1]') GLOBAL
-          lEFT JOIN ( select T$PONO, T$PDNO,T$ITEM,sum(T$REQT) REQT from baan.tticol125140 GROUP BY T$PDNO,T$PONO, T$ITEM) TB2 ON TRIM(TB2.T$ITEM) = TRIM(GLOBAL.ARTICULO) and TRIM(TB2.T$PDNO) = TRIM('[p1]')
-
+          lEFT JOIN ( select T$PONO, T$PDNO,T$ITEM,sum(T$REQT) REQT from {0}.tticol125{1} GROUP BY T$PDNO,T$PONO, T$ITEM) TB2 ON TRIM(TB2.T$ITEM) = TRIM(GLOBAL.ARTICULO) and TRIM(TB2.T$PDNO) = TRIM('[p1]')
+          lEFT JOIN ( select T$FPDN, T$ITEM,sum(T$QANA) QTYLC from {0}.tticol090{1} GROUP BY T$FPDN, T$ITEM) TB3 ON TRIM(TB3.T$ITEM) = TRIM(GLOBAL.ARTICULO) and TRIM(TB3.T$FPDN) =TRIM('[p1]')
           <!--SELECT DISTINCT rec.T$PONO PONO,ORDEN, '' ALMACEN, art.t$kltc LOTE, ARTICULO,
           art.t$dsca DESCRIPCION, art.t$cuni UNIDAD, CANT_EST, ACT_CANT,
           '' ISS_WAREH, 0 FACTOR, art.t$kltc IND_LOTE, '' ID

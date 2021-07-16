@@ -26,7 +26,7 @@
             var orden = numeroOrden.substr(9, 1);
             var guion = numeroOrden.substr(9, 1);
             var pallet = numeroOrden.substr(10, 3);
-            if (pallet.match(re)) {
+            //if (pallet.match(re)) {
                 if (numeroOrden != "") {
                     if (numeroOrden.length < 13 || numeroOrden.length > 13) {
                         alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, remember only 13 characters"
@@ -44,13 +44,13 @@
                     }
                 }
             }
-            else {
-                document.getElementById("txtRollNumber").focus();
-                document.getElementById("txtRollNumber").value = "";
-                alert(_idioma == "INGLES" ? "Only numbers allowed on pallet id"
-                                : "Solo se permiten números en el Pallet ID");
-            }
-        }
+//            else {
+//                document.getElementById("txtRollNumber").focus();
+//                document.getElementById("txtRollNumber").value = "";
+//                alert(_idioma == "INGLES" ? "Only numbers allowed on pallet id"
+//                                : "Solo se permiten números en el Pallet ID");
+//            }
+        //}
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
@@ -63,7 +63,7 @@
             </td>
             <td style="width: 250px; padding:5px;">
                 <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtRollNumber" CssClass="TextBoxBig" ClientIDMode="Static" />
+                    <asp:TextBox runat="server" ID="txtRollNumber" CssClass="TextBoxBig" ClientIDMode="Static" Onchange="validarRoll();"/>
                 </span>
             </td>
         </tr>

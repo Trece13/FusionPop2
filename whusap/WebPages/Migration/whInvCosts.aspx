@@ -141,11 +141,30 @@
         };
 
         function fun_AllowOnlyAmountAndDot(txt) {
-            if(txt.getAttribute("unit").trim() == "UN"){
-                    document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(",","").replace(".","");
+            if(txt.getAttribute("unit").trim().toUpperCase() != "KG" && txt.getAttribute("unit").trim() != "LB"){
+                    //document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(",","").replace(".","");
+                if (event.keyCode > 47 && event.keyCode < 58) {
+                    return true;
+                }
+                else {
+                    event.keyCode = 0;
+                    alert("Only Numbers allowed !!");
+                    return false;
+                }
+
             }
             else{
-                document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(',','.');
+                //document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(',','.');
+                
+               if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+
+                    return true;
+                }
+                else {
+                    event.keyCode = 0;
+                    alert("Only Numbers with dot allowed !!");
+                    return false;
+                }
             }
             };
     </script>
