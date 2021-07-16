@@ -43,7 +43,7 @@
         };
 
         function validarCantidadLimiteArticuloMaquina(field,cant_max,cant_reg,index) {
-            
+
             if(field.getAttribute('cantMax').trim() != ""){
                 if(parseFloat(field.getAttribute('cantMax').trim()) >= parseFloat(field.value)){
                     $('#txtQuantityHidden-'+index).val("0");
@@ -111,6 +111,8 @@
             var dataSave = false;
             var mensaje = "";
 
+
+
             for (var i = 0; i < numeroRegistros; i++) {
                 var txtQuantity = $('#txtQuantity-'+i).val();
                 var txtQuantityHidden = $('#txtQuantityHidden-'+i).val();
@@ -141,15 +143,10 @@
         function fun_AllowOnlyAmountAndDot(txt) {
             if(txt.getAttribute("unit").trim() == "UN"){
                     document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(",","").replace(".","");
-                }
-                //if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
-                //    return true;
-                //}
-                //else {
-                //    event.keyCode = 0;
-                //    alert("Only Numbers with dot allowed !!");
-                //    return false;
-                //}
+            }
+            else{
+                document.getElementById(txt.id).value = document.getElementById(txt.id).value.replace(',','.');
+            }
             };
     </script>
 </asp:Content>

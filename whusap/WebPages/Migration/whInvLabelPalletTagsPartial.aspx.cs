@@ -120,15 +120,13 @@ namespace whusap.WebPages.Migration
                     double segTrans = Tans.TotalSeconds;
                     if (segTrans > 20)
                     {
-
-                        Session["TimeClick"] = null;
+                        Session["TimeClick"] = DateTime.Now;
                         Process();
                     }
-
                 }
                 else
                 {
-                    Session["TimeClick"] = localDate;
+                    Session["TimeClick"] = DateTime.Now;
                     Process();
                 }
             }

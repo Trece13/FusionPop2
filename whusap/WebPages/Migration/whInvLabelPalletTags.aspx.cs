@@ -137,14 +137,14 @@ namespace whusap.WebPages.Migration
                     if (segTrans > 20)
                     {
 
-                        Session["TimeClick"] = null;
+                        Session["TimeClick"] = DateTime.Now;
                         Prosess();
                     }
 
                 }
                 else
                 {
-                    Session["TimeClick"] = localDate;
+                    Session["TimeClick"] = DateTime.Now;
                     Prosess();
                 }
             }
