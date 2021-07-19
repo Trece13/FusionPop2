@@ -20,6 +20,7 @@
                 else {
                     event.keyCode = 0;
                     alert("Only Numbers allowed !!");
+                    obj.focus();
                     return false;
                 }
             }
@@ -30,6 +31,7 @@
                 else {
                     event.keyCode = 0;
                     alert("Only Numbers with dot allowed !!");
+                    obj.focus();
                     return false;
                 }
             }

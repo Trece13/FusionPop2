@@ -28,6 +28,7 @@ namespace whusap.WebPages.WorkOrders
         public static string ThequantityassociatetonewpalletisminortooldpalletID = mensajes("ThequantityassociatetonewpalletisminortooldpalletID");
         public static string ThenewpalletIddoesnthaveItemequaltotheoldpalletIditem = mensajes("ThenewpalletIddoesnthaveItemequaltotheoldpalletIditem");
         public static string ThepalletIDDoesntexistorItsinpickingprocess = mensajes("ThepalletIDDoesntexistorItsinpickingprocess");
+        public static string ThepalletIDNotContaenthesameItem = mensajes("ThepalletIDNotContaenthesameItem");
         public static string ThePallethasalreadylocate = mensajes("ThePallethasalreadylocate");
         public static string ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus = mensajes("ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus");
         public static string ThePalletIDdoesnotexist = mensajes("ThePalletIDdoesnotexist");
@@ -350,7 +351,7 @@ namespace whusap.WebPages.WorkOrders
                 tccol307.CWAR = HttpContext.Current.Session["CWARUSING"].ToString();
                 tccol307.STAT_AUX = "1";
                 _idaltccol307.ActualizarTccol307(tccol307);
-                
+
             }
             HttpContext.Current.Session["PICKUSING"] = null;
             HttpContext.Current.Session["CWARUSING"] = null;
@@ -510,6 +511,7 @@ namespace whusap.WebPages.WorkOrders
                         ObjPicking.DESCWRH = DTPalletID.Rows[0]["DESCAW"].ToString();
                         ObjPicking.LOCA = DTPalletID.Rows[0]["ACLO"].ToString();
                         ObjPicking.QTYT = DTPalletID.Rows[0]["QTYT"].ToString();
+                        ObjPicking.QTY = MySessionObjPicking.QTYT.ToString();
                         ObjPicking.UN = DTPalletID.Rows[0]["UNIT"].ToString();
                         ObjPicking.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
                         ObjPicking.CNPK = DTPalletID.Rows[0]["CNPK"].ToString();
@@ -590,11 +592,19 @@ namespace whusap.WebPages.WorkOrders
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             EntidadPicking ObjPicking = new EntidadPicking();
 
-            DataTable DTPalletID = twhcolDAL.VerificarPalletIDItem(PAID_NEW,MySessionObjPicking.ITEM);
+            DataTable DTPalletID = twhcolDAL.VerificarPalletID(PAID_NEW);
             if (DTPalletID.Rows.Count > 0)
             {
-                ObjPicking.error = false;
-                return JsonConvert.SerializeObject(ObjPicking);
+                if (DTPalletID.Rows[0]["ITEM"].ToString().Trim() == MySessionObjPicking.ITEM.ToString().Trim()){
+                    ObjPicking.error = false;
+                    return JsonConvert.SerializeObject(ObjPicking);
+                }
+                else{
+                    ObjPicking.error = true;
+                    ObjPicking.errorMsg = ThepalletIDNotContaenthesameItem;
+                    return JsonConvert.SerializeObject(ObjPicking);
+                }
+                
             }
             else
             {
@@ -1000,16 +1010,16 @@ namespace whusap.WebPages.WorkOrders
 
                             if (Insertsucces && qtyt_act != 0)
                             {
-                                HttpContext.Current.Session["codeMaterial"] =   MyObj.ITEM;
+                                HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
                                 HttpContext.Current.Session["codePaid"] = PAID;
                                 HttpContext.Current.Session["codePaid2"] = MyObj.PAID;
-                                HttpContext.Current.Session["Lot"]          =   MyObj.CLOT;
-                                HttpContext.Current.Session["Quantity"]     =   MyObj.QTYC;
-                                HttpContext.Current.Session["Quantity2"]     =  MyObj.qtyaG;
-                                HttpContext.Current.Session["Date"]         =   MyObj.DATE;
-                                HttpContext.Current.Session["Pallet"]       =   MyObj.PAID;
-                                HttpContext.Current.Session["Machine"]      =   "";
-                                HttpContext.Current.Session["Operator"]     =   MyObj.LOGN;
+                                HttpContext.Current.Session["Lot"] = MyObj.CLOT;
+                                HttpContext.Current.Session["Quantity"] = MyObj.QTYC;
+                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
+                                HttpContext.Current.Session["Date"] = MyObj.DATE;
+                                HttpContext.Current.Session["Pallet"] = MyObj.PAID;
+                                HttpContext.Current.Session["Machine"] = "";
+                                HttpContext.Current.Session["Operator"] = MyObj.LOGN;
                                 HttpContext.Current.Session["Reprint"] = "no";
                                 HttpContext.Current.Session["AutoPrint"] = "yes";
 
@@ -1074,10 +1084,10 @@ namespace whusap.WebPages.WorkOrders
 
                 if (DtPalletsPick.Rows[indexCurrent + 1 == DtPalletsPick.Rows.Count ? 0 : indexCurrent + 1]["T$STAT"].ToString().Trim() == "1" && DtPalletsPick.Rows.Count > 1)
                 {
-                    List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID((DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count-1 ? indexCurrent + 1 : 0]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", (DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count-1 ? indexCurrent + 1: 0]["T$CWAR"].ToString()), (DtPalletsPick.Rows[indexCurrent + 1 == DtPalletsPick.Rows.Count-1 ?  indexCurrent + 1 : 0]["T$PICK"].ToString()));
-                    List<EntidadPicking> LstPallet42PAID = twhcolDAL.ConsultarPalletPicking042PAID((DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count-1 ? indexCurrent + 1 : 0]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", (DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count-1 ?indexCurrent + 1: 0]["T$CWAR"].ToString()), (DtPalletsPick.Rows[indexCurrent + 1 == DtPalletsPick.Rows.Count-1 ?  indexCurrent + 1 : 0]["T$PICK"].ToString()));
+                    List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID((DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", (DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$CWAR"].ToString()), (DtPalletsPick.Rows[indexCurrent + 1 == DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$PICK"].ToString()));
+                    List<EntidadPicking> LstPallet42PAID = twhcolDAL.ConsultarPalletPicking042PAID((DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$PAID"].ToString()), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", (DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$CWAR"].ToString()), (DtPalletsPick.Rows[indexCurrent + 1 == DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$PICK"].ToString()));
                     List<EntidadPicking> LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID((DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$PAID"].ToString()), MySessionObjPicking.WRH, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", (DtPalletsPick.Rows[indexCurrent + 1 <= DtPalletsPick.Rows.Count - 1 ? indexCurrent + 1 : 0]["T$PICK"].ToString()));
-                    
+
                     if (LstPallet22PAID.Count > 0)
                     {
                         HttpContext.Current.Session["MyObjPicking"] = LstPallet22PAID[0];

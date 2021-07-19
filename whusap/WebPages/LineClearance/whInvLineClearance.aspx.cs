@@ -135,6 +135,7 @@ namespace whusap.WebPages.LineClearance
                                                                                                        "{ validaInfo('" + strItem + "' , '1',this); " +
                                                                                                          "validateMov('" + dataCant + "',this.value, '" + objVal.ClientID + "', this);}");
                             ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onkeypress", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["UNIDAD"].ToString().Trim() + "');");
+                            ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onchange", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["UNIDAD"].ToString().Trim() + "');");
                         }
 
                         if (strLote != "1")
