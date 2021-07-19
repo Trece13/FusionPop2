@@ -13,9 +13,25 @@
         }
 
         function verificarDecimal(obj, Unidad) {
-            if (Unidad.toUpperCase() != "KG") {
-                var objControl = document.getElementById(obj.id);
-                objControl.value = objControl.value.replace(".",""); 
+            if (Unidad.toUpperCase() != "KG" && Unidad.toUpperCase() != "LB") {
+                if (event.keyCode > 47 && event.keyCode < 58) {
+                    return true;
+                }
+                else {
+                    event.keyCode = 0;
+                    alert("Only Numbers allowed !!");
+                    return false;
+                }
+            }
+            else {
+                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+                    return true;
+                }
+                else {
+                    event.keyCode = 0;
+                    alert("Only Numbers with dot allowed !!");
+                    return false;
+                }
             }
         }
 
@@ -192,7 +208,7 @@
                             <ItemTemplate>
                                 <asp:TextBox runat="server" ID="toReturn" type="number" Width="10%" step="any"/>
                                <asp:RegularExpressionValidator ID="validateReturn" runat="server" ControlToValidate="toReturn"
-                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="^\d+$"
+                                    ErrorMessage="Only numbers allowed" SetFocusOnError="true" ValidationExpression="^[0-9]+([.][0-9]+)?$"
                                     Display="Dynamic" ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" />
                                 <asp:CompareValidator ID="validateQuantity" runat="server" Operator="LessThanEqual"
                                     controltovalidate="toReturn" controltocompare="ActualQty"
