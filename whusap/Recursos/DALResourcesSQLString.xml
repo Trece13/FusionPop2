@@ -2169,7 +2169,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarRegistrotccol307">
         <stringSQL>
-          SELECT T$USER AS USSR,T$STAT AS STAT,T$PAID AS PAID FROM {0}.ttccol307{1} WHERE T$PAID = '[:PAID]'
+          SELECT T$USER AS USSR,T$STAT AS STAT,T$PAID AS PAID FROM {0}.ttccol307{1} --WHERE T$PAID = '[:PAID]'
+          WHERE T$STAT = 2
         </stringSQL>
       </operationName>
       <operationName name="ActualizarUsuariotccol307">
@@ -3437,11 +3438,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <!-- Smita Ends-->
       <operationName name="ConsultarQtdl">
         <stringSQL>
-          SELECT  REQT+NVL(COL090.T$QANA,0) REQT, PDNO, ITEM
+          SELECT  NVL(REQT,0) REQT, PDNO, ITEM
           FROM
           (
           SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO, T$ITEM
-          )global LEFT JOIN {0}.tticol090{1} col090 on col090.t$FPDN = global.PDNO and col090.t$ITEM = global.ITEM
+          union
+          SELECT SUM(col090.T$QANA) REQT, T$FPDN PDNO, '[T$ITEM]' ITEM FROM {0}.tticol090{1} col090 WHERE T$FPDN = '[T$PDNO]' AND T$ITEM = '[T$ITEM]'  group by T$FPDN, T$ITEM
+          )
+          <!--SELECT  REQT+NVL(COL090.T$QANA,0) REQT, PDNO, ITEM
+          FROM
+          (
+          SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO, T$ITEM
+          )global LEFT JOIN {0}.tticol090{1} col090 on col090.t$FPDN = global.PDNO and col090.t$ITEM = global.ITEM-->
           <!--SELECT SUM(ticol125.T$REQT) REQT FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO-->
         </stringSQL>
       </operationName>

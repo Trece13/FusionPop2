@@ -147,6 +147,7 @@ namespace whusap.WebPages.InvMaterial
                     Ent_tticol125 MyObj = new Ent_tticol125();
                     MyObj.pdno = item["Orden"].ToString();
                     MyObj.pono = Convert.ToInt32(item["Pos"].ToString());
+                    MyObj.item = item["Articulo"].ToString();
 
                     DataTable ResQtdl = idal.ConsultarQtdl(ref MyObj, ref strError);
 
