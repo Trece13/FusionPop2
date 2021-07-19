@@ -291,5 +291,27 @@ namespace whusa.Interfases
             }
             return retorno;
         }
+
+        public DataTable ConsultarTipoWarehouse(string WARE)
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$CWAR", WARE.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return retorno;
+        }
+
     }
 }

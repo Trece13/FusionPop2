@@ -326,10 +326,20 @@
             The Pallet ID is not locate
           </stringMessage>
         </operationName>
-        <operationName name="PalletNotExist">
+        <operationName name="WarehouseNotExist">
           <stringMessage>
-            Pallet ID blocked or doesn't exist
+            Warehouse don't exist
           </stringMessage>
+        </operationName>
+        <operationName name="WarehouseConsigment">
+            <stringMessage>
+              Consigment Warehouse Not Allowed
+            </stringMessage>
+        </operationName>
+        <operationName name="PalletNotExist">
+            <stringMessage>
+              Pallet ID blocked or doesn't exist
+            </stringMessage>
         </operationName>
         <operationName name="LocationTransfeCannotEqual">
           <stringMessage>

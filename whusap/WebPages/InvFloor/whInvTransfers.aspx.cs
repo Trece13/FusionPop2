@@ -34,6 +34,8 @@ namespace whusap.WebPages.InvFloor
         public static string Thetransferwassuccessful = string.Empty;
         public static string PalletNotLocate = string.Empty;
         public static string PalletNotExist = string.Empty;
+        public static string WarehouseNotExist = string.Empty;
+        public static string WarehouseConsigment = string.Empty;
         public static string LocationTransfeCannotEqual = string.Empty;
         public static string LocationTypeMustBulK = string.Empty;
         public static string LocationBlockedTransfers = string.Empty;
@@ -100,6 +102,31 @@ namespace whusap.WebPages.InvFloor
             return JsonConvert.SerializeObject(MyWarehouse);
         }
 
+        [WebMethod]
+        public static string VerificarTipoWarehouse(string WARE)
+        {
+            TypeWarehouse MyTypeWarehouse = new TypeWarehouse();
+            DataTable CurrentTypeWareHouse = Transfers.ConsultarTipoWarehouse(WARE);
+            if (CurrentTypeWareHouse.Rows.Count > 0)
+            {
+                MyTypeWarehouse.TYPW = CurrentTypeWareHouse.Rows[0]["TYPW"].ToString();
+                if (MyTypeWarehouse.TYPW.ToString() == "21")
+                {
+                    MyTypeWarehouse.Error = true;
+                    MyTypeWarehouse.ErrorMsg = WarehouseConsigment;
+                    MyTypeWarehouse.TipeMsgJs = "lbl";
+                }
+            }
+            else
+            {
+                MyTypeWarehouse.Error = true;
+                MyTypeWarehouse.ErrorMsg = WarehouseNotExist;
+                MyTypeWarehouse.TipeMsgJs = "lbl";
+                
+            }
+            return JsonConvert.SerializeObject(MyTypeWarehouse);
+        }
+        
         [WebMethod]
         public static string clickQuery(string PAID)
         {
@@ -364,6 +391,8 @@ namespace whusap.WebPages.InvFloor
             Thetransferwassuccessful = mensajes("Thetransferwassuccessful");
             PalletNotLocate = mensajes("PalletNotLocate");
             PalletNotExist = mensajes("PalletNotExist");
+            WarehouseNotExist = mensajes("WarehouseNotExist");
+            WarehouseConsigment = mensajes("WarehouseConsigment");
             LocationTransfeCannotEqual = mensajes("LocationTransfeCannotEqual");
             LocationTypeMustBulK = mensajes("LocationTypeMustBulK");
             LocationBlockedTransfers = mensajes("LocationBlockedTransfers");
@@ -390,6 +419,14 @@ namespace whusap.WebPages.InvFloor
         {
             public string CWAR { get; set; }
             public string SLOC { get; set; }
+        }
+
+        public class TypeWarehouse
+        {
+            public string TYPW { get; set; }
+            public bool Error { get; set; }
+            public string ErrorMsg { get; set; }
+            public string TipeMsgJs { get; set; }
         }
     }
 }

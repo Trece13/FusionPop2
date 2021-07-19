@@ -74,5 +74,9 @@ namespace whusa.Interfases
             return dal.ConsultarWarehouse(LOCA);
         }
 
+        public DataTable ConsultarTipoWarehouse(string WARE)
+        {
+            return dal.ConsultarTipoWarehouse(WARE);
+        }
     }
 }

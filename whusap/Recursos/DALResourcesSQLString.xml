@@ -1992,7 +1992,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ListWarehouses">
         <stringSQL>
-          SELECT T$CWAR AS CWAR, T$SLOC SLOC FROM {0}.twhwmd200{1} whwmd200 ORDER BY whwmd200.T$SLOC ASC
+          SELECT whwmd200.T$CWAR AS CWAR, whwmd200.T$SLOC SLOC FROM {0}.twhwmd200{1} whwmd200
+          INNER JOIN {0}.ttcmcs003{1} mcs003 on mcs003.t$cwar = whwmd200.t$cwar and mcs003.t$typw = 1
+          ORDER BY whwmd200.T$SLOC ASC
         </stringSQL>
       </operationName>
       <operationName name="ConsultarLocation">
@@ -2003,6 +2005,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultarWarehouseLocation">
         <stringSQL>
           SELECT T$CWAR CWAR from {0}.twhwmd300{1} WHERE /*T$LOCT = 5 AND T$BINB = 2 AND*/T$LOCA = '[:T$LOCA]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarTipoWarehouse">
+        <stringSQL>
+          SELECT T$TYPW TYPW from {0}.ttcmcs003{1} WHERE T$CWAR = '[:T$CWAR]'
         </stringSQL>
       </operationName>
       <operationName name="ConsultarRegistroTransferir">
@@ -3438,13 +3445,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <!-- Smita Ends-->
       <operationName name="ConsultarQtdl">
         <stringSQL>
-          SELECT  NVL(REQT,0) REQT, PDNO, ITEM
+          SELECT  NVL(SUM(REQT),0) REQT, PDNO, ITEM
           FROM
           (
           SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO, T$ITEM
           union
           SELECT SUM(col090.T$QANA) REQT, T$FPDN PDNO, '[T$ITEM]' ITEM FROM {0}.tticol090{1} col090 WHERE T$FPDN = '[T$PDNO]' AND T$ITEM = '[T$ITEM]'  group by T$FPDN, T$ITEM
           )
+          GROUP BY PDNO, ITEM
           <!--SELECT  REQT+NVL(COL090.T$QANA,0) REQT, PDNO, ITEM
           FROM
           (

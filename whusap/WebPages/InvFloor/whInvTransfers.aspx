@@ -77,7 +77,7 @@
         <label class="col-sm-2 col-form-label-lg" id="lblTitTargetLocation">
             Target Location</label>
         <div class="col-sm-2">
-                <input type="text" class="form-control form-control-lg col-sm-12" id="txbTargetWarehouse" placeholder="Warehouse"/>
+                <input type="text" class="form-control form-control-lg col-sm-12" id="txbTargetWarehouse" placeholder="Warehouse" onchange="VerificarTipoWarehouse()"/>
         </div>
         <div class="col-sm-2">
                 <input type="text" class="form-control form-control-lg col-sm-12"" id="txbTargetLocation" placeholder="Locate"/>
@@ -314,6 +314,24 @@
             sendAjax("VerifyWarehouse", Data, SuccesVerifyWarehouse)
         }
 
+        var VerificarTipoWarehouse = function () {
+
+            var Data = "{'WARE':'" + txbTargetWarehouse.value + "'}";
+            sendAjax("VerificarTipoWarehouse", Data, SuccesVerificarTipoWarehouse)
+        }
+
+        var SuccesVerificarTipoWarehouse = function (r) {
+            if (r.d != undefined) {
+                MyObjWarehoouse = JSON.parse(r.d);
+                if (MyObjWarehoouse.Error == true) {
+                    lblError.innerHTML = MyObjWarehoouse.ErrorMsg;
+                }
+                else {
+                }
+            }
+            else {
+            }
+        }
 
         var SendTransfer = function () {
 
