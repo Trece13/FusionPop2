@@ -2176,13 +2176,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarRegistrotccol307">
         <stringSQL>
-          SELECT T$USER AS USSR,T$STAT AS STAT,T$PAID AS PAID FROM {0}.ttccol307{1} --WHERE T$PAID = '[:PAID]'
+          SELECT T$USER AS USSR,T$STAT AS STAT,T$PAID AS PAID,T$CWAR AS CWAR FROM {0}.ttccol307{1} --WHERE T$PAID = '[:PAID]'
           WHERE T$STAT = 2
         </stringSQL>
       </operationName>
       <operationName name="ActualizarUsuariotccol307">
         <stringSQL>
-          UPDATE  {0}.ttccol307{1} SET T$USER = '[:USER]' WHERE T$PAID = '[:PAID]'
+          --UPDATE  {0}.ttccol307{1} SET T$USER = '[:USER]' WHERE T$PAID = '[:PAID]'
+          UPDATE  {0}.ttccol307{1} SET T$STAT = '1' WHERE T$PAID = '[:PICK]'
         </stringSQL>
       </operationName>
     </Module>

@@ -42,7 +42,7 @@ namespace whusa.DAL
 
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
-            paramList.Add(":PAID", ObjTtccol307.PAID);
+            paramList.Add(":PICK", ObjTtccol307.PAID);
             paramList.Add(":USER", ObjTtccol307.USRR);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
