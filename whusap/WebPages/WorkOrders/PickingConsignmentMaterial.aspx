@@ -837,8 +837,6 @@
                     ShowCurrentOptionsItem();
                 }
                 else {
-                    divTableWarehouse.innerHTML = '';
-                    divTableItem.innerHTML = '';
                 }
             }
             else {
