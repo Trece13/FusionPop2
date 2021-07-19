@@ -836,6 +836,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add("T$PDNO", obj.pdno.Trim());
             paramList.Add("T$PONO", obj.pono);
+            paramList.Add("T$ITEM", obj.item);
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try
