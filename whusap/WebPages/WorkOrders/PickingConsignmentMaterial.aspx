@@ -837,6 +837,7 @@
                     ShowCurrentOptionsItem();
                 }
                 else {
+                    ShowCurrentOptionsItem();
                 }
             }
             else {
