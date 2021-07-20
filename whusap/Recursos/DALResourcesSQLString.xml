@@ -1363,7 +1363,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --T$PICK ='[:T$PICK]',
           T$QTYT ='[:T$QTYT]'
           WHERE   T$PAID ='[:T$PAID]'
-          AND T$OORG = '[:T$OORG]'
+          --AND T$OORG = '[:T$OORG]'
           AND T$ORNO = '[:T$ORNO]'
           --AND  T$OSET = '[:T$OSET]'
           AND T$PONO ='[:T$PONO]'
@@ -1901,7 +1901,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="updatetticol242Quantity">
         <stringSQL>
           <!--UPDATE  {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE trim(T$SQNB) = trim('[:T$SQNB]')-->
-          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:QTYT_ACT]',T$AllO = T$AllO - '[:QTYT_OLD]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
+          UPDATE  {0}.tticol242{1} SET T$ACQT = (T$AllO + T$ACQT) - '[:QTYT_ACT]',T$AllO = T$AllO - '[:QTYT_OLD]' WHERE trim(T$SQNB) =  trim('[:T$SQNB]')
         </stringSQL>
       </operationName>
       <operationName name="updatetticol242QuantityFirst">

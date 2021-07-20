@@ -516,6 +516,9 @@ namespace whusap.WebPages.WorkOrders
                         ObjPicking.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
                         ObjPicking.CNPK = DTPalletID.Rows[0]["CNPK"].ToString();
                         ObjPicking.PICK = MySessionObjPicking.PICK;
+                        ObjPicking.ORNO = MySessionObjPicking.ORNO;
+                        ObjPicking.PONO = MySessionObjPicking.PONO;
+                        ObjPicking.ADVS = MySessionObjPicking.ADVS;
 
                         string Tbl = DTPalletID.Rows[0]["TBL"].ToString().Trim();
                         switch (Tbl)
@@ -524,7 +527,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["flag022"] = 1;
                                 HttpContext.Current.Session["flag042"] = 0;
                                 HttpContext.Current.Session["flag131"] = 0;
-                                twhcolDAL.ActualizarCantidades222(PAID_OLD);
+                                //JC 190721 twhcolDAL.ActualizarCantidades222(PAID_OLD);
                                 twhcolDAL.ActualizarCantidades222(PAID_NEW);
                                 twhcolDAL.ActCausalTICOL022(PAID_OLD, 12);
                                 twhcolDAL.ActCausalTICOL022(PAID_NEW, 8);
@@ -537,7 +540,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["flag042"] = 1;
                                 HttpContext.Current.Session["flag131"] = 0;
                                 HttpContext.Current.Session["flag022"] = 0;
-                                twhcolDAL.ActualizarCantidades242(PAID_OLD);
+                                //JC 190721 twhcolDAL.ActualizarCantidades242(PAID_OLD);
                                 twhcolDAL.ActualizarCantidades242(PAID_NEW);
                                 twhcolDAL.ActCausalTICOL042(PAID_OLD, 12);
                                 twhcolDAL.ActCausalTICOL042(PAID_NEW, 8);
@@ -1199,7 +1202,8 @@ namespace whusap.WebPages.WorkOrders
                     stat = 12;
                     twhcolDAL.ingRegTticol092140(maximo, MySessionObjPicking.PALLETID.Trim(), PAID, statCausal, HttpContext.Current.Session["user"].ToString().Trim());
                     twhcolDAL.InsertRegCausalCOL084(MySessionObjPicking.PALLETID.Trim(), HttpContext.Current.Session["user"].ToString().Trim(), statCausal);
-                    _idaltticol042.ActualizacionPalletId(PAID, stat.ToString(), strError);
+                    //JC 190721 _idaltticol042.ActualizacionPalletId(PAID, stat.ToString(), strError);
+                    _idaltticol042.ActualizacionPalletId(MySessionObjPicking.PALLETID.Trim(), stat.ToString(), strError);
                     //if (MySessionObjPicking.LOCA.Trim() != LOCA.Trim())
                     //{
                     twhcolDAL.ActualizarCantidades242(MySessionObjPicking.PALLETID.Trim());

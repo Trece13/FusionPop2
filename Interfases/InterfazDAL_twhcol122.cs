@@ -337,8 +337,6 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nError: " + ex.Message);
             }
         }
-      
-        
        
          public int InsertRegCausalCOL084(string pallet,string user, int statCausal)
         {
@@ -651,7 +649,7 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        //PRIO = MyRow["PRIO"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
                         ROWN = MyRow["ROWN"].ToString(),
                         OORG = MyRow["OORG"].ToString(),

@@ -1173,13 +1173,15 @@
                 hideShowNeutroSelect(ddReason, false);
                 if (sloc == "1") {
                     hideShowNeutroInputText(txLoca, true);
+                    locaOk = false;
                 }
                 else {
                     hideShowNeutroInputText(txLoca, false);
                     cnpk == "1" ? hideShowNeutroInputText(txQtyc, false) : hideShowNeutroInputText(txQtyc, true);
+                    locaOk = true;
                 }
                 paidOk = true;
-                locaOk = false;
+                //locaOk = false;
                 qtytOk = false;
                 formValid();
             }
