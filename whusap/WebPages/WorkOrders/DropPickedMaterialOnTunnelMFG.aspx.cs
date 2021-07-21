@@ -146,7 +146,12 @@ namespace whusap.WebPages.WorkOrders
             if (ExistenciaData(TableItticol082))
             {
                 DataRow myObjDt = TableItticol082.Rows[0];
+                if (MyObj.STAT == "4")
+                {
+                    MyObj.Error = true;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
 
+                }
                 MyObj.TBL = myObjDt["TBL"].ToString();
                 MyObj.PAID = myObjDt["PAID"].ToString();
                 MyObj.QTYT = myObjDt["QTYT"].ToString();

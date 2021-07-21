@@ -768,7 +768,7 @@
                         for (var i = 0; i < myObj.length; i++) {
 
                             if (myObj[i].T$STAT == 1) {
-                                bodyRows += "<tr onClick='selectNewPallet(this)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
+                                bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$PRIO+ "</td><td></td></tr>";
                             }
                             else {
                                 dropPending = true;
@@ -786,6 +786,8 @@
                                                         "<th scope='col'>Quantity</th>" +
                                                         "<th scope='col'>Unit</th>" +
                                                         "<th scope='col'>Pallet ID</th>" +
+                                                        "<th scope='col'>Machine</th>" +
+                                                        "<th scope='col'>Prio</th>" +
                                                         "<th scope='col'></th>" +
                                                     "</tr>" +
                                                    "</thead>" +
@@ -890,10 +892,10 @@
                     if (parseInt(item.T$PAID.trim()).toString() != "NaN") {
 
                         if (item.T$STAT == 1) {
-                            bodyRows += "<tr row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
                         }
                         else {
-                            bodyRows += "<tr row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
                         }
                         validos = true;
                     }

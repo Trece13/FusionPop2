@@ -1028,7 +1028,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22ItemQty">
         <stringSQL>
-          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN,MCNO,PRIO
           FROM
           (
           SELECT
@@ -1042,6 +1042,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
           COL222.T$ACLO LOCA,
+          CST002.T$MCNO MCNO,
+          COL082.T$PRIO PRIO,
           --ROW_NUMBER() OVER( PARTITION BY COL022.T$SQNB ORDER BY COL022.T$SQNB, COL022.T$DATE ) ROWN
           ROW_NUMBER() OVER (ORDER BY COL022.T$DATE) ROWN
           FROM {0}.TTICOL022{1} COL022
@@ -1054,6 +1056,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON MCS003.T$CWAR = COL222.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
           ON COL082.T$ITEM = COL022.T$MITM
+          LEFT JOIN {0}.TTICST002{1} CST002
+          ON CST002.T$PDNO = COL082.T$ORNO
           AND COL222.T$ACQT >= COL082.T$QTYT
           AND COL222.T$CWAT = COL082.T$CWAR
           AND COL082.T$ORNO = '[:ORNO]'
@@ -1068,7 +1072,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking042ItemQty">
         <stringSQL>
-          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN,MCNO,PRIO
           FROM
           (
           SELECT
@@ -1083,6 +1087,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           MCS003.T$DSCA DESCWRH,
           IBD001.T$CUNI UN,
           COL242.T$ACLO LOCA,
+          CST002.T$MCNO MCNO,
+          COL082.T$PRIO PRIO,
           --ROW_NUMBER() OVER( PARTITION BY COL042.T$SQNB ORDER BY COL042.T$SQNB, COL022.T$DATE ) ROWN
           ROW_NUMBER() OVER (ORDER BY COL042.T$DATE) ROWN
           FROM {0}.TTICOL042{1} COL042
@@ -1094,6 +1100,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.TTCMCS003{1} MCS003
           ON MCS003.T$CWAR = COL242.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
+          LEFT JOIN {0}.TTICST002{1} CST002
+          ON CST002.T$PDNO = COL082.T$ORNO
           ON COL082.T$ITEM = COL042.T$MITM
           AND COL242.T$ACQT >= COL082.T$QTYT
           AND COL242.T$CWAT = COL082.T$CWAR
@@ -1109,7 +1117,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking131ItemQty">
         <stringSQL>
-          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN
+          SELECT DISTINCT STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,LOCA,ROWN,MCNO,PRIO
           FROM
           (
           SELECT
@@ -1125,6 +1133,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           IBD001.T$CUNI UN,
           COL131.T$LOAA LOCA,
           COL131.T$DATE-5/24,
+          CST002.T$MCNO MCNO,
+          COL082.T$PRIO PRIO,
           --RANK() OVER (PARTITION BY COL082.T$PICK ORDER BY COL131.T$DATE, COL131.T$PAID) ROWN
           ROW_NUMBER() OVER (ORDER BY COL131.T$DATE) ROWN
           FROM {0}.TWHCOL131{1} COL131
@@ -1134,6 +1144,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON MCS003.T$CWAR = COL131.T$CWAA
           INNER JOIN {0}.TTICOL082{1} COL082
           ON COL082.T$ITEM = COL131.T$ITEM
+          LEFT JOIN {0}.TTICST002{1} CST002
+          ON CST002.T$PDNO = COL082.T$ORNO
           AND COL082.T$QTYT &lt;= COL131.T$QTYA
           AND COL082.T$CWAR = COL131.T$CWAA
           AND COL082.T$ORNO = '[:ORNO]'
