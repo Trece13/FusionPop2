@@ -28,7 +28,7 @@
             var pallet = numeroOrden.substr(10, 3);
             //if (pallet.match(re)) {
                 if (numeroOrden != "") {
-                    if (numeroOrden.length < 13 || numeroOrden.length > 13) {
+                    if (numeroOrden.length < 12 || numeroOrden.length > 13) {
                         alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, remember only 13 characters"
                                     : "Por favor use el formato ORDENTRABAJO-PALLETID, solo 13 caracteres");
                         document.getElementById("txtRollNumber").focus();
