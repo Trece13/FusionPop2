@@ -188,7 +188,8 @@
                 //                else if (MyObj.TipeMsgJs == "lbl") {
                 ////                    $('#lblMsg').html(MyObj.ErrorMsg);
                 //                }
-                DetallePick.hide(); if (MyObj.Error == true) {
+                $('#DetallePick').hide();
+                if (MyObj.Error == true) {
                     if (MyObj.TipeMsgJs == "alert") {
                         alert(MyObj.ErrorMsg);
                     } if (MyObj.TipeMsgJs == "lbl") {

@@ -409,7 +409,7 @@
                             </select>
                         </div>
                         <div class="col-4">
-                            <input id="bntChange" type="button" class="btn btn-primary col-12 btn-sm" onclick="IngresarCausales()"
+                            <input id="bntChange" type="button" class="btn btn-primary col-12 btn-sm"  style="display:none" onclick="IngresarCausales()"
                                 value="Change" />
                         </div>
                     </div>
@@ -596,6 +596,8 @@
             var btnConfirm = document.getElementById("btnConfirm");
             var btnSkipPicking = document.getElementById("btnSkipPicking");
             var bdPicketPending = document.getElementById("bdPicketPending");
+            var ddReason = document.getElementById("ddReason");
+            var bntChange = document.getElementById("bntChange");
             //var btnNextPicking = document.getElementById("btnNextPicking");
             //var btnEndPicking = document.getElementById("btnEndPicking");
             //var roetest = document.getElementById("roetest");
@@ -607,12 +609,23 @@
             //btnNextPicking.addEventListener("click", loadPage);
             //btnEndPicking.addEventListener("click", );f
             ddWare.addEventListener("change", loadPicksPending);
+            ddReason.addEventListener("change", changeReason);
             txPaid.addEventListener("input", verifyPallet);
             txLoca.addEventListener("input", VerifyLocation);
             txQtyc.addEventListener("input", VerifyQuantity);
             chkConsigment.addEventListener('change', GetWarehouse)
             //$("#btnEndPicking").hide();
             //$("#btnNextPicking").hide();
+        }
+
+        var changeReason = function () {
+            console.log(ddReason.value);
+            if (ddReason.value != "0") {
+                $(bntChange).show(500);
+            }
+            else {
+                $(bntChange).hide(500);
+            }
         }
 
         var GetWarehouse = function () {
@@ -1243,7 +1256,7 @@
             if (show) {
                 $(lblReason).show(100);
                 $(ddReason).show(100);
-                $(bntChange).show(100);
+                $(bntChange).hide(100);
             } else {
                 $(lblReason).hide(100);
                 $(ddReason).hide(100);

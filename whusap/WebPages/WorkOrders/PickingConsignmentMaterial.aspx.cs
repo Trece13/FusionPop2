@@ -1016,7 +1016,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
                                 HttpContext.Current.Session["codePaid"] = PAID;
                                 HttpContext.Current.Session["codePaid2"] = MyObj.PAID;
-                                HttpContext.Current.Session["Lot"] = MyObj.CLOT;
+                                HttpContext.Current.Session["Lot"] = MyObj.ORNO;
                                 HttpContext.Current.Session["Quantity"] = MyObj.QTYC;
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.DATE;

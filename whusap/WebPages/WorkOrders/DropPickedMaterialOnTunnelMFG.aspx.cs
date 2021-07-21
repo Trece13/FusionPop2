@@ -178,7 +178,7 @@ namespace whusap.WebPages.WorkOrders
             else
             {
                 MyObj.Error = true;
-                MyObj.TipeMsgJs = "alert";
+                MyObj.TipeMsgJs = "lbl";
                 MyObj.ErrorMsg = ThePalletIDDoesntexist;
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
