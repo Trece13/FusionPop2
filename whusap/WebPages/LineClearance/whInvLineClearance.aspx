@@ -17,7 +17,7 @@
                 if (event.keyCode > 47 && event.keyCode < 58) {
                     return true;
                 }
-                else {
+                else if (event.keyCode != undefined) {
                     event.keyCode = 0;
                     alert("Only Numbers allowed !!");
                     obj.focus();
@@ -25,10 +25,10 @@
                 }
             }
             else {
-                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46) {
+                if (event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46 ) {
                     return true;
                 }
-                else {
+                else if (event.keyCode != undefined) {
                     event.keyCode = 0;
                     alert("Only Numbers with dot allowed !!");
                     obj.focus();
