@@ -1141,6 +1141,45 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
+        public static string DropEndPicking(string PICK, bool Consigment = false)
+        {
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+            string res = string.Empty;
+            Ent_tticol082 Obj082 = new Ent_tticol082();
+            Obj082.STAT = Consigment == false ? "4" : "7";
+            Obj082.PICK = PICK.Trim();
+            int randomNum = new Random().Next(999);
+            string ramdomNumStr = string.Empty;
+
+            if (randomNum > 0 && randomNum < 10)
+            {
+                ramdomNumStr = "00" + randomNum.ToString();
+            }
+            else if (randomNum > 9 && randomNum < 100)
+            {
+                ramdomNumStr = "0" + randomNum.ToString();
+            }
+            else
+            {
+                ramdomNumStr = randomNum.ToString();
+            }
+            Obj082.PICK = MySessionObjPicking.PICK.Trim();
+
+            if (_idaltwhcol122.UpdateTtico082StatEndPicking(Obj082, ramdomNumStr) == true)
+            {
+                //JC 230721 Envio el nuevo valor del pick listo para imprimir
+                //res = UrlBaseBarcode;
+                Obj082.PICK = MySessionObjPicking.PICK.Trim() + "-" + ramdomNumStr;
+                res = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Obj082.PICK + "&code=Code128&dpi=96";
+            }
+            else
+            {
+
+            }
+            return res;
+        }
+
+        [WebMethod]
         public static bool Click_confirCausal(string PAID, string Causal, string txtPallet, string LOCA)
         {
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];

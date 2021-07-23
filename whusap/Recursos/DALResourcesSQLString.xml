@@ -1430,8 +1430,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {0}.tticol082{1} SET
           T$STAT = '[:T$STAT]',
           T$PICK = nvl('[:T$PICK]',T$PICK)
-          WHERE
-          trim(T$PAID) = trim('[:T$PAID]')
+          WHERE trim(T$PAID) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTtico082StatEndPicking">
+        <stringSQL>
+          UPDATE {0}.tticol082{1} SET
+          T$STAT = '[:T$STAT]',
+          T$PICK = nvl('[:T$PICK1]',T$PICK)
+          WHERE TRIM(T$PICK) = trim('[:T$PICK]')
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl082Paid">

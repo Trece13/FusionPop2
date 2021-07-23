@@ -1007,6 +1007,20 @@ namespace whusa.Interfases
             }
         }
 
+        public bool UpdateTtico082StatEndPicking(Ent_tticol082 Obj082, String Random)
+        {
+            string strError = string.Empty;
+            try
+            {
+                return dal.UpdateTtico082StatEndPicking(Obj082, Random);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
+
         public DataTable VerificarPalletIDItem(string PAID_NEW, string ITEM)
         {
             return dal.VerificarPalletIDItem(PAID_NEW, ITEM);
