@@ -36,6 +36,8 @@ namespace whusa.Entidades
             this.QTYC = string.Empty;
             this.PICK = string.Empty;
             this.PICK_URL = string.Empty;
+            //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+            this.RAND = string.Empty;
         }
 
         public string OORG { get; set; }
@@ -73,5 +75,7 @@ namespace whusa.Entidades
         public string PICK { get; set; }
 
         public string TYPW { get; set; }
+        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+        public string RAND { get; set; }
     }
 }

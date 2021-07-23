@@ -517,6 +517,8 @@ namespace whusa.DAL
                 paramList.Add(":PICK", MyObj.PICK);
                 paramList.Add(":CWAR", MyObj.CWAR);
                 paramList.Add(":STAT", MyObj.STAT);
+                //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                paramList.Add(":RAND", MyObj.RAND);
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
