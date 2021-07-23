@@ -33,9 +33,10 @@ namespace whusap
 
         string rutaServ = string.Empty;
         string rutaRetorno = String.Empty;
-        protected void Page_Load(object sender, EventArgs e)
+
+        protected void Page_Init(object sender, EventArgs e)
         {
-            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["PICKUSING"].ToString() != string.Empty)
+            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["CWARUSING"] != null)
             {
                 Ent_ttccol307 tccol307 = new Ent_ttccol307();
                 tccol307.PAID = HttpContext.Current.Session["PICKUSING"].ToString();
@@ -46,8 +47,21 @@ namespace whusap
                 HttpContext.Current.Session["PICKUSING"] = null;
                 HttpContext.Current.Session["CWARUSING"] = null;
             }
-            
+        }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["CWARUSING"] != null)
+            {
+                Ent_ttccol307 tccol307 = new Ent_ttccol307();
+                tccol307.PAID = HttpContext.Current.Session["PICKUSING"].ToString();
+                tccol307.CWAR = HttpContext.Current.Session["CWARUSING"].ToString();
+                tccol307.STAT_AUX = "1";
+                _idaltccol307.ActualizarTccol307(tccol307);
+
+                HttpContext.Current.Session["PICKUSING"] = null;
+                HttpContext.Current.Session["CWARUSING"] = null;
+            }
             //log.escribirError("entra al page load","master","Load","master");
             string url = Request.Url.AbsolutePath.ToString().Trim();
             //string url = "/fusionpub/WebPages/InvReceipts/whInvReceiptRawMaterialNew.aspx";

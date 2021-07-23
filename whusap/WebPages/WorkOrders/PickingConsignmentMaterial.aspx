@@ -353,7 +353,7 @@
                     <br>
                     <div id="divStartPicking" class="row">
                         <div class="col-6">
-                            <button class="btn btn-primary col-12 btn-sm" id="btnStarPicking" type="button">Start Picking</button>
+                            <button class="btn btn-primary col-12 btn-sm" id="btnStarPicking" type="button">Start Picking&nbsp;<span><i class="fas fa-circle-notch fa-spin" style="color: silver; display:none" id='StartLoader'></i></span></button>
                         </div>
                     </div>
                 </form>
@@ -596,7 +596,10 @@
         </div>
     </div>
     <script>
+        var ajaxShowCurrentOptionsWarehouse= null;
+        var ajaxShowCurrentOptionsItem = null;
 
+        var StarProcessing = false;
         var GetPicksProcessing = false;
         var TakeProcessing = false;
         var ChangeProcessing = false;
@@ -760,7 +763,7 @@
         function ShowCurrentOptionsItem() {
             divTableItem.innerHTML = '';
             var bodyRows = ""
-            $.ajax({
+                ajaxShowCurrentOptionsItem = $.ajax({
                 type: "POST",
                 url: "PickingConsignmentMaterial.aspx/ShowCurrentOptionsItem",
                 data: "{}",
@@ -802,7 +805,7 @@
         function ShowCurrentOptionsWarehouse() {
             var bodyRows = ""
             divTableWarehouse.innerHTML = '';
-            $.ajax({
+                ajaxShowCurrentOptionsWarehouse = $.ajax({
                 type: "POST",
                 async: false,
                 url: "PickingConsignmentMaterial.aspx/GetAllsPAlletsPending",
@@ -864,14 +867,18 @@
 
         var loadPage = function () {
             skip = false;
+            StartProcessing = false;
+            $('#StartLoader').show(100);
             EventoAjax("loadPage", "{'CWAR':'" + ddWare.value + "'}", LoadPageSuccess);
         }
 
         var LoadPageSuccess = function (r) {
             TakeProcessing = false;
             SkipProcessing = false;
+            StartProcessing = false;
             $('#TakeLoader' + indexTakeLoader).hide(500);
             $('#SkipLoader').hide(500);
+            $('#StartLoader').hide(500);
             ClearFormPicking();
             var divTables = document.getElementById('divTables');
             ddWare.value = 0;
@@ -916,6 +923,11 @@
 
         var loadPicksPending = function () {
             if (ddWare.value == "0") {
+                
+                ajaxShowCurrentOptionsItem != null ? ajaxShowCurrentOptionsItem.abort() : ajaxShowCurrentOptionsItem;
+                ajaxShowCurrentOptionsItem = null;
+                ajaxShowCurrentOptionsWarehouse != null ? ajaxShowCurrentOptionsWarehouse.abort() : ajaxShowCurrentOptionsWarehouse;
+                ajaxShowCurrentOptionsWarehouse = null;
                 $('#divPicketPending').hide(100);
                 $("#btnStarPicking").hide(100);
                 $('#divPicketPending').hide(100);
@@ -925,6 +937,10 @@
             }
             else {
                 /*$('#GetPicksLoader').show(10);*/
+                ajaxShowCurrentOptionsItem != null ? ajaxShowCurrentOptionsItem.abort() : ajaxShowCurrentOptionsItem;
+                ajaxShowCurrentOptionsItem = null;
+                ajaxShowCurrentOptionsWarehouse != null ? ajaxShowCurrentOptionsWarehouse.abort() : ajaxShowCurrentOptionsWarehouse;
+                ajaxShowCurrentOptionsWarehouse = null;
                 $('#divPicketPending').hide(100);
                 $("#formPicking").hide(100);
                 divTableWarehouse.innerHTML = '';
@@ -1186,7 +1202,7 @@
                 dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "'}";
 
                 //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
-                $.ajax({
+                 var  AjaxConfirm = $.ajax({
                     type: "POST",
                     url: "PickingConsignmentMaterial.aspx/Click_confirPKG",
                     data: dataS,
