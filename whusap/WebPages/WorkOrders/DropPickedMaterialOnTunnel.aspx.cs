@@ -93,6 +93,22 @@ namespace whusap.WebPages.WorkOrders.NewPages
             DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082(PickID);
             string ObjRetorno = string.Empty;
             bool ActalizacionExitosa = false;
+            //JC 230721 Adicionar la generación del número aleatorio para asignarsela al pick
+            int randomNum = new Random().Next(999);
+            string ramdomNumStr = string.Empty;
+
+            if (randomNum > 0 && randomNum < 10)
+            {
+                ramdomNumStr = "00" + randomNum.ToString();
+            }
+            else if (randomNum > 9 && randomNum < 100)
+            {
+                ramdomNumStr = "0" + randomNum.ToString();
+            }
+            else
+            {
+                ramdomNumStr = randomNum.ToString();
+            }
 
             if (ExistenciaData(TableItticol082))
             {
@@ -109,21 +125,32 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.PONO = myObjDt["PONO"].ToString();
                     MyObj.ORNO = myObjDt["ORNO"].ToString();
                     MyObj.QTYC = myObjDt["QTYA"].ToString();
-                    MyObj.PICK = myObjDt["PICK"].ToString();
+                    MyObj.PICK = myObjDt["PICK"].ToString().Trim();
                     MyObj.TYPW = myObjDt["TYPW"].ToString();
                     MyObj.CWAR = myObjDt["CWAR"].ToString();
                     MyObj.STAT = myObjDt["STAT"].ToString();
                     MyObj.MCNO = HttpContext.Current.Session["MCNO"].ToString();
-                    MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
+                    //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                    //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
                     if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
                     {
                         MyObj.STAT = "7";
+                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.RAND = ramdomNumStr;
                         Itticol082.Actualizartticol082(MyObj);
-                    }
+                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
+                        MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
+                     }
                     else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
                     {
                         MyObj.STAT = "4";
+                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.RAND = ramdomNumStr;
                         Itticol082.Actualizartticol082(MyObj);
+                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
+                        MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
                     }
                 }
 

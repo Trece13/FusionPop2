@@ -1688,7 +1688,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="Actualizartticol082">
         <stringSQL>
           --update {0}.tticol082{1} set t$stat = 4
-          update {0}.tticol082{1} set t$stat = '[:STAT]'
+          update {0}.tticol082{1}
+          set t$stat = '[:STAT]',
+          t$pick = '[:PICK]'||'-'||'[:RAND]'
           where T$PICK =  '[:PICK]'
           and T$CWAR =  nvl('[:CWAR]',T$CWAR)
           and T$STAT = '2'
