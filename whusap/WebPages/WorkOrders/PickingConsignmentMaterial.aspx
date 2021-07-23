@@ -1058,13 +1058,11 @@
                       //  }
                     //});
                     if (flag1 = true) {
-                        EndPickingProcessing = false;
-                        $("#EndPickingLoader").hide(500);
                         $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                         if (multi = false){
                             $("#lbPaid").html(Paids);
                             }
-                        EventoAjax("Eliminar307", "{}", null);
+                        /*EventoAjax("Eliminar307", "{}", null);*/
                     }
                     else {
                         EndPickingProcessing = false;
@@ -1076,7 +1074,8 @@
         }
 
         var DropMultipleSuccess = function (r) {
-
+            EndPickingProcessing = false;
+            $("#EndPickingLoader").hide(500);
             if (r.d != "") {
                 drop = true;
                 //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");

@@ -379,6 +379,14 @@ namespace whusap.WebPages.WorkOrders
             return JsonConvert.SerializeObject(Dt082Pickied);
         }
 
+        [WebMethod]
+        public static DataTable GetAllsPAlletsPendingDT()
+        {
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+            DataTable Dt082Pickied = twhcolDAL.ConsultarTticol082porStat("", "'1','2'", MySessionObjPicking.PICK.Trim(), MySessionObjPicking.WRH);
+            return Dt082Pickied;
+        }
+
         public static EntidadPicking getPendingPicket(string PICK, string CWAR)
         {
             EntidadPicking MyObj = new EntidadPicking();
@@ -1188,6 +1196,10 @@ namespace whusap.WebPages.WorkOrders
             else
             {
 
+            }
+            if (GetAllsPAlletsPendingDT().Rows.Count == 0)
+            {
+                Eliminar307();
             }
             return res;
         }
