@@ -618,9 +618,9 @@
         function stoper() {
             clearTimeout(timer);
         }
-        window.onbeforeunload = function (e) {
-
-        };
+        //window.onunload = function (e) {
+        //    EventoAjax("Actualizar307", "{}", null);
+        //};
 
         var cnpk = "";
         var sloc = "";

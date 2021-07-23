@@ -53,11 +53,7 @@ namespace whusap.WebPages.WorkOrders
         string _idioma = string.Empty;
         private static string globalMessages = "GlobalMessages";
         public static string qtyaG = "0";
-
-        protected void Page_Unload(object sender, EventArgs e)
-        {
-            string x = "sasassasasa";
-        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
@@ -323,8 +319,7 @@ namespace whusap.WebPages.WorkOrders
             MyObj307.PAID = String.Empty;
             MyObj307.CWAR = CWAR;
             MyObj307.USRR = string.Empty;
-            DataTable DTttccol307 = _idaltccol307.ConsultarPendientesTccol307("'1','2'", CWAR);
-            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["PICKUSING"].ToString() != string.Empty)
+            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["CWARUSING"] != null)
             {
                 Ent_ttccol307 tccol307 = new Ent_ttccol307();
                 tccol307.PAID = HttpContext.Current.Session["PICKUSING"].ToString();
@@ -333,6 +328,7 @@ namespace whusap.WebPages.WorkOrders
                 _idaltccol307.ActualizarTccol307(tccol307);
 
             }
+            DataTable DTttccol307 = _idaltccol307.ConsultarPendientesTccol307("'1','2'", CWAR);
             HttpContext.Current.Session["PICKUSING"] = null;
             HttpContext.Current.Session["CWARUSING"] = null;
 
@@ -629,6 +625,23 @@ namespace whusap.WebPages.WorkOrders
             return number.Contains(",") ? number.Replace(",", ".") : number.Replace(".", ",");
         }
 
+        [WebMethod]
+        public static void Actualizar307()
+        {
+            Ent_ttccol307 MyObj307 = new Ent_ttccol307();
+            if (HttpContext.Current.Session["PICKUSING"] != null && HttpContext.Current.Session["CWARUSING"] != null)
+            {
+                Ent_ttccol307 tccol307 = new Ent_ttccol307();
+                tccol307.PAID = HttpContext.Current.Session["PICKUSING"].ToString();
+                tccol307.CWAR = HttpContext.Current.Session["CWARUSING"].ToString();
+                tccol307.STAT_AUX = "1";
+                _idaltccol307.ActualizarTccol307(tccol307);
+
+            }
+            HttpContext.Current.Session["PICKUSING"] = null;
+            HttpContext.Current.Session["CWARUSING"] = null;
+
+        }
         [WebMethod]
         public static void Eliminar307()
         {
