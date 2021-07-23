@@ -1049,19 +1049,21 @@
                     $("#EndPickingLoader").show(100);
                     var myList = JSON.parse(localStorage.getItem('MyPalletList'));
                     var flag1 = false;
-                    var Paids = ""
-                    myList.forEach(function (x) {
-                        if (x.T$STAT == 2) {
-                            EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "','Consigment':" + chkConsigment.checked + "}", DropMultipleSuccess);
-                            Paids += x.T$PAID + " ";
+                    //var Paids = ""
+                    //myList.forEach(function (x) {
+                        //if (x.T$STAT == 2) {
+                            EventoAjax("DropEndPicking", "{'PICK':'" + myList.T$PICK + "','Consigment':" + chkConsigment.checked + "}", DropMultipleSuccess);
+                        //    Paids += x.T$PAID + " ";
                             flag1 = true;
-                        }
-                    });
+                      //  }
+                    //});
                     if (flag1 = true) {
                         EndPickingProcessing = false;
                         $("#EndPickingLoader").hide(500);
                         $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
-                        $("#lbPaid").html(Paids);
+                        if (multi = false){
+                            $("#lbPaid").html(Paids);
+                            }
                         EventoAjax("Eliminar307", "{}", null);
                     }
                     else {
@@ -1077,7 +1079,8 @@
 
             if (r.d != "") {
                 drop = true;
-                $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                 $("#Contenido_bcPick").attr("src", r.d);
                 printDiv("MyEtiquetaDrop");
                 selectPicksPending();
             }

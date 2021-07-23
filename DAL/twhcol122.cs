@@ -582,6 +582,36 @@ namespace whusa.DAL
 
         }
 
+        public bool UpdateTtico082StatEndPicking(Ent_tticol082 myObj, string EndRandom)
+        {
+            bool retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$STAT", myObj.STAT);
+            paramList.Add(":T$PICK", myObj.PICK);
+            paramList.Add(":T$PICK1", myObj.PICK+"-"+EndRandom);
+            string tabla = ".tticol082";
+            string name1 = "UpdateTtico082StatEndPicking";
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, null, paramList);
+            paramList.Clear();
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                //log.escribirError("ejecucion:" + Retorno + " " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol082140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return retorno;
+
+
+        }
+
         public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, string QTYT)
         {
             bool retorno = false;
