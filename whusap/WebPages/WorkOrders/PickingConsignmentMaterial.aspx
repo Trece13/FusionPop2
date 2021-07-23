@@ -1036,7 +1036,7 @@
                     var Paids = ""
                     myList.forEach(function (x) {
                         if (x.T$STAT == 2) {
-                            EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "'}", DropMultipleSuccess);
+                            EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "','Consigment':" + chkConsigment.checked + "}", DropMultipleSuccess);
                             Paids += x.T$PAID + " ";
                             flag1 = true;
                         }
