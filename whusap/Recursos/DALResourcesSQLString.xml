@@ -1680,7 +1680,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Actualizartticol082">
         <stringSQL>
-          update {0}.tticol082{1} set t$stat = 4
+          --update {0}.tticol082{1} set t$stat = 4
+          update {0}.tticol082{1} set t$stat = '[:STAT]'
           where T$PICK =  '[:PICK]'
           and T$CWAR =  nvl('[:CWAR]',T$CWAR)
           and T$STAT = '2'
@@ -1709,7 +1710,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletIDTticol082">
         <stringSQL>
-          SELECT distinct ticol082.T$CWAR CWAR,TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
+          SELECT distinct CWAR, TBL, TYPW, QTYA, PAID, QTYT, UNIT, ITEM, DSCA, ORNO, PICK, MCNO, DSCAM, STAT, PRIO, ADVS, PONO, STAP
+          FROM(
+          select 'ticol082' AS  TBL,col082.T$PAID AS PAID,col082.T$QTYT AS QTYT, col082.T$UNIT AS UNIT,col082.T$ITEM AS ITEM, col082.T$STAT AS STAP,
+          col082.T$QTYT AS QTYA, col082.T$ORNO AS ORNO, col082.T$PONO AS PONO, col082.T$ADVS AS ADVS, col082.T$PRIO AS PRIO, col082.T$STAT AS STAT,
+          rou002.T$DSCA AS DSCAM, col082.T$MCNO AS MCNO, col082.T$PICK AS PICK, cibd001.t$dsca AS DSCA, mcs003.T$TYPW AS TYPW, col082.T$CWAR AS CWAR
+          from {0}.tticol082{1} col082
+          LEFT JOIN {0}.ttcibd001{1} cibd001 ON cibd001.T$ITEM =  col082.T$ITEM
+          LEFT JOIN {0}.ttcmcs003{1} mcs003 ON mcs003.T$CWAR = col082.T$CWAR
+          LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
+          WHERE col082.T$STAT = 2
+          )
+          WHERE TRIM(PICK) = TRIM('[:PICK]')
+          <!--SELECT distinct ticol082.T$CWAR CWAR,TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
           ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO,stap FROM(
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol131140 col131
           UNION
@@ -1723,8 +1736,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           )ConGlobal INNER JOIN BAAN.tticol082140 ticol082 ON ConGlobal.PAID = ticol082.t$PAID AND ticol082.T$STAT =  2 INNER JOIN BAAN.ttirou002140 tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
           LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN baan.ttcmcs003140 mcs003 ON mcs003.T$CWAR = ticol082.T$CWAR
-          --WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
-          WHERE TRIM(ticol082.T$PICK) = TRIM('[:PICK]')
+          WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
+          WHERE TRIM(ticol082.T$PICK) = TRIM('[:PICK]')-->
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletIDTticol083">

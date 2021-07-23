@@ -5237,7 +5237,7 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            Pick ID has been droped before
+            Pick ID not exist or already dropped
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfordropprocess">
@@ -5259,7 +5259,7 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            Pick ID has been droped before
+            Pick ID no existe or fue retirado previamente
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfordropprocess">

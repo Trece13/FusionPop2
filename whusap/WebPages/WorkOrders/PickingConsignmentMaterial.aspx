@@ -1071,8 +1071,10 @@
         var DropSuccess = function (r) {
             DropProcessing = false;
             if (r.d != "") {
-                drop = true;
-                $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                drop = true;            
+                //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
+                $("#Contenido_bcPick").attr("src", r.d);
                 $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                 $("#lbPaid").html(localStorage.getItem('paid'))
                 printDiv("MyEtiquetaDrop");

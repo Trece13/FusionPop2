@@ -188,20 +188,18 @@
                 d.getSeconds()
                 );
 
-
             var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('</head><body >');
-            //mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write('</head><body ><style>@page {size: 6in,4in;margin: 0;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
 
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
 
-            setTimeout(mywindow.print(),3000);
-            mywindow.close();
+            setTimeout(function () { mywindow.print() }, 3000);
+            //            mywindow.close();
 
             return true;
         };

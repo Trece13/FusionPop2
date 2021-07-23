@@ -87,20 +87,35 @@
     </style>
     <script type="text/javascript">
         function printDiv(divID) {
-            var divElements = document.getElementById(divID).innerHTML;
-            var oldPage = document.body.innerHTML;
-            document.body.innerHTML = "<html";
-            document.body.innerHTML += "><head";
-            document.body.innerHTML += "><title";
-            document.body.innerHTML += "></title"
-            document.body.innerHTML += "></head";
-            document.body.innerHTML += "><body";
-            document.body.innerHTML += ">" + divElements;
-            document.body.innerHTML += "</body>";
+//            var divElements = document.getElementById(divID).innerHTML;
+//            var oldPage = document.body.innerHTML;
+//            document.body.innerHTML = "<html";
+//            document.body.innerHTML += "><head";
+//            document.body.innerHTML += "><title";
+//            document.body.innerHTML += "></title"
+//            document.body.innerHTML += "></head";
+//            document.body.innerHTML += "><body";
+//            document.body.innerHTML += ">" + divElements;
+//            document.body.innerHTML += "</body>";
 
-            window.print();
-            document.body.innerHTML = oldPage;
-            //setTimeout(window.close(),15000);
+//            window.print();
+//            document.body.innerHTML = oldPage;
+            //            //setTimeout(window.close(),15000);
+            //JC 230721 Cambio para que la etiqueta se imprima a lo largo y no a lo ancho.
+
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('</head><body ><style>@page {size: 6in,4in;margin: 0;}</style>');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            setTimeout(function () { mywindow.print() }, 3000);
+            //            mywindow.close();
+
         };
 
         function addZero(i) {

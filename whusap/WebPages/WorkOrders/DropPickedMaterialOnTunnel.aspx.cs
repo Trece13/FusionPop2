@@ -112,14 +112,17 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.PICK = myObjDt["PICK"].ToString();
                     MyObj.TYPW = myObjDt["TYPW"].ToString();
                     MyObj.CWAR = myObjDt["CWAR"].ToString();
+                    MyObj.STAT = myObjDt["STAT"].ToString();
                     MyObj.MCNO = HttpContext.Current.Session["MCNO"].ToString();
-                    MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"].ToString() + "&code=Code128&dpi=96";
+                    MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
                     if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
                     {
+                        MyObj.STAT = "7";
                         Itticol082.Actualizartticol082(MyObj);
                     }
                     else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
                     {
+                        MyObj.STAT = "4";
                         Itticol082.Actualizartticol082(MyObj);
                     }
                 }
@@ -133,7 +136,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.Error = false;
                     MyObj.TipeMsgJs = "alert";
                     MyObj.SuccessMsg = Thedropprocessissuccess;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);                    
                 }
                 else
                 {

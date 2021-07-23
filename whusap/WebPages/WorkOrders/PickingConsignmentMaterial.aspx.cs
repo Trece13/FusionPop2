@@ -1129,7 +1129,9 @@ namespace whusap.WebPages.WorkOrders
 
             if (_idaltwhcol122.UpdateTtico082Stat(Obj082) == true)
             {
-                res = UrlBaseBarcode;
+                 //JC 230721 Envio el nuevo valor del pick listo para imprimir
+                 //res = UrlBaseBarcode;
+                res = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Obj082.PICK + "&code=Code128&dpi=96";
             }
             else
             {

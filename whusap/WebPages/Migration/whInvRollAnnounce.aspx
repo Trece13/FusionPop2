@@ -29,15 +29,15 @@
             //if (pallet.match(re)) {
                 if (numeroOrden != "") {
                     if (numeroOrden.length < 12 || numeroOrden.length > 13) {
-                        alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, remember only 13 characters"
-                                    : "Por favor use el formato ORDENTRABAJO-PALLETID, solo 13 caracteres");
+                        alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, minimum 12 maximum 13 characters"
+                                    : "Por favor use el formato ORDENTRABAJO-PALLETID, minimo 12 maximo 13 caracteres");
                         document.getElementById("txtRollNumber").focus();
                         document.getElementById("txtRollNumber").value = "";
                     }
                     else {
                         if (guion != "-") {
-                            alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, remember 9 characters workorder, simbol minus, 3 characters pallet id"
-                                            : "Por favor use el formato ORDERNTRABAJO-PALLETID, recuerde 9 caracteres para la orden de trabajo, simbolo negativo, 3 caracteres para el Pallet ID.");
+                            alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, remember 9 characters workorder, plus dash, 3 characters pallet id"
+                                            : "Por favor use el formato ORDERNTRABAJO-PALLETID, recuerde 9 caracteres para la orden de trabajo, mas guion, 3 caracteres para el Pallet ID.");
                             document.getElementById("txtRollNumber").focus();
                             document.getElementById("txtRollNumber").value = "";
                         }

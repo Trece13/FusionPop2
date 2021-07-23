@@ -542,7 +542,7 @@
             setTimeout(function () {
                 mywindow.print();
             }, 3000);
-            mywindow.document.close(); // necessary for IE >= 10
+            //mywindow.document.close(); // necessary for IE >= 10
 
             return true;
         };

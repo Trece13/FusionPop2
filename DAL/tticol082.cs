@@ -516,6 +516,7 @@ namespace whusa.DAL
                 paramList.Add(":ORNO", MyObj.ORNO);
                 paramList.Add(":PICK", MyObj.PICK);
                 paramList.Add(":CWAR", MyObj.CWAR);
+                paramList.Add(":STAT", MyObj.STAT);
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
