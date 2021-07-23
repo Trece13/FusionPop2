@@ -782,7 +782,7 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        //PRIO = MyRow["PRIO"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
                         //ROWN = MyRow["ROWN"].ToString(),
                         //OORG = MyRow["OORG"].ToString(),
@@ -791,7 +791,8 @@ namespace whusa.Interfases
                         //PONO = MyRow["PONO"].ToString(),
                         //SQNB = MyRow["SQNB"].ToString(),
                         //ADVS = MyRow["ADVS"].ToString(),
-                        STAT = MyRow["STAT"].ToString()
+                        STAT = MyRow["STAT"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString()
 
                     };
 
@@ -823,8 +824,9 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        //PRIO = MyRow["PRIO"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString()
                         //ROWN = MyRow["ROWN"].ToString(),
                         //OORG = MyRow["OORG"].ToString(),
                         //ORNO = MyRow["ORNO"].ToString(),
@@ -862,8 +864,9 @@ namespace whusa.Interfases
                         DESCWRH = MyRow["DESCWRH"].ToString(),
                         QTY = MyRow["QTY"].ToString(),
                         UN = MyRow["UN"].ToString(),
-                        //PRIO = MyRow["PRIO"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
                         LOCA = MyRow["LOCA"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString()
                         //ROWN = MyRow["ROWN"].ToString(),
                         //OORG = MyRow["OORG"].ToString(),
                         //ORNO = MyRow["ORNO"].ToString(),

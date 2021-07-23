@@ -59,6 +59,7 @@ namespace whusa.DAL
             try
             {
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                paramList.Clear();
                 log.escribirError("My sql: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
             }
@@ -85,7 +86,7 @@ namespace whusa.DAL
             paramList.Add(":T$WHTA", bodegades.Trim());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -109,7 +110,7 @@ namespace whusa.DAL
             paramList.Add(":T$UNID", uniqueId.Trim());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -132,7 +133,7 @@ namespace whusa.DAL
             paramList.Add(":T$UNID", uniqueId.Trim());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -195,7 +196,7 @@ namespace whusa.DAL
             string name1 = "ConsultarPalletPicking22140";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
 
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -220,7 +221,7 @@ namespace whusa.DAL
             string tabla = ".tticol042";
             string name1 = "ConsultarPalletPicking042";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -245,7 +246,7 @@ namespace whusa.DAL
             string name1 = "ConsultarPalletPicking131";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -288,10 +289,9 @@ namespace whusa.DAL
             paramList.Add(":T$REFCNTU", Objtticol307140.REFCNTU);
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
-
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
             }
 
@@ -317,7 +317,7 @@ namespace whusa.DAL
             paramList.Add(":T$CWAR", Objttccol307.CWAR);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -343,7 +343,7 @@ namespace whusa.DAL
             string name1 = "UpdateTbl022";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -371,7 +371,7 @@ namespace whusa.DAL
             string name1 = "UpdateTbl042";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -399,7 +399,7 @@ namespace whusa.DAL
             string name1 = "UpdateTbl131";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -450,6 +450,7 @@ namespace whusa.DAL
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
             sentencia = strSentencia;
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -483,7 +484,7 @@ namespace whusa.DAL
 
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 bool Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -534,7 +535,7 @@ namespace whusa.DAL
 
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, null, paramList);
-
+            paramList.Clear();
             try
             {
                 bool Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -559,13 +560,12 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$PAID", myObj.PAID);
             paramList.Add(":T$STAT", myObj.STAT);
-
+            paramList.Add(":T$PICK", myObj.PICK);
             string tabla = ".tticol082";
             string name1 = "UpdateTtico082Stat";
 
-
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, null, paramList);
-
+            paramList.Clear();
             try
             {
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -598,7 +598,7 @@ namespace whusa.DAL
 
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, null, paramList);
-
+            paramList.Clear();
             try
             {
                 bool Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -630,7 +630,7 @@ namespace whusa.DAL
             string name1 = "InsertCausalCOL084";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -662,7 +662,7 @@ namespace whusa.DAL
             string name1 = "IngresarCauTticol092140";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -690,7 +690,7 @@ namespace whusa.DAL
             string name1 = "ActCausalTICOL022";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -720,7 +720,7 @@ namespace whusa.DAL
             string name1 = "ActCausalTICOL042";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
@@ -749,7 +749,7 @@ namespace whusa.DAL
             string name1 = "ActCausalcol131140";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -776,7 +776,7 @@ namespace whusa.DAL
 
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -801,7 +801,7 @@ namespace whusa.DAL
 
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -822,7 +822,7 @@ namespace whusa.DAL
             paramList.Add(":PAID", PAID.Trim());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -854,7 +854,7 @@ namespace whusa.DAL
             
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -880,7 +880,7 @@ namespace whusa.DAL
             //strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-            paramList = new Dictionary<string, object>();
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -906,7 +906,7 @@ namespace whusa.DAL
             string tabla = owner + ".tticol042140";
             string name1 = "ConsultarPalletPicking042PAID";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -933,7 +933,7 @@ namespace whusa.DAL
             string name1 = "ConsultarPalletPicking131PAID";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -959,6 +959,7 @@ namespace whusa.DAL
 
             strSentencia = recursos.readStatement(metodo2, method.Name, ref owner, ref env, tabla, paramList);
             sentencia = strSentencia;
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -981,7 +982,7 @@ namespace whusa.DAL
             paramList.Add(":PAID_OLD", PAID_OLD.Trim().ToUpper());
 
             strSentencia = recursos.readStatement(metodo2, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1006,7 +1007,7 @@ namespace whusa.DAL
             string name1 = "ActCausalcol130140";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1032,7 +1033,7 @@ namespace whusa.DAL
             string name1 = "ConsultarPalletPicking22With082";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1057,7 +1058,7 @@ namespace whusa.DAL
             string tabla = ".tticol042";
             string name1 = "ConsultarPalletPicking042With082";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1082,7 +1083,7 @@ namespace whusa.DAL
             string name1 = "ConsultarPalletPicking131With082";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1111,7 +1112,7 @@ namespace whusa.DAL
             string tabla = ".tticol222";
             string name1 = "ConsultarPalletPicking22ItemQty";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             //strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
 
             try
@@ -1143,7 +1144,7 @@ namespace whusa.DAL
             string tabla = ".tticol042";
             string name1 = "ConsultarPalletPicking042ItemQty";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1173,7 +1174,7 @@ namespace whusa.DAL
             string name1 = "ConsultarPalletPicking131ItemQty";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1198,7 +1199,7 @@ namespace whusa.DAL
             paramList.Add(":PROC", "7");
 
             strSentencia = recursos.readStatement(metodo2, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1223,6 +1224,7 @@ namespace whusa.DAL
             paramList.Add(":QTYT_ACT", qtyt_a);
 
             strSentencia = recursos.readStatement("twhcol130", method.Name, ref owner, ref env, "twhcol130", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1246,6 +1248,7 @@ namespace whusa.DAL
             paramList.Add(":QTYT_ACT", qtyt_a);
 
             strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, "tticol242", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1287,9 +1290,10 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$LOGN", _operator.Trim());
             paramList.Add(":T$STAT", stat);
-            paramList.Add(":T$PICK", PICK);
+            paramList.Add(":T$PICK", PICK.Trim());
             paramList.Add(":T$CWAR", CWAR);
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1309,6 +1313,7 @@ namespace whusa.DAL
             paramList.Add(":T$SQNB", PAID.Trim());
             paramList.Add(":OLD", OLD);
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1328,6 +1333,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", PAID.Trim());
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1348,6 +1354,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", PAID.Trim());
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1373,6 +1380,7 @@ namespace whusa.DAL
             paramList.Add(":T$QTYOLD", qtyOld /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
 
             strSentencia = recursos.readStatement("twhcol130", method.Name, ref owner, ref env, "twhcol130", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1396,6 +1404,7 @@ namespace whusa.DAL
             paramList.Add(":T$QTYOLD", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
 
             strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, "tticol242", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1419,6 +1428,7 @@ namespace whusa.DAL
             paramList.Add(":T$QTYOLD", allo /*qtyt_act.ToString().Contains(".") ? qtyt_act.ToString().Replace(".", ",") : qtyt_act.ToString().Replace(",", ".")*/);
 
             strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, "tticol222", paramList);
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
@@ -1440,7 +1450,7 @@ namespace whusa.DAL
             string tabla = ".tticol042";
             string name1 = "ConsultarPalletPickingGlobal";
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -1464,7 +1474,7 @@ namespace whusa.DAL
             paramList.Add(":ITEM", ITEM.Trim());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            paramList.Clear();
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);

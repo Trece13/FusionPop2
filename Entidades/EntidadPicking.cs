@@ -30,7 +30,7 @@ namespace whusa
             this.SQNB = string.Empty;
             this.ADVS = string.Empty;
             this.CNPK = string.Empty;
-
+            this.MCNO = string.Empty;
             this.error = false;
             this.errorMsg = string.Empty;
             this.KLTC = string.Empty;
@@ -54,12 +54,10 @@ namespace whusa
         public string SQNB { get; set; }
         public string ADVS { get; set; }
         public string CNPK { get; set; }
-       
+        public string MCNO { get; set; }
         public bool error { get; set; }
         public string errorMsg { get; set; }
         public string KLTC { get; set; }
-
-
         public string QTYT { get; set; }
 
         public string typeMsgJs { get; set; }

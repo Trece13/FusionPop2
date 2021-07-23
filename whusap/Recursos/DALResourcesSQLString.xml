@@ -692,8 +692,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN baan.twhcol131140 col131
           ON col131.T$paid = ticol082.T$PAID
           where UPPER(ticol082.T$LOGN) = NVL(UPPER('[:T$LOGN]'),ticol082.T$LOGN)
-          and ticol082.T$STAT in([:T$STAT])
-          and ticol082.T$PICK = NVL('[:T$PICK]',ticol082.T$PICK)
+          AND TICOL082.T$STAT IN([:T$STAT])
+          AND TRIM(TICOL082.T$PICK) = NVL('[:T$PICK]',TRIM(TICOL082.T$PICK))
           and ticol082.T$CWAR = NVL('[:T$CWAR]',ticol082.T$CWAR)
           order by ticol082.T$PONO,ticol082.T$ADVS asc)
           where stat022 != '12'
@@ -762,7 +762,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL022.T$DELE = 8
           and COL082.T$CWAR = NVL('[:CWAR]',COL082.T$CWAR)
           AND COL022.T$SQNB = '[:PAID]'
-          AND COL082.T$PICK = NVL('[:PICK]',COL082.T$PICK)
+          AND TRIM(COL082.T$PICK) = NVL('[:PICK]',TRIM(COL082.T$PICK))
           AND COL082.T$STAT IN('1','2')
           )
           WHERE ROWN = 1
@@ -814,7 +814,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL042.T$DELE = 8
           AND COL082.T$CWAR =  NVL('[:CWAR]',COL082.T$CWAR)
           AND COL042.T$SQNB = '[:PAID]'
-          AND COL082.T$PICK = NVL('[:PICK]',COL082.T$PICK)
+          AND TRIM(COL082.T$PICK) = NVL('[:PICK]',TRIM(COL082.T$PICK))
           AND COL082.T$STAT IN('1','2')
           )
           WHERE ROWN = 1
@@ -863,7 +863,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE (COL131.T$STAT = 6 OR COL131.T$STAT = 3)
           AND COL131.T$PAID = '[:PAID]'
           AND COL131.T$CWAA = NVL('[:CWAR]',COL131.T$CWAA)
-          AND COL082.T$PICK = NVL('[:PICK]',COL082.T$PICK)
+          AND TRIM(COL082.T$PICK) = NVL('[:PICK]',TRIM(COL082.T$PICK))
           AND COL082.T$STAT IN('1','2')
           )
           WHERE ROWN = 1
@@ -1428,7 +1428,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="UpdateTtico082Stat">
         <stringSQL>
           UPDATE {0}.tticol082{1} SET
-          T$STAT = '[:T$STAT]'
+          T$STAT = '[:T$STAT]',
+          T$PICK = nvl('[:T$PICK]',T$PICK)
           WHERE
           trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
@@ -2177,7 +2178,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPendientesTccol307">
         <stringSQL>
-          SELECT DISTINCT COL307.T$USER, COL307.T$STAT, COL307.T$PAID, COL307.T$CWAR, COL307.T$PROC,COL082.T$MCNO FROM BAAN.TTCCOL307140 COL307
+          SELECT DISTINCT COL307.T$USER, COL307.T$STAT, COL307.T$PAID, COL307.T$CWAR, COL307.T$PROC,COL082.T$MCNO,COL082.T$PRIO FROM BAAN.TTCCOL307140 COL307
           LEFT JOIN BAAN.TTICOL082140 COL082
           on COL082.T$PICK  = COL307.T$PAID
           and COL082.T$CWAR = COL307.T$CWAR

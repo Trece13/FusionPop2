@@ -12,6 +12,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.min.js"
         integrity="sha512-aDa+VOyQu6doCaYbMFcBBZ1z5zro7l/aur7DgYpt7KzNS9bjuQeowEX0JyTTeBTcRd0wwN7dfg5OThSKIWYj3A=="
         crossorigin="anonymous"></script>
+    <style>
+        .loader:before,
+        .loader:after,
+        .loader {
+            border-radius: 50%;
+            width: 2.5em;
+            height: 2.5em;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation: load7 1.8s infinite ease-in-out;
+            animation: load7 1.8s infinite ease-in-out;
+        }
+
+        .loader {
+            margin: 8em auto;
+            font-size: 10px;
+            position: relative;
+            text-indent: -9999em;
+            -webkit-animation-delay: 0.16s;
+            animation-delay: 0.16s;
+        }
+
+            .loader:before {
+                left: -3.5em;
+            }
+
+            .loader:after {
+                left: 3.5em;
+                -webkit-animation-delay: 0.32s;
+                animation-delay: 0.32s;
+            }
+
+            .loader:before,
+            .loader:after {
+                content: '';
+                position: absolute;
+                top: 0;
+            }
+
+        @-webkit-keyframes load7 {
+            0%, 80%, 100% {
+                box-shadow: 0 2.5em 0 -1.3em #ffffff;
+            }
+
+            40% {
+                box-shadow: 0 2.5em 0 0 #FFF;
+            }
+        }
+
+        @keyframes load7 {
+            0%, 80%, 100% {
+                box-shadow: 0 2.5em 0 -1.3em #ffffff;
+            }
+
+            40% {
+                box-shadow: 0 2.5em 0 0 #FFF;
+            }
+    </style>
     <style type="text/css">
         #MyEtiqueta label {
             font-size: 15px;
@@ -248,24 +306,10 @@
             var LbdDate2 = $("#LblDate2");
             LbdDate2.html(dateNow);
 
-            //            //Get the HTML of div
-            //            var divElements = document.getElementById(divID).innerHTML;
-            //            //Get the HTML of whole page
-            //            var oldPage = document.body.innerHTML;
-            //            //Reset the page's HTML with div's HTML only
-            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
-            //            //Print Page
-            //            window.print();
-            //            //Restore orignal HTML
-            //            document.body.innerHTML = oldPage;
-            //            window.close();
-            //            return true;
-
             var mywindow = window.open('', 'PRINT');
 
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('</head><body >');
-            //mywindow.document.write('<h1>' + document.title + '</h1>');
+            mywindow.document.write('</head><body ><style>@page {size: 6in,4in;margin: 0;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
 
@@ -317,6 +361,9 @@
         </div>
         <hr />
         <br />
+        <div class="fa-5x container text-center" style="display: none" id="GetPicksLoader">
+            <i class="fas fa-circle-notch fa-spin" style="color: silver;"></i>
+        </div>
         <div id="divPicketPending" class="col-12">
             <table id="tblPicketPending" class="table animate__animated animate__fadeInLeft" style="width: 100%">
                 <thead>
@@ -325,6 +372,7 @@
                         <th scope="col">Warehouse</th>
                         <th scope="col">User</th>
                         <th scope="col">Machine</th>
+                        <th scope="col">Priority</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -409,15 +457,15 @@
                             </select>
                         </div>
                         <div class="col-4">
-                            <input id="bntChange" type="button" class="btn btn-primary col-12 btn-sm"  style="display:none" onclick="IngresarCausales()"
+                            <input id="bntChange" type="button" class="btn btn-primary col-12 btn-sm" style="display: none" onclick="IngresarCausales()"
                                 value="Change" />
                         </div>
                     </div>
 
                     <br>
                     <div class="row">
-                        <input class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" type="button" value="Confirm">
-                        <input class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;" type="button" value="Skip Picking">
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="ConfirmLoader"></i></span></button>
+                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;" type="button">Skip Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                     </div>
                     <div class="row">
                         <label id="lblError" style="color: red"></label>
@@ -434,7 +482,7 @@
         </div>
         <div class="row">
             <div class="container">
-                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px; display:none" frameborder="0" src=""></iframe>
+                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px; display: none" frameborder="0" src=""></iframe>
             </div>
             <div id="MyEtiqueta">
                 <div id="myLabel">
@@ -548,6 +596,18 @@
         </div>
     </div>
     <script>
+
+        var GetPicksProcessing = false;
+        var TakeProcessing = false;
+        var ChangeProcessing = false;
+        var ConfirmProcessing = false;
+        var SkipProcessing = false;
+        var DropProcessing = false;
+        var EndPickingProcessing = false;
+
+        var indexTakeLoader;
+        var indexDropLoader;
+
         var timer;
         var skip = false;
         var drop = false;
@@ -556,7 +616,7 @@
             clearTimeout(timer);
         }
         window.onbeforeunload = function (e) {
-            console.log("sasasassas");
+
         };
 
         var cnpk = "";
@@ -565,6 +625,7 @@
         var locaOk = false;
         var qtytOk = false;
         var DisttinctLocaValid = false;
+
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
@@ -598,24 +659,14 @@
             var bdPicketPending = document.getElementById("bdPicketPending");
             var ddReason = document.getElementById("ddReason");
             var bntChange = document.getElementById("bntChange");
-            //var btnNextPicking = document.getElementById("btnNextPicking");
-            //var btnEndPicking = document.getElementById("btnEndPicking");
-            //var roetest = document.getElementById("roetest");
-            //var tblPickingsItems = document.getElementById("tblPickingsItems");
-            //var tblPickingsToBeProcessedWarehouse = document.getElementById("tblPickingsToBeProcessedWarehouse");
 
             btnStarPicking.addEventListener("click", loadPage);
-            //btnSkipPicking.addEventListener("click", );
-            //btnNextPicking.addEventListener("click", loadPage);
-            //btnEndPicking.addEventListener("click", );f
             ddWare.addEventListener("change", loadPicksPending);
             ddReason.addEventListener("change", changeReason);
             txPaid.addEventListener("input", verifyPallet);
             txLoca.addEventListener("input", VerifyLocation);
             txQtyc.addEventListener("input", VerifyQuantity);
             chkConsigment.addEventListener('change', GetWarehouse)
-            //$("#btnEndPicking").hide();
-            //$("#btnNextPicking").hide();
         }
 
         var changeReason = function () {
@@ -768,11 +819,11 @@
                         for (var i = 0; i < myObj.length; i++) {
 
                             if (myObj[i].T$STAT == 1) {
-                                bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$PRIO+ "</td><td></td></tr>";
+                                bodyRows += "<tr id='rowNum" + i + "' row= '" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
                             }
                             else {
                                 dropPending = true;
-                                bodyRows += "<tr onClick='Drop(this,false)' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop</button></td></tr>";
+                                bodyRows += "<tr onClick='Drop(this,false)' row= '" + i + "' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='DropLoader" + i + "'></i></span></button></td></tr>";
                             }
                         }
                         var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
@@ -786,8 +837,6 @@
                                                         "<th scope='col'>Quantity</th>" +
                                                         "<th scope='col'>Unit</th>" +
                                                         "<th scope='col'>Pallet ID</th>" +
-                                                        "<th scope='col'>Machine</th>" +
-                                                        "<th scope='col'>Prio</th>" +
                                                         "<th scope='col'></th>" +
                                                     "</tr>" +
                                                    "</thead>" +
@@ -795,7 +844,7 @@
                                                    bodyRows +
                         "</tbody>" +
                                                 "</table>";
-                        dropPending == true ? tableOptions += "<input type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "' value ='End Picking'>" : tableOptions;
+                        dropPending == true ? tableOptions += "<button type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "'>End Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='EndPickingLoader'></i></span></button>" : tableOptions;
 
 
                         $("#divTableWarehouse").append(tableOptions);
@@ -819,6 +868,10 @@
         }
 
         var LoadPageSuccess = function (r) {
+            TakeProcessing = false;
+            SkipProcessing = false;
+            $('#TakeLoader' + indexTakeLoader).hide(500);
+            $('#SkipLoader').hide(500);
             ClearFormPicking();
             var divTables = document.getElementById('divTables');
             ddWare.value = 0;
@@ -858,10 +911,12 @@
             else {
                 $("#formPicking").hide(100);
             }
+            TakeProcessing = false;
         }
 
         var loadPicksPending = function () {
             if (ddWare.value == "0") {
+                $('#divPicketPending').hide(100);
                 $("#btnStarPicking").hide(100);
                 $('#divPicketPending').hide(100);
                 $("#formPicking").hide(100);
@@ -869,9 +924,17 @@
                 divTableItem.innerHTML = '';
             }
             else {
+                /*$('#GetPicksLoader').show(10);*/
+                $('#divPicketPending').hide(100);
                 $("#formPicking").hide(100);
                 divTableWarehouse.innerHTML = '';
                 divTableItem.innerHTML = '';
+
+                if (bdPicketPending.childElementCount > 0) {
+                    for (let i = bdPicketPending.childElementCount - 1; i >= 0 ; i--) {
+                        bdPicketPending.children[i].remove()
+                    }
+                }
                 EventoAjax("loadPicksPending", "{'CWAR':'" + ddWare.value + "'}", loadPicksPendingSuccess);
             }
         }
@@ -892,16 +955,16 @@
                     if (parseInt(item.T$PAID.trim()).toString() != "NaN") {
 
                         if (item.T$STAT == 1) {
-                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
                         }
                         else {
-                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take</button></td>";
+                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;</span></button></td>";
                         }
                         validos = true;
                     }
                 });
                 if (validos) {
-                    $('#divPicketPending').show(100);
+                    $('#divPicketPending').show(500);
                 }
             }
             else {
@@ -911,10 +974,21 @@
         }
 
         var selectPicksPending = function (e) {
+            ChangeProcessing = false;
+            ConfirmProcessing = false;
+            SkipProcessing = false;
+            DropProcessing = false;
+            EndPickingProcessing = false;
+
             skip = false;
             ClearFormPicking();
             if (e != undefined) {
-                EventoAjax("ClickPickingPending", "{'PICK':'" + e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
+                if (verificarLoadersInactivos()) {
+                    TakeProcessing = true;
+                    indexTakeLoader = e.getAttribute('row');
+                    $('#TakeLoader' + indexTakeLoader).show(100);
+                    EventoAjax("ClickPickingPending", "{'PICK':'" + e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
+                }
             }
             else {
                 EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR') + "'}", LoadPageSuccess);
@@ -946,31 +1020,45 @@
         }
 
         var Drop = function (e, multi) {
-            if (multi == false) {
-                localStorage.setItem('paid', e.children[7].innerHTML.trim());
-                EventoAjax("Drop", "{'PAID':'" + e.children[7].innerHTML.trim() + "'}", DropSuccess);
-            }
-            else {
-                var myList = JSON.parse(localStorage.getItem('MyPalletList'));
-                var flag1 = false;
-                var Paids = ""
-                myList.forEach(function (x) {
-                    if (x.T$STAT == 2) {
-                        EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "'}", DropMultipleSuccess);
-                        Paids += x.T$PAID + " ";
-                        flag1 = true;
+            if (verificarLoadersInactivos()) {
+                if (multi == false) {
+                    DropProcessing = true;
+                    indexDropLoader = e.getAttribute('row');
+                    $('#DropLoader' + indexDropLoader).show(100);
+                    localStorage.setItem('paid', e.children[7].innerHTML.trim());
+                    EventoAjax("Drop", "{'PAID':'" + e.children[7].innerHTML.trim() + "','Consigment':" + chkConsigment.checked + "}", DropSuccess);
+                }
+                else {
+                    EndPickingProcessing = true;
+                    $("#EndPickingLoader").show(100);
+                    var myList = JSON.parse(localStorage.getItem('MyPalletList'));
+                    var flag1 = false;
+                    var Paids = ""
+                    myList.forEach(function (x) {
+                        if (x.T$STAT == 2) {
+                            EventoAjax("Drop", "{'PAID':'" + x.T$PAID + "'}", DropMultipleSuccess);
+                            Paids += x.T$PAID + " ";
+                            flag1 = true;
+                        }
+                    });
+                    if (flag1 = true) {
+                        EndPickingProcessing = false;
+                        $("#EndPickingLoader").hide(500);
+                        $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
+                        $("#lbPaid").html(Paids);
+                        EventoAjax("Eliminar307", "{}", null);
                     }
-                });
-                if (flag1 = true) {
-                    $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
-                    $("#lbPaid").html(Paids);
-                    EventoAjax("Eliminar307", "{}", null);
+                    else {
+                        EndPickingProcessing = false;
+                        $("#EndPickingLoader").hide(500);
+                    }
                 }
             }
 
         }
 
         var DropMultipleSuccess = function (r) {
+
             if (r.d != "") {
                 drop = true;
                 $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
@@ -981,6 +1069,7 @@
         }
 
         var DropSuccess = function (r) {
+            DropProcessing = false;
             if (r.d != "") {
                 drop = true;
                 $("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
@@ -989,6 +1078,7 @@
                 printDiv("MyEtiquetaDrop");
                 selectPicksPending();
             }
+            $('#DropLoader' + indexDropLoader).hide(500);
         }
 
 
@@ -1070,95 +1160,57 @@
         }
         var SkipPicking = function () {
             skip = true;
-            EventoAjax("SkipPicking", "{}", LoadPageSuccess);
+            if (verificarLoadersInactivos()) {
+                SkipProcessing = true;
+                $('#SkipLoader').show(100);
+                EventoAjax("SkipPicking", "{}", LoadPageSuccess);
+            }
         }
         var Confirm = function () {
-            if (parseFloat($("#Contenido_lblQuantity").val()) <= 0) {
-                $("#Contenido_lblQuantity").focus();
-                $('#LblError').html("The quantity cann´t be empty, zero less than zero");
-                return;
-            }
-
-            dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "'}";
-
-            //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
-            $.ajax({
-                type: "POST",
-                url: "PickingConsignmentMaterial.aspx/Click_confirPKG",
-                data: dataS,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var myObj = JSON.parse(response.d)
-                    if (myObj.Error == false) {
-                        if (myObj.qtyaG > 0) {
-                            //    printDiv("MyEtiqueta");
-                            myLabelFrame = document.getElementById('myLabelFrame');
-                            myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
-                        }
-                        //var newCant = parseFloat($("#Contenido_lblQuantity").val());
-                        //var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-
-                        //$('#Contenido_CBPalletNO').attr("src", myObj.PAID_OLD_URL);
-                        //$('#Contenido_CBItem').attr("src", myObj.ITEM_URL);
-                        //$('#Contenido_CBQuantity').attr("src", myObj.QTYC_URL);
-                        //$('#LblUnit').html($('#Contenido_lblQuantityDesc').html());
-
-                        //$('#Contenido_CBLot').attr("src", myObj.CLOT_URL);
-                        //if (myObj.CLOT_URL != undefined) {
-                        //    myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot').hide() : $('#Contenido_CBLot').show();
-                        //}
-
-                        //$('#Contenido_CBPalletNO2').attr("src", myObj.PAID_URL);
-                        //$('#Contenido_CBItem2').attr("src", myObj.ITEM_URL);
-                        //$('#lblItemDesc2').html($('#Contenido_lblItemDesc').html());
-                        //$('#Contenido_CBQuantity2').attr("src", myObj.QTYC1_URL);
-                        //$('#LblUnit2').html($('#Contenido_lblQuantityDesc').html());
-
-                        //$('#Contenido_CBLot2').attr("src", myObj.CLOT_URL);
-                        //if (myObj.CLOT_URL != undefined) {
-                        //    myObj.CLOT_URL.trim() == "" ? $('#Contenido_CBLot2').hide() : $('#Contenido_CBLot2').show();
-                        //}
-
-                        //var newCant = parseFloat($("#Contenido_lblQuantity").val());
-                        //var oldCant = parseFloat($("#Contenido_lblQuantityAux").html());
-                        alert("Information saved successfully");
-                        //$('#Contenido_lblPalletID').html("");
-                        //$('#Contenido_lblItemID').html("");
-                        //$('#Contenido_LblLotId').html("");
-                        //$('#Contenido_lblWarehouse').html("");
-                        //$('#Contenido_lbllocation').html("");
-                        //$('#Contenido_lblQuantity').html("");
-                        //$('#Contenido_lblItemDesc').html("");
-                        //$('#Contenido_lblWareDescr').html("");
-                        //$('#Contenido_lblQuantityDesc').html("");
-                        //$('#Contenido_txtPalletID').val("");
-                        //$('#txtlocation').val("");
-                        selectPicksPending();
-
-                    }
-                    else {
-                        alert(myObj.errorMsg);
-                        //$('#Contenido_lblPalletID').html("");
-                        //$('#Contenido_lblItemID').html("");
-                        //$('#Contenido_LblLotId').html("");
-                        //$('#Contenido_lblWarehouse').html("");
-                        //$('#Contenido_lbllocation').html("");
-                        //$('#Contenido_lblQuantity').html("");
-                        //$('#Contenido_lblItemDesc').html("");
-                        //$('#Contenido_lblWareDescr').html("");
-                        //$('#Contenido_lblQuantityDesc').html("");
-                        //$('#Contenido_txtPalletID').val("");
-                        //$('#txtlocation').val("");
-
-                        selectPicksPending();
-
-                    }
-                },
-                failure: function (response) {
-                    alert(response.d);
+            if (verificarLoadersInactivos()) {
+                ConfirmProcessing = true;
+                $("#ConfirmLoader").show(100);
+                if (parseFloat($("#Contenido_lblQuantity").val()) <= 0) {
+                    $("#Contenido_lblQuantity").focus();
+                    $('#LblError').html("The quantity cann´t be empty, zero less than zero");
+                    ConfirmProcessing = false;
+                    $("#ConfirmLoader").hide(500);
+                    return;
                 }
-            });
+
+                dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "'}";
+
+                //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
+                $.ajax({
+                    type: "POST",
+                    url: "PickingConsignmentMaterial.aspx/Click_confirPKG",
+                    data: dataS,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        var myObj = JSON.parse(response.d)
+                        if (myObj.Error == false) {
+                            if (myObj.qtyaG > 0) {
+                                //    printDiv("MyEtiqueta");
+                                myLabelFrame = document.getElementById('myLabelFrame');
+                                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
+                            }
+                            alert("Information saved successfully");
+                            selectPicksPending();
+                            $("#ConfirmLoader").hide(500);
+                        }
+                        else {
+                            alert(myObj.errorMsg);
+                            selectPicksPending();
+                            $("#ConfirmLoader").hide(500);
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                        $("#ConfirmLoader").hide(500);
+                    }
+                });
+            }
         }
 
 
@@ -1325,6 +1377,19 @@
             }
             else {
                 $('#btnConfirm').hide(300);
+            }
+        }
+
+        var verificarLoadersInactivos = function () {
+            if (TakeProcessing != false ||
+                ChangeProcessing != false ||
+                ConfirmProcessing != false ||
+                SkipProcessing != false ||
+                DropProcessing != false ||
+                EndPickingProcessing != false) {
+                return false;
+            } {
+                return true;
             }
         }
 
