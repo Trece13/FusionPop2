@@ -120,8 +120,9 @@ namespace whusap.WebPages.Balance
             lblError.Text = string.Empty; ;
             obj011.mcno = ((TextBox)sender).Text.Trim().ToUpperInvariant(); ;  //listMachine.SelectedValue.Trim().ToUpperInvariant();
 
-            //resultado = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-            resultado = idal011.listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
+            resultado = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
+            //JC 230721 Reversión a Tomar Orden inicializada en la máquina
+            //resultado = idal011.listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
             // Para este caso strError muestra los mensajes de resutado de la consulta para cuando no hay filas 
             // o cuando existe mas de una fila
 
