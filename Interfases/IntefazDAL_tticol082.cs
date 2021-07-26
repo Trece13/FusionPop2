@@ -86,6 +86,11 @@ namespace whusa.Interfases
             return dal.Actualizartticol082(myObj);
         }
 
+        public bool Actualizartticol082SinRandom(Ent_tticol082 myObj)
+        {
+            return dal.Actualizartticol082SinRandom(myObj);
+        }
+
         public bool Actualizartticol222(Ent_tticol082 myObj)
         {
             return dal.Actualizartticol222(myObj);

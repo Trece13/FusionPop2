@@ -1701,7 +1701,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --AND T$ORNO = '[:ORNO]'
         </stringSQL>
       </operationName>
-      
+      <operationName name="Actualizartticol082SinRandom">
+        <stringSQL>
+          --update {0}.tticol082{1} set t$stat = 4
+          update {0}.tticol082{1}
+          set t$stat = '[:STAT]'
+          where T$PICK =  '[:PICK]'
+          and T$CWAR =  nvl('[:CWAR]',T$CWAR)
+          and T$STAT = '7'
+        </stringSQL>
+      </operationName>
       <operationName name="Actualizartwhcol131">
         <stringSQL>
           update  {0}.twhcol131{1} set t$stat = 8 where t$paid =  '[:PAID]'

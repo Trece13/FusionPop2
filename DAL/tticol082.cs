@@ -535,6 +535,44 @@ namespace whusa.DAL
             MyObj.ErrorMsg = strError;
             return retorno;
         }
+
+        public bool Actualizartticol082SinRandom(Ent_tticol082 MyObj)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", MyObj.PAID);
+                paramList.Add(":PRIO", MyObj.PRIO);
+                paramList.Add(":ADVS", MyObj.ADVS);
+                paramList.Add(":PONO", MyObj.PONO);
+                paramList.Add(":ORNO", MyObj.ORNO);
+                paramList.Add(":PICK", MyObj.PICK);
+                paramList.Add(":CWAR", MyObj.CWAR);
+                paramList.Add(":STAT", MyObj.STAT);
+                //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                paramList.Add(":RAND", MyObj.RAND);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            MyObj.Error = true;
+            MyObj.ErrorMsg = strError;
+            return retorno;
+        }
+
         public bool Actualizartwhcol131(Ent_tticol082 MyObj)
         {
 

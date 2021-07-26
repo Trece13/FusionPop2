@@ -26,7 +26,8 @@ namespace whusap.WebPages.WorkOrders.NewPages
         public static string _operator = string.Empty;
         string _idioma = string.Empty;
         private static string globalMessages = "GlobalMessages";
-
+        //JC 260721 Adicionar Variable para validar el estado del pick y evitar doble asignación de numero aleatorio
+        public static string STATPICK = string.Empty;
         public static string Thedropprocessissuccess = mensajes("Thedropprocessissuccess");
         public static string Thedropprocessisnotsuccess = mensajes("Thedropprocessisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
@@ -130,17 +131,29 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.CWAR = myObjDt["CWAR"].ToString();
                     MyObj.STAT = myObjDt["STAT"].ToString();
                     MyObj.MCNO = HttpContext.Current.Session["MCNO"].ToString();
+                    STATPICK = MyObj.STAT;
                     //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                     //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
                     if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
                     {
                         MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
-                        MyObj.RAND = ramdomNumStr;
-                        Itticol082.Actualizartticol082(MyObj);
-                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
-                        MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
-                        MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
+                        //JC 260721 Cambio para que cuando ya tenga el número aleatorio no le genere uno adicional
+                        if (STATPICK == "7")
+                        {
+                            MyObj.RAND = "";
+                            Itticol082.Actualizartticol082SinRandom(MyObj);
+                            //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                            MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
+                        }
+                        else
+                        {
+                            MyObj.RAND = ramdomNumStr;
+                            Itticol082.Actualizartticol082(MyObj);
+                            //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                            MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
+                            MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
+                        }
                      }
                     else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
                     {
