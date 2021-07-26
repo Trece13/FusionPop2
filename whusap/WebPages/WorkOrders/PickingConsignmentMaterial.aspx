@@ -1049,19 +1049,21 @@
                     $("#EndPickingLoader").show(100);
                     var myList = JSON.parse(localStorage.getItem('MyPalletList'));
                     var flag1 = false;
-                    //var Paids = ""
-                    //myList.forEach(function (x) {
-                        //if (x.T$STAT == 2) {
+                    //JC 260709 No estaba imprimiendo los pallets cuando se le oprimía end picking
+                    var Paids = ""
+                    myList.forEach(function (x) {
+                        if (x.T$STAT == 2) {
                             EventoAjax("DropEndPicking", "{'PICK':'" + myList.T$PICK + "','Consigment':" + chkConsigment.checked + "}", DropMultipleSuccess);
-                        //    Paids += x.T$PAID + " ";
+                            Paids += x.T$PAID + " ";
                             flag1 = true;
-                      //  }
-                    //});
+                        }
+                    });
                     if (flag1 = true) {
                         $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
-                        if (multi = false){
+                        //JC 260709 No estaba imprimiendo los pallets cuando se le oprimía end picking
+                        //if (multi = false){
                             $("#lbPaid").html(Paids);
-                            }
+                        //    }
                         /*EventoAjax("Eliminar307", "{}", null);*/
                     }
                     else {
