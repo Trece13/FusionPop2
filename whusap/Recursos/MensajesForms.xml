@@ -5114,22 +5114,17 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            Pallet ID has not been dropped or discounted
+            Pick ID has not been dropped or discounted
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
           <stringMessage>
-            Pallet ID not valid for take to MFG
-          </stringMessage>
-        </operationName>
-        <operationName name="ThePalletIDDoesntexist">
-          <stringMessage>
-            Pallet ID has not been dropped or discounted
+            Pick ID not valid for take to MFG
           </stringMessage>
         </operationName>
         <operationName name="PalletIdAlreadyPicked">
           <stringMessage>
-            Pallet ID already Picked
+            Pick ID already Picked
           </stringMessage>
         </operationName>
       </Idiom>
@@ -5146,17 +5141,17 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            Pallet ID has not been dropped or discounted
+            Pick ID has not been dropped or discounted
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
           <stringMessage>
-            Pallet ID not valid for take to MFG
+            Pick ID not valid for take to MFG
           </stringMessage>
         </operationName>
         <operationName name="PalletIdAlreadyPicked">
           <stringMessage>
-            Pallet ID already Picked
+            Pick ID already Picked
           </stringMessage>
         </operationName>
       </Idiom>
