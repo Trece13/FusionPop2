@@ -134,7 +134,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
                     if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
                     {
-                        MyObj.STAT = "7";
+                        MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                         MyObj.RAND = ramdomNumStr;
                         Itticol082.Actualizartticol082(MyObj);

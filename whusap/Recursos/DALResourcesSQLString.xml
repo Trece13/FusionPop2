@@ -1728,7 +1728,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttcibd001{1} cibd001 ON cibd001.T$ITEM =  col082.T$ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 ON mcs003.T$CWAR = col082.T$CWAR
           LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
-          WHERE col082.T$STAT IN (2, 7)
+          WHERE col082.T$STAT IN (2,7)
           )
           WHERE TRIM(PICK) = TRIM('[:PICK]')
           <!--SELECT distinct ticol082.T$CWAR CWAR,TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
