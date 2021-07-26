@@ -1445,6 +1445,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$STAT = '[:T$STAT]',
           T$PICK = nvl('[:T$PICK1]',T$PICK)
           WHERE TRIM(T$PICK) = trim('[:T$PICK]')
+          AND T$STAT = '2'
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl082Paid">
