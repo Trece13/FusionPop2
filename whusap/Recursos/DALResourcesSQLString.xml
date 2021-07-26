@@ -719,7 +719,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking22140PAID">
         <stringSQL>
-          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,SLOC
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,MCNO,SLOC
           FROM
           (
           SELECT
@@ -741,6 +741,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          COL082.T$MCNO MCNO,
           WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
           CASE WHEN COL222.T$ACQT+COL222.T$ALLO >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
@@ -771,7 +772,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking042PAID">
         <stringSQL>
-          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,SLOC
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,MCNO,SLOC
           FROM
           (
           SELECT
@@ -793,6 +794,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          COL082.T$MCNO MCNO,
           WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
           CASE WHEN (COL242.T$ACQT+COL242.T$ALLO) >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
@@ -823,7 +825,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ConsultarPalletPicking131PAID">
         <stringSQL>
-          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,SLOC
+          SELECT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,QTYT,QTYOK,CWAROK,PICK,MCNO,SLOC
           FROM
           (
           SELECT
@@ -845,6 +847,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          COL082.T$MCNO MCNO,
           WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN,
           CASE WHEN (COL131.T$QTYA+COL131.T$ALLO) >= COL082.T$QTYT THEN 'TRUE' ELSE 'FALSE' END AS QTYOK,
@@ -1191,7 +1194,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking22With082">
         <stringSQL>
-          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,SLOC
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,MCNO,SLOC
           FROM(SELECT
           COL020.T$CNPK CNPK,
           COL022.T$DELE STAT,
@@ -1206,6 +1209,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PRIO PRIO,
           COL222.T$ACLO LOCA,
           COL082.T$PICK PICK,
+          COL082.T$MCNO MCNO,
           COL082.T$OORG OORG,
           COL082.T$ORNO ORNO,
           COL082.T$PONO PONO,
@@ -1240,7 +1244,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking042With082">
         <stringSQL>
-          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,SLOC
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,MCNO,SLOC
           FROM(SELECT
           COL020.T$CNPK CNPK,
           COL042.T$DELE STAT,
@@ -1255,6 +1259,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PRIO PRIO,
           COL242.T$ACLO LOCA,
           COL082.T$PICK PICK,
+          COL082.T$MCNO MCNO,
           COL082.T$OORG OORG,
           COL082.T$ORNO ORNO,
           COL082.T$PONO PONO,
@@ -1289,7 +1294,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletPicking131With082">
         <stringSQL>
-          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,QTYT,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,SLOC
+          SELECT DISTINCT CNPK,STAT,PALLETID,ITEM,DESCRIPTION,LOT,WRH,DESCWRH,QTY,QTYT,UN,PRIO,LOCA,OORG,ORNO,PONO,ADVS,ROWN,PICK,MCNO,SLOC
           FROM(SELECT
           COL020.T$CNPK CNPK,
           COL131.T$STAT STAT,
@@ -1309,6 +1314,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           COL082.T$PONO PONO,
           COL082.T$ADVS ADVS,
           COL082.T$PICK PICK,
+          COL082.T$MCNO MCNO,
           WMD200.T$SLOC SLOC,
           RANK() OVER(ORDER BY COL082.T$PRIO) ROWN
           FROM    {0}.TTICOL082{1} COL082
