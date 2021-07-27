@@ -135,7 +135,7 @@ namespace whusa.Interfases
             if (!isPro1False)
             {
                 strSentencia = strSentencia.Replace("ticol022.T$PRO1 = 2","ticol022.T$PRO1 = 1");
-                strSentencia += " AND ticol022.T$QTDL <> 0";
+                strSentencia += " AND ticol022.T$QTDL <> 0 AND ticol022.T$DELE NOT IN (1, 13)";
             }
             
             try

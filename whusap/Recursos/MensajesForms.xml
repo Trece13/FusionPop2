@@ -2990,7 +2990,7 @@
         </operationName>
         <operationName name="palletannounced">
           <stringMessage>
-            Pallet has not been announced.
+            Pallet has not been announced or Pallet has been delete
           </stringMessage>
         </operationName>
         <operationName name="palletwrapped">
@@ -3037,7 +3037,7 @@
         </operationName>
         <operationName name="palletannounced">
           <stringMessage>
-            Pallet no ha sido anunciado.
+            Pallet no ha sido anunciado or El Pallet fue borrado
           </stringMessage>
         </operationName>
         <operationName name="palletwrapped">
