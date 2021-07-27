@@ -309,7 +309,7 @@
             var mywindow = window.open('', 'PRINT');
 
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('</head><body ><style>@page {size: 6in,4in;margin: 0;}</style>');
+            mywindow.document.write('</head><body> <style>@page {size: 6in,4in;margin: 0; size: landscape;} #MyEtiquetaDrop{width:6in; height:4in;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
 
@@ -559,8 +559,9 @@
                     </div>
                 </div>
             </div>
-            <div id="MyEtiquetaDrop" style="display: none; width: 6in; height: 4in; border: solid 1px;">
-                <table style="margin: auto">
+            <div id="MyEtiquetaDropPrint" style="display:none;"">
+            <div id="MyEtiquetaDrop" style="width:6in; height:4in;">
+                <table style="margin: auto;margin-top:15px;">
                     <tr>
                         <td>
                             <label style="font-size: 30px">
@@ -593,6 +594,7 @@
                         </td>
                     </tr>
                 </table>
+            </div>
             </div>
         </div>
     </div>
@@ -1091,7 +1093,7 @@
                 drop = true;
                 //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
                  $("#Contenido_bcPick").attr("src", r.d);
-                printDiv("MyEtiquetaDrop");
+                 printDiv("MyEtiquetaDropPrint");
                 selectPicksPending();
             }
 
@@ -1106,7 +1108,7 @@
                 $("#Contenido_bcPick").attr("src", r.d);
                 $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                 $("#lbPaid").html(localStorage.getItem('paid'))
-                printDiv("MyEtiquetaDrop");
+                printDiv("MyEtiquetaDropPrint");
                 selectPicksPending();
             }
             $('#DropLoader' + indexDropLoader).hide(500);

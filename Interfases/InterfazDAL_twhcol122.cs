@@ -502,6 +502,7 @@ namespace whusa.Interfases
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString(),
                         PICK = MyRow["PICK"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString(),
                         SLOC = MyRow["SLOC"].ToString()
                     };
 
@@ -547,6 +548,7 @@ namespace whusa.Interfases
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString(),
                         PICK = MyRow["PICK"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString(),
                         SLOC = MyRow["SLOC"].ToString()
 
 
@@ -596,6 +598,7 @@ namespace whusa.Interfases
                         QTYOK = MyRow["QTYOK"].ToString(),
                         CWAROK = MyRow["CWAROK"].ToString(),
                         PICK = MyRow["PICK"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString(),
                         SLOC = MyRow["SLOC"].ToString()
 
 
@@ -639,8 +642,6 @@ namespace whusa.Interfases
 
                     EntidadPicking MyObjet = new EntidadPicking
                     {
-
-
                         PALLETID = MyRow["PALLETID"].ToString(),
                         ITEM = MyRow["ITEM"].ToString(),
                         DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
@@ -662,6 +663,7 @@ namespace whusa.Interfases
                         QTYT = MyRow["QTYT"].ToString(),
                         STAT = MyRow["STAT"].ToString(),
                         SLOC = MyRow["SLOC"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString(),
                         PICK = MyRow["PICK"].ToString()
                     };
 
@@ -706,6 +708,7 @@ namespace whusa.Interfases
                         CNPK = MyRow["CNPK"].ToString(),
                         STAT = MyRow["STAT"].ToString(),
                         PICK = MyRow["PICK"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString(),
                         SLOC = MyRow["SLOC"].ToString()
 
                     };
@@ -751,6 +754,7 @@ namespace whusa.Interfases
                         CNPK = MyRow["CNPK"].ToString(),
                         STAT = MyRow["STAT"].ToString(),
                         PICK = MyRow["PICK"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString(),
                         SLOC = MyRow["SLOC"].ToString()
                     };
 

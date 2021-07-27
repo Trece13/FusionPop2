@@ -34,6 +34,7 @@ namespace whusa
             this.error = false;
             this.errorMsg = string.Empty;
             this.KLTC = string.Empty;
+            this.MCNOPICK = false;
         }
 
         public string PALLETID { get; set; }
@@ -73,5 +74,7 @@ namespace whusa
         public string CWAROK { get; set; }
 
         public string PICK { get; set; }
+
+        public bool MCNOPICK { get; set; }
     }
 }
