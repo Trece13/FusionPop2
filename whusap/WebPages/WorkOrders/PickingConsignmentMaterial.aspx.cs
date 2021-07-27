@@ -33,6 +33,7 @@ namespace whusap.WebPages.WorkOrders
         public static string ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus = mensajes("ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus");
         public static string ThePalletIDdoesnotexist = mensajes("ThePalletIDdoesnotexist");
         public static string NotAalletsAvailablethereNotPallets = mensajes("NotAalletsAvailablethereNotPallets");
+        public static string machinesPicking = ConfigurationManager.AppSettings["MachinesPicking"];
         public static string errorlog = string.Empty;
         public static string ADVS = string.Empty;
         public object GObject = new object();
@@ -58,6 +59,8 @@ namespace whusap.WebPages.WorkOrders
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
+
+
             if (!IsPostBack)
             {
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
@@ -144,7 +147,7 @@ namespace whusap.WebPages.WorkOrders
                     int prio131 = LstPallet131.Count > 0 ? Convert.ToInt32(LstPallet131[0].PRIO.ToString()) : int.MaxValue;
                     int prio022 = LstPallet22.Count > 0 ? Convert.ToInt32(LstPallet22[0].PRIO.ToString()) : int.MaxValue;
                     int prio042 = LstPallet042.Count > 0 ? Convert.ToInt32(LstPallet042[0].PRIO.ToString()) : int.MaxValue;
-
+                    
                     if (prio131 != int.MinValue || prio022 != int.MinValue || prio042 != int.MinValue)
                     {
                         prios.Add(prio131);
@@ -166,6 +169,9 @@ namespace whusap.WebPages.WorkOrders
                 {
                     MyObj.PALLETID = LstPallet131[0].PALLETID.ToString();
                     EntidadPicking MyObjLst131 = LstPallet131[0];
+
+                    bool mcnopick = machinesPicking.Contains(LstPallet131[0].MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false ;
+
                     if (MyObjLst131.STAT.Trim() == "6" || MyObjLst131.STAT.Trim() == "3")
                     {
                         bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst131.PICK.ToString(), CWAR, "7", "0", "0");
@@ -188,6 +194,9 @@ namespace whusap.WebPages.WorkOrders
                 {
                     MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
                     EntidadPicking MyObjLst042 = LstPallet042[0];
+
+                    bool mcnopick = machinesPicking.Contains(MyObjLst042.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
+
                     if (MyObjLst042.STAT.Trim() == "7" || MyObjLst042.STAT.Trim() == "8")
                     {
 
@@ -211,6 +220,9 @@ namespace whusap.WebPages.WorkOrders
                 {
                     MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
                     EntidadPicking MyObjLst022 = LstPallet22[0];
+
+                    bool mcnopick = machinesPicking.Contains(MyObjLst022.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
+
                     if (MyObjLst022.STAT.Trim() == "7" || MyObjLst022.STAT.Trim() == "8")
                     {
                         bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst022.PICK.ToString(), CWAR, "7", "0", "0");
@@ -400,6 +412,7 @@ namespace whusap.WebPages.WorkOrders
                 if (LstPallet22PAID.Count > 0)
                 {
                     MyObj = LstPallet22PAID[0];
+                    bool mcnopick = machinesPicking.Contains(MyObj.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
                     HttpContext.Current.Session["MyObjPicking"] = MyObj;
                     HttpContext.Current.Session["flag022"] = 1;
                     HttpContext.Current.Session["flag131"] = 0;
@@ -409,6 +422,7 @@ namespace whusap.WebPages.WorkOrders
                 else if (LstPallet042PAID.Count > 0)
                 {
                     MyObj = LstPallet042PAID[0];
+                    bool mcnopick = machinesPicking.Contains(MyObj.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
                     HttpContext.Current.Session["MyObjPicking"] = MyObj;
                     HttpContext.Current.Session["flag042"] = 1;
                     HttpContext.Current.Session["flag022"] = 0;
@@ -419,6 +433,7 @@ namespace whusap.WebPages.WorkOrders
                 else if (LstPallet131PAID.Count > 0)
                 {
                     MyObj = LstPallet131PAID[0];
+                    bool mcnopick = machinesPicking.Contains(MyObj.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
                     HttpContext.Current.Session["MyObjPicking"] = MyObj;
                     HttpContext.Current.Session["flag131"] = 1;
                     HttpContext.Current.Session["flag022"] = 0;
@@ -1097,18 +1112,21 @@ namespace whusap.WebPages.WorkOrders
                         HttpContext.Current.Session["MyObjPicking"] = LstPallet22PAID[0];
                         MySessionObjPicking = LstPallet22PAID[0];
                         NoHallado = false;
+                        bool mcnopick = machinesPicking.Contains(MySessionObjPicking.MCNO.Trim()) == true ? MySessionObjPicking.MCNOPICK = true : MySessionObjPicking.MCNOPICK = false;
                     }
                     else if (LstPallet42PAID.Count > 0)
                     {
                         HttpContext.Current.Session["MyObjPicking"] = LstPallet42PAID[0];
                         MySessionObjPicking = LstPallet42PAID[0];
                         NoHallado = false;
+                        bool mcnopick = machinesPicking.Contains(MySessionObjPicking.MCNO.Trim()) == true ? MySessionObjPicking.MCNOPICK = true : MySessionObjPicking.MCNOPICK = false;
                     }
                     else if (LstPallet131PAID.Count > 0)
                     {
                         HttpContext.Current.Session["MyObjPicking"] = LstPallet131PAID[0];
                         MySessionObjPicking = LstPallet131PAID[0];
                         NoHallado = false;
+                        bool mcnopick = machinesPicking.Contains(MySessionObjPicking.MCNO.Trim()) == true ? MySessionObjPicking.MCNOPICK = true : MySessionObjPicking.MCNOPICK = false;
                     }
                     else
                     {
