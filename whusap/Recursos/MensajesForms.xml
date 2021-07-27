@@ -2355,7 +2355,16 @@
             Pallet ID status doesn´t allow rejection
           </stringMessage>
         </operationName>
-
+        <operationName name="errorshift">
+          <stringMessage>
+            Shift mustn't be empty
+          </stringMessage>
+        </operationName>
+        <operationName name="errorreason">
+          <stringMessage>
+            Reason mustn't be empty
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="encabezado">
