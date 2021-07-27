@@ -473,6 +473,7 @@
                 </form>
             </div>
             <div id="divTables" class="col-7">
+                <label style="display:none; color:red; font-size:15px" id="lblMcnoPick">Material room pick</label>
                 <div id="divTableItem" class="col-12">
                 </div>
                 <br />
@@ -873,6 +874,7 @@
         }
 
         var LoadPageSuccess = function (r) {
+            $("#lblMcnoPick").hide(500);
             TakeProcessing = false;
             SkipProcessing = false;
             StartProcessing = false;
@@ -898,6 +900,12 @@
                     lblWare.innerHTML = MyObj.WRH;
                     lblQtyc.innerHTML = MyObj.QTYT;
                     lblUnit.innerHTML = MyObj.UN;
+                    if (MyObj.MCNOPICK == true) {
+                        $("#lblMcnoPick").show(500);
+                    }
+                    else {
+                        $("#lblMcnoPick").hide(500);
+                    }
                     //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
                     divTables.classList.add("col-7");
                     divTables.classList.remove("col-12");
@@ -922,6 +930,7 @@
         }
 
         var loadPicksPending = function () {
+            $("#lblMcnoPick").hide(100);
             if (ddWare.value == "0") {
                 
                 ajaxShowCurrentOptionsItem != null ? ajaxShowCurrentOptionsItem.abort() : ajaxShowCurrentOptionsItem;
