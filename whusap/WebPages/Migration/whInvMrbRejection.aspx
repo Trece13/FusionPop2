@@ -334,7 +334,14 @@
             </td>
             <td style="width: 250px; padding: 5px;">
                     <asp:DropDownList runat="server" ID="dropDownWarehouse" CssClass="TextBoxBig"></asp:DropDownList>
-            
+                    <asp:RequiredFieldValidator id="RequiredFieldValidator2"
+                    ControlToValidate="dropDownWarehouse"
+                    Display="Static"
+                    ForeColor="red"
+                    Font-Names="arial" 
+                    Font-Size="12pt"
+                    ErrorMessage="Please choose MRB Warehouse"
+                    runat="server"/> 
                 
             </td>
             <td style="text-align: left;">
@@ -385,14 +392,22 @@
                 <hr />
                 <asp:Button ID="btnSend" runat="server" Text="Query" OnClick="btnSend_Click" CssClass="ButtonsSendSave" />
                 <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-  
-              
+                <asp:Label Text="" runat="server" ID="lblErrorAnnounce" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+                <asp:Label Text="" runat="server" ID="lblConfirmAnnounce" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+                <asp:Label Text="" runat="server" ID="lblErrorLocated" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                <asp:Label Text="" runat="server" ID="lblConfirmLocated" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
+                <asp:Label Text="" runat="server" ID="lblErrorDelivered" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+                <asp:Label Text="" runat="server" ID="lblConfirmDelivered" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
             </td>
         </tr>
     </table>
     
 
    <%-- Logic for Announced status --%>
+   <div runat="server" id="divBtnGuardarAnnouce" visible="false">
+        <hr />
+        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click_announce" OnClientClick="return validarFormularioAnnounce();" CssClass="ButtonsSendSave"/>   
+    </div>
        <div runat="server" id="divTableAnnounce" clientidmode="Static" ></div>
     <table runat="server" id="divBotonesAnnounce"  style="margin-bottom:10px; text-align:center; font-weight:bold;" cellspacing="0" cellpadding="0" visible="false">
         <tr>
@@ -401,11 +416,6 @@
                     AutoPostBack="true" /></td>
         </tr>
     </table>
-   <div runat="server" id="divBtnGuardarAnnouce" visible="false">
-        <hr />
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click_announce" OnClientClick="return validarFormularioAnnounce();" CssClass="ButtonsSendSave"/>
-    </div>
-
      <div runat="server" id="divLabelAnnounce" clientidmode="Static" visible="false" >
         
         <table style="font-size:small; font-weight:bold; text-align:center; width: 5.8in; height: 3.8in" border="1" cellspacing="0" cellpadding="0">
@@ -469,12 +479,6 @@
         </table>
         <hr />
     </div>
-  <asp:Label Text="" runat="server" ID="lblErrorAnnounce" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirmAnnounce" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-     <asp:Label Text="" runat="server" ID="lblErrorLocated" Style="color: red; font-size: 15px;
-        font-weight: bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirmLocated" Style="color: green; font-size: 15px;
-        font-weight: bold;" ClientIDMode="Static" />
     
    <%-- end Logic for Announced status --%>
    
@@ -690,8 +694,6 @@
         <hr />
     </div>
        <asp:HiddenField runat="server" ID="hdfQuantity" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblErrorDelivered" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
-    <asp:Label Text="" runat="server" ID="lblConfirmDelivered" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
    <%-- end Logic for Delivered status --%>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>

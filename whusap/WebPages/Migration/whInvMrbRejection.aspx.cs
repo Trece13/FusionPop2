@@ -234,6 +234,8 @@ namespace whusap.WebPages.Migration
                     orno = dr.ItemArray[1].ToString().Trim().ToUpper();
                     Pqty = Convert.ToDecimal(dr.ItemArray[3].ToString());
                     statusCheck =dr.ItemArray[8].ToString();
+                    //JC 270721  Llevar la unidad en una variable de sesion para imprimirla en la etiqueta.
+                    Session["Cuni"] = dr.ItemArray[5].ToString().Trim().ToUpper();
                      if (string.IsNullOrEmpty(lot) == true)
                      {
                          Session["Lot"] = string.Empty;
@@ -610,6 +612,8 @@ namespace whusap.WebPages.Migration
 
                  Ent_ttcibd001 data001 = new Ent_ttcibd001() { item = item };
                  _validaItem = _idalttcibd001.listaRegistro_ObtieneDescripcionUnidad(ref data001, ref strError);
+                 //JC 270721 Obtener la descripcion del item para la etiqueta
+                 Session["DescItem"] = _validaItem.Rows[0]["DESCRIPCION"].ToString().Trim();
 
                  if (_validaItem.Rows.Count < 1)
                  {
@@ -1100,8 +1104,19 @@ namespace whusap.WebPages.Migration
                         Session["Comments"] = exactReasons;
                         Session["Reprint"] = "no";
                     }
-
-
+                }
+                else
+                {
+                    if (shift == String.Empty)
+                    {
+                        lblErrorAnnounce.Text = mensajes("errorshift");
+                        return;
+                    }
+                    if (exactReasons == String.Empty)
+                    {
+                        lblErrorAnnounce.Text = mensajes("errorreason");
+                        return;
+                    }
                 }
             }
 
@@ -1139,7 +1154,7 @@ namespace whusap.WebPages.Migration
             var VariableAuxSuno = Request.Form["txtSupplier"].ToString().Trim();
             var suno = string.IsNullOrEmpty(VariableAuxSuno) ? string.Empty : Request.Form["txtSupplier"].ToString().Trim();
             var reasondesc = Request.Form["lblReasonDesc"];
-            
+
             var paid = txtPalletId.Text.Trim().ToUpper();
             var cwam = dropDownWarehouse.Text.Trim();
 
@@ -1149,7 +1164,7 @@ namespace whusap.WebPages.Migration
                 return;
             }
 
-            if (reasondesc == null)
+            if (reasondesc == null || reasondesc == "")
             {
                 reasondesc = "Adhesion";
             }
@@ -1286,7 +1301,9 @@ namespace whusap.WebPages.Migration
                     Session["Pallet"] = paid.Trim().ToUpper();
 
                     StringBuilder script = new StringBuilder();
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                    //JC 270721 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                    //JC 270721 Unificar el diseño de la etiqueta
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");                    
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
@@ -1379,20 +1396,37 @@ namespace whusap.WebPages.Migration
                         lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
                         lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                         lblValueReasonLocated.Text = reasondesc;
-
-                        Session["Reprint"]      = "no";
-                        Session["MaterialDesc"] = "";
-                        Session["Material"]     =  item.Trim().ToUpper() ;
-                        Session["codePaid"]     =  paid.Trim().ToUpper() ;
-                        Session["Lot"] = lot == String.Empty ? " " : lot;
-                        Session["Quantity"]     = cantidad.ToString().Trim().ToUpper();
+                        //JC 270721  Completar los datos para la etiqueta
+                        Session["WorkOrder"] = paid.Trim().ToUpper();
+                        Session["lblReason"] = reasondesc;
+                        Session["codePaid"] = paid.Trim().ToUpper();
+                        Session["ProductDesc"] = Session["DescItem"];
+                        Session["ProductCode"] = item.Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                        Session["Operator"]     = Session["user"].ToString();
+                        Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
+                        Session["Finished"] = paid.Trim().ToUpper();
                         Session["Pallet"] = paid.Trim().ToUpper();
+                        Session["PrintedBy"] = _operator;
+                        Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                        Session["Comments"] = obse;
+                        Session["Reprint"] = "no";
+
+
+                        //Session["Reprint"]      = "no";
+                        //Session["MaterialDesc"] = "";
+                        //Session["Material"]     =  item.Trim().ToUpper() ;
+                        //Session["codePaid"]     =  paid.Trim().ToUpper() ;
+                        //Session["Lot"] = lot == String.Empty ? " " : lot;
+                        //Session["Quantity"]     = cantidad.ToString().Trim().ToUpper();
+                        //Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
+                        //Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                        //Session["Operator"]     = Session["user"].ToString();
+                        //Session["Pallet"] = paid.Trim().ToUpper();
 
                         StringBuilder script = new StringBuilder();
-                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                        //JC 270721 Unificar el diseño de la etiqueta
+                        //JC 270721 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 

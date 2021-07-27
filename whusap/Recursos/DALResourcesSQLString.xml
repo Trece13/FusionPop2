@@ -1061,12 +1061,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL082.T$ITEM = COL022.T$MITM
           LEFT JOIN {0}.TTICST002{1} CST002
           ON CST002.T$PDNO = COL082.T$ORNO
+          WHERE COL022.T$DELE = 7
           AND COL222.T$ACQT >= COL082.T$QTYT
           AND COL222.T$CWAT = COL082.T$CWAR
           AND COL082.T$ORNO = '[:ORNO]'
           AND COL082.T$PONO = '[:PONO]'
           AND COL082.T$ADVS = '[:ADVS]'
-          WHERE COL022.T$DELE = 7
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
           )
           WHERE ROWN &lt;= 3 
@@ -1103,15 +1103,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.TTCMCS003{1} MCS003
           ON MCS003.T$CWAR = COL242.T$CWAT
           INNER JOIN {0}.TTICOL082{1} COL082
+          ON COL082.T$ITEM = COL042.T$MITM
           LEFT JOIN {0}.TTICST002{1} CST002
           ON CST002.T$PDNO = COL082.T$ORNO
-          ON COL082.T$ITEM = COL042.T$MITM
+          WHERE COL042.T$DELE = 7
           AND COL242.T$ACQT >= COL082.T$QTYT
           AND COL242.T$CWAT = COL082.T$CWAR
           AND COL082.T$ORNO = '[:ORNO]'
           AND COL082.T$PONO = '[:PONO]'
           AND COL082.T$ADVS = '[:ADVS]'
-          WHERE COL042.T$DELE = 7
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
           )
           WHERE ROWN &lt;= 3 
@@ -1149,12 +1149,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL082.T$ITEM = COL131.T$ITEM
           LEFT JOIN {0}.TTICST002{1} CST002
           ON CST002.T$PDNO = COL082.T$ORNO
+          WHERE COL131.T$STAT = 3
           AND COL082.T$QTYT &lt;= COL131.T$QTYA
           AND COL082.T$CWAR = COL131.T$CWAA
           AND COL082.T$ORNO = '[:ORNO]'
           AND COL082.T$PONO = '[:PONO]'
           AND COL082.T$ADVS = '[:ADVS]'
-          WHERE COL131.T$STAT = 3
           AND TRIM(COL131.T$ITEM) = TRIM('[:ITEM]')
           )
           WHERE ROWN &lt;= 3
