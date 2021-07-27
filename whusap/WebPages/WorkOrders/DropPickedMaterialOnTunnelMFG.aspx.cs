@@ -23,6 +23,7 @@ namespace whusap.WebPages.WorkOrders
         public static string Thepickedissuccess = mensajes("Thepickedissuccess");
         public static string Thepickedisnotsuccess = mensajes("Thepickedisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
+        public static string ThePalletIDAlreadyDrop = mensajes("ThePalletIDAlreadyDrop");
         public static string PalletIDnotvalidfortaketoMFG = mensajes("PalletIDnotvalidfortaketoMFG");
         public static string PalletIdAlreadyPicked = mensajes("PalletIdAlreadyPicked");
         
@@ -152,19 +153,28 @@ namespace whusap.WebPages.WorkOrders
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
 
                 }
-                MyObj.TBL = myObjDt["TBL"].ToString();
-                MyObj.PAID = myObjDt["PAID"].ToString();
-                MyObj.QTYT = myObjDt["QTYT"].ToString();
-                MyObj.UNIT = myObjDt["UNIT"].ToString();
-                MyObj.ITEM = myObjDt["ITEM"].ToString();
-                MyObj.DSCA = myObjDt["DSCA"].ToString();
-                MyObj.MCNO = myObjDt["MCNO"].ToString();
-                MyObj.DSCAM = myObjDt["DSCAM"].ToString();
-                MyObj.ORNO = myObjDt["ORNO"].ToString();
-                MyObj.STAT = myObjDt["STAT"].ToString();
-                MyObj.Error = false;
-                ObjRetorno = JsonConvert.SerializeObject(MyObj);
-
+                if (myObjDt["STAP"].ToString() == "6")
+                {
+                    MyObj.Error = true;
+                    MyObj.TipeMsgJs = "lbl";
+                    MyObj.ErrorMsg = ThePalletIDAlreadyDrop;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                }
+                else
+                {
+                    MyObj.TBL = myObjDt["TBL"].ToString();
+                    MyObj.PAID = myObjDt["PAID"].ToString();
+                    MyObj.QTYT = myObjDt["QTYT"].ToString();
+                    MyObj.UNIT = myObjDt["UNIT"].ToString();
+                    MyObj.ITEM = myObjDt["ITEM"].ToString();
+                    MyObj.DSCA = myObjDt["DSCA"].ToString();
+                    MyObj.MCNO = myObjDt["MCNO"].ToString();
+                    MyObj.DSCAM = myObjDt["DSCAM"].ToString();
+                    MyObj.ORNO = myObjDt["ORNO"].ToString();
+                    MyObj.STAT = myObjDt["STAT"].ToString();
+                    MyObj.Error = false;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                }
                 //if (VerificarStatPortabla(MyObj.TBL, MyObj.STAT))
                 //{
                 //    MyObj.Error = false;

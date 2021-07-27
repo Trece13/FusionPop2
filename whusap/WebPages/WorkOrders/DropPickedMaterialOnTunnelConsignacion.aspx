@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="DropPickedMaterialOnTunnel.aspx.cs" Inherits="whusap.WebPages.WorkOrders.NewPages.DropPickedMaterialOnTunnel" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="DropPickedMaterialOnTunnelConsignacion.aspx.cs" Inherits="whusap.WebPages.WorkOrders.NewPages.DropPickedMaterialOnTunnelConsignacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -59,7 +59,8 @@
                     </div>
                     <div class="col-6">
                         <div class="form-check float-right">
-                            <input type="checkbox" class="form-check-input" id="chkConsigment">
+                            <input type="checkbox" class="form-check-input" id="chkConsigment" 
+                                checked="checked">
                             <label class="form-check-label" for="chkConsigment" id="lblConsigment">Consigment</label>
                         </div>
                     </div>
@@ -226,7 +227,7 @@
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
                 type: "POST",
-                url: "DropPickedMaterialOnTunnel.aspx/" + WebMethod,
+                url: "DropPickedMaterialOnTunnelConsignacion.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -259,8 +260,7 @@
             LblPalletsValET = $('#LblPalletsValET');
             LblPickIdVal = $('#LblPickId');
             var chkConsigment = document.getElementById("chkConsigment");
-            chkConsigment.style.display = 'none';
-            lblConsigment.style.display = 'none';
+
         }
 
         var SearchPickID = function () {

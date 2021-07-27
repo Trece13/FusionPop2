@@ -1813,7 +1813,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPalletIDTticol082OnTunnelMFG">
         <stringSQL>
-          SELECT distinct TBL,PAID,icol083.t$QTYT QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,icol083.T$ORNO ORNO,icol083.T$MCNO MCNO, irou002.t$DSCA DSCAM, STAT FROM (
+          SELECT distinct 'ticol083' TBL,icol083.t$PAID PAID,icol083.t$QTYT QTYT,cibd001.T$CUNI UNIT,cibd001.T$ITEM ITEM,
+          cibd001.t$dsca DSCA,icol083.T$ORNO ORNO,icol083.T$MCNO MCNO, irou002.t$DSCA DSCAM, icol083.T$STAT STAT, icol083.T$STAT STAP
+          FROM    {0}.tticol083{1} icol083
+          LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  icol083.T$ITEM
+          LEFT JOIN BAAN.ttirou002140 irou002 on  irou002.T$MCNO =  icol083.T$MCNO
+          WHERE TRIM(icol083.T$PICK) = TRIM('[:PICK]')
+          <!--SELECT distinct TBL,PAID,icol083.t$QTYT QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,icol083.T$ORNO ORNO,icol083.T$MCNO MCNO, irou002.t$DSCA DSCAM, STAT, icol083.T$STAT STAP FROM (
           select 'ticol022' AS  TBL, T$SQNB AS PAID,T$QTDL AS QTYT,T$CUNI AS UNIT, T$MITM AS ITEM,T$PDNO AS ORNO, T$DELE AS STAT from {0}.tticol022{1}
           UNION
           select 'ticol042' AS  TBL,T$SQNB AS PAID,T$QTDL AS QTYT, T$CUNI AS UNIT,T$MITM  AS ITEM,T$PDNO AS ORNO, T$DELE AS STAT from {0}.tticol042{1} col042
@@ -1823,10 +1829,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYS AS QTYT,T$UNIC AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT from {0}.twhcol130{1} col130
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
-          --LEFT JOIN {0}.tticst002{1} icst002 on  icst002.T$PDNO =  ConGlobal.ORNO
+          LEFT JOIN {0}.tticst002{1} icst002 on  icst002.T$PDNO =  ConGlobal.ORNO
           INNER JOIN {0}.tticol083{1} icol083 on  icol083.T$PAID =  ConGlobal.PAID
           LEFT JOIN BAAN.ttirou002140 irou002 on  irou002.T$MCNO =  icol083.T$MCNO
-          WHERE TRIM(icol083.T$PICK) = TRIM('[:PICK]')
+          WHERE TRIM(icol083.T$PICK) = TRIM('[:PICK]')-->
         </stringSQL>
       </operationName>
       <!--<operationName name="ConsultarPalletIDTticol082MFG">
