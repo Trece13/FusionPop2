@@ -200,7 +200,7 @@
             document.body.innerHTML = "<html>";
             document.body.innerHTML += "<head>";
             document.body.innerHTML += "</head>";
-            document.body.innerHTML += "<body>";
+            document.body.innerHTML += "<body><style>@page {size: 6in,4in;margin: 0; size: landscape;}</style>";
             document.body.innerHTML += divElements;
             document.body.innerHTML += "</body>";
 
