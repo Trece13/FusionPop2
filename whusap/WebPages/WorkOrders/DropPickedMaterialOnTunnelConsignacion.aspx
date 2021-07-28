@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="DropPickedMaterialOnTunnel.aspx.cs" Inherits="whusap.WebPages.WorkOrders.NewPages.DropPickedMaterialOnTunnel" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="DropPickedMaterialOnTunnelConsignacion.aspx.cs" Inherits="whusap.WebPages.WorkOrders.NewPages.DropPickedMaterialOnTunnelConsignacion" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -59,7 +59,8 @@
                     </div>
                     <div class="col-6">
                         <div class="form-check float-right">
-                            <input type="checkbox" class="form-check-input" id="chkConsigment">
+                            <input type="checkbox" class="form-check-input" id="chkConsigment" 
+                                checked="checked">
                             <label class="form-check-label" for="chkConsigment" id="lblConsigment">Consigment</label>
                         </div>
                     </div>
@@ -70,7 +71,10 @@
             </div>
         </div>
         <div id="divForm" class="col-6">
-            <div id="DetallePallet">
+            <div id="DetallePallet">                       
+            <label class="col-sm-12 col-form-label-lg p-3 mb-2 bg-danger text-white text-center" id="LblDropVal">
+                Drop Pick ID
+            </label>
                 <div class="form-group row ">
                     <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachined">
                         Machine
@@ -128,6 +132,16 @@
                         <td colspan="4">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="LblPickIdVal" alt="" hspace="60"
                                 vspace="5" style="width: 3in; height: 1in; margin: 0px !important" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 20px">
+                                Type</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 20px" id="lblDrop">
+                            </label>
                         </td>
                     </tr>
                     <tr>
@@ -226,7 +240,7 @@
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
                 type: "POST",
-                url: "DropPickedMaterialOnTunnel.aspx/" + WebMethod,
+                url: "DropPickedMaterialOnTunnelConsignacion.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -259,8 +273,7 @@
             LblPalletsValET = $('#LblPalletsValET');
             LblPickIdVal = $('#LblPickId');
             var chkConsigment = document.getElementById("chkConsigment");
-            chkConsigment.style.display = 'none';
-            lblConsigment.style.display = 'none';
+
         }
 
         var SearchPickID = function () {
@@ -312,7 +325,6 @@
                 LblMachineval.html(MyObj.MCNO);
                 LblMachinedes.html(MyObj.DSCAM);
                 LblPalletsVal.html(MyObj.PAID);
-               
                 DetallePallet.show();
             }
         }

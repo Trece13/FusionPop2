@@ -17,7 +17,7 @@ using System.Web.Configuration;
 
 namespace whusap.WebPages.WorkOrders.NewPages
 {
-    public partial class DropPickedMaterialOnTunnel : System.Web.UI.Page
+    public partial class DropPickedMaterialOnTunnelConsignacion : System.Web.UI.Page
     {
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
@@ -31,6 +31,8 @@ namespace whusap.WebPages.WorkOrders.NewPages
         public static string Thedropprocessissuccess = mensajes("Thedropprocessissuccess");
         public static string Thedropprocessisnotsuccess = mensajes("Thedropprocessisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
+        public static string StatusNotAllowed = mensajes("StatusNotAllowed");
+        public static string WarehouseNotAllowed = mensajes("WarehouseNotAllowed");
         public static string PalletIDnotvalidfordropprocess = mensajes("PalletIDnotvalidfordropprocess");
         public static string Thepickdoesnothavewarehouses = mensajes("Thepickdoesnothavewarehouses");
         public static string Thepickdoesnothavewarehousesonconsignment = mensajes("Thepickdoesnothavewarehousesonconsignment");
@@ -136,17 +138,9 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
                     //JC 270721 Quitar restricion de consignacion 
                     //if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
-                    if (MyObj.TYPW == "21" || MyObj.TYPW == "1" && STATPICK == "2" || STATPICK == "4")
+                    if (MyObj.TYPW == "21")
                     {
-                        if (MyObj.TYPW == "21")
-                        {
-                            MyObj.STAT = "7";
-                        }
-                        else
-                        {
-                            MyObj.STAT = "4";
-                        }
-                        //MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
+                        MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                         //JC 260721 Cambio para que cuando ya tenga el número aleatorio no le genere uno adicional
                         if (STATPICK == "7")
@@ -167,20 +161,15 @@ namespace whusap.WebPages.WorkOrders.NewPages
                      }
                     //JC 270721 Quitar restricion de consignacion 
                     //else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
-                    else //if (MyObj.TYPW == "1" && STATPICK == "2")
+                    else if (MyObj.TYPW == "1")
                     {
-                        //JC 270721 Evitar los picks que no sean de consignacion
-                        //MyObj.STAT = "4";
-                        ////JC 230721 Cambio para que se envíe el dato con el numero aleatorio
-                        //MyObj.RAND = ramdomNumStr;
-                        //Itticol082.Actualizartticol082(MyObj);
-                        ////JC 230721 Cambio para que se envíe el dato con el numero aleatorio
-                        //MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
-                        //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
-                        MyObj.Error = true;
-                        MyObj.TipeMsgJs = "alert";
-                        MyObj.ErrorMsg = ThePalletIDDoesntexist;
-                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                        MyObj.STAT = "4";
+                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.RAND = ramdomNumStr;
+                        Itticol082.Actualizartticol082(MyObj);
+                        //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
+                        MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
                     }
                 }
 
@@ -253,6 +242,20 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.PAID += myObjDt["PAID"].ToString().Trim() + ",";
                     HttpContext.Current.Session["PAID"] = MyObj.PAID;
                     HttpContext.Current.Session["MCNO"] = MyObj.MCNO;
+                    if (MyObj.STAT == "2")
+                    {
+                        MyObj.Error = true;
+                        MyObj.TipeMsgJs = "alert";
+                        MyObj.ErrorMsg = StatusNotAllowed;
+                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    }
+                    if (MyObj.TYPW == "1")
+                    {
+                        MyObj.Error = true;
+                        MyObj.TipeMsgJs = "alert";
+                        MyObj.ErrorMsg = WarehouseNotAllowed;
+                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    }
                     //JC 270721 Duplicar la sesion para que permita hacer drop de cualquier pick (consignacion y no consignacion
                     //if (MyObj.TYPW != "21")
                     //{

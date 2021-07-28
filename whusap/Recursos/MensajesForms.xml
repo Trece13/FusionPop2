@@ -5126,6 +5126,11 @@
             Pick ID has not been dropped or discounted
           </stringMessage>
         </operationName>
+        <operationName name="ThePalletIDAlreadyDrop">
+          <stringMessage>
+            Pick ID has already dropped or discounted
+          </stringMessage>
+        </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
           <stringMessage>
             Pick ID not valid for take to MFG
@@ -5151,6 +5156,11 @@
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
             Pick ID has not been dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDAlreadyDrop">
+          <stringMessage>
+            Pick ID has already dropped or discounted
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
@@ -5244,6 +5254,21 @@
             Pick ID not exist or already dropped
           </stringMessage>
         </operationName>
+        <operationName name="ThePalletIDAlreadyDrop">
+          <stringMessage>
+            Pick ID has already dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="StatusNotAllowed">
+          <stringMessage>
+            Status Not Allowed
+          </stringMessage>
+        </operationName>
+        <operationName name="WarehouseNotAllowed">
+        <stringMessage>
+          Warehouse Not Allowed
+        </stringMessage>
+        </operationName>
         <operationName name="PalletIDnotvalidfordropprocess">
           <stringMessage>
             Pick ID not valid for drop process
@@ -5264,6 +5289,21 @@
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
             Pick ID no existe or fue retirado previamente
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePalletIDAlreadyDrop">
+          <stringMessage>
+            Pick ID has already dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="StatusNotAllowed">
+          <stringMessage>
+            Status Not Allowed
+          </stringMessage>
+        </operationName>
+        <operationName name="WarehoseNotAllowed">
+          <stringMessage>
+            Warehouse Not Allowed
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfordropprocess">
