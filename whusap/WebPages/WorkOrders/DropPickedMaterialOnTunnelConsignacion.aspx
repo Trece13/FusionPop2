@@ -71,7 +71,10 @@
             </div>
         </div>
         <div id="divForm" class="col-6">
-            <div id="DetallePallet">
+            <div id="DetallePallet">                       
+            <label class="col-sm-12 col-form-label-lg p-3 mb-2 bg-danger text-white text-center" id="LblDropVal">
+                Drop Pick ID
+            </label>
                 <div class="form-group row ">
                     <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachined">
                         Machine
@@ -129,6 +132,16 @@
                         <td colspan="4">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="LblPickIdVal" alt="" hspace="60"
                                 vspace="5" style="width: 3in; height: 1in; margin: 0px !important" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 20px">
+                                Type</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 20px" id="lblDrop">
+                            </label>
                         </td>
                     </tr>
                     <tr>
@@ -312,7 +325,6 @@
                 LblMachineval.html(MyObj.MCNO);
                 LblMachinedes.html(MyObj.DSCAM);
                 LblPalletsVal.html(MyObj.PAID);
-               
                 DetallePallet.show();
             }
         }

@@ -136,9 +136,17 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
                     //JC 270721 Quitar restricion de consignacion 
                     //if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "true" && MyObj.TYPW == "21")
-                    if (MyObj.TYPW == "21")
+                    if (MyObj.TYPW == "21" || MyObj.TYPW == "1" && STATPICK == "2" || STATPICK == "4")
                     {
-                        MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
+                        if (MyObj.TYPW == "21")
+                        {
+                            MyObj.STAT = "7";
+                        }
+                        else
+                        {
+                            MyObj.STAT = "4";
+                        }
+                        //MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                         //JC 260721 Cambio para que cuando ya tenga el número aleatorio no le genere uno adicional
                         if (STATPICK == "7")
@@ -159,7 +167,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                      }
                     //JC 270721 Quitar restricion de consignacion 
                     //else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
-                    else if (MyObj.TYPW == "1")
+                    else //if (MyObj.TYPW == "1" && STATPICK == "2")
                     {
                         //JC 270721 Evitar los picks que no sean de consignacion
                         //MyObj.STAT = "4";
