@@ -79,6 +79,7 @@
             padding: 5px;
             border: 1px solid black;
             border-radius: 12px;
+            margin:0;
         }
 
         .alingRight {
@@ -200,7 +201,7 @@
             document.body.innerHTML = "<html>";
             document.body.innerHTML += "<head>";
             document.body.innerHTML += "</head>";
-            document.body.innerHTML += "<body><style>@page {size: 6in,4in;margin: 0; size: landscape;}</style>";
+            document.body.innerHTML += "<body><style>@page {size: 6in 4in landscape; margin: 0;}</style>";
             document.body.innerHTML += divElements;
             document.body.innerHTML += "</body>";
 
@@ -225,7 +226,7 @@
             </div>
             <br />
             <div id="printSpace">
-                <div id="myLabel">
+                <div id="myLabel" style="width:6in; height:4in">
                     <div class="row">
                         <div class="col-6 alingLeft">
                             <label>
@@ -261,7 +262,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="myLabel2">
+                <div id="myLabel2" style="width:6in; height:4in">
                     <div class="row">
                         <div class="col-6 alingLeft">
                             <label>

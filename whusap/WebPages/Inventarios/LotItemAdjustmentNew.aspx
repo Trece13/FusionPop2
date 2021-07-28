@@ -327,8 +327,7 @@
                             <tr>
                                 <td id="">
                                     <strong>Pallet #</strong>&nbsp;&nbsp;
-                                        <label id="lblPalletNum" class="h6">
-                                            <label>
+                                        <label id="lblPalletNum" class="h6"></label>
                                 </td>
                                 <td id="">
                                     <strong>
@@ -458,8 +457,29 @@
             btnRestart.addEventListener("click", restartAll, false);
             btnRestartForm.addEventListener("click", restartInfo, false);
             cbRegrind.addEventListener("change", changeCheckRegrind, false);
+            ddItemDD.addEventListener("change", changeItemSelect, false);
             
         }
+
+        var changeItemSelect= function(){
+            if(ddItemDD.options[ddItemDD.selectedIndex].value.trim()!=0){
+                lbItemAdjusted.classList.remove("isNotValid");
+                lbItemAdjusted.classList.add("isValid");
+            }
+            else{
+                itemValid = false;
+                lbItemAdjusted.classList.remove("isValid");
+                lbItemAdjusted.classList.add("isNotValid");
+            }
+            $("#exLot").hide(500);
+            $("#checkLot").hide(500);
+            lbLotAdjusted.classList.remove("isNotValid");
+            lbLotAdjusted.classList.remove("isValid");
+            lbLotAdjusted.textContent       = "";
+            ddItemDD.options[ddItemDD.selectedIndex].getAttribute('ktlc').trim() == "1" ? lbLotAdjusted.setAttribute("contentEditable", true) : lbLotAdjusted.setAttribute("contentEditable", false);
+            verifyInfoForm();
+        }
+        
         var changeCheckRegrind = function(){
             if($('#cbRegrind').is(":checked") == true){
                 $('#lbItemAdjusted').hide(500);
@@ -481,7 +501,8 @@
             MylistItems.forEach(function (e) {
                 var option = document.createElement("option");
                 option.text = e.ITEM+" - "+e.DSCA;
-                option.value = e.ITEM
+                option.value = e.ITEM;
+                option.setAttribute('ktlc',e.KTLC);
                 ddItemDD.add(option);
             });
         }
@@ -642,7 +663,7 @@
             Obj028.REFCNTU = " ";
 
             var Data = "{twhcol028:" + JSON.stringify(Obj028) + "}";
-            sendAjax("LotItemAdjustmentNewNew.aspx/Save", Data, saveSuccess);
+            sendAjax("LotItemAdjustmentNew.aspx/Save", Data, saveSuccess);
         }
 
         var sendPallet = function(e) {
@@ -967,7 +988,7 @@
             var locaValid   = false;
             var reasonValid = false;
             var codeValid = false;
-            var ktlc = lbItemAdjusted.getAttribute("ktlc");
+            var ktlc = $('#cbRegrind').is(":checked") != true ? lbItemAdjusted.getAttribute("ktlc"):ddItemDD.options[ddItemDD.selectedIndex].getAttribute('ktlc');
             var sloc = lbWarehouseAdjusted.getAttribute("sloc");
 
             itemNotValid        = lbItemAdjusted.classList.contains("isNotValid");
@@ -997,11 +1018,21 @@
                 }
             }
             else{
-                if(lbItemAdjusted.textContent.trim().toUpperCase() == lbItemActual.textContent.trim().toUpperCase()){
-                    sameItemLot = true;
+                if($('#cbRegrind').is(":checked") != true){
+                    if(lbItemAdjusted.textContent.trim().toUpperCase() == lbItemActual.textContent.trim().toUpperCase()){
+                        sameItemLot = true;
+                    }
+                    else{
+                        sameItemLot = false;
+                    }
                 }
                 else{
-                    sameItemLot = false;
+                    if(ddItemDD.value.trim().toUpperCase() == lbItemActual.textContent.trim().toUpperCase()){
+                        sameItemLot = true;
+                    }
+                    else{
+                        sameItemLot = false;
+                    }
                 }
             }
 
