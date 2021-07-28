@@ -136,16 +136,6 @@
                     </tr>
                     <tr>
                         <td>
-                            <label style="font-size: 20px">
-                                Type</label>
-                        </td>
-                        <td style="text-align: center;">
-                            <label style="font-size: 20px" id="lblDrop">
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             <label style="font-size: 30px">
                                 Machine</label>
                         </td>
