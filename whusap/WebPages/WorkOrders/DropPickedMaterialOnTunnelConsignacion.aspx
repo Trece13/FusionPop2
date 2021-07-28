@@ -137,6 +137,17 @@
                     <tr>
                         <td>
                             <label style="font-size: 30px">
+                                Type</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label class="col-sm-12 col-form-label-lg p-3 mb-2 bg-danger text-white text-center" id="lblDropType">
+                                Drop Pick ID
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
                                 Machine</label>
                         </td>
                         <td style="text-align: center;">
