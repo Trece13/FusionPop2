@@ -198,15 +198,20 @@
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;
-            document.body.innerHTML = "<html>";
-            document.body.innerHTML += "<head>";
-            document.body.innerHTML += "</head>";
-            document.body.innerHTML += "<body><style>@page {size: 6in 4in landscape; margin: 0;}</style>";
-            document.body.innerHTML += divElements;
-            document.body.innerHTML += "</body>";
 
-            window.print();
-            document.body.innerHTML = oldPage;
+            var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
+            mywindow.document.write('<html><head>');
+            mywindow.document.write('</head><body><style>@page {size: 6in 4in landscape; margin: 5px;}</style>');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
+            mywindow.document.write('<link rel="stylesheet" href="styleLabel.css">');
+            mywindow.document.write('</body></html>');
+
+            mywindow.print();
+            setTimeout(function () {
+                mywindow.print();
+            }, 3000);
+            mywindow.document.close(); // necessary for IE >= 10
             //setTimeout(window.close(),15000);
         };
 
@@ -226,7 +231,7 @@
             </div>
             <br />
             <div id="printSpace">
-                <div id="myLabel" style="width:6in; height:4in">
+                <div id="myLabel" style="width:5.5in; height:3.5in">
                     <div class="row">
                         <div class="col-6 alingLeft">
                             <label>
@@ -262,7 +267,7 @@
                         </table>
                     </div>
                 </div>
-                <div id="myLabel2" style="width:6in; height:4in">
+                <div id="myLabel2" style="width:5.5in; height:3.5in">
                     <div class="row">
                         <div class="col-6 alingLeft">
                             <label>

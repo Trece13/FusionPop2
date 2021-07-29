@@ -416,14 +416,10 @@ namespace whusa.Interfases
             paramList.Add(":T$UNIT", MyObj.UNIT);
             paramList.Add(":T$QTYC", MyObj.QTYC);
             paramList.Add(":T$UNIC", MyObj.UNIC);
-            //paramList.Add(":T$DATE", MyObj.DATE);
             paramList.Add(":T$CONF", MyObj.CONF);
             paramList.Add(":T$RCNO", MyObj.RCNO);
-            //paramList.Add(":T$DATR", MyObj.DATR);
             paramList.Add(":T$LOCA", MyObj.LOCA==string.Empty?" ":MyObj.LOCA);
-            //paramList.Add(":T$DATL", MyObj.DATL);
             paramList.Add(":T$PRNT", MyObj.PRNT);
-            //paramList.Add(":T$DATP", MyObj.DATP);
             paramList.Add(":T$LOGN", MyObj.LOGN);
             paramList.Add(":T$LOGT", MyObj.LOGT);
             paramList.Add(":T$STAT", MyObj.STAT);
@@ -431,9 +427,6 @@ namespace whusa.Interfases
             paramList.Add(":T$FIRE", MyObj.FIRE);
             paramList.Add(":T$PSNO", MyObj.PSLIP == string.Empty ? " " : MyObj.PSLIP);
             paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO);
-            
-            
-
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 

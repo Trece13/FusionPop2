@@ -586,7 +586,7 @@
                 <label class="col-sm-4 col-form-label-lg" for="txQuantity">
                     Label quantity</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
+                    <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="500" placeholder="Label quantity">
                 </div>
                 <label id="Label2" for="txQuantity">
                 </label>

@@ -60,8 +60,8 @@ namespace whusap.WebPages.InvReceipts
             RequestUrlAuthority = (string)Request.Url.Authority;
 
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -117,9 +117,15 @@ namespace whusap.WebPages.InvReceipts
                 QUANTITYAUX_COMPLETADA = 0;
                 CiclePrintBegin = 0;
                 MyInsert.Clear();
+                HttpContext.Current.Session["MyConvertionFactor"] = null;
+                HttpContext.Current.Session["DTOrdencompra"] = null;
+                HttpContext.Current.Session["OrdenImportacion"] = null;
+                HttpContext.Current.Session["Dttwhwmd200"] = null;
+                HttpContext.Current.Session["PRIORIDAD"] = null;
+                HttpContext.Current.Session["LOCAL"] = null;
             }
   
-            CiclePrintEnd = Convert.ToInt32((Convert.ToInt32(CICLE) < 1) ? 1 : ((Convert.ToInt32(CICLE)>50)?50:Convert.ToInt32(CICLE)));
+            CiclePrintEnd = Convert.ToInt32((Convert.ToInt32(CICLE) < 1) ? 1 : ((Convert.ToInt32(CICLE)>1000)?1000:Convert.ToInt32(CICLE)));
             
             //string PSLIP = string.Empty; 
             PSLIP = PSLIP.Trim() == string.Empty ? " " : PSLIP.Trim();
@@ -130,9 +136,19 @@ namespace whusap.WebPages.InvReceipts
 
             if (CUNI != STUN)
             {
-                MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
-                QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
-                QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
+                if (HttpContext.Current.Session["MyConvertionFactor"] == null)
+                {
+                    MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
+                    HttpContext.Current.Session["MyConvertionFactor"] = MyConvertionFactor;
+                    QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                    QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
+                }
+                else
+                {
+                    MyConvertionFactor = (Factor)HttpContext.Current.Session["MyConvertionFactor"];
+                    QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                    QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
+                }
             }
 
 
@@ -140,11 +156,15 @@ namespace whusap.WebPages.InvReceipts
             {
                 if (OORG == "2")
                 {
-                    DataTable DTOrdencompra = ConsultaOrdencompra(ORNO, PONO, QUANTITYAUX, ITEM, "");
+                    DataTable DTOrdencompra = HttpContext.Current.Session["DTOrdencompra"] == null ? ConsultaOrdencompra(ORNO, PONO, QUANTITYAUX, ITEM, "") : (DataTable)HttpContext.Current.Session["DTOrdencompra"];
                     if (DTOrdencompra.Rows.Count > 0)
                     {
-                        bool OrdenImportacion = false;
-                        OrdenImportacion = twhcol130DAL.ConsultaOrdenImportacion(DTOrdencompra.Rows[0]["T$COTP"].ToString()).Rows.Count > 0 ? true : false;
+                        if (HttpContext.Current.Session["DTOrdencompra"] == null) { HttpContext.Current.Session["DTOrdencompra"] = DTOrdencompra; }
+                        bool OrdenImportacion = HttpContext.Current.Session["OrdenImportacion"] == null ? false : (bool)HttpContext.Current.Session["OrdenImportacion"];
+                        if (HttpContext.Current.Session["OrdenImportacion"] == null) { 
+                            OrdenImportacion = twhcol130DAL.ConsultaOrdenImportacion(DTOrdencompra.Rows[0]["T$COTP"].ToString()).Rows.Count > 0 ? true : false;
+                            HttpContext.Current.Session["OrdenImportacion"] = OrdenImportacion;
+                        }
                         int consecutivoPalletID = 0;
                         DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO);
                         string SecuenciaPallet = "001";
@@ -175,13 +195,19 @@ namespace whusap.WebPages.InvReceipts
                         {
                             string strError = string.Empty;
                             Ent_twhwmd200 OBJ200 = new Ent_twhwmd200 { cwar = DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim() };
-                            DataTable Dttwhwmd200 = twhwmd200.listaRegistro_ObtieneAlmacenLocation(ref OBJ200, ref strError);
+
+                            DataTable Dttwhwmd200 = HttpContext.Current.Session["Dttwhwmd200"] == null ? twhwmd200.listaRegistro_ObtieneAlmacenLocation(ref OBJ200, ref strError) : (DataTable)HttpContext.Current.Session["Dttwhwmd200"];
+                            if (HttpContext.Current.Session["Dttwhwmd200"] == null) { HttpContext.Current.Session["Dttwhwmd200"] = Dttwhwmd200; };
+
                             if (Dttwhwmd200.Rows.Count > 0)
                             {
                                 if (Dttwhwmd200.Rows[0]["LOC"].ToString().Trim() == "1")
                                 {
-                                    PRIORIDAD = twhcol130DAL.ConsultarPrioridadNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim()).Rows[0]["T$PRIO"].ToString().Trim();
-                                    LOCAL = twhcol130DAL.ConsultarLocationNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim(), PRIORIDAD).Rows[0]["T$LOCA"].ToString().Trim();
+                                    PRIORIDAD = HttpContext.Current.Session["PRIORIDAD"] == null ? twhcol130DAL.ConsultarPrioridadNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim()).Rows[0]["T$PRIO"].ToString().Trim() : HttpContext.Current.Session["PRIORIDAD"].ToString();
+                                    LOCAL = HttpContext.Current.Session["LOCAL"] == null ? twhcol130DAL.ConsultarLocationNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim(), PRIORIDAD).Rows[0]["T$LOCA"].ToString().Trim() : HttpContext.Current.Session["LOCAL"].ToString();
+
+                                    if (HttpContext.Current.Session["PRIORIDAD"] == null) { HttpContext.Current.Session["PRIORIDAD"] = PRIORIDAD; };
+                                    if (HttpContext.Current.Session["LOCAL"] == null) { HttpContext.Current.Session["LOCAL"] = LOCAL; };
                                 }
                             }
 
