@@ -194,7 +194,7 @@
             mywindow.document.write('</body></html>');
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
-            setTimeout(function () { mywindow.print() }, 1000);
+            //setTimeout(function () { mywindow.print() }, 1000);
             //mywindow.close();
 
             return true;
@@ -586,7 +586,7 @@
                 <label class="col-sm-4 col-form-label-lg" for="txQuantity">
                     Label quantity</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="500" placeholder="Label quantity">
+                    <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
                 </div>
                 <label id="Label2" for="txQuantity">
                 </label>
@@ -1666,10 +1666,10 @@
                             txPosition.attr('disabled', false);
                             txPosition.focus();
                             ddPosition.focus();
-                            setTimeout(function () { lblError.html(""); }, 2500);
+                            //setTimeout(function () { lblError.html(""); }, 2500);
 
                         } else {
-                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
 
                             btnEnviar.attr('disabled', true);
                             txItem.attr('disabled', true);
@@ -1706,9 +1706,9 @@
                             console.log("Si existe el order");
                             txPosition.focus();
                             ddPosition.focus();
-                            setTimeout(function () { lblError.html(""); }, 2500);
+                            //setTimeout(function () { lblError.html(""); }, 2500);
                         } else {
-                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
 
                             btnEnviar.attr('disabled', true);
                             txItem.attr('disabled', true);
@@ -1744,10 +1744,10 @@
                             txPosition.attr('disabled', false);
                             txPosition.focus();
                             ddPosition.focus();
-                            setTimeout(function () { lblError.html(""); }, 2500);
+                            //setTimeout(function () { lblError.html(""); }, 2500);
 
                         } else {
-                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
 
 
                             btnEnviar.attr('disabled', true);
@@ -1794,7 +1794,7 @@
                             ConsultarFactoresporItem();
                             txPosition.focus();
                             ddPosition.focus();
-                            setTimeout(function () { lblError.html(""); }, 4000);
+                            //setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
                             lblError.html('<%= lblItemError%>');
 
@@ -1831,7 +1831,7 @@
                             ConsultarFactoresporItem();
                             txPosition.focus();
                             ddPosition.focus();
-                            setTimeout(function () { lblError.html(""); }, 4000);
+                            //setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
                             lblError.html('<%= lblItemError%>');
 
@@ -1866,7 +1866,7 @@
                             ConsultarFactoresporItem();
                             txPosition.focus();
                             ddPosition.focus();
-                            setTimeout(function () { lblError.html(""); }, 4000);
+                            //setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
                             lblError.html('<%= lblItemError%>');
 

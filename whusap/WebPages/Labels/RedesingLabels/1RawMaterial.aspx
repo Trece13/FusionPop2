@@ -1,5 +1,4 @@
-﻿
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="1RawMaterial.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._1RawMaterial" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="1RawMaterial.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._1RawMaterial" %>
 
 <!DOCTYPE html>
 

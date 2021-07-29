@@ -94,15 +94,6 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.TextBox txtSecuence;
         
         /// <summary>
-        /// btnConsultar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnConsultar;
-        
-        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>
@@ -119,6 +110,15 @@ namespace whusap.WebPages.Migration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblConfirm;
+        
+        /// <summary>
+        /// btnConsultar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnConsultar;
         
         /// <summary>
         /// UpdatePanel1 control.

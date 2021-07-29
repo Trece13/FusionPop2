@@ -198,6 +198,7 @@
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;
+<<<<<<< HEAD
 
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
@@ -211,6 +212,17 @@
                 mywindow.print();
             }, 3000);
             mywindow.document.close(); // necessary for IE >= 10
+=======
+            document.body.innerHTML = "<html>";
+            document.body.innerHTML += "<head>";
+            document.body.innerHTML += "</head>";
+            document.body.innerHTML += "<body><style>@page {size: 6in 4in landscape; margin: 0;}</style>";
+            document.body.innerHTML += divElements;
+            document.body.innerHTML += "</body>";
+
+            window.print();
+            document.body.innerHTML = oldPage;
+>>>>>>> 8114b184c024a1e9705fb4b62b6d3242cb407d2d
             //setTimeout(window.close(),15000);
         };
 
@@ -230,9 +242,15 @@
             </div>
             <br />
             <div id="printSpace">
+<<<<<<< HEAD
                 <div id="myLabel" style="width:5.5in; height:3.4in; margin:8px" >
                     <div class="row" style="margin:auto">
                         <div class="col-5 alingLeft">
+=======
+                <div id="myLabel" style="width:6in; height:4in">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
+>>>>>>> 8114b184c024a1e9705fb4b62b6d3242cb407d2d
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
@@ -266,10 +284,16 @@
                         </table>
                     </div>
                 </div>
+<<<<<<< HEAD
                 <br />
                 <div id="myLabel2" style="width:5.5in; height:3.4in;  margin:8px">
                     <div class="row" style="margin:auto; padding-top:8px">
                         <div class="col-5 alingLeft">
+=======
+                <div id="myLabel2" style="width:6in; height:4in">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
+>>>>>>> 8114b184c024a1e9705fb4b62b6d3242cb407d2d
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc2" runat="server">MATERIAL DESCRIPTION</label></strong>
