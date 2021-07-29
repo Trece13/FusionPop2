@@ -201,10 +201,9 @@
 
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
-            mywindow.document.write('</head><body><style>@page {size: 6in 4in landscape; margin: 5px;}</style>');
+            mywindow.document.write('</head><body><style> body{ width:5.5in; height:3.4in;} @page {size: 6in 4in landscape; margin: 0;} .table {font-size:13px;} .table td{padding: 0.25rem !important;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
-            mywindow.document.write('<link rel="stylesheet" href="styleLabel.css">');
             mywindow.document.write('</body></html>');
 
             mywindow.print();
@@ -231,21 +230,21 @@
             </div>
             <br />
             <div id="printSpace">
-                <div id="myLabel" style="width:5.5in; height:3.5in">
-                    <div class="row">
-                        <div class="col-6 alingLeft">
+                <div id="myLabel" style="width:5.5in; height:3.4in; margin:8px" >
+                    <div class="row" style="margin:auto">
+                        <div class="col-5 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
+                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" style="height:1in"/>
                         </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
+                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" style="width:5in;height:1in"/>
                     </div>
                     <div>
                         <table class="table mw-100">
@@ -267,21 +266,22 @@
                         </table>
                     </div>
                 </div>
-                <div id="myLabel2" style="width:5.5in; height:3.5in">
-                    <div class="row">
-                        <div class="col-6 alingLeft">
+                <br />
+                <div id="myLabel2" style="width:5.5in; height:3.4in;  margin:8px">
+                    <div class="row" style="margin:auto; padding-top:8px">
+                        <div class="col-5 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc2" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" />
+                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" style="height:1in"/>
                         </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" />
+                        <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server"  style="width:5in; height:1in"/>
                     </div>
                     <div>
                         <table class="table mw-100">
