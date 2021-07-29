@@ -200,7 +200,7 @@ namespace whusap.WebPages.Migration
                     return;
                 }
 
-                if (enterQuantity > double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat))
+                if (enterQuantity >= double.Parse(factor, CultureInfo.InvariantCulture.NumberFormat))
                 {
                     lblError.Text = mensajes("amountfullpallet");
                     return;

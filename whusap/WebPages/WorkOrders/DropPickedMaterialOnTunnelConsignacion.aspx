@@ -122,7 +122,7 @@
             </div>
         </div>
         <div id="LblEtiqueta">
-            <div id="MyEtiquetaDrop" style="width: 6in; height: 4in; border: solid 1px;">
+            <div id="MyEtiquetaDrop" style="width: 6in; height: 4in;">
                 <table style="margin: auto">
                     <tr>
                         <td>
@@ -137,11 +137,11 @@
                     <tr>
                         <td>
                             <label style="font-size: 30px">
-                                Type</label>
+                                </label>
                         </td>
                         <td style="text-align: center;">
                             <label class="col-sm-12 col-form-label-lg p-3 mb-2 bg-danger text-white text-center" id="lblDropType">
-                                DROP PICK ID
+                                DROPPED PICK ID
                             </label>
                         </td>
                     </tr>

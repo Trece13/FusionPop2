@@ -118,7 +118,7 @@
             </div>
         </div>
         <div id="LblEtiqueta">
-            <div id="MyEtiquetaDrop" style="width: 6in; height: 4in; border: solid 1px;">
+            <div id="MyEtiquetaDrop" style="width: 6in; height: 4in;">
                 <table style="margin: auto">
                     <tr>
                         <td>

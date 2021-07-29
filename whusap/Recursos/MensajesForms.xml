@@ -5251,7 +5251,7 @@
         </operationName>
         <operationName name="ThePalletIDDoesntexist">
           <stringMessage>
-            Pick ID not exist or already dropped
+            Pick ID not exist or already dropped/confirmed
           </stringMessage>
         </operationName>
         <operationName name="ThePalletIDAlreadyDrop">
