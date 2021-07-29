@@ -122,6 +122,8 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            lblError.Text = "";
+            lblConfirm.Text = "";
             DateTime localDate = DateTime.Now;
 
             var PDNO = txtOrder.Text.Trim().ToUpper();
