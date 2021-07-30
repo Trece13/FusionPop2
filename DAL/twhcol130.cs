@@ -1559,6 +1559,55 @@ namespace whusa.Interfases
 
             return Retorno;
         }
+
+        public string InsertarReseiptRawMaterialComplementMultiInsert(Ent_twhcol130131 MyObj)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$OORG", MyObj.OORG);
+            paramList.Add(":T$ORNO", MyObj.ORNO);
+            paramList.Add(":T$ITEM", MyObj.ITEM);
+            paramList.Add(":T$PAID", MyObj.PAID);
+            paramList.Add(":T$PONO", MyObj.PONO);
+            paramList.Add(":T$SEQN", MyObj.SEQN);
+            paramList.Add(":T$CLOT", MyObj.CLOT == "" ? " " : MyObj.CLOT);
+            paramList.Add(":T$CWAR", MyObj.CWAR);
+            paramList.Add(":T$QTYS", MyObj.QTYS);
+            paramList.Add(":T$UNIT", MyObj.UNIT);
+            paramList.Add(":T$QTYC", MyObj.QTYC);
+            paramList.Add(":T$UNIC", MyObj.UNIC);
+            paramList.Add(":T$CONF", MyObj.CONF);
+            paramList.Add(":T$RCNO", MyObj.RCNO);
+            paramList.Add(":T$LOCA", MyObj.LOCA == string.Empty ? " " : MyObj.LOCA);
+            paramList.Add(":T$PRNT", MyObj.PRNT);
+            paramList.Add(":T$LOGN", MyObj.LOGN);
+            paramList.Add(":T$LOGT", MyObj.LOGT);
+            paramList.Add(":T$STAT", MyObj.STAT);
+            paramList.Add(":T$NPRT", MyObj.NPRT);
+            paramList.Add(":T$FIRE", MyObj.FIRE);
+            paramList.Add(":T$PSNO", MyObj.PSLIP == string.Empty ? " " : MyObj.PSLIP);
+            paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            return strSentencia;
+        }
+
+        public bool MultiInsert(string StrInsertMultiple)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref StrInsertMultiple, ref env, tabla, paramList);
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false); 
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Retorno;
+        }
     }
 
     

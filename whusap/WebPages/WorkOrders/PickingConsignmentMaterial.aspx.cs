@@ -1274,7 +1274,7 @@ namespace whusap.WebPages.WorkOrders
                     //{
                     twhcolDAL.ActualizarCantidades222(MySessionObjPicking.PALLETID.Trim());
                     Ent_tticol082 Obj082 = new Ent_tticol082();
-                    Obj082.STAT = "1";
+                    Obj082.STAT = "3";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     //}
@@ -1293,7 +1293,7 @@ namespace whusap.WebPages.WorkOrders
                     //{
                     twhcolDAL.ActualizarCantidades242(MySessionObjPicking.PALLETID.Trim());
                     Ent_tticol082 Obj082 = new Ent_tticol082();
-                    Obj082.STAT = "1";
+                    Obj082.STAT = "3";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     //}
@@ -1311,7 +1311,7 @@ namespace whusap.WebPages.WorkOrders
                     //{
                     twhcolDAL.ActualizarCantidades131(MySessionObjPicking.PALLETID.Trim(), false);
                     Ent_tticol082 Obj082 = new Ent_tticol082();
-                    Obj082.STAT = "1";
+                    Obj082.STAT = "3";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     //}

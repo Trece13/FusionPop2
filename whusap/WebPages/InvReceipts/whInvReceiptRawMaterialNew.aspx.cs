@@ -110,29 +110,45 @@ namespace whusap.WebPages.InvReceipts
         }
 
         [WebMethod]
-        public static string InsertarReseiptRawMaterial(string OORG, string ORNO, string ITEM, string PONO, string LOT, decimal QUANTITY, string STUN, string CUNI, string CWAR, string FIRE, string PSLIP, string CICLE = "1",bool INIT = false)
+        public static string InsertarReseiptRawMaterial(string OORG, string ORNO, string ITEM, string PONO, string LOT, decimal QUANTITY, string STUN, string CUNI, string CWAR, string FIRE, string PSLIP, string CICLE = "1", bool INIT = false)
         {
             if (INIT == true)
             {
                 QUANTITYAUX_COMPLETADA = 0;
                 CiclePrintBegin = 0;
                 MyInsert.Clear();
+                HttpContext.Current.Session["MyConvertionFactor"] = null;
+                HttpContext.Current.Session["DTOrdencompra"] = null;
+                HttpContext.Current.Session["OrdenImportacion"] = null;
+                HttpContext.Current.Session["Dttwhwmd200"] = null;
+                HttpContext.Current.Session["PRIORIDAD"] = null;
+                HttpContext.Current.Session["LOCAL"] = null;
             }
-  
-            CiclePrintEnd = Convert.ToInt32((Convert.ToInt32(CICLE) < 1) ? 1 : ((Convert.ToInt32(CICLE)>50)?50:Convert.ToInt32(CICLE)));
-            
+
+            CiclePrintEnd = Convert.ToInt32((Convert.ToInt32(CICLE) < 1) ? 1 : ((Convert.ToInt32(CICLE) > 1000) ? 1000 : Convert.ToInt32(CICLE)));
+
             //string PSLIP = string.Empty; 
             PSLIP = PSLIP.Trim() == string.Empty ? " " : PSLIP.Trim();
             decimal QUANTITYAUX = QUANTITY;
-            
+
             string Retrono = "El Registro no se ha insertado";
             Factor MyConvertionFactor = new Factor { };
 
             if (CUNI != STUN)
             {
-                MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
-                QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
-                QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
+                if (HttpContext.Current.Session["MyConvertionFactor"] == null)
+                {
+                    MyConvertionFactor = FactorConversion(ITEM, STUN, CUNI);
+                    HttpContext.Current.Session["MyConvertionFactor"] = MyConvertionFactor;
+                    QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                    QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
+                }
+                else
+                {
+                    MyConvertionFactor = (Factor)HttpContext.Current.Session["MyConvertionFactor"];
+                    QUANTITYAUX = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                    QUANTITYAUX = Decimal.Round(QUANTITYAUX, 4);
+                }
             }
 
 
@@ -140,11 +156,16 @@ namespace whusap.WebPages.InvReceipts
             {
                 if (OORG == "2")
                 {
-                    DataTable DTOrdencompra = ConsultaOrdencompra(ORNO, PONO, QUANTITYAUX, ITEM, "");
+                    DataTable DTOrdencompra = HttpContext.Current.Session["DTOrdencompra"] == null ? ConsultaOrdencompra(ORNO, PONO, QUANTITYAUX, ITEM, "") : (DataTable)HttpContext.Current.Session["DTOrdencompra"];
                     if (DTOrdencompra.Rows.Count > 0)
                     {
-                        bool OrdenImportacion = false;
-                        OrdenImportacion = twhcol130DAL.ConsultaOrdenImportacion(DTOrdencompra.Rows[0]["T$COTP"].ToString()).Rows.Count > 0 ? true : false;
+                        if (HttpContext.Current.Session["DTOrdencompra"] == null) { HttpContext.Current.Session["DTOrdencompra"] = DTOrdencompra; }
+                        bool OrdenImportacion = HttpContext.Current.Session["OrdenImportacion"] == null ? false : (bool)HttpContext.Current.Session["OrdenImportacion"];
+                        if (HttpContext.Current.Session["OrdenImportacion"] == null)
+                        {
+                            OrdenImportacion = twhcol130DAL.ConsultaOrdenImportacion(DTOrdencompra.Rows[0]["T$COTP"].ToString()).Rows.Count > 0 ? true : false;
+                            HttpContext.Current.Session["OrdenImportacion"] = OrdenImportacion;
+                        }
                         int consecutivoPalletID = 0;
                         DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130(ORNO);
                         string SecuenciaPallet = "001";
@@ -175,13 +196,19 @@ namespace whusap.WebPages.InvReceipts
                         {
                             string strError = string.Empty;
                             Ent_twhwmd200 OBJ200 = new Ent_twhwmd200 { cwar = DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim() };
-                            DataTable Dttwhwmd200 = twhwmd200.listaRegistro_ObtieneAlmacenLocation(ref OBJ200, ref strError);
+
+                            DataTable Dttwhwmd200 = HttpContext.Current.Session["Dttwhwmd200"] == null ? twhwmd200.listaRegistro_ObtieneAlmacenLocation(ref OBJ200, ref strError) : (DataTable)HttpContext.Current.Session["Dttwhwmd200"];
+                            if (HttpContext.Current.Session["Dttwhwmd200"] == null) { HttpContext.Current.Session["Dttwhwmd200"] = Dttwhwmd200; };
+
                             if (Dttwhwmd200.Rows.Count > 0)
                             {
                                 if (Dttwhwmd200.Rows[0]["LOC"].ToString().Trim() == "1")
                                 {
-                                    PRIORIDAD = twhcol130DAL.ConsultarPrioridadNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim()).Rows[0]["T$PRIO"].ToString().Trim();
-                                    LOCAL = twhcol130DAL.ConsultarLocationNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim(), PRIORIDAD).Rows[0]["T$LOCA"].ToString().Trim();
+                                    PRIORIDAD = HttpContext.Current.Session["PRIORIDAD"] == null ? twhcol130DAL.ConsultarPrioridadNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim()).Rows[0]["T$PRIO"].ToString().Trim() : HttpContext.Current.Session["PRIORIDAD"].ToString();
+                                    LOCAL = HttpContext.Current.Session["LOCAL"] == null ? twhcol130DAL.ConsultarLocationNativa(DTOrdencompra.Rows[0]["T$CWAR"].ToString().Trim(), PRIORIDAD).Rows[0]["T$LOCA"].ToString().Trim() : HttpContext.Current.Session["LOCAL"].ToString();
+
+                                    if (HttpContext.Current.Session["PRIORIDAD"] == null) { HttpContext.Current.Session["PRIORIDAD"] = PRIORIDAD; };
+                                    if (HttpContext.Current.Session["LOCAL"] == null) { HttpContext.Current.Session["LOCAL"] = LOCAL; };
                                 }
                             }
 
@@ -190,49 +217,55 @@ namespace whusap.WebPages.InvReceipts
                         {
                             //LOCAL = " ";
                             MyObjError.error = true;
-                            
+
                             MyObjError.errorMsg = Priorinboundnotfound;
                             return JsonConvert.SerializeObject(MyObjError);
                         }
-                        Ent_twhcol130131 MyObj = new Ent_twhcol130131
+                        Ent_twhcol130131 MyObj = new Ent_twhcol130131();
+                            MyObj.OORG = OORG;// Order type escaneada view 
+                            MyObj.ORNO = DTOrdencompra.Rows[0]["T$ORNO"].ToString();
+                            MyObj.ITEM = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
+                            MyObj.PAID = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
+                            MyObj.PONO = DTOrdencompra.Rows[0]["T$PONO"].ToString();
+                            MyObj.SEQN = DTOrdencompra.Rows[0]["T$SQNBR"].ToString();
+                            MyObj.CLOT = LOT;// lote VIEW
+                            MyObj.CWAR = DTOrdencompra.Rows[0]["T$CWAR"].ToString();
+                            MyObj.QTYS = (QUANTITY / CiclePrintEnd).ToString("0.0000");// cantidad escaneada view 
+                            MyObj.UNIT = STUN;//unit escaneada view
+                            MyObj.QTYC = (QUANTITYAUX / CiclePrintEnd).ToString("0.0000");//cantidad escaneada view aplicando factor
+                            MyObj.UNIC = CUNI;//unidad view stock
+                            MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                            MyObj.CONF = "1";
+                            MyObj.RCNO = " ";//llena baan
+                            MyObj.DATR = "01/01/70";//llena baan
+                            MyObj.LOCA = LOCAL;// enviamos vacio
+                            MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                            MyObj.PRNT = "1";// llenar en 1
+                            MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                            MyObj.NPRT = "1";//conteo de reimpresiones 
+                            MyObj.LOGN = HttpContext.Current.Session["user"].ToString();// nombre de ususario de la session
+                            MyObj.LOGT = " ";//llena baan
+                            MyObj.STAT = "0";// LLENAR EN 1  +
+                            MyObj.ALLO = "0";
+                            MyObj.DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString();
+                            MyObj.COTP = DTOrdencompra.Rows[0]["T$COTP"].ToString();
+                            MyObj.FIRE = FIRE;
+                            MyObj.NAMA = DTOrdencompra.Rows[0]["T$NAMA"].ToString();
+                            MyObj.PSLIP = PSLIP.ToUpper();
+                            MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96";
+                            MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96";
+                            MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+                            MyObj.CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "";
+                            MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + (QUANTITYAUX / CiclePrintEnd).ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
+                            MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+                        string StrInsertMultiple = string.Empty;
+
+                        for (int i = 0; i < 10; i++)
                         {
-                            OORG = OORG,// Order type escaneada view 
-                            ORNO = DTOrdencompra.Rows[0]["T$ORNO"].ToString(),
-                            ITEM = DTOrdencompra.Rows[0]["T$ITEM"].ToString(),
-                            PAID = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet,
-                            PONO = DTOrdencompra.Rows[0]["T$PONO"].ToString(),
-                            SEQN = DTOrdencompra.Rows[0]["T$SQNBR"].ToString(),
-                            CLOT = LOT,// lote VIEW
-                            CWAR = DTOrdencompra.Rows[0]["T$CWAR"].ToString(),
-                            QTYS = (QUANTITY / CiclePrintEnd).ToString("0.0000"),// cantidad escaneada view 
-                            UNIT = STUN,//unit escaneada view
-                            QTYC = (QUANTITYAUX / CiclePrintEnd).ToString("0.0000"),//cantidad escaneada view aplicando factor
-                            UNIC = CUNI,//unidad view stock
-                            DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//fecha de confirmacion 
-                            CONF = "1",
-                            RCNO = " ",//llena baan
-                            DATR = "01/01/70",//llena baan
-                            LOCA = LOCAL,// enviamos vacio
-                            DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llenar con fecha de hoy
-                            PRNT = "1",// llenar en 1
-                            DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString(),//llena baan
-                            NPRT = "1",//conteo de reimpresiones 
-                            LOGN = HttpContext.Current.Session["user"].ToString(),// nombre de ususario de la session
-                            LOGT = " ",//llena baan
-                            STAT = "0",// LLENAR EN 1  +
-                            ALLO = "0",
-                            DSCA = DTOrdencompra.Rows[0]["DSCA"].ToString(),
-                            COTP = DTOrdencompra.Rows[0]["T$COTP"].ToString(),
-                            FIRE = FIRE,
-                            NAMA = DTOrdencompra.Rows[0]["T$NAMA"].ToString(),
-                            PSLIP = PSLIP.ToUpper(),
-                            PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
-                            ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
-                            ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + "&code=Code128&dpi=96",
-                            CLOT_URL = LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + LOT.ToString().Trim().ToUpper() + "&code=Code128&dpi=96" : "",
-                            QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + (QUANTITYAUX / CiclePrintEnd).ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96",
-                            UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + STUN.ToString().Trim().ToUpper() + "&code=Code128&dpi=96"
-                        };
+                            StrInsertMultiple  += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
+                            SecuenciaPallet = (Convert.ToInt32(SecuenciaPallet) + 1).ToString();
+                            MyObj.PAID = MyObj.ORNO+"-"+(SecuenciaPallet.Trim().Length == 1 ? "00" + SecuenciaPallet.Trim() : SecuenciaPallet.Trim().Length == 2 ? "0" + SecuenciaPallet.Trim() : SecuenciaPallet.Trim().Length == 3 ? SecuenciaPallet.Trim() : SecuenciaPallet.Trim());
+                        }
 
                         if (OrdenImportacion)
                         {
@@ -240,7 +273,7 @@ namespace whusap.WebPages.InvReceipts
                             if (ConsultaPresupuestoImportacion.Rows.Count > 0 && ConsultaPresupuestoImportacion.Rows[0]["pres"].ToString().Trim() == "3")
                             {
                                 bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
-
+                                
                                 if (Insertsucces)
                                 {
 
@@ -256,7 +289,7 @@ namespace whusap.WebPages.InvReceipts
                             else
                             {
                                 MyObj.error = true;
-                                
+
                                 MyObj.errorMsg = ImportPOBudgetisnotclosedPOcannotberecived;
                                 Retrono = JsonConvert.SerializeObject(MyObj);
                             }
@@ -282,7 +315,7 @@ namespace whusap.WebPages.InvReceipts
                                 }
                             }
 
-                            bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
+                            bool Insertsucces = twhcol130DAL.MultiInsert(StrInsertMultiple);
 
                             if (Insertsucces)
                             {
@@ -292,7 +325,7 @@ namespace whusap.WebPages.InvReceipts
 
                                 if (CiclePrintBegin < CiclePrintEnd && CiclePrintEnd > 1)
                                 {
-                                    InsertarReseiptRawMaterial(OORG, ORNO, ITEM, PONO, LOT, QUANTITY, STUN, CUNI, CWAR, FIRE, PSLIP,CICLE,false);
+                                    InsertarReseiptRawMaterial(OORG, ORNO, ITEM, PONO, LOT, QUANTITY, STUN, CUNI, CWAR, FIRE, PSLIP, CICLE, false);
                                 }
                                 else if (CiclePrintEnd == 1)
                                 {
@@ -310,7 +343,7 @@ namespace whusap.WebPages.InvReceipts
                                 }
 
                                 Retrono = CiclePrintEnd > 1 ? JsonConvert.SerializeObject(MyInsert) : JsonConvert.SerializeObject(MyObj);
-                              
+
                             }
                             else
                             {
@@ -364,7 +397,7 @@ namespace whusap.WebPages.InvReceipts
                         {
                             //LOCAL = " ";
                             MyObjError.error = true;
-                            
+
                             MyObjError.errorMsg = Priorinboundnotfound;
                             return JsonConvert.SerializeObject(MyObjError);
                         }
@@ -422,7 +455,7 @@ namespace whusap.WebPages.InvReceipts
                         Ent_twhcol130131 MyObj = new Ent_twhcol130131
                         {
                             error = true,
-                            
+
                             errorMsg = Thelotdoesnotcorrespondtotheorder
                         };
 
