@@ -338,7 +338,7 @@
         </operationName>
         <operationName name="PalletNotExist">
             <stringMessage>
-              Pallet ID blocked or doesn't exist
+              Status Pallet ID doesn't allow transfer or doesn't exist
             </stringMessage>
         </operationName>
         <operationName name="LocationTransfeCannotEqual">
