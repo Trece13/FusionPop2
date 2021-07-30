@@ -589,7 +589,7 @@
                             </label>
                         </td>
                         <td style="text-align: center;">
-                            <label style="font-size: 30px" id="lbPaid">
+                            <label style="font-size: 20px" id="lbPaid">
                             </label>
                         </td>
                     </tr>
