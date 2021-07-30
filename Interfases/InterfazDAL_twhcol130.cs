@@ -458,5 +458,15 @@ namespace whusa.Interfases
         {
             return dal.ConsultaSumatoriaCantidadesTwhinh210(MyObj);
         }
+
+        public string  InsertarReseiptRawMaterialComplementMultiInsert(Ent_twhcol130131 MyObj)
+        {
+            return dal.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
+        }
+
+        public bool MultiInsert(string StrInsertMultiple)
+        {
+            return dal.MultiInsert(StrInsertMultiple);
+        }
     }
 }

@@ -473,7 +473,7 @@
                 </form>
             </div>
             <div id="divTables" class="col-7">
-                <label style="display:none; color:red; font-size:15px" id="lblMcnoPick">Material room pick</label>
+                <label style="display:none; color:red; font-size:24px" id="lblMcnoPick">Material room pick</label>
                 <div id="divTableItem" class="col-12">
                 </div>
                 <br />
@@ -1447,6 +1447,7 @@
                     else {
                         ClearFormPicking();
                         StartComponents();
+                        EventoAjax("SkipPicking", "{}", LoadPageSuccess);
                     }
                 },
                 failure: function (response) {

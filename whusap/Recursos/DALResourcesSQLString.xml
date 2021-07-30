@@ -1069,7 +1069,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL082.T$ADVS = '[:ADVS]'
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN &lt;= 3 
+          WHERE ROWN &lt;= 3
           ORDER BY PALLETID ASC
         </stringSQL>
       </operationName>
@@ -1114,7 +1114,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL082.T$ADVS = '[:ADVS]'
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
           )
-          WHERE ROWN &lt;= 3 
+          WHERE ROWN &lt;= 3
           ORDER BY PALLETID ASC
         </stringSQL>
       </operationName>
@@ -2678,6 +2678,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           DELETE FROM {0}.twhcol130{1} WHERE TRIM(T$PAID) =  TRIM('[:T$PAID]')
         </stringSQL>
       </operationName>
+      <operationName name="InsertarReseiptRawMaterialComplementMultiInsert">
+        <stringSQL>
+          INTO {0}.TWHCOL130{1}
+          (T$OORG, T$ORNO, T$ITEM, T$PAID, T$PONO, T$SEQN, T$CLOT, T$CWAR, T$QTYS, T$UNIT, T$QTYC, T$UNIC, T$DATE, T$CONF, T$RCNO, T$DATR, T$LOCA, T$DATL, T$PRNT, T$DATP, T$NPRT, T$LOGN, T$LOGT, T$STAT,T$PICK,T$DATK,T$LOGP,T$DAFR,T$MES1,T$DAFL,T$MES2,T$REFCNTD,T$REFCNTU,T$CWAA,T$DRPT,T$FIRE,T$LOAA,T$LOGR,T$QTYA,T$PSNO,T$ALLO)
+          VALUES
+          ('[:T$OORG]','[:T$ORNO]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')),'[:T$PAID]','[:T$PONO]','[:T$SEQN]','[:T$CLOT]','[:T$CWAR]','[:T$QTYS]','[:T$UNIT]','[:T$QTYC]','[:T$UNIC]',SYSDATE+5/24,'[:T$CONF]','[:T$RCNO]',SYSDATE+5/24,'[:T$LOCA]',SYSDATE+5/24,'[:T$PRNT]',SYSDATE+5/24,'[:T$NPRT]','[:T$LOGN]','[:T$LOGT]','[:T$STAT]','0',SYSDATE+5/24,' ',SYSDATE+5/24,' ',SYSDATE+5/24,' ','0','0',' ',SYSDATE,'[:T$FIRE]',' ',' ',0,'[:T$PSNO]','[:T$ALLO]')
+        </stringSQL>
+      </operationName>
+      <operationName name="MultiInsert">
+        <stringSQL>
+          INSERT ALL
+          {0}
+          SELECT * FROM dual
+        </stringSQL>
+      </operationName>
       <operationName name="InsertarReseiptRawMaterial">
         <stringSQL>
           insert into {0}.twhcol130{1}
@@ -2751,7 +2766,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ListaPurchaseOrders">
         <stringSQL>
-          select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
+          select TO_CHAR(inh210.t$prdt,'DD/MM/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
           pur401.t$ddtb DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
@@ -2779,7 +2794,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ListaPurchaseOrder">
         <stringSQL>
-          select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
+          select TO_CHAR(inh210.t$prdt,'DD/MM/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
           pur401.t$ddtb DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
@@ -3373,7 +3388,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
       <operationName name="vallidatePalletID">
-        <stringSQL>     
+        <stringSQL>
           <!--SELECT * FROM (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$PAID,ticol222.T$ACQT AS T$qtyc,
           ticol022.T$MITM AS T$ITEM,ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,ticol222.T$ACLO AS T$LOCA, ticol022.t$dele as t$stat,' ' AS T$CLOT
