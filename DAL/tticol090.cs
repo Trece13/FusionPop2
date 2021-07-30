@@ -243,6 +243,7 @@ namespace whusa.DAL
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$ITEM", objEnt.SITM);
+            paramList.Add(":T$CWAR", objEnt.CWAR);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
 

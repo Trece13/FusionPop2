@@ -3184,7 +3184,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol090">
       <operationName name="ConsultarCantidadPoritem022042131">
         <stringSQL>
-          select TBL, ITEM, SUM(QTYC) QTYC, CUNI, STAT,ORNO from (
+          --select TBL, ITEM, SUM(QTYC) QTYC, CUNI, STAT,ORNO from (
+          select TBL, ITEM, SUM(QTYC) QTYC, CUNI, STAT,CWAR from (
           SELECT 'whcol131' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,SUM(T$QTYA) AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT,T$ORNO AS ORNO,T$LOGN LOGN, T$DATE FROM {0}.tWhcol131{1}
           WHERE T$STAT = 6
           group by T$PAID,T$CWAA,T$LOAA,T$ITEM,T$UNIC,T$STAT,T$ORNO,T$LOGN, T$DATE
@@ -3202,8 +3203,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           WHERE ticol022.T$DELE = 8
           group by ticol022.T$SQNB,T$CWAT,T$ACLO,T$MITM,T$CUNI,T$DELE,ticol022.T$PDNO,T$LOGN,T$DATE
-          ) where trim(ITEM) = trim('[:T$ITEM]')
-          GROUP BY TBL, ITEM, CUNI, STAT,ORNO
+          ) where trim(ITEM) = trim('[:T$ITEM]') and trim(CWAR) = trim('[:T$CWAR]')
+          --GROUP BY TBL, ITEM, CUNI, STAT,ORNO
+          GROUP BY TBL, ITEM, CUNI, STAT,CWAR
         </stringSQL>
       </operationName>
       <operationName name="ConsultarCantidad215">
@@ -6368,8 +6370,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT DISTINCT
           ticst001.T$PDNO AS PDNO, ticst001.T$PONO AS PONO, ticst001.T$CWAR AS CWAR,
           ticst001.T$CLOT AS CLOT, ticst001.T$SITM AS SITM, tcibd001.T$DSCA AS DSCA,
-          --(SELECT CASE WHEN cant_max IS NULL THEN 0 ELSE cant_max END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO) CANT_MAX,
-          --(SELECT CASE WHEN cant_reg IS NULL THEN 0 ELSE cant_reg END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO) CANT_REG,
+          (SELECT CASE WHEN cant_max IS NULL THEN 0 ELSE cant_max END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO AND TURNO = '[:T$SHIF]') CANT_MAX,
+          (SELECT CASE WHEN cant_reg IS NULL THEN 0 ELSE cant_reg END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO AND TURNO = '[:T$SHIF]') CANT_REG,
+          (SELECT CASE WHEN sum(cant_reg) IS NULL THEN 0 ELSE sum(cant_reg) END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO AND TURNO = '[:T$SHIF]') CANT_PROC,
           tcibd001.T$CUNI AS CUNI, ticst001.T$QUES AS CANT_EST,
           (SELECT SUM(ticst0012.T$QUCS) FROM {0}.tticst001{1} ticst0012 WHERE ticst0012.T$PDNO = '[:T$PDNO]' AND ticst0012.T$SITM = ticst001.T$SITM ) AS ACT_CANT,
           (SELECT SUM(ticol082.T$QTYT) FROM {0}.tticol082{1} ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,

@@ -151,19 +151,25 @@ namespace whusap.WebPages.Migration
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
                                 var Stock = Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString());
                                 var Cant_Pic = Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.CANT_PICK.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.CANT_PICK.Trim()));
-                                MyLioEntidadObj.cant_reg = quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg");
-                                MyLioEntidadObj.cant_max = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max");
-                                MyLioEntidadObj.cant_proc = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc");
+                                //MyLioEntidadObj.cant_reg = quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg");
+                                //MyLioEntidadObj.cant_max = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max");
+                                //MyLioEntidadObj.cant_proc = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc");
 
                                 if (dt022044131.Rows.Count > 0)
                                 {
-                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+                                    //MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+                                    MyLioEntidadObj.ISWH = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
                                 }
 
                                 if (dt215.Rows.Count > 0)
                                 {
-                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Cant_Pic - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                    //MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Cant_Pic - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim()))).ToString();
+                                    MyLioEntidadObj.STOCK = (Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString()) - Cant_Pic - Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ACT_CANT.Trim())) - Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())).ToString();
                                 }
+                                MyLioEntidadObj.cant_reg = item["CANT_REG"].ToString().Trim() == "" ? "0" : item["CANT_REG"].ToString().Trim();
+                                MyLioEntidadObj.cant_max = item["CANT_MAX"].ToString().Trim() == "" ? MyLioEntidadObj.STOCK : item["CANT_MAX"].ToString().Trim();
+                                MyLioEntidadObj.cant_proc = item["CANT_PROC"].ToString().Trim() == "" ? "0" : item["CANT_PROC"].ToString().Trim();
+
                                 LstTable.Add(MyLioEntidadObj);
                             }
 
