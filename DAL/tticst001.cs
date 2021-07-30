@@ -35,7 +35,8 @@ namespace whusa.DAL
 
         public DataTable findByItemAndPdno(ref string pdno, ref string item, ref string strError)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -60,7 +61,8 @@ namespace whusa.DAL
 
         public DataTable findByPdno(ref string pdno, ref string strError)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -83,7 +85,8 @@ namespace whusa.DAL
         }
         public DataTable findByPdnoMRB(ref string pdno, ref string strError)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -106,7 +109,8 @@ namespace whusa.DAL
         }
         public DataTable findByPdnoCosts(ref string pdno, ref string shift, ref string strError)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -131,7 +135,8 @@ namespace whusa.DAL
 
         public DataTable findByPdnoMaterialRejected(ref string pdno, ref string strError)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -155,7 +160,8 @@ namespace whusa.DAL
 
         public DataTable quantity_reg_order_machine140(string SHIFT, string MCNO, string SITM, string PDNO)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();
@@ -182,7 +188,8 @@ namespace whusa.DAL
 
         public DataTable maxquantity_per_shift140(string SHIFT, string MCNO, string SITM, string PDNO)
         {
-            consulta.Rows.Clear();
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
             method = MethodBase.GetCurrentMethod();
 
             paramList = new Dictionary<string, object>();

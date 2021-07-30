@@ -32,8 +32,6 @@ namespace whusap.WebPages.Migration
         private static string formName;
         private static string globalMessages = "GlobalMessages";
         private static DataTable _consultarTurno;
-        public static DataTable _consultaMateriales = new DataTable();
-
         
         public bool valstatwo = Convert.ToBoolean(ConfigurationManager.AppSettings["valstatwo"]);
         #endregion
@@ -95,6 +93,8 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            //JC 300721 Evitar Error de Collection was Modified
+            DataTable _consultaMateriales = new DataTable();
             List<MyLioEntidad> LstTable = new List<MyLioEntidad>();
             Session["orno"] = txtOrder.Text.Trim().ToUpper();
             lblError.Text = String.Empty;
@@ -122,9 +122,8 @@ namespace whusap.WebPages.Migration
                     if (_consultarTurno.Rows.Count > 0)
                     {
                         string shift = _consultarTurno.Rows[0]["shif"].ToString().Trim();
-
                         _consultaMateriales = _idaltticst001.findByPdnoCosts(ref order, ref shift, ref strError);
-
+                        
                         if (_consultaMateriales.Rows.Count > 0)
                         {
                             LstTable.Clear();
@@ -152,6 +151,10 @@ namespace whusap.WebPages.Migration
                                 DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
                                 var Stock = Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString());
                                 var Cant_Pic = Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.CANT_PICK.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.CANT_PICK.Trim()));
+                                MyLioEntidadObj.cant_reg = quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg");
+                                MyLioEntidadObj.cant_max = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max");
+                                MyLioEntidadObj.cant_proc = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc");
+
                                 if (dt022044131.Rows.Count > 0)
                                 {
                                     MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
@@ -164,12 +167,12 @@ namespace whusap.WebPages.Migration
                                 LstTable.Add(MyLioEntidadObj);
                             }
 
-                            foreach (MyLioEntidad item in LstTable)
-                            {
-                                item.cant_reg = quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg");
-                                item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
-                                item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
-                            }
+                            //foreach (MyLioEntidad item in LstTable)
+                            //{
+                            //    item.cant_reg = quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, item.MCNO, item.SITM, item.PDNO, "cant_reg");
+                            //    item.cant_max = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_max");
+                            //    item.cant_proc = maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, item.MCNO, item.SITM, item.PDNO, "cant_proc");
+                            //}
                             Session["LstTable"] = LstTable;
                             Session["numReg"] = LstTable.Count();
                             makeTable();
