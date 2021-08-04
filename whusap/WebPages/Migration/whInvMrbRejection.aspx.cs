@@ -36,6 +36,8 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_twhinr140 _idaltwhinr140 = new InterfazDAL_twhinr140();
         private static InterfazDAL_tticol100 _idaltticol100 = new InterfazDAL_tticol100();
         private static InterfazDAL_tticol116 _idaltticol116 = new InterfazDAL_tticol116();
+        private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
+        public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
         string strError = string.Empty;
         string Aplicacion = "WEBAPP";
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
@@ -1008,7 +1010,6 @@ namespace whusap.WebPages.Migration
             StringBuilder script = new StringBuilder();
             script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
             script.Append("ventanaImp.moveTo(30, 0);");
-            //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
 
@@ -1175,6 +1176,10 @@ namespace whusap.WebPages.Migration
                 return;
             }
 
+            string strMaxSequence = getSequence(paid.ToUpper().Trim(),"Q");
+            string separator = "-";
+            string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+
             Ent_twhwmd300 data = new Ent_twhwmd300() { loca = location };
             var validaLocation = _idaltwhwmd300.listaRegistro_ObtieneAlmacen(ref data, ref strError);
             if (txSloc.Value.ToString().Trim() == "1")
@@ -1198,7 +1203,6 @@ namespace whusap.WebPages.Migration
 
             if (validarRegistro.Rows.Count > 0)
             {
-                //var validarUpdate = _idaltticol116.updateRecordRejectedWarehouse(ref item, ref warehouse, ref location, ref cantidad, ref strError);
                 Ent_tticol116 data116 = new Ent_tticol116()
                 {
                     item = item,
@@ -1226,17 +1230,9 @@ namespace whusap.WebPages.Migration
                 if (validInsertaux > 0)
                 {
 
-                    //validUpdate = _idaltticol116.UpdatePalletStatus_ticol022(ref data116, ref strError);
-
-                    ////update actual warehouse field on table ticol222 to MRB Warehouse:
-                    //validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
-
-
-                    //validUpdate = _idaltticol116.UpdatePalletStatus_ticol022(ref data116, ref strError);
                     validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
                     
                     validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError);
-                    //update actual warehouse field on table ticol222 to MRB Warehouse:  Located.
                     tableNameSave = Session["TableNameSave"].ToString();
                     if (tableNameSave == "ticol022")
                     {
@@ -1301,7 +1297,7 @@ namespace whusap.WebPages.Migration
                     Session["Pallet"] = paid.Trim().ToUpper();
 
                     StringBuilder script = new StringBuilder();
-                    //JC 270721 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                    //JC 270721 
                     //JC 270721 Unificar el diseño de la etiqueta
                     script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");                    
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
@@ -1347,12 +1343,8 @@ namespace whusap.WebPages.Migration
                     lblConfirmLocated.Text = mensajes("msjsave");
                     divTableLocated.InnerHtml = String.Empty;
                     divBtnGuardarLocated.Visible = false;
-                    //txtPalletId.Text = String.Empty;
-
-                    //validUpdate = _idaltticol116.UpdatePalletStatus_ticol022(ref data116, ref strError);
                     validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
-                        //update actual warehouse field on table ticol222 to MRB Warehouse:
-                    //    validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
+
                     tableNameSave = Session["TableNameSave"].ToString();
                     if (tableNameSave == "ticol022")
                     {
@@ -1363,20 +1355,6 @@ namespace whusap.WebPages.Migration
                         validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError);
                     }
                     
-
-                    //var rutaServ = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
-                    //imgCodeItem.Src = !string.IsNullOrEmpty(item) ? rutaServ : "";
-
-                    //var rutaServQty = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + cantidad.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
-                    //imgQty.Src = !string.IsNullOrEmpty(cantidad.ToString()) ? rutaServQty : "";
-
-                    //lblValueDescription.Text = hdfDescItem.Value;
-                    //lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
-                    //lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", _operator);
-                    //lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
-                 //   lblComments.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
-                  //  lblValueReason.Text = reasondesc;
-
                         var rutaServ1 = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
                         imgPalletId.Src = !string.IsNullOrEmpty(txtPalletId.Text) ? rutaServ1 : "";
 
@@ -1411,21 +1389,7 @@ namespace whusap.WebPages.Migration
                         Session["Comments"] = obse;
                         Session["Reprint"] = "no";
 
-
-                        //Session["Reprint"]      = "no";
-                        //Session["MaterialDesc"] = "";
-                        //Session["Material"]     =  item.Trim().ToUpper() ;
-                        //Session["codePaid"]     =  paid.Trim().ToUpper() ;
-                        //Session["Lot"] = lot == String.Empty ? " " : lot;
-                        //Session["Quantity"]     = cantidad.ToString().Trim().ToUpper();
-                        //Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        //Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                        //Session["Operator"]     = Session["user"].ToString();
-                        //Session["Pallet"] = paid.Trim().ToUpper();
-
                         StringBuilder script = new StringBuilder();
-                        //JC 270721 Unificar el diseño de la etiqueta
-                        //JC 270721 script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
                         script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
@@ -1637,6 +1601,31 @@ namespace whusap.WebPages.Migration
             //grdRecords.Columns[6].HeaderText = _textoLabels.readStatement(formName, _idioma, "headReturnQty");
             //grdRecords.Columns[7].HeaderText = _textoLabels.readStatement(formName, _idioma, "headUnit");
             //grdRecords.Columns[8].HeaderText = _textoLabels.readStatement(formName, _idioma, "headConfirmed");
+        }
+
+        public static string getSequence(string PAIDOld, string complement = "")
+        {
+            string sequence = string.Empty;
+            int indexSeparator = PAIDOld.IndexOf("-");
+            string SQNB = PAIDOld.Substring(0, indexSeparator);
+            string SEC = PAIDOld.Substring(indexSeparator + 1);
+
+            if (complement == "")
+            {
+                complement = recursos.SeparatorAlphaNumeric(ref SEC);
+            }
+
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
+            if (dtMaxSec.Rows.Count > 0)
+            {
+                sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
+            }
+            else
+            {
+                sequence = SQNB + "-" + complement + "000";
+            }
+
+            return sequence;
         }
         #endregion
 
