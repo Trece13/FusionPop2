@@ -52,6 +52,7 @@ namespace whusa
             this.errorMsg = string.Empty;
             this.Error = false;
             this.PAIDS = new List<string>();
+            this.QTYCFinal = string.Empty;
         }
 
         public string TERM { get; set; }
@@ -109,5 +110,7 @@ namespace whusa
         public string TypeMsgJs { get; set; }
         public decimal QSTK { get; set; }
         public List<string> PAIDS{ get; set; }
+
+        public string QTYCFinal { get; set; }
     }
 }

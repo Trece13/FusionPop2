@@ -995,7 +995,7 @@
                 }
             }
             else {
-                MyList.PAIDS.forEach(function (PAID) {
+                MyList.PAIDS.forEach(function (PAID, index) {
 
                     CBPalletNOd = PAID;
                     lblItemIDd = MyList.ITEM;
@@ -1036,7 +1036,7 @@
                         '<tbody>' +
                         '<tr>' +
                         '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + LblQuantityd.replace(",", ".") + " " + MyObject.UNIC + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? MyList.QTYCFinal.replace(",", ".") : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
@@ -1044,7 +1044,7 @@
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
-                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyObject.DATE + '</label></td>' +
+                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyList.DATE + '</label></td>' +
                         '</tr>' +
                         '</tbody>' +
                         '</table>' +

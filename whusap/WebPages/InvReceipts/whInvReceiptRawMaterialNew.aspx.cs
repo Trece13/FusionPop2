@@ -114,7 +114,7 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string InsertarReseiptRawMaterial(string OORG, string ORNO, string ITEM, string PONO, string LOT, decimal QUANTITY, string STUN, string CUNI, string CWAR, string FIRE, string PSLIP, string CICLE = "1", bool INIT = false)
         {
-            int Labels = Convert.ToInt32(CICLE)-1;
+            int Labels = Convert.ToInt32(CICLE) - 1;
             int FinalPaid = Convert.ToInt32(CICLE);
             int Packages = 10;
             int PackageCicles = Labels / Packages;
@@ -272,7 +272,6 @@ namespace whusap.WebPages.InvReceipts
                         {
                             if (CurrentPackageCicles == PackageCicles && CurrentIndependentCicles == IndependentCicles)
                             {
-                                StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
                                 PAIDS.Add(UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96");
                                 //QUANTITYAUX_COMPLETADA = (Labels*(QUANTITYAUX_COMPLETADA)) + Convert.ToDecimal(MyObj.QTYC);
                                 QUANTITYAUX_COMPLETADA = (Labels * (Convert.ToDecimal(MyObj.QTYC))) + Convert.ToDecimal(MyObj.QTYC);
@@ -288,13 +287,16 @@ namespace whusap.WebPages.InvReceipts
                                         if (QTYCOMPLETADA < LIMITE)
                                         {
                                             QTYFINAL = Convert.ToDecimal(MyObj.QTYC) + QTYCOMPLETADA;
-                                            MyObj.QTYC = QTYFINAL.ToString();
+                                            MyObj.QTYC = Math.Abs(Convert.ToDecimal(QTYFINAL.ToString())).ToString();
+                                            MyObj.QTYCFinal = Math.Abs(Convert.ToDecimal(QTYFINAL.ToString())).ToString();
+                                            HttpContext.Current.Session["QuantityFinal"] = MyObj.QTYCFinal;
                                         }
                                     }
                                 }
+                                StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
                                 CiclePrintBegin++;
                             }
-                            
+
                             if (CurrentPackageCicles == PackageCicles)
                             {
                                 while (CurrentIndependentCicles < IndependentCicles)
@@ -323,7 +325,44 @@ namespace whusap.WebPages.InvReceipts
                         }
                         else
                         {
-                            CiclePrintBegin++;
+                            if (Labels+1 > 1)
+                            {
+                                for (int i = 0; i <= Labels; i++)
+                                {
+                                    StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
+                                    PAIDS.Add(UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96");
+                                    SecuenciaPallet = (Convert.ToInt32(SecuenciaPallet) + 1).ToString();
+                                    MyObj.PAID = MyObj.ORNO + "-" + (SecuenciaPallet.Trim().Length == 1 ? "00" + SecuenciaPallet.Trim() : SecuenciaPallet.Trim().Length == 2 ? "0" + SecuenciaPallet.Trim() : SecuenciaPallet.Trim().Length == 3 ? SecuenciaPallet.Trim() : SecuenciaPallet.Trim());
+                                    QUANTITYAUX_COMPLETADA = (Labels * (Convert.ToDecimal(MyObj.QTYC))) + Convert.ToDecimal(MyObj.QTYC);
+                                    if (CiclePrintBegin == CiclePrintEnd - 1)
+                                    {
+                                        decimal QTYCOMPLETADA, QTYFINAL = 0;
+                                        decimal LIMITE = 0.05m;
+                                        decimal QTYLIMITE = 0;
+                                        QTYLIMITE = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTR"].ToString());
+                                        if (QUANTITY <= QTYLIMITE)
+                                        {
+                                            QTYCOMPLETADA = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString()) - QUANTITYAUX_COMPLETADA;
+                                            if (QTYCOMPLETADA < LIMITE)
+                                            {
+                                                QTYFINAL = Convert.ToDecimal(MyObj.QTYC) + QTYCOMPLETADA;
+                                                //MyObj.QTYC = Math.Abs(Convert.ToDecimal(QTYFINAL.ToString())).ToString();
+                                                MyObj.QTYCFinal = Math.Abs(Convert.ToDecimal(QTYFINAL.ToString())).ToString();
+                                                HttpContext.Current.Session["QuantityFinal"] = MyObj.QTYCFinal;
+                                            }
+                                        }
+                                    }
+                                    CiclePrintBegin++;
+                                }
+                            }
+                            else if (Labels+1 == 1)
+                            {
+                                StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
+                                PAIDS.Add(UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96");
+                                SecuenciaPallet = (Convert.ToInt32(SecuenciaPallet) + 1).ToString();
+                                MyObj.PAID = MyObj.ORNO + "-" + (SecuenciaPallet.Trim().Length == 1 ? "00" + SecuenciaPallet.Trim() : SecuenciaPallet.Trim().Length == 2 ? "0" + SecuenciaPallet.Trim() : SecuenciaPallet.Trim().Length == 3 ? SecuenciaPallet.Trim() : SecuenciaPallet.Trim());
+                                CiclePrintBegin++;
+                            }
                         }
 
                         if (OrdenImportacion)
@@ -335,7 +374,7 @@ namespace whusap.WebPages.InvReceipts
 
                                 if (Insertsucces)
                                 {
-
+                                    MyObj.QTYCFinal = HttpContext.Current.Session["QuantityFinal"] != null ? HttpContext.Current.Session["QuantityFinal"].ToString() : "";
                                     Retrono = JsonConvert.SerializeObject(MyObj);
                                 }
                                 else
@@ -355,7 +394,7 @@ namespace whusap.WebPages.InvReceipts
                         }
                         else
                         {
-                            
+
                             bool Insertsucces = twhcol130DAL.MultiInsert(StrInsertMultiple);
 
                             if (Insertsucces)
@@ -382,6 +421,7 @@ namespace whusap.WebPages.InvReceipts
                                     HttpContext.Current.Session["AutoPrint"] = "yes";
                                 }
                                 MyObj.PAIDS = PAIDS;
+                                MyObj.QTYCFinal = HttpContext.Current.Session["QuantityFinal"] != null ? HttpContext.Current.Session["QuantityFinal"].ToString() : "";
                                 Retrono = JsonConvert.SerializeObject(MyObj);
 
                             }
@@ -481,6 +521,7 @@ namespace whusap.WebPages.InvReceipts
                         bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
                         if (Insertsucces)
                         {
+                            MyObj.QTYCFinal = HttpContext.Current.Session["QuantityFinal"] != null ? HttpContext.Current.Session["QuantityFinal"].ToString() : "";
                             Retrono = JsonConvert.SerializeObject(MyObj);
                         }
                         else
