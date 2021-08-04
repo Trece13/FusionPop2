@@ -3757,6 +3757,29 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$NRGR = '[p1]'
         </stringSQL>
       </operationName>
+      <operationName name="VerificaCons_Serie_Label">
+        <stringSQL>
+          SELECT MAX(t$ffno) CONSEC, t$seri SEQ
+          FROM {0}.ttcmcs050{1}
+          WHERE T$NRGR = '[p1]'
+          AND t$blck = '2'
+          GROUP BY t$seri
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizarSerie_Consecutivo">
+        <stringSQL>
+          INSERT INTO {0}.ttcmcs050{1} (T$NRGR, T$SERI, T$DSCA, T$FFNO, T$BLCK, T$FFST, T$REFCNTD, T$REFCNTU)
+          VALUES ('[p1]', '    '||TO_CHAR(('[p2]'), '000'), 'SEQUENCE FP LABELS INVENTORY', 1, 1, 0, 0, 0)
+        </stringSQL>
+      </operationName>
+      <operationName name="actualizarContadores">
+        <stringSQL>
+          UPDATE {0}.ttcmcs050{1} mcs050
+          SET mcs050.t$ffno = mcs050.t$ffno + 1
+          WHERE TRIM(T$NRGR) = '[p1]'
+          AND t$blck = '2'
+        </stringSQL>
+      </operationName>
       <operationName name="TakeMaterialInv_listaConsLabel_Param">
         <stringSQL>
           SELECT T$ZONE, T$LABL, T$ITEM, T$CWAR, T$CLOT, T$QTYR, T$LOGN,

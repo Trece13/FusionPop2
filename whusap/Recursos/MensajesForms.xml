@@ -5938,6 +5938,11 @@
             Factor don't exist for this Item
           </stringMessage>
         </operationName>
+        <operationName name="qtygreaterfactor">
+          <stringMessage>
+            Quantity greater than factor (PLT)
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="ItemcodeisnotManufacturingType">
@@ -5983,6 +5988,11 @@
         <operationName name="FactordontexistforthisItem">
           <stringMessage>
             Factor don't exist for this Item
+          </stringMessage>
+        </operationName>
+        <operationName name="qtygreaterfactor">
+          <stringMessage>
+            Cantidad Superior al factor (PLT)
           </stringMessage>
         </operationName>
       </Idiom>
