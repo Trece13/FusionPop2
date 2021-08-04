@@ -748,7 +748,7 @@ namespace whusap.WebPages.Migration
                 , _idioma == "INGLES" ? "Lot" : "Lote"
                 , _idioma == "INGLES" ? "Comments" : "Comentarios");
 
-            table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td rowspan='3'>{6}</td></tr>"
+            table += String.Format("<tr><td>{0}</td><td>{1}</td><td id='unit'>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td rowspan='3'>{6}</td></tr>"
                 , _validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper()
                 , _validaItem.Rows[0]["DESCRIPCION"].ToString().Trim().ToUpper()
                 , _validaItem.Rows[0]["UNID"].ToString().Trim().ToUpper()
