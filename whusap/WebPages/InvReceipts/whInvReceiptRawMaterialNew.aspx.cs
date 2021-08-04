@@ -274,7 +274,7 @@ namespace whusap.WebPages.InvReceipts
                             {
                                 StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
                                 PAIDS.Add(UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96");
-                                QUANTITYAUX_COMPLETADA = QUANTITYAUX_COMPLETADA + Convert.ToDecimal(MyObj.QTYC);
+                                QUANTITYAUX_COMPLETADA = (Labels*(QUANTITYAUX_COMPLETADA)) + Convert.ToDecimal(MyObj.QTYC);
                                 if (CiclePrintBegin == CiclePrintEnd - 1)
                                 {
                                     decimal QTYCOMPLETADA, QTYFINAL = 0;
