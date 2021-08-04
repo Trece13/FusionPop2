@@ -228,7 +228,14 @@
          function validarCantidadQty(field) {
              var cantidad = field.value;
              var quant = $('#hdfQuantity').val();
-             var regex = /\d*[0-9]*[.]?[0-9]*$/;
+             var unidad = document.getElementById("txtUnit");
+             unidad = unidad.value;
+             if (unidad != "KG" && unidad != "LB") {
+                 var regex = /^-?\d*[0-9]*$/;
+             }
+             else {
+                 var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
+             }
              var re = new RegExp(regex);
              if (field.value.match(re)) {
                  if ((cantidad < 0)) {
@@ -246,7 +253,7 @@
              else {
                  this.focus();
                  field.value = 0;
-                 alert(idioma == "INGLES" ? "Only numbers here" : "Solo número en este campo");
+                 alert(idioma == "INGLES" ? "Only numbers here, no decimals allowed" : "Solo número en este campo, no se permiten decimales");
              }
          };
          function validarFormularioDelivered() {
@@ -295,7 +302,14 @@
          function validarCantidad(field, stk, CantidadDevuelta) {
              var cantidad = parseInt(field.value);
              var stock = stk;
-             var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
+             var unidad = document.getElementById("unit");
+             unidad = unidad.textContent;
+             if (unidad != "KG" && unidad != "LB") {
+                 var regex = /^-?\d*[0-9]*$/;
+             }
+             else {
+                 var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
+             }
              var re = new RegExp(regex);
              if (field.value.match(re)) {
                  if (((cantidad + CantidadDevuelta) > stock)) {
@@ -307,7 +321,7 @@
              else {
                  this.focus();
                  field.value = 0;
-                 alert(idioma == "INGLES" ? "Only numbers here" : "Solo número en este campo");
+                 alert(idioma == "INGLES" ? "Only numbers here, no decimals allowed" : "Solo número en este campo, no se permiten decimales");
              }
          };
          function setReason(field) 
