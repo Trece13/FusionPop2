@@ -2766,7 +2766,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ListaPurchaseOrders">
         <stringSQL>
-          select TO_CHAR(inh210.t$prdt,'DD/MM/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
+          select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
           pur401.t$ddtb DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
@@ -2794,7 +2794,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ListaPurchaseOrder">
         <stringSQL>
-          select TO_CHAR(inh210.t$prdt,'DD/MM/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
+          select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
           pur401.t$ddtb DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,

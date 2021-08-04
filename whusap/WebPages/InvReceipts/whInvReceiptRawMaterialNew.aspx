@@ -942,7 +942,7 @@
             $("#MyDynamicEtiqueta").empty();
             MyList = JSON.parse(r.d);
 
-            if (MyList.length == undefined) {
+            if (MyList.PAIDS.length == undefined) {
                 MyObject = JSON.parse(r.d);
                 if (MyObject.error == false) {
                     //Etiqueta Sin orden de compra
@@ -995,26 +995,26 @@
                 }
             }
             else {
-                MyList.forEach(function (MyObject) {
+                MyList.PAIDS.forEach(function (PAID) {
 
-                    CBPalletNOd = MyObject.PAID_URL;
-                    lblItemIDd = MyObject.ITEM;
-                    lblItemDescd = MyObject.DSCA;
-                    LblQuantityd = MyObject.QTYC;
-                    LblUnitd = MyObject.UNIC;
-                    LblLotIdd = MyObject.CLOT;
-                    CBPurchaseOrderd = MyObject.ORNO_URL;
-                    CBItem = MyObject.ITEM_URL;
-                    CBLotd = MyObject.CLOT_URL;
-                    CBQuantityd = MyObject.QTYC_URL;
-                    CBUnitd = MyObject.UNIC_URL;
-                    LblPurchaseOCd = MyObject.ORNO;
-                    LblItemOCd = MyObject.ITEM;
-                    LblLotOCd = MyObject.CLOT;
-                    LblUnitOCd = MyObject.UNIT;
-                    LblQuantityOCd = MyObject.QTYC;
-                    LblUser = MyObject.LOGN;
-                    LblSup = MyObject.NAMA;
+                    CBPalletNOd = PAID;
+                    lblItemIDd = MyList.ITEM;
+                    lblItemDescd = MyList.DSCA;
+                    LblQuantityd = MyList.QTYC;
+                    LblUnitd = MyList.UNIC;
+                    LblLotIdd = MyList.CLOT;
+                    CBPurchaseOrderd = MyList.ORNO_URL;
+                    CBItem = MyList.ITEM_URL;
+                    CBLotd = MyList.CLOT_URL;
+                    CBQuantityd = MyList.QTYC_URL;
+                    CBUnitd = MyList.UNIC_URL;
+                    LblPurchaseOCd = MyList.ORNO;
+                    LblItemOCd = MyList.ITEM;
+                    LblLotOCd = MyList.CLOT;
+                    LblUnitOCd = MyList.UNIT;
+                    LblQuantityOCd = MyList.QTYC;
+                    LblUser = MyList.LOGN;
+                    LblSup = MyList.NAMA;
 
 
                     var etiqueta =
@@ -1050,80 +1050,6 @@
                         '</table>' +
                         '</div>' +
                         '</div>';
-
-                    //'<div class="page" style="padding:0; margin: auto; height:4in;width:6in"><table style="margin: auto">                                                               ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td colspan="4"><br><br>' +
-                    //'<img src="' + CBPalletNOd + '" id="CBPalletNOd" alt="" hspace="60"' +
-                    //'vspace="5" style="width: 4in; height: .5in;" />                                            ' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td>                                                                                       ' +
-                    //'<label style="font-size: 11px">                                                            ' +
-                    //'ITEM</label>                                                                               ' +
-                    //'</td>                                                                                      ' +
-                    //'<td>                                                                                       ' +
-                    //'<label id="lblItemIDd" style="display: none; font-size: 10px">                              ' +
-                    //'' + lblItemIDd + '</label>' +
-                    //'<img src="' + CBItem + '" id="CBItem" alt="" hspace="60"    ' +
-                    //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td>                                                                                       ' +
-                    //'</td>                                                                                      ' +
-                    //'<td align="center">                                                                        ' +
-                    //'<label id="lblItemDescd" style="font-size: 11px">                                           ' +
-                    //'' + lblItemDescd + '</label>' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td>                                                                                       ' +
-                    //'<label style="font-size: 11px">                                                            ' +
-                    //'QUANTITY</label>                                                                           ' +
-                    //'</td>                                                                                      ' +
-                    //'<td>                                                                                       ' +
-                    //'<label id="LblQuantityd" style="display: none; font-size: 11px">                            ' +
-                    //'' + LblQuantityd + '</label>' +
-                    //'<img src="' + CBQuantityd + '" id="CBQuantityd" alt="" hspace="60"' +
-                    //'vspace="5" style="width: 2in; height: .5in;" />                                            ' +
-                    //'</td>                                                                                      ' +
-                    //'<td>                                                                                       ' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td>                                                                                       ' +
-                    //'</td>                                                                                      ' +
-                    //'<td align="center">                                                                        ' +
-                    //'<label id="LblUnitd" style="font-size: 11px">                                               ' +
-                    //'' + LblUnitd + '</label>' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td>                                                                                       ' +
-                    //'<label style="font-size: 11px">                                                            ' +
-                    //'LOT</label>                                                                                ' +
-                    //'</td>                                                                                      ' +
-                    //'<td>                                                                                       ' +
-                    //'<label id="LblLotIdd" style="display: none; font-size: 11px">                               ' +
-                    //'' + LblLotIdd + '</label>                                                                                   ' +
-                    //'<img src="' + CBLotd + '" id="CBLotd" alt="" hspace="60"     ' +
-                    //'vspace="5" style="width: 3in; height: .5in;" />                                            ' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'<tr>                                                                                       ' +
-                    //'<td>                                                                                       ' +
-                    //'<label style="font-size: 11px">                                                            ' +
-                    //'RECEIPT DATE</label>                                                                       ' +
-                    //'</td>                                                                                      ' +
-                    //'<td>                                                                                       ' +
-                    //'<label class="LblDate" style="font-size: 11px">                                               ' +
-                    //'</label>                                                                                   ' +
-                    //'</td>                                                                                      ' +
-                    //'</tr>                                                                                      ' +
-                    //'</table>'+
-                    //'</div>';
                     $('#MyDynamicEtiqueta').append(etiqueta);
                 }
             );
