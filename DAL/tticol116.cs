@@ -278,5 +278,57 @@ namespace whusa.DAL
 
             return consulta;
         }
+
+        public int ActualCant_ticol222(ref Ent_tticol116 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$ACQT", parametro.resCant.ToString().Trim().ToUpper());
+                paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+
+                return Convert.ToInt32(retorno);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return Convert.ToInt32(retorno);
+        }
+
+        public int ActualCant_whcol131(ref Ent_tticol116 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$QTYA", parametro.resCant.ToString().Trim().ToUpper());
+                paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                return Convert.ToInt32(retorno);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return Convert.ToInt32(retorno);
+        }
     }
 }

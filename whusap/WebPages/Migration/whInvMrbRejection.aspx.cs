@@ -1199,7 +1199,7 @@ namespace whusap.WebPages.Migration
                 MyObj022.log2 = "NONE";
                 MyObj022.qtd2 = Convert.ToInt32(cantidad);
                 MyObj022.pro2 = 2;
-                MyObj022.loca = location;
+                MyObj022.loca = location == string.Empty ? " ":location;
                 MyObj022.norp = 1;
                 MyObj022.dele = 7;
                 MyObj022.logd = "NONE";
@@ -1236,7 +1236,7 @@ namespace whusap.WebPages.Migration
                 MyObj131.CONF = "1";
                 MyObj131.RCNO = " ";//llena baan
                 MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                MyObj131.LOCA = location;//LOCA.ToUpper();// enviamos vacio 
+                MyObj131.LOCA = location == string.Empty ? " " : location;//LOCA.ToUpper();// enviamos vacio 
                 MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
                 MyObj131.PRNT = "1";// llenar en 1
                 MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
@@ -1289,8 +1289,8 @@ namespace whusap.WebPages.Migration
                     logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno,
                     paid = paid,
-                    cwam = cwam
-
+                    cwam = cwam,
+                    resCant = _stock-Convert.ToDecimal(cantidad)
                 };
                 Ent_tticol100 data100 = new Ent_tticol100()
                 {
@@ -1353,22 +1353,27 @@ namespace whusap.WebPages.Migration
                     if (tableNameSave == "ticol022")
                     {
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
+                        _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
                     }
                     else
                     {
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
+                        _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
                     }
 
-                    Session["Reprint"] = "no";
-                    Session["MaterialDesc"] = "";
-                    Session["Material"] = item.Trim().ToUpper();
+                    Session["WorkOrder"] = paid.Trim().ToUpper();
+                    Session["lblReason"] = reasondesc;
                     Session["codePaid"] = paid.Trim().ToUpper();
-                    Session["Lot"] = lot == String.Empty ? " " : lot;
-                    Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString();
+                    Session["ProductDesc"] = Session["DescItem"];
+                    Session["ProductCode"] = item.Trim().ToUpper();
                     Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                    Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                    Session["Operator"] = Session["user"].ToString();
+                    Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
+                    Session["Finished"] = paid.Trim().ToUpper();
                     Session["Pallet"] = paid.Trim().ToUpper();
+                    Session["PrintedBy"] = _operator;
+                    Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                    Session["Comments"] = obse;
+                    Session["Reprint"] = "no";
 
                     StringBuilder script = new StringBuilder();
                     //JC 270721 
@@ -1400,7 +1405,8 @@ namespace whusap.WebPages.Migration
                     logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno,
                     paid = paid,
-                    cwam = cwam
+                    cwam = cwam,
+                    resCant = _stock - Convert.ToDecimal(cantidad)
                 };
                 Ent_tticol100 data100 = new Ent_tticol100()
                 {
@@ -1455,7 +1461,7 @@ namespace whusap.WebPages.Migration
                         Session["ProductDesc"] = Session["DescItem"];
                         Session["ProductCode"] = item.Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
+                        Session["Quantity"] = data116.resCant + " " + Session["Cuni"].ToString(); ;
                         Session["Finished"] = paid.Trim().ToUpper();
                         Session["Pallet"] = paid.Trim().ToUpper();
                         Session["PrintedBy"] = _operator;
