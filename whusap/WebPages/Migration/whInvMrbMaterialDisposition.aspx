@@ -28,7 +28,7 @@
         }
     </style>
     <script type="text/javascript">
-
+        var idioma = '<%= _idioma %>';
        // txtItemError = '<%=lblitemError%>';
       //  txtLotError = '<%=lblLotError%>';
         //opI009584-003 
@@ -44,7 +44,25 @@
             return;
         }
 
-      
+        //JC 050821 Adicionar Validación para permitir decimales en KG o LB
+        function Validarqty(field) {
+            var cantidad = parseInt(field.value);
+            var unidad = document.getElementById('Contenido_grdRecords').children[0].children[1].children[4].innerHTML.trim().toUpperCase();
+            if (unidad != "KG" && unidad != "LB") {
+                 var regex = /^-?\d*[0-9]*$/;
+             }
+             else {
+                 var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
+             }
+             var re = new RegExp(regex);
+             if (field.value.match(re)) {
+             }
+             else {
+                 this.focus();
+                 field.value = 0;
+                 alert(idioma == "INGLES" ? "Only numbers here, no decimals allowed" : "Solo número en este campo, no se permiten decimales");
+             }
+        }
 
         $.fn.exists = function () {
             return this.length !== 0;
@@ -190,11 +208,11 @@
                             <ItemTemplate>
                                 <asp:TextBox ID="toReturn" runat="server" Width="12%" MaxLength="12" CausesValidation="True"
                                     CssClass="TextBox"  type="number"/>
-                                <asp:RegularExpressionValidator ID="validateReq1" runat="server" ControlToValidate="toReturn"
+<%--                                <asp:RegularExpressionValidator ID="validateReq1" runat="server" ControlToValidate="toReturn"
                                 ErrorMessage="Only 4 decimals allowed" SetFocusOnError="true"
                                 ValidationExpression="^\d+(\.\d{1,4})?$" Display="Dynamic" ForeColor="Red"
                                 Font-Names="Arial" Font-Size="9" Font-Italic="True" CssClass="errorMsg" Font-Bold="false"></asp:RegularExpressionValidator>
-                                <asp:RangeValidator ID="validateQuantity" runat="server" Type="Double" ControlToValidate="toReturn"
+--%>                                <asp:RangeValidator ID="validateQuantity" runat="server" Type="Double" ControlToValidate="toReturn"
                                     ErrorMessage="Quantity to return cannot be greater than Actual Quantity" Display="Dynamic"
                                     ForeColor="Red" Font-Names="Arial" Font-Size="9" Font-Italic="True" SetFocusOnError="true"
                                     MaximumValue="0" MinimumValue="0" />

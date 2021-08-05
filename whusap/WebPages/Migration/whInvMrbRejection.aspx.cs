@@ -730,7 +730,9 @@ namespace whusap.WebPages.Migration
         protected void makeTableLocated(string loc, string lot)
         {
             var table = String.Empty;
-            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), lot.Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(), loc.Trim());
+            //JC 050821 La validación se hará sólo por el pallet
+            //CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), lot.Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(), loc.Trim());
+            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStockPalletId(txtPalletId.Text.Trim());
             _stock = Convert.ToDecimal(_idalttcibd001.CantidadDevueltaStockPallet(txtPalletId.Text.Trim()));
             //Fila cwar
             table += String.Format("<hr /><div style='margin-bottom: 100px;'><table class='table table-bordered' style='width:1200px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");

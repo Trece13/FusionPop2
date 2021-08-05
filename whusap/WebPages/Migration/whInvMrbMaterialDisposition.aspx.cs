@@ -387,8 +387,7 @@ namespace whusap.WebPages.Migration
             lblResult.Text = string.Empty;
             //JC 050821 Se adiciona la columna cwar de la tabla items para llenar el dropdown de bodegas solo con esa bodega
             DataTable resultado1 = idal.listaRegistrosOrden_ParamMRB(ref obj1, ref strError, ref strOrden);
-            //JC 050821 Se adiciona la columna cwar de la tabla items para llenar el dropdown de bodegas solo con esa bodega
-            Session["WareItem"] = resultado1.Rows[0]["WARE"].ToString().ToUpper();
+
             if (strError != string.Empty)
             {
 
@@ -408,6 +407,8 @@ namespace whusap.WebPages.Migration
             }
             else
             {
+                //JC 050821 Se adiciona la columna cwar de la tabla items para llenar el dropdown de bodegas solo con esa bodega
+                Session["WareItem"] = resultado1.Rows[0]["WARE"].ToString().ToUpper();
                 // string itemInitials = string.Empty;
                 grdRecords.DataSource = resultado1;
                 grdRecords.DataBind();
@@ -914,14 +915,18 @@ namespace whusap.WebPages.Migration
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 // Verificar que si la cantidad es igual a 0, el control "toReturn" se deshabilite
-                string stock = ((HiddenField)e.Row.Cells[4].FindControl("actualqty")).Value.Trim();
+                string stock = ((HiddenField)e.Row.Cells[4].FindControl("actualqty")).Value.Trim(); 
                 stritem = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["Item"].ToString();
 
                 if (Convert.ToDouble(stock) == 0)
                 {
                     ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Enabled = false;
                     ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Attributes.Add("onfocus", "limpiar(this);");
-
+                }
+                //JC 050821 Adicionar Validación para permitir decimales en KG o LB
+                else
+                {
+                    ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Attributes.Add("onchange", "Validarqty(this);");
                 }
                 // Verificar que si el lote es nulo o vacio
                 string strLote = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["LOT"].ToString();
@@ -1035,7 +1040,11 @@ namespace whusap.WebPages.Migration
                 InterfazDAL_tticol118 idalsw = new InterfazDAL_tticol118();
                 //JC 050821 Sólo traer el dato del almacen del item
                 //DataTable stockw = idalsw.listaStockw_Param(ref strError);
-                var warehouseitem = Session["WareItem"].ToString();
+                var warehouseitem = string.Empty;
+                if (Session["WareItem"] != null)
+                {
+                    warehouseitem = Session["WareItem"].ToString();
+                }
                 DataTable stockw = idalsw.listaStockwareitem_Param(warehouseitem, ref strError);
                 DropDownList liststockw = (DropDownList)e.Row.Cells[1].FindControl("Stockwareh");
                 liststockw.DataSource = stockw;

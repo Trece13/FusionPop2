@@ -122,6 +122,11 @@ namespace whusa.Interfases
         {
             return dal.CantidadDevueltaStockPallet(PAID);
         }
+        //JC 050821 La validación se hará sólo por el pallet
+        public String CantidadDevueltaStockPalletId(string PAID)
+        {
+            return dal.CantidadDevueltaStockPalletId(PAID);
+        }
 
         public String CantidadDevueltaStocknotlocation(string ITEM, string CLOT, string CWAR)
         {
