@@ -113,5 +113,35 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public int ActualCant_ticol222(ref Ent_tticol116 parametrosIn, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualCant_ticol222(ref parametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+            
+        }
+
+        public int ActualCant_whcol131(ref Ent_tticol116 parametrosIn, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualCant_whcol131(ref parametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+            
+        }
     }
 }
