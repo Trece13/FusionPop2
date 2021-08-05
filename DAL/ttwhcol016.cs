@@ -73,6 +73,28 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
+        public int ActualizarSerie_Consecutivo(ref Ent_ttwhcol016 parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string MsgstrError = string.Empty;
+            paramList = new Dictionary<string, object>();
+            paramList.Add("p1", parametros.zone.Trim().ToUpperInvariant());
+            paramList.Add("p2", parametros.serietemp);
+
+            try
+            {
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla,paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                strError = MsgstrError + "Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return Convert.ToInt32(retorno);
+        }
+
         public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
@@ -99,6 +121,33 @@ namespace whusa.DAL
             return Convert.ToInt32(consulta.Rows[0]["CONSEC"].ToString());
         }
 
+        //JC 020821 Retornar consecutivo y serie
+        public DataTable VerificaCons_Serie_Label(ref Ent_ttwhcol016 parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add("p1", parametros.zone.Trim().ToUpperInvariant());
+
+            Dictionary<string, object> parametersOut = new Dictionary<string, object>();
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1)
+                {
+                    strError = "-1";
+                    return consulta;
+                }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [ttwhcol016]. Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
         public DataTable TakeMaterialInv_listaConsLabel_Param(ref Ent_ttwhcol016 Parametros, ref string strError)
         {
 
@@ -120,6 +169,29 @@ namespace whusa.DAL
                 log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             return consulta;
+        }
+
+        public int actualizarContadores(ref Ent_ttwhcol016 Parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add("p1", Parametros.zone.Trim().ToUpperInvariant());
+            bool retorno = false;
+
+            try
+            {
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+                return Convert.ToInt32(retorno);
+            }
+
+            catch (Exception ex)
+            {
+                strError = "Error when inserting data [ttcmcs050]. Try again or contact your administrator \n";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+
+            return Convert.ToInt32(retorno);
         }
 
         public DataTable TakeMaterialInv_verificaBodega_Param(ref Ent_ttwhcol016 Parametros, ref string strError)

@@ -112,12 +112,30 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
-
+        //JC 050821 Traer solo la bodega del item
+        //public DataTable listaStockw_Param(ref string strError)
+        public DataTable listaStockwareitem_Param(string wareitem, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                //JC 050821 Traer solo la bodega del item
+                //retorno = dal.listaStockw_Param(ref strError);
+                retorno = dal.listaStockwareitem_Param(wareitem, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
         public DataTable listaStockw_Param(ref string strError)
         {
             DataTable retorno;
             try
             {
+                //JC 050821 Traer solo la bodega del item
+                //retorno = dal.listaStockw_Param(ref strError);
                 retorno = dal.listaStockw_Param(ref strError);
                 return retorno;
             }
