@@ -441,7 +441,7 @@
                 $('#txQuantity').prop("disabled", false);
             }
         }
-
+//JC 020821 Quitar Validación Cantidades contra baan
         var SuccesVerificarQuantity = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.Error == true) {
@@ -449,16 +449,17 @@
             }
             if (MyObj.Error == false) {
                 $('#lblError').html("");
-                if (parseInt($('#txQuantity').val()) > 0 && parseInt($('#txQuantity').val()) <= parseInt(MyObj.stks, 10)) {
+                //if (parseInt($('#txQuantity').val()) > 0 && parseInt($('#txQuantity').val()) <= parseInt(MyObj.stks, 10)) {
+                if (parseInt($('#txQuantity').val())) {
                     $('#Contenido_Button1').prop("disabled", false);
-                    //$('#btnSave').prop("disabled", false);
+                    $('#btnSave').prop("disabled", false);
                     
                 }
-                else {
+                //else {
                     //$('#btnSave').prop("disabled", true);
-                    $('#Contenido_Button1').prop("disabled", true);
-                    ImprimirMensaje(MyObj.TypeMsgJs, MyObj.SuccessMsg);
-                }
+                    //$('#Contenido_Button1').prop("disabled", true);
+                    //ImprimirMensaje(MyObj.TypeMsgJs, MyObj.SuccessMsg);
+                //}
             }
         }
 
@@ -559,14 +560,14 @@
         }
 
         var VerificarLocation = function () {
-            //$('#btnSave').prop("disabled", true);
-            $('#Contenido_Button1').prop("disabled", true);
+            $('#btnSave').prop("disabled", true);
+            $('#Contenido_Button1').prop("disabled", false);
             var Data = "{'CWAR':'" + $('#txWarehouse').val() + "','LOCA':'" + $('#txLocation').val() + "'}";
             sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
         }
-
+//JC 020821 Quitar Validación Cantidades contra baan
         var VerificarQuantity = function () {
-            //$('#btnSave').prop("disabled", true);
+            $('#btnSave').prop("disabled", true);
             $('#Contenido_Button1').prop("disabled", true);
             var Data = "{'CWAR':'" + $('#txWarehouse').val() + "','ITEM':'" + $('#txItem').val() + "','CLOT':'" + $('#txLot').val() + "','LOCA':'" + $('#txLocation').val() + "','QTYS':'" + $('#txQuantity').val() + "'}";
             sendAjax("VerificarQuantity", Data, SuccesVerificarQuantity)
@@ -614,7 +615,7 @@
             stoper();
             timer = setTimeout("VerificarLocation()", 1000);
         });
-
+//JC 020821 Quitar Validación Cantidades contra baan
         txQuantity.bind('paste keyup', function () {
             stoper();
             timer = setTimeout("VerificarQuantity()", 1000);

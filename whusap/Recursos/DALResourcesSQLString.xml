@@ -5638,7 +5638,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="listaStockw_Param">
         <stringSQL>
-          select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from {0}.ttcmcs003{1} order by warehouse
+          select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName
+          from {0}.ttcmcs003{1} 
+          order by warehouse
+        </stringSQL>
+      </operationName>
+      <operationName name="listaStockwareitem_Param">
+        <stringSQL>
+          select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName
+          from {0}.ttcmcs003{1}
+          where t$cwar = '[:T$CWAR]'
+          order by warehouse
         </stringSQL>
       </operationName>
       <operationName name="listaReason_Param">
@@ -5705,7 +5715,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="selecttwhinr140ttcibd001">
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
-          ipu001.t$otbp proveedor, com100.t$nama nombre
+          ipu001.t$otbp proveedor, com100.t$nama nombre, ibd001.t$cwar ware
           from {0}.twhinr140{1} inr140
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
           left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
@@ -5759,7 +5769,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="selecttwhinr140el">
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
-          ipu001.t$otbp proveedor, com100.t$nama nombre
+          --ipu001.t$otbp proveedor, com100.t$nama nombre
+          ipu001.t$otbp proveedor, com100.t$nama nombre, ibd001.t$cwar ware
           from {0}.twhinr140{1} inr140
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
           left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item
@@ -5771,7 +5782,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="selecttwhinr140">
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
-          ipu001.t$otbp proveedor, com100.t$nama nombre
+          --ipu001.t$otbp proveedor, com100.t$nama nombre
+          ipu001.t$otbp proveedor, com100.t$nama nombre, ibd001.t$cwar ware
           from {0}.twhinr140{1} inr140
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
           left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = ibd001.t$item

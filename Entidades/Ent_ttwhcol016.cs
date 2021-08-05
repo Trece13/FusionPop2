@@ -64,6 +64,8 @@ namespace whusa.Entidades
         public string SuccessMsg { get; set; }
         [DataMember(Order = 15)]
         public string dsca { get; set; }
+        [DataMember(Order = 16)]
+        public int serietemp { get; set; }
 
         public Ent_ttwhcol016()
         {

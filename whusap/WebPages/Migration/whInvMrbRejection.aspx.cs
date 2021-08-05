@@ -1407,14 +1407,15 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_Delivered(object sender, EventArgs e)
         {
-              var validUpdate = 0;
-                lblErrorDelivered.Text = String.Empty;
+            var validUpdate = 0;
+            lblErrorDelivered.Text = String.Empty;
+            lblErrorDelivered.Visible = true;
             //var pdno = txtPalletId.Text.Trim().ToUpper().Substring(0, 9);
             var pdno = TxtOrder.Text.Trim().ToUpper().ToString();
             var machine = " ";
             var seqn = 1;
             var item = slItems.Text.Trim().ToUpper();
-            var clot = slLot.Text.ToString().Trim().ToUpper();
+            var clot = slLot.Text.ToString().Trim().ToUpper() == String.Empty ? " " : slLot.Text.ToString().Trim().ToUpper();
             var reason = slReason.SelectedValue.Trim().ToUpper();
             var rejectType = slRejectType.SelectedValue.Trim().ToUpper();
             var qtyr = double.Parse(txtQty.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
@@ -1426,12 +1427,12 @@ namespace whusap.WebPages.Migration
                 lblErrorDelivered.Text = "The Item can't be empty";
                 return;
             }
-
-            if (clot == string.Empty)
-            {
-                lblErrorDelivered.Text = "The lot can't be empty";
-                return;
-            }
+            //JC 050821 Se quita la validacion del lote, debido a que este dato ya lo trae del pallet
+            //if (clot == string.Empty)
+            //{
+            //    lblErrorDelivered.Text = "The lot can't be empty";
+            //    return;
+            //}
 
             if (reason == string.Empty)
             {

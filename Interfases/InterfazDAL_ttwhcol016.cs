@@ -30,13 +30,42 @@ namespace whusa.Interfases
             }
         }
 
-        public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 Parametros, ref string strError)
+        public int ActualizarSerie_Consecutivo(ref Ent_ttwhcol016 parametrosIn, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualizarSerie_Consecutivo(ref parametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 Parametros, ref string strError)       
         {
             int retorno = -1;
             //DataTable retorno;
             try
             {
                 retorno = dal.TakeMaterialInv_verificaConsLabel_Param(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        //JC 020821 Retornar consecutivo y serie
+        public DataTable VerificaCons_Serie_Label(ref Ent_ttwhcol016 Parametros, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.VerificaCons_Serie_Label(ref Parametros, ref strError);
                 return retorno;
             }
             catch (Exception ex)
@@ -59,7 +88,21 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
-                
+
+        public int actualizarContadores(ref Ent_ttwhcol016 Parametros, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.actualizarContadores(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += ex.Message);
+            }
+        }
+
         public DataTable TakeMaterialInv_verificaBodega_Param(ref Ent_ttwhcol016 Parametros, ref string strError)
         {
             //int retorno = -1;

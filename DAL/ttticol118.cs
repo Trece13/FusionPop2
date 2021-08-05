@@ -251,6 +251,32 @@ namespace whusa.DAL
             }
             return consulta;
         }
+        //JC 050821 Traer solo la bodega del item
+        //public DataTable listaStockw_Param(ref string strError)
+        public DataTable listaStockwareitem_Param(string wareitem, ref string strError)
+        {
+            Dictionary<string, object> paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ITEM", "");
+            paramList.Add(":T$CWAR", wareitem);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, "listaStockwareitem_Param", ref owner, ref env, tabla, paramList);
+
+            //strSentencia = "select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from baan.ttcmcs003140 order by warehouse";
+            
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Data not found"; }
+
+
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [tcmcs003]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
 
         public DataTable listaStockw_Param(ref string strError)
         {
@@ -260,7 +286,7 @@ namespace whusa.DAL
             strSentencia = recursos.readStatement(method.ReflectedType.Name, "listaStockw_Param", ref owner, ref env, tabla, paramList);
 
             //strSentencia = "select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName  from baan.ttcmcs003140 order by warehouse";
-            
+
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);

@@ -92,6 +92,7 @@ namespace whusap.WebPages.InvReceipts
         private static string globalMessages = "GlobalMessages";
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static string cyclecountLabel = WebConfigurationManager.AppSettings["cyclecountLabel"].ToString();
+        public static string serieLabelFP = WebConfigurationManager.AppSettings["serieLabelFP"].ToString();
 
 
         public static string ItemcodeisnotManufacturingType = mensajes("ItemcodeisnotManufacturingType");
@@ -103,9 +104,11 @@ namespace whusap.WebPages.InvReceipts
         public static string codedoesntexist = mensajes("codedoesntexist");
         public static string RegisteredquantitynotavilableonBaaninventory = mensajes("RegisteredquantitynotavilableonBaaninventory");
         public static string FactordontexistforthisItem = mensajes("FactordontexistforthisItem");
+        public static string qtygreaterfactor = mensajes("qtygreaterfactor");
 
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
+        private static InterfazDAL_ttwhcol016 _idaltwhcol016 = new InterfazDAL_ttwhcol016();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
         public static InterfazDAL_ttcibd001 ITtcibd001 = new InterfazDAL_ttcibd001();
@@ -219,8 +222,7 @@ namespace whusap.WebPages.InvReceipts
                 ObjTtcibd001.Error = true;
                 ObjTtcibd001.TypeMsgJs = "label";
 
-                ObjTtcibd001.ErrorMsg = Itemcodedoesntexist
-;
+                ObjTtcibd001.ErrorMsg = Itemcodedoesntexist;
             }
 
 
@@ -353,85 +355,89 @@ namespace whusap.WebPages.InvReceipts
 
 
         }
-
+        //JC 020821 Quitar Validación Cantidades contra baan
         [WebMethod]
         public static string VerificarQuantity(string CWAR, string ITEM, string CLOT, string LOCA, string QTYS)
         {
-            QTYS = QTYS.Replace(".", ",");
+        //    QTYS = QTYS.Replace(".", ",");
             decimal factor = 0;
             string strError = string.Empty;
             DataTable DtTtwhinr140 = new DataTable();
 
-            CWAR = CWAR.ToUpper();
-            ITEM = ITEM.ToUpper();
-            CLOT = CLOT.ToUpper();
-            LOCA = LOCA.ToUpper();
+            //CWAR = CWAR.ToUpper();
+            //ITEM = ITEM.ToUpper();
+            //CLOT = CLOT.ToUpper();
+            //LOCA = LOCA.ToUpper();
 
-            DtTtwhinr140 = ITtwhinr140.consultaStks(ref CWAR, ref ITEM, ref CLOT, ref LOCA, ref strError);
+            //DtTtwhinr140 = ITtwhinr140.consultaStks(ref CWAR, ref ITEM, ref CLOT, ref LOCA, ref strError);
 
             Ent_twhinr140 ObjTtwhinr140 = new Ent_twhinr140();
 
-            if (DtTtwhinr140.Rows.Count > 0)
+        //    if (DtTtwhinr140.Rows.Count > 0)
+        //    {
+        //        decimal stks = Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString());
+        //        if (stks > 0)
+        //        {
+        //            ObjTtwhinr140.stks = stks;
+        //            ObjTtwhinr140.Error = false;
+        //            ObjTtwhinr140.TypeMsgJs = "label";
+
+        //            ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
+        //            if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
+        //            {
+            if (HttpContext.Current.Session["CUNI"].ToString().Trim() == "CJ")
             {
-                decimal stks = Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString());
-                if (stks > 0)
+                DataTable dtFactor = twhcol130DAL.ConsultafactoresporItem(ITEM.Trim());
+                if (dtFactor.Rows.Count > 0)
                 {
-                    ObjTtwhinr140.stks = stks;
-                    ObjTtwhinr140.Error = false;
-                    ObjTtwhinr140.TypeMsgJs = "label";
-
-                    ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
-                    HttpContext.Current.Session["QTYS"] = QTYS;
-                    if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
+                    foreach (DataRow row in dtFactor.Rows)
                     {
-                        DataTable dtFactor = twhcol130DAL.ConsultafactoresporItem(ITEM.Trim());
-                        if (dtFactor.Rows.Count > 0)
+                        if (row["UNIT"].ToString().Trim() == "PLT" && row["BASU"].ToString().Trim() == HttpContext.Current.Session["CUNI"].ToString().Trim())
                         {
-                            foreach (DataRow row in dtFactor.Rows)
-                            {
-                                if (row["UNIT"].ToString().Trim() == "PLT" && row["BASU"].ToString().Trim() == HttpContext.Current.Session["CUNI"].ToString().Trim())
-                                {
-                                    factor = Convert.ToDecimal(row["FACTOR"].ToString().Trim());
-                                }
-                            }
-
-                            if (factor > 0)
-                            {
-                                if (Convert.ToDecimal(QTYS) > factor)
-                                {
-                                    ObjTtwhinr140.Error = true;
-                                    ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
-                                }
-                            }
-                            else
-                            {
-                                ObjTtwhinr140.Error = true;
-                                ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
-                            }
-                        }
-                        else
-                        {
-                            ObjTtwhinr140.Error = true;
-                            ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
+                            factor = Convert.ToDecimal(row["FACTOR"].ToString().Trim());
                         }
                     }
-                }
-                else
-                {
-                    ObjTtwhinr140.Error = true;
-                    ObjTtwhinr140.TypeMsgJs = "label";
 
-                    ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
+                    if (factor > 0)
+                    {
+                        if (Convert.ToDecimal(QTYS) > factor)
+                        {
+                            ObjTtwhinr140.TypeMsgJs = "label";
+                            ObjTtwhinr140.Error = true;
+                            ObjTtwhinr140.ErrorMsg = qtygreaterfactor;
+                        }
+                    }
+                    else
+                    {
+                        ObjTtwhinr140.TypeMsgJs = "label";
+                        ObjTtwhinr140.Error = true;
+                        ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
+                    }
+                    //}
+                    //else
+                    //{
+                    //    ObjTtwhinr140.Error = true;
+                    //    ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
+                    //}
+                    //}
+                    //}
+                    //else
+                    //{
+                    //    ObjTtwhinr140.Error = true;
+                    //    ObjTtwhinr140.TypeMsgJs = "label";
+
+                    //    ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
+                    //}
+                    //}
+                    //    else
+                    //    {
+                    //        ObjTtwhinr140.Error = true;
+                    //        ObjTtwhinr140.TypeMsgJs = "label";
+
+                    //        ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
                 }
             }
-            else
-            {
-                ObjTtwhinr140.Error = true;
-                ObjTtwhinr140.TypeMsgJs = "label";
-
-                ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
-            }
-
+            HttpContext.Current.Session["QTYS"] = QTYS;
             return JsonConvert.SerializeObject(ObjTtwhinr140);
 
         }
@@ -448,60 +454,78 @@ namespace whusap.WebPages.InvReceipts
             Ent_tticol022 data022;
             Ent_tticol042 data042;
             string strError = string.Empty;
-            string SecuenciaPallet = "C001";
-            int consecutivo = 0;
+            //JC 020801 Conseguir el último consecutivo de la serie NFP definida en baan
+            Ent_ttwhcol016 data016 = new Ent_ttwhcol016(); ;
+            string retorno = string.Empty;
+            data016.zone = serieLabelFP;
+            DataTable dat016 = _idaltwhcol016.VerificaCons_Serie_Label(ref data016, ref strError);
+            int actcontador = _idaltwhcol016.actualizarContadores(ref data016, ref strError);
+            //string SecuenciaPallet = "C";
+            string consecutivo = dat016.Rows[0]["CONSEC"].ToString().PadLeft(3, '0');          
+            string serie = dat016.Rows[0]["SEQ"].ToString();
+            
+            if (consecutivo == "990")
+            {
+                data016.serietemp = Convert.ToInt32(dat016.Rows[0]["SEQ"].ToString()) + 1;
+                int retconser = _idaltwhcol016.ActualizarSerie_Consecutivo(ref data016, ref strError);
+            }
             string id = CLOT.Trim() == "" ? cyclecountLabel : CLOT.Trim();
-
-            if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
-            {
+            string sqnb = cyclecountLabel.Trim() + serie.Trim() + "-" + consecutivo;
+            //if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
+            //{
                 //string id = cyclecountLabel;
-                DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
-                if (Dtticol022.Rows.Count > 0)
-                {
+                //JC 020821 Conseguir el último consecutivo de la serie NFP ya no se buscará el consecutivo por orden
+                //DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
+                //if (Dtticol022.Rows.Count > 0)
+                //{
 
-                        int res;
-                        string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() == "" ? SecuenciaPallet : Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
-                        int iSep = sqnb.IndexOf("-");
-                        string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C","");
-                        consecutivo = Convert.ToInt32(CurrentSecuence)+1;
-                }
-                else
-                {
-                    consecutivo = 1;
-                }
-            }
-            else
-            {
-                //string id = CLOT.Trim() == "" ? ITEM.Trim() : CLOT.Trim();
-                //string id = cyclecountLabel;
-                DataTable Dtticol042 = _idaltticol042.SecuenciaMayor(id);
-                if (Dtticol042.Rows.Count > 0)
-                {
-                    int res;
-                    string sqnb = Dtticol042.Rows[0]["T$SQNB"].ToString().Trim();
-                    int iSep = sqnb.IndexOf("-");
-                    string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C", "");
-                    consecutivo = Convert.ToInt32(CurrentSecuence)+1;
-                }
-                else
-                {
-                    consecutivo = 1;
-                }
-            }
+                        //int res;
+                        //string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() == "" ? SecuenciaPallet : Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
+                        //int iSep = sqnb.IndexOf("-");
+                        //string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C","");
+                        // //consecutivo = Convert.ToInt32(CurrentSecuence)+1;
+                        //consecutivo = CurrentSecuence + 1;
+                //}
+                //else
+                //{
+                //    //consecutivo = 1;
+                //    consecutivo = "1";
+                //}
+            //}
+            //else
+            //{
+            //    //string id = CLOT.Trim() == "" ? ITEM.Trim() : CLOT.Trim();
+            //    //string id = cyclecountLabel;
+            //    DataTable Dtticol042 = _idaltticol042.SecuenciaMayor(id);
+            //    if (Dtticol042.Rows.Count > 0)
+            //    {
+            //        int res;
+            //        string sqnb = Dtticol042.Rows[0]["T$SQNB"].ToString().Trim();
+            //        int iSep = sqnb.IndexOf("-");
+            //        string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C", "");
+            //        //consecutivo = Convert.ToInt32(CurrentSecuence)+1;
+            //        consecutivo = CurrentSecuence + 1;
+            //    }
+            //    else
+            //    {
+            //        //consecutivo = 1;
+            //        consecutivo = "1";
+            //    }
+            //}
 
-
-            if (consecutivo.ToString().Length == 1)
-            {
-                SecuenciaPallet = "C00" + consecutivo.ToString();
-            }
-            if (consecutivo.ToString().Length == 2)
-            {
-                SecuenciaPallet = "C0" + consecutivo.ToString();
-            }
-            if (consecutivo.ToString().Length == 3)
-            {
-                SecuenciaPallet = "C0" + consecutivo.ToString();
-            }
+            //JC 020821 Conseguir el último consecutivo de la serie NFP ya no se buscará el consecutivo por orden
+            //if (consecutivo.ToString().Length == 1)
+            //{
+            //    SecuenciaPallet = "C00" + consecutivo.ToString();
+            //}
+            //if (consecutivo.ToString().Length == 2)
+            //{
+            //    SecuenciaPallet = "C0" + consecutivo.ToString();
+            //}
+            //if (consecutivo.ToString().Length == 3)
+            //{
+            //    SecuenciaPallet = "C0" + consecutivo.ToString();
+            //}
 
 
             if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
@@ -509,7 +533,8 @@ namespace whusap.WebPages.InvReceipts
 
                 data022 = new Ent_tticol022();
                 data022.pdno = CLOT == "" ? cyclecountLabel : CLOT.Trim();
-                data022.sqnb = (CLOT == "" ? cyclecountLabel : CLOT.Trim()) + "-" + SecuenciaPallet;
+                //data022.sqnb = (CLOT == "" ? cyclecountLabel : CLOT.Trim()) + "-" + SecuenciaPallet;
+                data022.sqnb = sqnb;
                 data022.proc = 2;
                 data022.logn = HttpContext.Current.Session["user"].ToString();
                 data022.mitm = ITEM.Trim();
@@ -597,7 +622,8 @@ namespace whusap.WebPages.InvReceipts
                 data042 = new Ent_tticol042()
                 {
                     pdno = CLOT == "" ? cyclecountLabel : CLOT,
-                    sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet,
+                    //sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet,
+                    sqnb = sqnb,
                     proc = 2,
                     logn = HttpContext.Current.Session["user"].ToString(),
                     mitm = ITEM.Trim(),
