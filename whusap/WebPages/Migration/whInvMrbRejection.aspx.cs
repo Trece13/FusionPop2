@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Threading;
 using System.Configuration;
 using System.Web.Configuration;
+using whusa;
 
 
 namespace whusap.WebPages.Migration
@@ -1143,7 +1144,8 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_located(object sender, EventArgs e)
         {
-
+            Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+            Ent_tticol022 MyObj022 = new Ent_tticol022();
             var validUpdate = 0;
             lblErrorLocated.Text = String.Empty;
             var item = Session["ItemName"].ToString().Trim().ToUpper();
@@ -1182,6 +1184,78 @@ namespace whusap.WebPages.Migration
             string separator = "-";
             string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
 
+            if (Session["TableNameSave"].ToString() == "ticol022")
+            {
+
+                
+                MyObj022.pdno = lot;
+                MyObj022.sqnb = newPallet;
+                MyObj022.proc = 2;
+                MyObj022.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                MyObj022.mitm = item;
+                MyObj022.qtdl = Convert.ToDecimal(cantidad);
+                MyObj022.cuni = Session["Cuni"].ToString();//CUNI;
+                MyObj022.log1 = "NONE";
+                MyObj022.qtd1 = Convert.ToInt32(cantidad);
+                MyObj022.pro1 = 2;
+                MyObj022.log2 = "NONE";
+                MyObj022.qtd2 = Convert.ToInt32(cantidad);
+                MyObj022.pro2 = 2;
+                MyObj022.loca = location == string.Empty ? " ":location;
+                MyObj022.norp = 1;
+                MyObj022.dele = 7;
+                MyObj022.logd = "NONE";
+                MyObj022.refcntd = 0;
+                MyObj022.refcntu = 0;
+                MyObj022.drpt = DateTime.Now;
+                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                MyObj022.acqt = Convert.ToDecimal(cantidad);
+                MyObj022.cwaf = warehouse;//CWAR;
+                MyObj022.cwat = warehouse;//CWAR;
+                MyObj022.aclo = warehouse;
+                MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
+                var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+            }
+            else if (Session["TableNameSave"].ToString() == "whcol131")
+            {
+                
+                MyObj131.OORG = "2";// Order type escaneada view 
+                MyObj131.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
+                MyObj131.ITEM = item;
+                MyObj131.PAID = newPallet;
+                MyObj131.PONO = HttpContext.Current.Session["pono"].ToString();
+                MyObj131.SEQN = "1";
+                MyObj131.CLOT = lot;//CLOT.ToUpper();// lote VIEW
+                MyObj131.CWAR = warehouse;//CWAR.ToUpper();
+                MyObj131.QTYS = cantidad.ToString();//QTYS;// cantidad escaneada view 
+                MyObj131.UNIT = warehouse;//UNIT;//unit escaneada view
+                MyObj131.QTYC = cantidad.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                MyObj131.QTYA = cantidad.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                MyObj131.UNIC = Session["Cuni"].ToString();//UNIT;//unidad view stock
+                MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                MyObj131.CONF = "1";
+                MyObj131.RCNO = " ";//llena baan
+                MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                MyObj131.LOCA = location == string.Empty ? " " : location;//LOCA.ToUpper();// enviamos vacio 
+                MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                MyObj131.PRNT = "1";// llenar en 1
+                MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                MyObj131.NPRT = "1";//conteo de reimpresiones 
+                MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
+                MyObj131.LOGT = " ";//llena baan
+                MyObj131.STAT = "3";// LLENAR EN 3 
+                MyObj131.DSCA = " ";
+                MyObj131.COTP = " ";
+                MyObj131.FIRE = "2";
+                MyObj131.PSLIP = " ";
+                MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
+
+
+                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
+            }
+               
             Ent_twhwmd300 data = new Ent_twhwmd300() { loca = location };
             var validaLocation = _idaltwhwmd300.listaRegistro_ObtieneAlmacen(ref data, ref strError);
             if (txSloc.Value.ToString().Trim() == "1")
@@ -1217,8 +1291,8 @@ namespace whusap.WebPages.Migration
                     logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno,
                     paid = paid,
-                    cwam = cwam
-
+                    cwam = cwam,
+                    resCant = _stock-Convert.ToDecimal(cantidad)
                 };
                 Ent_tticol100 data100 = new Ent_tticol100()
                 {
@@ -1281,22 +1355,27 @@ namespace whusap.WebPages.Migration
                     if (tableNameSave == "ticol022")
                     {
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
+                        _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
                     }
                     else
                     {
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
+                        _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
                     }
 
-                    Session["Reprint"] = "no";
-                    Session["MaterialDesc"] = "";
-                    Session["Material"] = item.Trim().ToUpper();
+                    Session["WorkOrder"] = paid.Trim().ToUpper();
+                    Session["lblReason"] = reasondesc;
                     Session["codePaid"] = paid.Trim().ToUpper();
-                    Session["Lot"] = lot == String.Empty ? " " : lot;
-                    Session["Quantity"] = cantidad.ToString().Trim().ToUpper();
+                    Session["ProductDesc"] = Session["DescItem"];
+                    Session["ProductCode"] = item.Trim().ToUpper();
                     Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                    Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                    Session["Operator"] = Session["user"].ToString();
+                    Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
+                    Session["Finished"] = paid.Trim().ToUpper();
                     Session["Pallet"] = paid.Trim().ToUpper();
+                    Session["PrintedBy"] = _operator;
+                    Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                    Session["Comments"] = obse;
+                    Session["Reprint"] = "no";
 
                     StringBuilder script = new StringBuilder();
                     //JC 270721 
@@ -1328,7 +1407,8 @@ namespace whusap.WebPages.Migration
                     logr = HttpContext.Current.Session["user"].ToString(),
                     suno = suno == String.Empty ? " " : suno,
                     paid = paid,
-                    cwam = cwam
+                    cwam = cwam,
+                    resCant = _stock - Convert.ToDecimal(cantidad)
                 };
                 Ent_tticol100 data100 = new Ent_tticol100()
                 {
@@ -1383,7 +1463,7 @@ namespace whusap.WebPages.Migration
                         Session["ProductDesc"] = Session["DescItem"];
                         Session["ProductCode"] = item.Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
+                        Session["Quantity"] = data116.resCant + " " + Session["Cuni"].ToString(); ;
                         Session["Finished"] = paid.Trim().ToUpper();
                         Session["Pallet"] = paid.Trim().ToUpper();
                         Session["PrintedBy"] = _operator;
@@ -1391,8 +1471,38 @@ namespace whusap.WebPages.Migration
                         Session["Comments"] = obse;
                         Session["Reprint"] = "no";
 
+                        if (tableNameSave == "ticol022")
+                        {
+                            Session["WorkOrder2"] = MyObj022.sqnb;
+                            Session["lblReason2"] = reasondesc;
+                            Session["codePaid2"] = MyObj022.sqnb;
+                            Session["ProductDesc2"] = Session["DescItem"];
+                            Session["ProductCode2"] = item.Trim().ToUpper();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity2"] = MyObj022.qtd1 + " " + Session["Cuni"].ToString(); ;
+                            Session["Finished2"] = MyObj022.sqnb;
+                            Session["Pallet2"] = MyObj022.sqnb;
+                            Session["PrintedBy2"] = _operator;
+                            Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                            Session["Comments2"] = obse;
+                        }
+                        else
+                        {
+                            Session["WorkOrder2"] = MyObj131.PAID;
+                            Session["lblReason2"] = reasondesc;
+                            Session["codePaid2"] = MyObj131.PAID;
+                            Session["ProductDesc2"] = Session["DescItem"];
+                            Session["ProductCode2"] = item.Trim().ToUpper();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity2"] = MyObj131.QTYC + " " + Session["Cuni"].ToString(); ;
+                            Session["Finished2"] = MyObj131.PAID;
+                            Session["Pallet2"] = MyObj131.PAID;
+                            Session["PrintedBy2"] = _operator;
+                            Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                            Session["Comments2"] = obse;
+                        }
                         StringBuilder script = new StringBuilder();
-                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
