@@ -10,14 +10,14 @@
             font-size : 15px;
             color : Red;
         }
-        #txPalletID,#lblItemDsca
+<%--       #txPalletID,#lblItemDsca
         {
            width: 98%; 
-        }
-        #txZoneCode
+        }--%>
+<%--        #txZoneCode
         {
            width: 98%; 
-        }
+        }--%>
         #detail
         {
             display:none;
@@ -31,17 +31,21 @@
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
             Zone Code</label>
         <div class="col-sm-4 form-inline">
-            <div class="col-10 p-0">
-                <input type="text" class="form-control form-control-lg col-12" id="txZoneCode" placeholder="Zone Code">
+            <div class="col-2 p-0">
+                <input type="text" class="form-control form-control-lg col-12" id="txZoneCode" placeholder="Zone Code"/>
+            </div>
+            <div class="col-1 p-0">
             </div>
             <div class="col-2 p-0">
                 <button type="button" class="btn btn-primary col-12" id="btnClearZone">
                     <i class="fa fa-trash"></i>
                 </button>
             </div>
-            <label cLass ="col-form-label-lg" id="lblZoneCode"></label>   
-        </div>        
-    </div>
+            <div class="col-1 p-0">
+            </div>
+            <label id="lblZoneCode"></label> 
+        </div>  
+    </div>           
     <div id="divPallet">
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
@@ -65,17 +69,16 @@
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
             Item</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg col-8" id="lblItem" placeholder="Item" disabled>
-            <label cLass ="col-form-label-lg" id="lblItemDsca">
-            </label>
+            <input type="text" class="col-10 form-control form-control-lg" id="lblItem" placeholder="Item" disabled />
         </div>
+        <label id="lblItemDsca" for="lblItem">
+        </label>
         </div>
         <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txItem">
             Lot</label>
-        </label>
         <div class="col-sm-4">
-            <input type="text" class="col-10 form-control form-control-lg" id="txLot" placeholder="Lot" disabled>
+            <input type="text" class="col-10 form-control form-control-lg" id="txLot" placeholder="Lot" disabled />
         </div>
         <label id="lblLot" for="txLot">
         </label>
@@ -84,23 +87,23 @@
         <label class="col-sm-2 col-form-label-lg" for="txQuantity">
             Warehouse</label>
         <div class="col-sm-4">
-            <input type="text" class="col-10 form-control form-control-lg" id="txWarehouse" placeholder="Warehouse">
+            <input type="text" class="col-10 form-control form-control-lg" id="txWarehouse" placeholder="Warehouse" />
         </div>
         <label id="lblWarehouse" for="txWarehouse">
         </label>
-    </div>
+        </div>
         <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txLocation">
             Location</label>
         <div class="col-sm-4">
-            <input type="text" class=" col-10 form-control form-control-lg" id="txLocation" placeholder="Location">
+            <input type="text" class=" col-10 form-control form-control-lg" id="txLocation" placeholder="Location" />
         </div>
     </div>
         <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txQuantity">
             Quantity</label>
         <div class="col-sm-4">
-            <input type="number" class=" col-10 form-control form-control-lg" id="txQuantity" placeholder="Quantity">
+            <input type="number" class=" col-10 form-control form-control-lg" id="txQuantity" placeholder="Quantity" readonly />
         </div>
         <label id="lblQuantity" for="txQuantity">
         </label>
@@ -411,7 +414,7 @@
                 //$('#txLocation').val("");
                 //$('#txQuantity').val("");
                 $('#btnSave').prop("disabled", true);
-                lblWarehouse.html(MyObj.DESCRIPCION)
+                lblWarehouse.html(MyObj.dsca)
                 if (MyObj.sloc == "1") {
                     $('#txLocation').prop("disabled", false);
                     $('#txQuantity').prop("disabled", true);

@@ -69,8 +69,8 @@ namespace whusap.WebPages.InvReceipts
             RequestUrlAuthority = (string)Request.Url.Authority;
 
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -219,7 +219,7 @@ namespace whusap.WebPages.InvReceipts
                 using (ObjZone)
                 {
                     ObjPicking.WRH = ObjZone.CWAR;
-                    ObjPicking.DESCWRH = ObjZone.DSCA;
+                    ObjPicking.DESCWRH = ObjZone.DSCAW;
                     PCWAR = ObjZone.CWAR;
                     PSLOC = ObjZone.SLOC;
                 }
@@ -364,6 +364,7 @@ namespace whusap.WebPages.InvReceipts
                 Obj_twhcol016.error = false;
                 Obj_twhcol016.typeMsgJs = "console";
                 Obj_twhcol016.SuccessMsg = "Warehouse Encontrado";
+                Obj_twhcol016.dsca = DtTtwhcol016.Rows[0]["DESCRIPCION"].ToString();
 
                 if (DtTwhwmd200.Rows.Count > 0)
                 {
