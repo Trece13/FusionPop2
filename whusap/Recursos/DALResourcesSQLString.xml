@@ -5392,14 +5392,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ActualCant_ticol222">
         <stringSQL>
           UPDATE {0}.tticol222{1}
-          SET T$ACQT = '[:T$ACQT]',
+          SET T$ACQT = '[:T$ACQT]'
           WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="ActualCant_whcol131">
         <stringSQL>
           UPDATE {0}.twhcol131{1}
-          SET T$QTYA = '[:T$QTYA]',
+          SET T$QTYA = '[:T$QTYA]'
           WHERE T$PAID = '[:T$SQNB]'
         </stringSQL>
       </operationName>
