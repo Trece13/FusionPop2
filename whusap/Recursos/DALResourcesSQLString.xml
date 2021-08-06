@@ -5552,6 +5552,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol116">
+      <operationName name="ActualCant_ticol222">
+        <stringSQL>
+          UPDATE {0}.tticol222{1}
+          SET T$ACQT = '[:T$ACQT]'
+          WHERE T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualCant_whcol131">
+        <stringSQL>
+          UPDATE {0}.twhcol131{1}
+          SET T$QTYA = '[:T$QTYA]'
+          WHERE T$PAID = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="findRecordByWarehouseItemLocation">
         <stringSQL>
           SELECT T$ITEM AS ITEM, T$CWAR AS CWAR, T$LOCA AS LOCA

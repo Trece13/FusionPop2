@@ -731,9 +731,7 @@ namespace whusap.WebPages.Migration
         protected void makeTableLocated(string loc, string lot)
         {
             var table = String.Empty;
-            //JC 050821 La validación se hará sólo por el pallet
-            //CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), lot.Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(), loc.Trim());
-            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStockPalletId(txtPalletId.Text.Trim());
+            CantidadDevuelta = _idalttcibd001.CantidadDevueltaStock(_validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper(), lot.Trim().ToUpper(), _validaWarehouse.Rows[0]["CWAR"].ToString().Trim().ToUpper(), loc.Trim());
             _stock = Convert.ToDecimal(_idalttcibd001.CantidadDevueltaStockPallet(txtPalletId.Text.Trim()));
             //Fila cwar
             table += String.Format("<hr /><div style='margin-bottom: 100px;'><table class='table table-bordered' style='width:1200px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");
@@ -1201,7 +1199,7 @@ namespace whusap.WebPages.Migration
                 MyObj022.log2 = "NONE";
                 MyObj022.qtd2 = Convert.ToInt32(cantidad);
                 MyObj022.pro2 = 2;
-                MyObj022.loca = location == string.Empty ? " ":location;
+                MyObj022.loca = location == string.Empty ? "" : location;
                 MyObj022.norp = 1;
                 MyObj022.dele = 7;
                 MyObj022.logd = "NONE";
@@ -1238,7 +1236,7 @@ namespace whusap.WebPages.Migration
                 MyObj131.CONF = "1";
                 MyObj131.RCNO = " ";//llena baan
                 MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                MyObj131.LOCA = location == string.Empty ? " " : location;//LOCA.ToUpper();// enviamos vacio 
+                MyObj131.LOCA = location;//LOCA.ToUpper();// enviamos vacio 
                 MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
                 MyObj131.PRNT = "1";// llenar en 1
                 MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan

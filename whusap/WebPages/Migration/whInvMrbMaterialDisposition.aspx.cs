@@ -20,6 +20,7 @@ using whusa.Utilidades;
 using System.Globalization;
 using System.Threading;
 using System.Web.Configuration;
+using whusa;
 
 
 namespace whusap.WebPages.Migration
@@ -33,10 +34,13 @@ namespace whusap.WebPages.Migration
         public List<Ent_tticol127> ListaItems = new List<Ent_tticol127>();
         public List<Ent_tticol127> ListaLotes = new List<Ent_tticol127>();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
         Ent_tticol042 obj042 = new Ent_tticol042();
         public string ListaItemsJSON = string.Empty;
         public string ListaLotesJSON = string.Empty;
         private static InterfazDAL_tticol100 _idaltticol100 = new InterfazDAL_tticol100();
+        private static InterfazDAL_tticol116 _idaltticol116 = new InterfazDAL_tticol116();
+        public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         DataTable DTregrind = new DataTable();
         DataTable cantidadRegrind = new DataTable();
@@ -198,12 +202,6 @@ namespace whusap.WebPages.Migration
             grdRecords.Columns[13].HeaderText = _textoLabels.readStatement(formName, _idioma, "headRegrind");
             grdRecords.Columns[14].HeaderText = _textoLabels.readStatement(formName, _idioma, "headComments");
 
-            //grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headSupplier");
-            ////grdRecords.Columns[1].HeaderText = _textoLabels.readStatement(formName, _idioma, "headStock");
-            //grdRecords.Columns[2].HeaderText = _textoLabels.readStatement(formName, _idioma, "headStock");
-            //grdRecords.Columns[3].HeaderText = _textoLabels.readStatement(formName, _idioma, "headRegrind");
-            //grdRecords.Columns[4].HeaderText = _textoLabels.readStatement(formName, _idioma, "headComments");
-
             lblitemError = _textoLabels.readStatement(formName, _idioma, "lblItemError");
             lblLotError = _textoLabels.readStatement(formName, _idioma, "lblLotError");
             PalletIDdoesntexistsCannotcontinue    = mensajes("PalletIDdoesntexistsCannotcontinue");
@@ -290,9 +288,6 @@ namespace whusap.WebPages.Migration
         protected void btnSend_Click(object sender, EventArgs e)
         {
 
-            // Session["txtItem"] = txtItem.Text.ToUpper();
-            // Session["txtLot"] = string.IsNullOrEmpty(txtLot.Text.ToUpper()) || string.IsNullOrWhiteSpace(txtLot.Text.ToUpper()) ? " " : txtLot.Text.ToUpper();
-
             grdRecords.DataSource = "";
             grdRecords.DataBind();
             grdRecords.Visible = false;
@@ -358,10 +353,7 @@ namespace whusap.WebPages.Migration
                     }
 
                     lbltable.Value = tableName;
-                 //   With this you bind Theme variable qty to Theme grid, if Theme namespace is correct @resultado will BeachBumCashFactory bound to the grid
-                   // grdRecords.DataSource = resultado;
-                 //   grdRecords.DataBind();
-                   
+
                 }
             }
 
@@ -443,6 +435,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            double Stock = Convert.ToDouble(Session["qty"].ToString());
             var validUpdate = 0;
             InterfazDAL_tticol118 idal = new InterfazDAL_tticol118();
             List<Ent_tticol118> parameterCollection = new List<Ent_tticol118>();
@@ -463,16 +456,15 @@ namespace whusap.WebPages.Migration
 
             foreach (GridViewRow row in grdRecords.Rows)
             {
-                string toreturn = ((TextBox)row.Cells[7].FindControl("toReturn")).Text;
-              //  string lote = ((TextBox)row.Cells[7].FindControl("toReturn")).Text;
-                
+                string toreturn = ((TextBox)row.Cells[7].FindControl("toReturn")).Text;//valor de entrada
                 reason = ((DropDownList)row.Cells[9].FindControl("Reasonid")).SelectedValue;
                 disposition = ((DropDownList)row.Cells[8].FindControl("Dispoid")).SelectedValue;
-              //  stockw = ((DropDownList)grdRecords.Rows[0].Cells[1].FindControl("Stockwareh")).SelectedValue;
                 stockw = ((DropDownList)row.Cells[11].FindControl("Stockwareh")).SelectedValue;
                 stockwn = ((DropDownList)row.Cells[11].FindControl("Stockwareh")).SelectedItem.Text;
                 DataTable DTMyRegrind = new DataTable();
 
+                Session["ToReturnQuantity"] = ((TextBox)row.Cells[7].FindControl("toReturn")).Text;
+                Session["newWarehouse"] = ((DropDownList)row.Cells[11].FindControl("Stockwareh")).SelectedItem.Text;
                 Session["MyRegrind"] = ((DropDownList)grdRecords.Rows[0].Cells[1].FindControl("Regrind")).SelectedValue.ToString().Trim();
                 if (stockw == String.Empty && Convert.ToInt32(disposition) == 3)
                 {
@@ -820,6 +812,95 @@ namespace whusap.WebPages.Migration
                 }
                 if (Convert.ToInt32(disposition) ==3 ) //Return To Stock
                 {
+                    Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+                    Ent_tticol022 MyObj022 = new Ent_tticol022();
+                    string strMaxSequence = getSequence(txtPalletId.Text.ToUpper().Trim(), "Q");
+                    string separator = "-";
+                    string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+
+                    if (lbltable.Value.Trim() == "ticol022")
+                    {
+                        MyObj022.pdno = Session["Orden"].ToString();
+                        MyObj022.sqnb = newPallet;
+                        MyObj022.proc = 2;
+                        MyObj022.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                        MyObj022.mitm = obj.item;
+                        MyObj022.qtdl = Convert.ToDecimal(Session["ToReturnQuantity"].ToString());
+                        MyObj022.cuni = Session["Unit"].ToString();//CUNI;
+                        MyObj022.log1 = "NONE";
+                        MyObj022.qtd1 = Convert.ToInt32(Session["ToReturnQuantity"].ToString());
+                        MyObj022.pro1 = 2;
+                        MyObj022.log2 = "NONE";
+                        MyObj022.qtd2 = Convert.ToInt32(Session["ToReturnQuantity"].ToString());
+                        MyObj022.pro2 = 2;
+                        MyObj022.loca = " ";
+                        MyObj022.norp = 1;
+                        MyObj022.dele = 7;
+                        MyObj022.logd = "NONE";
+                        MyObj022.refcntd = 0;
+                        MyObj022.refcntu = 0;
+                        MyObj022.drpt = DateTime.Now;
+                        MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                        MyObj022.acqt = Convert.ToDecimal(Session["ToReturnQuantity"].ToString());
+                        MyObj022.cwaf = Session["newWarehouse"].ToString();//CWAR;
+                        MyObj022.cwat = Session["newWarehouse"].ToString();//CWAR;
+                        MyObj022.aclo = " ";
+                        MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                        var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
+                        var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+                    }
+                    else if (lbltable.Value.Trim() == "whcol131")
+                    {
+                        MyObj131.OORG = "2";// Order type escaneada view 
+                        MyObj131.ORNO = Session["Orden"].ToString();
+                        MyObj131.ITEM = obj.item;
+                        MyObj131.PAID = newPallet;
+                        MyObj131.PONO = HttpContext.Current.Session["pono"].ToString();
+                        MyObj131.SEQN = "1";
+                        MyObj131.CLOT = Session["Lote"].ToString() == string.Empty?" ":Session["Lote"].ToString();//CLOT.ToUpper();// lote VIEW
+                        MyObj131.CWAR = Session["newWarehouse"].ToString();//CWAR.ToUpper();
+                        MyObj131.QTYS = Session["ToReturnQuantity"].ToString();//QTYS;// cantidad escaneada view 
+                        MyObj131.UNIT = Session["Unit"].ToString();//UNIT;//unit escaneada view
+                        MyObj131.QTYC = Session["ToReturnQuantity"].ToString();//QTYS;//cantidad escaneada view aplicando factor
+                        MyObj131.QTYA = Session["ToReturnQuantity"].ToString();//QTYS;//cantidad escaneada view aplicando factor
+                        MyObj131.UNIC = Session["Unit"].ToString();//UNIT;//unidad view stock
+                        MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                        MyObj131.CONF = "1";
+                        MyObj131.RCNO = " ";//llena baan
+                        MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                        MyObj131.LOCA = "";//LOCA.ToUpper();// enviamos vacio 
+                        MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                        MyObj131.PRNT = "1";// llenar en 1
+                        MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                        MyObj131.NPRT = "1";//conteo de reimpresiones 
+                        MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
+                        MyObj131.LOGT = " ";//llena baan
+                        MyObj131.STAT = "3";// LLENAR EN 3 
+                        MyObj131.DSCA = " ";
+                        MyObj131.COTP = " ";
+                        MyObj131.FIRE = "2";
+                        MyObj131.PSLIP = " ";
+                        MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
+
+                        bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
+                    }
+
+                    Ent_tticol116 data116 = new Ent_tticol116()
+                    {
+                        paid = txtPalletId.Text.Trim(),
+                        resCant = Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())
+                    };
+
+                    if (lbltable.Value.Trim() == "ticol022")
+                    {
+                        _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
+                    }
+                    else
+                    {
+                        _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
+                    }
+
                     Session["disposition"] = "stock";
 
                     obj.item = Session["Item"].ToString().Trim().ToUpperInvariant();
@@ -850,8 +931,18 @@ namespace whusap.WebPages.Migration
                     Session["Operator"] = Session["user"].ToString();
                     Session["Pallet"] = row["PAID"].ToString();
 
+                    Session["MaterialDesc2"] = "";
+                    Session["Material2"] = obj.item;
+                    Session["codePaid2"] = row["PAID"].ToString();
+                    Session["Lot2"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
+                    Session["Quantity2"] = row["CANTIDAD"].ToString() + " " + Session["Unit"].ToString();
+                    Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                    Session["Machine2"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
+                    Session["Operator2"] = Session["user"].ToString();
+                    Session["Pallet2"] = row["PAID"].ToString();
+
                     StringBuilder script = new StringBuilder();
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3Regrinds.aspx'; ");
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                     lblResult.Text = mensajes("msjupdt");
@@ -955,58 +1046,6 @@ namespace whusap.WebPages.Migration
                 listreason.DataBind();
                 listreason.Items.Insert(0, new ListItem(_idioma == "INGLES" ? "Select Reason here..." : "Seleccione una razón...", string.Empty));
 
-                //DataTable proveedor = idalp.listaProveedores_Param(ref obj, ref strError);
-                //DropDownList listproveedor = (DropDownList)e.Row.Cells[9].FindControl("Supplier");
-                //listproveedor.DataSource = proveedor;
-                //listproveedor.DataTextField = "nombre";
-                //listproveedor.DataValueField = "proveedor";
-                //listproveedor.DataBind();
-                //listproveedor.Items.Insert(0, new ListItem("Select Supplier here...", string.Empty));
-
-
-                ////Llenar Reason Dropdownlist
-                //InterfazDAL_tticol118 idal = new InterfazDAL_tticol118();
-                //DataTable reason = idal.listaReason_Param(ref strError);
-                //DropDownList listreason = (DropDownList) e.Row.Cells[10].FindControl("Reasonid");
-                //listreason.DataSource = reason;
-                //listreason.DataTextField = "descr";
-                //listreason.DataValueField = "reason";
-                //listreason.DataBind();
-                //listreason.Items.Insert(0, new ListItem("Select Reason here...", string.Empty));               
-
-                ////Llenar Disposition Dropdownlist desde el webconfig
-                //////if (ConfigurationManager.AppSettings.AllKeys.Contains("Disposition"))
-                //////{
-                //////    string listdisposition = ConfigurationManager.AppSettings["Disposition"];
-
-                //////    var dispositionarray = listdisposition.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToList<string>();
-                //////    dispositionarray.Insert(0, "-- Select Disposition --");
-
-                //////    DropDownList dispoid = (DropDownList)e.Row.Cells[11].FindControl("Dispositionid");
-                //////    dispoid.DataSource = dispositionarray;
-                //////    dispoid.DataBind();
-                //////}
-                //////else { lblResult.Visible = true; lblResult.Text = "Disposition List not found"; }
-
-                ////Llenar Stock Warehouse Dropdownlist
-                //InterfazDAL_tticol118 idalsw = new InterfazDAL_tticol118();
-                //DataTable stockw = idalsw.listaStockw_Param(ref strError);
-                //DropDownList liststockw = (DropDownList) e.Row.Cells[11].FindControl("Stockwareh");
-                //liststockw.DataSource = stockw;
-                //liststockw.DataTextField = "descrw";
-                //liststockw.DataValueField = "warehouse";
-                //liststockw.DataBind();
-                //liststockw.Items.Insert(0, new ListItem("Select Stock Warehouse here...", string.Empty));
-
-                ////Llenar Stock Warehouse Dropdownlist
-                //InterfazDAL_tticol118 idalr = new InterfazDAL_tticol118();
-                //DataTable regrind = idalr.listaRegrind_Param(ref strError);
-                //DropDownList listregrind = (DropDownList)e.Row.Cells[12].FindControl("Regrind");
-                //listregrind.DataSource = regrind;
-                //listregrind.DataTextField = "descrc";
-                //listregrind.DataValueField = "item";
-                //listregrind.DataBind();
-                //listregrind.Items.Insert(0, new ListItem("Select Item here...", string.Empty));
             }
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
@@ -1069,6 +1108,30 @@ namespace whusap.WebPages.Migration
             }
         }
 
+        public static string getSequence(string PAIDOld, string complement = "")
+        {
+            string sequence = string.Empty;
+            int indexSeparator = PAIDOld.IndexOf("-");
+            string SQNB = PAIDOld.Substring(0, indexSeparator);
+            string SEC = PAIDOld.Substring(indexSeparator + 1);
+
+            if (complement == "")
+            {
+                complement = recursos.SeparatorAlphaNumeric(ref SEC);
+            }
+
+            DataTable dtMaxSec = _idaltwhcol130.maximaSecuenciaUnion(SQNB + "-" + complement);
+            if (dtMaxSec.Rows.Count > 0)
+            {
+                sequence = dtMaxSec.Rows[0]["sqnb"].ToString().Trim();
+            }
+            else
+            {
+                sequence = SQNB + "-" + complement + "000";
+            }
+
+            return sequence;
+        }
         #endregion
     }
 }
