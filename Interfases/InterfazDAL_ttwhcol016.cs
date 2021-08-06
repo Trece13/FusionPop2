@@ -44,6 +44,20 @@ namespace whusa.Interfases
             }
         }
 
+        public int DesactivarSerie_Consecutivo(ref Ent_ttwhcol016 parametrosIn, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.DesactivarSerie_Consecutivo(ref parametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
         public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 Parametros, ref string strError)       
         {
             int retorno = -1;
