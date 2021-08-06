@@ -469,6 +469,11 @@ namespace whusap.WebPages.InvReceipts
                 data016.serietemp = Convert.ToInt32(dat016.Rows[0]["SEQ"].ToString()) + 1;
                 int retconser = _idaltwhcol016.ActualizarSerie_Consecutivo(ref data016, ref strError);
             }
+            if (consecutivo == "998")
+            {
+                data016.serietemp = Convert.ToInt32(dat016.Rows[0]["SEQ"].ToString());
+                int retconser = _idaltwhcol016.DesactivarSerie_Consecutivo(ref data016, ref strError);
+            }
             string id = CLOT.Trim() == "" ? cyclecountLabel : CLOT.Trim();
             string sqnb = cyclecountLabel.Trim() + serie.Trim() + "-" + consecutivo;
             //if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
@@ -548,7 +553,7 @@ namespace whusap.WebPages.InvReceipts
                 data022.pro2 = 2;
                 data022.loca = " ";
                 data022.norp = 1;
-                data022.dele = 2;
+                data022.dele = 7;
                 data022.logd = "NONE";
                 data022.refcntd = 0;
                 data022.refcntu = 0;
@@ -637,7 +642,7 @@ namespace whusap.WebPages.InvReceipts
                     pro2 = 2,
                     loca = " ",
                     norp = 1,
-                    dele = 2,
+                    dele = 7,
                     logd = "NONE",
                     refcntd = 0,
                     refcntu = 0,

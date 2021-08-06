@@ -793,7 +793,9 @@ namespace whusap.WebPages.Migration
                     DataRow row = (DataRow)Session["FilaImprimir"];
 
                     Session["MaterialDesc"] = row["DESCI"].ToString();
-                    Session["MaterialCode"] = obj.item;
+                    //JC 050821 Cambiar el código del item por el de regrind
+                    //Session["MaterialCode"] = obj.item;
+                    Session["MaterialCode"] = obj.ritm;
                     Session["codePaid"] = row["PAID"].ToString();
                     Session["Lot"] = row["LOTE"].ToString();
                     Session["Quantity"] = row["CANTIDAD"].ToString() + " " + Session["Unit"].ToString();

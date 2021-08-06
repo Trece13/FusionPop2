@@ -3777,6 +3777,24 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           VALUES ('[p1]', '    '||TO_CHAR(('[p2]'), '000'), 'SEQUENCE FP LABELS INVENTORY', 1, 1, 0, 0, 0)
         </stringSQL>
       </operationName>
+      <operationName name="DesactivarSerie_Consecutivo">
+        <stringSQL>
+          UPDATE {0}.ttcmcs050{1} mcs050
+          SET mcs050.t$blck = '[p3]'
+          WHERE TRIM(T$NRGR) = '[p1]'
+          AND  TRIM(T$SERI) = LPAD('[p2]', 3, 0)
+          AND t$blck = '[p4]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActivarNuevaSerie_Consecutivo">
+        <stringSQL>
+          UPDATE {0}.ttcmcs050{1} mcs050
+          SET mcs050.t$blck = '[p4]'
+          WHERE TRIM(T$NRGR) = '[p1]'
+          AND  TRIM(T$SERI) = LPAD('[p5]', 3, 0)
+          AND t$blck = '[p3]'
+        </stringSQL>
+      </operationName>
       <operationName name="actualizarContadores">
         <stringSQL>
           UPDATE {0}.ttcmcs050{1} mcs050

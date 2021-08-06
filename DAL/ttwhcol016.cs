@@ -95,6 +95,33 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
+        public int DesactivarSerie_Consecutivo(ref Ent_ttwhcol016 parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string MsgstrError = string.Empty;
+            paramList = new Dictionary<string, object>();
+            paramList.Add("p1", parametros.zone.Trim().ToUpperInvariant());
+            paramList.Add("p2", parametros.serietemp);
+            paramList.Add("p3", '1');
+            paramList.Add("p4", '2');
+            paramList.Add("p5", parametros.serietemp+1);
+
+            try
+            {
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, "ActivarNuevaSerie_Consecutivo", ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                strError = MsgstrError + "Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return Convert.ToInt32(retorno);
+        }
+
         public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
