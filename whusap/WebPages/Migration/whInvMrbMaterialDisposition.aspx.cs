@@ -816,6 +816,9 @@ namespace whusap.WebPages.Migration
                 {
                     Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
                     Ent_tticol022 MyObj022 = new Ent_tticol022();
+
+                    if ((Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())) != 0)
+                    {
                     string strMaxSequence = getSequence(txtPalletId.Text.ToUpper().Trim(), "Q");
                     string separator = "-";
                     string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
@@ -888,19 +891,21 @@ namespace whusap.WebPages.Migration
                         bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
                     }
 
-                    Ent_tticol116 data116 = new Ent_tticol116()
-                    {
-                        paid = txtPalletId.Text.Trim(),
-                        resCant = Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())
-                    };
+                    
+                        Ent_tticol116 data116 = new Ent_tticol116()
+                        {
+                            paid = txtPalletId.Text.Trim(),
+                            resCant = Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())
+                        };
 
-                    if (lbltable.Value.Trim() == "ticol022")
-                    {
-                        _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
-                    }
-                    else
-                    {
-                        _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
+                        if (lbltable.Value.Trim() == "ticol022")
+                        {
+                            _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
+                        }
+                        else
+                        {
+                            _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
+                        }
                     }
 
                     Session["disposition"] = "stock";
@@ -935,7 +940,7 @@ namespace whusap.WebPages.Migration
                             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                             Session["Machine"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                             Session["Operator"] = Session["user"].ToString();
-                            Session["Pallet"] = row["PAID"].ToString();
+                            Session["Pallet"] = txtPalletId.Text.Trim().ToUpper();
 
                             Session["MaterialDesc2"] = "";
                             Session["Material2"] = obj.item;
@@ -962,7 +967,7 @@ namespace whusap.WebPages.Migration
                             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                             Session["Machine"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                             Session["Operator"] = Session["user"].ToString();
-                            Session["Pallet"] = row["PAID"].ToString();
+                            Session["Pallet"] = txtPalletId.Text.Trim().ToUpper();
 
                             Session["MaterialDesc2"] = "";
                             Session["Material2"] = obj.item;
