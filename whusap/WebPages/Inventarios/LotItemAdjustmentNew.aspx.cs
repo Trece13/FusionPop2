@@ -637,7 +637,7 @@ namespace whusap.WebPages.Inventarios
                     itemS = new ListItem();
                     rowIndex = (int)resultado.Rows.IndexOf(dr);
                     itemS.Value = dr.ItemArray[0].ToString();
-                    itemS.Text = dr.ItemArray[1].ToString();
+                    itemS.Text = dr.ItemArray[0].ToString() + " - " + dr.ItemArray[1].ToString();
                     dropDownReasonCodes.Items.Insert(rowIndex + 1, itemS);
                 }
             }
