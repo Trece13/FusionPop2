@@ -128,6 +128,7 @@ namespace whusap.WebPages.InvReceipts
                 QUANTITYAUX_COMPLETADA = 0;
                 CiclePrintBegin = 0;
                 MyInsert.Clear();
+                HttpContext.Current.Session["QuantityFinal"] = null;
                 HttpContext.Current.Session["MyConvertionFactor"] = null;
                 HttpContext.Current.Session["DTOrdencompra"] = null;
                 HttpContext.Current.Session["OrdenImportacion"] = null;

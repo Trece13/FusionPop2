@@ -1036,7 +1036,7 @@
                         '<tbody>' +
                         '<tr>' +
                         '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? MyList.QTYCFinal.replace(",", ".") : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ?  LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
