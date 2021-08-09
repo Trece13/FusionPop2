@@ -204,7 +204,7 @@
                                     <td></td>
                                     <td>
                                         <div id="lblReprint2" class="col-12 text-right" runat="server">
-                                            <label><strong>REPRINT</strong></label>
+                                            <label><strong></strong></label>
                                         </div>
                                     </td>
                                 </tr>
