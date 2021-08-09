@@ -272,7 +272,21 @@ namespace whusap.WebPages.Inventarios
                 lblMachine.Text = machine;
                 generateDropDownReasonCodes();
                 generateDropDownCostCenters();
-
+                dropDownCostCenters.SelectedValue = Session["emno"].ToString();
+                dropDownReasonCodes.SelectedValue = Session["cdis"].ToString();
+                if (Session["emno"].ToString() == "DO3062" && Session["cdis"].ToString() == "CS1004")
+                {
+                    dropDownCostCenters.Visible = true;
+                    dropDownReasonCodes.Visible = true;
+                    lblReason.Visible = false;
+                    lblCost.Visible = false;
+                }
+                else{
+                    dropDownCostCenters.Visible = false;
+                    dropDownReasonCodes.Visible = false;
+                    lblReason.Visible = true;
+                    lblCost.Visible = true;
+                }
             }
         }
 
@@ -371,7 +385,7 @@ namespace whusap.WebPages.Inventarios
                     itemS = new ListItem();
                     rowIndex = (int)resultado.Rows.IndexOf(dr);
                     itemS.Value = dr.ItemArray[0].ToString();
-                    itemS.Text = dr.ItemArray[1].ToString();
+                    itemS.Text = dr.ItemArray[0].ToString() +"-"+ dr.ItemArray[1].ToString();
                     dropDownReasonCodes.Items.Insert(rowIndex + 1, itemS);
                 }
             }
@@ -398,7 +412,7 @@ namespace whusap.WebPages.Inventarios
                     itemS = new ListItem();
                     rowIndex = (int)resultado.Rows.IndexOf(dr);
                     itemS.Value = dr.ItemArray[0].ToString();
-                    itemS.Text = dr.ItemArray[1].ToString();
+                    itemS.Text = dr.ItemArray[0].ToString() +"-"+ dr.ItemArray[1].ToString();
                     dropDownCostCenters.Items.Insert(rowIndex + 1, itemS);
                 }
             }
