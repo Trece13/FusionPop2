@@ -92,6 +92,7 @@ namespace whusap.WebPages.InvReceipts
         private static string globalMessages = "GlobalMessages";
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static string cyclecountLabel = WebConfigurationManager.AppSettings["cyclecountLabel"].ToString();
+        //JC 090821 Adicionar Parametro Web config para el manejo de los consecutivos
         public static string serieLabelFP = WebConfigurationManager.AppSettings["serieLabelFP"].ToString();
 
 

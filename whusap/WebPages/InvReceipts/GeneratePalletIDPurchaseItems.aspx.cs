@@ -37,6 +37,10 @@ namespace whusap.WebPages.InvReceipts
         public static string RegisteredquantitynotavilableonBaaninventory = mensajes("RegisteredquantitynotavilableonBaaninventory");
 
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
+        //JC 090821 Adicionar Parametro Web config para el manejo de los consecutivos
+        public static string serieLabelRM = WebConfigurationManager.AppSettings["serieLabelRM"].ToString();
+        public static string cyclecountLabelRM = WebConfigurationManager.AppSettings["cyclecountLabelRM"].ToString();
+
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
         public static InterfazDAL_ttcibd001 ITtcibd001 = new InterfazDAL_ttcibd001();
@@ -51,8 +55,8 @@ namespace whusap.WebPages.InvReceipts
             RequestUrlAuthority = (string)Request.Url.Authority;
 
 
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-CO");
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-CO");
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             base.InitializeCulture();
 
             if (!IsPostBack)
@@ -264,45 +268,46 @@ namespace whusap.WebPages.InvReceipts
 
 
         }
+        //JC 090821 Quitar Validación Cantidades contra baan
         [WebMethod]
         public static string VerificarQuantity(string CWAR, string ITEM, string CLOT, string LOCA)
         {
             string strError = string.Empty;
             DataTable DtTtwhinr140 = new DataTable();
 
-            CWAR = CWAR.ToUpper();
-            ITEM = ITEM.ToUpper();
-            CLOT = CLOT.ToUpper();
-            LOCA = LOCA.ToUpper();
+            //CWAR = CWAR.ToUpper();
+            //ITEM = ITEM.ToUpper();
+            //CLOT = CLOT.ToUpper();
+            //LOCA = LOCA.ToUpper();
 
-            DtTtwhinr140 = ITtwhinr140.consultaStks(ref CWAR, ref ITEM, ref CLOT, ref LOCA, ref strError);
+            //DtTtwhinr140 = ITtwhinr140.consultaStks(ref CWAR, ref ITEM, ref CLOT, ref LOCA, ref strError);
 
             Ent_twhinr140 ObjTtwhinr140 = new Ent_twhinr140();
-
-            if (DtTtwhinr140.Rows.Count > 0)
-            {
-                decimal stks = Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString());
-                if (stks > 0)
-                {
-                    ObjTtwhinr140.stks = stks;
-                    ObjTtwhinr140.Error = false;
-                    ObjTtwhinr140.TypeMsgJs = "label";
+            
+            //if (DtTtwhinr140.Rows.Count > 0)
+            //{
+            //    decimal stks = Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString());
+            //    if (stks > 0)
+            //    {
+            //        ObjTtwhinr140.stks = stks;
+            //        ObjTtwhinr140.Error = false;
+            //        ObjTtwhinr140.TypeMsgJs = "label";
                     
-                    ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
-                }
-                else
-                {
-                    ObjTtwhinr140.Error = true;
-                    ObjTtwhinr140.TypeMsgJs = "label";
-                    ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
-                }
-            }
-            else
-            {
-                ObjTtwhinr140.Error = true;
-                ObjTtwhinr140.TypeMsgJs = "label";
-                ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
-            }
+            //        ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
+            //    }
+            //    else
+            //    {
+            //        ObjTtwhinr140.Error = true;
+            //        ObjTtwhinr140.TypeMsgJs = "label";
+            //        ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
+            //    }
+            //}
+            //else
+            //{
+            //    ObjTtwhinr140.Error = true;
+            //    ObjTtwhinr140.TypeMsgJs = "label";
+            //    ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
+            //}
 
             return JsonConvert.SerializeObject(ObjTtwhinr140);
 
@@ -311,40 +316,64 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string Click_Save(string CWAR, string ITEM, string CLOT, string LOCA, string QTYS, string UNIT)
         {
-            int consecutivoPalletID = 0;
-            DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130("INITIAPOP-P");
-            string SecuenciaPallet = "001";
-            if (DTPalletContinue.Rows.Count > 0)
+            //int consecutivoPalletID = 0;
+            //DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130("INITIAPOP-P");
+            //string SecuenciaPallet = "001";
+            //if (DTPalletContinue.Rows.Count > 0)
+            //{
+            //    foreach (DataRow item in DTPalletContinue.Rows)
+            //    {
+            //        string paid = item["T$PAID"].ToString().Trim();
+            //        int indesSep = item["T$PAID"].ToString().Trim().IndexOf("-P");
+            //        string secuence = paid.Substring(indesSep + 1);
+            //        consecutivoPalletID = Convert.ToInt32(secuence)+1;
+            //        if (consecutivoPalletID.ToString().Length == 1)
+            //        {
+            //            SecuenciaPallet = "P00" + consecutivoPalletID;
+            //        }
+            //        if (consecutivoPalletID.ToString().Length == 2)
+            //        {
+            //            SecuenciaPallet = "P0" + consecutivoPalletID;
+            //        }
+            //        if (consecutivoPalletID.ToString().Length == 3)
+            //        {
+            //            SecuenciaPallet = "P"+consecutivoPalletID.ToString();
+            //        }
+
+            //    }
+
+            //}
+            Ent_ttwhcol016 data016 = new Ent_ttwhcol016(); ;
+            string retorno = string.Empty;
+            string strError = string.Empty;
+            data016.zone = serieLabelRM;
+            DataTable dat016 = ITtwhcol016.VerificaCons_Serie_Label(ref data016, ref strError);
+            int actcontador = ITtwhcol016.actualizarContadores(ref data016, ref strError);
+            //string SecuenciaPallet = "C";
+            string consecutivo = dat016.Rows[0]["CONSEC"].ToString().PadLeft(3, '0');
+            string serie = dat016.Rows[0]["SEQ"].ToString();
+
+            if (consecutivo == "990")
             {
-                foreach (DataRow item in DTPalletContinue.Rows)
-                {
-                    string paid = item["T$PAID"].ToString().Trim();
-                    int indesSep = item["T$PAID"].ToString().Trim().IndexOf("-P");
-                    string secuence = paid.Substring(indesSep + 1);
-                    consecutivoPalletID = Convert.ToInt32(secuence)+1;
-                    if (consecutivoPalletID.ToString().Length == 1)
-                    {
-                        SecuenciaPallet = "P00" + consecutivoPalletID;
-                    }
-                    if (consecutivoPalletID.ToString().Length == 2)
-                    {
-                        SecuenciaPallet = "P0" + consecutivoPalletID;
-                    }
-                    if (consecutivoPalletID.ToString().Length == 3)
-                    {
-                        SecuenciaPallet = "P"+consecutivoPalletID.ToString();
-                    }
-
-                }
-
+                data016.serietemp = Convert.ToInt32(dat016.Rows[0]["SEQ"].ToString()) + 1;
+                int retconser = ITtwhcol016.ActualizarSerie_Consecutivo(ref data016, ref strError);
             }
+            if (consecutivo == "998")
+            {
+                data016.serietemp = Convert.ToInt32(dat016.Rows[0]["SEQ"].ToString());
+                int retconser = ITtwhcol016.DesactivarSerie_Consecutivo(ref data016, ref strError);
+            }
+            string id = CLOT.Trim() == "" ? cyclecountLabelRM : CLOT.Trim();
+            string sqnb = cyclecountLabelRM.Trim() + serie.Trim() + "-" + consecutivo;
 
             Ent_twhcol130131 MyObj = new Ent_twhcol130131
             {
                 OORG = "2",// Order type escaneada view 
-                ORNO = "INITIAPOP",
+                //ORNO = "INITIAPOP",
+                ORNO = cyclecountLabelRM.Trim() + serie.Trim(),
                 ITEM = ITEM.ToUpper(),
-                PAID = "INITIAPOP" + "-" + SecuenciaPallet,
+                //PAID = "INITIAPOP" + "-" + SecuenciaPallet,
+                PAID = sqnb,
                 PONO = "1",
                 SEQN = "1",
                 CLOT = CLOT.ToUpper(),// lote VIEW
@@ -371,7 +400,8 @@ namespace whusap.WebPages.InvReceipts
                 FIRE = "2",
                 PSLIP = " ",
                 ALLO = "0",
-                PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "INITIAPOP" + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
+                //PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "INITIAPOP" + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
+                PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "INITIAPOP" + "-" + sqnb + "&code=Code128&dpi=96",
                 ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + "DTOrdencompra.Rows[0][].ToString()" + "&code=Code128&dpi=96",
                 ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ITEM + "&code=Code128&dpi=96",
                 CLOT_URL = CLOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + CLOT + "&code=Code128&dpi=96" : "",

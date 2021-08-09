@@ -434,15 +434,15 @@
             }
             if (MyObj.Error == false) {
                 $('#lblError').html("");
-                if (parseInt($('#txQuantity').val()) > 0 && parseInt($('#txQuantity').val()) <= parseInt(MyObj.stks, 10)) {
+//                if (parseInt($('#txQuantity').val()) > 0 && parseInt($('#txQuantity').val()) <= parseInt(MyObj.stks, 10)) {
                     $('#btnSave').prop("disabled", false);
                     
                 }
-                else {
-                    $('#btnSave').prop("disabled", true);
-                    ImprimirMensaje(MyObj.TypeMsgJs, MyObj.SuccessMsg);
-                }
-            }
+//                else {
+//                    $('#btnSave').prop("disabled", true);
+//                    ImprimirMensaje(MyObj.TypeMsgJs, MyObj.SuccessMsg);
+//                }
+//            }
         }
 
 
