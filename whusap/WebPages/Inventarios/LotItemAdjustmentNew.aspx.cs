@@ -326,63 +326,75 @@ namespace whusap.WebPages.Inventarios
         public static string Save(Ent_twhcol028 twhcol028)
         {
             //twhcol028.EMNO =
+            Ent_twhcol130131 MyOriginalPallet = (Ent_twhcol130131)HttpContext.Current.Session["MyOriginalPallet"];
             twhcol028.LOGN = HttpContext.Current.Session["user"].ToString();
             bool Res = _idaltwhcol028.insertRegistertwhcol028(ref twhcol028, ref strError);
-
             if (Res)
             {
-
-                saveOriginTable(twhcol028);
-                Ent_twhcol130131 MyOriginalPallet = (Ent_twhcol130131)HttpContext.Current.Session["MyOriginalPallet"];
-
-
-                string strMaxSequence = string.Empty;
-                switch (MyOriginalPallet.TBL)
+                if ((twhcol028.TITM == twhcol028.SITM) && (twhcol028.TWAR != twhcol028.SWAR || twhcol028.TLOC != twhcol028.SLOC))
                 {
-                    case "ticol022":
-                    case "ticol042":
-                        if (twhcol028.KTLC == "1")
-                        {
-                            if (twhcol028.TLOT.Trim().ToUpper() == twhcol028.SLOT.Trim().ToUpper())
-                            {
-                                strMaxSequence = getSequence(twhcol028.SLOT.Trim().ToUpper() + "-A");
-                            }
-                            else
-                            {
-                                strMaxSequence = getSequence(twhcol028.TLOT.Trim().ToUpper() + "-A");
-                            }
-                        }
-                        else if (twhcol028.KTLC != "1")
-                        {
-                            if (twhcol028.TLOT.Trim().ToUpper() == twhcol028.SLOT.Trim().ToUpper())
-                            {
-                                strMaxSequence = getSequence(MyOriginalPallet.ORNO + "-A");
-                            }
-                            else
-                            {
-                                strMaxSequence = getSequence(twhcol028.SLOT.Trim() + "-A");
-                            }
-                        }
-                        break;
-                    case "whcol131":
-                        strMaxSequence = getSequence(MyOriginalPallet.ORNO + "-A");
-                        break;
-                }
 
-                bool createSuccessNewPaller = saveNewPalletOriginTable(ref twhcol028, strMaxSequence);
-
-                if (createSuccessNewPaller)
-                {
-                    twhcol028.Error = false;
-                    twhcol028.ErrorMsg = "Se inserto correctamente";
-                    twhcol028.SuccessMsg = "Se inserto ok";
-                    twhcol028.TypeMsgJs = "Label";
+                    bool updateSuccessPallet = UpdatePalletOriginTable(ref twhcol028);
+                    if (updateSuccessPallet)
+                    {
+                        twhcol028.Error = false;
+                    }
+                    else
+                    {
+                        twhcol028.Error = true;
+                    }
                 }
                 else
                 {
-                    twhcol028.Error = true;
-                    twhcol028.ErrorMsg = "No se inserto correctamente el nuevo pallet";
-                    twhcol028.TypeMsgJs = "Label";
+                    saveOriginTable(twhcol028);
+                    string strMaxSequence = string.Empty;
+                    switch (MyOriginalPallet.TBL)
+                    {
+                        case "ticol022":
+                        case "ticol042":
+                            if (twhcol028.KTLC == "1")
+                            {
+                                if (twhcol028.TLOT.Trim().ToUpper() == twhcol028.SLOT.Trim().ToUpper())
+                                {
+                                    strMaxSequence = getSequence(twhcol028.SLOT.Trim().ToUpper() + "-A");
+                                }
+                                else
+                                {
+                                    strMaxSequence = getSequence(twhcol028.TLOT.Trim().ToUpper() + "-A");
+                                }
+                            }
+                            else if (twhcol028.KTLC != "1")
+                            {
+                                if (twhcol028.TLOT.Trim().ToUpper() == twhcol028.SLOT.Trim().ToUpper())
+                                {
+                                    strMaxSequence = getSequence(MyOriginalPallet.ORNO + "-A");
+                                }
+                                else
+                                {
+                                    strMaxSequence = getSequence(twhcol028.SLOT.Trim() + "-A");
+                                }
+                            }
+                            break;
+                        case "whcol131":
+                            strMaxSequence = getSequence(MyOriginalPallet.ORNO + "-A");
+                            break;
+                    }
+
+                    bool createSuccessNewPaller = saveNewPalletOriginTable(ref twhcol028, strMaxSequence);
+
+                    if (createSuccessNewPaller)
+                    {
+                        twhcol028.Error = false;
+                        twhcol028.ErrorMsg = "Se inserto correctamente";
+                        twhcol028.SuccessMsg = "Se inserto ok";
+                        twhcol028.TypeMsgJs = "Label";
+                    }
+                    else
+                    {
+                        twhcol028.Error = true;
+                        twhcol028.ErrorMsg = "No se inserto correctamente el nuevo pallet";
+                        twhcol028.TypeMsgJs = "Label";
+                    }
                 }
             }
             else
@@ -518,6 +530,42 @@ namespace whusap.WebPages.Inventarios
             return res;
         }
 
+        private static bool UpdatePalletOriginTable(ref Ent_twhcol028 twhcol028)
+        {
+            bool res = false;
+            string separator = "-";
+            string SQNB = twhcol028.PAID.Substring(0, twhcol028.PAID.IndexOf(separator));
+            switch (HttpContext.Current.Session["TBL"].ToString())
+            {
+                case "ticol022":
+                    Ent_tticol022 obj022 = new Ent_tticol022();
+                    obj022.sqnb = twhcol028.PAID;
+                    obj022.dele = 7;
+                    obj022.cwaf = twhcol028.TWAR;
+                    obj022.cwat = twhcol028.TWAR;
+                    obj022.aclo = twhcol028.TLOC == string.Empty ? " " : twhcol028.TLOC;
+                    res = dalticol100.updatetticol222(ref obj022, ref strError);
+                    break;
+                case "ticol042":
+                    Ent_tticol042 obj042 = new Ent_tticol042();
+                    obj042.sqnb = twhcol028.PAID;
+                    obj042.dele = 7;
+                    obj042.cwaf = twhcol028.TWAR;
+                    obj042.cwat = twhcol028.TWAR;
+                    obj042.aclo = twhcol028.TLOC == string.Empty ? " " : twhcol028.TLOC;;
+                    res = dalticol100.updatetticol242(ref obj042, ref strError);
+                    break;
+                case "whcol131":
+                    Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+                    MyObj131.PAID = twhcol028.PAID;
+                    MyObj131.STAT = "3";
+                    MyObj131.CWAR = twhcol028.TWAR;
+                    MyObj131.LOCA = twhcol028.TLOC == string.Empty ? " " : twhcol028.TLOC;;
+                    res = dalticol100.updatetwhcol131(ref MyObj131, ref strError);
+                    break;
+            }
+            return res;
+        }
         private static string currentSequience(string strOldSequence)
         {
             string strNewSequence = string.Empty;

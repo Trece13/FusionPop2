@@ -83,7 +83,7 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
-          public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 parametro, ref string strError)
+        public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 parametro, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
@@ -109,127 +109,129 @@ namespace whusa.DAL
             }
             return Convert.ToInt32(retorno);
         }
-          public int ActualUpdateStockWarehouse_ticol222(ref string tableName, ref string stockw, ref string palletId, ref string strError)
-          {
-              method = MethodBase.GetCurrentMethod();
-              bool retorno = false;
-           
-              
-              try
-              {
+        public int ActualUpdateStockWarehouse_ticol222(ref string tableName, ref string stockw, ref string palletId, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
 
-                  if (tableName == "ticol022")
-                  {
-                      paramList = new Dictionary<string, object>();
-                      paramList.Add(":T$SWAR", stockw.Trim().ToUpper());
-                      paramList.Add(":T$SQNB", palletId.Trim().ToUpper());
-                      
-                      //strSentencia = "SELECT  t$cwar warehosue, t$sloc handle_locations FROM   " + owner + ".twhwmd200" + env + "  WHERE   t$cwar = '" + stockw.Trim().ToUpper() + "' ";
-                      strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecttwhwmd200", ref owner, ref env, tabla, paramList);
-                      consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
-                      if (consulta.Rows.Count < 1)
-                      {
-                          strError = "Incorrect location, please verify.";
-                      }
-                      else
-                      {
-                          foreach (DataRow row in consulta.Rows)
-                          {
-                              sloc = row["handle_locations"].ToString();
-                              
-                          }
 
-                          if (sloc == "1")
-                          {   //if sloc = 1  
+            try
+            {
 
-                             // strSentencia = "SELECT  t$cwar warehouse, t$loca lcation, min(t$prio) priority FROM    " + owner + ".twhwmd300" + env + "  WHERE   t$cwar =  '" + stockw.Trim().ToUpper() + "' AND t$loct = 5 AND rownum = 1 GROUP BY t$cwar, t$loca";
-                                 //strSentencia = recursos.readStatement(method.ReflectedType.Name, "GetLocationStockWarehouse_whwmd300", ref owner, ref env, tabla, paramList);
-                                 strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecttwhwmd300", ref owner, ref env, tabla, paramList);
-                                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
-                                 foreach (DataRow row in consulta.Rows)
-                                 {
-                                     aloc = row["lcation"].ToString();
+                if (tableName == "ticol022")
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$SWAR", stockw.Trim().ToUpper());
+                    paramList.Add(":T$SQNB", palletId.Trim().ToUpper());
 
-                                 }  
-                      
-                          }else{
-                             aloc="  ";
-                          }
-                          aloc = aloc.Trim() == string.Empty ? " " : aloc.Trim();
-                          paramList.Add(":ALOC", aloc);
-                          //strSentencia = "UPDATE  " + owner + ".tticol222" + env + " SET T$CWAT = '" + stockw.Trim().ToUpper() + "'  ,T$ACLO='" + aloc + "'    WHERE T$SQNB = '" + palletId.Trim().ToUpper() + "'  ";
-                          strSentencia = recursos.readStatement(method.ReflectedType.Name, "updatetticol222", ref owner, ref env, tabla, paramList);                          
-                          retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
-                          return Convert.ToInt32(retorno);
+                    //strSentencia = "SELECT  t$cwar warehosue, t$sloc handle_locations FROM   " + owner + ".twhwmd200" + env + "  WHERE   t$cwar = '" + stockw.Trim().ToUpper() + "' ";
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecttwhwmd200", ref owner, ref env, tabla, paramList);
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                    if (consulta.Rows.Count < 1)
+                    {
+                        strError = "Incorrect location, please verify.";
+                    }
+                    else
+                    {
+                        foreach (DataRow row in consulta.Rows)
+                        {
+                            sloc = row["handle_locations"].ToString();
 
-                       
-                      }
-                  }
-                  else if (tableName == "whcol131")
-                  {
-                      paramList = new Dictionary<string, object>();
-                      paramList.Add(":T$SWAR", stockw.Trim().ToUpper());
-                      paramList.Add(":T$SQNB", palletId.Trim().ToUpper());
-                      //strSentencia = "select  t$cwar warehosue, t$sloc handle_locations from   " + owner + ".twhwmd200" + env + "   where   t$cwar = '" + stockw.Trim().ToUpper() + "'";
-                      strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecthandletwhwmd200", ref owner, ref env, tabla, paramList);                                                
-                      consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
-                      if (consulta.Rows.Count < 1)
-                      {
-                          strError = "Incorrect location, please verify.";
-                      }
-                      else
-                      {
-                          foreach (DataRow row in consulta.Rows)
-                          {
-                              sloc = row["handle_locations"].ToString();
+                        }
 
-                          }
+                        if (sloc == "1")
+                        {   //if sloc = 1  
 
-                          if (sloc == "1")
-                          {   //if sloc = 1  
+                            // strSentencia = "SELECT  t$cwar warehouse, t$loca lcation, min(t$prio) priority FROM    " + owner + ".twhwmd300" + env + "  WHERE   t$cwar =  '" + stockw.Trim().ToUpper() + "' AND t$loct = 5 AND rownum = 1 GROUP BY t$cwar, t$loca";
+                            //strSentencia = recursos.readStatement(method.ReflectedType.Name, "GetLocationStockWarehouse_whwmd300", ref owner, ref env, tabla, paramList);
+                            strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecttwhwmd300", ref owner, ref env, tabla, paramList);
+                            consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                            foreach (DataRow row in consulta.Rows)
+                            {
+                                aloc = row["lcation"].ToString();
 
-                              //strSentencia = " select  t$cwar warehouse, t$loca lcation, min(t$prio) priority from     " + owner + ".twhwmd300" + env + " where   t$cwar =  '" + stockw.Trim().ToUpper() + "' and t$loct = 5 and rownum = 1 GROUP BY t$cwar,t$loca ";
-                              strSentencia = recursos.readStatement(method.ReflectedType.Name, "selectpriowhwmd300", ref owner, ref env, tabla, paramList);                                                
-                              consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
-                              foreach (DataRow row in consulta.Rows)
-                              {
-                                  aloc = row["lcation"].ToString();
+                            }
 
-                              }
+                        }
+                        else
+                        {
+                            aloc = "  ";
+                        }
+                        aloc = aloc.Trim() == string.Empty ? " " : aloc.Trim();
+                        paramList.Add(":ALOC", aloc);
+                        //strSentencia = "UPDATE  " + owner + ".tticol222" + env + " SET T$CWAT = '" + stockw.Trim().ToUpper() + "'  ,T$ACLO='" + aloc + "'    WHERE T$SQNB = '" + palletId.Trim().ToUpper() + "'  ";
+                        strSentencia = recursos.readStatement(method.ReflectedType.Name, "updatetticol222", ref owner, ref env, tabla, paramList);
+                        retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                        return Convert.ToInt32(retorno);
 
-                          }
-                          else
-                          {
-                              aloc = " ";
-                          }
-                          aloc = aloc.Trim() == string.Empty ? "   " : aloc.Trim();
-                          paramList.Add(":ACLO", aloc);
-                          //strSentencia = "UPDATE  " + owner + ".twhcol131" + env + " SET T$CWAA  = '" + stockw.Trim().ToUpper() + "'  ,T$LOAA ='" + aloc + "'   WHERE T$PAID = '" + palletId.Trim().ToUpper() + "'  ";
-                          strSentencia = recursos.readStatement(method.ReflectedType.Name, "updatetwhcol131", ref owner, ref env, tabla, paramList);                                                                          
-                          retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
-                          return Convert.ToInt32(retorno);
 
-                      }
+                    }
+                }
+                else if (tableName == "whcol131")
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$SWAR", stockw.Trim().ToUpper());
+                    paramList.Add(":T$SQNB", palletId.Trim().ToUpper());
+                    //strSentencia = "select  t$cwar warehosue, t$sloc handle_locations from   " + owner + ".twhwmd200" + env + "   where   t$cwar = '" + stockw.Trim().ToUpper() + "'";
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, "selecthandletwhwmd200", ref owner, ref env, tabla, paramList);
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                    if (consulta.Rows.Count < 1)
+                    {
+                        strError = "Incorrect location, please verify.";
+                    }
+                    else
+                    {
+                        foreach (DataRow row in consulta.Rows)
+                        {
+                            sloc = row["handle_locations"].ToString();
 
-                  }
-                  //paramList = new Dictionary<string, object>();
-                  //paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper());
-                  //paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
+                        }
 
-                  //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                        if (sloc == "1")
+                        {   //if sloc = 1  
 
-                  //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                            //strSentencia = " select  t$cwar warehouse, t$loca lcation, min(t$prio) priority from     " + owner + ".twhwmd300" + env + " where   t$cwar =  '" + stockw.Trim().ToUpper() + "' and t$loct = 5 and rownum = 1 GROUP BY t$cwar,t$loca ";
+                            strSentencia = recursos.readStatement(method.ReflectedType.Name, "selectpriowhwmd300", ref owner, ref env, tabla, paramList);
+                            consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                            foreach (DataRow row in consulta.Rows)
+                            {
+                                aloc = row["lcation"].ToString();
 
-                  //return Convert.ToInt32(retorno);
-              }
-              catch (Exception ex)
-              {
-                  strError = ex.InnerException != null ?
-                     ex.Message + " (" + ex.InnerException + ")" :
-                     ex.Message;
-              }
-              return Convert.ToInt32(retorno);
-          }
+                            }
+
+                        }
+                        else
+                        {
+                            aloc = " ";
+                        }
+                        aloc = aloc.Trim() == string.Empty ? "   " : aloc.Trim();
+                        paramList.Add(":ACLO", aloc);
+                        //strSentencia = "UPDATE  " + owner + ".twhcol131" + env + " SET T$CWAA  = '" + stockw.Trim().ToUpper() + "'  ,T$LOAA ='" + aloc + "'   WHERE T$PAID = '" + palletId.Trim().ToUpper() + "'  ";
+                        strSentencia = recursos.readStatement(method.ReflectedType.Name, "updatetwhcol131", ref owner, ref env, tabla, paramList);
+                        retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                        return Convert.ToInt32(retorno);
+
+                    }
+
+                }
+                //paramList = new Dictionary<string, object>();
+                //paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper());
+                //paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
+
+                //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                //return Convert.ToInt32(retorno);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return Convert.ToInt32(retorno);
+        }
         public int ActualizaRegistro_ticol022(ref Ent_tticol100 parametro, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
@@ -241,14 +243,14 @@ namespace whusa.DAL
                 paramList.Add(":T$DELE", "3");
                 paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
                 paramList.Add(":T$LOGN", parametro.logr.Trim().ToUpper());
-                
+
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
-              
+
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
 
-             
+
 
 
 
@@ -292,7 +294,7 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
-        public int ActualizaRegistro_located(ref Ent_tticol100 parametro,ref string updstatus,ref string tableName, ref string strError)
+        public int ActualizaRegistro_located(ref Ent_tticol100 parametro, ref string updstatus, ref string tableName, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
@@ -303,10 +305,10 @@ namespace whusa.DAL
                 paramList.Add(":T$DELE", updstatus);
                 paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
                 paramList.Add(":T$LOGN", parametro.logr.Trim().ToUpper());
-                paramList.Add(":TABLENAME", "T"+ tableName.Trim().ToUpper());
-              
+                paramList.Add(":TABLENAME", "T" + tableName.Trim().ToUpper());
 
-                
+
+
                 if (tableName == "whcol131")
                 {
                     strSentencia = recursos.readStatement(method.ReflectedType.Name, "ActualizaRegistro_located_whcol131", ref owner, ref env, tabla, paramList);
@@ -421,7 +423,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SEQN", DbType.Int32, parametros.seqn);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MCNO", DbType.String, parametros.mcno.ToUpper());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SHIF", DbType.String, parametros.shif.ToUpper());
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item.ToUpper());
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, parametros.item.ToUpper());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYR", DbType.Double, parametros.qtyr);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CDIS", DbType.String, parametros.cdis.ToUpper());
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REJT", DbType.Int32, parametros.rejt);
@@ -494,6 +496,87 @@ namespace whusa.DAL
                 log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             return consulta;
+        }
+
+        public bool updatetticol222(ref Ent_tticol022 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$SWAR", parametro.cwaf.Trim().ToUpper());
+                paramList.Add(":T$SQNB", parametro.sqnb.Trim().ToUpper());
+                paramList.Add(":ALOC", parametro.aclo.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return retorno;
+        }
+
+        public bool updatetticol242(ref Ent_tticol042 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$SWAR", parametro.cwaf.Trim().ToUpper());
+                paramList.Add(":T$SQNB", parametro.sqnb.Trim().ToUpper());
+                paramList.Add(":ALOC", parametro.aclo.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return retorno;
+        }
+
+        public bool updatetwhcol131(ref Ent_twhcol130131 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$SWAR", parametro.CWAR.Trim().ToUpper());
+                paramList.Add(":T$SQNB", parametro.PAID.Trim().ToUpper());
+                paramList.Add(":ACLO", parametro.LOCA.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return retorno;
         }
     }
 }

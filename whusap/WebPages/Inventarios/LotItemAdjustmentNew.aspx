@@ -343,8 +343,8 @@
             </div>
         </div>
         <br />
-        <div id="printButton">
-            <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
+        <div id="printButton" class="container">
+            <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print fa-3x" id="btnPrint"></i></button>
         </div>
     </div>
     <script type="text/javascript">
@@ -639,15 +639,15 @@
             Obj028.PAID = txPalletID.value.trim().toUpperCase();
             Obj028.CDIS = $("#Contenido_dropDownReasonCodes").val();
             Obj028.EMNO = $("#Contenido_dropDownCostCenters").val();
-            Obj028.SITM = lbItemActual.textContent.trim();
-            Obj028.SWAR = lbWarehouseActual.textContent.trim();
-            Obj028.SLOC = lbLocaActual.textContent.trim();
-            Obj028.SLOT = lbLotActual.textContent.trim();
+            Obj028.SITM = lbItemActual.textContent.trim().toUpperCase();
+            Obj028.SLOT = lbLotActual.textContent.trim().toUpperCase();
             Obj028.SQTY = lbQtyActual.textContent.trim();
-            Obj028.TITM = lbItemAdjusted.textContent.trim();
-            Obj028.TWAR = lbWarehouseAdjusted.textContent.trim();
-            Obj028.TLOC = lbLocaAdjusted.textContent.trim();
-            Obj028.TLOT = lbLotAdjusted.textContent.trim();
+            Obj028.TITM = lbItemAdjusted.textContent.trim().toUpperCase();
+            Obj028.SWAR = lbWarehouseActual.textContent.trim().toUpperCase();
+            Obj028.TWAR = lbWarehouseAdjusted.textContent.trim().toUpperCase();
+            Obj028.TLOC = lbLocaAdjusted.textContent.trim().toUpperCase();
+            Obj028.SLOC = lbLocaActual.textContent.trim().toUpperCase();
+            Obj028.TLOT = lbLotAdjusted.textContent.trim().toUpperCase();
             Obj028.TQTY = lbQtyActual.textContent.trim();
             Obj028.UNIT = lbUnitAdjusted.textContent.trim();
             Obj028.LOGN = "";
@@ -793,10 +793,11 @@
             var MyObjTwhcol028 = JSON.parse(res.d);
             if(MyObjTwhcol028.Error == false){
                 
+
                 JsBarcode("#codePaid", MyObjTwhcol028.PAID);
-                JsBarcode("#codeItem", MyObjTwhcol028.SITM);
+                JsBarcode("#codeItem", MyObjTwhcol028.TITM);
                 lblitemDesc.textContent = lbItemDscaAdjusted.textContent;
-                lblWorkOrder.textContent = MyObjTwhcol028.WHLOT;
+                lblWorkOrder.textContent = MyObjTwhcol028.TLOT;
                 lblPalletNum.textContent =  MyObjTwhcol028.PAID.substring((MyObjTwhcol028.PAID.indexOf("-"))+1);
                 lblInspector.textContent = MyObjTwhcol028.LOGN;
                 lblMachine.textContent = MyObjTwhcol028.MCNO;
@@ -804,7 +805,12 @@
                 //lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
                 lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
                 $("#editTable").hide(500);
-                $('#printContainer').show(500);
+                if((lbItemActual.textContent.trim() == lbItemAdjusted.textContent.trim() )&&(lbWarehouseActual.textContent.trim() != lbWarehouseAdjusted.textContent.trim() || lbLocaAdjusted.textContent.trim() != lbLocaActual.textContent.trim())){
+
+                }
+                else{
+                    $('#printContainer').show(500);
+                }
             }
             else{
                 alert("error no insert");

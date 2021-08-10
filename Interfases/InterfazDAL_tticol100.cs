@@ -165,5 +165,47 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public bool updatetticol222(ref Ent_tticol022 parametro, ref string strError)
+        {
+            bool retorno = false;
+            try
+            {
+                retorno = dal.updatetticol222(ref parametro, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public bool updatetticol242(ref Ent_tticol042 parametro, ref string strError)
+        {
+            bool retorno = false;
+            try
+            {
+                retorno = dal.updatetticol242(ref parametro, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public bool updatetwhcol131(ref Ent_twhcol130131 parametro, ref string strError)
+        {
+            bool retorno = false;
+            try
+            {
+                retorno = dal.updatetwhcol131(ref parametro, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
     }
 }
