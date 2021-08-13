@@ -126,13 +126,13 @@
                             <strong>WO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
                         </div>
                         <div class="col-8 alingLeft">
-                            <strong>Reason&nbsp;</strong><label id="lblReason" runat="server"></label>
+                            <strong>&nbsp;</strong><label id="lblReason" runat="server"></label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 alingCenter">
                             <strong>
-                                <label id="lblMaterialDesc" runat="server">THIS PRODUCT IS ON HOLD PENDING DISPOSITION</label></strong>
+                                <label id="lblMaterialDesc" runat="server"></label></strong>
                         </div>
                     </div>
                     <div class="col-12 borderTop" id="divBarcode">

@@ -35,8 +35,11 @@ namespace whusap.WebPages.Labels.RedesingLabels
             try
             {
                 lblWorkOrder.InnerText      =  Session["WorkOrder"]     != null ? Session["WorkOrder"].ToString(): string.Empty;
-                lblReason.InnerText         =  Session["lblReason"]     != null ? Session["lblReason"].ToString(): string.Empty;
-                lblMaterialDesc.InnerText   =  "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
+                //JC 130821 En la etiqueta con cantidad restante no debe generar leyenda de motivo 
+                //lblReason.InnerText         =  Session["lblReason"]     != null ? Session["lblReason"].ToString(): string.Empty;
+                //lblMaterialDesc.InnerText   =  "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
+                lblReason.InnerText         =  "";
+                lblMaterialDesc.InnerText   =  "";
                 codePaid.Src                =  Session["codePaid"]      != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid"].ToString() + "&code=Code128&dpi=96" : string.Empty;
                 lblProductDesc.InnerText    =  Session["ProductCode"]   != null ? Transfers.DescripcionItem(Session["ProductCode"].ToString()) : string.Empty;
                 lblProductCode.InnerText    =  Session["ProductCode"]   != null ? Session["ProductCode"].ToString(): string.Empty;

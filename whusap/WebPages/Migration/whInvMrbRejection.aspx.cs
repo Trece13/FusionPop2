@@ -1208,13 +1208,12 @@ namespace whusap.WebPages.Migration
                 MyObj022.refcntd = 0;
                 MyObj022.refcntu = 0;
                 MyObj022.drpt = DateTime.Now;
-                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();                              
+                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                MyObj022.acqt = Convert.ToDecimal(cantidad); 
                 //JC 130821 Ajustar Datos Bodega Rechazo
-                //MyObj022.acqt = Convert.ToDecimal(cantidad);  
-                //MyObj022.cwaf = warehouse;//CWAR;
+                 //MyObj022.cwaf = warehouse;//CWAR;
                 //MyObj022.cwat = warehouse;//CWAR;
                 //MyObj022.aclo = warehouse;
-                MyObj022.acqt = _stock - Convert.ToDecimal(cantidad);  
                 MyObj022.cwaf = cwam;//CWAR;
                 MyObj022.cwat = cwam;//CWAR;
                 MyObj022.aclo = " ";
