@@ -94,6 +94,7 @@ namespace whusa.DAL
                 paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper());
                 paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
                 paramList.Add(":T$ACLO", " ");
+                paramList.Add(":T$ACQT", parametro.qtyr);
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
@@ -240,7 +241,7 @@ namespace whusa.DAL
             try
             {
                 paramList = new Dictionary<string, object>();
-                paramList.Add(":T$DELE", "3");
+                paramList.Add(":T$DELE", parametro.dele.Trim().ToUpper());
                 paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
                 paramList.Add(":T$LOGN", parametro.logr.Trim().ToUpper());
 

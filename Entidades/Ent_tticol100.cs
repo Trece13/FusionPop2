@@ -32,6 +32,7 @@ namespace whusa.Entidades
         public string Unit { get; set; }
         public string cwar { get; set; }
         public string paid { get; set; }
+        public string dele { get; set; }
 
 		public Ent_tticol100() 
         {
@@ -59,6 +60,7 @@ namespace whusa.Entidades
             Unit = string.Empty;
             cwar = string.Empty;
             paid = string.Empty;
+            dele = string.Empty;
         }
     }
 }

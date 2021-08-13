@@ -5382,9 +5382,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActualUpdateWarehouse_ticol222">
         <stringSQL>
+          --UPDATE {0}.tticol222{1}
+          --SET T$CWAT = '[:T$CWAT]',
+          --T$ACLO = '[:T$ACLO]'
           UPDATE {0}.tticol222{1}
-          SET T$CWAT = '[:T$CWAT]',
-          T$ACLO = '[:T$ACLO]'
+          SET T$ACQT = '[:T$ACQT]'
           WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>

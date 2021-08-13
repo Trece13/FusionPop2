@@ -1201,16 +1201,23 @@ namespace whusap.WebPages.Migration
                 MyObj022.pro2 = 2;
                 MyObj022.loca = location == string.Empty ? "" : location;
                 MyObj022.norp = 1;
-                MyObj022.dele = 7;
+                //JC 130821 Ajustar Datos Estado rechazado
+                //MyObj022.dele = 7;
+                MyObj022.dele = 3;
                 MyObj022.logd = "NONE";
                 MyObj022.refcntd = 0;
                 MyObj022.refcntu = 0;
                 MyObj022.drpt = DateTime.Now;
-                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj022.acqt = Convert.ToDecimal(cantidad);
-                MyObj022.cwaf = warehouse;//CWAR;
-                MyObj022.cwat = warehouse;//CWAR;
-                MyObj022.aclo = warehouse;
+                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();                              
+                //JC 130821 Ajustar Datos Bodega Rechazo
+                //MyObj022.acqt = Convert.ToDecimal(cantidad);  
+                //MyObj022.cwaf = warehouse;//CWAR;
+                //MyObj022.cwat = warehouse;//CWAR;
+                //MyObj022.aclo = warehouse;
+                MyObj022.acqt = _stock - Convert.ToDecimal(cantidad);  
+                MyObj022.cwaf = cwam;//CWAR;
+                MyObj022.cwat = cwam;//CWAR;
+                MyObj022.aclo = " ";
                 MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
 
                 var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
@@ -1292,6 +1299,11 @@ namespace whusap.WebPages.Migration
                     cwam = cwam,
                     resCant = _stock-Convert.ToDecimal(cantidad)
                 };
+                //1JC 130821 Validar si rechazaron todo el pallet para que grabe el dato correcto del pallet
+                if (data116.resCant > 0)
+                {
+                    data116.paid = newPallet;
+                }
                 Ent_tticol100 data100 = new Ent_tticol100()
                 {
 
@@ -1408,9 +1420,22 @@ namespace whusap.WebPages.Migration
                     cwam = cwam,
                     resCant = _stock - Convert.ToDecimal(cantidad)
                 };
+                //2JC 130821 Validar si rechazaron todo el pallet para que grabe el dato correcto del pallet
+                var estado = String.Empty;
+                if (data116.resCant > 0)
+                {
+                    data116.paid = newPallet;
+                    estado = "7";
+                }
+                else
+                {
+                    estado = "3";
+                }
                 Ent_tticol100 data100 = new Ent_tticol100()
                 {
-                   
+                    //JC 130821 Ajustar estado y cantidad
+                    dele = estado,
+                    qtyr = Convert.ToDouble(data116.resCant),
                     paid = paid,
                     cwar = cwam,
                     logr = HttpContext.Current.Session["user"].ToString(),
