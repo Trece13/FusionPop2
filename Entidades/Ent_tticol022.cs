@@ -239,5 +239,7 @@ namespace whusa.Entidades
         [DataMember(Order = 38)]
         [Column(Name = "QTYAG")]
         public decimal qtyaG { get; set; }
+
+        public decimal ALLOAUX { get; set; }
     }
 }

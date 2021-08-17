@@ -112,5 +112,7 @@ namespace whusa
         public List<string> PAIDS{ get; set; }
 
         public string QTYCFinal { get; set; }
+
+        public decimal ALLOAUX { get; set; }
     }
 }
