@@ -39,6 +39,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                 lblPallet.InnerHtml = Session["codePaid"] != null ? Session["codePaid"].ToString() : string.Empty;
                 lblMachine.InnerHtml        = Session["Machine"]        != null ? Session["Machine"].ToString(): string.Empty;
                 lblOperator.InnerHtml       = Session["Operator"]       != null ? Session["Operator"].ToString(): string.Empty;
+                myLabel.Visible = (Session["Quantity2"] != null ? Convert.ToDecimal(Session["Quantity2"].ToString()) : 0) > 0 ? true : false; 
 
                 lblMaterialDesc2.InnerHtml   = Session["codeMaterial"]  != null ? Transfers.DescripcionItem(Session["codeMaterial"].ToString().Trim()) : string.Empty;
                 codeMaterial2.Src            = Session["codeMaterial"]  != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codeMaterial"].ToString() + "&code=Code128&dpi=96" : string.Empty;

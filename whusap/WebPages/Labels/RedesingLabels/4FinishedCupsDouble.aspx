@@ -229,7 +229,7 @@
             </div>
             <br />
             <div id="printSpace">
-                <div id="myLabel" style="width:5.5in; height:3.4in; margin:8px" >
+                <div id="myLabel" style="width:5.5in; height:3.4in; margin:8px" runat="server">
                     <div class="row" style="margin:auto">
                         <div class="col-5 alingLeft">
                             <label>
