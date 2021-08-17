@@ -54,7 +54,7 @@ namespace whusap.WebPages.WorkOrders
         string _idioma = string.Empty;
         private static string globalMessages = "GlobalMessages";
         public static string qtyaG = "0";
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
@@ -147,7 +147,7 @@ namespace whusap.WebPages.WorkOrders
                     int prio131 = LstPallet131.Count > 0 ? Convert.ToInt32(LstPallet131[0].PRIO.ToString()) : int.MaxValue;
                     int prio022 = LstPallet22.Count > 0 ? Convert.ToInt32(LstPallet22[0].PRIO.ToString()) : int.MaxValue;
                     int prio042 = LstPallet042.Count > 0 ? Convert.ToInt32(LstPallet042[0].PRIO.ToString()) : int.MaxValue;
-                    
+
                     if (prio131 != int.MinValue || prio022 != int.MinValue || prio042 != int.MinValue)
                     {
                         prios.Add(prio131);
@@ -170,7 +170,7 @@ namespace whusap.WebPages.WorkOrders
                     MyObj.PALLETID = LstPallet131[0].PALLETID.ToString();
                     EntidadPicking MyObjLst131 = LstPallet131[0];
 
-                    bool mcnopick = machinesPicking.Contains(LstPallet131[0].MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false ;
+                    bool mcnopick = machinesPicking.Contains(LstPallet131[0].MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
 
                     if (MyObjLst131.STAT.Trim() == "6" || MyObjLst131.STAT.Trim() == "3")
                     {
@@ -597,16 +597,18 @@ namespace whusap.WebPages.WorkOrders
             DataTable DTPalletID = twhcolDAL.VerificarPalletID(PAID_NEW);
             if (DTPalletID.Rows.Count > 0)
             {
-                if (DTPalletID.Rows[0]["ITEM"].ToString().Trim() == MySessionObjPicking.ITEM.ToString().Trim()){
+                if (DTPalletID.Rows[0]["ITEM"].ToString().Trim() == MySessionObjPicking.ITEM.ToString().Trim())
+                {
                     ObjPicking.error = false;
                     return JsonConvert.SerializeObject(ObjPicking);
                 }
-                else{
+                else
+                {
                     ObjPicking.error = true;
                     ObjPicking.errorMsg = ThepalletIDNotContaenthesameItem;
                     return JsonConvert.SerializeObject(ObjPicking);
                 }
-                
+
             }
             else
             {
@@ -723,7 +725,11 @@ namespace whusap.WebPages.WorkOrders
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
-                        _idaltticol125.updataPalletStatus022(PAID, qtyaG == "0" ? "9" : "7");
+                        DataTable dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
+                        if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
+                        {
+                            _idaltticol125.updataPalletStatus022(PAID, qtyaG == "0" ? "" : "7");
+                        }
 
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
@@ -787,7 +793,8 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.cwaf = CWAR;//CWAR;
                             MyObj.cwat = CWAR;//CWAR;
                             MyObj.aclo = LOCA;
-                            MyObj.allo = Convert.ToDecimal(qtyt.ToString()); ;
+                            MyObj.allo = Convert.ToDecimal(qtyt.ToString());
+                            MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
                             var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
                             var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
@@ -826,7 +833,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else
                     {
-                        _idaltticol125.updataPalletStatus022(PAID, "9");
+                        //_idaltticol125.updataPalletStatus022(PAID, "9");
                         twhcolDAL.updatetticol222Quantity(PAID.Trim(), qtyt_old, qtyt_old);
                     }
                     return JsonConvert.SerializeObject(MyObj);
@@ -847,7 +854,11 @@ namespace whusap.WebPages.WorkOrders
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
-                        _idaltticol125.updataPalletStatus042(PAID, qtyaG == "0" ? "9" : "7");
+                        DataTable dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
+                        if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
+                        {
+                            _idaltticol125.updataPalletStatus042(PAID, qtyaG == "0" ? "" : "7");
+                        }
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
                         int consecutivo = 0;
@@ -912,7 +923,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.cwat = CWAR;//CWAR;
                             MyObj.aclo = LOCA;
                             MyObj.allo = Convert.ToDecimal(qtyt.ToString());//Convert.ToDecimal(qtyt_act.ToString());
-
+                            MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
                             var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj, ref strError);
                             var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
@@ -953,7 +964,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else
                     {
-                        _idaltticol125.updataPalletStatus042(PAID, "9");
+                        //_idaltticol125.updataPalletStatus042(PAID, "9");
                         twhcolDAL.updatetticol242Quantity(PAID.Trim(), qtyt_old, qtyt_old);
                     }
 
@@ -978,9 +989,12 @@ namespace whusap.WebPages.WorkOrders
                         DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
-                        _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "7" : "3");
-
-                        if (Convert.ToDecimal(qtyaG) > 0)
+                        DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
+                        if(Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0 ){
+                            _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "" : "3");
+                        }
+                        
+                        if (Convert.ToDecimal(qtyaG) > 0 || 0 < Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()))
                         {
                             string strMaxSequence = getSequence(PAID, "P");
                             string separator = "-";
@@ -1017,7 +1031,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.FIRE = "2";
                             MyObj.PSLIP = " ";
                             MyObj.ALLO = qtyt.ToString();
-
+                            MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
                             bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
 
@@ -1056,7 +1070,7 @@ namespace whusap.WebPages.WorkOrders
                     else
                     {
                         twhcolDAL.updatetwhcol131Quantity(PAID.Trim(), qtyt_old, qtyt_old);
-                        _idaltticol125.updataPalletStatus131(PAID, "7");
+                        //_idaltticol125.updataPalletStatus131(PAID, "7");
                     }
                     return JsonConvert.SerializeObject(MyObj);
                 }
@@ -1143,7 +1157,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string Drop(string PAID, bool Consigment  = false)
+        public static string Drop(string PAID, bool Consigment = false)
         {
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             string res = string.Empty;
@@ -1153,8 +1167,9 @@ namespace whusap.WebPages.WorkOrders
             int randomNum = new Random().Next(999);
             string ramdomNumStr = string.Empty;
 
-            if(randomNum > 0 &&randomNum < 10){
-                ramdomNumStr = "00"+ randomNum.ToString();
+            if (randomNum > 0 && randomNum < 10)
+            {
+                ramdomNumStr = "00" + randomNum.ToString();
             }
             else if (randomNum > 9 && randomNum < 100)
             {
@@ -1168,8 +1183,8 @@ namespace whusap.WebPages.WorkOrders
 
             if (_idaltwhcol122.UpdateTtico082Stat(Obj082) == true)
             {
-                 //JC 230721 Envio el nuevo valor del pick listo para imprimir
-                 //res = UrlBaseBarcode;
+                //JC 230721 Envio el nuevo valor del pick listo para imprimir
+                //res = UrlBaseBarcode;
                 res = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Obj082.PICK + "&code=Code128&dpi=96";
             }
             else

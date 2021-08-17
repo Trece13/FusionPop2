@@ -1223,7 +1223,7 @@
                     success: function (response) {
                         var myObj = JSON.parse(response.d)
                         if (myObj.Error == false) {
-                            if (myObj.qtyaG > 0) {
+                            if (myObj.qtyaG > 0 || myObj.ALLOAUX > 0) {
                                 //    printDiv("MyEtiqueta");
                                 myLabelFrame = document.getElementById('myLabelFrame');
                                 myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
