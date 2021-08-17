@@ -2288,6 +2288,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE  {0}.twhcol131{1} SET T$QTYA = ('[:T$QTYOLD]' - '[:T$QTYA]') + T$QTYA ,T$AllO =T$AllO - '[:T$QTYOLD]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
         </stringSQL>
       </operationName>
+      <operationName name="getAllotwhcol131">
+        <stringSQL>
+          SELECT T$ALLO AS ALLO  FROM {0}.TWHCOL131{1} TRIM(T$PAID) =  TRIM('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
           UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
@@ -3371,17 +3376,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="updataPalletStatus022">
         <stringSQL>
-          UPDATE {0}.tticol022{1} SET T$DELE ='[p3]' WHERE T$SQNB = '[p1]'
+          UPDATE {0}.tticol022{1} SET T$DELE = NVL('[p3]',T$DELE) WHERE T$SQNB = '[p1]'
         </stringSQL>
       </operationName>
       <operationName name="updataPalletStatus042">
         <stringSQL>
-          UPDATE {0}.tticol042{1} SET T$DELE ='[p3]' WHERE T$SQNB = '[p1]'
+          UPDATE {0}.tticol042{1} SET T$DELE = NVL('[p3]',T$DELE) WHERE T$SQNB = '[p1]'
         </stringSQL>
       </operationName>
       <operationName name="updataPalletStatus131">
         <stringSQL>
-          UPDATE {0}.twhcol131{1} SET T$STAT ='[p2]' WHERE T$PAID = '[p1]'
+          UPDATE {0}.twhcol131{1} SET T$STAT =NVL('[p2]',T$STAT) WHERE T$PAID = '[p1]'
         </stringSQL>
       </operationName>
       <operationName name="getReasonCodes">
@@ -4592,6 +4597,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol122">
+      <operationName name="getAllotwhcol131">
+        <stringSQL>
+          SELECT T$ALLO AS ALLO  FROM {0}.TWHCOL131{1} where TRIM(T$PAID) =  TRIM('[:T$PAID]')
+        </stringSQL>
+      </operationName>
+      <operationName name="getAllotticol242">
+        <stringSQL>
+          SELECT T$ALLO AS ALLO FROM {0}.TTICOL242{1}  WHERE TRIM(T$SQNB) =  TRIM('[:T$PAID]')
+        </stringSQL>
+      </operationName>
+      <operationName name="getAllotticol222">
+        <stringSQL>
+          SELECT T$ALLO AS ALLO FROM {0}.TTICOL242{1}  WHERE TRIM(T$SQNB) =  TRIM('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="InsertarTccol307140">
         <stringSQL>
           insert into {0}.ttccol307{1} (T$USER,T$STAT,T$PAID,T$CWAR,T$PROC,T$REFCNTD,T$REFCNTU) values ('[:T$USER]','[:T$STAT]','[:T$PAID]','[:T$CWAR]','[:T$PROC]','[:T$REFCNTD]','[:T$REFCNTU]')
