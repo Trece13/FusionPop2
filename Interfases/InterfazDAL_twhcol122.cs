@@ -1029,5 +1029,20 @@ namespace whusa.Interfases
         {
             return dal.VerificarPalletIDItem(PAID_NEW, ITEM);
         }
+
+        public DataTable getAllotwhcol131(string pallet)
+        {
+            return dal.getAllotwhcol131(pallet);
+        }
+
+        public DataTable getAllotticol242(string pallet)
+        {
+            return dal.getAllotticol242(pallet);
+        }
+
+        public DataTable getAllotticol222(string pallet)
+        {
+            return dal.getAllotticol222(pallet);
+        }
     }
 }
