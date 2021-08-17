@@ -1485,7 +1485,7 @@ namespace whusap.WebPages.Migration
                         Session["ProductDesc"] = Session["DescItem"];
                         Session["ProductCode"] = item.Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity"] = data116.resCant + " " + Session["Cuni"].ToString(); ;
+                        Session["Quantity"] = (Session["Cuni"].ToString().ToUpper().Trim() == "KG" || Session["Cuni"].ToString().ToUpper().Trim() == "LB" ? data116.resCant.ToString() : Convert.ToInt32(data116.resCant).ToString()) + " " + Session["Cuni"].ToString();
                         Session["Finished"] = paid.Trim().ToUpper();
                         Session["Pallet"] = paid.Trim().ToUpper();
                         Session["PrintedBy"] = _operator;
@@ -1501,7 +1501,7 @@ namespace whusap.WebPages.Migration
                             Session["ProductDesc2"] = Session["DescItem"];
                             Session["ProductCode2"] = item.Trim().ToUpper();
                             Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
-                            Session["Quantity2"] = MyObj022.qtd1 + " " + Session["Cuni"].ToString(); ;
+                            Session["Quantity2"] = MyObj022.qtdl + " " + Session["Cuni"].ToString(); ;
                             Session["Finished2"] = MyObj022.sqnb;
                             Session["Pallet2"] = MyObj022.sqnb;
                             Session["PrintedBy2"] = _operator;
