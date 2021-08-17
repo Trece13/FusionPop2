@@ -642,7 +642,7 @@
             Obj028.SITM = lbItemActual.textContent.trim().toUpperCase();
             Obj028.SLOT = lbLotActual.textContent.trim().toUpperCase();
             Obj028.SQTY = lbQtyActual.textContent.trim();
-            Obj028.TITM = lbItemAdjusted.textContent.trim().toUpperCase();
+            Obj028.TITM = $('#cbRegrind').is(":checked") != true ? lbItemAdjusted.textContent.trim().toUpperCase():ddItemDD.options[ddItemDD.selectedIndex].value.trim();
             Obj028.SWAR = lbWarehouseActual.textContent.trim().toUpperCase();
             Obj028.TWAR = lbWarehouseAdjusted.textContent.trim().toUpperCase();
             Obj028.TLOC = lbLocaAdjusted.textContent.trim().toUpperCase();
