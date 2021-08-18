@@ -3611,7 +3611,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
       <operationName name="listaRegistrosOrden_ParamLast">
         <stringSQL>
-          SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
+          --SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
+          SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, art.t$cwar Almacen, rec.t$sitm Articulo,
           art.t$dsca Descripcion, art.t$cuni Unidad, TB1.Cantidad Cant, art.t$kltc Lote, art.t$kitm stat,
           col020.t$cnpk cnpick, t$kitm as tipo, t$cpcl as clase
           FROM {0}.tticst001{1} rec
