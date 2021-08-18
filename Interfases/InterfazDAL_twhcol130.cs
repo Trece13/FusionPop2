@@ -19,6 +19,14 @@ namespace whusa.Interfases
 
         }
 
+        public DataTable GetWarehouseMaterialReturn(string ITEM)
+        {
+            DataTable retorno = new DataTable();
+            retorno = dal.GetWarehouseMaterialReturn(ITEM);
+            return retorno;
+
+        }
+
         public DataTable ValidarOrderID(Ent_twhcol130 whcol130)
         {
             DataTable retorno = new DataTable();

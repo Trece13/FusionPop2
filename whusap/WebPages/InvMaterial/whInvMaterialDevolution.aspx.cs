@@ -207,6 +207,10 @@ namespace whusap.WebPages.InvMaterial
                 string condLote = ((HiddenField)row.Cells[6].FindControl("LOTE")).Value.Trim();
                 ktlc = Convert.ToString(row.Cells[11].Text);
                 Item = row.Cells[1].Text.ToUpperInvariant();
+                //JC 180821 Tomar la bodega del maestro de artículos
+                HttpContext.Current.Session["ITEM"] = Item;
+                var Warehouse = Itwhcol130.GetWarehouseMaterialReturn(HttpContext.Current.Session["ITEM"].ToString());
+
                 Uni = row.Cells[5].Text.ToLower().Trim();
                 Pos = row.Cells[0].Text;
                 Tipo = row.Cells[12].Text;
@@ -290,7 +294,9 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.PONO = Convert.ToInt32(row.Cells[0].Text).ToString();
                             MyObj.SEQN = "0";
                             MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper();
-                            MyObj.CWAR = row.Cells[3].Text.ToUpperInvariant();
+                            //JC 180821 Grabar la bodega por defecto del item
+                            //MyObj.CWAR = row.Cells[3].Text.ToUpperInvariant();
+                            MyObj.CWAR = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                             MyObj.QTYS = toreturn;// cantidad escaneada view
                             MyObj.QTYA = toreturn;
                             MyObj.UNIT = row.Cells[5].Text.Trim();
@@ -346,8 +352,11 @@ namespace whusap.WebPages.InvMaterial
                             obj022.drpt = DateTime.Now;
                             obj022.urpt = HttpContext.Current.Session["user"].ToString();
                             obj022.acqt = Convert.ToDecimal(toreturn);
-                            obj022.cwaf = row.Cells[3].Text.ToUpper();
-                            obj022.cwat = row.Cells[3].Text.ToUpper();
+                            //JC 180821 Grabar la bodega por defecto del item
+                            //obj022.cwaf = row.Cells[3].Text.ToUpper();
+                            //obj022.cwat = row.Cells[3].Text.ToUpper();
+                            obj022.cwaf = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
+                            obj022.cwat = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                             obj022.aclo = "";
                             obj022.allo = 0;
                             
@@ -384,6 +393,11 @@ namespace whusap.WebPages.InvMaterial
                             obj042.drpt = DateTime.Now;
                             obj042.urpt = HttpContext.Current.Session["user"].ToString();
                             obj042.acqt = Convert.ToDouble(toreturn);
+                            //JC 180821 Grabar la bodega por defecto del item
+                            //obj042.cwaf = row.Cells[3].Text.ToUpper();
+                            //obj042.cwat = row.Cells[3].Text.ToUpper();
+                            obj042.cwaf = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
+                            obj042.cwat = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                             obj042.cwaf = row.Cells[3].Text.ToUpper();
                             obj042.cwat = row.Cells[3].Text.ToUpper();
                             obj042.aclo = "";
@@ -399,7 +413,9 @@ namespace whusap.WebPages.InvMaterial
                     obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
                     obj.pono = Convert.ToInt32(row.Cells[0].Text);
                     obj.item = row.Cells[1].Text.ToUpper(); //.Trim();
-                    obj.cwar = row.Cells[3].Text.ToUpper(); //.Trim();
+                    //JC 180821 Grabar la bodega por defecto del item
+                    //obj.cwar = row.Cells[3].Text.ToUpper(); //.Trim();
+                    obj.cwar = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                     obj.paid = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                     obj.clot = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
                     obj.reqt = Decimal.Parse(toreturn, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToInt32(toreturn);
