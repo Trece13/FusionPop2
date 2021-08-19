@@ -144,7 +144,7 @@ namespace whusap.WebPages.Balance
             //obj042.qtd1 = Convert.ToDecimal(lblQuantity.Text.Trim());
             obj042.pro1 = 1;
             obj042.sqnb = lblRegrindSequence.Text.Trim();
-            obj042.dele = 5;
+            obj042.dele = 7;
             parameterCollection042.Add(obj042);
             int retorno = idal042.actualizaRegistro_ConfirmedRegrind(ref parameterCollection042, ref strError);
 
@@ -154,35 +154,35 @@ namespace whusap.WebPages.Balance
                 lblError.Text = mensajes("errorupdt");
                 return;
             }
+            //JC 190821 Decidieron que se iba a realizar el ingreso manualmente en baan, por lo tanto se quita esta funcionalidad
+            //obj072.sour = 4;
+            //obj072.orno = lblWorkOrder.Text;
+            //obj072.pono = Convert.ToInt16(Session["PONO"].ToString());
+            //obj072.dwms = lblWorkOrder.Text;
+            //obj072.pwms = Convert.ToInt16(Session["PONO"].ToString());
+            //obj072.cwar = Session["CWAR"].ToString();
+            //obj072.item = lblRegrindCode.Text;
+            //obj072.qana = Convert.ToDecimal(lblQuantity.Text.Trim());
+            //obj072.cuni = lblUnit.Text;
+            //obj072.clot = " ";
+            //obj072.proc = 2;
+            //obj072.rcno = " ";
+            //obj072.rwms = " ";
+            //obj072.logn = Session["user"].ToString(); ;
+            //obj072.erro = " ";
+            //obj072.seqn = SerieDeLlave(lblRegrindSequence.Text.Trim());//Convert.ToInt32(lblRegrindSequence.Text.Substring(lblRegrindSequence.Text.Trim().Length - 2, 2));
+            //obj072.refcntd = 0;
+            //obj072.refcntu = 0;
+            //parameterCollection072.Add(obj072);
 
-            obj072.sour = 4;
-            obj072.orno = lblWorkOrder.Text;
-            obj072.pono = Convert.ToInt16(Session["PONO"].ToString());
-            obj072.dwms = lblWorkOrder.Text;
-            obj072.pwms = Convert.ToInt16(Session["PONO"].ToString());
-            obj072.cwar = Session["CWAR"].ToString();
-            obj072.item = lblRegrindCode.Text;
-            obj072.qana = Convert.ToDecimal(lblQuantity.Text.Trim());
-            obj072.cuni = lblUnit.Text;
-            obj072.clot = " ";
-            obj072.proc = 2;
-            obj072.rcno = " ";
-            obj072.rwms = " ";
-            obj072.logn = Session["user"].ToString(); ;
-            obj072.erro = " ";
-            obj072.seqn = SerieDeLlave(lblRegrindSequence.Text.Trim());//Convert.ToInt32(lblRegrindSequence.Text.Substring(lblRegrindSequence.Text.Trim().Length - 2, 2));
-            obj072.refcntd = 0;
-            obj072.refcntu = 0;
-            parameterCollection072.Add(obj072);
+            //int retornoRegrind = idal072.insertarRegistro(ref parameterCollection072, ref strError);
 
-            int retornoRegrind = idal072.insertarRegistro(ref parameterCollection072, ref strError);
-
-            if (!string.IsNullOrEmpty(strError))
-            {
-                lblError.Text = mensajes("errorsave");
-                lblError.Visible = true;
-                return;
-            }
+            //if (!string.IsNullOrEmpty(strError))
+            //{
+            //    lblError.Text = mensajes("errorsave");
+            //    lblError.Visible = true;
+            //    return;
+            //}
 
             Clear();
             lblResult.Text = mensajes("confirmregrind");
