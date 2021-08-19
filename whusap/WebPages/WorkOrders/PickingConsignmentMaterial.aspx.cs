@@ -130,122 +130,122 @@ namespace whusap.WebPages.WorkOrders
             List<EntidadPicking> LstPallet042PAID = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet131PAID = new List<EntidadPicking>();
 
-            if (true)
-            {
-                LstPallet131 = twhcolDAL.ConsultarPalletPicking131With082(CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
-                LstPallet042 = twhcolDAL.ConsultarPalletPicking042With082(CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
-                LstPallet22 = twhcolDAL.ConsultarPalletPicking22With082(CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
 
-                if (LstPallet131.Count == 0 && LstPallet042.Count == 0 && LstPallet22.Count == 0)
+            LstPallet131 = twhcolDAL.ConsultarPalletPicking131With082(CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
+            LstPallet042 = twhcolDAL.ConsultarPalletPicking042With082(CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
+            LstPallet22 = twhcolDAL.ConsultarPalletPicking22With082(CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim());
+
+            if (LstPallet131.Count == 0 && LstPallet042.Count == 0 && LstPallet22.Count == 0)
+            {
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
+            }
+            else
+            {
+
+                List<int> prios = new List<int>();
+                int prio131 = LstPallet131.Count > 0 ? Convert.ToInt32(LstPallet131[0].PRIO.ToString()) : int.MaxValue;
+                int prio022 = LstPallet22.Count > 0 ? Convert.ToInt32(LstPallet22[0].PRIO.ToString()) : int.MaxValue;
+                int prio042 = LstPallet042.Count > 0 ? Convert.ToInt32(LstPallet042[0].PRIO.ToString()) : int.MaxValue;
+
+                if (prio131 != int.MinValue || prio022 != int.MinValue || prio042 != int.MinValue)
                 {
-                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "script", "alert('" + NotAalletsAvailablethereNotPallets + "')", true);
+                    prios.Add(prio131);
+                    prios.Add(prio022);
+                    prios.Add(prio042);
+                    prios.Sort();
+                    currentPrio = prios[0];
+                }
+
+                if (currentPrio != int.MinValue)
+                {
+                    PrioIs131 = prio131 == currentPrio ? true : false;
+                    PrioIs022 = prio022 == currentPrio ? true : false;
+                    PrioIs042 = prio042 == currentPrio ? true : false;
+                }
+            }
+
+            if (LstPallet131.Count > 0 && PrioIs131 == true)
+            {
+                MyObj.PALLETID = LstPallet131[0].PALLETID.ToString();
+                EntidadPicking MyObjLst131 = LstPallet131[0];
+
+                bool mcnopick = machinesPicking.Contains(LstPallet131[0].MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
+
+                if (MyObjLst131.STAT.Trim() == "6" || MyObjLst131.STAT.Trim() == "3")
+                {
+                    bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst131.PICK.ToString(), CWAR, "7", "0", "0");
                 }
                 else
                 {
-
-                    List<int> prios = new List<int>();
-                    int prio131 = LstPallet131.Count > 0 ? Convert.ToInt32(LstPallet131[0].PRIO.ToString()) : int.MaxValue;
-                    int prio022 = LstPallet22.Count > 0 ? Convert.ToInt32(LstPallet22[0].PRIO.ToString()) : int.MaxValue;
-                    int prio042 = LstPallet042.Count > 0 ? Convert.ToInt32(LstPallet042[0].PRIO.ToString()) : int.MaxValue;
-
-                    if (prio131 != int.MinValue || prio022 != int.MinValue || prio042 != int.MinValue)
+                    if (MyObjLst131.STAT.Trim() == "10")
                     {
-                        prios.Add(prio131);
-                        prios.Add(prio022);
-                        prios.Add(prio042);
-                        prios.Sort();
-                        currentPrio = prios[0];
-                    }
-
-                    if (currentPrio != int.MinValue)
-                    {
-                        PrioIs131 = prio131 == currentPrio ? true : false;
-                        PrioIs022 = prio022 == currentPrio ? true : false;
-                        PrioIs042 = prio042 == currentPrio ? true : false;
+                        Ent_tticol082 myObj082 = new Ent_tticol082();
+                        myObj082.STAT = "3";
+                        myObj082.PRIO = LstPallet131[0].PRIO;
+                        _idaltwhcol122.UpdateTtico082(myObj082);
+                        loadPage();
+                        return MyObj;
                     }
                 }
+            }
 
-                if (LstPallet131.Count > 0 && PrioIs131 == true)
+            if (LstPallet042.Count > 0 && PrioIs042 == true)
+            {
+                MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
+                EntidadPicking MyObjLst042 = LstPallet042[0];
+
+                bool mcnopick = machinesPicking.Contains(MyObjLst042.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
+
+                if (MyObjLst042.STAT.Trim() == "7" || MyObjLst042.STAT.Trim() == "8")
                 {
-                    MyObj.PALLETID = LstPallet131[0].PALLETID.ToString();
-                    EntidadPicking MyObjLst131 = LstPallet131[0];
 
-                    bool mcnopick = machinesPicking.Contains(LstPallet131[0].MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
-
-                    if (MyObjLst131.STAT.Trim() == "6" || MyObjLst131.STAT.Trim() == "3")
-                    {
-                        bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst131.PICK.ToString(), CWAR, "7", "0", "0");
-                    }
-                    else
-                    {
-                        if (MyObjLst131.STAT.Trim() == "10")
-                        {
-                            Ent_tticol082 myObj082 = new Ent_tticol082();
-                            myObj082.STAT = "3";
-                            myObj082.PRIO = LstPallet131[0].PRIO;
-                            _idaltwhcol122.UpdateTtico082(myObj082);
-                            loadPage();
-                            return MyObj;
-                        }
-                    }
+                    bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst042.PICK.ToString(), CWAR, "7", "0", "0");
                 }
-
-                if (LstPallet042.Count > 0 && PrioIs042 == true)
+                else
                 {
-                    MyObj.PALLETID = LstPallet042[0].PALLETID.ToString();
-                    EntidadPicking MyObjLst042 = LstPallet042[0];
-
-                    bool mcnopick = machinesPicking.Contains(MyObjLst042.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
-
-                    if (MyObjLst042.STAT.Trim() == "7" || MyObjLst042.STAT.Trim() == "8")
+                    if (MyObjLst042.STAT.Trim() == "12")
                     {
-
-                        bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst042.PICK.ToString(), CWAR, "7", "0", "0");
-                    }
-                    else
-                    {
-                        if (MyObjLst042.STAT.Trim() == "12")
-                        {
-                            Ent_tticol082 myObj082 = new Ent_tticol082();
-                            myObj082.STAT = "3";
-                            myObj082.PRIO = LstPallet042[0].PRIO;
-                            _idaltwhcol122.UpdateTtico082(myObj082);
-                            loadPage();
-                            return MyObj;
-                        }
+                        Ent_tticol082 myObj082 = new Ent_tticol082();
+                        myObj082.STAT = "3";
+                        myObj082.PRIO = LstPallet042[0].PRIO;
+                        _idaltwhcol122.UpdateTtico082(myObj082);
+                        loadPage();
+                        return MyObj;
                     }
                 }
-
-                if (LstPallet22.Count > 0 && PrioIs022 == true)
-                {
-                    MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
-                    EntidadPicking MyObjLst022 = LstPallet22[0];
-
-                    bool mcnopick = machinesPicking.Contains(MyObjLst022.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
-
-                    if (MyObjLst022.STAT.Trim() == "7" || MyObjLst022.STAT.Trim() == "8")
-                    {
-                        bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst022.PICK.ToString(), CWAR, "7", "0", "0");
-                    }
-                    else
-                    {
-                        if (MyObjLst022.STAT.Trim() == "12")
-                        {
-                            Ent_tticol082 myObj082 = new Ent_tticol082();
-                            myObj082.STAT = "3";
-                            myObj082.PRIO = LstPallet22[0].PRIO;
-                            _idaltwhcol122.UpdateTtico082(myObj082);
-                            loadPage();
-                            return MyObj;
-                        }
-                    }
-                }
-
             }
 
             if (LstPallet22.Count > 0 && PrioIs022 == true)
             {
+                MyObj.PALLETID = LstPallet22[0].PALLETID.ToString();
+                EntidadPicking MyObjLst022 = LstPallet22[0];
+
+                bool mcnopick = machinesPicking.Contains(MyObjLst022.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
+
+                if (MyObjLst022.STAT.Trim() == "7" || MyObjLst022.STAT.Trim() == "8")
+                {
+                    bool res = twhcolDAL.InsertarTccol307140(HttpContext.Current.Session["user"].ToString().Trim(), "1", MyObjLst022.PICK.ToString(), CWAR, "7", "0", "0");
+                }
+                else
+                {
+                    if (MyObjLst022.STAT.Trim() == "12")
+                    {
+                        Ent_tticol082 myObj082 = new Ent_tticol082();
+                        myObj082.STAT = "3";
+                        myObj082.PRIO = LstPallet22[0].PRIO;
+                        _idaltwhcol122.UpdateTtico082(myObj082);
+                        loadPage();
+                        return MyObj;
+                    }
+                }
+            }
+
+
+
+            if (LstPallet22.Count > 0 && PrioIs022 == true)
+            {
                 MyObj = LstPallet22[0];
+                bool mcnopick = machinesPicking.Contains(MyObj.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
                 HttpContext.Current.Session["MyObjPicking"] = MyObj;
                 HttpContext.Current.Session["flag022"] = 0;
                 HttpContext.Current.Session["flag131"] = 0;
@@ -263,6 +263,7 @@ namespace whusap.WebPages.WorkOrders
             else if (LstPallet042.Count > 0 && PrioIs042 == true)
             {
                 MyObj = LstPallet042[0];
+                bool mcnopick = machinesPicking.Contains(MyObj.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;                
                 ADVS = MyObj.ADVS.ToString();
                 HttpContext.Current.Session["MyObjPicking"] = MyObj;
                 HttpContext.Current.Session["flag022"] = 0;
@@ -281,6 +282,7 @@ namespace whusap.WebPages.WorkOrders
             {
 
                 MyObj = LstPallet131[0];
+                bool mcnopick = machinesPicking.Contains(MyObj.MCNO.Trim()) == true ? MyObj.MCNOPICK = true : MyObj.MCNOPICK = false;
                 HttpContext.Current.Session["MyObjPicking"] = MyObj;
                 HttpContext.Current.Session["flag022"] = 0;
                 HttpContext.Current.Session["flag131"] = 1;
@@ -990,10 +992,11 @@ namespace whusap.WebPages.WorkOrders
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                         DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
-                        if(Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0 ){
+                        if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
+                        {
                             _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "" : "3");
                         }
-                        
+
                         if (Convert.ToDecimal(qtyaG) > 0 || 0 < Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()))
                         {
                             string strMaxSequence = getSequence(PAID, "P");
@@ -1149,7 +1152,17 @@ namespace whusap.WebPages.WorkOrders
                 }
                 else
                 {
-                    indexCurrent++;
+                    int indexCurrentVal = indexCurrent + 1 == DtPalletsPick.Rows.Count ? 0 : indexCurrent + 1;
+                    string currentStat = DtPalletsPick.Rows[indexCurrentVal]["T$STAT"].ToString().Trim();
+                    if (currentStat == "2")
+                    {
+                        indexCurrent = indexCurrentVal;
+                    }
+                    else
+                    {
+
+                        indexCurrent++;
+                    }
                 }
 
             }
