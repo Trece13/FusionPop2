@@ -148,18 +148,20 @@ namespace whusap.WebPages.Migration
                                 MyLioEntidadObj.MCNO = item["MCNO"].ToString();
                                 MyLioEntidadObj.CANT_PICK = item["CANT_PICK"].ToString();
                                 DataTable dt215 = _idaltticol090.ConsultarCantidad215(MyLioEntidadObj, ref strError);
-                                DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
+                                //JC 190821 No sumar doble vez los pallets asignados
+                                //DataTable dt022044131 = _idaltticol090.ConsultarCantidadPoritem022042131(MyLioEntidadObj, ref strError);
                                 var Stock = Convert.ToDecimal(dt215.Rows[0]["T$STOC"].ToString());
                                 var Cant_Pic = Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.CANT_PICK.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.CANT_PICK.Trim()));
                                 //MyLioEntidadObj.cant_reg = quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg") == string.Empty ? Convert.ToString(0) : quantity_reg_order_machine140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_reg");
                                 //MyLioEntidadObj.cant_max = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max") == string.Empty ? Convert.ToString(Int32.MaxValue) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_max");
                                 //MyLioEntidadObj.cant_proc = maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc") == string.Empty ? Convert.ToString(0) : maxquantity_per_shift140(shift, MyLioEntidadObj.MCNO, MyLioEntidadObj.SITM, MyLioEntidadObj.PDNO, "cant_proc");
-
-                                if (dt022044131.Rows.Count > 0)
-                                {
+                                //JC 190821 No sumar doble vez los pallets asignados
+                                //if (dt022044131.Rows.Count > 0)
+                                //{
                                     //MyLioEntidadObj.STOCK = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
-                                    MyLioEntidadObj.ISWH = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
-                                }
+                                    //MyLioEntidadObj.ISWH = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())) + Convert.ToDecimal(dt022044131.Rows[0]["QTYC"].ToString())).ToString();
+                                    MyLioEntidadObj.ISWH = (Convert.ToDecimal(string.IsNullOrEmpty(MyLioEntidadObj.ISWH.Trim()) ? Convert.ToDecimal(0) : Convert.ToDecimal(MyLioEntidadObj.ISWH.Trim())).ToString());
+                                //}
 
                                 if (dt215.Rows.Count > 0)
                                 {

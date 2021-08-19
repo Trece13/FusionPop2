@@ -3617,7 +3617,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
       <operationName name="listaRegistrosOrden_ParamLast">
         <stringSQL>
-          SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
+          <!--SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
           art.t$dsca Descripcion, art.t$cuni Unidad, TB1.Cantidad Cant, art.t$kltc Lote, art.t$kitm stat,
           col020.t$cnpk cnpick, t$kitm as tipo, t$cpcl as clase
           FROM {0}.tticst001{1} rec
@@ -3629,6 +3629,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.tticst001{1} cst001 on cst001.t$pdno = sfc.t$pdno
           where sfc.t$osta in('5','7') and cst001.t$qucs &lt;&gt; 0 and sfc.t$pdno='[p1]'
           group by sfc.t$pdno, cst001.t$sitm) TB1 ON TRIM(TB1.Articulo) = TRIM(rec.t$sitm)
+          WHERE sfc.t$osta in('5','7') AND rec.t$nnts = 1 AND sfc.t$pdno='[p1]' AND rec.t$qucs &gt; 0
+          ORDER BY rec.t$pono-->
+          SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
+          art.t$dsca Descripcion, art.t$cuni Unidad,
+          (SELECT SUM(ticst0012.T$QUCS)
+          FROM {0}.tticst001{1} ticst0012
+          WHERE ticst0012.T$PDNO = rec.t$pdno
+          AND ticst0012.T$SITM = rec.T$SITM
+          AND ticst0012.T$CWAR = rec.T$CWAR) Cant,
+          art.t$kltc Lote, art.t$kitm stat,
+          col020.t$cnpk cnpick, t$kitm as tipo, t$cpcl as clase
+          FROM {0}.tticst001{1} rec
+          LEFT JOIN {0}.ttcibd001{1} art on rec.t$sitm = art.t$item
+          LEFT JOIN {0}.ttisfc001{1} sfc ON rec.t$pdno = sfc.t$pdno
+          LEFT JOIN {0}.ttccol020{1} col020 on col020.t$item = art.t$item
           WHERE sfc.t$osta in('5','7') AND rec.t$nnts = 1 AND sfc.t$pdno='[p1]' AND rec.t$qucs &gt; 0
           ORDER BY rec.t$pono
         </stringSQL>
@@ -4186,6 +4201,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.ttcmcs003{1} ttcmcs003
           ON ttcmcs003.T$CWAR = TBL1.T$CWAR
           WHERE TRIM(T$ITEM) = '[:T$ITEM]'
+          ORDER BY T$CRDT
         </stringSQL>
       </operationName>
       <operationName name="consultaPalletPorLot">
@@ -6498,7 +6514,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           (SELECT CASE WHEN cant_reg IS NULL THEN 0 ELSE cant_reg END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO AND TURNO = '[:T$SHIF]') CANT_REG,
           (SELECT CASE WHEN sum(cant_reg) IS NULL THEN 0 ELSE sum(cant_reg) END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO AND TURNO = '[:T$SHIF]') CANT_PROC,
           tcibd001.T$CUNI AS CUNI, ticst001.T$QUES AS CANT_EST,
-          (SELECT SUM(ticst0012.T$QUCS) FROM {0}.tticst001{1} ticst0012 WHERE ticst0012.T$PDNO = '[:T$PDNO]' AND ticst0012.T$SITM = ticst001.T$SITM ) AS ACT_CANT,
+          (SELECT SUM(ticst0012.T$QUCS) FROM {0}.tticst001{1} ticst0012 WHERE ticst0012.T$PDNO = '[:T$PDNO]' AND ticst0012.T$SITM = ticst001.T$SITM AND ticst0012.T$CWAR = ticst001.T$CWAR) AS ACT_CANT,
           (SELECT SUM(ticol082.T$QTYT) FROM {0}.tticol082{1} ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,
           ticst001.T$ISWH AS ISWH_1, tcibd200.T$OQMF AS OQMF,
           CASE WHEN ticol080.T$QUNE IS NULL THEN 0 ELSE ticol080.T$QUNE END AS CANTD, tisfc010.T$MCNO AS MCNO,
