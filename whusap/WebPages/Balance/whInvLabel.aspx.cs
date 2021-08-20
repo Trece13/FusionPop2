@@ -35,6 +35,7 @@ namespace whusap.WebPages.Balance
         string strError = string.Empty;
         private static bool _procesoAutomatico = Convert.ToBoolean(ConfigurationManager.AppSettings["anuncioAutomaticorollos"].ToString());
         private static bool _procesConfirmacionAutomatica = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticarollos"].ToString());
+        private static bool _procesConfirmacionAutomaticagrinder = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticagrinder"].ToString());
         ////Manejo idioma
         public string Pleaseselectrollwinder = string.Empty;
         private static Mensajes _mensajesForm = new Mensajes();
@@ -45,6 +46,7 @@ namespace whusap.WebPages.Balance
         public static string _idioma;
         public static string anuncioautomatico;
         public static string confirmacionautomatica;
+        public static string confirmacionautomaticagrinder;
         public static string UrlBaseBarcode = System.Web.Configuration.WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         #endregion
 
@@ -94,7 +96,7 @@ namespace whusap.WebPages.Balance
                 ddRollWinder.DataSource = opciones;
                 ddRollWinder.DataBind();
                 lblError.Visible = false;
-                if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
+                if (_tipoFormulario.ToUpper() == "ROLLTAGS")
                 {
                     if (ConfigurationManager.AppSettings.AllKeys.Contains("BalanceMachines"))
                     {
@@ -113,6 +115,8 @@ namespace whusap.WebPages.Balance
                 }
                 else
                 {
+                    ddRollWinder.Visible = false;
+                    lblRollWinder.Visible = false;
                     if (ConfigurationManager.AppSettings.AllKeys.Contains("BalanceMachinesRetail"))
                     {
                         string machines = ConfigurationManager.AppSettings["BalanceMachinesRetail"];
@@ -136,15 +140,22 @@ namespace whusap.WebPages.Balance
                 control.Text = strTitulo;
                 Page.Form.DefaultButton = btnSend.UniqueID;
 
-                if (_procesoAutomatico && _tipoFormulario != "rolltags")
+                if (_procesoAutomatico && _tipoFormulario.ToUpper() == "ROLLTAGS")
                 {
                     lblInfo.Text = "The process of automatic announcement is active.";
                 }
-                if (_procesConfirmacionAutomatica && _tipoFormulario != "rolltags")
+                if (_procesConfirmacionAutomatica && _tipoFormulario.ToUpper() == "ROLLTAGS")
                 {
                     lblInfo.Text = lblInfo.Text + "The process of confirm announcement is active.";
                 }
-
+                if (_procesoAutomatico && _tipoFormulario.ToUpper() == "GRINDER")
+                {
+                    lblInfo.Text = "The process of automatic announcement grinder is active.";
+                }
+                if (_procesConfirmacionAutomaticagrinder && _tipoFormulario.ToUpper() == "GRINDER")
+                {
+                    lblInfo.Text = lblInfo.Text + "The process of confirm announcement grinder is active.";
+                }
             }
 
 
@@ -192,7 +203,7 @@ namespace whusap.WebPages.Balance
 
             //string RollWinder = txtRollWinder.Text.ToString().ToUpper();
             string RollWinder = ddRollWinder.Text;
-            if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
+            if (_tipoFormulario.ToUpper() == "ROLLTAGS")
             {
                 if (RollWinder.Trim() == "1" || RollWinder.Trim() == "2" || RollWinder.Trim() == "3" || RollWinder.Trim() == "4")
                 {
@@ -274,7 +285,7 @@ namespace whusap.WebPages.Balance
             obj022.cuni = resultado.Rows[0]["UNIDAD"].ToString();
             obj022.pdno = resultado.Rows[0]["ORDEN"].ToString();
             int sec = 0;
-            if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
+            if (_tipoFormulario.ToUpper() == "ROLLTAGS")
             {
                 obj022.sqnb = idal022.invLabel_generaSecuenciaOrden(ref obj022, ref strError);
                 //DataTable dt022 = Itticol022.SecuenciaMayorRollos(obj022.pdno.Trim().ToUpperInvariant());
@@ -384,7 +395,7 @@ namespace whusap.WebPages.Balance
             }
 
             int retorno = 0;
-            if (_tipoFormulario == "GRINDER")
+            if (_tipoFormulario.ToUpper() == "GRINDER")
             {
                 idal042.insertarRegistro(ref parameterCollection042, ref strError);
                 idal042.insertarRegistroTticon242(ref parameterCollection042, ref strError);
@@ -414,20 +425,22 @@ namespace whusap.WebPages.Balance
                 confirmacionautomatica = "false";
             }
 
-            if (confirmacionautomatica == "true")
+            if (_procesConfirmacionAutomaticagrinder)
+            {
+                confirmacionautomaticagrinder = "true";
+            }
+            else
+            {
+                confirmacionautomaticagrinder = "false";
+            }
+
+            if (confirmacionautomatica == "true" && _tipoFormulario.ToUpper() == "ROLLTAGS")
             {
                 //if (retorno > 0)
                 //{
                     Ent_tticol025 objTticol025 = new Ent_tticol025();
                     objTticol025.pdno = obj022.pdno;
-                    if (_tipoFormulario == "rolltags" || _tipoFormulario == "ROLLTAGS")
-                    {
-                        objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
-                    }
-                    else
-                    {
-                        objTticol025.sqnb = sec;
-                    }
+                    objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
                     objTticol025.mitm = obj022.mitm;
                     objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
                     objTticol025.qtdl = (float)obj022.qtdl;
@@ -446,9 +459,34 @@ namespace whusap.WebPages.Balance
                 //}
             }
 
+            if (confirmacionautomaticagrinder == "true" && _tipoFormulario.ToUpper() == "GRINDER")
+            {
+                //if (retorno > 0)
+                //{
+                Ent_tticol025 objTticol025 = new Ent_tticol025();
+                objTticol025.pdno = obj022.pdno;
+                objTticol025.sqnb = sec;
+                objTticol025.mitm = obj022.mitm;
+                objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
+                objTticol025.qtdl = (float)obj022.qtdl;
+                objTticol025.cuni = obj022.cuni;
+                objTticol025.date = DateTime.Now.ToString();
+                objTticol025.mess = "0";
+                objTticol025.user = obj022.logn;
+                objTticol025.refcntd = obj022.refcntd;
+                objTticol025.refcntu = obj022.refcntu;
+
+                lblError.Visible = true;
+                lblError.Text = mensajes("rollsaved");
+                lblError.ForeColor = System.Drawing.Color.Green;
+                int res = idal025.insertarRegistro(ref objTticol025, ref strError);
+
+                //}
+            }
+
             txtQuantity.Text = string.Empty;
 
-            if (_tipoFormulario == "GRINDER")
+            if (_tipoFormulario.ToUpper() == "GRINDER")
             {
                 resultado = idal042.invLabel_registroImprimir_Param(ref obj042, ref strError);
             }
@@ -458,28 +496,28 @@ namespace whusap.WebPages.Balance
             }
 
             DataRow reg = resultado.Rows[0];
-            Session["FilaImprimir"] = reg;
-            Session["descItem"] = obj020.dsca;
-            Session["unidad"] = hidden.Value;
+            Session["FilaImprimir"]     = reg;
+            Session["descItem"]         = obj020.dsca;
+            Session["unidad"]           = hidden.Value;
 
             HttpContext.Current.Session["Reprint"] = "no";
-            Session["MaterialDesc"] = obj020.dsca;
-            Session["codeMaterial"] = obj022.mitm ; 
-            Session["codePaid"] =  reg["SECUENCIA"].ToString() ;
-            Session["Lot"] = reg["ORDEN"].ToString();
-            Session["Quantity"] = reg["PESO"].ToString() + " " + obj020.cuni;
-            Session["Date"] = reg["FECHA"].ToString();
-            Session["Machine"]      =   idal022.getMachine(reg["ORDEN"].ToString(), obj022.mitm,ref strError);
-            Session["Operator"]     =   reg["USUARIO"].ToString();
-            if (_tipoFormulario == "GRINDER")
+            Session["MaterialDesc"]     = obj020.dsca;
+            Session["codeMaterial"]     = obj022.mitm ; 
+            Session["codePaid"]         =  reg["SECUENCIA"].ToString() ;
+            Session["Lot"]              = reg["ORDEN"].ToString();
+            Session["Quantity"]         = reg["PESO"].ToString() + " " + obj020.cuni;
+            Session["Date"]             = reg["FECHA"].ToString();
+            Session["Machine"]          =   idal022.getMachine(reg["ORDEN"].ToString(), obj022.mitm,ref strError);
+            Session["Operator"]         =   reg["USUARIO"].ToString();
+            if (_tipoFormulario.ToUpper() == "GRINDER")
             {
-                Session["Winder"] = "";
+                Session["Winder"]       = "";
             }
             else
             {
-                Session["Winder"] = RollWinder;
+                Session["Winder"]       = RollWinder;
             }
-            Session["Pallet"]       =   reg["SECUENCIA"].ToString();
+            Session["Pallet"]           =   reg["SECUENCIA"].ToString();
 
             StringBuilder script = new StringBuilder();
             script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', ");
