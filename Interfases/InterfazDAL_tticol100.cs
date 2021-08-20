@@ -44,6 +44,7 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
         public int ActualizaRegistro_located(ref Ent_tticol100 parametrosIn,ref string updstatus,ref string tableName, ref string strError)
         {
             int retorno = -1;
@@ -57,12 +58,12 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
-         public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 data, ref string strError)
+         public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 data, ref string strError, ref string tipo)
         {
             int retorno = -1;
             try
             {
-                retorno = dal.ActualUpdateWarehouse_ticol222(ref data, ref strError);
+                retorno = dal.ActualUpdateWarehouse_ticol222(ref data, ref strError, ref tipo);
                 return retorno;
             }
             catch (Exception ex)
@@ -70,6 +71,7 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
          public int ActualUpdateStockWarehouse_ticol222(ref string tableName,ref string stockw,ref string palletId, ref string strError)
          {
              int retorno = -1;
@@ -83,12 +85,12 @@ namespace whusa.Interfases
                  throw new Exception(strError += "\nPila: " + ex.Message);
              }
          }
-         public int ActualUpdateWarehouse_whcol131(ref Ent_tticol100 data, ref string strError)
+         public int ActualUpdateWarehouse_whcol131(ref Ent_tticol100 data, ref string strError, ref string tipo)
          {
              int retorno = -1;
              try
              {
-                 retorno = dal.ActualUpdateWarehouse_whcol131(ref data, ref strError);
+                 retorno = dal.ActualUpdateWarehouse_whcol131(ref data, ref strError, ref tipo);
                  return retorno;
              }
              catch (Exception ex)

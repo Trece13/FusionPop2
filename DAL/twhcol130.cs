@@ -1308,7 +1308,6 @@ namespace whusa.Interfases
             paramList.Add(":T$QTYA", MyObj.QTYA == string.Empty ? "0" : MyObj.QTYA.Trim());
             paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO.Trim());
 
-
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
 

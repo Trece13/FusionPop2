@@ -83,15 +83,28 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
-        public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 parametro, ref string strError)
+        public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 parametro, ref string strError, ref string tipo)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
-
+            var qt = parametro.qtyr;
+            var plt = parametro.paid;
+            plt.Substring(11, 1);
             try
             {
                 paramList = new Dictionary<string, object>();
-                paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper());
+                if (tipo == "Announced")
+                {
+                    paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper()); 
+                }
+                if (tipo == "Located")
+                {
+                    paramList.Add(":T$CWAT", " ");
+                }
+                if (tipo == "Delivered")
+                {
+                    paramList.Add(":T$CWAT", " ");
+                }
                 paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
                 paramList.Add(":T$ACLO", " ");
                 paramList.Add(":T$ACQT", parametro.qtyr);
@@ -268,17 +281,47 @@ namespace whusa.DAL
 
             return Convert.ToInt32(retorno);
         }
-        public int ActualUpdateWarehouse_whcol131(ref Ent_tticol100 parametro, ref string strError)
+        public int ActualUpdateWarehouse_whcol131(ref Ent_tticol100 parametro, ref string strError, ref string tipo)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
+            var qt = parametro.qtyr;
+            var plt = parametro.paid;
+            plt.Substring(11, 1);
 
             try
             {
                 paramList = new Dictionary<string, object>();
-                paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper());
-                paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
-                paramList.Add(":T$STAT", "11");
+                if (tipo == "Announced")
+                {
+                    paramList.Add(":T$CWAA", parametro.cwar.Trim().ToUpper());
+                    if (qt != 0)
+                    {
+                        paramList.Add(":T$STAT", "3");
+                    }
+                    else
+                    {
+                        paramList.Add(":T$STAT", "11");
+                    }
+                }
+                else
+                {
+                    if (tipo == "Located")
+                    {
+                        paramList.Add(":T$CWAA", " ");
+                        if (qt != 0)
+                        {
+                            paramList.Add(":T$STAT", "3");
+                        }
+                        else
+                        {                          
+                            paramList.Add(":T$STAT", "11");
+                        }
+                    }
+                }
+                paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());     
+                paramList.Add(":T$QTYA", parametro.qtyr);
+                //paramList.Add(":T$STAT", "11");
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 

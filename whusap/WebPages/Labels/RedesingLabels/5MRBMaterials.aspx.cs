@@ -34,20 +34,38 @@ namespace whusap.WebPages.Labels.RedesingLabels
             CrearLabel();
             try
             {
-                lblWorkOrder.InnerText      =  Session["WorkOrder"]     != null ? Session["WorkOrder"].ToString(): string.Empty;
-                lblReason.InnerText         =  Session["lblReason"]     != null ? Session["lblReason"].ToString(): string.Empty;
-                lblMaterialDesc.InnerText   =  "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
-                codePaid.Src                =  Session["codePaid"]      != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid"].ToString() + "&code=Code128&dpi=96" : string.Empty;
-                lblProductDesc.InnerText    =  Session["ProductCode"]   != null ? Transfers.DescripcionItem(Session["ProductCode"].ToString()) : string.Empty;
-                lblProductCode.InnerText    =  Session["ProductCode"]   != null ? Session["ProductCode"].ToString(): string.Empty;
-                lblDate.InnerText           =  Session["Date"]          != null ? Session["Date"].ToString(): string.Empty;
-                lblQuantity.InnerText       =  Session["Quantity"]      != null ? Session["Quantity"].ToString(): string.Empty;
-                lblFinished.InnerText       =  Session["Finished"]      != null ? Session["Finished"].ToString(): string.Empty;
-                lblPallet.InnerText         =  Session["Pallet"]        != null ? Session["Pallet"].ToString(): string.Empty;
-                lblPrintedBy.InnerText      =  Session["PrintedBy"]     != null ? Session["PrintedBy"].ToString(): string.Empty;
-                lblMachine.InnerText        =  Session["Machine"]       != null ? Session["Machine"].ToString(): string.Empty;
-                lblComments.InnerText       =  Session["Comments"]      != null ? Session["Comments"].ToString(): string.Empty;
-
+                if (Convert.ToInt16(Session["CantRest"]) == 0)
+                {
+                    lblWorkOrder.InnerText      = Session["WorkOrder2"] != null ? Session["WorkOrder2"].ToString() : string.Empty;
+                    lblReason.InnerText         = Session["lblReason2"] != null ? Session["lblReason2"].ToString() : string.Empty;
+                    lblMaterialDesc.InnerText    = "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
+                    codePaid.Src                = Session["codePaid2"] != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid2"].ToString() + "&code=Code128&dpi=96" : string.Empty;
+                    lblProductDesc.InnerText    = Session["ProductCode2"] != null ? Transfers.DescripcionItem(Session["ProductCode"].ToString()) : string.Empty;
+                    lblProductCode.InnerText    = Session["ProductCode2"] != null ? Session["ProductCode2"].ToString() : string.Empty;
+                    lblDate.InnerText           = Session["Date2"] != null ? Session["Date2"].ToString() : string.Empty;
+                    lblQuantity.InnerText       = Session["Quantity2"] != null ? Session["Quantity2"].ToString() : string.Empty;
+                    lblFinished.InnerText       = Session["Finished2"] != null ? Session["Finished2"].ToString() : string.Empty;
+                    lblPallet.InnerText         = Session["Pallet2"] != null ? Session["Pallet2"].ToString() : string.Empty;
+                    lblPrintedBy.InnerText      = Session["PrintedBy2"] != null ? Session["PrintedBy2"].ToString() : string.Empty;
+                    lblMachine.InnerText        = Session["Machine2"] != null ? Session["Machine2"].ToString() : string.Empty;
+                    lblComments.InnerText       = Session["Comments2"] != null ? Session["Comments2"].ToString() : string.Empty;
+                }
+                else
+                {
+                    lblWorkOrder.InnerText      =  Session["WorkOrder"]     != null ? Session["WorkOrder"].ToString(): string.Empty;
+                    lblReason.InnerText         =  Session["lblReason"]     != null ? Session["lblReason"].ToString(): string.Empty;
+                    lblMaterialDesc.InnerText   =  "THIS PRODUCT IS ON HOLD PENDING DISPOSITION";
+                    codePaid.Src                =  Session["codePaid"]      != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid"].ToString() + "&code=Code128&dpi=96" : string.Empty;
+                    lblProductDesc.InnerText    =  Session["ProductCode"]   != null ? Transfers.DescripcionItem(Session["ProductCode"].ToString()) : string.Empty;
+                    lblProductCode.InnerText    =  Session["ProductCode"]   != null ? Session["ProductCode"].ToString(): string.Empty;
+                    lblDate.InnerText           =  Session["Date"]          != null ? Session["Date"].ToString(): string.Empty;
+                    lblQuantity.InnerText       =  Session["Quantity"]      != null ? Session["Quantity"].ToString(): string.Empty;
+                    lblFinished.InnerText       =  Session["Finished"]      != null ? Session["Finished"].ToString(): string.Empty;
+                    lblPallet.InnerText         =  Session["Pallet"]        != null ? Session["Pallet"].ToString(): string.Empty;
+                    lblPrintedBy.InnerText      =  Session["PrintedBy"]     != null ? Session["PrintedBy"].ToString(): string.Empty;
+                    lblMachine.InnerText        =  Session["Machine"]       != null ? Session["Machine"].ToString(): string.Empty;
+                    lblComments.InnerText       =  Session["Comments"]      != null ? Session["Comments"].ToString(): string.Empty;
+                }
                 if (Session["Reprint"] != null)
                 {
                     if (Session["Reprint"].ToString() == "yes")

@@ -123,7 +123,7 @@
                 <div id="myLabel">
                     <div class="row">
                         <div class="col-4 alingLeft">
-                            <strong>WO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
+                            <strong>WO / PO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
                         </div>
                         <div class="col-8 alingLeft">
                             <strong>&nbsp;</strong><label id="lblReason" runat="server"></label>
@@ -195,7 +195,7 @@
                 <div id="myLabel2">
                     <div class="row">
                         <div class="col-4 alingLeft">
-                            <strong>WO&nbsp;</strong><label id="lblWorkOrder2" runat="server"></label>
+                            <strong>WO / PO&nbsp;</strong><label id="lblWorkOrder2" runat="server"></label>
                         </div>
                         <div class="col-8 alingLeft">
                             <strong>Reason&nbsp;</strong><label id="lblReason2" runat="server"></label>
