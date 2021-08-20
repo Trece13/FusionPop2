@@ -422,7 +422,7 @@ namespace whusap.WebPages.InvMaterial
                     obj.refcntd = "0";
                     obj.refcntu = "0";
                     obj.mess = " ";
-                    obj.prin = 2;
+                    obj.prin = 1;
                     obj.conf = 2;
                     obj.user = Session["user"].ToString();
                     obj.idrecord = grdRecords.DataKeys[row.RowIndex].Value.ToString();

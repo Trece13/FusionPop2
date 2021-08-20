@@ -778,7 +778,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
                 if (parametros.prin > 0)
-                    Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PRIN", DbType.Int32, parametros.prin);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PRIN", DbType.Int32, parametros.prin);
 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CONF", DbType.Int32, parametros.conf);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MESS", DbType.String, parametros.mess);

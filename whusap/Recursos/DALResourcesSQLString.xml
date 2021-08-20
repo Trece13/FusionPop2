@@ -3360,7 +3360,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <!-- Smita Begins-->
       <operationName name="updateFieldPrint">
         <stringSQL>
-          UPDATE {2} SET T$PRIN = 1
+          UPDATE {2} SET T$PRIN = T$PRIN + 1
           WHERE T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
@@ -3597,7 +3597,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT T125.*, art.t$cuni Unidad, ART.T$DSCA DESCRIPCION, T125.rowid ID
           FROM {0}.tticol125{1} T125 LEFT JOIN {0}.ttcibd001{1} ART
-          ON TRIM(T125.T$ITEM) = TRIM(ART.t$item) WHERE (T125.T$PRIN IN(1, 2)) AND T125.T$PDNO ='[p1]'
+          --ON TRIM(T125.T$ITEM) = TRIM(ART.t$item) WHERE (T125.T$PRIN IN(1, 2)) AND T125.T$PDNO ='[p1]'
+          ON TRIM(T125.T$ITEM) = TRIM(ART.t$item) WHERE T125.T$PDNO ='[p1]'
         </stringSQL>
       </operationName>
       <!--<operationName name="listaRegistrosOrden_ParamLast">

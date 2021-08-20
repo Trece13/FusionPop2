@@ -151,22 +151,43 @@ namespace whusap.WebPages.InvMaterial
                 {
                     //string prin = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PRIN"].ToString();
                     string paid = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["T$PAID"].ToString();
+                    //JC 190821 Actualiza el contador de impresiones cada vez que ingresen
+                    if (IsPostBack)
+                    {
+                        idal.updateFieldPrint(ref paid, ref strError);
+                        if (strError != string.Empty)
+                        {
+                            OrderError.IsValid = false;
+                        }
+                    }
+
                     var printed = idal.queryFieldPrint(ref paid, ref strError);
                     string prin = printed.Rows[0]["T$PRIN"].ToString().Trim();
                     valueprint = prin;
                     //obj.prin = idal.Rows[0].["T$PRIN"]
 
                     // ((Button)e.Row.Cells[7].FindControl("btnPrint")).OnClientClick = "printTag(" + FilaSerializada.Trim() + ")";
-                    ((Button)e.Row.Cells[7].FindControl("btnPrint")).Text = (prin.Trim().Equals("2")
-                        ? _idioma == "INGLES" ? "Print" : "Imprimir" : _idioma == "INGLES" ? "Reprint" : "Reimprimir");
+                    //((Button)e.Row.Cells[7].FindControl("btnPrint")).Text = (prin.Trim().Equals("1")
+                    //    ? _idioma == "INGLES" ? "Print" : "Imprimir" : _idioma == "INGLES" ? "Reprint" : "Reimprimir");
+
                     //Cambia el estado del campo print en la tabla ticol125
-                    if (prin.Trim().Equals("2"))
+                    //JC 190821 Actualiza el contador de impresiones cada vez que ingresen
+                    //if (prin.Trim().Equals("2"))
+                    //{
+                    //idal.updateFieldPrint(ref paid, ref strError);
+                    //if (strError != string.Empty)
+                    //{
+                    //    OrderError.IsValid = false;
+                    //}
+                    //}
+                    //JC 190821 Actualiza el contador de impresiones cada vez que ingresen
+                    if (Convert.ToInt16(valueprint) > 1)
                     {
-                        idal.updateFieldPrint(ref paid, ref strError);
-                        if (strError != string.Empty)
-                        {
-                            OrderError.IsValid = false; 
-                        }
+                        ((Button)e.Row.Cells[7].FindControl("btnPrint")).Text = (_idioma == "INGLES" ? "Reprint" : "Reimprimir");
+                    }
+                    else
+                    {
+                        ((Button)e.Row.Cells[7].FindControl("btnPrint")).Text = (_idioma == "INGLES" ? "Print" : "Imprimir");
                     }
                 }
             }
@@ -188,8 +209,15 @@ namespace whusap.WebPages.InvMaterial
                             grdRecords.DataBind();
                             reg = resultado.Rows[index];
                             Session["FilaImprimir"] = reg;
-
-                            Session["Reprint"] = "yes";
+                            //JC 190821 Evitar que la primera vez imprima reprint en la etiqueta
+                            if (Convert.ToInt16(resultado.Rows[0]["T$PRIN"].ToString()) <= 1)
+                            {
+                                Session["Reprint"] = "no";
+                            }
+                            else
+                            {
+                                Session["Reprint"] = "yes";
+                            }
                             Session["MaterialDesc"] = reg["DESCRIPCION"].ToString().Trim();
                             Session["MaterialCode"] = reg["T$ITEM"].ToString().Trim();
                             Session["codePaid"] = reg["T$PAID"].ToString().Trim();
