@@ -936,7 +936,7 @@ namespace whusap.WebPages.Migration
             Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
             Session["Comments"] = Objtticol100.obse;
             Session["Reprint"] = "no";
-
+            Session["CantRest"] = qtyr;
             StringBuilder script = new StringBuilder();
             script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
@@ -1016,6 +1016,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_announce(object sender, EventArgs e)
         {
+            Session["CantRest"] = "";
             var validInsert = 0;
             var validUpdate = 0;
             var tipoa = "Announced";
@@ -1143,8 +1144,8 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_located(object sender, EventArgs e)
         {
-            var tipol = "Located";
             Session["CantRest"] = "";
+            var tipol = "Located";
             Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
             Ent_tticol022 MyObj022 = new Ent_tticol022();
             var validUpdate = 0;
@@ -1559,6 +1560,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_Delivered(object sender, EventArgs e)
         {
+            Session["CantRest"] = "";
             var validUpdate = 0;
             var tipod = "Delivered";
             Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
