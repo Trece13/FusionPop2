@@ -979,6 +979,8 @@ namespace whusap.WebPages.WorkOrders
                 {
                     errorlog = "-Entro en 131\n";
                     int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), PAID.Trim().ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
+                    //JC 240821 Llevar la trazabilidad de los pallets confirmados
+                    twhcolDAL.ingRegTticol092140(MySessionObjPicking.PICK.Trim(), MySessionObjPicking.PALLETID.Trim(), PAID.Trim().ToUpper(), 10, HttpContext.Current.Session["user"].ToString().Trim());
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
                     //bool res1 = twhcolDAL.EliminarTccol307140(PAID.Trim().Trim(), ref sentencia1);
                     MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " ";
@@ -1041,7 +1043,8 @@ namespace whusap.WebPages.WorkOrders
                             if (Insertsucces)
                             {
                                 twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), PAID.Trim().ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia, true, MyObj.PAID, MySessionObjPicking.PRIO);
-
+                                //JC 240821 Llevar la trazabilidad de los pallets confirmados
+                                twhcolDAL.ingRegTticol092140(MySessionObjPicking.PICK.Trim(), MySessionObjPicking.PALLETID.Trim(), MyObj.PAID, 10, HttpContext.Current.Session["user"].ToString().Trim());
                             }
 
                             if (Insertsucces && qtyt_act != 0)
@@ -1067,6 +1070,8 @@ namespace whusap.WebPages.WorkOrders
                                 MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + qtyaG + "&code=Code128&dpi=96";
                                 MyObj.QTYC1_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYS + "&code=Code128&dpi=96";
                                 MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIT + "&code=Code128&dpi=96";
+                                //JC 240821  Llevar el control del pallet parcial y el pallet completo que se usó
+
                             }
                         }
                     }

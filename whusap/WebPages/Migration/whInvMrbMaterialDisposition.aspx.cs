@@ -441,7 +441,12 @@ namespace whusap.WebPages.Migration
                 ((TextBox)row.Cells[7].FindControl("toReturn")).Text = qty;
                 if (itemInitials != "B")
                 {
+                    ((DropDownList)row.Cells[8].FindControl("Dispoid")).Items[1].Enabled = false;
                     ((DropDownList)row.Cells[8].FindControl("Dispoid")).Items[4].Enabled = false;
+                }
+                else
+                {
+                    ((DropDownList)row.Cells[8].FindControl("Dispoid")).Items[3].Enabled = false;
                 }
             }
             //  txtItem.Text = "";
