@@ -527,7 +527,7 @@ namespace whusa.DAL
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
-
+            
             try
             {
                 
@@ -535,11 +535,12 @@ namespace whusa.DAL
                 foreach (Ent_tticol042 reg in parametros)
                 {
                     paramList = new Dictionary<string, object>();
-                    
+
                     paramList.Add(":T$PDNO", reg.pdno);
                     paramList.Add(":T$SQNB", reg.sqnb);
+                    //JC 240821 SAlvar los kilos con coma para que no falle en el local
                     paramList.Add(":T$ACQT", reg.qtdl);
-                    //paramList.Add(":T$ACQT", reg.qtdl);
+                    //paramList.Add(":T$ACQT", reg.kilos.Replace(".",","));
                     paramList.Add(":T$CWAF", reg.cwaf);
                     paramList.Add(":T$CWAT", reg.cwaf);
                     paramList.Add(":T$URPT", reg.urpt);

@@ -569,6 +569,34 @@ namespace whusa.DAL
             return retorno;
         }
 
+        //JC 240821 Solo actualiza cantidad en la ticol222 al pallet viejo
+        //public bool updatetticol222acqt(ref Ent_tticol022 parametro, ref string strError)
+        //{
+        //    method = MethodBase.GetCurrentMethod();
+        //    bool retorno = false;
+
+        //    try
+        //    {
+        //        paramList = new Dictionary<string, object>();
+        //        paramList.Add(":T$ACQT", parametro.acqt);
+        //        paramList.Add(":T$CWAT", parametro.cwat);
+        //        paramList.Add(":T$SQNB", parametro.sqnb);
+
+        //        strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+        //        retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+        //        return retorno;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        strError = ex.InnerException != null ?
+        //           ex.Message + " (" + ex.InnerException + ")" :
+        //           ex.Message;
+        //    }
+        //    return retorno;
+        //}
+
         public bool updatetticol242(ref Ent_tticol042 parametro, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

@@ -244,7 +244,7 @@
                                     <td><strong>Quantity</strong>&nbsp;&nbsp;<asp:Label ID="lblQuantity" runat="server"></asp:Label></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Origin Lot</strong>&nbsp;&nbsp;<asp:Label ID="lblOrigin" runat="server"></asp:Label></td>
+                                    <td><strong>Origin WO</strong>&nbsp;&nbsp;<asp:Label ID="lblOrigin" runat="server"></asp:Label></td>
                                     <td><strong>Supplier</strong>&nbsp;&nbsp;<asp:Label ID="lblSupplier" runat="server"></asp:Label></td>
                                 </tr>
                                 <tr>

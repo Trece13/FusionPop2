@@ -181,6 +181,20 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+        //JC 240821 Solo actualiza cantidad en la ticol222 al pallet viejo
+        //public bool updatetticol222acqt(ref Ent_tticol022 parametro, ref string strError)
+        //{
+        //    bool retorno = false;
+        //    try
+        //    {
+        //        retorno = dal.updatetticol222acqt(ref parametro, ref strError);
+        //        return retorno;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(strError += "\nPila: " + ex.Message);
+        //    }
+        //}
 
         public bool updatetticol242(ref Ent_tticol042 parametro, ref string strError)
         {

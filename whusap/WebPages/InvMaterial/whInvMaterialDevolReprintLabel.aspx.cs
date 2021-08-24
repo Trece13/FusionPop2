@@ -221,7 +221,9 @@ namespace whusap.WebPages.InvMaterial
                             Session["MaterialDesc"] = reg["DESCRIPCION"].ToString().Trim();
                             Session["MaterialCode"] = reg["T$ITEM"].ToString().Trim();
                             Session["codePaid"] = reg["T$PAID"].ToString().Trim();
-                            Session["Lot"] = reg["T$PDNO"].ToString().Trim();
+                            //JC 240821 Ajuste para que tome el lote correcto cuando sea la tabla whcol131
+                            //Session["Lot"] = reg["T$PDNO"].ToString().Trim();
+                            Session["Lot"] = reg["T$CLOT"].ToString().Trim();
                             Session["Quantity"] = reg["T$REQT"].ToString().Trim() + " " + reg["UNIDAD"].ToString().Trim();
                             Session["Origin"] = reg["T$PDNO"].ToString().Trim();
                             Session["Supplier"] = reg["T$USER"].ToString().Trim();

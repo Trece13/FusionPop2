@@ -132,6 +132,8 @@ namespace whusa.Entidades
         [DataMember(Order = 30)]
         public string wreg { get; set; }
 
+        public string kilos { get; set; }
+
         public Ent_tticol042()
         {
             pdno = string.Empty;

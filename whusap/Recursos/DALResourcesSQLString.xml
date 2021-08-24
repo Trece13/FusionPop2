@@ -5368,6 +5368,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE  {0}.tticol222{1} SET T$CWAT = '[:T$SWAR]' ,T$ACLO='[:ALOC]'    WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
+      <!--<operationName name="updatetticol222acqt">
+        <stringSQL>
+          UPDATE  {0}.tticol222{1} SET T$ACQT = T$ACQT - '[:T$ACQT]' WHERE T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>-->
       <operationName name="updatetticol242">
         <stringSQL>
           UPDATE  {0}.tticol242{1} SET T$CWAT = '[:T$SWAR]'  ,T$ACLO='[:ALOC]'    WHERE T$SQNB = '[:T$SQNB]'
@@ -5715,7 +5720,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="invLabel_registroImprimir_Param">
         <stringSQL>
-          select * from (select case trim(col118.t$ritm) when 'NA' then trim(col118.t$item) else trim(col118.t$ritm) end item, trim(ibd001.t$dsca) desci, trim(ibd001.t$cuni) unidad, col118.t$qtyr cantidad,
+          select * from (select case trim(col118.t$ritm) when 'NA' then trim(col118.t$item) else trim(col118.t$ritm) end item, trim(ibd001.t$dsca) desci, trim(ibd001.t$cuni) unidad,
+          --col118.t$qtyr cantidad,
+          round(((col118.t$qtyr * col020.t$pent)/2.20462), 2) cantidad,
           col118.t$clot lote, mcs005.t$dsca descr, substr(col118.t$obse,1,255) comentario, col020.t$pent factorkg, col118.t$datr-5/24 fecha, trim(col118.T$PAID) paid, col008.t$wreg wreg
           from {0}.tticol118{1} col118
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col118.t$item
@@ -5725,7 +5732,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.tticol008{1} col008 on col008.t$wmrb = col118.t$cwar
           where trim(col118.t$item)=trim('[:T$ITEM]')
           and upper(col118.t$clot)='[:T$CLOT]'
-          and col118.t$cwar='[:T$CWAR]' order by col118.T$DATR DESC)where rownum = 1
+          and col118.t$cwar='[:T$CWAR]' order by col118.T$DATR DESC)
+          where rownum = 1
         </stringSQL>
       </operationName>
       <operationName name="listaRegrind_ParamV2">

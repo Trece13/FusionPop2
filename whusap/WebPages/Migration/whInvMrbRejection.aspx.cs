@@ -1684,7 +1684,7 @@ namespace whusap.WebPages.Migration
                 MyObj131.NPRT = "1";//conteo de reimpresiones 
                 MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
                 MyObj131.LOGT = " ";//llena baan
-                MyObj131.STAT = "9";// LLENAR EN 9 Para el pallet Q
+                MyObj131.STAT = "11";// LLENAR EN 9 Para el pallet Q
                 MyObj131.DSCA = " ";
                 MyObj131.COTP = " ";
                 MyObj131.FIRE = "2";

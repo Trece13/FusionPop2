@@ -4473,6 +4473,16 @@
             Pallet ID doesn´t available for disposition
           </stringMessage>
         </operationName>
+        <operationName name="PalletIDWarehouse">
+          <stringMessage>
+            Warehouse not equal between Pallet and MRB Warehouse
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDqty">
+          <stringMessage>
+            Pallet doesn´t have quantity available for disposition
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="PalletIDdoesntexistsCannotcontinue">
@@ -4488,6 +4498,16 @@
         <operationName name="msjupdt">
           <stringMessage>
             Información salvada
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDWarehouse">
+          <stringMessage>
+            Bodega MRB no es igual a la bodega del pallet
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDqty">
+          <stringMessage>
+            El Pallet no tiene cantidad para disponer
           </stringMessage>
         </operationName>
       </Idiom>
