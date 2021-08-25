@@ -32,8 +32,8 @@
         }
 
         #myLabel,#myLabel2 {
-            width: 6in;
-            height: 4in;
+            width: 100%;
+            height: 650px;
             padding: 5px;
             border: 1px solid black;
             border-radius: 12px;
@@ -54,8 +54,8 @@
         #codePaid,#codePaid2 {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 500px;
+            height: 100%;
+            width: 100%;
         }
 
         .borderTop {
@@ -80,7 +80,7 @@
             padding: .1rem;
             vertical-align: top;
             border-top: 1px solid #dee2e6;
-            font-size: 12px;
+            font-size: 1.5em;
             text-align: left;
         }
 
@@ -135,13 +135,13 @@
                                 <label id="lblMaterialDesc" runat="server"></label></strong>
                         </div>
                     </div>
-                    <div class="col-12 borderTop" id="divBarcode">
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
+                    <div class="col-12 borderTop" id="divBarcode" style="height:30%">
+                        <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt=""/>
                     </div>
-                    <div class="col-12 m-0 justify-content-center">
-                        <table class="table col-auto p-5 mw-100">
+                    <div class="col-12 m-0 justify-content-center" style="height:50%">
+                        <table class="table col-auto p-5 mw-100" style="height:100%">
                             <tbody>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-12 alingCenter">
@@ -151,7 +151,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6 pl-4"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></div>
@@ -159,7 +159,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-7 pl-4"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished" runat="server"></label></div>
@@ -167,7 +167,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6 pl-4"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy" runat="server"></label></div>
@@ -175,7 +175,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-10">
                                         <div class="row">
                                             <div class="col-12 pl-4"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
@@ -207,13 +207,13 @@
                                 <label id="lblMaterialDesc2" runat="server">THIS PRODUCT IS ON HOLD PENDING DISPOSITION</label></strong>
                         </div>
                     </div>
-                    <div class="col-12 borderTop" id="divBarcode2">
+                    <div class="col-12 borderTop" id="divBarcode2" style="height:30%" >
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid2" alt="" />
                     </div>
-                    <div class="col-12 m-0 justify-content-center">
-                        <table class="table col-auto p-5 mw-100">
+                    <div class="col-12 m-0 justify-content-center" style="height:50%">
+                        <table class="table col-auto p-5 mw-100" style="height:100%">
                             <tbody>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-12 alingCenter">
@@ -223,7 +223,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6 pl-4"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate2" runat="server"></label></div>
@@ -231,7 +231,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-7 pl-4"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished2" runat="server"></label></div>
@@ -239,7 +239,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6 pl-4"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy2" runat="server"></label></div>
@@ -247,7 +247,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="row">
+                                <tr class="" style="height:20% !important">
                                     <td class="col-10">
                                         <div class="row">
                                             <div class="col-12 pl-4"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments2" runat="server"></label></div>
