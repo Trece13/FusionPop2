@@ -716,6 +716,7 @@ namespace whusap.WebPages.WorkOrders
                     Ent_tticol022 MyObj = new Ent_tticol022();
 
                     int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), PAID.Trim().ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
+                    twhcolDAL.ingRegTticol092140(MySessionObjPicking.PICK.Trim(), MySessionObjPicking.PALLETID.Trim(), PAID.Trim().ToUpper(), 10, HttpContext.Current.Session["user"].ToString().Trim());                    
                     MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " +
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + PAID.Trim().ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP +
                         "\n" + sentencia + "\n" +
@@ -845,6 +846,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Ent_tticol042 MyObj = new Ent_tticol042();
                     int res = twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), PAID.Trim().ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia);
+                    twhcolDAL.ingRegTticol092140(MySessionObjPicking.PICK.Trim(), MySessionObjPicking.PALLETID.Trim(), PAID.Trim().ToUpper(), 10, HttpContext.Current.Session["user"].ToString().Trim());                    
                     //bool res1 = twhcolDAL.EliminarTccol307140(PAID.Trim(), ref sentencia1);
                     MyObj.urpt = " " + HttpContext.Current.Session["user"].ToString().Trim() + " " + res + " " +
                         "\n- User: " + HttpContext.Current.Session["user"].ToString().Trim() + ",\n- Pallet: " + PAID.Trim().ToUpper() + "\n- Location: " + Location.ToUpper() + "\n- stat: " + "2" + "\n- maximo: " + maximo + "\n- OORG: " + OORG + "\n- ORNO: " + ORNO + "\n- PONO: " + PONO + "\n- qtytS: " + qtytS + "\n- ADVSP: " + ADVSP +
@@ -994,12 +996,12 @@ namespace whusap.WebPages.WorkOrders
                         qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                         MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                         DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
-                        if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
-                        {
+                        //if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
+                        //{
                             _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "" : "3");
-                        }
+                        //}
 
-                        if (Convert.ToDecimal(qtyaG) > 0 || 0 < Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()))
+                        if (Convert.ToDecimal(qtyaG) > 0)
                         {
                             string strMaxSequence = getSequence(PAID, "P");
                             string separator = "-";
