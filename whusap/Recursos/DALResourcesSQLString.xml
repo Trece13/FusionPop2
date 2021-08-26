@@ -1238,7 +1238,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL020.T$ITEM = COL022.T$MITM
           LEFT JOIN {0}.TWHWMD200{1} WMD200
           ON WMD200.T$CWAR = COL082.T$CWAR
-          WHERE COL022.T$DELE = 8
+          --WHERE COL022.T$DELE = 8
+          WHERE COL042.T$DELE IN (7,8) --JC 260821 Tomar solo pallets ubicados o asignados
           AND COL307.T$PAID IS NULL
           AND COL082.T$STAT = 1
           AND COL222.T$CWAT = NVL('[:T$CWAR]',COL222.T$CWAT))
@@ -1288,7 +1289,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON COL020.T$ITEM = COL042.T$MITM
           LEFT JOIN {0}.TWHWMD200{1} WMD200
           ON WMD200.T$CWAR = COL082.T$CWAR
-          WHERE COL042.T$DELE = 8
+          --WHERE COL042.T$DELE = 8
+          WHERE COL042.T$DELE IN (7,8) --JC 260821 Tomar solo pallets ubicados o asignados
           AND COL307.T$PAID IS NULL
           AND COL082.T$STAT = 1
           AND COL242.T$CWAT = NVL('[:T$CWAR]',COL242.T$CWAT))
@@ -1338,6 +1340,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ON WMD200.T$CWAR = COL082.T$CWAR
           WHERE COL307.T$PAID IS NULL
           AND COL082.T$STAT = 1
+          AND COL131.T$STAT IN (3,6) --JC 260821 Tomar solo pallets ubicados o asignados
           AND COL131.T$CWAA = NVL('[:T$CWAR]',COL131.T$CWAA))
           WHERE   ROWN = 1
         </stringSQL>
