@@ -354,6 +354,7 @@
                     <div id="divStartPicking" class="row">
                         <div class="col-6">
                             <button class="btn btn-primary col-12 btn-sm" id="btnStarPicking" type="button">Start Picking&nbsp;<span><i class="fas fa-circle-notch fa-spin" style="color: silver; display:none" id='StartLoader'></i></span></button>
+                            <label id="lblErrorInit" style="color:red; font-size:14px"></label>
                         </div>
                     </div>
                 </form>
@@ -388,7 +389,7 @@
                             <label>Pick ID</label>
                         </div>
                         <div class="col-2">
-                            <label id="lblPick">1030638831</label>
+                            <label id="lblPick">10209129012</label>
                         </div>
                     </div>
                     <br>
@@ -889,6 +890,8 @@
             $("#btnStarPicking").hide(500);
             var MyObj = r.d;
             if (MyObj.error == false) {
+                $("#lblErrorInit").hide(100);
+                $("#lblErrorInit").html("");
                 $('#divPicketPending').hide(100);
                 lblPick.innerHTML = MyObj.PICK;
                 if (MyObj.PICK != null) {
@@ -926,12 +929,15 @@
                 }
             }
             else {
+                $("#lblErrorInit").html(MyObj.errorMsg);
+                $("#lblErrorInit").show(100);
                 $("#formPicking").hide(100);
             }
             TakeProcessing = false;
         }
 
         var loadPicksPending = function () {
+            $("#lblErrorInit").hide(100);
             $("#lblMcnoPick").hide(100);
             if (ddWare.value == "0") {
                 

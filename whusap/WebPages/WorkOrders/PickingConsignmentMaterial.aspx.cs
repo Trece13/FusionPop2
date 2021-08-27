@@ -299,7 +299,8 @@ namespace whusap.WebPages.WorkOrders
 
             if ((LstPallet22.Count == 0) && (LstPallet042.Count == 0) && (LstPallet131.Count == 0))
             {
-                //mensaje = thereisnotPalletavailable;
+                MyObj.error = true;
+                MyObj.errorMsg = thereisnotPalletavailable;
             }
             else
             {

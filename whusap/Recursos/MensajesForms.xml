@@ -4966,7 +4966,7 @@
         </operationName>
         <operationName name="thereisnotPalletavailable">
           <stringMessage>
-            there is not Pallet available
+            There aren't Pallets available
           </stringMessage>
         </operationName>
         <operationName name="ThequantityassociatetonewpalletisminortooldpalletID">
@@ -5001,7 +5001,7 @@
         </operationName>
         <operationName name="thereisnotPalletavailable">
           <stringMessage>
-            there is not Pallet available
+            There aren't Pallets available
           </stringMessage>
         </operationName>
       </Idiom>
@@ -5013,7 +5013,7 @@
         </operationName>
         <operationName name="thereisnotPalletavailable">
           <stringMessage>
-            there is not Pallet available
+            There aren't Pallets available
           </stringMessage>
         </operationName>
         <operationName name="ThequantityassociatetonewpalletisminortooldpalletID">
@@ -5048,7 +5048,7 @@
         </operationName>
         <operationName name="thereisnotPalletavailable">
           <stringMessage>
-            there is not Pallet available
+            There aren't Pallets available
           </stringMessage>
         </operationName>
       </Idiom>
