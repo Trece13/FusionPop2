@@ -186,7 +186,14 @@ namespace whusap.WebPages.Migration
                 Session["Comments"] = comments;
 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterialsME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
+                else
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
                 script.Append("ventanaImp.moveTo(30, 0);");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 

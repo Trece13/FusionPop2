@@ -231,7 +231,15 @@ namespace whusap.WebPages.InvMaterial
                             Session["RecibedOn"] = DateTime.Now.ToString();
 
                             StringBuilder script = new StringBuilder();
-                            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterial.aspx', ");
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterialME.aspx', ");
+                            }
+                            else
+                            {
+                                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterial.aspx', ");
+                            }
+                            
                             script.Append("'ventanaImp', 'menubar=0,resizable=0,width=700,height=450');");
                             script.Append("ventanaImp.moveTo(30, 0);");
                             //script.Append("ventanaImp = window.open('../Labels/whInvPrintLabel.aspx', ");

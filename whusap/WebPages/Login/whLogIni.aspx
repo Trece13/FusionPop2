@@ -64,9 +64,13 @@
             $("#TblLogin").show("slow");
         }
         $('#Contenido_LoginButton').click(function () { sessionStorage.setItem("namePage", ""); });
+
+        
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
+    <asp:TextBox ID="txNavigator" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
     <!--<div style="height:60px; vertical-align:middle; position: relative; top: 0px; left: 0px;">
 
    </div>-->
@@ -305,5 +309,13 @@
          </tr>
      </table>
    </div>
+    <script>
+        $(function () {
+            if (navigator.userAgent.indexOf("Edg") > -1) {
+                $("#Contenido_txNavigator").val("EDG");
+            }
+        });
+        
+    </script>
 </asp:Content>
 

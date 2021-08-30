@@ -520,7 +520,14 @@ namespace whusap.WebPages.Balance
             Session["Pallet"]           =   reg["SECUENCIA"].ToString();
 
             StringBuilder script = new StringBuilder();
-            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', ");
+            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+            {
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStockME.aspx', ");
+
+            }
+            else{
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', ");
+            }
             script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
             script.Append("ventanaImp.moveTo(30, 0);");
             //script.Append("ventanaImp = window.open('../Labels/whInvLabel.aspx', ");

@@ -209,7 +209,14 @@ namespace whusap.WebPages.InvMaterial
             Session["Reprint"] = "no";
 
             StringBuilder script = new StringBuilder();
-            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/6InventoryLabel.aspx'; ");
+            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+            {
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/6InventoryLabelME.aspx'; ");
+            }
+            else
+            {
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/6InventoryLabel.aspx'; ");
+            }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
             //StringBuilder script = new StringBuilder();

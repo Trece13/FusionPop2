@@ -441,7 +441,14 @@ namespace whusap.WebPages.Migration
                 Session["AutoPrint"] = "yes";
 
                 StringBuilder script = new StringBuilder();
-                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCupsME.aspx'; ");
+                }
+                else
+                {
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                }
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                 divTable.Visible = false;
@@ -707,8 +714,16 @@ namespace whusap.WebPages.Migration
                 Session["Reprint"] = "yes";
 
 
-                StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCups.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                StringBuilder script = new StringBuilder(); 
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCupsME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
+                else
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/4FinishedCups.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
+                
                 script.Append("ventanaImp.moveTo(30, 0);");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 

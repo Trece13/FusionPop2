@@ -208,7 +208,14 @@ namespace whusap.WebPages.Migration
                 Session["Comments"] = consultaInformacion.Rows[0]["OBSE"].ToString().Trim().ToUpper();
                 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterialsME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
+                else
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
                 script.Append("ventanaImp.moveTo(30, 0);");
                 //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
@@ -242,7 +249,14 @@ namespace whusap.WebPages.Migration
                 Session["Reprint"] = "yes";
 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterialsME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
+                else
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
                 script.Append("ventanaImp.moveTo(30, 0);");
                 //script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);

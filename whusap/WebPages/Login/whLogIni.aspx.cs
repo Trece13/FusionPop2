@@ -85,6 +85,14 @@ namespace whusap.WebPages.Login
 
         protected void LoginButton_Command(object sender, CommandEventArgs e)
         {
+            if (txNavigator.Text == "EDG")
+            {
+                Session["navigator"] = "EDG";
+            }
+            else
+            {
+                Session["navigator"] = "";
+            }
             obj = new Ent_ttccol300();
             List<Ent_ttccol300> parameterCollection = new List<Ent_ttccol300>();
             strError = string.Empty;
@@ -355,5 +363,10 @@ namespace whusap.WebPages.Login
         }
 
         #endregion
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

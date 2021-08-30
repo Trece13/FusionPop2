@@ -151,7 +151,14 @@ namespace whusap.WebPages.Balance
                 Session["Pallet"] = reimpresion.Rows[0]["T$SQNB"];
 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/3Regrinds.aspx', ");
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/3RegrindsME.aspx', ");
+                }
+                else
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/3Regrinds.aspx', ");
+                }
                 script.Append("'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
                 script.Append("ventanaImp.moveTo(30, 0);");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);

@@ -938,7 +938,14 @@ namespace whusap.WebPages.Migration
             Session["Reprint"] = "no";
             Session["CantRest"] = qtyr;
             StringBuilder script = new StringBuilder();
-            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+            {
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+            }
+            else
+            {
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+            }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
         
@@ -1009,7 +1016,14 @@ namespace whusap.WebPages.Migration
             Session["Reprint"]     = "no";
 
             StringBuilder script = new StringBuilder();
-            script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+            {
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterialsME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+            }
+            else
+            {
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+            }
             script.Append("ventanaImp.moveTo(30, 0);");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
@@ -1396,7 +1410,15 @@ namespace whusap.WebPages.Migration
                     StringBuilder script = new StringBuilder();
                     //JC 270721 
                     //JC 270721 Unificar el diseño de la etiqueta
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");                    
+                    
+                    if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                    }
+                    else
+                    {
+                        script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                    }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
@@ -1538,11 +1560,25 @@ namespace whusap.WebPages.Migration
                         StringBuilder script = new StringBuilder();
                         if (Convert.ToInt16(Session["CantRest"]) > 0)
                         {
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDoubleME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                            }
                         }
                         else
                         {
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+                            }
                         }
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
@@ -1807,8 +1843,14 @@ namespace whusap.WebPages.Migration
                 }
                 StringBuilder script = new StringBuilder();
                 Session["CantRest"] = 0;
-                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
-                
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                }
+                else
+                {
+                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                }
 
                 lblErrorDelivered.Text = String.Empty;
                 lblConfirmDelivered.Text = mensajes("msjsave");

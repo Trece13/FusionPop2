@@ -165,7 +165,14 @@ namespace whusap.WebPages.Migration
                 bool ActualizacionTticol022 = _idaltticol022.ActualizarNorpTicol022(Obj_tticol022);
 
                 StringBuilder script = new StringBuilder();
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStockME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
+                else
+                {
+                    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStockME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                }
                 script.Append("ventanaImp.moveTo(30, 0);");
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
             }

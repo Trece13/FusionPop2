@@ -597,7 +597,15 @@ namespace whusap.WebPages.InvReceipts
 
 
                     StringBuilder script = new StringBuilder();
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                    if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCupsME.aspx'; ");
+                    }
+                    else
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                    }
+                    
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                     //StringBuilder script = new StringBuilder();
@@ -685,7 +693,14 @@ namespace whusap.WebPages.InvReceipts
                     HttpContext.Current.Session["Reprint"] = "no";
 
                     StringBuilder script = new StringBuilder();
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                    if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCupsME.aspx'; ");
+                    }
+                    else
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
+                    }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                     //StringBuilder script = new StringBuilder();

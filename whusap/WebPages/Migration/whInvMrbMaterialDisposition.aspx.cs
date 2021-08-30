@@ -881,7 +881,14 @@ namespace whusap.WebPages.Migration
                     Session["Reprint"] = "no";
 
                     StringBuilder script = new StringBuilder();
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
+                    if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterialME.aspx'; ");
+                    }
+                    else
+                    {
+                        script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
+                    }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                     lblResult.Text = mensajes("msjupdt");
@@ -1044,7 +1051,14 @@ namespace whusap.WebPages.Migration
                             Session["Pallet2"] = MyObj022.sqnb.ToString();
 
                             StringBuilder script = new StringBuilder();
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDoubleME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
+                            }
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                         }
                         else if (lbltable.Value.Trim() == "whcol131")
@@ -1071,7 +1085,14 @@ namespace whusap.WebPages.Migration
                             Session["Pallet2"] = MyObj131.PAID.ToString();
 
                             StringBuilder script = new StringBuilder();
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDoubleME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
+                            }
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                         }
                     }
@@ -1121,7 +1142,14 @@ namespace whusap.WebPages.Migration
             Session["Reprint"] = "no";
 
             StringBuilder script = new StringBuilder();
-            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
+            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+            {
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterialME.aspx'; ");
+            }
+            else
+            {
+                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/1RawMaterial.aspx'; ");
+            }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
             //StringBuilder script = new StringBuilder();
