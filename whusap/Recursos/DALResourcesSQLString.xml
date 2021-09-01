@@ -5694,7 +5694,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="insertarRegistro">
         <stringSQL>
-          INSERT INTO {2}
+          INSERT INTO {2} (T$ITEM, T$CWAR, T$LOCA, T$CLOT, T$QTYR, T$CDIS, T$OBSE, T$LOGR, T$DATR , T$DISP, T$PROC, T$MESS, T$SUNO, T$REFCNTD, T$REFCNTU, T$CWAM, T$PAID)
           VALUES({0}.F_ITEM_POP(TRIM(:T$ITEM)) , :T$CWAR, :T$LOCA, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+5/24 ,:T$DISP, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU,:T$CWAM,:T$PAID)
         </stringSQL>
       </operationName>

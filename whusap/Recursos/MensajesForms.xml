@@ -3050,6 +3050,11 @@
             Pallet has not been wrapped.
           </stringMessage>
         </operationName>
+        <operationName name="palletstatus">
+          <stringMessage>
+            Pallet has been rejected, can't confirm.
+          </stringMessage>
+        </operationName>
         <operationName name="palletconfirmed">
           <stringMessage>
             Pallet was already confirmed.
@@ -3095,6 +3100,11 @@
         <operationName name="palletwrapped">
           <stringMessage>
             Pallet no ha sido envuelto
+          </stringMessage>
+        </operationName>
+        <operationName name="palletstatus">
+          <stringMessage>
+            Pallet ha sido rechazado, no se puede confirmar.
           </stringMessage>
         </operationName>
         <operationName name="palletconfirmed">

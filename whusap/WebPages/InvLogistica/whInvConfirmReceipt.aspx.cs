@@ -128,6 +128,12 @@ namespace whusap.WebPages.InvLogistica
                                 return;
                             }
                         }
+                        if (DELE == "3")
+                        {
+                            lblError.Text = mensajes("palletstatus");
+                            lblConfirm.Text = "";
+                            return;
+                        }
                         if (QTDL == "0")
                         {
                             lblError.Text = mensajes("palletannounced");
