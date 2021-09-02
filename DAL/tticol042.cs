@@ -782,9 +782,10 @@ namespace whusa.DAL
 
                     strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, tabla2, paramList);
 
-                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                    //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
 
-                    return retorno;
+                    //return retorno;
                 }
 
                 catch (Exception ex)

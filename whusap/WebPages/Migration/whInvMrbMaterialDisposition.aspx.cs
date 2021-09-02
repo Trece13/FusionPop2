@@ -759,7 +759,8 @@ namespace whusap.WebPages.Migration
                     idal042.ActualizarCantidadRegistroTicol242(0, txtPalletId.Text.Trim());
                     //JC 240821 Reemplazar el punto por coma para que inserte bien en la tabla col242
                     bool retornoRegrindTticon242 = idal042.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
-                    bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
+                    //JC 020921 No es necesario hacer esta transferencia
+                    //bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
 
                 }
 
@@ -796,9 +797,13 @@ namespace whusap.WebPages.Migration
 
                     DataTable resultado = idal.invLabel_registroImprimir_Param(ref obj, ref strError);
                     resultado.Columns.Add("USER", typeof(String));
-                    DataRow reg = resultado.Rows[0];
-                    resultado.Rows[0]["USER"] = Session["user"].ToString().ToUpper();
-
+                    //JC 010921 Evitar error cuando no retorne datos
+                    if (resultado.Rows.Count > 0)
+                    {
+                        DataRow reg = resultado.Rows[0];
+                        resultado.Rows[0]["USER"] = Session["user"].ToString().ToUpper();
+                        Session["FilaImprimir"] = reg;
+                    }
 
                     //Generate Unique Regrind unique identifier should  dispot =4 - regrid
                     DataTable resultado1 = idal.invRegrid_Indentifier(ref obj, ref strError);
@@ -807,7 +812,8 @@ namespace whusap.WebPages.Migration
                      //int increment = 1;
                      //cnt = Convert.ToInt32(cnt) + increment;
                      //Session["cnt"] = cnt;
-                    Session["FilaImprimir"] = reg;
+                    //JC 010921 Evitar error cuandono traiga datos
+                    //Session["FilaImprimir"] = reg;
                     //Session["war"] = dropDownWarehouse.SelectedItem.Text;
                     Session["war"] = stockwn;
                     //printLabel.Visible = true;
@@ -863,7 +869,9 @@ namespace whusap.WebPages.Migration
                     //JC 050821 Cambiar el código del item por el de regrind
                     //Session["MaterialCode"] = obj.item;
                     Session["MaterialCode"] = obj.ritm;
-                    Session["codePaid"] = row["PAID"].ToString();
+                    //JC 020921 La etiqueta debe imprimir el dato del pallet generado para regrind
+                    //Session["codePaid"] = row["PAID"].ToString();
+                    Session["codePaid"] = Session["TagId"];
                     //JC 240821 EL lote para regrind siempre debe ir en blanco
                     if (Convert.ToInt32(disposition) == 4) //Regrind                    
                     {
