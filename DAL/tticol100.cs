@@ -123,6 +123,42 @@ namespace whusa.DAL
             }
             return Convert.ToInt32(retorno);
         }
+
+        //JC 060921 Ajustar datos para grabar regrind
+        public int ActualUpdateWarehouse_ticol242(ref Ent_tticol100 parametro, ref string strError, ref string tipo)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            var qt = parametro.qtyr;
+            var plt = parametro.paid;
+            plt.Substring(11, 1);
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                if (tipo == "Located")
+                {
+                    paramList.Add(":T$CWAT", " ");
+                }
+  
+                paramList.Add(":T$SQNB", parametro.paid.Trim().ToUpper());
+                paramList.Add(":T$ACLO", " ");
+                paramList.Add(":T$ACQT", parametro.qtyr);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+
+                return Convert.ToInt32(retorno);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                   ex.Message + " (" + ex.InnerException + ")" :
+                   ex.Message;
+            }
+            return Convert.ToInt32(retorno);
+        }
+
         public int ActualUpdateStockWarehouse_ticol222(ref string tableName, ref string stockw, ref string palletId, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
@@ -281,6 +317,35 @@ namespace whusa.DAL
 
             return Convert.ToInt32(retorno);
         }
+
+        //JC 060921 Ajustar datos para grabar y actualizar regrind
+        public int ActualizaRegistro_ticol042(ref Ent_tticol100 parametro, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$DELE", parametro.dele.Trim().ToUpper());
+                paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
+                paramList.Add(":T$LOGN", parametro.logr.Trim().ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                return Convert.ToInt32(retorno);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+            }
+
+            return Convert.ToInt32(retorno);
+        }
+
         public int ActualUpdateWarehouse_whcol131(ref Ent_tticol100 parametro, ref string strError, ref string tipo)
         {
             method = MethodBase.GetCurrentMethod();

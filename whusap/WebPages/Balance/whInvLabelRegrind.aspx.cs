@@ -25,6 +25,9 @@ namespace whusap.WebPages.Balance
         protected static InterfazDAL_tticol080 idal080 = new InterfazDAL_tticol080();
         protected static InterfazDAL_tticol042 idal042 = new InterfazDAL_tticol042();
         protected static InterfazDAL_ttccol301 idal301 = new InterfazDAL_ttccol301();
+        //JC 060921 Leer el parametro de confirmación automatica de regrind para poner el estado correcto        
+        private static bool _ConfirmacionAutomaticaRgr = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticagrinder"].ToString());
+
         Ent_tticol020 obj020 = new Ent_tticol020();
         Ent_tticol080 obj080 = new Ent_tticol080();
         Ent_tticol042 obj042 = new Ent_tticol042();
@@ -227,7 +230,15 @@ namespace whusap.WebPages.Balance
             obj042.pro2 = 2;
             obj042.loca = " ";
             obj042.norp = 0;
-            obj042.dele = 2;
+            //JC 060921 Leer el parametro de confirmación automatica de regrind para poner el estado correcto   
+            if (_ConfirmacionAutomaticaRgr == true)
+            {
+                obj042.dele = 7;
+            }
+            else
+            {
+                obj042.dele = 2;
+            }
             obj042.logd = " ";
             obj042.refcntd = 0;
             obj042.refcntu = 0;
@@ -235,7 +246,15 @@ namespace whusap.WebPages.Balance
             obj042.urpt = " ";
             obj042.acqt = Convert.ToDouble(value);
             obj042.cwaf = BodegaItem;
-            obj042.cwat = " ";
+            //JC 060921 Leer el parametro de confirmación automatica de regrind para poner el estado correcto
+            if (_ConfirmacionAutomaticaRgr == true)
+            {
+                obj042.cwat = BodegaItem;
+            }
+            else
+            {
+                obj042.cwat = " ";
+            }
             obj042.aclo = " ";
             obj042.allo = 0;
             parameterCollectionRegrind.Add(obj042);

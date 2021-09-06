@@ -300,7 +300,8 @@
              return validate;
          };
          function validarCantidad(field, stk, CantidadDevuelta) {
-             var cantidad = parseInt(field.value);
+             //var cantidad = parseInt(field.value);  //JC 060921 Evitar pasarlos valores con decimales a entero
+             var cantidad = parseFloat(field.value);
              var stock = stk;
              var unidad = document.getElementById("unit");
              unidad = unidad.textContent;

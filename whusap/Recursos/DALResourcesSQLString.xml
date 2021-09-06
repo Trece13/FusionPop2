@@ -3028,11 +3028,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM
           (
           SELECT SUM(T$ACQT) AS QTYR
-          FROM  BAAN.TTICOL222140
+          FROM  {0}.TTICOL222{1}
+          WHERE TRIM(T$SQNB) = TRIM('[:T$PAID]')
+          UNION
+          SELECT SUM(T$ACQT) AS QTYR
+          FROM  {0}.TTICOL242{1}
           WHERE TRIM(T$SQNB) = TRIM('[:T$PAID]')
           UNION
           SELECT SUM(T$QTYA) AS QTYR
-          FROM  BAAN.TWHCOL131140
+          FROM  {0}.TWHCOL131{1}
           WHERE TRIM(T$PAID) = TRIM('[:T$PAID]')
           )
           --SELECT TO_CHAR((NVL(SUM(T$QTYR),0)), '999999999.999') AS QTYR FROM  {0}.TTICOL116{1}  WHERE TRIM(T$ITEM) = TRIM('[:T$ITEM]') and T$CLOT = '[:T$CLOT]' and  TRIM(T$CWAR)= TRIM('[:T$CWAR]') and TRIM(T$LOCA) = TRIM('[:T$LOCA]')
@@ -3489,6 +3493,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ticol022.T$MITM AS T$ITEM,ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,ticol222.T$ACLO AS T$LOCA, ticol022.t$dele as t$stat,ticol022.t$pdno as t$clot
           FROM {0}.tticol022{1} ticol022
           LEFT JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
+          UNION
+          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$PAID, CASE WHEN ticol042.T$DELE = '11' then ticol042.T$QTDL ELSE ticol242.T$ACQT END AS T$qtyc,
+          ticol042.T$MITM AS T$ITEM,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAT AS T$CWAR,ticol242.T$ACLO AS T$LOCA, ticol042.t$dele as t$stat,ticol042.t$pdno as t$clot
+          FROM {0}.tticol042{1} ticol042
+          LEFT JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           UNION
           SELECT 'whcol131' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID, CASE WHEN T$STAT = '9' THEN T$QTYC ELSE T$QTYA END AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA,T$STAT as t$stat,
           T$CLOT as t$clot
@@ -5423,7 +5432,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE {0}.tticol022{1} SET T$DELE = [:T$DELE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
           WHERE T$SQNB = '[:T$PAID]'
-
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizaRegistro_ticol042">
+        <stringSQL>
+          UPDATE {0}.tticol042{1} SET T$DELE = [:T$DELE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
+          WHERE T$SQNB = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActualizaRegistro_located_whcol131">
@@ -5451,6 +5465,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
+      <operationName name="ActualUpdateWarehouse_ticol242">
+        <stringSQL>
+          UPDATE {0}.tticol242{1}
+          SET T$ACQT = '[:T$ACQT]',
+          T$CWAT = CASE WHEN '[:T$CWAT]' = ' ' THEN T$CWAT ELSE '[:T$CWAT]' END
+          WHERE T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="ActualUpdateWarehouse_whcol131">
         <stringSQL>
           UPDATE {0}.twhcol131{1}
@@ -5469,6 +5491,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
+      <operationName name="ActualCant_ticol242">
+        <stringSQL>
+          UPDATE {0}.tticol242{1}
+          SET T$ACQT = '[:T$ACQT]'
+          WHERE T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+
       <operationName name="ActualCant_whcol131">
         <stringSQL>
           UPDATE {0}.twhcol131{1}
@@ -5684,6 +5714,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ActualUpdateWarehouse_ticol222">
         <stringSQL>
           UPDATE {0}.tticol222{1}
+          SET T$CWAT = '[:T$CWAT]',
+          T$ACLO = ' '
+          WHERE T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualUpdateWarehouse_ticol242">
+        <stringSQL>
+          UPDATE {0}.tticol242{1}
           SET T$CWAT = '[:T$CWAT]',
           T$ACLO = ' '
           WHERE T$SQNB = '[:T$SQNB]'

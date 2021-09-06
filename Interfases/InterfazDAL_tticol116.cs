@@ -72,6 +72,23 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        //JC 060921 Ajustar datos para grabar regrind
+        public int ActualUpdateWarehouse_ticol242(ref Ent_tticol116 parametrosIn, ref string strError)
+        {
+
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualUpdateWarehouse_ticol242(ref parametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
         public int ActualUpdateWarehouse_whcol131(ref Ent_tticol116 parametrosIn, ref string strError)
         {
 
@@ -127,6 +144,22 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
             
+        }
+
+        //JC 060921 Ajustar datos para grabar regrind
+        public int ActualCant_ticol242(ref Ent_tticol116 parametrosIn, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualCant_ticol242(ref parametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+
         }
 
         public int ActualCant_whcol131(ref Ent_tticol116 parametrosIn, ref string strError)

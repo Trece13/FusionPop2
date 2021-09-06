@@ -28,6 +28,8 @@ namespace whusap.WebPages.Migration
         private static InterfazDAL_ttcmcs003 _idalttcmcs003 = new InterfazDAL_ttcmcs003();
         private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        //JC 060921 Ajustar para grabar datos de regrind
+        private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
         private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
         private static InterfazDAL_ttcmcs005 _idalttcmcs005 = new InterfazDAL_ttcmcs005();
         private static InterfazDAL_tticol011 _idaltticol011 = new InterfazDAL_tticol011();
@@ -238,7 +240,8 @@ namespace whusap.WebPages.Migration
                     Pqty = Convert.ToDecimal(dr.ItemArray[3].ToString());
                     statusCheck =dr.ItemArray[8].ToString();
                     //JC 270721  Llevar la unidad en una variable de sesion para imprimirla en la etiqueta.
-                    Session["Cuni"] = dr.ItemArray[5].ToString().Trim().ToUpper();
+                    //JC 060921 Quitar las mayusculas de la unidad, porque baan no maneja todo en mayúsculas
+                    Session["Cuni"] = dr.ItemArray[5].ToString().Trim();
                      if (string.IsNullOrEmpty(lot) == true)
                      {
                          Session["Lot"] = string.Empty;
@@ -325,7 +328,9 @@ namespace whusap.WebPages.Migration
                         Session["OrNo"] = TxtOrder.Text.Trim();
                         break;
                     }
-                    else if ((tableName == "ticol022")  && (status == 7))
+                    //JC 060921 Incluir la tabla de regrind
+                    //else if ((tableName == "ticol022")  && (status == 7))
+                    else if ((tableName == "ticol022") && (status == 7) || (tableName == "ticol042") && (status == 7))
                     {
                         retorno = "Located";
                         Session["TableNameSave"] = tableName;
@@ -379,7 +384,8 @@ namespace whusap.WebPages.Migration
                             break;
                     }
                 }
-                 if (tableName == "ticol022")
+                if (tableName == "ticol022")
+                if (tableName == "ticol022" || tableName == "ticol042")
                 {
                     switch (statusCheck)
                     {
@@ -415,6 +421,49 @@ namespace whusap.WebPages.Migration
                             break;
                     }
                 }
+                //JC 060921 Incluir la tabla de regrind
+                if (tableName == "ticol042")
+                    {
+                        switch (statusCheck)
+                        {
+                            case "1":
+                                inlineStatus = "Deleted";
+                                break;
+                            case "2":
+                                inlineStatus = "Announced";
+                                break;
+                            case "3":
+                                inlineStatus = "Rejected";
+                                break;
+                            case "4":
+                                inlineStatus = "Validated";
+                                break;
+                            case "5":
+                                inlineStatus = "Received";
+                                break;
+                            case "6":
+                                inlineStatus = "Picked";
+                                break;
+                            case "8":
+                                inlineStatus = "Requested";
+                                break;
+                            case "9":
+                                inlineStatus = "Picking";
+                                break;
+                            case "10":
+                                inlineStatus = "Dropped CP";
+                                break;
+                            case "11":
+                                inlineStatus = "Delivered";
+                                break;
+                            case "12":
+                                inlineStatus = "Blocked";
+                                break;
+                            case "13":
+                                inlineStatus = "ToDelete";
+                                break;
+                        }
+                    }
              
                     lblError.Text =   "Pallet ID status doesn´t allow rejection Actual Status " + inlineStatus;
                     return;
@@ -1162,6 +1211,9 @@ namespace whusap.WebPages.Migration
             var tipol = "Located";
             Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
             Ent_tticol022 MyObj022 = new Ent_tticol022();
+            //JC 060921 Ajustar Datos para rechazar regrind
+            Ent_tticol042 MyObj042 = new Ent_tticol042();
+
             var validUpdate = 0;
             lblErrorLocated.Text = String.Empty;
             var item = Session["ItemName"].ToString().Trim().ToUpper();
@@ -1239,6 +1291,39 @@ namespace whusap.WebPages.Migration
 
                 var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
                 var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+            }
+            //JC 060921 Ajustar Datos para rechazar regrind
+            else if (Session["TableNameSave"].ToString() == "ticol042")
+            {                                
+                MyObj042.pdno = lot;
+                MyObj042.sqnb = newPallet;
+                MyObj042.proc = 2;
+                MyObj042.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                MyObj042.mitm = item;
+                MyObj042.qtdl = Convert.ToDouble(cantidad);
+                MyObj042.cuni = Session["Cuni"].ToString();//CUNI;
+                MyObj042.log1 = "NONE";
+                MyObj042.qtd1 = Convert.ToInt32(cantidad);
+                MyObj042.pro1 = 2;
+                MyObj042.log2 = "NONE";
+                MyObj042.qtd2 = Convert.ToInt32(cantidad);
+                MyObj042.pro2 = 2;
+                MyObj042.loca = location == string.Empty ? " " : location;
+                MyObj042.norp = 1;
+                MyObj042.dele = 3;
+                MyObj042.logd = "NONE";
+                MyObj042.refcntd = 0;
+                MyObj042.refcntu = 0;
+                MyObj042.drpt = DateTime.Now;
+                MyObj042.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                MyObj042.acqt = Convert.ToDouble(cantidad); 
+                MyObj042.cwaf = cwam;//CWAR;
+                MyObj042.cwat = cwam;//CWAR;
+                MyObj042.aclo = " ";
+                MyObj042.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj042, ref strError);
+                var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj042, ref strError);
             }
             else if (Session["TableNameSave"].ToString() == "whcol131")
             {
@@ -1335,13 +1420,28 @@ namespace whusap.WebPages.Migration
 
                 if (validInsertaux > 0)
                 {
+                    //JC 060921 Ajustar para grabar datos de regrind
+                    //validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
+                    //validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
 
-                    validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
-                    validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
+                    if (tableNameSave == "ticol022")
+                    {
+                        validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
+                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
+                    }
+                    if (tableNameSave == "ticol042")
+                    {
+                        validUpdate = _idaltticol100.ActualizaRegistro_ticol042(ref data100, ref strError);
+                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol242(ref data100, ref strError, ref tipol);
+                    }
                     tableNameSave = Session["TableNameSave"].ToString();
                     if (tableNameSave == "ticol022")
                     {
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
+                    }
+                    else if (tableNameSave == "ticol042")
+                    {
+                        validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol242(ref data116, ref strError);
                     }
                     else
                     {
@@ -1385,6 +1485,11 @@ namespace whusap.WebPages.Migration
                     {
                         validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
                         _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
+                    }
+                    else if (tableNameSave == "ticol042")
+                    {
+                        validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol242(ref data116, ref strError);
+                        _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
                     }
                     else
                     {
@@ -1485,6 +1590,11 @@ namespace whusap.WebPages.Migration
                         validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
                         validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
                     }
+                    else if (tableNameSave == "ticol042")
+                    {
+                        validUpdate = _idaltticol100.ActualizaRegistro_ticol042(ref data100, ref strError);
+                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol242(ref data100, ref strError, ref tipol);
+                    }
                     else
                     {
                         validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError, ref tipol);
@@ -1539,6 +1649,22 @@ namespace whusap.WebPages.Migration
                             Session["Pallet2"] = MyObj022.sqnb;
                             Session["PrintedBy2"] = _operator;
                             Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                            Session["Comments2"] = obse;
+                        }
+                        else if (tableNameSave == "ticol042")
+                        {
+                            Session["WorkOrder"] = MyObj042.pdno;
+                            Session["WorkOrder2"] = MyObj042.pdno;
+                            Session["lblReason2"] = reasondesc;
+                            Session["codePaid2"] = MyObj042.sqnb;
+                            Session["ProductDesc2"] = Session["DescItem"];
+                            Session["ProductCode2"] = item.Trim().ToUpper();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity2"] = MyObj042.qtdl + " " + Session["Cuni"].ToString(); ;
+                            Session["Finished2"] = MyObj042.sqnb;
+                            Session["Pallet2"] = MyObj042.sqnb;
+                            Session["PrintedBy2"] = _operator;
+                            Session["Machine2"] = " ";
                             Session["Comments2"] = obse;
                         }
                         else
