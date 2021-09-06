@@ -3,8 +3,8 @@
     Theme="Cuadriculas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="styles/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="styles/jquery.dataTables.min.js"></script>
     <script language="javascript" src="../../Scripts/script.js" type="text/javascript"></script>
     <style type="text/css">
         .style3
