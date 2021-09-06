@@ -70,7 +70,7 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <asp:TextBox ID="txNavigator" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+    <asp:TextBox ID="txNavigator" runat="server" OnTextChanged="TextBox1_TextChanged" Visible="False"></asp:TextBox>
     <!--<div style="height:60px; vertical-align:middle; position: relative; top: 0px; left: 0px;">
 
    </div>-->
