@@ -5,10 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    <%--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">--%>
+    <link rel="stylesheet" href="styles/fontawesome5.1.css" />
+    <link rel="stylesheet" href="styles/bootstrap4.css" />
+
     <style type="text/css">
         #MyEtiqueta label {
             font-size: 15px;
@@ -75,7 +78,7 @@
 
         #myLabel {
             width: 100% !important;
-            height:650px !important;
+            height: 650px !important;
             padding: 5px;
             border: 1px solid black;
             border-radius: 12px;
@@ -96,14 +99,14 @@
         #codePaid {
             display: block;
             margin: auto;
-            height:100% !important;
+            height: 100% !important;
             width: 100% !important;
         }
 
         #codeMaterial {
             display: block;
             margin: auto;
-            height:100% !important;
+            height: 100% !important;
             width: 100% !important;
         }
 
@@ -197,10 +200,10 @@
             margin-right: 0px !important;
             margin-left: 0px !important;
         }
-        #printSpace{
-            height:800px;
-        }
 
+        #printSpace {
+            height: 800px;
+        }
     </style>
     <script type="text/javascript">
         function printDiv(divID) {
@@ -235,7 +238,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height:20%">
+                    <div class="row" style="height: 20%">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -250,10 +253,10 @@
                     <div class="col-12 borderTop" id="divBarcode">
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
                     </div>
-                    <div style="height:40%">
-                        <table class="table mw-100" style="height:100%" >
+                    <div style="height: 40%">
+                        <table class="table mw-100" style="height: 100%">
                             <tbody>
-                                <tr class="" style="height:33% !important">
+                                <tr class="" style="height: 33% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6"><strong>WO Lot</strong><label id="lblLot" runat="server"></label></div>
@@ -261,7 +264,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="" style="height:33% !important">
+                                <tr class="" style="height: 33% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-8"><strong>Date</strong><label id="lblDate" runat="server"></label></div>
@@ -269,7 +272,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr class="" style="height:33% !important">
+                                <tr class="" style="height: 33% !important">
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-4"><strong>Machine</strong><label id="lblMachine" runat="server"></label></div>
@@ -288,8 +291,13 @@
             </div>
         </div>
     </form>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>--%>
+
+    <script src="styles/jquery-3.2.1.slim.min.js"></script>
+    <script src="styles/popper.min.js"></script>
+    <script src="styles/bootstrap4.min.js"></script>
+
 </body>
 </html>

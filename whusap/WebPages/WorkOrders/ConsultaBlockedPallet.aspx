@@ -368,6 +368,6 @@
 
 
     </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="styles/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="styles/jquery.dataTables.min.js"></script>
 </asp:Content>

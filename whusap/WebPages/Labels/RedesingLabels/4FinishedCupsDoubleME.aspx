@@ -5,10 +5,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    <%-- <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">--%>
+    <link rel="stylesheet" href="styles/fontawesome5.1.css" />
+    <link rel="stylesheet" href="styles/bootstrap4.css" />
     <style type="text/css">
         #MyEtiqueta label {
             font-size: 15px;
@@ -73,13 +75,13 @@
             text-align: center;
         }
 
-        #myLabel,#myLabel2 {
+        #myLabel, #myLabel2 {
             width: 100%;
             height: 650px;
             padding: 5px;
             border: 1px solid black;
             border-radius: 12px;
-            margin:0;
+            margin: 0;
         }
 
         .alingRight {
@@ -94,28 +96,28 @@
             width: 6in;
         }
 
-        #codePaid,#codePaid2 {
+        #codePaid, #codePaid2 {
             display: block;
             margin: auto;
             height: 100%;
             width: 100%;
         }
 
-        #codeMaterial,#codeMaterial2 {
+        #codeMaterial, #codeMaterial2 {
             display: block;
             margin: auto;
             height: 100%;
             width: 100%;
         }
 
-        #codeItem,#codeItem2 {
+        #codeItem, #codeItem2 {
             display: block;
             margin: auto;
             height: 100%;
             width: 100%;
         }
 
-        #itemDesc,#itemDesc2 {
+        #itemDesc, #itemDesc2 {
             vertical-align: middle;
             font-size: 21px;
         }
@@ -165,7 +167,7 @@
             border-bottom: none;
         }
 
-        #divBarcode,#divBarcode2 {
+        #divBarcode, #divBarcode2 {
             height: 30%;
             padding: inherit;
         }
@@ -230,7 +232,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel" runat="server">
-                    <div class="row" style="margin:auto; height:10% !important">
+                    <div class="row" style="margin: auto; height: 10% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -238,15 +240,15 @@
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server"/>
+                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
                         </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server"/>
+                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                    <div style="height:50%">
-                        <table class="table mw-100" style="height:100%">
+                    <div style="height: 50%">
+                        <table class="table mw-100" style="height: 100%">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
@@ -267,7 +269,7 @@
                 </div>
                 <br />
                 <div id="myLabel2">
-                    <div class="row" style="margin:auto; height:10% !important">
+                    <div class="row" style="margin: auto; height: 10% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -275,15 +277,15 @@
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server"/>
+                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" />
                         </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">
                         <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                    <div style="height:50%">
-                        <table class="table mw-100" style="height:100%">
+                    <div style="height: 50%">
+                        <table class="table mw-100" style="height: 100%">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot2" runat="server"></label></td>
@@ -305,8 +307,12 @@
             </div>
         </div>
     </form>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <%-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>--%>
+    <script src="styles/jquery-3.2.1.slim.min.js"></script>
+    <script src="styles/popper.min.js"></script>
+    <script src="styles/bootstrap4.min.js"></script>
+
 </body>
 </html>

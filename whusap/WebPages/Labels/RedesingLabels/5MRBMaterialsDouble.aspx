@@ -5,21 +5,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    <%--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">--%>
+    <link rel="stylesheet" href="styles/fontawesome5.1.css" />
+    <link rel="stylesheet" href="styles/bootstrap4.css" />
+
     <style type="text/css">
         #MyEtiqueta label {
             font-size: 15px;
         }
 
-        #LblDate,#LblDate2 {
+        #LblDate, #LblDate2 {
             font-size: 14px !important;
         }
 
         #LblReprintInd,
-        #LblReprint,#LblReprint2 {
+        #LblReprint, #LblReprint2 {
             display: none;
         }
 
@@ -31,7 +34,7 @@
             text-align: center;
         }
 
-        #myLabel,#myLabel2 {
+        #myLabel, #myLabel2 {
             width: 6in;
             height: 4in;
             padding: 5px;
@@ -51,7 +54,7 @@
             width: 6in;
         }
 
-        #codePaid,#codePaid2 {
+        #codePaid, #codePaid2 {
             display: block;
             margin: auto;
             height: 75px;
@@ -132,7 +135,8 @@
                     <div class="row">
                         <div class="col-12 alingCenter">
                             <strong>
-                                <label id="lblMaterialDesc" runat="server"></label></strong>
+                                <label id="lblMaterialDesc" runat="server"></label>
+                            </strong>
                         </div>
                     </div>
                     <div class="col-12 borderTop" id="divBarcode">
@@ -266,8 +270,12 @@
             </div>
         </div>
     </form>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+    <%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>--%>
+    <script src="styles/jquery-3.2.1.slim.min.js"></script>
+    <script src="styles/popper.min.js"></script>
+    <script src="styles/bootstrap4.min.js"></script>
+
 </body>
 </html>

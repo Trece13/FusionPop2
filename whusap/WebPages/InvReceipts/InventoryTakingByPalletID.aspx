@@ -4,22 +4,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-<style>
-        #lblError
-        {
-            font-size : 15px;
-            color : Red;
+    <style>
+        #lblError {
+            font-size: 15px;
+            color: Red;
         }
-        #txPalletID
-        {
-           width: 98%; 
+
+        #txPalletID {
+            width: 98%;
         }
-        #detail
-        {
-            display:none;
+
+        #detail {
+            display: none;
         }
-        
-</style>
+    </style>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
             Pallet ID</label>
@@ -29,7 +27,7 @@
             </div>
             <div class="col-2 p-0">
                 <button type="button" class="btn btn-primary col-12" id="btnClear">
-            
+
                     <i class="fa fa-trash"></i>
                 </button>
             </div>
@@ -37,52 +35,52 @@
     </div>
     <div id="detail">
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg" for="txPalletID">
-            Item</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="lblItem" placeholder="Item" disabled>
-        </div>
-        <label id="lblItemDsca">
+            <label class="col-sm-2 col-form-label-lg" for="txPalletID">
+                Item</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control form-control-lg" id="lblItem" placeholder="Item" disabled>
+            </div>
+            <label id="lblItemDsca">
             </label>
-    </div>
+        </div>
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg" for="txItem">
-            Lot</label>
-        </label>
+            <label class="col-sm-2 col-form-label-lg" for="txItem">
+                Lot</label>
+            </label>
         <div class="col-sm-4">
             <input type="text" class="form-control form-control-lg" id="Text1" placeholder="Lot" disabled>
         </div>
-        <label id="Label2" for="txItem">
-        </label>
-    </div>
-        <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg" for="txQuantity">
-            Warehouse</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txWarehouse" placeholder="Warehouse">
+            <label id="Label2" for="txItem">
+            </label>
         </div>
-        <label id="lblWarehouse" for="txWarehouse">
-        </label>
-    </div>
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg" for="txLocation">
-            Location</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txLocation" placeholder="Location">
+            <label class="col-sm-2 col-form-label-lg" for="txQuantity">
+                Warehouse</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control form-control-lg" id="txWarehouse" placeholder="Warehouse">
+            </div>
+            <label id="lblWarehouse" for="txWarehouse">
+            </label>
         </div>
-    </div>
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg" for="txQuantity">
-            Quantity</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity">
+            <label class="col-sm-2 col-form-label-lg" for="txLocation">
+                Location</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control form-control-lg" id="txLocation" placeholder="Location">
+            </div>
         </div>
-        <label id="lblQuantity" for="txQuantity">
-        </label>
-    </div>
         <div class="form-group row">
-        <input id="btnSave" type="button" class="btn btn-primary btn-lg" value="SAVE" />
-    </div>
+            <label class="col-sm-2 col-form-label-lg" for="txQuantity">
+                Quantity</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity">
+            </div>
+            <label id="lblQuantity" for="txQuantity">
+            </label>
+        </div>
+        <div class="form-group row">
+            <input id="btnSave" type="button" class="btn btn-primary btn-lg" value="SAVE" />
+        </div>
     </div>
     <div class="form-group row">
         <label id="lblError">
@@ -91,7 +89,7 @@
 
 
     <script>
-        var ktlc = ""; 
+        var ktlc = "";
         function printDiv(divID) {
 
             var monthNames = [
@@ -99,7 +97,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
@@ -236,7 +234,7 @@
         var SuccesVerificarItem = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == true) {
-                    ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
                 BloquearComponentes();
             }
             if (MyObj.error == false) {
@@ -246,7 +244,7 @@
                 lblQuantity.html(MyObj.cuni);
                 ktlc = MyObj.kltc;
                 if (MyObj.kltc == "1") {
-                    
+
                     $('#txLot').prop("disabled", false);
                 }
                 else {
@@ -315,7 +313,7 @@
                 $('#lblError').html("");
                 if ($('#txQuantity').val() > 0 && $('#txQuantity').val() <= parseInt(MyObj.stks, 10)) {
                     $('#btnSave').prop("disabled", false);
-                    
+
                 }
                 else {
                     $('#btnSave').prop("disabled", true);
@@ -452,12 +450,8 @@
         });
 
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="styles/popper.min.js"></script>
+    <script src="styles/bootstrap.min.js"></script>
+    <script src="styles/jquery-3.1.1.min.js"></script>
 
 </asp:Content>

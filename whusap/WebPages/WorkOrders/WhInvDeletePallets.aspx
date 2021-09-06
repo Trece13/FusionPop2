@@ -5,24 +5,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style type="text/css">
-    #MyEtiqueta label
-    {
-        font-size : 15px;
-    }
-    
-    
-    #LblDate
-    {
-        font-size:14px !important;
-    }
-    
-    #LblReprintInd,#LblReprint,#btnEnviar,#MyEtiqueta
-    {
-        display:none;
-    }
-    
-    
-</style>
+        #MyEtiqueta label {
+            font-size: 15px;
+        }
+
+
+        #LblDate {
+            font-size: 14px !important;
+        }
+
+        #LblReprintInd, #LblReprint, #btnEnviar, #MyEtiqueta {
+            display: none;
+        }
+    </style>
     <form id="form1" class="container">
     <%--<div class="form-group row">
         <input id="state" type="button" class="btn btn-danger btn-lg" value="tticol022"/>&nbsp
@@ -88,19 +83,14 @@
     </div>
     </form>
     <style type="text/css">
-        #MyEtiqueta
-        {
-<%--            display: none;--%>
+        #MyEtiqueta {
+            <%-- display: none;
+            --%>;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="styles/jquery-3.3.1.min.js"></script>
+    <script src="styles\popper.min.js"></script>
+    <script src="styles/bootstrap.min.js"></script>
     <script type="text/javascript">
 
         var FuncitionSuccesConsultaPalletID = function (res) {
@@ -126,7 +116,7 @@
                 btnEnviar.show();
                 btnQuery.hide();
                 MyEtiqueta.show();
-                
+
             }
         }
 
@@ -176,76 +166,76 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
-                var day = date.getDate();
-                var monthIndex = date.getMonth();
-                var year = date.getFullYear();
+            var day = date.getDate();
+            var monthIndex = date.getMonth();
+            var year = date.getFullYear();
 
-                var hours = date.getHours();
-                var minutes = date.getMinutes();
-                var seconds = date.getSeconds();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
 
-                return ' ' + monthNames[monthIndex] + '/' +day +'/' + year+' '+hours+':'+minutes+':'+seconds+' ';
+            return ' ' + monthNames[monthIndex] + '/' + day + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds + ' ';
+        }
+
+        var FuncitionSuccesReprint = function (r) {
+            console.log(r.d);
+            MyEtiqueta.hide('slow');
+
+            var MyObject = JSON.parse(r.d);
+            if (MyObject.MyError == undefined) {
+
+
+                //Etiqueta NO OC
+
+                lblItemID.html(MyObject.ITEM);
+                lblItemDesc.html(MyObject.DSCA);
+
+                LblQuantity.html(MyObject.QTYC);
+                LblUnit.html(MyObject.UNIC);
+
+                LblLotId.html(MyObject.CLOT);
+                LblDate.html(" " + formatDate(new Date()) + " ");
+                LblReprint.html(MyObject.NPRT);
+
+
+                if (parseInt(MyObject.NPRT, 10) > 1) {
+                    LblReprintInd.show();
+                    LblReprint.show();
+                }
+
+                MyEtiqueta.show('slow');
+                alert("Pickup Process Succesfully");
+
             }
-
-            var FuncitionSuccesReprint = function (r) {
-                console.log(r.d);
+            else if (MyObject.MyError != undefined) {
                 MyEtiqueta.hide('slow');
-
-                var MyObject = JSON.parse(r.d);
-                if (MyObject.MyError == undefined) {
-
-
-                    //Etiqueta NO OC
-
-                    lblItemID.html(MyObject.ITEM);
-                    lblItemDesc.html(MyObject.DSCA);
-
-                    LblQuantity.html(MyObject.QTYC);
-                    LblUnit.html(MyObject.UNIC);
-
-                    LblLotId.html(MyObject.CLOT);
-                    LblDate.html(" " + formatDate(new Date()) + " ");
-                    LblReprint.html(MyObject.NPRT);
-
-
-                    if (parseInt(MyObject.NPRT, 10) > 1) {
-                        LblReprintInd.show();
-                        LblReprint.show();
-                    }
-
-                    MyEtiqueta.show('slow');
-                    alert("Pickup Process Succesfully");
-
-                }
-                else if (MyObject.MyError != undefined) {
-                    MyEtiqueta.hide('slow');
-                    alert(MyObject.MyError);
-                    btnQuery.show();
-                    btnEnviar.hide();
-                    txPalletID.val("");
-                }
-
+                alert(MyObject.MyError);
+                btnQuery.show();
+                btnEnviar.hide();
+                txPalletID.val("");
             }
 
+        }
 
 
-            $(function () {
 
-                IdentificarControles();
+        $(function () {
 
-                btnEnviar.click(function () {
-                    var Data = "{'PAID':'" + txPalletID.val().toUpperCase() + "'}";
-                    sendAjax("Click_Pick", Data, FuncitionSuccesReprint)
-                });
+            IdentificarControles();
 
-                btnQuery.click(function () {
-                    var Data = "{'PAID':'" + txPalletID.val().toUpperCase() + "'}";
-                    sendAjax("Click_Query", Data, FuncitionSuccesConsultaPalletID)
-                });
+            btnEnviar.click(function () {
+                var Data = "{'PAID':'" + txPalletID.val().toUpperCase() + "'}";
+                sendAjax("Click_Pick", Data, FuncitionSuccesReprint)
+            });
 
-                if ('<%=active022%>' == 'False') {
+            btnQuery.click(function () {
+                var Data = "{'PAID':'" + txPalletID.val().toUpperCase() + "'}";
+                sendAjax("Click_Query", Data, FuncitionSuccesConsultaPalletID)
+            });
+
+            if ('<%=active022%>' == 'False') {
                     $('#state').val("tticol042");
                     $('#state').removeClass("btn-danger");
                     $('#state').addClass("btn-success");
@@ -254,7 +244,7 @@
                     $('#btnEnviar').val("Save");
                     $('#mainlabel').html('Regrind Pallet ID');
                     $('#rowAnnounced').show();
-                    
+
                 }
                 else {
                     $('#state').val("tticol022");
@@ -271,11 +261,7 @@
 
 
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="styles/jquery-3.3.1.min.js"></script>
+    <script src="styles\popper.min.js"></script>
+    <script src="styles/bootstrap.min.js"></script>
 </asp:Content>

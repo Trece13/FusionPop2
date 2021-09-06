@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="DropPickedMaterialOnTunnel.aspx.cs" Inherits="whusap.WebPages.WorkOrders.NewPages.DropPickedMaterialOnTunnel" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="styles/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="styles/jquery.dataTables.min.js"></script>
     <style>
         #lblConsigment {
             margin-left: 20px;
