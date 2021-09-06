@@ -4,9 +4,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script language="javascript" src="../../Scripts/script.js" type="text/javascript"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script type="text/javascript" src="styles/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="styles/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="styles/font-awesome.min.css"/>
     <style type="text/css">
         .style3
         {
