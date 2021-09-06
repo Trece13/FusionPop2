@@ -1964,7 +1964,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol242">
       <operationName name="ActualizarCantidadRegistroTicol242">
         <stringSQL>
-          UPDATE {0}.tticol222{1} SET T$ACQT = '[:T$ACQT]' WHERE T$SQNB like '%[:T$SQNB]%'
+          --TABLA CORRECTA
+          UPDATE {0}.tticol242{1} SET T$ACQT = '[:T$ACQT]' WHERE T$SQNB like '%[:T$SQNB]%'
         </stringSQL>
       </operationName>
       <operationName name="updatetticol242Quantity">
@@ -5451,7 +5452,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE {0}.[:TABLENAME]{1} SET T$DELE = [:T$DELE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
           WHERE T$SQNB = '[:T$PAID]'
-
         </stringSQL>
       </operationName>
       <operationName name="ActualUpdateWarehouse_ticol222">
@@ -5676,6 +5676,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ActualCant_ticol222">
         <stringSQL>
           UPDATE {0}.tticol222{1}
+          SET T$ACQT = '[:T$ACQT]'
+          WHERE T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualCant_ticol242">
+        <stringSQL>
+          UPDATE {0}.tticol242{1}
           SET T$ACQT = '[:T$ACQT]'
           WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>

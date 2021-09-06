@@ -34,6 +34,8 @@ namespace whusap.WebPages.Migration
         public List<Ent_tticol127> ListaItems = new List<Ent_tticol127>();
         public List<Ent_tticol127> ListaLotes = new List<Ent_tticol127>();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        //JC 060921 Ajustar datos par disponer regrind
+        private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
         private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
         Ent_tticol042 obj042 = new Ent_tticol042();
         public string ListaItemsJSON = string.Empty;
@@ -348,7 +350,9 @@ namespace whusap.WebPages.Migration
                         lblError.Text = _textoLabels.readStatement(formName, _idioma, "PalletIDdoesntavailablefordisposition");
                         return;
                     }
-                    else if ((tableName == "ticol022") && (status != 3))
+                    //JC 060921 Ajustar datos par disponer regrind
+                    //else if ((tableName == "ticol022") && (status != 3))
+                    else if ((tableName == "ticol022") && (status != 3) || (tableName == "ticol042") && (status != 3))
                     {
                         //lblError.Text = PalletIDdoesntavailablefordisposition;
                         lblError.Text = _textoLabels.readStatement(formName, _idioma, "PalletIDdoesntavailablefordisposition");
@@ -712,6 +716,8 @@ namespace whusap.WebPages.Migration
                         //updstatus = "7";
                         //validUpdate = _idaltticol100.ActualizaRegistro_located(ref dataticol100, ref updstatus, ref tableName, ref strError);
                         //warehouse Logic
+                        strOrden = txtPalletId.Text.Substring(0, 9);
+                        Session["Orden"] = strOrden;
                         if (Convert.ToDouble(Session["qty"].ToString()) == obj.qtyr)
                         {
                             updstatus = "7";
@@ -720,6 +726,18 @@ namespace whusap.WebPages.Migration
                         }
 
 
+                    }
+                    //JC 060921 Ajustar datos par disponer regrind
+                    else if (lbltable.Value == "ticol042")
+                    {
+                        strOrden = txtPalletId.Text.Substring(0, 9);
+                        Session["Orden"] = strOrden;
+                        if (Convert.ToDouble(Session["qty"].ToString()) == obj.qtyr)
+                        {
+                            updstatus = "7";
+                            validUpdate = _idaltticol100.ActualizaRegistro_located(ref dataticol100, ref updstatus, ref tableName, ref strError);
+                            //warehouse Logic
+                        }
                     }
                     else if (lbltable.Value == "whcol131")
                     {
@@ -924,13 +942,15 @@ namespace whusap.WebPages.Migration
                 {
                     Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
                     Ent_tticol022 MyObj022 = new Ent_tticol022();
+                    //JC 060921 Ajustar datos par disponer regrind
+                    Ent_tticol042 MyObj042 = new Ent_tticol042();
 
                     if ((Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())) != 0)
                     {
                     string strMaxSequence = getSequence(txtPalletId.Text.ToUpper().Trim(), "Q");
                     string separator = "-";
                     string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
-
+                    
                     if (lbltable.Value.Trim() == "ticol022")
                     {
                         MyObj022.pdno = Session["Orden"].ToString();
@@ -969,6 +989,46 @@ namespace whusap.WebPages.Migration
 
                         var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
                         var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+                    }
+                    //JC 060921 Ajustar datos par disponer regrind
+                    if (lbltable.Value.Trim() == "ticol042")
+                    {
+                        MyObj042.pdno = Session["Orden"].ToString();
+                        MyObj042.sqnb = newPallet;
+                        MyObj042.proc = 2;
+                        MyObj042.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                        MyObj042.mitm = obj.item;
+                        MyObj042.qtdl = Convert.ToDouble(Session["ToReturnQuantity"].ToString());
+                        MyObj042.cuni = Session["Unit"].ToString();//CUNI;
+                        MyObj042.log1 = "NONE";
+                        MyObj042.qtd1 = Convert.ToDecimal(Session["ToReturnQuantity"].ToString());
+                        MyObj042.pro1 = 2;
+                        MyObj042.log2 = "NONE";
+                        MyObj042.qtd2 = Convert.ToDecimal(Session["ToReturnQuantity"].ToString());
+                        MyObj042.pro2 = 2;
+                        MyObj042.loca = " ";
+                        MyObj042.norp = 1;
+                        MyObj042.dele = 7;
+                        MyObj042.logd = "NONE";
+                        MyObj042.refcntd = 0;
+                        MyObj042.refcntu = 0;
+                        MyObj042.drpt = DateTime.Now;
+                        MyObj042.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                        MyObj042.acqt = Convert.ToDouble(Session["ToReturnQuantity"].ToString());
+                        MyObj042.cwaf = Session["newWarehouse"].ToString();//CWAR;
+                        MyObj042.cwat = Session["newWarehouse"].ToString();//CWAR;
+                        if (Convert.ToInt32(disposition) == 3)
+                        {
+                            MyObj042.aclo = _idaltticol022.getloca(MyObj042.cwat.Trim(), ref strError).Rows.Count > 0 ? _idaltticol022.getloca(MyObj042.cwat.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
+                        }
+                        else
+                        {
+                            MyObj042.aclo = " ";
+                        }
+                        MyObj042.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                        var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj042, ref strError);
+                        var validateSaveTicol222 = _idaltticol042.InsertarRegistroTicol242(ref MyObj042, ref strError);
                     }
                     else if (lbltable.Value.Trim() == "whcol131")
                     {
@@ -1026,6 +1086,11 @@ namespace whusap.WebPages.Migration
                         {
                             _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
                         }
+                        //JC 060921 Ajustar datos par disponer regrind
+                        if (lbltable.Value.Trim() == "ticol042")
+                        {
+                            _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
+                        }
                         else
                         {
                             _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
@@ -1078,6 +1143,41 @@ namespace whusap.WebPages.Migration
                             Session["Machine2"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                             Session["Operator2"] = Session["user"].ToString();
                             Session["Pallet2"] = MyObj022.sqnb.ToString();
+
+                            StringBuilder script = new StringBuilder();
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDoubleME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
+                            }
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+                        }
+                        //JC 060921 Ajustar datos par disponer regrind
+                        if (lbltable.Value.Trim() == "ticol042")
+                        {
+                            Session["Reprint"] = "no";
+                            Session["MaterialDesc"] = "";
+                            Session["Material"] = obj.item;
+                            Session["codePaid"] = txtPalletId.Text.Trim().ToUpper();
+                            Session["Lot"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
+                            Session["Quantity"] = (Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())).ToString() + " " + Session["Unit"].ToString();
+                            Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Machine"] = " ";
+                            Session["Operator"] = Session["user"].ToString();
+                            Session["Pallet"] = txtPalletId.Text.Trim().ToUpper();
+
+                            Session["MaterialDesc2"] = "";
+                            Session["Material2"] = obj.item;
+                            Session["codePaid2"] = MyObj042.sqnb.ToString();
+                            Session["Lot2"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
+                            Session["Quantity2"] = MyObj042.qtdl + " " + Session["Unit"].ToString();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Machine2"] = " ";
+                            Session["Operator2"] = Session["user"].ToString();
+                            Session["Pallet2"] = MyObj042.sqnb.ToString();
 
                             StringBuilder script = new StringBuilder();
                             if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
