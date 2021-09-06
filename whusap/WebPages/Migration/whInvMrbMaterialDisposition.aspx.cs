@@ -584,6 +584,19 @@ namespace whusap.WebPages.Migration
                 var value = Decimal.Parse(toreturn/*, numberFormatInfo*/);
                 if (Convert.ToInt32(disposition) == 4) //Regrid                    Session["lot"] = " ";
                 {
+                    //JC 060921 Traer la bodega de regrind definida por bodega MRB tabla ticol008
+                    string Ware_Regrind = dropDownWarehouse.Text.ToUpperInvariant();
+                    string Bod_Rgr = string.Empty;
+                    DataTable Bodega_Regrind = idal042.Warehouse_Regrind(ref Ware_Regrind, ref strError);
+                    if (Bodega_Regrind.Rows.Count > 0)
+                    {
+                        Bod_Rgr = Convert.ToString(Bodega_Regrind.Rows[0]["WREGRIND"]);
+                    }
+                    else
+                    {
+                        Bod_Rgr = Ware_Regrind;
+                    }
+
                     string dscaitem = ((DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Regrind")).SelectedItem.Text.Substring(((DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Regrind")).SelectedItem.Text.IndexOf(" - ") + 2).Trim();
                     string strTagId = string.Empty;
 
@@ -624,7 +637,9 @@ namespace whusap.WebPages.Migration
                     //obj042.acqt = Convert.ToDouble(value);
                     obj042.acqt = Convert.ToDouble(value) / Convert.ToDouble(2.20462);
                     obj042.cwaf = dropDownWarehouse.Text.ToUpperInvariant();
-                    obj042.cwat = stockw;
+                    //JC 060921 Traer el dato correcto de la bodega definida en la tabla de bodega mrb y regrind ticol008
+                    //obj042.cwat = stockw;
+                    obj042.cwat = Bod_Rgr;
                     obj042.aclo = " ";
                     obj042.wreg = reg.ItemArray[2].ToString();
                     obj042.allo = 0;
@@ -712,6 +727,9 @@ namespace whusap.WebPages.Migration
                         //updstatus = "3";
                         //validUpdate = _idaltticol100.ActualizaRegistro_located(ref dataticol100, ref updstatus, ref tableName, ref strError);
                         //warehouse Logic
+                        //JC 060921 Adicionar la orden para que la variable de sesion tenga el dato correcto
+                        strOrden = txtPalletId.Text.Substring(0, 9);
+                        Session["Orden"] = strOrden;
                         if (Convert.ToDouble(Session["qty"].ToString()) == obj.qtyr)
                         {
                             updstatus = "3";
@@ -757,7 +775,7 @@ namespace whusap.WebPages.Migration
                     int retornoRegrind = idal042.insertarRegistro(ref parameterCollectionRegrind, ref strError);
                     //JC 240821 Actualizar la cantidad a cero del pallet original
                     idal042.ActualizarCantidadRegistroTicol242(0, txtPalletId.Text.Trim());
-                    //JC 240821 Reemplazar el punto por coma para que inserte bien en la tabla col242
+                    //JC 240821 Reemplazar el punto por coma para que inserte bien en la tabla col242                            
                     bool retornoRegrindTticon242 = idal042.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
                     //JC 020921 No es necesario hacer esta transferencia
                     //bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
@@ -1023,11 +1041,14 @@ namespace whusap.WebPages.Migration
                     lblResult.Text = string.Empty;
 
                     DataTable resultadop = idal.listaRegistros_Param(ref obj, ref strError);
-
-                    resultadop.Columns.Add("FactorKG", typeof(string));
-
-                    resultadop.Rows[0]["FactorKG"] = FactorKG.Trim();
-
+                    //JC 060921 No calcular el dato para la materia prima
+                    //resultadop.Columns.Add("FactorKG", typeof(string));
+                    //resultadop.Rows[0]["FactorKG"] = FactorKG.Trim();
+                    if (lbltable.Value.Trim() != "whcol131")
+                    {
+                        resultadop.Columns.Add("FactorKG", typeof(string));
+                        resultadop.Rows[0]["FactorKG"] = FactorKG.Trim();
+                    }
                     Session["resultadop"] = resultadop;
                     Session["IsPreviousPage"] = "";
 

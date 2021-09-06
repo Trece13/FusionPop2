@@ -260,7 +260,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND D.T$LOCA = '[:T$LOCA]'
         </stringSQL>
       </operationName>
-
+      <operationName name="Warehouse_Regrind">
+        <stringSQL>
+          SELECT T$WREG WREGRIND
+          FROM {0}.tticol008{1}
+          WHERE TRIM(T$WMRB) = '[:T$CWAR]'
+        </stringSQL>
+      </operationName>
       <!--<operationName name="actualizaRegistro_LocationRegrind">
         <stringSQL>
           UPDATE {0}.tticol042{1}

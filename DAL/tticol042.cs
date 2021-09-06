@@ -542,7 +542,9 @@ namespace whusa.DAL
                     paramList.Add(":T$ACQT", reg.qtdl);
                     //paramList.Add(":T$ACQT", reg.kilos.Replace(".",","));
                     paramList.Add(":T$CWAF", reg.cwaf);
-                    paramList.Add(":T$CWAT", reg.cwaf);
+                    //JC 060921 Traer la bodega correcta definida para bodega mrb por bodega regrind ticol008
+                    //paramList.Add(":T$CWAT", reg.cwaf);
+                    paramList.Add(":T$CWAT", reg.cwat);
                     paramList.Add(":T$URPT", reg.urpt);
                     paramList.Add(":T$ACLO", reg.aclo.Trim() == string.Empty ? " " : reg.aclo.Trim());
                     paramList.Add(":T$ALLO", reg.allo.ToString().Trim() == decimal.MinValue.ToString().Trim() ? "0" : reg.allo.ToString());
@@ -759,6 +761,30 @@ namespace whusa.DAL
                 {
                     consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
                     
+                }
+                catch (Exception ex)
+                {
+                    //strError = "Error to the search sequence [tticol042]. Try again or contact your administrator \n " + strSentencia;
+                    log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                }
+                return consulta;
+            }
+
+            //JC 060921 Traer la bodega de regrind definida por bodega MRB
+            public DataTable Warehouse_Regrind(ref string cwar, ref string strError)
+            {
+                method = MethodBase.GetCurrentMethod();
+                //string strSecuencia = Parametros.sqnb.Trim().ToUpperInvariant();
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$CWAR", cwar.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                try
+                {
+                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
                 }
                 catch (Exception ex)
                 {

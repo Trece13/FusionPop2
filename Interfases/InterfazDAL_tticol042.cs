@@ -344,6 +344,21 @@ namespace whusa.Interfases
             }
         }
 
+        //JC 060921 Traer la bodega de regrind 
+        public DataTable Warehouse_Regrind(ref string cwar, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.Warehouse_Regrind(ref cwar, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         public bool ActualizarCantidadRegistroTicol242(decimal ACQT, string SQNB)
         {
             string strError = string.Empty;
