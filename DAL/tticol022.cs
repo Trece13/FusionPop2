@@ -188,6 +188,34 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
+        //JC 080921 Ajustar la cantidad del pallet cuando rechazan un pallet en estado delivered
+        public bool Actualizartticol022Cant(ref string pallet, ref decimal qty)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", pallet);
+                paramList.Add(":QTYA", qty);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
         public string WharehouseTisfc001(string PDNO, ref string strError)
         {
             consulta.Rows.Clear();

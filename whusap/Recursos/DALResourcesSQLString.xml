@@ -370,6 +370,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           sysdate+5/24, '[:T$DELE]', '[:T$LOGD]', sysdate+5/24, '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
+      <operationName name="Actualizartticol022Cant">
+        <stringSQL>
+          update {0}.tticol022{1} set t$qtdl = t$qtdl - '[:QTYA]' where T$SQNB =  '[:PAID]'
+        </stringSQL>
+      </operationName>        
       <operationName name="insertarRegistroSimple">
         <stringSQL>
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,

@@ -499,7 +499,7 @@
         </operationName>
         <operationName name="formempty">
           <stringMessage>
-            Please, enter all fields.
+            Please enter work order number.
           </stringMessage>
         </operationName>
         <operationName name="formemptyAny">
@@ -596,7 +596,7 @@
         </operationName>
         <operationName name="formempty">
           <stringMessage>
-            Por favor diligencie todos los campos
+            Por favor digite el número de la orden.
           </stringMessage>
         </operationName>
         <operationName name="ordernotactive">

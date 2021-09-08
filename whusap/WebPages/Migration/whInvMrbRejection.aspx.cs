@@ -319,14 +319,23 @@ namespace whusap.WebPages.Migration
                     }
                     else if ((tableName == "ticol022")  && (status == 11))
                     {
-                        retorno = "Delivered";
-                        TxtOrder.Enabled = true;
-                        SetFocus(TxtOrder);
-                        itempallet = itemName;
-                        lotepallet = lot;
-                        Session["TableNameSave"] = tableName;
-                        Session["OrNo"] = TxtOrder.Text.Trim();
-                        break;
+                        //JC 080921 Evitar cargar datos de un pallet delivered con cantidad cero
+                        if (Pqty == 0)
+                        {
+                            lblError.Text = mensajes("palletnotexists");
+                            return;
+                        }
+                        else
+                        {
+                            retorno = "Delivered";
+                            TxtOrder.Enabled = true;
+                            SetFocus(TxtOrder);
+                            itempallet = itemName;
+                            lotepallet = lot;
+                            Session["TableNameSave"] = tableName;
+                            Session["OrNo"] = TxtOrder.Text.Trim();
+                            break;
+                        }
                     }
                     //JC 060921 Incluir la tabla de regrind
                     //else if ((tableName == "ticol022")  && (status == 7))
@@ -1650,7 +1659,7 @@ namespace whusap.WebPages.Migration
                             Session["PrintedBy2"] = _operator;
                             Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                             Session["Comments2"] = obse;
-                        }
+                       }
                         else if (tableNameSave == "ticol042")
                         {
                             Session["WorkOrder"] = MyObj042.pdno;
@@ -1682,6 +1691,7 @@ namespace whusap.WebPages.Migration
                             Session["PrintedBy2"] = _operator;
                             Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                             Session["Comments2"] = obse;
+                            Session["Reprint"] = "no";
                         }
                         StringBuilder script = new StringBuilder();
                         if (Convert.ToInt16(Session["CantRest"]) > 0)
@@ -1815,6 +1825,9 @@ namespace whusap.WebPages.Migration
 
                 var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
                 var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+                //JC 090821 Ajustar la cantidad del pallet cuando esta en estado delivered y lo rechazan
+                var qt = Convert.ToDecimal(qtyr);
+                var actualizacol022 = _idaltticol022.Actualizartticol022Cant(ref paid, ref qt);
             }
             else if (Session["TableNameSave"].ToString() == "whcol131")
             {

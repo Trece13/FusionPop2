@@ -383,6 +383,13 @@ namespace whusa.Interfases
             }
         }
 
+        //JC 080921 Ajustar la cantidad del pallet cuando rechazan un pallet en estado delivered
+        public bool Actualizartticol022Cant(ref string pallet, ref decimal qty)
+        {
+            return dal.Actualizartticol022Cant(ref pallet, ref qty);
+        }
+
+
         public string WharehouseTisfc001(string PDNO, ref string strError)
         {
             try
