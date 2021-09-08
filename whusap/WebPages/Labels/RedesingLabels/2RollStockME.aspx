@@ -5,9 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-        crossorigin="anonymous" />
+    <link rel="stylesheet" href="styles/all.css"/>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
     <link rel="stylesheet" href="styles/bootstrap4.css" />
     <style type="text/css">

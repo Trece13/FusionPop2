@@ -4,9 +4,7 @@
     <link rel="stylesheet" href="styles/all.css"/>
     <link href="styles/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/animate.min.css" />
-    <%--<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />--%>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style type="text/css">
@@ -529,7 +527,7 @@
             mywindow.document.write('<html><head>');
             mywindow.document.write('</head><body>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
-            mywindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
+            mywindow.document.write('<link rel="stylesheet" href="styles/bootstrap.min.css">');
             mywindow.document.write('<link rel="stylesheet" href="styleLabel.css">');
             mywindow.document.write('</body></html>');
             mywindow.focus(); // necessary for IE >= 10*/

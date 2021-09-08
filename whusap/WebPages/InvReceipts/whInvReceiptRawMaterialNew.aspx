@@ -42,8 +42,8 @@
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
 
 
-            mywindow.document.write('<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />' +
-                                    '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">' +
+            mywindow.document.write('<link rel="stylesheet" href="styles/all.css" />' +
+                                    '<link rel="stylesheet" href="styles/bootstrap.min.css" />' +
                                     '<style type="text/css">' +
                                     '#MyEtiqueta label {' +
                                     'font-size: 15px;' +

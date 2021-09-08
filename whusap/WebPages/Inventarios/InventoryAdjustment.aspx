@@ -535,7 +535,7 @@
             mywindow.document.write('<html><head>');
             mywindow.document.write('</head><body>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
-            mywindow.document.write('<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
+            mywindow.document.write('<link rel="stylesheet" href="styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
             mywindow.document.write('<link rel="stylesheet" href="styleLabel.css">');
             mywindow.document.write('</body></html>');
             mywindow.focus(); // necessary for IE >= 10*/
