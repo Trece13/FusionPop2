@@ -79,6 +79,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     else
                     {
                         lblReprint.Visible = false;
+                        lblReprint2.Visible = false;
                         if (Session["AutoPrint"] != null)
                         {
                             if (Session["AutoPrint"] == "yes")
