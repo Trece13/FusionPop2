@@ -81,6 +81,8 @@
 
         .alingRight {
             text-align: right;
+            top: 0px;
+            left: 0px;
         }
 
         .alingLeft {
@@ -228,6 +230,9 @@
                         </div>
                         <div class="col-6 alingRight">
                             <label id="lblMaterialCode" runat="server"><strong>MATERIAL CODE</strong></label>
+                        </div>
+                        <div class="col-5 alingRight">
+                            <img src="~/images/logophoenix_login.jpg" runat="server" id="codeMaterial" alt="" />
                         </div>
                     </div>
                     <br />

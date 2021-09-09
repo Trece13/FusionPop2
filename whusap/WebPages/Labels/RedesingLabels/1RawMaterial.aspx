@@ -229,6 +229,9 @@
                         <div class="col-6 alingRight">
                             <label id="lblMaterialCode" runat="server"><strong>MATERIAL CODE</strong></label>
                         </div>
+                        <div class="col-5 alingRight">
+                            <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
+                        </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">

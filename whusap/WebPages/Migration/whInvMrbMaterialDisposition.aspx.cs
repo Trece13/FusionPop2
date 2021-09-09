@@ -608,8 +608,9 @@ namespace whusap.WebPages.Migration
                     DataRow reg = resultado.Rows[0];
 
                     //insert a new record on tables ticol042 and ticol242 and whcol020.
-                    
-                    strTagId = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString();
+                    //JC 090921 Generar estas etiquetas de regrind con el consecutivo D.
+                    //strTagId = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString();
+                    strTagId = txtPalletId.Text.Substring(0, 9) + "-D" + cantidadRegrind.Rows[0]["CANT"].ToString();
                     Session["TagId"] = strTagId;
                     strError = string.Empty;
                     obj042.sqnb = strTagId;
