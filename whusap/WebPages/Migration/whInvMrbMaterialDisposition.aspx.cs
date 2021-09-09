@@ -650,24 +650,24 @@ namespace whusap.WebPages.Migration
                     parameterCollectionRegrind.Add(obj042);
 
 
+                    //JC 090921 No es neceario armar el objeto para crear transferencias
+                    //objWhcol020.tbl = lbltable.Value.ToString().Trim();
+                    ////CLOT = ,
+                    //objWhcol020.clot = txtPalletId.Text.Substring(0, txtPalletId.Text.IndexOf('-')-1);
+                    //objWhcol020.sqnb = strTagId;
+                    //objWhcol020.mitm = regrind.Trim().ToUpperInvariant();
+                    ////DSCA  = "",
+                    //objWhcol020.dsca = dscaitem;
+                    //objWhcol020.cwor = dropDownWarehouse.Text.ToUpperInvariant();
+                    //objWhcol020.loor = " ";
+                    //objWhcol020.cwde = dropDownWarehouse.Text.ToUpperInvariant();
+                    //objWhcol020.lode = " ";
 
-                    objWhcol020.tbl = lbltable.Value.ToString().Trim();
-                    //CLOT = ,
-                    objWhcol020.clot = txtPalletId.Text.Substring(0, txtPalletId.Text.IndexOf('-')-1);
-                    objWhcol020.sqnb = strTagId;
-                    objWhcol020.mitm = regrind.Trim().ToUpperInvariant();
-                    //DSCA  = "",
-                    objWhcol020.dsca = dscaitem;
-                    objWhcol020.cwor = dropDownWarehouse.Text.ToUpperInvariant();
-                    objWhcol020.loor = " ";
-                    objWhcol020.cwde = dropDownWarehouse.Text.ToUpperInvariant();
-                    objWhcol020.lode = " ";
-
-                    objWhcol020.qtdl = obj042.qtdl;
-                    objWhcol020.cuni = obj042.cuni;
-                    //DATE  = ,
-                    //MESS  = ,
-                    objWhcol020.user = Session["user"].ToString();
+                    //objWhcol020.qtdl = obj042.qtdl;
+                    //objWhcol020.cuni = obj042.cuni;
+                    ////DATE  = ,
+                    ////MESS  = ,
+                    //objWhcol020.user = Session["user"].ToString();
 
 
 
