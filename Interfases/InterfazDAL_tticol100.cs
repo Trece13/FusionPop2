@@ -73,6 +73,21 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+        //JC 100921 Actualizar bodega en la tabla col222
+        public int ActualizaRegistrobodegaxtabla(ref Ent_tticol100 parametrosIn, ref string location, ref string tableName, ref string strError)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.ActualizaRegistrobodegaxtabla(ref parametrosIn, ref location, ref tableName, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
          public int ActualUpdateWarehouse_ticol222(ref Ent_tticol100 data, ref string strError, ref string tipo)
         {
             int retorno = -1;
