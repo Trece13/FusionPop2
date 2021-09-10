@@ -793,7 +793,27 @@ namespace whusap.WebPages.Migration
                     //Segundo insert
                     int retornoRegrind = idal042.insertarRegistro(ref parameterCollectionRegrind, ref strError);
                     //JC 240821 Actualizar la cantidad a cero del pallet original
-                    idal042.ActualizarCantidadRegistroTicol242(0, txtPalletId.Text.Trim());
+                    //JC 100921 Actualizar la cantidad del pallet original si la disposición del pallet no es completa
+                    //idal042.ActualizarCantidadRegistroTicol242(0, txtPalletId.Text.Trim());
+                    Ent_tticol116 data116 = new Ent_tticol116()
+                    {
+                        paid = txtPalletId.Text.Trim(),
+                        resCant = Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())
+                    };
+
+                    if (lbltable.Value.Trim() == "ticol022")
+                    {
+                        _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
+                    }
+                    //JC 060921 Ajustar datos par disponer regrind
+                    if (lbltable.Value.Trim() == "ticol042")
+                    {
+                        _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
+                    }
+                    else
+                    {
+                        _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
+                    }
                     //JC 240821 Reemplazar el punto por coma para que inserte bien en la tabla col242                            
                     bool retornoRegrindTticon242 = idal042.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
                     //JC 020921 No es necesario hacer esta transferencia
