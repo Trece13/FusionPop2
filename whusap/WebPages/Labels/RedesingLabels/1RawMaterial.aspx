@@ -218,6 +218,10 @@
             }
             return i;
         };
+        function codeMaterial_onclick() {
+
+        }
+
     </script>
 </head>
 <body>
@@ -234,7 +238,7 @@
                             <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
+                            <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" onclick="return codeMaterial_onclick()" />
                         </div>
                     </div>
                     <br />
