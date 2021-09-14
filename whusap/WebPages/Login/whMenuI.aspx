@@ -213,9 +213,10 @@
         <br />
         <div runat="server" id="tblMenu">
         </div>
-        <div id="Reportissues">
+        
+    </div>
+<%--    <div id="Reportissues">
             <button type="button" class="btn btn-danger btn-lg">
                 Report Issues</button>
-        </div>
-    </div>
+        </div>--%>
 </asp:Content>

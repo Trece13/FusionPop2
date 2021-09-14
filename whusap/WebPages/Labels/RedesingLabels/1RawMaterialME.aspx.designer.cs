@@ -40,15 +40,6 @@ namespace whusap.WebPages.Labels.RedesingLabels {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMaterialDesc;
         
         /// <summary>
-        /// lblMaterialCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMaterialCode;
-        
-        /// <summary>
         /// codeMaterial control.
         /// </summary>
         /// <remarks>

@@ -499,7 +499,7 @@
             </div>
         </div>
 
-
+        <div class="row">
         <div class="col-sm-6">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
@@ -634,7 +634,7 @@
                 </tbody>
             </table>
         </div>
-
+        </div>
         <label id="lblError" class="col-sm-12">
         </label>
         <div id="MyEtiqueta">

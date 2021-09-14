@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    +<script type="text/javascript">
+    <script type="text/javascript">
         function printDiv(divID) {
 
             var monthNames = [
@@ -175,7 +175,7 @@
       </div>
     </div>
 
-
+        <div class="row">
     <div class="col-sm-6">
         <div class="form-group row">
             <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
@@ -303,6 +303,7 @@
             </tbody>
         </table>
     </div>
+            </div>
     </form>
     <label id="lblError" class="col-sm-12">
     </label>

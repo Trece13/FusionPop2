@@ -21,6 +21,13 @@
             display: none;
         }
 
+        #codeMaterial, #codeMaterial2 {
+            display: block;
+            margin: auto;
+            height: 80px;
+            width: 100%;
+        }
+
         .isValid {
             border-bottom: solid;
             border-color: green;
@@ -227,9 +234,6 @@
                             <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
                         </div>
                         <div class="col-6 alingRight">
-                            <label id="lblMaterialCode" runat="server"><strong>MATERIAL CODE</strong></label>
-                        </div>
-                        <div class="col-5 alingRight">
                             <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
                         </div>
                     </div>

@@ -100,11 +100,11 @@
             width: 100%;
         }
 
-        #codeItem {
+        #codeMaterial, #codeMaterial2 {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 250px;
+            height: 110%;
+            width: 70%;
         }
 
         #itemDesc {
@@ -229,9 +229,6 @@
                             <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
                         </div>
                         <div class="col-6 alingRight">
-                            <label id="lblMaterialCode" runat="server"><strong>MATERIAL CODE</strong></label>
-                        </div>
-                        <div class="col-5 alingRight">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="codeMaterial" alt="" />
                         </div>
                     </div>

@@ -102,7 +102,7 @@
         #codeMaterial {
             display: block;
             margin: auto;
-            height: 100%;
+            height: 90px;
             width: 100%;
         }
 
@@ -225,7 +225,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height: 10%">
+                    <div class="row" style="height: 15%">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -240,7 +240,8 @@
                     <div class="col-12 borderTop" id="divBarcode" style="height: 30%">
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
                     </div>
-                    <div style="height: 50%">
+                    <div style="height: 50
+%">
                         <table class="table mw-100" style="height: 100%">
                             <tbody>
                                 <tr style="height: 20%">

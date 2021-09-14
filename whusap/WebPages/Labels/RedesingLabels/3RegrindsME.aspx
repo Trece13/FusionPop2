@@ -224,7 +224,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height: 10% !important">
+                    <div class="row" style="height: 15% !important">
                         <div class="col-7 alingLeft">
                             <label>
                                 <strong>
@@ -238,7 +238,7 @@
                     <div class="col-12 borderTop" id="divBarcode">
                         <img src="~/images/logophoenix_login.jpg" id="codePaid" runat="server" />
                     </div>
-                    <div style="height: 60%">
+                    <div style="height: 55%">
                         <table class="table mw-100" style="height: 100%">
                             <tbody>
                                 <tr style="height: 20%">

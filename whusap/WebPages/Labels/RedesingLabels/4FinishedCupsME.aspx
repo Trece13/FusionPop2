@@ -225,7 +225,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div style="height: 10%">
+                    <div style="height: 15%">
                         <div class="row" style="height: 100% !important">
                             <div class="col-7 alingLeft">
                                 <label>
