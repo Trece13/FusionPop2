@@ -539,8 +539,8 @@ namespace whusa.DAL
                     paramList.Add(":T$PDNO", reg.pdno);
                     paramList.Add(":T$SQNB", reg.sqnb);
                     //JC 240821 SAlvar los kilos con coma para que no falle en el local
-                    //paramList.Add(":T$ACQT", reg.qtdl);
-                    paramList.Add(":T$ACQT", reg.kilos.Replace(".",","));
+                    paramList.Add(":T$ACQT", reg.qtdl);
+                    //paramList.Add(":T$ACQT", reg.kilos.Replace(".",","));
                     paramList.Add(":T$CWAF", reg.cwaf);
                     //JC 060921 Traer la bodega correcta definida para bodega mrb por bodega regrind ticol008
                     //paramList.Add(":T$CWAT", reg.cwaf);

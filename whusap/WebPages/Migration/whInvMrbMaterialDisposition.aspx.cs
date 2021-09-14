@@ -343,7 +343,8 @@ namespace whusap.WebPages.Migration
                     unit = dr.ItemArray[5].ToString().Trim().ToUpper();
                     qty = dr.ItemArray[3].ToString();
                     Session["qty"] = qty;
-                    Session["ware"] = dr.ItemArray[6].ToString().Trim().ToUpper(); ;
+                    Session["ware"] = dr.ItemArray[6].ToString().Trim().ToUpper();
+                    Session["unplt"] = dr.ItemArray[5].ToString().Trim().ToUpper();
                     if ((tableName == "whcol131") && (status != 11))
                     {
                         //lblError.Text = PalletIDdoesntavailablefordisposition;
@@ -461,6 +462,9 @@ namespace whusap.WebPages.Migration
         {
             double Stock = Convert.ToDouble(Session["qty"].ToString());
             var validUpdate = 0;
+            //JC 100921 Ajutar para que actualice bodega cuando es retorno a stock de pallet completo
+            var validupd022 = 0;
+            var validupd042 = 0;
             InterfazDAL_tticol118 idal = new InterfazDAL_tticol118();
             List<Ent_tticol118> parameterCollection = new List<Ent_tticol118>();
             Ent_tticol118 obj = new Ent_tticol118();
@@ -504,6 +508,8 @@ namespace whusap.WebPages.Migration
 
 
                 string regrind = ((DropDownList)grdRecords.Rows[0].Cells[2].FindControl("Regrind")).SelectedValue;
+                //JC 100921 Dato del regrind para la etiqueta.
+                Session["Regrind"] = regrind;
                 if (regrind == String.Empty && Convert.ToInt32(disposition) == 4)
                 {
                     corregible = true;
@@ -606,7 +612,7 @@ namespace whusap.WebPages.Migration
 
                     DataTable resultado = idal.inv_datospesos(ref obj, ref strError);
                     DataRow reg = resultado.Rows[0];
-
+                    Session["PesoItemRgr"] = reg.ItemArray[1];
                     //insert a new record on tables ticol042 and ticol242 and whcol020.
                     //JC 090921 Generar estas etiquetas de regrind con el consecutivo D.
                     //strTagId = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString();
@@ -640,7 +646,9 @@ namespace whusap.WebPages.Migration
                     obj042.drpt = DateTime.Now;
                     obj042.urpt = " ";
                     //obj042.acqt = Convert.ToDouble(value);
-                    obj042.acqt = Convert.ToDouble(value) / Convert.ToDouble(2.20462);
+                    //JC 100921 Ajustar la cantidad correcta
+                    //obj042.acqt = Convert.ToDouble(value) / Convert.ToDouble(2.20462);
+                    obj042.acqt = Convert.ToDouble(Math.Round((Convert.ToDecimal((value * Convert.ToDecimal(reg.ItemArray[1])) / Convert.ToDecimal(2.20462))), 2));
                     obj042.cwaf = dropDownWarehouse.Text.ToUpperInvariant();
                     //JC 060921 Traer el dato correcto de la bodega definida en la tabla de bodega mrb y regrind ticol008
                     //obj042.cwat = stockw;
@@ -703,12 +711,12 @@ namespace whusap.WebPages.Migration
                     //update whcol131 or ticol022 table: status to “Located” 
                     Ent_tticol100 dataticol100 = new Ent_tticol100()
                     {
-
                         paid = txtPalletId.Text.ToString(),
                         logr = Session["user"].ToString(),
-
-
+                        //JC 100921 Actualizar bodega en la tabla col222
+                        cwar = stockw                        
                     };
+                    //Session["cwarplt"] = dataticol100.cwar;
                     string updstatus;
                     var tableName = lbltable.Value;
                     if (lbltable.Value == "ticol022")
@@ -723,6 +731,10 @@ namespace whusap.WebPages.Migration
                         {
                             updstatus = "7";
                             validUpdate = _idaltticol100.ActualizaRegistro_located(ref dataticol100, ref updstatus, ref tableName, ref strError);
+                            //JC 100921 Actualizar bodega en la tabla col222
+                            var location = _idaltticol022.getloca(stockw, ref strError).Rows.Count > 0 ? _idaltticol022.getloca(stockw, ref strError).Rows[0]["LOCA"].ToString() : " ";
+                            string tabName = "ticol222";
+                            validupd022 = _idaltticol100.ActualizaRegistrobodegaxtabla(ref dataticol100, ref location, ref tabName, ref strError);
                             //warehouse Logic
                         }
 
@@ -737,6 +749,10 @@ namespace whusap.WebPages.Migration
                         {
                             updstatus = "7";
                             validUpdate = _idaltticol100.ActualizaRegistro_located(ref dataticol100, ref updstatus, ref tableName, ref strError);
+                            //JC 100921 Actualizar bodega en la tabla col222
+                            var location = _idaltticol022.getloca(stockw, ref strError).Rows.Count > 0 ? _idaltticol022.getloca(stockw, ref strError).Rows[0]["LOCA"].ToString() : " ";
+                            string tabName = "ticol242";
+                            validupd022 = _idaltticol100.ActualizaRegistrobodegaxtabla(ref dataticol100, ref location, ref tabName, ref strError);
                             //warehouse Logic
                         }
                     }
@@ -753,6 +769,10 @@ namespace whusap.WebPages.Migration
                         {
                             updstatus = "3";
                             validUpdate = _idaltticol100.ActualizaRegistro_located(ref dataticol100, ref updstatus, ref tableName, ref strError);
+                            //JC 100921 Actualizar bodega en la tabla col222
+                            var location = _idaltticol022.getloca(stockw, ref strError).Rows.Count > 0 ? _idaltticol022.getloca(stockw, ref strError).Rows[0]["LOCA"].ToString() : " ";
+                            string tabName = "whcol131";
+                            validupd022 = _idaltticol100.ActualizaRegistrobodegaxtabla(ref dataticol100, ref location, ref tabName, ref strError);
                             //warehouse Logic
                         }
 
@@ -953,7 +973,7 @@ namespace whusap.WebPages.Migration
                     Session["RecibedBy"] = Session["user"].ToString();
                     Session["RecibedOn"] = DateTime.Now.ToString();
                     Session["Reprint"] = "no";
-                    
+                    var cntrgr = (Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())).ToString();
                     StringBuilder script = new StringBuilder();
                     //JC 100921 Imprimir la etiqueta de acuerdo a la cantidad restante
                     if ((Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())) > 0)
@@ -971,7 +991,7 @@ namespace whusap.WebPages.Migration
                             Session["Material"] = obj.item;
                             Session["codePaid"] = txtPalletId.Text.Trim().ToUpper();
                             Session["Lot"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
-                            Session["Quantity"] = (Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())).ToString() + " " + Session["Unit"].ToString();
+                            Session["Quantity"] = Convert.ToDecimal(cntrgr) + " " + Session["unplt"].ToString();
                             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                             Session["Machine"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                             Session["Operator"] = Session["user"].ToString();
@@ -981,7 +1001,7 @@ namespace whusap.WebPages.Migration
                             Session["Material2"] = obj.item;
                             Session["codePaid2"] = Session["TagId"];
                             Session["Lot2"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
-                            Session["Quantity2"] = Convert.ToDecimal(Session["ToReturnQuantity"].ToString()).ToString() + " " + Session["Unit"].ToString();
+                            Session["Quantity2"] = Convert.ToDouble(Math.Round(Convert.ToDecimal(Session["ToReturnQuantity"].ToString()) * Convert.ToDecimal(Session["PesoItemRgr"].ToString()) / Convert.ToDecimal(2.20462), 2)) + " " + Session["Unit"].ToString();
                             Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
                             Session["Machine2"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                             Session["Operator2"] = Session["user"].ToString();
@@ -1004,7 +1024,7 @@ namespace whusap.WebPages.Migration
                             Session["Material"] = obj.item;
                             Session["codePaid"] = txtPalletId.Text.Trim().ToUpper();
                             Session["Lot"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
-                            Session["Quantity"] = (Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())).ToString() + " " + Session["Unit"].ToString();
+                            Session["Quantity"] = Convert.ToDecimal(cntrgr) + " " + Session["unplt"].ToString();
                             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
                             Session["Machine"] = " ";
                             Session["Operator"] = Session["user"].ToString();
@@ -1014,7 +1034,7 @@ namespace whusap.WebPages.Migration
                             Session["Material2"] = obj.item;
                             Session["codePaid2"] = Session["TagId"];
                             Session["Lot2"] = row["LOTE"].ToString() == String.Empty ? " " : row["LOTE"].ToString();
-                            Session["Quantity2"] = (Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())).ToString() + " " + Session["Unit"].ToString();
+                            Session["Quantity2"] = Convert.ToDouble(Math.Round(Convert.ToDecimal(Session["ToReturnQuantity"].ToString()) * Convert.ToDecimal(Session["PesoItemRgr"].ToString()) / Convert.ToDecimal(2.20462), 2)) + " " + Session["Unit"].ToString();
                             Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
                             Session["Machine2"] = " ";
                             Session["Operator2"] = Session["user"].ToString();

@@ -447,6 +447,39 @@ namespace whusa.DAL
             return Convert.ToInt32(retorno);
         }
 
+        //JC 100921 Actualiza Bodega cuando se retorna todo el pallet
+        public int ActualizaRegistrobodegaxtabla(ref Ent_tticol100 parametro, ref string location, ref string tableName, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$CWAT", parametro.cwar.Trim().ToUpper());
+                paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
+                paramList.Add(":T$ACLO", location);
+                paramList.Add(":TABLENAME", "T" + tableName.Trim().ToUpper());
+                if (tableName == "whcol131")
+                {
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, "ActualizaRegistrobodegaxtabla_whcol131", ref owner, ref env, tabla, paramList);
+                }
+                else
+                {
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, "ActualizaRegistrobodegaxtabla", ref owner, ref env, tabla, paramList);
+                }
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                return Convert.ToInt32(retorno);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+            }
+            return Convert.ToInt32(retorno);
+        }
+
         public DataTable findMaxSeqnByPdno(ref string pdno, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

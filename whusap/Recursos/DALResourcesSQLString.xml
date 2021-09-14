@@ -5459,6 +5459,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB = '[:T$PAID]'
         </stringSQL>
       </operationName>
+      <operationName name="ActualizaRegistrobodegaxtabla">
+        <stringSQL>
+          UPDATE {0}.[:TABLENAME]{1} SET T$CWAT = '[:T$CWAT]', T$ACLO = '[:T$ACLO]'
+          WHERE T$SQNB = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizaRegistrobodegaxtabla_whcol131">
+        <stringSQL>
+          UPDATE {0}.[:TABLENAME]{1} SET T$CWAA = '[:T$CWAT]', T$LOAA = '[:T$ACLO]'
+          WHERE T$PAID = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="ActualUpdateWarehouse_ticol222">
         <stringSQL>
           --UPDATE {0}.tticol222{1}
