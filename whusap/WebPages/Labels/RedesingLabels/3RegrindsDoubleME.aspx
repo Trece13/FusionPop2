@@ -59,8 +59,8 @@
         #codeMaterial, #codeMaterial2 {
             display: block;
             margin: auto;
-            height: 60%;
-            width: 70%;
+            height: 100%;
+            width: 100%;
         }
 
         .borderTop {
@@ -119,14 +119,14 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height: 10% !important">
+                    <div class="row" style="height: 15% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight">
+                        <div class="col-6 alingRight" style="height:100%">
                             <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
                         </div>
                     </div>
@@ -165,14 +165,14 @@
                     </div>
                 </div>
                 <div id="myLabel2">
-                    <div class="row" style="height: 10% !important">
+                    <div class="row" style="height: 15% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc2" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight">
+                        <div class="col-6 alingRight" style="height:100%">
                             <img src="~/images/logophoenix_login.jpg" id="codeMaterial2" runat="server" />
                         </div>
                     </div>

@@ -231,7 +231,7 @@
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-5 alingRight">
+                        <div class="col-5 alingRight" style="height:100%">
                             <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
                         </div>
                     </div>

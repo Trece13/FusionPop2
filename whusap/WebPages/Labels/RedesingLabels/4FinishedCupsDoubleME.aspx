@@ -228,14 +228,14 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel" runat="server">
-                    <div class="row" style="margin: auto; height: 10% !important">
+                    <div class="row" style="margin: auto; height: 15% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight">
+                        <div class="col-6 alingRight"  style="height:110%" >
                             <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
                         </div>
                     </div>

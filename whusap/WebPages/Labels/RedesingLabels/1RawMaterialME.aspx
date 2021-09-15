@@ -104,7 +104,7 @@
             display: block;
             margin: auto;
             height: 110%;
-            width: 70%;
+            width: 100%
         }
 
         #itemDesc {
@@ -228,7 +228,7 @@
                         <div class="col-6 alingLeft">
                             <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
                         </div>
-                        <div class="col-6 alingRight">
+                        <div class="col-6 alingRight" style="height:100%">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="codeMaterial" alt="" />
                         </div>
                     </div>
