@@ -73,9 +73,7 @@
 
         #myLabel {
             width: 6in;
-            height: 4in;
-            padding: 5px;
-            border: 1px solid black;
+            height: 3in;
             border-radius: 12px;
         }
 
@@ -101,7 +99,7 @@
         #codeMaterial {
             display: block;
             margin: auto;
-            height: 50px;
+            height: 70px;
             width: 220px;
         }
 
@@ -132,7 +130,6 @@
         }
 
         #printContainer {
-            margin-bottom: 100px;
         }
 
         #editTable {
@@ -183,12 +180,16 @@
 
         .table td,
         .table th {
-            padding: .1rem;
+            padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 12px;
+            font-size: 1.05em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
+        }
+        @page{
+            size:landscape;
+            margin:3px;
         }
     </style>
     <script type="text/javascript">
@@ -228,7 +229,7 @@
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
-                                    <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
+                                    <label id="lblMaterialDesc" style="font-size: 1.1em;" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
                         <div class="col-6 alingRight">
@@ -265,7 +266,7 @@
             </div>
         </div>
     </form>
-    <<script src="styles/jquery-3.2.1.slim.min.js"></script>
+    <script src="styles/jquery-3.2.1.slim.min.js"></script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap4.min.js"></script>
 </body>

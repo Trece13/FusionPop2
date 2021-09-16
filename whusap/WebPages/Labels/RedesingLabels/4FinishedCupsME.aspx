@@ -73,10 +73,9 @@
         }
 
         #myLabel {
-            width: 100%;
-            height: 650px;
-            padding: 5px;
-            border: 1px solid black;
+            width: 85%;
+            height: 440px;
+            padding: 0px;
             border-radius: 12px;
         }
 
@@ -186,10 +185,14 @@
         .table th {
             padding: .1rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.3em;
+            font-size: 1.7em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
+        }
+        @page{
+            size:landscape;
+            margin:3px;
         }
     </style>
     <script type="text/javascript">
@@ -225,12 +228,12 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div style="height: 15%">
+                    <div style="height: 20%">
                         <div class="row" style="height: 100% !important">
                             <div class="col-7 alingLeft">
                                 <label>
                                     <strong>
-                                        <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
+                                        <label id="lblMaterialDesc" style="font-size:1.7em" runat="server">MATERIAL DESCRIPTION</label></strong>
                                 </label>
                             </div>
                             <div class="col-5 alingRight"  style="height:110%">
