@@ -1233,8 +1233,9 @@ namespace whusap.WebPages.Migration
                             MyObj131.FIRE = "2";
                             MyObj131.PSLIP = " ";
                             MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
-
                             bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
+                        }
+                            
                             Ent_tticol116 data116 = new Ent_tticol116()
                             {
                                 paid = txtPalletId.Text.Trim(),
@@ -1301,7 +1302,7 @@ namespace whusap.WebPages.Migration
                                     Session["Machine2"] = _idaltticol022.getMachine(row["LOTE"].ToString(), obj.item.Trim().ToUpper(), ref strError);
                                     Session["Operator2"] = Session["user"].ToString();
                                     Session["Pallet2"] = MyObj022.sqnb.ToString();
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
                                     if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
                                     {
                                         script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDoubleME.aspx'; ");
@@ -1309,6 +1310,8 @@ namespace whusap.WebPages.Migration
                                     else
                                     {
                                         script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
+                                    }
+                                        ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                                 }
                                     //JC 060921 Ajustar datos par disponer regrind
                                 if (lbltable.Value.Trim() == "ticol042")
@@ -1333,7 +1336,7 @@ namespace whusap.WebPages.Migration
                                     Session["Machine2"] = " ";
                                     Session["Operator2"] = Session["user"].ToString();
                                     Session["Pallet2"] = MyObj042.sqnb.ToString();
-                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+                                    
                                     if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
                                     {
                                         script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDoubleME.aspx'; ");
@@ -1341,7 +1344,8 @@ namespace whusap.WebPages.Migration
                                     else
                                     {
                                         script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/3RegrindsDouble.aspx'; ");
-                                    }                                   
+                                    }     
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                                 }
                                 else if (lbltable.Value.Trim() == "whcol131")
                                 {
@@ -1384,8 +1388,6 @@ namespace whusap.WebPages.Migration
                         }
                     }
                 }
-            }
-        }
 
         protected void printLabel_Click(object sender, EventArgs e)
         {
