@@ -78,9 +78,7 @@
 
         #myLabel {
             width: 6in;
-            height: 4in;
-            padding: 5px;
-            border: 1px solid black;
+            height: 3in;
             border-radius: 12px;
         }
 
@@ -137,7 +135,6 @@
         }
 
         #printContainer {
-            margin-bottom: 100px;
         }
 
         #editTable {
@@ -188,9 +185,9 @@
 
         .table td,
         .table th {
-            padding: .1rem;
+            padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 12px;
+            font-size: 1.05em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
@@ -199,6 +196,11 @@
         .row {
             margin-right: 0px !important;
             margin-left: 0px !important;
+        }
+
+        @page{
+            size:landscape;
+            margin:3px;
         }
     </style>
     <script type="text/javascript">
