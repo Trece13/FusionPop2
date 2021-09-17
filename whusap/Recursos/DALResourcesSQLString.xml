@@ -2444,6 +2444,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {0}.twhcol130{1} SET T$LOAA = '[:T$LOAA]', T$CWAA = '[:T$CWAA]',T$QTYA = (SELECT T$QTYC FROM {0}.twhcol130{1} where T$PAID = '[:T$PAID]') ,T$LOGT = '[:T$LOGT]',T$STAT = '[:T$STAT]' where T$PAID = '[:T$PAID]'
         </stringSQL>
       </operationName>
+      <operationName name="Actualizartwhcol131CantEstado">
+        <stringSQL>
+          UPDATE {0}.twhcol131{1} SET T$QTYA = '[:T$QTYA]', T$STAT = '[:T$STAT]' where T$PAID = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+
       <operationName name="ConsultarLocation">
         <stringSQL>
           SELECT T$CWAR CWAR,T$LOCA LOCA, T$LOCT LOCT, T$BINB BINB from {0}.twhwmd300{1} WHERE /*T$LOCT = 5 AND T$BINB = 2 AND*/ T$CWAR = '[:T$CWAR]' AND T$LOCA = '[:T$LOCA]'

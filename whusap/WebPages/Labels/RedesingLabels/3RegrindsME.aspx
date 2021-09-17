@@ -72,9 +72,9 @@
         }
 
         #myLabel {
-            width: 100%;
-            height: 650px;
-            padding: 5px;
+            width: 85%;
+            height: 440px;
+            padding: 0px;
             border: 1px solid black;
             border-radius: 12px;
         }
@@ -185,7 +185,7 @@
         .table th {
             padding: .1rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.3em;
+            font-size: 1.7em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;

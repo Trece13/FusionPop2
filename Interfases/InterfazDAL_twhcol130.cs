@@ -370,7 +370,12 @@ namespace whusa.Interfases
         {
             return dal.ActualizacionLocaWhcol130(PAID, LOCA, CWAA, LOGT, STAT);
         }
-
+        //JC 160921 Incluir la tabla de materia prima
+        public bool Actualizartwhcol131CantEstado(string PAID, decimal STAT, decimal QTYA)
+        {
+            return dal.Actualizartwhcol131CantEstado(PAID, STAT, QTYA);
+        }
+        
         public bool Eliminartccol307(string PAID, string USER)
         {
             return dal.EliminarRegistrotccol307(PAID, USER);
