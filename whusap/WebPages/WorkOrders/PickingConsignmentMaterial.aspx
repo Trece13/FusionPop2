@@ -1228,7 +1228,13 @@
                             if (myObj.qtyaG > 0 || myObj.ALLOAUX > 0) {
                                 //    printDiv("MyEtiqueta");
                                 myLabelFrame = document.getElementById('myLabelFrame');
-                                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
+                                if(sessionStorage.getItem('nav').toString() == 'EDG'){
+                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
+                                }
+                                else {
+                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
+
+                                }
                             }
                             alert("Information saved successfully");
                             selectPicksPending();

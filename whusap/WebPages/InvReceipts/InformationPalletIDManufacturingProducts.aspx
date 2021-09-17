@@ -319,7 +319,12 @@
                 $('#btnSave').prop("disabled", true);
                 alert("Registration was successful");
                 myLabelFrame = document.getElementById('myLabelFrame');
-                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCups.aspx';
+                if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsME.aspx';
+                }
+                else {
+                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCups.aspx';
+                }
 
             }
             else {

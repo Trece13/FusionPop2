@@ -317,6 +317,10 @@
         $(function () {
             if (navigator.userAgent.indexOf("Edg") > -1) {
                 $("#Contenido_txNavigator").val("EDG");
+                sessionStorage.setItem('nav', 'EDG');
+            }
+            else {
+                sessionStorage.setItem('nav', '');
             }
         });
         

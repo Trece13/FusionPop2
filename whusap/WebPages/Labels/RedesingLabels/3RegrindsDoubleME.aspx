@@ -31,7 +31,7 @@
 
         #myLabel, #myLabel2 {
             width: 85%;
-            height: 440px;
+            height: 565px;
             padding: 0px;
             border-radius: 12px;
         }
@@ -84,6 +84,10 @@
             vertical-align: middle;
             padding-left: 1em;
         }
+        @page{
+            size:landscape;
+            margin:3px;
+        }
     </style>
     <script type="text/javascript">
         function printDiv(divID) {
@@ -118,7 +122,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height: 15% !important">
+                    <div class="row" style="height: 20% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -164,7 +168,7 @@
                     </div>
                 </div>
                 <div id="myLabel2">
-                    <div class="row" style="height: 15% !important">
+                    <div class="row" style="height: 20% !important">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>

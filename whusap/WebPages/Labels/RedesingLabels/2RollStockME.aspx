@@ -190,6 +190,11 @@
             vertical-align: middle;
             padding-left: 1em;
         }
+
+        @page{
+            size:landscape;
+            margin:3px;
+        }
     </style>
     <script type="text/javascript">
         function printDiv(divID) {

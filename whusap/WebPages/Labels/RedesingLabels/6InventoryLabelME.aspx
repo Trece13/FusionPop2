@@ -77,10 +77,9 @@
         }
 
         #myLabel {
-            width: 100% !important;
-            height: 650px !important;
+            width: 85% !important;
+            height: 440px !important;
             padding: 5px;
-            border: 1px solid black;
             border-radius: 12px;
         }
 
@@ -203,6 +202,10 @@
 
         #printSpace {
             height: 800px;
+        }
+        @page{
+            size:landscape;
+            margin:3px;
         }
     </style>
     <script type="text/javascript">

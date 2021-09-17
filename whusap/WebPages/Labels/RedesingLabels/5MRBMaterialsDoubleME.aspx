@@ -32,7 +32,7 @@
 
         #myLabel, #myLabel2 {
             width: 85%;
-            height: 440px;
+            height: 480px;
             padding: 0px;
             border-radius: 12px;
         }
@@ -84,6 +84,11 @@
 
         .alingCenter {
             text-align: center;
+        }
+
+        @page{
+            size:landscape;
+            margin:3px;
         }
     </style>
     <script type="text/javascript">

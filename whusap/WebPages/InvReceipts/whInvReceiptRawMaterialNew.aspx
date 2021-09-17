@@ -978,7 +978,12 @@
 
                     DeshabilitarLimpiarControles();
                     myLabelFrame = document.getElementById('myLabelFrame');
-                    myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
+                    if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterialME.aspx';
+                    }
+                    else {
+                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
+                    }
 
 
                 }

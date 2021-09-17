@@ -188,7 +188,10 @@
         #lblMaterialDesc, #lblMaterialCode{
             font-size: ;
         }
-        @page printSpace { size: A3; margin: 0; } 
+        @page{
+            size:landscape;
+            margin:3px;
+        }
     </style>
     <script type="text/javascript">
         function printDiv(divID) {
@@ -223,7 +226,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height:10%">
+                    <div class="row" style="height:20%">
                         <div class="col-6 alingLeft">
                             <label id="lblMaterialDesc" runat="server"><strong>MATERIAL DESCRIPTION</strong></label>
                         </div>

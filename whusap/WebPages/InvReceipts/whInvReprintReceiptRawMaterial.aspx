@@ -364,8 +364,12 @@
                 //    btnMyEtiqueta.show('slow');
                 //    //btnMyEtiquetaOC.hide('slow');
                 //}
-
-                ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterial.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');
+                if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                    ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterialME.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');
+                }
+                else {
+                    ventanaImp = window.open('../Labels/RedesingLabels/1RawMaterial.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');
+                }
                 ventanaImp.moveTo(30, 0);
             }
             else {
