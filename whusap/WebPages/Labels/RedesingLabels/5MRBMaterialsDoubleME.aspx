@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns=http://www.w3.org/1999/xhtml>
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -31,9 +31,10 @@
         }
 
         #myLabel, #myLabel2 {
-            width: 85%;
-            height: 480px;
-            padding: 0px;
+            width: 8.5in;
+            height: 5.5in;
+            padding: 5px;
+            border: 0px solid black;
             border-radius: 12px;
         }
 
@@ -52,8 +53,8 @@
         #codePaid, #codePaid2 {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 100px;
+            width: 500px;
         }
 
         .borderTop {
@@ -124,7 +125,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row">
+                    <div class="row" style="height: 10%;">
                         <div class="col-4 alingLeft">
                             <strong>WO / PO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
                         </div>
@@ -189,7 +190,7 @@
                                         <div id="lblReprint" class="col-12 text-right" runat="server">
                                             <label><strong>REPRINT</strong></label>
                                         </div>
-                                    </td>
+                                   </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -197,7 +198,7 @@
                 </div>
                 <br />
                 <div id="myLabel2">
-                    <div class="row">
+                    <div class="row" style="height: 10%;">
                         <div class="col-4 alingLeft">
                             <strong>WO / PO&nbsp;</strong><label id="lblWorkOrder2" runat="server"></label>
                         </div>
