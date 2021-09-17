@@ -220,8 +220,8 @@ namespace whusap.WebPages.Migration
             string loc = string.Empty;
             string tableName = string.Empty;
             string war = string.Empty;
-             string orno = string.Empty;
-             string statusCheck = string.Empty;
+            string orno = string.Empty;
+            string statusCheck = string.Empty;
             if (resultado.Rows.Count < 1)
             {
                 lblError.Text = mensajes("palletnotexists");
