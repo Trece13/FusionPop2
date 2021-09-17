@@ -1089,6 +1089,31 @@ namespace whusa.Interfases
             return retorno;
         }
 
+        public bool Actualizartwhcol131CantEstado(string PAID, decimal STAT, decimal QTYA)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":T$STAT", STAT);
+            paramList.Add(":T$QTYA", QTYA);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                retorno = true;
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to update [twhcol130]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+
+            return retorno;
+        }
+
         public bool EliminarRegistrotccol307(string PAID, string USER)
         {
             bool retorno = false;

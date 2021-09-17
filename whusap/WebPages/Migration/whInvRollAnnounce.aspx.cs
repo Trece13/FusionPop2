@@ -18,12 +18,14 @@ namespace whusap.WebPages.Migration
         #region Propiedades
             private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
             private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
+            private static InterfazDAL_twhcol130 _idaltwhcol131 = new InterfazDAL_twhcol130();
             private static InterfazDAL_tticol080 _idaltticol080 = new InterfazDAL_tticol080();
             private static InterfazDAL_tticst001 _idaltticst001 = new InterfazDAL_tticst001();
             private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
             private static Mensajes _mensajesForm = new Mensajes();
             private static LabelsText _textoLabels = new LabelsText();
             private static string _operator;
+            private static string loteitem;
             public static string _idioma;
             private static string strError;
             private static string formName;
@@ -90,7 +92,7 @@ namespace whusap.WebPages.Migration
         {
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
-
+            loteitem = String.Empty;
             if (txtRollNumber.Text.Trim() != String.Empty && txtWorkOrder.Text.Trim() != String.Empty)
             {
                 var sqnb = txtRollNumber.Text.Trim().ToUpper();
@@ -99,7 +101,7 @@ namespace whusap.WebPages.Migration
                 var bodd = String.Empty;
 
                 var consultaSqnb = _idaltticol022.validarRegistroByPalletId(ref sqnb, ref bodo, ref bodd, ref pdno);
-
+                loteitem = consultaSqnb.Rows[0]["LOT"].ToString();
                 if (consultaSqnb.Rows.Count > 0)
                 {
                     var item = consultaSqnb.Rows[0]["ITEM"].ToString();
@@ -152,6 +154,7 @@ namespace whusap.WebPages.Migration
             var qtdl = double.Parse(txtQuantity.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
             var orno = txtWorkOrder.Text.Trim().ToUpper();
             var pono = hdfPONO.Value.Trim().ToUpper();
+            var clot = loteitem;
             var item = txtItem.Text.Trim().ToUpper();
             var cwar = hdfCWAR.Value.Trim().ToUpper();
 
@@ -174,9 +177,9 @@ namespace whusap.WebPages.Migration
                 proc = 2,
                 refcntd = 0,
                 refcntu = 0,
-                clot = " ",
+                clot = clot,
                 oorg = "4",
-                pick = 0
+                pick = 2
             };
 
             if (consultaRegistro.Count > 0)
@@ -189,6 +192,7 @@ namespace whusap.WebPages.Migration
                     _idaltticol022.ActualizarCantidadRegistroTicol222(0,txtRollNumber.Text.Trim());
                     _idaltticol042.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
                     _idaltticol042.ActualizarCantidadRegistroTicol242(0, txtRollNumber.Text.Trim());
+                    _idaltwhcol131.Actualizartwhcol131CantEstado(txtRollNumber.Text.Trim(), 9, 0);
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjupdate");
                     trItem.Visible = false;
@@ -214,8 +218,11 @@ namespace whusap.WebPages.Migration
 
                 var validaInsert = _idaltticol080.insertarRegistro(ref lista, ref strError, ref isTag);
                 _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
+                _idaltticol022.ActualizarCantidadRegistroTicol222(0, txtRollNumber.Text.Trim());
                 _idaltticol042.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
-                if (validaInsert > 0)
+                _idaltticol042.ActualizarCantidadRegistroTicol242(0, txtRollNumber.Text.Trim());
+                _idaltwhcol131.Actualizartwhcol131CantEstado(txtRollNumber.Text.Trim(), 9, 0);
+                 if (validaInsert > 0)
                 {
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjsave");
