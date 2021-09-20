@@ -48,6 +48,8 @@ namespace whusap.WebPages.Migration
        
         private static LabelsText _textoLabels = new LabelsText();
         private static DataTable _consultaPedido;
+        //JC 200921 Validar si el pallet se consumió en esa orden
+        private static DataTable _consultaOrdenPallet;
         private static DataTable _consultaInformacionPedido;
         private static string formName;
         private static string globalMessages = "GlobalMessages";
@@ -568,6 +570,16 @@ namespace whusap.WebPages.Migration
                      if (pdno != String.Empty)
                      {
                          _consultaPedido = _idaltticst001.findByPdnoMRB(ref pdno, ref strError);
+                         //JC 200921 Consultar si el pallet se consumió para esa orden
+                         _consultaOrdenPallet = _idaltticst001.findByPdnoMRBPallet(txtPalletId.Text.Trim(), ref pdno, ref strError);
+
+                         if (_consultaOrdenPallet.Rows.Count <= 0)
+                         {
+                             lblErrorDelivered.Visible = true;
+                             lblErrorDelivered.Text = mensajes("ordernotlinked");
+                             TxtOrder.Text = string.Empty;
+                             return;
+                         }
 
                          if (_consultaPedido.Rows.Count > 0)
                          {

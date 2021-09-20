@@ -6620,10 +6620,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           inner join {0}.ttcibd001{1} tcibd001
           on tcibd001.t$item = tisfc001.t$mitm
           WHERE tisfc001.T$OSTA IN ('5','7','9') AND tisfc001.T$PDNO ='[:T$PDNO]'
-
         </stringSQL>
       </operationName>
       <!-- Smita Ends-->
+      <operationName name="findByPdnoMRBPallet">
+        <stringSQL>
+          SELECT T$PAID, T$ORNO
+          FROM   {0}.tticol083{1}
+          WHERE  T$ORNO = '[:T$ORNO]'
+          AND    T$PAID ='[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="findByPdnoCosts">
         <stringSQL>
           SELECT DISTINCT
