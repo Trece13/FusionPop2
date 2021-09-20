@@ -575,6 +575,7 @@ namespace whusap.WebPages.Migration
 
                          if (_consultaOrdenPallet.Rows.Count <= 0)
                          {
+                             lblErrorDelivered.Visible = true;
                              lblErrorDelivered.Text = mensajes("ordernotlinked");
                              TxtOrder.Text = string.Empty;
                              return;
