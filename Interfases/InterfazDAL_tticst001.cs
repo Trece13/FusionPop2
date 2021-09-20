@@ -75,6 +75,21 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
+        //JC 200921 Consultar si el pallet se consumió en esa orden
+        public DataTable findByPdnoMRBPallet(string paid, ref string orno, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno = new DataTable();
+            try
+            {
+                retorno = dal.findByPdnoMRBPallet(ref paid, ref orno, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
 
         public DataTable findByPdnoCosts(ref string pdno, ref string  shift, ref string strError)
         {

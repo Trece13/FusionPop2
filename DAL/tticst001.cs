@@ -107,6 +107,33 @@ namespace whusa.DAL
 
             return consulta;
         }
+        //JC200921 Consultar si el pallet se consumió en esa orden
+        public DataTable findByPdnoMRBPallet(ref string paid, ref string orno, ref string strError)
+        {
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", paid.Trim().ToUpper());
+            paramList.Add(":T$ORNO", orno.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Incorrect location, please verify."; }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to the search sequence [tticst001]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+
+            return consulta;
+        }
+
         public DataTable findByPdnoCosts(ref string pdno, ref string shift, ref string strError)
         {
             //JC 300721 Evitar Error Collection

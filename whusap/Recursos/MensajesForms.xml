@@ -2408,6 +2408,11 @@
             Reason mustn't be empty
           </stringMessage>
         </operationName>
+        <operationName name="ordernotlinked">
+          <stringMessage>
+            The order didn't consume that pallet ID.
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="encabezado">
@@ -2499,6 +2504,11 @@
         <operationName name="lotnotexists">
           <stringMessage>
             Lote no existe para este articulo.
+          </stringMessage>
+        </operationName>
+        <operationName name="ordernotlinked">
+          <stringMessage>
+            La orden no consumió ese pallet.
           </stringMessage>
         </operationName>
       </Idiom>
