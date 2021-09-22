@@ -107,7 +107,7 @@ namespace whusap.WebPages.Login
                 imgUniquePassword.Src = !string.IsNullOrEmpty(password) ? rutaServPassword : "";
                 imgUniquePassword.Style.Add("width", "1.8in");
                 imgUniquePassword.Style.Add("height", ".6in");
-                Page.ClientScript.RegisterStartupScript(GetType(), "none", "<script>printContent('uno');</script>", false);
+                Page.ClientScript.RegisterStartupScript(GetType(), "none", "<script>setTimeout(function(){printContent('Contenido_UpdatePanel1')},3000);</script>", false);
                 btnGeneratePassword.Enabled = false;
                 return;
                 
