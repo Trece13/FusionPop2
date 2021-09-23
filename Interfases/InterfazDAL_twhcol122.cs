@@ -322,13 +322,13 @@ namespace whusa.Interfases
             }
         }
 
-        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, string QTYT)
+        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, EntidadPicking Objpicking)
         {
 
             string strError = string.Empty;
             try
             {
-                bool updateTticol082 = dal.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, QTYT);
+                bool updateTticol082 = dal.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, Objpicking);
                 return updateTticol082;
 
             }

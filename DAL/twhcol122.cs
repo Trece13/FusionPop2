@@ -561,6 +561,9 @@ namespace whusa.DAL
             paramList.Add(":T$PAID", myObj.PAID);
             paramList.Add(":T$STAT", myObj.STAT);
             paramList.Add(":T$PICK", myObj.PICK);
+            paramList.Add(":T$ORNO", myObj.ORNO);
+            paramList.Add(":T$PONO", myObj.PONO);
+            paramList.Add(":T$ADVS", myObj.ADVS);
             string tabla = ".tticol082";
             string name1 = "UpdateTtico082Stat";
 
@@ -612,7 +615,7 @@ namespace whusa.DAL
 
         }
 
-        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, string QTYT)
+        public bool UpdateTbl082ByPaid(string PAID_NEW, string PAID_OLD, EntidadPicking Objpicking)
         {
             bool retorno = false;
             method = MethodBase.GetCurrentMethod();
@@ -620,8 +623,11 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add(":PAID_NEW", PAID_NEW);
             paramList.Add(":PAID_OLD", PAID_OLD);
-            paramList.Add(":QTYT", QTYT);
-
+            paramList.Add(":QTYT", Objpicking.QTYT);
+            paramList.Add(":ORNO", Objpicking.ORNO);
+            paramList.Add(":PONO", Objpicking.PONO);
+            paramList.Add(":ADVS", Objpicking.ADVS);
+            paramList.Add(":PICK", Objpicking.PICK);
 
             string tabla = ".tticol082";
             string name1 = "UpdateTbl082ByPaid";

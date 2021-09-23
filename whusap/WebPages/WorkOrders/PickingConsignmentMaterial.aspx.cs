@@ -533,7 +533,7 @@ namespace whusap.WebPages.WorkOrders
                                 twhcolDAL.ActualizarCantidades222(PAID_NEW);
                                 twhcolDAL.ActCausalTICOL022(PAID_OLD, 12);
                                 twhcolDAL.ActCausalTICOL022(PAID_NEW, 8);
-                                _idaltwhcol122.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, ObjPicking.QTYT);
+                                _idaltwhcol122.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, ObjPicking);
                                 MySessionObjPicking.PALLETID = PAID_NEW;
                                 HttpContext.Current.Session["MyObjPicking"] = ObjPicking;
                                 break;
@@ -546,7 +546,7 @@ namespace whusap.WebPages.WorkOrders
                                 twhcolDAL.ActualizarCantidades242(PAID_NEW);
                                 twhcolDAL.ActCausalTICOL042(PAID_OLD, 12);
                                 twhcolDAL.ActCausalTICOL042(PAID_NEW, 8);
-                                _idaltwhcol122.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, ObjPicking.QTYT);
+                                _idaltwhcol122.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, ObjPicking);
                                 MySessionObjPicking.PALLETID = PAID_NEW;
                                 HttpContext.Current.Session["MyObjPicking"] = ObjPicking;
                                 break;
@@ -559,7 +559,7 @@ namespace whusap.WebPages.WorkOrders
                                 twhcolDAL.ActualizarCantidades131(PAID_NEW, false);
                                 twhcolDAL.ActCausalcol131140(PAID_OLD, 10);
                                 twhcolDAL.ActCausalcol131140(PAID_NEW, 6);
-                                _idaltwhcol122.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, ObjPicking.QTYT);
+                                _idaltwhcol122.UpdateTbl082ByPaid(PAID_NEW, PAID_OLD, ObjPicking);
                                 MySessionObjPicking.PALLETID = PAID_NEW;
                                 HttpContext.Current.Session["MyObjPicking"] = ObjPicking;
                                 break;
@@ -1353,6 +1353,10 @@ namespace whusap.WebPages.WorkOrders
                     Ent_tticol082 Obj082 = new Ent_tticol082();
                     Obj082.STAT = "3";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
+                    Obj082.ORNO = MySessionObjPicking.ORNO.Trim();
+                    Obj082.PONO = MySessionObjPicking.PONO.Trim();
+                    Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
+                    Obj082.PICK = MySessionObjPicking.PICK.Trim();
                     _idaltwhcol122.UpdateTtico082Stat(Obj082);
                     //}
                     return true;
