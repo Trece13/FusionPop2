@@ -1518,6 +1518,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND   T$PONO = '[:PONO]'
           AND   T$ADVS = '[:ADVS]'
           AND   T$PICK = '[:PICK]'
+          --JC 230921 Cambio
         </stringSQL>
       </operationName>
       <operationName name="UpdateTbl022">
