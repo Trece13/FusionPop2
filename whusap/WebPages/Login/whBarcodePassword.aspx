@@ -76,8 +76,8 @@
 
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
-
-            mywindow.print();
+            setTimeout(function () { mywindow.print(); }, 2000); 
+            //mywindow.print();
             mywindow.close();
 
                         return true;
