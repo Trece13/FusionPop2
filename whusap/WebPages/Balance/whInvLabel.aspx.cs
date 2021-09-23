@@ -501,6 +501,7 @@ namespace whusap.WebPages.Balance
             Session["unidad"]           = hidden.Value;
 
             HttpContext.Current.Session["Reprint"] = "no";
+            HttpContext.Current.Session["AutoPrint"] = "yes";
             Session["MaterialDesc"]     = obj020.dsca;
             Session["codeMaterial"]     = obj022.mitm ; 
             Session["codePaid"]         =  reg["SECUENCIA"].ToString() ;
