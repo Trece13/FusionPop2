@@ -6609,6 +6609,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT T$PDNO AS PDNO, T$PONO AS PONO, T$SITM AS SITM, T$CWAR AS CWAR FROM {2} WHERE TRIM(T$SITM) = TRIM('[:T$SITM]') AND T$PDNO = '[:T$PDNO]'
         </stringSQL>
       </operationName>
+      <operationName name="findByItemAndPdnoPlanta">
+        <stringSQL>
+          SELECT T$PDNO AS PDNO, T$PONO AS PONO, T$SITM AS SITM, T$CWAR AS CWAR FROM {2} WHERE TRIM(T$SITM) = TRIM('[:T$SITM]') AND T$PDNO = '[:T$PDNO]' AND T$NNTS = '2'
+        </stringSQL>
+      </operationName>
       <operationName name="findByPdno">
         <stringSQL>
           SELECT

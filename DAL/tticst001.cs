@@ -59,6 +59,32 @@ namespace whusa.DAL
             return consulta;
         }
 
+        public DataTable findByItemAndPdnoPlanta(ref string pdno, ref string item, ref string strError)
+        {
+            //JC 300721 Evitar Error Collection
+            //consulta.Rows.Clear();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SITM", item.Trim().ToUpper());
+            paramList.Add(":T$PDNO", pdno.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Incorrect location, please verify."; }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to the search sequence [twhwmd300]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+
+            return consulta;
+        }
+
         public DataTable findByPdno(ref string pdno, ref string strError)
         {
             //JC 300721 Evitar Error Collection

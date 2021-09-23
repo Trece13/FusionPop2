@@ -1961,6 +1961,53 @@
       </Idiom>
     </Module>
 
+    <Module name="whInvPlantConsuption.aspx">
+      <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Rolls Consumption
+          </stringMessage>
+        </operationName>
+        <operationName name="quantityhigher">
+          <stringMessage>
+            Quantity enter must be higher than zero, please check.
+          </stringMessage>
+        </operationName>
+        <operationName name="orderitemnotexists">
+          <stringMessage>
+            Order and Item doesn't exist.
+          </stringMessage>
+        </operationName>
+        <operationName name="rollnotexists">
+          <stringMessage>
+            Pallet ID doesn't exist.
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="encabezado">
+          <stringMessage>
+            Rollos de consumo
+          </stringMessage>
+        </operationName>
+        <operationName name="quantityhigher">
+          <stringMessage>
+            Cantidad ingresada debe ser mayor a cero, por favor revise.
+          </stringMessage>
+        </operationName>
+        <operationName name="orderitemnotexists">
+          <stringMessage>
+            Orden y articulo no existen.
+          </stringMessage>
+        </operationName>
+        <operationName name="rollnotexists">
+          <stringMessage>
+            Numero de Pallet ID no existe.
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
+
     <Module name="whInvTranfersPlant.aspx">
       <Idiom name="INGLES">
         <operationName name="encabezado">

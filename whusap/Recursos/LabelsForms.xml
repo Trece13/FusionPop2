@@ -2304,6 +2304,73 @@
       </Idiom>
     </Module>
 
+    <Module name="whInvPlantConsuption.aspx">
+      <Idiom name="INGLES">
+        <label name="lblRollNumber">
+          <stringMessage>
+            Pallet ID:
+          </stringMessage>
+        </label>
+        <label name="lblWorkOrder">
+          <stringMessage>
+            Work order:
+          </stringMessage>
+        </label>
+        <label name="btnConsultar">
+          <stringMessage>
+            Query
+          </stringMessage>
+        </label>
+        <label name="lblItem">
+          <stringMessage>
+            Item:
+          </stringMessage>
+        </label>
+        <label name="lblQuantity">
+          <stringMessage>
+            Quantity
+          </stringMessage>
+        </label>
+        <label name="btnRegister">
+          <stringMessage>
+            Register
+          </stringMessage>
+        </label>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <label name="lblRollNumber">
+          <stringMessage>
+            Número de Pallet:
+          </stringMessage>
+        </label>
+        <label name="lblWorkOrder">
+          <stringMessage>
+            Orden de trabajo:
+          </stringMessage>
+        </label>
+        <label name="btnConsultar">
+          <stringMessage>
+            Consultar
+          </stringMessage>
+        </label>
+        <label name="lblItem">
+          <stringMessage>
+            Articulo:
+          </stringMessage>
+        </label>
+        <label name="lblQuantity">
+          <stringMessage>
+            Cantidad:
+          </stringMessage>
+        </label>
+        <label name="btnRegister">
+          <stringMessage>
+            Registrar
+          </stringMessage>
+        </label>
+      </Idiom>
+    </Module>
+
     <Module name="whInvTransfersPlant.aspx">
       <Idiom name="INGLES">
         <label name="lblPlant">

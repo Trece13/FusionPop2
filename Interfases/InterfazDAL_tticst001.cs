@@ -31,6 +31,21 @@ namespace whusa.Interfases
             }
         }
 
+        public DataTable findByItemAndPdnoPlanta(ref string pdno, ref string item, ref string strError)
+        {
+            //int retorno = -1;
+            DataTable retorno = new DataTable();
+            try
+            {
+                retorno = dal.findByItemAndPdnoPlanta(ref pdno, ref item, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         //public DataTable findByPdno(ref string pdno,  ref string strError)
         //{
         //    //int retorno = -1;
