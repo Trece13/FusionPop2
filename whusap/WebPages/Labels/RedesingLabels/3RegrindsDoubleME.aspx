@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns=http://www.w3.org/1999/xhtml>
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -30,8 +30,8 @@
         }
 
         #myLabel, #myLabel2 {
-            width: 85%;
-            height: 565px;
+            width: 8.5in;
+            height: 5.5in;
             padding: 0px;
             border-radius: 12px;
         }
@@ -51,14 +51,14 @@
         #codePaid, #codePaid2 {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 100px;
+            width: 500px;
         }
 
         #codeMaterial, #codeMaterial2 {
             display: block;
             margin: auto;
-            height: 100%;
+            height: 50px;
             width: 100%;
         }
 
@@ -122,7 +122,7 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height: 20% !important">
+                    <div class="row">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -136,8 +136,8 @@
                     <div class="col-12 borderTop" id="divBarcode" style="height: 30% !important">
                         <img src="~/images/logophoenix_login.jpg" id="codePaid" runat="server" />
                     </div>
-                    <div style="height: 50% !important">
-                        <table class="table mw-100" style="height: 100% !important">
+                    <div>
+                        <table class="table mw-100" style="height: 15%">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
@@ -168,22 +168,22 @@
                     </div>
                 </div>
                 <div id="myLabel2">
-                    <div class="row" style="height: 20% !important">
+                    <div class="row">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc2" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight" style="height:100%">
+                        <div class="col-6 alingRight">
                             <img src="~/images/logophoenix_login.jpg" id="codeMaterial2" runat="server" />
                         </div>
                     </div>
                     <div class="col-12 borderTop" id="divBarcode2" style="height: 30% !important">
                         <img src="~/images/logophoenix_login.jpg" id="codePaid2" runat="server" />
                     </div>
-                    <div style="height: 50% !important">
-                        <table class="table mw-100" style="height: 100% !important">
+                    <div style="height: 10%">
+                        <table class="table mw-100">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot2" runat="server"></label></td>

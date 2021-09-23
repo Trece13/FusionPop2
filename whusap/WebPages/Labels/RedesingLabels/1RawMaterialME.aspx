@@ -94,9 +94,9 @@
 
         #codePaid {
             display: block;
-            margin: auto;
             height: 100%;
-            width: 100%;
+            width: 740px;
+			margin-left: 40px;
         }
 
         #codeMaterial, #codeMaterial2 {

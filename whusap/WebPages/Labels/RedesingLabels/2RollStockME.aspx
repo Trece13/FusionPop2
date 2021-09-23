@@ -197,6 +197,8 @@
         }
     </style>
     <script type="text/javascript">
+        //window.addEventListener("beforeprint", function() { window.close(); });
+        window.addEventListener("afterprint", function() { window.close() });
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;

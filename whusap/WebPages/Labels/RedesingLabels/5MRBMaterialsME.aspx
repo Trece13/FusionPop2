@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns=http://www.w3.org/1999/xhtml>
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -73,9 +73,10 @@
         }
 
         #myLabel {
-            width: 85%;
-            height: 440px;
-            padding: 0px;
+            width: 8.5in;
+            height: 4.5in;
+            padding: 5px;
+            border: 0px solid black;
             border-radius: 12px;
         }
 
@@ -94,8 +95,8 @@
         #codePaid {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 100px;
+            width: 500px;
         }
 
         #codeItem {
@@ -105,7 +106,7 @@
             width: 250px;
         }
 
-        #itemDesc {
+       #itemDesc {
             vertical-align: middle;
             font-size: 21px;
         }
@@ -144,7 +145,7 @@
             animation-name: spin;
             animation-duration: 5000ms;
             animation-iteration-count: infinite;
-            animation-timing-function: linear;
+           animation-timing-function: linear;
         }
 
         #saveSection {
@@ -176,11 +177,11 @@
 
         .table td,
         .table th {
-            padding: .1rem;
+            padding: 0rem;
             vertical-align: top;
             border-top: 1px solid #dee2e6;
-            font-size: 1.7em;
-            text-align: left;
+            font-size: 1.7rem;
+            text-align: 0eft;
         }
 
         .alingCenter {
@@ -188,12 +189,11 @@
         }
 
         .row {
-            font-size: 1.3em;
+            font-size: 1em;
         }
-
-        @page{
+                               @page{
             size:landscape;
-            margin:3px;
+            margin:10px;
         }
     </style>
     <script type="text/javascript">
@@ -229,8 +229,8 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div style="height: 10%">
-                        <div class="row">
+                    <div>
+                        <div class="row" style="height: 10%;">
                             <div class="col-4 alingLeft">
                                 <strong>WO / PO&nbsp;</strong><label id="lblWorkOrder" runat="server"></label>
                             </div>
@@ -239,7 +239,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="height: 10%">
+                    <div>
                         <div class="row">
                             <div class="col-12 alingCenter">
                                 <strong>
@@ -253,7 +253,7 @@
                     <div class="col-12 m-0 justify-content-center" style="height: 40%">
                         <table class="table col-auto p-5 mw-100" style="height: 100%">
                             <tbody>
-                                <tr style="height: 15%">
+                                <tr>
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-12 alingCenter">
@@ -263,7 +263,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr style="height: 15%">
+                                <tr>
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6 pl-4"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></div>
@@ -271,7 +271,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr style="height: 15%">
+                                <tr>
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-7 pl-4"><strong>Finished/WIP PID</strong>&nbsp;&nbsp;<label id="lblFinished" runat="server"></label></div>
@@ -279,7 +279,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr style="height: 15%">
+                                <tr>
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-6 pl-4"><strong>Printed By</strong>&nbsp;&nbsp;<label id="lblPrintedBy" runat="server"></label></div>
@@ -287,14 +287,14 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr style="height: 15%">
+                                <tr>
                                     <td class="col-12">
                                         <div class="row">
                                             <div class="col-12 pl-4"><strong>Comments</strong>&nbsp;&nbsp;<label id="lblComments" runat="server"></label></div>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr style="height: 15%">
+                                <tr>
                                     <td class="col-2">
                                         <div id="lblReprint" class="col-12 text-right" runat="server">
                                             <label><strong>REPRINT</strong></label>
@@ -308,9 +308,9 @@
             </div>
         </div>
     </form>
-    <%-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>--%>
+    <%-- <script src=https://code.jquery.com/jquery-3.2.1.slim.min.js crossorigin="anonymous"></script>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js crossorigin="anonymous"></script>
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js crossorigin="anonymous"></script>--%>
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap4.min.js"></script>

@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns=http://www.w3.org/1999/xhtml>
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -23,7 +23,7 @@
 
         .isValid {
             border-bottom: solid;
-            border-color: green;
+           border-color: green;
         }
 
         .isNotValid {
@@ -72,8 +72,8 @@
         }
 
         #myLabel, #myLabel2 {
-            width: 85%;
-            height: 440px;
+            width: 6in;
+            height: 4in;
             padding: 0px;
             border-radius: 12px;
             margin: 0;
@@ -94,21 +94,21 @@
         #codePaid, #codePaid2 {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 75px;
+            width: 500px;
         }
 
         #codeMaterial, #codeMaterial2 {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 50px;
+            width: 220px;
         }
 
         #codeItem, #codeItem2 {
             display: block;
             margin: auto;
-            height: 100%;
+            height: 50px;
             width: 100%;
         }
 
@@ -183,12 +183,15 @@
 
         .table td,
         .table th {
-            padding: .1rem;
+            padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.7em;
+            font-size: 2em;
             text-align: left;
             vertical-align: middle;
-            padding-left: 1em;
+            padding-left: 0em;
+        }
+                               @page{
+            size:landscape;
         }
     </style>
     <script type="text/javascript">
@@ -198,7 +201,7 @@
 
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
-            mywindow.document.write('</head><body><style> body{ width:5.5in; height:3.4in;} @page {size: 6in 4in landscape; margin: 0;} .table {font-size:13px;} .table td{padding: 0.25rem !important;}</style>');
+            mywindow.document.write('</head><body style="margin-top: 1px; margin-left: 1px; margin-right: 1px;"><style>@page{size:landscape;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('<link rel="stylesheet" href="styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
             mywindow.document.write('</body></html>');
@@ -227,14 +230,14 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel" runat="server">
-                    <div class="row" style="margin: auto; height: 15% !important">
+                    <div class="row">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight"  style="height:110%" >
+                        <div class="col-6 alingRight">
                             <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
                         </div>
                     </div>
@@ -242,8 +245,8 @@
                     <div class="col-12 borderTop" id="divBarcode">
                         <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                    <div style="height: 50%">
-                        <table class="table mw-100" style="height: 100%">
+                    <div style="height: 15%">
+                        <table class="table mw-100">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
@@ -264,7 +267,7 @@
                 </div>
                 <br />
                 <div id="myLabel2">
-                    <div class="row" style="margin: auto; height: 10% !important">
+                    <div class="row">
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
@@ -279,8 +282,8 @@
                     <div class="col-12 borderTop" id="divBarcode">
                         <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                    <div style="height: 50%">
-                        <table class="table mw-100" style="height: 100%">
+                    <div style="height: 10%">
+                        <table class="table mw-100">
                             <tbody>
                                 <tr>
                                     <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot2" runat="server"></label></td>
