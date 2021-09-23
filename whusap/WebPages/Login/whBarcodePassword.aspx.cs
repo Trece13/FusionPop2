@@ -101,11 +101,11 @@ namespace whusap.WebPages.Login
                 string rutaServPassword = string.Empty;
                 rutaServUserName = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UserName.Text.Trim().ToUpperInvariant() + "&code=Code128&dpi=96";
                 imgUniqueUserName.Src = !string.IsNullOrEmpty(UserName.Text.Trim().ToUpperInvariant()) ? rutaServUserName : "";
-                imgUniqueUserName.Style.Add("width", "1.8in");
+                imgUniqueUserName.Style.Add("width", "3in");
                 imgUniqueUserName.Style.Add("height", ".6in");
                 rutaServPassword = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + password + "&code=Code128&dpi=96&printDataText=false";
                 imgUniquePassword.Src = !string.IsNullOrEmpty(password) ? rutaServPassword : "";
-                imgUniquePassword.Style.Add("width", "1.8in");
+                imgUniquePassword.Style.Add("width", "3in");
                 imgUniquePassword.Style.Add("height", ".6in");
                 Page.ClientScript.RegisterStartupScript(GetType(), "none", "<script>setTimeout(function(){printContent('Contenido_UpdatePanel1')},3000);</script>", false);
                 btnGeneratePassword.Enabled = false;
