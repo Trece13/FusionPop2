@@ -16,9 +16,10 @@
         {
             display: scroll;
             position: fixed;
-            bottom: 50px;
-            right: 10px;
-            width: 100px;
+            bottom: 104px;
+            right: 107px;
+            width: 96px;
+            height: 29px;
         }
         
         #lblMsg
@@ -113,7 +114,7 @@
             $(BtnSave).hide();
             $(BtnCancel).show();
             Mylist.forEach(function (item) {
-                    if (item.PAID.trim() == idMyRow.cells[0].innerHTML.trim()) {
+                if (item.PAID.trim() == idMyRow.cells[0].innerHTML.trim()) {
                     if (tticol082.length > 0) {
                         if (verificarExistencia(tticol082, item.PAID.trim())) {
 
@@ -133,7 +134,7 @@
 
         function DeshabilitarPrioridad(idMyRow, BtnSave, BtnCancel) {
             var i = 0;
-           
+
             tticol082.forEach(function (item) {
                 if (item.PAID.trim() == idMyRow.cells[0].innerHTML.trim()) {
                     indexEliminar = i;
@@ -302,23 +303,23 @@
         function ClickSaveSuccess(r) {
             $('.table tbody tr').remove();
             ClickQuery();
-//            MylistInsert = JSON.parse(r.d);
-//            if (MylistInsert.length > 0) {
-//                MylistInsert.forEach(function (x) {
-//                    if (x == false) {
-//                        $('.table tbody tr').remove();
-//                        $('#lblMsg').html("Some record was not inserted");
-//                    }
-//                    else {
-//                        $('.table tbody tr').remove();
-//                        $('#lblMsg').html("All records were insert");
-//                    }
-//                });
-//            }
-//            else {
-//                $('.table tbody tr').remove();
-//                $('#lblMsg').html("The insertion was not done");
-//            }
+            //            MylistInsert = JSON.parse(r.d);
+            //            if (MylistInsert.length > 0) {
+            //                MylistInsert.forEach(function (x) {
+            //                    if (x == false) {
+            //                        $('.table tbody tr').remove();
+            //                        $('#lblMsg').html("Some record was not inserted");
+            //                    }
+            //                    else {
+            //                        $('.table tbody tr').remove();
+            //                        $('#lblMsg').html("All records were insert");
+            //                    }
+            //                });
+            //            }
+            //            else {
+            //                $('.table tbody tr').remove();
+            //                $('#lblMsg').html("The insertion was not done");
+            //            }
         }
 
         var ClickSave = function () {
