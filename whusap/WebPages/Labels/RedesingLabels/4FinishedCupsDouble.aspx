@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="styles/fontawesome5.1.css"/>
-<link rel="stylesheet" href="styles/bootstrap4.css"/>
+    <link rel="stylesheet" href="styles/fontawesome5.1.css" />
+    <link rel="stylesheet" href="styles/bootstrap4.css" />
     <style type="text/css">
         #MyEtiqueta label {
             font-size: 15px;
@@ -71,10 +71,10 @@
             text-align: center;
         }
 
-        #myLabel,#myLabel2 {
+        #myLabel, #myLabel2 {
             width: 6in;
             height: 3in;
-            margin:0;
+            margin: 0;
         }
 
         .alingRight {
@@ -89,28 +89,28 @@
             width: 6in;
         }
 
-        #codePaid,#codePaid2 {
+        #codePaid, #codePaid2 {
             display: block;
             margin: auto;
             height: 75px;
             width: 500px;
         }
 
-        #codeMaterial,#codeMaterial2 {
+        #codeMaterial, #codeMaterial2 {
             display: block;
             margin: auto;
             height: 50px;
             width: 220px;
         }
 
-        #codeItem,#codeItem2 {
+        #codeItem, #codeItem2 {
             display: block;
             margin: auto;
             height: 75px;
             width: 250px;
         }
 
-        #itemDesc,#itemDesc2 {
+        #itemDesc, #itemDesc2 {
             vertical-align: middle;
             font-size: 21px;
         }
@@ -159,7 +159,7 @@
             border-bottom: none;
         }
 
-        #divBarcode,#divBarcode2 {
+        #divBarcode, #divBarcode2 {
             height: 140px;
             padding: inherit;
         }
@@ -188,9 +188,9 @@
             padding-left: 1em;
         }
 
-        @page{
-            size:landscape;
-            margin:3px;
+        @page {
+            size: landscape;
+            margin: 3px;
         }
     </style>
     <script type="text/javascript">
@@ -224,12 +224,14 @@
     <form id="form1" runat="server">
         <div id="printContainer" class="container">
             <div id="printButton" runat="server">
-                <button type="button" onclick="printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 ">
+                    <img src="images\printer.svg" height="30px" width="30px" /></button>
+
             </div>
             <br />
             <div id="printSpace">
-                <div id="myLabel" style="width:5.5in; height:3.4in; margin:8px" runat="server">
-                    <div class="row" style="margin:auto">
+                <div id="myLabel" style="width: 5.5in; height: 3.4in; margin: 8px" runat="server">
+                    <div class="row" style="margin: auto">
                         <div class="col-5 alingLeft">
                             <label>
                                 <strong>
@@ -237,12 +239,12 @@
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" style="height:1in"/>
+                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" style="height: 1in" />
                         </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" style="width:5in;height:1in"/>
+                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" style="width: 5in; height: 1in" />
                     </div>
                     <div>
                         <table class="table mw-100">
@@ -265,8 +267,8 @@
                     </div>
                 </div>
                 <br />
-                <div id="myLabel2" style="width:5.5in; height:3.4in;  margin:8px">
-                    <div class="row" style="margin:auto; padding-top:8px">
+                <div id="myLabel2" style="width: 5.5in; height: 3.4in; margin: 8px">
+                    <div class="row" style="margin: auto; padding-top: 8px">
                         <div class="col-5 alingLeft">
                             <label>
                                 <strong>
@@ -274,12 +276,12 @@
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" style="height:1in"/>
+                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" style="height: 1in" />
                         </div>
                     </div>
                     <br />
                     <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server"  style="width:5in; height:1in"/>
+                        <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" style="width: 5in; height: 1in" />
                     </div>
                     <div>
                         <table class="table mw-100">
@@ -304,8 +306,15 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var now = new Date();
+            document.getElementById('lblDate') != null ? document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes() : "";
+            document.getElementById('lblDate2') != null ? document.getElementById('lblDate2').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes() : "";
+        });
+    </script>
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
-<script src="styles/popper.min.js"></script>
-<script src="styles/bootstrap4.min.js"></script>
+    <script src="styles/popper.min.js"></script>
+    <script src="styles/bootstrap4.min.js"></script>
 </body>
 </html>

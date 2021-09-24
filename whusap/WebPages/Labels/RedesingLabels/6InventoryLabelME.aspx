@@ -203,9 +203,10 @@
         #printSpace {
             height: 800px;
         }
-        @page{
-            size:landscape;
-            margin:3px;
+
+        @page {
+            size: landscape;
+            margin: 3px;
         }
     </style>
     <script type="text/javascript">
@@ -236,7 +237,9 @@
     <form id="form1" runat="server">
         <div id="printContainer" class="container">
             <div id="printButton" runat="server">
-                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 ">
+                    <img src="images\printer.svg" height="30px" width="30px" /></button>
+
             </div>
             <br />
             <div id="printSpace">
@@ -248,7 +251,7 @@
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight" style="height:110%">
+                        <div class="col-6 alingRight" style="height: 110%">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="codeMaterial" alt="" />
                         </div>
                     </div>
@@ -294,6 +297,12 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var now = new Date();
+            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+        });
+    </script>
     <%--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>--%>

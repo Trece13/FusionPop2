@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link rel="stylesheet" href="styles/all.css"/>
+    <link rel="stylesheet" href="styles/all.css" />
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
     <link rel="stylesheet" href="styles/bootstrap4.css" />
     <style type="text/css">
@@ -191,14 +191,14 @@
             padding-left: 1em;
         }
 
-        @page{
-            size:landscape;
-            margin:3px;
+        @page {
+            size: landscape;
+            margin: 3px;
         }
     </style>
     <script type="text/javascript">
         //window.addEventListener("beforeprint", function() { window.close(); });
-        window.addEventListener("afterprint", function() { window.close() });
+        window.addEventListener("afterprint", function () { window.close() });
         function printDiv(divID) {
             var divElements = document.getElementById(divID).innerHTML;
             var oldPage = document.body.innerHTML;
@@ -226,7 +226,10 @@
     <form id="form1" runat="server">
         <div id="printContainer" class="container">
             <div id="printButton" runat="server">
-                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 ">
+                    <img src="images\printer.svg" height="30px" width="30px" /></button>
+
             </div>
             <br />
             <div id="printSpace">
@@ -283,6 +286,12 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var now = new Date();
+            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+        });
+    </script>
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap4.min.js"></script>

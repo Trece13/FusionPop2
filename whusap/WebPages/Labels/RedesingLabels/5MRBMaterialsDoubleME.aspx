@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns=http://www.w3.org/1999/xhtml>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -87,9 +87,9 @@
             text-align: center;
         }
 
-        @page{
-            size:landscape;
-            margin:3px;
+        @page {
+            size: landscape;
+            margin: 3px;
         }
     </style>
     <script type="text/javascript">
@@ -120,7 +120,9 @@
     <form id="form1" runat="server">
         <div id="printContainer" class="container">
             <div id="printButton" runat="server">
-                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 ">
+                    <img src="images\printer.svg" height="30px" width="30px" /></button>
+
             </div>
             <br />
             <div id="printSpace">
@@ -190,7 +192,7 @@
                                         <div id="lblReprint" class="col-12 text-right" runat="server">
                                             <label><strong>REPRINT</strong></label>
                                         </div>
-                                   </td>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -271,6 +273,13 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var now = new Date();
+            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+            document.getElementById('lblDate2').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+        });
+    </script>
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap4.min.js"></script>

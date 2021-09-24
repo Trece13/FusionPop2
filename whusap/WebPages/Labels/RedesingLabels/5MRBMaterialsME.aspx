@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 
-<html xmlns=http://www.w3.org/1999/xhtml>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -106,7 +106,7 @@
             width: 250px;
         }
 
-       #itemDesc {
+        #itemDesc {
             vertical-align: middle;
             font-size: 21px;
         }
@@ -145,7 +145,7 @@
             animation-name: spin;
             animation-duration: 5000ms;
             animation-iteration-count: infinite;
-           animation-timing-function: linear;
+            animation-timing-function: linear;
         }
 
         #saveSection {
@@ -191,9 +191,10 @@
         .row {
             font-size: 1em;
         }
-                               @page{
-            size:landscape;
-            margin:10px;
+
+        @page {
+            size: landscape;
+            margin: 10px;
         }
     </style>
     <script type="text/javascript">
@@ -224,7 +225,9 @@
     <form id="form1" runat="server">
         <div id="printContainer" class="container">
             <div id="printButton" runat="server">
-                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><i class="fas fa-print fa-2x" id="btnPrint"></i></button>
+                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 ">
+                    <img src="images\printer.svg" height="30px" width="30px" /></button>
+
             </div>
             <br />
             <div id="printSpace">
@@ -308,6 +311,12 @@
             </div>
         </div>
     </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var now = new Date();
+            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+        });
+    </script>
     <%-- <script src=https://code.jquery.com/jquery-3.2.1.slim.min.js crossorigin="anonymous"></script>
     <script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js crossorigin="anonymous"></script>
     <script src=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js crossorigin="anonymous"></script>--%>
