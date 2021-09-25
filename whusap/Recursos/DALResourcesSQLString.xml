@@ -1478,13 +1478,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="UpdateTtico082Stat">
         <stringSQL>
           UPDATE {0}.tticol082{1} SET
-          T$STAT = '[:T$STAT]' 
+          T$STAT = '[:T$STAT]'
           --,T$PICK = nvl('[:T$PICK]',T$PICK)
-          WHERE trim(T$PAID) = trim('[:T$PAID]')
-          AND   trim(T$ORNO) = trim('[:T$ORNO]')
-          AND trim(T$PONO) = trim('[:T$PONO]')
-          AND trim(T$ADVS) = trim('[:T$ADVS]')
-          AND trim(T$PICK) = trim('[:T$PICK]')       
+          WHERE trim(T$PAID) = TRIM('[:T$PAID]')
+          AND   trim(T$ORNO) = NVL(trim('[:T$ORNO]'),TRIM(T$ORNO))
+          AND trim(T$PONO) = NVL(trim('[:T$PONO]'),TRIM(T$PONO))
+          AND trim(T$ADVS) = NVL(trim('[:T$ADVS]'),TRIM(T$ADVS))
+          AND trim(T$PICK) = trim('[:T$PICK]')
         </stringSQL>
       </operationName>
       <operationName name="UpdateTtico082StatEndPicking">

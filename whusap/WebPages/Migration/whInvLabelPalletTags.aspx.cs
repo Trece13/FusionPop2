@@ -122,6 +122,12 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+
+            if (Request.QueryString["tipoFormulario"].ToString().ToUpper() != null)
+            {
+                _tipoFormulario = Request.QueryString["tipoFormulario"].ToString().ToUpper();
+            }
+
             lblError.Text = "";
             lblConfirm.Text = "";
             DateTime localDate = DateTime.Now;

@@ -59,12 +59,12 @@ namespace whusap.WebPages.WorkOrders
         {
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
-
+            HttpContext.Current.Session["MyObjPicking"] = null;
 
             if (!IsPostBack)
             {
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
-
+                
                 if (formName.Contains('?'))
                 {
                     formName = formName.Split('?')[0];
@@ -1200,12 +1200,13 @@ namespace whusap.WebPages.WorkOrders
             {
                 ramdomNumStr = randomNum.ToString();
             }
-            Obj082.PICK = MySessionObjPicking.PICK.Trim() + "-" + ramdomNumStr;
+            Obj082.PICK = MySessionObjPicking.PICK.Trim();
 
             if (_idaltwhcol122.UpdateTtico082Stat(Obj082) == true)
             {
                 //JC 230721 Envio el nuevo valor del pick listo para imprimir
                 //res = UrlBaseBarcode;
+                Obj082.PICK = MySessionObjPicking.PICK.Trim() + "-" + ramdomNumStr;
                 res = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Obj082.PICK + "&code=Code128&dpi=96";
             }
             else
