@@ -332,6 +332,34 @@ namespace whusa.DAL
         }
         //fin picking ok
 
+        //JC 250921 No permitir un pallet sugerido si ya está en el pick id
+        public DataTable ConsultarPallet_X_Picking(Ent_tticol082 Obj082PPaid)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":PAID", Obj082PPaid.PAID.Trim());
+            paramList.Add(":PICK", Obj082PPaid.PICK.Trim());
+            string tabla = owner + ".tticol222140";
+            string name1 = "ConsultarPallet_X_Picking";
+            //strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+            paramList.Clear();
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol222140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+
         public int actRegtticol022140(string SQNB)
         {
             bool retorno = false;
@@ -1382,6 +1410,28 @@ namespace whusa.DAL
             return Retorno;
 
         }
+        //JC 250921 Ajustar cantidades
+        public bool ActualizarCantidades242_OLD(string PAID, string QTY)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", PAID.Trim());
+            paramList.Add("p1", QTY);
+            strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            paramList.Clear();
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+            return Retorno;
+
+        }
 
         public bool ActualizarCantidades222(string PAID)
         {
@@ -1389,6 +1439,29 @@ namespace whusa.DAL
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$SQNB", PAID.Trim());
+
+            strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
+            paramList.Clear();
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine(Retorno);
+            return Retorno;
+
+        }
+
+        public bool ActualizarCantidades222_OLD(string PAID, string QTY)
+        {
+            bool Retorno = false;
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", PAID.Trim());
+            paramList.Add("p1", QTY);
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
             paramList.Clear();
             try

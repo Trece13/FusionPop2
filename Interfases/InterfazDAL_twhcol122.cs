@@ -221,6 +221,13 @@ namespace whusa.Interfases
 
                 return dal.ConsultarTt307140(Objttccol307);
         }
+        //JC 250921 No permitir tomar un pallet si está dentro del pick
+        public DataTable ConsultarPallet_X_Picking(Ent_tticol082 Obj082PPaid)
+        {
+
+            return dal.ConsultarPallet_X_Picking(Obj082PPaid);
+        }
+
         //actRegtticol022140
         public int actRegtticol022140(string PDNO)
         {
@@ -931,9 +938,19 @@ namespace whusa.Interfases
             return dal.ActualizarCantidades222(PAID);
         }
 
+        public bool ActualizarCantidades222_OLD(string PAID, string QTY)
+        {
+            return dal.ActualizarCantidades222_OLD(PAID, QTY);
+        }
+
         public bool ActualizarCantidades242(string PAID)
         {
             return dal.ActualizarCantidades242(PAID);
+        }
+        //JC 250921 Actualizar cantidades pallet viejos
+        public bool ActualizarCantidades242_OLD(string PAID, string QTY)
+        {
+            return dal.ActualizarCantidades242_OLD(PAID, QTY);
         }
 
         public bool ActualizarCantidades131(string PAID,bool OLD = true )

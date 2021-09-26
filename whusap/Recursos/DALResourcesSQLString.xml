@@ -649,6 +649,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol082">
+      <operationName name="ConsultarPallet_X_Picking">
+        <stringSQL>
+          select * from {0}.tticol082{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
+        </stringSQL>
+      </operationName>
       <operationName name="ExistPrio">
         <stringSQL>
           SELECT distinct COL082.T$PICK PICK,COL082.T$PRIO PRIO FROM BAAN.TTICOL082140 COL082
@@ -679,7 +686,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT distinct col307.T$PAID PAID,COL082.T$PICK PICK,/*COL082.T$CWAR CWAR,COL082.T$ORNO ORNO,COL082.T$TIME TIME,*/COL082.T$PRIO PRIO FROM BAAN.TTICOL082140 COL082
           INNER JOIN BAAN.TTIROU002140 ROU002 ON ROU002.T$MCNO = COL082.T$MCNO
           LEFT JOIN BAAN.ttccol307140 col307 ON col307.t$paid = COL082.T$PICK
-          WHERE COL082.T$MCNO = NVL('[:MCNO]',COL082.T$MCNO)
+          WHERE COL082.T$MCNO = NVL('[:MCNO]',ActualizarCantidades222.T$MCNO)
           AND COL082.T$PICK = NVL('[:PICK]',COL082.T$PICK)
           AND col307.T$PAID IS NULL
           ORDER BY COL082.T$PRIO,COL082.T$PICK
@@ -688,8 +695,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ActualizarCantidades222">
         <stringSQL>
           UPDATE BAAN.tticol222140 SET
-          T$ACQT = (select T$ALLO from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]')),
-          T$ALLO = (select T$ACQT from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]'))
+          --T$ACQT = (select T$ALLO from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]')),
+          --T$ALLO = (select T$ACQT from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]'))
+          T$ACQT = (select T$ACQT - T$ACQT from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]')),
+          T$ALLO = (select T$ALLO + T$ACQT from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]'))
+          WHERE  TRIM(T$SQNB) = TRIM('[:T$SQNB]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizarCantidades222_OLD">
+        <stringSQL>
+          UPDATE BAAN.tticol222140 SET
+          T$ACQT = (select T$ACQT + '[p1]' from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]')),
+          T$ALLO = (select T$ALLO - '[p1]' from BAAN.tticol222140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]'))
           WHERE  TRIM(T$SQNB) = TRIM('[:T$SQNB]')
         </stringSQL>
       </operationName>
@@ -698,6 +715,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE BAAN.tticol242140 SET
           T$ACQT = (select T$ALLO from BAAN.tticol242140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]')),
           T$ALLO = (select T$ACQT from BAAN.tticol242140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]'))
+          WHERE  TRIM(T$SQNB) = TRIM('[:T$SQNB]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizarCantidades242_OLD">
+        <stringSQL>
+          UPDATE BAAN.tticol242140 SET
+          T$ACQT = (select T$ACQT + '[p1]' from BAAN.tticol242140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]')),
+          T$ALLO = (select T$ALLO - '[p1]' from BAAN.tticol242140 where TRIM(T$SQNB) = TRIM('[:T$SQNB]'))
           WHERE  TRIM(T$SQNB) = TRIM('[:T$SQNB]')
         </stringSQL>
       </operationName>
@@ -4702,7 +4727,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="getAllotticol222">
         <stringSQL>
-          SELECT T$ALLO AS ALLO FROM {0}.TTICOL242{1}  WHERE TRIM(T$SQNB) =  TRIM('[:T$PAID]')
+          SELECT T$ALLO AS ALLO FROM {0}.TTICOL222{1}  WHERE TRIM(T$SQNB) =  TRIM('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="InsertarTccol307140">
@@ -4763,6 +4788,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and T$PAID = NVL('[:T$PAID]',T$PAID)
           and T$CWAR = NVL('[:T$CWAR]',T$CWAR)
           and T$STAT = NVL('[:T$STAT]',T$STAT)
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPallet_X_Picking">
+        <stringSQL>
+          select * from {0}.tticol082{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
         </stringSQL>
       </operationName>
       <operationName name="insertarRegistro">
