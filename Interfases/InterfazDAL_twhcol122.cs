@@ -228,6 +228,12 @@ namespace whusa.Interfases
             return dal.ConsultarPallet_X_Picking(Obj082PPaid);
         }
 
+        public DataTable ConsultarPallet_X_Picking_Advs(Ent_tticol082 Obj082PPaid)
+        {
+
+            return dal.ConsultarPallet_X_Picking_Advs(Obj082PPaid);
+        }
+
         //actRegtticol022140
         public int actRegtticol022140(string PDNO)
         {
@@ -1020,6 +1026,20 @@ namespace whusa.Interfases
             try
             {
                 return dal.UpdateTtico082Stat(Obj082);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
+        //JC 260921 Ajustar informacion pallet cuando se cambia el pallet
+        public bool UpdateTtico082Stat_CambioPallet(Ent_tticol082 Obj082)
+        {
+            string strError = string.Empty;
+            try
+            {
+                return dal.UpdateTtico082Stat_CambioPallet(Obj082);
 
             }
             catch (Exception ex)

@@ -192,7 +192,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ListaRegistro_ReprintRegrind">
         <stringSQL>
           SELECT  A.T$PDNO, A.T$PONO, A.T$MITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
-          FROM	{0}.TTICOL042{1} A INNER JOIN
+          FROM	{0}.TTICOL042{1} A LEFT JOIN
           {0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
           {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
           WHERE 	A.T$SQNB = '[:T$SQNB]'
@@ -1466,7 +1466,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND T$ADVS = '[:T$ADVS]'
           AND T$ORNO = '[:T$ORNO]'
           AND T$PONO = '[:T$PONO]'
-          AND T$PRIO = '[:T$PRIO]'
+          --AND T$PRIO = '[:T$PRIO]'
         </stringSQL>
       </operationName>
       <operationName name="UpdateTtico082">
@@ -1504,7 +1504,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           UPDATE {0}.tticol082{1} SET
           T$STAT = '[:T$STAT]'
-          --,T$PICK = nvl('[:T$PICK]',T$PICK)
+          ,T$PICK = nvl('[:T$PICK]'||'-'||'[RAND]',T$PICK)
+          WHERE trim(T$PAID) = TRIM('[:T$PAID]')
+          AND   trim(T$ORNO) = NVL(trim('[:T$ORNO]'),TRIM(T$ORNO))
+          AND trim(T$PONO) = NVL(trim('[:T$PONO]'),TRIM(T$PONO))
+          AND trim(T$ADVS) = NVL(trim('[:T$ADVS]'),TRIM(T$ADVS))
+          AND trim(T$PICK) = trim('[:T$PICK]')
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTtico082Stat_CambioPallet">
+        <stringSQL>
+          UPDATE {0}.tticol082{1} SET
+          T$STAT = '[:T$STAT]'
           WHERE trim(T$PAID) = TRIM('[:T$PAID]')
           AND   trim(T$ORNO) = NVL(trim('[:T$ORNO]'),TRIM(T$ORNO))
           AND trim(T$PONO) = NVL(trim('[:T$PONO]'),TRIM(T$PONO))
@@ -2381,7 +2392,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="updatetwhcol131Quantity">
         <stringSQL>
-          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
+          --UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:T$QTYA]',T$AllO =T$AllO - '[:T$QTYA]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
+          UPDATE  {0}.twhcol131{1} SET T$QTYA = (T$AllO + T$QTYA) - '[:QTYT_ACT]',T$AllO =T$AllO - '[:QTYT_ACT]' WHERE trim(T$PAID) =  trim('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="maximaSecuencia">
@@ -4795,6 +4807,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select * from {0}.tticol082{1}
           where T$PAID = '[:PAID]'
           and TRIM(T$PICK) = TRIM('[:PICK]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPallet_X_Picking_Advs">
+        <stringSQL>
+          select * from {0}.tticol082{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
+          and TRIM(T$ORNO) = TRIM('[:ORNO]')
+          and TRIM(T$PONO) = TRIM('[:PONO]')
         </stringSQL>
       </operationName>
       <operationName name="insertarRegistro">

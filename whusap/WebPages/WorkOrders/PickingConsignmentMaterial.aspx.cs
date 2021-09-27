@@ -786,7 +786,8 @@ namespace whusap.WebPages.WorkOrders
                                 SecuenciaPallet = "C0" + consecutivo.ToString();
                             }
 
-                            MyObj.pdno = ORNO;
+                            //MyObj.pdno = ORNO;
+                            MyObj.pdno = MySessionObjPicking.LOT.Trim();
                             MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
                             MyObj.proc = 2;
                             MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
@@ -801,7 +802,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.pro2 = 2;
                             MyObj.loca = LOCA.Trim();
                             MyObj.norp = 1;
-                            MyObj.dele = 9;
+                            MyObj.dele = 11;
                             MyObj.logd = "NONE";
                             MyObj.refcntd = 0;
                             MyObj.refcntu = 0;
@@ -811,7 +812,8 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.cwaf = CWAR;//CWAR;
                             MyObj.cwat = CWAR;//CWAR;
                             MyObj.aclo = LOCA;
-                            MyObj.allo = Convert.ToDecimal(qtyt.ToString());
+                            //MyObj.allo = Convert.ToDecimal(qtyt.ToString());
+                            MyObj.allo = 0;
                             MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
                             var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
@@ -819,7 +821,7 @@ namespace whusap.WebPages.WorkOrders
 
                             if (validateSave > 0)
                             {
-                                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), PAID.Trim().ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia, true, MyObj.sqnb, MySessionObjPicking.PRIO);
+                                twhcolDAL.actRegtticol082140(HttpContext.Current.Session["user"].ToString().Trim(), PAID.Trim().ToUpper(), Location.ToUpper(), 2, maximo, OORG, ORNO, "", PONO, qtytS, ADVSP, sentencia, true, MyObj.sqnb, MySessionObjPicking.PICK);
 
                             }
 
@@ -828,7 +830,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                 HttpContext.Current.Session["codePaid"] = PAID;
                                 HttpContext.Current.Session["codePaid2"] = MyObj.sqnb;
-                                HttpContext.Current.Session["Lot"] = ORNO;
+                                HttpContext.Current.Session["Lot"] = MyObj.pdno; ;
                                 HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG; 
                                 HttpContext.Current.Session["Date"] = MyObj.date;
@@ -851,7 +853,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else
                     {
-                        //_idaltticol125.updataPalletStatus022(PAID, "9");
+                        _idaltticol125.updataPalletStatus022(PAID, "11");
                         twhcolDAL.updatetticol222Quantity(PAID.Trim(), qtyt_old, qtyt_old);
                     }
                     return JsonConvert.SerializeObject(MyObj);
@@ -916,7 +918,8 @@ namespace whusap.WebPages.WorkOrders
                             }
 
 
-                            MyObj.pdno = ORNO;
+                            //MyObj.pdno = ORNO;
+                            MyObj.pdno = MySessionObjPicking.LOT.Trim(); ;
                             MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
                             MyObj.proc = 2;
                             MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
@@ -929,8 +932,9 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.log2 = "NONE";
                             MyObj.qtd2 = Convert.ToDecimal(qtyt.ToString());
                             MyObj.pro2 = 2;
-                            MyObj.loca = LOCA.Trim();
-                            MyObj.norp = 1;
+                            //MyObj.loca = LOCA.Trim() == "" ? "" : LOCA;
+                            MyObj.loca =  " ";
+                            MyObj.norp = 1; 
                             MyObj.dele = 9;
                             MyObj.logd = "NONE";
                             MyObj.refcntd = 0;
@@ -940,7 +944,8 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.acqt = 0;
                             MyObj.cwaf = CWAR;//CWAR;
                             MyObj.cwat = CWAR;//CWAR;
-                            MyObj.aclo = LOCA;
+                            //MyObj.aclo = LOCA.Trim() == "" ? "" : LOCA;
+                            MyObj.aclo = "";
                             MyObj.allo = Convert.ToDecimal(qtyt.ToString());//Convert.ToDecimal(qtyt_act.ToString());
                             MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
@@ -958,7 +963,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                 HttpContext.Current.Session["codePaid"] = MyObj.sqnb;
                                 HttpContext.Current.Session["codePaid2"] = PAID;
-                                HttpContext.Current.Session["Lot"] = ORNO;
+                                HttpContext.Current.Session["Lot"] = MyObj.pdno; ;
                                 HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.date;
@@ -983,7 +988,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else
                     {
-                        //_idaltticol125.updataPalletStatus042(PAID, "9");
+                        _idaltticol125.updataPalletStatus042(PAID, "11");
                         twhcolDAL.updatetticol242Quantity(PAID.Trim(), qtyt_old, qtyt_old);
                     }
 
@@ -1047,12 +1052,14 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.NPRT = "1";//conteo de reimpresiones 
                             MyObj.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
                             MyObj.LOGT = " ";//llena baan
-                            MyObj.STAT = "7";// LLENAR EN 3 
+                            MyObj.STAT = "9";// LLENAR EN 3 
                             MyObj.DSCA = " ";
                             MyObj.COTP = " ";
                             MyObj.FIRE = "2";
                             MyObj.PSLIP = " ";
-                            MyObj.ALLO = qtyt.ToString();
+                            MyObj.LOCA = MySessionObjPicking.LOCA.Trim();
+                            //MyObj.ALLO = qtyt.ToString();
+                            MyObj.ALLO = "0";
                             MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
                             bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
@@ -1064,14 +1071,15 @@ namespace whusap.WebPages.WorkOrders
                                 twhcolDAL.ingRegTticol092140(MySessionObjPicking.PICK.Trim(), MySessionObjPicking.PALLETID.Trim(), MyObj.PAID, 10, HttpContext.Current.Session["user"].ToString().Trim());
                             }
 
-                            if (Insertsucces && qtyt_act != 0)
+                            //if (Insertsucces && qtyt_act != 0)
+                            if (Insertsucces && Convert.ToDecimal(qtyaG) != 0)
                             {
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
                                 HttpContext.Current.Session["codePaid"] = PAID;
                                 HttpContext.Current.Session["codePaid2"] = MyObj.PAID;
-                                HttpContext.Current.Session["Lot"] = MyObj.ORNO;
-                                HttpContext.Current.Session["Quantity"] = MyObj.qtyaG;
-                                HttpContext.Current.Session["Quantity2"] = MyObj.QTYC;
+                                HttpContext.Current.Session["Lot"] = MyObj.CLOT;
+                                HttpContext.Current.Session["Quantity"] = MyObj.QTYC;
+                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.DATE;
                                 HttpContext.Current.Session["Pallet"] = MyObj.PAID;
                                 HttpContext.Current.Session["Machine"] = "";
@@ -1094,8 +1102,8 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else
                     {
+                        _idaltticol125.updataPalletStatus131(PAID, "9");
                         twhcolDAL.updatetwhcol131Quantity(PAID.Trim(), qtyt_old, qtyt_old);
-                        //_idaltticol125.updataPalletStatus131(PAID, "7");
                     }
                     return JsonConvert.SerializeObject(MyObj);
                 }
@@ -1195,6 +1203,7 @@ namespace whusap.WebPages.WorkOrders
         public static string Drop(string PAID, bool Consigment = false)
         {
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+
             string res = string.Empty;
             Ent_tticol082 Obj082 = new Ent_tticol082();
             Obj082.STAT = Consigment == false ? "4" : "7";
@@ -1215,11 +1224,17 @@ namespace whusap.WebPages.WorkOrders
                 ramdomNumStr = randomNum.ToString();
             }
             Obj082.PICK = MySessionObjPicking.PICK.Trim();
-            //JC 250921 Ejecutar Drop del pallet unico
-            Obj082.PICK = MySessionObjPicking.PICK.Trim();
-            Obj082.ORNO = MySessionObjPicking.ORNO.Trim();
-            Obj082.PONO = MySessionObjPicking.PONO.Trim();
-            Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
+            //JC 260921 Ejecutar Drop del pallet unico
+            DataTable RespAdvs = _idaltwhcol122.ConsultarPallet_X_Picking(Obj082);
+            if (RespAdvs.Rows.Count > 0)
+            {
+                Obj082.OORG = RespAdvs.Rows[0]["T$OORG"].ToString().Trim();
+                Obj082.ORNO = RespAdvs.Rows[0]["T$ORNO"].ToString().Trim();
+                Obj082.PONO = RespAdvs.Rows[0]["T$PONO"].ToString().Trim();
+                Obj082.ADVS = RespAdvs.Rows[0]["T$ADVS"].ToString().Trim();
+            }
+            Obj082.RAND = ramdomNumStr;
+            //Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
             if (_idaltwhcol122.UpdateTtico082Stat(Obj082) == true)
             {
                 //JC 230721 Envio el nuevo valor del pick listo para imprimir
@@ -1265,7 +1280,7 @@ namespace whusap.WebPages.WorkOrders
             //JC 250921 Ejecutar Drop del pallet unico
             Obj082.ORNO = MySessionObjPicking.ORNO.Trim();
             Obj082.PONO = MySessionObjPicking.PONO.Trim();
-            Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
+            //Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
             if (_idaltwhcol122.UpdateTtico082StatEndPicking(Obj082, ramdomNumStr) == true)
             {
                 //JC 230721 Envio el nuevo valor del pick listo para imprimir
@@ -1350,10 +1365,16 @@ namespace whusap.WebPages.WorkOrders
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     //JC 250921 Ejecutar Drop del pallet unico
                     Obj082.PICK = MySessionObjPicking.PICK.Trim();
-                    Obj082.ORNO = ORNO.Trim();
-                    Obj082.PONO = PONO.Trim();
-                    Obj082.ADVS = ADVS.Trim();
-                    _idaltwhcol122.UpdateTtico082Stat(Obj082);
+                    //JC 260921 Ejecutar Drop del pallet unico
+                    DataTable RespAdvs = _idaltwhcol122.ConsultarPallet_X_Picking(Obj082);
+                    if (RespAdvs.Rows.Count > 0)
+                    {
+                        Obj082.OORG = RespAdvs.Rows[0]["T$OORG"].ToString().Trim();
+                        Obj082.ORNO = RespAdvs.Rows[0]["T$ORNO"].ToString().Trim();
+                        Obj082.PONO = RespAdvs.Rows[0]["T$PONO"].ToString().Trim();
+                        Obj082.ADVS = RespAdvs.Rows[0]["T$ADVS"].ToString().Trim();
+                    }
+                    _idaltwhcol122.UpdateTtico082Stat_CambioPallet(Obj082);
                     //}
                     return true;
 
@@ -1374,10 +1395,16 @@ namespace whusap.WebPages.WorkOrders
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     //JC 250921 Ejecutar Drop del pallet unico
                     Obj082.PICK = MySessionObjPicking.PICK.Trim();
-                    Obj082.ORNO = ORNO.Trim();
-                    Obj082.PONO = PONO.Trim();
-                    Obj082.ADVS = ADVS.Trim();
-                    _idaltwhcol122.UpdateTtico082Stat(Obj082);
+                    //JC 260921 Ejecutar Drop del pallet unico
+                    DataTable RespAdvs = _idaltwhcol122.ConsultarPallet_X_Picking(Obj082);
+                    if (RespAdvs.Rows.Count > 0)
+                    {
+                        Obj082.OORG = RespAdvs.Rows[0]["T$OORG"].ToString().Trim();
+                        Obj082.ORNO = RespAdvs.Rows[0]["T$ORNO"].ToString().Trim();
+                        Obj082.PONO = RespAdvs.Rows[0]["T$PONO"].ToString().Trim();
+                        Obj082.ADVS = RespAdvs.Rows[0]["T$ADVS"].ToString().Trim();
+                    }
+                    _idaltwhcol122.UpdateTtico082Stat_CambioPallet(Obj082);
                     //}
                     return true;
 
@@ -1395,11 +1422,17 @@ namespace whusap.WebPages.WorkOrders
                     Ent_tticol082 Obj082 = new Ent_tticol082();
                     Obj082.STAT = "3";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
-                    Obj082.ORNO = MySessionObjPicking.ORNO.Trim();
-                    Obj082.PONO = MySessionObjPicking.PONO.Trim();
-                    Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
                     Obj082.PICK = MySessionObjPicking.PICK.Trim();
-                    _idaltwhcol122.UpdateTtico082Stat(Obj082);
+                    //JC 260921 Ejecutar Drop del pallet unico
+                    DataTable RespAdvs = _idaltwhcol122.ConsultarPallet_X_Picking(Obj082);
+                    if (RespAdvs.Rows.Count > 0)
+                    {
+                        Obj082.OORG = RespAdvs.Rows[0]["T$OORG"].ToString().Trim();
+                        Obj082.ORNO = RespAdvs.Rows[0]["T$ORNO"].ToString().Trim();
+                        Obj082.PONO = RespAdvs.Rows[0]["T$PONO"].ToString().Trim();
+                        Obj082.ADVS = RespAdvs.Rows[0]["T$ADVS"].ToString().Trim();
+                    }
+                    _idaltwhcol122.UpdateTtico082Stat_CambioPallet(Obj082);
                     //}
                     return true;
                 }
