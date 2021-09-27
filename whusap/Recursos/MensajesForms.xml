@@ -5023,7 +5023,7 @@
       <Idiom name="INGLES">
         <operationName name="ThePalletNotAllowedHavingTheSameWarehouse">
           <stringMessage>
-            The pallet not allowed, not having the same warehouse
+            The pallet not allowed, not having the same warehouse   
           </stringMessage>
         </operationName>
         <operationName name="ThepalletIDNotContaenthesameItem">
