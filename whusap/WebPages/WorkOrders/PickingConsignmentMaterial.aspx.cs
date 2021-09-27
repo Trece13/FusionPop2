@@ -719,7 +719,7 @@ namespace whusap.WebPages.WorkOrders
                 decimal qtyt_old = ConvertToDecimal(QTYT_OLD.ToString().Trim());
                 decimal qtyt_act = qtyt_old - qtyt;
                 string qtytS = ConvertToDecimal(QTYT.ToString().Trim()).ToString().ToString();
-                int cnpk = Convert.ToInt32(MySessionObjPicking.CNPK.Trim());
+                int cnpk = Convert.ToInt32(MySessionObjPicking.CNPK.Trim() == "" ? "2" : MySessionObjPicking.CNPK.Trim());
                 String Location = LOCA;
 
                 //Generar Ramdom
