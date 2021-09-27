@@ -221,6 +221,19 @@ namespace whusa.Interfases
 
                 return dal.ConsultarTt307140(Objttccol307);
         }
+        //JC 250921 No permitir tomar un pallet si está dentro del pick
+        public DataTable ConsultarPallet_X_Picking(Ent_tticol082 Obj082PPaid)
+        {
+
+            return dal.ConsultarPallet_X_Picking(Obj082PPaid);
+        }
+
+        public DataTable ConsultarPallet_X_Picking_Advs(Ent_tticol082 Obj082PPaid)
+        {
+
+            return dal.ConsultarPallet_X_Picking_Advs(Obj082PPaid);
+        }
+
         //actRegtticol022140
         public int actRegtticol022140(string PDNO)
         {
@@ -931,9 +944,19 @@ namespace whusa.Interfases
             return dal.ActualizarCantidades222(PAID);
         }
 
+        public bool ActualizarCantidades222_OLD(string PAID, string QTY)
+        {
+            return dal.ActualizarCantidades222_OLD(PAID, QTY);
+        }
+
         public bool ActualizarCantidades242(string PAID)
         {
             return dal.ActualizarCantidades242(PAID);
+        }
+        //JC 250921 Actualizar cantidades pallet viejos
+        public bool ActualizarCantidades242_OLD(string PAID, string QTY)
+        {
+            return dal.ActualizarCantidades242_OLD(PAID, QTY);
         }
 
         public bool ActualizarCantidades131(string PAID,bool OLD = true )
@@ -1003,6 +1026,20 @@ namespace whusa.Interfases
             try
             {
                 return dal.UpdateTtico082Stat(Obj082);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
+        //JC 260921 Ajustar informacion pallet cuando se cambia el pallet
+        public bool UpdateTtico082Stat_CambioPallet(Ent_tticol082 Obj082)
+        {
+            string strError = string.Empty;
+            try
+            {
+                return dal.UpdateTtico082Stat_CambioPallet(Obj082);
 
             }
             catch (Exception ex)

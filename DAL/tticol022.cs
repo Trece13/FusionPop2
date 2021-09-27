@@ -1058,7 +1058,7 @@ namespace whusa.DAL
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":T$CWAR", CWAR.ToUpper().Trim());
                 paramList.Add(":T$ACQT", ACQT.ToString().Contains(",") == true ? ACQT.ToString().Replace(",", ".") : ACQT.ToString().Replace(".", ","));
-                paramList.Add(":T$ACLO", ACLO.ToUpper().Trim());               
+                paramList.Add(":T$ACLO", ACLO.ToUpper() == "" ? " " : ACLO.ToUpper().Trim());               
                 paramList.Add(":T$SQNB", PAID.ToUpper());
 
 

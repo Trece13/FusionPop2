@@ -200,7 +200,7 @@
 
         #lblError {
             color: red;
-            font-size: 13px;
+            font-size: 30px;
         }
 
         .load {
@@ -350,7 +350,7 @@
                     <div id="divStartPicking" class="row">
                         <div class="col-6">
                             <button class="btn btn-primary col-12 btn-sm" id="btnStarPicking" type="button">Start Picking&nbsp;<span><i class="fas fa-circle-notch fa-spin" style="color: silver; display:none" id='StartLoader'></i></span></button>
-                            <label id="lblErrorInit" style="color:red; font-size:14px"></label>
+                            <label id="lblErrorInit" style="color:red; font-size:30px"></label>
                         </div>
                     </div>
                 </form>
@@ -465,7 +465,7 @@
                         <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;" type="button">Skip Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                     </div>
                     <div class="row">
-                        <label id="lblError" style="color: red"></label>
+                        <label id="lblError" style="color: red; font-size: 30px;"></label>
                     </div>
                 </form>
             </div>
@@ -733,7 +733,7 @@
             }
             else if (MyObj.error == true) {
                 paidInvalid();
-                $("#lblError").html("Pallet not exists");
+                $("#lblError").html("Pallet not allowed");
             }
         }
 
@@ -755,7 +755,7 @@
                 ShowCurrentOptionsWarehouse();
             }
             else if (MyObj.error == true) {
-                console.log("Pallet not exists");
+                console.log("Pallet not allowed");
 
             }
         }
