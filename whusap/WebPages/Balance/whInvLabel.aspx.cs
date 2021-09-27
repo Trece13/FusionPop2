@@ -188,6 +188,11 @@ namespace whusap.WebPages.Balance
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
+            //JC 270921 Evitar que se confunda el programa y no haga el proceso correcto de acuerdo al formulario
+            if (Request.QueryString["tipoFormulario"] != null)
+            {
+                _tipoFormulario = Request.QueryString["tipoFormulario"].ToString().ToUpper();
+            }
             lblError.Visible = true;
             decimal cantidad;
             string cantidads;

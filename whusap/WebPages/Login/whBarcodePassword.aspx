@@ -108,10 +108,10 @@
                             <div id="uno" align="center">
 
                                 <p align="center">
-                                    <img src="" runat="server" id="imgUniqueUserName" alt="" />
+                                    <img src="" runat="server" id="imgUniqueUserName" style="height: .9in; widht: 1.5in;" alt="" />
                                 </p>
                                 <p align="center">
-                                    <img src="" runat="server" id="imgUniquePassword" alt=""/>
+                                    <img src="" runat="server" id="imgUniquePassword" style="height: .9in; widht: 2.5in;" alt=""/>
                                 </p>
 
                             </div>

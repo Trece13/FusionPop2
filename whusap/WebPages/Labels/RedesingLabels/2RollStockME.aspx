@@ -94,21 +94,21 @@
         #codePaid {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 120px;
+            width: 750px;
         }
 
         #codeMaterial {
             display: block;
-            margin: auto;
-            height: 90px;
-            width: 100%;
+            margin: auto auto auto 0px;
+            height: 80px;
+            width: 300px;
         }
 
         #codeItem {
             display: block;
             margin: auto;
-            height: 75px;
+            height: 120px;
             width: 250px;
         }
 
@@ -238,10 +238,10 @@
                         <div class="col-6 alingLeft">
                             <label>
                                 <strong>
-                                    <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
+                                    <label id="lblMaterialDesc" runat="server" style="font-size: 2em;">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-6 alingRight" style="height: 110%;">
+                        <div class="col-6 alingRight">
                             <img src="~/images/logophoenix_login.jpg" runat="server" id="codeMaterial" alt="" />
                         </div>
                     </div>

@@ -93,21 +93,21 @@
         #codePaid {
             display: block;
             margin: auto;
-            height: 100%;
-            width: 100%;
+            height: 120px;
+            width: 750px;
         }
 
         #codeMaterial {
             display: block;
-            margin: auto;
-            height: 100%;
-            width: 100%;
+            margin: auto auto auto 0px;
+            height: 80px;
+            width: 220px;
         }
 
         #codeItem {
             display: block;
             margin: auto;
-            height: 75px;
+            height: 120px;
             width: 250px;
         }
 
@@ -164,6 +164,8 @@
         #divBarcode {
             height: 30%;
             padding: inherit;
+            margin-left: 25px;
+            margin-right: 25px;
         }
 
         @keyframes spin {
@@ -230,16 +232,16 @@
             <br />
             <div id="printSpace">
                 <div id="myLabel">
-                    <div class="row" style="height: 20% !important">
-                        <div class="col-7 alingLeft">
+                    <div class="row" style="height: 30% !important">
+                        <div class="col-6 alingLeft">
                             <label>
                                 <strong>
-                                    <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
+                                    <label id="lblMaterialDesc" runat="server" style="font-size: 2em;">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
-                        <div class="col-5 alingRight" style="height: 100%">
-                            <img src="~/images/logophoenix_login.jpg" id="codeMaterial" runat="server" />
-                        </div>
+                        <div class="col-6 alingRight">
+                            &nbsp;<img src="~/images/logophoenix_login.jpg" id="codeMaterial" 
+                                runat="server" /></div>
                     </div>
                     <div class="col-12 borderTop" id="divBarcode">
                         <img src="~/images/logophoenix_login.jpg" id="codePaid" runat="server" />
@@ -257,7 +259,6 @@
                                 <tr style="height: 20%">
                                     <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
                                     <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
-                                    <td rowspan="2"></td>
                                 </tr>
                                 <tr style="height: 20%">
                                     <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
