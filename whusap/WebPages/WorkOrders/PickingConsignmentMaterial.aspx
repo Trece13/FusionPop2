@@ -818,7 +818,7 @@
                     window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
                     if (myObj.length > 0) {
                         existPalletsPick = true;
-
+                        console.log(myObj);
                         for (var i = 0; i < myObj.length; i++) {
 
                             if (myObj[i].T$STAT == 1) {
