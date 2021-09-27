@@ -131,17 +131,18 @@
             </asp:ContentPlaceHolder>
         </div>
         <input id="hOpen" type="hidden" name="hOpen" runat="server" value="" />
-        <div id="footer" style="overflow: hidden; height: 4em; background-color: #2f80ed; position: fixed"
+        <div id="footer" style="overflow: hidden; height: 2.4em; background-color: #2f80ed; position: fixed; left: 0px;"
             align="left">
-            <div style="width: 33%; float: left; text-align: center; margin-top: 1%">
-                <asp:Label ID="LblShif1" runat="server" Font-Names="Calibri" Font-Size="2em" ForeColor="White"></asp:Label>
+            <div style="width: 33%; float: left; text-align: center; margin-top: 1%; height: 15px;">
+                <asp:Label ID="LblShif1" runat="server" Font-Names="Calibri" Font-Size="1.2em" ForeColor="White"></asp:Label>
             </div>
             <div style="width: 33%; float: left; text-align: center; margin-top: 1%">
                 <asp:Label Style="margin: auto" ID="LblName1" runat="server" Font-Names="Calibri"
-                    Font-Size="2em" ForeColor="White"></asp:Label>
+                    Font-Size="1.2em" ForeColor="White"></asp:Label>
             </div>
             <div style="width: 33%; float: left; text-align: center; margin-top: 1%">
-                <asp:Label ID="LblDate1" runat="server" Font-Names="Calibri" Font-Size="2em" ForeColor="White"></asp:Label>
+                <a href="c2ac3709-d3ab-417d-9383-8b314143d8cfwhusap.log">c2ac3709-d3ab-417d-9383-8b314143d8cfwhusap.log</a>
+                <asp:Label ID="LblDate1" runat="server" Font-Names="Calibri" Font-Size="1.2em" ForeColor="White"></asp:Label>
             </div>
         </div>
     </form>
