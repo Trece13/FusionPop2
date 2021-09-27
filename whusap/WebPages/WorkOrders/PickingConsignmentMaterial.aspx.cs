@@ -29,6 +29,7 @@ namespace whusap.WebPages.WorkOrders
         public static string ThenewpalletIddoesnthaveItemequaltotheoldpalletIditem = mensajes("ThenewpalletIddoesnthaveItemequaltotheoldpalletIditem");
         public static string ThepalletIDDoesntexistorItsinpickingprocess = mensajes("ThepalletIDDoesntexistorItsinpickingprocess");
         public static string ThepalletIDNotContaenthesameItem = mensajes("ThepalletIDNotContaenthesameItem");
+           public static string ThePalletNotAllowedHavingTheSameWarehouse = mensajes("ThePalletNotAllowedHavingTheSameWarehouse");
         public static string ThePallethasalreadylocate = mensajes("ThePallethasalreadylocate");
         public static string ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus = mensajes("ThePalletIDdoesnotexistorisnotassociatedtoyouruserornothavepalletsinpickingstatus");
         public static string ThePalletIDdoesnotexist = mensajes("ThePalletIDdoesnotexist");
@@ -608,14 +609,15 @@ namespace whusap.WebPages.WorkOrders
                     //return JsonConvert.SerializeObject(ObjPicking);
                     if (DTPalletID.Rows[0]["CWAT"].ToString().Trim() == MySessionObjPicking.WRH.ToString().Trim())
                     {
-                        ObjPicking.error = false;
+                        ObjPicking.error = false; 
                         return JsonConvert.SerializeObject(ObjPicking);
                     }
                     else
                     {
                         ObjPicking.error = true;
-                        ObjPicking.errorMsg = ThepalletIDNotContaenthesameItem;
+                        ObjPicking.errorMsg = ThePalletNotAllowedHavingTheSameWarehouse;
                         return JsonConvert.SerializeObject(ObjPicking);
+                        
                     }
                 else
                 {

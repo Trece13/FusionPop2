@@ -703,6 +703,7 @@
 
         function verifyPallet() {
             stoper();
+            lstPallets = JSON.parse(window.localStorage.getItem('MyPalletList'));
             timer = setTimeout(function () {
                 var CurrentPaid = lblPaid.innerHTML.trim();
                 var NewPaid = txPaid.value.trim().toUpperCase();
@@ -711,11 +712,25 @@
                     $("#lblError").html("");
                 }
                 else {
-                    $("#lblError").html("");
-                    console.log("Pallet NO Igual");
-                    Method = "VerificarExistenciaPalletID"
-                    Data = "{'PAID_NEW':'" + NewPaid + "'}";
-                    EventoAjax(Method, Data, PalletIDSuccess)
+                    inpick = false;
+                    for (var i = 0 ; i < lstPallets.length; i++) {
+                        if (lstPallets[i].T$PAID.trim() == NewPaid.trim()) {
+                            inpick = true;
+                        }
+                    }
+
+                    if (inpick) {
+                        paidInvalid();
+                        $("#lblError").html("");
+                    }
+                    else {
+                        $("#lblError").html("");
+                        console.log("Pallet NO Igual");
+                        Method = "VerificarExistenciaPalletID"
+                        Data = "{'PAID_NEW':'" + NewPaid + "'}";
+                        EventoAjax(Method, Data, PalletIDSuccess)
+                        lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
+                    }
                 }
             }, 1500);
 
@@ -724,7 +739,7 @@
         var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
-                console.log("Pallet exists");
+                console.log();
                 validElement(txPaid);
                 locaInvalid();
                 hideShowNeutroInputText(txQtyc, false);
@@ -733,7 +748,7 @@
             }
             else if (MyObj.error == true) {
                 paidInvalid();
-                $("#lblError").html("Pallet not allowed");
+                $("#lblError").html(MyObj.errorMsg);
             }
         }
 

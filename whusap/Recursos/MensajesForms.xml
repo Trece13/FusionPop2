@@ -5021,6 +5021,11 @@
 
     <Module name="Picking.aspx">
       <Idiom name="INGLES">
+        <operationName name="ThePalletNotAllowedHavingTheSameWarehouse">
+          <stringMessage>
+            The pallet not allowed, not having the same warehouse
+          </stringMessage>
+        </operationName>
         <operationName name="ThepalletIDNotContaenthesameItem">
         <stringMessage>
           The pallet ID not contain the same Item
