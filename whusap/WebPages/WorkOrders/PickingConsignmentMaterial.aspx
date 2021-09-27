@@ -721,6 +721,7 @@
 
                     if (inpick) {
                         paidInvalid();
+                        alert("Pallet not Allowed, cause is into this pick.");
                         $("#lblError").html("");
                     }
                     else {
