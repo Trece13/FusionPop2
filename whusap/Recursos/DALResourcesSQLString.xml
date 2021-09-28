@@ -6378,7 +6378,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           tisfc001.T$QTDL - (select nvl(sum(T$QTDL),0) FROM {0}.tticol025{1} WHERE T$PDNO = tisfc001.T$PDNO AND T$MITM=tisfc001.T$MITM) AS QTYPEND,
           T$QDLV + (select nvl(sum(T$QTDL),0) FROM {0}.tticol025{1} WHERE T$PDNO = tisfc001.T$PDNO AND T$MITM = tisfc001.T$MITM) AS TOTQTYENT,
           tcibd003.T$CONV AS QTYPLT, ticol022.T$DELE AS DELE, wmd200.t$sloc as SLOC,
-          (select t$loca from {0}.twhwmd300{1} where t$cwar = tisfc001.T$CWAR and t$loct = 5  and t$prio &lt; 999  and rownum = 1 group by t$loca) as LOCA
+          (select t$loca from {0}.twhwmd300{1} where t$cwar = tisfc001.T$CWAR and t$loct = 5  and t$prio &lt; 999 and t$binb = 2 and rownum = 1 group by t$loca) as LOCA
           FROM {2} tisfc001
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tisfc001.T$MITM = tcibd001.T$ITEM
           INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.T$CWAR = tisfc001.T$CWAR

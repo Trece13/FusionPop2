@@ -95,7 +95,7 @@
         #codePaid {
             display: block;
             height: 100%;
-            width: 740px;
+            width: 702px;
 			margin-left: 40px;
         }
 
@@ -103,7 +103,7 @@
             display: block;
             margin: auto;
             height: 110%;
-            width: 100%
+            width: 80%
         }
 
         #itemDesc {

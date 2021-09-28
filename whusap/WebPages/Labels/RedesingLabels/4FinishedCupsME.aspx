@@ -185,7 +185,7 @@
         .table th {
             padding: .1rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.7em;
+            font-size: 1.6em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
