@@ -281,7 +281,8 @@ namespace whusap.WebPages.Inventarios
                     lblReason.Visible = false;
                     lblCost.Visible = false;
                 }
-                else{
+                else
+                {
                     dropDownCostCenters.Visible = false;
                     dropDownReasonCodes.Visible = false;
                     lblReason.Visible = true;
@@ -385,7 +386,7 @@ namespace whusap.WebPages.Inventarios
                     itemS = new ListItem();
                     rowIndex = (int)resultado.Rows.IndexOf(dr);
                     itemS.Value = dr.ItemArray[0].ToString();
-                    itemS.Text = dr.ItemArray[0].ToString() +"-"+ dr.ItemArray[1].ToString();
+                    itemS.Text = dr.ItemArray[0].ToString() + "-" + dr.ItemArray[1].ToString();
                     dropDownReasonCodes.Items.Insert(rowIndex + 1, itemS);
                 }
             }
@@ -412,7 +413,7 @@ namespace whusap.WebPages.Inventarios
                     itemS = new ListItem();
                     rowIndex = (int)resultado.Rows.IndexOf(dr);
                     itemS.Value = dr.ItemArray[0].ToString();
-                    itemS.Text = dr.ItemArray[0].ToString() +"-"+ dr.ItemArray[1].ToString();
+                    itemS.Text = dr.ItemArray[0].ToString() + "-" + dr.ItemArray[1].ToString();
                     dropDownCostCenters.Items.Insert(rowIndex + 1, itemS);
                 }
             }
@@ -467,21 +468,26 @@ namespace whusap.WebPages.Inventarios
                 txtAdjustmentQuantity.Focus();
                 return;
             }
-            else{
-                if (inputQty > (Convert.ToDecimal(lblQuantityValue.Text) * 2))
+            else
+            {
+                if (lblQuantityValue.Text.Trim() != "0")
                 {
-                    lblError.Text = "New quantity not allowed, máximum double”";
-                    txtPalletId.Enabled = true;
-                    btnSave.Visible = true;
-                    tblPalletInfo.Visible = true;
-                    btnSave.Visible = true;
-                    txtAdjustmentQuantity.Text = "";
-                    txtAdjustmentQuantity.Focus();
-                    return;
+                    if (inputQty > (Convert.ToDecimal(lblQuantityValue.Text) * 2))
+                    {
+                        lblError.Text = "New quantity not allowed, máximum double”";
+                        txtPalletId.Enabled = true;
+                        btnSave.Visible = true;
+                        tblPalletInfo.Visible = true;
+                        btnSave.Visible = true;
+                        txtAdjustmentQuantity.Text = "";
+                        txtAdjustmentQuantity.Focus();
+                        return;
+                    }
                 }
+
             }
 
-            
+
             //if (Convert.ToInt32(txtAdjustmentQuantity.Text.Trim()) > Convert.ToInt32(lblQuantityValue.Text.Trim()))
             //{
             //    lblError.Text = AdjustmentquantityshouldbelessthanexistingQty;
@@ -520,7 +526,7 @@ namespace whusap.WebPages.Inventarios
             //obj.CDIS = Session["cdis"].ToString();
             //obj.EMNO = Session["emno"].ToString();
             obj.CDIS = dropDownReasonCodes.SelectedValue;
-            obj.EMNO = dropDownCostCenters.SelectedValue; 
+            obj.EMNO = dropDownCostCenters.SelectedValue;
             obj.PROC = 2;
             obj.ORNO = " ";
             obj.PONO = Convert.ToInt32(HttpContext.Current.Session["pono"].ToString());
@@ -654,11 +660,11 @@ namespace whusap.WebPages.Inventarios
                 lblitemDesc.Text = Transfers.DescripcionItem(obj.ITEM); ;
                 lblWorkOrder.Text = obj.PAID.Substring(0, obj.PAID.IndexOf("-"));
                 lblPalletNum.Text = newPallet.Substring(obj.PAID.IndexOf("-") + 1);
-                lblInspector.Text =obj.LOGN;
+                lblInspector.Text = obj.LOGN;
                 lblDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
                 //lblShift.Text =Session["shif"].ToString();
                 lblQuantityL.Text = txtAdjustmentQuantity.Text.Trim() + "  " + lblUnitValue.Text.Trim();
-                codeItem.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" +obj.ITEM.Trim()+ "&code=Code128&dpi=96";
+                codeItem.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + obj.ITEM.Trim() + "&code=Code128&dpi=96";
                 codePaid.ImageUrl = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + newPallet.Trim() + "&code=Code128&dpi=96";
 
                 divPrint.Visible = true;

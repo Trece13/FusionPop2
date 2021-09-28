@@ -414,6 +414,11 @@ namespace whusap.WebPages.InvReceipts
                         ObjTtwhinr140.Error = true;
                         ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
                     }
+
+                    if (Convert.ToInt32(QTYS) == 0)
+                    {
+                        ObjTtwhinr140.Error = false;
+                    }
                     //}
                     //else
                     //{

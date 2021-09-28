@@ -201,9 +201,7 @@
         function validarAdjustQty(qty) {
 
             if (qty <= 0) {
-
                 alert("Adjustment quantity: cannot be zero (0)");
-                // $("#txtAdjustmentQuantity").val('');
                 $("#txtAdjustmentQuantity").focus();
                 return false;
             }
@@ -213,13 +211,6 @@
                 $("#txtAdjustmentQuantity").focus();
                 return false;
             }
-            //qtyExting = $("#Contenido_lblQuantityValue").text();
-            //if (parseInt(qty) > parseInt(qtyExting)) {
-
-            //     alert("Adjustment quantity shuould be less than existing Qty");
-            //    // $("#txtAdjustmentQuantity").val('');
-            //    $("#txtAdjustmentQuantity").focus();
-            //    return false;
         }
 
 
@@ -502,7 +493,7 @@
                                                 <strong>
                                                     <asp:Label ID="Label3" runat="server" Text="Made in Dublin VA"></asp:Label></strong></td><td id="" style="width: 151px;">
                                                 <strong>&nbsp;&nbsp;</strong> </td></tr></tbody></table></div></div></div><br /><div id="printButton" class="container">
-                        <button type="button" onclick="printLabel()" class="btn btn-link col-12"><i class="fas fa-print" id="btnPrint"></i></button>
+                        <button type="button" onclick="printLabel()" class="btn btn-link col-12"><img src="images\printer.svg" height="30px" width="30px"/></button>
                     </div>
                 </div>
             </div>
@@ -532,7 +523,7 @@
             //            return true;
 
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
-            mywindow.document.write('<html><head>');
+            mywindow.document.write('<html><head><style>@page {size: landscape; margin: 3px;}</style>');
             mywindow.document.write('</head><body>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('<link rel="stylesheet" href="styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
