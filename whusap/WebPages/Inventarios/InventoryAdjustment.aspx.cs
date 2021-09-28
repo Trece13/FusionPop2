@@ -516,8 +516,11 @@ namespace whusap.WebPages.Inventarios
             obj.LOGN = Session["user"].ToString(); ;
             //obj.CDIS = dropDownReasonCodes.SelectedItem.Value;
             //obj.EMNO = dropDownCostCenters.SelectedItem.Value; 
-            obj.CDIS = Session["cdis"].ToString();
-            obj.EMNO = Session["emno"].ToString();
+            //JC 280921 Evitar que tome los valores por defecto de la variable de session
+            //obj.CDIS = Session["cdis"].ToString();
+            //obj.EMNO = Session["emno"].ToString();
+            obj.CDIS = dropDownReasonCodes.SelectedValue;
+            obj.EMNO = dropDownCostCenters.SelectedValue; 
             obj.PROC = 2;
             obj.ORNO = " ";
             obj.PONO = Convert.ToInt32(HttpContext.Current.Session["pono"].ToString());

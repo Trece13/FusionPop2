@@ -22,6 +22,7 @@ namespace whusap.WebPages.Balance
         #region Propiedades
         protected static InterfazDAL_ttccol301 idal301 = new InterfazDAL_ttccol301();
         protected static InterfazDAL_tticol042 idal042 = new InterfazDAL_tticol042();
+        protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
         protected static InterfazDAL_twhcol072 idal072 = new InterfazDAL_twhcol072();
         Ent_tticol042 obj042 = new Ent_tticol042();
         Ent_twhcol072 obj072 = new Ent_twhcol072();
@@ -37,6 +38,7 @@ namespace whusap.WebPages.Balance
         private static string formName;
         private static string globalMessages = "GlobalMessages";
         public static string _idioma;
+        private static bool _ConfirmacionAutomaticaRgr = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticagrinder"].ToString());
         #endregion
 
         #region Eventos
@@ -144,9 +146,24 @@ namespace whusap.WebPages.Balance
             //obj042.qtd1 = Convert.ToDecimal(lblQuantity.Text.Trim());
             obj042.pro1 = 1;
             obj042.sqnb = lblRegrindSequence.Text.Trim();
-            obj042.dele = 7;
+            //Va a depender del parametro de confirmacion de regrind
+            //obj042.dele = 7;
+            if (_ConfirmacionAutomaticaRgr == true)
+            {
+                obj042.dele = 7;
+                obj042.cwat = Session["CWAR"].ToString();
+                obj042.loca = idal022.getloca(obj042.cwat.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj042.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " "; 
+            }
+            else
+            {
+                obj042.dele = 2;
+                obj042.cwat = " ";
+                obj042.loca = " ";
+            }
+
             parameterCollection042.Add(obj042);
             int retorno = idal042.actualizaRegistro_ConfirmedRegrind(ref parameterCollection042, ref strError);
+            idal042.ActualizarCantidadAlmacenRegistroTicol242(HttpContext.Current.Session["user"].ToString(), Convert.ToDouble(obj042.qtd1), obj042.loca, obj042.cwat, obj042.sqnb);
 
             if (!string.IsNullOrEmpty(strError))
             {

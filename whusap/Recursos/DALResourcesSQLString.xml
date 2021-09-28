@@ -221,6 +221,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           {0}.ttcibd001{1} B ON TRIM(A.T$MITM) = TRIM(B.T$ITEM) INNER JOIN
           {0}.tticst001{1} C ON A.T$PDNO = C.T$PDNO AND A.T$PONO = C.T$PONO
           WHERE TRIM(A.T$SQNB) = '[:T$SQNB]'
+          AND  T$DELE = '7'
         </stringSQL>
       </operationName>
       <operationName name="selectTticol000">
@@ -297,6 +298,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where t$cwar = '[:T$CWAR]'
           and t$loct = 5
           and t$prio &lt; 999
+          and t$binb = 2
           and rownum = 1
           group by t$loca
         </stringSQL>

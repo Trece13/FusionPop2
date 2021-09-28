@@ -538,7 +538,7 @@ namespace whusap.WebPages.InvReceipts
             {
 
                 data022 = new Ent_tticol022();
-                data022.pdno = CLOT == "" ? cyclecountLabel : CLOT.Trim();
+                data022.pdno = CLOT == "" ? cyclecountLabel.Trim() + serie.Trim() : CLOT.Trim();
                 //data022.sqnb = (CLOT == "" ? cyclecountLabel : CLOT.Trim()) + "-" + SecuenciaPallet;
                 data022.sqnb = sqnb;
                 data022.proc = 2;
@@ -635,7 +635,7 @@ namespace whusap.WebPages.InvReceipts
 
                 data042 = new Ent_tticol042()
                 {
-                    pdno = CLOT == "" ? cyclecountLabel : CLOT,
+                    pdno = CLOT == "" ? cyclecountLabel.Trim() + serie.Trim() : CLOT,
                     //sqnb = (CLOT == "" ? cyclecountLabel : CLOT) + "-" + SecuenciaPallet,
                     sqnb = sqnb,
                     proc = 2,
