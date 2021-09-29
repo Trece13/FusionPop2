@@ -360,32 +360,10 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string VerificarQuantity(string CWAR, string ITEM, string CLOT, string LOCA, string QTYS)
         {
-        //    QTYS = QTYS.Replace(".", ",");
             decimal factor = 0;
             string strError = string.Empty;
             DataTable DtTtwhinr140 = new DataTable();
-
-            //CWAR = CWAR.ToUpper();
-            //ITEM = ITEM.ToUpper();
-            //CLOT = CLOT.ToUpper();
-            //LOCA = LOCA.ToUpper();
-
-            //DtTtwhinr140 = ITtwhinr140.consultaStks(ref CWAR, ref ITEM, ref CLOT, ref LOCA, ref strError);
-
             Ent_twhinr140 ObjTtwhinr140 = new Ent_twhinr140();
-
-        //    if (DtTtwhinr140.Rows.Count > 0)
-        //    {
-        //        decimal stks = Convert.ToDecimal(DtTtwhinr140.Rows[0]["STKS"].ToString());
-        //        if (stks > 0)
-        //        {
-        //            ObjTtwhinr140.stks = stks;
-        //            ObjTtwhinr140.Error = false;
-        //            ObjTtwhinr140.TypeMsgJs = "label";
-
-        //            ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
-        //            if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
-        //            {
             if (HttpContext.Current.Session["CUNI"].ToString().Trim() == "CJ")
             {
                 DataTable dtFactor = twhcol130DAL.ConsultafactoresporItem(ITEM.Trim());
@@ -419,28 +397,6 @@ namespace whusap.WebPages.InvReceipts
                     {
                         ObjTtwhinr140.Error = false;
                     }
-                    //}
-                    //else
-                    //{
-                    //    ObjTtwhinr140.Error = true;
-                    //    ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
-                    //}
-                    //}
-                    //}
-                    //else
-                    //{
-                    //    ObjTtwhinr140.Error = true;
-                    //    ObjTtwhinr140.TypeMsgJs = "label";
-
-                    //    ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
-                    //}
-                    //}
-                    //    else
-                    //    {
-                    //        ObjTtwhinr140.Error = true;
-                    //        ObjTtwhinr140.TypeMsgJs = "label";
-
-                    //        ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
                 }
             }
             HttpContext.Current.Session["QTYS"] = QTYS;
@@ -467,9 +423,9 @@ namespace whusap.WebPages.InvReceipts
             DataTable dat016 = _idaltwhcol016.VerificaCons_Serie_Label(ref data016, ref strError);
             int actcontador = _idaltwhcol016.actualizarContadores(ref data016, ref strError);
             //string SecuenciaPallet = "C";
-            string consecutivo = dat016.Rows[0]["CONSEC"].ToString().PadLeft(3, '0');          
+            string consecutivo = dat016.Rows[0]["CONSEC"].ToString().PadLeft(3, '0');
             string serie = dat016.Rows[0]["SEQ"].ToString();
-            
+
             if (consecutivo == "990")
             {
                 data016.serietemp = Convert.ToInt32(dat016.Rows[0]["SEQ"].ToString()) + 1;
@@ -484,24 +440,24 @@ namespace whusap.WebPages.InvReceipts
             string sqnb = cyclecountLabel.Trim() + serie.Trim() + "-" + consecutivo;
             //if (HttpContext.Current.Session["myItemType"].ToString().Trim() != "RET")
             //{
-                //string id = cyclecountLabel;
-                //JC 020821 Conseguir el último consecutivo de la serie NFP ya no se buscará el consecutivo por orden
-                //DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
-                //if (Dtticol022.Rows.Count > 0)
-                //{
+            //string id = cyclecountLabel;
+            //JC 020821 Conseguir el último consecutivo de la serie NFP ya no se buscará el consecutivo por orden
+            //DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
+            //if (Dtticol022.Rows.Count > 0)
+            //{
 
-                        //int res;
-                        //string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() == "" ? SecuenciaPallet : Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
-                        //int iSep = sqnb.IndexOf("-");
-                        //string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C","");
-                        // //consecutivo = Convert.ToInt32(CurrentSecuence)+1;
-                        //consecutivo = CurrentSecuence + 1;
-                //}
-                //else
-                //{
-                //    //consecutivo = 1;
-                //    consecutivo = "1";
-                //}
+            //int res;
+            //string sqnb = Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() == "" ? SecuenciaPallet : Dtticol022.Rows[0]["T$SQNB"].ToString().Trim();
+            //int iSep = sqnb.IndexOf("-");
+            //string CurrentSecuence = sqnb.Substring(iSep + 1).Replace("C","");
+            // //consecutivo = Convert.ToInt32(CurrentSecuence)+1;
+            //consecutivo = CurrentSecuence + 1;
+            //}
+            //else
+            //{
+            //    //consecutivo = 1;
+            //    consecutivo = "1";
+            //}
             //}
             //else
             //{
@@ -584,7 +540,7 @@ namespace whusap.WebPages.InvReceipts
 
                 var validateSave = _idaltticol022.insertarRegistroSimple(ref data022, ref strError);
                 var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref data022, ref strError);
-                
+
                 //return JsonConvert.SerializeObject(data022);
                 if (Convert.ToBoolean(validateSave) && Convert.ToBoolean(validateSaveTicol222))
                 {
@@ -610,7 +566,7 @@ namespace whusap.WebPages.InvReceipts
                     {
                         script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/4FinishedCups.aspx'; ");
                     }
-                    
+
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
                     //StringBuilder script = new StringBuilder();
@@ -630,7 +586,7 @@ namespace whusap.WebPages.InvReceipts
                 else
                 {
                     StringBuilder script = new StringBuilder();
-                    string alert = "alert('" + strError.Replace("\n","") + "')";
+                    string alert = "alert('" + strError.Replace("\n", "") + "')";
                     script.Append(alert);
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                 }
@@ -688,7 +644,7 @@ namespace whusap.WebPages.InvReceipts
                 {
                     HttpContext.Current.Session["MaterialDesc"] = data042.mitm;
                     HttpContext.Current.Session["codeMaterial"] = data042.mitm;
-                    HttpContext.Current.Session["codePaid"] =  data042.sqnb ;
+                    HttpContext.Current.Session["codePaid"] = data042.sqnb;
                     HttpContext.Current.Session["Lot"] = CLOT;
                     HttpContext.Current.Session["Quantity"] = data042.acqt + " " + data042.cuni;
                     HttpContext.Current.Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
