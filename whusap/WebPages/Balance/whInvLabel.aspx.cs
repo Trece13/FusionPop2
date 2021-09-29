@@ -443,9 +443,13 @@ namespace whusap.WebPages.Balance
             {
                 //if (retorno > 0)
                 //{
+                    //JC 290921 Buscar la secuencia solo en la tabla ticol025
+                    var consecutivo = idal025.consultarConsecutivoRegistro(ref pdno, ref strError);
+                    consecutivo = consecutivo + 1;
                     Ent_tticol025 objTticol025 = new Ent_tticol025();
                     objTticol025.pdno = obj022.pdno;
-                    objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
+                    //objTticol025.sqnb = Convert.ToInt32(obj022.sqnb.Substring((obj022.sqnb.IndexOf("-") + 1)));
+                    objTticol025.sqnb = consecutivo;
                     objTticol025.mitm = obj022.mitm;
                     objTticol025.dsca = Transfers.DescripcionItem(obj022.mitm);
                     objTticol025.qtdl = (float)obj022.qtdl;
