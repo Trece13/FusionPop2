@@ -81,6 +81,63 @@ namespace whusa.DAL
 
         }
 
+        //JC 280921 Insertar registro ticol083 para MRB
+        public int insertarRegistro_MRB083(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            //Ent_twhcol018 obj018;
+            //twhcol018 dal018 = new twhcol018();
+
+            try
+            {
+                //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+                //int cant = parametros.Count;
+
+                foreach (Ent_tticol080 reg_MRB083 in parametros)
+                {
+                    //obj018 = new Ent_twhcol018();
+                    //parametrosIn = AdicionaParametrosComunes(reg);
+
+                    method = MethodBase.GetCurrentMethod();
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$ORNO", reg_MRB083.orno);
+                    paramList.Add(":T$PONO", reg_MRB083.pono);
+                    paramList.Add(":T$CWAR", reg_MRB083.cwar);
+                    paramList.Add(":T$ITEM", reg_MRB083.item.Trim());
+                    paramList.Add(":T$QTYT", reg_MRB083.qune);//En ambiente local no funciona . con solo esta tabla(080), este funcionamiento es correcto en fusionpub.
+                    paramList.Add(":T$LOGN", reg_MRB083.logn);
+                    paramList.Add(":T$TIME", reg_MRB083.date);
+                    paramList.Add(":T$PROC", reg_MRB083.proc);
+                    paramList.Add(":T$REFCNTD", reg_MRB083.refcntd);
+                    paramList.Add(":T$REFCNTU", reg_MRB083.refcntu);
+                    paramList.Add(":T$CLOT", reg_MRB083.clot);
+                    paramList.Add(":T$OORG", reg_MRB083.oorg);
+                    paramList.Add(":T$PICK", reg_MRB083.pick);
+                    paramList.Add(":T$PAID", strTagId);
+                    paramList.Add(":T$ADVS", "0");
+                    paramList.Add(":T$UNIT", " ");
+                    paramList.Add(":T$MCNO", " ");
+                    paramList.Add(":T$PRIO", "0");
+                    paramList.Add(":T$LOCA", " ");
+                    paramList.Add(":T$STAT", "4");
+                    //strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList, 1);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+                }
+                return Convert.ToInt32(retorno);
+            }
+
+            catch (Exception ex)
+            {
+                strError = "Error when inserting data [tticol083]. Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return Convert.ToInt32(retorno);
+
+        }
+
         public int ActualizarRegistros(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
         {
             method = MethodBase.GetCurrentMethod();

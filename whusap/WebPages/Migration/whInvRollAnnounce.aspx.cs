@@ -101,9 +101,10 @@ namespace whusap.WebPages.Migration
                 var bodd = String.Empty;
 
                 var consultaSqnb = _idaltticol022.validarRegistroByPalletId(ref sqnb, ref bodo, ref bodd, ref pdno);
-                loteitem = consultaSqnb.Rows[0]["LOT"].ToString();
+                
                 if (consultaSqnb.Rows.Count > 0)
                 {
+                    loteitem = consultaSqnb.Rows[0]["LOT"].ToString();
                     var item = consultaSqnb.Rows[0]["ITEM"].ToString();
                     var qtdl = consultaSqnb.Rows[0]["QUANTITY"].ToString();
 
@@ -181,11 +182,15 @@ namespace whusap.WebPages.Migration
                 oorg = "4",
                 pick = 2
             };
-
+            //JC 280921 Insertar registro en la ticol082
+            List<Ent_tticol080> lista083 = new List<Ent_tticol080>();
+            lista083.Add(data080);
+            var isTag083 = txtRollNumber.Text.Trim();
+            
             if (consultaRegistro.Count > 0)
             {
                 var validateUpdate = _idaltticol080.updateRecordRollAnnounce(ref data080, ref strError);
-
+                
                 if (validateUpdate)
                 {
                     _idaltticol022.ActualizacionPalletId(txtRollNumber.Text.Trim(),"11", strError);
@@ -193,6 +198,8 @@ namespace whusap.WebPages.Migration
                     _idaltticol042.ActualizacionPalletId(txtRollNumber.Text.Trim(), "11", strError);
                     _idaltticol042.ActualizarCantidadRegistroTicol242(0, txtRollNumber.Text.Trim());
                     _idaltwhcol131.Actualizartwhcol131CantEstado(txtRollNumber.Text.Trim(), 9, 0);
+                    //JC 290921 Ingresar datos col083
+                    _idaltticol080.insertarRegistro_MRB083(ref lista083, ref strError, ref isTag083);
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjupdate");
                     trItem.Visible = false;
@@ -224,6 +231,8 @@ namespace whusap.WebPages.Migration
                 _idaltwhcol131.Actualizartwhcol131CantEstado(txtRollNumber.Text.Trim(), 9, 0);
                  if (validaInsert > 0)
                 {
+                    //JC 290921 Ingresar datos col083
+                    _idaltticol080.insertarRegistro_MRB083(ref lista083, ref strError, ref isTag083);
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjsave");
                     trItem.Visible = false;

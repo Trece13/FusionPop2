@@ -29,6 +29,20 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+        //JC 280921 INsertar registro ticol083 para que permita MRB
+        public int insertarRegistro_MRB083(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
+        {
+            int retorno = -1;
+            try
+            {
+                retorno = dal.insertarRegistro_MRB083(ref parametros, ref strError, ref strTagId);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
 
         public int ActualizarRegistros(ref List<Ent_tticol080> parametros, ref string strError, ref string strTagId)
         {
