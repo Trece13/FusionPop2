@@ -323,8 +323,6 @@
         #myLabel {
             width: 6in;
             height: 4in;
-            padding: 20px;
-            border: 1px solid black;
             border-radius: 12px;
         }
 
@@ -425,12 +423,16 @@
 
         .table td,
         .table th {
-            padding: .1rem;
+            padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 12px;
+            font-size: 1.05em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
+        }
+        @page{
+            size:landscape;
+            margin:3px;
         }
     </style>
 
@@ -543,12 +545,12 @@
                 </div>
             </div>
             <div class="form-group row" id="lblsItemDesc">
-                <label class="col-sm-4 col-form-label-lg">
+                <label class="col-sm-0 col-form-label-lg">
                 </label>
                 <div class="col-sm-6">
                     <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
                         -</label>
-                    <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
+                    <label class="col-sm-1 col-form-label-lg" id="lblUnidSt">
                         -</label>
                 </div>
             </div>
