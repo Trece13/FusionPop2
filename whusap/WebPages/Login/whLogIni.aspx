@@ -320,7 +320,7 @@
                 sessionStorage.setItem('nav', 'EDG');
             }
             else {
-                sessionStorage.setItem('nav', '');
+                sessionStorage.setItem('nav','OTHER');
             }
         });
         

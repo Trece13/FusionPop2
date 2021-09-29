@@ -31,6 +31,11 @@ namespace whusa.Interfases
         {
             return dal.ConsultarPendientesTccol307(STAT0,STAT1);
         }
-        
+
+
+        public DataTable ConsultarRegistrotccol307Null(Ent_ttccol307 ObjTtccol307)
+        {
+            return dal.ConsultarRegistrotccol307Null(ObjTtccol307);
+        }
     }
 }

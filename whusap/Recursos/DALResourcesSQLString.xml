@@ -2330,6 +2330,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$STAT = 2
         </stringSQL>
       </operationName>
+      <operationName name="ConsultarRegistrotccol307Null">
+        <stringSQL>
+          delete from baan.ttccol307140
+          where t$paid in (
+          select col307.t$paid
+          from baan.ttccol307140 col307
+          left join baan.tticol082140 col082
+          on col307.t$paid = col082.t$pick
+          where col082.t$pick is null)
+        </stringSQL>
+      </operationName>
       <operationName name="ActualizarUsuariotccol307">
         <stringSQL>
           --UPDATE  {0}.ttccol307{1} SET T$USER = '[:USER]' WHERE T$PAID = '[:PAID]'
