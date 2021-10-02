@@ -97,9 +97,10 @@
                                     'text-align: center;' +
                                     '}' +
                                     '#myLabel {' +
-                                    'width: 8in;' +
-                                    'height: 5.9in;' +
+                                    'width: 6in;' +
+                                    'height: 4in;' +
                                     'padding: 20px;' +
+                                    'border: 1px solid black;' +
                                     'border-radius: 12px;' +
                                     '}' +
                                     '.alingRight {' +
@@ -115,7 +116,7 @@
                                     'display: block;' +
                                     'margin: auto;' +
                                     'height: 150px;' +
-                                    'width: 750px;' +
+                                    'width: 500px;' +
                                     '}' +
                                     '#codeItem {' +
                                     'display: block;' +
@@ -181,15 +182,11 @@
                                     '.table th {' +
                                     'padding: .1rem;' +
                                     'border-top: 1px solid #dee2e6;' +
-                                    'font-size: 1.7rem;' +
+                                    'font-size: 12px;' +
                                     'text-align: left;' +
                                     'vertical-align: middle;' +
                                     'padding-left: 1em;' +
                                     '}' +
-                                    '@page {'+
-                                        'size: landscape;'+
-                                        'margin: 3px;'+
-                                    '}'+
                                     '</style>' +
                                     '</head><body>');
 
@@ -206,12 +203,6 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/font-awesome.min.css">
     <style type="text/css">
-        #lblUnidDsca{
-            font-size :small;
-        }
-        #lblUnidSt{
-            font-size :small;
-        }
         #myLabelFrame {
             display: none;
         }
@@ -434,16 +425,12 @@
 
         .table td,
         .table th {
-            padding: 0rem;
+            padding: .1rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.2em;
+            font-size: 12px;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
-        }
-        @page{
-            size:landscape;
-            margin:3px;
         }
     </style>
 
@@ -515,10 +502,10 @@
         <div class="row">
         <div class="col-sm-6">
             <div class="form-group row">
-                <label class="col-sm-4" for="TxOrderType">
+                <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
                     Order Type</label>
                 <div class="col-sm-6">
-                    <select class="form-control" id="TxOrderType" tabindex="1">
+                    <select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
                         <option value="0">Select Order Type</option>
                         <option value="1">Sales Order Return</option>
                         <option value="2">Purchase orders</option>
@@ -527,79 +514,84 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-4" for="txOrderID">
+                <label class="col-sm-4 col-form-label-lg" for="txOrderID">
                     Order ID</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txOrderID" placeholder="Order ID"
+                    <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
                         data-method="ValidarOrderID" tabindex="1" maxlength="9">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-4" for="txPosition">
+                <label class="col-sm-4 col-form-label-lg" for="txPosition">
                     Position</label>
                 <div class="col-sm-6" style="display: none">
-                    <input type="text" class="form-control" id="txPosition" placeholder="Position "
+                    <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
                         data-method="ValidarPosition" tabindex="1">
                 </div>
-                <div class="col-sm-6 ">
-                    <select class="form-control" id="DdPosition" tabindex="1">
+                <div class="col-sm-6">
+                    <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
                         <option value="0">Select Position</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-4" for="txItem">
+                <label class="col-sm-4 col-form-label-lg" for="txItem">
                     Item</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txItem" placeholder="Item"
+                    <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
                         data-method="ValidarItem" tabindex="1">
                 </div>
             </div>
             <div class="form-group row" id="lblsItemDesc">
+                <label class="col-sm-4 col-form-label-lg">
+                </label>
                 <div class="col-sm-6">
-                    <label class="col-sm-10" id="lblUnidDsca">-</label>
-                    <label class="col-sm-1" id="lblUnidSt">-</label>
+                    <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
+                        -</label>
+                    <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
+                        -</label>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-4" for="txLot">
+                <label class="col-sm-4 col-form-label-lg" for="txLot">
                     Lot</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txLot" placeholder="Lot"
+                    <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
                         data-method="ValidarLote" tabindex="1">
                 </div>
             </div>
             <div class="form-group row" style="display: none">
-                <label class="col-sm-4" for="DdUnit">
+                <label class="col-sm-4 col-form-label-lg" for="DdUnit">
                     Unit</label>
                 <div class="col-sm-6">
-                    <asp:DropDownList class="form-control" ID="DdUnit" runat="server">
+                    <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
                     </asp:DropDownList>
                 </div>
                 <label id="Label1" for="txUnit">
                 </label>
             </div>
-            <div class="form-group row">   
-                <label class="col-sm-4" for="txQuantity">Quantity</label>            
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label-lg" for="txQuantity">
+                    Quantity</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txQuantity" placeholder="Quantity"
+                    <input type="text" class="form-control form-control-lg" id="txQuantity" placeholder="Quantity"
                         data-method="ValidarQuantity" tabindex="1">
                 </div>
                 <label id="lblUnis" for="txQuantity">
                 </label>
             </div>
             <div class="form-group row" id="LabelQuantityDiv">
-                <label class="col-sm-4" for="txQuantity">
+                <label class="col-sm-4 col-form-label-lg" for="txQuantity">
                     Label quantity</label>
                 <div class="col-sm-6">
-                    <input type="number" class="form-control" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
+                    <input type="number" class="form-control form-control-lg" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
                 </div>
-                <label id="Label2" class="col-2" for="txQuantity">
+                <label id="Label2" for="txQuantity">
                 </label>
             </div>
 
             <div class="form-group row" id="finalReceipt">
-                <label class="col-sm-4" for="">
+                <label class="col-sm-4 col-form-label-lg" for="">
                 </label>
                 <div class=" col-sm-6">
                     <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
@@ -667,6 +659,13 @@
                         </label>
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
                             vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center">
+                        <label id="lblItemDesc" style="font-size: 11px">
+                        </label>
                     </td>
                 </tr>
                 <tr>
@@ -1027,7 +1026,7 @@
                         '</div>' +
                         '</div>' +
                         '<br />' +
-                        '<div class="col-10 borderTop" id="divBarcode">' +
+                        '<div class="col-12 borderTop" id="divBarcode">' +
                         '<img src="' + CBPalletNOd + '" id="codePaid" alt="" />' +
                         '</div>' +
                         '<div>' +
@@ -1146,7 +1145,7 @@
                         break;
                     case "2":
                         $('#lblsItemDesc').hide(500);
-                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500).css("display","flex") : $('#LabelQuantityDiv').hide(500);
+                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500) : $('#LabelQuantityDiv').hide(500);
                         $('#ChkfinalReceipt').prop('disabled', true);
                         $('#ChkfinalReceipt').prop('checked', false);
                         txOrderID.attr('disabled', false);

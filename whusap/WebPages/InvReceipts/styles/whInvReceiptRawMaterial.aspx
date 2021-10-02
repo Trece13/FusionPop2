@@ -1,17 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="whInvReceiptRawMaterialNew.aspx.cs" Inherits="whusap.WebPages.InvReceipts.whInvReceiptRawMaterialNew" %>
+    CodeBehind="whInvReceiptRawMaterial.aspx.cs" Inherits="whusap.WebPages.InvReceipts.whInvReceiptRawMaterial" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <script type="text/javascript">
-        var timer;
-
-        function stoper() {
-
-            clearTimeout(timer);
-        }
-
         function printDiv(divID) {
 
             var monthNames = [
@@ -19,11 +12,11 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-            ];
+              ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
-            var LbdDate = $(".LblDate");
+            var LbdDate = $("#LblDate");
             LbdDate.html(
                 monthNames[d.getMonth()] +
                 "/" +
@@ -31,774 +24,447 @@
                 "/" +
                 d.getFullYear() +
                 " " +
-                d.getHours() +
+                addZero(d.getHours()) +
                 ":" +
-                d.getMinutes() +
+                addZero(d.getMinutes()) +
                 ":" +
-                d.getSeconds()
+                addZero(d.getSeconds())
                 );
 
-            var mywindow = window.open('', 'targetWindow', 'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=600,height=400')
+            function addZero(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            };
+            //            //Get the HTML of div
+            //            var divElements = document.getElementById(divID).innerHTML;
+            //            //Get the HTML of whole page
+            //            var oldPage = document.body.innerHTML;
+            //            //Reset the page's HTML with div's HTML only
+            //            document.body.innerHTML = "<html><head><title></title></head><body>" + divElements + "</body></html>";
+            //            //Print Page
+            //            window.print();
+            //            //Restore orignal HTML
+            //            document.body.innerHTML = oldPage;
+            //            window.close();
+            //            return true;
+
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-
-
-            mywindow.document.write('<link rel="stylesheet" href="styles/all.css" />' +
-                                    '<link rel="stylesheet" href="styles/bootstrap.min.css" />' +
-                                    '<style type="text/css">' +
-                                    '#MyEtiqueta label {' +
-                                    'font-size: 15px;' +
-                                    '}' +
-                                    '#LblDate {' +
-                                    'font-size: 14px !important;' +
-                                    '}' +
-                                    '#LblReprintInd,' +
-                                    '#LblReprint {' +
-                                    'display: none;' +
-                                    '}' +
-                                    '.isValid {' +
-                                    'border-bottom: solid;' +
-                                    'border-color: green;' +
-                                    '}' +
-                                    '.isNotValid {' +
-                                    'border-bottom: solid;' +
-                                    'border-color: red;' +
-                                    '}' +
-                                    '.fa-check {' +
-                                    'color: green;' +
-                                    '}' +
-                                    '.fa-times {' +
-                                    'color: red;' +
-                                    '}' +
-                                    '#checkItem,' +
-                                    '#checkLot,' +
-                                    '#checkWarehouse,' +
-                                    '#checkLoca,' +
-                                    '#checkPaid {' +
-                                    'display: none;' +
-                                    '}' +
-                                    '#exItem,' +
-                                    '#exLot,' +
-                                    '#exWarehouse,' +
-                                    '#exLoca,' +
-                                    '#exPaid {' +
-                                    'display: none;' +
-                                    '}' +
-                                    '#loadItem,' +
-                                    '#loadLot,' +
-                                    '#loadWarehouse,' +
-                                    '#loadLoca,' +
-                                    '#loadPaid {' +
-                                    'display: none;' +
-                                    '}' +
-                                    'tr {' +
-                                    'text-align: center;' +
-                                    '}' +
-                                    'th {' +
-                                    'text-align: center;' +
-                                    '}' +
-                                    '#myLabel {' +
-                                    'width: 8in;' +
-                                    'height: 5.9in;' +
-                                    'padding: 20px;' +
-                                    'border-radius: 12px;' +
-                                    '}' +
-                                    '.alingRight {' +
-                                    'text-align: right;' +
-                                    '}' +
-                                    '.alingLeft {' +
-                                    'text-align: left;' +
-                                    '}' +
-                                    '#printButton {' +
-                                    'width: 6in;' +
-                                    '}' +
-                                    '#codePaid {' +
-                                    'display: block;' +
-                                    'margin: auto;' +
-                                    'height: 150px;' +
-                                    'width: 750px;' +
-                                    '}' +
-                                    '#codeItem {' +
-                                    'display: block;' +
-                                    'margin: auto;' +
-                                    'height: 75px;' +
-                                    'width: 250px;' +
-                                    '}' +
-                                    '#itemDesc {' +
-                                    'vertical-align: middle;' +
-                                    'font-size: 21px;' +
-                                    '}' +
-                                    '.divDesc {' +
-                                    'text-align: center;' +
-                                    '}' +
-                                    '#lblDesc {' +
-                                    '}' +
-                                    '#lblMadein {' +
-                                    '}' +
-                                    '.borderTop {' +
-                                    'border-top: solid 1px gray;' +
-                                    '}' +
-                                    '#printContainer {' +
-                                    'margin-bottom: 100px;' +
-                                    '}' +
-                                    '#editTable {' +
-                                    'display: none;' +
-                                    '}' +
-                                    '#lblError {' +
-                                    'color: red;' +
-                                    'font-size: 13px;' +
-                                    '}' +
-                                    '.load {' +
-                                    'width: 10px;' +
-                                    'height: 10px;' +
-                                    'align-content: center;' +
-                                    'animation-name: spin;' +
-                                    'animation-duration: 5000ms;' +
-                                    'animation-iteration-count: infinite;' +
-                                    'animation-timing-function: linear;' +
-                                    '}' +
-                                    '#saveSection {' +
-                                    'display: none;' +
-                                    '}' +
-                                    '.notBorderBottom {' +
-                                    'border-bottom: none;' +
-                                    '}' +
-                                    '#divBarcode {' +
-                                    '--height: 186px;' +
-                                    'padding: inherit;' +
-                                    '}' +
-                                    '@keyframes spin {' +
-                                    'from {' +
-                                    'transform: rotate(0deg);' +
-                                    '}' +
-                                    'to {' +
-                                    'transform: rotate(360deg);' +
-                                    '}' +
-                                    '}' +
-                                    '#table {' +
-                                    'font-size: 10px;' +
-                                    '}' +
-                                    '.table td,' +
-                                    '.table th {' +
-                                    'padding: .1rem;' +
-                                    'border-top: 1px solid #dee2e6;' +
-                                    'font-size: 1.7rem;' +
-                                    'text-align: left;' +
-                                    'vertical-align: middle;' +
-                                    'padding-left: 1em;' +
-                                    '}' +
-                                    '@page {'+
-                                        'size: landscape;'+
-                                        'margin: 3px;'+
-                                    '}'+
-                                    '</style>' +
-                                    '</head><body>');
-
+            mywindow.document.write('</head><body >');
+            //mywindow.document.write('<h1>' + document.title + '</h1>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
+
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
-            setTimeout(function () { mywindow.print() }, 2000);
-            //mywindow.close();
+
+            mywindow.print();
+            mywindow.close();
 
             return true;
         };
     </script>
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css" />
     <style type="text/css">
-        #lblUnidDsca{
-            font-size :small;
+        #myLabelFrame{
+            display:none;
         }
-        #lblUnidSt{
-            font-size :small;
+        #ShowModal
+        {
+            display:none;
         }
-        #myLabelFrame {
-            display: none;
+        #ShowModalMsg
+        {
+            display:none;
         }
-
-        #loadingIcon {
-            display: none;
-        }
-
-        #ShowModal {
-            display: none;
-        }
-
-        #ShowModalMsg {
-            display: none;
-        }
-
-        .form-group {
+        .form-group
+        {
             margin-bottom: 0.5rem;
         }
-
-        #MyEtiqueta {
+        
+        #MyEtiqueta
+        {
             display: none;
             padding-left: 50px;
         }
-
-        #MyEtiquetaOC {
+        
+        #MyEtiquetaOC
+        {
             display: none;
         }
-
-        #lblError {
+        
+        #lblError
+        {
             color: Red;
             font-size: 24px;
         }
-
-        .FontPopUp {
-            font-size: 15px;
+        
+        .FontPopUp
+        {
+            font-size:15px;
         }
-
-        #LabelQuantityDiv {
-            display: none;
-        }
-
-        #MyDynamicEtiqueta {
-            margin-top: 0;
-            margin-bottom: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            display: none;
-        }
-
-        #lblsItemDesc {
-            display: none;
-        }
-
-        <style type="text/css" > #MyEtiqueta label {
-            font-size: 15px;
-        }
-
-        #LblDate {
-            font-size: 14px !important;
-        }
-
-        #LblReprintInd,
-        #LblReprint {
-            display: none;
-        }
-
-        .isValid {
-            border-bottom: solid;
-            border-color: green;
-        }
-
-        .isNotValid {
-            border-bottom: solid;
-            border-color: red;
-        }
-
-        .fa-check {
-            color: green;
-        }
-
-        .fa-times {
-            color: red;
-        }
-
-        #checkItem,
-        #checkLot,
-        #checkWarehouse,
-        #checkLoca,
-        #checkPaid {
-            display: none;
-        }
-
-        #exItem,
-        #exLot,
-        #exWarehouse,
-        #exLoca,
-        #exPaid {
-            display: none;
-        }
-
-        #loadItem,
-        #loadLot,
-        #loadWarehouse,
-        #loadLoca,
-        #loadPaid {
-            display: none;
-        }
-
-        tr {
+        
+        etiqueta
+        {
             text-align: center;
-        }
-
-        th {
-            text-align: center;
-        }
-
-        #myLabel {
-            width: 6in;
-            height: 4in;
-            padding: 20px;
             border: 1px solid black;
-            border-radius: 12px;
+        }       
+    </style><script type="text/javascript">
+        function IniciarListasOrderType() {
+
+            LstSalesOrder = JSON.parse('<%= LstSalesOrderJSON%>');
+            LstTransferOrder = JSON.parse('<%= LstTransferOrderJSON%>');
+            LstPurchaseOrders = JSON.parse('<%= LstPurchaseOrdersJSON%>');
+            console.log(LstSalesOrder);
+            console.log(LstTransferOrder);
+            console.log(LstPurchaseOrders);
         }
 
-        .alingRight {
-            text-align: right;
-        }
+        IniciarListasOrderType();
+    </script><form id="form1" class="container col-sm-12">
 
-        .alingLeft {
-            text-align: left;
-        }
-
-        #printButton {
-            width: 6in;
-        }
-
-        #codePaid {
-            display: block;
-            margin: auto;
-            height: 150px;
-            width: 500px;
-        }
-
-        #codeItem {
-            display: block;
-            margin: auto;
-            height: 75px;
-            width: 250px;
-        }
-
-        #itemDesc {
-            vertical-align: middle;
-            font-size: 21px;
-        }
-
-        .divDesc {
-            text-align: center;
-        }
-
-        #lblDesc {
-        }
-
-        #lblMadein {
-        }
-
-        .borderTop {
-            border-top: solid 1px gray;
-        }
-
-        #printContainer {
-            margin-bottom: 100px;
-        }
-
-        #editTable {
-            display: none;
-        }
-
-        #lblError {
-            color: red;
-            font-size: 13px;
-        }
-
-        .load {
-            width: 10px;
-            height: 10px;
-            align-content: center;
-            animation-name: spin;
-            animation-duration: 5000ms;
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        #saveSection {
-            display: none;
-        }
-
-        .notBorderBottom {
-            border-bottom: none;
-        }
-
-        #divBarcode {
-            --height: 186px;
-            padding: inherit;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        #table {
-            font-size: 10px;
-        }
-
-        .table td,
-        .table th {
-            padding: 0rem;
-            border-top: 1px solid #dee2e6;
-            font-size: 1.2em;
-            text-align: left;
-            vertical-align: middle;
-            padding-left: 1em;
-        }
-        @page{
-            size:landscape;
-            margin:3px;
-        }
-    </style>
-
-
-    <script type="text/javascript">
-        //        function IniciarListasOrderType() {
-
-        //            LstSalesOrder = JSON.parse('<%= Session["LstSalesOrderJSON"]%>');
-        //            LstTransferOrder = JSON.parse('<%=Session["LstTransferOrderJSON"]%>');
-        //            LstPurchaseOrders = JSON.parse('<%= Session["LstPurchaseOrdersJSON"]%>');
-        ////            console.log(LstSalesOrder);
-        ////            console.log(LstTransferOrder);
-        ////            console.log(LstPurchaseOrders);
-        //        }
-
-        //        IniciarListasOrderType();
-    </script>
-    <form id="form1" class="container col-sm-12">
-
-
-        <button id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
-        </button>
-
-        <!-- Modal -->
-        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1Label" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body FontPopUp">
-                        <label id="label1"></label>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Modal2">Yes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    </div>
-                </div>
-            </div>
+    
+    <button  id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body FontPopUp">
+          <label id="label1"></label>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Modal2">Yes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          </div>
         </div>
-
-        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="Modal2Label" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body FontPopUp">
-                        Packing Slip Number
-            <input type="text" id="pslip" />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="BtnSavePslip" class="btn btn-primary" data-dismiss="modal" data-toggle="modal">Save</button>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="Modal2Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body FontPopUp">
+                Packing Slip Number
+            <input type="text" id="pslip"/>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="BtnSavePslip" class="btn btn-primary" data-dismiss="modal" data-toggle="modal">Save</button>
+          </div>
         </div>
+      </div>
+    </div>
+    
+    <button  id="ShowModalMsg" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Modal3">
+    </button>
 
-        <button id="ShowModalMsg" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal3">
-        </button>
-
-        <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body FontPopUp">
-                        It could be final receipt, total receivedquantity equal to total ordered quantity
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
-                    </div>
-                </div>
-            </div>
+    <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-body FontPopUp">
+            It could be final receipt, total receivedquantity equal to total ordered quantity
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+          </div>
         </div>
+      </div>
+    </div>
 
         <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label class="col-sm-4" for="TxOrderType">
-                    Order Type</label>
-                <div class="col-sm-6">
-                    <select class="form-control" id="TxOrderType" tabindex="1">
-                        <option value="0">Select Order Type</option>
-                        <option value="1">Sales Order Return</option>
-                        <option value="2">Purchase orders</option>
-                        <option value="22">Transfer Order</option>
-                    </select>
-                </div>
+    <div class="col-sm-6">
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
+                Order Type</label>
+            <div class="col-sm-6">
+                <select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
+                    <option value="0">Select Order Type</option>
+                    <option value="1">Sales Order Return</option>
+                    <option value="2">Purchase orders</option>
+                    <option value="22">Transfer Order</option>
+                </select>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txOrderID">
-                    Order ID</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txOrderID" placeholder="Order ID"
-                        data-method="ValidarOrderID" tabindex="1" maxlength="9">
-                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txOrderID">
+                Order ID</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
+                    data-method="ValidarOrderID" tabindex="1">
             </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txPosition">
-                    Position</label>
-                <div class="col-sm-6" style="display: none">
-                    <input type="text" class="form-control" id="txPosition" placeholder="Position "
-                        data-method="ValidarPosition" tabindex="1">
-                </div>
-                <div class="col-sm-6 ">
-                    <select class="form-control" id="DdPosition" tabindex="1">
-                        <option value="0">Select Position</option>
-                    </select>
-                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txPosition">
+                Position</label>
+            <div class="col-sm-6" style ="display:none">
+                <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
+                    data-method="ValidarPosition" tabindex="1">
             </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txItem">
-                    Item</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txItem" placeholder="Item"
-                        data-method="ValidarItem" tabindex="1">
-                </div>
+            <div class="col-sm-6" >
+                <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
+                    <option value="0">Select Position</option>
+                </select>
             </div>
-            <div class="form-group row" id="lblsItemDesc">
-                <div class="col-sm-6">
-                    <label class="col-sm-10" id="lblUnidDsca">-</label>
-                    <label class="col-sm-1" id="lblUnidSt">-</label>
-                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txItem">
+                Item</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
+                    data-method="ValidarItem" tabindex="1">
+                <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
+                    -</label>
+                <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
+                    -</label>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txLot">
-                    Lot</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txLot" placeholder="Lot"
-                        data-method="ValidarLote" tabindex="1">
-                </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txLot">
+                Lot</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
+                    data-method="ValidarLote" tabindex="1">
             </div>
-            <div class="form-group row" style="display: none">
-                <label class="col-sm-4" for="DdUnit">
-                    Unit</label>
-                <div class="col-sm-6">
-                    <asp:DropDownList class="form-control" ID="DdUnit" runat="server">
-                    </asp:DropDownList>
-                </div>
-                <label id="Label1" for="txUnit">
+        </div>
+        <div class="form-group row" style="display:none">
+            <label class="col-sm-4 col-form-label-lg" for="DdUnit">
+                Unit</label>
+            <div class="col-sm-6">
+                <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
+                </asp:DropDownList>
+            </div>
+            <label id="Label1" for="txUnit">
+            </label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txQuantity">
+                Quantity</label>
+            <div class="col-sm-6">
+                <input class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern = "[0-9]"
+                    data-method="ValidarQuantity" tabindex="1">
+            </div>
+            <label id="lblUnis" for="txQuantity">
+            </label>
+            <label id="lblMyCant" for="txQuantity">
+            </label>
+        </div>
+        <div class="form-group row" id="finalReceipt">
+            <label class="col-sm-4 col-form-label-lg" for="">
+            </label>
+            <div class=" col-sm-6">
+                <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
+                <label class="" for="ChkfinalReceipt">
+                    Final Receipt
                 </label>
             </div>
-            <div class="form-group row">   
-                <label class="col-sm-4" for="txQuantity">Quantity</label>            
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txQuantity" placeholder="Quantity"
-                        data-method="ValidarQuantity" tabindex="1">
-                </div>
-                <label id="lblUnis" for="txQuantity">
-                </label>
-            </div>
-            <div class="form-group row" id="LabelQuantityDiv">
-                <label class="col-sm-4" for="txQuantity">
-                    Label quantity</label>
-                <div class="col-sm-6">
-                    <input type="number" class="form-control" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
-                </div>
-                <label id="Label2" class="col-2" for="txQuantity">
-                </label>
-            </div>
-
-            <div class="form-group row" id="finalReceipt">
-                <label class="col-sm-4" for="">
-                </label>
-                <div class=" col-sm-6">
-                    <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
-                    <label class="" for="ChkfinalReceipt">
-                        Final Receipt
-                    </label>
-                </div>
-            </div>
-            <div class="form-group row">
-                <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
+        </div>
+        <div class="form-group row">
+            <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp;
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
-                Print</button>&nbsp
-                <i class="fa fa-spinner fa-pulse fa-3x fa-fw" id="loadingIcon"></i>
-
-
+                Print</button>&nbsp;
+            <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()" style="display:none">
+                Print</button>&nbsp;
+            <!--<button id="btnMyEtiquetaOC" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiquetaOC')">
+            Print</button>-->
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Order Number
+                    </th>
+                    <th>
+                        Position
+                    </th>
+                    <th>
+                        Item Code
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        PI.Re Date
+                    </th>
+                    <th colspan="2" style="text-align: center">
+                        Expected
+                    </th>
+                    <th>
+                        Warehouse
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="DetailBody">
+            </tbody>
+        </table>
+    </div>
             </div>
-        </div>
-
-        <div class="col-sm-6">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Order Number
-                        </th>
-                        <th>Position
-                        </th>
-                        <th>Item Code
-                        </th>
-                        <th>Description
-                        </th>
-                        <th>PI.Re Date
-                        </th>
-                        <th colspan="2" style="text-align: center">Expected
-                        </th>
-                        <th>Warehouse
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="DetailBody">
-                </tbody>
-            </table>
-        </div>
-        </div>
-        <label id="lblError" class="col-sm-12">
-        </label>
-        <div id="MyEtiqueta">
-            <table style="margin: auto">
-                <tr>
-                    <td>
-                        <label style="font-size: 11px">
-                            ID</label>
-                    </td>
-                    <td colspan="4">
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
-                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style="font-size: 11px">
-                            ITEM</label>
-                    </td>
-                    <td colspan="4">
-                        <label id="lblItemID" style="display: none; font-size: 11px">
-                        </label>
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBItem" alt="" hspace="60"
-                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style="font-size: 11px">
-                            QUANTITY</label>
-                    </td>
-                    <td colspan="4">
-                        <label id="LblQuantity" style="display: none; font-size: 11px">
-                        </label>
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBQuantity" alt="" hspace="60"
-                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td align="center">
-                        <label id="LblUnit" style="font-size: 11px">
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style="font-size: 11px">
-                            LOT</label>
-                    </td>
-                    <td colspan="4">
-                        <label id="LblLotId" style="display: none; font-size: 11px">
-                        </label>
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBLot" alt="" hspace="60"
-                            vspace="5" style="width: 4in; height: .5in; margin: 0px !important;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label style="font-size: 9px">
-                            RECEIPT DATE</label>
-                    </td>
-                    <td>
-                        <label id="LblDate" style="font-size: 9px">
-                        </label>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="MyDynamicEtiqueta">
-        </div>
-        <div id="MyEtiquetaOC">
-            <table>
-                <tr>
-                    <td colspan="2">
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPurchaseOrder" alt=""
-                            hspace="60" vspace="5" style="width: 2in; height: .5in;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
-                        <label>
-                            PURCHASE ORDER</label>
-                        <label style="display: none" id="LblPurchaseOC">
-                        </label>
-                    </center>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
+    </form>
+    <label id="lblError" class="col-sm-12">
+    </label>
+    <div id="MyEtiqueta">
+        <table style="width: 6in; height: 4in; margin: 0px; border:1px solid black">
+            <tr>
+                <td colspan="4" style="border:1px solid black;" align="center">
+                <label id="lblItemID">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="border:1px solid black;" align="center">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
+                        vspace="5" style="width: 4in; height: 0.7in; margin: 0px !important" />
+                </td>
+            </tr>
+            <tr>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        LOT</label>
+                </td>
+                <td style="border:1px solid black;" align="center">                   
+                    <label id="LblOriginalLot">
+                    </label>
+                </td>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Quantity</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblQuantity">
+                    </label>
+                    <label id="LblUnit">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Origin Lot</label>
+                </td>
+                <td style="border:1px solid black;" align="center">                   
+                    <label id="LblLotId">
+                    </label>
+                </td>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Supplier</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblSupplier">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Received By</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblLogn">
+                    </label>
+                </td>
+                <td style="border:1px solid black;" align="left">
+                    <label>
+                        Received On</label>
+                </td>
+                <td style="border:1px solid black;" align="center">
+                    <label id="LblDate">
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="MyEtiquetaOC">
+        <table>
+            <!--<tr>
+                <td colspan="2">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPurchaseOrder" alt=""
+                        hspace="60" vspace="5" style="width: 2in; height: .5in;" />
+                </td>
+            </tr>-->
+            <tr>
+                <td colspan="2">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center>
                         <label>
                             ITEM</label>
                         <label style="display: none" id="LblItemOC">
                         </label>
                     </center>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center>
+                        <label>
+                            PURCHASE ORDER</label>
+                        <label style="display: none" id="LblPurchaseOC">
+                        </label>
+                    </center>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center>
                         <label>
                             LOT</label>
                         <label style="display: none" id="LblLotOC">
                         </label>
                     </center>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center>
                         <label>
                             UNIT</label>
                         <label style="display: none" id="LblUnitOC">
                         </label>
                     </center>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <img src="~/images/logophoenix_login.jpg" runat="server" id="CBUnit" alt="" hspace="60"
-                            vspace="5" style="width: 2in; height: .5in;" />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <center>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img src="~/images/logophoenix_login.jpg" runat="server" id="CBUnit" alt="" hspace="60"
+                        vspace="5" style="width: 2in; height: .5in;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <center>
                         <label>
                             QUANTITY</label>
                         <label style="display: none" id="LblQuantityOC">
                         </label>
                     </center>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
-            <ContentTemplate>
-                <div class="container">
-                    <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
-                </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+            <div class="container">
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class ="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
     <!-- Referencias de estilo-->
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap.min.js"></script>
@@ -810,10 +476,10 @@
 
         }
 
-        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
+        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode, dynamicUrl) {
             var options = {
                 type: "POST",
-                url: "whInvReceiptRawMaterialNew.aspx/" + WebMethod,
+                url: dynamicUrl == true ? "whInvReceiptRawMaterial.aspx/" + WebMethod : WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -825,12 +491,16 @@
             WebMethod = "";
         }
 
+            function resBartender(res){
+                console.log(res);
+            }
+
         function IniciarControles() {
-            loadingIcon = $('#loadingIcon');
 
             btnEnviar = $('#btnEnviar');
 
             btnMyEtiqueta = $('#btnMyEtiqueta');
+            //btnMyEtiquetaOC = $('#btnMyEtiquetaOC');
 
             TxOrderType = $('#TxOrderType');
             txOrderID = $('#txOrderID');
@@ -860,10 +530,12 @@
             LblLotId = $('#LblLotId');
             LblDate = $('#LblDate');
             LblReprint = $('#LblReprint');
-
+            LblLogn = $('#LblLogn');
+            LblSupplier = $('#LblSupplier');
             //Etiqueta Orden de compra
 
             LblPurchaseOC = $('#LblPurchaseOC');
+            LblOriginalLot = $('#LblOriginalLot');
             LblItemOC = $('#LblItemOC');
             LblLotOC = $('#LblLotOC');
             LblUnitOC = $('#LblUnitOC');
@@ -873,13 +545,13 @@
 
             lblError = $('#lblError');
 
+
         }
 
 
-
-        $('#BtnSavePslip').click(function () {
-            if (finalReceiptAuto) {
-                $('#ShowModalMsg').click();
+        $('#BtnSavePslip').click(function(){                
+            if(finalReceiptAuto){
+                $('#ShowModalMsg').click();   
             }
         });
 
@@ -904,7 +576,6 @@
             limpiarPosition();
             txQuantity.val("");
             DdUnis.val("");
-            $('#LabelQuantity').val("");
         }
 
         function DeshabilitarOrderType() {
@@ -925,141 +596,84 @@
             limpiarPosition();
             txQuantity.val("");
             DdUnis.val("");
-
-
         }
 
 
         var InsertSucces = function (r) {
-            $('#loadingIcon').hide();
-            $('#btnEnviar').show();
-            $("#MyDynamicEtiqueta").empty();
-            MyList = JSON.parse(r.d);
 
-            if (MyList.PAIDS.length == undefined) {
-                MyObject = JSON.parse(r.d);
-                if (MyObject.error == false) {
-                    //Etiqueta Sin orden de compra
-
-                    $('#pslip').val("");
-                    CBPalletNO.attr("src", MyObject.PAID_URL);
-                    lblItemID.html(MyObject.ITEM);
-                    lblItemDesc.html(MyObject.DSCA);
-                    LblQuantity.html(MyObject.QTYC);
-                    LblUnit.html(MyObject.UNIC);
-                    LblLotId.html(MyObject.CLOT);
-                    //LblReprint.html(MyObject.PAID.substring(10, 13));
-
-                    // Etiqueta orden de compra
-
-                    CBPurchaseOrder.attr("src", MyObject.ORNO_URL);
-                    CBItem.attr("src", MyObject.ITEM_URL);
-                    CBLot.attr("src", MyObject.CLOT_URL);
-                    if (MyObject.CLOT_URL == "") {
-                        CBLot.hide();
-                    }
-                    else {
-                        CBLot.show();
-                    }
-                    CBQuantity.attr("src", MyObject.QTYC_URL);
-                    CBUnit.attr("src", MyObject.UNIC_URL);
-
-                    LblPurchaseOC.html(MyObject.ORNO);
-                    LblItemOC.html(MyObject.ITEM);
-                    LblLotOC.html(MyObject.CLOT);
-                    LblUnitOC.html(MyObject.UNIT);
-                    LblQuantityOC.html(MyObject.QTYC);
-
-                    //                if (MyObject.OORG != "2" && MyObject != undefined) {
-                    //                    //btnMyEtiqueta.show();
-                    //                }
-                    //                else if (MyObject != undefined) {
-                    //                    //btnMyEtiqueta.show();
-                    //                }
-
-                    DeshabilitarLimpiarControles();
-                    myLabelFrame = document.getElementById('myLabelFrame');
-                    if (sessionStorage.getItem('nav').toString() == 'EDG') {
-                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterialME.aspx';
-                    }
-                    else {
-                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
-                    }
+            MyObject = JSON.parse(r.d);
 
 
+            if (MyObject.error == false) {
+                //Etiqueta Sin orden de compra
+
+                $('#pslip').val("");
+                CBPalletNO.attr("src", MyObject.PAID_URL);
+                //lblItemID.html(MyObject.ITEM & " - " & MyObject.DSCA);
+                lblItemID.html(MyObject.ITEM_URL);
+                lblItemDesc.html(MyObject.DSCA);
+                LblQuantity.html(MyObject.QTYC);
+                LblUnit.html(MyObject.UNIC);
+                LblLotId.html(MyObject.CLOT);
+                LblLogn.html(MyObject.LOGN);
+                LblSupplier.html(MyObject.NAMA);
+                //LblReprint.html(MyObject.PAID.substring(10, 13));
+
+                // Etiqueta orden de compra
+
+                //CBItem.attr("src", MyObject.ITEM_URL);
+                //CBItem.attr(MyObject.ITEM_URL);
+                CBPurchaseOrder.attr("src", MyObject.ORNO_URL);
+                //CBLot.attr("src", MyObject.CLOT_URL);
+                if (MyObject.CLOT_URL == "") {
+                    CBLot.hide();
                 }
                 else {
-                    console.log("El registro no se realizo");
-                    alert(MyObject.errorMsg);
+                    CBLot.show();
                 }
-            }
-            else {
-                MyList.PAIDS.forEach(function (PAID, index) {
+                //CBQuantity.attr("src", MyObject.QTYC_URL);
+                CBUnit.attr("src", MyObject.UNIC_URL);
 
-                    CBPalletNOd = PAID;
-                    lblItemIDd = MyList.ITEM;
-                    lblItemDescd = MyList.DSCA;
-                    LblQuantityd = MyList.QTYC;
-                    LblUnitd = MyList.UNIC;
-                    LblLotIdd = MyList.CLOT;
-                    CBPurchaseOrderd = MyList.ORNO_URL;
-                    CBItem = MyList.ITEM_URL;
-                    CBLotd = MyList.CLOT_URL;
-                    CBQuantityd = MyList.QTYC_URL;
-                    CBUnitd = MyList.UNIC_URL;
-                    LblPurchaseOCd = MyList.ORNO;
-                    LblItemOCd = MyList.ITEM;
-                    LblLotOCd = MyList.CLOT;
-                    LblUnitOCd = MyList.UNIT;
-                    LblQuantityOCd = MyList.QTYC;
-                    LblUser = MyList.LOGN;
-                    LblSup = MyList.NAMA;
+                LblItemOC.html(MyObject.ITEM);
+                LblPurchaseOC.html(MyObject.ORNO);
+                LblOriginalLot.html(MyObject.ORNO);
+                LblLotOC.html(MyObject.CLOT);
+                LblUnitOC.html(MyObject.UNIT);
+                LblQuantityOC.html(MyObject.QTYC);
 
-
-                    var etiqueta =
-                        '<div id="myLabel">' +
-                        '<div class="row">' +
-                        '<div class="col-6 alingLeft">' +
-                        '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
-                        '</div>' +
-                        '<div class="col-6 alingRight">' +
-                        '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
-                        '</div>' +
-                        '</div>' +
-                        '<br />' +
-                        '<div class="col-10 borderTop" id="divBarcode">' +
-                        '<img src="' + CBPalletNOd + '" id="codePaid" alt="" />' +
-                        '</div>' +
-                        '<div>' +
-                        '<table class="table mw-100">' +
-                        '<tbody>' +
-                        '<tr>' +
-                        '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ?  LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
-                        '</tr>' +
-                        '<tr>' +
-                        '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblSup + '</label></td>' +
-                        '</tr>' +
-                        '<tr>' +
-                        '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
-                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyList.DATE + '</label></td>' +
-                        '</tr>' +
-                        '</tbody>' +
-                        '</table>' +
-                        '</div>' +
-                        '</div>';
-                    $('#MyDynamicEtiqueta').append(etiqueta);
+                if (MyObject.OORG != "2" && MyObject != undefined) {
+                    //btnMyEtiqueta.show();
                 }
-            );
+                else if (MyObject != undefined) {
+                    //btnMyEtiqueta.show();
+                }
 
                 DeshabilitarLimpiarControles();
-                printDiv('MyDynamicEtiqueta');
-
+                myLabelFrame = document.getElementById('myLabelFrame');
+                if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                    myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterialME.aspx';
+                }
+                else {
+                    myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
+                }
+                
             }
+            else {
+                console.log("El registro no se realizo");
+                alert(MyObject.errorMsg);
+            }
+
 
         }
 
+        function printLabel(){
+            //var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'" + MyObject.ORNO + "','ITEM':'" + MyObject.ITEM + "','LOT':'" + MyObject.CLOT + "','QTY':'" + MyObject.QTYC + "'}";
+            var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'jjhjhj','ITEM':'aaaaa','LOT':'aaaaa','QTY':'aaaa'}";
+            WebMethod = "http://susavgabart01:82/Integration/WebServiceIntegration/Execute";
+            sendAjax(WebMethod, Data, resBartender,true,false);
+        }
+
+        
         var SuccesQuantityUnity = function (r) {
 
             lstFactor = JSON.parse(r.d);
@@ -1130,23 +744,19 @@
 
         $(function () {
             IniciarControles();
-            qtylabelsrec = "<%=qtylabelsrec%>";
+
             $('#TxOrderType').change(function (e) {
 
                 console.log(e);
                 console.log(e.currentTarget.value)
                 switch (e.currentTarget.value) {
                     case "0":
-                        $('#lblsItemDesc').hide(500);
-                        $('#LabelQuantityDiv').hide(500)
                         $('#ChkfinalReceipt').prop('disabled', true);
                         $('#ChkfinalReceipt').prop('checked', false);
                         DeshabilitarLimpiarControles();
                         //                        $('#finalReceipt').show(100);
                         break;
                     case "2":
-                        $('#lblsItemDesc').hide(500);
-                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500).css("display","flex") : $('#LabelQuantityDiv').hide(500);
                         $('#ChkfinalReceipt').prop('disabled', true);
                         $('#ChkfinalReceipt').prop('checked', false);
                         txOrderID.attr('disabled', false);
@@ -1155,8 +765,6 @@
                         //                        $('#finalReceipt').hide(100);
                         break;
                     default:
-                        $('#lblsItemDesc').hide(500);
-                        $('#LabelQuantityDiv').hide(500)
                         $('#ChkfinalReceipt').prop('disabled', true);
                         $('#ChkfinalReceipt').prop('checked', false);
                         txOrderID.attr('disabled', false);
@@ -1168,12 +776,12 @@
             });
 
             txQuantity.bind("input paste", function (e) {
-
+                
                 if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
                     var straux = "";
                     str = $('#txQuantity').val();
                     for (var i = 0; i < $('#txQuantity').val().length; i++) {
-                        straux += str.charAt(i).replace(",", "").replace(".", "");
+                        straux += str.charAt(i).replace(",","").replace(".","");
                     }
                     $('#txQuantity').val(straux);
                 } else {
@@ -1184,7 +792,6 @@
                     }
                     $('#txQuantity').val(straux);
                 }
-
                 if (TxOrderType.val() == "1") {
                     //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
                     LstSalesOrder.forEach(function (x) {
@@ -1213,6 +820,7 @@
                 }
 
                 var mycant = parseFloat(MyObject.OQUA);
+                $('#lblMyCant').html(mycant);
                 //var rangBajo = parseFloat(MyObject.OQUA) * (1 - parseFloat(MyObject.RTQP) / 100);
                 var rangAlto = parseFloat(MyObject.OQUA) * (1 + parseFloat(MyObject.RTQP) / 100);
 
@@ -1250,7 +858,7 @@
                                 console.log("Cantidad dentro de rango.");
                                 lblError.html("");
                                 btnEnviar.attr('disabled', false);
-                                if (mycantView + SumatoriaDevuelta == rangAlto) {
+                                if (mycantView + SumatoriaDevuelta == mycant) {
                                     $('#ChkfinalReceipt').prop('checked', true);
                                     $('#ShowModal').click();
                                     finalReceiptAuto = true;
@@ -1274,7 +882,7 @@
                                 lblError.html("");
                                 btnEnviar.attr('disabled', false);
 
-                                if (mycantView + SumatoriaDevuelta == rangAlto) {
+                                if (mycantView + SumatoriaDevuelta == mycant) {
                                     $('#ChkfinalReceipt').prop('checked', true);
 
                                 }
@@ -1298,7 +906,7 @@
                             lblError.html("");
                             btnEnviar.attr('disabled', false);
 
-                            if (mycantView + SumatoriaDevuelta == rangAlto) {
+                            if (mycantView + SumatoriaDevuelta == mycant) {
                                 $('#ChkfinalReceipt').prop('checked', true);
                                 $('#ShowModal').click();
                                 finalReceiptAuto = true;
@@ -1321,7 +929,7 @@
                             lblError.html("");
                             btnEnviar.attr('disabled', false);
 
-                            if (mycantView + SumatoriaDevuelta == rangAlto) {
+                            if (mycantView + SumatoriaDevuelta == mycant) {
                                 $('#ChkfinalReceipt').prop('checked', true);
 
                             }
@@ -1345,6 +953,7 @@
                 txQuantity.val("");
                 btnEnviar.attr('disabled', true);
                 if (TxOrderType.val() == "1") {
+                    //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());
                     LstSalesOrder.forEach(function (x) {
                         if (x.ITEM == txItem.val().trim().toUpperCase() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().toUpperCase().trim()) {
                             MyObject = x;
@@ -1353,6 +962,7 @@
                 }
 
                 if (TxOrderType.val() == "2") {
+                    //MyObject = LstPurchaseOrders.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());
                     LstPurchaseOrders.forEach(function (x) {
                         if (x.ITEM == txItem.val().trim().toUpperCase() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim().toUpperCase()) {
                             MyObject = x;
@@ -1402,27 +1012,11 @@
                     txQuantity.focus();
                 }
             });
-
             function ConsultarSumatoria130(OrdenID, Position, SEQNR) {
 
                 var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
                 WebMethod = "ConsultarSumatoriaCantidades130";
-                sendAjax(WebMethod, Data, ConsultarSumatoria, false);
-
-            }
-
-            var ListasOdenCompraSuccess = function (r) {
-                var Lista = JSON.parse(r.d);
-                LstSalesOrder = JSON.parse(Lista[0]);
-                LstTransferOrder = JSON.parse(Lista[1]);
-                LstPurchaseOrders = JSON.parse(Lista[2]);
-            }
-
-            function ListasOdenCompra(OrdenID, OrderType) {
-
-                var Data = "{'ORNO':'" + OrdenID + "','TYPE_ORNO':'" + OrderType + "'}";
-                WebMethod = "ListasOdenCompra";
-                sendAjax(WebMethod, Data, ListasOdenCompraSuccess, false);
+                sendAjax(WebMethod, Data, ConsultarSumatoria, false, true);
 
             }
 
@@ -1430,7 +1024,7 @@
 
                 var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "'}";
                 WebMethod = "ConsultarSumatoriaCantidades130";
-                sendAjax(WebMethod, Data, ConsultarSumatoria, false);
+                sendAjax(WebMethod, Data, ConsultarSumatoria, false,true);
 
             }
 
@@ -1438,13 +1032,12 @@
 
                 var Data = "{'ITEM':'" + $('#txItem').val().trim() + "'}";
                 WebMethod = "ConsultafactoresporItem";
-                sendAjax(WebMethod, Data, SuccesQuantityUnity, false);
+                sendAjax(WebMethod, Data, SuccesQuantityUnity, false,true);
 
             }
 
             $('#btnEnviar').click(function () {
-                $('#btnEnviar').hide();
-                $('#loadingIcon').show();
+
                 if (TxOrderType.val() == "1") {
                     //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim().toUpperCase() && x.ORNO==txOrderID.val().trim().toUpperCase() && x.PONO==txPosition.val().trim().toUpperCase());
 
@@ -1471,8 +1064,8 @@
                         PSLIP = " ";
                         console.log(MyObject);
 
-                        var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "','CICLE':'1','INIT':'true'}";
-                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false);
+                        var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
+                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
                     } else {
                     }
                 }
@@ -1506,8 +1099,8 @@
                             PSLIP = $('#pslip').val().trim();
                             console.log(MyObject);
 
-                            var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "','CICLE':'" + (($('#LabelQuantity').val().trim() == "") ? "1" : $('#LabelQuantity').val().trim()) + "','INIT':'true'}";
-                            sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false);
+                            var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
+                            sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
                         }
                         else {
 
@@ -1542,8 +1135,8 @@
                         console.log(MyObject);
 
 
-                        var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "','CICLE':'1','INIT':'true'}";
-                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false);
+                        var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
+                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
 
                     } else {
 
@@ -1570,15 +1163,128 @@
 
             DeshabilitarControl();
 
+            //            txOrderID.bind("change paste keyup", function (e) {
+
+            //                if (e.currentTarget.value.trim() != "" && e.currentTarget.value != undefined && e.currentTarget.value != null) {
+            //                    var OrdenID = txOrderID.val().trim().toUpperCase();
+
+            //                    if (TxOrderType.val() == "1") {
+            //                        var Order = undefined; //LstSalesOrder.find(x => x.ORNO.toUpperCase() == OrdenID.toUpperCase());
+
+            //                        LstSalesOrder.forEach(function (x) {
+            //                            if (x.ORNO.toUpperCase() == OrdenID.toUpperCase()) {
+            //                                Order = x
+            //                            }
+            //                        });
+
+            //                        if (Order != undefined) {
+            //                            console.log("Si existe el order");
+            //                            lblError.html("");
+            //                            txItem.attr('disabled', false);
+            //                            txItem.focus();
+
+            //                        } else {
+            //                            lblError.html('<%= lblOrderError%>');
+
+            //                            btnEnviar.attr('disabled', true);
+            //                            txItem.attr('disabled', true);
+            //                            txPosition.attr('disabled', true);
+            //                            txLot.attr('disabled', true);
+            //                            DdUnis.attr('disabled', true);
+            //                            txQuantity.attr('disabled', true);
+
+            //                            txItem.val("");
+            //                            txPosition.val("");
+            //                            txLot.val("");
+            //                            DdUnis.val("");
+            //                            txQuantity.val("");
+
+            //                            var MyElemnt = "#" + e.currentTarget.id;
+            //                            $(MyElemnt).focus();
+            //                        }
+            //                    }
+            //                    else if (TxOrderType.val() == "2") {
+            //                        var Order = undefined; //LstPurchaseOrders.find(x => x.ORNO.toUpperCase() == OrdenID.toUpperCase());
+
+            //                        LstPurchaseOrders.forEach(function (x) {
+            //                            if (x.ORNO.toUpperCase() == OrdenID.toUpperCase()) {
+            //                                Order = x
+            //                            }
+            //                        });
+
+
+            //                        txItem.attr('disabled', false);
+            //                        if (Order != undefined) {
+            //                            console.log("Si existe el order");
+            //                            lblError.html("");
+            //                            txItem.focus();
+            //                        } else {
+            //                            lblError.html('<%= lblOrderError%>');
+
+            //                            btnEnviar.attr('disabled', true);
+            //                            txItem.attr('disabled', true);
+            //                            txPosition.attr('disabled', true);
+            //                            txLot.attr('disabled', true);
+            //                            DdUnis.attr('disabled', true);
+            //                            txQuantity.attr('disabled', true);
+
+            //                            txItem.val("");
+            //                            txPosition.val("");
+            //                            txLot.val("");
+            //                            DdUnis.val("");
+            //                            txQuantity.val("");
+
+            //                            var MyElemnt = "#" + e.currentTarget.id;
+            //                            $(MyElemnt).focus();
+            //                        }
+            //                    }
+            //                    else if (TxOrderType.val() == "22") {
+            //                        var Order = undefined; // LstTransferOrder.find(x => x.ORNO.toUpperCase() == OrdenID.toUpperCase() );
+
+            //                        LstTransferOrder.forEach(function (x) {
+            //                            if (x.ORNO.toUpperCase() == OrdenID.toUpperCase()) {
+            //                                Order = x
+            //                            }
+            //                        });
+
+            //                        if (Order != undefined) {
+            //                            console.log("Si existe el order");
+            //                            lblError.html("");
+            //                            txItem.attr('disabled', false);
+            //                            txItem.focus();
+
+            //                        } else {
+            //                            lblError.html('<%= lblOrderError%>');
+
+            //                            btnEnviar.attr('disabled', true);
+            //                            txItem.attr('disabled', true);
+            //                            txPosition.attr('disabled', true);
+            //                            txLot.attr('disabled', true);
+            //                            DdUnis.attr('disabled', true);
+            //                            txQuantity.attr('disabled', true);
+
+            //                            txItem.val("");
+            //                            txPosition.val("");
+            //                            txLot.val("");
+            //                            DdUnis.val("");
+            //                            txQuantity.val("");
+
+            //                            var MyElemnt = "#" + e.currentTarget.id;
+            //                            $(MyElemnt).focus();
+
+            //                        }
+            //                    }
+            //                }
+            //            });
 
             txOrderID.bind("change paste keyup", function (e) {
                 lblError.html('');
-                if (e.currentTarget.value.trim() != "" && e.currentTarget.value.trim().length == 9 && e.currentTarget.value != undefined && e.currentTarget.value != null) {
+                if (e.currentTarget.value.trim() != "" && e.currentTarget.value != undefined && e.currentTarget.value != null) {
                     var OrdenID = txOrderID.val().trim().toUpperCase();
 
                     if (TxOrderType.val() == "1") {
                         var Order = undefined; //LstSalesOrder.find(x => x.ORNO.toUpperCase() == OrdenID.toUpperCase());
-                        ListasOdenCompra(OrdenID.toUpperCase(), TxOrderType.val());
+
                         LstSalesOrder.forEach(function (x) {
                             if (x.ORNO.toUpperCase() == OrdenID.toUpperCase()) {
                                 Order = x
@@ -1591,10 +1297,10 @@
                             txPosition.attr('disabled', false);
                             txPosition.focus();
                             ddPosition.focus();
-                            //setTimeout(function () { lblError.html(""); }, 2500);
+                            setTimeout(function () { lblError.html(""); }, 2500);
 
                         } else {
-                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 1500);
 
                             btnEnviar.attr('disabled', true);
                             txItem.attr('disabled', true);
@@ -1616,8 +1322,7 @@
                     }
                     else if (TxOrderType.val() == "2") {
                         var Order = undefined; //LstPurchaseOrders.find(x => x.ORNO.toUpperCase() == OrdenID.toUpperCase());
-                        ListasOdenCompra(OrdenID.toUpperCase(), TxOrderType.val());
-                        //IniciarListasOrderType();
+
                         LstPurchaseOrders.forEach(function (x) {
                             if (x.ORNO.toUpperCase() == OrdenID.toUpperCase()) {
                                 Order = x
@@ -1631,9 +1336,9 @@
                             console.log("Si existe el order");
                             txPosition.focus();
                             ddPosition.focus();
-                            //setTimeout(function () { lblError.html(""); }, 2500);
+                            setTimeout(function () { lblError.html(""); }, 2500);
                         } else {
-                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 1500);
 
                             btnEnviar.attr('disabled', true);
                             txItem.attr('disabled', true);
@@ -1655,8 +1360,7 @@
                     }
                     else if (TxOrderType.val() == "22") {
                         var Order = undefined; // LstTransferOrder.find(x => x.ORNO.toUpperCase() == OrdenID.toUpperCase() );
-                        ListasOdenCompra(OrdenID.toUpperCase(), TxOrderType.val());
-                        //IniciarListasOrderType();
+
                         LstTransferOrder.forEach(function (x) {
                             if (x.ORNO.toUpperCase() == OrdenID.toUpperCase()) {
                                 Order = x
@@ -1669,10 +1373,10 @@
                             txPosition.attr('disabled', false);
                             txPosition.focus();
                             ddPosition.focus();
-                            //setTimeout(function () { lblError.html(""); }, 2500);
+                            setTimeout(function () { lblError.html(""); }, 2500);
 
                         } else {
-                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 1500);
 
 
                             btnEnviar.attr('disabled', true);
@@ -1694,7 +1398,7 @@
 
                         }
                     }
-        }
+                }
             });
 
 
@@ -1719,7 +1423,7 @@
                             ConsultarFactoresporItem();
                             txPosition.focus();
                             ddPosition.focus();
-                            //setTimeout(function () { lblError.html(""); }, 4000);
+                            setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
                             lblError.html('<%= lblItemError%>');
 
@@ -1756,7 +1460,7 @@
                             ConsultarFactoresporItem();
                             txPosition.focus();
                             ddPosition.focus();
-                            //setTimeout(function () { lblError.html(""); }, 4000);
+                            setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
                             lblError.html('<%= lblItemError%>');
 
@@ -1791,7 +1495,7 @@
                             ConsultarFactoresporItem();
                             txPosition.focus();
                             ddPosition.focus();
-                            //setTimeout(function () { lblError.html(""); }, 4000);
+                            setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
                             lblError.html('<%= lblItemError%>');
 
@@ -1812,11 +1516,178 @@
                             $('#txItem').focus();
                         }
                     }
-        }
+                }
             });
+
+            //            txPosition.bind("change paste keyup", function (e) {
+
+            //                if (e.currentTarget.value.trim() != "" && e.currentTarget.value != undefined && e.currentTarget.value != null) {
+            //                    var Position = txPosition.val().trim();
+            //                    var MyItem = txItem.val().trim().toUpperCase();
+            //                    var OrdenID = txOrderID.val().trim();
+
+            //                    if (TxOrderType.val() == "1") {
+            //                        var Item = undefined; //LstSalesOrder.find(x => x.ORNO == OrdenID.toUpperCase() && x.ITEM == Item.toUpperCase() && x.PONO == Position);
+
+            //                        LstSalesOrder.forEach(function (x) {
+            //                            if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
+            //                                Item = x
+            //                            }
+            //                        });
+
+            //                        if (Item != undefined) {
+            //                            console.log("Si existe el la posicion con respecto al item y a la orden.");
+            //                            lblError.html("");
+            //                            if (Item.TERM == "1") {
+            //                                //txQuantity.attr('disabled', false);
+            //                                DdUnis.attr('disabled', false);
+            //                                console.log("El registro tiene Fecha vigente");
+            //                                lblError.html("");
+            //                                DdUnis.focus();
+            //                            }
+            //                            else {
+            //                                btnEnviar.attr('disabled', true);
+
+            //                                //txLot.attr('disabled', true);
+            //                                DdUnis.attr('disabled', true);
+            //                                txQuantity.attr('disabled', true);
+
+            //                                //txLot.val("");
+            //                                DdUnis.val("");
+            //                                txQuantity.val("");
+
+            //                                var MyElemnt = "#" + e.currentTarget.id;
+            //                                $(MyElemnt).focus();
+            //                                lblError.html('<%= lblDateError%>');
+            //                            }
+
+            //                        } else {
+            //                            lblError.html('<%= lblPositionError%>');
+
+            //                            btnEnviar.attr('disabled', true);
+
+            //                            //txLot.attr('disabled', true);
+            //                            DdUnis.attr('disabled', true);
+            //                            txQuantity.attr('disabled', true);
+
+            //                            //txLot.val("");
+            //                            DdUnis.val("");
+            //                            txQuantity.val("");
+
+            //                            var MyElemnt = "#" + e.currentTarget.id;
+            //                            $(MyElemnt).focus();
+            //                        }
+            //                    }
+            //                    else if (TxOrderType.val() == "2") {
+            //                        var Item = undefined; //LstPurchaseOrders.find(x => x.ORNO == OrdenID.toUpperCase() && x.ITEM == Item.toUpperCase() && x.PONO == Position);
+
+
+            //                        LstPurchaseOrders.forEach(function (x) {
+            //                            if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
+            //                                Item = x
+            //                            }
+            //                        });
+
+            //                        if (Item != undefined) {
+            //                            console.log("Si existe el la posicion con respecto al item y a la orden.");
+            //                            if (Item.TERM == "1") {
+            //                                //txQuantity.attr('disabled', false);
+            //                                DdUnis.attr('disabled', false);
+            //                                console.log("El registro tiene Fecha vigente");
+            //                                lblError.html("");
+            //                                DdUnis.focus();
+            //                            }
+            //                            else {
+
+            //                                btnEnviar.attr('disabled', true);
+
+            //                                //txLot.attr('disabled', true);
+            //                                DdUnis.attr('disabled', true);
+            //                                txQuantity.attr('disabled', true);
+
+            //                                //txLot.val("");
+            //                                DdUnis.val("");
+            //                                txQuantity.val("");
+
+            //                                var MyElemnt = "#" + e.currentTarget.id;
+            //                                $(MyElemnt).focus();
+            //                                lblError.html('<%= lblDateError%>');
+            //                                btnEnviar.attr('disabled', true);
+            //                            }
+            //                        } else {
+            //                            lblError.html('<%= lblPositionError%>');
+
+            //                            btnEnviar.attr('disabled', true);
+
+            //                            //txLot.attr('disabled', true);
+            //                            DdUnis.attr('disabled', true);
+            //                            txQuantity.attr('disabled', true);
+
+            //                            //txLot.val("");
+            //                            DdUnis.val("");
+            //                            txQuantity.val("");
+
+            //                            var MyElemnt = "#" + e.currentTarget.id;
+            //                            $(MyElemnt).focus();
+            //                        }
+            //                    }
+            //                    else if (TxOrderType.val() == "22") {
+            //                        var Item = undefined; // LstTransferOrder.find(x => x.ORNO == OrdenID.toUpperCase() && x.ITEM == Item.toUpperCase() && x.PONO == Position);
+
+            //                        LstTransferOrder.forEach(function (x) {
+            //                            if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
+            //                                Item = x
+            //                            }
+            //                        });
+
+            //                        if (Item != undefined) {
+            //                            console.log("Si existe el la posicion con respecto al item y a la orden.");
+            //                            if (Item.TERM == "1") {
+            //                                //txQuantity.attr('disabled', false);
+            //                                DdUnis.attr('disabled', false);
+            //                                console.log("El registro tiene Fecha vigente");
+            //                                lblError.html("");
+            //                                DdUnis.focus();
+            //                            }
+            //                            else {
+
+            //                                btnEnviar.attr('disabled', true);
+
+            //                                txLot.attr('disabled', true);
+            //                                DdUnis.attr('disabled', true);
+            //                                txQuantity.attr('disabled', true);
+
+            //                                txLot.val("");
+            //                                DdUnis.val("");
+            //                                txQuantity.val("");
+
+            //                                var MyElemnt = "#" + e.currentTarget.id;
+            //                                $(MyElemnt).focus();
+            //                                lblError.html('<%= lblDateError%>');
+            //                            }
+            //                        } else {
+            //                            lblError.html('<%= lblPositionError%>');
+
+            //                            btnEnviar.attr('disabled', true);
+
+            //                            //txLot.attr('disabled', true);
+            //                            DdUnis.attr('disabled', true);
+            //                            txQuantity.attr('disabled', true);
+
+            //                            //txLot.val("");
+            //                            DdUnis.val("");
+            //                            txQuantity.val("");
+
+            //                            var MyElemnt = "#" + e.currentTarget.id;
+            //                            $(MyElemnt).focus();
+            //                        }
+            //                    }
+            //                }
+            //            });
 
             txPosition.bind("change paste keyup", function (e) {
 
+                $('#lblUnidDsca').hide();
                 if (e.currentTarget.value.trim() != "" && e.currentTarget.value != undefined && e.currentTarget.value != null) {
                     var Position = txPosition.val().trim();
                     var MyItem = txItem.val().trim().toUpperCase();
@@ -1832,7 +1703,6 @@
                         });
 
                         if (Item != undefined) {
-                            $('#lblsItemDesc').show(500);
                             //$('#lblUnidSt').val(Item.STUN);
                             $('#lblUnidSt').html(Item.STUN);
                             $('#lblUnidDsca').html(Item.DSCA);
@@ -1869,7 +1739,7 @@
                                 txQuantity.attr('disabled', false);
 
                                 var mycant = parseFloat(Item.OQUA);
-
+                                $('#lblMyCant').html(mycant);
                                 if (SumatoriaDevuelta == mycant) {
                                     txQuantity.attr('disabled', true);
                                     btnEnviar.attr('disabled', true);
@@ -1899,7 +1769,6 @@
                             }
 
                         } else {
-                            $('#lblsItemDesc').hide(500);
                             lblError.html('<%= lblPositionError%>');
 
                             btnEnviar.attr('disabled', true);
@@ -1928,7 +1797,6 @@
                         });
 
                         if (Item != undefined) {
-                            $('#lblsItemDesc').show(500);
                             $('#lblUnidSt').html(Item.STUN);
                             $('#lblUnidDsca').html(Item.DSCA);
                             $('#lblUnidDsca').show();
@@ -1976,7 +1844,6 @@
                                 btnEnviar.attr('disabled', true);
                             }
                         } else {
-                            $('#lblsItemDesc').hide(500);
                             lblError.html('<%= lblPositionError%>');
 
                             btnEnviar.attr('disabled', true);
@@ -2004,7 +1871,6 @@
                         });
 
                         if (Item != undefined) {
-                            $('#lblsItemDesc').show(500);
                             $('#lblUnidSt').html(Item.STUN);
                             $('#lblUnidDsca').html(Item.DSCA);
                             $('#lblUnidDsca').show();
@@ -2036,6 +1902,7 @@
                                 DdUnis.attr('disabled', true);
                                 txQuantity.attr('disabled', false);
                                 var mycant = parseFloat(Item.OQUA);
+                                $('#lblMyCant').html(mycant);
                                 if (SumatoriaDevuelta == mycant) {
                                     txQuantity.attr('disabled', true);
                                     btnEnviar.attr('disabled', true);
@@ -2060,7 +1927,6 @@
                                 lblError.html('<%= lblDateError%>');
                             }
                         } else {
-                            $('#lblsItemDesc').hide(500);
                             lblError.html('<%= lblPositionError%>');
 
                             btnEnviar.attr('disabled', true);
@@ -2079,18 +1945,18 @@
                             $(MyElemnt).focus();
                         }
                     }
-        }
-        else {
+                }
+                else {
 
-            txLot.attr('disabled', true);
-            DdUnis.attr('disabled', true);
-            txQuantity.attr('disabled', true);
+                    txLot.attr('disabled', true);
+                    DdUnis.attr('disabled', true);
+                    txQuantity.attr('disabled', true);
 
-            txItem.val("");
-            txLot.val("");
-            DdUnis.val("");
-            txQuantity.val("");
-        }
+                    txItem.val("");
+                    txLot.val("");
+                    DdUnis.val("");
+                    txQuantity.val("");
+                }
             });
 
             $('#ChkfinalReceipt').click(function () {
@@ -2144,113 +2010,113 @@
         });
 
 
-$('#DdPosition').bind("change", function (e) {
+        $('#DdPosition').bind("change", function (e) {
 
-    txPosition.val($('#DdPosition').val());
-    txPosition.change();
-});
-
-
-function addOption() {
-
-    var options = [];
-    var unique = [];
-
-    $('.rowTable').remove();
-    $('#DdPosition option').remove(0);
-    $('#DdPosition').append("<option value='0'>Select Position</option>");
-
-    if (TxOrderType.val() == "1") {
-        LstSalesOrder.forEach(function (x) {
-            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                optionValue = x.PONO.trim();
-                options.push(optionValue);
-            }
-        });
-    }
-    else if (TxOrderType.val() == "2") {
-
-        LstPurchaseOrders.forEach(function (x) {
-            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                optionValue = x.PONO.trim();
-                options.push(optionValue);
-            }
+            txPosition.val($('#DdPosition').val());
+            txPosition.change();
         });
 
-    }
-    else if (TxOrderType.val() == "22") {
 
-        LstTransferOrder.forEach(function (x) {
-            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                optionValue = x.PONO.trim();
-                options.push(optionValue);
+        function addOption() {
+
+            var options = [];
+            var unique = [];
+
+            $('.rowTable').remove();
+            $('#DdPosition option').remove(0);
+            $('#DdPosition').append("<option value='0'>Select Position</option>");
+
+            if (TxOrderType.val() == "1") {
+                LstSalesOrder.forEach(function (x) {
+                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                        optionValue = x.PONO.trim();
+                        options.push(optionValue);
+                    }
+                });
             }
-        });
-    }
+            else if (TxOrderType.val() == "2") {
+
+                LstPurchaseOrders.forEach(function (x) {
+                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                        optionValue = x.PONO.trim();
+                        options.push(optionValue);
+                    }
+                });
+
+            }
+            else if (TxOrderType.val() == "22") {
+
+                LstTransferOrder.forEach(function (x) {
+                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                        optionValue = x.PONO.trim();
+                        options.push(optionValue);
+                    }
+                });
+            }
 
 
 
-    unique = options.filter(onlyUnique);
+            unique = options.filter(onlyUnique);
 
-    function onlyUnique(value, index, self) {
-        return self.indexOf(value) === index;
-    }
+            function onlyUnique(value, index, self) {
+                return self.indexOf(value) === index;
+            }
 
-    unique.forEach(function (x) {
-        optionValueX = x;
-        $('#DdPosition').append("<option value=" + optionValueX + ">" + optionValueX + "</option>");
+            unique.forEach(function (x) {
+                optionValueX = x;
+                $('#DdPosition').append("<option value=" + optionValueX + ">" + optionValueX + "</option>");
 
-    });
-
-    unique.forEach(function (x) {
-        CurrentOption = x;
-        PonoAnt = "";
-
-        if (TxOrderType.val() == "1") {
-
-            LstSalesOrder.forEach(function (x) {
-                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                    PonoAnt = x.PONO.toUpperCase().trim();
-                }
-            });
-        }
-        else if (TxOrderType.val() == "2") {
-
-            LstPurchaseOrders.forEach(function (x) {
-                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                    PonoAnt = x.PONO.toUpperCase().trim();
-                }
             });
 
-        }
-        else if (TxOrderType.val() == "22") {
+            unique.forEach(function (x) {
+                CurrentOption = x;
+                PonoAnt = "";
 
+                if (TxOrderType.val() == "1") {
 
-
-            LstTransferOrder.forEach(function (x) {
-                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                    PonoAnt = x.PONO.toUpperCase().trim();
+                    LstSalesOrder.forEach(function (x) {
+                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                            PonoAnt = x.PONO.toUpperCase().trim();
+                        }
+                    });
                 }
+                else if (TxOrderType.val() == "2") {
+
+                    LstPurchaseOrders.forEach(function (x) {
+                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                            PonoAnt = x.PONO.toUpperCase().trim();
+                        }
+                    });
+
+                }
+                else if (TxOrderType.val() == "22") {
+
+
+
+                    LstTransferOrder.forEach(function (x) {
+                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                            PonoAnt = x.PONO.toUpperCase().trim();
+                        }
+                    });
+                }
+
+
+
+
             });
+
+            options = [];
+            unique = []
         }
 
-
-
-
-    });
-
-    options = [];
-    unique = []
-}
-
-function limpiarPosition() {
-    $('#DdPosition option').remove(0);
-    $('#DdPosition').append("<option value='0'>Select Position</option>");
-    $('.rowTable').remove();
-}
+        function limpiarPosition() {
+            $('#DdPosition option').remove(0);
+            $('#DdPosition').append("<option value='0'>Select Position</option>");
+            $('.rowTable').remove();
+        }
     </script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap.min.js"></script>

@@ -31,7 +31,7 @@
 
         #myLabel, #myLabel2 {
             width: 8.5in;
-            height: 5.5in;
+            height: 6in;
             padding: 0px;
             border-radius: 12px;
         }

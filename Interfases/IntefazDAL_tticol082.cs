@@ -60,6 +60,11 @@ namespace whusa.Interfases
         {
             return dal.ConsultarPalletIDTticol082(PalletID);
         }
+        //JC 021021 Desasignar Pallets de un Picking
+        public DataTable ConsultarPalletID_x_Picking(string PalletID)
+        {
+            return dal.ConsultarPalletID_x_Picking(PalletID);
+        }
 
         public DataTable ConsultarPalletIDTticol083(string PalletID)
         {

@@ -305,7 +305,7 @@
             var mywindow = window.open('', 'PRINT');
 
             mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('</head><body> <style>@page {size: 6in,4in;margin: 0; size: landscape;} #MyEtiquetaDrop{width:6in; height:4in;}</style>');
+            mywindow.document.write('</head><body> <style>@page {size: 6in,3in;margin: 0; size: landscape;} #MyEtiquetaDrop{width:6in; height:3in;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
 
@@ -367,6 +367,7 @@
                     <tr>
                         <th scope="col">Picking ID</th>
                         <th scope="col">Warehouse</th>
+                        <th scope="col">Date</th>
                         <th scope="col">User</th>
                         <th scope="col">Machine</th>
                         <th scope="col">Priority</th>
@@ -557,7 +558,7 @@
                 </div>
             </div>
             <div id="MyEtiquetaDropPrint" style="display:none;"">
-            <div id="MyEtiquetaDrop" style="width:6in; height:4in;">
+            <div id="MyEtiquetaDrop" style="width:6in; height:3.5in;">
                 <table style="margin: auto;margin-top:15px;">
                     <tr>
                         <td>
@@ -586,8 +587,9 @@
                             </label>
                         </td>
                         <td style="text-align: center;">
-                            <label style="font-size: 20px" id="lbPaid">
-                            </label>
+                            <label style="font-size: 20px" id="lbPaid"></label>
+                            <label style="font-size: 20px" id="lbSep">/</label>
+                            <label style="font-size: 20px" id="lbQtyp"></label>
                         </td>
                     </tr>
                 </table>
@@ -820,6 +822,7 @@
 
         function ShowCurrentOptionsWarehouse() {
             var bodyRows = ""
+            var drop = true
             divTableWarehouse.innerHTML = '';
                 ajaxShowCurrentOptionsWarehouse = $.ajax({
                 type: "POST",
@@ -838,11 +841,11 @@
                         for (var i = 0; i < myObj.length; i++) {
 
                             if (myObj[i].T$STAT == 1) {
-                                bodyRows += "<tr id='rowNum" + i + "' row= '" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
+                                bodyRows += "<tr id='rowNum" + i + "' row= '" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$LOCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
                             }
                             else {
                                 dropPending = true;
-                                bodyRows += "<tr onClick='Drop(this,false)' row= '" + i + "' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$DSCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='DropLoader" + i + "'></i></span></button></td></tr>";
+                                bodyRows += "<tr onClick='Drop(this,false)' row= '" + i + "' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$LOCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='DropLoader" + i + "'></i></span></button></td></tr>";
                             }
                         }
                         var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
@@ -852,7 +855,7 @@
                                                         "<th scope='col'>Machine</th>" +
                                                         "<th scope='col'>Warehouse</th>" +
                                                         "<th scope='col'>Item</th>" +
-                                                        "<th scope='col'>Description</th>" +
+                                                        "<th scope='col'>Location</th>" +
                                                         "<th scope='col'>Quantity</th>" +
                                                         "<th scope='col'>Unit</th>" +
                                                         "<th scope='col'>Pallet ID</th>" +
@@ -1000,10 +1003,10 @@
                     if (parseInt(item.T$PAID.trim()).toString() != "NaN") {
 
                         if (item.T$STAT == 1) {
-                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
+                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
                         }
                         else {
-                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;</span></button></td>";
+                            bodyRows += "<tr onclick='btnPickingPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;</span></button></td>";
                         }
                         validos = true;
                     }
@@ -1083,7 +1086,7 @@
                     myList.forEach(function (x) {
                         if (x.T$STAT == 2) {
                             EventoAjax("DropEndPicking", "{'PICK':'" + myList.T$PICK + "','Consigment':" + chkConsigment.checked + "}", DropMultipleSuccess);
-                            Paids += x.T$PAID + " ";
+                            Paids += x.T$PAID + "/" + x.T$QTYT + " ";
                             flag1 = true;
                         }
                     });
@@ -1125,6 +1128,8 @@
                 //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
                 $("#Contenido_bcPick").attr("src", r.d);
                 $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
+                //JC 021021 Traer la cantidad del picking por pallet
+                $("#lbQtyp").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$QTYT)
                 $("#lbPaid").html(localStorage.getItem('paid'))
                 printDiv("MyEtiquetaDropPrint");
                 selectPicksPending();

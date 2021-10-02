@@ -25,11 +25,11 @@
             var numeroOrden = document.getElementById('txtRollNumber').value.trim();
             var orden = numeroOrden.substr(9, 1);
             var guion = numeroOrden.substr(9, 1);
-            var pallet = numeroOrden.substr(10, 3);
+            var pallet = numeroOrden.substr(10, 5);
             //if (pallet.match(re)) {
                 if (numeroOrden != "") {
-                    if (numeroOrden.length < 13 || numeroOrden.length > 14) {
-                        alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, minimum 13 maximum 14 characters"
+                    if (numeroOrden.length < 11 || numeroOrden.length > 14) {
+                        alert(_idioma == "INGLES" ? "Please use this format WORKORDER-PALLETID, minimum 12 maximum 14 characters"
                                     : "Por favor use el formato ORDENTRABAJO-PALLETID, minimo 13 maximo 14 caracteres");
                         document.getElementById("txtRollNumber").focus();
                         document.getElementById("txtRollNumber").value = "";
