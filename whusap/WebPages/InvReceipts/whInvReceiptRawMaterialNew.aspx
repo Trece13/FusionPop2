@@ -1146,7 +1146,7 @@
                         break;
                     case "2":
                         $('#lblsItemDesc').hide(500);
-                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500).css("display","ruby-base") : $('#LabelQuantityDiv').hide(500);
+                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500).css("display","flex") : $('#LabelQuantityDiv').hide(500);
                         $('#ChkfinalReceipt').prop('disabled', true);
                         $('#ChkfinalReceipt').prop('checked', false);
                         txOrderID.attr('disabled', false);

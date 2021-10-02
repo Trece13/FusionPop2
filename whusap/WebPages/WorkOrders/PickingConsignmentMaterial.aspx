@@ -613,7 +613,7 @@
 
         var timer;
         var skip = false;
-        var drop = false;
+        
         var existPalletsPick = false;
         function stoper() {
             clearTimeout(timer);
@@ -1482,6 +1482,7 @@
             });
         }
         $(function () {
+            var drop = false;
             StartComponents();
             //loadPicksPending();
             GetWarehouse();

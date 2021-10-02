@@ -360,6 +360,7 @@ namespace whusa.Interfases
             //log.escribirError("My query es jc" + strSentencia,"Hola","Hola", "Hola");
             try
             {
+                log.escribirError("este es el sql: " + strSentencia, "hola", "InsertarReseiptRawMaterial", "InsertarReseiptRawMaterial");
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
             }
             catch (Exception ex)
