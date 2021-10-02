@@ -330,8 +330,11 @@
         }
 
         #myLabel {
-            width: 0in;
-            height: 0in;
+            width: 6in;
+            height: 4in;
+            padding: 20px;
+            border: 1px solid black;
+            border-radius: 12px;
         }
 
         .alingRight {
@@ -433,7 +436,7 @@
         .table th {
             padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 0.5em;
+            font-size: 1.2em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
@@ -576,9 +579,8 @@
                 <label id="Label1" for="txUnit">
                 </label>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txQuantity">
-                    Quantity</label>
+            <div class="form-group row">   
+                <label class="col-sm-4" for="txQuantity">Quantity</label>            
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="txQuantity" placeholder="Quantity"
                         data-method="ValidarQuantity" tabindex="1">
