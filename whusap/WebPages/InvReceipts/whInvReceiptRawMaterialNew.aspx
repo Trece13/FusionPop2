@@ -97,10 +97,9 @@
                                     'text-align: center;' +
                                     '}' +
                                     '#myLabel {' +
-                                    'width: 100%;' +
-                                    'height: 810px;' +
+                                    'width: 8in;' +
+                                    'height: 5.9in;' +
                                     'padding: 20px;' +
-                                    'border: 1px solid black;' +
                                     'border-radius: 12px;' +
                                     '}' +
                                     '.alingRight {' +
@@ -115,8 +114,8 @@
                                     '#codePaid {' +
                                     'display: block;' +
                                     'margin: auto;' +
-                                    'height: 40%;' +
-                                    'width: 100%;' +
+                                    'height: 150px;' +
+                                    'width: 750px;' +
                                     '}' +
                                     '#codeItem {' +
                                     'display: block;' +
@@ -182,7 +181,7 @@
                                     '.table th {' +
                                     'padding: .1rem;' +
                                     'border-top: 1px solid #dee2e6;' +
-                                    'font-size: 1.5rem;' +
+                                    'font-size: 1.7rem;' +
                                     'text-align: left;' +
                                     'vertical-align: middle;' +
                                     'padding-left: 1em;' +
@@ -331,9 +330,8 @@
         }
 
         #myLabel {
-            width: 6in;
-            height: 4in;
-            border-radius: 12px;
+            width: 0in;
+            height: 0in;
         }
 
         .alingRight {
@@ -435,7 +433,7 @@
         .table th {
             padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 0.7em;
+            font-size: 0.5em;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
@@ -1027,7 +1025,7 @@
                         '</div>' +
                         '</div>' +
                         '<br />' +
-                        '<div class="col-12 borderTop" id="divBarcode">' +
+                        '<div class="col-10 borderTop" id="divBarcode">' +
                         '<img src="' + CBPalletNOd + '" id="codePaid" alt="" />' +
                         '</div>' +
                         '<div>' +

@@ -2785,9 +2785,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="PaidMayorwhcol130">
         <stringSQL>
           SELECT T$PAID  FROM(
-          SELECT t$PAID FROM {0}.twhcol130{1} WHERE T$paid LIKE '%[:T$ORNO]%'
+          SELECT t$PAID FROM {0}.twhcol130{1} WHERE T$paid LIKE '%[:T$ORNO]%' AND REGEXP_LIKE(SUBSTR(T$PAID,11,1), '[^A-Za-z]')
           UNION
-          SELECT t$PAID FROM {0}.twhcol131{1} WHERE T$paid LIKE '%[:T$ORNO]%' order by t$PAID desc
+          SELECT t$PAID FROM {0}.twhcol131{1} WHERE T$paid LIKE '%[:T$ORNO]%' AND REGEXP_LIKE(SUBSTR(T$PAID,11,1), '[^A-Za-z]') order by t$PAID desc
           ) WHERE ROWNUM =1
         </stringSQL>
       </operationName>
