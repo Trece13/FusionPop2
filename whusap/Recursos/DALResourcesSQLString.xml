@@ -2322,6 +2322,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE
           COL307.T$STAT IN([:T$STAT])
           AND COL307.T$CWAR = NVL('[:T$CWAR]',COL307.T$CWAR)
+          ORDER BY COL082.T$PRIO
         </stringSQL>
       </operationName>
       <operationName name="ConsultarRegistrotccol307">
@@ -5398,7 +5399,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro_MRB083">
         <stringSQL>
           INSERT INTO {0}.tticol083{1} (T$OORG, T$ORNO, T$PONO, T$ADVS, T$ITEM, T$QTYT, T$UNIT, T$CWAR, T$MCNO, T$TIME, T$PRIO, T$PICK, T$PAID, T$LOCA, T$LOGN, T$STAT, T$REFCNTD, T$REFCNTU)
-          VALUES('[:T$OORG]', '[:T$ORNO]', '[:T$PONO]', '[:T$ADVS]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')), '[:T$QTYT]', '[:T$UNIT]', '[:T$CWAR]', '[:T$MCNO]', sysdate+(5/24), '[:T$PRIO]', '[:T$PICK]', '[:T$PAID]', '[:T$LOCA]', '[:T$LOGN]', '[:T$STAT]', '[:T$REFCNTD]', '[:T$REFCNTU]')
+          VALUES('[:T$OORG]', '[:T$ORNO]', '[:T$PONO]', '[:T$ADVS]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')), '[:T$QTYT]', '[:T$UNIT]', '[:T$CWAR]', '[:T$MCNO]', sysdate+(5/24), '[:T$PRIO]', '[:T$PICK]', UPPER('[:T$PAID]'), '[:T$LOCA]', '[:T$LOGN]', '[:T$STAT]', '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
       <operationName name="actualizarRegistro_Param">

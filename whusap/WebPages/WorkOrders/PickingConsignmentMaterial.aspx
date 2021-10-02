@@ -820,6 +820,7 @@
 
         function ShowCurrentOptionsWarehouse() {
             var bodyRows = ""
+            var drop = true
             divTableWarehouse.innerHTML = '';
                 ajaxShowCurrentOptionsWarehouse = $.ajax({
                 type: "POST",
