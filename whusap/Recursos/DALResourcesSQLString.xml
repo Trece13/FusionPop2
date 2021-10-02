@@ -1857,6 +1857,22 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(ticol082.T$PICK) = TRIM('[:PICK]')-->
         </stringSQL>
       </operationName>
+      <operationName name="ConsultarPalletID_x_Picking">
+        <stringSQL>
+          SELECT distinct CWAR, TBL, TYPW, QTYA, PAID, QTYT, UNIT, ITEM, DSCA, ORNO, PICK, MCNO, DSCAM, STAT, PRIO, ADVS, PONO, STAP
+          FROM(
+          select 'ticol082' AS  TBL,col082.T$PAID AS PAID,col082.T$QTYT AS QTYT, col082.T$UNIT AS UNIT,col082.T$ITEM AS ITEM, col082.T$STAT AS STAP,
+          col082.T$QTYT AS QTYA, col082.T$ORNO AS ORNO, col082.T$PONO AS PONO, col082.T$ADVS AS ADVS, col082.T$PRIO AS PRIO, col082.T$STAT AS STAT,
+          rou002.T$DSCA AS DSCAM, col082.T$MCNO AS MCNO, col082.T$PICK AS PICK, cibd001.t$dsca AS DSCA, mcs003.T$TYPW AS TYPW, col082.T$CWAR AS CWAR
+          from {0}.tticol082{1} col082
+          LEFT JOIN {0}.ttcibd001{1} cibd001 ON cibd001.T$ITEM =  col082.T$ITEM
+          LEFT JOIN {0}.ttcmcs003{1} mcs003 ON mcs003.T$CWAR = col082.T$CWAR
+          LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
+          WHERE col082.T$STAT = 1
+          )
+          WHERE TRIM(PICK) = TRIM('[:PICK]')
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarPalletIDTticol083">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,ticol083.T$ORNO ORNO,ticol083.T$MCNO MCNO,ticol083.T$STAT STAT,stap FROM (
@@ -2315,8 +2331,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarPendientesTccol307">
         <stringSQL>
-          SELECT DISTINCT COL307.T$USER, COL307.T$STAT, COL307.T$PAID, COL307.T$CWAR, COL307.T$PROC,COL082.T$MCNO,COL082.T$PRIO FROM BAAN.TTCCOL307140 COL307
-          LEFT JOIN BAAN.TTICOL082140 COL082
+          SELECT DISTINCT COL307.T$USER, COL307.T$STAT, COL307.T$PAID, COL307.T$CWAR, COL307.T$PROC,COL082.T$MCNO,COL082.T$PRIO,COL082.T$TIME-5/24 TIME FROM {0}.TTCCOL307{1} COL307
+          LEFT JOIN {0}.TTICOL082{1} COL082
           on COL082.T$PICK  = COL307.T$PAID
           and COL082.T$CWAR = COL307.T$CWAR
           WHERE

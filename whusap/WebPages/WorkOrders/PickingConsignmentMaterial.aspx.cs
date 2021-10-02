@@ -1210,6 +1210,7 @@ namespace whusap.WebPages.WorkOrders
             Ent_tticol082 Obj082 = new Ent_tticol082();
             Obj082.STAT = Consigment == false ? "4" : "7";
             Obj082.PAID = PAID.Trim();
+            
             int randomNum = new Random().Next(999);
             string ramdomNumStr = string.Empty;
 
@@ -1234,6 +1235,8 @@ namespace whusap.WebPages.WorkOrders
                 Obj082.ORNO = RespAdvs.Rows[0]["T$ORNO"].ToString().Trim();
                 Obj082.PONO = RespAdvs.Rows[0]["T$PONO"].ToString().Trim();
                 Obj082.ADVS = RespAdvs.Rows[0]["T$ADVS"].ToString().Trim();
+                //JC 021021 Enviar la cantidad del pallet por picking
+                Obj082.QTYT = RespAdvs.Rows[0]["T$QTYT"].ToString().Trim();
             }
             Obj082.RAND = ramdomNumStr;
             //Obj082.ADVS = MySessionObjPicking.ADVS.Trim();
@@ -1242,6 +1245,8 @@ namespace whusap.WebPages.WorkOrders
                 //JC 230721 Envio el nuevo valor del pick listo para imprimir
                 //res = UrlBaseBarcode;
                 Obj082.PICK = MySessionObjPicking.PICK.Trim() + "-" + ramdomNumStr;
+                //JC 021021 Imprimir la cantidad del pick por pallet.
+                Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                 res = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Obj082.PICK + "&code=Code128&dpi=96";
             }
             else
