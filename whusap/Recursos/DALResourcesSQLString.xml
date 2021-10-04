@@ -688,9 +688,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT distinct col307.T$PAID PAID,COL082.T$PICK PICK,/*COL082.T$CWAR CWAR,COL082.T$ORNO ORNO,COL082.T$TIME TIME,*/COL082.T$PRIO PRIO FROM BAAN.TTICOL082140 COL082
           INNER JOIN BAAN.TTIROU002140 ROU002 ON ROU002.T$MCNO = COL082.T$MCNO
           LEFT JOIN BAAN.ttccol307140 col307 ON col307.t$paid = COL082.T$PICK
-          WHERE COL082.T$MCNO = NVL('[:MCNO]',ActualizarCantidades222.T$MCNO)
+          WHERE COL082.T$MCNO = NVL('[:MCNO]',COL082.T$MCNO)
           AND COL082.T$PICK = NVL('[:PICK]',COL082.T$PICK)
-          AND col307.T$PAID IS NULL
+          --AND col307.T$PAID IS NULL
           ORDER BY COL082.T$PRIO,COL082.T$PICK
         </stringSQL>
       </operationName>

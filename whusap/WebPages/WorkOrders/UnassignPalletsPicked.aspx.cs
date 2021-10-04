@@ -161,33 +161,22 @@ namespace whusap.WebPages.WorkOrders
                 }
                 else
                 {
-                    MyObj.TBL = myObjDt["TBL"].ToString();
-                    MyObj.PAID = myObjDt["PAID"].ToString();
-                    MyObj.QTYT = myObjDt["QTYT"].ToString();
-                    MyObj.UNIT = myObjDt["UNIT"].ToString();
-                    MyObj.ITEM = myObjDt["ITEM"].ToString();
-                    MyObj.DSCA = myObjDt["DSCA"].ToString();
-                    MyObj.MCNO = myObjDt["MCNO"].ToString();
-                    MyObj.DSCAM = myObjDt["DSCAM"].ToString();
-                    MyObj.ORNO = myObjDt["ORNO"].ToString();
-                    MyObj.STAT = myObjDt["STAT"].ToString();
-                    MyObj.Error = false;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    foreach (DataRow row in TableItticol082.Rows)
+                    {
+                        MyObj.TBL = myObjDt["TBL"].ToString();
+                        MyObj.PAID = myObjDt["PAID"].ToString();
+                        MyObj.QTYT = myObjDt["QTYT"].ToString();
+                        MyObj.UNIT = myObjDt["UNIT"].ToString();
+                        MyObj.ITEM = myObjDt["ITEM"].ToString();
+                        MyObj.DSCA = myObjDt["DSCA"].ToString();
+                        MyObj.MCNO = myObjDt["MCNO"].ToString();
+                        MyObj.DSCAM = myObjDt["DSCAM"].ToString();
+                        MyObj.ORNO = myObjDt["ORNO"].ToString();
+                        MyObj.STAT = myObjDt["STAT"].ToString();
+                        MyObj.Error = false;
+                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                    }
                 }
-                //if (VerificarStatPortabla(MyObj.TBL, MyObj.STAT))
-                //{
-                //    MyObj.Error = false;
-
-                //    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                //}
-                //else
-                //{
-                //    MyObj.Error = true;
-                //    MyObj.TipeMsgJs = "lbl";
-                //    MyObj.ErrorMsg = PalletIDnotvalidfortaketoMFG;
-                //    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                //}
-
             }
             else
             {

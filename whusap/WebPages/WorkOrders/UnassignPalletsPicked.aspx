@@ -51,8 +51,13 @@
                     placeholder="Pick ID" onkeyup="SearchPickIDTimer()" />
             </div>
         </div>
+        <div id="divTables" class="col-7">
+            <div id="divTableItem" class="col-12">
+            </div>
+            <br />
+        </div>
         <div id="DetallePallet">
-<%--            <div class="form-group row ">
+            <div class="form-group row ">
                 <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="lblItem">
                     Item
                 </label>
@@ -78,7 +83,7 @@
                     </label>
                 </div>
             </div>
---%>            <div class="form-group row ">
+            <div class="form-group row ">
                 <label class="col-sm-2 col-form-label-lg"  id="Label1">
                     Work Order
                 </label>
@@ -116,6 +121,7 @@
     </form>
     <script>
         var timer;
+        var ajaxSearchPickID = null;
 
         function stoper() {
             clearTimeout(timer);
@@ -166,6 +172,48 @@
             var Data = "{'PickID':'" + $('#txPickID').val().toUpperCase() + "'}";
             WebMethod = "SearchPickID";
             sendAjax(WebMethod, Data, SearchPickIDSuccess, false);
+                }
+
+        function SearchPickIDSuccess() {
+            divTableItem.innerHTML = '';
+            var bodyRows = ""
+            ajaxSearchPickID != null ? ajaxSearchPickID.abort() : ajaxSearchPickID;
+                ajaxSearchPickID = $.ajax({
+                type: "POST",
+                url: "UnassignPalletsPicked.aspx/SearchPickID",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    myObj = JSON.parse(response.d);
+                    if (myObj.length > 0 && existPalletsPick == true) {
+                        for (var i = 0; i < myObj.length; i++) {
+                            bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].PAID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DSCA + "</td><td>" + myObj[i].QTYT + "</td><td>" + myObj[i].UNIT + "</td></tr>";
+                        }
+                        var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
+                                                    "<thead>" +
+                                                      "<tr>" +
+                                                        "<th scope='col'>Pallet</th>" +
+                                                        "<th scope='col'>Location</th>" +
+                                                        "<th scope='col'>Item</th>" +
+                                                        "<th scope='col'>Description</th>" +
+                                                        "<th scope='col'>Quantity</th>" +
+                                                        "<th scope='col'>Unit</th>" +
+                                                    "</tr>" +
+                                                   "</thead>" +
+                                                   "<tbody>" +
+                                                   bodyRows
+                        "</tbody>" +
+                                                "</table>";
+
+
+                        $("#divTableItem").append(tableOptions);
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
+            });
         }
 
         var ClickDropTagPick = function () {
@@ -173,48 +221,6 @@
             var Data = "{'PickID':'" + $('#txPickID').val() + "'}";
             WebMethod = "ClickDropTagPick";
             sendAjax(WebMethod, Data, ClickDropTagPickSuccess, false);
-        }
-
-        function SearchPickIDSuccess(r) {
-            lblMsg.hide(500);
-            var MyObj = JSON.parse(r.d);
-            if (MyObj.Error == true) {
-                txPickID.addClass("InputIncorrecto");
-                txPickID.removeClass("InputCorrecto");
-                //                lblDecCustomer.html("");
-//                if (MyObj.TipeMsgJs == "alert") {
-//                    alert(MyObj.ErrorMsg);
-//                }
-                //                else if (MyObj.TipeMsgJs == "lbl") {
-                ////                    $('#lblMsg').html(MyObj.ErrorMsg);
-                //                }
-                $('#DetallePick').hide();
-                if (MyObj.Error == true) {
-                    if (MyObj.TipeMsgJs == "alert") {
-                        alert(MyObj.ErrorMsg);
-                    } if (MyObj.TipeMsgJs == "lbl") {
-                        lblMsg.html(MyObj.ErrorMsg);
-                        lblMsg.show(500);
-                    }
-                }
-            }
-            else {
-                
-                txPickID.addClass("InputCorrecto");
-                txPickID.removeClass("InputIncorrecto");
-                //                lblDecCustomer.html(MyObj.NAMA);
-                //                $('#lblMsg').html("");
-
-
-                lblItemID.html(MyObj.ITEM);
-                lblItemDesc.html(MyObj.DSCA);
-                LblQuantityVal.html(MyObj.QTYT);
-                LblQuantityUnit.html(MyObj.UNIT);
-                lblWorkOrder.html(MyObj.ORNO);
-                lblMachine.html(MyObj.MCNO);
-                lblDMachine.html(MyObj.DSCAM);
-                DetallePallet.show();
-            }
         }
 
         function ClickDropTagPickSuccess(r) {
