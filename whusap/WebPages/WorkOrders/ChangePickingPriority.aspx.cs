@@ -90,11 +90,13 @@ namespace whusap.WebPages.WorkOrders.NewPages
                List<Ent_tticol082> lstUpdatePicks = new List<Ent_tticol082>();
                Ent_tticol082 MyObj082Last = new Ent_tticol082();
                DataTable nextsPrios =  getNextPrio(PRIO);
+ 
                foreach(DataRow item in nextsPrios.Rows){
                    Ent_tticol082 MyObj082 = new Ent_tticol082();
                    MyObj082.PICK = item["PICK"].ToString();
                    MyObj082.PRIO = item["PRIO"].ToString();
                    MyObj082.PAID = item["PAID"].ToString();
+                   MyObj082.OLDP = item["PRIO"].ToString();
                    if (lstUpdatePicks.Count == 0)
                    {
                        lstUpdatePicks.Add(MyObj082);

@@ -97,9 +97,8 @@
                                     'text-align: center;' +
                                     '}' +
                                     '#myLabel {' +
-                                    'width: 8in;' +
-                                    'height: 5.9in;' +
-                                    'padding: 20px;' +
+                                    'width: 6in;' +
+                                    'height: 4in;' +
                                     'border-radius: 12px;' +
                                     '}' +
                                     '.alingRight {' +
@@ -1017,12 +1016,12 @@
 
 
                     var etiqueta =
-                        '<div id="myLabel">' +
+                        '<div id="myLabel" style="width: 100%; height: 100%;">' +
                         '<div class="row">' +
-                        '<div class="col-6 alingLeft">' +
+                        '<div class="col-6 alingLeft" style="font-size: 30px; height: 1em;">' +
                         '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
                         '</div>' +
-                        '<div class="col-6 alingRight">' +
+                        '<div class="col-4 alingRight" style="font-size: 30px; height: 1em;">' +
                         '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
                         '</div>' +
                         '</div>' +

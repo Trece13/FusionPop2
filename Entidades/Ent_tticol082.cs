@@ -38,6 +38,8 @@ namespace whusa.Entidades
             this.PICK_URL = string.Empty;
             //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
             this.RAND = string.Empty;
+            //JC 041021 Actualizar solo el pick que estan cambiando
+            this.OLDP = string.Empty;
         }
 
         public string OORG { get; set; }
@@ -77,5 +79,7 @@ namespace whusa.Entidades
         public string TYPW { get; set; }
         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
         public string RAND { get; set; }
+        //JC 041021 Actualizar solo el pick que estan cambiando
+        public string OLDP { get; set; }
     }
 }
