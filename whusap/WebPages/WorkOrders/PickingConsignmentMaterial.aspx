@@ -1003,10 +1003,10 @@
                     if (parseInt(item.T$PAID.trim()).toString() != "NaN") {
 
                         if (item.T$STAT == 1) {
-                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
+                            bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button onclick='selectPicksPending(this)' class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "' pallet='" + item.T$PAID + "' cwar='" + item.T$CWAR + "' row='" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
                         }
                         else {
-                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;</span></button></td>";
+                            bodyRows += "<tr row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button  onclick='selectPicksPending(this)' disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "' pallet='" + item.T$PAID + "' cwar='" + item.T$CWAR + "' row='" + i + "' >Take <span>&nbsp;</span></button></td>";
                         }
                         validos = true;
                     }
@@ -1033,12 +1033,15 @@
             if (e != undefined) {
                 if (verificarLoadersInactivos()) {
                     TakeProcessing = true;
-                    indexTakeLoader = e.getAttribute('row');
+                    let pick = e.getAttribute('pallet').trim();
+                    let cwar = e.getAttribute('cwar').trim();
+                    let indexTakeLoader = e.getAttribute('row').trim();
                     $('#TakeLoader' + indexTakeLoader).show(100);
-                    EventoAjax("ClickPickingPending", "{'PICK':'" + e.children[0].innerHTML.trim() + "','CWAR':'" + e.children[1].innerHTML.trim() + "'}", LoadPageSuccess);
+                    EventoAjax("ClickPickingPending", "{'PICK':'" + pick + "','CWAR':'" + cwar + "'}", LoadPageSuccess);
                 }
             }
             else {
+                $('#TakeLoader' + indexTakeLoader).show(100);
                 EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR') + "'}", LoadPageSuccess);
             }
         }
