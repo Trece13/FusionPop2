@@ -196,7 +196,7 @@
             mywindow.document.write('</body></html>');
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
-            setTimeout(function () { mywindow.print() }, 2000);
+            setTimeout(function () { mywindow.print() }, 5000);
             //mywindow.close();
 
             return true;

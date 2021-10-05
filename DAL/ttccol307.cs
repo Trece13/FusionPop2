@@ -14,11 +14,12 @@ namespace whusa.DAL
 {
     public class ttccol307
     {
-        private static Seguimiento log = new Seguimiento();
+        
         private static StackTrace stackTrace = new StackTrace();
         private static MethodBase method;
         private static Recursos recursos = new Recursos();
 
+        private static Seguimiento log = new Seguimiento();
         List<Ent_ParametrosDAL> parametrosIn = new List<Ent_ParametrosDAL>();
         Dictionary<string, object> paramList = new Dictionary<string, object>();
         Dictionary<string, object> parametersOut = new Dictionary<string, object>();
@@ -124,7 +125,7 @@ namespace whusa.DAL
             paramList.Add(":T$STAT", STAT);
             paramList.Add(":T$CWAR", CWAR);
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-
+            log.escribirError("consulta" + strSentencia, "seguimiento picking", "seguimiento picking", "seguimiento picking");
             try
             {
                 Resultado = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
