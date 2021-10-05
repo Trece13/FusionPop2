@@ -16,7 +16,10 @@ namespace whusap.WebPages.WorkOrders
     public partial class UnassignPalletsPicked : System.Web.UI.Page
     {
         public static Ent_tticol082 MyObj = new Ent_tticol082();
+        private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
+        public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
+
 
         private static string globalMessages = "GlobalMessages";
 
@@ -140,6 +143,7 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string SearchPickID(string PickID)
         {
+            List<Ent_tticol082> lsttticol082 = new List<Ent_tticol082>();
             DataTable TableItticol082 = Itticol082.ConsultarPalletID_x_Picking(PickID);
             string ObjRetorno = string.Empty;
 
@@ -174,7 +178,67 @@ namespace whusap.WebPages.WorkOrders
                         MyObj.ORNO = myObjDt["ORNO"].ToString();
                         MyObj.STAT = myObjDt["STAT"].ToString();
                         MyObj.Error = false;
-                        ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                        lsttticol082.Add(MyObj);
+                        ObjRetorno = JsonConvert.SerializeObject(lsttticol082);
+                    }
+                }
+            }
+            else
+            {
+                MyObj.Error = true;
+                MyObj.TipeMsgJs = "lbl";
+                MyObj.ErrorMsg = ThePalletIDDoesntexist;
+                ObjRetorno = JsonConvert.SerializeObject(MyObj);
+            }
+            return ObjRetorno;
+        }
+
+        [WebMethod]
+        public static string designar(string PickID)
+        {
+            List<Ent_tticol082> lsttticol082 = new List<Ent_tticol082>();
+            DataTable TableItticol082 = Itticol082.ConsultarPalletID_x_Picking(PickID);
+            string ObjRetorno = string.Empty;
+
+            if (ExistenciaData(TableItticol082))
+            {
+                DataRow myObjDt = TableItticol082.Rows[0];
+                if (MyObj.STAT == "4")
+                {
+                    MyObj.Error = true;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+
+                }
+                if (myObjDt["STAP"].ToString() == "6")
+                {
+                    MyObj.Error = true;
+                    MyObj.TipeMsgJs = "lbl";
+                    MyObj.ErrorMsg = ThePalletIDAlreadyDrop;
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
+                }
+                else
+                {
+                    foreach (DataRow row in TableItticol082.Rows)
+                    {
+                        MyObj.TBL = myObjDt["TBL"].ToString();
+                        MyObj.PAID = myObjDt["PAID"].ToString();
+                        MyObj.QTYT = myObjDt["QTYT"].ToString();
+                        MyObj.UNIT = myObjDt["UNIT"].ToString();
+                        MyObj.ITEM = myObjDt["ITEM"].ToString();
+                        MyObj.DSCA = myObjDt["DSCA"].ToString();
+                        MyObj.MCNO = myObjDt["MCNO"].ToString();
+                        MyObj.DSCAM = myObjDt["DSCAM"].ToString();
+                        MyObj.ORNO = myObjDt["ORNO"].ToString();
+                        MyObj.STAT = "3";
+                        MyObj.Error = false;
+
+                        _idaltwhcol122.UpdateTtico082Stat(MyObj);
+                        twhcolDAL.ActCausalcol131140(MyObj.PAID, 3);
+                        twhcolDAL.ActCausalTICOL022(MyObj.PAID, 7);
+                        twhcolDAL.ActCausalTICOL042(MyObj.PAID, 7);
+                        
+                        lsttticol082.Add(MyObj);
+                        ObjRetorno = JsonConvert.SerializeObject(lsttticol082);
                     }
                 }
             }
