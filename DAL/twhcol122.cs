@@ -1419,6 +1419,8 @@ namespace whusa.DAL
             paramList.Add(":T$CWAR", CWAR);
             strSentencia = recursos.readStatement("tticol082", method.Name, ref owner, ref env, "tticol082", paramList);
             paramList.Clear();
+            log.escribirError(" ConsultarTticol082porStat Entro en : " + strSentencia, "seguimiento picking", "seguimiento picking", "seguimiento picking");
+
             try
             {
                 Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);

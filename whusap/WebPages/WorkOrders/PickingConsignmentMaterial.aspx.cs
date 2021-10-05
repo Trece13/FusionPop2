@@ -23,6 +23,7 @@ namespace whusap.WebPages.WorkOrders
 {
     public partial class PickingConsignmentMaterial : System.Web.UI.Page
     {
+        private static Seguimiento log = new Seguimiento();
         public static string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         public static string thereisnotPalletavailable = mensajes("thereisnotPalletavailable");
         public static string ThequantityassociatetonewpalletisminortooldpalletID = mensajes("ThequantityassociatetonewpalletisminortooldpalletID");
@@ -354,6 +355,7 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static EntidadPicking ClickPickingPending(string PICK = "", string CWAR = "")
         {
+            log.escribirError("los paramentros de entrada son pick=" + PICK + " Y CWAR= " + CWAR, "seguimiento picking", "seguimiento picking", "seguimiento picking");
             bool PickIntUse = false;
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             MySessionObjPicking.WRH = CWAR;
@@ -363,10 +365,13 @@ namespace whusap.WebPages.WorkOrders
             DataTable DTttccol307 = _idaltccol307.ConsultarPendientesTccol307("'2'", CWAR);
             if (DTttccol307.Rows.Count > 0)
             {
+                log.escribirError("Entro en DTttccol307.Rows.Count" + CWAR, "seguimiento picking", "seguimiento picking", "seguimiento picking");
+
                 foreach (DataRow item in DTttccol307.Rows)
                 {
                     if (item["T$PAID"].ToString() == PICK && item["T$CWAR"].ToString() == CWAR)
                     {
+                        log.escribirError("Entro en (item[T$PAID].ToString() == PICK && item[T$CWAR].ToString() == CWAR)", "seguimiento picking", "seguimiento picking", "seguimiento picking");
                         MySessionObjPicking.error = true;
                         return MySessionObjPicking;
                     }
@@ -378,6 +383,7 @@ namespace whusap.WebPages.WorkOrders
             tccol307.CWAR = CWAR;
             HttpContext.Current.Session["PICKUSING"] = PICK;
             HttpContext.Current.Session["CWARUSING"] = CWAR;
+            log.escribirError("Las variables de session son: " + HttpContext.Current.Session["PICKUSING"].ToString() + " y " + HttpContext.Current.Session["CWARUSING"].ToString(), "seguimiento picking", "seguimiento picking", "seguimiento picking");
             tccol307.STAT_AUX = "2";
             _idaltccol307.ActualizarTccol307(tccol307);
             return getPendingPicket(PICK, CWAR);
@@ -405,11 +411,14 @@ namespace whusap.WebPages.WorkOrders
 
         public static EntidadPicking getPendingPicket(string PICK, string CWAR)
         {
+            log.escribirError(" Entro en :  getPendingPicket con: " + PICK + " y " + CWAR, "seguimiento picking", "seguimiento picking", "seguimiento picking");
+
             EntidadPicking MyObj = new EntidadPicking();
             DataTable Dt082Pickied = twhcolDAL.ConsultarTticol082porStat("", "1", PICK, CWAR);
 
             foreach (DataRow row in Dt082Pickied.Rows)
             {
+                log.escribirError(" entro en foreach (DataRow row in Dt082Pickied.Rows)", "seguimiento picking", "seguimiento picking", "seguimiento picking");
                 List<EntidadPicking> LstPallet22PAID = twhcolDAL.ConsultarPalletPicking22PAID(row["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", CWAR, PICK);
                 List<EntidadPicking> LstPallet042PAID = twhcolDAL.ConsultarPalletPicking042PAID(row["T$PAID"].ToString().Trim(), string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "1", CWAR, PICK);
                 List<EntidadPicking> LstPallet131PAID = twhcolDAL.ConsultarPalletPicking131PAID(row["T$PAID"].ToString().Trim(), CWAR, string.Empty, HttpContext.Current.Session["user"].ToString().Trim(), "5", PICK);

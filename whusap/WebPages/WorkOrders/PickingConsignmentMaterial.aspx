@@ -1006,7 +1006,7 @@
                             bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
                         }
                         else {
-                            bodyRows += "<tr onclick='btnPickingPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;</span></button></td>";
+                            bodyRows += "<tr onclick='selectPicksPending(this)' row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Take <span>&nbsp;</span></button></td>";
                         }
                         validos = true;
                     }
