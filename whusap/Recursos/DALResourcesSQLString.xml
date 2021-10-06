@@ -280,72 +280,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>-->
     </Module>
-    <Module name="ttdcol137">
-      <operationName name="insertarDatos">
-        <stringSQL>
-          INSERT INTO {2} (T$PAID, T$ORNO, T$CLOT, T$CWAR, T$LOCA, T$QTYA, T$DATE, T$USER, T$REFCNTD, T$REFCNTU)
-          VALUES ('[:T$PAID]', '[:T$ORNO]', '[:T$CLOT]', '[:T$CWAR]', '[:T$LOCA]', '[:T$QTYA]', sysdate+5/24, '[:T$USER]', '[:T$REFCNTD]', '[:T$REFCNTU]')
-        </stringSQL>
-      </operationName>
-    <operationName name="Actualizarttdcol022Status">
-      <stringSQL>
-        update {0}.tticol022{1} set t$dele = '[:DELE]' where T$SQNB = '[:PAID]'
-      </stringSQL>
-    </operationName>
-      <operationName name="Actualizarttdcol222Cant">
-        <stringSQL>
-          update {0}.tticol222{1} set t$acqt = '[:QTYA]' where T$SQNB = '[:PAID]'
-        </stringSQL>
-      </operationName>
-      <operationName name="Actualizarttdcol042Status">
-        <stringSQL>
-          update {0}.tticol042{1} set t$dele = '[:DELE]' where T$SQNB = '[:PAID]'
-        </stringSQL>
-      </operationName>
-      <operationName name="Actualizarttdcol242Cant">
-        <stringSQL>
-          update {0}.tticol242{1} set t$acqt = '[:QTYA]' where T$SQNB = '[:PAID]'
-        </stringSQL>
-      </operationName>
-      <operationName name="Actualizartwhcol131CantStatus">
-        <stringSQL>
-          update {0}.twhcol131{1} set t$qtya = '[:QTYA]', t$stat = '[:STAT]' where T$PAID = '[:PAID]'
-        </stringSQL>
-      </operationName>
-      <operationName name="vallidatePalletInfoSalesOrder">
-        <stringSQL>
-          SELECT sGlobal.TBL,sGlobal.T$ORNO, sGlobal.T$PAID, sGlobal.T$QTYC, sGlobal.T$ITEM, sGlobal.DSCA, sGlobal.T$CUNI, sGlobal.T$CWAR, sGlobal.DESCW, sGlobal.T$LOCA, sGlobal.T$CLOT,tisfc010.T$MCNO,T$PONO
-          FROM
-          (
-          SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$paid,ticol222.T$ACQT AS T$qtyc,
-          ticol022.T$MITM AS T$ITEM, tcibd001.t$dsca AS DSCA, ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,
-          tcmcs003.t$dsca as DESCW, ticol222.T$ACLO AS T$LOCA, ticol022.T$PDNO AS T$CLOT, 0 as T$PONO
-          FROM {0}.tticol022{1} ticol022
-          INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
-          INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol022.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
-          UNION
-          SELECT 'whcol131' AS TBL,whcol131.T$ORNO AS T$ORNO,whcol131.T$PAID AS T$paid,whcol131.T$QTYA AS T$qtyc,
-          whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAA AS T$CWAR,
-          tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT,whcol131.T$PONO
-          FROM {0}.tWhcol131{1} whcol131
-          INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
-          UNION
-          SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
-          ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAT AS T$CWAR,
-          tcmcs003.t$dsca as DSCAW, ticol242.T$ACLO AS T$LOCA, ticol042.T$PDNO AS T$CLOT,ticol042.T$PONO
-          FROM {0}.tticol042{1} ticol042
-          INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
-          INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
-          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
-          WHERE T$paid = '[p1]'
-          AND ROWNUM = 1
-          ORDER BY T$paid ASC
-        </stringSQL>
-      </operationName>
-    </Module>
     <Module name="tticol022">
       <operationName name="getMachine">
         <stringSQL>
@@ -1580,6 +1514,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND trim(T$PICK) = trim('[:T$PICK]')
         </stringSQL>
       </operationName>
+      <operationName name="UpdateTtico082StatNew">
+        <stringSQL>
+          UPDATE {0}.tticol082{1} SET
+          T$STAT = '[:T$STAT]'
+          WHERE trim(T$PAID) = TRIM('[:T$PAID]')
+          AND   trim(T$ORNO) = NVL(trim('[:T$ORNO]'),TRIM(T$ORNO))
+          AND trim(T$PONO) = NVL(trim('[:T$PONO]'),TRIM(T$PONO))
+          AND trim(T$ADVS) = NVL(trim('[:T$ADVS]'),TRIM(T$ADVS))
+          AND trim(T$PICK) = trim('[:T$PICK]')
+        </stringSQL>
+      </operationName>
       <operationName name="UpdateTtico082Stat_CambioPallet">
         <stringSQL>
           UPDATE {0}.tticol082{1} SET
@@ -1671,6 +1616,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           update {0}.twhcol131{1}
           set T$STAT ='[:T$DELE]'
           where T$PAID ='[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActAlloTICOL222">
+        <stringSQL>
+          update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActAlloTICOL242">
+        <stringSQL>
+          update {0}.tticol242{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActAllcol131140">
+        <stringSQL>
+          update {0}.twhcol131{1} set  T$QTYA = T$ACQT + [T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$PAID) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActCausalcol130140">
@@ -3325,13 +3285,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(tcib001.T$ITEM) = '[:T$ITEM]'
         </stringSQL>
       </operationName>
-      <operationName name="findSalesOrder">
-        <stringSQL>
-          SELECT t$orno
-          FROM {0}.ttdsls400{1}
-          WHERE TRIM(T$ORNO) = '[:T$ORNO]'
-        </stringSQL>
-      </operationName>
       <operationName name="findRecordsSupplies">
         <stringSQL>
           SELECT ibd001.T$ITEM AS ITEM, ibd001.T$DSCA AS DSCA, ibd001.T$CWAR AS CWAR, ibd001.T$CUNI AS CUNI, TO_CHAR(NVL(wmd215.T$STOC, 0), '999999999.9999') AS STOCK
@@ -4830,6 +4783,26 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol122">
+      <operationName name="Delete082">
+        <stringSQL>
+          delete BAAN.tticol082140 where T$ORNO = '[:T$ORNO]' and T$PONO = '[:T$PONO]'and T$ADVS = '[:T$ADVS]' and trim(T$PICK) = trim('[:T$PICK]') and trim(T$PAID) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ActAlloTICOL222">
+        <stringSQL>
+          update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActAlloTICOL242">
+        <stringSQL>
+          update {0}.tticol242{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ActAllcol131140">
+        <stringSQL>
+          update {0}.twhcol131{1} set  T$QTYA = T$QTYA + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$PAID) = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="getAllotwhcol131">
         <stringSQL>
           SELECT T$ALLO AS ALLO  FROM {0}.TWHCOL131{1} where TRIM(T$PAID) =  TRIM('[:T$PAID]')
@@ -5683,7 +5656,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --T$ACLO = '[:T$ACLO]'
           UPDATE {0}.tticol222{1}
           SET T$ACQT = '[:T$ACQT]',
-              T$CWAT = CASE WHEN '[:T$CWAT]' = ' ' THEN T$CWAT ELSE '[:T$CWAT]' END
+          T$CWAT = CASE WHEN '[:T$CWAT]' = ' ' THEN T$CWAT ELSE '[:T$CWAT]' END
           WHERE T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
@@ -6033,7 +6006,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="listaStockw_Param">
         <stringSQL>
           select t$cwar warehouse, t$dsca descrw, CONCAT(CONCAT(t$cwar,'  -   '),t$dsca) warehouseFullName
-          from {0}.ttcmcs003{1} 
+          from {0}.ttcmcs003{1}
           order by warehouse
         </stringSQL>
       </operationName>

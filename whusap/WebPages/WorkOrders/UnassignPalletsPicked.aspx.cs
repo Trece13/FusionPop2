@@ -231,14 +231,22 @@ namespace whusap.WebPages.WorkOrders
                         MyObj.MCNO = row["MCNO"].ToString();
                         MyObj.DSCAM = row["DSCAM"].ToString();
                         MyObj.ORNO = row["ORNO"].ToString();
+                        MyObj.PONO = row["PONO"].ToString();
+                        MyObj.ADVS = row["ADVS"].ToString();
                         MyObj.STAT = "3";
                         MyObj.Error = false;
+                        MyObj.PICK = PickID.Trim();
+                        _idaltwhcol122.UpdateTtico082StatNew(MyObj);
 
-                        _idaltwhcol122.UpdateTtico082Stat(MyObj);
                         twhcolDAL.ActCausalcol131140(MyObj.PAID, 3);
                         twhcolDAL.ActCausalTICOL022(MyObj.PAID, 7);
                         twhcolDAL.ActCausalTICOL042(MyObj.PAID, 7);
-                        
+
+                        twhcolDAL.ActAllcol131140(MyObj.PAID, Convert.ToDecimal(MyObj.QTYT));
+                        twhcolDAL.ActAlloTICOL222(MyObj.PAID, Convert.ToDecimal(MyObj.QTYT));
+                        twhcolDAL.ActAlloTICOL242(MyObj.PAID, Convert.ToDecimal(MyObj.QTYT));
+
+                        twhcolDAL.Delete082(MyObj);
                         lsttticol082.Add(MyObj);
                         ObjRetorno = JsonConvert.SerializeObject(lsttticol082);
                     }

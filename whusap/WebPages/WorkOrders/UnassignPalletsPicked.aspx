@@ -180,11 +180,12 @@
         }
 
         var designarSuccess = function () {
+            divTableItem.innerHTML = '';
             alert("Unassingn success");
         }
 
         function SearchPickIDSuccess(response) {
-            //divTableItem.innerHTML = '';
+            divTableItem.innerHTML = '';
             var bodyRows = "";
             myObj = JSON.parse(response.d);
             if (myObj.length > 0) {
@@ -205,7 +206,7 @@
                                            "</thead>" +
                                            "<tbody>" +
                                             bodyRows +
-                                           "<tr><button type='button' class='btn btn-primary col-12' onclick='designar(" + $('#txPickID').val().toUpperCase() + ")'>Designar</button></tr><br>" +
+                                           "<tr><button type='button' class='btn btn-primary col-12' onclick='designar(" + $('#txPickID').val().toUpperCase() + ")'>Unassing</button></tr><br>" +
                                            "</tbody>" +
                                         "</table>";
 

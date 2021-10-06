@@ -1033,6 +1033,19 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nError: " + ex.Message);
             }
         }
+        public bool UpdateTtico082StatNew(Ent_tticol082 Obj082)
+        {
+            string strError = string.Empty;
+            try
+            {
+                return dal.UpdateTtico082StatNew(Obj082);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
         //JC 260921 Ajustar informacion pallet cuando se cambia el pallet
         public bool UpdateTtico082Stat_CambioPallet(Ent_tticol082 Obj082)
         {
@@ -1081,5 +1094,29 @@ namespace whusa.Interfases
         {
             return dal.getAllotticol222(pallet);
         }
+
+        public DataTable ActAllcol131140(string pallet,decimal qty)
+        {
+
+            return dal.ActAllcol131140(pallet, qty);
+        }
+
+        public DataTable ActAlloTICOL222(string pallet, decimal qty)
+        {
+            return dal.ActAlloTICOL222(pallet, qty);
+        }
+
+        public DataTable ActAlloTICOL242(string pallet, decimal qty)
+        {
+            return dal.ActAlloTICOL242(pallet,qty);
+        }
+
+
+        public DataTable Delete082(Ent_tticol082 Obj082)
+        {
+            return dal.Delete082(Obj082);
+        }
+        
+        
     }
 }
