@@ -50,7 +50,7 @@
                         placeholder="Pick ID" onkeyup="SearchPickIDTimer()" />
                 </div>
             </div>
-            <div id="divTables" class="col-7">
+            <div id="divTables" class="col-12">
                 <div id="divTableItem" class="col-12">
                 </div>
                 <br />
@@ -180,7 +180,7 @@
         }
 
         var designarSuccess = function () {
-            alert("wwwwww");
+            alert("Unassingn success");
         }
 
         function SearchPickIDSuccess(response) {
@@ -189,7 +189,7 @@
             myObj = JSON.parse(response.d);
             if (myObj.length > 0) {
                 for (var i = 0; i < myObj.length; i++) {
-                    bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].PAID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DSCA + "</td><td>" + myObj[i].QTYT + "</td><td>" + myObj[i].UNIT + "</td></tr>";
+                    bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].PAID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].CWAR + "</td><td>" + myObj[i].DSCA + "</td><td>" + myObj[i].QTYT + "</td><td>" + myObj[i].UNIT + "</td></tr>";
                 }
                 var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
                                             "<thead>" +
@@ -197,6 +197,7 @@
                                                 "<th scope='col'>Pallet</th>" +
                                                 "<th scope='col'>Location</th>" +
                                                 "<th scope='col'>Item</th>" +
+                                                "<th scope='col'>Warehouse</th>" +
                                                 "<th scope='col'>Description</th>" +
                                                 "<th scope='col'>Quantity</th>" +
                                                 "<th scope='col'>Unit</th>" +
@@ -204,7 +205,7 @@
                                            "</thead>" +
                                            "<tbody>" +
                                             bodyRows +
-                                           "<tr><button type='button' class='btn btn-primary' onclick='designar(" + $('#txPickID').val().toUpperCase() + ")'>Designar</button></tr>" +
+                                           "<tr><button type='button' class='btn btn-primary col-12' onclick='designar(" + $('#txPickID').val().toUpperCase() + ")'>Designar</button></tr><br>" +
                                            "</tbody>" +
                                         "</table>";
 

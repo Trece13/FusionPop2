@@ -167,18 +167,20 @@ namespace whusap.WebPages.WorkOrders
                 {
                     foreach (DataRow row in TableItticol082.Rows)
                     {
-                        MyObj.TBL = myObjDt["TBL"].ToString();
-                        MyObj.PAID = myObjDt["PAID"].ToString();
-                        MyObj.QTYT = myObjDt["QTYT"].ToString();
-                        MyObj.UNIT = myObjDt["UNIT"].ToString();
-                        MyObj.ITEM = myObjDt["ITEM"].ToString();
-                        MyObj.DSCA = myObjDt["DSCA"].ToString();
-                        MyObj.MCNO = myObjDt["MCNO"].ToString();
-                        MyObj.DSCAM = myObjDt["DSCAM"].ToString();
-                        MyObj.ORNO = myObjDt["ORNO"].ToString();
-                        MyObj.STAT = myObjDt["STAT"].ToString();
-                        MyObj.Error = false;
-                        lsttticol082.Add(MyObj);
+                        Ent_tticol082 MyObj2 = new Ent_tticol082();
+                        MyObj2.TBL = row["TBL"].ToString();
+                        MyObj2.PAID = row["PAID"].ToString();
+                        MyObj2.QTYT = row["QTYT"].ToString();
+                        MyObj2.UNIT = row["UNIT"].ToString();
+                        MyObj2.ITEM = row["ITEM"].ToString();
+                        MyObj2.DSCA = row["DSCA"].ToString();
+                        MyObj2.MCNO = row["MCNO"].ToString();
+                        MyObj2.DSCAM = row["DSCAM"].ToString();
+                        MyObj2.ORNO = row["ORNO"].ToString();
+                        MyObj2.STAT = row["STAT"].ToString();
+                        MyObj2.CWAR = row["CWAR"].ToString();
+                        MyObj2.Error = false;
+                        lsttticol082.Add(MyObj2);
                         ObjRetorno = JsonConvert.SerializeObject(lsttticol082);
                     }
                 }
@@ -220,15 +222,15 @@ namespace whusap.WebPages.WorkOrders
                 {
                     foreach (DataRow row in TableItticol082.Rows)
                     {
-                        MyObj.TBL = myObjDt["TBL"].ToString();
-                        MyObj.PAID = myObjDt["PAID"].ToString();
-                        MyObj.QTYT = myObjDt["QTYT"].ToString();
-                        MyObj.UNIT = myObjDt["UNIT"].ToString();
-                        MyObj.ITEM = myObjDt["ITEM"].ToString();
-                        MyObj.DSCA = myObjDt["DSCA"].ToString();
-                        MyObj.MCNO = myObjDt["MCNO"].ToString();
-                        MyObj.DSCAM = myObjDt["DSCAM"].ToString();
-                        MyObj.ORNO = myObjDt["ORNO"].ToString();
+                        MyObj.TBL =  row["TBL"].ToString();
+                        MyObj.PAID = row["PAID"].ToString();
+                        MyObj.QTYT = row["QTYT"].ToString();
+                        MyObj.UNIT = row["UNIT"].ToString();
+                        MyObj.ITEM = row["ITEM"].ToString();
+                        MyObj.DSCA = row["DSCA"].ToString();
+                        MyObj.MCNO = row["MCNO"].ToString();
+                        MyObj.DSCAM = row["DSCAM"].ToString();
+                        MyObj.ORNO = row["ORNO"].ToString();
                         MyObj.STAT = "3";
                         MyObj.Error = false;
 
