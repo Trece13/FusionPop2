@@ -332,5 +332,26 @@ namespace whusa.DAL
             }
             return consulta;
         }
+
+        //JC 051021 Buscar la orden de venta
+        public DataTable findSalesOrder(string ORDER)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ORNO", ORDER.Trim().ToUpper());
+
+            strSQL = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSQL, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+            }
+            return consulta;
+        }
+
     }
 }

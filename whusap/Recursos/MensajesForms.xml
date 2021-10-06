@@ -6132,6 +6132,112 @@
         </operationName>
       </Idiom>
     </Module>
+    <Module name="RegisterPalletsSalesOrders.aspx">
+      <Idiom name="INGLES">
+        <operationName name="SalesOrdercodeisnotManufacturingType">
+          <stringMessage>
+            Item code is not Manufacturing Type
+          </stringMessage>
+        </operationName>
+        <operationName name="SalesOrdercodedoesntexist">
+          <stringMessage>
+            Sales Order code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Paidcodedoesntexist">
+          <stringMessage>
+            Pallet id code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Warehousecodedoesntexist">
+          <stringMessage>
+            Warehouse code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationblockedinbound">
+          <stringMessage>
+            Location blocked inbound
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationcodedoesntexist">
+          <stringMessage>
+            Location code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="codedoesntexist">
+          <stringMessage>
+            code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="RegisteredquantitynotavilableonBaaninventory">
+          <stringMessage>
+            Registered quantity not avilable on Baan inventory
+          </stringMessage>
+        </operationName>
+        <operationName name="FactordontexistforthisItem">
+          <stringMessage>
+            Factor don't exist for this Item
+          </stringMessage>
+        </operationName>
+        <operationName name="qtygreaterfactor">
+          <stringMessage>
+            Quantity greater than factor (PLT)
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="ItemcodeisnotManufacturingType">
+          <stringMessage>
+            Item code is not Manufacturing Type
+          </stringMessage>
+        </operationName>
+        <operationName name="SalesOrdercodedoesntexist">
+          <stringMessage>
+            Sales Order code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Paidcodedoesntexist">
+          <stringMessage>
+            Pallet id code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Warehousecodedoesntexist">
+          <stringMessage>
+            Warehouse code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationblockedinbound">
+          <stringMessage>
+            Location blocked inbound
+          </stringMessage>
+        </operationName>
+        <operationName name="Locationcodedoesntexist">
+          <stringMessage>
+            Location code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="codedoesntexist">
+          <stringMessage>
+            code doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="RegisteredquantitynotavilableonBaaninventory">
+          <stringMessage>
+            Registered quantity not avilable on Baan inventory
+          </stringMessage>
+        </operationName>
+        <operationName name="FactordontexistforthisItem">
+          <stringMessage>
+            Factor don't exist for this Item
+          </stringMessage>
+        </operationName>
+        <operationName name="qtygreaterfactor">
+          <stringMessage>
+            Cantidad Superior al factor (PLT)
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
 
     <Module name="InventoryAdjustment.aspx">
       <Idiom name="INGLES">

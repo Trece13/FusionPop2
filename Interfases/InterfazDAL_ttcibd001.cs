@@ -137,5 +137,10 @@ namespace whusa.Interfases
         {
             return dal.findItem(ITEM);
         }
+        //JC 051021 Buscar la Orden de Venta
+        public DataTable findSalesOrder(string ORDER)
+        {
+            return dal.findSalesOrder(ORDER);
+        }
     }
 }
