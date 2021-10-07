@@ -364,39 +364,46 @@ namespace whusap.WebPages.InvReceipts
             string strError = string.Empty;
             DataTable DtTtwhinr140 = new DataTable();
             Ent_twhinr140 ObjTtwhinr140 = new Ent_twhinr140();
-            if (HttpContext.Current.Session["CUNI"].ToString().Trim() == "CJ")
+            if (HttpContext.Current.Session["CUNI"].ToString().Trim() == "CJ" || Convert.ToInt32(QTYS) == 0)
             {
-                DataTable dtFactor = twhcol130DAL.ConsultafactoresporItem(ITEM.Trim());
-                if (dtFactor.Rows.Count > 0)
+                if (Convert.ToInt32(QTYS) != 0)
                 {
-                    foreach (DataRow row in dtFactor.Rows)
+                    DataTable dtFactor = twhcol130DAL.ConsultafactoresporItem(ITEM.Trim());
+                    if (dtFactor.Rows.Count > 0)
                     {
-                        if (row["UNIT"].ToString().Trim() == "PLT" && row["BASU"].ToString().Trim() == HttpContext.Current.Session["CUNI"].ToString().Trim())
+                        foreach (DataRow row in dtFactor.Rows)
                         {
-                            factor = Convert.ToDecimal(row["FACTOR"].ToString().Trim());
+                            if (row["UNIT"].ToString().Trim() == "PLT" && row["BASU"].ToString().Trim() == HttpContext.Current.Session["CUNI"].ToString().Trim())
+                            {
+                                factor = Convert.ToDecimal(row["FACTOR"].ToString().Trim());
+                            }
                         }
-                    }
 
-                    if (factor > 0)
-                    {
-                        if (Convert.ToDecimal(QTYS) > factor)
+                        if (factor > 0)
+                        {
+                            if (Convert.ToDecimal(QTYS) > factor)
+                            {
+                                ObjTtwhinr140.TypeMsgJs = "label";
+                                ObjTtwhinr140.Error = true;
+                                ObjTtwhinr140.ErrorMsg = qtygreaterfactor;
+                            }
+                        }
+                        else
                         {
                             ObjTtwhinr140.TypeMsgJs = "label";
                             ObjTtwhinr140.Error = true;
-                            ObjTtwhinr140.ErrorMsg = qtygreaterfactor;
+                            ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
+                        }
+
+                        if (Convert.ToInt32(QTYS) == 0)
+                        {
+                            ObjTtwhinr140.Error = false;
                         }
                     }
-                    else
-                    {
-                        ObjTtwhinr140.TypeMsgJs = "label";
-                        ObjTtwhinr140.Error = true;
-                        ObjTtwhinr140.ErrorMsg = FactordontexistforthisItem;
-                    }
-
-                    if (Convert.ToInt32(QTYS) == 0)
-                    {
-                        ObjTtwhinr140.Error = false;
-                    }
+                }
+                else
+                {
+                    ObjTtwhinr140.Error = false;
                 }
             }
             HttpContext.Current.Session["QTYS"] = QTYS;

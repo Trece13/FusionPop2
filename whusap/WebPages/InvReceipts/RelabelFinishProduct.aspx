@@ -450,7 +450,7 @@
             if (MyObj.Error == false) {
                 $('#lblError').html("");
                 //if (parseInt($('#txQuantity').val()) > 0 && parseInt($('#txQuantity').val()) <= parseInt(MyObj.stks, 10)) {
-                if (parseInt($('#txQuantity').val())) {
+                if (parseInt($('#txQuantity').val()) >= 0) {
                     $('#Contenido_Button1').prop("disabled", false);
                     $('#btnSave').prop("disabled", false);
                     

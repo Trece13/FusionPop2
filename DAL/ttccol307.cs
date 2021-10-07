@@ -161,6 +161,29 @@ namespace whusa.DAL
             }
             return Consulta;
         }
+
+        public bool EliminarRegistrotccol307Null(Ent_ttccol307 ObjTtccol307)
+        {
+            string strError = string.Empty;
+            bool Resultado = false;
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", ObjTtccol307.PAID);
+            //paramList.Add(":T$CWAR", ObjTtccol307.CWAR);
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Resultado = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [ttccol307]. Try again or contact your administrator";
+                //throw ex;
+            }
+            return Resultado;
+        }
     }
 }
 

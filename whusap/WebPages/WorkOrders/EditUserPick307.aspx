@@ -33,7 +33,7 @@
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
                 type: "POST",
-                url: "EditUserPick.aspx/" + WebMethod,
+                url: "EditUserPick307.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -65,8 +65,8 @@
             var MylistPicks = JSON.parse(r.d);
             MylistPicks.forEach(function (e) {
                 var option = document.createElement("option");
-                option.text = "Pick No: " + e.PAID + " Warehouse: " + e.CWAR
-                option.value = e.PAID.trim()
+                option.text = "Pick No: " + e.T$PAID + " Warehouse: " + e.T$CWAR
+                option.value = e.T$PAID.trim()
                 ddPick.add(option);
             });
             $('#BtnSave').show();
@@ -99,7 +99,7 @@
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
-                url: "EditUserPick.aspx/" + Method.trim(),
+                url: "EditUserPick307.aspx/" + Method.trim(),
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -187,7 +187,7 @@
         var ActualizarUsuarioTtccol307 = function () {
             //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
             //var Data = "{'PAID':'" + txPalletId.val() + "','USER':'" + txtUser.val() + "','USERO':'" + MyOBj.USRR + "'}";
-            var Data = "{'PICK':'" + ddPick.value + "' }";
+            var Data = "{'PICK':'" + ddPick.value + "'}";
             WebMethod = "ActualizarUsuarioTtccol307";
             sendAjax(WebMethod, Data, ActualizarUsuarioTtccol307Success, false);
         }

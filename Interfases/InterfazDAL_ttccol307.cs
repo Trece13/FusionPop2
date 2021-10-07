@@ -37,5 +37,10 @@ namespace whusa.Interfases
         {
             return dal.ConsultarRegistrotccol307Null(ObjTtccol307);
         }
+
+        public bool EliminarRegistrotccol307Null(Ent_ttccol307 ent_ttccol307)
+        {
+            return dal.EliminarRegistrotccol307Null(ent_ttccol307);
+        }
     }
 }

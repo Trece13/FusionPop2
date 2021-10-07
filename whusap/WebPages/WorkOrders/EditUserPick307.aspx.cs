@@ -39,9 +39,8 @@ namespace whusap.WebPages.WorkOrders
             if (Lsttccol307.Rows.Count > 0)
             {
                 DataRow ItemRow = Lsttccol307.Rows[0];
-                ObjReturn.PAID = ItemRow["PAID"].ToString();
-                ObjReturn.USRR = ItemRow["USSR"].ToString();
-                ObjReturn.STAT = ItemRow["STAT"].ToString();
+                ObjReturn.PAID = ItemRow["T$PAID"].ToString();
+                ObjReturn.CWAR = ItemRow["T$CWAR"].ToString();
                 ObjReturn.Error = false;
             }
             else
@@ -57,39 +56,19 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string ActualizarUsuarioTtccol307(string PICK)
         {
-
-            //if (USER.Trim().ToUpper() == USERO.Trim().ToUpper())
-            //{
-            //    ObjReturn.Error = true;
-            //    ObjReturn.ErrorMsg = Thecurrentusercannotbethesameastheprevioususer;
-            //    ObjReturn.TypeMsgJs = "lbl";
-            //    return JsonConvert.SerializeObject(ObjReturn);
-            //}
-
-            //bool ExisteUsusario = ConsulrarExistenciaUsuario(new Ent_ttccol300 { user = USER.Trim().ToUpper() });
-            //if (ExisteUsusario)
-            //{
-                bool ActualizacionExitosa = Ittccol307.ActualizarUsuariotccol307(new Ent_ttccol307 { PAID = PICK.Trim().ToUpper() });
-                if (ActualizacionExitosa)
-                {
-                    ObjReturn.Error = false;
-                    ObjReturn.SuccessMsg = Updtatesuccessfull;
-                    ObjReturn.TypeMsgJs = "lbl";
-                }
-                else if (!ActualizacionExitosa)
-                {
-                    ObjReturn.Error = true;
-                    ObjReturn.ErrorMsg = Updtatenotsuccessfull;
-                    ObjReturn.TypeMsgJs = "lbl";
-                }
-            //}
-            //else if (!ExisteUsusario)
-            //{
-            //    ObjReturn.Error = true;
-            //    ObjReturn.ErrorMsg = Theusertoupdatenotexist;
-            //    ObjReturn.TypeMsgJs = "lbl";
-            //}
-
+            bool ActualizacionExitosa = Ittccol307.EliminarRegistrotccol307Null(new Ent_ttccol307 { PAID = PICK.Trim().ToUpper()});
+            if (ActualizacionExitosa)
+            {
+                ObjReturn.Error = false;
+                ObjReturn.SuccessMsg = Updtatesuccessfull;
+                ObjReturn.TypeMsgJs = "lbl";
+            }
+            else if (!ActualizacionExitosa)
+            {
+                ObjReturn.Error = true;
+                ObjReturn.ErrorMsg = Updtatenotsuccessfull;
+                ObjReturn.TypeMsgJs = "lbl";
+            }
             return JsonConvert.SerializeObject(ObjReturn);
         }
 
