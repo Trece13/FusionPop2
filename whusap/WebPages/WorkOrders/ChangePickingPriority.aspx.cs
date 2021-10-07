@@ -70,8 +70,8 @@ namespace whusap.WebPages.WorkOrders.NewPages
                 {
                     Ent_tticol082 tticol082 = new Ent_tticol082();
                     tticol082.PICK = dtRow["PICK"].ToString();
-                    //tticol082.CWAR = dtRow["CWAR"].ToString();
-                    //tticol082.ORNO = dtRow["ORNO"].ToString();
+                    tticol082.MCNO = dtRow["MCNO"].ToString();
+                    tticol082.ORNO = dtRow["ORNO"].ToString();
                     //tticol082.TIME = dtRow["TIME"].ToString();
                     tticol082.PRIO = dtRow["PRIO"].ToString();
                     lstPicks.Add(tticol082);

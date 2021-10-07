@@ -470,8 +470,8 @@ namespace whusap.WebPages.Inventarios
             }
             else
             {
-                //if (lblQuantityValue.Text.Trim() != "0")
-                //{
+                if (lblQuantityValue.Text.Trim() != "0")
+                {
                     if (inputQty > (Convert.ToDecimal(lblQuantityValue.Text) * 2))
                     {
                         lblError.Text = "New quantity not allowed, máximum double”";
@@ -483,7 +483,7 @@ namespace whusap.WebPages.Inventarios
                         txtAdjustmentQuantity.Focus();
                         return;
                     }
-                //}
+                }
 
             }
 

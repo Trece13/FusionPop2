@@ -34,6 +34,8 @@
                 <thead>
                     <tr>
                         <th scope="col" class="col-4">Pick ID</th>
+                        <th scope="col" class="col-4">Work Order</th>
+                        <th scope="col" class="col-4">Machine</th>
                         <th scope="col" class="col-4">Priority</th>
                         <th scope="col" class="col-4"></th>
                     </tr>
@@ -131,7 +133,7 @@
             var bodyRows = "";
             if (MyObjLst.length > 0) {
                 MyObjLst.forEach(function (item, i) {
-                    bodyRows += "<tr row = '" + i + "' onmouseenter=showButton(" + i + ") id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft' style='display:none'><td>" + item.PICK + "</td><td><input id='inputNum" + i + "' class='form-control' type = 'number' value='" + item.PRIO + "' placeholder='" + item.PRIO + "' disabled/></td><td><button class='btn btn-success col-12 btn-sm' type='button' style='display:none; height:33px' id='btnChangePrio" + i + "' onclick= SavePrio('" + item.PICK.trim() + "','" + i + "')>Change</button></td></tr>";
+                    bodyRows += "<tr row = '" + i + "' onmouseenter=showButton(" + i + ") id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft' style='display:none'><td>" + item.PICK + "</td><td>" + item.ORNO + "</td><td>" + item.MCNO + "</td><td><input id='inputNum" + i + "' class='form-control' type = 'number' value='" + item.PRIO + "' placeholder='" + item.PRIO + "' disabled/></td><td><button class='btn btn-success col-12 btn-sm' type='button' style='display:none; height:33px;     width: 100px;' id='btnChangePrio" + i + "' onclick= SavePrio('" + item.PICK.trim() + "','" + i + "')>Change</button></td></tr>";
                     ig = i;
                 });   
             }
