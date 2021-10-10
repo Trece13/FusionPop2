@@ -1615,7 +1615,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           update {0}.twhcol131{1}
           set T$STAT ='[:T$DELE]'
-          where T$PAID ='[:T$SQNB]'
+          where TRIM(T$PAID) =TRIM('[:T$SQNB]')
         </stringSQL>
       </operationName>
       <operationName name="ActAlloTICOL222">

@@ -392,11 +392,15 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string GetAllsPAlletsPending()
         {
+            //JC 101021 No mostrar la lista de pallets pendientes cuando se termina el picking
+            HttpContext.Current.Session["STATPICKING"] = null;
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             DataTable Dt082Pickied = twhcolDAL.ConsultarTticol082porStat("", "'1','2'", MySessionObjPicking.PICK.Trim(), MySessionObjPicking.WRH);
             if (Dt082Pickied.Rows.Count > 0)
             {
                 HttpContext.Current.Session["DtPalletsPick"] = Dt082Pickied;
+                //JC 101021  No mostrar la lista de pallets pendientes cuando se termina el picking
+                HttpContext.Current.Session["STATPICKING"] = Dt082Pickied.Rows[0]["T$STAT"].ToString();
             }
             return JsonConvert.SerializeObject(Dt082Pickied);
         }
@@ -412,6 +416,8 @@ namespace whusap.WebPages.WorkOrders
         public static EntidadPicking getPendingPicket(string PICK, string CWAR)
         {
             log.escribirError(" Entro en :  getPendingPicket con: " + PICK + " y " + CWAR, "seguimiento picking", "seguimiento picking", "seguimiento picking");
+            //JC 101021 Evitar que despliegue la lista de pallets sugeridos si ya se termino el pick
+            HttpContext.Current.Session["STATPICKING"] = null;
 
             EntidadPicking MyObj = new EntidadPicking();
             DataTable Dt082Pickied = twhcolDAL.ConsultarTticol082porStat("", "1", PICK, CWAR);
@@ -430,6 +436,8 @@ namespace whusap.WebPages.WorkOrders
                     HttpContext.Current.Session["flag022"] = 1;
                     HttpContext.Current.Session["flag131"] = 0;
                     HttpContext.Current.Session["flag042"] = 0;
+                    //JC 101021 Tomar el estado del picking para desplegar lista de pallets sugeridos
+                    HttpContext.Current.Session["STATPICKING"] = Dt082Pickied.Rows[0]["T$STAT"].ToString();
                     return MyObj;
                 }
                 else if (LstPallet042PAID.Count > 0)
@@ -440,7 +448,8 @@ namespace whusap.WebPages.WorkOrders
                     HttpContext.Current.Session["flag042"] = 1;
                     HttpContext.Current.Session["flag022"] = 0;
                     HttpContext.Current.Session["flag131"] = 0;
-
+                    //JC 101021 Tomar el estado del picking para desplegar lista de pallets sugeridos
+                    HttpContext.Current.Session["STATPICKING"] = Dt082Pickied.Rows[0]["T$STAT"].ToString();
                     return MyObj;
                 }
                 else if (LstPallet131PAID.Count > 0)
@@ -451,7 +460,8 @@ namespace whusap.WebPages.WorkOrders
                     HttpContext.Current.Session["flag131"] = 1;
                     HttpContext.Current.Session["flag022"] = 0;
                     HttpContext.Current.Session["flag042"] = 0;
-
+                    //JC 101021 Tomar el estado del picking para desplegar lista de pallets sugeridos
+                    HttpContext.Current.Session["STATPICKING"] = Dt082Pickied.Rows[0]["T$STAT"].ToString();
                     return MyObj;
                 }
 
@@ -481,22 +491,26 @@ namespace whusap.WebPages.WorkOrders
             List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
             List<EntidadPicking> LstReturn = new List<EntidadPicking>();
-            LstPallet131 = twhcolDAL.ConsultarPalletPicking131ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
-            if (LstPallet131.Count > 0)
+            //JC 101021  No mostrar la tabla de pallets sugeridos si ya es el último pick
+            if (HttpContext.Current.Session["STATPICKING"] != null)
             {
-                LstReturn = LstPallet131;
-            }
+                LstPallet131 = twhcolDAL.ConsultarPalletPicking131ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+                if (LstPallet131.Count > 0)
+                {
+                    LstReturn = LstPallet131;
+                }
 
-            LstPallet042 = twhcolDAL.ConsultarPalletPicking042ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
-            if (LstPallet042.Count > 0)
-            {
-                LstReturn = LstPallet042;
-            }
+                LstPallet042 = twhcolDAL.ConsultarPalletPicking042ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+                if (LstPallet042.Count > 0)
+                {
+                    LstReturn = LstPallet042;
+                }
 
-            LstPallet22 = twhcolDAL.ConsultarPalletPicking22ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
-            if (LstPallet22.Count > 0)
-            {
-                LstReturn = LstPallet22;
+                LstPallet22 = twhcolDAL.ConsultarPalletPicking22ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+                if (LstPallet22.Count > 0)
+                {
+                    LstReturn = LstPallet22;
+                }
             }
             return JsonConvert.SerializeObject(LstReturn);
         }
@@ -1377,7 +1391,9 @@ namespace whusap.WebPages.WorkOrders
                     //{
                     twhcolDAL.ActualizarCantidades222(MySessionObjPicking.PALLETID.Trim());
                     Ent_tticol082 Obj082 = new Ent_tticol082();
-                    Obj082.STAT = "3";
+                    //JC 101021 Evitar que los pickings queden bloqueados, en lugar de eso siempre van a quedar creados
+                    //Obj082.STAT = "3";
+                    Obj082.STAT = "1";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     //JC 250921 Ejecutar Drop del pallet unico
                     Obj082.PICK = MySessionObjPicking.PICK.Trim();
@@ -1407,7 +1423,9 @@ namespace whusap.WebPages.WorkOrders
                     //{
                     twhcolDAL.ActualizarCantidades242(MySessionObjPicking.PALLETID.Trim());
                     Ent_tticol082 Obj082 = new Ent_tticol082();
-                    Obj082.STAT = "3";
+                    //JC 101021 Evitar que los pickings queden bloqueados, en lugar de eso siempre van a quedar creados
+                    //Obj082.STAT = "3";
+                    Obj082.STAT = "1";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     //JC 250921 Ejecutar Drop del pallet unico
                     Obj082.PICK = MySessionObjPicking.PICK.Trim();
@@ -1436,7 +1454,9 @@ namespace whusap.WebPages.WorkOrders
                     //{
                     twhcolDAL.ActualizarCantidades131(MySessionObjPicking.PALLETID.Trim(), false);
                     Ent_tticol082 Obj082 = new Ent_tticol082();
-                    Obj082.STAT = "3";
+                    //JC 101021 Evitar que los pickings queden bloqueados, en lugar de eso siempre van a quedar creados
+                    //Obj082.STAT = "3";
+                    Obj082.STAT = "1";
                     Obj082.PAID = MySessionObjPicking.PALLETID.Trim();
                     Obj082.PICK = MySessionObjPicking.PICK.Trim();
                     //JC 260921 Ejecutar Drop del pallet unico
