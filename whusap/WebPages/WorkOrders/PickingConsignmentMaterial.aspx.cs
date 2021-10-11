@@ -771,7 +771,9 @@ namespace whusap.WebPages.WorkOrders
                         DataTable dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
                         //if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
                         //{
-                            _idaltticol125.updataPalletStatus022(PAID, qtyaG == "0" ? "11" : "7");
+                        //JC 111021 Ajustar el estado en funcion de las cantidades
+                            //_idaltticol125.updataPalletStatus022(PAID, qtyaG == "0" ? "11" : "7");
+                              _idaltticol125.updataPalletStatus022(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "11" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "8" : "7");                       
                         //}
 
                         string strError = string.Empty;
@@ -903,7 +905,9 @@ namespace whusap.WebPages.WorkOrders
                         DataTable dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
                         //if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
                         //{
-                            _idaltticol125.updataPalletStatus042(PAID, qtyaG == "0" ? "11" : "7");
+                        //JC 111021 Ajustar el estado en funcion de las cantidades
+                            //_idaltticol125.updataPalletStatus042(PAID, qtyaG == "0" ? "11" : "7");
+                              _idaltticol125.updataPalletStatus042(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "11" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "8" : "7");                       
                         //}
                         string strError = string.Empty;
                         string SecuenciaPallet = "C001";
@@ -1043,7 +1047,9 @@ namespace whusap.WebPages.WorkOrders
                         DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
                         //if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
                         //{
-                        _idaltticol125.updataPalletStatus131(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "9" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "6" : "3");
+                        //JC 111021 Ajustar el estado en funcion de las cantidades
+                            //_idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "9" : "3");
+                            _idaltticol125.updataPalletStatus131(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "9" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "6" : "3");
                         //}
 
                         if (Convert.ToDecimal(qtyaG) > 0)
