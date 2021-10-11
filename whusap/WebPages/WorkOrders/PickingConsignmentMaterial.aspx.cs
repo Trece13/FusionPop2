@@ -1043,7 +1043,7 @@ namespace whusap.WebPages.WorkOrders
                         DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
                         //if (Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) != 0)
                         //{
-                            _idaltticol125.updataPalletStatus131(PAID, qtyaG == "0" ? "9" : "3");
+                        _idaltticol125.updataPalletStatus131(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "9" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "6" : "3");
                         //}
 
                         if (Convert.ToDecimal(qtyaG) > 0)

@@ -935,7 +935,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL131.T$PAID = '[:PAID]'
           AND COL131.T$CWAA = NVL('[:CWAR]',COL131.T$CWAA)
           AND TRIM(COL082.T$PICK) = NVL('[:PICK]',TRIM(COL082.T$PICK))
-          AND COL082.T$STAT IN('1','2')
+          --AND COL082.T$STAT IN('1','2') --JC 111021 Cuando el pallet está en el mismo pick evitar que traiga mal la cantidad del siguiente pick
+          AND COL082.T$STAT IN('1')
           )
           WHERE ROWN = 1
         </stringSQL>
