@@ -60,9 +60,24 @@ namespace whusa.Interfases
             return dal.Actualizarttdcol042Status(myObj);
         }
 
-        public bool Actualizartwhcol131CantStatus(ref string pallet, ref int status, ref decimal qty)
+        public bool Actualizartwhcol131CantStatus(ref string pallet, ref int status, ref decimal qty,string CWAR = "",string LOCA = "")
         {
-            return dal.Actualizartwhcol131CantStatus(ref pallet, ref status, ref qty);
+            return dal.Actualizartwhcol131CantStatus(ref pallet, ref status, ref qty,CWAR,LOCA);
+        }
+
+        public object Actualizarttdcol222Status(Ent_ttdcol137 data137)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Actualizarttdcol242(Ent_ttdcol137 data137)
+        {
+            return dal.Actualizarttdco242(data137);
+        }
+
+        public object Actualizarttdcol222(Ent_ttdcol137 data137)
+        {
+            return dal.Actualizarttdcol222(data137);
         }
     }
 }

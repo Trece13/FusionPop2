@@ -189,7 +189,7 @@ namespace whusa.DAL
             return retorno;
         }
 
-        public bool Actualizartwhcol131CantStatus(ref string pallet, ref int status, ref decimal qty)
+        public bool Actualizartwhcol131CantStatus(ref string pallet, ref int status, ref decimal qty,string CWAR,string LOCA)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
@@ -202,6 +202,8 @@ namespace whusa.DAL
                 paramList.Add(":PAID", pallet.ToUpper());
                 paramList.Add(":QTYA", qty);
                 paramList.Add(":STAT", status);
+                paramList.Add(":CWAR", CWAR);
+                paramList.Add(":LOCA", LOCA);
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
@@ -251,5 +253,59 @@ namespace whusa.DAL
             return parameterCollection;
         }
 
+
+        public bool Actualizarttdco242(Ent_ttdcol137 data137)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", data137.Paid.ToUpper());
+                paramList.Add(":CWAT", data137.Cwar);
+                paramList.Add(":LOCA", data137.Loca);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
+        public bool Actualizarttdcol222(Ent_ttdcol137 data137)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", data137.Paid.ToUpper());
+                paramList.Add(":CWAT", data137.Cwar);
+                paramList.Add(":LOCA", data137.Loca);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
     }
 }
