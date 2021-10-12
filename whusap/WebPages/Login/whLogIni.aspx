@@ -24,6 +24,16 @@
     </style>
     <script type="text/javascript">
         
+        document.addEventListener('keydown', function (e) {
+            var mayus = e.getModifierState && e.getModifierState('CapsLock');
+            console.log(mayus);
+            if (mayus)
+                $("#lblCapsLock").html("Caps lock is on");
+            else
+                $("#lblCapsLock").html("");
+
+        });
+
         var _idioma = '<%= _idioma %>';
         $(document).ready(function () {
 
@@ -136,6 +146,13 @@
                              CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
                              ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator><br/>
                 </td>
+            </tr>
+            <tr> 
+                <td></td>
+                <td> <p align="center">
+                    <label id="lblCapsLock" style="color:red"></label></p></td>
+                <td></td>
+            </tr>
             <tr> 
                 <td></td><td><a  id="ForgotLink" href="#" style="color: #C0C0C0; display:none">¿forgot password?</a></td>
             </tr>
