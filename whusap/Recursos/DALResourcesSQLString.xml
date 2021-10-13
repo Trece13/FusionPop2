@@ -859,7 +859,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --AND col307.T$PAID IS NULL
           ORDER BY COL082.T$PRIO,COL082.T$PICK
         </stringSQL>
-      </operationName>
+      </operationName>      
       <operationName name="ActualizarCantidades222">
         <stringSQL>
           UPDATE BAAN.tticol222140 SET
@@ -2573,7 +2573,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
-    <Module name="twhcol130">
+<Module name="twhcol130">
       <operationName name="GetWarehouse">
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
@@ -3257,8 +3257,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
         </stringSQL>
       </operationName>
-    </Module>
-    <Module name="ttccol300">
+    </Module>    	
+	<Module name="ttccol300">
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$USER, T$NAMA, T$PASS, T$UFIN, T$REFCNTD, T$REFCNTU)
