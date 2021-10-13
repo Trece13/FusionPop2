@@ -2586,9 +2586,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
-<<<<<<< HEAD
-<Module name="twhcol130">
-=======
     <Module name="twhcol130">
       <operationName name="getPicks082">
         <stringSQL>
@@ -2607,7 +2604,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           globalQ WHERE globalQ.PICK = '[:PICK]'
         </stringSQL>
       </operationName>
->>>>>>> 47b0072e4227017d216e847b36af2ef0c8a45c8f
       <operationName name="GetWarehouse">
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
