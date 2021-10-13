@@ -91,6 +91,66 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ORDER BY T$paid ASC
         </stringSQL>
       </operationName>
+      <operationName name="List_StatusPallet_OriginTable">
+        <stringSQL>
+          select  Tab, Code, Descr
+          from
+          (
+          select 'col131' Tab, 1 Code, 'Received' Descr from dual
+          union
+          select 'col131', 2, 'Picked' from dual
+          union
+          select 'col131', 3,  'Located' from dual
+          union
+          select 'col131', 4, 'Announced' from dual
+          union
+          select 'col131', 5, 'Adjusted' from dual
+          union
+          select 'col131', 6, 'Allocated' from dual
+          union
+          select 'col131', 7, 'Picking' from dual
+          union
+          select 'col131', 8, 'Dropped' from dual
+          union
+          select 'col131', 9, 'Delivered' from dual
+          union
+          select 'col131', 10, 'Blocked' from dual
+          union
+          select 'col131', 11, 'Rejected' from dual
+          union
+          select 'col022', 1, 'Deleted' from dual
+          union
+          select 'col022', 2, 'Announced' from dual
+          union
+          select 'col022', 3, 'Rejected' from dual
+          union
+          select 'col022', 4, 'Wrapped' from dual
+          union
+          select 'col022', 5, 'Received' from dual
+          union
+          select 'col022', 6, 'Picked' from dual
+          union
+          select 'col022', 7, 'Located' from dual
+          union
+          select 'col022', 8, 'Allocated' from dual
+          union
+          select 'col022', 9, 'Picking' from dual
+          union
+          select 'col022', 10, 'Dropped' from dual
+          union
+          select 'col022', 11, 'Delivered' from dual
+          union
+          select 'col022', 12, 'Blocked' from dual
+          union
+          select 'col022', 13, 'To Delete' from dual
+          union
+          select 'col022', 14, 'Adjusted' from dual
+          union
+          select 'col022', 15, 'No' from dual
+          )
+          order by Tab, Code
+        </stringSQL>
+      </operationName>
     </Module>
     <Module name="tticol042">
       <operationName name="invLabel_registroImprimir_Param">
@@ -1784,7 +1844,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarRegistrosBloquedos">
         <stringSQL>
-          SELECT TBL,PAID, CWAR, LOCA, ITEM, LOTE, QTYC, CUNI, T$DSCA AS DSCA,STAT,cibd001.T$KLTC AS KLTC FROM (
+          SELECT TBL,PAID, CWAR, LOCA, ITEM, LOTE, QTYC, CUNI, T$DSCA AS DSCA,STAT,cibd001.T$KLTC AS KLTC, col084.T$LOGN AS LOGN FROM (
           SELECT 'whcol130' AS TBL,T$PAID AS PAID,T$CWAA AS CWAR,T$LOAA AS LOCA,T$ITEM AS ITEM,T$CLOT as LOTE,T$QTYA AS qtyc,T$UNIC AS CUNI,T$STAT AS STAT FROM {0}.tWhcol130{1}
           WHERE T$STAT ='10'
           UNION
@@ -1804,6 +1864,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE ticol042.T$DELE ='12'
           )ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          LEFT JOIN {0}.tticol084{1} col084 on  col084.T$PAID =  ConGlobal.PAID
           INNER JOIN {0}.tticol136{1} col136 on  col136.T$CWAR =  ConGlobal.CWAR and TRIM(col136.t$USER) = NVL(TRIM('[:USER]'),TRIM(col136.t$USER))
         </stringSQL>
       </operationName>
@@ -2463,7 +2524,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="EliminarRegistrotccol307Null">
         <stringSQL>
-          DELETE BAAN.TTCCOL307140 WHERE TRIM(T$PAID) = TRIM('[:T$PAID]')
+          DELETE FROM {0}.ttccol307{1}
+          WHERE   t$paid in (
+          SELECT  col307.t$paid
+          FROM    {0}.ttccol307{1} col307
+          LEFT JOIN {0}.tticol082{1} col082
+          ON col307.t$paid = col082.t$pick
+          WHERE   col082.t$pick is null
+          AND     TRIM(COL307.T$PAID) = TRIM('[:T$PAID]')
+          )
+          --DELETE {0}.TTCCOL307{1} WHERE TRIM(T$PAID) = TRIM('[:T$PAID]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarUsuariotccol307">

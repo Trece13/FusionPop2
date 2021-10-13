@@ -5266,6 +5266,11 @@
             Pick ID has already dropped or discounted
           </stringMessage>
         </operationName>
+        <operationName name="ThePickIDAlreadyDrop">
+          <stringMessage>
+            Pick ID has already dropped picks or not exist
+          </stringMessage>
+        </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">
           <stringMessage>
             Pick ID not valid for take to MFG
@@ -5296,6 +5301,11 @@
         <operationName name="ThePalletIDAlreadyDrop">
           <stringMessage>
             Pick ID has already dropped or discounted
+          </stringMessage>
+        </operationName>
+        <operationName name="ThePickIDAlreadyDrop">
+          <stringMessage>
+            Pick ID has already dropped picks or not exist
           </stringMessage>
         </operationName>
         <operationName name="PalletIDnotvalidfortaketoMFG">

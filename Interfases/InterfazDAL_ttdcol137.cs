@@ -39,6 +39,20 @@ namespace whusa.Interfases
                 throw new Exception(ex.InnerException.ToString());
             }
         }
+        //JC 121021 Llenar el dropdown con el valor correcto del estado del pallet
+        public DataTable List_StatusPallet_OriginTable(ref string strError)
+        {
+            DataTable retorno = new DataTable();
+            try
+            {
+                retorno = dal.List_StatusPallet_OriginTable(ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
 
         public bool Actualizarttdcol222Cant(ref string pallet, ref decimal qty)
         {

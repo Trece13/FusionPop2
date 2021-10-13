@@ -241,6 +241,7 @@
                                     "<thead>" +
                                     "<tr>" +
                                     "<th scope='col'>Pallet ID</th>" +
+                                    "<th scope='col'>User</th>" +
                                     "<th scope='col'>Warehouse</th>" +
                                     "<th scope='col'>Location</th>" +
                                     "<th scope='col'>Item</th>" +
@@ -274,6 +275,7 @@
                     var IdBtnSave = "MyBtnSave" + i;
                     newRow = '<tr id=' + id + '>' +
                                     '<td>' + item.PAID + '</td>' +
+                                    '<td>' + item.LOGN + '</td>' +
                                     '<td>' + item.CWAR + '</td>' +
                                     '<td>' + item.LOCA + '</td>' +
                                     '<td>' + item.ITEM + '</td>' +

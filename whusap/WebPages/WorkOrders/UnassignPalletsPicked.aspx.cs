@@ -10,6 +10,8 @@ using System.Data;
 using Newtonsoft.Json;
 using whusa.Entidades;
 using whusa.Utilidades;
+//JC 121021 Al finalizar de desagsignar eliminar el picking si queda huerfano
+using whusa;
 
 namespace whusap.WebPages.WorkOrders
 {
@@ -19,14 +21,16 @@ namespace whusap.WebPages.WorkOrders
         private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
         public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
-
+        //JC 121021 Al finalizar de desagsignar eliminar el picking si queda huerfano
+        public static IntefazDAL_ttccol307 Ittccol307 = new IntefazDAL_ttccol307();
+        public static Ent_ttccol307 ObjReturn = new Ent_ttccol307();
 
         private static string globalMessages = "GlobalMessages";
 
         public static string Thepickedissuccess = mensajes("Thepickedissuccess");
         public static string Thepickedisnotsuccess = mensajes("Thepickedisnotsuccess");
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
-        public static string ThePalletIDAlreadyDrop = mensajes("ThePalletIDAlreadyDrop");
+        public static string ThePickIDAlreadyDrop = mensajes("ThePickIDAlreadyDrop");
         public static string PalletIDnotvalidfortaketoMFG = mensajes("PalletIDnotvalidfortaketoMFG");
         public static string PalletIdAlreadyPicked = mensajes("PalletIdAlreadyPicked");
         
@@ -160,7 +164,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     MyObj.Error = true;
                     MyObj.TipeMsgJs = "lbl";
-                    MyObj.ErrorMsg = ThePalletIDAlreadyDrop;
+                    MyObj.ErrorMsg = ThePickIDAlreadyDrop;
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
                 else
@@ -215,7 +219,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     MyObj.Error = true;
                     MyObj.TipeMsgJs = "lbl";
-                    MyObj.ErrorMsg = ThePalletIDAlreadyDrop;
+                    MyObj.ErrorMsg = ThePickIDAlreadyDrop;
                     ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
                 else
@@ -248,6 +252,8 @@ namespace whusap.WebPages.WorkOrders
 
                         twhcolDAL.Delete082(MyObj);
                         lsttticol082.Add(MyObj);
+                        //JC 121021 Al finalizar de desagsignar eliminar el picking si queda huerfano
+                        bool ActualizacionExitosa = Ittccol307.EliminarRegistrotccol307Null(new Ent_ttccol307 { PAID = PickID.Trim().ToUpper() });
                         ObjRetorno = JsonConvert.SerializeObject(lsttticol082);
                     }
                 }
@@ -259,7 +265,7 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.ErrorMsg = ThePalletIDDoesntexist;
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
-            return ObjRetorno;
+            return ObjRetorno;          
         }
 
         public static bool ExistenciaData(DataTable Data)

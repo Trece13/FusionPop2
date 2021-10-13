@@ -82,6 +82,27 @@ namespace whusa.DAL
             }
             return consulta;
         }
+        //JC 121021 Traer el estado del pallet de acuerdo a la tabla
+        public DataTable List_StatusPallet_OriginTable(ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Incorrect location, please verify."; }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to the get data for [Pallet Status]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+
+            return consulta;
+        }
 
         public bool Actualizarttdcol222Cant(ref string pallet, ref decimal qty)
         {
