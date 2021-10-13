@@ -2586,9 +2586,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
-<<<<<<< HEAD
-<Module name="twhcol130">
-=======
     <Module name="twhcol130">
       <operationName name="getPicks082">
         <stringSQL>
@@ -2601,14 +2598,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="getPaids082">
         <stringSQL>
           select DISTINCT PICK,PAID,CWAR,MCNO,DATT from(
-          select ticol082.T$PICK AS PICK, ticol082.T$PAID AS PAID, ticol082.T$CWAR AS CWAR, ticol082.T$MCNO AS MCNO, ticol082.T$TIME AS DATT from baan.tticol082140 ticol082
+          select ticol082.T$PICK AS PICK, ticol082.T$PAID AS PAID, ticol082.T$CWAR AS CWAR, ticol082.T$MCNO AS MCNO, ticol082.T$TIME-5/24 AS DATT from baan.tticol082140 ticol082
           union
-          select ticol083.T$PICK AS PICK, ticol083.T$PAID AS PAID, ticol083.T$CWAR AS CWAR, ticol083.T$MCNO AS MCNO, ticol083.T$TIME AS DATT from baan.tticol083140 ticol083)
+          select ticol083.T$PICK AS PICK, ticol083.T$PAID AS PAID, ticol083.T$CWAR AS CWAR, ticol083.T$MCNO AS MCNO, ticol083.T$TIME-5/24 AS DATT from baan.tticol083140 ticol083)
           globalQ WHERE globalQ.PICK = '[:PICK]'
         </stringSQL>
       </operationName>
->>>>>>> 47b0072e4227017d216e847b36af2ef0c8a45c8f
-      <operationName name="GetWarehouse">
+     <operationName name="GetWarehouse">
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
           INNER JOIN {0}.ttcmcs003{1} tcmcs003
