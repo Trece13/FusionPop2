@@ -69,14 +69,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticol022{1} ticol022
           INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol022.t$mitm
-          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
           UNION
           SELECT 'whcol131' AS TBL,whcol131.T$ORNO AS T$ORNO,whcol131.T$PAID AS T$paid,whcol131.T$QTYA AS T$qtyc,
           whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAA AS T$CWAR,
           tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT,whcol131.T$PONO,whcol131.T$STAT as STAT
           FROM {0}.tWhcol131{1} whcol131
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
-          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
           ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAT AS T$CWAR,
@@ -84,7 +84,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticol042{1} ticol042
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
-          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
+          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
           LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
           WHERE T$paid = '[p1]'
           AND ROWNUM = 1
@@ -817,6 +817,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol082">
+      <operationName name="ConsultarPallet_X_Picking83">
+        <stringSQL>
+          select * from(
+          select * from {0}.tticol082{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
+          union
+          select * from {0}.tticol083{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
+          )
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarPallet_X_Picking">
         <stringSQL>
           select * from {0}.tticol082{1}
@@ -2573,7 +2586,28 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
+<<<<<<< HEAD
 <Module name="twhcol130">
+=======
+    <Module name="twhcol130">
+      <operationName name="getPicks082">
+        <stringSQL>
+          select DISTINCT PICK from(
+          select ticol082.T$PICK AS PICK  from baan.tticol082140 ticol082 WHERE ticol082.T$STAT = '4'
+          union
+          select ticol083.T$PICK AS PICK  from baan.tticol083140 ticol083 WHERE ticol083.T$STAT = '4') globalQ ORDER BY PICK ASC
+        </stringSQL>
+      </operationName>
+      <operationName name="getPaids082">
+        <stringSQL>
+          select DISTINCT PICK,PAID,CWAR,MCNO,DATT from(
+          select ticol082.T$PICK AS PICK, ticol082.T$PAID AS PAID, ticol082.T$CWAR AS CWAR, ticol082.T$MCNO AS MCNO, ticol082.T$TIME AS DATT from baan.tticol082140 ticol082
+          union
+          select ticol083.T$PICK AS PICK, ticol083.T$PAID AS PAID, ticol083.T$CWAR AS CWAR, ticol083.T$MCNO AS MCNO, ticol083.T$TIME AS DATT from baan.tticol083140 ticol083)
+          globalQ WHERE globalQ.PICK = '[:PICK]'
+        </stringSQL>
+      </operationName>
+>>>>>>> 47b0072e4227017d216e847b36af2ef0c8a45c8f
       <operationName name="GetWarehouse">
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
@@ -5065,6 +5099,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select * from {0}.tticol082{1}
           where T$PAID = '[:PAID]'
           and TRIM(T$PICK) = TRIM('[:PICK]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPallet_X_Picking83">
+        <stringSQL>
+          select * from(
+          select * from {0}.tticol082{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
+          union
+          select * from {0}.tticol083{1}
+          where T$PAID = '[:PAID]'
+          and TRIM(T$PICK) = TRIM('[:PICK]')
+          )
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPallet_X_Picking_Advs">
