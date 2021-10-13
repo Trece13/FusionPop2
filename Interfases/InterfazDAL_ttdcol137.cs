@@ -86,7 +86,7 @@ namespace whusa.Interfases
 
         public object Actualizarttdcol242(Ent_ttdcol137 data137)
         {
-            return dal.Actualizarttdco242(data137);
+            return dal.Actualizarttdcol242(data137);
         }
 
         public object Actualizarttdcol222(Ent_ttdcol137 data137)

@@ -29,7 +29,7 @@ namespace whusap.WebPages.WorkOrders
 
         public static string Thepickedissuccess = mensajes("Thepickedissuccess");
         public static string Thepickedisnotsuccess = mensajes("Thepickedisnotsuccess");
-        public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
+        public static string ThePickIDDoesntexist = mensajes("ThePickIDDoesntexist");
         public static string ThePickIDAlreadyDrop = mensajes("ThePickIDAlreadyDrop");
         public static string PalletIDnotvalidfortaketoMFG = mensajes("PalletIDnotvalidfortaketoMFG");
         public static string PalletIdAlreadyPicked = mensajes("PalletIdAlreadyPicked");
@@ -136,7 +136,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 MyObj.Error = true;
                 MyObj.TipeMsgJs = "alert";
-                MyObj.ErrorMsg = ThePalletIDDoesntexist;
+                MyObj.ErrorMsg = ThePickIDDoesntexist;
 
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
@@ -193,7 +193,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 MyObj.Error = true;
                 MyObj.TipeMsgJs = "lbl";
-                MyObj.ErrorMsg = ThePalletIDDoesntexist;
+                MyObj.ErrorMsg = ThePickIDDoesntexist;
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
             return ObjRetorno;
@@ -262,7 +262,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 MyObj.Error = true;
                 MyObj.TipeMsgJs = "lbl";
-                MyObj.ErrorMsg = ThePalletIDDoesntexist;
+                MyObj.ErrorMsg = ThePickIDDoesntexist;
                 ObjRetorno = JsonConvert.SerializeObject(MyObj);
             }
             return ObjRetorno;          

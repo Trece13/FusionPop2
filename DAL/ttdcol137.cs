@@ -223,8 +223,8 @@ namespace whusa.DAL
                 paramList.Add(":PAID", pallet.ToUpper());
                 paramList.Add(":QTYA", qty);
                 paramList.Add(":STAT", status);
-                paramList.Add(":CWAR", CWAR);
-                paramList.Add(":LOCA", LOCA);
+                paramList.Add(":CWAR", CWAR.ToUpper());
+                paramList.Add(":LOCA", LOCA.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
@@ -275,7 +275,7 @@ namespace whusa.DAL
         }
 
 
-        public bool Actualizarttdco242(Ent_ttdcol137 data137)
+        public bool Actualizarttdcol242(Ent_ttdcol137 data137)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
@@ -286,8 +286,8 @@ namespace whusa.DAL
 
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":PAID", data137.Paid.ToUpper());
-                paramList.Add(":CWAT", data137.Cwar);
-                paramList.Add(":LOCA", data137.Loca);
+                paramList.Add(":CWAT", data137.Cwar.ToUpper());
+                paramList.Add(":LOCA", data137.Loca.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
@@ -313,8 +313,8 @@ namespace whusa.DAL
 
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":PAID", data137.Paid.ToUpper());
-                paramList.Add(":CWAT", data137.Cwar);
-                paramList.Add(":LOCA", data137.Loca);
+                paramList.Add(":CWAT", data137.Cwar.ToUpper());
+                paramList.Add(":LOCA", data137.Loca.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);

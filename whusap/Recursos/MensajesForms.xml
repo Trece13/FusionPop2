@@ -5256,9 +5256,9 @@
             The picked is not success
           </stringMessage>
         </operationName>
-        <operationName name="ThePalletIDDoesntexist">
+        <operationName name="ThePickIDDoesntexist">
           <stringMessage>
-            Pick ID has not been dropped or discounted
+            Pick ID not exist
           </stringMessage>
         </operationName>
         <operationName name="ThePalletIDAlreadyDrop">
@@ -5293,9 +5293,9 @@
             The picked is not success
           </stringMessage>
         </operationName>
-        <operationName name="ThePalletIDDoesntexist">
+        <operationName name="ThePickIDDoesntexist">
           <stringMessage>
-            Pick ID has not been dropped or discounted
+            Pick ID not exist
           </stringMessage>
         </operationName>
         <operationName name="ThePalletIDAlreadyDrop">
