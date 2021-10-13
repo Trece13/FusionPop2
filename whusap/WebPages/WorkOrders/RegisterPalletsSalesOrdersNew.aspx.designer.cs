@@ -13,15 +13,6 @@ namespace whusap.WebPages.WorkOrders {
     public partial class RegisterPalletsSalesOrdersNew {
         
         /// <summary>
-        /// ddStatus control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddStatus;
-        
-        /// <summary>
         /// ScriptManager1 control.
         /// </summary>
         /// <remarks>

@@ -144,6 +144,8 @@ namespace whusa.Entidades
         public string typeMsgJs { get; set; }
         [DataMember(Order = 27)]
         public string errorMsg { get; set; }
+        [DataMember(Order = 28)]
+        public List<StatusTab> statsTab { get; set; }
     }
 }
 

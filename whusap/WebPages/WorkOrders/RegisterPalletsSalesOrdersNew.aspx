@@ -15,26 +15,24 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style>
-        #MyEtiquetaOC,#MyEtiqueta
-        {
+        #MyEtiquetaOC, #MyEtiqueta {
             display: none;
         }
-        #LblUnitOC
-        {
-            font-size:14px;
+
+        #LblUnitOC {
+            font-size: 14px;
         }
-        #lblError
-        {
-            font-size:30px;
-            color:Red;
+
+        #lblError {
+            font-size: 30px;
+            color: Red;
         }
-        
-        label
-        {
-            font-size:14px;
+
+        label {
+            font-size: 14px;
         }
     </style>
-<%--    <div class="form-group row">
+    <%--    <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txItem">
             Sales Order</label>
         <div class="col-sm-4">
@@ -49,22 +47,25 @@
         <div class="col-sm-4">
             <input type="text" class="form-control form-control-lg" id="txPaid" placeholder="Pallet Id">
         </div>
-        <label id="lblItemdesc" for="txPaid" style="font-size:20px;">
+        <label id="lblItemdesc" for="txPaid" style="font-size: 20px;">
         </label>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPaid">
             Status</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg" id="txStat" placeholder="Status">
+            <input type="text" class="form-control form-control-lg" id="txStat" placeholder="Status" disabled>
         </div>
     </div>
-        <div class="form-group row">
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPaid">
             New Status</label>
         <div class="col-sm-4">
-            <asp:DropDownList runat="server" ID="ddStatus" placeholder="Status"></asp:DropDownList>
+            <select id="ddStat" class="form-control">
+                <option value="0" selected>Select State</option>
+            </select>
         </div>
+
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txWarehouse">
@@ -90,7 +91,7 @@
         </label>
     </div>
     <div class="form-group row">
-        <input type="button"  class="btn btn-primary btn-lg" id="btnsave" value="Save"></input>
+        <input type="button" class="btn btn-primary btn-lg" id="btnsave" value="Save"></input>
     </div>
     <div class="form-group row">
         <label id="lblError"></label>
@@ -102,13 +103,13 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="container">
-                <iframe id="myLabelFrame" scrolling="no" title="" class ="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
             </div>
         </ContentTemplate>
-    </asp:UpdatePanel>    
+    </asp:UpdatePanel>
     <div>
     </div>
-    <script>      
+    <script>
         var timer;
         function stoper() {
 
@@ -127,6 +128,8 @@
             lblItemdesc = $('#lblItemdesc');
             lblQuantity = $('#lblQuantity');
             btnSave = $('#Contenido_Button1');
+
+            ddStat = document.getElementById("ddStat");
 
         };
 
@@ -174,14 +177,17 @@
                 lblSalesOrder.html(MyObj.order);
                 lblQuantity.html(MyObj.cuni);
                 $('#txPaid').prop("disabled", true);
-                $('#txStat').prop("disabled", false);
+                $('#txStat').prop("disabled", true);
                 $('#txWarehouse').prop("disabled", false);
                 $('#txLocation').prop("disabled", false);
                 $('#txQuantity').prop("disabled", false);
-                }
             }
+        }
 
         var SuccesVerificarPallet = function (r) {
+            for (let i = ddStat.options.length; i > 0; i--) {
+                ddStat.remove(i);
+            }
             var MyObj = JSON.parse(r.d);
             if (MyObj.Error == true) {
                 ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
@@ -205,10 +211,29 @@
                 $('#txStat').val(MyObj.stat);
                 $('#Contenido_Button1').prop("disabled", false);
                 $('#txPaid').prop("disabled", true);
-                $('#txStat').prop("disabled", false);
+                $('#txStat').prop("disabled", true);
                 $('#txWarehouse').prop("disabled", false);
                 $('#txLocation').prop("disabled", false);
                 $('#txQuantity').prop("disabled", false);
+
+
+                if (MyObj.statsTab.length > 0) {
+                    MyObj.statsTab.forEach(function (e) {
+                        var option = document.createElement("option");
+                        option.text =  e.Code + " - "+ e.Desc;
+                        option.value = e.Code;
+                        ddStat.add(option);
+                    });
+                }
+                //MyObjLst.forEach(function (e) {
+                //    var option = document.createElement("option");
+                //    option.text = "Pallet ID: " + e.PAID + " Warehouse: " + e.CWAR + " Machine: " + e.MCNO + " Date: " + e.DATT;
+                //    option.value = e.PAID;
+                //    option.setAttribute('CWAR', e.CWAR);
+                //    option.setAttribute('MCNO', e.MCNO);
+                //    option.setAttribute('DATE', e.DATT);
+                //    ddPaid.add(option);
+                //});
             }
         }
 
@@ -226,6 +251,9 @@
             }
         }
         var SuccesClick_Save = function (r) {
+            for (let i = ddStat.options.length; i > 0; i--) {
+                ddStat.remove(i);
+            }
             alert("Update Success");
             $('#txPaid').prop("disabled", false);
             $('#txStat').prop("disabled", true);
@@ -238,55 +266,55 @@
             $('#txWarehouse').val("");
             $('#txLocation').val("");
             $('#txQuantity').val("");
-        
-//            MyObject = JSON.parse(r.d);
 
-//            if (MyObject.error == false) {
-//                //Etiqueta Sin orden de compra
+            //            MyObject = JSON.parse(r.d);
 
-//                $('#Contenido_CBPalletNO').attr("src", MyObject.PAID_URL);
-//                $('#Contenido_lblItemID').html(MyObject.ITEM);
-//                $('#Contenido_lblItemDesc').html(MyObject.DSCA);
-//                $('#Contenido_LblQuantity').html(MyObject.QTYC);
-//                $('#Contenido_LblUnit').html(MyObject.UNIC);
-//                $('#Contenido_LblLotId').html(MyObject.CLOT);
+            //            if (MyObject.error == false) {
+            //                //Etiqueta Sin orden de compra
 
-//                $('#Contenido_CBPurchaseOrder').attr("src", MyObject.ORNO_URL);
-//                $('#Contenido_CBItem').attr("src", MyObject.ITEM_URL);
-//                $("#Contenido_CBLot").attr("src", MyObject.CLOT_URL);
-//                if (MyObject.CLOT_URL == "") {
-//                    $('#Contenido_CBLot').hide();
-//                }
-//                else {
-//                    $('#Contenido_CBLot').show();
-//                }
-//                $('#Contenido_CBQuantity').attr("src", MyObject.QTYC_URL);
-//                $('#Contenido_CBUnit').attr("src", MyObject.UNIC_URL);
+            //                $('#Contenido_CBPalletNO').attr("src", MyObject.PAID_URL);
+            //                $('#Contenido_lblItemID').html(MyObject.ITEM);
+            //                $('#Contenido_lblItemDesc').html(MyObject.DSCA);
+            //                $('#Contenido_LblQuantity').html(MyObject.QTYC);
+            //                $('#Contenido_LblUnit').html(MyObject.UNIC);
+            //                $('#Contenido_LblLotId').html(MyObject.CLOT);
 
-//                $('#Contenido_LblPurchaseOC').html(MyObject.ORNO);
-//                $('#Contenido_LblItemOC').html(MyObject.ITEM);
-//                $('#Contenido_LblLotOC').html(MyObject.CLOT);
-//                $('#LblUnitOC').html(MyObject.UNIT);
-//                $('#Contenido_LblQuantityOC').html(MyObject.QTYC);
+            //                $('#Contenido_CBPurchaseOrder').attr("src", MyObject.ORNO_URL);
+            //                $('#Contenido_CBItem').attr("src", MyObject.ITEM_URL);
+            //                $("#Contenido_CBLot").attr("src", MyObject.CLOT_URL);
+            //                if (MyObject.CLOT_URL == "") {
+            //                    $('#Contenido_CBLot').hide();
+            //                }
+            //                else {
+            //                    $('#Contenido_CBLot').show();
+            //                }
+            //                $('#Contenido_CBQuantity').attr("src", MyObject.QTYC_URL);
+            //                $('#Contenido_CBUnit').attr("src", MyObject.UNIC_URL);
 
-//                $('#txItem').val("");
-//                $('#txPaid').val("");
-//                $('#txWarehouse').val("");
-//                $('#txLocation').val("");
-//                $('#txQuantity').val("");
-//                $('#lblSalesOrder').html("");
-//                $('#lblWarehouse').html("");
-//                $('#lblQuantity').html("");
-//                $('#lblError').html("");
-//                $('#Contenido_Button1').prop("disabled", true);
+            //                $('#Contenido_LblPurchaseOC').html(MyObject.ORNO);
+            //                $('#Contenido_LblItemOC').html(MyObject.ITEM);
+            //                $('#Contenido_LblLotOC').html(MyObject.CLOT);
+            //                $('#LblUnitOC').html(MyObject.UNIT);
+            //                $('#Contenido_LblQuantityOC').html(MyObject.QTYC);
 
-//            }
-//            else {
-//                console.log("El registro no se realizo");
-//                alert(MyObject.errorMsg);
-//            }
+            //                $('#txItem').val("");
+            //                $('#txPaid').val("");
+            //                $('#txWarehouse').val("");
+            //                $('#txLocation').val("");
+            //                $('#txQuantity').val("");
+            //                $('#lblSalesOrder').html("");
+            //                $('#lblWarehouse').html("");
+            //                $('#lblQuantity').html("");
+            //                $('#lblError').html("");
+            //                $('#Contenido_Button1').prop("disabled", true);
 
-      }
+            //            }
+            //            else {
+            //                console.log("El registro no se realizo");
+            //                alert(MyObject.errorMsg);
+            //            }
+
+        }
 
 
         //var VerificarSalesOrder = function () {
@@ -303,9 +331,9 @@
 
         var save = function () {
 
-            var Data = "{'STAT':'" + $('#txStat').val().trim() + "','CWAR':'" + $('#txWarehouse').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYA':'" + $('#txQuantity').val().trim()+ "'}";
-            sendAjax("save", Data, SuccesClick_Save);                     
-                                                                          
+            var Data = "{'STAT':'" + (ddStat.value == '0' ? $('#txStat').val().trim() : ddStat.value) + "','CWAR':'" + $('#txWarehouse').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYA':'" + $('#txQuantity').val().trim() + "'}";
+            sendAjax("save", Data, SuccesClick_Save);
+
         }
 
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {

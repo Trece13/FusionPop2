@@ -481,5 +481,15 @@ namespace whusa.Interfases
         {
             return dal.MultiInsert(StrInsertMultiple);
         }
+
+        public DataTable getPicks082()
+        {
+            return dal.getPicks082();
+        }
+
+        public DataTable getPaids082(string PICK)
+        {
+            return dal.getPaids082(PICK);
+        }
     }
 }

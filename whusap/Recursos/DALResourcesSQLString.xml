@@ -147,6 +147,36 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select 'col022', 14, 'Adjusted' from dual
           union
           select 'col022', 15, 'No' from dual
+          union
+          select 'col042', 1, 'Deleted' from dual
+          union
+          select 'col042', 2, 'Announced' from dual
+          union
+          select 'col042', 3, 'Rejected' from dual
+          union
+          select 'col042', 4, 'Wrapped' from dual
+          union
+          select 'col042', 5, 'Received' from dual
+          union
+          select 'col042', 6, 'Picked' from dual
+          union
+          select 'col042', 7, 'Located' from dual
+          union
+          select 'col042', 8, 'Allocated' from dual
+          union
+          select 'col042', 9, 'Picking' from dual
+          union
+          select 'col042', 10, 'Dropped' from dual
+          union
+          select 'col042', 11, 'Delivered' from dual
+          union
+          select 'col042', 12, 'Blocked' from dual
+          union
+          select 'col042', 13, 'To Delete' from dual
+          union
+          select 'col042', 14, 'Adjusted' from dual
+          union
+          select 'col042', 15, 'No' from dual
           )
           order by Tab, Code
         </stringSQL>

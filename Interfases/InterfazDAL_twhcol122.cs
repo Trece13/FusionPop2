@@ -1116,7 +1116,13 @@ namespace whusa.Interfases
         {
             return dal.Delete082(Obj082);
         }
-        
-        
+
+
+
+        public DataTable ConsultarPallet_X_Picking83(Ent_tticol082 Obj082PPaid)
+        {
+
+            return dal.ConsultarPallet_X_Picking83(Obj082PPaid);
+        }
     }
 }

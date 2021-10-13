@@ -1845,6 +1845,32 @@ namespace whusa.DAL
 
             return Retorno;
         }
+
+        public DataTable ConsultarPallet_X_Picking83(Ent_tticol082 Obj082PPaid)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":PAID", Obj082PPaid.PAID.Trim());
+            paramList.Add(":PICK", Obj082PPaid.PICK.Trim());
+            string tabla = owner + ".tticol222140";
+            string name1 = "ConsultarPallet_X_Picking83";
+            //strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+            paramList.Clear();
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol222140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
     }
 }
 

@@ -39,7 +39,8 @@ namespace whusap.WebPages.WorkOrders
         public static InterfazDAL_ttcibd001 ITtcibd001 = new InterfazDAL_ttcibd001();
         public static InterfazDAL_tticol125 ITticol125 = new InterfazDAL_tticol125();
         public static InterfazDAL_ttdcol137 ITticol137 = new InterfazDAL_ttdcol137();
-
+        public static DataTable resultado = new DataTable();
+        public static List<StatusTab> LstStatusTab;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -87,7 +88,20 @@ namespace whusap.WebPages.WorkOrders
                 }
 
                 string strError = string.Empty;
+                resultado = ITticol137.List_StatusPallet_OriginTable(ref strError);
+                if (resultado.Rows.Count > 0)
+                {
+                    LstStatusTab = new List<StatusTab>();
+                    foreach(DataRow reg in resultado.Rows){
 
+                        StatusTab objStaTab  = new StatusTab();
+                        objStaTab.Table = reg["TAB"].ToString();
+                        objStaTab.Code = reg["CODE"].ToString();
+                        objStaTab.Desc = reg["DESCR"].ToString();
+                        LstStatusTab.Add(objStaTab);
+
+                    }
+                }
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString(),
@@ -163,9 +177,10 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["QTYA"] = Obj_tticol125.qtya;
                 HttpContext.Current.Session["STAT"] = Obj_tticol125.stat;
                 HttpContext.Current.Session["User"].ToString();
+                Obj_tticol125.statsTab = LstStatusTab.FindAll(e => DtTticol125.Rows[0]["TBL"].ToString().Contains(e.Table));
+                
                 //JC 121021 Generar la tabla de estados de acuerdo a la tabla
-                DataTable resultado = ITticol137.List_StatusPallet_OriginTable(ref strError);
-
+                
             }
             else
             {
@@ -247,6 +262,7 @@ namespace whusap.WebPages.WorkOrders
 
             return retorno;
         }
+
 
     }
 }
