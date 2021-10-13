@@ -163,6 +163,9 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["QTYA"] = Obj_tticol125.qtya;
                 HttpContext.Current.Session["STAT"] = Obj_tticol125.stat;
                 HttpContext.Current.Session["User"].ToString();
+                //JC 121021 Generar la tabla de estados de acuerdo a la tabla
+                DataTable resultado = ITticol137.List_StatusPallet_OriginTable(ref strError);
+
             }
             else
             {

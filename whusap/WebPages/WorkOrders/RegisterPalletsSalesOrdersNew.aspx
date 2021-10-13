@@ -59,6 +59,13 @@
             <input type="text" class="form-control form-control-lg" id="txStat" placeholder="Status">
         </div>
     </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label-lg" for="txPaid">
+            New Status</label>
+        <div class="col-sm-4">
+            <asp:DropDownList runat="server" ID="ddStatus" placeholder="Status"></asp:DropDownList>
+        </div>
+    </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txWarehouse">
             Warehouse</label>
