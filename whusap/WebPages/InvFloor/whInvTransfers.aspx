@@ -24,13 +24,15 @@
     </style>
 
     <form id="form1" class="container">
-    <div id="divTransferHeader">
+    <div id="divTransferHeader" style="display: block;">
     <div class="form-group row ">
-        <label class="col-sm-2 col-form-label-lg" for="txPalletId" id="lblTitPalletId">
+        <label class="col-2 col-form-label-lg" for="txPalletId" id="lblTitPalletId">
             Pallet ID</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control form-control-lg col-sm-10" id="txPalletId" placeholder="Pallet ID">&nbsp
-            <button class="btn btn-lg col-sm-1,5"  onclick="CleanPalletID(); return false;"><i class="fa fa-trash"></i> </button>
+        <div class="col-3">
+            <input type="text" class="form-control form-control-lg col-12" id="txPalletId" placeholder="Pallet ID">&nbsp
+        </div>
+        <div class="col-1">
+            <button class="btn btn-lg btn-success col-12"  onclick="CleanPalletID(); return false;">Restart </button>
         </div>
     </div>
     
@@ -48,8 +50,8 @@
         <label class="col-sm-2 col-form-label-lg"  id="lblTitItem">
             Item</label>
         <div class="col-sm-4">
-                <label class="col-sm-6 col-form-label-lg" id="lblItemId" >-</label>
-                <label class="col-sm-6 col-form-label-lg" id="lblItemDescription" >-</label>
+                <label class="col-5 col-form-label" id="lblItemId" >-</label>
+                <label class="col-6 col-form-label" id="lblItemDescription" >-</label>
         </div>
     </div>
     <div class="form-group row">
@@ -65,9 +67,9 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" id="lblTitQuality">
             Quantity</label>
-        <div class="col-sm-3">
-                <label class="col-sm-10 col-form-label-lg" id ="lblQuatity" >-</label>
-                <label class="col-sm-2 col-form-label-lg" id ="lblUnit" >-</label>
+        <div class="col-3">
+                <label class="col-9 col-form-label-lg" id ="lblQuatity" >-</label>
+                <label class="col-2 col-form-label-lg" id ="lblUnit" >-</label>
         </div>
     </div>
     
@@ -193,6 +195,7 @@
             //btnCleanPallet = document.getElementById("btnCleanPallet");
             btnQuery = document.getElementById("btnQuery");
             btnTransfer = document.getElementById("btnTransfer");
+            DisabletxbTargetLocation();
         }
 
         IniciarElemntos();
@@ -397,6 +400,10 @@
                     lblError.innerHTML = "";
                     if (x.SLOC.trim().toUpperCase() == 1) {
                         EnabletxbTargetLocation();
+                        txbTargetLocation.value = "";
+                    }
+                    else {
+                        xbTargetLocation.value = "";
                     }
                     localStorage.TargetSloc = x.SLOC.trim();
                 }
