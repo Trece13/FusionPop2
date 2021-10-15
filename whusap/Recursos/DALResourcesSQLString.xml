@@ -2604,11 +2604,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           globalQ WHERE globalQ.PICK = '[:PICK]'
         </stringSQL>
       </operationName>
-<<<<<<< HEAD
       <operationName name="GetWarehouse">
-=======
-     <operationName name="GetWarehouse">
->>>>>>> 6e1c2341402f8dc670754ef1cbd96369560261f3
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
           INNER JOIN {0}.ttcmcs003{1} tcmcs003

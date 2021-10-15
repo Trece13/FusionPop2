@@ -31,8 +31,8 @@
         <div class="col-3">
             <input type="text" class="form-control form-control-lg col-12" id="txPalletId" placeholder="Pallet ID">&nbsp
         </div>
-        <div class="col-1">
-            <button class="btn btn-lg btn-success col-12"  onclick="CleanPalletID(); return false;">Restart </button>
+        <div class="col-2">
+            <button class="btn btn-lg btn-success col-12"  onclick="CleanPalletID(); return false;">Change Pallet ID </button>
         </div>
     </div>
     
@@ -94,6 +94,7 @@
     </label>
     </form>
     <script  type="text/javascript">
+        var SLOC = false;
         var SuccesPalletConsult = function (r) {
 
             MyObject = JSON.parse(r.d)
@@ -364,8 +365,13 @@
             }
 
             else {
-                var Data = "{'PAID':'" + txPalletId.value.trim().toUpperCase() + "','CurrentWarehouse':'" + txbCurrentWarehouse.value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + txbCurrentLocation.value + "','TargetWarehouse':'" + txbTargetWarehouse.value.trim().toUpperCase() + "','TargetSloc':'" + localStorage.TargetSloc + "','TargetLocation':'" + txbTargetLocation.value + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
-                sendAjax("clickTransfer", Data, SuccesTransferConsult);
+                if (txbTargetWarehouse.value.trim() == "") {
+                    txbTargetWarehouse.focus();
+                }
+                else {
+                    var Data = "{'PAID':'" + txPalletId.value.trim().toUpperCase() + "','CurrentWarehouse':'" + txbCurrentWarehouse.value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + txbCurrentLocation.value + "','TargetWarehouse':'" + txbTargetWarehouse.value.trim().toUpperCase() + "','TargetSloc':'" + (SLOC == true ?'1':'0') + "','TargetLocation':'" + txbTargetLocation.value + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
+                    sendAjax("clickTransfer", Data, SuccesTransferConsult);
+                }
             }
         }
 
@@ -389,6 +395,7 @@
         };
 
         var txbTargetWarehousechange = function () {
+            $('#txbTargetLocation').val("");
             lstWarehouses = JSON.parse('<%=lstWarehouses %>');
             DisabletxbTargetLocation();
             txbTargetWarehouse.classList.add("IncorrectWarehouse");
@@ -401,9 +408,11 @@
                     if (x.SLOC.trim().toUpperCase() == 1) {
                         EnabletxbTargetLocation();
                         txbTargetLocation.value = "";
+                        SLOC = true;
                     }
                     else {
-                        xbTargetLocation.value = "";
+                        txbTargetLocation.value = "";
+                        SLOC = false;
                     }
                     localStorage.TargetSloc = x.SLOC.trim();
                 }
