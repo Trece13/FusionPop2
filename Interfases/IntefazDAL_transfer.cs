@@ -39,6 +39,14 @@ namespace whusa.Interfases
 
         }
 
+        //JC 171021 Validar Stock en Baan
+        public DataTable ValidarStockBaan(Ent_twhcol020 objWhcol020)
+        {
+
+            return dal.ValidarStockBaan(objWhcol020);
+
+        }
+
         public bool ActualizarTransferencia(Ent_twhcol020 objWhcol020)
         {
             return dal.ActualizarTransferencia(objWhcol020);
