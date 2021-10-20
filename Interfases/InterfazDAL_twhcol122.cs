@@ -902,6 +902,130 @@ namespace whusa.Interfases
             return Lstwhcol122;
         }
 
+        public List<EntidadPicking> ConsultarPalletPicking131Item(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
+        {
+            List<EntidadPicking> Lstwhcol131 = new List<EntidadPicking>();
+            DataTable DTwhcolo131 = dal.ConsultarPalletPicking131Item(Item, Cant, Prio, _operator, orno, pono, advs);
+            if (DTwhcolo131.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DTwhcolo131.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        //ROWN = MyRow["ROWN"].ToString(),
+                        //OORG = MyRow["OORG"].ToString(),
+                        //ORNO = MyRow["ORNO"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
+                        //PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        //ADVS = MyRow["ADVS"].ToString(),
+                        STAT = MyRow["STAT"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString()
+
+                    };
+
+                    Lstwhcol131.Add(MyObjet);
+                }
+
+            }
+            return Lstwhcol131;
+        }
+
+        public List<EntidadPicking> ConsultarPalletPicking042Item(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
+        {
+            List<EntidadPicking> Lstwhcol042 = new List<EntidadPicking>();
+            DataTable DTwhcolo42 = dal.ConsultarPalletPicking042Item(Item, Cant, Prio, _operator, orno, pono, advs);
+            if (DTwhcolo42.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DTwhcolo42.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString()
+                        //ROWN = MyRow["ROWN"].ToString(),
+                        //OORG = MyRow["OORG"].ToString(),
+                        //ORNO = MyRow["ORNO"].ToString(),
+                        ////OSET = MyRow["OSET"].ToString(),
+                        //PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        //ADVS = MyRow["ADVS"].ToString(),
+
+                    };
+
+                    Lstwhcol042.Add(MyObjet);
+                }
+
+            }
+            return Lstwhcol042;
+        }
+
+        public List<EntidadPicking> ConsultarPalletPicking22Item(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
+        {
+            List<EntidadPicking> Lstwhcol122 = new List<EntidadPicking>();
+            DataTable DTwhcol122 = dal.ConsultarPalletPicking22Item(Item, Cant, Prio, _operator, orno, pono, advs);
+            if (DTwhcol122.Rows.Count > 0)
+            {
+                foreach (DataRow MyRow in DTwhcol122.Rows)
+                {
+
+                    EntidadPicking MyObjet = new EntidadPicking
+                    {
+
+                        PALLETID = MyRow["PALLETID"].ToString(),
+                        ITEM = MyRow["ITEM"].ToString(),
+                        DESCRIPTION = MyRow["DESCRIPTION"].ToString(),
+                        LOT = MyRow["LOT"].ToString(),
+                        WRH = MyRow["WRH"].ToString(),
+                        DESCWRH = MyRow["DESCWRH"].ToString(),
+                        QTY = MyRow["QTY"].ToString(),
+                        UN = MyRow["UN"].ToString(),
+                        PRIO = MyRow["PRIO"].ToString(),
+                        LOCA = MyRow["LOCA"].ToString(),
+                        MCNO = MyRow["MCNO"].ToString()
+                        //ROWN = MyRow["ROWN"].ToString(),
+                        //OORG = MyRow["OORG"].ToString(),
+                        //ORNO = MyRow["ORNO"].ToString(),
+                        //OSET = MyRow["OSET"].ToString(),
+                        //PONO = MyRow["PONO"].ToString(),
+                        //SQNB = MyRow["SQNB"].ToString(),
+                        //ADVS = MyRow["ADVS"].ToString(),
+                        //QTYT = MyRow["QTYT"].ToString(),
+
+                    };
+
+                    Lstwhcol122.Add(MyObjet);
+                }
+
+            }
+            return Lstwhcol122;
+        }
+
         public DataTable ConsultarTt307140Proc(Ent_ttccol307 MyObj307)
         {
             return dal.ConsultarTt307140(MyObj307);

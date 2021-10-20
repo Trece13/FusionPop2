@@ -244,7 +244,7 @@
         .table th {
             padding: .1rem;
             border-top: 1px solid #dee2e6;
-            font-size: 12px;
+            font-size: 16px;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
@@ -508,7 +508,7 @@
                         <div class="col-4" id="lblLoca">
                         </div>
                         <div class="col-5 p-0">
-                            <input type="text" class="col-12 form-control" id="txLoca" placeholder="Location" required>
+                            <input type="text" class="col-12 form-control" id="txLoca" placeholder="Location" required style="display:none">
                         </div>
                     </div>
                     <br>
@@ -560,11 +560,12 @@
             <table id="" class="table animate__animated animate__fadeInLeft" style="width: 100%">
                 <thead>
                     <tr>
+                        <th scope="col">Warehouse</th>
                         <th scope="col">Location</th>
                         <th scope="col">Quantity</th>
                     </tr>
                 </thead>
-                <tbody id="bdPicket182">
+                <tbody id="bdPallets">
                 </tbody>
             </table>
             </div>
@@ -752,6 +753,7 @@
             var btnConfirm = document.getElementById("btnConfirm");
             var btnSkipPicking = document.getElementById("btnSkipPicking");
             var bdPicket182 = document.getElementById("bdPicket182");
+            var bdPallets = document.getElementById("bdPallets");
             var ddReason = document.getElementById("ddReason");
             var bntChange = document.getElementById("bntChange");
 
@@ -810,11 +812,12 @@
         var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
+                paidOk = true;
                 console.log();
                 validElement(txPaid);
                 locaInvalid();
                 hideShowNeutroInputText(txQtyc, true);
-                hideShowNeutroInputText(txLoca, true);
+                //hideShowNeutroInputText(txLoca, true);
                 //hideShowNeutroSelect(ddReason, true);
                 cnpk = MyObj.CNPK;
                 //lblPick.innerHTML = MyObj.PICK;
@@ -866,32 +869,25 @@
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (response) {
-                    myObj = JSON.parse(response.d);
-                    //window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
-                    if (myObj.length > 0 && existPalletsPick == true) {
-                        for (var i = 0; i < myObj.length; i++) {
-                            bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                success: function (r) {
+                    var MyObjLst = JSON.parse(r.d);
+                    if (bdPallets.childElementCount > 0) {
+                        for (let i = bdPallets.childElementCount - 1; i >= 0 ; i--) {
+                            bdPallets.children[i].remove()
                         }
-                        var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
-                                                    "<thead>" +
-                                                      "<tr>" +
-                                                        "<th scope='col'>Pallet</th>" +
-                                                        "<th scope='col'>Location</th>" +
-                                                        "<th scope='col'>Item</th>" +
-                                                        "<th scope='col'>Description</th>" +
-                                                        "<th scope='col'>Quantity</th>" +
-                                                        "<th scope='col'>Unit</th>" +
-                                                    "</tr>" +
-                                                   "</thead>" +
-                                                   "<tbody>" +
-                                                   bodyRows
-                        "</tbody>" +
-                                                "</table>";
-
-
-                        //$("#divTableItem").append(tableOptions);
                     }
+                    var bodyRows = "";
+                    if (MyObjLst.length > 0) {
+                        var validos = true;
+                        MyObjLst.forEach(function (item, i) {
+                            bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.WRH + "</td><td>" + item.LOCA + "</td><td>" + item.QTY + "</td></tr>";
+                        });
+                    }
+                    else {
+                        $('#bdPallets').hide(100);
+                    }
+                    $("#bdPallets").append(bodyRows);
+                    
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -1079,7 +1075,7 @@
             if (MyObjLst.length > 0) {
                 var validos = true;
                 MyObjLst.forEach(function (item, i) {
-                    bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>Holas </td><td>" + item.T$CWAR + "</td><td>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
+                    bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>Holas </td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
                 });
                 if (validos) {
                     $('#bdPicket182').show(500);
@@ -1123,7 +1119,7 @@
             paidInvalid();
             txPaid.value = "";
             txQtyc.value = "";
-            txLoca.value = "";
+            //txLoca.value = "";
 
             //lblPick.innerHTML = "";
             //lblPaid.innerHTML = "";
@@ -1134,7 +1130,7 @@
             lblUnit.innerHTML = "";
             NeutroInputText(txPaid);
             NeutroInputText(txQtyc);
-            NeutroInputText(txLoca);
+            //NeutroInputText(txLoca);
 
             hideShowNeutroSelect(ddReason, false);
         }
@@ -1275,7 +1271,7 @@
             if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
                 txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
             }
-            var qtycAct = parseFloat(lblQtyc.innerHTML.trim());
+            var qtycAct = parseFloat(lblQtyc.innerHTML.trim()) <= parseFloat($("#qtyTbl").html()) ? parseFloat(lblQtyc.innerHTML.trim()) : parseFloat($("#qtyTbl").html());
             var qtycNew = parseFloat(txQtyc.value.trim());
             if (qtycAct >= qtycNew && qtycNew > 0) {
                 qtytValid();
@@ -1362,7 +1358,7 @@
         var paidInvalid = function () {
             if (txPaid.value.trim() != "") {
                 invalidElement(txPaid);
-                hideShowNeutroInputText(txLoca, false);
+                //hideShowNeutroInputText(txLoca, false);
                 hideShowNeutroInputText(txQtyc, false);
                 hideShowNeutroSelect(ddReason, false);
                 paidOk = false;
@@ -1378,11 +1374,11 @@
                 hideShowNeutroInputText(txQtyc, false);
                 hideShowNeutroSelect(ddReason, false);
                 if (sloc == "1") {
-                    hideShowNeutroInputText(txLoca, true);
+                    //hideShowNeutroInputText(txLoca, true);
                     locaOk = false;
                 }
                 else {
-                    hideShowNeutroInputText(txLoca, false);
+                    //hideShowNeutroInputText(txLoca, false);
                     cnpk == "1" ? hideShowNeutroInputText(txQtyc, false) : hideShowNeutroInputText(txQtyc, true);
                     locaOk = true;
                 }
@@ -1494,7 +1490,7 @@
         }
 
         function formValid() {
-            if (cnpk == "1" && sloc != "1") {
+            if (cnpk == "1") {
                 if (paidOk == true) {
                     $('#btnConfirm').show(300);
                 }
@@ -1502,15 +1498,7 @@
                     $('#btnConfirm').hide(300);
                 }
             }
-            else if (cnpk == "1" && sloc == "1") {
-                if (paidOk == true && locaOk == true) {
-                    $('#btnConfirm').show(300);
-                }
-                else {
-                    $('#btnConfirm').hide(300);
-                }
-            }
-            else if (paidOk == true && locaOk == true && qtytOk == true) {
+            else if (paidOk == true && qtytOk == true) {
                 $('#btnConfirm').show(300);
             }
             else {

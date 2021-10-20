@@ -513,19 +513,19 @@ namespace whusap.WebPages.WorkOrders
             List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
             List<EntidadPicking> LstReturn = new List<EntidadPicking>();
             //JC 101021  No mostrar la tabla de pallets sugeridos si ya es el último pick
-            LstPallet131 = twhcolDAL.ConsultarPalletPicking131ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+            LstPallet131 = twhcolDAL.ConsultarPalletPicking131Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
             if (LstPallet131.Count > 0)
             {
                 LstReturn = LstPallet131;
             }
 
-            LstPallet042 = twhcolDAL.ConsultarPalletPicking042ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+            LstPallet042 = twhcolDAL.ConsultarPalletPicking042Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
             if (LstPallet042.Count > 0)
             {
                 LstReturn = LstPallet042;
             }
 
-            LstPallet22 = twhcolDAL.ConsultarPalletPicking22ItemQty(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+            LstPallet22 = twhcolDAL.ConsultarPalletPicking22Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
             if (LstPallet22.Count > 0)
             {
                 LstReturn = LstPallet22;
