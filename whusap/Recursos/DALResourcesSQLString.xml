@@ -2395,12 +2395,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = ticol222.t$cwat
           WHERE T$DELE = '7'
           UNION
-          SELECT 'whcol130' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA, wmd200.t$sloc AS SLOC
+          SELECT 'whcol130' AS TBL,T$CLOT AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA, wmd200.t$sloc AS SLOC
           FROM {0}.tWhcol130{1} col130
           INNER JOIN {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = col130.t$cwaa
           WHERE T$STAT = '2'
           UNION
-          SELECT 'whcol131' AS TBL,T$ORNO AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA, wmd200.t$sloc AS SLOC
+          SELECT 'whcol131' AS TBL,T$CLOT AS T$ORNO,T$PAID AS T$PAID,T$QTYA AS T$qtyc,T$ITEM AS T$ITEM,T$UNIC AS T$CUNI,T$CWAA AS T$CWAR,T$LOAA AS T$LOCA, wmd200.t$sloc AS SLOC
           FROM {0}.tWhcol131{1} col131
           INNER JOIN {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = col131.t$cwaa
           WHERE T$STAT = '3'
@@ -2426,13 +2426,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ValidarStockBaan">
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
-          ibd001.t$cwar ware, inr140.t$loca, ibd001.t$kltc,case when ibd001.t$kltc=1 then trim('OPN028868') else '                ' end
-          from BAAN.twhinr140140 inr140
-          inner join BAAN.ttcibd001140 ibd001 on ibd001.t$item = inr140.t$item
+          ibd001.t$cwar ware, inr140.t$loca, ibd001.t$kltc,case when ibd001.t$kltc=1 then trim('[:T$CLOT]') else '                ' end
+          from {0}.twhinr140{1} inr140
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
+          inner join {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = inr140.t$cwar
           where trim(inr140.t$item)=trim('[:T$MITM]')
-          and inr140.t$clot=case when ibd001.t$kltc=1 then trim('[:T$CLOT]') else '                ' end
+          and case when ibd001.t$kltc=1 then trim(inr140.t$clot) else inr140.t$clot end = case when ibd001.t$kltc = 1 then trim('[:T$CLOT]') else '                ' end
           and trim(inr140.t$cwar) = trim('[:T$CWOR]')
-          and trim(inr140.t$loca) = trim('[:T$LOOR]')
+          and case when wmd200.t$sloc=1 then trim(inr140.t$loca) else inr140.t$loca end = case when wmd200.t$sloc = 1 then trim('[:T$LOOR]') else '          ' end
           and inr140.t$stks &gt;= [:T$QTDL]
       </stringSQL>
       </operationName>
