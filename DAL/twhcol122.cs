@@ -1330,7 +1330,98 @@ namespace whusa.DAL
             paramList.Add(":PONO", pono.Trim());
             paramList.Add(":ADVS", advs.Trim());
             string tabla = ".twhcol131";
-            string name1 = "ConsultarPalletPicking131ItemQty";
+            string name1 = "ConsultarPalletPicking131Item";
+
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+            paramList.Clear();
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [twhcol131140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+        public DataTable ConsultarPalletPicking22Item(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":ITEM", Item.Trim());
+            paramList.Add(":QTYT", Cant.Trim());
+            paramList.Add(":PRIO", Prio.Trim());
+            paramList.Add(":ORNO", orno.Trim());
+            paramList.Add(":PONO", pono.Trim());
+            paramList.Add(":ADVS", advs.Trim());
+            string tabla = ".tticol222";
+            string name1 = "ConsultarPalletPicking22Item";
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+            paramList.Clear();
+            //strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                flag22 = 1;
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol222140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+        public DataTable ConsultarPalletPicking042Item(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":ITEM", Item.Trim());
+            paramList.Add(":QTYT", Cant.Trim());
+            paramList.Add(":PRIO", Prio.Trim());
+            paramList.Add(":ORNO", orno.Trim());
+            paramList.Add(":PONO", pono.Trim());
+            paramList.Add(":ADVS", advs.Trim());
+            string tabla = ".tticol042";
+            string name1 = "ConsultarPalletPicking042Item";
+            strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
+            paramList.Clear();
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                strError = "Error finding table [tticol042140]. Try again or contact your administrator \n ";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+        public DataTable ConsultarPalletPicking131Item(string Item, string Cant, string Prio, string _operator, string orno, string pono, string advs)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string metodo2 = "tticol082";
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$PAID", PAID.Trim());
+            paramList.Add(":ITEM", Item.Trim());
+            paramList.Add(":QTYT", Cant.Trim());
+            paramList.Add(":PRIO", Prio.Trim());
+            paramList.Add(":ORNO", orno.Trim());
+            paramList.Add(":PONO", pono.Trim());
+            paramList.Add(":ADVS", advs.Trim());
+            string tabla = ".twhcol131";
+            string name1 = "ConsultarPalletPicking131Item";
 
             strSentencia = recursos.readStatement(metodo2, name1, ref owner, ref env, tabla, paramList);
             paramList.Clear();

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="PickingConsignmentMaterial.aspx.cs" Inherits="whusap.WebPages.WorkOrders.PickingConsignmentMaterial" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true" CodeBehind="PickingUpdate.aspx.cs" Inherits="whusap.WebPages.WorkOrders.PickingUpdate" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="styles/jquery-2.1.1.min.js"></script>
@@ -244,7 +244,7 @@
         .table th {
             padding: .1rem;
             border-top: 1px solid #dee2e6;
-            font-size: 12px;
+            font-size: 16px;
             text-align: left;
             vertical-align: middle;
             padding-left: 1em;
@@ -256,8 +256,7 @@
             border-radius: 4px;
         }
 
-        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #bntChange,
-        #btnConfirm, #txLoca, #txQtyc {
+        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc {
             display: none;
         }
 
@@ -361,17 +360,32 @@
         <div class="fa-5x container text-center" style="display: none" id="GetPicksLoader">
             <i class="fas fa-circle-notch fa-spin" style="color: silver;"></i>
         </div>
+        <div id="" class="row col-12">
+            <table id="" class="table animate__animated animate__fadeInLeft" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Work Order</th>
+                        <th scope="col">Machine</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Warehouse</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit</th>
+                    </tr>
+                </thead>
+                <tbody id="bdPicket182">
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <br />
+        <br />
         <div id="divPicketPending" class="col-12">
             <table id="tblPicketPending" class="table animate__animated animate__fadeInLeft" style="width: 100%">
                 <thead>
                     <tr>
-                        <th scope="col">Picking ID</th>
-                        <th scope="col">Warehouse</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Machine</th>
-                        <th scope="col">Priority</th>
-                        <th scope="col"></th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Quantity</th>
                     </tr>
                 </thead>
                 <tbody id="bdPicketPending">
@@ -380,16 +394,7 @@
         </div>
         <div class="row">
             <div class="col-5">
-                <form id="formPicking">
-                    <div class="row">
-                        <div class="col-3">
-                            <label>Pick ID</label>
-                        </div>
-                        <div class="col-2">
-                            <label id="lblPick">10209129012</label>
-                        </div>
-                    </div>
-                    <br>
+                <%--<form id="formPicking">
                     <div class="row">
                         <div class="col-3">
                             <label>Pallet ID</label>
@@ -468,15 +473,101 @@
                     <div class="row">
                         <label id="lblError" style="color: red; font-size: 30px;"></label>
                     </div>
+                </form>--%>
+                <form id="">
+                    <div class="row">
+                        <div class="col-3">
+                            <label>Pallet ID</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" class="col-12 form-control" id="txPaid" placeholder="Pallet ID" required>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <label>Item</label>
+                        </div>
+                        <div class="col-9" id="LblItem">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <label>Warehouse</label>
+                        </div>
+                        <div class="col-2" id="lblWare">
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <label>Location</label>
+                        </div>
+                        <div class="col-4" id="lblLoca">
+                        </div>
+                        <div class="col-5 p-0">
+                            <input type="text" class="col-12 form-control" id="txLoca" placeholder="Location" required style="display:none">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-3">
+                            <label>Quantity</label>
+                        </div>
+                        <div class="col-2" id="lblQtyc">
+                        </div>
+                        <div class="col-2" id="lblUnit">
+                        </div>
+                        <div class="col-5  p-0">
+                            <input type="text" class="col-12 form-control" id="txQtyc" placeholder="Quantity" required>
+                        </div>
+                    </div>
+                    <br>
+                    <hr id="reasonLine" />
+                    <div id="divReason" class="row">
+                        <div class="col-2">
+                            <label id="lblReason">Reason</label>
+                        </div>
+                        <div class="col-6">
+                            <select class="form-control" id="ddReason" tabindex="1">
+                                <option value="0">Select Reason</option>
+                                <option value="1">Wrong Lot</option>
+                                <option value="2">Aisle Blocked</option>
+                                <option value="3">Wrong Location</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <input id="bntChange" type="button" class="btn btn-primary col-12 btn-sm" style="display: none" onclick="IngresarCausales()"
+                                value="Change" />
+                        </div>
+                    </div>
+
+                    <br>
+                    <div class="row">
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader"></i></span></button>
+                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" type="button">End Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
+                    </div>
+                    <div class="row">
+                        <label id="lblError" style="color: red; font-size: 30px;"></label>
+                    </div>
                 </form>
             </div>
-            <div id="divTables" class="col-7">
-                <label style="display:none; color:red; font-size:24px" id="lblMcnoPick">Material room pick</label>
-                <div id="divTableItem" class="col-12">
+            <div  class="col-2">
                 </div>
-                <br />
-                <div id="divTableWarehouse" class="col-12">
-                </div>
+            <div id="divTables" class="col-3">
+            <table id="" class="table animate__animated animate__fadeInLeft" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th scope="col">Warehouse</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="bdPallets">
+                </tbody>
+            </table>
             </div>
         </div>
         <div class="row">
@@ -598,7 +689,7 @@
         </div>
     </div>
     <script>
-        var ajaxShowCurrentOptionsWarehouse= null;
+        var ajaxShowCurrentOptionsWarehouse = null;
         var ajaxShowCurrentOptionsItem = null;
 
         var StarProcessing = false;
@@ -615,7 +706,7 @@
 
         var timer;
         var skip = false;
-        
+
         var existPalletsPick = false;
         function stoper() {
             clearTimeout(timer);
@@ -634,7 +725,7 @@
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
-                url: "PickingConsignmentMaterial.aspx/" + Method.trim(),
+                url: "PickingUpdate.aspx/" + Method.trim(),
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -648,7 +739,7 @@
             var ddWare = document.getElementById("ddWare");
             var pickingResult = document.getElementById("pickingResult");
             var formPicking = document.getElementById("formPicking");
-            var lblPick = document.getElementById("lblPick");
+            //var lblPick = document.getElementById("lblPick");
             var lblPaid = document.getElementById("lblPaid");
             var txPaid = document.getElementById("txPaid");
             var LblItem = document.getElementById("LblItem");
@@ -661,7 +752,8 @@
             var btnStarPicking = document.getElementById("btnStarPicking");
             var btnConfirm = document.getElementById("btnConfirm");
             var btnSkipPicking = document.getElementById("btnSkipPicking");
-            var bdPicketPending = document.getElementById("bdPicketPending");
+            var bdPicket182 = document.getElementById("bdPicket182");
+            var bdPallets = document.getElementById("bdPallets");
             var ddReason = document.getElementById("ddReason");
             var bntChange = document.getElementById("bntChange");
 
@@ -707,34 +799,12 @@
             stoper();
             lstPallets = JSON.parse(window.localStorage.getItem('MyPalletList'));
             timer = setTimeout(function () {
-                var CurrentPaid = lblPaid.innerHTML.trim();
-                var NewPaid = txPaid.value.trim().toUpperCase();
-                if (CurrentPaid.trim().toUpperCase() == NewPaid.trim().toUpperCase()) {
-                    paidValid();
-                    $("#lblError").html("");
-                }
-                else {
-                    inpick = false;
-                    for (var i = 0 ; i < lstPallets.length; i++) {
-                        if (lstPallets[i].T$PAID.trim() == NewPaid.trim()) {
-                            inpick = true;
-                        }
-                    }
-
-                    if (inpick) {
-                        paidInvalid();
-                        alert("Pallet not Allowed, cause is include into this pick");  
-                        $("#lblError").html("");
-                    }
-                    else {
-                        $("#lblError").html("");
-                        console.log("Pallet NO Igual");
-                        Method = "VerificarExistenciaPalletID"
-                        Data = "{'PAID_NEW':'" + NewPaid + "'}";
-                        EventoAjax(Method, Data, PalletIDSuccess)
-                        lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
-                    }
-                }
+                $("#lblError").html("");
+                console.log("Pallet NO Igual");
+                Method = "VerificarExistenciaPalletID"
+                Data = "{'PAID_NEW':'" + $('#txPaid').val() + "'}";
+                EventoAjax(Method, Data, PalletIDSuccess)
+                lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
             }, 1500);
 
         }
@@ -742,12 +812,24 @@
         var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
+                paidOk = true;
                 console.log();
                 validElement(txPaid);
                 locaInvalid();
-                hideShowNeutroInputText(txQtyc, false);
-                hideShowNeutroInputText(txLoca, false);
-                hideShowNeutroSelect(ddReason, true);
+                hideShowNeutroInputText(txQtyc, true);
+                //hideShowNeutroInputText(txLoca, true);
+                //hideShowNeutroSelect(ddReason, true);
+                cnpk = MyObj.CNPK;
+                //lblPick.innerHTML = MyObj.PICK;
+                //lblPaid.innerHTML = MyObj.PALLETID;
+                LblItem.innerHTML = MyObj.ITEM;
+                lblLoca.innerHTML = MyObj.LOCA;
+                lblWare.innerHTML = MyObj.WRH;
+                lblQtyc.innerHTML = MyObj.QTYT;
+                lblUnit.innerHTML = MyObj.UN;
+                //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
+                //ShowCurrentOptionsItem();
+                //ShowCurrentOptionsWarehouse();
             }
             else if (MyObj.error == true) {
                 paidInvalid();
@@ -761,8 +843,8 @@
                 console.log("ESTADOS CAMBIADOS");
                 ClearFormPicking();
                 cnpk = MyObj.CNPK;
-                lblPick.innerHTML = MyObj.PICK;
-                lblPaid.innerHTML = MyObj.PALLETID;
+                //lblPick.innerHTML = MyObj.PICK;
+                //lblPaid.innerHTML = MyObj.PALLETID;
                 LblItem.innerHTML = MyObj.ITEM;
                 lblLoca.innerHTML = MyObj.LOCA;
                 lblWare.innerHTML = MyObj.WRH;
@@ -779,40 +861,33 @@
         }
 
         function ShowCurrentOptionsItem() {
-            divTableItem.innerHTML = '';
+            //divTableItem.innerHTML = '';
             var bodyRows = ""
-                ajaxShowCurrentOptionsItem = $.ajax({
+            ajaxShowCurrentOptionsItem = $.ajax({
                 type: "POST",
-                url: "PickingConsignmentMaterial.aspx/ShowCurrentOptionsItem",
+                url: "PickingUpdate.aspx/ShowCurrentOptionsItem",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (response) {
-                    myObj = JSON.parse(response.d);
-                    //window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
-                    if (myObj.length > 0 && existPalletsPick == true) {
-                        for (var i = 0; i < myObj.length; i++) {
-                            bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].PALLETID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].DESCRIPTION + "</td><td>" + myObj[i].QTY + "</td><td>" + myObj[i].UN + "</td></tr>";
+                success: function (r) {
+                    var MyObjLst = JSON.parse(r.d);
+                    if (bdPallets.childElementCount > 0) {
+                        for (let i = bdPallets.childElementCount - 1; i >= 0 ; i--) {
+                            bdPallets.children[i].remove()
                         }
-                        var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
-                                                    "<thead>" +
-                                                      "<tr>" +
-                                                        "<th scope='col'>Pallet</th>" +
-                                                        "<th scope='col'>Location</th>" +
-                                                        "<th scope='col'>Item</th>" +
-                                                        "<th scope='col'>Description</th>" +
-                                                        "<th scope='col'>Quantity</th>" +
-                                                        "<th scope='col'>Unit</th>" +
-                                                    "</tr>" +
-                                                   "</thead>" +
-                                                   "<tbody>" +
-                                                   bodyRows
-                        "</tbody>" +
-                                                "</table>";
-
-
-                        $("#divTableItem").append(tableOptions);
                     }
+                    var bodyRows = "";
+                    if (MyObjLst.length > 0) {
+                        var validos = true;
+                        MyObjLst.forEach(function (item, i) {
+                            bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.WRH + "</td><td>" + item.LOCA + "</td><td>" + item.QTY + "</td></tr>";
+                        });
+                    }
+                    else {
+                        $('#bdPallets').hide(100);
+                    }
+                    $("#bdPallets").append(bodyRows);
+                    
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -823,11 +898,11 @@
         function ShowCurrentOptionsWarehouse() {
             var bodyRows = ""
             var drop = true
-            divTableWarehouse.innerHTML = '';
-                ajaxShowCurrentOptionsWarehouse = $.ajax({
+            //divTableWarehouse.innerHTML = '';
+            ajaxShowCurrentOptionsWarehouse = $.ajax({
                 type: "POST",
                 async: false,
-                url: "PickingConsignmentMaterial.aspx/GetAllsPAlletsPending",
+                url: "PickingUpdate.aspx/GetAllsPAlletsPending",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -869,13 +944,13 @@
                         dropPending == true ? tableOptions += "<button type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "'>End Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='EndPickingLoader'></i></span></button>" : tableOptions;
 
 
-                        $("#divTableWarehouse").append(tableOptions);
+                        //$("#divTableWarehouse").append(tableOptions);
                     }
                     else if (drop == false) {
                         existPalletsPick = false;
                         alert("No more pickings availables for this warehouse");
-                        divTableWarehouse.innerHTML = '';
-                        divTableItem.innerHTML = '';
+                        //divTableWarehouse.innerHTML = '';
+                        //divTableItem.innerHTML = '';
                     }
                 },
                 failure: function (response) {
@@ -908,40 +983,40 @@
                 $("#lblErrorInit").hide(100);
                 $("#lblErrorInit").html("");
                 $('#divPicketPending').hide(100);
-                lblPick.innerHTML = MyObj.PICK;
-                if (MyObj.PICK != null) {
-                    cnpk = MyObj.CNPK;
-                    sloc = MyObj.SLOC;
-                    sessionStorage.setItem('PICK', MyObj.PICK);
-                    sessionStorage.setItem('CWAR', MyObj.WRH);
-                    lblPaid.innerHTML = MyObj.PALLETID;
-                    LblItem.innerHTML = MyObj.ITEM;
-                    lblLoca.innerHTML = MyObj.LOCA;
-                    lblWare.innerHTML = MyObj.WRH;
-                    lblQtyc.innerHTML = MyObj.QTYT;
-                    lblUnit.innerHTML = MyObj.UN;
-                    if (MyObj.MCNOPICK == true) {
-                        $("#lblMcnoPick").show(500);
-                    }
-                    else {
-                        $("#lblMcnoPick").hide(500);
-                    }
-                    //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
-                    divTables.classList.add("col-7");
-                    divTables.classList.remove("col-12");
-                    $("#formPicking").show(500);
-                } else {
-                    $("#formPicking").hide(500);
-                    divTables.classList.remove("col-7");
-                    divTables.classList.add("col-12");
-                }
-                if (skip == false) {
-                    ShowCurrentOptionsWarehouse();
-                    ShowCurrentOptionsItem();
-                }
-                else {
-                    ShowCurrentOptionsItem();
-                }
+                //lblPick.innerHTML = MyObj.PICK;
+                //if (MyObj.PICK != null) {
+                //    cnpk = MyObj.CNPK;
+                //    sloc = MyObj.SLOC;
+                //    sessionStorage.setItem('PICK', MyObj.PICK);
+                //    sessionStorage.setItem('CWAR', MyObj.WRH);
+                //    lblPaid.innerHTML = MyObj.PALLETID;
+                //    LblItem.innerHTML = MyObj.ITEM;
+                //    lblLoca.innerHTML = MyObj.LOCA;
+                //    lblWare.innerHTML = MyObj.WRH;
+                //    lblQtyc.innerHTML = MyObj.QTYT;
+                //    lblUnit.innerHTML = MyObj.UN;
+                //    if (MyObj.MCNOPICK == true) {
+                //        $("#lblMcnoPick").show(500);
+                //    }
+                //    else {
+                //        $("#lblMcnoPick").hide(500);
+                //    }
+                //    //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
+                //    divTables.classList.add("col-7");
+                //    divTables.classList.remove("col-12");
+                //    $("#formPicking").show(500);
+                //} else {
+                //    $("#formPicking").hide(500);
+                //    divTables.classList.remove("col-7");
+                //    divTables.classList.add("col-12");
+                //}
+                //if (skip == false) {
+                //    ShowCurrentOptionsWarehouse();
+                //    ShowCurrentOptionsItem();
+                //}
+                //else {
+                //    ShowCurrentOptionsItem();
+                //}
             }
             else {
                 $("#lblErrorInit").html(MyObj.errorMsg);
@@ -955,7 +1030,7 @@
             $("#lblErrorInit").hide(100);
             $("#lblMcnoPick").hide(100);
             if (ddWare.value == "0") {
-                
+
                 ajaxShowCurrentOptionsItem != null ? ajaxShowCurrentOptionsItem.abort() : ajaxShowCurrentOptionsItem;
                 ajaxShowCurrentOptionsItem = null;
                 ajaxShowCurrentOptionsWarehouse != null ? ajaxShowCurrentOptionsWarehouse.abort() : ajaxShowCurrentOptionsWarehouse;
@@ -964,8 +1039,8 @@
                 $("#btnStarPicking").hide(100);
                 $('#divPicketPending').hide(100);
                 $("#formPicking").hide(100);
-                divTableWarehouse.innerHTML = '';
-                divTableItem.innerHTML = '';
+                //divTableWarehouse.innerHTML = '';
+                //divTableItem.innerHTML = '';
             }
             else {
                 /*$('#GetPicksLoader').show(10);*/
@@ -973,52 +1048,46 @@
                 ajaxShowCurrentOptionsItem = null;
                 ajaxShowCurrentOptionsWarehouse != null ? ajaxShowCurrentOptionsWarehouse.abort() : ajaxShowCurrentOptionsWarehouse;
                 ajaxShowCurrentOptionsWarehouse = null;
-                $('#divPicketPending').hide(100);
+                $('#divPicket182').hide(100);
                 $("#formPicking").hide(100);
-                divTableWarehouse.innerHTML = '';
-                divTableItem.innerHTML = '';
+                //divTableWarehouse.innerHTML = '';
+                //divTableItem.innerHTML = '';
 
-                if (bdPicketPending.childElementCount > 0) {
-                    for (let i = bdPicketPending.childElementCount - 1; i >= 0 ; i--) {
-                        bdPicketPending.children[i].remove()
+                if (bdPicket182.childElementCount > 0) {
+                    for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
+                        bdPicket182.children[i].remove()
                     }
                 }
-                EventoAjax("loadPicksPending", "{'CWAR':'" + ddWare.value + "'}", loadPicksPendingSuccess);
+                EventoAjax("loadPicks182", "{'CWAR':'" + ddWare.value + "'}", loadPicks182Success);
             }
         }
 
-        var loadPicksPendingSuccess = function (r) {
+        var loadPicks182Success = function (r) {
 
             var MyObjLst = JSON.parse(r.d);
-            if (bdPicketPending.childElementCount > 0) {
-                for (let i = bdPicketPending.childElementCount - 1; i >= 0 ; i--) {
-                    bdPicketPending.children[i].remove()
+            if (bdPicket182.childElementCount > 0) {
+                for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
+                    bdPicket182.children[i].remove()
                 }
             }
             $("#btnStarPicking").show(100);
             var bodyRows = "";
             if (MyObjLst.length > 0) {
-                var validos = false;
+                var validos = true;
                 MyObjLst.forEach(function (item, i) {
-                    if (parseInt(item.T$PAID.trim()).toString() != "NaN") {
-
-                        if (item.T$STAT == 1) {
-                            bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button onclick='selectPicksPending(this)' class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "' pallet='" + item.T$PAID + "' cwar='" + item.T$CWAR + "' row='" + i + "'>Take <span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='TakeLoader" + i + "'></i></span></button></td>";
-                        }
-                        else {
-                            bodyRows += "<tr row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$PAID + "</td><td>" + item.T$CWAR + "</td><td>" + item.TIME + "</td><td>" + item.T$USER + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$PRIO + "</td><td><button  onclick='selectPicksPending(this)' disabled class='btn btn-primary col-12 btn-sm' type='button' id='btnPickingPending" + i + "' pallet='" + item.T$PAID + "' cwar='" + item.T$CWAR + "' row='" + i + "' >Take <span>&nbsp;</span></button></td>";
-                        }
-                        validos = true;
-                    }
+                    bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>Holas </td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
                 });
                 if (validos) {
-                    $('#divPicketPending').show(500);
+                    $('#bdPicket182').show(500);
+                    ShowCurrentOptionsItem();
                 }
             }
             else {
-                $('#divPicketPending').hide(100);
+                $('#bdPicket182').hide(100);
             }
-            $("#bdPicketPending").append(bodyRows);
+            $("#bdPicket182").append(bodyRows);
+
+            
         }
 
         var selectPicksPending = function (e) {
@@ -1050,10 +1119,10 @@
             paidInvalid();
             txPaid.value = "";
             txQtyc.value = "";
-            txLoca.value = "";
+            //txLoca.value = "";
 
-            lblPick.innerHTML = "";
-            lblPaid.innerHTML = "";
+            //lblPick.innerHTML = "";
+            //lblPaid.innerHTML = "";
             LblItem.innerHTML = "";
             lblLoca.innerHTML = "";
             lblWare.innerHTML = "";
@@ -1061,7 +1130,7 @@
             lblUnit.innerHTML = "";
             NeutroInputText(txPaid);
             NeutroInputText(txQtyc);
-            NeutroInputText(txLoca);
+            //NeutroInputText(txLoca);
 
             hideShowNeutroSelect(ddReason, false);
         }
@@ -1097,7 +1166,7 @@
                         $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
                         //JC 260709 No estaba imprimiendo los pallets cuando se le oprimía end picking
                         //if (multi = false){
-                            $("#lbPaid").html(Paids);
+                        $("#lbPaid").html(Paids);
                         //    }
                         /*EventoAjax("Eliminar307", "{}", null);*/
                     }
@@ -1116,8 +1185,8 @@
             if (r.d != "") {
                 drop = true;
                 //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
-                 $("#Contenido_bcPick").attr("src", r.d);
-                 printDiv("MyEtiquetaDropPrint");
+                $("#Contenido_bcPick").attr("src", r.d);
+                printDiv("MyEtiquetaDropPrint");
                 selectPicksPending();
             }
 
@@ -1126,7 +1195,7 @@
         var DropSuccess = function (r) {
             DropProcessing = false;
             if (r.d != "") {
-                drop = true;            
+                drop = true;
                 //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
                 //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
                 $("#Contenido_bcPick").attr("src", r.d);
@@ -1202,7 +1271,7 @@
             if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
                 txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
             }
-            var qtycAct = parseFloat(lblQtyc.innerHTML.trim());
+            var qtycAct = parseFloat(lblQtyc.innerHTML.trim()) <= parseFloat($("#qtyTbl").html()) ? parseFloat(lblQtyc.innerHTML.trim()) : parseFloat($("#qtyTbl").html());
             var qtycNew = parseFloat(txQtyc.value.trim());
             if (qtycAct >= qtycNew && qtycNew > 0) {
                 qtytValid();
@@ -1240,9 +1309,9 @@
                 dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "'}";
 
                 //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
-                 var  AjaxConfirm = $.ajax({
+                var AjaxConfirm = $.ajax({
                     type: "POST",
-                    url: "PickingConsignmentMaterial.aspx/Click_confirPKG",
+                    url: "PickingUpdate.aspx/Click_confirPKG",
                     data: dataS,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -1252,7 +1321,7 @@
                             if (myObj.qtyaG > 0 || myObj.ALLOAUX > 0) {
                                 //    printDiv("MyEtiqueta");
                                 myLabelFrame = document.getElementById('myLabelFrame');
-                                if(sessionStorage.getItem('nav').toString() == 'EDG'){
+                                if (sessionStorage.getItem('nav').toString() == 'EDG') {
                                     myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
                                 }
                                 else {
@@ -1277,6 +1346,9 @@
                 });
             }
         }
+
+
+
         var SucceessConfirm = function () {
 
         }
@@ -1286,7 +1358,7 @@
         var paidInvalid = function () {
             if (txPaid.value.trim() != "") {
                 invalidElement(txPaid);
-                hideShowNeutroInputText(txLoca, false);
+                //hideShowNeutroInputText(txLoca, false);
                 hideShowNeutroInputText(txQtyc, false);
                 hideShowNeutroSelect(ddReason, false);
                 paidOk = false;
@@ -1302,11 +1374,11 @@
                 hideShowNeutroInputText(txQtyc, false);
                 hideShowNeutroSelect(ddReason, false);
                 if (sloc == "1") {
-                    hideShowNeutroInputText(txLoca, true);
+                    //hideShowNeutroInputText(txLoca, true);
                     locaOk = false;
                 }
                 else {
-                    hideShowNeutroInputText(txLoca, false);
+                    //hideShowNeutroInputText(txLoca, false);
                     cnpk == "1" ? hideShowNeutroInputText(txQtyc, false) : hideShowNeutroInputText(txQtyc, true);
                     locaOk = true;
                 }
@@ -1418,7 +1490,7 @@
         }
 
         function formValid() {
-            if (cnpk == "1" && sloc != "1") {
+            if (cnpk == "1") {
                 if (paidOk == true) {
                     $('#btnConfirm').show(300);
                 }
@@ -1426,15 +1498,7 @@
                     $('#btnConfirm').hide(300);
                 }
             }
-            else if (cnpk == "1" && sloc == "1") {
-                if (paidOk == true && locaOk == true) {
-                    $('#btnConfirm').show(300);
-                }
-                else {
-                    $('#btnConfirm').hide(300);
-                }
-            }
-            else if (paidOk == true && locaOk == true && qtytOk == true) {
+            else if (paidOk == true && qtytOk == true) {
                 $('#btnConfirm').show(300);
             }
             else {
@@ -1456,35 +1520,35 @@
         }
 
         function IngresarCausales() {
-            $.ajax({
-                type: "POST",
-                url: "PickingConsignmentMaterial.aspx/Click_confirCausal",
-                data: "{'PAID':'" + txPaid.value.toString() +
-                      "','Causal':'" + document.getElementById("ddReason").value +
-                      "','txtPallet':'" + txPaid.value +
-                      "','LOCA':'" + txLoca.value.toString().trim() + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    if (response.d == true && DisttinctLocaValid == false) {
-                        var CurrentPaid = lblPaid.innerHTML.trim();
-                        var NewPaid = txPaid.value.trim();
-                        Method = "VerificarPalletID"
-                        Data = "{'PAID_NEW':'" + NewPaid + "','PAID_OLD':'" + CurrentPaid + "','selectOptionPallet' : 'false'}";
-                        EventoAjax(Method, Data, VerificarPalletIDSuccess);
-                    }
-                    else {
-                        ClearFormPicking();
-                        StartComponents();
-                        EventoAjax("SkipPicking", "{}", LoadPageSuccess);
-                    }
-                },
-                failure: function (response) {
-                    //alert(response.d);
-                    //document.getElementById("btnconfirPKG").disabled = true;
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "PickingUpdate.aspx/Click_confirCausal",
+            //        data: "{'PAID':'" + txPaid.value.toString() +
+            //              "','Causal':'" + document.getElementById("ddReason").value +
+            //              "','txtPallet':'" + txPaid.value +
+            //              "','LOCA':'" + txLoca.value.toString().trim() + "'}",
+            //        contentType: "application/json; charset=utf-8",
+            //        dataType: "json",
+            //        success: function (response) {
+            //            if (response.d == true && DisttinctLocaValid == false) {
+            //                //var CurrentPaid = lblPaid.innerHTML.trim();
+            //                var NewPaid = txPaid.value.trim();
+            //                Method = "VerificarPalletID"
+            //                Data = "{'PAID_NEW':'" + NewPaid + "','PAID_OLD':'" + CurrentPaid + "','selectOptionPallet' : 'false'}";
+            //                EventoAjax(Method, Data, VerificarPalletIDSuccess);
+            //            }
+            //            else {
+            //                ClearFormPicking();
+            //                StartComponents();
+            //                EventoAjax("SkipPicking", "{}", LoadPageSuccess);
+            //            }
+            //        },
+            //        failure: function (response) {
+            //            //alert(response.d);
+            //            //document.getElementById("btnconfirPKG").disabled = true;
 
-                }
-            });
+            //        }
+            //    });
         }
         $(function () {
             var drop = false;
