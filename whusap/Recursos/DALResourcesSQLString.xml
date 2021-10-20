@@ -5077,7 +5077,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="VerificarLocate">
         <stringSQL>
-          SELECT * from {0}.twhwmd300{1} WHERE trim(T$LOCA) = trim('[:LOCA]') and T$CWAR = trim('[:CWAR]') AND T$LOCT = '5' AND T$BOUT = '2'
+          SELECT * from {0}.twhwmd300{1} WHERE trim(T$LOCA) = nvl(trim('[:LOCA]'),trim(T$LOCA)) and T$CWAR = nvl(trim('[:CWAR]'),trim(T$CWAR)) AND T$LOCT = '5' AND T$BOUT = '2'
         </stringSQL>
       </operationName>
       <operationName name="ConsultarTt307140">
@@ -6446,6 +6446,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {2}
           SET T$MSSH = '[:T$MSSH]', T$DATE = sysdate+5/24, T$SEND = [:T$SEND]
           WHERE T$DOCN = '[:T$DOCN]' AND T$PATH LIKE('%[:T$PATH]%') AND T$USER = UPPER('[:T$USER]')
+        </stringSQL>
+      </operationName>
+    </Module>
+    <Module name="tticol182">
+      <operationName name="SelectRecord">
+        <stringSQL>
+          select * from (SELECT T$OORG, T$ORNO, T$PONO, T$ADVS, T$ITEM, T$QTYT, T$UNIT, T$CWAR, T$MCNO, T$TIME, T$PRIO, T$PICK, T$PAID, T$LOCA, T$LOGN, T$STAT, T$REFCNTD, T$REFCNTU,
+          ROW_NUMBER() OVER (ORDER BY T$PRIO asc) ROWN
+          FROM BAAN.TTICOL182140 WHERE T$CWAR = 'WPV201' order by T$PRIO asc) where ROWN = 1
         </stringSQL>
       </operationName>
     </Module>
