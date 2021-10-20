@@ -63,7 +63,7 @@ namespace whusa.Interfases
             paramList = new Dictionary<string, object>();
             //paramList.Add(":T$PAID", PAID.Trim().ToUpper());
 
-            paramList.Add(":T$CLOT", objWhcol020.clot.Trim().ToUpper());//objWhcol020.clot.Trim().ToUpper());
+            paramList.Add(":T$CLOT", objWhcol020.clot.Trim().ToUpper() == "" ? " " : objWhcol020.clot.Trim().ToUpper()); //objWhcol020.clot.Trim().ToUpper());
             paramList.Add(":T$SQNB", objWhcol020.sqnb.Trim().ToUpper());
             paramList.Add(":T$MITM", objWhcol020.mitm.ToUpper());
             paramList.Add(":T$DSCA", objWhcol020.dsca.Trim().ToUpper());//objWhcol020.dsca.Trim().ToUpper());
