@@ -381,7 +381,7 @@ namespace whusap.WebPages.InvReceipts
                             decimal QTYCActual = Convert.ToDecimal(MyObj.QTYC);
                             decimal CantidadMaxima = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString());
                             decimal Restante = ( CantidadMaxima - (TotalRecibido + QTYCActual) );
-                            if ( Restante <= LIMITE )
+                            if (Math.Abs(Restante) <= LIMITE )
                             {
                                 MyObj.QTYC = Convert.ToString( CantidadMaxima - TotalRecibido );
                             }

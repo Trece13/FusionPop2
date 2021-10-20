@@ -95,6 +95,33 @@ namespace whusa.Interfases
             }
             return retorno;
         }
+        //JC 171021 Validar Stock en Baan
+        public DataTable ValidarStockBaan(Ent_twhcol020 objWhcol020)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$CLOT", objWhcol020.clot.Trim().ToUpper());//objWhcol020.clot.Trim().ToUpper());
+            paramList.Add(":T$SQNB", objWhcol020.sqnb.Trim().ToUpper());
+            paramList.Add(":T$MITM", objWhcol020.mitm.ToUpper().Trim());
+            paramList.Add(":T$DSCA", objWhcol020.dsca.Trim().ToUpper());//objWhcol020.dsca.Trim().ToUpper());
+            paramList.Add(":T$CWOR", objWhcol020.cwor.Trim().ToUpper());
+            paramList.Add(":T$LOOR", objWhcol020.loor.Trim().ToUpper() == "" ? " " : objWhcol020.loor.Trim().ToUpper());
+            paramList.Add(":T$QTDL", objWhcol020.qtdl);
+            DataTable retorno = new DataTable();
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return retorno;
+        }
 
         public bool ActualizarTransferencia(Ent_twhcol020 objWhcol020)
         {

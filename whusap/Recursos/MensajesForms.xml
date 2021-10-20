@@ -404,6 +404,11 @@
             The Transfer was not updated in the corresponding table, please contact the administrator
           </stringMessage>
         </operationName>
+        <operationName name="TranferQtynotenough">
+          <stringMessage>
+            The Transfer was not created because baan don't have enough stock
+          </stringMessage>
+        </operationName>
         <operationName name="NotInserted">
           <stringMessage>
             The record has not been inserted, please contact the administrator
@@ -443,6 +448,11 @@
         </operationName>
         <operationName name="TransferNotUpdated">
           <stringMessage>
+          </stringMessage>
+        </operationName>
+        <operationName name="TranferQtynotenough">
+          <stringMessage>
+            The Transfer was not created because baan don't have enough stock
           </stringMessage>
         </operationName>
         <operationName name="NotInserted">

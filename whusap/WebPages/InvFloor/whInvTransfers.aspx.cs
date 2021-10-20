@@ -22,6 +22,8 @@ namespace whusap.WebPages.InvFloor
     {
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
+        //JC 171021 Consultar stock en baan antes de tranferir
+        private static InterfazDAL_tticol127 _idaltticol127 = new InterfazDAL_tticol127();
 
         public string lstWarehouses = string.Empty;
         public List<string> lstLocates = new List<string>();
@@ -40,6 +42,7 @@ namespace whusap.WebPages.InvFloor
         public static string LocationTypeMustBulK = string.Empty;
         public static string LocationBlockedTransfers = string.Empty;
         public static string TransferNotUpdated = string.Empty;
+        public static string TranferQtynotenough = string.Empty;
         public static string NotInserted = string.Empty;
         public static string TargetLocationNotExist = string.Empty;
         public static string CurrentNotExist = string.Empty;
@@ -300,32 +303,42 @@ namespace whusap.WebPages.InvFloor
                             }
                             else
                             {
-                                bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
-
-                                if (TransferenciasI)
+                                DataTable StockBaan = Transfers.ValidarStockBaan(objWhcol020);
+                                if (StockBaan.Rows.Count <= 0)
                                 {
-                                    if (/*TransferenciasU == */true)
+                                    objWhcol020.Error = true;
+                                    objWhcol020.ErrorMsg = TranferQtynotenough;
+                                    objWhcol020.TipeMsgJs = "lbl";
+
+                                }
+                                else
+                                {
+                                    bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
+
+                                    if (TransferenciasI)
                                     {
-                                        objWhcol020.Success = true;
-                                        objWhcol020.SuccessMsg = Thetransferwassuccessful;
-                                        objWhcol020.TipeMsgJs = "lbl";
+                                        if (/*TransferenciasU == */true)
+                                        {
+                                            objWhcol020.Success = true;
+                                            objWhcol020.SuccessMsg = Thetransferwassuccessful;
+                                            objWhcol020.TipeMsgJs = "lbl";
+                                        }
+                                        else
+                                        {
+                                            objWhcol020.Error = true;
+                                            objWhcol020.ErrorMsg = TransferNotUpdated;
+                                            objWhcol020.TipeMsgJs = "lbl";
+                                        }
                                     }
                                     else
                                     {
                                         objWhcol020.Error = true;
-                                        objWhcol020.ErrorMsg = TransferNotUpdated;
+                                        objWhcol020.ErrorMsg = NotInserted;
                                         objWhcol020.TipeMsgJs = "lbl";
                                     }
-                                }
-                                else
-                                {
-                                    objWhcol020.Error = true;
-                                    objWhcol020.ErrorMsg = NotInserted;
-                                    objWhcol020.TipeMsgJs = "lbl";
-                                }
 
+                                }
                             }
-
                         }
                         else
                         {
@@ -389,6 +402,7 @@ namespace whusap.WebPages.InvFloor
         protected void CargarIdioma()
         {
             Thetransferwassuccessful = mensajes("Thetransferwassuccessful");
+            TranferQtynotenough = mensajes("TranferQtynotenough");
             PalletNotLocate = mensajes("PalletNotLocate");
             PalletNotExist = mensajes("PalletNotExist");
             WarehouseNotExist = mensajes("WarehouseNotExist");

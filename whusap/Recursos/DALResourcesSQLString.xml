@@ -2423,6 +2423,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           VALUES('[:T$CLOT]', '[:T$SQNB]', {0}.F_ITEM_POP(TRIM('[:T$MITM]')) , '[:T$DSCA]', '[:T$CWOR]', '[:T$LOOR]', '[:T$CWDE]', '[:T$LODE]', '[:T$QTDL]', '[:T$CUNI]', '[:T$RCNO]', sysdate+5/24, '[:T$MESS]', '[:T$USER]', '[:T$REFCNTD]', '[:T$REFCNTU]')
         </stringSQL>
       </operationName>
+      <operationName name="ValidarStockBaan">
+        <stringSQL>
+          select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
+          ibd001.t$cwar ware, inr140.t$loca, ibd001.t$kltc,case when ibd001.t$kltc=1 then trim('OPN028868') else '                ' end
+          from BAAN.twhinr140140 inr140
+          inner join BAAN.ttcibd001140 ibd001 on ibd001.t$item = inr140.t$item
+          where trim(inr140.t$item)=trim('[:T$MITM]')
+          and inr140.t$clot=case when ibd001.t$kltc=1 then trim('[:T$CLOT]') else '                ' end
+          and trim(inr140.t$cwar) = trim('[:T$CWOR]')
+          and trim(inr140.t$loca) = trim('[:T$LOOR]')
+          and inr140.t$stks &gt;= [:T$QTDL]
+      </stringSQL>
+      </operationName>
       <operationName name="ActualizarTransferencia">
         <stringSQL>
           UPDATE {0}.twhcol020{1} SET T$CWOR = '[:T$CWOR]', T$LOOR = '[:T$LOOR]', T$CWDE = '[:T$CWDE]', T$LODE =  '[:T$LODE]', T$DATE = SYSDATE+5/24 ,T$USER = '[:T$USER]' WHERE TRIM( T$SQNB) = TRIM('[:T$SQNB]')
@@ -2604,7 +2617,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           globalQ WHERE globalQ.PICK = '[:PICK]'
         </stringSQL>
       </operationName>
-      <operationName name="GetWarehouse">
+     <operationName name="GetWarehouse">
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
           INNER JOIN {0}.ttcmcs003{1} tcmcs003
