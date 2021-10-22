@@ -256,7 +256,7 @@
             border-radius: 4px;
         }
 
-        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc {
+        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc,#MainDiv {
             display: none;
         }
 
@@ -360,6 +360,7 @@
         <div class="fa-5x container text-center" style="display: none" id="GetPicksLoader">
             <i class="fas fa-circle-notch fa-spin" style="color: silver;"></i>
         </div>
+        <div id="MainDiv">
         <div id="" class="row col-12">
             <table id="" class="table animate__animated animate__fadeInLeft" style="width: 100%">
                 <thead>
@@ -394,86 +395,6 @@
         </div>
         <div class="row">
             <div class="col-5">
-                <%--<form id="formPicking">
-                    <div class="row">
-                        <div class="col-3">
-                            <label>Pallet ID</label>
-                        </div>
-                        <div class="col-4" id="lblPaid">
-                        </div>
-                        <div class="col-5 p-0">
-                            <input type="text" class="col-12 form-control" id="txPaid" placeholder="Pallet ID" required>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <label>Item</label>
-                        </div>
-                        <div class="col-9" id="LblItem">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <label>Location</label>
-                        </div>
-                        <div class="col-4" id="lblLoca">
-                        </div>
-                        <div class="col-5 p-0">
-                            <input type="text" class="col-12 form-control" id="txLoca" required>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <label>Warehouse</label>
-                        </div>
-                        <div class="col-2" id="lblWare">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-3">
-                            <label>Quantity</label>
-                        </div>
-                        <div class="col-2" id="lblQtyc">
-                        </div>
-                        <div class="col-2" id="lblUnit">
-                        </div>
-                        <div class="col-5  p-0">
-                            <input type="text" class="col-12 form-control" id="txQtyc" required>
-                        </div>
-                    </div>
-                    <br>
-                    <hr id="reasonLine" />
-                    <div id="divReason" class="row">
-                        <div class="col-2">
-                            <label id="lblReason">Reason</label>
-                        </div>
-                        <div class="col-6">
-                            <select class="form-control" id="ddReason" tabindex="1">
-                                <option value="0">Select Reason</option>
-                                <option value="1">Wrong Lot</option>
-                                <option value="2">Aisle Blocked</option>
-                                <option value="3">Wrong Location</option>
-                            </select>
-                        </div>
-                        <div class="col-4">
-                            <input id="bntChange" type="button" class="btn btn-primary col-12 btn-sm" style="display: none" onclick="IngresarCausales()"
-                                value="Change" />
-                        </div>
-                    </div>
-
-                    <br>
-                    <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="ConfirmLoader"></i></span></button>
-                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" onclick="SkipPicking(); return false;" type="button">Skip Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
-                    </div>
-                    <div class="row">
-                        <label id="lblError" style="color: red; font-size: 30px;"></label>
-                    </div>
-                </form>--%>
                 <form id="">
                     <div class="row">
                         <div class="col-3">
@@ -546,7 +467,7 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader"></i></span></button>
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader"></i></span></button>
                         <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" type="button">End Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                     </div>
                     <div class="row">
@@ -569,6 +490,7 @@
                 </tbody>
             </table>
             </div>
+        </div>
         </div>
         <div class="row">
             <div class="container">
@@ -777,7 +699,6 @@
         }
 
         var GetWarehouse = function () {
-            $("#btnStarPicking").hide(500);
             $('#divPicketPending').hide(500);
             for (let i = ddWare.options.length; i > 0; i--) {
                 ddWare.remove(i);
@@ -977,7 +898,6 @@
             ClearFormPicking();
             var divTables = document.getElementById('divTables');
             ddWare.value = 0;
-            $("#btnStarPicking").hide(500);
             var MyObj = r.d;
             if (MyObj.error == false) {
                 $("#lblErrorInit").hide(100);
@@ -1027,6 +947,17 @@
         }
 
         var loadPicksPending = function () {
+            $("#MainDiv").hide(100);
+            if (bdPicket182.childElementCount > 0) {
+                for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
+                    bdPicket182.children[i].remove()
+                }
+            }
+            if (bdPallets.childElementCount > 0) {
+                for (let i = bdPallets.childElementCount - 1; i >= 0 ; i--) {
+                    bdPallets.children[i].remove()
+                }
+            }
             $("#lblErrorInit").hide(100);
             $("#lblMcnoPick").hide(100);
             if (ddWare.value == "0") {
@@ -1036,7 +967,6 @@
                 ajaxShowCurrentOptionsWarehouse != null ? ajaxShowCurrentOptionsWarehouse.abort() : ajaxShowCurrentOptionsWarehouse;
                 ajaxShowCurrentOptionsWarehouse = null;
                 $('#divPicketPending').hide(100);
-                $("#btnStarPicking").hide(100);
                 $('#divPicketPending').hide(100);
                 $("#formPicking").hide(100);
                 //divTableWarehouse.innerHTML = '';
@@ -1052,12 +982,6 @@
                 $("#formPicking").hide(100);
                 //divTableWarehouse.innerHTML = '';
                 //divTableItem.innerHTML = '';
-
-                if (bdPicket182.childElementCount > 0) {
-                    for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
-                        bdPicket182.children[i].remove()
-                    }
-                }
                 EventoAjax("loadPicks182", "{'CWAR':'" + ddWare.value + "'}", loadPicks182Success);
             }
         }
@@ -1065,12 +989,7 @@
         var loadPicks182Success = function (r) {
 
             var MyObjLst = JSON.parse(r.d);
-            if (bdPicket182.childElementCount > 0) {
-                for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
-                    bdPicket182.children[i].remove()
-                }
-            }
-            $("#btnStarPicking").show(100);
+            
             var bodyRows = "";
             if (MyObjLst.length > 0) {
                 var validos = true;
@@ -1079,10 +998,12 @@
                 });
                 if (validos) {
                     $('#bdPicket182').show(500);
+                    $("#MainDiv").show(100);
                     ShowCurrentOptionsItem();
                 }
             }
             else {
+                $("#MainDiv").hide(100);
                 $('#bdPicket182').hide(100);
             }
             $("#bdPicket182").append(bodyRows);

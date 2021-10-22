@@ -61,5 +61,46 @@ namespace whusa.DAL
             return retorno;
         }
 
+        public bool InsertarregistroItticol182(Entidades.Ent_tticol182 Objtticol182)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$OORG", Objtticol182.OORG.Trim() == "" ? "0" : Objtticol182.OORG);
+                paramList.Add(":T$ORNO", Objtticol182.ORNO);
+                //paramList.Add(":T$OSET", Objtticol182.OSET);
+                paramList.Add(":T$PONO", Objtticol182.PONO.Trim() == "" ? "0" : Objtticol182.PONO);
+                //paramList.Add(":T$SQNB", Objtticol182.SQNB);
+                paramList.Add(":T$ADVS", Objtticol182.ADVS.Trim() == "" ? "0" : Objtticol182.ADVS);
+
+                paramList.Add(":T$ITEM", Objtticol182.ITEM);
+                paramList.Add(":T$STAT", Objtticol182.STAT);
+                paramList.Add(":T$QTYT", Objtticol182.QTYT);
+                paramList.Add(":T$CWAR", Objtticol182.CWAR);
+                paramList.Add(":T$UNIT", Objtticol182.UNIT);
+                paramList.Add(":T$PRIO", Objtticol182.PRIO.Trim() == "" ? "0" : Objtticol182.PRIO);
+                paramList.Add(":T$PAID", Objtticol182.PAID);
+                paramList.Add(":T$LOGN", Objtticol182.LOGN);
+                paramList.Add(":T$MCNO", Objtticol182.MCNO);
+                paramList.Add(":T$PICK", Objtticol182.PICK);
+                paramList.Add(":T$LOCA", Objtticol182.LOCA);
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
     }
 }

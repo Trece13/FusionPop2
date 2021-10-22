@@ -31,5 +31,10 @@ namespace whusa.Interfases
             }
         }
 
+        public bool InsertarregistroItticol182(Ent_tticol182 myObj)
+        {
+            return dal.InsertarregistroItticol182(myObj);
+        }
+
     }
 }

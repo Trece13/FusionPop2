@@ -84,24 +84,24 @@ namespace whusa.Entidades
 
         public Ent_tticol182() 
         {
-            OORG    = String.Empty;
-            ORNO    = String.Empty;
-            PONO    = String.Empty;
-            ADVS    = String.Empty;
-            ITEM    = String.Empty;
-            QTYT    = String.Empty;
-            UNIT    = String.Empty;
-            CWAR    = String.Empty;
-            MCNO    = String.Empty;
-            TIME    = String.Empty;
-            PRIO    = String.Empty;
-            PICK    = String.Empty;
-            PAID    = String.Empty;
-            LOCA    = String.Empty;
-            LOGN    = String.Empty;
-            STAT    = String.Empty;
-            REFCNTD = String.Empty;
-            REFCNTU = String.Empty;
+            OORG    = " ";
+            ORNO    = " ";
+            PONO    = " ";
+            ADVS    = " ";
+            ITEM    = " ";
+            QTYT    = " ";
+            UNIT    = " ";
+            CWAR    = " ";
+            MCNO    = " ";
+            TIME    = " ";
+            PRIO    = " ";
+            PICK    = " ";
+            PAID    = " ";
+            LOCA    = " ";
+            LOGN    = " ";
+            STAT    = " ";
+            REFCNTD = " ";
+            REFCNTU = " ";
         }
     }
 }

@@ -2350,6 +2350,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
         </stringSQL>
       </operationName>
+      <operationName name="InsertarregistroItticol182">
+        <stringSQL>
+          INSERT INTO {0}.tticol082{1}(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU)
+          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarTticol082">
         <stringSQL>
           SELECT col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$OSET as OSET, col082.T$PONO as PONO, col082.T$SQNB as SQNB, col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU FROM {0}.tticol082{1} col082 left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM WHERE col082.T$STAT = 1 order by col082.t$prio
@@ -6599,6 +6605,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select * from (SELECT T$OORG, T$ORNO, T$PONO, T$ADVS, T$ITEM, T$QTYT, T$UNIT, T$CWAR, T$MCNO, T$TIME, T$PRIO, T$PICK, T$PAID, T$LOCA, T$LOGN, T$STAT, T$REFCNTD, T$REFCNTU,
           ROW_NUMBER() OVER (ORDER BY T$PRIO asc) ROWN
           FROM BAAN.TTICOL182140 WHERE T$CWAR = 'WPV201' order by T$PRIO asc) where ROWN = 1
+        </stringSQL>
+      </operationName>
+      <operationName name="InsertarregistroItticol182">
+        <stringSQL>INSERT INTO BAAN.tticol182140(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU) VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
         </stringSQL>
       </operationName>
     </Module>
