@@ -102,5 +102,31 @@ namespace whusa.DAL
             return retorno;
         }
 
+        public bool ActualizarRegistroItticol182(Entidades.Ent_tticol182 Objtticol182)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$QTYT", Objtticol182.QTYT);
+                paramList.Add(":T$CWAR", Objtticol182.CWAR);
+                paramList.Add(":T$PAID", Objtticol182.PAID);
+                paramList.Add(":T$PICK", Objtticol182.PICK);
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
     }
 }
