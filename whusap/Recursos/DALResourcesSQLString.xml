@@ -338,7 +338,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$PONO, T$QTDL, T$CUNI, T$LOG1, T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP, T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+(5/24), {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1, sysdate+(5/24), :T$QTD1, :T$PRO1, :T$LOG2, sysdate+(5/24), :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP, sysdate+(5/24), :T$DELE, :T$LOGD, sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
+          VALUES (UPPER(:T$PDNO), UPPER(:T$SQNB), :T$PROC, :T$LOGN, sysdate+(5/24), {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$PONO, :T$QTDL, :T$CUNI, :T$LOG1, sysdate+(5/24), :T$QTD1, :T$PRO1, :T$LOG2, sysdate+(5/24), :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP, sysdate+(5/24), :T$DELE, :T$LOGD, sysdate+(5/24), :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
       </operationName>
       <operationName name="listaCantidadRegrind">
@@ -523,7 +523,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,
           T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP,
           T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU)
-          VALUES (:T$PDNO, :T$SQNB, :T$PROC, :T$LOGN, sysdate+5/24, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$QTDL, :T$CUNI, :T$LOG1,
+          VALUES (UPPER(:T$PDNO), UPPER(:T$SQNB), :T$PROC, :T$LOGN, sysdate+5/24, {0}.F_ITEM_POP(TRIM(:T$MITM)) , :T$QTDL, :T$CUNI, :T$LOG1,
           sysdate+5/24, :T$QTD1, :T$PRO1, :T$LOG2, sysdate+5/24, :T$QTD2, :T$PRO2, :T$LOCA, :T$NORP,
           sysdate+5/24, :T$DELE, :T$LOGD, sysdate+5/24, :T$REFCNTD, :T$REFCNTU)
         </stringSQL>
@@ -2428,7 +2428,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="insertarRegistroTticon242">
         <stringSQL>
           INSERT INTO {0}.tticol242{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLO)
-          VALUES('[:T$PDNO]','[:T$SQNB]',SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0,'[:T$ALLO]')
+          VALUES(UPPER('[:T$PDNO]'),UPPER('[:T$SQNB]'),SYSDATE+5/24,'[:T$URPT]','[:T$ACQT]','[:T$CWAF]','[:T$CWAT]','[:T$ACLO]',0,0,'[:T$ALLO]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarCantidadAlmacenRegistroTicol242">
