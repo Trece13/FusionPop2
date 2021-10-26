@@ -468,7 +468,7 @@
                     <br>
                     <div class="row">
                         <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader"></i></span></button>
-                        <button class="btn btn-primary col-12 btn-sm" id="btnSkipPicking" type="button">End Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
+                        <button class="btn btn-danger col-12 btn-sm" id="" type="button">Exit Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                     </div>
                     <div class="row">
                         <label id="lblError" style="color: red; font-size: 30px;"></label>
@@ -673,7 +673,7 @@
             var txQtyc = document.getElementById("txQtyc");
             var btnStarPicking = document.getElementById("btnStarPicking");
             var btnConfirm = document.getElementById("btnConfirm");
-            var btnSkipPicking = document.getElementById("btnSkipPicking");
+            //var btnSkipPicking = document.getElementById("btnSkipPicking");
             var bdPicket182 = document.getElementById("bdPicket182");
             var bdPallets = document.getElementById("bdPallets");
             var ddReason = document.getElementById("ddReason");
@@ -683,7 +683,7 @@
             ddWare.addEventListener("change", loadPicksPending);
             ddReason.addEventListener("change", changeReason);
             txPaid.addEventListener("input", verifyPallet);
-            txLoca.addEventListener("input", VerifyLocation);
+            //txLoca.addEventListener("input", VerifyLocation);
             txQtyc.addEventListener("input", VerifyQuantity);
             chkConsigment.addEventListener('change', GetWarehouse)
         }
@@ -741,6 +741,15 @@
                 //hideShowNeutroInputText(txLoca, true);
                 //hideShowNeutroSelect(ddReason, true);
                 cnpk = MyObj.CNPK;
+                if (cnpk == "1"){
+                    hideShowNeutroInputText(txQtyc, false);
+                    hideShowNeutroInputText(btnConfirm, true);
+                }
+                else{
+                    hideShowNeutroInputText(txQtyc, true);
+                    hideShowNeutroInputText(btnConfirm, false);
+
+                }
                 //lblPick.innerHTML = MyObj.PICK;
                 //lblPaid.innerHTML = MyObj.PALLETID;
                 LblItem.innerHTML = MyObj.ITEM;
@@ -758,28 +767,28 @@
             }
         }
 
-        var VerificarPalletIDSuccess = function (r) {
-            var MyObj = JSON.parse(r.d);
-            if (MyObj.error == false) {
-                console.log("ESTADOS CAMBIADOS");
-                ClearFormPicking();
-                cnpk = MyObj.CNPK;
-                //lblPick.innerHTML = MyObj.PICK;
-                //lblPaid.innerHTML = MyObj.PALLETID;
-                LblItem.innerHTML = MyObj.ITEM;
-                lblLoca.innerHTML = MyObj.LOCA;
-                lblWare.innerHTML = MyObj.WRH;
-                lblQtyc.innerHTML = MyObj.QTYT;
-                lblUnit.innerHTML = MyObj.UN;
-                //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
-                ShowCurrentOptionsItem();
-                ShowCurrentOptionsWarehouse();
-            }
-            else if (MyObj.error == true) {
-                console.log("Pallet not allowed");
+        //var VerificarPalletIDSuccess = function (r) {
+        //    var MyObj = JSON.parse(r.d);
+        //    if (MyObj.error == false) {
+        //        console.log("ESTADOS CAMBIADOS");
+        //        ClearFormPicking();
+        //        cnpk = MyObj.CNPK;
+        //        //lblPick.innerHTML = MyObj.PICK;
+        //        //lblPaid.innerHTML = MyObj.PALLETID;
+        //        LblItem.innerHTML = MyObj.ITEM;
+        //        lblLoca.innerHTML = MyObj.LOCA;
+        //        lblWare.innerHTML = MyObj.WRH;
+        //        lblQtyc.innerHTML = MyObj.QTYT;
+        //        lblUnit.innerHTML = MyObj.UN;
+        //        //(MyObj.CNPK == "1") ? $('#txQtyc').hide(500) : $('#txQtyc').show(500);
+        //        ShowCurrentOptionsItem();
+        //        ShowCurrentOptionsWarehouse();
+        //    }
+        //    else if (MyObj.error == true) {
+        //        console.log("Pallet not allowed");
 
-            }
-        }
+        //    }
+        //}
 
         function ShowCurrentOptionsItem() {
             //divTableItem.innerHTML = '';
@@ -1011,30 +1020,30 @@
             
         }
 
-        var selectPicksPending = function (e) {
-            ChangeProcessing = false;
-            ConfirmProcessing = false;
-            SkipProcessing = false;
-            DropProcessing = false;
-            EndPickingProcessing = false;
+        //var selectPicksPending = function (e) {
+        //    ChangeProcessing = false;
+        //    ConfirmProcessing = false;
+        //    SkipProcessing = false;
+        //    DropProcessing = false;
+        //    EndPickingProcessing = false;
 
-            skip = false;
-            ClearFormPicking();
-            if (e != undefined) {
-                if (verificarLoadersInactivos()) {
-                    TakeProcessing = true;
-                    let pick = e.getAttribute('pallet').trim();
-                    let cwar = e.getAttribute('cwar').trim();
-                    let indexTakeLoader = e.getAttribute('row').trim();
-                    $('#TakeLoader' + indexTakeLoader).show(100);
-                    EventoAjax("ClickPickingPending", "{'PICK':'" + pick + "','CWAR':'" + cwar + "'}", LoadPageSuccess);
-                }
-            }
-            else {
-                $('#TakeLoader' + indexTakeLoader).show(100);
-                EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR') + "'}", LoadPageSuccess);
-            }
-        }
+        //    skip = false;
+        //    ClearFormPicking();
+        //    if (e != undefined) {
+        //        if (verificarLoadersInactivos()) {
+        //            TakeProcessing = true;
+        //            let pick = e.getAttribute('pallet').trim();
+        //            let cwar = e.getAttribute('cwar').trim();
+        //            let indexTakeLoader = e.getAttribute('row').trim();
+        //            $('#TakeLoader' + indexTakeLoader).show(100);
+        //            EventoAjax("ClickPickingPending", "{'PICK':'" + pick + "','CWAR':'" + cwar + "'}", LoadPageSuccess);
+        //        }
+        //    }
+        //    else {
+        //        $('#TakeLoader' + indexTakeLoader).show(100);
+        //        EventoAjax("ClickPickingPending", "{'PICK':'" + sessionStorage.getItem('PICK') + "','CWAR':'" + sessionStorage.getItem('CWAR') + "'}", LoadPageSuccess);
+        //    }
+        //}
 
         var ClearFormPicking = function () {
             paidInvalid();
@@ -1152,41 +1161,41 @@
 
         }
 
-        var VerifyLocation = function () {
-            var CurrentLoca = lblLoca.innerHTML.trim();
-            stoper();
-            timer = setTimeout(function () {
-                var NewLoca = txLoca.value.trim().toUpperCase();
-                if (CurrentLoca.trim() == NewLoca.trim()) {
-                    locaValid();
-                    $('#lblError').html('');
-                    DisttinctLocaValid = false;
-                }
-                else {
-                    console.log("Pallet NO Igual");
-                    $('#lblError').html('')
-                    Method = "VerificarLocate"
-                    Data = "{'CWAR':'" + lblWare.innerHTML.trim() + "','LOCA':'" + txLoca.value.trim().toUpperCase() + "'}";
-                    EventoAjax(Method, Data, SucceessVerifyLocation)
-                }
-            }, 2000);
-        }
+        //var VerifyLocation = function () {
+        //    var CurrentLoca = lblLoca.innerHTML.trim();
+        //    stoper();
+        //    timer = setTimeout(function () {
+        //        var NewLoca = txLoca.value.trim().toUpperCase();
+        //        if (CurrentLoca.trim() == NewLoca.trim()) {
+        //            locaValid();
+        //            $('#lblError').html('');
+        //            DisttinctLocaValid = false;
+        //        }
+        //        else {
+        //            console.log("Pallet NO Igual");
+        //            $('#lblError').html('')
+        //            Method = "VerificarLocate"
+        //            Data = "{'CWAR':'" + lblWare.innerHTML.trim() + "','LOCA':'" + txLoca.value.trim().toUpperCase() + "'}";
+        //            EventoAjax(Method, Data, SucceessVerifyLocation)
+        //        }
+        //    }, 2000);
+        //}
 
-        var SucceessVerifyLocation = function (r) {
-            if (r.d == true) {
-                console.log("Location valida");
-                locaValid();
-                hideShowNeutroSelect(ddReason, true);
-                hideShowNeutroInputText(txQtyc, false);
-                DisttinctLocaValid = true;
-            }
-            else {
-                console.log("Location no valida");
-                locaInvalid();
-                $('#lblError').html('Location invalid');
-                DisttinctLocaValid = false;
-            }
-        }
+        //var SucceessVerifyLocation = function (r) {
+        //    if (r.d == true) {
+        //        console.log("Location valida");
+        //        locaValid();
+        //        hideShowNeutroSelect(ddReason, true);
+        //        hideShowNeutroInputText(txQtyc, false);
+        //        DisttinctLocaValid = true;
+        //    }
+        //    else {
+        //        console.log("Location no valida");
+        //        locaInvalid();
+        //        $('#lblError').html('Location invalid');
+        //        DisttinctLocaValid = false;
+        //    }
+        //}
 
         var VerifyQuantity = function () {
             if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
@@ -1207,14 +1216,14 @@
         var SucceessVerifyQuantity = function () {
 
         }
-        var SkipPicking = function () {
-            skip = true;
-            if (verificarLoadersInactivos()) {
-                SkipProcessing = true;
-                $('#SkipLoader').show(100);
-                EventoAjax("SkipPicking", "{}", LoadPageSuccess);
-            }
-        }
+        //var SkipPicking = function () {
+        //    skip = true;
+        //    if (verificarLoadersInactivos()) {
+        //        SkipProcessing = true;
+        //        $('#SkipLoader').show(100);
+        //        EventoAjax("SkipPicking", "{}", LoadPageSuccess);
+        //    }
+        //}
         var Confirm = function () {
             if (verificarLoadersInactivos()) {
                 ConfirmProcessing = true;
@@ -1237,6 +1246,12 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
+                        if (bdPicket182.childElementCount > 0) {
+                            for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
+                                bdPicket182.children[i].remove()
+                            }
+                        }
+                        loadPicksPending();
                         var myObj = JSON.parse(response.d)
                         if (myObj.Error == false) {
                             if (myObj.qtyaG > 0 || myObj.ALLOAUX > 0) {
@@ -1251,8 +1266,9 @@
                                 }
                             }
                             alert("Information saved successfully");
-                            selectPicksPending();
+                            //selectPicksPending();
                             $("#ConfirmLoader").hide(500);
+                            ClearFormPicking();
                         }
                         else {
                             alert(myObj.errorMsg);

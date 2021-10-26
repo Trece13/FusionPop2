@@ -121,6 +121,15 @@ namespace whusap.WebPages.Labels.RedesingLabels {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOperator;
         
         /// <summary>
+        /// myLabel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myLabel2;
+        
+        /// <summary>
         /// lblMaterialDesc2 control.
         /// </summary>
         /// <remarks>
@@ -200,5 +209,59 @@ namespace whusap.WebPages.Labels.RedesingLabels {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOperator2;
+        
+        /// <summary>
+        /// MyEtiquetaDrop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MyEtiquetaDrop;
+        
+        /// <summary>
+        /// bcPick control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage bcPick;
+        
+        /// <summary>
+        /// lbMcno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbMcno;
+        
+        /// <summary>
+        /// lbPaid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbPaid;
+        
+        /// <summary>
+        /// lbSep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbSep;
+        
+        /// <summary>
+        /// lbQtyp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lbQtyp;
     }
 }

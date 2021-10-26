@@ -58,6 +58,8 @@ namespace whusa.DAL
                 paramList.Add(":T$PRIO", Objtticol082.PRIO);
                 paramList.Add(":T$PAID", Objtticol082.PAID);
                 paramList.Add(":T$LOGN", Objtticol082.LOGN);
+                paramList.Add(":T$MCNO", Objtticol082.MCNO);
+                paramList.Add(":T$PICK", Objtticol082.PICK);
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
             }
