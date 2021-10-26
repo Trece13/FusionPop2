@@ -268,7 +268,7 @@
                     </div>
                 </div>
                 <br />
-                <div id="myLabel2">
+                <div id="myLabel2" runat="server">
                     <div class="row">
                         <div class="col-6 alingLeft">
                             <label>

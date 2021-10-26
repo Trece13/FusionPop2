@@ -121,6 +121,15 @@ namespace whusap.WebPages.Labels.RedesingLabels {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblOperator;
         
         /// <summary>
+        /// myLabel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl myLabel2;
+        
+        /// <summary>
         /// lblMaterialDesc2 control.
         /// </summary>
         /// <remarks>

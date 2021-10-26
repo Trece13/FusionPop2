@@ -74,6 +74,23 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     }
                 }
 
+                 if (Session["PartialLabel"] != null)
+                {
+                    if (Session["PartialLabel"].ToString() == "yes")
+                    {
+                        myLabel.Visible = true;
+                        myLabel2.Visible = true;
+                        
+                    }
+                    else
+                    {
+                        myLabel.Visible = false;
+                        myLabel2.Visible = false;
+                    }
+                }
+                
+
+
                 if (Session["Reprint"] != null)
                 {
                     if (Session["Reprint"].ToString() == "yes")
