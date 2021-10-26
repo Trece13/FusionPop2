@@ -2347,7 +2347,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="InsertarregistroItticol082">
         <stringSQL>
           INSERT INTO {0}.tticol082{1}(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU)
-          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
+          VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',NVL('[:T$MCNO]',' '),SYSDATE,'[:T$PRIO]',NVL('[:T$PICK]','0'),'[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
         </stringSQL>
       </operationName>
       <operationName name="InsertarregistroItticol182">
@@ -6603,13 +6603,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol182">
       <operationName name="SelectRecord">
         <stringSQL>
-          select * from (SELECT T$OORG, T$ORNO, T$PONO, T$ADVS, T$ITEM, T$QTYT, T$UNIT, T$CWAR, T$MCNO, T$TIME, T$PRIO, T$PICK, T$PAID, T$LOCA, T$LOGN, T$STAT, T$REFCNTD, T$REFCNTU,
-          ROW_NUMBER() OVER (ORDER BY T$PRIO asc) ROWN
-          FROM BAAN.TTICOL182140 WHERE T$CWAR = 'WPV201' order by T$PRIO asc) where ROWN = 1
+          SELECT * FROM (SELECT T$OORG, T$ORNO, T$PONO, T$ADVS, T$ITEM, T$QTYT, T$UNIT, T$CWAR, T$MCNO, T$TIME, T$PRIO, T$PICK, T$PAID, T$LOCA, T$LOGN, T$STAT, T$REFCNTD, T$REFCNTU,
+          ROW_NUMBER() OVER (ORDER BY T$PRIO ASC) ROWN
+          FROM BAAN.TTICOL182140 WHERE T$CWAR = '[:T$CWAR]' AND T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN = 1
         </stringSQL>
       </operationName>
       <operationName name="InsertarregistroItticol182">
         <stringSQL>INSERT INTO BAAN.tticol182140(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU) VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizarRegistroItticol182">
+        <stringSQL>
+          UPDATE BAAN.tticol182140 set T$QTYT = '[:T$QTYT]' where TRIM(T$CWAR) = NVL(TRIM('[:T$CWAR]'),TRIM(T$CWAR)) and T$PAID LIKE TRIM('%[:T$PAID]%') and TRIM(T$PICK) = NVL(TRIM('[:T$PICK]'),TRIM(T$PICK))
         </stringSQL>
       </operationName>
     </Module>

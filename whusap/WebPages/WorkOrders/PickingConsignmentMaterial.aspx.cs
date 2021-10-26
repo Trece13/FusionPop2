@@ -782,69 +782,69 @@ namespace whusap.WebPages.WorkOrders
                         if (Convert.ToDecimal(qtyaG) > 0)
                         {
 
-                            string id = ORNO;
-                            DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
-                            if (Dtticol022.Rows.Count > 0)
-                            {
-                                if (Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() != "")
+                                string id = ORNO;
+                                DataTable Dtticol022 = _idaltticol022.SecuenciaMayor(id);
+                                if (Dtticol022.Rows.Count > 0)
                                 {
-                                    consecutivo = Convert.ToInt32(Dtticol022.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
+                                    if (Dtticol022.Rows[0]["T$SQNB"].ToString().Trim() != "")
+                                    {
+                                        consecutivo = Convert.ToInt32(Dtticol022.Rows[0]["T$SQNB"].ToString().Trim().Substring(11, 3)) + 1;
+                                    }
+                                    else
+                                    {
+                                        consecutivo = 1;
+                                    }
                                 }
                                 else
                                 {
                                     consecutivo = 1;
                                 }
-                            }
-                            else
-                            {
-                                consecutivo = 1;
-                            }
 
-                            if (consecutivo.ToString().Length == 1)
-                            {
-                                SecuenciaPallet = "C00" + consecutivo.ToString();
-                            }
-                            if (consecutivo.ToString().Length == 2)
-                            {
-                                SecuenciaPallet = "C0" + consecutivo.ToString();
-                            }
-                            if (consecutivo.ToString().Length == 3)
-                            {
-                                SecuenciaPallet = "C0" + consecutivo.ToString();
-                            }
+                                if (consecutivo.ToString().Length == 1)
+                                {
+                                    SecuenciaPallet = "C00" + consecutivo.ToString();
+                                }
+                                if (consecutivo.ToString().Length == 2)
+                                {
+                                    SecuenciaPallet = "C0" + consecutivo.ToString();
+                                }
+                                if (consecutivo.ToString().Length == 3)
+                                {
+                                    SecuenciaPallet = "C0" + consecutivo.ToString();
+                                }
 
-                            //MyObj.pdno = ORNO;
-                            MyObj.pdno = MySessionObjPicking.LOT.Trim();
-                            MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
-                            MyObj.proc = 2;
-                            MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
-                            MyObj.mitm = MySessionObjPicking.ITEM.Trim();
-                            MyObj.qtdl = Convert.ToDecimal(qtyt.ToString());
-                            MyObj.cuni = CUNI;//CUNI;
-                            MyObj.log1 = "NONE";
-                            MyObj.qtd1 = Convert.ToInt32(qtyt.ToString());
-                            MyObj.pro1 = 2;
-                            MyObj.log2 = "NONE";
-                            MyObj.qtd2 = Convert.ToInt32(qtyt.ToString());
-                            MyObj.pro2 = 2;
-                            MyObj.loca = LOCA.Trim();
-                            MyObj.norp = 1;
-                            MyObj.dele = 11;
-                            MyObj.logd = "NONE";
-                            MyObj.refcntd = 0;
-                            MyObj.refcntu = 0;
-                            MyObj.drpt = DateTime.Now;
-                            MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                            MyObj.acqt = 0;
-                            MyObj.cwaf = CWAR;//CWAR;
-                            MyObj.cwat = CWAR;//CWAR;
-                            MyObj.aclo = LOCA;
-                            //MyObj.allo = Convert.ToDecimal(qtyt.ToString());
-                            MyObj.allo = 0;
-                            MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
+                                //MyObj.pdno = ORNO;
+                                MyObj.pdno = MySessionObjPicking.LOT.Trim();
+                                MyObj.sqnb = ORNO + "-" + SecuenciaPallet;
+                                MyObj.proc = 2;
+                                MyObj.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                                MyObj.mitm = MySessionObjPicking.ITEM.Trim();
+                                MyObj.qtdl = Convert.ToDecimal(qtyt.ToString());
+                                MyObj.cuni = CUNI;//CUNI;
+                                MyObj.log1 = "NONE";
+                                MyObj.qtd1 = Convert.ToInt32(qtyt.ToString());
+                                MyObj.pro1 = 2;
+                                MyObj.log2 = "NONE";
+                                MyObj.qtd2 = Convert.ToInt32(qtyt.ToString());
+                                MyObj.pro2 = 2;
+                                MyObj.loca = LOCA.Trim();
+                                MyObj.norp = 1;
+                                MyObj.dele = 11;
+                                MyObj.logd = "NONE";
+                                MyObj.refcntd = 0;
+                                MyObj.refcntu = 0;
+                                MyObj.drpt = DateTime.Now;
+                                MyObj.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                                MyObj.acqt = 0;
+                                MyObj.cwaf = CWAR;//CWAR;
+                                MyObj.cwat = CWAR;//CWAR;
+                                MyObj.aclo = LOCA;
+                                //MyObj.allo = Convert.ToDecimal(qtyt.ToString());
+                                MyObj.allo = 0;
+                                MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
 
-                            var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
-                            var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
+                                var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj, ref strError);
+                                var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj, ref strError);
 
                             if (validateSave > 0)
                             {
