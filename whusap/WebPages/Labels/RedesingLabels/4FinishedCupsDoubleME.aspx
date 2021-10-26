@@ -23,7 +23,7 @@
 
         .isValid {
             border-bottom: solid;
-           border-color: green;
+            border-color: green;
         }
 
         .isNotValid {
@@ -190,8 +190,9 @@
             vertical-align: middle;
             padding-left: 0em;
         }
-                               @page{
-            size:landscape;
+
+        @page {
+            size: landscape;
         }
     </style>
     <script type="text/javascript">
@@ -243,7 +244,7 @@
                         </div>
                     </div>
                     <br />
-                    <div class="col-12 borderTop" id="divBarcode">
+                    <div class="col-12 borderTop" id="divBarcode1">
                         <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
                     <div style="height: 15%">
@@ -280,7 +281,7 @@
                         </div>
                     </div>
                     <br />
-                    <div class="col-12 borderTop" id="divBarcode">
+                    <div class="col-12 borderTop" id="divBarcode2">
                         <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
                     <div style="height: 10%">
@@ -303,6 +304,42 @@
                         </table>
                     </div>
                 </div>
+            <div id="MyEtiquetaDrop" style="width:6in; height:3.5in;" runat="server">
+                <table style="margin: auto;margin-top:15px;">
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Pick ID</label>
+                        </td>
+                        <td colspan="4">
+                            <img src="~/images/logophoenix_login.jpg" runat="server" id="bcPick" alt="" hspace="60"
+                                vspace="5" style="width: 3in; height: 1in; margin: 0px !important" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Machine</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 30px" id="lbMcno" runat="server">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Pallet(s)
+                            </label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 20px" id="lbPaid" runat="server"></label>
+                            <label style="font-size: 20px" id="lbSep" runat="server">/</label>
+                            <label style="font-size: 20px" id="lbQtyp" runat="server"></label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             </div>
         </div>
     </form>

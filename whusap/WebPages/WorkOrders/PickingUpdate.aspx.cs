@@ -938,6 +938,8 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["Operator"] = MyObj.logn;
                                 HttpContext.Current.Session["Reprint"] = "no";
                                 HttpContext.Current.Session["AutoPrint"] = "yes";
+                                HttpContext.Current.Session["PickLabel"] = "yes";
+                                HttpContext.Current.Session["Pick"] = MyObjPicking.PICK;
 
                                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
                                 MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
@@ -1064,8 +1066,10 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["Machine"] = "";
                                 HttpContext.Current.Session["Operator"] = MyObj.logn;
                                 HttpContext.Current.Session["Reprint"] = "no";
+                                HttpContext.Current.Session["Pick"] = MyObjPicking.PICK;
 
                                 HttpContext.Current.Session["AutoPrint"] = "yes";
+                                HttpContext.Current.Session["PickLabel"] = "yes";
 
                                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
                                 MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
@@ -1164,6 +1168,8 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["Operator"] = MyObj.LOGN;
                                 HttpContext.Current.Session["Reprint"] = "no";
                                 HttpContext.Current.Session["AutoPrint"] = "yes";
+                                HttpContext.Current.Session["PickLabel"] = "yes";
+                                HttpContext.Current.Session["Pick"] = MyObjPicking.PICK;
 
                                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
                                 MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
