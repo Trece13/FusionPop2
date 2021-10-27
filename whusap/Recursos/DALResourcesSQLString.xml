@@ -1931,17 +1931,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActAlloTICOL222">
         <stringSQL>
-          update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+          update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$SQNB) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActAlloTICOL242">
         <stringSQL>
-          update {0}.tticol242{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+          update {0}.tticol242{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$SQNB) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActAllcol131140">
         <stringSQL>
-          update {0}.twhcol131{1} set  T$QTYA = T$ACQT + [T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$PAID) = '[:T$PAID]'
+          update {0}.twhcol131{1} set  T$QTYA = T$ACQT + [T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$PAID) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActCausalcol130140">
@@ -5154,17 +5154,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActAlloTICOL222">
         <stringSQL>
-          update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+          update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$SQNB) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActAlloTICOL242">
         <stringSQL>
-          update {0}.tticol242{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$SQNB) = '[:T$PAID]'
+          update {0}.tticol242{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$SQNB) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="ActAllcol131140">
         <stringSQL>
-          update {0}.twhcol131{1} set  T$QTYA = T$QTYA + [:T$QTY], T$ALLO = T$ALLO - [:T$QTY] where trim(T$PAID) = '[:T$PAID]'
+          update {0}.twhcol131{1} set  T$QTYA = T$QTYA + [:T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$PAID) = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="getAllotwhcol131">
