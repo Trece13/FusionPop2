@@ -467,7 +467,7 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader"></i></span></button>
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button>
                         <button class="btn btn-danger col-12 btn-sm" id="" type="button">Exit Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                     </div>
                     <div class="row">
@@ -494,7 +494,7 @@
         </div>
         <div class="row">
             <div class="container">
-                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px; display: none" frameborder="0" src=""></iframe>
+                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 50px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
             </div>
             <div id="MyEtiqueta">
                 <div id="myLabel">
@@ -685,7 +685,8 @@
             txPaid.addEventListener("input", verifyPallet);
             //txLoca.addEventListener("input", VerifyLocation);
             txQtyc.addEventListener("input", VerifyQuantity);
-            chkConsigment.addEventListener('change', GetWarehouse)
+            chkConsigment.addEventListener('change', GetWarehouse);
+            btnConfirm.addEventListener('click', Confirm)
         }
 
         var changeReason = function () {
@@ -1003,7 +1004,7 @@
             if (MyObjLst.length > 0) {
                 var validos = true;
                 MyObjLst.forEach(function (item, i) {
-                    bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>Holas </td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
+                    bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>" + item.T$DSCA + "</td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
                 });
                 if (validos) {
                     $('#bdPicket182').show(500);
@@ -1235,8 +1236,7 @@
                     $("#ConfirmLoader").hide(500);
                     return;
                 }
-
-                dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "'}";
+                dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "','consigment':'" + (chkConsigment.checked == true ? 'true' : 'false') + "'}";
 
                 //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
                 var AjaxConfirm = $.ajax({
@@ -1246,15 +1246,16 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
+                        ConfirmProcessing = false;
+
                         if (bdPicket182.childElementCount > 0) {
                             for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
                                 bdPicket182.children[i].remove()
                             }
                         }
-                        loadPicksPending();
                         var myObj = JSON.parse(response.d)
                         if (myObj.Error == false) {
-                            if (myObj.qtyaG > 0 || myObj.ALLOAUX > 0) {
+                            if (true) {
                                 //    printDiv("MyEtiqueta");
                                 myLabelFrame = document.getElementById('myLabelFrame');
                                 if (sessionStorage.getItem('nav').toString() == 'EDG') {
@@ -1269,6 +1270,7 @@
                             //selectPicksPending();
                             $("#ConfirmLoader").hide(500);
                             ClearFormPicking();
+                            loadPicksPending();
                         }
                         else {
                             alert(myObj.errorMsg);
@@ -1444,14 +1446,10 @@
         }
 
         var verificarLoadersInactivos = function () {
-            if (TakeProcessing != false ||
-                ChangeProcessing != false ||
-                ConfirmProcessing != false ||
-                SkipProcessing != false ||
-                DropProcessing != false ||
-                EndPickingProcessing != false) {
+            if (ConfirmProcessing != false) {
                 return false;
-            } {
+            }
+            else{
                 return true;
             }
         }
