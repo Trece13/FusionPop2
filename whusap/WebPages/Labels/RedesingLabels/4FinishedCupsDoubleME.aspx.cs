@@ -52,8 +52,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                 lblOperator2.InnerHtml = Session["Operator"] != null ? Session["Operator"].ToString() : string.Empty;
                 bcPick.Src = Session["Pick"] != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["Pick"].ToString() + "&code=Code128&dpi=96" : string.Empty;
                 lbMcno.InnerHtml = Session["Machine"] != null ? Session["Machine"].ToString() : string.Empty; ;
-                lbPaid.InnerHtml = Session["codePaid2"] != null ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + Session["codePaid2"].ToString() + "&code=Code128&dpi=96" : string.Empty;
-                lbSep.InnerHtml = "";
+                lbPaid.InnerHtml = Session["codePaid2"] != null ? Session["codePaid2"].ToString() : string.Empty;
                 lbQtyp.InnerHtml = Session["Quantity"] != null ? Session["Quantity"].ToString() : string.Empty; ;
 
                 if (Session["PickLabel"] != null)
@@ -69,7 +68,6 @@ namespace whusap.WebPages.Labels.RedesingLabels
                         bcPick.Src = "";
                         lbMcno.InnerHtml = "";
                         lbPaid.InnerHtml = "";
-                        lbSep.InnerHtml = "";
                         lbQtyp.InnerHtml = "";
                     }
                 }
@@ -79,7 +77,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     if (Session["PartialLabel"].ToString() == "yes")
                     {
                         myLabel.Visible = true;
-                        myLabel2.Visible = true;
+                        myLabel2.Visible = false;
                         
                     }
                     else
@@ -88,8 +86,10 @@ namespace whusap.WebPages.Labels.RedesingLabels
                         myLabel2.Visible = false;
                     }
                 }
-                
 
+                 printButton.Visible = true;
+                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                 EliminarVariablesSession();
 
                 if (Session["Reprint"] != null)
                 {

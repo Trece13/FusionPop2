@@ -60,6 +60,7 @@ namespace whusa.DAL
                 paramList.Add(":T$LOGN", Objtticol082.LOGN);
                 paramList.Add(":T$MCNO", Objtticol082.MCNO);
                 paramList.Add(":T$PICK", Objtticol082.PICK);
+                paramList.Add(":T$LOCA", Objtticol082.LOCA);
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
             }
