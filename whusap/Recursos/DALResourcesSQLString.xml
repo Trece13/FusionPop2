@@ -7275,11 +7275,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           (SELECT CASE WHEN sum(cant_reg) IS NULL THEN 0 ELSE sum(cant_reg) END FROM webuser.maxquantity_per_shift{1} WHERE orden = ticst001.T$PDNO AND articulo = ticst001.T$SITM AND maquina = tisfc010.T$MCNO AND TURNO = '[:T$SHIF]') CANT_PROC,
           tcibd001.T$CUNI AS CUNI, ticst001.T$QUES AS CANT_EST,
           (SELECT SUM(ticst0012.T$QUCS) FROM {0}.tticst001{1} ticst0012 WHERE ticst0012.T$PDNO = '[:T$PDNO]' AND ticst0012.T$SITM = ticst001.T$SITM AND ticst0012.T$CWAR = ticst001.T$CWAR) AS ACT_CANT,
-          (SELECT SUM(ticol082.T$QTYT) FROM {0}.tticol082{1} ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,
+          --(SELECT SUM(ticol082.T$QTYT) FROM {0}.tticol082{1} ticol082 WHERE ticol082.T$ORNO = '[:T$PDNO]' AND ticol082.T$PONO = ticst001.T$PONO ) AS ISWH,
+          (SELECT SUM(ticol182.T$QTYT) FROM {0}.tticol182{1} ticol182 WHERE ticol182.T$ORNO = '[:T$PDNO]' AND ticol182.T$PONO = ticst001.T$PONO ) + ticst001.T$ISWH AS ISWH,
           ticst001.T$ISWH AS ISWH_1, tcibd200.T$OQMF AS OQMF,
           CASE WHEN ticol080.T$QUNE IS NULL THEN 0 ELSE ticol080.T$QUNE END AS CANTD, tisfc010.T$MCNO AS MCNO,
           --(SELECT SUM(ticol082.T$QTYT) FROM BAAN.tticol082140 ticol082 WHERE ticol082.T$ORNO != '[:T$PDNO]' AND ticol082.T$ITEM = ticst001.T$SITM AND ticol082.T$STAT = 1) AS CANT_PICK
-          (SELECT SUM(ticol182.T$QTYT) FROM BAAN.tticol182140 ticol082 WHERE ticol182.T$ORNO != '[:T$PDNO]' AND ticol182.T$ITEM = ticst001.T$SITM AND ticol182.T$STAT = 1) AS CANT_PICK
+          (SELECT SUM(ticol182.T$QTYT) FROM BAAN.tticol182140 ticol182 WHERE ticol182.T$ORNO != '[:T$PDNO]' AND ticol182.T$ITEM = ticst001.T$SITM AND ticol182.T$STAT = 1) AS CANT_PICK
           FROM {0}.tticst001{1} ticst001
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.T$ITEM = ticst001.T$SITM
           INNER JOIN {0}.ttcibd200{1} tcibd200 ON tcibd200.T$ITEM = tcibd001.T$ITEM
