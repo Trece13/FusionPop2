@@ -1842,6 +1842,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND trim(T$PICK) = trim('[:T$PICK]')
         </stringSQL>
       </operationName>
+      <operationName name="UpdateTtico082StatFreeNew">
+        <stringSQL>
+          UPDATE {0}.tticol182{1} SET
+          T$STAT = '[:T$STAT]'
+          WHERE trim(T$ORNO) = NVL(trim('[:T$ORNO]'),TRIM(T$ORNO))
+          AND trim(T$PONO) = NVL(trim('[:T$PONO]'),TRIM(T$PONO))
+          AND trim(T$ADVS) = NVL(trim('[:T$ADVS]'),TRIM(T$ADVS))
+          AND trim(T$PICK) = trim('[:T$PICK]')
+        </stringSQL>
+      </operationName>
       <operationName name="UpdateTtico082Stat_CambioPallet">
         <stringSQL>
           UPDATE {0}.tticol082{1} SET
@@ -2218,6 +2228,38 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(PICK) = TRIM('[:PICK]')
         </stringSQL>
       </operationName>
+      <operationName name="ConsultarPalletID_x_FreePicking">
+        <stringSQL>
+          SELECT distinct CWAR, TBL, TYPW, QTYA, QTYT, UNIT, ITEM, DSCA, ORNO, PICK, MCNO, DSCAM, STAT, PRIO, ADVS, PONO, STAP
+          FROM(
+          select 'ticol182' AS  TBL,col082.T$QTYT AS QTYT, col082.T$UNIT AS UNIT,col082.T$ITEM AS ITEM, col082.T$STAT AS STAP,
+          col082.T$QTYT AS QTYA, col082.T$ORNO AS ORNO, col082.T$PONO AS PONO, col082.T$ADVS AS ADVS, col082.T$PRIO AS PRIO, col082.T$STAT AS STAT,
+          rou002.T$DSCA AS DSCAM, col082.T$MCNO AS MCNO, col082.T$PICK AS PICK, cibd001.t$dsca AS DSCA, mcs003.T$TYPW AS TYPW, col082.T$CWAR AS CWAR
+          from {0}.tticol182{1} col082
+          LEFT JOIN {0}.ttcibd001{1} cibd001 ON cibd001.T$ITEM =  col082.T$ITEM
+          LEFT JOIN {0}.ttcmcs003{1} mcs003 ON mcs003.T$CWAR = col082.T$CWAR
+          LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
+          WHERE col082.T$STAT = 1
+          )
+          WHERE TRIM(PICK) = TRIM('[:PICK]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPicksTticol082">
+        <stringSQL>
+          select  t$pick pick, t$cwar wrh, t$mcno mcn, count(*) pallets
+          from    {0}.tticol082{1}
+          where   t$stat = '1'
+          group by t$pick, t$cwar, t$mcno
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarPicksTticol182">
+        <stringSQL>
+          select  t$pick pick, t$cwar wrh, t$mcno mcn, count(*) pallets
+          from    {0}.tticol182{1}
+          where   t$stat = '1'
+          group by t$pick, t$cwar, t$mcno
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarPalletIDTticol083">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,ticol083.T$ORNO ORNO,ticol083.T$MCNO MCNO,ticol083.T$STAT STAT,stap FROM (
@@ -2309,6 +2351,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT  col002.t$tite tite, col002.t$dsca dsca,col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$PONO as PONO, col082.T$PAID as SQNB, col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME-5/24 as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU from  {0}.tticol082{1} col082 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM where t$STAT =1  and col002.t$tite = '[:T$TITE]' and col082.T$CWAR = nvl('[:T$CWAR]',col082.T$CWAR) and col082.T$MCNO = nvl('[:T$MCNO]',col082.T$MCNO) order by t$prio,col082.T$CWAR desc,col082.T$MCNO desc
         </stringSQL>
       </operationName>
+      <operationName name="ConsultarTticol182PorPlant">
+        <stringSQL>
+          --SELECT  col002.t$tite tite, col002.t$dsca dsca,col182.T$OORG as OORG, col182.T$ORNO as ORNO, col182.T$PONO as PONO, col182.T$ADVS as ADVS, col182.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col182.T$QTYT as QTYT, col182.T$UNIT as UNIT, col182.T$CWAR as CWAR, col182.T$MCNO as MCNO, col182.T$TIME-5/24 as TIME, col182.T$PRIO as PRIO, col182.T$PICK as PICK, col182.T$LOGN as LOGN, col182.T$STAT as STAT, col182.T$REFCNTD as REFCNTD, col182.T$REFCNTU as REFCNTU from  {0}.tticol182{1} col182 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col182.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col182.T$ITEM where t$STAT = 1 and col002.t$tite = '[:T$TITE]' and col182.T$CWAR = nvl('[:T$CWAR]',col182.T$CWAR) and col182.T$MCNO = nvl('[:T$MCNO]',col182.T$MCNO) order by t$prio,col182.T$CWAR desc,col182.T$MCNO desc
+          SELECT  col002.t$tite tite, col002.t$dsca dsca,col182.T$OORG as OORG, col182.T$ORNO as ORNO, col182.T$PONO as PONO, col182.T$ADVS as ADVS, col182.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col182.T$QTYT as QTYT, col182.T$UNIT as UNIT, col182.T$CWAR as CWAR, col182.T$MCNO as MCNO, col182.T$TIME-5/24 as TIME, col182.T$PRIO as PRIO, col182.T$PICK as PICK, col182.T$LOGN as LOGN, col182.T$STAT as STAT, col182.T$REFCNTD as REFCNTD, col182.T$REFCNTU as REFCNTU from  {0}.tticol182{1} col182 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col182.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col182.T$ITEM where t$STAT = 1 and col002.t$tite = '[:T$TITE]' order by t$prio,col182.T$CWAR desc,col182.T$MCNO desc
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultarTticol082PorPlantPono">
         <stringSQL>
           SELECT  col002.t$tite tite, col002.t$dsca dsca,col082.T$OORG as OORG, col082.T$ORNO as ORNO, col082.T$PONO as PONO,col082.T$ADVS as ADVS, col082.T$ITEM as ITEM, cibd001.T$DSCA AS DSCAI, col082.T$QTYT as QTYT, col082.T$UNIT as UNIT, col082.T$CWAR as CWAR, col082.T$MCNO as MCNO, col082.T$TIME-5/24 as TIME, col082.T$PRIO as PRIO, col082.T$PICK as PICK, col082.T$PAID as PAID, col082.T$LOCA as LOCA, col082.T$LOGN as LOGN, col082.T$STAT as STAT, col082.T$REFCNTD as REFCNTD, col082.T$REFCNTU as REFCNTU from  {0}.tticol082{1} col082 inner join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM where t$STAT =1 and col082.T$PRIO >= '[:T$PRIO]' order by t$prio
@@ -2317,6 +2365,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ConsultaPlantTticol082">
         <stringSQL>
           select  col002.t$tite TITE, col002.t$dsca DSCA from  {0}.tticol082{1} col082 left join {0}.tticol003{1} col003 on col003.t$mcno =  col082.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite where col082.t$stat = 1 group by col002.t$tite, col002.t$dsca order by T$DSCA
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultaPlantTticol182">
+        <stringSQL>
+          select  col002.t$tite TITE, col002.t$dsca DSCA from  {0}.tticol182{1} col182 left join {0}.tticol003{1} col003 on col003.t$mcno =  col182.t$mcno left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite where col182.t$stat = 1 group by col002.t$tite, col002.t$dsca order by T$DSCA
         </stringSQL>
       </operationName>
       <operationName name="ConsultaWarehouseTticol082">
@@ -2330,6 +2383,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where t$STAT =1  and col002.t$tite = '[:T$TITE]'
         </stringSQL>
       </operationName>
+      <operationName name="ConsultaWarehouseTticol182">
+        <stringSQL>
+          SELECT DISTINCT col182.T$CWAR as TITE, mcs003.T$DSCA dsca
+          from  {0}.tticol182{1} col182
+          inner join {0}.tticol003{1} col003 on col003.t$mcno =  col182.t$mcno
+          left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite
+          left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col182.T$ITEM
+          left join {0}.ttcmcs003{1} mcs003 on col182.t$cwar = mcs003.t$cwar
+          where t$STAT = 1 and col002.t$tite = '[:T$TITE]'
+        </stringSQL>
+      </operationName>
       <operationName name="ConsultaMachineTticol082">
         <stringSQL>
           SELECT DISTINCT col003.t$mcno as MCNO, col003.t$mcno dsca
@@ -2339,6 +2403,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col082.T$ITEM
           left join {0}.ttcmcs003{1} mcs003 on col082.t$cwar = mcs003.t$cwar
           where t$STAT =1  and col002.t$tite = '[:T$TITE]' and col082.t$cwar = '[:T$CWAR]'
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultaMachineTticol182">
+        <stringSQL>
+          SELECT DISTINCT col003.t$mcno as MCNO, col003.t$mcno dsca
+          from  {0}.tticol182{1} col182
+          inner join {0}.tticol003{1} col003 on col003.t$mcno =  col182.t$mcno
+          left join {0}.tticol002{1} col002 on col002.t$tite =  col003.t$tite
+          left join {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM = col182.T$ITEM
+          left join {0}.ttcmcs003{1} mcs003 on col182.t$cwar = mcs003.t$cwar
+          where t$STAT = 1 and col002.t$tite = '[:T$TITE]' and col182.t$cwar = '[:T$CWAR]'
         </stringSQL>
       </operationName>
       <operationName name="ActualizarPrioridadTticol082">
@@ -5155,9 +5230,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="twhcol122">
       <operationName name="Delete082">
         <stringSQL>
-          delete BAAN.tticol082140 where T$ORNO = '[:T$ORNO]' and T$PONO = '[:T$PONO]'and T$ADVS = '[:T$ADVS]' and trim(T$PICK) = trim('[:T$PICK]') and trim(T$PAID) = trim('[:T$PAID]')
+          delete {0}.tticol082{1} where T$ORNO = '[:T$ORNO]' and T$PONO = '[:T$PONO]'and T$ADVS = '[:T$ADVS]' and trim(T$PICK) = trim('[:T$PICK]') and trim(T$PAID) = trim('[:T$PAID]')
         </stringSQL>
       </operationName>
+      <operationName name="Delete182">
+        <stringSQL>
+          delete {0}.tticol182{1} where T$ORNO = '[:T$ORNO]' and T$PONO = '[:T$PONO]'and T$ADVS = '[:T$ADVS]' and trim(T$PICK) = trim('[:T$PICK]')
+        </stringSQL>
+      </operationName>
+
       <operationName name="ActAlloTICOL222">
         <stringSQL>
           update {0}.tticol222{1} set  T$ACQT = T$ACQT + [:T$QTY], T$ALLO = CASE WHEN (T$ALLO - [:T$QTY]) &lt; 0 THEN 0 ELSE T$ALLO - [:T$QTY] END where trim(T$SQNB) = '[:T$PAID]'

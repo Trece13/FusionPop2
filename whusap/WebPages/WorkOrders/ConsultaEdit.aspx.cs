@@ -87,13 +87,13 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string SelectPlant()
         {
-            return JsonConvert.SerializeObject(Itticol082.ConsultaPlantTticol082());
+            return JsonConvert.SerializeObject(Itticol082.ConsultaPlantTticol182());
         }
 
         [WebMethod]
         public static string SelectWarehouse(string plant)
         {
-            return JsonConvert.SerializeObject(Itticol082.ConsultaWarehouseTticol082( plant ));
+            return JsonConvert.SerializeObject(Itticol082.ConsultaWarehouseTticol182( plant ));
         }
 
         [WebMethod]
@@ -103,12 +103,13 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string ClickQuery(string plant,string warehouse,string machine)
+        //public static string ClickQuery(string plant,string warehouse,string machine)
+        public static string ClickQuery(string plant)
         {
             plantGlobal = plant;
             Console.WriteLine("Entro en ClickQuery...");
             string strError = string.Empty;
-            DataTable ListaRegistroCustomer = Itticol082.ConsultarTticol082PorPlant(plant,warehouse,machine);
+            DataTable ListaRegistroCustomer = Itticol082.ConsultarTticol182PorPlant(plant);
             if (strError == string.Empty)
             {
                 return JsonConvert.SerializeObject(ListaRegistroCustomer);

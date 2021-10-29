@@ -15,7 +15,7 @@ using whusa;
 
 namespace whusap.WebPages.WorkOrders
 {
-    public partial class UnassignPalletsPicked : System.Web.UI.Page
+    public partial class UnassignPalletsFreePicked : System.Web.UI.Page
     {
         public static Ent_tticol082 MyObj = new Ent_tticol082();
         private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
@@ -43,7 +43,7 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string ConsultarTticol082(string PAID)
         {
-            DataTable Lstticol082 = Itticol082.ConsultarPicksTticol082(PAID);
+            DataTable Lstticol082 = Itticol082.ConsultarPicksTticol182(PAID);
             if (Lstticol082.Rows.Count > 0)
             {
                 DataRow ItemRow = Lstticol082.Rows[0];
@@ -64,114 +64,10 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string ClickDropTagPick(string PickID)
-        {
-            DataTable TableItticol082 = Itticol082.ConsultarPalletIDOnTunnelTticol083(PickID);
-            string ObjRetorno = string.Empty;
-
-            if (ExistenciaData(TableItticol082))
-            {
-                foreach (DataRow myObjDt in TableItticol082.Rows)
-                {
-                //DataRow myObjDt = TableItticol082.Rows[0];
-                MyObj.TBL = myObjDt["TBL"].ToString();
-                MyObj.PAID = myObjDt["PAID"].ToString();
-                MyObj.QTYT = myObjDt["QTYT"].ToString();
-                MyObj.UNIT = myObjDt["UNIT"].ToString();
-                MyObj.ITEM = myObjDt["ITEM"].ToString();
-                MyObj.DSCA = myObjDt["DSCA"].ToString();
-                MyObj.STAP = myObjDt["STAP"].ToString();
-
-                bool ActalizacionExitosa = false;
-                switch (MyObj.TBL)
-                {
-                    case "ticol022":
-                        if (MyObj.STAP.ToString().Trim() == "11")
-                        {
-                            MyObj.Error = true;
-                            MyObj.TipeMsgJs = "alert";
-                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
-
-                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            //return ObjRetorno;
-                        }
-                        ActalizacionExitosa = Itticol082.Actualizartticol022MFG(MyObj);
-                        Itticol082.Actualizartticol082MFG(MyObj);                        
-                        break;
-                    case "whcol130":
-                        if (MyObj.STAP.ToString().Trim() == "9")
-                        {
-                            MyObj.Error = true;
-                            MyObj.TipeMsgJs = "alert";
-                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
-
-                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            //return ObjRetorno;
-                        }
-                        ActalizacionExitosa = Itticol082.Actualizartwhcol130MFG(MyObj);
-                        Itticol082.Actualizartticol082MFG(MyObj);                        
-                        break;
-                    case "whcol131":
-                        if (MyObj.STAP.ToString().Trim() == "9")
-                        {
-                            MyObj.Error = true;
-                            MyObj.TipeMsgJs = "alert";
-                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
-
-                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            //return ObjRetorno;
-                        }
-                        ActalizacionExitosa = Itticol082.Actualizartwhcol131MFG(MyObj);
-                        Itticol082.Actualizartticol082MFG(MyObj);                        
-
-                        break;
-                    case "ticol042":
-                        if (MyObj.STAP.ToString().Trim() == "11")
-                        {
-                            MyObj.Error = true;
-                            MyObj.TipeMsgJs = "alert";
-                            //MyObj.ErrorMsg = PalletIdAlreadyPicked;
-
-                            //ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                            //return ObjRetorno;
-                        }
-                        ActalizacionExitosa = Itticol082.Actualizartticol042MFG(MyObj);
-                        Itticol082.Actualizartticol082MFG(MyObj);                        
-                        break;
-                }
-                if (ActalizacionExitosa)
-                {
-                    MyObj.Error = false;
-                    MyObj.TipeMsgJs = "alert";
-                    MyObj.SuccessMsg = Thepickedissuccess;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                }
-                else
-                {
-                    MyObj.Error = true;
-                    MyObj.TipeMsgJs = "alert";
-                    MyObj.ErrorMsg = Thepickedisnotsuccess;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
-                }
-            }
-        }
-            else
-            {
-                MyObj.Error = true;
-                MyObj.TipeMsgJs = "alert";
-                MyObj.ErrorMsg = ThePickIDDoesntexist;
-
-                ObjRetorno = JsonConvert.SerializeObject(MyObj);
-            }
-
-            return ObjRetorno;
-        }
-
-        [WebMethod]
         public static string SearchPickID(string PickID)
         {
             List<Ent_tticol082> lsttticol082 = new List<Ent_tticol082>();
-            DataTable TableItticol082 = Itticol082.ConsultarPalletID_x_Picking(PickID);
+            DataTable TableItticol082 = Itticol082.ConsultarPalletID_x_FreePicking(PickID);
             string ObjRetorno = string.Empty;
 
             if (ExistenciaData(TableItticol082))
@@ -196,7 +92,6 @@ namespace whusap.WebPages.WorkOrders
                     {
                         Ent_tticol082 MyObj2 = new Ent_tticol082();
                         MyObj2.TBL = row["TBL"].ToString();
-                        MyObj2.PAID = row["PAID"].ToString();
                         MyObj2.QTYT = row["QTYT"].ToString();
                         MyObj2.UNIT = row["UNIT"].ToString();
                         MyObj2.ITEM = row["ITEM"].ToString();
@@ -226,7 +121,7 @@ namespace whusap.WebPages.WorkOrders
         public static string designar(string PickID)
         {
             List<Ent_tticol082> lsttticol082 = new List<Ent_tticol082>();
-            DataTable TableItticol082 = Itticol082.ConsultarPalletID_x_Picking(PickID);
+            DataTable TableItticol082 = Itticol082.ConsultarPalletID_x_FreePicking(PickID);
             string ObjRetorno = string.Empty;
 
             if (ExistenciaData(TableItticol082))
@@ -250,7 +145,6 @@ namespace whusap.WebPages.WorkOrders
                     foreach (DataRow row in TableItticol082.Rows)
                     {
                         MyObj.TBL =  row["TBL"].ToString();
-                        MyObj.PAID = row["PAID"].ToString();
                         MyObj.QTYT = row["QTYT"].ToString();
                         MyObj.UNIT = row["UNIT"].ToString();
                         MyObj.ITEM = row["ITEM"].ToString();
@@ -263,20 +157,9 @@ namespace whusap.WebPages.WorkOrders
                         MyObj.STAT = "3";
                         MyObj.Error = false;
                         MyObj.PICK = PickID.Trim();
-                        _idaltwhcol122.UpdateTtico082StatNew(MyObj);
-
-                        twhcolDAL.ActCausalcol131140(MyObj.PAID, 3);
-                        twhcolDAL.ActCausalTICOL022(MyObj.PAID, 7);
-                        twhcolDAL.ActCausalTICOL042(MyObj.PAID, 7);
-
-                        twhcolDAL.ActAllcol131140(MyObj.PAID, Convert.ToDecimal(MyObj.QTYT));
-                        twhcolDAL.ActAlloTICOL222(MyObj.PAID, Convert.ToDecimal(MyObj.QTYT));
-                        twhcolDAL.ActAlloTICOL242(MyObj.PAID, Convert.ToDecimal(MyObj.QTYT));
-
-                        twhcolDAL.Delete082(MyObj);
+                        _idaltwhcol122.UpdateTtico082StatFreeNew(MyObj);
+                        twhcolDAL.Delete182(MyObj);
                         lsttticol082.Add(MyObj);
-                        //JC 121021 Al finalizar de desagsignar eliminar el picking si queda huerfano
-                        bool ActualizacionExitosa = Ittccol307.EliminarRegistrotccol307Null(new Ent_ttccol307 { PAID = PickID.Trim().ToUpper() });
                         ObjRetorno = JsonConvert.SerializeObject(lsttticol082);
                     }
                 }
@@ -299,29 +182,6 @@ namespace whusap.WebPages.WorkOrders
                 ContieneDatos = true;
             }
             return ContieneDatos;
-        }
-
-        public static bool VerificarStatPortabla(string tabla, string estado)
-        {
-            bool retorno = false;
-            switch (tabla)
-            {
-                case "ticol022":
-                    if (estado == "11") { retorno = true; } else { retorno = false; };
-                    break;
-                case "ticol042":
-                    if (estado == "11") { retorno = true; } else { retorno = false; };
-
-                    break;
-                case "whcol130":
-                    if (estado == "9") { retorno = true; } else { retorno = false; };
-                    break;
-                case "whcol131":
-                    if (estado == "9") { retorno = true; } else { retorno = false; };
-
-                    break;
-            }
-            return retorno;
         }
 
         protected static string mensajes(string tipoMensaje)

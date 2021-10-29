@@ -1170,6 +1170,20 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nError: " + ex.Message);
             }
         }
+
+        public bool UpdateTtico082StatFreeNew(Ent_tticol082 Obj082)
+        {
+            string strError = string.Empty;
+            try
+            {
+                return dal.UpdateTtico082StatFreeNew(Obj082);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nError: " + ex.Message);
+            }
+        }
         //JC 260921 Ajustar informacion pallet cuando se cambia el pallet
         public bool UpdateTtico082Stat_CambioPallet(Ent_tticol082 Obj082)
         {
@@ -1241,7 +1255,10 @@ namespace whusa.Interfases
             return dal.Delete082(Obj082);
         }
 
-
+        public DataTable Delete182(Ent_tticol082 Obj082)
+        {
+            return dal.Delete182(Obj082);
+        }
 
         public DataTable ConsultarPallet_X_Picking83(Ent_tticol082 Obj082PPaid)
         {

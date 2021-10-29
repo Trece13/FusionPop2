@@ -129,10 +129,10 @@
                     <option value="0" selected>Select Plant</option>
                 </select>
             </div>
-            <label class="col-sm-2 col-form-label-lg" for="txPlant" id="lblDecCustomer">
-            </label>
+            <!--<label class="col-sm-2 col-form-label-lg" for="txPlant" id="lblDecCustomer">
+            </label>-->
         </div>
-        <div id="divWarehouse" class="form-group row ">
+<!--        <div id="divWarehouse" class="form-group row ">
             <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="Label1">
                 Warehouse
             </label>
@@ -156,6 +156,7 @@
             <label class="col-sm-2 col-form-label-lg" for="txPlant" id="Label4">
             </label>
         </div>
+        -->
         <%--        <div class="form-group row ">
             <label class="col-sm-2 col-form-label-lg" for="txPalletId" id="Label1">
                 To Date
@@ -165,15 +166,12 @@
             </div>
         </div>--%>
         <div class="form-group row" id="divQueryAction">
-            <div class="col-sm-2">
-            </div>
             <div class="col-sm-4">
                 <input type="button" class="btn btn-primary btn-lg col-sm-7 " id="btnQuery" value="Query" />
             </div>
         </div>
     </div>
     <hr />
-    <br />
     <label id="lblMsg">
     </label>
     <br />
@@ -192,7 +190,7 @@
     </form>
     <script>
         $(document).ready(function () {
-            $('#MyTable').DataTable();
+            //$('#MyTable').DataTable();
             SelectPlant();
         });
     </script>
@@ -325,7 +323,8 @@
 
         btnQuery.click(function () {
             tticol082 = [];
-            ClickQuery($('#DdPlant').val(), ($('#DdWarehouse').val() == "0" ? "" : $('#DdWarehouse').val()), ($('#DdMachine').val() == "0" ? "" : $('#DdMachine').val()));
+            //ClickQuery($('#DdPlant').val(), ($('#DdWarehouse').val() == "0" ? "" : $('#DdWarehouse').val()), ($('#DdMachine').val() == "0" ? "" : $('#DdMachine').val()));
+            ClickQuery($('#DdPlant').val());
         });
 
         btnSave.click(function () {
@@ -364,9 +363,11 @@
             }
         }
 
-        var ClickQuery = function ( plant, warehouse, machine ) {
+        //var ClickQuery = function ( plant, warehouse, machine ) {
+        var ClickQuery = function (plant) {
             //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
-            var Data = "{plant:'" + plant + "',warehouse:'" + warehouse + "',machine:'" + machine + "'}";
+            //var Data = "{plant:'" + plant + "',warehouse:'" + warehouse + "',machine:'" + machine + "'}";
+            var Data = "{plant:'" + plant + "'}";
             WebMethod = "ClickQuery";
             sendAjax(WebMethod, Data, ClickQuerySuccess, false);
         }
@@ -375,7 +376,7 @@
             //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
             var Data = "{}";
             WebMethod = "SelectPlant";
-            sendAjax(WebMethod, Data, SelectPlantSuccess, false);
+            sendAjax(WebMethod, Data, SelectPlantSuccess, false);            
         }
 
         var SelectWarehouse = function (idpland) {
@@ -416,6 +417,7 @@
                 });
 
             }
+            btnQuery.click();
         };
 
         function SelectWarehouseSuccess(r) {
@@ -482,7 +484,7 @@
                                     "</thead>" +
                                     "<tbody id='bodytb'>";
             var PieTable = "</tbody></table >" +
-            "<script>$('#MyTable').dataTable();<" +
+            //"<script>$('#MyTable').dataTable();<" +
             "/script><style>#MyTable_wrapper{width: 100%} .paginate_button{font-size:14px; margin-left:5px;} #MyTable_length{font-size:12px; margin-rigth:5px;} #MyTable_filter{font-size:12px; margin-rigth:5px;} <" + "/style>";
             var CuerpoTable = "";
 
@@ -697,7 +699,7 @@
                 if (row != i) {
 
                     $("#Myinput" + i).prop("disabled", true);
-                    $("#MyBtnSave" + i).hide(100);
+                    //$("#MyBtnSave" + i).hide(100);
                 }
             }
 
@@ -706,7 +708,7 @@
         function DisabledPono(a, i) {
             $("#" + a.id).prop("disabled", true);
             $("#" + a.id).val($("#aux" + a.id).val());
-            $("#MyBtnSave" + i).show().addClass("hidden");
+            //$("#MyBtnSave" + i).show().addClass("hidden");
         }
 
         function changeValuePlant(a) {

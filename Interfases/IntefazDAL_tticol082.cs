@@ -41,19 +41,38 @@ namespace whusa.Interfases
         {
             return dal.ConsultaPlantTticol082();
         }
+        //JC 281021 Cambiar Prioridad a picks
+        public DataTable ConsultaPlantTticol182()
+        {
+            return dal.ConsultaPlantTticol182();
+        }
         public DataTable ConsultaWarehouseTticol082( string plant )
         {
             return dal.ConsultaWarehouseTticol082( plant );
         }
-        
+        //JC 281021 Cambiar Prioridad a picks
+        public DataTable ConsultaWarehouseTticol182(string plant)
+        {
+            return dal.ConsultaWarehouseTticol182(plant);
+        }
         public object ConsultaMachineTticol082(string plant, string warehouse)
         {
             return dal.ConsultaMachineTticol082(plant,warehouse);
         }
-
+        //JC 281021 Cambiar Prioridad a picks
+        public object ConsultaMachineTticol182(string plant, string warehouse)
+        {
+            return dal.ConsultaMachineTticol082(plant, warehouse);
+        }
         public DataTable ConsultarTticol082PorPlant(string plant,string warehouse,string machine)
         {
             return dal.ConsultarTticol082PorPlant(plant,warehouse,machine);
+        }
+        //JC 281021 Cambiar Prioridad a picks
+        //public DataTable ConsultarTticol182PorPlant(string plant, string warehouse, string machine)
+        public DataTable ConsultarTticol182PorPlant(string plant)
+        {
+            return dal.ConsultarTticol182PorPlant(plant);
         }
 
         public DataTable ConsultarPalletIDTticol082(string PalletID)
@@ -64,6 +83,21 @@ namespace whusa.Interfases
         public DataTable ConsultarPalletID_x_Picking(string PalletID)
         {
             return dal.ConsultarPalletID_x_Picking(PalletID);
+        }
+
+        public DataTable ConsultarPalletID_x_FreePicking(string PalletID)
+        {
+            return dal.ConsultarPalletID_x_FreePicking(PalletID);
+        }
+        //JC 281021 Listado de Picking que se pueden desasignar
+        public DataTable ConsultarPicksTticol082(string Picks)
+        {
+            return dal.ConsultarPicksTticol082(Picks);
+        }
+
+        public DataTable ConsultarPicksTticol182(string Picks)
+        {
+            return dal.ConsultarPicksTticol182(Picks);
         }
 
         public DataTable ConsultarPalletIDTticol083(string PalletID)

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="UnassignPalletsPicked.aspx.cs" Inherits="whusap.WebPages.WorkOrders.UnassignPalletsPicked" %>
+    CodeBehind="UnassignPalletsFreePicked.aspx.cs" Inherits="whusap.WebPages.WorkOrders.UnassignPalletsFreePicked" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="styles/jquery-3.3.1.js"></script>
@@ -46,8 +46,6 @@
                     Pick ID
                 </label>
                 <div class="col-sm-6">
-                    <!--<input type="text" class="form-control form-control-lg col-sm-12" id="txPickID"
-                        placeholder="Pick ID" onkeyup="SearchPickIDTimer()" />-->
                     <select id="ddPick" class="form-control col-6" onchange="SearchPickIDTimer()">
                     <option value="0" selected>Select Pick to Unassign</option>
             </select>
@@ -141,7 +139,7 @@
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
                 type: "POST",
-                url: "UnassignPalletsPicked.aspx/" + WebMethod,
+                url: "UnassignPalletsFreePicked.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -188,8 +186,6 @@
         }
 
         var SearchPickID = function () {
-            //var Data = "{'key':'" + value + "'}";
-            //var Data = "{'PickID':'" + $('#txPickID').val().toUpperCase() + "'}";
              var Data = "{'PickID':'" + ddPick.value + "' }";
             WebMethod = "SearchPickID";
             sendAjax(WebMethod, Data, SearchPickIDSuccess, false);
@@ -221,13 +217,11 @@
             myObj = JSON.parse(response.d);
             if (myObj.length > 0) {
                 for (var i = 0; i < myObj.length; i++) {
-                    bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].PAID + "</td><td>" + myObj[i].LOCA + "</td><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].CWAR + "</td><td>" + myObj[i].DSCA + "</td><td>" + myObj[i].QTYT + "</td><td>" + myObj[i].UNIT + "</td></tr>";
+                    bodyRows += "<tr id='rowNum" + i + "'><td>" + myObj[i].ITEM + "</td><td>" + myObj[i].CWAR + "</td><td>" + myObj[i].DSCA + "</td><td>" + myObj[i].QTYT + "</td><td>" + myObj[i].UNIT + "</td></tr>";
                 }
                 var tableOptions = "<table id ='tblItems' class='table animate__animated animate__fadeIn' style='width:100% display:none'>" +
                                             "<thead>" +
                                               "<tr>" +
-                                                "<th scope='col'>Pallet</th>" +
-                                                "<th scope='col'>Location</th>" +
                                                 "<th scope='col'>Item</th>" +
                                                 "<th scope='col'>Warehouse</th>" +
                                                 "<th scope='col'>Description</th>" +
@@ -237,7 +231,6 @@
                                            "</thead>" +
                                            "<tbody>" +
                                             bodyRows +
-                                           //"<tr><button type='button' class='btn btn-primary col-12' onclick='designar(" + $('#txPickID').val().toUpperCase() + ")'>Unassing</button></tr><br>" +
                                            "<tr><button type='button' class='btn btn-primary col-12' onclick='designar(" + $('#ddPick').val() + ")'>Unassing</button></tr><br>" +                                           
                                            "</tbody>" +
                                         "</table>";
@@ -289,7 +282,7 @@
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
-                url: "UnassignPalletsPicked.aspx/" + Method.trim(),
+                url: "UnassignPalletsFreePicked.aspx/" + Method.trim(),
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

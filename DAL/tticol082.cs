@@ -247,8 +247,59 @@ namespace whusa.DAL
             }
             return retorno;
         }
+        //JC 281021 Cambiar prioridad a picks
+        public DataTable ConsultaPlantTticol182()
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
 
         public DataTable ConsultaWarehouseTticol082( string plant )
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+            string strError = string.Empty;
+
+            try
+            {
+
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$TITE", plant);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+        //JC 281021 Cambiar prioridad a picks
+        public DataTable ConsultaWarehouseTticol182(string plant)
         {
             method = MethodBase.GetCurrentMethod();
             DataTable retorno = new DataTable();
@@ -348,6 +399,33 @@ namespace whusa.DAL
             }
             return retrotno;
         }
+        //JC 281021 Cambiar prioridad a picks
+        //public DataTable ConsultarTticol182PorPlant(string plant, string warehouse, string machine)
+        public DataTable ConsultarTticol182PorPlant(string plant)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$TITE", plant);
+                //paramList.Add(":T$CWAR", warehouse);
+                //paramList.Add(":T$MCNO", machine);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
 
         public DataTable ConsultarTticol082PorPlantPono(string plant,int prio,string advs)
         {
@@ -412,6 +490,80 @@ namespace whusa.DAL
                 //paramList.Add(":PAID", PalletID);
                 paramList.Add(":PICK", PalletID);
 
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+
+        public DataTable ConsultarPalletID_x_FreePicking(string PalletID)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                //paramList.Add(":PAID", PalletID);
+                paramList.Add(":PICK", PalletID);
+
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+        //JC 281021 Listado de Picking que se pueden desasignar
+        public DataTable ConsultarPicksTticol082(string Picks)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PICK", Picks);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+
+        public DataTable ConsultarPicksTticol182(string Picks)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PICK", Picks);
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
@@ -1244,9 +1396,35 @@ namespace whusa.DAL
             return retorno;
         }
 
-
-
         public object ConsultaMachineTticol082(string plant, string warehouse)
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+            string strError = string.Empty;
+
+            try
+            {
+
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$TITE", plant);
+                paramList.Add(":T$CWAR", warehouse);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+        //JC 281021 Cambiar prioridad a picks
+        public object ConsultaMachineTticol182(string plant, string warehouse)
         {
             method = MethodBase.GetCurrentMethod();
             DataTable retorno = new DataTable();
