@@ -90,6 +90,10 @@
         {
             display:none;
         }
+        .btnEdit{
+            display:none;
+            font-size:9px;
+        }
     </style>
     <script>
         var timer;
@@ -192,6 +196,7 @@
         $(document).ready(function () {
             //$('#MyTable').DataTable();
             SelectPlant();
+            $('#lblMsg').html("");
         });
     </script>
     <script>
@@ -485,7 +490,7 @@
                                     "<tbody id='bodytb'>";
             var PieTable = "</tbody></table >" +
             //"<script>$('#MyTable').dataTable();<" +
-            "/script><style>#MyTable_wrapper{width: 100%} .paginate_button{font-size:14px; margin-left:5px;} #MyTable_length{font-size:12px; margin-rigth:5px;} #MyTable_filter{font-size:12px; margin-rigth:5px;} <" + "/style>";
+            "<style>#MyTable_wrapper{width: 100%} .paginate_button{font-size:14px; margin-left:5px;} #MyTable_length{font-size:12px; margin-rigth:5px;} #MyTable_filter{font-size:12px; margin-rigth:5px;} <" + "/style>";
             var CuerpoTable = "";
 
             $('.table').remove();
@@ -526,7 +531,7 @@
                     //                    STAT      
 
 
-                    newRow = '<tr id=' + id + '>' +
+                    newRow = '<tr OORG = ' + item.OORG + ' ORNO = ' + item.ORNO + ' PONO = ' + item.PONO + ' ADVS = ' + item.ADVS + ' PICK = ' + item.PICK + ' id=' + id + ' onmouseenter="EnabledPono(' + idInput + ',' + i + ')">' +
                                     '<td id="prio' + i + '" style="color:white !important">' + item.PRIO + '</td>' +
                                     '<td id="orno' + i + '">' + item.ORNO + '</td>' +
                                     '<td id="item' + i + '">' + item.ITEM + '</td>' +
@@ -538,11 +543,8 @@
                                     '<td id="time' + i + '">' + item.TIME + '</td>' +
                                     '<td style="display:none">' + item.ADVS + '</td>' +
                                     '<td style="width:200px">' +
-                                    '<div class="input-group mb-3"><div class="input-group-prepend"><button class="btn btn-primary btnEdit" type="button" onclick="EnabledPono(' + idInput + ',' + i + ')"><i class="fa fa-pencil" aria-hidden="true"></i></button></div><input type="text" style="width:110px; class="form-control" placeholder="' + item.PRIO + '" aria-label="Example text with button addon" aria-describedby="button-addon1" id=' + idInput + ' value=' + item.PRIO + ' disabled></div>' +
+                                    '<div class="input-group mb-3"><div class="input-group-prepend"><button class="btn btn-primary btnEdit" type="button" id = "btnEdit'+i+'" onclick= SavePrio("'+ i + '")>Change</button></div><input type="text" style="width:110px; class="form-control" placeholder="' + item.PRIO + '" aria-label="Example text with button addon" aria-describedby="button-addon1" id=' + idInput + ' value=' + item.PRIO + ' disabled></div>' +
                                     '<td style="width:200px"><input type="number" class = "MyPrio form-control hidden" style="width:110px; display: inline-block;" id= aux' + idInput + ' value=' + item.PRIO + ' disabled>';
-                    //                    newRowEditButton = item.PICK.trim() == "" ? '<input type="button" id =' + IdBtnEdit + ' value="Edit" class="btn btn-primary bouton-image"  style="width:50px" onclick="HabilitarPrioridad(' + idInput + ',' + id + ',' + IdBtnCancel + ',' + IdBtnSave + ',' + IdBtnEdit + ')"></input>&nbsp' : '';
-                    //                    newRowCancelButton = item.PICK.trim() == "" ? '<input type="button" id =' + IdBtnCancel + ' value="Cancel" class="btn btn-danger  bouton-image" style="width:50px" onclick="DeshabilitarPrioridad(' + idInput + ',' + id + ',' + IdBtnEdit + ',' + IdBtnSave + ',' + IdBtnCancel + ')"></input>&nbsp' : '';
-                    //                    newRowSaveButton = item.PICK.trim() == "" ? '<input type="button" id =' + IdBtnSave + ' value="Save" class="btn btn-success bouton-image" style="width:50px" onclick="AgregrarPrioridad(' + idInput + ',' + id + ',' + IdBtnCancel + ',' + IdBtnEdit + ',' + IdBtnSave + ')"></input>' : '';
                     newRowSaveButton = item.PICK.trim() == "" ? '<i class="fa fa-spinner fa-pulse fa-lg fa-fw loadIco" style="display: none;" id="loadIco' + i + '"></i><input type="button"  id =' + IdBtnSave + ' value="Save" class="btn btn-success save-button" style="width:50px;display:none" onclick="AgregrarPrioridadSave(' + idInput + ',' + id + ',' + i +')" ></input>' : '';
                     newRowEnd = '</td></tr>';
 
@@ -565,7 +567,26 @@
         }
 
 
+        var SavePrio = function (i) {
+            //alert("{'PRIO':'" + $('#inputNum' + i).val() + "','PICK':'" + PICK + "'}");
+            console.log($("#MyRow" + i).attr('oorg')+" "+
+            $("#MyRow" + i).attr('orno') + " " +
+            $("#MyRow" + i).attr('pono') + " " +
+            $("#MyRow" + i).attr('advs') + " " +
+            $("#MyRow" + i).attr('pick') + " " +
+            $("#Myinput" + i).val());
 
+            if ($('#Myinput' + i).attr('placeholder').trim() != $('#Myinput' + i).val().trim() && $('#Myinput' + i).val().trim() != "" && parseInt($('#Myinput' + i).val().trim()) >= 0) {
+                sendAjax("SavePrio", "{'PRIO':'" + $('#Myinput' + i).val() + "','PICK':'" + $("#MyRow" + i).attr('pick') + "'}", SavePrioSuccess);
+            }
+            else {
+                $('#inputNum' + i).focus();
+            }
+        }
+
+        var SavePrioSuccess = function () {
+            SelectWarehouse($("#DdPlant").val());
+        }
 
         function ClickSaveSuccess(r) {
             $(".loadIco").hide(100);
@@ -694,12 +715,12 @@
             $("#" + a.id).focus();
             $("#MyBtnSave" + row).show(100);
             $("#" + a.id).val("");
-
+            $("#btnEdit" + row).show(100);
             for (var i = 0; i < rowsNum; i++) {
                 if (row != i) {
 
                     $("#Myinput" + i).prop("disabled", true);
-                    //$("#MyBtnSave" + i).hide(100);
+                    $("#btnEdit" + i).hide(100);
                 }
             }
 

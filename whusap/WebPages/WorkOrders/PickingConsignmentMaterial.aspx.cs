@@ -48,6 +48,7 @@ namespace whusap.WebPages.WorkOrders
         private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
         private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
         private static IntefazDAL_ttccol307 _idaltccol307 = new IntefazDAL_ttccol307();
+        public static InterfazDAL_ttdcol137 ITticol137 = new InterfazDAL_ttdcol137();
         public EventArgs Ge = new EventArgs();
         private static Mensajes _mensajesForm = new Mensajes();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();

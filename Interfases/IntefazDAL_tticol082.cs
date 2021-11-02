@@ -282,5 +282,20 @@ namespace whusa.Interfases
         {
             return dal.ExistPrio(MyObj082);
         }
+
+        public bool UpdatePrio182(Ent_tticol082 MyObj082)
+        {
+            return dal.UpdatePrio182(MyObj082);
+        }
+
+        public DataTable getNextPrio182(Ent_tticol082 MyObj082)
+        {
+            return dal.getNextPrio182(MyObj082);
+        }
+
+        public DataTable ExistPrio182(Ent_tticol082 MyObj082)
+        {
+            return dal.ExistPrio182(MyObj082);
+        }
     }
 }

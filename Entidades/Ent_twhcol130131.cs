@@ -7,7 +7,7 @@ namespace whusa
 {
     public class Ent_twhcol130131
     {
-        public string QTYA;
+        
         public Ent_twhcol130131()
         {
             this.TERM = string.Empty;
@@ -54,7 +54,7 @@ namespace whusa
             this.PAIDS = new List<string>();
             this.QTYCFinal = string.Empty;
         }
-
+        public string QTYA { get; set; }
         public string TERM { get; set; }
         public string OORG { get; set; }
         public string ORNO { get; set; }

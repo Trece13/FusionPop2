@@ -256,7 +256,7 @@
             border-radius: 4px;
         }
 
-        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc,#MainDiv {
+        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc, #MainDiv {
             display: none;
         }
 
@@ -468,7 +468,7 @@
                     <br>
                     <div class="row">
                         <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button>
-                        <button class="btn btn-danger col-12 btn-sm" id="" type="button">Exit Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
+                        <button class="btn btn-danger col-12 btn-sm" id="" type="button" onclick="Stop()";><span>Stop Picking&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                     </div>
                     <div class="row">
                         <label id="lblError" style="color: red; font-size: 30px;"></label>
@@ -742,11 +742,11 @@
                 //hideShowNeutroInputText(txLoca, true);
                 //hideShowNeutroSelect(ddReason, true);
                 cnpk = MyObj.CNPK;
-                if (cnpk == "1"){
+                if (cnpk == "1") {
                     hideShowNeutroInputText(txQtyc, false);
                     hideShowNeutroInputText(btnConfirm, true);
                 }
-                else{
+                else {
                     hideShowNeutroInputText(txQtyc, true);
                     hideShowNeutroInputText(btnConfirm, false);
 
@@ -818,7 +818,7 @@
                         $('#bdPallets').hide(100);
                     }
                     $("#bdPallets").append(bodyRows);
-                    
+
                 },
                 failure: function (response) {
                     alert(response.d);
@@ -999,12 +999,16 @@
         var loadPicks182Success = function (r) {
 
             var MyObjLst = JSON.parse(r.d);
-            
+
             var bodyRows = "";
             if (MyObjLst.length > 0) {
                 var validos = true;
+                var flag = false;
                 MyObjLst.forEach(function (item, i) {
-                    bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>" + item.T$DSCA + "</td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
+                    if (flag == false) {
+                        bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>" + item.T$DSCA + "</td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
+                        flag = true;
+                    }
                 });
                 if (validos) {
                     $('#bdPicket182').show(500);
@@ -1018,7 +1022,7 @@
             }
             $("#bdPicket182").append(bodyRows);
 
-            
+
         }
 
         //var selectPicksPending = function (e) {
@@ -1286,6 +1290,33 @@
             }
         }
 
+        var Stop = function () {
+            if (verificarLoadersInactivos()) {
+                ConfirmProcessing = true;
+                $("#ConfirmLoader").show(100);
+                if (parseFloat($("#Contenido_lblQuantity").val()) <= 0) {
+                    $("#Contenido_lblQuantity").focus();
+                    $('#LblError').html("The quantity cann´t be empty, zero less than zero");
+                    ConfirmProcessing = false;
+                    $("#ConfirmLoader").hide(500);
+                    return;
+                }
+                dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "','consigment':'" + (chkConsigment.checked == true ? 'true' : 'false') + "'}";
+
+                //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
+                var AjaxConfirm = $.ajax({
+                    type: "POST",
+                    url: "PickingUpdate.aspx/StopPicking",
+                    data: dataS,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        window.history.back();
+                    }
+
+                });
+            }
+        }
 
 
         var SucceessConfirm = function () {
@@ -1449,7 +1480,7 @@
             if (ConfirmProcessing != false) {
                 return false;
             }
-            else{
+            else {
                 return true;
             }
         }

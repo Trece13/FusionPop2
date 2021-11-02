@@ -1596,5 +1596,78 @@ namespace whusa.DAL
             }
             return retrotno;
         }
+
+        public bool UpdatePrio182(Ent_tticol082 MyObj082)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            bool retrotno = false;
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PRIO", MyObj082.PRIO);
+                paramList.Add(":PICK", MyObj082.PICK);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+
+        public DataTable getNextPrio182(Ent_tticol082 MyObj082)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PRIO", MyObj082.PRIO);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+
+        public DataTable ExistPrio182(Ent_tticol082 MyObj082)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PRIO", MyObj082.PRIO);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
     }
 }
