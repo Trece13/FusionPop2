@@ -3609,7 +3609,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     </Module>
     <Module name="ttcibd001">
       <!--NEW-->
-      <operationName name="CantidadDevueltaStockPallet">
+      <operationName name="findSalesOrder">
+        <stringSQL>
+          SELECT *
+          FROM  {0}.ttdsls400{1}
+          WHERE T$ORNO = '[:T$ORNO]'
+        </stringSQL>
+      </operationName>   
+          <operationName name="CantidadDevueltaStockPallet">
         <stringSQL>
           SELECT TO_CHAR((NVL(SUM(QTYR),0)), '999999999.999') AS QTYR
           FROM
