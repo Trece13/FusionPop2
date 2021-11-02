@@ -50,6 +50,7 @@ namespace whusap.WebPages.WorkOrders
         private static IntefazDAL_ttccol307 _idaltccol307 = new IntefazDAL_ttccol307();
         private static InterfazDAL_tticol182 _idaltticol182 = new InterfazDAL_tticol182();
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
+        public static InterfazDAL_ttdcol137 ITticol137 = new InterfazDAL_ttdcol137();
         public EventArgs Ge = new EventArgs();
         private static Mensajes _mensajesForm = new Mensajes();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
@@ -340,23 +341,32 @@ namespace whusap.WebPages.WorkOrders
             MyObj182.CWAR = CWAR;
 
             DataTable DTtticol182 = _idaltticol182.SelectRecord(ref MyObj182, ref strError);
-            if (DTtticol182.Rows.Count > 0)
-            {
-                MySessionObjPicking.OORG = DTtticol182.Rows[0]["T$OORG"].ToString();
-                MySessionObjPicking.ORNO = DTtticol182.Rows[0]["T$ORNO"].ToString();
-                MySessionObjPicking.PONO = DTtticol182.Rows[0]["T$PONO"].ToString();
-                MySessionObjPicking.ADVS = DTtticol182.Rows[0]["T$ADVS"].ToString();
-                MySessionObjPicking.ITEM = DTtticol182.Rows[0]["T$ITEM"].ToString();
-                MySessionObjPicking.QTY = DTtticol182.Rows[0]["T$QTYT"].ToString();
-                MySessionObjPicking.UN = DTtticol182.Rows[0]["T$UNIT"].ToString();
-                MySessionObjPicking.WRH = DTtticol182.Rows[0]["T$CWAR"].ToString();
-                MySessionObjPicking.MCNO = DTtticol182.Rows[0]["T$MCNO"].ToString();
-                MySessionObjPicking.PRIO = DTtticol182.Rows[0]["T$PRIO"].ToString();
-                MySessionObjPicking.PICK = DTtticol182.Rows[0]["T$PICK"].ToString();
-                MySessionObjPicking.DESCRIPTION = DTtticol182.Rows[0]["T$DSCA"].ToString();
-                //MySessionObjPicking.PALLETID = DTtticol182.Rows[0]["T$PAID"].ToString();
-                //MySessionObjPicking.LOCA = DTtticol182.Rows[0]["T$LOCA"].ToString();
-                MySessionObjPicking.STAT = DTtticol182.Rows[0]["T$STAT"].ToString();
+            int index = 0;            
+            foreach( DataRow row in DTtticol182.Rows){
+                if (row["T$STAT"].ToString().Trim() == "1" || (row["T$STAT"].ToString().Trim() == "5" && row["T$LOGN"].ToString().Trim() == HttpContext.Current.Session["user"].ToString().Trim()))
+                {
+                    MySessionObjPicking.OORG = row["T$OORG"].ToString();
+                    MySessionObjPicking.ORNO = row["T$ORNO"].ToString();
+                    MySessionObjPicking.PONO = row["T$PONO"].ToString();
+                    MySessionObjPicking.ADVS = row["T$ADVS"].ToString();
+                    MySessionObjPicking.ITEM = row["T$ITEM"].ToString();
+                    MySessionObjPicking.QTY = row["T$QTYT"].ToString();
+                    MySessionObjPicking.UN = row["T$UNIT"].ToString();
+                    MySessionObjPicking.WRH = row["T$CWAR"].ToString();
+                    MySessionObjPicking.MCNO = row["T$MCNO"].ToString();
+                    MySessionObjPicking.PRIO = row["T$PRIO"].ToString();
+                    MySessionObjPicking.PICK = row["T$PICK"].ToString();
+                    MySessionObjPicking.DESCRIPTION = row["T$DSCA"].ToString();
+                    //MySessionObjPicking.PALLETID = row["T$PAID"].ToString();
+                    //MySessionObjPicking.LOCA = row["T$LOCA"].ToString();
+                    MySessionObjPicking.STAT = row["T$STAT"].ToString();
+                    MyObj182.PICK = MySessionObjPicking.PICK;
+                    MyObj182.STAT = "5";
+                    MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
+                    _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
+                    break;
+                }
+                index++;
             }
             HttpContext.Current.Session["MyObjPicking"] = MySessionObjPicking;
             return JsonConvert.SerializeObject(DTtticol182);
@@ -686,7 +696,7 @@ namespace whusap.WebPages.WorkOrders
 
 
                 if (MySessionObjPicking.WRH.Trim() != DTPalletID.Rows[0]["CWAT"].ToString().Trim() ||
-                ObjPicking182.ITEM.Trim() != DTPalletID.Rows[0]["ITEM"].ToString().Trim())
+                MySessionObjPicking.ITEM.Trim() != DTPalletID.Rows[0]["ITEM"].ToString().Trim())
                 {
                     ObjPicking182.error = true;
                     ObjPicking182.errorMsg = ThepalletIDDoesntexistorItsinpickingprocess;
@@ -695,18 +705,28 @@ namespace whusap.WebPages.WorkOrders
 
                 if (DTPalletID.Rows[0]["TBL"].ToString().Trim() == "ticol022")
                 {
+                    //Ent_ttdcol137 data137 = new Ent_ttdcol137();
+                    //data137.Dele = 1;
+                    //var validateSaveTicol022 = ITticol137.Actualizarttdcol022Status(data137);
                     HttpContext.Current.Session["flag022"] = 1;
                     HttpContext.Current.Session["flag042"] = 0;
                     HttpContext.Current.Session["flag131"] = 0;
                 }
                 else if (DTPalletID.Rows[0]["TBL"].ToString().Trim() == "ticol042")
                 {
+                    //Ent_ttdcol137 data137 = new Ent_ttdcol137();
+                    //data137.Dele = 1;
+                    //var validateSaveTicol042 = ITticol137.Actualizarttdcol042Status(data137);
                     HttpContext.Current.Session["flag042"] = 1;
                     HttpContext.Current.Session["flag131"] = 0;
                     HttpContext.Current.Session["flag022"] = 0;
                 }
                 else if (DTPalletID.Rows[0]["TBL"].ToString().Trim() == "whcol131")
                 {
+                    //int STATUS = 1;
+                    //string PALLET = PAID_NEW;
+                    //decimal qt = 0; 
+                    //var validateSaveWhcol131 = ITticol137.Actualizartwhcol131CantStatus(ref PALLET, ref STATUS, ref qt);
                     HttpContext.Current.Session["flag131"] = 1;
                     HttpContext.Current.Session["flag022"] = 0;
                     HttpContext.Current.Session["flag042"] = 0;
@@ -777,6 +797,19 @@ namespace whusap.WebPages.WorkOrders
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             string sentencia1 = string.Empty;
             twhcolDAL.EliminarTccol307140(MySessionObjPicking.PICK.Trim(), MySessionObjPicking.WRH.Trim(), ref sentencia1);
+        }
+
+        [WebMethod]
+        public static string  StopPicking()
+        {
+            string strError = string.Empty;
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+            Ent_tticol182 MyObj182 = new Ent_tticol182();
+            MyObj182.STAT = "1";
+            MyObj182.PICK = MySessionObjPicking.PICK;
+            _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
+            string UrlBase = WebConfigurationManager.AppSettings["UrlBase"].ToString();
+            return UrlBase + "/Webpages/Login/Login/whMenuI.aspx";
         }
 
         [WebMethod]
@@ -913,6 +946,8 @@ namespace whusap.WebPages.WorkOrders
 
                             _idaltticol125.updataPalletStatus022(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "11" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "8" : "7");
 
+                            twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
+
                             if (res182 && Convert.ToDecimal(obj182Old.QTYT) != 0)
                             {
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
@@ -947,6 +982,7 @@ namespace whusap.WebPages.WorkOrders
                             bool res182 = Itticol082.InsertarregistroItticol082(obj082);
                             bool resUpd182 = _idaltticol182.ActualizarRegistroItticol182(obj182Old);
                             _idaltticol125.updataPalletStatus022(PAID, "11");
+                            twhcolDAL.ingRegTticol092140(maximo, PAID, PAID, 1, HttpContext.Current.Session["user"].ToString().Trim());
 
                             HttpContext.Current.Session["PartialLabel"] = "no";
                             HttpContext.Current.Session["PickLabel"] = "yes";
@@ -965,6 +1001,7 @@ namespace whusap.WebPages.WorkOrders
                         bool res182 = Itticol082.InsertarregistroItticol082(obj082);
                         bool resUpd182 = _idaltticol182.ActualizarRegistroItticol182(obj182Old);
                         _idaltticol125.updataPalletStatus022(PAID, "11");
+                        twhcolDAL.ingRegTticol092140(maximo, PAID, PAID, 1, HttpContext.Current.Session["user"].ToString().Trim());
                         HttpContext.Current.Session["PartialLabel"] = "no";
                         HttpContext.Current.Session["PickLabel"] = "yes";
                         HttpContext.Current.Session["Pallet"] = obj082.PAID;
@@ -979,6 +1016,7 @@ namespace whusap.WebPages.WorkOrders
 
                         //twhcolDAL.updatetticol222Quantity(PAID.Trim(), qtyt_old, qtyt_old);
                     }
+                    _idaltticol182.Delete182Zero();
                     return JsonConvert.SerializeObject(MyObj);
 
                 }
@@ -1044,6 +1082,7 @@ namespace whusap.WebPages.WorkOrders
                             var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj, ref strError);
 
                             _idaltticol125.updataPalletStatus022(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "11" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "8" : "7");
+                            twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
 
                             if (res182 && Convert.ToDecimal(obj182Old.QTYT) != 0)
                             {
@@ -1082,6 +1121,7 @@ namespace whusap.WebPages.WorkOrders
                             HttpContext.Current.Session["PartialLabel"] = "no";
                             HttpContext.Current.Session["PickLabel"] = "yes";
                             _idaltticol125.updataPalletStatus042(PAID, "11");
+                            twhcolDAL.ingRegTticol092140(maximo, PAID, PAID, 1, HttpContext.Current.Session["user"].ToString().Trim());
                             HttpContext.Current.Session["Pallet"] = obj082.PAID;
                             HttpContext.Current.Session["Pick"] = obj082.PICK;
                             HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
@@ -1097,6 +1137,7 @@ namespace whusap.WebPages.WorkOrders
                         bool res182 = Itticol082.InsertarregistroItticol082(obj082);
                         bool resUpd182 = _idaltticol182.ActualizarRegistroItticol182(obj182Old);
                         _idaltticol125.updataPalletStatus042(PAID, "11");
+                        twhcolDAL.ingRegTticol092140(maximo, PAID, PAID, 1, HttpContext.Current.Session["user"].ToString().Trim());
                         HttpContext.Current.Session["PartialLabel"] = "no";
                         HttpContext.Current.Session["PickLabel"] = "yes";
                         //twhcolDAL.updatetticol242Quantity(PAID.Trim(), qtyt_old, qtyt_old);
@@ -1110,7 +1151,7 @@ namespace whusap.WebPages.WorkOrders
                         HttpContext.Current.Session["codePaid2"] = obj082.PAID;
 
                     }
-
+                    _idaltticol182.Delete182Zero();
                     return JsonConvert.SerializeObject(MyObj);
 
 
@@ -1176,6 +1217,8 @@ namespace whusap.WebPages.WorkOrders
                             bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
 
                             _idaltticol125.updataPalletStatus131(PAID, "3");
+                            twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
+
                             if (res182 && Convert.ToDecimal(obj182Old.QTYT) != 0)
                             {
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
@@ -1213,6 +1256,7 @@ namespace whusap.WebPages.WorkOrders
                             HttpContext.Current.Session["PartialLabel"] = "no";
                             HttpContext.Current.Session["PickLabel"] = "yes";
                             _idaltticol125.updataPalletStatus131(PAID, "9");
+                            twhcolDAL.ingRegTticol092140(maximo, PAID, PAID, 1, HttpContext.Current.Session["user"].ToString().Trim());
                             HttpContext.Current.Session["Pallet"] = obj082.PAID;
                             HttpContext.Current.Session["Pick"] = obj082.PICK;
                             HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
@@ -1228,6 +1272,7 @@ namespace whusap.WebPages.WorkOrders
                         bool res182 = Itticol082.InsertarregistroItticol082(obj082);
                         bool resUpd182 = _idaltticol182.ActualizarRegistroItticol182(obj182Old);
                         _idaltticol125.updataPalletStatus131(PAID, "9");
+                        twhcolDAL.ingRegTticol092140(maximo, PAID, PAID, 1, HttpContext.Current.Session["user"].ToString().Trim());
                         HttpContext.Current.Session["PartialLabel"] = "no";
                         HttpContext.Current.Session["PickLabel"] = "yes";
                         //twhcolDAL.updatetwhcol131Quantity(PAID.Trim(), qtyt_old, qtyt_old);
@@ -1241,12 +1286,14 @@ namespace whusap.WebPages.WorkOrders
                         HttpContext.Current.Session["PartialLabel"] = "no";
 
                     }
+                    _idaltticol182.Delete182Zero();
                     return JsonConvert.SerializeObject(MyObj);
                 }
                 else
                 {
                     Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
                     MyErrorObj.Error = true;
+                    _idaltticol182.Delete182Zero();
                     return JsonConvert.SerializeObject(MyErrorObj); ;
                 }
 
@@ -1257,6 +1304,7 @@ namespace whusap.WebPages.WorkOrders
                 Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
                 MyErrorObj.Error = true;
                 MyErrorObj.errorMsg = errorlog + e.Message;
+                _idaltticol182.Delete182Zero();
                 return JsonConvert.SerializeObject(MyErrorObj); ;
             }
         }

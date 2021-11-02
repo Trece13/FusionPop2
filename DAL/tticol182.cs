@@ -33,6 +33,60 @@ namespace whusa.DAL
             //Constructor
         }
 
+        public DataTable Delete182Zero()
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+                return retorno;
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return retorno;
+        }
+
+
+        public DataTable ChangeStat182(ref Ent_tticol182 data, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            DataTable retorno = new DataTable();
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$PICK", data.PICK.Trim());
+                paramList.Add(":T$STAT", data.STAT.Trim());
+                paramList.Add(":T$LOGN", data.LOGN.Trim());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+                return retorno;
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
+
         public DataTable SelectRecord(ref Ent_tticol182 data, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
