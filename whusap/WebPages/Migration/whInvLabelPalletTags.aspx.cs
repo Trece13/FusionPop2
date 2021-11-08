@@ -127,6 +127,13 @@ namespace whusap.WebPages.Migration
             {
                 _tipoFormulario = Request.QueryString["tipoFormulario"].ToString().ToUpper();
             }
+            //JC 051121 SI es una reimpresion ir a la rutina correcta.
+
+            if (_tipoFormulario == "REPRINT")
+            {
+                formRePrintLabel();
+                return;
+            }
 
             lblError.Text = "";
             lblConfirm.Text = "";
