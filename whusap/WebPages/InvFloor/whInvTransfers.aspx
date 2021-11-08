@@ -369,7 +369,7 @@
                     txbTargetWarehouse.focus();
                 }
                 else {
-                    var Data = "{'PAID':'" + txPalletId.value.trim().toUpperCase() + "','CurrentWarehouse':'" + txbCurrentWarehouse.value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + txbCurrentLocation.value + "','TargetWarehouse':'" + txbTargetWarehouse.value.trim().toUpperCase() + "','TargetSloc':'" + (SLOC == true ?'1':'0') + "','TargetLocation':'" + txbTargetLocation.value + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
+                    var Data = "{'PAID':'" + txPalletId.value.trim().toUpperCase() + "','CurrentWarehouse':'" + txbCurrentWarehouse.value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + txbCurrentLocation.value.toUpperCase().trim() + "','TargetWarehouse':'" + txbTargetWarehouse.value.trim().toUpperCase() + "','TargetSloc':'" + (SLOC == true ? '1' : '0') + "','TargetLocation':'" + txbTargetLocation.value.toUpperCase().trim() + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
                     sendAjax("clickTransfer", Data, SuccesTransferConsult);
                 }
             }

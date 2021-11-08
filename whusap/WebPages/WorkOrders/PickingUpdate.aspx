@@ -826,70 +826,6 @@
             });
         }
 
-        function ShowCurrentOptionsWarehouse() {
-            var bodyRows = ""
-            var drop = true
-            //divTableWarehouse.innerHTML = '';
-            ajaxShowCurrentOptionsWarehouse = $.ajax({
-                type: "POST",
-                async: false,
-                url: "PickingUpdate.aspx/GetAllsPAlletsPending",
-                data: "{}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    var dropPending = false;
-                    myObj = JSON.parse(response.d);
-                    window.localStorage.setItem('MyPalletList', JSON.stringify(myObj));
-                    if (myObj.length > 0) {
-                        existPalletsPick = true;
-                        console.log(myObj);
-                        for (var i = 0; i < myObj.length; i++) {
-
-                            if (myObj[i].T$STAT == 1) {
-                                bodyRows += "<tr id='rowNum" + i + "' row= '" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$LOCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td></td></tr>";
-                            }
-                            else {
-                                dropPending = true;
-                                bodyRows += "<tr onClick='Drop(this,false)' row= '" + i + "' id='rowNum" + i + "'><td>" + myObj[i].T$ORNO + "</td><td>" + myObj[i].T$MCNO + "</td><td>" + myObj[i].T$CWAR + "</td><td>" + myObj[i].T$ITEM + "</td><td>" + myObj[i].T$LOCA + "</td><td>" + myObj[i].T$QTYT + "</td><td>" + myObj[i].T$UNIT + "</td><td>" + myObj[i].T$PAID + "</td><td><button class='btn btn-success col-12 btn-sm' type='button' id='btnPickingPending" + i + "'>Drop<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='DropLoader" + i + "'></i></span></button></td></tr>";
-                            }
-                        }
-                        var tableOptions = "<table id ='tblWare' class='table animate__animated animate__fadeInt' style='width:100%;'>" +
-                                                    "<thead>" +
-                                                      "<tr>" +
-                                                        "<th scope='col'>Work Order</th>" +
-                                                        "<th scope='col'>Machine</th>" +
-                                                        "<th scope='col'>Warehouse</th>" +
-                                                        "<th scope='col'>Item</th>" +
-                                                        "<th scope='col'>Location</th>" +
-                                                        "<th scope='col'>Quantity</th>" +
-                                                        "<th scope='col'>Unit</th>" +
-                                                        "<th scope='col'>Pallet ID</th>" +
-                                                        "<th scope='col'></th>" +
-                                                    "</tr>" +
-                                                   "</thead>" +
-                                                   "<tbody>" +
-                                                   bodyRows +
-                        "</tbody>" +
-                                                "</table>";
-                        dropPending == true ? tableOptions += "<button type='button' onClick='Drop(this,true)' class='btn btn-success col-12 btn-sm animate__animated animate__fadeIn' type='button' id='btnPickingPending" + i + "'>End Picking<span>&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display:none' id='EndPickingLoader'></i></span></button>" : tableOptions;
-
-
-                        //$("#divTableWarehouse").append(tableOptions);
-                    }
-                    else if (drop == false) {
-                        existPalletsPick = false;
-                        alert("No more pickings availables for this warehouse");
-                        //divTableWarehouse.innerHTML = '';
-                        //divTableItem.innerHTML = '';
-                    }
-                },
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-
         var loadPage = function () {
             skip = false;
             StartProcessing = false;
@@ -1073,78 +1009,6 @@
         var ClearFormWarehouse = function () {
 
         }
-
-        var Drop = function (e, multi) {
-            if (verificarLoadersInactivos()) {
-                if (multi == false) {
-                    DropProcessing = true;
-                    indexDropLoader = e.getAttribute('row');
-                    $('#DropLoader' + indexDropLoader).show(100);
-                    localStorage.setItem('paid', e.children[7].innerHTML.trim());
-                    EventoAjax("Drop", "{'PAID':'" + e.children[7].innerHTML.trim() + "','Consigment':" + chkConsigment.checked + "}", DropSuccess);
-                }
-                else {
-                    EndPickingProcessing = true;
-                    $("#EndPickingLoader").show(100);
-                    var myList = JSON.parse(localStorage.getItem('MyPalletList'));
-                    var flag1 = false;
-                    //JC 260709 No estaba imprimiendo los pallets cuando se le oprimía end picking
-                    var Paids = ""
-                    myList.forEach(function (x) {
-                        if (x.T$STAT == 2) {
-                            EventoAjax("DropEndPicking", "{'PICK':'" + myList.T$PICK + "','Consigment':" + chkConsigment.checked + "}", DropMultipleSuccess);
-                            Paids += x.T$PAID + "/" + x.T$QTYT + " ";
-                            flag1 = true;
-                        }
-                    });
-                    if (flag1 = true) {
-                        $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
-                        //JC 260709 No estaba imprimiendo los pallets cuando se le oprimía end picking
-                        //if (multi = false){
-                        $("#lbPaid").html(Paids);
-                        //    }
-                        /*EventoAjax("Eliminar307", "{}", null);*/
-                    }
-                    else {
-                        EndPickingProcessing = false;
-                        $("#EndPickingLoader").hide(500);
-                    }
-                }
-            }
-
-        }
-
-        var DropMultipleSuccess = function (r) {
-            EndPickingProcessing = false;
-            $("#EndPickingLoader").hide(500);
-            if (r.d != "") {
-                drop = true;
-                //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
-                $("#Contenido_bcPick").attr("src", r.d);
-                printDiv("MyEtiquetaDropPrint");
-                selectPicksPending();
-            }
-
-        }
-
-        var DropSuccess = function (r) {
-            DropProcessing = false;
-            if (r.d != "") {
-                drop = true;
-                //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
-                //$("#Contenido_bcPick").attr("src", r.d + "/Barcode/BarcodeHandler.ashx?data=" + (JSON.parse(localStorage.getItem('MyPalletList'))[0].T$PICK) + "&code=Code128&dpi=96");
-                $("#Contenido_bcPick").attr("src", r.d);
-                $("#lbMcno").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$MCNO)
-                //JC 021021 Traer la cantidad del picking por pallet
-                $("#lbQtyp").html(JSON.parse(localStorage.getItem('MyPalletList'))[0].T$QTYT)
-                $("#lbPaid").html(localStorage.getItem('paid'))
-                printDiv("MyEtiquetaDropPrint");
-                selectPicksPending();
-            }
-            $('#DropLoader' + indexDropLoader).hide(500);
-        }
-
-
 
         var SuccessGetWarehouse = function () {
 
@@ -1485,37 +1349,6 @@
             }
         }
 
-        function IngresarCausales() {
-            //    $.ajax({
-            //        type: "POST",
-            //        url: "PickingUpdate.aspx/Click_confirCausal",
-            //        data: "{'PAID':'" + txPaid.value.toString() +
-            //              "','Causal':'" + document.getElementById("ddReason").value +
-            //              "','txtPallet':'" + txPaid.value +
-            //              "','LOCA':'" + txLoca.value.toString().trim() + "'}",
-            //        contentType: "application/json; charset=utf-8",
-            //        dataType: "json",
-            //        success: function (response) {
-            //            if (response.d == true && DisttinctLocaValid == false) {
-            //                //var CurrentPaid = lblPaid.innerHTML.trim();
-            //                var NewPaid = txPaid.value.trim();
-            //                Method = "VerificarPalletID"
-            //                Data = "{'PAID_NEW':'" + NewPaid + "','PAID_OLD':'" + CurrentPaid + "','selectOptionPallet' : 'false'}";
-            //                EventoAjax(Method, Data, VerificarPalletIDSuccess);
-            //            }
-            //            else {
-            //                ClearFormPicking();
-            //                StartComponents();
-            //                EventoAjax("SkipPicking", "{}", LoadPageSuccess);
-            //            }
-            //        },
-            //        failure: function (response) {
-            //            //alert(response.d);
-            //            //document.getElementById("btnconfirPKG").disabled = true;
-
-            //        }
-            //    });
-        }
         $(function () {
             var drop = false;
             StartComponents();
