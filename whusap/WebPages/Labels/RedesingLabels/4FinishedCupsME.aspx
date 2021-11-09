@@ -249,20 +249,22 @@
                         <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
                     <div style="height: 50%;">
-                        <table class="table mw-100" style="height: 100%;">
-                            <tbody>
-                                <tr>
-                                    <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
-                                    <td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></td>
+                        <table class="table mw-90" style="height: 100%;">
+                            <tbody> 
+                                <tr style="font-size:80px; text-align:left; vertical-align:middle;">                
+                                    <th rowspan="4"><label id="lblMachine" runat="server"></label></th>                                 
                                 </tr>
-                                <tr>
-                                    <td colspan="2"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></td>
+                                <tr>                                   
                                     <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
+                                    <td><strong>WO Lot</strong>&nbsp;&nbsp;<label id="lblLot" runat="server"></label></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Machine</strong>&nbsp;&nbsp;<label id="lblMachine" runat="server"></label></td>
+                                    <td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity" runat="server"></label></td>
+                                    <td colspan="2"><strong>Date</strong>&nbsp;&nbsp;<label id="lblDate" runat="server"></label></td>                                    
+                                </tr>
+                                <tr>
                                     <td><strong>Made in Dublin VA</strong></td>
-                                    <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>
+                                    <td><strong>Operator</strong>&nbsp;&nbsp;<label id="lblOperator" runat="server"></label></td>          
                                 </tr>
                             </tbody>
                         </table>

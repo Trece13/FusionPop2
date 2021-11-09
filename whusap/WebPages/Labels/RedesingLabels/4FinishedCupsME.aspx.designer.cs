@@ -58,6 +58,24 @@ namespace whusap.WebPages.Labels.RedesingLabels {
         protected global::System.Web.UI.HtmlControls.HtmlImage codePaid;
         
         /// <summary>
+        /// lblMachine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMachine;
+        
+        /// <summary>
+        /// lblPallet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPallet;
+        
+        /// <summary>
         /// lblLot control.
         /// </summary>
         /// <remarks>
@@ -83,24 +101,6 @@ namespace whusap.WebPages.Labels.RedesingLabels {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDate;
-        
-        /// <summary>
-        /// lblPallet control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPallet;
-        
-        /// <summary>
-        /// lblMachine control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMachine;
         
         /// <summary>
         /// lblOperator control.

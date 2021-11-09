@@ -362,6 +362,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           {0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
           {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
           WHERE 	A.T$SQNB = '[:T$SQNB]'
+          UNION
+          SELECT  A.T$PDNO, 0, A.T$MITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
+          FROM	{0}.TTICOL022{1} A LEFT JOIN
+          {0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
+          {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
+          WHERE 	A.T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="ActualizaRegistro_ReprintRegrind">
