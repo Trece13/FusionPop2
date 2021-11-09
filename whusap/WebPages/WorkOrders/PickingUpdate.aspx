@@ -21,7 +21,7 @@
             -webkit-animation: load7 1.8s infinite ease-in-out;
             animation: load7 1.8s infinite ease-in-out;
         }
-        #StatusChange{
+        #StatusChangeBtn{
             display:none;
         }
         .loader {
@@ -407,7 +407,7 @@
                             <input type="text" class="col-12 form-control" id="txPaid" placeholder="Pallet ID" required>
                         </div>
                         <div class="col-3">
-                            <button class="btn btn-danger col-12 btn-sm" id="StatusChange" type="button" onclick="StatusChange()";><span>Block Pick&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
+                            <button class="btn btn-danger col-12 btn-sm" id="StatusChangeBtn" type="button" onclick="StatusChange()"><span>Do you want to block this pallet?</span></button>
                         </div>
                     </div>
                     <br>
@@ -651,20 +651,20 @@
         var qtytOk = false;
         var DisttinctLocaValid = false;
 
-        var StatusChange = function () {
+        function StatusChange() {
             Swal.fire({
                 title: 'Are you sure?',
-                text: "Do you want to block this pallet?",
+                text: "",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, block it!'
+                confirmButtonText: 'Yes'
             }).then(function (result) {
                 if (result.value) {
                     Method = "BlockPick182"
-                    Data = "{}";
-                    EventoAjax(Method, Data, null);
+                    Data = "{'PAID':'" + $('#txPaid').val() + "'}";
+                    EventoAjax(Method, Data, SucceessStatusChange);
                     $("#StatusChange").hide(100);
                     Swal.fire(
                       'Blocked!',
@@ -720,6 +720,9 @@
             btnConfirm.addEventListener('click', Confirm)
         }
 
+        var SucceessStatusChange = function (r) {
+            ClearFormPicking();
+        }
         var changeReason = function () {
             console.log(ddReason.value);
             if (ddReason.value != "0") {
@@ -765,7 +768,7 @@
         var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
-                $("#StatusChange").show(100);
+                $("#StatusChangeBtn").show(100);
                 paidOk = true;
                 console.log();
                 validElement(txPaid);
@@ -797,7 +800,7 @@
             else if (MyObj.error == true) {
                 paidInvalid();
                 $("#lblError").html(MyObj.errorMsg);
-                $("#StatusChange").hide(100);
+                $("#StatusChangeBtn").hide(100);
             }
         }
 
@@ -863,7 +866,7 @@
             skip = false;
             StartProcessing = false;
             $('#StartLoader').show(100);
-            $("#StatusChange").hide(100);
+            $("#StatusChangeBtn").hide(100);
             EventoAjax("loadPage", "{'CWAR':'" + ddWare.value + "'}", LoadPageSuccess);
         }
 

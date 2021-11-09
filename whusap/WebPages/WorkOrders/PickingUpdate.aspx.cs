@@ -863,18 +863,24 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string BlockPick182()
+        public static string BlockPick182(string PAID)
         {
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking182"];
             string strError = string.Empty;
-            Ent_tticol182 MyObj182 = new Ent_tticol182();
-            MyObj182.PICK = MySessionObjPicking.PICK;
-            MyObj182.STAT = HttpContext.Current.Session["flag131"].ToString().Trim() == "1" ? "10" : "12";
-            MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
-            MyObj182.ORNO = MySessionObjPicking.ORNO;
-            MyObj182.PONO = MySessionObjPicking.PONO;
-            MyObj182.ADVS = MySessionObjPicking.ADVS;
-            _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
+
+            if (HttpContext.Current.Session["flag131"].ToString().Trim() == "1")
+            {
+                _idaltticol125.updataPalletStatus131(PAID, "10");
+            }
+            else if (HttpContext.Current.Session["flag022"].ToString().Trim() == "1")
+            {
+                _idaltticol125.updataPalletStatus022(PAID, "12");
+            }
+            else
+            {
+                _idaltticol125.updataPalletStatus042(PAID, "12");
+            }
+
             return JsonConvert.SerializeObject(MySessionObjPicking);
         }
 
