@@ -103,5 +103,7 @@ namespace whusa.Entidades
             REFCNTD = " ";
             REFCNTU = " ";
         }
+
+        public string QTY { get; set; }
     }
 }

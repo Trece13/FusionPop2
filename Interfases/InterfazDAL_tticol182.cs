@@ -70,5 +70,32 @@ namespace whusa.Interfases
             return dal.ActualizarRegistroItticol182(myObj);
         }
 
+        public DataTable SelectTticol182(ref Ent_tticol182 data, ref string strError)
+        {
+            DataTable retorno = new DataTable();
+            try
+            {
+                retorno = dal.SelectTticol182(ref data, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public bool ActualizarStatTticol182(ref Ent_tticol182 data, ref string strError)
+        {
+            bool retorno  = false;
+            try
+            {
+                retorno = dal.ActualizarStatTticol182(ref data, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
     }
 }

@@ -52,6 +52,8 @@ namespace whusap.WebPages.WorkOrders
             Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             HttpContext.Current.Session["MyObjPicking"] = null;
+            HttpContext.Current.Session["MyObjPicking182"] = null;
+            
 
             if (!IsPostBack)
             {
@@ -146,13 +148,16 @@ namespace whusap.WebPages.WorkOrders
                     MyObj182.PICK = MySessionObjPicking.PICK;
                     MyObj182.STAT = "5";
                     MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj182.ORNO = MySessionObjPicking.ORNO; 
+                    MyObj182.PONO = MySessionObjPicking.PONO; 
+                    MyObj182.ADVS = MySessionObjPicking.ADVS; 
                     _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
                     break;
                 }
                 index++;
             }
             HttpContext.Current.Session["MyObjPicking"] = MySessionObjPicking;
-            return JsonConvert.SerializeObject(DTtticol182);
+            return JsonConvert.SerializeObject(MySessionObjPicking);
         }
 
         [WebMethod]
@@ -390,6 +395,7 @@ namespace whusap.WebPages.WorkOrders
                 obj182Old.ITEM = MyObjPicking.ITEM;
                 obj182Old.STAT = consigment.Trim() == "true" ? "7" : "4";
                 obj182Old.QTYT = (Convert.ToDecimal(MyObjPicking.QTY) - Convert.ToDecimal(QTYT)).ToString();
+                obj182Old.QTY = (Convert.ToDecimal(MyObjPicking182.QTYT) - Convert.ToDecimal(QTYT)).ToString();
                 obj182Old.CWAR = MyObjPicking.WRH;
                 obj182Old.UNIT = MyObjPicking.UN;
                 obj182Old.PRIO = MyObjPicking.PRIO;
@@ -473,7 +479,7 @@ namespace whusap.WebPages.WorkOrders
 
                             twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
 
-                            if (res182 && Convert.ToDecimal(obj182Old.QTYT) != 0)
+                            if (res182 && Convert.ToDecimal(obj182Old.QTY) != 0)
                             {
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                 HttpContext.Current.Session["codePaid"] = PAID;
@@ -609,7 +615,7 @@ namespace whusap.WebPages.WorkOrders
                             _idaltticol125.updataPalletStatus022(PAID, (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) == 0) ? "11" : (qtyaG == "0" && Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) >= 0) ? "8" : "7");
                             twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
 
-                            if (res182 && Convert.ToDecimal(obj182Old.QTYT) != 0)
+                            if (res182 && Convert.ToDecimal(obj182Old.QTY) != 0)
                             {
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                 HttpContext.Current.Session["codePaid"] = MyObj.sqnb;
@@ -744,7 +750,7 @@ namespace whusap.WebPages.WorkOrders
                             _idaltticol125.updataPalletStatus131(PAID, "3");
                             twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
 
-                            if (res182 && Convert.ToDecimal(obj182Old.QTYT) != 0)
+                            if (res182 && Convert.ToDecimal(obj182Old.QTY) != 0)
                             {
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
                                 HttpContext.Current.Session["codePaid"] = PAID;

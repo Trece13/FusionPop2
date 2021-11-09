@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="EditUserPick.aspx.cs" Inherits="whusap.WebPages.WorkOrders.EditUserPick" %>
+    CodeBehind="EditPick.aspx.cs" Inherits="whusap.WebPages.WorkOrders.EditPick" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script src="styles/jquery-3.3.1.js"></script>
@@ -33,7 +33,7 @@
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
                 type: "POST",
-                url: "EditUserPick.aspx/" + WebMethod,
+                url: "EditPick.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 async: asyncMode != undefined ? asyncMode : true,
@@ -65,14 +65,18 @@
             var MylistPicks = JSON.parse(r.d);
             MylistPicks.forEach(function (e) {
                 var option = document.createElement("option");
-                option.text = "Pick No: " + e.PAID + " Warehouse: " + e.CWAR
-                option.value = e.PAID.trim()
+                option.text = "Pick No: " + e.PICK + " Warehouse: " + e.CWAR
+                option.value = e.PICK.trim()
+                option.setAttribute('ORNO', e.ORNO);
+                option.setAttribute('PONO', e.PONO);
+                option.setAttribute('ADVS', e.ADVS);
+                option.setAttribute('PICK', e.PICK);
                 ddPick.add(option);
             });
             $('#BtnSave').show();
         }
 
-        var SuccessGetWarehouse = function () {
+                var SuccessGetWarehouse = function () {
 
         }
 
@@ -84,7 +88,7 @@
             GetPicks();
         });
 
-        var loadPage = function () {
+         var loadPage = function () {
             skip = false;
             EventoAjax("loadPage", "{'CWAR':'" + ddWare.value + "'}", LoadPageSuccess);
         }
@@ -99,7 +103,7 @@
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
-                url: "EditUserPick.aspx/" + Method.trim(),
+                url: "EditPick.aspx/" + Method.trim(),
                 data: Data,
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -177,17 +181,17 @@
         }
         iniciarComponentes();
 
-        //        var ConsultarTtccol307 = function () {
-        //            //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
-        //            var Data = "{'PAID':'" + txPalletId.val().trim() + "'}";
-        //            WebMethod = "ConsultarTtccol307";
-        //            sendAjax(WebMethod, Data, ConsultarTtccol307Success, false);
-        //        }
+//        var ConsultarTtccol307 = function () {
+//            //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
+//            var Data = "{'PAID':'" + txPalletId.val().trim() + "'}";
+//            WebMethod = "ConsultarTtccol307";
+//            sendAjax(WebMethod, Data, ConsultarTtccol307Success, false);
+//        }
 
         var ActualizarUsuarioTtccol307 = function () {
             //var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "','SEQNR':'" + SEQNR + "'}";
             //var Data = "{'PAID':'" + txPalletId.val() + "','USER':'" + txtUser.val() + "','USERO':'" + MyOBj.USRR + "'}";
-            var Data = "{'PICK':'" + ddPick.value + "' }";
+            var Data = "{'PICK':'" + $('#ddPick').find(':selected').attr('PICK') + "','ORNO':'" + $('#ddPick').find(':selected').attr('ORNO') + "','PONO':'" + $('#ddPick').find(':selected').attr('PONO') + "','ADVS':'" + $('#ddPick').find(':selected').attr('ADVS') + "' }";
             WebMethod = "ActualizarUsuarioTtccol307";
             sendAjax(WebMethod, Data, ActualizarUsuarioTtccol307Success, false);
         }
@@ -206,29 +210,29 @@
             BtnClean.hide(1000);
             txPalletId.attr("disabled", false);
         }
-        //        var ConsultarTtccol307Success = function (res) {
-        //            MyOBj = JSON.parse(res.d);
-        //            if (MyOBj.Error) {
-        //                lblMsg.html(MyOBj.ErrorMsg);
-        //                DivDetalle.hide(1000);
-        //                BtnSave.hide(500);
-        //                BtnQuery.show(500);
-        //                lblMsg.addClass("Incorrecto");
-        //                lblMsg.removeClass("Correcto");
-        //            }
-        //            else if (!MyOBj.Error) {
-        //                DivDetalle.show(1000);
-        //                BtnSave.show(500);
-        //                BtnQuery.hide(500);
-        //                lblState.html(MyOBj.STAT);
-        //                txtUser.val(MyOBj.USRR);
-        //                txtStatus.val(MyOBj.STAT);
-        //                lblMsg.addClass("Correcto");
-        //                lblMsg.removeClass("Incorrecto");
-        //                BtnClean.show(500);
-        //                txPalletId.attr("disabled", true);
-        //            }
-        //        };
+//        var ConsultarTtccol307Success = function (res) {
+//            MyOBj = JSON.parse(res.d);
+//            if (MyOBj.Error) {
+//                lblMsg.html(MyOBj.ErrorMsg);
+//                DivDetalle.hide(1000);
+//                BtnSave.hide(500);
+//                BtnQuery.show(500);
+//                lblMsg.addClass("Incorrecto");
+//                lblMsg.removeClass("Correcto");
+//            }
+//            else if (!MyOBj.Error) {
+//                DivDetalle.show(1000);
+//                BtnSave.show(500);
+//                BtnQuery.hide(500);
+//                lblState.html(MyOBj.STAT);
+//                txtUser.val(MyOBj.USRR);
+//                txtStatus.val(MyOBj.STAT);
+//                lblMsg.addClass("Correcto");
+//                lblMsg.removeClass("Incorrecto");
+//                BtnClean.show(500);
+//                txPalletId.attr("disabled", true);
+//            }
+//        };
         var ActualizarUsuarioTtccol307Success = function (res) {
             MyOBj = JSON.parse(res.d);
             if (MyOBj.Error) {

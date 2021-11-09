@@ -14,10 +14,11 @@ using whusa.Utilidades;
 
 namespace whusap.WebPages.WorkOrders
 {
-    public partial class EditUserPick : System.Web.UI.Page
+    public partial class EditPick : System.Web.UI.Page
     {
         public static IntefazDAL_ttccol307 Ittccol307 = new IntefazDAL_ttccol307();
         public static InterfazDAL_ttccol300 Ittccol300 = new InterfazDAL_ttccol300();
+        private static InterfazDAL_tticol182 _idaltticol182 = new InterfazDAL_tticol182();
         public static Ent_ttccol307 ObjReturn = new Ent_ttccol307();
 
         private static string globalMessages = "GlobalMessages";
@@ -35,13 +36,15 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string ConsultarTtccol307(string PAID)
         {
-            DataTable Lsttccol307 = Ittccol307.ConsultarRegistrotccol307(new Ent_ttccol307 { PAID = PAID.Trim().ToUpper() });
-            if (Lsttccol307.Rows.Count > 0)
+            Ent_tticol182 MyObj182 = new Ent_tticol182();
+            MyObj182.STAT = "5";
+            string strError = string.Empty;
+            DataTable DTtticol182 = _idaltticol182.SelectTticol182(ref MyObj182, ref strError);
+            if (DTtticol182.Rows.Count > 0)
             {
-                DataRow ItemRow = Lsttccol307.Rows[0];
-                ObjReturn.PAID = ItemRow["PAID"].ToString();
-                ObjReturn.USRR = ItemRow["USSR"].ToString();
-                ObjReturn.STAT = ItemRow["STAT"].ToString();
+                DataRow ItemRow = DTtticol182.Rows[0];
+                ObjReturn.PAID = ItemRow["PICK"].ToString();
+                ObjReturn.STAT = ItemRow["STAA"].ToString();
                 ObjReturn.Error = false;
             }
             else
@@ -51,44 +54,32 @@ namespace whusap.WebPages.WorkOrders
                 ObjReturn.TypeMsgJs = "lbl";
             }
 
-            return JsonConvert.SerializeObject(Lsttccol307);
+            return JsonConvert.SerializeObject(DTtticol182);
         }
 
         [WebMethod]
-        public static string ActualizarUsuarioTtccol307(string PICK)
+        public static string ActualizarUsuarioTtccol307(string PICK, string ORNO, string PONO, string ADVS)
         {
-
-            //if (USER.Trim().ToUpper() == USERO.Trim().ToUpper())
-            //{
-            //    ObjReturn.Error = true;
-            //    ObjReturn.ErrorMsg = Thecurrentusercannotbethesameastheprevioususer;
-            //    ObjReturn.TypeMsgJs = "lbl";
-            //    return JsonConvert.SerializeObject(ObjReturn);
-            //}
-
-            //bool ExisteUsusario = ConsulrarExistenciaUsuario(new Ent_ttccol300 { user = USER.Trim().ToUpper() });
-            //if (ExisteUsusario)
-            //{
-            bool ActualizacionExitosa = Ittccol307.ActualizarUsuariotccol307(new Ent_ttccol307 { PAID = PICK.Trim().ToUpper() });
-            if (ActualizacionExitosa)
-            {
-                ObjReturn.Error = false;
-                ObjReturn.SuccessMsg = Updtatesuccessfull;
-                ObjReturn.TypeMsgJs = "lbl";
-            }
-            else if (!ActualizacionExitosa)
-            {
-                ObjReturn.Error = true;
-                ObjReturn.ErrorMsg = Updtatenotsuccessfull;
-                ObjReturn.TypeMsgJs = "lbl";
-            }
-            //}
-            //else if (!ExisteUsusario)
-            //{
-            //    ObjReturn.Error = true;
-            //    ObjReturn.ErrorMsg = Theusertoupdatenotexist;
-            //    ObjReturn.TypeMsgJs = "lbl";
-            //}
+            string strError = string.Empty;
+            Ent_tticol182 MyObj182 = new Ent_tticol182();
+            MyObj182.STAT = "1";
+            MyObj182.ORNO = ORNO;
+            MyObj182.PONO = PONO;
+            MyObj182.ADVS = ADVS;
+            MyObj182.PICK = PICK;
+            bool ActualizacionExitosa = _idaltticol182.ActualizarStatTticol182(ref MyObj182, ref strError);
+                if (ActualizacionExitosa)
+                {
+                    ObjReturn.Error = false;
+                    ObjReturn.SuccessMsg = Updtatesuccessfull;
+                    ObjReturn.TypeMsgJs = "lbl";
+                }
+                else if (!ActualizacionExitosa)
+                {
+                    ObjReturn.Error = true;
+                    ObjReturn.ErrorMsg = Updtatenotsuccessfull;
+                    ObjReturn.TypeMsgJs = "lbl";
+                }
 
             return JsonConvert.SerializeObject(ObjReturn);
         }

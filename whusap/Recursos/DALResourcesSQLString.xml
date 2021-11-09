@@ -6722,6 +6722,25 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol182">
+      <operationName name="SelectTticol182">
+        <stringSQL>
+          SELECT T$OORG OORG, T$ORNO ORNO, T$PONO PONO, T$ADVS ADVS, T$ITEM ITEM,T$QTYT QTYT, T$UNIT UNIT, T$CWAR CWAR, T$MCNO MCNO, T$TIME DATT, T$PRIO PRIO, T$PICK PICK, T$LOGN LOGN, T$STAT STAA, T$REFCNTD REFCNTD, T$REFCNTU REFCNTU FROM BAAN.TTICOL182140
+          WHERE T$STAT = NVL('[:T$STAT]',T$STAT )
+        </stringSQL>
+      </operationName>
+      <operationName name="ActualizarStatTticol182">
+        <stringSQL>
+          UPDATE BAAN.tticol182140 set T$STAT = '[:T$STAT]' where TRIM(T$ORNO) = NVL(TRIM('[:T$ORNO]'),TRIM(T$ORNO)) and TRIM(T$PONO) = NVL(TRIM('[:T$PONO]'),TRIM(T$PONO)) and TRIM(T$ADVS) = NVL(TRIM('[:T$ADVS]'),TRIM(T$ADVS)) and TRIM(T$PICK) = NVL(TRIM('[:T$PICK]'),TRIM(T$PICK))
+        </stringSQL>
+      </operationName>
+      <operationName name="SelectRecord">
+        <stringSQL>
+          SELECT * FROM (SELECT COL182.T$OORG, COL182.T$ORNO, COL182.T$PONO, COL182.T$ADVS, COL182.T$ITEM, COL182.T$QTYT, COL182.T$UNIT, COL182.T$CWAR, COL182.T$MCNO, COL182.T$TIME, COL182.T$PRIO, COL182.T$PICK, COL182.T$LOGN, COL182.T$STAT, COL182.T$REFCNTD, COL182.T$REFCNTU,cibd001.T$DSCA,
+          ROW_NUMBER() OVER (ORDER BY COL182.T$PRIO ASC) ROWN
+          FROM BAAN.TTICOL182140  COL182
+          WHERE COL182.T$CWAR = '[:T$CWAR]' AND COL182.T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN &lt; 10
+        </stringSQL>
+      </operationName>
       <operationName name="SelectRecord">
         <stringSQL>
           SELECT * FROM (SELECT COL182.T$OORG, COL182.T$ORNO, COL182.T$PONO, COL182.T$ADVS, COL182.T$ITEM, COL182.T$QTYT, COL182.T$UNIT, COL182.T$CWAR, COL182.T$MCNO, COL182.T$TIME, COL182.T$PRIO, COL182.T$PICK, COL182.T$LOGN, COL182.T$STAT, COL182.T$REFCNTD, COL182.T$REFCNTU,cibd001.T$DSCA,

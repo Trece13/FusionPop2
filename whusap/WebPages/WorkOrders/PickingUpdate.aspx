@@ -481,6 +481,7 @@
             <table id="" class="table animate__animated animate__fadeInLeft" style="width: 100%">
                 <thead>
                     <tr>
+                        <th scope="col">Pallet ID</th>
                         <th scope="col">Warehouse</th>
                         <th scope="col">Location</th>
                         <th scope="col">Quantity</th>
@@ -811,7 +812,7 @@
                     if (MyObjLst.length > 0) {
                         var validos = true;
                         MyObjLst.forEach(function (item, i) {
-                            bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.WRH + "</td><td>" + item.LOCA + "</td><td>" + item.QTY + "</td></tr>";
+                            bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.PALLETID + "</td><td>" + item.WRH + "</td><td>" + item.LOCA + "</td><td>" + item.QTY + "</td></tr>";
                         });
                     }
                     else {
@@ -934,18 +935,12 @@
 
         var loadPicks182Success = function (r) {
 
-            var MyObjLst = JSON.parse(r.d);
+            var item = JSON.parse(r.d);
 
             var bodyRows = "";
-            if (MyObjLst.length > 0) {
+            if (item.error == false) {
                 var validos = true;
-                var flag = false;
-                MyObjLst.forEach(function (item, i) {
-                    if (flag == false) {
-                        bodyRows += "<tr  row = '" + i + "' id='rowNum" + i + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.T$ORNO + "</td><td>" + item.T$MCNO + "</td><td>" + item.T$ITEM + "</td><td>" + item.T$DSCA + "</td><td>" + item.T$CWAR + "</td><td id = 'qtyTbl'>" + item.T$QTYT + "</td><td>" + item.T$UNIT + "</td>";
-                        flag = true;
-                    }
-                });
+                bodyRows += "<tr  row = '" + 0 + "' id='rowNum" + 0 + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.ORNO + "</td><td>" + item.MCNO + "</td><td>" + item.ITEM + "</td><td>" + item.DESCRIPTION + "</td><td>" + item.WRH + "</td><td id = 'qtyTbl'>" + item.QTY + "</td><td>" + item.UN + "</td>";
                 if (validos) {
                     $('#bdPicket182').show(500);
                     $("#MainDiv").show(100);
