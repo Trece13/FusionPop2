@@ -6727,7 +6727,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
 	  <operationName name="ChangeStat182">
         <stringSQL>
-          UPDATE  BAAN.TTICOL182140 SET T$STAT = '[:T$STAT]',T$LOGN = NVL('[:T$LOGN]',T$LOGN)  WHERE T$PICK = '[:T$PICK]'
+          UPDATE  BAAN.TTICOL182140 SET T$STAT = '[:T$STAT]',T$LOGN = NVL('[:T$LOGN]',T$LOGN)  WHERE T$PICK = '[:T$PICK]' AND T$ORNO = '[:T$ORNO]' AND T$PONO = '[:T$PONO]' AND T$ADVS = '[:T$ADVS]'
         </stringSQL>
       </operationName>
       <operationName name="Delete182Zero">
