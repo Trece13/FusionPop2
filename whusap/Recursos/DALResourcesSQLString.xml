@@ -6757,7 +6757,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Delete182Zero">
         <stringSQL>
-          DELETE FROM {0}.TTICOL182{1} WHERE T$QTYT = 0
+          DELETE FROM {0}.TTICOL182{1} WHERE T$QTYT &lt; 0
         </stringSQL>
       </operationName>   
       <operationName name="InsertarregistroItticol182">

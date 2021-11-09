@@ -252,7 +252,7 @@
                         <table class="table mw-90" style="height: 100%;">
                             <tbody> 
                                 <tr style="font-size:80px; text-align:left; vertical-align:middle;">                
-                                    <th rowspan="4" style="padding: 0; font-size: 180px"><label id="lblMachine" runat="server"></label></th>                                 
+                                    <th rowspan="4" style="padding: 0; font-size: 150px"><label id="lblMachine" runat="server"></label></th>                                 
                                 </tr>
                                 <tr>                                   
                                     <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>

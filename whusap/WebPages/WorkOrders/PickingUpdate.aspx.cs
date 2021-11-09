@@ -53,7 +53,7 @@ namespace whusap.WebPages.WorkOrders
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
             HttpContext.Current.Session["MyObjPicking"] = null;
             HttpContext.Current.Session["MyObjPicking182"] = null;
-            
+
 
             if (!IsPostBack)
             {
@@ -126,8 +126,9 @@ namespace whusap.WebPages.WorkOrders
             MyObj182.CWAR = CWAR;
 
             DataTable DTtticol182 = _idaltticol182.SelectRecord(ref MyObj182, ref strError);
-            int index = 0;            
-            foreach( DataRow row in DTtticol182.Rows){
+            int index = 0;
+            foreach (DataRow row in DTtticol182.Rows)
+            {
                 if (row["T$STAT"].ToString().Trim() == "1" || (row["T$STAT"].ToString().Trim() == "5" && row["T$LOGN"].ToString().Trim() == HttpContext.Current.Session["user"].ToString().Trim()))
                 {
                     MySessionObjPicking.OORG = row["T$OORG"].ToString();
@@ -148,9 +149,9 @@ namespace whusap.WebPages.WorkOrders
                     MyObj182.PICK = MySessionObjPicking.PICK;
                     MyObj182.STAT = "5";
                     MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
-                    MyObj182.ORNO = MySessionObjPicking.ORNO; 
-                    MyObj182.PONO = MySessionObjPicking.PONO; 
-                    MyObj182.ADVS = MySessionObjPicking.ADVS; 
+                    MyObj182.ORNO = MySessionObjPicking.ORNO;
+                    MyObj182.PONO = MySessionObjPicking.PONO;
+                    MyObj182.ADVS = MySessionObjPicking.ADVS;
                     _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
                     break;
                 }
@@ -189,11 +190,11 @@ namespace whusap.WebPages.WorkOrders
             return JsonConvert.SerializeObject(LstReturn);
         }
 
-        public static string LiteralStatus(string tbl,string stat)
+        public static string LiteralStatus(string tbl, string stat)
         {
             string statRes = string.Empty;
-            string[] array131 = new string[]{"","Received","Picked","Located","Announced","Adjusted","Allocated","Picking","Dropped","Delivered","Blocked","Rejected"};
-            string[] array122 = new string[] {"", "Deleted", "Announced", "Rejected", "Wrapped", "Received", "Picked", "Located", "Allocated", "Picking", "Dropped", "Delivered", "Blocked", "To Delete", "Adjusted", "No" };
+            string[] array131 = new string[] { "", "Received", "Picked", "Located", "Announced", "Adjusted", "Allocated", "Picking", "Dropped", "Delivered", "Blocked", "Rejected" };
+            string[] array122 = new string[] { "", "Deleted", "Announced", "Rejected", "Wrapped", "Received", "Picked", "Located", "Allocated", "Picking", "Dropped", "Delivered", "Blocked", "To Delete", "Adjusted", "No" };
             if (tbl == "ticol022" || tbl == "ticol042")
             {
                 statRes = array122[Convert.ToInt16(stat)];
@@ -242,12 +243,13 @@ namespace whusap.WebPages.WorkOrders
                     ObjPicking182.errorMsg = "Pallet no allowed " + LiteralStatus(DTPalletID.Rows[0]["TBL"].ToString().Trim(), DTPalletID.Rows[0]["STAT"].ToString());
                     return JsonConvert.SerializeObject(ObjPicking182);
                 }
-                else if((DTPalletID.Rows[0]["TBL"].ToString().Trim() == "whcol131") && (DTPalletID.Rows[0]["STAT"].ToString() != "3")){
+                else if ((DTPalletID.Rows[0]["TBL"].ToString().Trim() == "whcol131") && (DTPalletID.Rows[0]["STAT"].ToString() != "3"))
+                {
                     ObjPicking182.error = true;
                     ObjPicking182.errorMsg = "Pallet no allowed " + LiteralStatus(DTPalletID.Rows[0]["TBL"].ToString().Trim(), DTPalletID.Rows[0]["STAT"].ToString());
                     return JsonConvert.SerializeObject(ObjPicking182);
                 }
-                
+
 
 
                 if (MySessionObjPicking.WRH.Trim() != DTPalletID.Rows[0]["CWAT"].ToString().Trim() ||
@@ -330,7 +332,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string  StopPicking()
+        public static string StopPicking()
         {
             string strError = string.Empty;
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
@@ -859,6 +861,23 @@ namespace whusap.WebPages.WorkOrders
         {
             return "_operator:" + HttpContext.Current.Session["user"].ToString().Trim() + "  Session['user']:" + HttpContext.Current.Session["user"].ToString() + " ,flag022: " + HttpContext.Current.Session["flag022"].ToString() + " ,flag042: " + HttpContext.Current.Session["flag042"] + " ,flag113: " + HttpContext.Current.Session["flag131"];
         }
+
+        [WebMethod]
+        public static string BlockPick182()
+        {
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking182"];
+            string strError = string.Empty;
+            Ent_tticol182 MyObj182 = new Ent_tticol182();
+            MyObj182.PICK = MySessionObjPicking.PICK;
+            MyObj182.STAT = HttpContext.Current.Session["flag131"].ToString().Trim() == "1" ? "10" : "12";
+            MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
+            MyObj182.ORNO = MySessionObjPicking.ORNO;
+            MyObj182.PONO = MySessionObjPicking.PONO;
+            MyObj182.ADVS = MySessionObjPicking.ADVS;
+            _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
+            return JsonConvert.SerializeObject(MySessionObjPicking);
+        }
+
 
         public static string getSequence(string PAIDOld, string complement = "")
         {

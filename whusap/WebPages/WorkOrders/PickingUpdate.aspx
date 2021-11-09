@@ -8,6 +8,7 @@
         rel="stylesheet"
         href="styles/animate.min.css" />
     <script src="styles/sweetalert2.min.js"></script>
+
     <style>
         .loader:before,
         .loader:after,
@@ -20,7 +21,9 @@
             -webkit-animation: load7 1.8s infinite ease-in-out;
             animation: load7 1.8s infinite ease-in-out;
         }
-
+        #StatusChange{
+            display:none;
+        }
         .loader {
             margin: 8em auto;
             font-size: 10px;
@@ -400,8 +403,11 @@
                         <div class="col-3">
                             <label>Pallet ID</label>
                         </div>
-                        <div class="col-9">
+                        <div class="col-6">
                             <input type="text" class="col-12 form-control" id="txPaid" placeholder="Pallet ID" required>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-danger col-12 btn-sm" id="StatusChange" type="button" onclick="StatusChange()";><span>Block Pick&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
                         </div>
                     </div>
                     <br>
@@ -645,6 +651,30 @@
         var qtytOk = false;
         var DisttinctLocaValid = false;
 
+        var StatusChange = function () {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to block this pallet?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, block it!'
+            }).then(function (result) {
+                if (result.value) {
+                    Method = "BlockPick182"
+                    Data = "{}";
+                    EventoAjax(Method, Data, null);
+                    $("#StatusChange").hide(100);
+                    Swal.fire(
+                      'Blocked!',
+                      'Pick has been Blocked.',
+                      'success'
+                    )
+                }
+            })
+        }
+
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
@@ -735,6 +765,7 @@
         var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
+                $("#StatusChange").show(100);
                 paidOk = true;
                 console.log();
                 validElement(txPaid);
@@ -766,6 +797,7 @@
             else if (MyObj.error == true) {
                 paidInvalid();
                 $("#lblError").html(MyObj.errorMsg);
+                $("#StatusChange").hide(100);
             }
         }
 
@@ -831,6 +863,7 @@
             skip = false;
             StartProcessing = false;
             $('#StartLoader').show(100);
+            $("#StatusChange").hide(100);
             EventoAjax("loadPage", "{'CWAR':'" + ddWare.value + "'}", LoadPageSuccess);
         }
 
