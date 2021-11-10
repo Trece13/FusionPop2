@@ -754,6 +754,7 @@ namespace whusap.WebPages.WorkOrders
 
                             if (res182 && Convert.ToDecimal(obj182Old.QTY) != 0)
                             {
+                                HttpContext.Current.Session["Table"] = "whcol131";
                                 HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
                                 HttpContext.Current.Session["codePaid"] = PAID;
                                 HttpContext.Current.Session["codePaid2"] = MyObj.PAID;
@@ -762,8 +763,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.DATE;
                                 HttpContext.Current.Session["Pallet"] = MyObj.PAID;
-                                //HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
-                                HttpContext.Current.Session["Machine"] = " ";
+                                HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
                                 HttpContext.Current.Session["Operator"] = MyObj.LOGN;
                                 HttpContext.Current.Session["Reprint"] = "no";
                                 HttpContext.Current.Session["AutoPrint"] = "yes";

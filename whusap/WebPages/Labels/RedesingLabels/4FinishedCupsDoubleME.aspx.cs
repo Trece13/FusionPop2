@@ -37,7 +37,10 @@ namespace whusap.WebPages.Labels.RedesingLabels
                 lblQuantity.InnerHtml = Session["Quantity2"] != null ? Session["Quantity2"].ToString() : string.Empty;
                 lblDate.InnerHtml = Session["Date"] != null ? Session["Date"].ToString() : string.Empty;
                 lblPallet.InnerHtml = Session["codePaid"] != null ? Session["codePaid"].ToString() : string.Empty;
-                lblMachine.InnerHtml = Session["Machine"] != null ? Session["Machine"].ToString() : string.Empty;
+                if (HttpContext.Current.Session["Table"] != "whcol131")
+                {
+                    lblMachine.InnerHtml = Session["Machine"] != null ? Session["Machine"].ToString() : string.Empty;
+                }
                 lblOperator.InnerHtml = Session["Operator"] != null ? Session["Operator"].ToString() : string.Empty;
                 myLabel.Visible = (Session["Quantity2"] != null ? Convert.ToDecimal(Session["Quantity2"].ToString()) : 0) > 0 ? true : false;
 

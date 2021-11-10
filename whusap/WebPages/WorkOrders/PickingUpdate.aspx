@@ -669,7 +669,7 @@
                     $("#StatusChange").hide(100);
                     Swal.fire(
                       'Blocked!',
-                      'Pick has been Blocked.',
+                      'Pallet Id has been Blocked.',
                       'success'
                     )
                 }
