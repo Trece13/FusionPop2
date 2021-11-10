@@ -368,6 +368,7 @@
             <table id="" class="table animate__animated animate__fadeInLeft" style="width: 100%">
                 <thead>
                     <tr>
+                        <th scope="col">Pick Id</th>
                         <th scope="col">Work Order</th>
                         <th scope="col">Machine</th>
                         <th scope="col">Item</th>
@@ -976,7 +977,7 @@
             var bodyRows = "";
             if (item.error == false) {
                 var validos = true;
-                bodyRows += "<tr  row = '" + 0 + "' id='rowNum" + 0 + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.ORNO + "</td><td>" + item.MCNO + "</td><td>" + item.ITEM + "</td><td>" + item.DESCRIPTION + "</td><td>" + item.WRH + "</td><td id = 'qtyTbl'>" + item.QTY + "</td><td>" + item.UN + "</td>";
+                bodyRows += "<tr  row = '" + 0 + "' id='rowNum" + 0 + "' class = 'animate__animated animate__fadeInLeft'><td>" + item.PICK + "</td><td>" + item.ORNO + "</td><td>" + item.MCNO + "</td><td>" + item.ITEM + "</td><td>" + item.DESCRIPTION + "</td><td>" + item.WRH + "</td><td id = 'qtyTbl'>" + item.QTY + "</td><td>" + item.UN + "</td>";
                 if (validos) {
                     $('#bdPicket182').show(500);
                     $("#MainDiv").show(100);

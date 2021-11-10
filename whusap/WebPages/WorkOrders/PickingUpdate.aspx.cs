@@ -762,7 +762,8 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
                                 HttpContext.Current.Session["Date"] = MyObj.DATE;
                                 HttpContext.Current.Session["Pallet"] = MyObj.PAID;
-                                HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
+                                //HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
+                                HttpContext.Current.Session["Machine"] = " ";
                                 HttpContext.Current.Session["Operator"] = MyObj.LOGN;
                                 HttpContext.Current.Session["Reprint"] = "no";
                                 HttpContext.Current.Session["AutoPrint"] = "yes";

@@ -1478,8 +1478,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           )
           --WHERE ROWN &lt;= 5
           WHERE ROWNUM &lt;= 5
-          ORDER BY DATT ASC
-        </stringSQL>
+          AND QTY &gt; 0
+        ORDER BY DATT ASC
+      </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042Item">
         <stringSQL>
@@ -1525,8 +1526,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           )
           --WHERE ROWN &lt;= 5
           WHERE ROWNUM &lt;= 5
-          ORDER BY DATT ASC
-        </stringSQL>
+          AND QTY &gt; 0
+        ORDER BY DATT ASC
+      </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131Item">
         <stringSQL>
@@ -1569,6 +1571,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           )
           --WHERE ROWN &lt;= 5
           WHERE ROWNUM &lt;= 5
+          AND QTY &gt; 0
           ORDER BY DATT ASC
         </stringSQL>
       </operationName>
@@ -6749,7 +6752,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Delete182Zero">
         <stringSQL>
-          DELETE FROM {0}.TTICOL182{1} WHERE T$QTYT &lt; 0
+          DELETE FROM {0}.TTICOL182{1} WHERE T$QTYT &lt;= 0
         </stringSQL>
       </operationName>   
       <operationName name="InsertarregistroItticol182">

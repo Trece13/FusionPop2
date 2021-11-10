@@ -73,7 +73,7 @@
 
         #myLabel, #myLabel2 {
             width: 6in;
-            height: 4in;
+            height: 3.5in;
             padding: 0px;
             border-radius: 12px;
             margin: 0;
@@ -304,7 +304,7 @@
                         </table>
                     </div>
                 </div>
-            <div id="MyEtiquetaDrop" style="width:6in; height:3.5in;" runat="server">
+            <div id="MyEtiquetaDrop" style="width:6in; height:3in;" runat="server">
                 <table style="margin: auto;margin-top:15px;">
                     <tr>
                         <td>
