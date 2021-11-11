@@ -314,7 +314,7 @@ namespace whusap.WebPages.InvReceipts
                                             }
                                         }
                                     }
-                                    StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);  
+                                    StrInsertMultiple += twhcol130DAL.InsertarReseiptRawMaterialComplementMultiInsert(MyObj);
                                     CiclePrintBegin++;
                                 }
 

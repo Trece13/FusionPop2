@@ -248,7 +248,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     var qt = Convert.ToDecimal(QTYA);
                     var STATUS = Convert.ToInt32(STAT.Trim());
-                    var validateSaveWhcol131 = ITticol137.Actualizartwhcol131CantStatus(ref PALLET, ref STATUS, ref qt,CWAR,LOCA);
+                    var validateSaveWhcol131 = ITticol137.Actualizartwhcol131CantStatus(ref PALLET, ref STATUS, ref qt,CWAR,LOCA,LOT);
                 }
             //}
         }

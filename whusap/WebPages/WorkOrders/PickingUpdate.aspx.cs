@@ -362,6 +362,9 @@ namespace whusap.WebPages.WorkOrders
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             Ent_tticol182 MyObj182 = new Ent_tticol182();
             MyObj182.STAT = "1";
+            MyObj182.ORNO = MySessionObjPicking.ORNO;
+            MyObj182.PONO = MySessionObjPicking.PONO;
+            MyObj182.ADVS = MySessionObjPicking.ADVS;
             MyObj182.PICK = MySessionObjPicking.PICK;
             _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
             string UrlBase = WebConfigurationManager.AppSettings["UrlBase"].ToString();
@@ -376,6 +379,7 @@ namespace whusap.WebPages.WorkOrders
                 Random generator = new Random();
                 int t = generator.Next(1, 1000);
                 string maximo = string.Format("{0:0000000000}", t);
+
 
                 EntidadPicking MyObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
                 EntidadPicking MyObjPicking182 = (EntidadPicking)HttpContext.Current.Session["MyObjPicking182"];
@@ -393,7 +397,8 @@ namespace whusap.WebPages.WorkOrders
                 string sentencia = string.Empty;
                 string sentencia1 = string.Empty;
 
-
+                DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
+                qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
 
                 Ent_tticol082 obj082 = new Ent_tticol082();
                 obj082.OORG = MyObjPicking182.OORG == "" ? " " : MyObjPicking182.OORG;
@@ -439,15 +444,13 @@ namespace whusap.WebPages.WorkOrders
                 string qtytS = ConvertToDecimal(QTYT.ToString().Trim()).ToString().ToString();
                 int cnpk = Convert.ToInt32(MyObjPicking182.CNPK.Trim() == "" ? "2" : MyObjPicking182.CNPK.Trim());
                 String Location = LOCA;
-
+                if (Convert.ToDecimal(qtyaG) > 0) { 
                 if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
                 {
                     Ent_tticol022 MyObj = new Ent_tticol022();
 
                     DataTable dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
                     twhcolDAL.updatetticol222Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) > 0 ? Convert.ToDecimal(QTYT_OLD) : 0);
-                    DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
-                    qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                     MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                     dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
 
@@ -583,8 +586,6 @@ namespace whusap.WebPages.WorkOrders
                     DataTable dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
                     twhcolDAL.updatetticol242Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) > 0 ? Convert.ToDecimal(QTYT_OLD) : 0);
                     //twhcolDAL.updatetticol242Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(QTYT_OLD));
-                    DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
-                    qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                     MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                     dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
 
@@ -718,8 +719,6 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
                     twhcolDAL.updatetwhcol131QuantityFirst(PAID.Trim(), qtyt, Convert.ToDecimal(MyObjPicking.QTYT));
-                    DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
-                    qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
                     MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                     DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
                     if (cnpk != 1)
@@ -847,6 +846,14 @@ namespace whusap.WebPages.WorkOrders
                     _idaltticol182.Delete182Zero();
                     return JsonConvert.SerializeObject(MyObj);
                 }
+                else
+                {
+                    Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
+                    MyErrorObj.Error = true;
+                    _idaltticol182.Delete182Zero();
+                    return JsonConvert.SerializeObject(MyErrorObj); ;
+                }
+              }
                 else
                 {
                     Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
