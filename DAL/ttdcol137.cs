@@ -315,6 +315,7 @@ namespace whusa.DAL
                 paramList.Add(":PAID", data137.Paid.ToUpper());
                 paramList.Add(":CWAT", data137.Cwar.ToUpper());
                 paramList.Add(":LOCA", data137.Loca.ToUpper());
+                paramList.Add(":LOT", data137.Lot.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);

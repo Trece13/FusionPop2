@@ -146,6 +146,8 @@ namespace whusa.Entidades
         public string errorMsg { get; set; }
         [DataMember(Order = 28)]
         public List<StatusTab> statsTab { get; set; }
+        [DataMember(Order = 29)]
+        public string kltc { get; set; }
     }
 }
 

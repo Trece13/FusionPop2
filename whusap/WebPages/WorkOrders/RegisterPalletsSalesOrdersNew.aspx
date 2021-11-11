@@ -68,6 +68,13 @@
 
     </div>
     <div class="form-group row">
+        <label class="col-sm-2 col-form-label-lg" for="txClot">
+            Lot</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control form-control-lg" id="txClot" placeholder="Lot">
+        </div>
+    </div>
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txWarehouse">
             Warehouse</label>
         <div class="col-sm-4">
@@ -143,6 +150,7 @@
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
+            $('#txClot').prop("disabled", true);
             $('#Contenido_Button1').prop("disabled", true);
 
         };
@@ -160,6 +168,7 @@
                 $('#lblSalesOrder').html("");
                 $('#lblItemdesc').html("");
                 $('#lblQuantity').html("");
+                $('#txClot').val("");
 
                 ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
                 BloquearComponentes();
@@ -181,6 +190,7 @@
                 $('#txWarehouse').prop("disabled", false);
                 $('#txLocation').prop("disabled", false);
                 $('#txQuantity').prop("disabled", false);
+                $('#txClot').prop("disabled", true);
             }
         }
 
@@ -193,10 +203,12 @@
                 ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
                 $('#txWarehouse').prop("disabled", true);
                 $('#txLocation').prop("disabled", true);
+                $('#txClot').prop("disabled", true);
                 $('#txQuantity').prop("disabled", true);
 
                 $('#txWarehouse').val("");
                 $('#txLocation').val("");
+                $('#txClot').val("");
                 $('#txQuantity').val("");
                 $('lblItemdesc').html("");
             }
@@ -207,9 +219,11 @@
                 $('#lblItemdesc').html(MyObj.dsca);
                 $('#txLocation').val(MyObj.pdno);
                 $('#txQuantity').val(MyObj.qtya);
+                $('#txClot').val(MyObj.clot);
                 $('lblItemdesc').html("");
                 $('#txStat').val(MyObj.stat);
                 $('#Contenido_Button1').prop("disabled", false);
+                MyObj.kltc == "1" ? $('#txClot').prop("disabled", false) : $('#txClot').prop("disabled", true);
                 $('#txPaid').prop("disabled", true);
                 $('#txStat').prop("disabled", true);
                 $('#txWarehouse').prop("disabled", false);
@@ -260,9 +274,11 @@
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
+            $('#txClot').prop("disabled", true);
 
             $('#txPaid').val("");
             $('#txStat').val("");
+            $('#txClot').val("");
             $('#txWarehouse').val("");
             $('#txLocation').val("");
             $('#txQuantity').val("");
@@ -331,7 +347,7 @@
 
         var save = function () {
 
-            var Data = "{'STAT':'" + (ddStat.value == '0' ? $('#txStat').val().trim() : ddStat.value) + "','CWAR':'" + $('#txWarehouse').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYA':'" + $('#txQuantity').val().trim() + "'}";
+            var Data = "{'STAT':'" + (ddStat.value == '0' ? $('#txStat').val().trim() : ddStat.value) + "','CWAR':'" + $('#txWarehouse').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYA':'" + $('#txQuantity').val().trim() + "','LOT':'" + $('#txClot').val().trim() + "'}";
             sendAjax("save", Data, SuccesClick_Save);
 
         }
