@@ -450,7 +450,17 @@ namespace whusap.WebPages.WorkOrders
                     Ent_tticol022 MyObj = new Ent_tticol022();
 
                     DataTable dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
-                    twhcolDAL.updatetticol222Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) > 0 ? Convert.ToDecimal(QTYT_OLD) : 0);
+                    DataTable DTPalletnew = _idaltwhcol130.VerificarPalletID(ref PAID);
+                    string qtytnew = DTPallet.Rows[0]["QTYT"].ToString();
+                    if (Convert.ToDecimal(qtytnew) >= Convert.ToDecimal(QTYT)) { 
+                        twhcolDAL.updatetticol222Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) > 0 ? Convert.ToDecimal(QTYT_OLD) : 0);
+                    }
+                    else {
+                        Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
+                        MyErrorObj.Error = true;
+                        _idaltticol182.Delete182Zero();
+                        return JsonConvert.SerializeObject(MyErrorObj); ;
+                    }
                     MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                     dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
 
@@ -584,7 +594,19 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Ent_tticol042 MyObj = new Ent_tticol042();
                     DataTable dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
-                    twhcolDAL.updatetticol242Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) > 0 ? Convert.ToDecimal(QTYT_OLD) : 0);
+                    DataTable DTPalletnew = _idaltwhcol130.VerificarPalletID(ref PAID);
+                    string qtytnew = DTPallet.Rows[0]["QTYT"].ToString();
+                    if (Convert.ToDecimal(qtytnew) >= Convert.ToDecimal(QTYT))
+                    {
+                        twhcolDAL.updatetticol242Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString()) > 0 ? Convert.ToDecimal(QTYT_OLD) : 0);
+                    }
+                    else
+                    {
+                        Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
+                        MyErrorObj.Error = true;
+                        _idaltticol182.Delete182Zero();
+                        return JsonConvert.SerializeObject(MyErrorObj); ;
+                    }
                     //twhcolDAL.updatetticol242Quantity(PAID.Trim(), Convert.ToDecimal(QTYT), Convert.ToDecimal(QTYT_OLD));
                     MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                     dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
@@ -718,7 +740,19 @@ namespace whusap.WebPages.WorkOrders
                 else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
                 {
                     Ent_twhcol130131 MyObj = new Ent_twhcol130131();
-                    twhcolDAL.updatetwhcol131QuantityFirst(PAID.Trim(), qtyt, Convert.ToDecimal(MyObjPicking.QTYT));
+                    DataTable DTPalletnew = _idaltwhcol130.VerificarPalletID(ref PAID);
+                    string qtytnew = DTPallet.Rows[0]["QTYT"].ToString();
+                    if (Convert.ToDecimal(qtytnew) >= Convert.ToDecimal(QTYT))
+                    {
+                        twhcolDAL.updatetwhcol131QuantityFirst(PAID.Trim(), qtyt, Convert.ToDecimal(MyObjPicking.QTYT));
+                    }
+                    else
+                    {
+                        Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
+                        MyErrorObj.Error = true;
+                        _idaltticol182.Delete182Zero();
+                        return JsonConvert.SerializeObject(MyErrorObj); ;
+                    }
                     MyObj.qtyaG = Convert.ToDecimal(qtyaG);
                     DataTable dtAllo = twhcolDAL.getAllotwhcol131(PAID.Trim());
                     if (cnpk != 1)
