@@ -169,6 +169,7 @@ namespace whusap.WebPages.WorkOrders
                 Obj_tticol125.pdno = DtTticol125.Rows[0]["T$LOCA"].ToString();
                 Obj_tticol125.qtya = DtTticol125.Rows[0]["T$QTYC"].ToString();
                 Obj_tticol125.stat = DtTticol125.Rows[0]["STAT"].ToString();
+                Obj_tticol125.kltc = DtTticol125.Rows[0]["KLTC"].ToString();
                 HttpContext.Current.Session["TABLA"] = DtTticol125.Rows[0]["TBL"].ToString();
                 HttpContext.Current.Session["PAID"] = PAID;
                 HttpContext.Current.Session["CLOT"] = Obj_tticol125.clot;
@@ -196,7 +197,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static void save(string STAT,string CWAR,string LOCA,string QTYA)
+        public static void save(string STAT,string CWAR,string LOCA,string QTYA,string LOT)
         {
             string TABLA = HttpContext.Current.Session["TABLA"].ToString();
             string PALLET = HttpContext.Current.Session["PAID"].ToString();
@@ -214,6 +215,7 @@ namespace whusap.WebPages.WorkOrders
             data137.Qtya = Convert.ToDecimal(QTYA);
             data137.Dele = Convert.ToInt32(STAT.Trim());
             data137.User = HttpContext.Current.Session["User"].ToString();
+            data137.Lot = LOT.ToUpper();
 
             //var validatesave = ITticol137.insertarDatos(ref data137, ref strError);
             //if (validatesave > 0) 

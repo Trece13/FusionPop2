@@ -88,6 +88,8 @@ namespace whusa.Entidades
             this.refcntd = prefcntd;
             this.refcntu = prefcntu;
         }
+
+        public string Lot { get; set; }
     }
 }
 
