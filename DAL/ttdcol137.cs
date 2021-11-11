@@ -329,5 +329,57 @@ namespace whusa.DAL
             }
             return retorno;
         }
+
+        public bool Actualizarttdcol042Pdno(Ent_ttdcol137 data137)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", data137.Paid.ToUpper());
+                paramList.Add(":PDNO", data137.Lot.ToUpper() == "" ? " " : data137.Lot.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
+        public bool Actualizarttdcol022Pdno(Ent_ttdcol137 data137)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", data137.Paid.ToUpper());
+                paramList.Add(":PDNO", data137.Lot.ToUpper() == "" ? " " : data137.Lot.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
     }
 }

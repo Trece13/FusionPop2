@@ -233,6 +233,7 @@ namespace whusap.WebPages.WorkOrders
                     var qt = Convert.ToDecimal(QTYA);
                     var validateSaveTicol222 = ITticol137.Actualizarttdcol222Cant(ref PALLET, ref qt);;
                     var validateSaveTicol222N = ITticol137.Actualizarttdcol222(data137);
+                    var validateSaveTicol022N = ITticol137.Actualizarttdcol022Pdno(data137);
                     var validateSaveTicol022 = ITticol137.Actualizarttdcol022Status(data137);
                 }
                 if (TABLA == "ticol042")
@@ -240,6 +241,7 @@ namespace whusap.WebPages.WorkOrders
                     var qt = Convert.ToDecimal(QTYA);
                     var validateSaveTicol242 = ITticol137.Actualizarttdcol242Cant(ref PALLET, ref qt);
                     var validateSaveTicol242N = ITticol137.Actualizarttdcol242(data137);
+                    var validateSaveTicol042N = ITticol137.Actualizarttdcol042Pdno(data137);
                     var validateSaveTicol042 = ITticol137.Actualizarttdcol042Status(data137);
                 }
                 if (TABLA == "whcol131")

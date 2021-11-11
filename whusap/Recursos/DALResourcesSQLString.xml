@@ -28,6 +28,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           update {0}.tticol022{1} set t$dele = '[:DELE]' where T$SQNB = '[:PAID]'
         </stringSQL>
       </operationName>
+      <operationName name="Actualizarttdcol022Pdno">
+        <stringSQL>
+          update {0}.tticol022{1} set T$PDNO = '[:PDNO]' where T$SQNB = '[:PAID]'
+        </stringSQL>
+      </operationName>
+      <operationName name="Actualizarttdcol042Pdno">
+        <stringSQL>
+          update {0}.tticol042{1} set T$PDNO = '[:PDNO]' where T$SQNB = '[:PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="Actualizarttdcol222">
         <stringSQL>
           update {0}.tticol222{1} set T$CWAT = '[:CWAT]',T$ACLO = '[:LOCA]',T$PDNO = '[:LOT]' where T$SQNB = '[:PAID]'
@@ -182,6 +192,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
+
     <Module name="tticol042">
       <operationName name="invLabel_registroImprimir_Param">
         <stringSQL>

@@ -93,6 +93,16 @@ namespace whusa.Interfases
         {
             return dal.Actualizarttdcol222(data137);
         }
+
+        public object Actualizarttdcol022Pdno(Ent_ttdcol137 data137)
+        {
+            return dal.Actualizarttdcol022Pdno(data137);
+        }
+
+        public object Actualizarttdcol042Pdno(Ent_ttdcol137 data137)
+        {
+            return dal.Actualizarttdcol042Pdno(data137);
+        }
     }
 }
 
