@@ -210,7 +210,7 @@ namespace whusa.DAL
             return retorno;
         }
 
-        public bool Actualizartwhcol131CantStatus(ref string pallet, ref int status, ref decimal qty,string CWAR,string LOCA)
+        public bool Actualizartwhcol131CantStatus(ref string pallet, ref int status, ref decimal qty,string CWAR,string LOCA,string LOT)
         {
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
@@ -225,6 +225,7 @@ namespace whusa.DAL
                 paramList.Add(":STAT", status);
                 paramList.Add(":CWAR", CWAR.ToUpper());
                 paramList.Add(":LOCA", LOCA.ToUpper());
+                paramList.Add(":LOT", LOT.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
@@ -287,7 +288,8 @@ namespace whusa.DAL
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":PAID", data137.Paid.ToUpper());
                 paramList.Add(":CWAT", data137.Cwar.ToUpper());
-                paramList.Add(":LOCA", data137.Loca.ToUpper());
+                paramList.Add(":LOCA", data137.Loca.ToUpper() == "" ? " ":data137.Loca.ToUpper());
+                paramList.Add(":LOT", data137.Lot.ToUpper() == "" ? "" : data137.Lot.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
@@ -314,8 +316,60 @@ namespace whusa.DAL
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":PAID", data137.Paid.ToUpper());
                 paramList.Add(":CWAT", data137.Cwar.ToUpper());
-                paramList.Add(":LOCA", data137.Loca.ToUpper());
-                paramList.Add(":LOT", data137.Lot.ToUpper());
+                paramList.Add(":LOCA", data137.Loca.ToUpper() == "" ? " " : data137.Loca.ToUpper());
+                paramList.Add(":LOT", data137.Lot.ToUpper() == "" ? " " : data137.Lot.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
+        public bool Actualizarttdcol042Pdno(Ent_ttdcol137 data137)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", data137.Paid.ToUpper());
+                paramList.Add(":PDNO", data137.Lot.ToUpper() == "" ? " " : data137.Lot.ToUpper());
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
+        public bool Actualizarttdcol022Pdno(Ent_ttdcol137 data137)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", data137.Paid.ToUpper());
+                paramList.Add(":PDNO", data137.Lot.ToUpper() == "" ? " " : data137.Lot.ToUpper());
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
