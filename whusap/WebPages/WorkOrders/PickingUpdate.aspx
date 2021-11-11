@@ -987,6 +987,7 @@
             else {
                 $("#MainDiv").hide(100);
                 $('#bdPicket182').hide(100);
+                alert("No Picks Availables For This Warehouse");
             }
             $("#bdPicket182").append(bodyRows);
 

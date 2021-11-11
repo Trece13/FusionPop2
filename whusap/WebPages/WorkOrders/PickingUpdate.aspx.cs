@@ -127,65 +127,89 @@ namespace whusap.WebPages.WorkOrders
 
             DataTable DTtticol182 = _idaltticol182.SelectRecord(ref MyObj182, ref strError);
             int index = 0;
-            foreach (DataRow row in DTtticol182.Rows)
+            if (DTtticol182.Rows.Count > 0)
             {
-                if (row["T$STAT"].ToString().Trim() == "1" || (row["T$STAT"].ToString().Trim() == "5" && row["T$LOGN"].ToString().Trim() == HttpContext.Current.Session["user"].ToString().Trim()))
+                foreach (DataRow row in DTtticol182.Rows)
                 {
-                    MySessionObjPicking.OORG = row["T$OORG"].ToString();
-                    MySessionObjPicking.ORNO = row["T$ORNO"].ToString();
-                    MySessionObjPicking.PONO = row["T$PONO"].ToString();
-                    MySessionObjPicking.ADVS = row["T$ADVS"].ToString();
-                    MySessionObjPicking.ITEM = row["T$ITEM"].ToString();
-                    MySessionObjPicking.QTY = row["T$QTYT"].ToString();
-                    MySessionObjPicking.UN = row["T$UNIT"].ToString();
-                    MySessionObjPicking.WRH = row["T$CWAR"].ToString();
-                    MySessionObjPicking.MCNO = row["T$MCNO"].ToString();
-                    MySessionObjPicking.PRIO = row["T$PRIO"].ToString();
-                    MySessionObjPicking.PICK = row["T$PICK"].ToString();
-                    MySessionObjPicking.DESCRIPTION = row["T$DSCA"].ToString();
-                    //MySessionObjPicking.PALLETID = row["T$PAID"].ToString();
-                    //MySessionObjPicking.LOCA = row["T$LOCA"].ToString();
-                    MySessionObjPicking.STAT = row["T$STAT"].ToString();
-                    MyObj182.PICK = MySessionObjPicking.PICK;
-                    MyObj182.STAT = "5";
-                    MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
-                    MyObj182.ORNO = MySessionObjPicking.ORNO;
-                    MyObj182.PONO = MySessionObjPicking.PONO;
-                    MyObj182.ADVS = MySessionObjPicking.ADVS;
-                    _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
-                    break;
+                    if (row["T$STAT"].ToString().Trim() == "1" || (row["T$STAT"].ToString().Trim() == "5" && row["T$LOGN"].ToString().Trim() == HttpContext.Current.Session["user"].ToString().Trim()))
+                    {
+                        MySessionObjPicking.OORG = row["T$OORG"].ToString();
+                        MySessionObjPicking.ORNO = row["T$ORNO"].ToString();
+                        MySessionObjPicking.PONO = row["T$PONO"].ToString();
+                        MySessionObjPicking.ADVS = row["T$ADVS"].ToString();
+                        MySessionObjPicking.ITEM = row["T$ITEM"].ToString();
+                        MySessionObjPicking.QTY = row["T$QTYT"].ToString();
+                        MySessionObjPicking.UN = row["T$UNIT"].ToString();
+                        MySessionObjPicking.WRH = row["T$CWAR"].ToString();
+                        MySessionObjPicking.MCNO = row["T$MCNO"].ToString();
+                        MySessionObjPicking.PRIO = row["T$PRIO"].ToString();
+                        MySessionObjPicking.PICK = row["T$PICK"].ToString();
+                        MySessionObjPicking.DESCRIPTION = row["T$DSCA"].ToString();
+                        //MySessionObjPicking.PALLETID = row["T$PAID"].ToString();
+                        //MySessionObjPicking.LOCA = row["T$LOCA"].ToString();
+                        MySessionObjPicking.STAT = row["T$STAT"].ToString();
+                        MyObj182.PICK = MySessionObjPicking.PICK;
+                        MyObj182.STAT = "5";
+                        MyObj182.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
+                        MyObj182.ORNO = MySessionObjPicking.ORNO;
+                        MyObj182.PONO = MySessionObjPicking.PONO;
+                        MyObj182.ADVS = MySessionObjPicking.ADVS;
+                        _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
+                        MySessionObjPicking.error = false;
+                        break;
+                    }
+                    index++;
                 }
-                index++;
+                HttpContext.Current.Session["MyObjPicking"] = MySessionObjPicking;
             }
-            HttpContext.Current.Session["MyObjPicking"] = MySessionObjPicking;
+            else
+            {
+                HttpContext.Current.Session["MyObjPicking182"] = null;
+                HttpContext.Current.Session["MyObjPicking"] = new EntidadPicking();
+                MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+                MySessionObjPicking.error =  true;
+                MySessionObjPicking.errorMsg = "No Picks Availables For This Warehouse.";
+            }
+            
             return JsonConvert.SerializeObject(MySessionObjPicking);
         }
 
         [WebMethod]
         public static string ShowCurrentOptionsItem()
         {
-            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
             List<EntidadPicking> LstPallet22 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet042 = new List<EntidadPicking>();
             List<EntidadPicking> LstPallet131 = new List<EntidadPicking>();
             List<EntidadPicking> LstReturn = new List<EntidadPicking>();
-            //JC 101021  No mostrar la tabla de pallets sugeridos si ya es el último pick
-            LstPallet131 = twhcolDAL.ConsultarPalletPicking131Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
-            if (LstPallet131.Count > 0)
+            if (HttpContext.Current.Session["MyObjPicking"] != " ")
             {
-                LstReturn = LstPallet131;
-            }
+                EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+                //JC 101021  No mostrar la tabla de pallets sugeridos si ya es el último pick
+                LstPallet131 = twhcolDAL.ConsultarPalletPicking131Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+                if (LstPallet131.Count > 0)
+                {
+                    LstReturn = LstPallet131;
+                }
 
-            LstPallet042 = twhcolDAL.ConsultarPalletPicking042Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
-            if (LstPallet042.Count > 0)
-            {
-                LstReturn = LstPallet042;
-            }
+                LstPallet042 = twhcolDAL.ConsultarPalletPicking042Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+                if (LstPallet042.Count > 0)
+                {
+                    LstReturn = LstPallet042;
+                }
 
-            LstPallet22 = twhcolDAL.ConsultarPalletPicking22Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
-            if (LstPallet22.Count > 0)
+                LstPallet22 = twhcolDAL.ConsultarPalletPicking22Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
+                if (LstPallet22.Count > 0)
+                {
+                    LstReturn = LstPallet22;
+                }               
+            }
+            else
             {
-                LstReturn = LstPallet22;
+                EntidadPicking ObjPicking182 = new EntidadPicking();
+                ObjPicking182.error = true;
+                ObjPicking182.errorMsg = "No More Picks Availables for this Warehouse.";
+                EntidadPicking MySessionObjPicking = null;
+                return JsonConvert.SerializeObject(ObjPicking182);
             }
             return JsonConvert.SerializeObject(LstReturn);
         }
