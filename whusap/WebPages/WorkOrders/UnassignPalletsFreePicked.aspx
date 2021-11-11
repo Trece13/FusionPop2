@@ -178,7 +178,7 @@
             var MylistPicks = JSON.parse(r.d);
             MylistPicks.forEach(function (e) {
                 var option = document.createElement("option");
-                option.text = "Pick No: " + e.PICK + " Warehouse: " + e.WRH + " Machine: " + e.MCN + " Qty Pallets: " + e.PALLETS
+                option.text = "Pick No: " + e.PICK + " Warehouse: " + e.WRH + " Machine: " + e.MCN + " Qty Pallets / Picks: " + e.PALLETS
                 option.value = e.PICK.trim()
                 ddPick.add(option);
             });
