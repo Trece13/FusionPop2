@@ -28,7 +28,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           update {0}.tticol022{1} set t$dele = '[:DELE]' where T$SQNB = '[:PAID]'
         </stringSQL>
       </operationName>
-      <operationName name="Actualizarttdcol022PdnoConsultarPalletPicking042Item">
+      <operationName name="Actualizarttdcol022Pdno">
         <stringSQL>
           update {0}.tticol022{1} set T$PDNO = '[:PDNO]' where T$SQNB = '[:PAID]'
         </stringSQL>
