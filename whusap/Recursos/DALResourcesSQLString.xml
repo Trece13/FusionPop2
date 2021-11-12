@@ -28,7 +28,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           update {0}.tticol022{1} set t$dele = '[:DELE]' where T$SQNB = '[:PAID]'
         </stringSQL>
       </operationName>
-      <operationName name="Actualizarttdcol022Pdno">
+      <operationName name="Actualizarttdcol022PdnoConsultarPalletPicking042Item">
         <stringSQL>
           update {0}.tticol022{1} set T$PDNO = '[:PDNO]' where T$SQNB = '[:PAID]'
         </stringSQL>
@@ -1486,7 +1486,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL182.T$PONO = '[:PONO]'
           AND COL182.T$ADVS = '[:ADVS]'
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
-          AND QTY &gt; 0
+          AND COL222.T$ACQT &gt; 0
           ORDER BY COL022.T$DATE-5/24 ASC
           )
           WHERE ROWN &lt;= 5
@@ -1536,7 +1536,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL182.T$PONO = '[:PONO]'
           AND COL182.T$ADVS = '[:ADVS]'
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
-          AND QTY &gt; 0
+          AND COL242.T$ACQT &gt; 0
           ORDER BY COL042.T$DATE-5/24 ASC
           )
           WHERE ROWN &lt;= 5
