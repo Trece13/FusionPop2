@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="4FinishedCupsDouble.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._4FinishedCupsDouble" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="4FinishedCupsDoubleME.aspx.cs" Inherits="whusap.WebPages.Labels.RedesingLabels._4FinishedCupsDoubleME" %>
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns=http://www.w3.org/1999/xhtml>
 <head runat="server">
     <title></title>
     <link rel="stylesheet" href="styles/fontawesome5.1.css" />
@@ -61,7 +61,9 @@
         }
         #myLabel, #myLabel2 {
             width: 6in;
-            height: 3in;
+            height: 4in;
+            padding: 0px;
+            border-radius: 12px;
             margin: 0;
         }
         .alingRight {
@@ -88,8 +90,8 @@
         #codeItem, #codeItem2 {
             display: block;
             margin: auto;
-            height: 75px;
-            width: 250px;
+            height: 50px;
+            width: 100%;
         }
         #itemDesc, #itemDesc2 {
             vertical-align: middle;
@@ -106,6 +108,7 @@
             border-top: solid 1px gray;
         }
         #printContainer {
+            margin-bottom: 100px;
         }
         #editTable {
             display: none;
@@ -130,7 +133,7 @@
             border-bottom: none;
         }
         #divBarcode, #divBarcode2 {
-            height: 140px;
+            height: 30%;
             padding: inherit;
         }
         @keyframes spin {
@@ -148,14 +151,13 @@
         .table th {
             padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.05em;
+            font-size: 2em;
             text-align: left;
             vertical-align: middle;
-            padding-left: 1em;
+            padding-left: 0em;
         }
         @page {
             size: landscape;
-            margin: 3px;
         }
     </style>
     <script type="text/javascript">
@@ -164,7 +166,7 @@
             var oldPage = document.body.innerHTML;
             var mywindow = window.open('', 'PRINT', 'height=400px,width=600px');
             mywindow.document.write('<html><head>');
-            mywindow.document.write('</head><body><style> body{ width:5.5in; height:3.4in;} @page {size: 6in 4in landscape; margin: 0;} .table {font-size:13px;} .table td{padding: 0.25rem !important;}</style>');
+            mywindow.document.write('</head><body style="margin-top: 1px; margin-left: 1px; margin-right: 1px;"><style>@page{size:landscape;}</style>');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('<link rel="stylesheet" href="styles/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">');
             mywindow.document.write('</body></html>');
@@ -186,29 +188,28 @@
     <form id="form1" runat="server">
         <div id="printContainer" class="container">
             <div id="printButton" runat="server">
-                <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 ">
-                    <img src="images\printer.svg" height="30px" width="30px" /></button>
+                               <button type="button" onclick="javascript:printDiv('printSpace')" class="btn btn-link col-12 "><img src="images\printer.svg" height="30px" width="30px"/></button>
 
             </div>
             <br />
             <div id="printSpace">
-                <div id="myLabel" style="width: 5.5in; height: 3.4in; margin: 8px" runat="server">
-                    <div class="row" style="margin: auto">
-                        <div class="col-5 alingLeft">
+                <div id="myLabel" runat="server">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" style="height: 1in" />
+                            <img id="codeMaterial" src="~/images/logophoenix_login.jpg" runat="server" />
                         </div>
                     </div>
                     <br />
-                    <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" style="width: 5in; height: 1in" />
+                    <div class="col-12 borderTop" id="divBarcode1">
+                        <img id="codePaid" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                    <div>
+                    <div style="height: 15%">
                         <table class="table mw-100">
                             <tbody>
                                 <tr>
@@ -229,23 +230,23 @@
                     </div>
                 </div>
                 <br />
-                <div id="myLabel2" style="width: 5.5in; height: 3.4in; margin: 8px">
-                    <div class="row" style="margin: auto; padding-top: 8px">
-                        <div class="col-5 alingLeft">
+                <div id="myLabel2" runat="server">
+                    <div class="row">
+                        <div class="col-6 alingLeft">
                             <label>
                                 <strong>
                                     <label id="lblMaterialDesc2" runat="server">MATERIAL DESCRIPTION</label></strong>
                             </label>
                         </div>
                         <div class="col-6 alingRight">
-                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" style="height: 1in" />
+                            <img id="codeMaterial2" src="~/images/logophoenix_login.jpg" runat="server" />
                         </div>
                     </div>
                     <br />
-                    <div class="col-12 borderTop" id="divBarcode">
-                        <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" style="width: 5in; height: 1in" />
+                    <div class="col-12 borderTop" id="divBarcode2">
+                        <img id="codePaid2" src="~/images/logophoenix_login.jpg" runat="server" />
                     </div>
-                    <div>
+                    <div style="height: 10%">
                         <table class="table mw-100">
                             <tbody>
                                 <tr>
@@ -265,6 +266,42 @@
                         </table>
                     </div>
                 </div>
+            <div id="MyEtiquetaDrop" style="width:6in; height:3.5in;" runat="server">
+                <table style="margin: auto;margin-top:15px;">
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Pick ID</label>
+                        </td>
+                        <td colspan="4">
+                            <img src="~/images/logophoenix_login.jpg" runat="server" id="bcPick" alt="" hspace="60"
+                                vspace="5" style="width: 3in; height: 1in; margin: 0px !important" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Machine</label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 30px" id="lbMcno" runat="server">
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label style="font-size: 30px">
+                                Pallet(s)
+                            </label>
+                        </td>
+                        <td style="text-align: center;">
+                            <label style="font-size: 20px" id="lbPaid" runat="server"></label>
+                            <label style="font-size: 20px" id="lbSep" runat="server">/</label>
+                            <label style="font-size: 20px" id="lbQtyp" runat="server"></label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             </div>
         </div>
     </form>
@@ -278,5 +315,6 @@
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap4.min.js"></script>
+
 </body>
 </html>

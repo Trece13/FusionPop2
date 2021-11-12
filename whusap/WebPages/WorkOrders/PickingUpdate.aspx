@@ -1163,7 +1163,7 @@
                                     myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
                                 }
                                 else {
-                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
+                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
 
                                 }
                             }
