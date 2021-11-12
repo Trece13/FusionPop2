@@ -37,10 +37,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                 lblQuantity.InnerHtml = Session["Quantity2"] != null ? Session["Quantity2"].ToString() : string.Empty;
                 lblDate.InnerHtml = Session["Date"] != null ? Session["Date"].ToString() : string.Empty;
                 lblPallet.InnerHtml = Session["codePaid"] != null ? Session["codePaid"].ToString() : string.Empty;
-                if (HttpContext.Current.Session["Table"] != "whcol131")
-                {
-                    lblMachine.InnerHtml = Session["Machine"] != null ? Session["Machine"].ToString() : string.Empty;
-                }
+                lblMachine.InnerHtml = Session["Machine"] != null ? Session["Machine"].ToString() : string.Empty;
                 lblOperator.InnerHtml = Session["Operator"] != null ? Session["Operator"].ToString() : string.Empty;
                 myLabel.Visible = (Session["Quantity2"] != null ? Convert.ToDecimal(Session["Quantity2"].ToString()) : 0) > 0 ? true : false;
 
@@ -63,7 +60,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     if (Session["PickLabel"].ToString() == "yes")
                     {
                         MyEtiquetaDrop.Visible = true;
-                        
+
                     }
                     else
                     {
@@ -75,13 +72,13 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     }
                 }
 
-                 if (Session["PartialLabel"] != null)
+                if (Session["PartialLabel"] != null)
                 {
                     if (Session["PartialLabel"].ToString() == "yes")
                     {
                         myLabel.Visible = true;
                         myLabel2.Visible = false;
-                        
+
                     }
                     else
                     {
@@ -90,9 +87,9 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     }
                 }
 
-                 printButton.Visible = true;
-                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
-                 EliminarVariablesSession();
+                printButton.Visible = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                EliminarVariablesSession();
 
                 if (Session["Reprint"] != null)
                 {

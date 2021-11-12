@@ -399,7 +399,7 @@ namespace whusap.WebPages.WorkOrders
 
                 DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                 qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
-
+                Decimal CantidadRestante = Convert.ToDecimal(qtyaG) - Convert.ToDecimal(QTYT);
                 Ent_tticol082 obj082 = new Ent_tticol082();
                 obj082.OORG = MyObjPicking182.OORG == "" ? " " : MyObjPicking182.OORG;
                 obj082.ORNO = MyObjPicking182.ORNO == "" ? " " : MyObjPicking182.ORNO;
@@ -444,7 +444,6 @@ namespace whusap.WebPages.WorkOrders
                 string qtytS = ConvertToDecimal(QTYT.ToString().Trim()).ToString().ToString();
                 int cnpk = Convert.ToInt32(MyObjPicking182.CNPK.Trim() == "" ? "2" : MyObjPicking182.CNPK.Trim());
                 String Location = LOCA;
-                if (Convert.ToDecimal(qtyaG) > 0) { 
                 if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
                 {
                     Ent_tticol022 MyObj = new Ent_tticol022();
@@ -471,7 +470,7 @@ namespace whusap.WebPages.WorkOrders
 
                         string strError = string.Empty;
 
-                        if (Convert.ToDecimal(qtyaG) > 0)
+                        if (Convert.ToDecimal(CantidadRestante) > 0)
                         {
                             string strMaxSequence = getSequence(obj082.ORNO + "-P000", "P");
                             string separator = "-";
@@ -525,7 +524,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codePaid2"] = MyObj.sqnb;
                                 HttpContext.Current.Session["Lot"] = MyObj.pdno; ;
                                 HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
-                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
+                                HttpContext.Current.Session["Quantity2"] = CantidadRestante;
                                 HttpContext.Current.Session["Date"] = MyObj.date;
                                 HttpContext.Current.Session["Pallet"] = MyObj.sqnb;
                                 HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
@@ -616,7 +615,7 @@ namespace whusap.WebPages.WorkOrders
 
                         string strError = string.Empty;
 
-                        if (Convert.ToDecimal(qtyaG) > 0)
+                        if (CantidadRestante > 0)
                         {
                             string strMaxSequence = getSequence(obj082.ORNO + "-P000", "P");
                             string separator = "-";
@@ -671,7 +670,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codePaid2"] = PAID;
                                 HttpContext.Current.Session["Lot"] = MyObj.pdno; ;
                                 HttpContext.Current.Session["Quantity"] = MyObj.qtd1;
-                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
+                                HttpContext.Current.Session["Quantity2"] = CantidadRestante;
                                 HttpContext.Current.Session["Date"] = MyObj.date;
                                 HttpContext.Current.Session["Pallet"] = MyObj.sqnb;
                                 HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
@@ -759,7 +758,7 @@ namespace whusap.WebPages.WorkOrders
                     {
 
 
-                        if (Convert.ToDecimal(qtyaG) > 0)
+                        if (CantidadRestante > 0)
                         {
                             string strMaxSequence = getSequence(obj082.ORNO + "-P000", "P");
                             string separator = "-";
@@ -817,7 +816,7 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codePaid2"] = MyObj.PAID;
                                 HttpContext.Current.Session["Lot"] = MyObj.CLOT;
                                 HttpContext.Current.Session["Quantity"] = MyObj.QTYC;
-                                HttpContext.Current.Session["Quantity2"] = MyObj.qtyaG;
+                                HttpContext.Current.Session["Quantity2"] = CantidadRestante;
                                 HttpContext.Current.Session["Date"] = MyObj.DATE;
                                 HttpContext.Current.Session["Pallet"] = MyObj.PAID;
                                 HttpContext.Current.Session["Machine"] = MyObjPicking182.MCNO;
@@ -887,14 +886,7 @@ namespace whusap.WebPages.WorkOrders
                     _idaltticol182.Delete182Zero();
                     return JsonConvert.SerializeObject(MyErrorObj); ;
                 }
-              }
-                else
-                {
-                    Ent_twhcol130131 MyErrorObj = new Ent_twhcol130131();
-                    MyErrorObj.Error = true;
-                    _idaltticol182.Delete182Zero();
-                    return JsonConvert.SerializeObject(MyErrorObj); ;
-                }
+
 
 
             }
