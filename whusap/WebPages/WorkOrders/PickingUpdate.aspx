@@ -1175,7 +1175,9 @@
                         }
                         else {
                             alert(myObj.errorMsg);
-                            selectPicksPending();
+                            //JC 131121 Removido   selectPicksPending();
+                            //JC cambio por loadpickpendings
+                            loadPicksPending();
                             $("#ConfirmLoader").hide(500);
                         }
                     },

@@ -50,6 +50,11 @@ namespace whusa.Interfases
             return retorno;
 
         }
+        //JC 121121 Consultar el stock en baan antes de confirmar.
+        public DataTable ValidarStockBaan(ref string ITM, ref string LOT, ref string LOC, ref string WRH, ref string QTY)
+        {
+            return dal.ValidarStockBaan(ITM, LOT, LOC, WRH, QTY);
+        }
 
         public List<DataTable> ListasOrderType()
         {
