@@ -621,7 +621,7 @@
     <script>
         var ajaxShowCurrentOptionsWarehouse = null;
         var ajaxShowCurrentOptionsItem = null;
-
+        var qty = "";
         var StarProcessing = false;
         var GetPicksProcessing = false;
         var TakeProcessing = false;
@@ -716,7 +716,7 @@
             ddReason.addEventListener("change", changeReason);
             txPaid.addEventListener("input", verifyPallet);
             //txLoca.addEventListener("input", VerifyLocation);
-            txQtyc.addEventListener("input", VerifyQuantity);
+            txQtyc.addEventListener("keyup", VerifyQuantity);
             chkConsigment.addEventListener('change', GetWarehouse);
             btnConfirm.addEventListener('click', Confirm)
         }
@@ -1099,19 +1099,26 @@
         //    }
         //}
 
-        var VerifyQuantity = function () {
-            if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
-                txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
-            }
-            var qtycAct = parseFloat(lblQtyc.innerHTML.trim()) <= parseFloat($("#qtyTbl").html()) ? parseFloat(lblQtyc.innerHTML.trim()) : parseFloat($("#qtyTbl").html());
-            var qtycNew = parseFloat(txQtyc.value.trim());
-            if (qtycAct >= qtycNew && qtycNew > 0) {
-                qtytValid();
-                $('#lblError').html('')
+        var VerifyQuantity = function (e) {
+            console.log(e.keyCode+" "+e.which);
+            if (e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode == 9 || e.keyCode == 8 || e.keyCode == 190) {
+                if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
+                    txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
+                }
+                var qtycAct = parseFloat(lblQtyc.innerHTML.trim()) <= parseFloat($("#qtyTbl").html()) ? parseFloat(lblQtyc.innerHTML.trim()) : parseFloat($("#qtyTbl").html());
+                var qtycNew = parseFloat(txQtyc.value.trim());
+                if (qtycAct >= qtycNew && qtycNew > 0) {
+                    qtytValid();
+                    $('#lblError').html('');
+                    qty = qtycNew;
+                }
+                else {
+                    qtytInvalid();
+                    $('#lblError').html('Quantity invalid')
+                }
             }
             else {
-                qtytInvalid();
-                $('#lblError').html('Quantity invalid')
+                txQtyc.value = qty;
             }
         }
 
