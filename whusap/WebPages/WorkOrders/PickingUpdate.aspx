@@ -677,6 +677,33 @@
             })
         }
 
+        function BlockPicking() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then(function (result) {
+                if (result.value) {
+                    Method = "BlockPicking"
+                    Data = "{}";
+                    EventoAjax(Method, Data,BlockPickingSuccess);
+                    $("#StatusChange").hide(100);
+                    Swal.fire(
+                      'Blocked!',
+                      'Pick Id has been Blocked.',
+                      'success'
+                    )
+                }
+            })
+        }
+        var BlockPickingSuccess = function(){
+            ClearFormPicking();
+            loadPicksPending();
+        }
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
@@ -1227,21 +1254,7 @@
 
         var Block = function () {
 
-                dataS = "{}";
-
-                //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
-                var AjaxConfirm = $.ajax({
-                    type: "POST",
-                    url: "PickingUpdate.aspx/BlockPicking",
-                    data: dataS,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        ClearFormPicking();
-                        loadPicksPending();
-                    }
-
-                });
+            BlockPicking();
         }
 
         var SucceessConfirm = function () {
