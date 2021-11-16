@@ -45,6 +45,7 @@ namespace whusap.WebPages.WorkOrders
                 DataRow ItemRow = DTtticol182.Rows[0];
                 ObjReturn.PAID = ItemRow["PICK"].ToString();
                 ObjReturn.STAT = ItemRow["STAA"].ToString();
+                ObjReturn.STAT = ItemRow["STATUS"].ToString();
                 ObjReturn.Error = false;
             }
             else
