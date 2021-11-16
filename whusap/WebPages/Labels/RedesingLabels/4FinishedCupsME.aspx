@@ -185,7 +185,7 @@
         .table th {
             padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.2em;
+            font-size: 1.5em;
             text-align: left;
             vertical-align: middle;
             padding-left: 0em;
@@ -279,7 +279,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var now = new Date();
-            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + addZero(now.getUTCMinutes());
         });
     </script>
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
