@@ -6775,7 +6775,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ROW_NUMBER() OVER (ORDER BY COL182.T$PRIO ASC) ROWN
           FROM BAAN.TTICOL182140  COL182
           LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  COL182.T$ITEM
-          WHERE COL182.T$CWAR = '[:T$CWAR]' AND COL182.T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN &lt; 10
+          WHERE COL182.T$CWAR = '[:T$CWAR]' AND COL182.T$STAT IN (1, 5) AND COL182.T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN &lt; 10
         </stringSQL>
       </operationName>
 	  <operationName name="ChangeStat182">

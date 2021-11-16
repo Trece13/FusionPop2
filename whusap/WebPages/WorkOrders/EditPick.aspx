@@ -65,7 +65,7 @@
             var MylistPicks = JSON.parse(r.d);
             MylistPicks.forEach(function (e) {
                 var option = document.createElement("option");
-                option.text = "Pick No: " + e.PICK + " Warehouse: " + e.CWAR + " Status: " + e.STATUS
+                option.text = "Pick No: " + e.PICK + " Priority: " + e.PRIO + " Warehouse: " + e.CWAR + " Status: " + e.STATUS
                 option.value = e.PICK.trim()
                 option.setAttribute('ORNO', e.ORNO);
                 option.setAttribute('PONO', e.PONO);
