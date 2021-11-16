@@ -372,6 +372,22 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
+        public static string BlockPicking()
+        {
+            string strError = string.Empty;
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+            Ent_tticol182 MyObj182 = new Ent_tticol182();
+            MyObj182.STAT = "3";
+            MyObj182.ORNO = MySessionObjPicking.ORNO;
+            MyObj182.PONO = MySessionObjPicking.PONO;
+            MyObj182.ADVS = MySessionObjPicking.ADVS;
+            MyObj182.PICK = MySessionObjPicking.PICK;
+            _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
+            string UrlBase = WebConfigurationManager.AppSettings["UrlBase"].ToString();
+            return UrlBase + "/Webpages/Login/Login/whMenuI.aspx";
+        }
+
+        [WebMethod]
         public static string Click_confirPKG(string QTYT, string consigment)
         {
             try
