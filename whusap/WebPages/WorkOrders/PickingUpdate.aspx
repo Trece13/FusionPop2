@@ -474,8 +474,9 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button>
-                        <button class="btn btn-danger col-12 btn-sm" id="" type="button" onclick="Stop()";><span>Stop Picking&nbsp;<i class='fas fa-circle-notch fa-spin' style='color: silver; display: none' id="SkipLoader"></i></span></button>
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button><br />
+                        <button class="btn btn-danger col-12 btn-sm" id="" type="button" onclick="Stop()";><span>Stop Picking</span></button><br />
+                        <button class="btn btn-warning col-12 btn-sm" id="" type="button" onclick="Block()";><span>Block Picking</span></button>
                     </div>
                     <div class="row">
                         <label id="lblError" style="color: red; font-size: 30px;"></label>
@@ -621,7 +622,7 @@
     <script>
         var ajaxShowCurrentOptionsWarehouse = null;
         var ajaxShowCurrentOptionsItem = null;
-
+        var qty = "";
         var StarProcessing = false;
         var GetPicksProcessing = false;
         var TakeProcessing = false;
@@ -676,6 +677,33 @@
             })
         }
 
+        function BlockPicking() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then(function (result) {
+                if (result.value) {
+                    Method = "BlockPicking"
+                    Data = "{}";
+                    EventoAjax(Method, Data,BlockPickingSuccess);
+                    $("#StatusChange").hide(100);
+                    Swal.fire(
+                      'Blocked!',
+                      'Pick Id has been Blocked.',
+                      'success'
+                    )
+                }
+            })
+        }
+        var BlockPickingSuccess = function(){
+            ClearFormPicking();
+            loadPicksPending();
+        }
         var EventoAjax = function (Method, Data, MethodSuccess) {
             $.ajax({
                 type: "POST",
@@ -716,7 +744,7 @@
             ddReason.addEventListener("change", changeReason);
             txPaid.addEventListener("input", verifyPallet);
             //txLoca.addEventListener("input", VerifyLocation);
-            txQtyc.addEventListener("input", VerifyQuantity);
+            txQtyc.addEventListener("keyup", VerifyQuantity);
             chkConsigment.addEventListener('change', GetWarehouse);
             btnConfirm.addEventListener('click', Confirm)
         }
@@ -1098,19 +1126,26 @@
         //    }
         //}
 
-        var VerifyQuantity = function () {
-            if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
-                txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
-            }
-            var qtycAct = parseFloat(lblQtyc.innerHTML.trim()) <= parseFloat($("#qtyTbl").html()) ? parseFloat(lblQtyc.innerHTML.trim()) : parseFloat($("#qtyTbl").html());
-            var qtycNew = parseFloat(txQtyc.value.trim());
-            if (qtycAct >= qtycNew && qtycNew > 0) {
-                qtytValid();
-                $('#lblError').html('')
+        var VerifyQuantity = function (e) {
+            console.log(e.keyCode+" "+e.which);
+            if (e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode == 9 || e.keyCode == 8 || e.keyCode == 190) {
+                if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
+                    txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
+                }
+                var qtycAct = parseFloat(lblQtyc.innerHTML.trim()) <= parseFloat($("#qtyTbl").html()) ? parseFloat(lblQtyc.innerHTML.trim()) : parseFloat($("#qtyTbl").html());
+                var qtycNew = parseFloat(txQtyc.value.trim());
+                if (qtycAct >= qtycNew && qtycNew > 0) {
+                    qtytValid();
+                    $('#lblError').html('');
+                    qty = qtycNew;
+                }
+                else {
+                    qtytInvalid();
+                    $('#lblError').html('Quantity invalid')
+                }
             }
             else {
-                qtytInvalid();
-                $('#lblError').html('Quantity invalid')
+                txQtyc.value = qty;
             }
         }
 
@@ -1162,7 +1197,7 @@
                                     myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
                                 }
                                 else {
-                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDouble.aspx';
+                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
 
                                 }
                             }
@@ -1174,7 +1209,9 @@
                         }
                         else {
                             alert(myObj.errorMsg);
-                            selectPicksPending();
+                            //JC 131121 Removido   selectPicksPending();
+                            //JC cambio por loadpickpendings
+                            loadPicksPending();
                             $("#ConfirmLoader").hide(500);
                         }
                     },
@@ -1214,6 +1251,10 @@
             }
         }
 
+        var Block = function () {
+
+            BlockPicking();
+        }
 
         var SucceessConfirm = function () {
 

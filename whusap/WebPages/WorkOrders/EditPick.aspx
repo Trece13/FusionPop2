@@ -65,7 +65,7 @@
             var MylistPicks = JSON.parse(r.d);
             MylistPicks.forEach(function (e) {
                 var option = document.createElement("option");
-                option.text = "Pick No: " + e.PICK + " Warehouse: " + e.CWAR
+                option.text = "Pick No: " + e.PICK + " " + " User: " + e.LOGN + " " + " Priority: " + e.PRIO + " " + " Warehouse: " + e.CWAR + " " + " Status: " + e.STATUS
                 option.value = e.PICK.trim()
                 option.setAttribute('ORNO', e.ORNO);
                 option.setAttribute('PONO', e.PONO);
@@ -118,7 +118,7 @@
                 Pick Id
             </label>
             <select id="ddPick" class="form-control col-6">
-                <option value="0" selected>Select Pick Blocked</option>
+                <option value="0" selected>Select Pick In Process / Blocked</option>
             </select>
 <%--            <div class="col-sm-4">
                 <input type="text" class="form-control form-control-lg col-sm-10" id="txPalletId"

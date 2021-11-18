@@ -79,14 +79,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticol022{1} ticol022
           INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol022.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
+          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
           UNION
           SELECT 'whcol131' AS TBL,whcol131.T$ORNO AS T$ORNO,whcol131.T$PAID AS T$paid,whcol131.T$QTYA AS T$qtyc,
           whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAA AS T$CWAR,
           tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT,whcol131.T$PONO,whcol131.T$STAT as STAT,tcibd001.T$KLTC as KLTC
           FROM {0}.tWhcol131{1} whcol131
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
+          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
           ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAT AS T$CWAR,
@@ -94,7 +94,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticol042{1} ticol042
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
-          INNER JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
+          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
           LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
           WHERE T$paid = '[p1]'
           AND ROWNUM = 1
@@ -192,6 +192,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
+
     <Module name="tticol042">
       <operationName name="invLabel_registroImprimir_Param">
         <stringSQL>
@@ -1485,7 +1486,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL182.T$PONO = '[:PONO]'
           AND COL182.T$ADVS = '[:ADVS]'
           AND TRIM(COL022.T$MITM) = TRIM('[:ITEM]')
-          AND QTY &gt; 0
+          AND COL222.T$ACQT &gt; 0
           ORDER BY COL022.T$DATE-5/24 ASC
           )
           WHERE ROWN &lt;= 5
@@ -1535,7 +1536,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           AND COL182.T$PONO = '[:PONO]'
           AND COL182.T$ADVS = '[:ADVS]'
           AND TRIM(COL042.T$MITM) = TRIM('[:ITEM]')
-          AND QTY &gt; 0
+          AND COL242.T$ACQT &gt; 0
           ORDER BY COL042.T$DATE-5/24 ASC
           )
           WHERE ROWN &lt;= 5
@@ -2981,6 +2982,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.twhwmd200{1}  wmd200 on ConGlobal.CWAT = wmd200.t$cwar
           LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(ConGlobal.ITEM)
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ValidarStockBaan">
+        <stringSQL>
+          select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
+          ibd001.t$cwar ware, inr140.t$loca, ibd001.t$kltc,case when ibd001.t$kltc=1 then trim('[:T$CLOT]') else '                ' end
+          from {0}.twhinr140{1} inr140
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
+          inner join {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = inr140.t$cwar
+          where trim(inr140.t$item)=trim('[:T$MITM]')
+          and case when ibd001.t$kltc=1 then trim(inr140.t$clot) else inr140.t$clot end = case when ibd001.t$kltc = 1 then trim('[:T$CLOT]') else '                ' end
+          and trim(inr140.t$cwar) = trim('[:T$CWOR]')
+          and case when wmd200.t$sloc=1 then trim(inr140.t$loca) else inr140.t$loca end = case when wmd200.t$sloc = 1 then trim('[:T$LOOR]') else '          ' end
+          and inr140.t$stks &gt;= [:T$QTDL]
         </stringSQL>
       </operationName>
 
@@ -6743,8 +6758,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol182">
       <operationName name="SelectTticol182">
         <stringSQL>
-          SELECT T$OORG OORG, T$ORNO ORNO, T$PONO PONO, T$ADVS ADVS, T$ITEM ITEM,T$QTYT QTYT, T$UNIT UNIT, T$CWAR CWAR, T$MCNO MCNO, T$TIME DATT, T$PRIO PRIO, T$PICK PICK, T$LOGN LOGN, T$STAT STAA, T$REFCNTD REFCNTD, T$REFCNTU REFCNTU FROM BAAN.TTICOL182140
-          WHERE T$STAT = NVL('[:T$STAT]',T$STAT )
+          SELECT T$OORG OORG, T$ORNO ORNO, T$PONO PONO, T$ADVS ADVS, T$ITEM ITEM,T$QTYT QTYT, T$UNIT UNIT, T$CWAR CWAR, T$MCNO MCNO, T$TIME DATT, T$PRIO PRIO, T$PICK PICK, T$LOGN LOGN, T$STAT STAA,
+          CASE WHEN T$STAT = 3 THEN 'BLOCKED' ELSE 'IN PROCESS' END STATUS,T$REFCNTD REFCNTD, T$REFCNTU REFCNTU
+          FROM {0}.TTICOL182{1}
+          WHERE T$STAT IN ('[:T$STAT]','[:T$STAB]')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarStatTticol182">
@@ -6758,7 +6775,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ROW_NUMBER() OVER (ORDER BY COL182.T$PRIO ASC) ROWN
           FROM BAAN.TTICOL182140  COL182
           LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  COL182.T$ITEM
-          WHERE COL182.T$CWAR = '[:T$CWAR]' AND COL182.T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN &lt; 10
+          WHERE COL182.T$CWAR = '[:T$CWAR]' AND COL182.T$STAT IN (1, 5) AND COL182.T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN &lt; 10
         </stringSQL>
       </operationName>
 	  <operationName name="ChangeStat182">

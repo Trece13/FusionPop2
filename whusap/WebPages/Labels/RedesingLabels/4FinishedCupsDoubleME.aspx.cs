@@ -67,7 +67,7 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     if (Session["PickLabel"].ToString() == "yes")
                     {
                         MyEtiquetaDrop.Visible = true;
-                        
+
                     }
                     else
                     {
@@ -79,13 +79,13 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     }
                 }
 
-                 if (Session["PartialLabel"] != null)
+                if (Session["PartialLabel"] != null)
                 {
                     if (Session["PartialLabel"].ToString() == "yes")
                     {
                         myLabel.Visible = true;
                         myLabel2.Visible = false;
-                        
+
                     }
                     else
                     {
@@ -94,9 +94,9 @@ namespace whusap.WebPages.Labels.RedesingLabels
                     }
                 }
 
-                 printButton.Visible = true;
-                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
-                 EliminarVariablesSession();
+                printButton.Visible = true;
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
+                EliminarVariablesSession();
 
                 if (Session["Reprint"] != null)
                 {

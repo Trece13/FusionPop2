@@ -570,6 +570,31 @@ namespace whusa.Interfases
             }
             return consulta;
         }
+        //JC 121121 Consultar el stock en baan antes de confirmar.
+        public DataTable ValidarStockBaan(string ITM, string LOT, string LOC, string WRH, string QTY)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$CLOT", LOT.Trim().ToUpper());
+            paramList.Add(":T$MITM", ITM.ToUpper().Trim());
+            paramList.Add(":T$CWOR", WRH.Trim().ToUpper());
+            paramList.Add(":T$LOOR", LOC.Trim().ToUpper() == "" ? " " : LOC.Trim().ToUpper());
+            paramList.Add(":T$QTDL", QTY);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return Retorno;
+        }
 
         public DataTable ValidarUnidad(Ent_twhcol130 whcol130)
         {

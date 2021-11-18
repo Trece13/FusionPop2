@@ -195,6 +195,7 @@ namespace whusa.DAL
             {
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":T$STAT", data.STAT);
+                paramList.Add(":T$STAB", 3);
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
             }

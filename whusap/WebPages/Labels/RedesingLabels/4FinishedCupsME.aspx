@@ -185,7 +185,7 @@
         .table th {
             padding: 0rem;
             border-top: 1px solid #dee2e6;
-            font-size: 1.2em;
+            font-size: 1.5em;
             text-align: left;
             vertical-align: middle;
             padding-left: 0em;
@@ -252,7 +252,7 @@
                         <table class="table mw-90" style="height: 100%;">
                             <tbody> 
                                 <tr style="font-size:80px; text-align:left; vertical-align:middle;">                
-                                    <th rowspan="4" style="padding: 0; padding-right: 100px; font-size: 150px"><label id="lblMachine" runat="server"></label></th>                                 
+                                    <th rowspan="4" style="padding: 0; padding-right: 120px; font-size: 150px"><label id="lblMachine" runat="server"></label></th>                                 
                                 </tr>
                                 <tr>                                   
                                     <td><strong>Pallet #</strong>&nbsp;&nbsp;<label id="lblPallet" runat="server"></label></td>
@@ -279,7 +279,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             var now = new Date();
-            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getUTCMinutes();
+            document.getElementById('lblDate').innerHTML = now.getMonth() + 1 + "/" + now.getDate() + "/" + now.getFullYear() + " " + now.getHours() + ":" + addZero(now.getUTCMinutes());
         });
     </script>
     <script src="styles/jquery-3.2.1.slim.min.js"></script>
