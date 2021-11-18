@@ -180,7 +180,7 @@
             padding: 0rem;
             vertical-align: top;
             border-top: 1px solid #dee2e6;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             text-align: 0eft;
         }
 
