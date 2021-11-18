@@ -793,7 +793,7 @@
 
         }
 
-        var PalletIDSuccess = function (r) {
+        var PalletIDSuccess = function (r) {    
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
                 $("#StatusChangeBtn").show(100);
