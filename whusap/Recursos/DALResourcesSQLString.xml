@@ -2700,7 +2700,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and trim(inr140.t$cwar) = trim('[:T$CWOR]')
           and case when wmd200.t$sloc=1 then trim(inr140.t$loca) else inr140.t$loca end = case when wmd200.t$sloc = 1 then trim('[:T$LOOR]') else '          ' end
           and inr140.t$stks &gt;= [:T$QTDL]
-      </stringSQL>
+        </stringSQL>
       </operationName>
       <operationName name="ActualizarTransferencia">
         <stringSQL>
@@ -2986,7 +2986,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ValidarStockBaan">
         <stringSQL>
-          select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
+          <!--select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
           ibd001.t$cwar ware, inr140.t$loca, ibd001.t$kltc,case when ibd001.t$kltc=1 then trim('[:T$CLOT]') else '                ' end
           from {0}.twhinr140{1} inr140
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
@@ -2995,7 +2995,55 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and case when ibd001.t$kltc=1 then trim(inr140.t$clot) else inr140.t$clot end = case when ibd001.t$kltc = 1 then trim('[:T$CLOT]') else '                ' end
           and trim(inr140.t$cwar) = trim('[:T$CWOR]')
           and case when wmd200.t$sloc=1 then trim(inr140.t$loca) else inr140.t$loca end = case when wmd200.t$sloc = 1 then trim('[:T$LOOR]') else '          ' end
-          and inr140.t$stks &gt;= [:T$QTDL]
+          and inr140.t$stks &gt;= [:T$QTDL]-->
+          select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, desci, unidad,
+          ware, inr140.t$loca, t$kltc, case when t$kltc=1 then loc else '                ' end, qty
+          from
+          (
+          select  col022.t$mitm itm, trim(col082.t$cwar) wrh, case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end loc,
+          case when ibd001.t$kltc=1 then trim(col022.t$pdno) else'                ' end lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
+          ibd001.t$cwar ware, ibd001.t$kltc, sum(col082.t$qtyt) qty
+          from    {0}.tticol082{1} col082
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col082.t$item
+          inner join {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = col082.t$cwar
+          inner join {0}.tticol022{1} col022 on col022.t$sqnb = col082.t$paid
+          group by col022.t$mitm, trim(col082.t$cwar), case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end,
+          case when ibd001.t$kltc=1 then trim(col022.t$pdno) else'                ' end, ibd001.t$dsca, ibd001.t$cuni,
+          ibd001.t$cwar, ibd001.t$kltc
+          union
+          select  col042.t$mitm, trim(col082.t$cwar), case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end,
+          case when ibd001.t$kltc=1 then trim(col042.t$pdno) else'                ' end, ibd001.t$dsca, ibd001.t$cuni,
+          ibd001.t$cwar, ibd001.t$kltc, sum(col082.t$qtyt)
+          from    {0}.tticol082{1} col082
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col082.t$item
+          inner join {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = col082.t$cwar
+          inner join {0}.tticol042{1} col042 on col042.t$sqnb = col082.t$paid
+          group by col042.t$mitm, trim(col082.t$cwar), case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end,
+          case when ibd001.t$kltc=1 then trim(col042.t$pdno) else'                ' end, ibd001.t$dsca, ibd001.t$cuni,
+          ibd001.t$cwar, ibd001.t$kltc
+          union
+          select  col131.t$item, trim(col082.t$cwar), case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end,
+          case when ibd001.t$kltc=1 then trim(col131.t$clot) else'                ' end, ibd001.t$dsca, ibd001.t$cuni,
+          ibd001.t$cwar, ibd001.t$kltc,sum(col082.t$qtyt)
+          from    {0}.tticol082{1} col082
+          inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col082.t$item
+          inner join {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = col082.t$cwar
+          inner join {0}.twhcol131{1} col131 on col131.t$paid = col082.t$paid
+          group by col131.t$item, trim(col082.t$cwar), case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end,
+          case when ibd001.t$kltc=1 then trim(col131.t$clot) else'                ' end, ibd001.t$dsca, ibd001.t$cuni,
+          ibd001.t$cwar, ibd001.t$kltc
+          ) global
+          inner join {0}.twhinr140{1} inr140
+          on trim(inr140.t$item) = trim(global.itm)
+          and inr140.t$clot = global.lot
+          and trim(inr140.t$cwar) = global.wrh
+          and trim(inr140.t$loca) = (global.loc)
+          where trim(global.itm)=trim('[:T$MITM]')
+          and trim(global.wrh) = trim('[:T$CWOR]')
+          and case when global.t$kltc=1 then trim(global.lot) else inr140.t$clot end = case when global.t$kltc = 1 then trim('[:T$CLOT]') else '                ' end
+          and trim(global.loc) = trim('[:T$LOOR]')
+          and inr140.t$stks &gt;= [:T$QTDL] + global.qty
+
         </stringSQL>
       </operationName>
 
