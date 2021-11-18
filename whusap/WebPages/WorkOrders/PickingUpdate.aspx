@@ -757,12 +757,11 @@
             lstPallets = JSON.parse(window.localStorage.getItem('MyPalletList'));
             timer = setTimeout(function () {
                 $("#lblError").html("");
-                console.log("Pallet NO Igual");
                 Method = "VerificarExistenciaPalletID"
-                Data = "{'PAID_NEW':'" + $('#txPaid').val() + "'}";
+                Data = "{'PAID_NEW':'" + $('#txPaid').val().toUpperCase() + "'}";
                 EventoAjax(Method, Data, PalletIDSuccess)
                 lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
-            }, 1500);
+            }, 2000);
 
         }
 
