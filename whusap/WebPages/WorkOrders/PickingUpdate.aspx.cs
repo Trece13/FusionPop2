@@ -419,8 +419,31 @@ namespace whusap.WebPages.WorkOrders
                 string LOC = MyObjPicking182.LOCA;
                 string WRH = MyObjPicking182.WRH;
                 string QTY = QTYT;
-                DataTable StockBaan = _idaltwhcol130.ValidarStockBaan(ref ITM, ref LOT, ref LOC, ref WRH, ref QTY);
-                if (StockBaan.Rows.Count > 0)
+                //JC 181121 Validar la cantidad en pickings previos
+                string StockB, QtyPicked;
+                DataTable StockPicked = _idaltwhcol130.ValidarStockPicked(ref ITM, ref LOT, ref LOC, ref WRH, ref QTY);
+                if (StockPicked.Rows.Count <= 0)
+                {
+                    QtyPicked = "0";
+                }
+                else
+                {
+                    QtyPicked = StockPicked.Rows[0]["QTY"].ToString();
+                }
+                String QtyTotal = (Convert.ToDecimal(QtyPicked) + Convert.ToDecimal(QTY)).ToString();
+                DataTable StockBaan = _idaltwhcol130.ValidarStockBaan(ref ITM, ref LOT, ref LOC, ref WRH, ref QtyTotal);
+                //JC 181121 Validar la cantidad en pickings previos
+                //DataTable StockPicked = _idaltwhcol130.ValidarStockPicked(ref ITM, ref LOT, ref LOC, ref WRH, ref QTY);
+                if (StockBaan.Rows.Count <= 0)
+                {
+                    StockB = "0";
+                }
+                else
+                {
+                    StockB = StockBaan.Rows[0]["STOCK"].ToString();
+                }
+                
+                if (Convert.ToDecimal(StockB) >= Convert.ToDecimal(QtyTotal))
                 {
                     DataTable DTPallet = _idaltwhcol130.VerificarPalletID(ref PAID);
                     qtyaG = DTPallet.Rows[0]["QTYT"].ToString();
@@ -765,6 +788,7 @@ namespace whusap.WebPages.WorkOrders
 
                     else if (Convert.ToInt32(HttpContext.Current.Session["flag131"].ToString().Trim()) == 1)
                     {
+                        HttpContext.Current.Session["Table"] = "whcol131";
                         Ent_twhcol130131 MyObj = new Ent_twhcol130131();
                         DataTable DTPalletnew = _idaltwhcol130.VerificarPalletID(ref PAID);
                         string qtytnew = DTPallet.Rows[0]["QTYT"].ToString();
@@ -836,8 +860,7 @@ namespace whusap.WebPages.WorkOrders
                                 twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
 
                                 if (res182 && Convert.ToDecimal(obj182Old.QTY) != 0)
-                                {
-                                    HttpContext.Current.Session["Table"] = "whcol131";
+                                {                                  
                                     HttpContext.Current.Session["codeMaterial"] = MyObj.ITEM;
                                     HttpContext.Current.Session["codePaid"] = PAID;
                                     HttpContext.Current.Session["codePaid2"] = MyObj.PAID;

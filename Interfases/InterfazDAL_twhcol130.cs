@@ -55,6 +55,11 @@ namespace whusa.Interfases
         {
             return dal.ValidarStockBaan(ITM, LOT, LOC, WRH, QTY);
         }
+        //JC 181121 Validar que se tiene en los pickings previos
+        public DataTable ValidarStockPicked(ref string ITM, ref string LOT, ref string LOC, ref string WRH, ref string QTY)
+        {
+            return dal.ValidarStockPicked(ITM, LOT, LOC, WRH, QTY);
+        }
 
         public List<DataTable> ListasOrderType()
         {

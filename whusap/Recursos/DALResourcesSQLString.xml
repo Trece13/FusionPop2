@@ -368,16 +368,29 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ListaRegistro_ReprintRegrind">
         <stringSQL>
-          SELECT  A.T$PDNO, A.T$PONO, A.T$MITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
+          --SELECT  A.T$PDNO, A.T$PONO, A.T$MITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
+          --FROM	{0}.TTICOL042{1} A LEFT JOIN
+          --{0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
+          --{0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
+          --WHERE 	A.T$SQNB = '[:T$SQNB]'
+          --UNION
+          --SELECT  A.T$PDNO, 0, A.T$MITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
+          --FROM	{0}.TTICOL022{1} A LEFT JOIN
+          --{0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
+          --{0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
+          --WHERE 	A.T$SQNB = '[:T$SQNB]'
+          SELECT  A.T$PDNO, A.T$PONO, D.T$RITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
           FROM	{0}.TTICOL042{1} A LEFT JOIN
           {0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
-          {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
+          {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM LEFT JOIN
+          {0}.TTICOL119{1} D ON D.T$PAID = A.T$SQNB
           WHERE 	A.T$SQNB = '[:T$SQNB]'
           UNION
-          SELECT  A.T$PDNO, 0, A.T$MITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
+          SELECT  A.T$PDNO, 0, D.T$RITM, A.T$QTDL, '' T$CWAR, A.T$LOGN, A.T$DATE-5/24 t$DATE, A.T$PROC, A.T$REFCNTD, A.T$REFCNTU, '' T$CLOT, B.T$MCNO, C.T$DSCA, A.T$NORP, A.T$CUNI, A.T$SQNB, A.T$DLRP-5/24 T$DLRP
           FROM	{0}.TTICOL022{1} A LEFT JOIN
           {0}.TTICOL011{1} B ON A.T$PDNO = B.T$PDNO INNER JOIN
-          {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM
+          {0}.TTCIBD001{1} C ON A.T$MITM = C.T$ITEM  LEFT JOIN
+          {0}.TTICOL119{1} D ON D.T$PAID = A.T$SQNB
           WHERE 	A.T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
@@ -649,7 +662,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           case when ibd001.t$kltc = 1 then ticol022.T$PDNO else ' ' end AS LOT,ticol022.T$MITM AS ITEM, ticol022.T$QTDL AS QUANTITY, ticol022.T$CUNI AS UNIDAD,
           ticol022.T$PRO1 AS PRO1, ticol022.T$PRO2 AS PRO2,T$DRPT, ticol222.T$URPT as URPT, ticol222.T$ACQT as ACQT,
           ticol222.T$CWAF as CWAF, ticol222.T$CWAT as CWAT, ticol222.T$ACLO as ACLO, ticol222.T$REFCNTD as REFCNTD,
-          ticol222.T$REFCNTU as REFCNTU , ticol022.T$DELE as DELE, ticol022.T$SQNB as SQNB
+          ticol222.T$REFCNTU as REFCNTU , ticol022.T$DELE as DELE, ticol022.T$SQNB as SQNB, ticol022.t$pdno as ORNO
           FROM {0}.tticol022{1} ticol022
           inner join {0}.tticol222{1} ticol222 on ticol222.T$SQNB = ticol022.T$SQNB
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = ticol022.T$MITM
@@ -658,7 +671,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT case when ibd001.t$kltc = 1 then ticol042.T$PDNO else ' ' end  AS LOT,ticol042.T$MITM AS ITEM, ticol042.T$QTDL AS QUANTITY, ticol042.T$CUNI AS UNIDAD,
           ticol042.T$PRO1 AS PRO1, ticol042.T$PRO2 AS PRO2,T$DRPT, ticol242.T$URPT as URPT, ticol242.T$ACQT as ACQT,
           ticol242.T$CWAF as CWAF, ticol242.T$CWAT as CWAT, ticol242.T$ACLO as ACLO, ticol242.T$REFCNTD as REFCNTD,
-          ticol242.T$REFCNTU as REFCNTU, ticol042.T$DELE as DELE, ticol042.T$SQNB as SQNB
+          ticol242.T$REFCNTU as REFCNTU, ticol042.T$DELE as DELE, ticol042.T$SQNB as SQNB, ticol042.t$pdno as ORNO
           FROM {0}.tticol042{1} ticol042
           inner join {0}.tticol242{1} ticol242 on ticol242.T$SQNB = ticol042.T$SQNB
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = ticol042.T$MITM
@@ -667,10 +680,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT col131.T$CLOT AS LOT,col131.T$ITEM AS ITEM, col131.T$QTYA AS QUANTITY, col131.T$UNIC AS UNIDAD,
           2 AS PRO1, 2 AS PRO2,T$DRPT, col131.T$LOGR as URPT, col131.T$QTYA as ACQT,
           col131.T$CWAA as CWAF, col131.T$CWAA as CWAT, col131.T$LOAA as ACLO, col131.T$REFCNTD as REFCNTD,
-          col131.T$REFCNTU as REFCNTU, col131.T$STAT as DELE, col131.T$PAID as SQNB
+          col131.T$REFCNTU as REFCNTU, col131.T$STAT as DELE, col131.T$PAID as SQNB, col131.t$orno as ORNO
           FROM {0}.twhcol131{1} col131
           where col131.t$stat = '3'
           ) GlobalC
+          INNER JOIN BAAN.TTISFC001140 SFC001
+          ON sfc001.t$pdno = GlobalC.ORNO
+          AND sfc001.t$osta IN('5','7','9')
           WHERE GlobalC.SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
@@ -2986,7 +3002,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ValidarStockBaan">
         <stringSQL>
-          <!--select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
+          select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
           ibd001.t$cwar ware, inr140.t$loca, ibd001.t$kltc,case when ibd001.t$kltc=1 then trim('[:T$CLOT]') else '                ' end
           from {0}.twhinr140{1} inr140
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = inr140.t$item
@@ -2995,14 +3011,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and case when ibd001.t$kltc=1 then trim(inr140.t$clot) else inr140.t$clot end = case when ibd001.t$kltc = 1 then trim('[:T$CLOT]') else '                ' end
           and trim(inr140.t$cwar) = trim('[:T$CWOR]')
           and case when wmd200.t$sloc=1 then trim(inr140.t$loca) else inr140.t$loca end = case when wmd200.t$sloc = 1 then trim('[:T$LOOR]') else '          ' end
-          and inr140.t$stks &gt;= [:T$QTDL]-->
-          select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, desci, unidad,
-          ware, inr140.t$loca, t$kltc, case when t$kltc=1 then loc else '                ' end, qty
+          --and inr140.t$stks &gt;= [:T$QTDL]
+        </stringSQL>
+      </operationName>
+      <operationName name="ValidarStockPicked">
+        <stringSQL>
+          select  inr140.t$stks stock, wrh, itm, lot, desci, unidad, loc, qty, klt
           from
           (
           select  col022.t$mitm itm, trim(col082.t$cwar) wrh, case when wmd200.t$sloc=1 then trim(col082.t$loca) else '          ' end loc,
           case when ibd001.t$kltc=1 then trim(col022.t$pdno) else'                ' end lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
-          ibd001.t$cwar ware, ibd001.t$kltc, sum(col082.t$qtyt) qty
+          ibd001.t$cwar ware, ibd001.t$kltc klt, sum(col082.t$qtyt) qty
           from    {0}.tticol082{1} col082
           inner join {0}.ttcibd001{1} ibd001 on ibd001.t$item = col082.t$item
           inner join {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = col082.t$cwar
@@ -3033,20 +3052,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           case when ibd001.t$kltc=1 then trim(col131.t$clot) else'                ' end, ibd001.t$dsca, ibd001.t$cuni,
           ibd001.t$cwar, ibd001.t$kltc
           ) global
+          inner join {0}.twhwmd200{1} wmd200
+          on wmd200.t$cwar = global.wrh
           inner join {0}.twhinr140{1} inr140
           on trim(inr140.t$item) = trim(global.itm)
-          and inr140.t$clot = global.lot
-          and trim(inr140.t$cwar) = global.wrh
-          and trim(inr140.t$loca) = (global.loc)
+          and case when global.klt=1 then trim(inr140.t$clot) else'                ' end = case when global.klt=1 then trim(global.lot) else'                ' end
+          and trim(inr140.t$cwar) = trim(global.wrh)
+          and case when wmd200.t$sloc = 1 then trim(inr140.t$loca) else '          ' end = case when wmd200.t$sloc = 1 then trim(global.loc) else '          ' end
           where trim(global.itm)=trim('[:T$MITM]')
           and trim(global.wrh) = trim('[:T$CWOR]')
-          and case when global.t$kltc=1 then trim(global.lot) else inr140.t$clot end = case when global.t$kltc = 1 then trim('[:T$CLOT]') else '                ' end
-          and trim(global.loc) = trim('[:T$LOOR]')
-          and inr140.t$stks &gt;= [:T$QTDL] + global.qty
-
+          and case when global.klt=1 then trim(global.lot) else inr140.t$clot end = case when global.klt = 1 then trim('[:T$CLOT]') else '                ' end
+          and case when wmd200.t$sloc = 1 then trim(global.loc) else '          ' end = case when wmd200.t$sloc = 1 then trim('[:T$LOOR]') else '          ' end
         </stringSQL>
       </operationName>
-
       <operationName name="VerificarPalletIDz">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,whwmd200.T$sloc SLOC, CLOT, KLTC FROM (
