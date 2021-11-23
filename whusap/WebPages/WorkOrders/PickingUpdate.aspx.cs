@@ -392,6 +392,7 @@ namespace whusap.WebPages.WorkOrders
         {
             try
             {
+                HttpContext.Current.Session["Table"] = "";
                 Random generator = new Random();
                 int t = generator.Next(1, 1000);
                 string maximo = string.Format("{0:0000000000}", t);
@@ -494,6 +495,7 @@ namespace whusap.WebPages.WorkOrders
                     String Location = LOCA;
                     if (Convert.ToInt32(HttpContext.Current.Session["flag022"].ToString().Trim()) == 1)
                     {
+                        HttpContext.Current.Session["Table"] = "ticol022";
                         Ent_tticol022 MyObj = new Ent_tticol022();
 
                         DataTable dtAllo = twhcolDAL.getAllotticol222(PAID.Trim());
@@ -641,6 +643,7 @@ namespace whusap.WebPages.WorkOrders
                     }
                     else if (Convert.ToInt32(HttpContext.Current.Session["flag042"].ToString().Trim()) == 1)
                     {
+                        HttpContext.Current.Session["Table"] = "ticol042";
                         Ent_tticol042 MyObj = new Ent_tticol042();
                         DataTable dtAllo = twhcolDAL.getAllotticol242(PAID.Trim());
                         DataTable DTPalletnew = _idaltwhcol130.VerificarPalletID(ref PAID);
