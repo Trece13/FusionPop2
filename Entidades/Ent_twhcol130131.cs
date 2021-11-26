@@ -7,7 +7,11 @@ namespace whusa
 {
     public class Ent_twhcol130131
     {
-        
+        public object clone()
+        {
+            return this.MemberwiseClone();
+        }
+
         public Ent_twhcol130131()
         {
             this.TERM = string.Empty;
@@ -52,6 +56,7 @@ namespace whusa
             this.errorMsg = string.Empty;
             this.Error = false;
             this.PAIDS = new List<string>();
+            this.PAIDS_URLS = new List<string>();
             this.QTYCFinal = string.Empty;
         }
         public string QTYA { get; set; }
@@ -109,10 +114,51 @@ namespace whusa
         public string MCNO { get; set; }
         public string TypeMsgJs { get; set; }
         public decimal QSTK { get; set; }
-        public List<string> PAIDS{ get; set; }
+        public List<string> PAIDS { get; set; }
+        public List<string> PAIDS_URLS { get; set; }
 
         public string QTYCFinal { get; set; }
 
         public decimal ALLOAUX { get; set; }
+
+        public string LOT { get; set; }
+
+        public string DATT { get; set; }
+
+        public string KLTC { get; set; }
+
+        public string DESCAW { get; set; }
+
+        public string REFCNTU { get; set; }
+
+        public string REFCNTD { get; set; }
+
+        public string PSNO { get; set; }
+
+        public string QTYT { get; set; }
+
+        public string LOAA { get; set; }
+
+        public string CWAA { get; set; }
+
+        public string MES2 { get; set; }
+
+        public string DAFL { get; set; }
+
+        public string MES1 { get; set; }
+
+        public string DAFR { get; set; }
+
+        public string LOGP { get; set; }
+
+        public string LOGR { get; set; }
+
+        public string DRPT { get; set; }
+
+        public string DATK { get; set; }
+
+        public string PICK { get; set; }
+
+        public string typeMsgJs { get; set; }
     }
 }

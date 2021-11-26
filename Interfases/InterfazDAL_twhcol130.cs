@@ -452,6 +452,11 @@ namespace whusa.Interfases
             return dal.VerificarPalletID(PAID);
         }
 
+        public DataTable VerificarPalletIDTwhcol131(ref string PAID)
+        {
+            return dal.VerificarPalletIDTwhcol131(PAID);
+        }
+        
         public DataTable VerificarPalletIDz(ref string PAID)
         {
             return dal.VerificarPalletIDz(PAID);
@@ -501,5 +506,12 @@ namespace whusa.Interfases
         {
             return dal.getPaids082(PICK);
         }
+
+
+        public bool InserTwhcol131(Ent_twhcol130131 MyObj)
+        {
+            return dal.InserTwhcol131(MyObj);
+        }
+
     }
 }

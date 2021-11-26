@@ -3000,6 +3000,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
         </stringSQL>
       </operationName>
+      <operationName name="VerificarPalletIDTwhcol131">
+        <stringSQL>
+          SELECT distinct TBL,tisfc010.T$MCNO as MCNO,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC,wmd200.T$SLOC SLOC,mcs003.T$DSCA DESCAW,OORG,ORNO,ITEM,PAID,PONO,SEQN,LOT,CWAR,QTYS,UNIT,QTYC,UNIC,DATT,CONF,RCNO,DATR,LOCA,DATL,PICK,DATK,PRNT,DATP,NPRT,DRPT,LOGR,LOGN,LOGP,LOGT,DAFR,MES1,DAFL,MES2,FIRE,CWAA,LOAA,QTYT,STAT,REFCNTD,REFCNTU,PSNO,ALLO FROM (
+          select  'whcol131' AS  TBL,T$OORG as OORG, T$ORNO AS ORNO, T$ITEM AS ITEM, T$PAID AS PAID , T$PONO as PONO, T$SEQN as SEQN, T$CLOT  as LOT, T$CWAR as CWAR, T$QTYS as QTYS, T$UNIT AS UNIT, T$QTYC as QTYC, T$UNIC as UNIC, T$DATE as DATT, T$CONF as CONF, T$RCNO as RCNO, T$DATR as DATR, T$LOCA as LOCA, T$DATL as DATL, T$PICK as PICK, T$DATK as DATK, T$PRNT as PRNT, T$DATP as DATP, T$NPRT as NPRT, T$DRPT as DRPT, T$LOGR as LOGR, T$LOGN as LOGN, T$LOGP as LOGP, T$LOGT as LOGT, T$DAFR as DAFR, T$MES1 as MES1, T$DAFL as DAFL, T$MES2 as MES2, T$FIRE as FIRE, T$CWAA as CWAA, T$LOAA as LOAA, T$QTYA AS QTYT, T$STAT AS STAT, T$REFCNTD as REFCNTD, T$REFCNTU as REFCNTU, T$PSNO as PSNO, T$ALLO AS ALLO from BAAN.twhcol131140 col131
+          ) ConGlobal
+          LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          LEFT JOIN BAAN.ttcmcs003140 mcs003 on ConGlobal.CWAR = mcs003.t$cwar
+          LEFT JOIN BAAN.twhwmd200140  wmd200 on ConGlobal.CWAR = wmd200.t$cwar
+          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(ConGlobal.ITEM)
+          WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="ValidarStockBaan">
         <stringSQL>
           select  inr140.t$stks stock, inr140.t$cwar warehouse, inr140.t$item item, inr140.t$clot lot, ibd001.t$dsca desci, ibd001.t$cuni unidad,
@@ -3432,6 +3444,38 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="InsertarReseiptRawMaterial">
         <stringSQL>
           insert into {0}.twhcol130{1}
+          (T$OORG, T$ORNO, T$ITEM, T$PAID, T$PONO, T$SEQN, T$CLOT, T$CWAR, T$QTYS, T$UNIT, T$QTYC, T$UNIC, T$DATE, T$CONF, T$RCNO, T$DATR, T$LOCA, T$DATL, T$PRNT, T$DATP, T$NPRT, T$LOGN, T$LOGT, T$STAT,/*CAMPOS EXCLUIDOS DEL ENVIO DE INFORMAION(NO PUEDEN SER NULOS )*/ T$PICK,T$DATK,T$LOGP,T$DAFR,T$MES1,T$DAFL,T$MES2,T$REFCNTD,T$REFCNTU,T$CWAA,T$DRPT,T$FIRE,T$LOAA,T$LOGR,T$QTYA,T$PSNO,T$ALLO)
+          values (
+          '[:T$OORG]',  			/*	T$OORG	*/		/*    '2'				*/
+          '[:T$ORNO]', 			/*	T$ORNO	*/		/*    'OPN028526'		*/
+          {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , 			/*	T$ITEM	*/		/*    'BPBUG-00000' 	*/
+          '[:T$PAID]',			/*	T$PAID	*/		/*    'OPN028526-023'	*/
+          '[:T$PONO]', 			/*	T$PONO	*/		/*    '2'				*/
+          '[:T$SEQN]', 			/*	T$SEQN	*/		/*    '1'				*/
+          '[:T$CLOT]', 			/*	T$CLOT	*/		/*    'JH'				*/
+          '[:T$CWAR]', 			/*	T$CWAR	*/		/*    'WRV101'			*/
+          '[:T$QTYS]', 			/*	T$QTYS	*/		/*    '250000'			*/
+          '[:T$UNIT]', 			/*	T$UNIT	*/		/*    'UN' 				*/
+          '[:T$QTYC]', 			/*	T$QTYC	*/		/*    '250000'			*/
+          '[:T$UNIC]', 			/*	T$UNIC	*/		/*    'UN' 				*/
+          sysdate+5/24, /*[:T$DATE]', 			/*	T$DATE	*/		/*    '25/09/19'		*/
+          '[:T$CONF]', 			/*	T$CONF	*/		/*    '1'				*/
+          '[:T$RCNO]', 			/*	T$RCNO	*/		/*    '013950974'		*/
+          sysdate+5/24, /*	T$DATR	*/		/*    '01/01/70'		*/
+          '[:T$LOCA]', 				/*T$LOCA	*/		/*    '[:T$LOCA]'		*/
+          sysdate+5/24,/*'[:T$DATL]', 				T$DATL	*/		/*    '01/01/70'		*/
+          '[:T$PRNT]', 			/*	T$PRNT	*/		/*    '2'				*/
+          sysdate+5/24, /*'[:T$DATP]', 		T$DATP	*/		/*    '19/09/19' 		*/
+          '[:T$NPRT]', 			/*	T$NPRT	*/		/*    '0'				*/
+          '[:T$LOGN]', 			/*	T$LOGN	*/		/*    'JCASTRO'			*/
+          '[:T$LOGT]', 			/*	T$LOGT	*/		/*    '[:T$LOGT]'		*/
+          '[:T$STAT]',			/*	T$STAT	*/		/*    '1'				*/
+          /*CAMPOS EXCLUIDOS DEL ENVIO DE INFORMAION(NO PUEDEN SER NULOS )*/'0',sysdate+5/24,' ',sysdate+5/24,' ',sysdate+5/24,' ','0','0',' ',sysdate,'[:T$FIRE]',' ',' ',0,'[:T$PSNO]','[:T$ALLO]')
+        </stringSQL>
+      </operationName>
+      <operationName name="InserTwhcol131">
+        <stringSQL>
+          insert into {0}.twhcol131{1}
           (T$OORG, T$ORNO, T$ITEM, T$PAID, T$PONO, T$SEQN, T$CLOT, T$CWAR, T$QTYS, T$UNIT, T$QTYC, T$UNIC, T$DATE, T$CONF, T$RCNO, T$DATR, T$LOCA, T$DATL, T$PRNT, T$DATP, T$NPRT, T$LOGN, T$LOGT, T$STAT,/*CAMPOS EXCLUIDOS DEL ENVIO DE INFORMAION(NO PUEDEN SER NULOS )*/ T$PICK,T$DATK,T$LOGP,T$DAFR,T$MES1,T$DAFL,T$MES2,T$REFCNTD,T$REFCNTU,T$CWAA,T$DRPT,T$FIRE,T$LOAA,T$LOGR,T$QTYA,T$PSNO,T$ALLO)
           values (
           '[:T$OORG]',  			/*	T$OORG	*/		/*    '2'				*/

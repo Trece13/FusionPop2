@@ -57,10 +57,10 @@
             var re = new RegExp(regex);
             var lenght = document.getElementById("txtSecuence").value.length;
             var str = document.getElementById("txtSecuence").value.trim();
-            if (str.match(re)) {
+            if (true) {
                 if (str != "") {
-                    if (str.length < 3 || str.length > 3) {
-                        alert(_idioma == "INGLES" ? "Please use this format Sequence, remember only 3 characters" : "Por favor use el formato de secuencia, solo 3 caracteres.")
+                    if (str.length < 3 || str.length > 4) {
+                        alert(_idioma == "INGLES" ? "Please use this format Sequence, remember max 4 characters" : "Por favor use el formato de secuencia, maximo 3 caracteres.")
                         document.getElementById("txtSecuence").focus();
                         document.getElementById("txtSecuence").value = "";
                         return false;
