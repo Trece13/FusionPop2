@@ -184,7 +184,7 @@ namespace whusap.WebPages.WorkOrders
             if (HttpContext.Current.Session["MyObjPicking"] != " ")
             {
                 EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
-                //JC 101021  No mostrar la tabla de pallets sugeridos si ya es el último pick
+                //JC 101021  No mostrar la tabla de pallets sugeridos si ya es el último pick.
                 LstPallet131 = twhcolDAL.ConsultarPalletPicking131Item(MySessionObjPicking.ITEM, MySessionObjPicking.QTY, MySessionObjPicking.PRIO, HttpContext.Current.Session["user"].ToString().Trim(), MySessionObjPicking.ORNO, MySessionObjPicking.PONO, MySessionObjPicking.ADVS);
                 if (LstPallet131.Count > 0)
                 {
