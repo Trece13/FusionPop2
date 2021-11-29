@@ -172,7 +172,7 @@ namespace whusap.WebPages.WorkOrders
             return JsonConvert.SerializeObject(Obj131);
         }
 
-        public static string VerificarItem(string ITEM,string CLOT)
+        public static string VerificarItem(string ITEM, string CLOT)
         {
 
             Ent_ttcibd001 ObjTtcibd001 = new Ent_ttcibd001();
@@ -195,7 +195,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     ObjTtcibd001.Error = true;
                     ObjTtcibd001.TypeMsgJs = "label";
-                    
+
                     ObjTtcibd001.ErrorMsg = ItemcodeisnotPurchaseType;
                 }
                 else
@@ -209,7 +209,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 ObjTtcibd001.Error = true;
                 ObjTtcibd001.TypeMsgJs = "label";
-                
+
                 ObjTtcibd001.ErrorMsg = ItemcodeisnotPurchaseType;
             }
 
@@ -217,7 +217,6 @@ namespace whusap.WebPages.WorkOrders
 
             return JsonConvert.SerializeObject(ObjTtcibd001);
         }
-
 
         [WebMethod]
         public static string VerificarLote(string ITEM, string CLOT)
@@ -240,7 +239,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 Obj_tticol125.Error = true;
                 Obj_tticol125.TypeMsgJs = "label";
-                
+
                 Obj_tticol125.ErrorMsg = Lotcodedoesntexist;
 
             }
@@ -283,7 +282,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 Obj_twhcol016.Error = true;
                 Obj_twhcol016.TypeMsgJs = "label";
-                
+
                 Obj_twhcol016.ErrorMsg = Warehousecodedoesntexist;
             }
 
@@ -315,7 +314,7 @@ namespace whusap.WebPages.WorkOrders
                     {
                         Obj_twhwmd200.Error = true;
                         Obj_twhwmd200.TypeMsgJs = "label";
-                        
+
                         Obj_twhwmd200.ErrorMsg = Locationblockedinbound;
                     }
                 }
@@ -323,7 +322,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Obj_twhwmd200.Error = true;
                     Obj_twhwmd200.TypeMsgJs = "label";
-                    
+
                     Obj_twhwmd200.ErrorMsg = Locationcodedoesntexist;
                 }
 
@@ -332,7 +331,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 Obj_twhwmd200.Error = true;
                 Obj_twhwmd200.TypeMsgJs = "label";
-                
+
                 Obj_twhwmd200.ErrorMsg = Locationcodedoesntexist;
             }
 
@@ -341,7 +340,7 @@ namespace whusap.WebPages.WorkOrders
 
         }
         [WebMethod]
-        public static string VerificarQuantity(string CWAR, string ITEM,string LOCA = " ", string CLOT = " ")
+        public static string VerificarQuantity(string CWAR, string ITEM, string LOCA = " ", string CLOT = " ")
         {
             string strError = string.Empty;
             DataTable DtTtwhinr140 = ITtwhinr140.consultaPorAlmacenItemUbicacionLote(ref CWAR, ref ITEM, ref LOCA, ref PCLOT, ref strError);
@@ -353,7 +352,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     ObjTtwhinr140.Error = true;
                     ObjTtwhinr140.TypeMsgJs = "label";
-                    
+
                     ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
                 }
                 else
@@ -361,16 +360,16 @@ namespace whusap.WebPages.WorkOrders
                     ObjTtwhinr140.stks = Convert.ToInt32(DtTtwhinr140.Rows[0]["STKS"].ToString());
                     ObjTtwhinr140.Error = false;
                     ObjTtwhinr140.TypeMsgJs = "label";
-                    
+
                     ObjTtwhinr140.SuccessMsg = RegisteredquantitynotavilableonBaaninventory;
                 }
-                
+
             }
             else
             {
                 ObjTtwhinr140.Error = true;
                 ObjTtwhinr140.TypeMsgJs = "label";
-                
+
                 ObjTtwhinr140.ErrorMsg = RegisteredquantitynotavilableonBaaninventory;
             }
 
@@ -423,9 +422,9 @@ namespace whusap.WebPages.WorkOrders
             MyObj131Base.PAIDS.Clear();
             Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
             Double qtyReal = Convert.ToDouble(QtyReal);
-            Double Pallets = Convert.ToDouble(Paids);
+            Double Pallets = Convert.ToDouble(Paids.Trim() == string.Empty ? "1" : Paids.Trim());
             Double Parcials = qtyReal / Pallets;
-            Decimal QUANTITY = 0 ;
+            Decimal QUANTITY = 0;
             int inserts = 0;
             int consecutivoPalletID = 0;
             int QUANTITYAUX_COMPLETADA = 0;
@@ -463,33 +462,35 @@ namespace whusap.WebPages.WorkOrders
                     }
 
                 }
-                    MyObj.PAID = MyObj131Base.ORNO + "-" + SecuenciaPallet;
-                    MyObj.CWAR = TargetCwar;
-                    MyObj.LOCA = TargetLoca;
-                    MyObj.QTYS = Parcials.ToString();
-                    MyObj.QTYC = Parcials.ToString();
-                    MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-                    MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
-                    MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-                    MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-                    MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
-                    MyObj.LOGT = " ";
-                    MyObj.PAIDS.Add(MyObj.PAID);
-                    MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
-                    MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
-                    MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
-                    MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
-                    MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
-                    //MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYC.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
-                    MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+                MyObj.PAID = MyObj131Base.ORNO + "-" + SecuenciaPallet;
+                MyObj.CWAR = TargetCwar;
+                MyObj.LOCA = TargetLoca;
+                MyObj.QTYS = Parcials.ToString();
+                MyObj.QTYC = Parcials.ToString();
+                MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
+                MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
+                MyObj.LOGT = " ";
+                MyObj.PAIDS.Add(MyObj.PAID);
+                MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
+                MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
+                MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
+                MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
+                MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
+                //MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYC.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
+                MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
 
-                if(twhcol130DAL.InserTwhcol131(MyObj)){
+                if (twhcol130DAL.InserTwhcol131(MyObj))
+                {
                     inserts++;
                 }
             }
-            if( inserts  == Pallets){
+            if (inserts == Pallets)
+            {
                 Ent_twhcol020 objWhcol020 = new Ent_twhcol020();
-                objWhcol020.tbl ="";
+                objWhcol020.tbl = "";
                 objWhcol020.clot = "";
                 objWhcol020.sqnb = MyObj131Base.PAID;
                 objWhcol020.mitm = MyObj131Base.ITEM;
@@ -506,7 +507,7 @@ namespace whusap.WebPages.WorkOrders
                 Transfers.InsertarTransferencia(objWhcol020);
                 _idaltwhcol131.Actualizartwhcol131CantEstado(MyObj131Base.PAID, 9, (Convert.ToDecimal(QtyReal) - Convert.ToDecimal(MyObj131Base.QTYS)));
             }
-            return JsonConvert.SerializeObject(MyObj); 
+            return JsonConvert.SerializeObject(MyObj);
         }
 
         protected static string mensajes(string tipoMensaje)

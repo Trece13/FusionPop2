@@ -203,7 +203,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="TakeMaterialInv_verificaBodega_Param">
         <stringSQL>
-          SELECT t$cwar, t$dsca  DESCRIPCION
+          SELECT t$cwar, t$dsca  DESCRIPCION,T$TYPW TYPW
           FROM {0}.ttcmcs003{1}
           WHERE TRIM(t$cwar) = '[p1]'
         </stringSQL>
@@ -890,7 +890,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL082.T$PRIO >='[:PRIO]' ORDER BY  COL082.T$PRIO,COL082.T$PICK
         </stringSQL>
       </operationName>
-		<operationName name="ExistPrio182">
+      <operationName name="ExistPrio182">
         <stringSQL>
           SELECT distinct COL082.T$PICK PICK,COL082.T$PRIO PRIO FROM BAAN.TTICOL182140 COL082
           INNER JOIN BAAN.TTIROU002140 ROU002 ON ROU002.T$MCNO = COL082.T$MCNO
@@ -909,7 +909,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN BAAN.TTCCOL307140 COL307 ON COL307.T$PAID = COL082.T$PICK
           WHERE COL082.T$PRIO >='[:PRIO]' ORDER BY  COL082.T$PRIO,COL082.T$PICK
         </stringSQL>
-      </operationName>		  
+      </operationName>
       <operationName name="GetMachine">
         <stringSQL>
           SELECT T$MCNO MCNO, T$DSCA DSCA FROM BAAN.TTIROU002140 ORDER BY MCNO ASC
@@ -925,7 +925,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --AND col307.T$PAID IS NULL
           ORDER BY COL082.T$PRIO,COL082.T$PICK
         </stringSQL>
-      </operationName>      
+      </operationName>
       <operationName name="ActualizarCantidades222">
         <stringSQL>
           UPDATE BAAN.tticol222140 SET
@@ -1508,8 +1508,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE ROWN &lt;= 5
           --WHERE ROWNUM &lt;= 5
           --AND QTY &gt; 0
-        --ORDER BY DATT ASC
-      </stringSQL>
+          --ORDER BY DATT ASC
+        </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking042Item">
         <stringSQL>
@@ -1558,8 +1558,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE ROWN &lt;= 5
           --WHERE ROWNUM &lt;= 5
           --AND QTY &gt; 0
-        --ORDER BY DATT ASC
-      </stringSQL>
+          --ORDER BY DATT ASC
+        </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletPicking131Item">
         <stringSQL>
@@ -2255,7 +2255,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
           WHERE col082.T$STAT IN (2,7)
           )
-          WHERE TRIM(PICK) LIKE TRIM('[:PICK]%')
+          WHERE TRIM(PICK) = TRIM('[:PICK]')
           <!--SELECT distinct ticol082.T$CWAR CWAR,TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
           ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO,stap FROM(
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol131140 col131
@@ -2899,7 +2899,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           globalQ WHERE globalQ.PICK = '[:PICK]'
         </stringSQL>
       </operationName>
-     <operationName name="GetWarehouse">
+      <operationName name="GetWarehouse">
         <stringSQL>
           SELECT * FROM {0}.tticol136{1} tcol136
           INNER JOIN {0}.ttcmcs003{1} tcmcs003
@@ -2987,14 +2987,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT distinct TBL,tisfc010.T$MCNO as MCNO,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col222.T$ALLO AS ALLO, col022.T$PDNO as LOT from {0}.tticol022{1} col022
           INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
-          where col022.t$dele = '7'
+
           UNION
           select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT AS CWAT ,col242.T$ACLO  AS ACLO, col242.T$ALLO AS ALLO, col042.T$PDNO as LOT from {0}.tticol042{1} col042
           INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
-          where col042.t$dele = '7'
+
           UNION
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA,T$ALLO AS ALLO, T$CLOT as LOT from {0}.twhcol131{1} col131
-          where col131.t$stat = '3'
+
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
@@ -3693,8 +3693,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
         </stringSQL>
       </operationName>
-    </Module>    	
-	<Module name="ttccol300">
+    </Module>
+    <Module name="ttccol300">
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$USER, T$NAMA, T$PASS, T$UFIN, T$REFCNTD, T$REFCNTU)
@@ -3788,8 +3788,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM  {0}.ttdsls400{1}
           WHERE T$ORNO = '[:T$ORNO]'
         </stringSQL>
-      </operationName>   
-          <operationName name="CantidadDevueltaStockPallet">
+      </operationName>
+      <operationName name="CantidadDevueltaStockPallet">
         <stringSQL>
           SELECT TO_CHAR((NVL(SUM(QTYR),0)), '999999999.999') AS QTYR
           FROM
@@ -4628,7 +4628,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="TakeMaterialInv_verificaBodega_Param">
         <stringSQL>
-          SELECT t$cwar, t$dsca  DESCRIPCION
+          SELECT t$cwar, t$dsca  DESCRIPCION,T$TYPW TYPW
           FROM {0}.ttcmcs003{1}
           WHERE TRIM(t$cwar) = '[p1]'
         </stringSQL>
@@ -5478,10 +5478,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW, LOT,ALLO,col020.T$CNPK CNPK FROM (
           select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, col022.T$PDNO AS LOT,col222.T$ALLO AS ALLO  from BAAN.tticol022140 col022
-          INNER JOIN BAAN.tticol222140 col222 on col222.t$sqnb = col022.t$sqnb 
+          INNER JOIN BAAN.tticol222140 col222 on col222.t$sqnb = col022.t$sqnb
           UNION
           select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT AS CWAT ,col242.T$ACLO,col042.T$PDNO AS LOT,col242.T$ALLO AS ALLO  from BAAN.tticol042140 col042
-          INNER JOIN BAAN.tticol242140 col242 on col242.t$sqnb = col042.t$sqnb 
+          INNER JOIN BAAN.tticol242140 col242 on col242.t$sqnb = col042.t$sqnb
           UNION
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIC AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA,T$CLOT AS LOT,T$ALLO AS ALLO from BAAN.twhcol131140 col131
           UNION
@@ -6891,7 +6891,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE COL182.T$CWAR = '[:T$CWAR]' AND COL182.T$STAT IN (1, 5) AND COL182.T$QTYT > 0 ORDER BY T$PRIO ASC) WHERE ROWN &lt; 10
         </stringSQL>
       </operationName>
-	  <operationName name="ChangeStat182">
+      <operationName name="ChangeStat182">
         <stringSQL>
           UPDATE  BAAN.TTICOL182140 SET T$STAT = '[:T$STAT]',T$LOGN = NVL('[:T$LOGN]',T$LOGN)  WHERE T$PICK = '[:T$PICK]' AND T$ORNO = '[:T$ORNO]' AND T$PONO = '[:T$PONO]' AND T$ADVS = '[:T$ADVS]'
         </stringSQL>
@@ -6900,9 +6900,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           DELETE FROM {0}.TTICOL182{1} WHERE T$QTYT &lt;= 0
         </stringSQL>
-      </operationName>   
+      </operationName>
       <operationName name="InsertarregistroItticol182">
-        <stringSQL>INSERT INTO BAAN.tticol182140(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU) VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
+        <stringSQL>
+          INSERT INTO BAAN.tticol182140(T$OORG,T$ORNO,T$PONO,T$ADVS,T$ITEM,T$QTYT,T$UNIT,T$CWAR,T$MCNO,T$TIME,T$PRIO,T$PICK,T$PAID,T$LOCA,T$LOGN,T$STAT,T$REFCNTD,T$REFCNTU) VALUES ('[:T$OORG]','[:T$ORNO]','[:T$PONO]','[:T$ADVS]',{0}.F_ITEM_POP(TRIM('[:T$ITEM]')) ,'[:T$QTYT]','[:T$UNIT]','[:T$CWAR]',' ',SYSDATE,'[:T$PRIO]','0','[:T$PAID]',' ','[:T$LOGN]','[:T$STAT]','0','0')
         </stringSQL>
       </operationName>
       <operationName name="ActualizarRegistroItticol182">
@@ -7699,4 +7700,3 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <!--End of new developing-->
   </Modules>
 </DALResources>
-

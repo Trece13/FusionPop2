@@ -34,10 +34,7 @@
                 <input type="text" class="form-control form-control-lg col-12" id="txPalletID" placeholder="Pallet ID">
             </div>
             <div class="col-2 p-0">
-                <button type="button" class="btn btn-primary col-12" id="btnClear">
-
-                    <i class="fa fa-trash"></i>
-                </button>
+                <input type="button" class="btn btn-primary col-12" id="btnClear" value="Reset"/>
             </div>
         </div>
     </div>
@@ -114,7 +111,6 @@
             </div>
         </div>
     </div>
-    <input type="reset" value ="limpiar"/>
     <div class="form-group row">
         <label id="lblError">
         </label>
@@ -123,6 +119,8 @@
 
     <script>
         var ktlc = "";
+        var warehouseValid = false;
+        var locationValid = false;
         function printDiv(divID) {
 
             var monthNames = [
@@ -326,8 +324,11 @@
             txLot = $('#txLot');
             txWarehouseCrrnt = $('#txWarehouseCrrnt');
             txWarehouseTrgt = $('#txWarehouseTrgt');
+            txLocationTrgt = $('#txLocationTrgt');
             //txLocationCrrnt = $('#txLocationCrrnt');
             txQuantity = $('#txQuantity');
+            txQuantityTotal = $('#txQuantityTotal');
+            txQuantityPaidTotal = $('#txQuantityPaidTotal');
 
             lblItem = $('#lblItem');
             //lblWarehouse = $('#lblWarehouse');
@@ -454,24 +455,30 @@
                 $('#lblError').html("");
                 if (MyObj.sloc == "1") {
                     $('#txLocationTrgt').prop("disabled", false);
+                    warehouseValid = true;
+                    locationValid = false;
                 }
                 else {
                     $('#txLocationTrgt').prop("disabled", true);
                     $('#txLocationTrgt').val("");
+                    warehouseValid = false;
+                    locationValid = true;
                 }
             }
+            VerificarForm()
         }
 
         var SuccesVerificarLocation = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.Error == true) {
-                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
-                $('#txQuantity').prop("disabled", true);
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
+                locationValid = false;
             }
             if (MyObj.Error == false) {
                 $('#lblError').html("");
-                $('#txQuantity').prop("disabled", false);
+                locationValid = true;
             }
+            VerificarForm();
         }
 
         var SuccesVerificarQuantity = function (r) {
@@ -549,7 +556,7 @@
             sendAjax("VerificarLote", Data, SuccesVerificarLote)
         }
 
-        var VerificarWarehouse = function (cware,SuccessMethod) {
+        var VerificarWarehouse = function (cware, SuccessMethod) {
             $('#btnTransfer').prop("disabled", true);
             var Data = "{'CWAR':'" + cware.toUpperCase().trim() + "'}";
             sendAjax("VerificarWarehouse", Data, SuccessMethod)
@@ -557,7 +564,7 @@
 
         var VerificarLocation = function () {
             $('#btnTransfer').prop("disabled", true);
-            var Data = "{'CWAR':'" + $('#txWarehouseCrrnt').val() + "','LOCA':'" + $('#txLocationCrrnt').val() + "'}";
+            var Data = "{'CWAR':'" + $('#txWarehouseTrgt').val() + "','LOCA':'" + $('#txLocationTrgt').val() + "'}";
             sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
         }
 
@@ -602,24 +609,59 @@
         });
 
         txWarehouseTrgt.bind('paste input', function () {
+            $('#btnTransfer').prop("disabled", true);
             stoper();
             timer = setTimeout("VerificarWarehouse('" + txWarehouseTrgt.val() + "',SuccesVerificarWarehouseTrgt)", 1000);
         });
 
-
-        //txLocationCrrnt.bind('paste keyup', function () {
-        //    stoper();
-        //    timer = setTimeout("VerificarLocation()", 1000);
-        //});
+        txLocationTrgt.bind('paste input', function () {
+            $('#btnTransfer').prop("disabled", true);
+            stoper();
+            timer = setTimeout("VerificarLocation()", 1000);
+        });
 
         txQuantity.bind('paste keyup', function () {
             stoper();
             timer = setTimeout("VerificarQuantity()", 1000);
         });
 
+        txQuantityTotal.bind('paste keyup', function () {
+            $('#lblError').html("");
+            VerificarForm();
+        })
+
+        txQuantityPaidTotal.bind('paste keyup', function () {
+            $('#lblError').html("");
+            VerificarForm();
+        })
+
         btnTransfer.bind('click', function () {
             Click_Transfer();
         });
+
+
+        var VerificarForm = function () {
+            if (parseFloat($("#txQuantityTotal").val()) > parseFloat($("#txQuantity").val())) {
+                $('#lblError').html("Total Quantity Real is greater than allowed");
+                $('#btnTransfer').prop("disabled", true);
+            }
+            else if ($("#txQuantityTotal").val().trim() == "") {
+                $('#lblError').html("Total Quantity Real is Empty");
+                $('#btnTransfer').prop("disabled", true);
+            }
+            else if (parseFloat($("#txQuantityPaidTotal").val()) <= 0) {
+                $('#btnTransfer').prop("disabled", true);
+            }
+            else if (warehouseValid == false) {
+                $('#btnTransfer').prop("disabled", true);
+            }
+            else if (locationValid == false) {
+                $('#btnTransfer').prop("disabled", true);
+            }
+            else {
+                $('#btnTransfer').prop("disabled", false);
+            }
+        }
 
         var TransferSucces = function (r) {
             $("#MyDynamicEtiqueta").empty();
