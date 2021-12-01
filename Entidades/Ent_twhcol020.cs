@@ -98,5 +98,8 @@ namespace whusa.Entidades
         [DataMember(Order = 21)]
         [Column(Name = "sloc")]
         public string sloc { get; set; }
+
+        [DataMember(Order = 22)]
+        public string row { get; set; }
     }
 }

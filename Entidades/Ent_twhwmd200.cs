@@ -42,5 +42,7 @@ namespace whusa.Entidades
         public string typeMsgJs { get; set; }
         [DataMember(Order = 8)]
         public string errorMsg { get; set; }
+        [DataMember(Order = 9)]
+        public string row { get; set; }
     }
 }

@@ -104,6 +104,12 @@ namespace whusa.Entidades
         public string errorMsg { get; set; }
 
         public string stat { get; set; }
+
+        public string TYPW { get; set; }
+
+        public string TipeMsgJs { get; set; }
+        [DataMember(Order = 19)]
+        public string Row { get; set; }
     }
 }
 

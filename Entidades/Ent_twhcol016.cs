@@ -28,14 +28,14 @@ namespace whusa.Entidades
 
         public Ent_twhcol016()
         {
-            this.ZONE    = string.Empty;
-            this.LABL    = string.Empty;
-            this.ITEM    = string.Empty;
-            this.CWAR    = string.Empty;
-            this.CLOT    = string.Empty;
-            this.QTYR    = string.Empty;
-            this.LOGN    = string.Empty;
-            this.DATE    = string.Empty;
+            this.ZONE = string.Empty;
+            this.LABL = string.Empty;
+            this.ITEM = string.Empty;
+            this.CWAR = string.Empty;
+            this.CLOT = string.Empty;
+            this.QTYR = string.Empty;
+            this.LOGN = string.Empty;
+            this.DATE = string.Empty;
             this.REFCNTD = string.Empty;
             this.REFCNTU = string.Empty;
         }

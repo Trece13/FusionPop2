@@ -30,9 +30,9 @@ namespace whusa.DAL
         private static String owner = ConfigurationManager.AppSettings["owner"].ToString();
         private static string tabla = owner + ".tticol020" + env;
 
-        public tticol020() 
-        { 
-            
+        public tticol020()
+        {
+
         }
 
         public int insertarRegistro(ref List<Ent_tticol020> parametros, ref string strError)
@@ -77,7 +77,7 @@ namespace whusa.DAL
             paramList.Add(":T$REFCNTD", Objtticol020.refcntd.ToString());
             paramList.Add(":T$REFCNTU", Objtticol020.refcntu.ToString());
 
-            try            
+            try
             {
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
@@ -100,15 +100,15 @@ namespace whusa.DAL
             try
             {
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PDNO", DbType.String, parametros.pdno);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String,  parametros.mitm); 
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DSCA", DbType.String, parametros.dsca); 
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTDL", DbType.Decimal, parametros.qtdl); 
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CUNI", DbType.String, parametros.cuni); 
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MITM", DbType.String, parametros.mitm);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DSCA", DbType.String, parametros.dsca);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTDL", DbType.Decimal, parametros.qtdl);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CUNI", DbType.String, parametros.cuni);
                 //Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$DATE", DbType.String, parametros.date); 
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MESS", DbType.String, parametros.mess); 
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$USER", DbType.String, parametros.user); 
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$MESS", DbType.String, parametros.mess);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$USER", DbType.String, parametros.user);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTD", DbType.Int32, parametros.refcntd);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTU", DbType.Int32, parametros.refcntu); 
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTU", DbType.Int32, parametros.refcntu);
 
                 if (blnUsarPRetorno)
                 {

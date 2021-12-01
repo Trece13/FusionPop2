@@ -63,7 +63,7 @@ namespace whusa.Entidades
 
         [DataMember(Order = 10)]
         [Column(Name = "IDRECORD")]
-        public string idrecord { get; set; }                                                                                                                                                                                                                                                                                                                                                
+        public string idrecord { get; set; }
 
         public Ent_tticol020()
         {

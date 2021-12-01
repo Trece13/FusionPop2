@@ -13,7 +13,7 @@ namespace whusa.Interfases
         tticol020 dal = new tticol020();
         // Constructor
         static InterfazDAL_tticol020()
-        { 
+        {
         }
 
         public int insertarRegistro(ref List<Ent_tticol020> parametrosIn, ref string strError)

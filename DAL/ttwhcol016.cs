@@ -29,9 +29,9 @@ namespace whusa.DAL
         private static String owner = ConfigurationManager.AppSettings["owner"].ToString();
         string tabla = owner + ".twhcol016" + env;
 
-        public ttwhcol016() 
-        { 
-            
+        public ttwhcol016()
+        {
+
         }
 
         public int insertarRegistro(ref List<Ent_ttwhcol016> parametros, ref string strError)
@@ -42,8 +42,8 @@ namespace whusa.DAL
 
             try
             {
-                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla); 
-                
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+
                 foreach (Ent_ttwhcol016 reg in parametros)
                 {
                     parametrosIn = AdicionaParametrosComunes(reg);
@@ -53,14 +53,14 @@ namespace whusa.DAL
                     paramList = new Dictionary<string, object>();
                     paramList.Add("p1", reg.zone.Trim().ToUpperInvariant());
 
-                    strSentencia = recursos.readStatement(method.ReflectedType.Name, "actualizarSecuenciaInsert", ref owner, ref env, tabla, paramList);                     
+                    strSentencia = recursos.readStatement(method.ReflectedType.Name, "actualizarSecuenciaInsert", ref owner, ref env, tabla, paramList);
 
                     //" SET t$ffno = (SELECT MAX(t$ffno) " +
                     //                 "FROM " + owner + ".ttcmcs050" + env +
                     //                " WHERE TRIM(T$NRGR) = '" + reg.zone.Trim() + "')  + ROWNUM " +
 
-                    MsgstrError = "Error al Actualizar ttcmcs050. ";                    
-                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null , false);
+                    MsgstrError = "Error al Actualizar ttcmcs050. ";
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
 
                 }
                 return Convert.ToInt32(retorno);
@@ -84,7 +84,7 @@ namespace whusa.DAL
 
             try
             {
-                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla,paramList);
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
             }
             catch (Exception ex)
@@ -105,7 +105,7 @@ namespace whusa.DAL
             paramList.Add("p2", parametros.serietemp);
             paramList.Add("p3", '1');
             paramList.Add("p4", '2');
-            paramList.Add("p5", parametros.serietemp+1);
+            paramList.Add("p5", parametros.serietemp + 1);
 
             try
             {
@@ -129,7 +129,7 @@ namespace whusa.DAL
             paramList.Add("p1", parametros.zone.Trim().ToUpperInvariant());
 
             Dictionary<string, object> parametersOut = new Dictionary<string, object>();
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList); 
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try
             {
@@ -182,8 +182,8 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add("p1", Parametros.labl.Trim().ToUpperInvariant());
 
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList); 
-            
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
             try
             {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
@@ -227,7 +227,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add("p1", Parametros.cwar.Trim().ToUpperInvariant());
 
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList); 
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try
             {
@@ -248,7 +248,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add("p1", Parametros.item.Trim().ToUpperInvariant());
 
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList); 
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try
             {
@@ -290,7 +290,7 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add("p1", Parametros.zone.Trim().ToUpperInvariant());
 
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList); 
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try
             {
@@ -312,9 +312,10 @@ namespace whusa.DAL
             paramList = new Dictionary<string, object>();
             paramList.Add("p1", ParametrosIn.clot.Trim().ToUpperInvariant());
 
-            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList); 
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
-            try {
+            try
+            {
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
                 if (consulta.Rows.Count < 1) { strError = "Lot Code doesn´t exist. Cannot Continue"; }
                 return consulta;
@@ -336,10 +337,10 @@ namespace whusa.DAL
 
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ZONE", DbType.String, parametros.zone);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LABL", DbType.String, parametros.labl);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String,  parametros.item);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$ITEM", DbType.String, parametros.item);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAR", DbType.String, parametros.cwar);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CLOT", DbType.String, parametros.clot);
-                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYR", DbType.Decimal, Convert.ToDecimal(parametros.qtyr).ToString("#.##0,0000") );
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$QTYR", DbType.Decimal, Convert.ToDecimal(parametros.qtyr).ToString("#.##0,0000"));
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$LOGN", DbType.String, parametros.logn);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTD", DbType.Int32, parametros.refcntd);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTU", DbType.Int32, parametros.refcntu);

@@ -58,7 +58,7 @@ namespace whusa.Interfases
             }
         }
 
-        public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 Parametros, ref string strError)       
+        public int TakeMaterialInv_verificaConsLabel_Param(ref Ent_ttwhcol016 Parametros, ref string strError)
         {
             int retorno = -1;
             //DataTable retorno;
@@ -143,7 +143,7 @@ namespace whusa.Interfases
             }
             catch (Exception ex)
             {
-                 throw new Exception(ex.InnerException.ToString());
+                throw new Exception(ex.InnerException.ToString());
             }
         }
 
