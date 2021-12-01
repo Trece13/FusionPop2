@@ -113,6 +113,13 @@
 </table>
     
     <script  type="text/javascript">
+        var setTimer = {};
+
+        function stoper(timer) {
+
+            clearTimeout(timer);
+        }
+
         var SLOC = false;
         var SuccesPalletConsult = function (r) {
             MyObject = JSON.parse(r.d)
@@ -311,27 +318,33 @@
         }
         // Hide/show buttons
         var SendPalletID = function (row) {
-
-            var Data = "{'PAID':'" + document.getElementById("txPalletID" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
-            sendAjax("clickQuery", Data, SuccesPalletConsult)
+            stoper(setTimer["timer" + row]);
+            setTimer["timer"+row] = setTimeout(function () {
+                var Data = "{'PAID':'" + document.getElementById("txPalletID" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
+                sendAjax("clickQuery", Data, SuccesPalletConsult)
+            },2000);
+            
         }
 
         var VerifyWarehouse = function () {
-
-            var Data = "{'LOCA':'" + txbCurrentLocation.value.trim().toUpperCase() + "'}";
-            sendAjax("VerifyWarehouse", Data, SuccesVerifyWarehouse)
+                var Data = "{'LOCA':'" + txbCurrentLocation.value.trim().toUpperCase() + "'}";
+                sendAjax("VerifyWarehouse", Data, SuccesVerifyWarehouse)
         }
 
         var VerificarTipoWarehouse = function (row) {
-
-            var Data = "{'WARE':'" + document.getElementById("txbTargetWarehouse" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
-            sendAjax("VerificarTipoWarehouse", Data, SuccesVerificarTipoWarehouse)
+            stoper(setTimer["timer" + row]);
+            setTimer["timer"+row] = setTimeout(function () {
+                var Data = "{'WARE':'" + document.getElementById("txbTargetWarehouse" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
+                sendAjax("VerificarTipoWarehouse", Data, SuccesVerificarTipoWarehouse)
+            }, 2000);
         }
 
         var VerificarLocation = function (row) {
-
-            var Data = "{'CWAR':'" + document.getElementById("txbTargetWarehouse" + row).value.trim().toUpperCase() + "','LOCA':'" + document.getElementById("txbTargetLocation" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
-            sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
+            stoper(setTimer["timer" + row]);
+            setTimer["timer"+row] = setTimeout(function () {
+                var Data = "{'CWAR':'" + document.getElementById("txbTargetWarehouse" + row).value.trim().toUpperCase() + "','LOCA':'" + document.getElementById("txbTargetLocation" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
+                sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
+            }, 2000);
         }
 
         var SuccesVerificarLocation = function (r) {
