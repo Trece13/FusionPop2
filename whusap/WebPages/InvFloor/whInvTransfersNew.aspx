@@ -19,8 +19,8 @@
         }
     </style>
 
-    <form id="form1" class="container">
-    <div id="divTransferHeader" style="display: block;">
+    <form id="form1" class="container" style="display:none">
+    <div id="divTransferHeader" style="display: none;">
     <div class="form-group row ">
         <label class="col-2 col-form-label-lg" for="txPalletId" id="lblTitPalletId">
             Pallet ID</label>
@@ -82,7 +82,7 @@
     </div>
 
     <div class="form-group row">
-        <input type="button" class="btn btn-primary btn-lg col-sm-6" id="btnTransfer" value="Transfer" />
+        <input type="button" class="btn btn-primary btn-lg col-sm-6" id="" value="Transfer" />
     </div>
 
     </div>
@@ -200,7 +200,7 @@
             //Buttons                                                                             
             //btnCleanPallet = document.getElementById("btnCleanPallet");
             btnQuery = document.getElementById("btnQuery");
-            btnTransfer = document.getElementById("btnTransfer");
+            //btnTransfer = document.getElementById("btnTransfer");
             DisabletxbTargetLocation();
 
 
@@ -213,7 +213,7 @@
 
             //btnCleanPallet.addEventListener("click", CleanPalletID);
             btnQuery.addEventListener("click", SendPalletID);
-            btnTransfer.addEventListener("click", SendTransfer);
+            //btnTransfer.addEventListener("click", SendTransfer);
 
             txbCurrentWarehouse.addEventListener("change", txbCurrentWarehousechange);
             txbTargetWarehouse.addEventListener("change", txbTargetWarehousechange);
@@ -227,9 +227,9 @@
 
         // Disable/Enable textbox
         //Disable
-        function DisabletxPalletId() {
-            txPalletId.readOnly = true;
-        }
+        //function DisabletxPalletId() {
+        //    txPalletId.readOnly = true;
+        //}
         function DisabletxbCurrentWarehouse() {
             txbCurrentWarehouse.readOnly = true;
         }
@@ -245,9 +245,9 @@
             txbTargetLocation.readOnly = true;
         }
         //Enable
-        function EnabletxPalletId() {
-            txPalletId.readOnly = false;
-        }
+        //function EnabletxPalletId() {
+        //    txPalletId.readOnly = false;
+        //}
         function EnabletxbCurrentWarehouse() {
             txbCurrentWarehouse.readOnly = false;
         }
@@ -381,8 +381,8 @@
 
         var SendTransfer = function () {
             for(i = 1 ; i < document.getElementById("TblPallets").rows.length; i++){
-                if (document.getElementById("TblPallets").rows[i].cells[1].children[0].attributes["valid"] == "true") {
-                    var Data = "{'PAID':'" + document.getElementById("txPalletId" + (i - 1)).value.trim().toUpperCase() + "','CurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + document.getElementById("txbCurrentLocation" + (i - 1)).value.toUpperCase().trim() + "','TargetWarehouse':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).value.trim().toUpperCase() + "','TargetSloc':'" + (SLOC == true ? '1' : '0') + "','TargetLocation':'" + document.getElementById("txbTargetLocation" + (i - 1)).value.toUpperCase().trim() + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
+                if (document.getElementById("TblPallets").rows[i].cells[1].children[0].attributes["valid"].value == "true") {
+                    var Data = "{'PAID':'" + document.getElementById("txPalletID" + (i - 1)).value.trim().toUpperCase() + "','CurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + document.getElementById("txbCurrentLocation" + (i - 1)).value.toUpperCase().trim() + "','TargetWarehouse':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).value.trim().toUpperCase() + "','TargetSloc':'" + (SLOC == true ? '1' : '0') + "','TargetLocation':'" + document.getElementById("txbTargetLocation" + (i - 1)).value.toUpperCase().trim() + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
                     sendAjax("clickTransfer", Data, SuccesTransferConsult);
                 }
             }
@@ -437,7 +437,7 @@
 
         var CleanPalletID = function (row) {
 
-            CleantxPalletId(row);
+            //CleantxPalletId(row);
             CleantxbCurrentWarehouse(row);
             CleantxbCurrentLocation(row);
             CleantxbTargetWarehouse(row);
@@ -497,7 +497,7 @@
                 "<td><input type='text' class='form-control form-control-lg col-sm-12'' id='txbTargetLocation" + i + "' placeholder='Locate' oninput='VerificarLocation(" + i + ")' disabled/></td>" +
                 "<td><input type='button' class='btn btn-lg btn-success col-12'  onclick='CleanPalletID(" + i + "); return false;' value='Change Pallet ID'></button></td>" +
                 "<td><input type='button' class='btn btn-lg btn-primary col-12' id='btnTransfer" + i + "' onclick='CleanPalletID(" + i + "); return false;' value='Transfer' style='display:none'></button></td>" +
-                (i == 0 ? "<td><input type='button' class='btn btn-primary btn-lg col-sm-1' id='btnTransf' value='Transfer' style='position:fixed' onclick='SendTransfer'/></td>" : "<td></td>");
+                (i == 0 ? "<td><input type='button' class='btn btn-primary btn-lg col-sm-1' id='btnTransfer' value='Transfer' style='position:fixed' onclick='SendTransfer()'/></td>" : "<td></td>");
             }
         }
         CargarRegistros();
