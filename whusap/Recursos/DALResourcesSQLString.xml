@@ -4661,6 +4661,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(ltc100.t$clot) = '[p1]'
         </stringSQL>
       </operationName>
+      <operationName name="UserConsigment">
+        <stringSQL>
+          SELECT * FROM BAAN.TTICOL136140 WHERE T$USER = '[:USER]'
+        </stringSQL>
+      </operationName>
     </Module>
     <Module name="ttwhcol017">
       <operationName name="selecttwhcol018">

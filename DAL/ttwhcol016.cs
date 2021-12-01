@@ -362,6 +362,25 @@ namespace whusa.DAL
             return parameterCollection;
         }
 
+
+        public DataTable UserConsigment(string user)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":USER", user);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError( Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
     }
 }
 

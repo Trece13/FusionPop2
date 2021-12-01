@@ -124,18 +124,17 @@
                 (document.getElementById("txbCurrentLocation"+ MyObject.row).value.trim() == "" && MyObject.sloc == "1") ? EnabletxbCurrentLocation() : DisabletxbCurrentLocation();
                 (document.getElementById("txbCurrentLocation" + MyObject.row).value == "") ? StartCurrentLocation = false : StartCurrentLocation = true;
                 (document.getElementById("txbCurrentWarehouse" + MyObject.row).value == "") ? VerifyWarehouse() : "";
+                document.getElementById("txbCurrentWarehouse" + MyObject.row).setAttribute('sloc', MyObject.sloc);
                 document.getElementById("lblItemId" + MyObject.row).innerHTML =  MyObject.mitm;
                 document.getElementById("lblItemDescription" + MyObject.row).innerHTML = MyObject.dsca;
                 document.getElementById("lblQuatity" + MyObject.row).innerHTML = MyObject.qtdl;
                 document.getElementById("lblUnit" + MyObject.row).innerHTML = MyObject.cuni;
                 document.getElementById("txbTargetWarehouse" + MyObject.row).disabled = false
-                HidedivQueryAction();
-                DisabletxPalletId();
-                ShowdivTransferDetail();
-                lblError.innerHTML = "";
+                document.getElementById("lblError" + MyObject.row).innerHTML = "";
             }
             else {
-                lblError.innerHTML = MyObject.ErrorMsg;
+                document.getElementById("lblError" + MyObject.row).innerHTML = MyObject.ErrorMsg;
+                CleanPalletID(MyObject.row,true);
             }
         }
 
@@ -340,12 +339,18 @@
             if (r.d != undefined) {
                 MyObjWarehoouse = JSON.parse(r.d);
                 if (MyObjWarehoouse.Error == true) {
-                    lblError.innerHTML = MyObjWarehoouse.ErrorMsg;
+                    document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = MyObjWarehoouse.ErrorMsg;
                     document.getElementById("txPalletID"+ MyObjWarehoouse.row).setAttribute("valid", false);
                 }
                 else {
-                    document.getElementById("txPalletID" + MyObjWarehoouse.row).setAttribute("valid", true);
-
+                    if (document.getElementById("txbCurrentWarehouse" + MyObjWarehoouse.row).value.trim() === document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.row).value.trim() && document.getElementById("txbTargetLocation" + MyObjWarehoouse.row).value.trim() === document.getElementById("txbCurrentLocation" + MyObjWarehoouse.row).value.trim()) {
+                        document.getElementById("txPalletID" + MyObjWarehoouse.row).setAttribute("valid", false);
+                        document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = "Location cannot be the same";
+                    }
+                    else {
+                        document.getElementById("txPalletID" + MyObjWarehoouse.row).setAttribute("valid", true);
+                        document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = "";
+                    }
                 }
             }
             else {
@@ -356,7 +361,7 @@
             if (r.d != undefined) {
                 MyObjWarehoouse = JSON.parse(r.d);
                 if (MyObjWarehoouse.Error == true) {
-                    lblError.innerHTML = MyObjWarehoouse.ErrorMsg;
+                    document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = MyObjWarehoouse.ErrorMsg;
                     document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).value = "";
                     document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).disabled = true;
                     document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", false);
@@ -367,11 +372,21 @@
                         document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).value = "";
                         document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).disabled = false;
                         document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", false);
+                        document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.Row).setAttribute("sloc", "1");
+                        document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = "";
                     }
                     else {
                         document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).value = "";
                         document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).disabled = true;
-                        document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", true);
+                        document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.Row).setAttribute("sloc", "2");
+                        if (document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.Row).value.trim() === document.getElementById("txbCurrentWarehouse" + MyObjWarehoouse.Row).value.trim()) {
+                            document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", false);
+                            document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = "Location cannot be the same";
+                        }
+                        else {
+                            document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", true);
+                            document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = "";
+                        }
                     }
                 }
             }
@@ -435,7 +450,7 @@
 
         };
 
-        var CleanPalletID = function (row) {
+        var CleanPalletID = function (row,error) {
 
             //CleantxPalletId(row);
             CleantxbCurrentWarehouse(row);
@@ -448,10 +463,8 @@
             CleanlblUnit(row);
             document.getElementById("txbTargetWarehouse" + row).disabled = true;
             document.getElementById("txbTargetLocation" + row).disabled = true;
-            document.getElementById("txPalletID" + row).setAttribute("valid",false);
-
-
-            
+            document.getElementById("txPalletID" + row).setAttribute("valid", false);
+            error == true? "":document.getElementById("txPalletID" + row).value = "";            
         }
         IniciarEventos();
     </script>
@@ -486,7 +499,8 @@
             cantidad = 20;
             for(i = 0; i < cantidad; i++){
                 MyTableTransfer.insertRow(-1).innerHTML = "<th scope='row'>" + (i + 1) + "</th>" +
-                "<td><input type='text' row = " + i + "  valid = false class='form-control form-control-lg col-12' id='txPalletID" + i + "' placeholder='Pallet ID' oninput='SendPalletID(" + i + ")'></td>" +
+                "<td><input type='text' row = " + i + "  valid = false class='form-control form-control-lg col-12' id='txPalletID" + i + "' placeholder='Pallet ID' oninput='SendPalletID(" + i + ")'>"+
+                "<label id='lblError"+i+"' style='font-size:15px; color:red'></label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemId" + i + "' >-</label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemDescription" + i + "' >-</label></td>" +
                 "<td><input type='text' class='form-control form-control-lg col-sm-12' id='txbCurrentWarehouse" + i + "' placeholder='Warehouse' disabled/></td>" +

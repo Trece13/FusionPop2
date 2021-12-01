@@ -192,5 +192,10 @@ namespace whusa.Interfases
             }
         }
 
+
+        public DataTable UserConsigment(string user)
+        {
+            return dal.UserConsigment(user);
+        }
     }
 }

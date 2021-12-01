@@ -121,6 +121,7 @@ namespace whusap.WebPages.InvFloor
             Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
             Obj_twhwmd200.cwar = WARE;
 
+            DataTable DtConsigment = ITtwhcol016.UserConsigment(HttpContext.Current.Session["user"].ToString());
             DataTable DtTtwhcol016 = ITtwhcol016.TakeMaterialInv_verificaBodega_Param(ref Obj_twhcol016, ref strError);
             DataTable DtTwhwmd200 = ITwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref Obj_twhwmd200, ref strError);
 
@@ -133,7 +134,7 @@ namespace whusap.WebPages.InvFloor
 
                 Obj_twhcol016.TYPW = DtTtwhcol016.Rows[0]["TYPW"].ToString();
 
-                if (Obj_twhcol016.TYPW.ToString() == "21")
+                if (Obj_twhcol016.TYPW.ToString() == "21" && DtConsigment.Rows[0]["T$CONS"].ToString().Trim() != "1")
                 {
                     Obj_twhcol016.Error = true;
                     Obj_twhcol016.ErrorMsg = WarehouseConsigment;
@@ -201,6 +202,7 @@ namespace whusap.WebPages.InvFloor
                 objWhcol020.Error = true;
                 objWhcol020.ErrorMsg = PalletNotExist;
                 objWhcol020.TipeMsgJs = "lbl";
+                objWhcol020.row = ROW;
 
             }
 
