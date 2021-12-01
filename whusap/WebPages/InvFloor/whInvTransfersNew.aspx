@@ -17,6 +17,9 @@
         .ContenidoOculto {
             display: none;
         }
+        .input{
+            font-size:15px;
+        }
     </style>
 
     <form id="form1" class="container" style="display:none">
@@ -88,7 +91,6 @@
     </div>
     <label id="lblError" style="font-size:24px; color:red" >
     </label>
-    </form>
     <table class="table" id="TblPallets" style="margin-bottom:100px">
   <thead>
     <tr>
@@ -119,7 +121,7 @@
                 lblItemId.innerHTML = MyObject.mitm;
                 document.getElementById("txbCurrentWarehouse"+ MyObject.row).value = MyObject.cwor;
                 (document.getElementById("txbCurrentWarehouse"+ MyObject.row).value == "") ? DisabletxbCurrentWarehouse() : DisabletxbCurrentWarehouse();
-                (document.getElementById("txbCurrentWarehouse"+ MyObject.row).value == "") ? StartCurrentWarehouse = false : StartCurrentWarehouse = true;
+                (document.getElementById("txbCurrentWarehouse"+ MyObject.row).value == "") ? document.getElementById("txbCurrentWarehouse"+ MyObject.row).setAttribute("StartCurrentWarehouse",false) : document.getElementById("txbCurrentWarehouse"+ MyObject.row).setAttribute("StartCurrentWarehouse",true);
                 document.getElementById("txbCurrentLocation"+ MyObject.row).value = MyObject.loor;
                 (document.getElementById("txbCurrentLocation"+ MyObject.row).value.trim() == "" && MyObject.sloc == "1") ? EnabletxbCurrentLocation() : DisabletxbCurrentLocation();
                 (document.getElementById("txbCurrentLocation" + MyObject.row).value == "") ? StartCurrentLocation = false : StartCurrentLocation = true;
@@ -154,14 +156,11 @@
 
             if (MyObject.Success == true) {
                 alert(MyObject.SuccessMsg);
-                lblError.innerHTML = "";
-
-                CleanPalletID();
-                EnabletxPalletId();
-                ShowdivQueryAction();
+                document.getElementById("lblError" + MyObject.row).innerHTML = "";
+                CleanPalletID(MyObject.row);
             }
             else if (MyObject.Error == true) {
-                lblError.innerHTML = MyObject.ErrorMsg;
+                document.getElementById("lblError" + MyObject.row).innerHTML = MyObject.ErrorMsg;
             }
 
 
@@ -397,7 +396,7 @@
         var SendTransfer = function () {
             for(i = 1 ; i < document.getElementById("TblPallets").rows.length; i++){
                 if (document.getElementById("TblPallets").rows[i].cells[1].children[0].attributes["valid"].value == "true") {
-                    var Data = "{'PAID':'" + document.getElementById("txPalletID" + (i - 1)).value.trim().toUpperCase() + "','CurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).value.trim().toUpperCase() + "','CurrentSloc':'" + localStorage.CurrentSloc + "','CurrentLocation':'" + document.getElementById("txbCurrentLocation" + (i - 1)).value.toUpperCase().trim() + "','TargetWarehouse':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).value.trim().toUpperCase() + "','TargetSloc':'" + (SLOC == true ? '1' : '0') + "','TargetLocation':'" + document.getElementById("txbTargetLocation" + (i - 1)).value.toUpperCase().trim() + "','StartCurrentWarehouse':'" + StartCurrentWarehouse + "','StartCurrentLocation':'" + StartCurrentLocation + "'}";
+                    var Data = "{'PAID':'" + document.getElementById("txPalletID" + (i - 1)).value.trim().toUpperCase() + "','CurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).value.trim().toUpperCase() + "','CurrentSloc':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).getAttribute("sloc") + "','CurrentLocation':'" + document.getElementById("txbCurrentLocation" + (i - 1)).value.toUpperCase().trim() + "','TargetWarehouse':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).value.trim().toUpperCase() + "','TargetSloc':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).getAttribute("sloc") + "','TargetLocation':'" + document.getElementById("txbTargetLocation" + (i - 1)).value.toUpperCase().trim() + "','row':'"+(i-1)+"','StartCurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).getAttribute("StartCurrentWarehouse") + "'}";
                     sendAjax("clickTransfer", Data, SuccesTransferConsult);
                 }
             }
@@ -499,18 +498,18 @@
             cantidad = 20;
             for(i = 0; i < cantidad; i++){
                 MyTableTransfer.insertRow(-1).innerHTML = "<th scope='row'>" + (i + 1) + "</th>" +
-                "<td><input type='text' row = " + i + "  valid = false class='form-control form-control-lg col-12' id='txPalletID" + i + "' placeholder='Pallet ID' oninput='SendPalletID(" + i + ")'>"+
+                "<td><input type='text' row = " + i + "  valid = false class='form-control form-control-lg col-12 input' id='txPalletID" + i + "' placeholder='Pallet ID' oninput='SendPalletID(" + i + ")'>" +
                 "<label id='lblError"+i+"' style='font-size:15px; color:red'></label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemId" + i + "' >-</label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemDescription" + i + "' >-</label></td>" +
-                "<td><input type='text' class='form-control form-control-lg col-sm-12' id='txbCurrentWarehouse" + i + "' placeholder='Warehouse' disabled/></td>" +
-                "<td><input type='text' class='form-control form-control-lg col-sm-12' id='txbCurrentLocation" + i + "' placeholder='Locate' disabled/></td>" +
+                "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbCurrentWarehouse" + i + "' placeholder='Warehouse' disabled/></td>" +
+                "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbCurrentLocation" + i + "' placeholder='Locate' disabled/></td>" +
                 "<td><label class='col-9 col-form-label-lg' id ='lblQuatity" + i + "' >-</label></td>" +
                 "<td><label class='col-2 col-form-label-lg' id ='lblUnit" + i + "' >-</label></td>" +
-                "<td><input type='text' class='form-control form-control-lg col-sm-12' id='txbTargetWarehouse" + i + "' placeholder='Warehouse' oninput='VerificarTipoWarehouse(" + i + ")' disabled/></td>" +
-                "<td><input type='text' class='form-control form-control-lg col-sm-12'' id='txbTargetLocation" + i + "' placeholder='Locate' oninput='VerificarLocation(" + i + ")' disabled/></td>" +
-                "<td><input type='button' class='btn btn-lg btn-success col-12'  onclick='CleanPalletID(" + i + "); return false;' value='Change Pallet ID'></button></td>" +
-                "<td><input type='button' class='btn btn-lg btn-primary col-12' id='btnTransfer" + i + "' onclick='CleanPalletID(" + i + "); return false;' value='Transfer' style='display:none'></button></td>" +
+                "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbTargetWarehouse" + i + "' placeholder='Warehouse' oninput='VerificarTipoWarehouse(" + i + ")' disabled/></td>" +
+                "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbTargetLocation" + i + "' placeholder='Locate' oninput='VerificarLocation(" + i + ")' disabled/></td>" +
+                "<td><input type='button' class='btn btn-lg btn-success col-12 input'  onclick='CleanPalletID(" + i + "); return false;' value='Change Pallet ID'></button></td>" +
+                "<td><input type='button' class='btn btn-lg btn-primary col-12 input' id='btnTransfer" + i + "' onclick='CleanPalletID(" + i + "); return false;' value='Transfer' style='display:none'></button></td>" +
                 (i == 0 ? "<td><input type='button' class='btn btn-primary btn-lg col-sm-1' id='btnTransfer' value='Transfer' style='position:fixed' onclick='SendTransfer()'/></td>" : "<td></td>");
             }
         }

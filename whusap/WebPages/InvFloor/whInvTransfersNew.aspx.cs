@@ -262,10 +262,10 @@ namespace whusap.WebPages.InvFloor
         }
 
         [WebMethod]
-        public static string clickTransfer(string PAID, string CurrentWarehouse, string CurrentSloc, string CurrentLocation, string TargetWarehouse, string TargetSloc, string TargetLocation, bool StartCurrentWarehouse = true, bool StartCurrentLocation = true)
+        public static string clickTransfer(string PAID, string CurrentWarehouse, string CurrentSloc, string CurrentLocation, string TargetWarehouse, string TargetSloc, string TargetLocation, string row,bool StartCurrentWarehouse = true)
         {
             Ent_twhcol020 objWhcol020 = new Ent_twhcol020();
-
+            objWhcol020.row = row;
             DataTable Transferencias = Transfers.ConsultarRegistroTransferir(PAID);
 
             bool LocationCurrent = false;
@@ -278,21 +278,9 @@ namespace whusap.WebPages.InvFloor
                 }
                 else
                 {
-                    if (StartCurrentWarehouse == true && StartCurrentWarehouse == true)
+                    if (StartCurrentWarehouse == true)
                     {
                         LocationCurrent = true;
-                    }
-                    else if (StartCurrentWarehouse == true && StartCurrentWarehouse == false)
-                    {
-                        LocationCurrent = (Transfers.ConsultarLocation(CurrentWarehouse, CurrentLocation).Rows.Count > 0) ? true : false;
-                    }
-                    else if (StartCurrentWarehouse == false && StartCurrentWarehouse == true)
-                    {
-                        LocationCurrent = (Transfers.ConsultarLocation(CurrentWarehouse, CurrentLocation).Rows.Count > 0) ? true : false;
-                    }
-                    else if (StartCurrentWarehouse == false && StartCurrentWarehouse == false)
-                    {
-                        LocationCurrent = (Transfers.ConsultarLocation(CurrentWarehouse, CurrentLocation).Rows.Count > 0) ? true : false;
                     }
                 }
 
