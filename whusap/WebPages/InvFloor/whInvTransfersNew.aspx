@@ -312,25 +312,25 @@
         // Hide/show buttons
         var SendPalletID = function (row) {
 
-            var Data = "{'PAID':'" + document.getElementById("txPalletID" + row).value + "','ROW':'" + row + "'}";
+            var Data = "{'PAID':'" + document.getElementById("txPalletID" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
             sendAjax("clickQuery", Data, SuccesPalletConsult)
         }
 
         var VerifyWarehouse = function () {
 
-            var Data = "{'LOCA':'" + txbCurrentLocation.value.trim() + "'}";
+            var Data = "{'LOCA':'" + txbCurrentLocation.value.trim().toUpperCase() + "'}";
             sendAjax("VerifyWarehouse", Data, SuccesVerifyWarehouse)
         }
 
         var VerificarTipoWarehouse = function (row) {
 
-            var Data = "{'WARE':'" + document.getElementById("txbTargetWarehouse"+row).value + "','ROW':'" + row + "'}";
+            var Data = "{'WARE':'" + document.getElementById("txbTargetWarehouse" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
             sendAjax("VerificarTipoWarehouse", Data, SuccesVerificarTipoWarehouse)
         }
 
         var VerificarLocation = function (row) {
 
-            var Data = "{'CWAR':'" + document.getElementById("txbTargetWarehouse" + row).value + "','LOCA':'" + document.getElementById("txbTargetLocation" + row).value + "','ROW':'" + row + "'}";
+            var Data = "{'CWAR':'" + document.getElementById("txbTargetWarehouse" + row).value.trim().toUpperCase() + "','LOCA':'" + document.getElementById("txbTargetLocation" + row).value.trim().toUpperCase() + "','ROW':'" + row + "'}";
             sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
         }
 
@@ -499,7 +499,7 @@
             for(i = 0; i < cantidad; i++){
                 MyTableTransfer.insertRow(-1).innerHTML = "<th scope='row'>" + (i + 1) + "</th>" +
                 "<td><input type='text' row = " + i + "  valid = false class='form-control form-control-lg col-12 input' id='txPalletID" + i + "' placeholder='Pallet ID' oninput='SendPalletID(" + i + ")'>" +
-                "<label id='lblError"+i+"' style='font-size:15px; color:red'></label></td>" +
+                "<label id='lblError" + i + "' style='font-size:15px; color:red; position: absolute;'></label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemId" + i + "' >-</label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemDescription" + i + "' >-</label></td>" +
                 "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbCurrentWarehouse" + i + "' placeholder='Warehouse' disabled/></td>" +
