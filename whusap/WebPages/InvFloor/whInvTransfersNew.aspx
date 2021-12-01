@@ -89,7 +89,7 @@
     </div>
 
     </div>
-    <label id="lblError" style="font-size:24px; color:red" >
+    <label id="lblError" style="font-size:24px; color:green" >
     </label>
     <table class="table" id="TblPallets" style="margin-bottom:100px">
   <thead>
@@ -163,7 +163,7 @@
 
             if (MyObject.Success == true) {
                 alert(MyObject.SuccessMsg);
-                document.getElementById("lblError" + MyObject.row).innerHTML = "";
+                document.getElementById("lblError").innerHTML = "";
                 CleanPalletID(MyObject.row);
             }
             else if (MyObject.Error == true) {
