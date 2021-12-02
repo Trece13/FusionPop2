@@ -79,7 +79,7 @@
             padding: .1rem;
             vertical-align: top;
             border-top: 1px solid #dee2e6;
-            font-size: 1.7em;
+            font-size: 1.5em;
             text-align: left;
         }
 
@@ -142,7 +142,7 @@
                             </strong>
                         </div>
                     </div>
-                    <div class="col-12 borderTop" id="divBarcode" style="height: 30%">
+                    <div class="col-12 borderTop" id="divBarcode" style="height: 25%">
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid" alt="" />
                     </div>
                     <div class="col-12 m-0 justify-content-center" style="height: 50%">
@@ -214,7 +214,7 @@
                                 <label id="lblMaterialDesc2" runat="server">THIS PRODUCT IS ON HOLD PENDING DISPOSITION</label></strong>
                         </div>
                     </div>
-                    <div class="col-12 borderTop" id="divBarcode2" style="height: 30%">
+                    <div class="col-12 borderTop" id="divBarcode2" style="height: 25%">
                         <img src="~/images/logophoenix_login.jpg" runat="server" id="codePaid2" alt="" />
                     </div>
                     <div class="col-12 m-0 justify-content-center" style="height: 50%">

@@ -299,7 +299,9 @@
 
              return validate;
          };
-         function validarCantidad(field, stk, CantidadDevuelta) {
+         //JC 02122021 Ajustar la validacion con la cantidad del pallet.
+         //function validarCantidad(field, stk, CantidadDevuelta) {
+         function validarCantidad(field, stk, stockpallet) {
              //var cantidad = parseInt(field.value);  //JC 060921 Evitar pasarlos valores con decimales a entero
              var cantidad = parseFloat(field.value);
              var stock = stk;
@@ -313,8 +315,18 @@
              }
              var re = new RegExp(regex);
              if (field.value.match(re)) {
-                 if (((cantidad + CantidadDevuelta) > stock)) {
+                //JC 02122021 Ajustar la validacion con la cantidad del pallet.
+                 //if (((cantidad + CantidadDevuelta) > stock)) {
+                 if (cantidad > stock) {
                      alert(idioma == "INGLES" ? 'Quantity is greater that stock by item, warehouse and lot, only have ' + (stock) : 'Cantidad mayor a la cantidad existente por item, almacen y lote, solo hay ' + (stock));
+                     this.focus();
+                     field.value = 0;
+                 }
+                 //JC 02122021 Ajustar la validacion con la cantidad del pallet.
+                 //if (cantidad > CantidadDevuelta) {
+                 if (cantidad > stockpallet) {
+                     //alert(idioma == "INGLES" ? 'Quantity is greater that quantity by pallet, only have ' + (CantidadDevuelta) : 'Cantidad mayor a la cantidad del pallet, solo hay ' + (CantidadDevuelta));
+                     alert(idioma == "INGLES" ? 'Quantity is greater that quantity by pallet, only have ' + (stockpallet) : 'Cantidad mayor a la cantidad del pallet, solo hay ' + (stockpallet));
                      this.focus();
                      field.value = 0;
                  }

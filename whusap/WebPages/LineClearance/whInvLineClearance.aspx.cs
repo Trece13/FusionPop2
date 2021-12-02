@@ -206,6 +206,13 @@ namespace whusap.WebPages.LineClearance
                 obj.fpdn = txtWorkOrderFrom.Text.ToUpperInvariant();
                 resultado = idal.lineClearance_verificaOrdenes_Param(ref obj, ref strError);
 
+                if (resultado.Rows.Count < 1)
+                {
+                    lblResult.Text = string.Format(mensajes("ordernotexists"), ErrorOrden, obj.fpdn.Trim());
+                    lblResult.ForeColor = System.Drawing.Color.Red;
+                    return;
+                }
+
                 ErrorOrden = "TO ";
                 obj.fpdn = txtWorkOrderTo.Text.ToUpperInvariant();
                 resultado = idal.lineClearance_verificaOrdenes_Param(ref obj, ref strError);

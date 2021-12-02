@@ -4884,7 +4884,7 @@
         </operationName>
         <operationName name="ordernotexists">
           <stringMessage>
-            Work Order doesn´t exists or is not active. Cannot continue.
+            Work Order doesn´t exists or is not active, {0}, {1}. Cannot continue.
           </stringMessage>
         </operationName>
         <operationName name="notitems">
