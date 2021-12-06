@@ -1938,7 +1938,7 @@
         </operationName>
         <operationName name="orderitemnotexists">
           <stringMessage>
-            Order and Item doesn't exist.
+            Order Closed or Item doesn't exist in WorkOrder.
           </stringMessage>
         </operationName>
         <operationName name="rollnotexists">

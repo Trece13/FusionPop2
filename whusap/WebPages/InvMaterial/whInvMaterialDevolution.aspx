@@ -254,23 +254,17 @@
 
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
             <ContentTemplate>
-                <asp:GridView ID="grdRecords" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"
+                <%--JC 061221<asp:GridView ID="grdRecords" runat="server" AutoGenerateColumns="False" DataKeyNames="ID"--%>
+                 <asp:GridView ID="grdRecords" runat="server" AutoGenerateColumns="False" DataKeyNames="ORDEN"
                     OnRowDataBound="grdRecords_RowDataBound" SkinID="Default"> 
+                   <%-- onselectedindexchanged="grdRecords_SelectedIndexChanged"> --%>
                     <Columns>
-                        <asp:BoundField HeaderText="Position" DataField="pos">
-                            <ItemStyle HorizontalAlign="Center" Width="10%" />
-                            <HeaderStyle CssClass="HeaderGrid" HorizontalAlign="Center" />
-                        </asp:BoundField>
                         <asp:BoundField HeaderText="Item" DataField="ARTICULO">
                             <ItemStyle HorizontalAlign="Center" Width="15%" />
                             <HeaderStyle CssClass="HeaderGrid" HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="Description" DataField="Descripcion">
                             <ItemStyle HorizontalAlign="Left" Width="40%" />
-                            <HeaderStyle CssClass="HeaderGrid" HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Warehouse" DataField="Almacen">
-                            <ItemStyle HorizontalAlign="Center" />
                             <HeaderStyle CssClass="HeaderGrid" HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="Actual Qty" DataField="cant" DataFormatString="{0}">

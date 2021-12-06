@@ -684,9 +684,6 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.twhcol131{1} col131
           where col131.t$stat = '3'
           ) GlobalC
-          INNER JOIN BAAN.TTISFC001140 SFC001
-          ON sfc001.t$pdno = GlobalC.ORNO
-          AND sfc001.t$osta IN('5','7','9')
           WHERE GlobalC.SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
@@ -4327,11 +4324,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT  NVL(SUM(REQT),0) REQT, PDNO, ITEM
           FROM
           (
-          SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO, T$ITEM
+          SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$ITEM = '[T$ITEM]'  group by T$PDNO, T$ITEM
           union
           SELECT SUM(col090.T$QANA) REQT, T$FPDN PDNO, '[T$ITEM]' ITEM FROM {0}.tticol090{1} col090 WHERE T$FPDN = '[T$PDNO]' AND T$ITEM = '[T$ITEM]'  group by T$FPDN, T$ITEM
           )
           GROUP BY PDNO, ITEM
+          <!--SELECT  NVL(SUM(REQT),0) REQT, PDNO, ITEM
+          FROM
+          (
+          SELECT SUM(ticol125.T$REQT) REQT, T$PDNO PDNO, T$ITEM ITEM FROM {0}.tticol125{1} ticol125 WHERE T$PDNO = '[T$PDNO]' AND T$PONO = '[T$PONO]'  group by T$PDNO, T$PONO, T$ITEM
+          union
+          SELECT SUM(col090.T$QANA) REQT, T$FPDN PDNO, '[T$ITEM]' ITEM FROM {0}.tticol090{1} col090 WHERE T$FPDN = '[T$PDNO]' AND T$ITEM = '[T$ITEM]'  group by T$FPDN, T$ITEM
+          )
+          GROUP BY PDNO, ITEM-->
           <!--SELECT  REQT+NVL(COL090.T$QANA,0) REQT, PDNO, ITEM
           FROM
           (
@@ -4420,7 +4425,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           group by sfc.t$pdno, cst001.t$sitm) TB1 ON TRIM(TB1.Articulo) = TRIM(rec.t$sitm)
           WHERE sfc.t$osta in('5','7') AND rec.t$nnts = 1 AND sfc.t$pdno='[p1]' AND rec.t$qucs &gt; 0
           ORDER BY rec.t$pono-->
-          SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
+          <!--JC 061221 SELECT rec.rowid ID, rec.t$pdno Orden, rec.t$pono Pos, rec.t$cwar Almacen, rec.t$sitm Articulo,
           art.t$dsca Descripcion, art.t$cuni Unidad,
           (SELECT SUM(ticst0012.T$QUCS)
           FROM {0}.tticst001{1} ticst0012
@@ -4434,7 +4439,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttisfc001{1} sfc ON rec.t$pdno = sfc.t$pdno
           LEFT JOIN {0}.ttccol020{1} col020 on col020.t$item = art.t$item
           WHERE sfc.t$osta in('5','7') AND rec.t$nnts = 1 AND sfc.t$pdno='[p1]' AND rec.t$qucs &gt; 0
-          ORDER BY rec.t$pono
+          ORDER BY rec.t$pono-->
+          SELECT rec.t$pdno Orden, rec.t$sitm Articulo, art.t$dsca Descripcion, art.t$cuni Unidad,
+          (SELECT SUM(ticst0012.T$QUCS)
+          FROM {0}.tticst001{1} ticst0012
+          WHERE ticst0012.T$PDNO = rec.t$pdno
+          AND ticst0012.T$SITM = rec.T$SITM) Cant,
+          art.t$kltc Lote, art.t$kitm stat,
+          col020.t$cnpk cnpick, t$kitm as tipo, t$cpcl as clase
+          FROM {0}.tticst001{1} rec
+          LEFT JOIN {0}.ttcibd001{1} art on rec.t$sitm = art.t$item
+          LEFT JOIN {0}.ttisfc001{1} sfc ON rec.t$pdno = sfc.t$pdno
+          LEFT JOIN {0}.ttccol020{1} col020 on col020.t$item = art.t$item
+          WHERE sfc.t$osta in('5','7') AND rec.t$nnts = 1 AND sfc.t$pdno='[p1]' AND rec.t$qucs &gt; 0
+          GROUP BY rec.t$pdno, rec.t$sitm, art.t$dsca, art.t$cuni, art.t$kltc, art.t$kitm,col020.t$cnpk, t$kitm, t$cpcl
         </stringSQL>
       </operationName>
       <operationName name="listaRegistrosOrden_ParamHis">
@@ -7434,7 +7452,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticst001">
       <operationName name="findByItemAndPdno">
         <stringSQL>
-          SELECT T$PDNO AS PDNO, T$PONO AS PONO, T$SITM AS SITM, T$CWAR AS CWAR FROM {2} WHERE TRIM(T$SITM) = TRIM('[:T$SITM]') AND T$PDNO = '[:T$PDNO]'
+          --SELECT T$PDNO AS PDNO, T$PONO AS PONO, T$SITM AS SITM, T$CWAR AS CWAR FROM {2} WHERE TRIM(T$SITM) = TRIM('[:T$SITM]') AND T$PDNO = '[:T$PDNO]'
+          SELECT cst001.T$PDNO AS PDNO, cst001.T$PONO AS PONO, cst001.T$SITM AS SITM, cst001.T$CWAR AS CWAR
+          FROM {2} cst001 INNER JOIN BAAN.TTISFC001140 SFC001 ON sfc001.t$pdno = cst001.t$pdno AND sfc001.t$osta IN('5','7','9')
+          WHERE TRIM(cst001.T$SITM) = TRIM('[:T$SITM]')
+          AND cst001.T$PDNO = '[:T$PDNO]'
         </stringSQL>
       </operationName>
       <operationName name="findByItemAndPdnoPlanta">

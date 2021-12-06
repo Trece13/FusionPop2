@@ -146,7 +146,7 @@ namespace whusap.WebPages.InvMaterial
                 {
                     Ent_tticol125 MyObj = new Ent_tticol125();
                     MyObj.pdno = item["Orden"].ToString();
-                    MyObj.pono = Convert.ToInt32(item["Pos"].ToString());
+                    //JC 061221 MyObj.pono = Convert.ToInt32(item["Pos"].ToString());
                     MyObj.item = item["Articulo"].ToString();
 
                     DataTable ResQtdl = idal.ConsultarQtdl(ref MyObj, ref strError);
@@ -201,20 +201,22 @@ namespace whusap.WebPages.InvMaterial
                 string paid = string.Empty;
                 string sec  = string.Empty;
                 int sec022 = 0;
-                string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
-                string toLot = ((DropDownList)row.Cells[8].FindControl("toLot")).SelectedValue;
+                string toreturn = ((TextBox)row.Cells[4].FindControl("toReturn")).Text;
+                string toLot = ((DropDownList)row.Cells[6].FindControl("toLot")).SelectedValue;
                 //string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
-                string condLote = ((HiddenField)row.Cells[6].FindControl("LOTE")).Value.Trim();
-                ktlc = Convert.ToString(row.Cells[11].Text);
-                Item = row.Cells[1].Text.ToUpperInvariant();
+                string condLote = ((HiddenField)row.Cells[4].FindControl("LOTE")).Value.Trim();
+                ktlc = Convert.ToString(row.Cells[9].Text);
+                Item = row.Cells[0].Text.ToUpperInvariant();
                 //JC 180821 Tomar la bodega del maestro de artículos
                 HttpContext.Current.Session["ITEM"] = Item;
                 var Warehouse = Itwhcol130.GetWarehouseMaterialReturn(HttpContext.Current.Session["ITEM"].ToString());
 
-                Uni = row.Cells[5].Text.ToLower().Trim();
-                Pos = row.Cells[0].Text;
-                Tipo = row.Cells[12].Text;
-                Clase = row.Cells[13].Text.ToUpperInvariant().Trim();
+                Uni = row.Cells[3].Text.ToLower().Trim();
+                //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
+                //Pos = row.Cells[0].Text;
+                Pos = "10";
+                Tipo = row.Cells[10].Text;
+                Clase = row.Cells[11].Text.ToUpperInvariant().Trim();
                 
                 bool reqLote = condLote == "1" ? true : false;
                 
@@ -234,7 +236,7 @@ namespace whusap.WebPages.InvMaterial
                 if ((reqLote && String.IsNullOrEmpty(toLot.Trim())) && !string.IsNullOrEmpty(toreturn))
                 {
                     lblResult.Text = mensajes("lotcode");
-                    lblResult.ForeColor = System.Drawing.Color.Green;
+                    lblResult.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
 
@@ -289,9 +291,11 @@ namespace whusap.WebPages.InvMaterial
 
                             MyObj.OORG = "4";
                             MyObj.ORNO = txtWorkOrder.Text.Trim().ToUpper();
-                            MyObj.ITEM = row.Cells[1].Text.ToUpper();
+                            MyObj.ITEM = row.Cells[0].Text.ToUpper();
                             MyObj.PAID = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
-                            MyObj.PONO = Convert.ToInt32(row.Cells[0].Text).ToString();
+                            //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
+                            //MyObj.PONO = Convert.ToInt32(row.Cells[0].Text).ToString();
+                            MyObj.PONO = "10";
                             MyObj.SEQN = "0";
                             MyObj.CLOT = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper();
                             //JC 180821 Grabar la bodega por defecto del item
@@ -299,9 +303,9 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.CWAR = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                             MyObj.QTYS = toreturn;// cantidad escaneada view
                             MyObj.QTYA = toreturn;
-                            MyObj.UNIT = row.Cells[5].Text.Trim();
+                            MyObj.UNIT = row.Cells[3].Text.Trim();
                             MyObj.QTYC = toreturn;//cantidad escaneada view aplicando factor
-                            MyObj.UNIC = row.Cells[5].Text.Trim();
+                            MyObj.UNIC = row.Cells[3].Text.Trim();
                             MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
                             MyObj.CONF = "1";
                             MyObj.RCNO = " ";//llena baan
@@ -314,7 +318,7 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.LOGN = HttpContext.Current.Session["user"].ToString();// nombre de ususario de la session
                             MyObj.LOGT = " ";//llena baan
                             MyObj.STAT = "1";// LLENAR EN 1  
-                            MyObj.DSCA = row.Cells[2].Text.ToUpperInvariant();
+                            MyObj.DSCA = row.Cells[1].Text.ToUpperInvariant();
                             MyObj.COTP = "0";
                             MyObj.FIRE = "1";
                             MyObj.PSLIP = " ";
@@ -334,9 +338,9 @@ namespace whusap.WebPages.InvMaterial
                             obj022.sqnb = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             obj022.proc = 1;
                             obj022.logn = HttpContext.Current.Session["user"].ToString();
-                            obj022.mitm = row.Cells[1].Text.ToUpper().Trim();
+                            obj022.mitm = row.Cells[0].Text.ToUpper().Trim();
                             obj022.qtdl = Convert.ToDecimal(toreturn);
-                            obj022.cuni = row.Cells[5].Text.Trim();
+                            obj022.cuni = row.Cells[3].Text.Trim();
                             obj022.log1 = "NONE";
                             obj022.qtd1 = Convert.ToInt32(toreturn);
                             obj022.pro1 = 1;
@@ -369,15 +373,16 @@ namespace whusap.WebPages.InvMaterial
                         {
                             Ent_tticol042 obj042 = new Ent_tticol042();
                             List<Ent_tticol042> list042 = new List<Ent_tticol042>();
-
-                            obj042.pdno = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper().Trim();
+                            //JC 061221 Ajustar para que salve el campo orden en la tabla ticol042 siempre con un valor
+                            //obj042.pdno = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpper().Trim();
+                            obj042.pdno = string.IsNullOrEmpty(toLot) ? txtWorkOrder.Text.Trim().ToUpper() : toLot.ToUpper().Trim();
                             obj042.sqnb = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
                             obj042.proc = 1;
                             obj042.logn = HttpContext.Current.Session["user"].ToString();
-                            obj042.mitm = row.Cells[1].Text.ToUpper().Trim();
+                            obj042.mitm = row.Cells[0].Text.ToUpper().Trim();
                             obj042.pono = Convert.ToInt32(Pos);
                             obj042.qtdl = Convert.ToDouble(toreturn);
-                            obj042.cuni = row.Cells[5].Text.Trim();
+                            obj042.cuni = row.Cells[3].Text.Trim();
                             obj042.log1 = "NONE";
                             obj042.qtd1 = Convert.ToDecimal(toreturn);
                             obj042.pro1 = 1;
@@ -398,8 +403,9 @@ namespace whusap.WebPages.InvMaterial
                             //obj042.cwat = row.Cells[3].Text.ToUpper();
                             obj042.cwaf = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                             obj042.cwat = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
-                            obj042.cwaf = row.Cells[3].Text.ToUpper();
-                            obj042.cwat = row.Cells[3].Text.ToUpper();
+                            //JC 061221 Se quita esta inserción debido a que se cambio la estructura del gridview
+                            //obj042.cwaf = row.Cells[3].Text.ToUpper();
+                            //obj042.cwat = row.Cells[3].Text.ToUpper();
                             obj042.aclo = "";
                             obj042.allo = 0;
 
@@ -411,8 +417,10 @@ namespace whusap.WebPages.InvMaterial
 
                     obj = new Ent_tticol125();
                     obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
-                    obj.pono = Convert.ToInt32(row.Cells[0].Text);
-                    obj.item = row.Cells[1].Text.ToUpper(); //.Trim();
+                    //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
+                    //obj.pono = Convert.ToInt32(row.Cells[0].Text);
+                    obj.pono = Convert.ToInt32("10");
+                    obj.item = row.Cells[0].Text.ToUpper(); //.Trim();
                     //JC 180821 Grabar la bodega por defecto del item
                     //obj.cwar = row.Cells[3].Text.ToUpper(); //.Trim();
                     obj.cwar = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
@@ -551,11 +559,11 @@ namespace whusap.WebPages.InvMaterial
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 // Verificar que si la cantidad es igual a 0, el control "toReturn" se deshabilite
-                if (Convert.ToDouble(e.Row.Cells[4].Text) == 0)
+                if (Convert.ToDouble(e.Row.Cells[2].Text) == 0)
                 {
-                    ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Enabled = false;
-                    ((TextBox)e.Row.Cells[6].FindControl("toReturn")).Attributes.Add("onfocus", "limpiar(this);");
-                    ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onkeyup", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["unidad"].ToString().Trim() + "');");
+                    ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Enabled = false;
+                    ((TextBox)e.Row.Cells[4].FindControl("toReturn")).Attributes.Add("onfocus", "limpiar(this);");
+                    ((TextBox)e.Row.Cells[3].FindControl("toReturn")).Attributes.Add("onkeyup", "verificarDecimal(this,'" + ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["unidad"].ToString().Trim() + "');");
 
 
                 }
@@ -836,15 +844,16 @@ namespace whusap.WebPages.InvMaterial
             OrderError.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "customWorkOrder");
             //validateReturn.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "btnSave");
             //validateQuantity.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "btnSave");
-            grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPosition");
-            grdRecords.Columns[1].HeaderText = _textoLabels.readStatement(formName, _idioma, "headItem");
-            grdRecords.Columns[2].HeaderText = _textoLabels.readStatement(formName, _idioma, "headDescription");
-            grdRecords.Columns[3].HeaderText = _textoLabels.readStatement(formName, _idioma, "headWarehouse");
-            grdRecords.Columns[4].HeaderText = _textoLabels.readStatement(formName, _idioma, "headActualQty");
-            grdRecords.Columns[5].HeaderText = _textoLabels.readStatement(formName, _idioma, "headUnit");
-            grdRecords.Columns[6].HeaderText = _textoLabels.readStatement(formName, _idioma, "headToReturn");
-            grdRecords.Columns[7].HeaderText = _textoLabels.readStatement(formName, _idioma, "headLot");
-            grdRecords.Columns[8].HeaderText = _textoLabels.readStatement(formName, _idioma, "headLot");
+            //JC 061221 Corregir los titulos ya que se quitaron dos columnas
+            //grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headPosition");
+            grdRecords.Columns[0].HeaderText = _textoLabels.readStatement(formName, _idioma, "headItem");
+            grdRecords.Columns[1].HeaderText = _textoLabels.readStatement(formName, _idioma, "headDescription");
+            //grdRecords.Columns[3].HeaderText = _textoLabels.readStatement(formName, _idioma, "headWarehouse");
+            grdRecords.Columns[2].HeaderText = _textoLabels.readStatement(formName, _idioma, "headActualQty");
+            grdRecords.Columns[3].HeaderText = _textoLabels.readStatement(formName, _idioma, "headUnit");
+            grdRecords.Columns[4].HeaderText = _textoLabels.readStatement(formName, _idioma, "headToReturn");
+            grdRecords.Columns[5].HeaderText = _textoLabels.readStatement(formName, _idioma, "headLot");
+            grdRecords.Columns[6].HeaderText = _textoLabels.readStatement(formName, _idioma, "headLot");
         }
 
         protected string mensajes(string tipoMensaje)
