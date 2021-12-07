@@ -77,6 +77,23 @@ namespace whusap.WebPages.WorkOrders
             return retorno;
         }
 
+        //[WebMethod]
+        //public static bool VerificarPalletID(string PAID)
+        //{
+        //    bool retorno = false;
+        //    string strError = string.Empty;
+        //    DataTable DTPalletID = twhcol130DAL.VerificarPalletID(ref PAID);
+        //    EntidadPicking ObjPicking = new EntidadPicking();
+
+        //    if (DTPalletID.Rows.Count > 0)
+        //    {
+        //        retorno = true;
+        //    }
+
+
+        //    return retorno;
+        //}
+
         [WebMethod]
         public static bool VerificarPalletID(string PAID)
         {
@@ -95,29 +112,12 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static bool VerificarPalletID(string PAID)
-        {
-            bool retorno = false;
-            string strError = string.Empty;
-            DataTable DTPalletID = twhcol130DAL.VerificarPalletID(ref PAID);
-            EntidadPicking ObjPicking = new EntidadPicking();
-
-            if (DTPalletID.Rows.Count > 0)
-            {
-                retorno = true;
-            }
-
-
-            return retorno;
-        }
-
-        [WebMethod]
-        public static string VerificarPalletID(string ITEM,string WARE,string PAID, string CLOT, string DATEI, string DATEF)
+        public static string VerificarPalletID(string ITEM, string WARE, string PAID, string CLOT, string DATEI, string DATEF)
         {
             string strError = string.Empty;
 
             List<Ent_tticol119> lst119 = new List<Ent_tticol119>();
-            Ent_tticol119 MyObj119  = new Ent_tticol119();
+            Ent_tticol119 MyObj119 = new Ent_tticol119();
             MyObj119.item = ITEM;
             MyObj119.cwar = WARE;
             MyObj119.paid = PAID;
@@ -125,7 +125,7 @@ namespace whusap.WebPages.WorkOrders
             MyObj119.dati = DATEI;
             MyObj119.datf = DATEF;
 
-            DataTable DT119 = ticol119DAL.SelectRegister(MyObj119,ref strError);
+            DataTable DT119 = ticol119DAL.SelectRegister(MyObj119, ref strError);
             if (DT119.Rows.Count > 0)
             {
                 foreach (DataRow row in DT119.Rows)
@@ -151,11 +151,11 @@ namespace whusap.WebPages.WorkOrders
                     lst119.Add(MyObj119lst);
 
                 }
-                
+
             }
-            return  JsonConvert.SerializeObject(lst119);
+            return JsonConvert.SerializeObject(lst119);
         }
-        
+
     }
 }
 
