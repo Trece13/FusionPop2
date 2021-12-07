@@ -3677,6 +3677,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where TRIM(UPPER(whinh210.T$ORNO)) = TRIM(UPPER('[:T$ORNO]')) AND TRIM(UPPER(TCIBD001.T$ITEM)) = TRIM(UPPER('[:T$ITEM]'))
         </stringSQL>
       </operationName>
+      <operationName name="ValidarItemOnly">
+        <stringSQL>
+          select distinct TCIBD001.T$ITEM AS ITEM, TCIBD001.T$KLTC AS KLTC, TCIBD001.T$CUNI AS CUNI from {0}.twhinh210{1} whinh210
+          inner join {0}.TTCIBD001{1} TCIBD001 on whinh210.T$ITEM = TCIBD001.T$ITEM
+          where TRIM(UPPER(TCIBD001.T$ITEM)) = TRIM(UPPER('[:T$ITEM]'))
+        </stringSQL>
+      </operationName>
       <operationName name="ValidarLote">
         <stringSQL>
           <stringSQL>
@@ -6614,6 +6621,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="SelectRegister">
         <stringSQL>
           select * from {0}.tticol116{1} where trim(T$PAID) = trim('[:T$PAID]')
+        </stringSQL>
+      </operationName>
+    </Module>
+    <Module name="tticol119">
+      <operationName name="SelectRegister">
+        <stringSQL>
+          select * from baan.tticol119140 where trim(T$PAID) = trim('[:T$PAID]') and  trim(T$CWAR) = trim('[:T$CWAR]') and  trim(T$ITEM) = trim('[:T$ITEM]') and  trim(T$CLOT) = nvl(trim('[:T$CLOT]',T$CLOT)) and T$DATR &gt;= '[:DATEI]' and T$DATR &lt;= '[:DATEF]'
         </stringSQL>
       </operationName>
     </Module>

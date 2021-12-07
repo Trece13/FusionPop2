@@ -121,8 +121,8 @@ namespace whusa.Interfases
 
             paramList = new Dictionary<string, object>();
             paramList.Add("p1", returnorder.Trim().ToUpperInvariant());
-           // string returnorder = returnorder.Trim().ToUpperInvariant();
-           
+            // string returnorder = returnorder.Trim().ToUpperInvariant();
+
             string tableName = string.Empty;
             strSentencia = recursos.readStatement(method.ReflectedType.Name, "vallidatePurchaseOrder", ref owner, ref env, tabla, paramList);
 
@@ -421,7 +421,7 @@ namespace whusa.Interfases
             paramList.Add(":T$CONF", MyObj.CONF);
             paramList.Add(":T$RCNO", MyObj.RCNO);
             //paramList.Add(":T$DATR", MyObj.DATR);
-            paramList.Add(":T$LOCA", MyObj.LOCA==string.Empty?" ":MyObj.LOCA);
+            paramList.Add(":T$LOCA", MyObj.LOCA == string.Empty ? " " : MyObj.LOCA);
             //paramList.Add(":T$DATL", MyObj.DATL);
             paramList.Add(":T$PRNT", MyObj.PRNT);
             //paramList.Add(":T$DATP", MyObj.DATP);
@@ -432,8 +432,8 @@ namespace whusa.Interfases
             paramList.Add(":T$FIRE", MyObj.FIRE);
             paramList.Add(":T$PSNO", MyObj.PSLIP == string.Empty ? " " : MyObj.PSLIP);
             paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO);
-            
-            
+
+
 
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
@@ -486,7 +486,7 @@ namespace whusa.Interfases
             paramList.Add(":T$DATR", MyObj.DATR);
             paramList.Add(":T$DATL", MyObj.DATL);
             paramList.Add(":T$DATP", MyObj.DATP);
-            paramList.Add(":T$FIRE", MyObj.FIRE.Trim()== string.Empty ? "0" : MyObj.FIRE.Trim());
+            paramList.Add(":T$FIRE", MyObj.FIRE.Trim() == string.Empty ? "0" : MyObj.FIRE.Trim());
             paramList.Add(":T$PSNO", MyObj.PSLIP.Trim() == string.Empty ? "0" : MyObj.PSLIP.Trim());
             paramList.Add(":T$ALLO", MyObj.ALLO.Trim() == string.Empty ? "0" : MyObj.PSLIP.Trim());
 
@@ -532,25 +532,45 @@ namespace whusa.Interfases
         }
 
         public DataTable ValidarItem(Ent_twhcol130 whcol130)
-            {
-                method = MethodBase.GetCurrentMethod();
-                paramList = new Dictionary<string, object>();
-                paramList.Add(":T$ORNO", whcol130.ORNO.Trim());
-                paramList.Add(":T$ITEM", whcol130.ITEM.Trim());
-                
-                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ORNO", whcol130.ORNO.Trim());
+            paramList.Add(":T$ITEM", whcol130.ITEM.Trim());
 
-                try
-                {
-                    consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
-                    
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                }
-                return consulta;
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
+
+        public DataTable ValidarItemOnly(Ent_twhcol130 whcol130)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ITEM", whcol130.ITEM.Trim());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
 
         public DataTable ValidarLote(Ent_twhcol130 whcol130)
         {
@@ -930,13 +950,13 @@ namespace whusa.Interfases
             return consulta;
         }
 
-        public DataTable ActualizarConteoReimpresion(string PAID,string LOGR)
+        public DataTable ActualizarConteoReimpresion(string PAID, string LOGR)
         {
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$PAID", PAID.Trim());
             paramList.Add(":T$LOGR", LOGR.Trim());
-            
+
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
             try
@@ -978,7 +998,7 @@ namespace whusa.Interfases
         {
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
-            paramList.Add(":T$PAID",PAID.Trim() /*PAID.Trim()*/);
+            paramList.Add(":T$PAID", PAID.Trim() /*PAID.Trim()*/);
             paramList.Add(":T$USER", USRR.Trim());
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
@@ -1026,7 +1046,7 @@ namespace whusa.Interfases
             return respuesta;
         }
 
-    
+
         public DataTable ConsultarLocation(string CWAR, string LOCA)
         {
             method = MethodBase.GetCurrentMethod();
@@ -1090,7 +1110,7 @@ namespace whusa.Interfases
         //    return consulta;
         //}
 
-        public DataTable ActualizacionPickMaterialWhcol130(string PAID,string PICK, string DATK, string LOGP, string STAT)
+        public DataTable ActualizacionPickMaterialWhcol130(string PAID, string PICK, string DATK, string LOGP, string STAT)
         {
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
@@ -1114,7 +1134,7 @@ namespace whusa.Interfases
             return consulta;
         }
 
-        public bool ActualizacionLocaWhcol130(string PAID, string LOCA,string CWAA, string LOGT, string STAT)
+        public bool ActualizacionLocaWhcol130(string PAID, string LOCA, string CWAA, string LOGT, string STAT)
         {
             bool retorno = false;
 
@@ -1183,7 +1203,7 @@ namespace whusa.Interfases
                 {
                     retorno = true;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -1213,7 +1233,7 @@ namespace whusa.Interfases
             return consulta;
         }
 
-        public DataTable ConsultarLocationNativa(string CWAR,string PRIO)
+        public DataTable ConsultarLocationNativa(string CWAR, string PRIO)
         {
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
@@ -1226,14 +1246,14 @@ namespace whusa.Interfases
             }
             catch (Exception ex)
             {
-               
+
                 strError = "Error to select location in [ttccol310]. Try again or contact your administrator \n ";
                 log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             return consulta;
         }
 
-        public string ConsultarSumatoriaCantidades130(string ORNO,string PONO,string SEQNR)
+        public string ConsultarSumatoriaCantidades130(string ORNO, string PONO, string SEQNR)
         {
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
@@ -1289,7 +1309,7 @@ namespace whusa.Interfases
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$COTP", COTP.Trim());
             DataTable consulta = new DataTable();
- 
+
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 
@@ -1380,7 +1400,7 @@ namespace whusa.Interfases
             paramList.Add(":T$NPRT", MyObj.NPRT);
             paramList.Add(":T$FIRE", MyObj.FIRE);
             paramList.Add(":T$PSNO", MyObj.PSLIP);
-            paramList.Add(":T$CWAA", MyObj.CWAR.Trim().Trim()==""?" ":MyObj.CWAR.Trim().Trim());
+            paramList.Add(":T$CWAA", MyObj.CWAR.Trim().Trim() == "" ? " " : MyObj.CWAR.Trim().Trim());
             paramList.Add(":T$LOAA", MyObj.LOCA.Trim() == string.Empty ? " " : MyObj.LOCA.Trim());
             paramList.Add(":T$QTYA", MyObj.QTYA == string.Empty ? "0" : MyObj.QTYA.Trim());
             paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO.Trim());
@@ -1504,7 +1524,7 @@ namespace whusa.Interfases
             return Retorno;
         }
 
-        
+
         public DataTable VerificarPalletIDz(string PAID)
         {
             DataTable Retorno = new DataTable();
@@ -1719,7 +1739,7 @@ namespace whusa.Interfases
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref StrInsertMultiple, ref env, tabla, paramList);
             try
             {
-                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false); 
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
             }
             catch (Exception ex)
             {
@@ -1826,6 +1846,6 @@ namespace whusa.Interfases
 
     }
 
-    
+
 
 }

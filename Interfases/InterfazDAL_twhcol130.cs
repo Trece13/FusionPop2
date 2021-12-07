@@ -513,5 +513,12 @@ namespace whusa.Interfases
             return dal.InserTwhcol131(MyObj);
         }
 
+
+        public DataTable ValidarItemOnly(Ent_twhcol130 twhcol130)
+        {
+            DataTable retorno = new DataTable();
+            retorno = dal.ValidarItemOnly(twhcol130);
+            return retorno;
+        }
     }
 }
