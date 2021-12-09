@@ -115,7 +115,7 @@ namespace whusap.WebPages.InvFloor
             string strError = string.Empty;
 
             Ent_ttwhcol016 Obj_twhcol016 = new Ent_ttwhcol016();
-            Obj_twhcol016.cwar = WARE;
+            Obj_twhcol016.cwar = WARE.ToUpper();
             Obj_twhcol016.Row = ROW;
 
             Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
@@ -156,7 +156,7 @@ namespace whusap.WebPages.InvFloor
                 Obj_twhcol016.TypeMsgJs = "label";
                 Obj_twhcol016.ErrorMsg = WarehouseNotExist;
             }
-
+            Obj_twhcol016.cwar.ToUpper();
             return JsonConvert.SerializeObject(Obj_twhcol016);
         }
 
@@ -216,10 +216,10 @@ namespace whusap.WebPages.InvFloor
 
             string strError = string.Empty;
             Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
-            Obj_twhwmd200.cwar = CWAR;
+            Obj_twhwmd200.cwar = CWAR.ToUpper();
             Obj_twhwmd200.row = ROW;
 
-            DataTable DtTransfer = Itransfer.ConsultarLocation(Obj_twhwmd200.cwar, LOCA);
+            DataTable DtTransfer = Itransfer.ConsultarLocation(Obj_twhwmd200.cwar, LOCA.ToUpper());
 
             if (DtTransfer.Rows.Count > 0)
             {

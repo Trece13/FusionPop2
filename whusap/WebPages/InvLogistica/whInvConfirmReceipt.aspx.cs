@@ -27,9 +27,6 @@ namespace whusap.WebPages.InvLogistica
             private static string strError;
             private static string formName;
             private static string globalMessages = "GlobalMessages";
-            public static string SLOC;
-            public static string LOCA;
-            public static string CWAR;
         #endregion
 
         #region Eventos
@@ -91,7 +88,12 @@ namespace whusap.WebPages.InvLogistica
             }
 
             protected void btnConsultar_Click(object sender, EventArgs e)
-            {
+            {   
+                //JC 091221 Se Mueven estas variables al entorno locar y no dejarlas publicas
+                Session["CWAR"] = "";
+                Session["LOCA"] = "";
+                string SLOC, LOCA, CWAR;
+
                 divTable.Visible = false;
 
                 if (txtNumeroOrden.Text.Trim() != String.Empty)
@@ -116,6 +118,9 @@ namespace whusap.WebPages.InvLogistica
                         SLOC = consultaOrden.Rows[0]["SLOC"].ToString();
                         LOCA = consultaOrden.Rows[0]["LOCA"].ToString();
                         CWAR = consultaOrden.Rows[0]["CWAR"].ToString();
+                        //JC 091221 Crear una variable de sesion para almacenar la bodega
+                        Session["CWAR"] = CWAR;
+                        Session["LOCA"] = LOCA;
                         //Validamos si el parametro de validar producción esta activo
                         var consultaPrdVl = _idalttisfc001.findProdValidation_Parameter(ref strError);
                         var PRVL = consultaPrdVl.Rows[0]["PRVL"].ToString();
@@ -188,6 +193,12 @@ namespace whusap.WebPages.InvLogistica
 
             protected void btnGuardar_Click(object sender, EventArgs e)
             {
+                //JC 091221 Grabar las variables de sesion en variables tipo string
+                string CWARG = "";
+                string LOCAG = "";
+                CWARG = HttpContext.Current.Session["CWAR"].ToString();
+                LOCAG = HttpContext.Current.Session["LOCA"].ToString();
+
                 var sqnb = txtNumeroOrden.Text.Trim().ToUpper();
                 var pdno = sqnb.Substring(0, 9);
                 var pro1 = "2";
@@ -265,7 +276,7 @@ namespace whusap.WebPages.InvLogistica
                             lblError.Text = String.Empty;
                             divTable.Visible = false;
                             txtNumeroOrden.Text = String.Empty;
-                            _idaltticol022.ActualizarCantidadAlmacenRegistroTicol222(HttpContext.Current.Session["user"].ToString(), data022.qtd1, LOCA, CWAR, data022.sqnb);
+                            _idaltticol022.ActualizarCantidadAlmacenRegistroTicol222(HttpContext.Current.Session["user"].ToString(), data022.qtd1, LOCAG, CWARG, data022.sqnb);
                             return;
                         }
                         else

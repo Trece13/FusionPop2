@@ -354,6 +354,11 @@
 
     <Module name="NewWhInvTransfers.aspx">
       <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Bulk transfers
+          </stringMessage>
+        </operationName>
         <operationName name="PalletIdAlreadyTransferAndPendingToProcess">
           <stringMessage>
             Pallet Id already transfer and pending to process
@@ -426,6 +431,11 @@
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <operationName name="encabezado">
+          <stringMessage>
+            Transferencias Masivas
+          </stringMessage>
+        </operationName>
         <operationName name="PalletNotLocate">
           <stringMessage>
           </stringMessage>
@@ -4934,6 +4944,11 @@
 
     <Module name="WhInvDeletePallets.aspx">
       <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Delete Pallets.
+          </stringMessage>
+        </operationName>
         <operationName name="PalletidDoesnexist">
           <stringMessage>
             Pallet id Does'n exist.
