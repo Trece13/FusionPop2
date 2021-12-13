@@ -1392,7 +1392,7 @@ namespace whusa.Interfases
             paramList.Add(":T$UNIC", MyObj.UNIC);
             paramList.Add(":T$CONF", MyObj.CONF);
             paramList.Add(":T$RCNO", MyObj.RCNO);
-            paramList.Add(":T$LOCA", MyObj.LOCA == string.Empty ? " " : MyObj.LOCA);
+            paramList.Add(":T$LOCA", MyObj.LOCA == string.Empty ? " " : MyObj.LOCA.ToUpper());
             paramList.Add(":T$PRNT", MyObj.PRNT);
             paramList.Add(":T$LOGN", MyObj.LOGN);
             paramList.Add(":T$LOGT", MyObj.LOGT);
@@ -1400,8 +1400,8 @@ namespace whusa.Interfases
             paramList.Add(":T$NPRT", MyObj.NPRT);
             paramList.Add(":T$FIRE", MyObj.FIRE);
             paramList.Add(":T$PSNO", MyObj.PSLIP.Trim().Trim() == "" ? " " : MyObj.PSLIP.Trim().Trim());
-            paramList.Add(":T$CWAA", MyObj.CWAR.Trim().Trim() == "" ? " " : MyObj.CWAR.Trim().Trim());
-            paramList.Add(":T$LOAA", MyObj.LOCA.Trim() == string.Empty ? " " : MyObj.LOCA.Trim());
+            paramList.Add(":T$CWAA", MyObj.CWAR.Trim().Trim() == "" ? " " : MyObj.CWAR.Trim().Trim().ToUpper());
+            paramList.Add(":T$LOAA", MyObj.LOCA.Trim() == string.Empty ? " " : MyObj.LOCA.Trim().ToUpper());
             paramList.Add(":T$QTYA", MyObj.QTYA == string.Empty ? "0" : MyObj.QTYA.Trim());
             paramList.Add(":T$ALLO", MyObj.ALLO == string.Empty ? "0" : MyObj.ALLO.Trim());
 
