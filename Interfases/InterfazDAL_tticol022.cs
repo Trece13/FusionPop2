@@ -491,7 +491,14 @@ namespace whusa.Interfases
 
 
         }
+        //JC 131221 Actualiza el pallet nuevo en el campo pallet Disposition en la ticol118
+        public bool ActualizacionPalletId118(string PAID, string PLLD, string strError)
+        {
 
+            return dal.ActualizacionPalletId118(PAID, PLLD, strError);
+
+
+        }
 
         public bool ActualizarCantidadAlmacenRegistroTicol222(string _operator, decimal ACQT, string ACLO, string CWAR, string PAID)
         {

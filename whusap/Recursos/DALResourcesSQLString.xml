@@ -548,6 +548,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {2} SET T$DELE = '[:STAT]' WHERE T$SQNB = '[p1]'  --13. To Delete
         </stringSQL>
       </operationName>
+      <operationName name="ActualizacionPalletId118">
+        <stringSQL>
+          UPDATE {2} SET T$PLLD = '[p2]' WHERE T$PAID = '[p1]'  --13. To Delete
+        </stringSQL>
+      </operationName>
       <operationName name="insertarRegistro">
         <stringSQL>
           INSERT INTO {2} (T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$QTDL, T$CUNI, T$LOG1,

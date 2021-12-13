@@ -38,8 +38,8 @@ namespace whusa.DAL
             string MsgstrError = string.Empty;
             try
             {
-                strSentencia = "INSERT INTO " + tabla + " ( T$ITEM, T$CWAR, T$CLOT, T$QTYR, T$CDIS, T$OBSE, T$LOGR, T$DATR, T$DISP, T$STOC, T$RITM, T$PROC, T$MESS, T$SUNO, T$REFCNTD, T$REFCNTU,T$PAID) " +
-                                           "VALUES (BAAN.F_ITEM_POP(TRIM(:T$ITEM)), :T$CWAR, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+(5/24), :T$DISP, :T$STOC, :T$RITM, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU, UPPER(:T$PAID))";
+                strSentencia = "INSERT INTO " + tabla + " ( T$ITEM, T$CWAR, T$CLOT, T$QTYR, T$CDIS, T$OBSE, T$LOGR, T$DATR, T$DISP, T$STOC, T$RITM, T$PROC, T$MESS, T$SUNO, T$REFCNTD, T$REFCNTU,T$PAID, T$PLLD) " +
+                                           "VALUES (BAAN.F_ITEM_POP(TRIM(:T$ITEM)), :T$CWAR, :T$CLOT, :T$QTYR, :T$CDIS, :T$OBSE, :T$LOGR, sysdate+(5/24), :T$DISP, :T$STOC, :T$RITM, :T$PROC, :T$MESS, :T$SUNO, :T$REFCNTD, :T$REFCNTU, UPPER(:T$PAID), UPPER(:T$PLLD))";
                 foreach (Ent_tticol118 reg in parametros)
                 {
                     parametrosIn = AdicionaParametrosComunes(reg);
@@ -507,7 +507,8 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$SUNO", DbType.String, parametros.suno);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTD", DbType.Int32, parametros.refcntd);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTU", DbType.Int32, parametros.refcntu); 
-				Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PAID", DbType.String, parametros.paid);																									  
+				Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PAID", DbType.String, parametros.paid);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PLLD", DbType.String, parametros.plld);	
 
                 if (blnUsarPRetorno)
                 {

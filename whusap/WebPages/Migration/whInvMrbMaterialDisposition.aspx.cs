@@ -579,6 +579,7 @@ namespace whusap.WebPages.Migration
                     //JC 240821 En caso que dispongan toda la cantidad el pallet original debe quedar en la tabla ticol118
                     //obj.paid = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString(); ;
                     obj.paid = txtPalletId.Text.Trim();
+                    obj.plld = Convert.ToString(0);
                     parameterCollection.Add(obj);
                 }
 
@@ -705,6 +706,11 @@ namespace whusap.WebPages.Migration
                     lblError1.Text = strError;
                     return;
                 }
+                //JC 131221 Actualizar pallet nuevo en tabla ticol118
+                var PAIDACT = txtPalletId.Text.Trim();
+                var NewP = Convert.ToString(Session["newPallet"]);
+                var actualizapallet118 = _idaltticol022.ActualizacionPalletId118(PAIDACT, NewP, strError);
+
                 if (Convert.ToInt32(disposition) == 3) //Return to Stock
                 {
 
@@ -1107,7 +1113,7 @@ namespace whusap.WebPages.Migration
 
                     if ((Convert.ToDecimal(Convert.ToDouble(Session["qty"].ToString())) - Convert.ToDecimal(Session["ToReturnQuantity"].ToString())) != 0)
                     {
-                        string strMaxSequence = getSequence(txtPalletId.Text.ToUpper().Trim(), "Q");
+                        string strMaxSequence = getSequence(txtPalletId.Text.ToUpper().Trim(), "D");
                         string separator = "-";
                         string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
                         //JC 100921 Crear los datos para generar las etiquetas
@@ -1151,6 +1157,9 @@ namespace whusap.WebPages.Migration
 
                             var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
                             var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+                            //var PAIDACT = txtPalletId.Text.Trim();
+                            //var NewP = Convert.ToString(Session["newPallet"]);
+                            //var actualizapallet118 = _idaltticol022.ActualizacionPalletId118(PAIDACT, NewP, strError);
                         }
                         //JC 060921 Ajustar datos par disponer regrind
                         if (lbltable.Value.Trim() == "ticol042")
@@ -1245,15 +1254,24 @@ namespace whusap.WebPages.Migration
                             if (lbltable.Value.Trim() == "ticol022")
                             {
                                 _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
+                                var PAIDACT = txtPalletId.Text.Trim();
+                                var NewP = Convert.ToString(Session["newPallet"]);
+                                var actualizapallet118 = _idaltticol022.ActualizacionPalletId118(PAIDACT, NewP, strError);
                             }
                             //JC 060921 Ajustar datos par disponer regrind
                             if (lbltable.Value.Trim() == "ticol042")
                             {
                                 _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
+                                var PAIDACT = txtPalletId.Text.Trim();
+                                var NewP = Convert.ToString(Session["newPallet"]);
+                                var actualizapallet118 = _idaltticol022.ActualizacionPalletId118(PAIDACT, NewP, strError);
                             }
                             else
                             {
                                 _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
+                                var PAIDACT = txtPalletId.Text.Trim();
+                                var NewP = Convert.ToString(Session["newPallet"]);
+                                var actualizapallet118 = _idaltticol022.ActualizacionPalletId118(PAIDACT, NewP, strError);
                             }
                             Session["disposition"] = "stock";
 

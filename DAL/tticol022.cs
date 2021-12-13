@@ -29,6 +29,7 @@ namespace whusa.DAL
         private static String owner = ConfigurationManager.AppSettings["owner"].ToString();
         private static string tabla = owner + ".tticol022" + env;
         private static string tabla222 = owner + ".tticol222" + env;
+        private static string tabla118 = owner + ".tticol118" + env;
         /* Metodos */
         public tticol022()
         {
@@ -1036,6 +1037,41 @@ namespace whusa.DAL
             {
 
                 strError = "Error to update status (to delete) [tticol022]. Try again or contact your administrator \n ";
+
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+
+                Console.WriteLine(ex);
+
+            }
+
+            return consulta;
+
+        }
+
+        //JC 131221 Actualiza el pallet nuevo en el campo pallet Disposition en la ticol118
+        public bool ActualizacionPalletId118(string PAID, string PLLD, string strError)
+        {
+            bool consulta = false;
+            method = MethodBase.GetCurrentMethod();
+            tabla118 = owner + ".tticol118" + env; ;
+
+            paramList = new Dictionary<string, object>();
+
+            paramList.Add("p1", PAID.Trim().ToUpper());
+            paramList.Add("p2", PLLD.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla118, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+
+            }
+
+            catch (Exception ex)
+            {
+
+                strError = "Error to Update Pallet Disposition [tticol118]. Try again or contact your administrator \n ";
 
                 log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
 

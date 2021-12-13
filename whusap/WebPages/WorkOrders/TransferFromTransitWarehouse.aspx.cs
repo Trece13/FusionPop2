@@ -422,9 +422,19 @@ namespace whusap.WebPages.WorkOrders
             MyObj131Base.PAIDS.Clear();
             Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
             Double qtyReal = Convert.ToDouble(QtyReal);
-            Double Pallets = Convert.ToDouble(Paids.Trim() == string.Empty ? "1" : Paids.Trim());
-            Double Parcials = qtyReal / Pallets;
+            Double QtyPallets = Convert.ToDouble(Paids.Trim() == string.Empty ? "1" : Paids.Trim());
+            Double Parcials = qtyReal / QtyPallets;
             Decimal QUANTITY = 0;
+            int CantPalletsComp = Convert.ToInt32(Parcials);
+            double CantParcPallets = Parcials - CantPalletsComp;
+            if (CantParcPallets == 0)
+            {
+                CantParcPallets = 0;
+            }
+            else
+            {
+                CantParcPallets = 1;
+            }
             int inserts = 0;
             int consecutivoPalletID = 0;
             int QUANTITYAUX_COMPLETADA = 0;
@@ -437,7 +447,7 @@ namespace whusap.WebPages.WorkOrders
                 QUANTITY = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITY * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
             }
 
-            for (int i = 0; i < Pallets; i++)
+            for (int i = 0; i < CantPalletsComp; i++)
             {
 
                 DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol131(MyObj131Base.ORNO);
@@ -465,14 +475,17 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.PAID = MyObj131Base.ORNO + "-" + SecuenciaPallet;
                 MyObj.CWAR = TargetCwar;
                 MyObj.LOCA = TargetLoca;
-                MyObj.QTYS = Parcials.ToString();
-                MyObj.QTYC = Parcials.ToString();
+                MyObj.QTYS = QtyPallets.ToString();
+                MyObj.QTYC = QtyPallets.ToString();
                 MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
                 MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
                 MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
                 MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
                 MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
                 MyObj.LOGT = " ";
+                MyObj.CWAA = TargetCwar;
+                MyObj.LOAA = TargetLoca;
+                MyObj.QTYA = QtyPallets.ToString();
                 MyObj.PAIDS.Add(MyObj.PAID);
                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
                 MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
@@ -482,12 +495,65 @@ namespace whusap.WebPages.WorkOrders
                 //MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYC.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
                 MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
 
-                if (twhcol130DAL.InserTwhcol131(MyObj))
+                if (twhcol130DAL.Insertartwhcol131(MyObj))
                 {
                     inserts++;
                 }
             }
-            if (inserts == Pallets)
+            for (int p = 0; p < CantParcPallets; p++)
+            {
+
+                DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol131(MyObj131Base.ORNO);
+                string SecuenciaPallet = "001";
+                if (DTPalletContinue.Rows.Count > 0)
+                {
+                    foreach (DataRow item in DTPalletContinue.Rows)
+                    {
+                        consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(10, 3)) + 1;
+                        if (consecutivoPalletID.ToString().Length == 1)
+                        {
+                            SecuenciaPallet = "00" + consecutivoPalletID;
+                        }
+                        if (consecutivoPalletID.ToString().Length == 2)
+                        {
+                            SecuenciaPallet = "0" + consecutivoPalletID;
+                        }
+                        if (consecutivoPalletID.ToString().Length == 3)
+                        {
+                            SecuenciaPallet = consecutivoPalletID.ToString();
+                        }
+                    }
+
+                }
+                MyObj.PAID = MyObj131Base.ORNO + "-" + SecuenciaPallet;
+                MyObj.CWAR = TargetCwar;
+                MyObj.LOCA = TargetLoca;
+                MyObj.QTYS = (qtyReal - (CantPalletsComp * QtyPallets)).ToString();
+                MyObj.QTYC = (qtyReal - (CantPalletsComp * QtyPallets)).ToString();
+                MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
+                MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
+                MyObj.LOGT = " ";
+                MyObj.CWAA = TargetCwar;
+                MyObj.LOAA = TargetLoca;
+                MyObj.QTYA = (qtyReal - (CantPalletsComp * QtyPallets)).ToString();
+                MyObj.PAIDS.Add(MyObj.PAID);
+                MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
+                MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
+                MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
+                MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
+                MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
+                //MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYC.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
+                MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+
+                if (twhcol130DAL.Insertartwhcol131(MyObj))
+                {
+                    inserts++;
+                }
+            }
+            if (inserts == CantPalletsComp + CantParcPallets)
             {
                 Ent_twhcol020 objWhcol020 = new Ent_twhcol020();
                 objWhcol020.tbl = "";
@@ -500,7 +566,7 @@ namespace whusap.WebPages.WorkOrders
                 objWhcol020.cwde = TargetCwar;
                 objWhcol020.lode = TargetLoca;
 
-                objWhcol020.qtdl = Convert.ToDouble(MyObj131Base.QTYC);
+                objWhcol020.qtdl = Convert.ToDouble(qtyReal);
                 objWhcol020.cuni = MyObj131Base.UNIT;
                 objWhcol020.user = HttpContext.Current.Session["user"].ToString();
 

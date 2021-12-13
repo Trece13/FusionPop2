@@ -507,11 +507,11 @@ namespace whusa.Interfases
             return dal.getPaids082(PICK);
         }
 
-
-        public bool InserTwhcol131(Ent_twhcol130131 MyObj)
-        {
-            return dal.InserTwhcol131(MyObj);
-        }
+        //JC 13122021 Quitarla porque ya esta en la interfaz
+        //public bool Insertartwhcol131(Ent_twhcol130131 MyObj)
+        //{
+        //    return dal.Insertartwhcol131(MyObj);
+        //}
 
 
         public DataTable ValidarItemOnly(Ent_twhcol130 twhcol130)

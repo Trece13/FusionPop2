@@ -79,7 +79,11 @@ namespace whusa.Entidades
 		[DataMember(Order = 16)]
         [Column(Name = "PAID")]
         public string paid { get; set; }
-		
+
+        [DataMember(Order = 17)]
+        [Column(Name = "PLLD")]
+        public string plld { get; set; }
+
         public Ent_tticol118()
         {
             item = string.Empty;
@@ -99,11 +103,13 @@ namespace whusa.Entidades
             refcntd = 0;
             refcntu = 0;
             paid = string.Empty;
+            plld = string.Empty;
         }
 
 
         public Ent_tticol118(string pitem, string pcwar, string pclot, double pqtyr, string pcdis, string pobse, string plogr, string pdatr,
-                            int pdisp, string pstoc, string pritm, int pproc, string pmess, string psuno, int prefcntd, int prefcntu, string ppaid)
+                            int pdisp, string pstoc, string pritm, int pproc, string pmess, string psuno, int prefcntd, int prefcntu, string ppaid,
+                            string pplld)
         {
             this.item = pitem;
             this.cwar = pcwar;
@@ -122,6 +128,7 @@ namespace whusa.Entidades
             this.refcntd = prefcntd;
             this.refcntu = prefcntu;
             this.paid = ppaid;
+            this.plld = pplld;
         }    
     }
 }

@@ -78,9 +78,9 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label-lg" for="txQuantityPaidTotal">
-                Total Pallets Received</label>
+                Qty Received per Pallet</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txQuantityPaidTotal" placeholder="Qty Pallets Total">
+                <input type="text" class="form-control form-control-lg" id="txQuantityPaidTotal" placeholder="Qty per Pallet">
             </div>
         </div>
         <div class="form-group row">
@@ -576,7 +576,7 @@
 
         var Click_Transfer = function () {
 
-            var Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Paids':'" + $('#txQuantityPaidTotal').val() + "','TargetCwar':'" + $('#txWarehouseCrrnt').val() + "','TargetLoca':'" + $('#txLocationCrrnt').val() + "'}";
+            var Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Paids':'" + $('#txQuantityPaidTotal').val() + "','TargetCwar':'" + $('#txWarehouseTrgt').val() + "','TargetLoca':'" + $('#txLocationTrgt').val() + "'}";
             sendAjax("Click_Transfer", Data, TransferSucces);
 
         }
