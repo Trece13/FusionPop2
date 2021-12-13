@@ -57,6 +57,7 @@ namespace whusa
             this.Error = false;
             this.PAIDS = new List<string>();
             this.PAIDS_URLS = new List<string>();
+            this.QTYAS = new List<string>();
             this.QTYCFinal = string.Empty;
         }
         public string QTYA { get; set; }
