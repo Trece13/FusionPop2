@@ -112,7 +112,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string VerificarPalletID(string ITEM, string WARE, string PAID, string CLOT, string DATEI, string DATEF)
+        public static string Send(string ITEM, string WARE, string PAID, string CLOT, string DATEI, string DATEF)
         {
             string strError = string.Empty;
 
@@ -132,22 +132,24 @@ namespace whusap.WebPages.WorkOrders
                 {
                     Ent_tticol119 MyObj119lst = new Ent_tticol119();
 
-                    MyObj119lst.item = row["ITEM"].ToString();
-                    MyObj119lst.cwar = row["CWAR"].ToString();
-                    MyObj119lst.clot = row["CLOT"].ToString();
-                    MyObj119lst.qtyr = Convert.ToInt32(row["QTYR"].ToString());
-                    MyObj119lst.cdis = row["CDIS"].ToString();
-                    MyObj119lst.obse = row["OBSE"].ToString();
-                    MyObj119lst.logr = row["LOGR"].ToString();
-                    MyObj119lst.datr = row["DATR"].ToString();
-                    MyObj119lst.disp = Convert.ToInt32(row["DISP"].ToString());
-                    MyObj119lst.stoc = row["STOC"].ToString();
-                    MyObj119lst.ritm = row["RITM"].ToString();
-                    MyObj119lst.proc = Convert.ToInt32(row["PROC"].ToString());
-                    MyObj119lst.mess = row["MESS"].ToString();
-                    MyObj119lst.suno = row["SUNO"].ToString();
-                    MyObj119lst.refcntd = Convert.ToInt32(row["REFCNTD"].ToString());
-                    MyObj119lst.refcntu = Convert.ToInt32(row["REFCNTU"].ToString());
+                    MyObj119lst.item = row["T$ITEM"].ToString();
+                    MyObj119lst.cwar = row["T$CWAR"].ToString();
+                    MyObj119lst.clot = row["T$CLOT"].ToString();
+                    MyObj119lst.qtyr = Convert.ToInt32(row["T$QTYR"].ToString());
+                    MyObj119lst.cdis = row["T$CDIS"].ToString();
+                    MyObj119lst.obse = row["T$OBSE"].ToString();
+                    MyObj119lst.logr = row["T$LOGR"].ToString();
+                    MyObj119lst.datr = row["T$DATR"].ToString();
+                    MyObj119lst.disp = Convert.ToInt32(row["T$DISP"].ToString());
+                    MyObj119lst.stoc = row["T$STOC"].ToString();
+                    MyObj119lst.ritm = row["T$RITM"].ToString();
+                    MyObj119lst.proc = Convert.ToInt32(row["T$PROC"].ToString());
+                    MyObj119lst.mess = row["T$MESS"].ToString();
+                    MyObj119lst.suno = row["T$SUNO"].ToString();
+                    MyObj119lst.paid = row["T$PAID"].ToString();
+                    MyObj119lst.plld = row["T$PLLD"].ToString();
+                    MyObj119lst.refcntd = Convert.ToInt32(row["T$REFCNTD"].ToString());
+                    MyObj119lst.refcntu = Convert.ToInt32(row["T$REFCNTU"].ToString());
                     lst119.Add(MyObj119lst);
 
                 }

@@ -120,17 +120,18 @@
             }
         };
         var VerificarPalletIDSucces = function (r) {
+            console.log(r.d)
+        };
+        var SendSucces = function (r) {
+            
             $("#tbody tr").detach();
             var Mylst = JSON.parse(r.d);
             if (Mylst.length > 0) {
-                Mylst.each(function (i, row) {
-                    $('#tbody').append('<tr><td>' + row.ITEM + '</td><td>' + row.CWAR + '</td><td>' + row.CLOT + '</td><td>' + row.LOGR + '</td><td>' + row.DATR + '</td><td>' + row.DISP + '</td><td>' + row.CWAR + '</td><td>' + row + '</td><td>' + row.RITM + '</td><td>' + row.PAID + '</td><td>' + row.PAID + '</td></tr>');
+                Mylst.forEach(function (row,i) {
+                    $('#tbody').append('<tr><td>' + row.item + '</td><td>' + row.cwar + '</td><td>' + row.clot + '</td><td>' + row.qtyr + '</td><td>' + row.logr + '</td><td>' + row.datr + '</td><td>' + row.disp + '</td><td>' + row.stoc + '</td><td>' + row.ritm + '</td><td>' + row.paid + '</td><td>' + row.plld + '</td></tr>');
                 });
-                
+
             }
-        };
-        var SendSucces = function (r) {
-            console.log(r.d)
         }
 
         $('#txItem').bind("input", function () {
