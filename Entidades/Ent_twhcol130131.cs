@@ -115,6 +115,7 @@ namespace whusa
         public string TypeMsgJs { get; set; }
         public decimal QSTK { get; set; }
         public List<string> PAIDS { get; set; }
+        public List<string> QTYAS { get; set; }
         public List<string> PAIDS_URLS { get; set; }
 
         public string QTYCFinal { get; set; }

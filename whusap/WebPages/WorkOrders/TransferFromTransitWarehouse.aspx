@@ -730,7 +730,7 @@
                     CBPalletNOd = MyList.PAIDS_URLS[index];
                     lblItemIDd = MyList.ITEM;
                     lblItemDescd = MyList.DSCA;
-                    LblQuantityd = MyList.QTYC;
+                    LblQuantityd = MyList.QTYAS[index];
                     LblUnitd = MyList.UNIC;
                     LblLotIdd = MyList.CLOT;
                     CBPurchaseOrderd = MyList.ORNO_URL;
@@ -742,7 +742,7 @@
                     LblItemOCd = MyList.ITEM;
                     LblLotOCd = MyList.CLOT;
                     LblUnitOCd = MyList.UNIT;
-                    LblQuantityOCd = MyList.QTYC;
+                    LblQuantityOCd = MyList.QTYAS[index];
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 

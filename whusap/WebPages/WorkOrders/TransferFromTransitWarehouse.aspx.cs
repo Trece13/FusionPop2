@@ -486,6 +486,7 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.CWAA = TargetCwar;
                 MyObj.LOAA = TargetLoca;
                 MyObj.QTYA = QtyPallets.ToString();
+                MyObj.QTYAS.Add(MyObj.QTYA);
                 MyObj.PAIDS.Add(MyObj.PAID);
                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
                 MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
@@ -539,6 +540,7 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.CWAA = TargetCwar;
                 MyObj.LOAA = TargetLoca;
                 MyObj.QTYA = (qtyReal - (CantPalletsComp * QtyPallets)).ToString();
+                MyObj.QTYAS.Add(MyObj.QTYA);
                 MyObj.PAIDS.Add(MyObj.PAID);
                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
                 MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
