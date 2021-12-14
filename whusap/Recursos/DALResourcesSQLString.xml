@@ -6638,7 +6638,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and  trim(T$CWAR) = nvl(trim('[:T$CWAR]'), trim(T$CWAR))
           and  trim(T$ITEM) = nvl(trim('[:T$ITEM]'), trim(T$ITEM))
           and  trim(T$CLOT) = nvl(trim('[:T$CLOT]'), trim(T$CLOT))
-          and  T$DATR &gt;= nvl('[:DATEI]','01/01/1970') and T$DATR &lt;= nvl('[:DATEF]','31/12/2050')
+          and  T$DATR &gt;= nvl('[:DATEI]','01-JAN-70') and T$DATR &lt;= nvl('[:DATEF]','31-DEC-2050')
           --select * from baan.tticol119140 where trim(T$PAID) = trim('[:T$PAID]') and  trim(T$CWAR) = trim('[:T$CWAR]') and  trim(T$ITEM) = trim('[:T$ITEM]') and  trim(T$CLOT) = nvl(trim('[:T$CLOT]',T$CLOT)) and T$DATR &gt;= '[:DATEI]' and T$DATR &lt;= '[:DATEF]'
         </stringSQL>
       </operationName>
