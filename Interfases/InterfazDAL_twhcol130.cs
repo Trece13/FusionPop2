@@ -520,5 +520,30 @@ namespace whusa.Interfases
             retorno = dal.ValidarItemOnly(twhcol130);
             return retorno;
         }
+
+        public bool tticol042Auto(string PALLETNEW, string PALLET)
+        {
+            return dal.tticol042Auto(PALLETNEW, PALLET);
+        }
+
+        public bool tticol022Auto(string PALLETNEW, string PALLET)
+        {
+            return dal.tticol022Auto(PALLETNEW, PALLET);
+        }
+
+        public bool tticol242Auto(string PALLETNEW, string PALLET, string QTYA)
+        {
+            return dal.tticol242Auto(PALLETNEW, PALLET, QTYA);
+        }
+
+        public bool tticol222Auto(string PALLETNEW, string PALLET, string QTYA)
+        {
+            return dal.tticol222Auto(PALLETNEW, PALLET, QTYA);
+        }
+
+        public bool InserTwhcol131Auto(string PALLETNEW, string PALLET, string QTYA)
+        {
+            return dal.InserTwhcol131Auto(PALLETNEW, PALLET, QTYA);
+        }
     }
 }
