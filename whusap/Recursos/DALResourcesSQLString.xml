@@ -3478,6 +3478,36 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           /*CAMPOS EXCLUIDOS DEL ENVIO DE INFORMAION(NO PUEDEN SER NULOS )*/'0',sysdate+5/24,' ',sysdate+5/24,' ',sysdate+5/24,' ','0','0',' ',sysdate,'[:T$FIRE]',' ',' ',0,'[:T$PSNO]','[:T$ALLO]')
         </stringSQL>
       </operationName>
+      <operationName name="tticol042Auto">
+        <stringSQL>
+          INSERT INTO {0}.tticol042{1} (T$PDNO,T$SQNB,T$PROC,T$LOGN,T$DATE,T$MITM,T$PONO,T$QTDL,T$CUNI,T$LOG1,T$DATC,T$QTD1,T$PRO1,T$LOG2,T$DATU,T$QTD2,T$PRO2,T$LOCA,T$NORP,T$DLRP,T$DELE,T$LOGD,T$DATD,T$REFCNTD,T$REFCNTU)
+          SELECT T$PDNO,'[:SQNBNEW]'as T$SQNB,T$PROC,T$LOGN,T$DATE,T$MITM,T$PONO,T$QTDL,T$CUNI,T$LOG1,T$DATC,T$QTD1,T$PRO1,T$LOG2,T$DATU,T$QTD2,T$PRO2,T$LOCA,T$NORP,T$DLRP,T$DELE,T$LOGD,T$DATD,T$REFCNTD,T$REFCNTU FROM {0}.tticol042{1} WHERE TRIM(T$SQNB) = TRIM('[:SQNB]')
+        </stringSQL>
+      </operationName>
+      <operationName name="tticol022Auto">
+        <stringSQL>
+          INSERT INTO {0}.tticol022{1} (T$PDNO,T$SQNB,T$PROC,T$LOGN,T$DATE,T$MITM,T$PONO,T$QTDL,T$CUNI,T$LOG1,T$DATC,T$QTD1,T$PRO1,T$LOG2,T$DATU,T$QTD2,T$PRO2,T$LOCA,T$NORP,T$DLRP,T$DELE,T$LOGD,T$DATD,T$REFCNTD,T$REFCNTU)
+          SELECT T$PDNO,'[:SQNBNEW]'as T$SQNB,T$PROC,T$LOGN,T$DATE,T$MITM,T$PONO,T$QTDL,T$CUNI,T$LOG1,T$DATC,T$QTD1,T$PRO1,T$LOG2,T$DATU,T$QTD2,T$PRO2,T$LOCA,T$NORP,T$DLRP,T$DELE,T$LOGD,T$DATD,T$REFCNTD,T$REFCNTU FROM {0}.tticol022{1} WHERE TRIM(T$SQNB) = TRIM('[:SQNB]')
+        </stringSQL>
+      </operationName>
+      <operationName name="tticol242Auto">
+        <stringSQL>
+          INSERT INTO {0}.tticol242{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLO)
+          SELECT T$PDNO,'[:SQNBNEW]' AS T$SQNB,T$DRPT,T$URPT,'[:QTYC]' AS T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLOU FROM {0}.tticol242{1} WHERE TRIM(T$SQNB) = TRIM('[:SQNB]')
+        </stringSQL>
+      </operationName>
+      <operationName name="tticol222Auto">
+        <stringSQL>
+          INSERT INTO {0}.tticol222{1} (T$PDNO,T$SQNB,T$DRPT,T$URPT,T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLO)
+          SELECT T$PDNO,'[:SQNBNEW]' AS T$SQNB,T$DRPT,T$URPT,'[:QTYC]' AS T$ACQT,T$CWAF,T$CWAT,T$ACLO,T$REFCNTD,T$REFCNTU,T$ALLOU FROM {0}.tticol222{1} WHERE TRIM(T$SQNB) = TRIM('[:SQNB]')
+        </stringSQL>
+      </operationName>
+      <operationName name="InserTwhcol131Auto">
+        <stringSQL>
+          insert into {0}.twhcol131{1} (T$OORG, T$ORNO, T$ITEM, T$PAID, T$PONO, T$SEQN, T$CLOT, T$CWAR, T$QTYS, T$UNIT, T$QTYC, T$UNIC, T$DATE, T$CONF, T$RCNO, T$DATR, T$LOCA, T$DATL, T$PRNT, T$DATP, T$NPRT, T$LOGN, T$LOGT, T$STAT,T$PICK,T$DATK,T$LOGP,T$DAFR,T$MES1,T$DAFL,T$MES2,T$REFCNTD,T$REFCNTU,T$CWAA,T$DRPT,T$FIRE,T$LOAA,T$LOGR,T$QTYA,T$PSNO,T$ALLO)
+          SELECT T$OORG, T$ORNO, T$ITEM, '[:SQNBNEW]' AS T$PAID, T$PONO, T$SEQN, T$CLOT, T$CWAR, '[:QTYC]' AS T$QTYS, T$UNIT, '[:QTYC]'AS T$QTYC, T$UNIC, T$DATE, T$CONF, T$RCNO, T$DATR, T$LOCA, T$DATL, T$PRNT, T$DATP, T$NPRT, T$LOGN, T$LOGT, T$STAT,T$PICK,T$DATK,T$LOGP,T$DAFR,T$MES1,T$DAFL,T$MES2,T$REFCNTD,T$REFCNTU,T$CWAA,T$DRPT,T$FIRE,T$LOAA,T$LOGR,T$QTYA,T$PSNO,T$ALLO FROM {0}.twhcol131{1} WHERE TRIM(T$PAID) = TRIM('[:SQNB]')
+        </stringSQL>
+      </operationName>
       <operationName name="InserTwhcol131">
         <stringSQL>
           insert into {0}.twhcol131{1}

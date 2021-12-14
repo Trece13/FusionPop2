@@ -1841,6 +1841,127 @@ namespace whusa.Interfases
             return retorno;
         }
 
+
+        public bool tticol042Auto(string PALLETNEW, string PALLET)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":SQNBNEW", PALLETNEW);
+            paramList.Add(":SQNB", PALLET);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "tticol042Auto", "tticol042Auto", "tticol042Auto");
+
+            }
+
+            return retorno;
+        }
+
+        public bool tticol022Auto(string PALLETNEW, string PALLET)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":SQNBNEW", PALLETNEW);
+            paramList.Add(":SQNB", PALLET);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "tticol022Auto", "tticol022Auto", "tticol022Auto");
+
+            }
+
+            return retorno;
+        }
+
+        public bool tticol242Auto(string PALLETNEW, string PALLET, string QTYA)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":SQNBNEW", PALLETNEW);
+            paramList.Add(":SQNB", PALLET);
+            paramList.Add(":QTYC", QTYA);
+            
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "tticol242Auto", "tticol242Auto", "tticol242Auto");
+
+            }
+
+            return retorno;
+        }
+
+        public bool tticol222Auto(string PALLETNEW, string PALLET, string QTYA)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":SQNBNEW", PALLETNEW);
+            paramList.Add(":SQNB", PALLET);
+            paramList.Add(":QTYC", QTYA);
+
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "tticol222Auto", "tticol222Auto", "tticol222Auto");
+
+            }
+
+            return retorno;
+        }
+
+        public bool InserTwhcol131Auto(string PALLETNEW, string PALLET, string QTYA)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":SQNBNEW", PALLETNEW);
+            paramList.Add(":SQNB", PALLET);
+            paramList.Add(":QTYC", QTYA);
+
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "InserTwhcol131Auto", "InserTwhcol131Auto", "InserTwhcol131Auto");
+
+            }
+
+            return retorno;
+        }
     }
 
 

@@ -122,8 +122,8 @@ namespace whusap.WebPages.WorkOrders
             MyObj119.cwar = WARE;
             MyObj119.paid = PAID;
             MyObj119.clot = CLOT;
-            MyObj119.dati = DATEI;
-            MyObj119.datf = DATEF;
+            MyObj119.dati = Convert.ToDateTime(DATEI).ToString("MM/dd/yyyy");
+            MyObj119.datf = Convert.ToDateTime(DATEF).ToString("MM/dd/yyyy"); ;
 
             DataTable DT119 = ticol119DAL.SelectRegister(MyObj119, ref strError);
             if (DT119.Rows.Count > 0)
