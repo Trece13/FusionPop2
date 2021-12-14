@@ -1259,7 +1259,7 @@ namespace whusap.WebPages.Migration
                                 var actualizapallet118 = _idaltticol022.ActualizacionPalletId118(PAIDACT, NewP, strError);
                             }
                             //JC 060921 Ajustar datos par disponer regrind
-                            if (lbltable.Value.Trim() == "ticol042")
+                            else if (lbltable.Value.Trim() == "ticol042")
                             {
                                 _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
                                 var PAIDACT = txtPalletId.Text.Trim();
@@ -1586,7 +1586,7 @@ namespace whusap.WebPages.Migration
             }
             else
             {
-                sequence = SQNB + "-" + complement + "000";
+                sequence = SQNB + "-" + complement + "00";
             }
 
             return sequence;
