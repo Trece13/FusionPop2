@@ -170,6 +170,7 @@ namespace whusap.WebPages.WorkOrders
                 Obj_tticol125.qtya = DtTticol125.Rows[0]["T$QTYC"].ToString();
                 Obj_tticol125.stat = DtTticol125.Rows[0]["STAT"].ToString();
                 Obj_tticol125.kltc = DtTticol125.Rows[0]["KLTC"].ToString();
+                HttpContext.Current.Session["ITEM"] = DtTticol125.Rows[0]["T$ITEM"].ToString();
                 HttpContext.Current.Session["TABLA"] = DtTticol125.Rows[0]["TBL"].ToString();
                 HttpContext.Current.Session["PAID"] = PAID;
                 HttpContext.Current.Session["CLOT"] = Obj_tticol125.clot;
@@ -177,7 +178,9 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["LOCA"] = Obj_tticol125.pdno;
                 HttpContext.Current.Session["QTYA"] = Obj_tticol125.qtya;
                 HttpContext.Current.Session["STAT"] = Obj_tticol125.stat;
+                HttpContext.Current.Session["MCNO"] = DtTticol125.Rows[0]["T$MCNO"].ToString();
                 HttpContext.Current.Session["User"].ToString();
+                
                 Obj_tticol125.statsTab = LstStatusTab.FindAll(e => DtTticol125.Rows[0]["TBL"].ToString().Contains(e.Table));
                 
                 //JC 121021 Generar la tabla de estados de acuerdo a la tabla
@@ -218,14 +221,14 @@ namespace whusap.WebPages.WorkOrders
             data137.Lot = LOT.ToUpper();
 
             string ORNO = PALLET.Trim().Substring(0, PALLET.Trim().IndexOf("-"));
-            DataTable DTPalletContinue = twhcol130DAL.PaidMayorwhcol130((PALLET.Trim().Substring(0, PALLET.Trim().IndexOf("-")))+"-P");
+            DataTable DTPalletContinue = twhcol130DAL.maximaSecuenciaUnion((PALLET.Trim().Substring(0, PALLET.Trim().IndexOf("-"))) + "-P");
             int consecutivoPalletID = 0;
             string SecuenciaPallet = "P001";
                 if (DTPalletContinue.Rows.Count > 0)
                 {
                     foreach (DataRow item in DTPalletContinue.Rows)
                     {
-                        consecutivoPalletID = Convert.ToInt32(item["T$PAID"].ToString().Trim().Substring(item["T$PAID"].ToString().Trim().IndexOf(("P"))+1))+1;
+                        consecutivoPalletID = Convert.ToInt32(item["SQNB"].ToString().Trim().Substring(item["SQNB"].ToString().Trim().IndexOf(("P")) + 1)) + 1;
                         if (consecutivoPalletID.ToString().Length == 1)
                         {
                             SecuenciaPallet = "P00" + consecutivoPalletID;
@@ -243,6 +246,7 @@ namespace whusap.WebPages.WorkOrders
 
                 if (TABLA == "ticol022")
                 {
+                    HttpContext.Current.Session["Table"] = "ticol022";
                     var qt = Convert.ToDecimal(HttpContext.Current.Session["QTYA"].ToString()) - Convert.ToDecimal(QTYA);
                     var validateSaveTicol222 = ITticol137.Actualizarttdcol222Cant(ref PALLET, ref qt);
                     var validateSaveTicol222N = ITticol137.Actualizarttdcol222(data137);
@@ -250,9 +254,12 @@ namespace whusap.WebPages.WorkOrders
                     var validateSaveTicol022 = ITticol137.Actualizarttdcol022Status(data137);
                     bool Auto022 = twhcol130DAL.tticol022Auto(ORNO + "-" + SecuenciaPallet, PALLET);
                     bool Auto222 = twhcol130DAL.tticol222Auto(ORNO + "-" + SecuenciaPallet, PALLET, QTYA);
+
+
                 }
                 if (TABLA == "ticol042")
                 {
+                    HttpContext.Current.Session["Table"] = "ticol042";
                     var qt = Convert.ToDecimal(HttpContext.Current.Session["QTYA"].ToString()) - Convert.ToDecimal(QTYA);
                     var validateSaveTicol242 = ITticol137.Actualizarttdcol242Cant(ref PALLET, ref qt);
                     var validateSaveTicol242N = ITticol137.Actualizarttdcol242(data137);
@@ -264,12 +271,28 @@ namespace whusap.WebPages.WorkOrders
                 }
                 if (TABLA == "whcol131")
                 {
+                    HttpContext.Current.Session["Table"] = "whcol131";
                     var qt = Convert.ToDecimal(HttpContext.Current.Session["QTYA"].ToString()) - Convert.ToDecimal(QTYA);
                     var STATUS = Convert.ToInt32(STAT.Trim());
                     var validateSaveWhcol131 = ITticol137.Actualizartwhcol131CantStatus(ref PALLET, ref STATUS, ref qt,CWAR,LOCA,LOT);
                     bool Auto131 = twhcol130DAL.InserTwhcol131Auto(ORNO + "-" + SecuenciaPallet, PALLET, QTYA);
                 }
-            //}
+
+                HttpContext.Current.Session["codeMaterial"] = HttpContext.Current.Session["ITEM"].ToString().Trim();
+                HttpContext.Current.Session["codePaid"] = PALLET.Trim();
+                HttpContext.Current.Session["codePaid2"] = (ORNO + "-" + SecuenciaPallet).Trim();
+                HttpContext.Current.Session["Lot"] = LOT;
+                HttpContext.Current.Session["Quantity"] = Convert.ToDecimal(HttpContext.Current.Session["QTYA"].ToString()) - Convert.ToDecimal(QTYA);
+                HttpContext.Current.Session["Quantity2"] = Convert.ToDecimal(QTYA);
+                HttpContext.Current.Session["Date"] =  DateTime.Now.ToString("MM/dd/yyyy");
+                HttpContext.Current.Session["Pallet"] = PALLET.Trim();
+                HttpContext.Current.Session["Machine"] = HttpContext.Current.Session["MCNO"];
+                HttpContext.Current.Session["Operator"] = HttpContext.Current.Session["user"].ToString();
+                HttpContext.Current.Session["Reprint"] = "no";
+                HttpContext.Current.Session["AutoPrint"] = "yes";
+                HttpContext.Current.Session["PickLabel"] = "yes";
+                HttpContext.Current.Session["Pick"] = "xxxxxxxx";
+                HttpContext.Current.Session["PartialLabel"] = null;
         }
 
         protected static string mensajes(string tipoMensaje)

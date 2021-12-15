@@ -96,7 +96,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
           LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
           LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
-          WHERE T$paid = '[p1]'
+          WHERE trim(T$paid) = '[p1]'
           AND ROWNUM = 1
           ORDER BY T$paid ASC
         </stringSQL>

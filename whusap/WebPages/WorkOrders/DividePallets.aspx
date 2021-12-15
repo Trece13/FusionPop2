@@ -110,7 +110,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="container">
-                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 450px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+                <iframe id="myLabelFrame" scrolling="no" title="" class="col-12" style="height: 69px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -283,52 +283,17 @@
             $('#txLocation').val("");
             $('#txQuantity').val("");
 
-            //            MyObject = JSON.parse(r.d);
+            if (true) {
+                //    printDiv("MyEtiqueta");
+                myLabelFrame = document.getElementById('myLabelFrame');
+                if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
+                }
+                else {
+                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
 
-            //            if (MyObject.error == false) {
-            //                //Etiqueta Sin orden de compra
-
-            //                $('#Contenido_CBPalletNO').attr("src", MyObject.PAID_URL);
-            //                $('#Contenido_lblItemID').html(MyObject.ITEM);
-            //                $('#Contenido_lblItemDesc').html(MyObject.DSCA);
-            //                $('#Contenido_LblQuantity').html(MyObject.QTYC);
-            //                $('#Contenido_LblUnit').html(MyObject.UNIC);
-            //                $('#Contenido_LblLotId').html(MyObject.CLOT);
-
-            //                $('#Contenido_CBPurchaseOrder').attr("src", MyObject.ORNO_URL);
-            //                $('#Contenido_CBItem').attr("src", MyObject.ITEM_URL);
-            //                $("#Contenido_CBLot").attr("src", MyObject.CLOT_URL);
-            //                if (MyObject.CLOT_URL == "") {
-            //                    $('#Contenido_CBLot').hide();
-            //                }
-            //                else {
-            //                    $('#Contenido_CBLot').show();
-            //                }
-            //                $('#Contenido_CBQuantity').attr("src", MyObject.QTYC_URL);
-            //                $('#Contenido_CBUnit').attr("src", MyObject.UNIC_URL);
-
-            //                $('#Contenido_LblPurchaseOC').html(MyObject.ORNO);
-            //                $('#Contenido_LblItemOC').html(MyObject.ITEM);
-            //                $('#Contenido_LblLotOC').html(MyObject.CLOT);
-            //                $('#LblUnitOC').html(MyObject.UNIT);
-            //                $('#Contenido_LblQuantityOC').html(MyObject.QTYC);
-
-            //                $('#txItem').val("");
-            //                $('#txPaid').val("");
-            //                $('#txWarehouse').val("");
-            //                $('#txLocation').val("");
-            //                $('#txQuantity').val("");
-            //                $('#lblSalesOrder').html("");
-            //                $('#lblWarehouse').html("");
-            //                $('#lblQuantity').html("");
-            //                $('#lblError').html("");
-            //                $('#Contenido_Button1').prop("disabled", true);
-
-            //            }
-            //            else {
-            //                console.log("El registro no se realizo");
-            //                alert(MyObject.errorMsg);
-            //            }
+                }
+            }
 
         }
 
