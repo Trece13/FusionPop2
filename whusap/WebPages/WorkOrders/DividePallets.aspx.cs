@@ -228,7 +228,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     foreach (DataRow item in DTPalletContinue.Rows)
                     {
-                        consecutivoPalletID = Convert.ToInt32(item["SQNB"].ToString().Trim().Substring(item["SQNB"].ToString().Trim().IndexOf(("P")) + 1)) + 1;
+                        consecutivoPalletID = Convert.ToInt32(item["SQNB"].ToString().Trim().Substring(item["SQNB"].ToString().Trim().LastIndexOf(("P")) + 1)) + 1;
                         if (consecutivoPalletID.ToString().Length == 1)
                         {
                             SecuenciaPallet = "P00" + consecutivoPalletID;
@@ -282,8 +282,8 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["codePaid"] = PALLET.Trim();
                 HttpContext.Current.Session["codePaid2"] = (ORNO + "-" + SecuenciaPallet).Trim();
                 HttpContext.Current.Session["Lot"] = LOT;
-                HttpContext.Current.Session["Quantity"] = Convert.ToDecimal(HttpContext.Current.Session["QTYA"].ToString()) - Convert.ToDecimal(QTYA);
-                HttpContext.Current.Session["Quantity2"] = Convert.ToDecimal(QTYA);
+                HttpContext.Current.Session["Quantity"] = Convert.ToDecimal(QTYA);
+                HttpContext.Current.Session["Quantity2"] = Convert.ToDecimal(HttpContext.Current.Session["QTYA"].ToString()) - Convert.ToDecimal(QTYA);
                 HttpContext.Current.Session["Date"] =  DateTime.Now.ToString("MM/dd/yyyy");
                 HttpContext.Current.Session["Pallet"] = PALLET.Trim();
                 HttpContext.Current.Session["Machine"] = HttpContext.Current.Session["MCNO"];
