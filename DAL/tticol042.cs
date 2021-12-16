@@ -358,6 +358,32 @@ namespace whusa.DAL
             }
         }
 
+        //JC 1512221 Buscar el maximo consecutivo en todas las tablas
+        public DataTable listaCantidadRegrind_Disposicion(ref Ent_tticol042 ParametrosIn, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PDNO", ParametrosIn.pdno);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "-1"; }
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+                strError = "Error when querying data [tticol042-ticol022-whcol131]. Try again or contact your administrator";
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+                throw ex;
+            }
+        }
+
         public DataTable listaRegistroXSQNB(ref Ent_tticol042 Parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

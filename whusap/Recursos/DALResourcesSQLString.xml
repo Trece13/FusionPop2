@@ -359,6 +359,25 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$PDNO = '[:T$PDNO]'
         </stringSQL>
       </operationName>
+      <operationName name="listaCantidadRegrind_Disposicion">
+        <stringSQL>
+          SELECT  MAX(CANT) CANT
+          FROM
+          (
+          SELECT LTRIM((LPAD((COUNT(T$PDNO) + 1),3,'0')), '0') CANT
+          FROM {2}
+          WHERE T$PDNO = '[:T$PDNO]'
+          UNION
+          SELECT LTRIM((LPAD((COUNT(T$PDNO) + 1),3,'0')), '0') CANT
+          FROM {0}.tticol022{1}
+          WHERE T$PDNO = '[:T$PDNO]'
+          UNION
+          SELECT LTRIM((LPAD((COUNT(T$ORNO) + 1),3,'0')), '0') CANT
+          FROM {0}.twhcol131{1}
+          WHERE T$ORNO = '[:T$PDNO]'
+          )
+        </stringSQL>
+      </operationName>
       <operationName name="listaRegistroXSQNB">
         <stringSQL>
           SELECT T$PDNO, T$SQNB, T$PROC, T$LOGN, T$DATE, T$MITM, T$PONO, T$QTDL, T$CUNI, T$LOG1, T$DATC, T$QTD1, T$PRO1, T$LOG2, T$DATU, T$QTD2, T$PRO2, T$LOCA, T$NORP, T$DLRP, T$DELE, T$LOGD, T$DATD, T$REFCNTD, T$REFCNTU
@@ -6662,13 +6681,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol119">
       <operationName name="SelectRegister">
         <stringSQL>
-          select *
+          select  t$item, t$cwar, t$clot, t$qtyr, t$cdis, trim(t$obse) t$obse,  t$logr, t$datr-5/24 t$datr,
+          case
+          when t$disp = 2 then 'Return to Vendor'
+          when t$disp = 3 then 'Return to Stock'
+          when t$disp = 4 then 'Regrind'
+          when t$disp = 5 then 'Recycle'
+          end t$disp,
+          t$stoc, trim(t$ritm) t$ritm, t$paid, t$plld, t$mess, t$proc, t$suno, t$refcntd, t$refcntu
           from {0}.tticol119{1}
           where trim(T$PLLD) = nvl(trim('[:T$PAID]'), trim(T$PLLD))
           and  trim(T$CWAR) = nvl(trim('[:T$CWAR]'), trim(T$CWAR))
           and  trim(T$ITEM) = nvl(trim('[:T$ITEM]'), trim(T$ITEM))
-          and  trim(T$CLOT) = nvl(trim('[:T$CLOT]'), trim(T$CLOT))
-          and  T$DATR &gt;= nvl('[:DATEI]','01-JAN-70') and T$DATR &lt;= nvl('[:DATEF]','31-DEC-2050')
+          and  T$CLOT = nvl('[:T$CLOT]', T$CLOT)
+          and  to_char(T$DATR, 'MM/dd/yyyy') &gt;= nvl('[:DATEI]','01/01/1970') and to_char(T$DATR, 'MM/dd/yyyy') &lt;= nvl('[:DATEF]','12/31/2050')
           --select * from baan.tticol119140 where trim(T$PAID) = trim('[:T$PAID]') and  trim(T$CWAR) = trim('[:T$CWAR]') and  trim(T$ITEM) = trim('[:T$ITEM]') and  trim(T$CLOT) = nvl(trim('[:T$CLOT]',T$CLOT)) and T$DATR &gt;= '[:DATEI]' and T$DATR &lt;= '[:DATEF]'
         </stringSQL>
       </operationName>

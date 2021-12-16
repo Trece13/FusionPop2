@@ -759,7 +759,7 @@
                         '</div>' +
                         '<br />' +
                         '<div class="col-10 borderTop" id="divBarcode">' +
-                        '<img src="' + CBPalletNOd + '" id="codePaid" alt="" style="margin-left:20px; width:500px"/>' +
+                        '<img src="' + CBPalletNOd + '" id="codePaid" alt="" style="margin-left:50px; width:680px"/>' +
                         '</div>' +
                         '<div>' +
                         '<table class="table mw-100">' +

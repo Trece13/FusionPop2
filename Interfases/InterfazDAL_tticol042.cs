@@ -157,6 +157,21 @@ namespace whusa.Interfases
             }
         }
 
+        //JC 15122021 Buscar el maximo consecutivo en todas las tablas
+        public DataTable listaCantidadRegrind_Disposicion(ref Ent_tticol042 ParametrosIn, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.listaCantidadRegrind_Disposicion(ref ParametrosIn, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         public DataTable listaRegistroXSQNB(ref Ent_tticol042 Parametros, ref string strError)
         {
             DataTable retorno;

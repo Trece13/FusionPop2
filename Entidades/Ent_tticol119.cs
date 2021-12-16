@@ -46,7 +46,7 @@ namespace whusa.Entidades
 
         [DataMember(Order = 8)]
         [Column(Name = "DISP")]
-        public int disp { get; set; }
+        public string disp { get; set; }
 
         [DataMember(Order = 9)]
         [Column(Name = "STOC")]
@@ -94,7 +94,7 @@ namespace whusa.Entidades
             obse = string.Empty;
             logr = string.Empty;
             datr = string.Empty;
-            disp = 0;
+            disp = string.Empty;
             stoc = string.Empty;
             ritm = string.Empty;
             proc = 0;
@@ -108,7 +108,7 @@ namespace whusa.Entidades
 
 
         public Ent_tticol119(string pitem, string pcwar, string pclot, double pqtyr, string pcdis, string pobse, string plogr, string pdatr,
-                            int pdisp, string pstoc, string pritm, int pproc, string pmess, string psuno, int prefcntd, int prefcntu, string ppaid,
+                            string pdisp, string pstoc, string pritm, int pproc, string pmess, string psuno, int prefcntd, int prefcntu, string ppaid,
                             string pplld)
         {
             this.item = pitem;

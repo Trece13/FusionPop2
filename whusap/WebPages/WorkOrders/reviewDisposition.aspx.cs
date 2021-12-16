@@ -123,7 +123,7 @@ namespace whusap.WebPages.WorkOrders
             MyObj119.paid = PAID;
             MyObj119.clot = CLOT;
             MyObj119.dati = Convert.ToDateTime(DATEI).ToString("MM/dd/yyyy");
-            MyObj119.datf = Convert.ToDateTime(DATEF).ToString("MM/dd/yyyy"); ;
+            MyObj119.datf = Convert.ToDateTime(DATEF).ToString("MM/dd/yyyy");
 
             DataTable DT119 = ticol119DAL.SelectRegister(MyObj119, ref strError);
             if (DT119.Rows.Count > 0)
@@ -140,7 +140,7 @@ namespace whusap.WebPages.WorkOrders
                     MyObj119lst.obse = row["T$OBSE"].ToString();
                     MyObj119lst.logr = row["T$LOGR"].ToString();
                     MyObj119lst.datr = row["T$DATR"].ToString();
-                    MyObj119lst.disp = Convert.ToInt32(row["T$DISP"].ToString());
+                    MyObj119lst.disp = row["T$DISP"].ToString();
                     MyObj119lst.stoc = row["T$STOC"].ToString();
                     MyObj119lst.ritm = row["T$RITM"].ToString();
                     MyObj119lst.proc = Convert.ToInt32(row["T$PROC"].ToString());

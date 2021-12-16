@@ -460,6 +460,11 @@ namespace whusap.WebPages.Migration
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            Session["TagId"] = "";
+            Session["newPallet"] = "";
+            Session["ToReturnQuantity"] = "";
+            Session["newWarehouse"] = "";
+            Session["MyRegrind"] = "";
             double Stock = Convert.ToDouble(Session["qty"].ToString());
             var validUpdate = 0;
             //JC 100921 Ajutar para que actualice bodega cuando es retorno a stock de pallet completo
@@ -555,7 +560,9 @@ namespace whusap.WebPages.Migration
                 }
 
                 obj042.pdno = txtPalletId.Text.Substring(0, 9);
-                cantidadRegrind = idal042.listaCantidadRegrind(ref obj042, ref strError);
+                //JC 15122021 Cambiar la busqueda del maximo consecutivo en todas las tablas
+                //cantidadRegrind = idal042.listaCantidadRegrind(ref obj042, ref strError);
+                cantidadRegrind = idal042.listaCantidadRegrind_Disposicion(ref obj042, ref strError);
 
                 if (!toreturn.Equals(string.Empty))
                 {
@@ -617,7 +624,14 @@ namespace whusap.WebPages.Migration
                     //insert a new record on tables ticol042 and ticol242 and whcol020.
                     //JC 090921 Generar estas etiquetas de regrind con el consecutivo D.
                     //strTagId = txtPalletId.Text.Substring(0, 9) + "-R" + cantidadRegrind.Rows[0]["CANT"].ToString();
-                    strTagId = txtPalletId.Text.Substring(0, 9) + "-D" + cantidadRegrind.Rows[0]["CANT"].ToString();
+                    //JC 15122021 Agregar cero a la secuencia cuando sea menor que 10.
+                    string seq = string.Empty;
+                    if (Convert.ToDecimal(cantidadRegrind.Rows[0]["CANT"]) < 10)
+                    {
+                        seq = '0' + cantidadRegrind.Rows[0]["CANT"].ToString();
+                    }
+                    //strTagId = txtPalletId.Text.Substring(0, 9) + "-D" + cantidadRegrind.Rows[0]["CANT"].ToString();
+                    strTagId = txtPalletId.Text.Substring(0, 9) + "-D" + seq;
                     Session["TagId"] = strTagId;
                     strError = string.Empty;
                     obj042.sqnb = strTagId;
@@ -832,7 +846,7 @@ namespace whusap.WebPages.Migration
                         _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
                     }
                     //JC 060921 Ajustar datos par disponer regrind
-                    if (lbltable.Value.Trim() == "ticol042")
+                    else if (lbltable.Value.Trim() == "ticol042")
                     {
                         _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
                     }
@@ -844,7 +858,10 @@ namespace whusap.WebPages.Migration
                     bool retornoRegrindTticon242 = idal042.insertarRegistroTticon242(ref parameterCollectionRegrind, ref strError);
                     //JC 020921 No es necesario hacer esta transferencia
                     //bool TransferenciasI = Transfers.InsertarTransferencia(objWhcol020);
-
+                    //JC 151221 Actualizar pallet nuevo en tabla ticol118
+                    var PAIDACT_Rg = txtPalletId.Text.Trim();
+                    var NewP_Rg = Convert.ToString(Session["TagId"]);
+                    var actualizapallet118_Rg = _idaltticol022.ActualizacionPalletId118(PAIDACT_Rg, NewP_Rg, strError);
                 }
 
                 //JC 240821 Actualizar la cantidad cuando la disposicion es recycle
