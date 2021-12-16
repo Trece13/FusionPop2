@@ -96,6 +96,12 @@ namespace whusap.WebPages.Labels.RedesingLabels
                         myLabel2.Visible = false;
                     }
                 }
+                else
+                {
+                    MyEtiquetaDrop.Visible = false;
+                    myLabel.Visible = true;
+                    myLabel2.Visible = true;
+                }
 
                 printButton.Visible = true;
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "printDiv", "javascript:printDiv('printSpace');", true);
