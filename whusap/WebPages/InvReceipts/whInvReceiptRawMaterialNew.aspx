@@ -97,8 +97,8 @@
                                     'text-align: center;' +
                                     '}' +
                                     '#myLabel {' +
-                                    'width: 6in;' +
-                                    'height: 4in;' +
+                                    'width: 5.5in;' +
+                                    'height: 3.5in;' +
                                     'border-radius: 12px;' +
                                     '}' +
                                     '.alingRight {' +
@@ -329,8 +329,8 @@
         }
 
         #myLabel {
-            width: 6in;
-            height: 4in;
+            width: 5.5in;
+            height: 3.5in;
             padding: 20px;
             border: 1px solid black;
             border-radius: 12px;
