@@ -2906,9 +2906,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="getPicks082">
         <stringSQL>
           select DISTINCT PICK from(
-          select ticol082.T$PICK AS PICK  from baan.tticol082140 ticol082 WHERE ticol082.T$STAT = '4'
+          select ticol082.T$PICK AS PICK  from baan.tticol082140 ticol082 WHERE ticol082.T$STAT = '4' and t$time >= sysdate - 3
           union
-          select ticol083.T$PICK AS PICK  from baan.tticol083140 ticol083 WHERE ticol083.T$STAT = '4') globalQ ORDER BY PICK ASC
+          select ticol083.T$PICK AS PICK  from baan.tticol083140 ticol083 WHERE ticol083.T$STAT = '4' and t$time >= sysdate - 3) globalQ ORDER BY PICK ASC
         </stringSQL>
       </operationName>
       <operationName name="getPaids082">
@@ -3104,17 +3104,17 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="VerificarPalletIDz">
         <stringSQL>
           SELECT distinct TBL,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA, ORNO,STAT,CWAT,ACLO,mcs003.T$DSCA DESCAW,whwmd200.T$sloc SLOC, CLOT, KLTC FROM (
-          --select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
-          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col022.T$QTDL AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT, ' ' AS CWAT ,col022.T$LOCA AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
-          --INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
-          --LEFT JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
+          select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col222.T$ACQT AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT,col222.T$CWAT AS CWAT ,col222.T$ACLO AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
+          --select 'ticol022' AS  TBL, col022.T$SQNB AS PAID,col022.T$QTDL AS QTYT,col022.T$CUNI AS UNIT, col022.T$MITM AS ITEM,col022.T$PDNO AS ORNO, col022.T$DELE AS STAT, ' ' AS CWAT ,col022.T$LOCA AS ACLO, substr(col022.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol022{1} col022
+          INNER JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
+          LEFT JOIN {0}.tticol222{1} col222 on col222.t$sqnb = col022.t$sqnb
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col022.t$mitm
           --where col022.T$DELE = 7
           UNION
-          --select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
-          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col042.T$QTDL AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,' ',col042.T$LOCA, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
-          --INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
-          --LEFT JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
+          select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col242.T$ACQT AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,col242.T$CWAT,col242.T$ACLO, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
+          --select 'ticol042' AS  TBL, col042.T$SQNB AS PAID,col042.T$QTDL AS QTYT,col042.T$CUNI AS UNIT, col042.T$MITM AS ITEM,col042.T$PDNO AS ORNO, col042.T$DELE AS STAT,' ',col042.T$LOCA, substr(col042.T$SQNB,1,9) AS CLOT, ibd001.T$KLTC AS KLTC from {0}.tticol042{1} col042
+          INNER JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
+          LEFT JOIN {0}.tticol242{1} col242 on col242.t$sqnb = col042.t$sqnb
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col042.t$mitm
           --where col042.T$DELE = 7
           UNION
@@ -3125,12 +3125,12 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIC AS UNIT, col131.T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA, col131.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol131{1} col131
           INNER JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col131.t$item
           --where col131.T$STAT = 3
-          UNION
-          select 'whcol016' AS  TBL,T$LABL AS PAID,T$QTYR AS QTYT,T$CUNI AS UNIT, col016.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,col016.T$CWAR,' ', col016.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol016{1} col016
-          LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col016.t$item
-          UNION
-          select 'whcol018' AS  TBL,T$TGID AS PAID,T$QTDL AS QTYT,col018.T$CUNI AS UNIT, col018.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,' ',' ', col018.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol018{1} col018
-          LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col018.t$item
+          --UNION
+          --select 'whcol016' AS  TBL,T$LABL AS PAID,T$QTYR AS QTYT,T$CUNI AS UNIT, col016.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,col016.T$CWAR,' ', col016.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol016{1} col016
+          --LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col016.t$item
+          --UNION
+          --select 'whcol018' AS  TBL,T$TGID AS PAID,T$QTDL AS QTYT,col018.T$CUNI AS UNIT, col018.T$ITEM AS ITEM, ' ' AS ORNO, 0 AS STAT,' ',' ', col018.T$CLOT AS CLOT, ibd001.T$KLTC AS KLTC from {0}.twhcol018{1} col018
+          --LEFT JOIN {0}.ttcibd001{1} ibd001 on ibd001.t$item = col018.t$item
           ) ConGlobal
           LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
@@ -3240,7 +3240,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           SELECT
           WHCOL131.T$OORG OORG, WHCOL131.T$ORNO ORNO, WHCOL131.T$ITEM ITEM, TCIBD001.T$DSCA DSCA, WHCOL131.T$PAID PAID, WHCOL131.T$PONO PONO, WHCOL131.T$SEQN SEQN,
-          WHCOL131.T$CLOT CLOT, WHCOL131.T$CWAR CWAR, WHCOL131.T$QTYS QTYS, WHCOL131.T$UNIC UNIT, CASE WHEN WHCOL131.T$QTYC = WHCOL131.T$QTYA THEN WHCOL131.T$QTYC ELSE WHCOL131.T$QTYA END QTYC, WHCOL131.T$UNIC UNIC,
+          WHCOL131.T$CLOT CLOT, WHCOL131.T$CWAR CWAR, WHCOL131.T$QTYS QTYS, WHCOL131.T$UNIC UNIT,
+          CASE WHEN WHCOL131.T$QTYC = WHCOL131.T$QTYA 
+            THEN CASE WHEN WHCOL131.T$QTYC = 0 THEN WHCOL131.T$QTYA END
+            ELSE CASE WHEN WHCOL131.T$QTYA = 0 THEN WHCOL131.T$QTYC END
+          END QTYC, WHCOL131.T$UNIC UNIC,
           WHCOL131.T$DATE-5/24 T$DATE, WHCOL131.T$CONF CONF, WHCOL131.T$RCNO RCNO, WHCOL131.T$DATR DATR, WHCOL131.T$LOCA LOCA, WHCOL131.T$DATL DATL,
           WHCOL131.T$PICK PICK, WHCOL131.T$DATK DATK, WHCOL131.T$PRNT PRNT, WHCOL131.T$DATP DATP, WHCOL131.T$NPRT NPRT, WHCOL131.T$LOGN LOGN,
           WHCOL131.T$LOGP LOGP, WHCOL131.T$LOGT LOGT, WHCOL131.T$DAFR DAFR, WHCOL131.T$MES1 MES1, WHCOL131.T$DAFL DAFL, WHCOL131.T$MES2 MES2,
@@ -3600,10 +3604,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ListaPurchaseOrders">
         <stringSQL>
+          --LOCAL FORMATO FECHA DD/MM/YYYY  Servidor MM/DD/YYYY
           select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
-          pur401.t$ddtb DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
+          TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
           pur401.t$oltp OLTP, pur401.t$cwar CWAR,inh210.T$STUN STUN, IBD001.T$CUNI CUNI,inh210.t$seqn SEQNR,inh210.T$QSTR QSTR
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001 on ipu001.t$item = pur401.t$item
@@ -3628,10 +3633,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ListaPurchaseOrder">
         <stringSQL>
-          select TO_CHAR(inh210.t$prdt,'DD/MM/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
+          --LOCAL FORMATO FECHA DD/MM/YYYY  Servidor MM/DD/YYYY
+          select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
-          pur401.t$ddtb DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
+          TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
           pur401.t$oltp OLTP, pur401.t$cwar CWAR,inh210.T$STUN STUN, IBD001.T$CUNI CUNI,inh210.t$seqn SEQNR,inh210.T$QSTR QSTR
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001 on ipu001.t$item = pur401.t$item
