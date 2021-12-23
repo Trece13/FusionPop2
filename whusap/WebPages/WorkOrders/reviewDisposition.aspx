@@ -41,10 +41,10 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label-lg" for="txDateI">
                         Date</label>
-                    <div class="col-sm-3">
+                    <div class="col-4">
                         <input type="date" class="form-control form-control-lg" id="txDateI" tabindex="5">
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-4">
                         <input type="date" class="form-control form-control-lg" id="txDateF" tabindex="6">
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                 </div>
                 <br />
                 <div class="form-group row">
-                    <label class="col-sm-10 col-form-label-lg" style="color: red" id="txError"></label>
+                    <label class="col-sm-12 col-form-label-lg" style="color: red" id="txError"></label>
                 </div>
             </div>
         </div>
