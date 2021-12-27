@@ -571,6 +571,35 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public bool UpdateMasive(Ent_tticol022 MyObj022)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.UpdateMasive(MyObj022);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public bool UpdateMasive222(Ent_tticol022 MyObj022)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.UpdateMasive222(MyObj022);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
     }
 
 

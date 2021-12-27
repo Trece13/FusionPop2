@@ -1962,6 +1962,36 @@ namespace whusa.Interfases
 
             return retorno;
         }
+
+        public bool UpdateMasive(Ent_twhcol130 MyObj131)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$OORG", MyObj131.OORG);
+            paramList.Add(":T$ORNO", MyObj131.ORNO);
+            paramList.Add(":T$ITEM", MyObj131.ITEM);
+            paramList.Add(":T$PAID", MyObj131.PAID);
+            paramList.Add(":T$CWAA", MyObj131.CWAA);
+            paramList.Add(":T$LOAA", MyObj131.LOAA);
+            paramList.Add(":T$QTYA", MyObj131.QTYA);
+            paramList.Add(":T$STAT", MyObj131.STAT);
+
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "InserTwhcol131Auto", "InserTwhcol131Auto", "InserTwhcol131Auto");
+
+            }
+
+            return retorno;
+        }
     }
 
 

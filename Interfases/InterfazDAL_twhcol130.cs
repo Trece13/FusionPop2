@@ -545,5 +545,10 @@ namespace whusa.Interfases
         {
             return dal.InserTwhcol131Auto(PALLETNEW, PALLET, QTYA);
         }
+
+        public bool UpdateMasive(Ent_twhcol130 MyObj131)
+        {
+            return dal.UpdateMasive(MyObj131);
+        }
     }
 }

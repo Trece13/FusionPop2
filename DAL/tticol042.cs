@@ -962,6 +962,71 @@ namespace whusa.DAL
                 }
                 return consulta;
             }
+
+            public bool UpdateMasive(Ent_tticol042 MyObj042)
+            {
+                method = MethodBase.GetCurrentMethod();
+                bool retorno = false;
+                string strError = string.Empty;
+                try
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$MITM", MyObj042.mitm);
+                    paramList.Add(":T$DELE", MyObj042.dele);
+                    paramList.Add(":T$SQNB", MyObj042.sqnb.ToUpper());
+
+
+                    strSentencia = recursos.readStatement("tticol042", method.Name, ref owner, ref env, tabla2, paramList);
+
+                    //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+
+                    //return retorno;
+                }
+
+                catch (Exception ex)
+                {
+                    strError = ex.InnerException != null ?
+                        ex.Message + " (" + ex.InnerException + ")" :
+                        ex.Message;
+
+                }
+
+                return retorno;
+            }
+
+            public bool UpdateMasive242(Ent_tticol042 MyObj042)
+            {
+                method = MethodBase.GetCurrentMethod();
+                bool retorno = false;
+                string strError = string.Empty;
+                try
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$CWAT", MyObj042.cwat);
+                    paramList.Add(":T$ACLO", MyObj042.aclo);
+                    paramList.Add(":T$ACQT", MyObj042.acqt);
+                    paramList.Add(":T$SQNB", MyObj042.sqnb.ToUpper());
+
+
+                    strSentencia = recursos.readStatement("tticol242", method.Name, ref owner, ref env, tabla2, paramList);
+
+                    //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+
+                    //return retorno;
+                }
+
+                catch (Exception ex)
+                {
+                    strError = ex.InnerException != null ?
+                        ex.Message + " (" + ex.InnerException + ")" :
+                        ex.Message;
+
+                }
+
+                return retorno;
+            }
     }
 }
 

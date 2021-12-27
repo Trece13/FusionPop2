@@ -194,6 +194,26 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     </Module>
 
     <Module name="tticol042">
+      <operationName name="UpdateMasive">
+        <stringSQL>
+          UPDATE {0}.tticol042{1}
+          set
+          T$PDNO = '[:T$PDNO]',
+          T$MITM ='[:T$MITM]',
+          T$DELE ='[:T$DELE]'
+          WHERE T$SQNB ='[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateMasive242">
+        <stringSQL>
+          UPDATE {0}.tticol242{1}
+          set
+          T$CWAT ='[:T$CWAT]',
+          T$ACLO ='[:T$ACLO]',
+          T$ACQT ='[:T$ACQT]'
+          WHERE T$SQNB ='[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="invLabel_registroImprimir_Param">
         <stringSQL>
           SELECT T$PDNO ORDEN, T$SQNB SECUENCIA, T$MITM ITEM, T$QTDL PESO, T$LOGN USUARIO, (T$DATE-5/24) FECHA
@@ -496,6 +516,26 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
     </Module>
     <Module name="tticol022">
+      <operationName name="UpdateMasive">
+        <stringSQL>
+          UPDATE {0}.tticol022{1}
+          set
+          T$PDNO ='[:T$PDNO]',
+          T$MITM ='[:T$MITM]',
+          T$DELE ='[:T$DELE]'
+          WHERE T$SQNB ='[:T$SQNB]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateMasive222">
+        <stringSQL>
+          UPDATE {0}.tticol222{1}
+          set
+          T$CWAT ='[:T$CWAT]',
+          T$ACLO ='[:T$ACLO]',
+          T$ACQT ='[:T$ACQT]'
+          WHERE T$SQNB ='[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="getMachine">
         <stringSQL>
           SELECT tisfc001.T$PDNO,tisfc010.T$MCNO as MCNO FROM baan.ttisfc001140 tisfc001
@@ -2903,6 +2943,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="UpdateMasive">
+        <stringSQL>
+          update {0}.twhcol131{1}
+          set
+          T$OORG ='[:T$OORG]',
+          T$ORNO ='[:T$ORNO]',
+          T$ITEM ='[:T$ITEM]',
+          T$CWAA ='[:T$CWAA]',
+          T$QTYA ='[:T$QTYA]',
+          T$STAT ='[:T$STAT]'
+          where TRIM(T$PAID) = TRIM('[:T$PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="getPicks082">
         <stringSQL>
           select DISTINCT PICK from(
