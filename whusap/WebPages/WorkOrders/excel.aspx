@@ -23,10 +23,10 @@
                 filter: alpha(opacity=0);
             }
 
-#tableErrors{
-	display:none;
-	margin-bottom:200px;
-}
+        #tableErrors {
+            display: none;
+            margin-bottom: 200px;
+        }
     </style>
     <div class="container">
         <input id="uploadFile" placeholder="File Name here" disabled="disabled" class="col-12 p-0" style="border-radius: 5px; height: 44px" />
@@ -35,9 +35,9 @@
             <span id="titleLoad">Select .cvs</span>
             <input id="file" type="file" class="upload col-12" />
         </div>
-<br>
-<br>
-        <table class="table" id = "tableErrors">
+        <br>
+        <br>
+        <table class="table" id="tableErrors">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -48,8 +48,8 @@
             </tbody>
         </table>
     </div>
-    <script>	
-	dot = "."
+    <script>
+        dot = "."
         document.getElementById("file").onInput = function () {
             document.getElementById("uploadFile").value = this.value;
         };
@@ -88,20 +88,20 @@
             });
             return output;
         }
-function loader(){
-	var strload = "Loading";
-	if(dot=="..."){
-		dot = ".";
-	}
-	else{
-		dot+="."
-	}
-	$('#titleLoad').html( strload+dot)		
-		
-	
-}
+        function loader() {
+            var strload = "Loading";
+            if (dot == "...") {
+                dot = ".";
+            }
+            else {
+                dot += "."
+            }
+            $('#titleLoad').html(strload + dot)
+
+
+        }
         function readFile(evt) {
-	refreshIntervalId = setInterval(loader, 200);
+            refreshIntervalId = setInterval(loader, 200);
             dataSend = '';
             let file = evt.target.files[0];
             let reader = new FileReader();
@@ -110,12 +110,16 @@ function loader(){
                 let lines = parseCSV(e.target.result);
                 //let data = reverseMatrix(lines);
                 let data = lines;
+                var ciclebegin = 1;
+                var cicles = 5;
+                var rowsParcial = parseInt(data.length / cicles)
+                var resto = data.length - rowsParcial * cicles;
                 for (let i = 0; i < data.length; i++) {
                     if (i > 0) {
                         dataSend += data[i] + ";";
                     }
                 }
-	document.getElementById('file').value = "";
+                document.getElementById('file').value = "";
                 EventoAjax("Receipt_Data", "{'Data':'" + dataSend + "'}", resp)
                 console.log(data);
             };
@@ -127,23 +131,23 @@ function loader(){
         document.getElementById('file').addEventListener('change', readFile, false);
         function resp(r) {
 
-clearInterval(refreshIntervalId);
-$('#titleLoad').html("Select .cvs")
+            clearInterval(refreshIntervalId);
+            $('#titleLoad').html("Select .cvs")
             if (r.d == "") {
-$('#tableErrors').fadeOut(100);
-$("#tbody tr").remove(); 
+                $('#tableErrors').fadeOut(100);
+                $("#tbody tr").remove();
                 document.getElementById("uploadFile").value = "";
                 Swal.fire(
                 'Good job!',
                 'All records have been saved successfully!',
                 'success'
                 )
-                
+
 
             }
             else {
- $("#tbody tr").remove(); 
-$('#tableErrors').fadeIn(100);
+                $("#tbody tr").remove();
+                $('#tableErrors').fadeIn(100);
                 document.getElementById("uploadFile").value = "";
                 Swal.fire(
                 'Warnong!',
@@ -151,10 +155,10 @@ $('#tableErrors').fadeIn(100);
                 'warning'
                 )
                 let errors = r.d.split(';')
-                for (var i = 0; i < errors.length;i++){
-if(errors [i].trim()!=""){
-                    $('#tbody').append('<tr id=""><td>'+i+'</td><td style="color:red">'+errors [i]+'</td></tr>');
-}
+                for (var i = 0; i < errors.length; i++) {
+                    if (errors[i].trim() != "") {
+                        $('#tbody').append('<tr id=""><td>' + i + '</td><td style="color:red">' + errors[i] + '</td></tr>');
+                    }
                 }
             }
         }

@@ -27,82 +27,94 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string Receipt_Data(string Data)
         {
-            //bool result = true;
             string fails = string.Empty;
-            string[] DataColArray = new string[] { };
-            string[] DataRowArray = Data.Split(';');
-            Ent_twhcol130 MyObj131 = new Ent_twhcol130();
-            Ent_tticol022 MyObj022 = new Ent_tticol022();
-            Ent_tticol042 MyObj042 = new Ent_tticol042();
-            for (int i = 0; i < DataRowArray.Length; i++)
+            try
             {
-                if (DataRowArray[i] != "")
+                //bool result = true;
+                string[] DataColArray = new string[] { };
+                string[] DataRowArray = Data.Split(';');
+                Ent_twhcol130 MyObj131 = new Ent_twhcol130();
+                Ent_tticol022 MyObj022 = new Ent_tticol022();
+                Ent_tticol042 MyObj042 = new Ent_tticol042();
+                for (int i = 0; i < DataRowArray.Length; i++)
                 {
-
-                    DataColArray = DataRowArray[i].Split('|');
-                    string Paid = DataColArray[3];
-                    DataTable DTPalletID = ITwhcol130.VerificarPalletID(ref Paid);
-                    if (DTPalletID.Rows.Count > 0)
+                    if (DataRowArray[i] != "")
                     {
-                        if (DTPalletID.Rows[0]["TBL"].ToString() == "ticol042")
+
+                        DataColArray = DataRowArray[i].Split('|');
+                        string Paid = DataColArray[3];
+                        DataTable DTPalletID = ITwhcol130.VerificarPalletID(ref Paid);
+                        if (DTPalletID.Rows.Count > 0)
                         {
-                            MyObj042.pdno = DataColArray[1].ToString();
-                            MyObj042.mitm = DataColArray[2].ToString();
-                            MyObj042.cwat = DataColArray[3].ToString();
-                            MyObj042.aclo = DataColArray[4].ToString();
-                            MyObj042.sqnb = DataColArray[5].ToString();
-                            MyObj042.acqt = Convert.ToInt32(DataColArray[6]);
-                            MyObj042.dele = Convert.ToInt32(DataColArray[7]);
-                            if (ITticol042.UpdateMasive(MyObj042))
+                            if (DTPalletID.Rows[0]["TBL"].ToString() == "ticol042")
                             {
-                                ITticol042.UpdateMasive242(MyObj042);
+                                MyObj042.pdno = DataColArray[1].ToString();
+                                MyObj042.mitm = DataColArray[2].ToString();
+                                MyObj042.cwat = DataColArray[3].ToString();
+                                MyObj042.aclo = DataColArray[4].ToString();
+                                MyObj042.sqnb = DataColArray[5].ToString();
+                                MyObj042.acqt = Convert.ToInt32(DataColArray[6]);
+                                MyObj042.dele = Convert.ToInt32(DataColArray[7]);
+                                if (ITticol042.UpdateMasive(MyObj042))
+                                {
+                                    ITticol042.UpdateMasive242(MyObj042);
+                                }
+                                else
+                                {
+                                    fails += MyObj042.sqnb + ";";
+                                }
                             }
-                            else
+                            else if (DTPalletID.Rows[0]["TBL"].ToString() == "ticol022")
                             {
-                                fails += MyObj042.sqnb + ";";
+                                MyObj022.pdno = DataColArray[1].ToString();
+                                MyObj022.mitm = DataColArray[2].ToString();
+                                MyObj022.cwat = DataColArray[3].ToString();
+                                MyObj022.aclo = DataColArray[4].ToString();
+                                MyObj022.sqnb = DataColArray[5].ToString();
+                                MyObj022.acqt = Convert.ToInt32(DataColArray[6]);
+                                MyObj022.dele = Convert.ToInt32(DataColArray[7]);
+                                if (ITticol022.UpdateMasive(MyObj022))
+                                {
+                                    ITticol022.UpdateMasive222(MyObj022);
+                                }
+                                else
+                                {
+                                    fails += MyObj022.sqnb + ";";
+                                }
                             }
+                            else if (DTPalletID.Rows[0]["TBL"].ToString() == "whcol131")
+                            {
+                                MyObj131.OORG = Convert.ToInt32(DataColArray[0].Contains(",") ? (DataColArray[0].Substring(0, DataColArray[0].IndexOf(",")).ToString()) : ((DataColArray[0].ToString())));
+                                MyObj131.ORNO = DataColArray[1].ToString();
+                                MyObj131.ITEM = DataColArray[2].ToString();
+                                MyObj131.PAID = DataColArray[3].ToString();
+                                MyObj131.CWAA = DataColArray[4].ToString();
+                                MyObj131.LOAA = DataColArray[5].ToString();
+                                MyObj131.QTYA = Convert.ToInt32(DataColArray[6]);
+                                MyObj131.STAT = Convert.ToInt32(DataColArray[7]);
+                                if (!ITwhcol130.UpdateMasive(MyObj131))
+                                {
+                                    fails += MyObj131.PAID + ";";
+                                }
+                            }
+
                         }
-                        else if (DTPalletID.Rows[0]["TBL"].ToString() == "ticol022")
+                        else
                         {
-                            MyObj022.pdno = DataColArray[1].ToString();
-                            MyObj022.mitm = DataColArray[2].ToString();
-                            MyObj022.cwat = DataColArray[3].ToString();
-                            MyObj022.aclo = DataColArray[4].ToString();
-                            MyObj022.sqnb = DataColArray[5].ToString();
-                            MyObj022.acqt = Convert.ToInt32(DataColArray[6]);
-                            MyObj022.dele = Convert.ToInt32(DataColArray[7]);
-                            if (ITticol022.UpdateMasive(MyObj022))
-                            {
-                                ITticol022.UpdateMasive222(MyObj022);
-                            }
-                            else
-                            {
-                                fails += MyObj022.sqnb + ";";
-                            }
-                        }
-                        else if (DTPalletID.Rows[0]["TBL"].ToString() == "whcol131")
-                        {
-                            MyObj131.OORG = Convert.ToInt32(DataColArray[0].Contains(",") ? (DataColArray[0].Substring(0, DataColArray[0].IndexOf(",")).ToString()) : ((DataColArray[0].ToString())));
-                            MyObj131.ORNO = DataColArray[1].ToString();
-                            MyObj131.ITEM = DataColArray[2].ToString();
-                            MyObj131.PAID = DataColArray[3].ToString();
-                            MyObj131.CWAA = DataColArray[4].ToString();
-                            MyObj131.LOAA = DataColArray[5].ToString();
-                            MyObj131.QTYA = Convert.ToInt32(DataColArray[6]);
-                            MyObj131.STAT = Convert.ToInt32(DataColArray[7]);
-                            if (!ITwhcol130.UpdateMasive(MyObj131))
-                            {
-                                fails += MyObj131.PAID + ";";
-                            }
+                            fails += Paid + ";";
                         }
 
                     }
-
                 }
+
+
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
             return fails;
-
-            //return result;
         }
 
 
