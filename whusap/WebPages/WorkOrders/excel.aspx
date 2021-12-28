@@ -4,9 +4,55 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
-    <input type="file" id="file" class="col-6 border" />
-    <label id="lblError" style="color:red;font-size:12px"></label>
-    <script>
+    <style>
+        .fileUpload {
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+            .fileUpload input.upload {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+
+#tableErrors{
+	display:none;
+	margin-bottom:200px;
+}
+    </style>
+    <div class="container">
+        <input id="uploadFile" placeholder="File Name here" disabled="disabled" class="col-12 p-0" style="border-radius: 5px; height: 44px" />
+        <br />
+        <div class="fileUpload btn btn-primary col-12 m-0">
+            <span id="titleLoad">Select .cvs</span>
+            <input id="file" type="file" class="upload col-12" />
+        </div>
+<br>
+<br>
+        <table class="table" id = "tableErrors">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Pallet ID whit error</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+    <script>	
+	dot = "."
+        document.getElementById("file").onInput = function () {
+            document.getElementById("uploadFile").value = this.value;
+        };
 
         function EventoAjax(Method, Data, MethodSuccess) {
             $.ajax({
@@ -42,8 +88,20 @@
             });
             return output;
         }
-
+function loader(){
+	var strload = "Loading";
+	if(dot=="..."){
+		dot = ".";
+	}
+	else{
+		dot+="."
+	}
+	$('#titleLoad').html( strload+dot)		
+		
+	
+}
         function readFile(evt) {
+	refreshIntervalId = setInterval(loader, 200);
             dataSend = '';
             let file = evt.target.files[0];
             let reader = new FileReader();
@@ -57,6 +115,7 @@
                         dataSend += data[i] + ";";
                     }
                 }
+	document.getElementById('file').value = "";
                 EventoAjax("Receipt_Data", "{'Data':'" + dataSend + "'}", resp)
                 console.log(data);
             };
@@ -67,20 +126,36 @@
 
         document.getElementById('file').addEventListener('change', readFile, false);
         function resp(r) {
-            if (r.d != "") {
+
+clearInterval(refreshIntervalId);
+$('#titleLoad').html("Select .cvs")
+            if (r.d == "") {
+$('#tableErrors').fadeOut(100);
+$("#tbody tr").remove(); 
+                document.getElementById("uploadFile").value = "";
                 Swal.fire(
                 'Good job!',
                 'All records have been saved successfully!',
                 'success'
                 )
+                
+
             }
             else {
+ $("#tbody tr").remove(); 
+$('#tableErrors').fadeIn(100);
+                document.getElementById("uploadFile").value = "";
                 Swal.fire(
                 'Warnong!',
                 'Some records were not saved!',
                 'warning'
                 )
-
+                let errors = r.d.split(';')
+                for (var i = 0; i < errors.length;i++){
+if(errors [i].trim()!=""){
+                    $('#tbody').append('<tr id=""><td>'+i+'</td><td style="color:red">'+errors [i]+'</td></tr>');
+}
+                }
             }
         }
 
