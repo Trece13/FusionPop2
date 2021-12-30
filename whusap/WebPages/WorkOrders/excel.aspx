@@ -50,6 +50,7 @@
     </div>
     <script>
         dot = "."
+        var totalreg = 0;
         document.getElementById("file").onInput = function () {
             document.getElementById("uploadFile").value = this.value;
         };
@@ -114,6 +115,7 @@
                 var cicles = 5;
                 var rowsParcial = parseInt(data.length / cicles)
                 var resto = data.length - rowsParcial * cicles;
+                totalreg = data.length
                 for (let i = 0; i < data.length; i++) {
                     if (i > 0) {
                         dataSend += data[i] + ";";
@@ -130,7 +132,7 @@
 
         document.getElementById('file').addEventListener('change', readFile, false);
         function resp(r) {
-
+            
             clearInterval(refreshIntervalId);
             $('#titleLoad').html("Select .cvs")
             if (r.d == "") {
@@ -146,20 +148,20 @@
 
             }
             else {
-                $("#tbody tr").remove();
-                $('#tableErrors').fadeIn(100);
-                document.getElementById("uploadFile").value = "";
-                Swal.fire(
-                'Warnong!',
-                'Some records were not saved!',
-                'warning'
-                )
                 let errors = r.d.split(';')
                 for (var i = 0; i < errors.length; i++) {
                     if (errors[i].trim() != "") {
                         $('#tbody').append('<tr id=""><td>' + i + '</td><td style="color:red">' + errors[i] + '</td></tr>');
                     }
                 }
+                $("#tbody tr").remove();
+                $('#tableErrors').fadeIn(100);
+                document.getElementById("uploadFile").value = "";
+                Swal.fire(
+                'Warnong!',
+                'Some records were not saved! saved:' + totalreg - errors.length + ", not saved:" +errors.length,
+                'warning'
+                )
             }
         }
 

@@ -2952,7 +2952,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           T$ITEM ='[:T$ITEM]',
           T$CWAA ='[:T$CWAA]',
           T$QTYA ='[:T$QTYA]',
-          T$STAT ='[:T$STAT]'
+          T$STAT ='[:T$STAT]',
+          T$LOAA ='[:T$LOAA]'
           where TRIM(T$PAID) = TRIM('[:T$PAID]')
         </stringSQL>
       </operationName>
