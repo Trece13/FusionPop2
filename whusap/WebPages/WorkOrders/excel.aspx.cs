@@ -48,13 +48,13 @@ namespace whusap.WebPages.WorkOrders
                         {
                             if (DTPalletID.Rows[0]["TBL"].ToString() == "ticol042")
                             {
-                                if (DataColArray.Length == 8)
+                                if (DataColArray.Length == 8 && (DataColArray[7] != "" || DataColArray[6] != ""))
                                 {
                                     MyObj042.pdno = DataColArray[1].ToString();
                                     MyObj042.mitm = DataColArray[2].ToString();
-                                    MyObj042.cwat = DataColArray[3].ToString();
-                                    MyObj042.aclo = DataColArray[4].ToString();
-                                    MyObj042.sqnb = DataColArray[5].ToString();
+                                    MyObj042.sqnb = DataColArray[3].ToString();
+                                    MyObj042.cwat = DataColArray[4].ToString();
+                                    MyObj042.aclo = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
                                     MyObj042.acqt = Convert.ToInt32(DataColArray[6]);
                                     MyObj042.dele = Convert.ToInt32(DataColArray[7]);
                                     if (ITticol042.UpdateMasive(MyObj042))
@@ -74,13 +74,13 @@ namespace whusap.WebPages.WorkOrders
                             else if (DTPalletID.Rows[0]["TBL"].ToString() == "ticol022")
                             {
 
-                                if (DataColArray.Length == 8)
+                                if (DataColArray.Length == 8 && (DataColArray[7] != "" || DataColArray[6] != ""))
                                 {
                                     MyObj022.pdno = DataColArray[1].ToString();
                                     MyObj022.mitm = DataColArray[2].ToString();
-                                    MyObj022.cwat = DataColArray[3].ToString();
-                                    MyObj022.aclo = DataColArray[4].ToString();
-                                    MyObj022.sqnb = DataColArray[5].ToString();
+                                    MyObj022.sqnb = DataColArray[3].ToString();
+                                    MyObj022.cwat = DataColArray[4].ToString();
+                                    MyObj022.aclo = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
                                     MyObj022.acqt = Convert.ToInt32(DataColArray[6]);
                                     MyObj022.dele = Convert.ToInt32(DataColArray[7]);
                                     if (ITticol022.UpdateMasive(MyObj022))
@@ -108,7 +108,7 @@ namespace whusap.WebPages.WorkOrders
                                     MyObj131.ITEM = DataColArray[2].ToString();
                                     MyObj131.PAID = DataColArray[3].ToString();
                                     MyObj131.CWAA = DataColArray[4].ToString();
-                                    MyObj131.LOAA = DataColArray[5].ToString();
+                                    MyObj131.LOAA = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
                                     MyObj131.QTYA = Convert.ToInt32(DataColArray[6]);
                                     MyObj131.STAT = Convert.ToInt32(DataColArray[7]);
                                     if (!ITwhcol130.UpdateMasive(MyObj131))

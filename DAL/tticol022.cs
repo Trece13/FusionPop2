@@ -1247,7 +1247,7 @@ namespace whusa.DAL
                 paramList.Add(":T$SQNB", MyObj022.sqnb.ToUpper());
 
 
-                strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, tabla, paramList);
+                strSentencia = recursos.readStatement("tticol022", method.Name, ref owner, ref env, tabla, paramList);
 
                 //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
