@@ -148,18 +148,18 @@
 
             }
             else {
+                $("#tbody tr").remove();
                 let errors = r.d.split(';')
                 for (var i = 0; i < errors.length; i++) {
                     if (errors[i].trim() != "") {
                         $('#tbody').append('<tr id=""><td>' + i + '</td><td style="color:red">' + errors[i] + '</td></tr>');
                     }
                 }
-                $("#tbody tr").remove();
                 $('#tableErrors').fadeIn(100);
                 document.getElementById("uploadFile").value = "";
                 Swal.fire(
-                'Warnong!',
-                'Some records were not saved! saved:' + totalreg - errors.length + ", not saved:" +errors.length,
+                'Warning!',
+                'Some records were not saved! saved:' + (totalreg - errors.length) + ', not saved:' +errors.length,
                 'warning'
                 )
             }
