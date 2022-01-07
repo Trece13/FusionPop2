@@ -162,5 +162,10 @@ namespace whusa
         public string PICK { get; set; }
 
         public string typeMsgJs { get; set; }
+
+        public string PROC { get; set; }
+
+        public string RFID { get; set; }
+        public string EVNT { get; set; }
     }
 }

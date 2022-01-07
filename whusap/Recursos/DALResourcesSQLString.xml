@@ -2943,6 +2943,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="Insertar133">
+        <stringSQL>
+          INSET INTO BAAN.TWHCOL133140 VALUES
+          T$PAID = '[:T$PAID]'
+          T$RFID = '[:T$RFID]'
+          T$EVNT = '[:T$EVNT]'
+          T$ORNO = '[:T$ORNO]'
+          T$DATE = SYSDATE-5/24
+          T$LOGN = '[:T$LOGN]'
+          T$PROC = '[:T$PROC]'
+          T$REFCNTD = '[:T$REFCNTD]'
+          T$REFCNTU = '[:T$REFCNTU]'
+        </stringSQL>
+      </operationName>
       <operationName name="UpdateMasive">
         <stringSQL>
           update {0}.twhcol131{1}

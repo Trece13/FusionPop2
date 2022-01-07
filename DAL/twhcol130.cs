@@ -1897,7 +1897,7 @@ namespace whusa.Interfases
             paramList.Add(":SQNBNEW", PALLETNEW);
             paramList.Add(":SQNB", PALLET);
             paramList.Add(":QTYC", QTYA);
-            
+
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
             try
@@ -1992,8 +1992,42 @@ namespace whusa.Interfases
 
             return retorno;
         }
+
+        public bool Insertar133(Ent_twhcol130131 MyObj)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", MyObj.PAID);
+            paramList.Add(":T$RFID", MyObj.RFID);
+            paramList.Add(":T$ORNO", MyObj.ORNO);
+            paramList.Add(":T$DATE", MyObj.DATE);
+            paramList.Add(":T$LOGN", MyObj.LOGN);
+            paramList.Add(":T$PROC", MyObj.PROC);
+            paramList.Add(":T$REFCNTD", MyObj.REFCNTD);
+            paramList.Add(":T$REFCNTU", MyObj.REFCNTU);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+
+            try
+            {
+                //retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, true) .ToString();
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+                //DataTable Existencia = ConsultarPorPalletIDReimpresion(MyObj.PAID);
+                //if (Existencia.Rows.Count > 0)
+                //{
+                //    retorno = "true";
+                //}
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+
+            }
+
+            return retorno;
+        }
     }
-
-
-
 }

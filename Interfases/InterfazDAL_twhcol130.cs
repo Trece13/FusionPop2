@@ -550,5 +550,10 @@ namespace whusa.Interfases
         {
             return dal.UpdateMasive(MyObj131);
         }
+
+        public bool Insertar133(Ent_twhcol130131 MyObj)
+        {
+            return dal.Insertar133(MyObj);
+        }
     }
 }

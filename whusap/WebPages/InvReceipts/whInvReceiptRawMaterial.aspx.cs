@@ -361,6 +361,11 @@ namespace whusap.WebPages.InvReceipts
                             NAMA = DTOrdencompra.Rows[0]["T$NAMA"].ToString(),
                             FIRE = FIRE,
                             PSLIP = PSLIP.ToUpper(),
+                            PROC= "2",
+                            RFID = " ",
+                            EVNT = " ",
+                            REFCNTD = "0",
+                            REFCNTU = "0",
                             ITEM_URL = DTOrdencompra.Rows[0]["T$ITEM"].ToString().Trim().ToUpper() + " - " + DTOrdencompra.Rows[0]["DSCA"].ToString().Trim().ToUpper(),
                             PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet + "&code=Code128&dpi=96",
                             ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "&code=Code128&dpi=96",
@@ -405,7 +410,9 @@ namespace whusap.WebPages.InvReceipts
                             if (ConsultaPresupuestoImportacion.Rows.Count > 0 && ConsultaPresupuestoImportacion.Rows[0]["pres"].ToString().Trim() == "3")
                             {
                                 bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
-
+                                bool Insertsucces133 = twhcol130DAL.Insertar133(MyObj);
+                                ServiceReference2.Service1Client wcfser = new ServiceReference2.Service1Client();
+                                wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN,"0","0","0");
                                 if (Insertsucces)
                                 {
                                     Retrono = JsonConvert.SerializeObject(MyObj);
