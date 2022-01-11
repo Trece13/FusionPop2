@@ -411,7 +411,7 @@ namespace whusap.WebPages.InvReceipts
                             {
                                 bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
                                 bool Insertsucces133 = twhcol130DAL.Insertar133(MyObj);
-                                ServiceReference2.Service1Client wcfser = new ServiceReference2.Service1Client();
+                                SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
                                 wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN,"0","0","0");
                                 if (Insertsucces)
                                 {
