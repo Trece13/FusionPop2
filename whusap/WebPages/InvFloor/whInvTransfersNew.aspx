@@ -162,7 +162,7 @@
             MyObject = JSON.parse(r.d)
 
             if (MyObject.Success == true) {
-                alert(MyObject.SuccessMsg);
+                //alert(MyObject.SuccessMsg);
                 document.getElementById("lblError").innerHTML = "";
                 CleanPalletID(MyObject.row);
             }
@@ -407,13 +407,17 @@
         }
 
         var SendTransfer = function () {
-            for(i = 1 ; i < document.getElementById("TblPallets").rows.length; i++){
+            for (i = 1; i < document.getElementById("TblPallets").rows.length; i++) {
                 if (document.getElementById("TblPallets").rows[i].cells[1].children[0].attributes["valid"].value == "true") {
-                    var Data = "{'PAID':'" + document.getElementById("txPalletID" + (i - 1)).value.trim().toUpperCase() + "','CurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).value.trim().toUpperCase() + "','CurrentSloc':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).getAttribute("sloc") + "','CurrentLocation':'" + document.getElementById("txbCurrentLocation" + (i - 1)).value.toUpperCase().trim() + "','TargetWarehouse':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).value.trim().toUpperCase() + "','TargetSloc':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).getAttribute("sloc") + "','TargetLocation':'" + document.getElementById("txbTargetLocation" + (i - 1)).value.toUpperCase().trim() + "','row':'"+(i-1)+"','StartCurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).getAttribute("StartCurrentWarehouse") + "'}";
+                    var Data = "{'PAID':'" + document.getElementById("txPalletID" + (i - 1)).value.trim().toUpperCase() + "','CurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).value.trim().toUpperCase() + "','CurrentSloc':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).getAttribute("sloc") + "','CurrentLocation':'" + document.getElementById("txbCurrentLocation" + (i - 1)).value.toUpperCase().trim() + "','TargetWarehouse':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).value.trim().toUpperCase() + "','TargetSloc':'" + document.getElementById("txbTargetWarehouse" + (i - 1)).getAttribute("sloc") + "','TargetLocation':'" + document.getElementById("txbTargetLocation" + (i - 1)).value.toUpperCase().trim() + "','row':'" + (i - 1) + "','StartCurrentWarehouse':'" + document.getElementById("txbCurrentWarehouse" + (i - 1)).getAttribute("StartCurrentWarehouse") + "'}";
                     sendAjax("clickTransfer", Data, SuccesTransferConsult);
                 }
-            }
 
+
+            }
+            //JC 070122 Enviar el mensaje de salvar al final
+            MyObject.SuccessMsg = "Transfer Saved Successfully"
+            alert(MyObject.SuccessMsg);
 
         }
 
