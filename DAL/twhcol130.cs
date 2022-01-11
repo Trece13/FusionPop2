@@ -2029,5 +2029,27 @@ namespace whusa.Interfases
 
             return retorno;
         }
+
+        public DataTable selectTccol020(Ent_twhcol130131 MyObj)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":ITEM", MyObj.ITEM);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return Retorno;
+        }
     }
 }

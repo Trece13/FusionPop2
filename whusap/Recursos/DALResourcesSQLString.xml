@@ -3569,6 +3569,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           /*CAMPOS EXCLUIDOS DEL ENVIO DE INFORMAION(NO PUEDEN SER NULOS )*/'0',sysdate+5/24,' ',sysdate+5/24,' ',sysdate+5/24,' ','0','0',' ',sysdate,'[:T$FIRE]',' ',' ',0,'[:T$PSNO]','[:T$ALLO]')
         </stringSQL>
       </operationName>
+      <operationName name="selectTccol020">
+        <stringSQL>
+          select * from baan.ttccol020140 where trim(T$ITEM) = trim(':ITEM')
+        </stringSQL>
+      </operationName>
       <operationName name="tticol042Auto">
         <stringSQL>
           INSERT INTO {0}.tticol042{1} (T$PONO,T$PDNO,T$SQNB,T$PROC,T$LOGN,T$DATE,T$MITM,T$QTDL,T$CUNI,T$LOG1,T$DATC,T$QTD1,T$PRO1,T$LOG2,T$DATU,T$QTD2,T$PRO2,T$LOCA,T$NORP,T$DLRP,T$DELE,T$LOGD,T$DATD,T$REFCNTD,T$REFCNTU)

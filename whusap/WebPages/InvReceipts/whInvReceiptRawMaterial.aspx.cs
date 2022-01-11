@@ -361,7 +361,7 @@ namespace whusap.WebPages.InvReceipts
                             NAMA = DTOrdencompra.Rows[0]["T$NAMA"].ToString(),
                             FIRE = FIRE,
                             PSLIP = PSLIP.ToUpper(),
-                            PROC= "2",
+                            PROC = "2",
                             RFID = " ",
                             EVNT = " ",
                             REFCNTD = "0",
@@ -385,10 +385,10 @@ namespace whusap.WebPages.InvReceipts
                             decimal TotalRecibido = Convert.ToDecimal(DTOrdencompra.Rows[0]["RECIBIDO"].ToString());
                             decimal QTYCActual = Convert.ToDecimal(MyObj.QTYC);
                             decimal CantidadMaxima = Convert.ToDecimal(DTOrdencompra.Rows[0]["T$QSTK"].ToString());
-                            decimal Restante = ( CantidadMaxima - (TotalRecibido + QTYCActual) );
-                            if (Math.Abs(Restante) <= LIMITE )
+                            decimal Restante = (CantidadMaxima - (TotalRecibido + QTYCActual));
+                            if (Math.Abs(Restante) <= LIMITE)
                             {
-                                MyObj.QTYC = Convert.ToString( CantidadMaxima - TotalRecibido );
+                                MyObj.QTYC = Convert.ToString(CantidadMaxima - TotalRecibido);
                             }
                         }
 
@@ -410,11 +410,9 @@ namespace whusap.WebPages.InvReceipts
                             if (ConsultaPresupuestoImportacion.Rows.Count > 0 && ConsultaPresupuestoImportacion.Rows[0]["pres"].ToString().Trim() == "3")
                             {
                                 bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
-                                bool Insertsucces133 = twhcol130DAL.Insertar133(MyObj);
-                                SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
-                                wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN,"0","0","0");
                                 if (Insertsucces)
                                 {
+
                                     Retrono = JsonConvert.SerializeObject(MyObj);
                                 }
                                 else
@@ -434,9 +432,18 @@ namespace whusap.WebPages.InvReceipts
                         else
                         {
                             bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
-
+                            DataTable DtRfID = twhcol130DAL.selectTccol020(MyObj);
                             if (Insertsucces)
                             {
+                                if (DtRfID.Rows.Count > 0)
+                                {
+
+                                    if (DtRfID.Rows[0]["T$RFID"].ToString().Trim() == "1")
+                                    {
+                                        SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
+                                        wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
+                                    }
+                                }
                                 Retrono = JsonConvert.SerializeObject(MyObj);
                             }
                             else

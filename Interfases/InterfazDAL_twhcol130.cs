@@ -555,5 +555,10 @@ namespace whusa.Interfases
         {
             return dal.Insertar133(MyObj);
         }
+
+        public DataTable selectTccol020(Ent_twhcol130131 MyObj)
+        {
+            return dal.selectTccol020(MyObj);
+        }
     }
 }
