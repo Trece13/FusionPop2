@@ -254,7 +254,7 @@
                     -</label>
             <label id="lblUnis" for="txQuantity">
             </label>
-            <label id="lblMyCant" for="txQuantity">
+            <label id="lblMyCant" for="txQuantity" style="display:none">
             </label>
         </div>
         <div class="form-group row" id="finalReceipt">
