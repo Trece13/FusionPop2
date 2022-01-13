@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="cyclecount .aspx.cs" Inherits="whusap.WebPages.InvReceipts.cyclecount" %>
+    CodeBehind="cyclecount.aspx.cs" Inherits="whusap.WebPages.InvReceipts.cyclecount" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
