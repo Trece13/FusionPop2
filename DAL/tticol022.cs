@@ -1209,6 +1209,7 @@ namespace whusa.DAL
             try
             {
                 paramList = new Dictionary<string, object>();
+                paramList.Add(":T$PDNO", MyObj022.pdno);
                 paramList.Add(":T$MITM", MyObj022.mitm);
                 paramList.Add(":T$DELE", MyObj022.dele);
                 paramList.Add(":T$SQNB", MyObj022.sqnb.ToUpper());
