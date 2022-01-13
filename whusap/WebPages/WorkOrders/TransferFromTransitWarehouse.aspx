@@ -25,7 +25,7 @@
             padding-bottom: 0;
             display: none;
         }
-        ..form-group {
+        .form-group {
             margin-bottom: 1.5rem;
         }
     </style>

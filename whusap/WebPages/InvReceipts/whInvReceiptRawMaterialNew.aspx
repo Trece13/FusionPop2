@@ -13,7 +13,6 @@
         }
 
         function printDiv(divID) {
-            .form-group
             var monthNames = [
                 "1", "2", "3",
                 "4", "5", "6", "7",
