@@ -102,7 +102,7 @@
         <label class="col-sm-2 col-form-label-lg" for="txQuantity">
             Quantity</label>
         <div class="col-sm-4">
-            <input type="number" class=" col-10 form-control form-control-lg" id="txQuantity" placeholder="Quantity" readonly />
+            <input type="number" class=" col-10 form-control form-control-lg" id="txQuantity" placeholder="Quantity" />
         </div>
         <label id="lblQuantity" for="txQuantity">
         </label>

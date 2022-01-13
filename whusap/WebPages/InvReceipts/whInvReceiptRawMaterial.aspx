@@ -214,6 +214,7 @@
                     <option value="1">Sales Order Return</option>
                     <option value="2">Purchase orders</option>
                     <option value="22">Transfer Order</option>
+<<<<<<< HEAD
                 </select>--%>
                     <div class="col-sm-6">
                         <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
@@ -266,6 +267,90 @@
                 </div>
                 <div class="form-group row">
                     <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp;
+=======
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txOrderID">
+                Order ID</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
+                    data-method="ValidarOrderID" tabindex="1">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txPosition">
+                Position</label>
+            <div class="col-sm-6" style ="display:none">
+                <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
+                    data-method="ValidarPosition" tabindex="1">
+            </div>
+            <div class="col-sm-6" >
+                <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
+                    <option value="0">Select Position</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txItem">
+                Item</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
+                    data-method="ValidarItem" tabindex="1">
+                <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
+                    -</label>
+                <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
+                    -</label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txLot">
+                Lot</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
+                    data-method="ValidarLote" tabindex="1">
+            </div>
+        </div>
+        <div class="form-group row" style="display:none">
+            <label class="col-sm-4 col-form-label-lg" for="DdUnit">
+                Unit</label>
+            <div class="col-sm-6">
+                <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
+                </asp:DropDownList>
+            </div>
+            <label id="Label1" for="txUnit">
+            </label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label-lg" for="txQuantity">
+                Quantity</label>
+            <div class="col-sm-6">
+                <input class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern = "[0-9]"
+                    data-method="ValidarQuantity" tabindex="1">
+            </div>
+            <%--            <label id="lblUnis" for="txQuantity">
+            </label>
+            <label id="lblMyCant" for="txQuantity">
+            </label>--%>   
+            <label class="col-sm-2 col-form-label-lg" id="lblUnis" for="txQuantity"></label>         
+        </div>  
+        <div>
+            <label> </label>
+        </div>
+        <div class="form-group row" id="finalReceipt">
+            <label class="col-sm-4 col-form-label-lg" for="">
+            </label>
+            <div class=" col-sm-6">
+                <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
+                <label class="" for="ChkfinalReceipt">
+                    Final Receipt
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp;
+>>>>>>> ac574c17be2e361da721be8705a0937718053d21
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
                 Print</button>&nbsp;
             <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()" style="display: none">
