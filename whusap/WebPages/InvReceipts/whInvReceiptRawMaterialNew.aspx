@@ -13,7 +13,7 @@
         }
 
         function printDiv(divID) {
-
+            .form-group
             var monthNames = [
                 "1", "2", "3",
                 "4", "5", "6", "7",
@@ -228,7 +228,7 @@
         }
 
         .form-group {
-            margin-bottom: 0.5rem;
+            margin-bottom: 2rem;
         }
 
         #MyEtiqueta {
