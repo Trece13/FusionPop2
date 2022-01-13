@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MDMasterPage.Master" AutoEventWireup="true"
-    CodeBehind="InventoryTakingByPalletIDWarehousesNotControlledByLocation.aspx.cs" Inherits="whusap.WebPages.InvReceipts.InventoryTakingByPalletIDWarehousesNotControlledByLocation" %>
+    CodeBehind="cyclecount .aspx.cs" Inherits="whusap.WebPages.InvReceipts.cyclecount" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
 </asp:Content>
@@ -206,7 +206,7 @@
             $('#txLot').prop("disabled", true);
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
-            $('#txQuantity').prop("disabled", true);
+            $('#txQuantity').prop("disabled", false);
             $('#btnSave').prop("disabled", false);
 
         };
@@ -230,7 +230,7 @@
                 $('#lblQuantity').html("");
                 $('#txWarehouse').prop("disabled", true);
                 $('#txLocation').prop("disabled", true);
-                $('#txQuantity').prop("disabled", true);
+                $('#txQuantity').prop("disabled", false);
                 $('#txPalletID').prop("disabled", true);
                 $('#detail').hide(1000);
                 $('#divPallet').hide(1000);
@@ -271,7 +271,7 @@
                 $('#lblQuantity').html("");
                 $('#txWarehouse').prop("disabled", true);
                 $('#txLocation').prop("disabled", true);
-                $('#txQuantity').prop("disabled", true);
+                $('#txQuantity').prop("disabled", false);
                 $('#txPalletID').prop("disabled", false);
                 $('#detail').hide(1000);
             }
@@ -295,7 +295,7 @@
                     $('#txLot').val("");
                     $('#txWarehouse').prop("disabled", false);
                     $('#txLocation').prop("disabled", true);
-                    $('#txQuantity').prop("disabled", true);
+                    $('#txQuantity').prop("disabled", false);
                 }
                 if (MyObj.SLOC == "1") {
                     $('#txLocation').prop("disabled", false);
@@ -345,7 +345,7 @@
             $('#lblError').html("");
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
-            $('#txQuantity').prop("disabled", true);
+            $('#txQuantity').prop("disabled", false);
             $('#txPalletID').prop("disabled", true);
             $('#txZoneCode').prop("disabled", false);
         });
@@ -370,7 +370,7 @@
                     $('#txLot').prop("disabled", true);
                     $('#txWarehouse').prop("disabled", false);
                     $('#txLocation').prop("disabled", true);
-                    $('#txQuantity').prop("disabled", true);
+                    $('#txQuantity').prop("disabled", false);
                 }
             }
 
@@ -393,7 +393,7 @@
             else {
                 $('#txWarehouse').prop("disabled", true);
                 $('#txLocation').prop("disabled", true);
-                $('#txQuantity').prop("disabled", true);
+                $('#txQuantity').prop("disabled", false);
                 $('#btnSave').prop("disabled", true);
             }
         }
@@ -403,7 +403,7 @@
             if (MyObj.error == true) {
                 ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
                 $('#txLocation').prop("disabled", true);
-                $('#txQuantity').prop("disabled", true);
+                $('#txQuantity').prop("disabled", false);
                 //$('#txLocation').val("");
                 //$('#txQuantity').val("");
                 $('#btnSave').prop("disabled", true);
@@ -416,7 +416,7 @@
                 lblWarehouse.html(MyObj.dsca)
                 if (MyObj.sloc == "1") {
                     $('#txLocation').prop("disabled", false);
-                    $('#txQuantity').prop("disabled", true);
+                    $('#txQuantity').prop("disabled", false);
                     //$('#btnSave').prop("disabled", true);
                 }
                 else {
@@ -432,7 +432,7 @@
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == true) {
                 ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
-                $('#txQuantity').prop("disabled", true);
+                $('#txQuantity').prop("disabled", false);
                 $('#btnSave').prop("disabled", true);
             }
             if (MyObj.error == false) {
@@ -607,7 +607,7 @@
         txLot.bind('paste keyup', function () {
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
-            $('#txQuantity').prop("disabled", true);
+            $('#txQuantity').prop("disabled", false);
             //$('#txWarehouse').val("");
             //$('#txLocation').val("");
             //$('#txQuantity').val("");
@@ -623,7 +623,7 @@
         txWarehouse.bind('paste keyup', function () {
 
             $('#txLocation').prop("disabled", true);
-            $('#txQuantity').prop("disabled", true);
+            $('#txQuantity').prop("disabled", false);
             //$('#txLocation').val("");
             //$('#txQuantity').val("");
             //$('#btnSave').prop("disabled", true);
@@ -637,7 +637,7 @@
 
         txLocation.bind('paste keyup', function () {
 
-            $('#txQuantity').prop("disabled", true);
+            $('#txQuantity').prop("disabled", false);
             //$('#txQuantity').val("");
             //$('#btnSave').prop("disabled", true);
 
