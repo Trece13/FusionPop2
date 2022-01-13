@@ -228,7 +228,7 @@
         }
 
         .form-group {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         #MyEtiqueta {
