@@ -3571,7 +3571,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="selectTccol020">
         <stringSQL>
-          select * from baan.ttccol020140 where trim(T$ITEM) = trim(':ITEM')
+          select * from baan.ttccol020140 where trim(T$ITEM) = trim('[:ITEM]')
         </stringSQL>
       </operationName>
       <operationName name="tticol042Auto">
