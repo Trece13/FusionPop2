@@ -446,7 +446,7 @@ namespace whusap.WebPages.InvReceipts
                                         //if (rfid == true)
                                         //{
                                         SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
-                                        string res = wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
+                                        string res = wcfser.ProWhcol133(MyObj.PAID, "0", "VA Dock", MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
                                         Console.WriteLine(res);
                                         //}
 
