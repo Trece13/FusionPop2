@@ -38,7 +38,7 @@
             </div>
             <div class="col-2 p-0">
                 <button type="button" class="btn btn-primary col-12" id="btnClearZone">
-                    <i class="fa fa-trash"></i>
+                    Reset
                 </button>
             </div>
             <div class="col-1 p-0">
@@ -56,8 +56,7 @@
             </div>
             <div class="col-2 p-0">
                 <button type="button" class="btn btn-danger col-12" id="btnClear">
-            
-                    <i class="fa fa-trash"></i>
+                    Reset
                 </button>
             </div>
         </div>
