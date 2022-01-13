@@ -47,6 +47,7 @@ namespace whusap.WebPages.InvReceipts
         private static Mensajes _mensajesForm = new Mensajes();
         private static string globalMessages = "GlobalMessages";
         public static decimal QUANTITYAUX_COMPLETADA;
+        public static bool rfid = Convert.ToBoolean(ConfigurationManager.AppSettings["rfid"]);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -440,10 +441,13 @@ namespace whusap.WebPages.InvReceipts
 
                                     if (DtRfID.Rows[0]["T$RFID"].ToString().Trim() == "1")
                                     {
-                                        SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
-                                        string res = wcfser.ProWhcol133(MyObj.PAID, "0", "0",MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
+                                        if (rfid == true)
+                                        {
+                                            SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
+                                            string res = wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
+                                            Console.WriteLine(res);
+                                        }
 
-                                        Console.WriteLine(res);
                                     }
                                 }
                                 Retrono = JsonConvert.SerializeObject(MyObj);
