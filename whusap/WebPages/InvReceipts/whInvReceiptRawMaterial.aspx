@@ -247,10 +247,14 @@
                 <input class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern = "[0-9]"
                     data-method="ValidarQuantity" tabindex="1">
             </div>
-            <label id="lblUnis" for="txQuantity">
+            <%--            <label id="lblUnis" for="txQuantity">
             </label>
             <label id="lblMyCant" for="txQuantity">
-            </label>
+            </label>--%>   
+            <label class="col-sm-2 col-form-label-lg" id="lblUnis" for="txQuantity"></label>         
+        </div>  
+        <div>
+            <label> </label>
         </div>
         <div class="form-group row" id="finalReceipt">
             <label class="col-sm-4 col-form-label-lg" for="">

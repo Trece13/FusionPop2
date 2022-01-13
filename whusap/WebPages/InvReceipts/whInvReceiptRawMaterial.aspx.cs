@@ -433,6 +433,8 @@ namespace whusap.WebPages.InvReceipts
                         else
                         {
                             bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
+                            if (rfid == true)
+                            {
                             DataTable DtRfID = twhcol130DAL.selectTccol020(MyObj);
                             if (Insertsucces)
                             {
@@ -441,15 +443,16 @@ namespace whusap.WebPages.InvReceipts
 
                                     if (DtRfID.Rows[0]["T$RFID"].ToString().Trim() == "1")
                                     {
-                                        if (rfid == true)
-                                        {
-                                            SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
-                                            string res = wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
-                                            Console.WriteLine(res);
-                                        }
+                                        //if (rfid == true)
+                                        //{
+                                        SrvRfidPop.Service1Client wcfser = new SrvRfidPop.Service1Client();
+                                        string res = wcfser.ProWhcol133(MyObj.PAID, "0", "0", MyObj.ORNO, MyObj.DATE, MyObj.LOGN, "0", "0", "0");
+                                        Console.WriteLine(res);
+                                        //}
 
                                     }
                                 }
+                            }
                                 Retrono = JsonConvert.SerializeObject(MyObj);
                             }
                             else
