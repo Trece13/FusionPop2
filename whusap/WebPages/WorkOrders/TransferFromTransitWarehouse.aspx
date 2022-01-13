@@ -25,6 +25,9 @@
             padding-bottom: 0;
             display: none;
         }
+        ..form-group {
+            margin-bottom: 1.5rem;
+        }
     </style>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
