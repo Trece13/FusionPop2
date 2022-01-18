@@ -433,11 +433,11 @@ namespace whusap.WebPages.InvReceipts
                         else
                         {
                             bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
+                            if (Insertsucces)
+                            {
                             if (rfid == true)
                             {
                             DataTable DtRfID = twhcol130DAL.selectTccol020(MyObj);
-                            if (Insertsucces)
-                            {
                                 if (DtRfID.Rows.Count > 0)
                                 {
 
