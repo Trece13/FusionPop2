@@ -2051,5 +2051,26 @@ namespace whusa.Interfases
 
             return Retorno;
         }
+
+        public DataTable VerificarPalletID130(Ent_twhcol130 twhcol130)
+        {
+            DataTable Retorno = new DataTable();
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":PAID", twhcol130.PAID.Trim());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                Retorno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return Retorno;
+        }
     }
 }

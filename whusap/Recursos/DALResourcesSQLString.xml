@@ -3071,6 +3071,19 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT * FROM {0}.twhwmd310{1} wmd310 left join {0}.twhwmd200{1} wmd200 on wmd200.T$CWAR = wmd310.T$CWAR left join baan.ttcmcs003140 mcs003 on mcs003.T$CWAR = wmd310.T$CWAR WHERE wmd310.T$ZONE = '[:ZONE]'
         </stringSQL>
       </operationName>
+      <operationName name="VerificarPalletID130">
+        <stringSQL>
+          SELECT
+          COL131.T$OORG, COL131.T$ORNO, COL131.T$ITEM, COL131.T$PAID, COL131.T$PONO, COL131.T$SEQN, COL131.T$CLOT, COL131.T$CWAR, COL131.T$QTYS,
+          COL131.T$UNIT, COL131.T$QTYC, COL131.T$UNIC, COL131.T$DATE, COL131.T$CONF, COL131.T$RCNO, COL131.T$DATR, COL131.T$LOCA, COL131.T$DATL,
+          COL131.T$PICK, COL131.T$DATK, COL131.T$PRNT, COL131.T$DATP, COL131.T$NPRT, COL131.T$DRPT, COL131.T$LOGR, COL131.T$LOGN, COL131.T$LOGP,
+          COL131.T$LOGT, COL131.T$DAFR, COL131.T$MES1, COL131.T$DAFL, COL131.T$MES2, COL131.T$FIRE, COL131.T$CWAA, COL131.T$LOAA, COL131.T$QTYA,
+          COL131.T$STAT, COL131.T$REFCNTD, COL131.T$REFCNTU, COL131.T$PSNO, COL131.T$ALLO, COL020.T$RFID
+          FROM BAAN.TWHCOL130140 COL131
+          LEFT JOIN BAAN.TTCCOL020140 COL020 ON COL020.T$ITEM = COL131.T$ITEM
+          WHERE TRIM(COL131.T$PAID ) = TRIM('[:PAID]')
+        </stringSQL>
+      </operationName>
       <operationName name="VerificarPalletID">
         <stringSQL>
           SELECT distinct TBL,tisfc010.T$MCNO as MCNO,PAID,QTYT,UNIT,ITEM,cibd001.t$dsca DSCA,cibd001.T$KLTC KLTC, ORNO,STAT,CWAT,wmd200.T$SLOC SLOC,ACLO,mcs003.T$DSCA DESCAW,ALLO,LOT FROM (

@@ -43,10 +43,9 @@ namespace whusa
         public decimal ALLO { get; set; }
         public DateTime DRPT { get; set; }
         public long LOGR { get; set; }
-        public string FIRE {get;set;}
-        public string CWAA {get;set;}
-        public string LOAA {get;set;}
-        public double QTYA {get;set;}
-
+        public string FIRE { get; set; }
+        public string CWAA { get; set; }
+        public string LOAA { get; set; }
+        public double QTYA { get; set; }
     }
 }

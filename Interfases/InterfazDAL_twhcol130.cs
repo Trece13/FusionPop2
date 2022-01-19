@@ -560,5 +560,10 @@ namespace whusa.Interfases
         {
             return dal.selectTccol020(MyObj);
         }
+
+        public DataTable VerificarPalletID130(Ent_twhcol130 twhcol130)
+        {
+            return dal.VerificarPalletID130(twhcol130);
+        }
     }
 }
