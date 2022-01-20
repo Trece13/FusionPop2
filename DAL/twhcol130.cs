@@ -2072,5 +2072,29 @@ namespace whusa.Interfases
 
             return Retorno;
         }
+
+        public bool Actfirecol130140(Ent_twhcol130 MyObj131)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$FIRE", MyObj131.FIRE);
+            paramList.Add(":T$SQN", MyObj131.PAID);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "Actfirecol130140", "Actfirecol130140", "Actfirecol130140");
+
+            }
+
+            return retorno;
+        }
+
     }
 }

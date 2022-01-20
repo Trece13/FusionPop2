@@ -2943,6 +2943,13 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhcol130">
+      <operationName name="Actfirecol130140">
+        <stringSQL>
+          update {0}.twhcol130{1}
+          set T$FIRE ='[:T$FIRE]'
+          where T$PAID ='[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="Insertar133">
         <stringSQL>
           INSET INTO BAAN.TWHCOL133140 VALUES

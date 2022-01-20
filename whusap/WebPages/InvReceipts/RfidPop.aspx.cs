@@ -137,9 +137,12 @@ namespace whusap.WebPages.InvReceipts
         {
             DataTable dt133 = (DataTable)HttpContext.Current.Session["dt133"];
             DataTable dt130 = (DataTable)HttpContext.Current.Session["dt130"];
+            Ent_twhcol130 MyObj131 = new Ent_twhcol130();
+            MyObj131.FIRE = "1";
+            MyObj131.PAID = dt130.Rows[0]["T$PAID"].ToString();
             bool bl2 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(),"",dt130.Rows[0]["T$ORNO"].ToString(),"","","","","");
-            bool bl1 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), dt133.Rows[0]["LOGN"].ToString(),"Si");
-
+            bool bl1 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
+            bool bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
             if (bl1 && bl2)
             {
                 return true;

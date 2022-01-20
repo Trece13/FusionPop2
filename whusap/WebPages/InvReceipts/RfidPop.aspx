@@ -158,7 +158,7 @@
                     </label>
                 </div>
                 <div class="form-group row">
-                    <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" disabled/>&nbsp
+                    <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" disabled />&nbsp
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
     </form>
     <!-- Referencias de estilo-->
     <script>
-        
+
 
         $(function () {
             function sendAjax(WebMethod, Data, FuncitionSucces) {
@@ -205,13 +205,13 @@
             };
             let ValidarPalletID = function () {
                 stoper();
-                timer =  setTimeout(function(){sendValidarPalletID()},2000);
+                timer = setTimeout(function () { sendValidarPalletID() }, 2000);
             };
             let ValidarRfis = function () {
                 stoper();
-                timer = setTimeout(function(){sendValidarRfis()},2000);
+                timer = setTimeout(function () { sendValidarRfis() }, 2000);
             };
-            
+
             let SaveSucces = function (r) {
                 if (r.d == true) {
                     alert("Process success");
@@ -223,26 +223,31 @@
             };
             let ValidarPalletIDSucces = function (r) {
                 let myList = JSON.parse(r.d)
-                if (myList.length > 0)
-                {
-                    if (myList[0]["T$RFID"].toString().trim() == "1") {
-                        txItem.value = myList[0]["T$ITEM"].toString().trim();
-                        txLot.value = myList[0]["T$CLOT"].toString();
-                        txQuantity.value = myList[0]["T$QTYS"].toString();
-                        lblUnis.innerHTML = myList[0]["T$UNIT"].toString();
-                        txRfid.removeAttribute("disabled");
+                if (myList.length > 0) {
+                    if (myList[0]["T$FIRE"].toString().trim() == '2') {
+
+                        if (myList[0]["T$RFID"].toString().trim() == "1") {
+                            txItem.value = myList[0]["T$ITEM"].toString().trim();
+                            txLot.value = myList[0]["T$CLOT"].toString();
+                            txQuantity.value = myList[0]["T$QTYS"].toString();
+                            lblUnis.innerHTML = myList[0]["T$UNIT"].toString();
+                            txRfid.removeAttribute("disabled");
+                        }
+                        else {
+                            txRfid.value = "";
+                            txItem.value = "";
+                            lblUnidDsca.innerHTML = "";
+                            lblUnidSt.innerHTML = "";
+                            txLot.value = "";
+                            txQuantity.value = "";
+                            lblUnis.innerHTML = "";
+                            txRfid.setAttribute('disabled', 'disabled');
+                            btnEnviar.setAttribute('disabled', 'disabled');
+                            lblError.innerHTML = "item not controlled with Rfid";
+                        }
                     }
-                    else {
-                        txRfid.value = "";
-                        txItem.value = "";
-                        lblUnidDsca.innerHTML = "";
-                        lblUnidSt.innerHTML = "";
-                        txLot.value = "";
-                        txQuantity.value = "";
-                        lblUnis.innerHTML = "";
-                        txRfid.setAttribute('disabled', 'disabled');
-                        btnEnviar.setAttribute('disabled', 'disabled');
-                        lblError.innerHTML = "item not controlled with Rfid";
+                    else{
+                        lblError.innerHTML = "Pallet already receipt";
                     }
                 }
                 else {
@@ -255,22 +260,24 @@
                     lblUnis.innerHTML = "";
                     txRfid.setAttribute('disabled', 'disabled');
                     btnEnviar.setAttribute('disabled', 'disabled');
-                    lblError.innerHTML = "";
+                    lblError.innerHTML = "Pallet don't exist";
                 }
-                
+
             };
             let ValidarRfisSucces = function (r) {
                 if (r.d == true) {
-                    btnEnviar.removeAttribute("disabled");
+                    btnEnviar.removeAttribute("diRfidsabled");
+                    lblError.innerHTML = "";
                 }
                 else {
-                    btnEnviar.setAttribute("disabled",'disabled');
+                    btnEnviar.setAttribute("disabled", 'disabled');
+                    lblError.innerHTML = "Rfid not register in real view";
                 }
-                
+
             };
             let CleanForm = function () {
-                txPaid.value="";
-                txRfid.value="";
+                txPaid.value = "";
+                txRfid.value = "";
                 txItem.value = "";
                 lblUnidDsca.innerHTML = "";
                 lblUnidSt.innerHTML = "";
@@ -287,7 +294,7 @@
             btnEnviar.addEventListener('click', Save, false);
         });
 
-        
+
     </script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap.min.js"></script>
