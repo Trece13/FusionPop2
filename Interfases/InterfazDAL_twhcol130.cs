@@ -565,5 +565,10 @@ namespace whusa.Interfases
         {
             return dal.VerificarPalletID130(twhcol130);
         }
+
+        public bool Actfirecol130140(Ent_twhcol130 MyObj131)
+        {
+            return dal.Actfirecol130140(MyObj131);
+        }
     }
 }
