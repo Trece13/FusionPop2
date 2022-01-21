@@ -2080,7 +2080,7 @@ namespace whusa.Interfases
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":T$FIRE", MyObj131.FIRE);
-            paramList.Add(":T$SQN", MyObj131.PAID);
+            paramList.Add(":T$SQNB", MyObj131.PAID);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
             try

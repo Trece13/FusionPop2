@@ -266,7 +266,7 @@
             };
             let ValidarRfisSucces = function (r) {
                 if (r.d == true) {
-                    btnEnviar.removeAttribute("diRfidsabled");
+                    btnEnviar.removeAttribute("disabled");
                     lblError.innerHTML = "";
                 }
                 else {

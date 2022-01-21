@@ -119,6 +119,8 @@ namespace whusap.WebPages.Inventarios
                 HttpContext.Current.Session["TBL"] = MyObjDT["TBL"].ToString().Trim();
                 HttpContext.Current.Session["MyOriginalPallet"] = MyObj;
                 //HttpContext.Current.Session["ORNO"] = MyObjDT["ORNO"].ToString();
+                //JC 210122 Guardar el item para busarlo en la tabla de regrind por item
+                HttpContext.Current.Session["ITM"] = MyObjDT["ITEM"].ToString().Trim();
 
                 if (MyObj.QTYA.Trim() == "0")
                 {
@@ -213,6 +215,9 @@ namespace whusap.WebPages.Inventarios
         {
             Ent_ttwhcol016 obj016 = new Ent_ttwhcol016();
             obj016.stat = "RET";
+            //JC 210122 Buscar los posibles regrind en la tabla ticol135
+            obj016.item = HttpContext.Current.Session["ITM"].ToString();
+
             int i = 0;
             DataTable DTItemt = dal016.GetItemsStat(ref obj016, ref strError);
             List<Ent_twhcol130131> lstItems = new List<Ent_twhcol130131>();
@@ -235,7 +240,7 @@ namespace whusap.WebPages.Inventarios
                     }
                 }
             }
-
+                       
             return JsonConvert.SerializeObject(lstItems); ;
         }
 
@@ -329,6 +334,13 @@ namespace whusap.WebPages.Inventarios
             Ent_twhcol130131 MyOriginalPallet = (Ent_twhcol130131)HttpContext.Current.Session["MyOriginalPallet"];
             twhcol028.LOGN = HttpContext.Current.Session["user"].ToString();
             bool Res = _idaltwhcol028.insertRegistertwhcol028(ref twhcol028, ref strError);
+            //JC 210122 Si es un retal hacer un calculo diferente para la cantidad.
+            DataTable TipoItem = _idaltwhcol028.GetItemType(ref twhcol028, ref strError);
+            DataTable NetwItem = _idaltwhcol028.GetItemNetw(ref twhcol028, ref strError);
+            twhcol028.TYPE = TipoItem.Rows[0]["TYPE"].ToString().ToUpper().Trim();
+            twhcol028.NETW = NetwItem.Rows[0]["NETW"].ToString().Trim();
+            twhcol028.UNRG = TipoItem.Rows[0]["UNIT"].ToString();
+            twhcol028.QTRG = Convert.ToString(Math.Round(((Convert.ToDecimal(twhcol028.TQTY) * Convert.ToDecimal(twhcol028.NETW)) / Convert.ToDecimal(2.20462)), 4));
             if (Res)
             {
                 if ((twhcol028.TITM == twhcol028.SITM) && (twhcol028.TWAR != twhcol028.SWAR || twhcol028.TLOC != twhcol028.SLOC))
@@ -360,7 +372,10 @@ namespace whusap.WebPages.Inventarios
                                 }
                                 else
                                 {
-                                    strMaxSequence = getSequence(twhcol028.TLOT.Trim().ToUpper() + "-A");
+                                    //strMaxSequence = getSequence(twhcol028.TLOT.Trim().ToUpper() + "-A");
+                                    //JC 210122 Corregir la busqueda si el lote destino no existe o si el item no maneja lote
+                                    strMaxSequence = getSequence(twhcol028.PAID.Substring(0, 9).ToUpper() + "-A");
+                                                                       
                                 }
                             }
                             else if (twhcol028.KTLC != "1")
@@ -428,13 +443,30 @@ namespace whusap.WebPages.Inventarios
                     obj022.proc = 1;
                     obj022.logn = twhcol028.LOGN;
                     obj022.mitm = twhcol028.TITM;
-                    obj022.qtdl = Convert.ToDecimal(twhcol028.TQTY);
-                    obj022.cuni = twhcol028.UNIT;
+                    //JC 210122 Grabar la cantidad Correcta si es un regrind
+                    //obj022.cuni = twhcol028.UNIT;
+                    //obj022.qtdl = Convert.ToDecimal(twhcol028.TQTY);
+                    if (twhcol028.TYPE == "RET")
+                    {
+                        obj022.cuni = twhcol028.UNRG;
+                        obj022.qtdl = Math.Round(((Convert.ToDecimal(twhcol028.TQTY) * Convert.ToDecimal(twhcol028.NETW)) / Convert.ToDecimal(2.20462)), 4);
+                        obj022.qtd1 = Convert.ToInt32((Convert.ToInt32(twhcol028.TQTY) * Convert.ToDecimal(twhcol028.NETW)) / Convert.ToDecimal(2.20462));
+                        obj022.qtd2 = Convert.ToInt32((Convert.ToInt32(twhcol028.TQTY) * Convert.ToDecimal(twhcol028.NETW)) / Convert.ToDecimal(2.20462));
+                        obj022.acqt = Math.Round(((Convert.ToDecimal(twhcol028.TQTY) * Convert.ToDecimal(twhcol028.NETW)) / Convert.ToDecimal(2.20462)), 4);
+                    }
+                    else
+                    {
+                        obj022.cuni = twhcol028.UNIT;
+                        obj022.qtdl = Convert.ToDecimal(twhcol028.TQTY);
+                        obj022.qtd1 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
+                        obj022.qtd2 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
+                        obj022.acqt = Convert.ToDecimal(twhcol028.TQTY);
+                    }
                     obj022.log1 = "NONE";
-                    obj022.qtd1 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
+                    //obj022.qtd1 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
                     obj022.pro1 = 1;
                     obj022.log2 = "NONE";
-                    obj022.qtd2 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
+                    //obj022.qtd2 = Convert.ToInt32(Convert.ToDouble(twhcol028.TQTY));
                     obj022.pro2 = 2;
                     obj022.loca = " ";
                     obj022.norp = 1;
@@ -444,7 +476,7 @@ namespace whusap.WebPages.Inventarios
                     obj022.refcntu = 0;
                     obj022.drpt = DateTime.Now;
                     obj022.urpt = twhcol028.LOGN;
-                    obj022.acqt = Convert.ToDecimal(twhcol028.TQTY);
+                    //obj022.acqt = Convert.ToDecimal(twhcol028.TQTY);
                     obj022.cwaf = twhcol028.TWAR;
                     obj022.cwat = twhcol028.TWAR;
                     obj022.aclo = twhcol028.SLOC;

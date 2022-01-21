@@ -268,6 +268,8 @@ namespace whusa.DAL
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add("stat", Parametros.stat.Trim().ToUpper());
+            //JC 210122 Buscar el item en tabla ticol135
+            paramList.Add("item", Parametros.item.Trim().ToUpper());
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 

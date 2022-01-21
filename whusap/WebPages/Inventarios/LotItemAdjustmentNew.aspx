@@ -804,7 +804,17 @@
                 lblMachine.textContent = MyObjTwhcol028.MCNO;
                 lblDate.textContent = MyObjTwhcol028.DATR;
                 //lblShift.textContent = $('#LblShif1').text().replace("Shift:","");;
-                lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
+                //lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
+                //JC 210122 Cantidad acorde si es regrind
+                if (MyObjTwhcol028.TYPE == "RET") {
+                    lbQtyAdjusted.textContent = MyObjTwhcol028.QTRG;
+                    lbUnitAdjusted.textContent = MyObjTwhcol028.UNRG;
+                    lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
+                }
+                else
+                {
+                    lblQuantity.textContent = lbQtyAdjusted.textContent+" "+lbUnitAdjusted.textContent;
+                }
                 $("#editTable").hide(500);
                 if((lbItemActual.textContent.trim() == lbItemAdjusted.textContent.trim() )&&(lbWarehouseActual.textContent.trim() != lbWarehouseAdjusted.textContent.trim() || lbLocaAdjusted.textContent.trim() != lbLocaActual.textContent.trim())){
 

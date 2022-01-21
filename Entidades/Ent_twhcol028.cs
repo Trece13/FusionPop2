@@ -97,5 +97,13 @@ namespace whusa.Entidades
         public string KTLC { get; set; }
         [DataMember(Order = 31)]
         public string SUBI { get; set; }
+        [DataMember(Order = 32)]
+        public string TYPE { get; set; }
+        [DataMember(Order = 33)]
+        public string NETW { get; set; }
+        [DataMember(Order = 34)]
+        public string UNRG { get; set; }
+        [DataMember(Order = 35)]
+        public string QTRG { get; set; }
     }
 }

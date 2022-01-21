@@ -4820,9 +4820,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="GetItemsStat">
         <stringSQL>
-          SELECT t$item, t$dsca DESCRIPCION, t$cuni UNIDAD, t$kltc LOTE
-          FROM {0}.ttcibd001{1}
-          WHERE TRIM(T$CPCL) = '[stat]'
+          --SELECT t$item, t$dsca DESCRIPCION, t$cuni UNIDAD, t$kltc LOTE
+          --FROM {0}.ttcibd001{1}
+          --WHERE TRIM(T$CPCL) = '[stat]'
+          --AND T$CSIG = ' '
+          --ORDER BY t$item
+          SELECT  col135.t$rgrn t$item, ibd001.t$dsca DESCRIPCION, ibd001.t$cuni UNIDAD, ibd001.t$kltc LOTE
+          FROM {0}.tticol135{1} col135
+          INNER JOIN {0}.ttcibd001{1} ibd001
+          ON ibd001.t$item = col135.t$rgrn
+          WHERE TRIM(col135.T$ITEM) = '[item]'
         </stringSQL>
       </operationName>
       <operationName name="TakeMaterialInv_verificaZona_Param">
@@ -7902,6 +7909,20 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           '[:T$MESS]',
           '[:T$REFCNTD]',
           '[:T$REFCNTU]')
+        </stringSQL>
+      </operationName>
+      <operationName name="GetItemType">
+        <stringSQL>
+          SELECT ibd001.T$CPCL AS TYPE, ibd001.T$CUNI AS UNIT
+          FROM {0}.ttcibd001{1} ibd001
+          WHERE TRIM(ibd001.T$ITEM) = '[item]'
+        </stringSQL>
+      </operationName>
+      <operationName name="GetItemNetw">
+        <stringSQL>
+          SELECT t$pent as NETW
+          FROM {0}.ttccol020{1}
+          WHERE TRIM(T$ITEM) = '[item]'
         </stringSQL>
       </operationName>
     </Module>

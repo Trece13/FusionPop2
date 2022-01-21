@@ -80,5 +80,49 @@ namespace whusa.DAL
             return retorno;
         }
 
+        //JC 210122 Buscar tipo Item
+        public DataTable GetItemType(ref Ent_twhcol028 Parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add("item", Parametros.TITM.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Item code doesn´t exist. Cannot continue"; }
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
+        public DataTable GetItemNetw(ref Ent_twhcol028 Parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add("item", Parametros.SITM.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Item code doesn´t exist. Cannot continue"; }
+                return consulta;
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
+
     }
 }

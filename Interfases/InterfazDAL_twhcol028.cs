@@ -30,5 +30,35 @@ namespace whusa.Interfases
             }
             return retorno;
         }
+
+        //JC 210122 Buscar si el item a convertir es un regrin para calcular la cantidad por peso
+        public DataTable GetItemType(ref Ent_twhcol028 Parametros, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.GetItemType(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
+        public DataTable GetItemNetw(ref Ent_twhcol028 Parametros, ref string strError)
+        {
+            DataTable retorno;
+            try
+            {
+                retorno = dal.GetItemNetw(ref Parametros, ref strError);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
     }
 }
