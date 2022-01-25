@@ -630,6 +630,11 @@ namespace whusap.WebPages.Migration
                     {
                         seq = '0' + cantidadRegrind.Rows[0]["CANT"].ToString();
                     }
+                    //JC 250122 Definir el nuevo valor de la secuencia, cuando era mayor a 10 quedaba en blanco
+                    else
+                    {
+                        seq = cantidadRegrind.Rows[0]["CANT"].ToString();
+                    }
                     //strTagId = txtPalletId.Text.Substring(0, 9) + "-D" + cantidadRegrind.Rows[0]["CANT"].ToString();
                     strTagId = txtPalletId.Text.Substring(0, 9) + "-D" + seq;
                     Session["TagId"] = strTagId;

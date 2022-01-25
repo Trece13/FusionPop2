@@ -381,7 +381,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="listaCantidadRegrind_Disposicion">
         <stringSQL>
-          SELECT  MAX(CANT) CANT
+          --SELECT  MAX(CANT) CANT  --JC 250122 Evitar que la secuencia falle
+          SELECT  SUM(CANT) CANT
           FROM
           (
           SELECT LTRIM((LPAD((COUNT(T$PDNO) + 1),3,'0')), '0') CANT
@@ -609,7 +610,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActualizacionPalletId118">
         <stringSQL>
-          UPDATE {2} SET T$PLLD = '[p2]' WHERE T$PAID = '[p1]'  --13. To Delete
+          --UPDATE {2} SET T$PLLD = '[p2]' WHERE T$PAID = '[p1]'  --13. To Delete  --JC 250122 Solo modificar el pallet pendiente
+          UPDATE {2} SET T$PLLD = '[p2]' WHERE T$PAID = '[p1]' AND T$PLLD = '0'  --13. To Delete
         </stringSQL>
       </operationName>
       <operationName name="insertarRegistro">
