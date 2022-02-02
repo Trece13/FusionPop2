@@ -487,5 +487,35 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        //JC Actualizar de manera masiva los datos del estado y cantidad de la bodega a limpiar
+        public bool UpdateMasiveStatus(Ent_tticol042 MyObj042)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.UpdateMasiveStatus(MyObj042);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public bool UpdateMasive242WrhQty(Ent_tticol042 MyObj042)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.UpdateMasive242WrhQty(MyObj042);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
     }
 }

@@ -1028,6 +1028,60 @@ namespace whusa.DAL
 
                 return retorno;
             }
+
+        //JC 020122 Actualizar Masivamente cantidad y estado para dejarlos en blanco para luego cargar los datos nuevos
+            public bool UpdateMasiveStatus(Ent_tticol042 MyObj042)
+            {
+                method = MethodBase.GetCurrentMethod();
+                bool retorno = false;
+                string strError = string.Empty;
+                try
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$DELE", MyObj042.dele);
+                    paramList.Add(":T$CWAT", MyObj042.cwat);
+
+                    strSentencia = recursos.readStatement("tticol042", method.Name, ref owner, ref env, tabla2, paramList);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+                }
+
+                catch (Exception ex)
+                {
+                    strError = ex.InnerException != null ?
+                        ex.Message + " (" + ex.InnerException + ")" :
+                        ex.Message;
+
+                }
+
+                return retorno;
+            }
+
+            public bool UpdateMasive242WrhQty(Ent_tticol042 MyObj042)
+            {
+                method = MethodBase.GetCurrentMethod();
+                bool retorno = false;
+                string strError = string.Empty;
+                try
+                {
+                    paramList = new Dictionary<string, object>();
+                    paramList.Add(":T$CWAT", MyObj042.cwat);
+                    paramList.Add(":T$ACQT", MyObj042.acqt);
+
+                    strSentencia = recursos.readStatement("tticol042", method.Name, ref owner, ref env, tabla2, paramList);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+                }
+
+                catch (Exception ex)
+                {
+                    strError = ex.InnerException != null ?
+                        ex.Message + " (" + ex.InnerException + ")" :
+                        ex.Message;
+
+                }
+
+                return retorno;
+            }
+
     }
 }
 

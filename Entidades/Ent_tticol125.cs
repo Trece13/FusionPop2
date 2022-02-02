@@ -148,6 +148,8 @@ namespace whusa.Entidades
         public List<StatusTab> statsTab { get; set; }
         [DataMember(Order = 29)]
         public string kltc { get; set; }
+        [DataMember(Order = 30)]
+        public string rfid { get; set; }
     }
 }
 

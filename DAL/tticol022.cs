@@ -1266,6 +1266,60 @@ namespace whusa.DAL
 
             return retorno;
         }
+
+        //JC 020122 Actualizacion Estado y cantidad masivamente para limpiar datos de la bodega
+        public bool UpdateMasiveStatus(Ent_tticol022 MyObj022)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$DELE", MyObj022.dele);
+                paramList.Add(":T$CWAT", MyObj022.cwat.ToUpper());
+
+                strSentencia = recursos.readStatement("tticol022", method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+
+            return retorno;
+        }
+
+        public bool UpdateMasive222WrhQty(Ent_tticol022 MyObj022)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":T$CWAT", MyObj022.cwat);
+                paramList.Add(":T$ACQT", MyObj022.acqt);
+
+                strSentencia = recursos.readStatement("tticol022", method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+
+            return retorno;
+        }
+
     }
     
 }

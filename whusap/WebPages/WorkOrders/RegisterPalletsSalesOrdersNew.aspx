@@ -97,6 +97,13 @@
         <label id="lblQuantity" for="txQuantity">
         </label>
     </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label-lg" for="txRfid">
+            Rfid</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control form-control-lg" id="txRfid" placeholder="Rfid">
+        </div>
+    </div>
     <div class="form-group row">
         <input type="button" class="btn btn-primary btn-lg" id="btnsave" value="Save"></input>
     </div>
@@ -131,6 +138,7 @@
             txWarehouse = $('#txWarehouse');
             txLocation = $('#txLocation');
             txQuantity = $('#txQuantity');
+            txRfid = $('#txRfid');
             lblSalesOrder = $('#lblSalesOrder');
             lblItemdesc = $('#lblItemdesc');
             lblQuantity = $('#lblQuantity');
@@ -150,6 +158,7 @@
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
+            $('#txRfid').prop("disabled", true);
             $('#txClot').prop("disabled", true);
             $('#Contenido_Button1').prop("disabled", true);
 
@@ -165,6 +174,7 @@
                 $('#txWarehouse').val("");
                 $('#txLocation').val("");
                 $('#txQuantity').val("");
+                $('#txRfid').val("");
                 $('#lblSalesOrder').html("");
                 $('#lblItemdesc').html("");
                 $('#lblQuantity').html("");
@@ -180,6 +190,7 @@
                 $('#txWarehouse').val("");
                 $('#txLocation').val("");
                 $('#txQuantity').val("");
+                $('#txRfid').val("");
                 $('lblSalesOrder').html("");
                 $('lblItemdesc').html("");
                 $('lblQuantity').html("");
@@ -190,6 +201,7 @@
                 $('#txWarehouse').prop("disabled", false);
                 $('#txLocation').prop("disabled", false);
                 $('#txQuantity').prop("disabled", false);
+                $('#txRfid').prop("disabled", false);
                 $('#txClot').prop("disabled", true);
             }
         }
@@ -205,11 +217,12 @@
                 $('#txLocation').prop("disabled", true);
                 $('#txClot').prop("disabled", true);
                 $('#txQuantity').prop("disabled", true);
-
+                $('#txRfid').prop("disabled", true);
                 $('#txWarehouse').val("");
                 $('#txLocation').val("");
                 $('#txClot').val("");
                 $('#txQuantity').val("");
+                $('#txRfid').val("");
                 $('lblItemdesc').html("");
             }
             if (MyObj.Error == false) {
@@ -219,6 +232,7 @@
                 $('#lblItemdesc').html(MyObj.dsca);
                 $('#txLocation').val(MyObj.pdno);
                 $('#txQuantity').val(MyObj.qtya);
+                $('#txRfid').val(MyObj.rfid);
                 $('#txClot').val(MyObj.clot);
                 $('lblItemdesc').html("");
                 $('#txStat').val(MyObj.stat);
@@ -229,7 +243,7 @@
                 $('#txWarehouse').prop("disabled", false);
                 $('#txLocation').prop("disabled", false);
                 $('#txQuantity').prop("disabled", false);
-
+                $('#txRfid').prop("disabled", false);
 
                 if (MyObj.statsTab.length > 0) {
                     MyObj.statsTab.forEach(function (e) {
@@ -274,6 +288,7 @@
             $('#txWarehouse').prop("disabled", true);
             $('#txLocation').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
+            $('#txRfid').prop("disabled", true);
             $('#txClot').prop("disabled", true);
 
             $('#txPaid').val("");
@@ -282,7 +297,7 @@
             $('#txWarehouse').val("");
             $('#txLocation').val("");
             $('#txQuantity').val("");
-
+            $('#txRfid').val("");
             //            MyObject = JSON.parse(r.d);
 
             //            if (MyObject.error == false) {
@@ -347,7 +362,7 @@
 
         var save = function () {
 
-            var Data = "{'STAT':'" + (ddStat.value == '0' ? $('#txStat').val().trim() : ddStat.value) + "','CWAR':'" + $('#txWarehouse').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYA':'" + $('#txQuantity').val().trim() + "','LOT':'" + $('#txClot').val().trim() + "'}";
+            var Data = "{'STAT':'" + (ddStat.value == '0' ? $('#txStat').val().trim() : ddStat.value) + "','CWAR':'" + $('#txWarehouse').val().trim() + "','LOCA':'" + $('#txLocation').val().trim() + "','QTYA':'" + $('#txQuantity').val().trim() + "','LOT':'" + $('#txClot').val().trim() + "','RFID':'" + $('#txRfid').val().trim() + "' }";
             sendAjax("save", Data, SuccesClick_Save);
 
         }

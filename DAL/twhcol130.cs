@@ -1993,6 +1993,31 @@ namespace whusa.Interfases
             return retorno;
         }
 
+        //JC 020122 Actualizar Estado y Cantidad masivalmente limpieza bodega de cargue
+        public bool UpdateMasiveStaQty(Ent_twhcol130 MyObj131)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$CWAA", MyObj131.CWAA);
+            paramList.Add(":T$QTYA", MyObj131.QTYA);
+            paramList.Add(":T$STAT", MyObj131.STAT);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+            try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strSentencia + ex.Message, "InserTwhcol131Auto", "InserTwhcol131Auto", "InserTwhcol131Auto");
+
+            }
+
+            return retorno;
+        }
+
         public bool Insertar133(Ent_twhcol130131 MyObj)
         {
             bool retorno = false;

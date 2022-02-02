@@ -551,6 +551,13 @@ namespace whusa.Interfases
             return dal.UpdateMasive(MyObj131);
         }
 
+        //JC 020122 Actualizar Masivamente la cantidad y estado para limpiar los datos antes de cargar los nuevos pallets
+        public bool UpdateMasiveStaQty(Ent_twhcol130 MyObj131)
+        {
+            return dal.UpdateMasiveStaQty(MyObj131);
+        }
+
+
         public bool Insertar133(Ent_twhcol130131 MyObj)
         {
             return dal.Insertar133(MyObj);

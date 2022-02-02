@@ -68,34 +68,45 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           update {0}.twhcol131{1} set t$qtya = '[:QTYA]', t$stat = '[:STAT]',T$CWAA = NVL('[:CWAR]',T$CWAA),T$LOAA = NVL('[:LOCA]',T$LOAA),T$CLOT = NVL('[:LOT]',T$CLOT) where T$PAID = '[:PAID]'
         </stringSQL>
       </operationName>
+      <operationName name="Actualizartwhcol133Rfid">
+        <stringSQL>
+          update {0}.twhcol133{1} set t$rfid = '[:RFID]' where T$PAID = '[:PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="vallidatePalletInfoSalesOrder">
         <stringSQL>
-          SELECT sGlobal.KLTC,sGlobal.STAT,sGlobal.TBL,sGlobal.T$ORNO, sGlobal.T$PAID, sGlobal.T$QTYC, sGlobal.T$ITEM, sGlobal.DSCA, sGlobal.T$CUNI, sGlobal.T$CWAR, sGlobal.DESCW, sGlobal.T$LOCA, sGlobal.T$CLOT,tisfc010.T$MCNO,T$PONO
+          SELECT sGlobal.KLTC,sGlobal.STAT,sGlobal.TBL,sGlobal.T$ORNO, sGlobal.T$PAID, sGlobal.T$QTYC, sGlobal.T$ITEM, sGlobal.DSCA, sGlobal.T$CUNI, sGlobal.T$CWAR, sGlobal.DESCW, sGlobal.T$LOCA, sGlobal.T$CLOT,tisfc010.T$MCNO,T$PONO, PAIDR
           FROM
           (
           SELECT 'ticol022' AS TBL,ticol022.T$PDNO AS T$ORNO,ticol022.T$SQNB AS T$paid,ticol222.T$ACQT AS T$qtyc,
           ticol022.T$MITM AS T$ITEM, tcibd001.t$dsca AS DSCA, ticol022.T$CUNI AS T$CUNI,ticol222.T$CWAT AS T$CWAR,
-          tcmcs003.t$dsca as DESCW, ticol222.T$ACLO AS T$LOCA, ticol022.T$PDNO AS T$CLOT, 0 as T$PONO,ticol022.T$DELE as STAT,tcibd001.T$KLTC as KLTC
+          tcmcs003.t$dsca as DESCW, ticol222.T$ACLO AS T$LOCA, ticol022.T$PDNO AS T$CLOT, 0 as T$PONO,ticol022.T$DELE as STAT,tcibd001.T$KLTC as KLTC,
+          col133.t$RFID AS PAIDR
           FROM {0}.tticol022{1} ticol022
           INNER JOIN {0}.tticol222{1} ticol222 ON ticol222.T$SQNB = ticol022.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol022.t$mitm
           LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol222.T$CWAT
+          LEFT JOIN {0}.twhcol133{1} col133 ON col133.t$paid = ticol022.T$sqnb
           UNION
           SELECT 'whcol131' AS TBL,whcol131.T$ORNO AS T$ORNO,whcol131.T$PAID AS T$paid,whcol131.T$QTYA AS T$qtyc,
           whcol131.T$ITEM AS T$ITEM,tcibd001.t$dsca as DSCA, whcol131.T$UNIC AS T$CUNI,whcol131.T$CWAA AS T$CWAR,
-          tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT,whcol131.T$PONO,whcol131.T$STAT as STAT,tcibd001.T$KLTC as KLTC
+          tcmcs003.t$dsca as DSCAW, whcol131.T$LOAA AS T$LOCA,  whcol131.T$CLOT AS T$CLOT,whcol131.T$PONO,whcol131.T$STAT as STAT,tcibd001.T$KLTC as KLTC,
+          col133.t$RFID AS PAIDR
           FROM {0}.tWhcol131{1} whcol131
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = whcol131.t$item
           LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = whcol131.T$CWAA
+          LEFT JOIN {0}.twhcol133{1} col133 ON col133.t$paid = whcol131.T$PAID
           UNION
           SELECT 'ticol042' AS TBL,ticol042.T$PDNO AS T$ORNO,ticol042.T$SQNB AS T$paid,ticol242.T$ACQT AS T$qtyc,
           ticol042.T$MITM AS T$ITEM,tcibd001.t$dsca as DSCA,ticol042.T$CUNI AS T$CUNI,ticol242.T$CWAT AS T$CWAR,
-          tcmcs003.t$dsca as DSCAW, ticol242.T$ACLO AS T$LOCA, ticol042.T$PDNO AS T$CLOT,ticol042.T$PONO,ticol042.T$DELE as STAT,tcibd001.T$KLTC as KLTC
+          tcmcs003.t$dsca as DSCAW, ticol242.T$ACLO AS T$LOCA, ticol042.T$PDNO AS T$CLOT,ticol042.T$PONO,ticol042.T$DELE as STAT,tcibd001.T$KLTC as KLTC,
+          col133.t$RFID AS PAIDR
           FROM {0}.tticol042{1} ticol042
           INNER JOIN {0}.tticol242{1} ticol242 ON ticol242.T$SQNB = ticol042.T$SQNB
           INNER JOIN {0}.ttcibd001{1} tcibd001 ON tcibd001.t$item = ticol042.t$mitm
-          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT) sGlobal
-          LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
+          LEFT JOIN {0}.ttcmcs003{1} tcmcs003 ON tcmcs003.t$cwar = ticol242.T$CWAT
+          LEFT JOIN {0}.twhcol133{1} col133 ON col133.t$paid = ticol042.T$sqnb) sGlobal
+          LEFT JOIN {0}.Ttisfc010{1} tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(sGlobal.t$item)
           WHERE trim(T$paid) = '[p1]'
           AND ROWNUM = 1
           ORDER BY T$paid ASC
@@ -214,6 +225,28 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
       </operationName>
+<!--Actualizar Masivamente Estado y cantidad Inicio-->
+      <operationName name="UpdateMasiveStatus">
+        <stringSQL>
+          UPDATE
+          (SELECT col042.t$pdno, col042.t$sqnb, col042.t$dele
+          FROM {0}.tticol042{1}  col042
+          INNER JOIN {0}.tticol242{1} col242
+          ON col042.t$pdno = col242.t$pdno
+          AND col042.t$sqnb = col242.t$sqnb
+          WHERE col242.t$cwat = '[:T$CWAT]'
+          AND col042.t$dele = '7') t
+          SET t.t$dele = '[:T$DELE]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateMasive242WrhQty">
+        <stringSQL>
+          UPDATE  {0}.tticol242{1}
+          SET t$acqt = '[:T$ACQT]'
+          where   t$cwat = '[:T$CWAT]'
+        </stringSQL>
+      </operationName>
+      <!--Actualizar Masivamente Estado y cantidad Fin-->
       <operationName name="invLabel_registroImprimir_Param">
         <stringSQL>
           SELECT T$PDNO ORDEN, T$SQNB SECUENCIA, T$MITM ITEM, T$QTDL PESO, T$LOGN USUARIO, (T$DATE-5/24) FECHA
@@ -537,6 +570,28 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
       </operationName>
+<!--Actualizar Masivamente Estado y cantidad Inicio-->
+      <operationName name="UpdateMasiveStatus">
+        <stringSQL>
+          UPDATE
+          (SELECT col022.t$pdno, col022.t$sqnb, col022.t$dele
+          FROM {0}.tticol022{1}  col022
+          INNER JOIN {0}.tticol222{1} col222
+          ON col022.t$pdno = col222.t$pdno
+          AND col022.t$sqnb = col222.t$sqnb
+          WHERE col222.t$cwat = '[:T$CWAT]'
+          AND col022.t$dele = '7') t
+          SET t.t$dele = '[:T$DELE]'
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateMasive242WrhQty">
+        <stringSQL>
+          UPDATE  {0}.tticol222{1}
+          SET t$acqt = '[:T$ACQT]'
+          where   t$cwat = '[:T$CWAT]'
+        </stringSQL>
+      </operationName>
+<!--Actualizar Masivamente Estado y cantidad Fin-->
       <operationName name="getMachine">
         <stringSQL>
           SELECT tisfc001.T$PDNO,tisfc010.T$MCNO as MCNO FROM baan.ttisfc001140 tisfc001
@@ -2761,6 +2816,21 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           ORDER BY T$PAID ASC
         </stringSQL>
       </operationName>
+      <operationName name="ConsultarRegistroTransferirRfid">
+        <stringSQL>
+          select  *
+          from    {0}.ttccol020{1}
+          WHERE   TRIM(T$ITEM) = TRIM('[:T$ITEM]')
+        </stringSQL>
+      </operationName>
+      <operationName name="ConsultarRegistroTransferirRfidPallet">
+        <stringSQL>
+          select  *
+          from    {0}.twhcol133{1}
+          WHERE   TRIM(T$PAID) = TRIM('[:T$PAID]')
+          AND     TRIM(T$EVNT) = 'VA Dock 11'
+        </stringSQL>
+      </operationName>      
       <operationName name="InsertarTransferencia">
         <stringSQL>
           INSERT INTO {0}.twhcol020{1}(T$CLOT, T$SQNB, T$MITM, T$DSCA, T$CWOR, T$LOOR, T$CWDE, T$LODE, T$QTDL, T$CUNI, T$RCNO, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
@@ -2980,6 +3050,18 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where TRIM(T$PAID) = TRIM('[:T$PAID]')
         </stringSQL>
       </operationName>
+<!-- Actualizar masivamente para limpiar datos de bodega a cargar Inicio -->
+      <operationName name="UpdateMasiveStaQty">
+        <stringSQL>
+          update {0}.twhcol131{1}
+          set
+          T$QTYA ='[:T$QTYA]',
+          T$STAT ='[:T$STAT]'
+          where TRIM(T$CWAA) = TRIM('[:T$CWAA]')
+          and t$stat = '3'
+        </stringSQL>
+      </operationName>
+      <!-- Actualizar masivamente para limpiar datos de bodega a cargar Fin -->
       <operationName name="getPicks082">
         <stringSQL>
           select DISTINCT PICK from(

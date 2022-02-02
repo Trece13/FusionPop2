@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using whusa;
 using whusa.Entidades;
 using whusa.Interfases;
+using Newtonsoft.Json;
 
 namespace whusap.WebPages.WorkOrders
 {
@@ -141,6 +142,57 @@ namespace whusap.WebPages.WorkOrders
             return fails;
         }
 
+        [WebMethod]
+        public static string Click_Update(string WARE)
+        {
+            string strError = string.Empty;
+
+            Ent_twhcol130 MyObj131 = new Ent_twhcol130();
+            Ent_tticol022 MyObj022 = new Ent_tticol022();
+            Ent_tticol042 MyObj042 = new Ent_tticol042();
+            MyObj042.Error = true;
+            MyObj042.cwat = WARE;
+            MyObj042.acqt = Convert.ToInt32(0);
+            MyObj042.dele = Convert.ToInt32(11);
+            if (ITticol042.UpdateMasiveStatus(MyObj042))
+            {
+                ITticol042.UpdateMasive242WrhQty(MyObj042);
+                MyObj042.Error = false;
+            }
+
+            MyObj022.cwat = WARE;
+            MyObj022.acqt = Convert.ToInt32(0);
+            MyObj022.dele = Convert.ToInt32(11);
+            if (ITticol022.UpdateMasiveStatus(MyObj022))
+            {
+                ITticol022.UpdateMasive222WrhQty(MyObj022);
+                MyObj042.Error = false;
+            }
+
+            MyObj131.CWAA = WARE;
+            MyObj131.QTYA = Convert.ToInt32(0);
+            MyObj131.STAT = Convert.ToInt32(9);
+            if (ITwhcol130.UpdateMasiveStaQty(MyObj131))
+            {
+                MyObj042.Error = false;
+                
+            }
+
+            if (MyObj042.Error == false)
+            {
+                MyObj042.Error = false;
+                MyObj042.TypeMsgJs = "label";
+                MyObj042.ErrorMsg = "Data Updated";
+            }
+            else
+            {
+                MyObj042.Error = true;
+                MyObj042.TypeMsgJs = "label";
+                MyObj042.ErrorMsg = "No Data Updated";
+            }
+
+            return JsonConvert.SerializeObject(MyObj042);
+        }
 
     }
 }

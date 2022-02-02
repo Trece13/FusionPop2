@@ -36,6 +36,7 @@ namespace whusap.WebPages.InvFloor
         public static string Thetransferwassuccessful = string.Empty;
         public static string PalletNotLocate = string.Empty;
         public static string PalletNotExist = string.Empty;
+        public static string PalletRfidNotExist = string.Empty;
         public static string WarehouseNotExist = string.Empty;
         public static string WarehouseConsigment = string.Empty;
         public static string LocationTransfeCannotEqual = string.Empty;
@@ -151,18 +152,48 @@ namespace whusap.WebPages.InvFloor
                 }
                 else
                 {
-                    objWhcol020.tbl = Transferencias.Rows[0]["TBL"].ToString().Trim();
-                    objWhcol020.sloc = Transferencias.Rows[0]["SLOC"].ToString();
-                    objWhcol020.clot = Transferencias.Rows[0]["T$ORNO"].ToString().Trim();
-                    objWhcol020.sqnb = Transferencias.Rows[0]["T$PAID"].ToString().Trim();
-                    objWhcol020.mitm = Transferencias.Rows[0]["T$ITEM"].ToString().Trim();
-                    objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);
-                    objWhcol020.cwor = Transferencias.Rows[0]["T$CWAR"].ToString().Trim();
-                    objWhcol020.loor = Transferencias.Rows[0]["T$LOCA"].ToString().Trim();
-                    objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
-                    objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
-                    objWhcol020.user = HttpContext.Current.Session["user"].ToString();
+                    //JC 030222 Validar si el item es de RFID que el pallet este asociado a un RFID
+                    DataTable Rfid = Transfers.ConsultarRegistroTransferirRfid(Transferencias.Rows[0]["T$ITEM"].ToString().Trim());
 
+                    if (Rfid.Rows[0]["T$RFID"].ToString().Trim() =="1")
+                    {
+                        DataTable RfidPallet = Transfers.ConsultarRegistroTransferirRfidPallet(PAID);
+
+                        if (RfidPallet.Rows.Count > 0)
+                        {
+                            objWhcol020.tbl = Transferencias.Rows[0]["TBL"].ToString().Trim();
+                            objWhcol020.sloc = Transferencias.Rows[0]["SLOC"].ToString();
+                            objWhcol020.clot = Transferencias.Rows[0]["T$ORNO"].ToString().Trim();
+                            objWhcol020.sqnb = Transferencias.Rows[0]["T$PAID"].ToString().Trim();
+                            objWhcol020.mitm = Transferencias.Rows[0]["T$ITEM"].ToString().Trim();
+                            objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);
+                            objWhcol020.cwor = Transferencias.Rows[0]["T$CWAR"].ToString().Trim();
+                            objWhcol020.loor = Transferencias.Rows[0]["T$LOCA"].ToString().Trim();
+                            objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
+                            objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
+                            objWhcol020.user = HttpContext.Current.Session["user"].ToString();
+                        }
+                        else
+                        {
+                            objWhcol020.Error = true;
+                            objWhcol020.ErrorMsg = PalletRfidNotExist;
+                            objWhcol020.TipeMsgJs = "lbl";
+                        }
+                    }
+                    else
+                    {
+                        objWhcol020.tbl = Transferencias.Rows[0]["TBL"].ToString().Trim();
+                        objWhcol020.sloc = Transferencias.Rows[0]["SLOC"].ToString();
+                        objWhcol020.clot = Transferencias.Rows[0]["T$ORNO"].ToString().Trim();
+                        objWhcol020.sqnb = Transferencias.Rows[0]["T$PAID"].ToString().Trim();
+                        objWhcol020.mitm = Transferencias.Rows[0]["T$ITEM"].ToString().Trim();
+                        objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);
+                        objWhcol020.cwor = Transferencias.Rows[0]["T$CWAR"].ToString().Trim();
+                        objWhcol020.loor = Transferencias.Rows[0]["T$LOCA"].ToString().Trim();
+                        objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
+                        objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
+                        objWhcol020.user = HttpContext.Current.Session["user"].ToString();
+                    }
                 }
                 //}
             }
@@ -405,6 +436,7 @@ namespace whusap.WebPages.InvFloor
             TranferQtynotenough = mensajes("TranferQtynotenough");
             PalletNotLocate = mensajes("PalletNotLocate");
             PalletNotExist = mensajes("PalletNotExist");
+            PalletRfidNotExist = mensajes("PalletRfidNotExist");
             WarehouseNotExist = mensajes("WarehouseNotExist");
             WarehouseConsigment = mensajes("WarehouseConsigment");
             LocationTransfeCannotEqual = mensajes("LocationTransfeCannotEqual");

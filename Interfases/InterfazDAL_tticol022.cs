@@ -600,6 +600,36 @@ namespace whusa.Interfases
             }
         }
 
+        //JC 020122 Actualizar estado, cantidad masivamente para limpiar los datos de la bodega
+        public bool UpdateMasiveStatus(Ent_tticol022 MyObj022)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.UpdateMasive(MyObj022);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+        public bool UpdateMasive222WrhQty(Ent_tticol022 MyObj022)
+        {
+            string strError = string.Empty;
+            try
+            {
+                bool retorno = dal.UpdateMasive222(MyObj022);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
+
     }
 
 

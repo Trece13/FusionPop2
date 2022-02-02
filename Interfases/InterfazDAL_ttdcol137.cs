@@ -79,6 +79,12 @@ namespace whusa.Interfases
             return dal.Actualizartwhcol131CantStatus(ref pallet, ref status, ref qty,CWAR,LOCA,LOT);
         }
 
+        //JC 030222 Actualizar el rfid si cambió
+        public bool Actualizartwhcol133Rfid(ref string pallet, string RFID)
+        {
+            return dal.Actualizartwhcol133Rfid(ref pallet, RFID);
+        }
+
         public object Actualizarttdcol222Status(Ent_ttdcol137 data137)
         {
             throw new NotImplementedException();

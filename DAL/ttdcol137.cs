@@ -240,7 +240,35 @@ namespace whusa.DAL
             }
             return retorno;
         }
-   
+
+        //JC 030222 Actulizar el rfid si cambió
+        public bool Actualizartwhcol133Rfid(ref string pallet, string RFID)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":PAID", pallet.ToUpper());
+                paramList.Add(":RFID", RFID);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
+        }
+
         private List<Ent_ParametrosDAL> AdicionaParametrosComunes(Ent_ttdcol137 parametros, bool blnUsarPRetorno = false)
         {
             method = MethodBase.GetCurrentMethod();

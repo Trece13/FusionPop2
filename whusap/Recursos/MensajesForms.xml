@@ -389,6 +389,11 @@
               Status Pallet ID doesn't allow transfer or doesn't exist
             </stringMessage>
         </operationName>
+        <operationName name="PalletRfidNotExist">
+          <stringMessage>
+            Pallet ID doesn't have Rfid linked
+          </stringMessage>
+        </operationName>
         <operationName name="LocationTransfeCannotEqual">
           <stringMessage>
             The Location to transfer cannot be equal
@@ -441,6 +446,10 @@
           </stringMessage>
         </operationName>
         <operationName name="PalletNotExist">
+          <stringMessage>
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletRfidNotExist">
           <stringMessage>
           </stringMessage>
         </operationName>

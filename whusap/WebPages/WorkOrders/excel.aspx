@@ -28,6 +28,19 @@
             margin-bottom: 200px;
         }
     </style>
+    <div class="col-sm-10 form-inline">
+        <label class="col-sm-2 col-form-label-lg" for="txIWrh">
+            Warehouse</label>
+        <div class="col-2 p-0">
+            <input type="text" class="col-10 p-0" id="txWrh" placeholder="Warehouse">            
+        </div>
+        <div class="col-3 p-0">
+            <asp:Button  class="btn btn-primary btn-lg" ID="btnUpdate" runat="server" Text="Clean Pallets POP" />
+        </div>
+        <div class="form-group row" for="txIWrh">
+            <label id="lblError"></label>
+        </div>
+    </div>
     <div class="container">
         <input id="uploadFile" placeholder="File Name here" disabled="disabled" class="col-12 p-0" style="border-radius: 5px; height: 44px" />
         <br />
@@ -49,6 +62,8 @@
         </table>
     </div>
     <script>
+        btnUpdate = $('#Contenido_btnUpdate');
+
         dot = "."
         var totalreg = 0;
         document.getElementById("file").onInput = function () {
@@ -64,6 +79,21 @@
                 dataType: "json",
                 success: MethodSuccess
             })
+        };
+
+        function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
+            var options = {
+                type: "POST",
+                url: "excel.aspx/" + WebMethod,
+                data: Data,
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                dataType: "json",
+                success: FuncitionSucces
+            };
+            $.ajax(options);
+
+            WebMethod = "";
         };
 
         function parseCSV(text) {
@@ -164,6 +194,41 @@
                 )
             }
         }
+        //JC 280122 Limpiar los datos de cantidad y estado para la bodega seleccionada
+        btnUpdate.bind('click', function () {
+            Click_Update();
+        });
 
+        var Click_Update = function () {
+            var Data = "{'WARE':'" + $('#txWrh').val().trim() + "'}";
+            sendAjax("Click_Update", Data, SuccesClick_Update, true)
+            //EventoAjax("Click_Update", Data, SuccesClick_Update)
+       };
+
+        var SuccesClick_Update = function (r) {
+            var MyObj = JSON.parse(r.d);
+            if (MyObj.Error == true) {
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
+                alert("Data not Updated");
+            }
+            if (MyObj.Error == false) {
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.SuccessMsg);
+                alert("Data Updated");
+                }
+            };
+
+        function ImprimirMensaje(type, msg) {
+            switch (type) {
+                case "alert":
+                    alert(msg);
+                    break;
+                case "console":
+                    console.log(msg);
+                    break;
+                case "label":
+                    $('#lblError').html(msg);
+                    break;
+            }
+        };
     </script>
 </asp:Content>

@@ -32,6 +32,39 @@ namespace whusa.Interfases
             return retorno;
         }
 
+        //JC 030222 Validar si el item tiene control RFID
+        public DataTable ConsultarRegistroTransferirRfid(string ITEM)
+        {
+            DataTable retorno = new DataTable();
+
+            try
+            {
+                retorno = dal.ConsultarRegistroTransferirRfid(ITEM);
+            }
+            catch (Exception ex)
+            {
+                //throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+
+            return retorno;
+        }
+
+        public DataTable ConsultarRegistroTransferirRfidPallet(string PAID)
+        {
+            DataTable retorno = new DataTable();
+
+            try
+            {
+                retorno = dal.ConsultarRegistroTransferirRfidPallet(PAID);
+            }
+            catch (Exception ex)
+            {
+                //throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+
+            return retorno;
+        }
+
         public bool InsertarTransferencia(Ent_twhcol020 objWhcol020)
         {
 

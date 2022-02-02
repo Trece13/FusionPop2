@@ -149,6 +149,7 @@ namespace whusap.WebPages.WorkOrders
             HttpContext.Current.Session["CWAR"] = "";
             HttpContext.Current.Session["LOCA"] = "";
             HttpContext.Current.Session["QTYA"] = "";
+            HttpContext.Current.Session["RFID"] = "";
 
             string strError = string.Empty;
 
@@ -170,6 +171,7 @@ namespace whusap.WebPages.WorkOrders
                 Obj_tticol125.qtya = DtTticol125.Rows[0]["T$QTYC"].ToString();
                 Obj_tticol125.stat = DtTticol125.Rows[0]["STAT"].ToString();
                 Obj_tticol125.kltc = DtTticol125.Rows[0]["KLTC"].ToString();
+                Obj_tticol125.rfid = DtTticol125.Rows[0]["PAIDR"].ToString();
                 HttpContext.Current.Session["TABLA"] = DtTticol125.Rows[0]["TBL"].ToString();
                 HttpContext.Current.Session["PAID"] = PAID;
                 HttpContext.Current.Session["CLOT"] = Obj_tticol125.clot;
@@ -177,6 +179,7 @@ namespace whusap.WebPages.WorkOrders
                 HttpContext.Current.Session["LOCA"] = Obj_tticol125.pdno;
                 HttpContext.Current.Session["QTYA"] = Obj_tticol125.qtya;
                 HttpContext.Current.Session["STAT"] = Obj_tticol125.stat;
+                HttpContext.Current.Session["RFID"] = Obj_tticol125.rfid;
                 HttpContext.Current.Session["User"].ToString();
                 Obj_tticol125.statsTab = LstStatusTab.FindAll(e => DtTticol125.Rows[0]["TBL"].ToString().Contains(e.Table));
                 
@@ -197,7 +200,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static void save(string STAT,string CWAR,string LOCA,string QTYA,string LOT)
+        public static void save(string STAT,string CWAR,string LOCA,string QTYA,string LOT, string RFID)
         {
             string TABLA = HttpContext.Current.Session["TABLA"].ToString();
             string PALLET = HttpContext.Current.Session["PAID"].ToString();
@@ -250,6 +253,12 @@ namespace whusap.WebPages.WorkOrders
                     var STATUS = Convert.ToInt32(STAT.Trim());
                     var validateSaveWhcol131 = ITticol137.Actualizartwhcol131CantStatus(ref PALLET, ref STATUS, ref qt,CWAR,LOCA,LOT);
                 }
+                //JC 030222 Actualizar el rfid si hay cambio
+                if (HttpContext.Current.Session["RFID"].ToString().Trim() != RFID)
+                {
+                    var validateSaveWhcol133 = ITticol137.Actualizartwhcol133Rfid(ref PALLET, RFID);
+                }
+                
             //}
         }
 
