@@ -391,12 +391,49 @@ namespace whusap.WebPages.InvReceipts
                                 DataTable ConsultaPresupuestoImportacion = twhcol130DAL.ConsultaPresupuestoImportacion(ORNO);
                                 if (ConsultaPresupuestoImportacion.Rows.Count > 0 && ConsultaPresupuestoImportacion.Rows[0]["pres"].ToString().Trim() == "3")
                                 {
-                                    bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
+                                    //JC 02092022 Insertar de manera masiva los registros de la importación
+                                    //bool Insertsucces = twhcol130DAL.InsertarReseiptRawMaterial(MyObj);
+
+                                    //if (Insertsucces)
+                                    //{
+                                    //    MyObj.QTYCFinal = HttpContext.Current.Session["QuantityFinal"] != null ? HttpContext.Current.Session["QuantityFinal"].ToString() : "";
+                                    //    Retrono = JsonConvert.SerializeObject(MyObj);
+                                    //}
+                                    //else
+                                    //{
+                                    //    MyObj.error = true;
+                                    //    MyObj.errorMsg = "la insercion fue: " + Insertsucces.ToString();
+                                    //    Retrono = JsonConvert.SerializeObject(MyObj);
+                                    //}
+                                    bool Insertsucces = twhcol130DAL.MultiInsert(StrInsertMultiple);
 
                                     if (Insertsucces)
                                     {
+                                            
+                                        MyInsert.Add(MyObj);
+
+                                        if (CiclePrintBegin < CiclePrintEnd && CiclePrintEnd > 1)
+                                        {
+                                            InsertarReseiptRawMaterial(OORG, ORNO, ITEM, PONO, LOT, QUANTITY, STUN, CUNI, CWAR, FIRE, PSLIP, CICLE, false);
+                                        }
+                                        else if (CiclePrintEnd == 1)
+                                        {
+                                            HttpContext.Current.Session["MaterialDesc"] = DTOrdencompra.Rows[0]["DSCA"].ToString();
+                                            HttpContext.Current.Session["MaterialCode"] = DTOrdencompra.Rows[0]["T$ITEM"].ToString();
+                                            HttpContext.Current.Session["codePaid"] = DTOrdencompra.Rows[0]["T$ORNO"].ToString() + "-" + SecuenciaPallet;
+                                            HttpContext.Current.Session["Lot"] = LOT;
+                                            HttpContext.Current.Session["Quantity"] = MyObj.QTYC + " " + CUNI;
+                                            HttpContext.Current.Session["Origin"] = LOT;
+                                            HttpContext.Current.Session["Supplier"] = DTOrdencompra.Rows[0]["T$NAMA"].ToString();
+                                            HttpContext.Current.Session["RecibedBy"] = _operator;
+                                            HttpContext.Current.Session["RecibedOn"] = DateTime.Now.ToString();
+                                            HttpContext.Current.Session["Reprint"] = "no";
+                                            HttpContext.Current.Session["AutoPrint"] = "yes";
+                                        }
+                                        MyObj.PAIDS = PAIDS;
                                         MyObj.QTYCFinal = HttpContext.Current.Session["QuantityFinal"] != null ? HttpContext.Current.Session["QuantityFinal"].ToString() : "";
                                         Retrono = JsonConvert.SerializeObject(MyObj);
+
                                     }
                                     else
                                     {
@@ -408,7 +445,6 @@ namespace whusap.WebPages.InvReceipts
                                 else
                                 {
                                     MyObj.error = true;
-
                                     MyObj.errorMsg = ImportPOBudgetisnotclosedPOcannotberecived;
                                     Retrono = JsonConvert.SerializeObject(MyObj);
                                 }

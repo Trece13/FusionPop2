@@ -933,88 +933,89 @@
             $('#btnEnviar').show();
             $("#MyDynamicEtiqueta").empty();
             MyList = JSON.parse(r.d);
+            //JC 020920200 Evitar generar datos si se tiene un error
+            if (MyList.Error == false && MyList.error == false) {
+                if (MyList.PAIDS.length == undefined) {
+                    MyObject = JSON.parse(r.d);
+                    if (MyObject.error == false) {
+                        //Etiqueta Sin orden de compra
 
-            if (MyList.PAIDS.length == undefined) {
-                MyObject = JSON.parse(r.d);
-                if (MyObject.error == false) {
-                    //Etiqueta Sin orden de compra
+                        $('#pslip').val("");
+                        CBPalletNO.attr("src", MyObject.PAID_URL);
+                        lblItemID.html(MyObject.ITEM);
+                        lblItemDesc.html(MyObject.DSCA);
+                        LblQuantity.html(MyObject.QTYC);
+                        LblUnit.html(MyObject.UNIC);
+                        LblLotId.html(MyObject.CLOT);
+                        //LblReprint.html(MyObject.PAID.substring(10, 13));
 
-                    $('#pslip').val("");
-                    CBPalletNO.attr("src", MyObject.PAID_URL);
-                    lblItemID.html(MyObject.ITEM);
-                    lblItemDesc.html(MyObject.DSCA);
-                    LblQuantity.html(MyObject.QTYC);
-                    LblUnit.html(MyObject.UNIC);
-                    LblLotId.html(MyObject.CLOT);
-                    //LblReprint.html(MyObject.PAID.substring(10, 13));
+                        // Etiqueta orden de compra
 
-                    // Etiqueta orden de compra
+                        CBPurchaseOrder.attr("src", MyObject.ORNO_URL);
+                        CBItem.attr("src", MyObject.ITEM_URL);
+                        CBLot.attr("src", MyObject.CLOT_URL);
+                        if (MyObject.CLOT_URL == "") {
+                            CBLot.hide();
+                        }
+                        else {
+                            CBLot.show();
+                        }
+                        CBQuantity.attr("src", MyObject.QTYC_URL);
+                        CBUnit.attr("src", MyObject.UNIC_URL);
 
-                    CBPurchaseOrder.attr("src", MyObject.ORNO_URL);
-                    CBItem.attr("src", MyObject.ITEM_URL);
-                    CBLot.attr("src", MyObject.CLOT_URL);
-                    if (MyObject.CLOT_URL == "") {
-                        CBLot.hide();
+                        LblPurchaseOC.html(MyObject.ORNO);
+                        LblItemOC.html(MyObject.ITEM);
+                        LblLotOC.html(MyObject.CLOT);
+                        LblUnitOC.html(MyObject.UNIT);
+                        LblQuantityOC.html(MyObject.QTYC);
+
+                        //                if (MyObject.OORG != "2" && MyObject != undefined) {
+                        //                    //btnMyEtiqueta.show();
+                        //                }
+                        //                else if (MyObject != undefined) {
+                        //                    //btnMyEtiqueta.show();
+                        //                }
+
+                        DeshabilitarLimpiarControles();
+                        myLabelFrame = document.getElementById('myLabelFrame');
+                        if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                            myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterialME.aspx';
+                        }
+                        else {
+                            myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
+                        }
+
+
                     }
                     else {
-                        CBLot.show();
+                        console.log("El registro no se realizo");
+                        alert(MyObject.errorMsg);
                     }
-                    CBQuantity.attr("src", MyObject.QTYC_URL);
-                    CBUnit.attr("src", MyObject.UNIC_URL);
-
-                    LblPurchaseOC.html(MyObject.ORNO);
-                    LblItemOC.html(MyObject.ITEM);
-                    LblLotOC.html(MyObject.CLOT);
-                    LblUnitOC.html(MyObject.UNIT);
-                    LblQuantityOC.html(MyObject.QTYC);
-
-                    //                if (MyObject.OORG != "2" && MyObject != undefined) {
-                    //                    //btnMyEtiqueta.show();
-                    //                }
-                    //                else if (MyObject != undefined) {
-                    //                    //btnMyEtiqueta.show();
-                    //                }
-
-                    DeshabilitarLimpiarControles();
-                    myLabelFrame = document.getElementById('myLabelFrame');
-                    if (sessionStorage.getItem('nav').toString() == 'EDG') {
-                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterialME.aspx';
-                    }
-                    else {
-                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
-                    }
-
-
                 }
                 else {
-                    console.log("El registro no se realizo");
-                    alert(MyObject.errorMsg);
-                }
-            }
-            else {
-                MyList.PAIDS.forEach(function (PAID, index) {
+                    MyList.PAIDS.forEach(function (PAID, index) {
 
-                    CBPalletNOd = PAID;
-                    lblItemIDd = MyList.ITEM;
-                    lblItemDescd = MyList.DSCA;
-                    LblQuantityd = MyList.QTYC;
-                    LblUnitd = MyList.UNIC;
-                    LblLotIdd = MyList.CLOT;
-                    CBPurchaseOrderd = MyList.ORNO_URL;
-                    CBItem = MyList.ITEM_URL;
-                    CBLotd = MyList.CLOT_URL;
-                    CBQuantityd = MyList.QTYC_URL;
-                    CBUnitd = MyList.UNIC_URL;
-                    LblPurchaseOCd = MyList.ORNO;
-                    LblItemOCd = MyList.ITEM;
-                    LblLotOCd = MyList.CLOT;
-                    LblUnitOCd = MyList.UNIT;
-                    LblQuantityOCd = MyList.QTYC;
-                    LblUser = MyList.LOGN;
-                    LblSup = MyList.NAMA;
+                        CBPalletNOd = PAID;
+                        lblItemIDd = MyList.ITEM;
+                        lblItemDescd = MyList.DSCA;
+                        LblQuantityd = MyList.QTYC;
+                        LblUnitd = MyList.UNIC;
+                        LblLotIdd = MyList.CLOT;
+                        CBPurchaseOrderd = MyList.ORNO_URL;
+                        CBItem = MyList.ITEM_URL;
+                        CBLotd = MyList.CLOT_URL;
+                        CBQuantityd = MyList.QTYC_URL;
+                        CBUnitd = MyList.UNIC_URL;
+                        LblPurchaseOCd = MyList.ORNO;
+                        LblItemOCd = MyList.ITEM;
+                        LblLotOCd = MyList.CLOT;
+                        LblUnitOCd = MyList.UNIT;
+                        LblQuantityOCd = MyList.QTYC;
+                        LblUser = MyList.LOGN;
+                        LblSup = MyList.NAMA;
 
 
-                    var etiqueta =
+                        var etiqueta =
                         '<div id="myLabel" style="width: 100%; height: 100%;">' +
                         '<div class="row">' +
                         '<div class="col-6 alingLeft" style="font-size: 30px; height: 1em;">' +
@@ -1033,7 +1034,7 @@
                         '<tbody>' +
                         '<tr>' +
                         '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ?  LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ? LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
                         '</tr>' +
                         '<tr>' +
                         '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
@@ -1047,15 +1048,26 @@
                         '</table>' +
                         '</div>' +
                         '</div>';
-                    $('#MyDynamicEtiqueta').append(etiqueta);
-                }
+                        $('#MyDynamicEtiqueta').append(etiqueta);
+                    }
             );
 
-                DeshabilitarLimpiarControles();
-                printDiv('MyDynamicEtiqueta');
+                    DeshabilitarLimpiarControles();
+                    printDiv('MyDynamicEtiqueta');
 
+                }
+                //JC02092022 Evitar imprimir etiqeutas si tenemos error
             }
-
+            else {
+                if (MyList.ErrorMsg != null) {
+                    lblError.html(MyList.ErrorMsg)
+                }
+                else {
+                    if (MyList.errorMsg != null) {
+                        lblError.html(MyList.errorMsg)
+                    }
+                }
+            }
         }
 
         var SuccesQuantityUnity = function (r) {
