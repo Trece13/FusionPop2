@@ -140,7 +140,7 @@ namespace whusap.WebPages.InvReceipts
             Ent_twhcol130 MyObj131 = new Ent_twhcol130();
             MyObj131.FIRE = "1";
             MyObj131.PAID = dt130.Rows[0]["T$PAID"].ToString();
-            bool bl2 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(),"",dt130.Rows[0]["T$ORNO"].ToString(),"","","","","");
+            bool bl2 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
             bool bl1 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
             bool bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
             if (bl1 && bl2)
