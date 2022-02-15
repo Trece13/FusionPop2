@@ -130,15 +130,15 @@ namespace whusap.WebPages.InvReceipts
             string strMsg = string.Empty;
             DataTable dt133WhitPaid = ServiceRfidPop.SelectWhcol133OPaidAssing(RFID, "VA Dock");
             DataTable dt133 = ServiceRfidPop.SelectWhcol133Oss(RFID, "VA Dock");
+            if (dt133.Rows.Count <= 0)
+            {
+                strMsg = mensajes("RfidNotRegisterRealview");
+                HttpContext.Current.Session["dt133"] = dt133;
+            }
             if (dt133WhitPaid.Rows.Count > 0)
             {
                 strMsg = mensajes("RfidAlreadyLinkedPallet");
                 HttpContext.Current.Session["dt133"] = dt133WhitPaid;
-            }
-            else if (dt133.Rows.Count > 0)
-            {
-                strMsg = mensajes("RfidNotRegisterRealview");
-                HttpContext.Current.Session["dt133"] = dt133;
             }
             return strMsg;
         }
