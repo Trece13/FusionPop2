@@ -6329,7 +6329,88 @@
         </operationName>
       </Idiom>
     </Module>
-
+ <Module name="whInvReceiptRawMaterialNew.aspx">
+      <Idiom name="INGLES">
+        <operationName name="Priorinboundnotfound">
+          <stringMessage>
+            Prior inbound not found
+          </stringMessage>
+        </operationName>
+        <operationName name="ImportPOBudgetisnotclosedPOcannotberecived">
+          <stringMessage>
+            Import PO, Budget is not closed. PO cannot be recived
+          </stringMessage>
+        </operationName>
+        <operationName name="Thelotdoesnotcorrespondtotheorder">
+          <stringMessage>
+            The lot does not correspond to the order
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="Priorinboundnotfound">
+          <stringMessage>
+            Prior inbound not found
+          </stringMessage>
+        </operationName>
+        <operationName name="ImportPOBudgetisnotclosedPOcannotberecived">
+          <stringMessage>
+            Import PO, Budget is not closed. PO cannot be recived
+          </stringMessage>
+        </operationName>
+        <operationName name="Thelotdoesnotcorrespondtotheorder">
+          <stringMessage>
+            The lot does not correspond to the order
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
+    <Module name="RfidPop.aspx">
+      <Idiom name="INGLES">
+        <operationName name="RfidAlreadyLinkedPallet">
+          <stringMessage>
+            RFID Already linked to a pallet
+          </stringMessage>
+        </operationName>
+        <operationName name="RfidNotRegisterRealview">
+          <stringMessage>
+            RFID not register in realview
+          </stringMessage>
+        </operationName>
+        <operationName name="Priorinboundnotfound">
+          <stringMessage>
+            Prior inbound not found
+          </stringMessage>
+        </operationName>
+        <operationName name="ImportPOBudgetisnotclosedPOcannotberecived">
+          <stringMessage>
+            Import PO, Budget is not closed. PO cannot be recived
+          </stringMessage>
+        </operationName>
+        <operationName name="Thelotdoesnotcorrespondtotheorder">
+          <stringMessage>
+            The lot does not correspond to the order
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="Priorinboundnotfound">
+          <stringMessage>
+            Prior inbound not found
+          </stringMessage>
+        </operationName>
+        <operationName name="ImportPOBudgetisnotclosedPOcannotberecived">
+          <stringMessage>
+            Import PO, Budget is not closed. PO cannot be recived
+          </stringMessage>
+        </operationName>
+        <operationName name="Thelotdoesnotcorrespondtotheorder">
+          <stringMessage>
+            The lot does not correspond to the order
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
     <Module name="whInvReceiptRawMaterialNew.aspx">
       <Idiom name="INGLES">
         <operationName name="Priorinboundnotfound">
