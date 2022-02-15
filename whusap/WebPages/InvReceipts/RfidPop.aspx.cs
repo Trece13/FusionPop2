@@ -125,11 +125,22 @@ namespace whusap.WebPages.InvReceipts
 
 
         [WebMethod]
-        public static bool ValidarRfis(string RFID)
+        public static string ValidarRfis(string RFID)
         {
+            string strMsg = string.Empty;
+            DataTable dt133WhitPaid = ServiceRfidPop.SelectWhcol133OPaidAssing(RFID, "VA Dock");
             DataTable dt133 = ServiceRfidPop.SelectWhcol133Oss(RFID, "VA Dock");
-            HttpContext.Current.Session["dt133"] = dt133;
-            return dt133.Rows.Count > 0 ? true : false;
+            if (dt133WhitPaid.Rows.Count > 0)
+            {
+                strMsg = mensajes("RfidAlreadyLinkedPallet");
+                HttpContext.Current.Session["dt133"] = dt133WhitPaid;
+            }
+            else if (dt133.Rows.Count > 0)
+            {
+                strMsg = mensajes("RfidNotRegisterRealview");
+                HttpContext.Current.Session["dt133"] = dt133;
+            }
+            return strMsg;
         }
 
         [WebMethod]
@@ -140,7 +151,7 @@ namespace whusap.WebPages.InvReceipts
             Ent_twhcol130 MyObj131 = new Ent_twhcol130();
             MyObj131.FIRE = "1";
             MyObj131.PAID = dt130.Rows[0]["T$PAID"].ToString();
-            bool bl2 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
+            bool bl2 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(),dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
             bool bl1 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
             bool bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
             if (bl1 && bl2)
@@ -167,7 +178,7 @@ namespace whusap.WebPages.InvReceipts
         {
             Mensajes mensajesForm = new Mensajes();
             string idioma = "INGLES";
-            var retorno = mensajesForm.readStatement("whInvReceiptRawMaterialNew.aspx", idioma, ref tipoMensaje);
+            var retorno = mensajesForm.readStatement("RfidPop.aspx", idioma, ref tipoMensaje);
 
             if (retorno.Trim() == String.Empty)
             {

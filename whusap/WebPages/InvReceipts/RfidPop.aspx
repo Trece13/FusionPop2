@@ -265,13 +265,13 @@
 
             };
             let ValidarRfisSucces = function (r) {
-                if (r.d == true) {
-                    btnEnviar.removeAttribute("disabled");
-                    lblError.innerHTML = "";
+                if (r.d.trim() != "") {
+                    btnEnviar.setAttribute("disabled", 'disabled');
+                    lblError.innerHTML = r.d;
                 }
                 else {
-                    btnEnviar.setAttribute("disabled", 'disabled');
-                    lblError.innerHTML = "Rfid not register in real view";
+                    btnEnviar.removeAttribute("disabled");
+                    lblError.innerHTML = "";
                 }
 
             };
