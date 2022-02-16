@@ -29,6 +29,7 @@ namespace whusap.WebPages.WorkOrders
         public static string PCLOT = string.Empty;
         private static string globalMessages = "GlobalMessages";
         public static string PalletIDdoesntexist = mensajes("PalletIDdoesntexist");
+        public static string PalletIDStatusDelivered = mensajes("PalletIDStatusDelivered");
         public static string ItemcodeisnotPurchaseType = mensajes("ItemcodeisnotPurchaseType");
         public static string Lotcodedoesntexist = mensajes("Lotcodedoesntexist");
         public static string Warehousecodedoesntexist = mensajes("Warehousecodedoesntexist");
@@ -111,55 +112,66 @@ namespace whusap.WebPages.WorkOrders
 
             if (DTPalletID.Rows.Count > 0)
             {
-                Obj131.MCNO = DTPalletID.Rows[0]["MCNO"].ToString();
-                Obj131.DSCA = DTPalletID.Rows[0]["DSCA"].ToString();
-                Obj131.KLTC = DTPalletID.Rows[0]["KLTC"].ToString();
-                Obj131.SLOC = DTPalletID.Rows[0]["SLOC"].ToString();
-                Obj131.DESCAW = DTPalletID.Rows[0]["DESCAW"].ToString();
-                Obj131.OORG = DTPalletID.Rows[0]["OORG"].ToString();
-                Obj131.ORNO = DTPalletID.Rows[0]["ORNO"].ToString();
-                Obj131.ITEM = DTPalletID.Rows[0]["ITEM"].ToString();
-                Obj131.PAID = DTPalletID.Rows[0]["PAID"].ToString();
-                Obj131.PONO = DTPalletID.Rows[0]["PONO"].ToString();
-                Obj131.SEQN = DTPalletID.Rows[0]["SEQN"].ToString();
-                Obj131.LOT = DTPalletID.Rows[0]["LOT"].ToString();
-                Obj131.CWAR = DTPalletID.Rows[0]["CWAR"].ToString();
-                Obj131.QTYS = DTPalletID.Rows[0]["QTYS"].ToString();
-                Obj131.UNIT = DTPalletID.Rows[0]["UNIT"].ToString();
-                Obj131.QTYC = DTPalletID.Rows[0]["QTYC"].ToString();
-                Obj131.UNIC = DTPalletID.Rows[0]["UNIC"].ToString();
-                Obj131.DATT = DTPalletID.Rows[0]["DATT"].ToString();
-                Obj131.CONF = DTPalletID.Rows[0]["CONF"].ToString();
-                Obj131.RCNO = DTPalletID.Rows[0]["RCNO"].ToString();
-                Obj131.DATR = DTPalletID.Rows[0]["DATR"].ToString();
-                Obj131.LOCA = DTPalletID.Rows[0]["LOCA"].ToString();
-                Obj131.DATL = DTPalletID.Rows[0]["DATL"].ToString();
-                Obj131.PICK = DTPalletID.Rows[0]["PICK"].ToString();
-                Obj131.DATK = DTPalletID.Rows[0]["DATK"].ToString();
-                Obj131.PRNT = DTPalletID.Rows[0]["PRNT"].ToString();
-                Obj131.DATP = DTPalletID.Rows[0]["DATP"].ToString();
-                Obj131.NPRT = DTPalletID.Rows[0]["NPRT"].ToString();
-                Obj131.DRPT = DTPalletID.Rows[0]["DRPT"].ToString();
-                Obj131.LOGR = DTPalletID.Rows[0]["LOGR"].ToString();
-                Obj131.LOGN = DTPalletID.Rows[0]["LOGN"].ToString();
-                Obj131.LOGP = DTPalletID.Rows[0]["LOGP"].ToString();
-                Obj131.LOGT = DTPalletID.Rows[0]["LOGT"].ToString();
-                Obj131.DAFR = DTPalletID.Rows[0]["DAFR"].ToString();
-                Obj131.MES1 = DTPalletID.Rows[0]["MES1"].ToString();
-                Obj131.DAFL = DTPalletID.Rows[0]["DAFL"].ToString();
-                Obj131.MES2 = DTPalletID.Rows[0]["MES2"].ToString();
-                Obj131.FIRE = DTPalletID.Rows[0]["FIRE"].ToString();
-                Obj131.CWAA = DTPalletID.Rows[0]["CWAA"].ToString();
-                Obj131.LOAA = DTPalletID.Rows[0]["LOAA"].ToString();
-                Obj131.QTYT = DTPalletID.Rows[0]["QTYT"].ToString();
-                Obj131.STAT = DTPalletID.Rows[0]["STAT"].ToString();
-                Obj131.PSNO = DTPalletID.Rows[0]["PSNO"].ToString();
-                Obj131.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
-                Obj131.REFCNTD = DTPalletID.Rows[0]["REFCNTD"].ToString();
-                Obj131.REFCNTU = DTPalletID.Rows[0]["REFCNTU"].ToString();
-                Obj131.error = false;
+                                //JC 16022022 Validar el estado delivered para que no lo deje volver a tomar para recibirlo
+                if (DTPalletID.Rows[0]["STAT"].ToString() == "9")
+                {
+                    Obj131.Error = true;
+                    Obj131.TypeMsgJs = "label";
 
-                HttpContext.Current.Session["MyPalletTwhcol13"] = Obj131;
+                    Obj131.ErrorMsg = PalletIDStatusDelivered;
+                }
+                else
+                {
+                    Obj131.MCNO = DTPalletID.Rows[0]["MCNO"].ToString();
+                    Obj131.DSCA = DTPalletID.Rows[0]["DSCA"].ToString();
+                    Obj131.KLTC = DTPalletID.Rows[0]["KLTC"].ToString();
+                    Obj131.SLOC = DTPalletID.Rows[0]["SLOC"].ToString();
+                    Obj131.DESCAW = DTPalletID.Rows[0]["DESCAW"].ToString();
+                    Obj131.OORG = DTPalletID.Rows[0]["OORG"].ToString();
+                    Obj131.ORNO = DTPalletID.Rows[0]["ORNO"].ToString();
+                    Obj131.ITEM = DTPalletID.Rows[0]["ITEM"].ToString();
+                    Obj131.PAID = DTPalletID.Rows[0]["PAID"].ToString();
+                    Obj131.PONO = DTPalletID.Rows[0]["PONO"].ToString();
+                    Obj131.SEQN = DTPalletID.Rows[0]["SEQN"].ToString();
+                    Obj131.LOT = DTPalletID.Rows[0]["LOT"].ToString();
+                    Obj131.CWAR = DTPalletID.Rows[0]["CWAR"].ToString();
+                    Obj131.QTYS = DTPalletID.Rows[0]["QTYS"].ToString();
+                    Obj131.UNIT = DTPalletID.Rows[0]["UNIT"].ToString();
+                    Obj131.QTYC = DTPalletID.Rows[0]["QTYC"].ToString();
+                    Obj131.UNIC = DTPalletID.Rows[0]["UNIC"].ToString();
+                    Obj131.DATT = DTPalletID.Rows[0]["DATT"].ToString();
+                    Obj131.CONF = DTPalletID.Rows[0]["CONF"].ToString();
+                    Obj131.RCNO = DTPalletID.Rows[0]["RCNO"].ToString();
+                    Obj131.DATR = DTPalletID.Rows[0]["DATR"].ToString();
+                    Obj131.LOCA = DTPalletID.Rows[0]["LOCA"].ToString();
+                    Obj131.DATL = DTPalletID.Rows[0]["DATL"].ToString();
+                    Obj131.PICK = DTPalletID.Rows[0]["PICK"].ToString();
+                    Obj131.DATK = DTPalletID.Rows[0]["DATK"].ToString();
+                    Obj131.PRNT = DTPalletID.Rows[0]["PRNT"].ToString();
+                    Obj131.DATP = DTPalletID.Rows[0]["DATP"].ToString();
+                    Obj131.NPRT = DTPalletID.Rows[0]["NPRT"].ToString();
+                    Obj131.DRPT = DTPalletID.Rows[0]["DRPT"].ToString();
+                    Obj131.LOGR = DTPalletID.Rows[0]["LOGR"].ToString();
+                    Obj131.LOGN = DTPalletID.Rows[0]["LOGN"].ToString();
+                    Obj131.LOGP = DTPalletID.Rows[0]["LOGP"].ToString();
+                    Obj131.LOGT = DTPalletID.Rows[0]["LOGT"].ToString();
+                    Obj131.DAFR = DTPalletID.Rows[0]["DAFR"].ToString();
+                    Obj131.MES1 = DTPalletID.Rows[0]["MES1"].ToString();
+                    Obj131.DAFL = DTPalletID.Rows[0]["DAFL"].ToString();
+                    Obj131.MES2 = DTPalletID.Rows[0]["MES2"].ToString();
+                    Obj131.FIRE = DTPalletID.Rows[0]["FIRE"].ToString();
+                    Obj131.CWAA = DTPalletID.Rows[0]["CWAA"].ToString();
+                    Obj131.LOAA = DTPalletID.Rows[0]["LOAA"].ToString();
+                    Obj131.QTYT = DTPalletID.Rows[0]["QTYT"].ToString();
+                    Obj131.STAT = DTPalletID.Rows[0]["STAT"].ToString();
+                    Obj131.PSNO = DTPalletID.Rows[0]["PSNO"].ToString();
+                    Obj131.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
+                    Obj131.REFCNTD = DTPalletID.Rows[0]["REFCNTD"].ToString();
+                    Obj131.REFCNTU = DTPalletID.Rows[0]["REFCNTU"].ToString();
+                    Obj131.error = false;
+
+                    HttpContext.Current.Session["MyPalletTwhcol13"] = Obj131;
+                }                
             }
             else
             {

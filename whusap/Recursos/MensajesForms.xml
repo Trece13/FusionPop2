@@ -5913,6 +5913,11 @@
             Pallet ID doesn´t exist
           </stringMessage>
         </operationName>
+        <operationName name="PalletIDStatusDelivered">
+          <stringMessage>
+            Pallet ID not allowed due has delivered status
+          </stringMessage>
+        </operationName>
         <operationName name="ItemcodeisnotPurchaseType">
           <stringMessage>
             Item code is not Purchase Type
@@ -5948,6 +5953,11 @@
         <operationName name="PalletIDdoesntexist">
           <stringMessage>
             Pallet ID doesn´t exist
+          </stringMessage>
+        </operationName>
+        <operationName name="PalletIDStatusDelivered">
+          <stringMessage>
+            Pallet ID no permitido porque el estado es Entregado
           </stringMessage>
         </operationName>
         <operationName name="ItemcodeisnotPurchaseType">
