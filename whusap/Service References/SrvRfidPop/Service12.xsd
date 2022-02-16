@@ -251,6 +251,7 @@
         <xs:element minOccurs="0" name="EVNT" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="LOGN" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="PROC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PRINT" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

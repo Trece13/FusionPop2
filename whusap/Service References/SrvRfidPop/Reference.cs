@@ -49,7 +49,7 @@ namespace whusap.SrvRfidPop {
         void InitProcRfid022(string RFID, string EVNT, string LOGN, string PROC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InitProcRfid025", ReplyAction="http://tempuri.org/IService1/InitProcRfid025Response")]
-        void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC);
+        void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC, string PRINT);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Updtwhcol133RfidSS", ReplyAction="http://tempuri.org/IService1/Updtwhcol133RfidSSResponse")]
         bool Updtwhcol133RfidSS(string PAID, string RFID);
@@ -129,8 +129,8 @@ namespace whusap.SrvRfidPop {
             base.Channel.InitProcRfid022(RFID, EVNT, LOGN, PROC);
         }
         
-        public void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC) {
-            base.Channel.InitProcRfid025(RFID, EVNT, LOGN, PROC);
+        public void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC, string PRINT) {
+            base.Channel.InitProcRfid025(RFID, EVNT, LOGN, PROC, PRINT);
         }
         
         public bool Updtwhcol133RfidSS(string PAID, string RFID) {
