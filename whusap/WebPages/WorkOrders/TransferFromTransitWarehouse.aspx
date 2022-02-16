@@ -358,8 +358,8 @@
 
         var SuccesVerificarPalletID = function (r) {
             var MyObj = JSON.parse(r.d);
-            if (MyObj.error == true) {
-                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+            if (MyObj.Error == true) {
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
                 //                $('#lblWorkOrder').html("");
                 $('#lblItem').val("");
                 $('#lblItemDsca').html("");
@@ -409,11 +409,11 @@
 
         var SuccesVerificarItem = function (r) {
             var MyObj = JSON.parse(r.d);
-            if (MyObj.error == true) {
-                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+            if (MyObj.Error == true) {
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
                 BloquearComponentes();
             }
-            if (MyObj.error == false) {
+            if (MyObj.Error == false) {
                 $('#lblError').html("");
                 lblItem.val(MyObj.dsca);
                 lblItem.html(MyObj.dsca);
@@ -438,11 +438,11 @@
 
         var SuccesVerificarLote = function (r) {
             var MyObj = JSON.parse(r.d);
-            if (MyObj.error == true) {
-                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+            if (MyObj.Error == true) {
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
                 $('#txWarehouseCrrnt').prop("disabled", true);
             }
-            if (MyObj.error == false) {
+            if (MyObj.Error == false) {
                 $('#lblError').html("");
                 $('#txWarehouseCrrnt').prop("disabled", false);
             }
@@ -451,7 +451,7 @@
         var SuccesVerificarWarehouseTrgt = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.Error == true) {
-                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
                 $('#txLocationTrgt').prop("disabled", true);
             }
             if (MyObj.Error == false) {
@@ -486,10 +486,10 @@
 
         var SuccesVerificarQuantity = function (r) {
             var MyObj = JSON.parse(r.d);
-            if (MyObj.error == true) {
-                ImprimirMensaje(MyObj.typeMsgJs, MyObj.errorMsg);
+            if (MyObj.Error == true) {
+                ImprimirMensaje(MyObj.TypeMsgJs, MyObj.ErrorMsg);
             }
-            if (MyObj.error == false) {
+            if (MyObj.Error == false) {
                 $('#lblError').html("");
                 if ($('#txQuantity').val() > 0 && $('#txQuantity').val() <= parseInt(MyObj.stks, 10)) {
                     $('#btnTransfer').prop("disabled", false);
@@ -497,7 +497,7 @@
                 }
                 else {
                     $('#btnTransfer').prop("disabled", true);
-                    ImprimirMensaje(MyObj.typeMsgJs, MyObj.SuccessMsg);
+                    ImprimirMensaje(MyObjy.TypeMsgJs, MyObj.SuccessMsg);
                 }
             }
         }
@@ -534,7 +534,7 @@
             }
             else {
                 console.log("El registro no se realizo");
-                alert(MyObject.errorMsg);
+                alert(MyObject.ErrorMsg);
             }
 
         }
@@ -672,7 +672,7 @@
 
             if (MyList.PAIDS.length == undefined) {
                 MyObject = JSON.parse(r.d);
-                if (MyObject.error == false) {
+                if (MyObject.Error == false) {
                     //Etiqueta Sin orden de compra
 
                     $('#pslip').val("");
@@ -724,7 +724,7 @@
                 }
                 else {
                     console.log("El registro no se realizo");
-                    alert(MyObject.errorMsg);
+                    alert(MyObject.ErrorMsg);
                 }
             }
             else {

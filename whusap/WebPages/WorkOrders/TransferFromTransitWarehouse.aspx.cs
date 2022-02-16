@@ -105,6 +105,7 @@ namespace whusap.WebPages.WorkOrders
         {
             HttpContext.Current.Session["MyPalletTwhcol13"] = null;
             string strError = string.Empty;
+            PAID = PAID.ToUpper();
             DataTable DTPalletID = twhcol130DAL.VerificarPalletIDTwhcol131(ref PAID);
             Ent_twhcol130131 Obj131 = new Ent_twhcol130131();
 
@@ -162,10 +163,10 @@ namespace whusap.WebPages.WorkOrders
             }
             else
             {
-                Obj131.error = true;
-                Obj131.typeMsgJs = "label";
+                Obj131.Error = true;
+                Obj131.TypeMsgJs = "label";
 
-                Obj131.errorMsg = PalletIDdoesntexist;
+                Obj131.ErrorMsg = PalletIDdoesntexist;
             }
 
 
@@ -425,7 +426,8 @@ namespace whusap.WebPages.WorkOrders
             Double QtyPallets = Convert.ToDouble(Paids.Trim() == string.Empty ? "1" : Paids.Trim());
             Double Parcials = qtyReal / QtyPallets;
             Decimal QUANTITY = 0;
-            int CantPalletsComp = Convert.ToInt32(Parcials);
+            //int CantPalletsComp = Convert.ToInt32(Parcials);
+            double CantPalletsComp = Math.Truncate(Parcials);
             double CantParcPallets = Parcials - CantPalletsComp;
             if (CantParcPallets == 0)
             {
@@ -559,7 +561,7 @@ namespace whusap.WebPages.WorkOrders
             {
                 Ent_twhcol020 objWhcol020 = new Ent_twhcol020();
                 objWhcol020.tbl = "";
-                objWhcol020.clot = "";
+                objWhcol020.clot = MyObj131Base.LOT == string.Empty ? " " : MyObj131Base.LOT;
                 objWhcol020.sqnb = MyObj131Base.PAID;
                 objWhcol020.mitm = MyObj131Base.ITEM;
                 objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);

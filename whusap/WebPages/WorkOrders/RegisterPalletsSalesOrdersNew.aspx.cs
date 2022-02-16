@@ -257,8 +257,8 @@ namespace whusap.WebPages.WorkOrders
                 if (HttpContext.Current.Session["RFID"].ToString().Trim() != RFID)
                 {
                     var validateSaveWhcol133 = ITticol137.Actualizartwhcol133Rfid(ref PALLET, RFID);
-                    SrvRfidPop.Service1Client SrvRfidPopWcf = new SrvRfidPop.Service1Client();
-                    bool validateSaveWhcol133Ss = SrvRfidPopWcf.Updtwhcol133RfidSS(PALLET, RFID);
+                    SrvRfidPop.Service1Client SrvRfidPop = new SrvRfidPop.Service1Client();
+                    bool validateSaveWhcol133Ss = SrvRfidPop.Updtwhcol133RfidSS(PALLET, RFID);
                 }
                 
             //}
