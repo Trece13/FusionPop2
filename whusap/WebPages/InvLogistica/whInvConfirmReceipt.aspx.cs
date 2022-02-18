@@ -87,6 +87,12 @@ namespace whusap.WebPages.InvLogistica
                 }
             }
 
+
+            protected void btnClear_Click(object sender, EventArgs e)
+            {
+                divTable.Visible = false;
+            }
+
             protected void btnConsultar_Click(object sender, EventArgs e)
             {   
                 //JC 091221 Se Mueven estas variables al entorno locar y no dejarlas publicas
@@ -98,6 +104,7 @@ namespace whusap.WebPages.InvLogistica
 
                 if (txtNumeroOrden.Text.Trim() != String.Empty)
                 {
+                    Session["numeroOrdenPallet"] = txtNumeroOrden.Text.Trim().ToUpper();
                     var numeroOrdenPallet = txtNumeroOrden.Text.Trim().ToUpper();
                     var numeroOrden = numeroOrdenPallet.Substring(0, 9);
                     var pro1 = true;
@@ -194,6 +201,11 @@ namespace whusap.WebPages.InvLogistica
             protected void btnGuardar_Click(object sender, EventArgs e)
             {
                 //JC 091221 Grabar las variables de sesion en variables tipo string
+                if (Session["numeroOrdenPallet"] != txtNumeroOrden.Text.Trim().ToUpper())
+                {
+                    divTable.Visible = false;
+                    return;
+                }
                 string CWARG = "";
                 string LOCAG = "";
                 CWARG = HttpContext.Current.Session["CWAR"].ToString();
