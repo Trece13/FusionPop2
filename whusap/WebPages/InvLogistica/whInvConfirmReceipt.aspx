@@ -2,6 +2,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script type="text/javascript">
+        function hidediv() {
+            var v = document.getElementById("Contenido_divTable");
+                if (v.style.display === "none") {
+                 v.style.display = "block";
+                } else {
+                    v.style.display = "none";
+                }
+            };
+
         function validarOrden() {
             var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
             var re = new RegExp(regex);
@@ -48,7 +57,7 @@
             </td>
             <td style="width: 250px; padding: 5px;">
                 <span style="vertical-align: middle;">
-                    <asp:TextBox runat="server" ID="txtNumeroOrden" CssClass="TextBoxBig" onblur="validarOrden();" ClientIDMode="Static" />
+                    <asp:TextBox runat="server" ID="txtNumeroOrden" CssClass="TextBoxBig" onblur="validarOrden();" onchange="hidediv();" ClientIDMode="Static" />
                 </span>
             </td>
         </tr>
