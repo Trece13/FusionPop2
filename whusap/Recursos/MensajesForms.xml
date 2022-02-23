@@ -3225,7 +3225,112 @@
         </operationName>
       </Idiom>
     </Module>
-
+    <Module name="whInvConfirmReceiptWm.aspx">
+      <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Confirm Receipt
+          </stringMessage>
+        </operationName>
+        <operationName name="palletannounced">
+          <stringMessage>
+            Pallet has not been announced or Pallet has been delete
+          </stringMessage>
+        </operationName>
+        <operationName name="palletwrapped">
+          <stringMessage>
+            Pallet has not been wrapped.
+          </stringMessage>
+        </operationName>
+        <operationName name="palletstatus">
+          <stringMessage>
+            Pallet has been rejected, can't confirm.
+          </stringMessage>
+        </operationName>
+        <operationName name="palletconfirmed">
+          <stringMessage>
+            Pallet was already confirmed.
+          </stringMessage>
+        </operationName>
+        <operationName name="orderisnotactive">
+          <stringMessage>
+            Order is not active. Please try again with right information
+          </stringMessage>
+        </operationName>
+        <operationName name="confirmedquantity">
+          <stringMessage>
+            Confirmed quantity ( {0} ) is greater that pending quantity to be confirmed ( {1} ), Please try again with right information.
+          </stringMessage>
+        </operationName>
+        <operationName name="quantityzero">
+          <stringMessage>
+            Confirmed quantity can not be zero. Please try again with right information.
+          </stringMessage>
+        </operationName>
+        <operationName name="quantitynegative">
+          <stringMessage>
+            Negative quantities are not allowed to be confirmed in this device
+          </stringMessage>
+        </operationName>
+        <operationName name="orderconfirmed">
+          <stringMessage>
+            Production order and secuence pallete was already confirm.
+          </stringMessage>
+        </operationName>
+      </Idiom>
+      <Idiom name="ESPAÑOL">
+        <operationName name="encabezado">
+          <stringMessage>
+            Confirmar Recepción
+          </stringMessage>
+        </operationName>
+        <operationName name="palletannounced">
+          <stringMessage>
+            Pallet no ha sido anunciado or El Pallet fue borrado
+          </stringMessage>
+        </operationName>
+        <operationName name="palletwrapped">
+          <stringMessage>
+            Pallet no ha sido envuelto
+          </stringMessage>
+        </operationName>
+        <operationName name="palletstatus">
+          <stringMessage>
+            Pallet ha sido rechazado, no se puede confirmar.
+          </stringMessage>
+        </operationName>
+        <operationName name="palletconfirmed">
+          <stringMessage>
+            Pallet ya ha sido confirmado.
+          </stringMessage>
+        </operationName>
+        <operationName name="orderisnotactive">
+          <stringMessage>
+            La orden no se encuentra activa. Por favor intente nuevamente con la información correcta.
+          </stringMessage>
+        </operationName>
+        <operationName name="confirmedquantity">
+          <stringMessage>
+            La cantidad confirmada ( {0} ) es maypr qie la cantidad pendiente por confirmar ( {1} ). Por favor intente nuevamente con la información correcta.
+          </stringMessage>
+        </operationName>
+        <operationName name="quantityzero">
+          <stringMessage>
+            La cantidad confirmada no puede ser cero. Por favor intente nuevamente con la información correcta.
+          </stringMessage>
+        </operationName>
+        <operationName name="quantitynegative">
+          <stringMessage>
+            No se encuentran permitidas las cantidades negativas.
+          </stringMessage>
+        </operationName>
+        <operationName name="orderconfirmed">
+          <stringMessage>
+            La orden de producción y secuencia pallet ya se encuentran confirmadas.
+          </stringMessage>
+        </operationName>
+      </Idiom>
+    </Module>
     <Module name="whInvSugUbicacion.aspx">
       <Idiom name="INGLES">
         <operationName name="encabezado">
