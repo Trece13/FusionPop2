@@ -420,15 +420,15 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           (
           SELECT LTRIM((LPAD((COUNT(T$PDNO) + 1),3,'0')), '0') CANT
           FROM {2}
-          WHERE T$PDNO = '[:T$PDNO]'
+          WHERE T$PDNO = UPPER('[:T$PDNO]')
           UNION
           SELECT LTRIM((LPAD((COUNT(T$PDNO) + 1),3,'0')), '0') CANT
           FROM {0}.tticol022{1}
-          WHERE T$PDNO = '[:T$PDNO]'
+          WHERE T$PDNO = UPPER('[:T$PDNO]')
           UNION
           SELECT LTRIM((LPAD((COUNT(T$ORNO) + 1),3,'0')), '0') CANT
           FROM {0}.twhcol131{1}
-          WHERE T$ORNO = '[:T$PDNO]'
+          WHERE T$ORNO = UPPER('[:T$PDNO]')
           )
         </stringSQL>
       </operationName>
