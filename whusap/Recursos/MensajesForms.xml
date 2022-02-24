@@ -6444,7 +6444,7 @@
         </operationName>
       </Idiom>
     </Module>
- <Module name="whInvReceiptRawMaterialNew.aspx">
+    <Module name="whInvReceiptRawMaterialNew.aspx">
       <Idiom name="INGLES">
         <operationName name="Priorinboundnotfound">
           <stringMessage>
@@ -6526,43 +6526,6 @@
         </operationName>
       </Idiom>
     </Module>
-    <Module name="whInvReceiptRawMaterialNew.aspx">
-      <Idiom name="INGLES">
-        <operationName name="Priorinboundnotfound">
-          <stringMessage>
-            Prior inbound not found
-          </stringMessage>
-        </operationName>
-        <operationName name="ImportPOBudgetisnotclosedPOcannotberecived">
-          <stringMessage>
-            Import PO, Budget is not closed. PO cannot be recived
-          </stringMessage>
-        </operationName>
-        <operationName name="Thelotdoesnotcorrespondtotheorder">
-          <stringMessage>
-            The lot does not correspond to the order
-          </stringMessage>
-        </operationName>
-      </Idiom>
-      <Idiom name="ESPAÑOL">
-        <operationName name="Priorinboundnotfound">
-          <stringMessage>
-            Prior inbound not found
-          </stringMessage>
-        </operationName>
-        <operationName name="ImportPOBudgetisnotclosedPOcannotberecived">
-          <stringMessage>
-            Import PO, Budget is not closed. PO cannot be recived
-          </stringMessage>
-        </operationName>
-        <operationName name="Thelotdoesnotcorrespondtotheorder">
-          <stringMessage>
-            The lot does not correspond to the order
-          </stringMessage>
-        </operationName>
-      </Idiom>
-    </Module>
-
     <Module name="whInvReprintReceiptRawMaterial.aspx">
       <Idiom name="INGLES">
         <operationName name="ThePalletIDdoesnotexist">
