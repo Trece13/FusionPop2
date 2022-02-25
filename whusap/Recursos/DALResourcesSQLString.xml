@@ -3779,6 +3779,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           /*CAMPOS EXCLUIDOS DEL ENVIO DE INFORMAION(NO PUEDEN SER NULOS )*/'0',sysdate+5/24,' ',sysdate+5/24,' ',sysdate+5/24,' ','0','0','[:T$CWAA]',sysdate+5/24,'[:T$FIRE]','[:T$LOAA]',' ','[:T$QTYA]','[:T$PSNO]','[:T$ALLO]')
         </stringSQL>
       </operationName>
+      <operationName name="Updateqtystwhcol131">
+        <stringSQL>
+          UPDATE {0}.TWHCOL131{1} SET T$QTYS = ':QTYS',T$QTYC = ':QTYC' WHERE TRIM(T$PAID) = TRIM(':PAID')
+        </stringSQL>
+      </operationName>
       <operationName name="ListaPurchaseOrders">
         <stringSQL>
           --LOCAL FORMATO FECHA DD/MM/YYYY  Servidor MM/DD/YYYY

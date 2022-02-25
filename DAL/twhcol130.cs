@@ -1428,6 +1428,30 @@ namespace whusa.Interfases
         }
 
 
+        public bool Updateqtystwhcol131(Ent_twhcol130131 MyObj)
+        {
+            bool retorno = false;
+
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":PAID", MyObj.PAID);
+            paramList.Add(":QTYC", MyObj.QTYC);
+            paramList.Add(":QTYS", MyObj.QTYS);
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+             try
+            {
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError("My Query" + strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+
+            }
+
+            return retorno;
+        }
+
         public DataTable ListaPurchaseOrder(string ORNO)
         {
             method = MethodBase.GetCurrentMethod();

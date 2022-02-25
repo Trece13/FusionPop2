@@ -421,6 +421,11 @@ namespace whusa.Interfases
             return dal.Insertartwhcol131(MyObj);
         }
 
+        public bool Updateqtystwhcol131(Ent_twhcol130131 MyObj)
+        {
+            return dal.Updateqtystwhcol131(MyObj);
+        }
+
         public List<DataTable> ListasOrderType(string ORNO, string TYPE_ORNO)
         {
             List<DataTable> ListasOrderType = new List<DataTable>();
