@@ -80,7 +80,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="button" class="btn btn-primary btn-sm col-8" value="Save" id ="btnGuardar"/></td>
+                        <input type="button" class="btn btn-success btn-lg col-12" value="Save" id ="btnGuardar"/></td>
                     <td></td>
                 </tr>
             </tbody>
