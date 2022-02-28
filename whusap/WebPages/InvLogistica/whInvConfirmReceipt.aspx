@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
     <script type="text/javascript">
-        function hidediv() {
+          function hidediv() {
             var v = document.getElementById("Contenido_divTable");
                 if (v.style.display === "none") {
                  v.style.display = "block";

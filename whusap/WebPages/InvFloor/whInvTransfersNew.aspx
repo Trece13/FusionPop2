@@ -355,8 +355,8 @@
                     document.getElementById("txPalletID"+ MyObjWarehoouse.row).setAttribute("valid", false);
                 }
                 else {
-                    if (document.getElementById("txbCurrentWarehouse" + MyObjWarehoouse.row).value.trim() === document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.row).value.trim() && document.getElementById("txbTargetLocation" + MyObjWarehoouse.row).value.trim() === document.getElementById("txbCurrentLocation" + MyObjWarehoouse.row).value.trim()) {
-                        document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", false);
+                    if (document.getElementById("txbCurrentWarehouse" + MyObjWarehoouse.row).value.trim().toUpperCase() === document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.row).value.trim().toUpperCase() && document.getElementById("txbTargetLocation" + MyObjWarehoouse.row).value.trim().toUpperCase() === document.getElementById("txbCurrentLocation" + MyObjWarehoouse.row).value.trim().toUpperCase()) {
+                        document.getElementById("txPalletID" + MyObjWarehoouse.row).setAttribute("valid", false);
                         document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = "Warehouse / Location cannot be the same";
                     }
                     else {
@@ -373,7 +373,7 @@
             if (r.d != undefined) {
                 MyObjWarehoouse = JSON.parse(r.d);
                 if (MyObjWarehoouse.Error == true) {
-                    document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = MyObjWarehoouse.ErrorMsg;
+                    document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = MyObjWarehoouse.ErrorMsg;
                     document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).value = "";
                     document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).disabled = true;
                     document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", false);
@@ -527,7 +527,8 @@
                 "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbTargetLocation" + i + "' placeholder='Locate' oninput='VerificarLocation(" + i + ")' disabled/></td>" +
                 "<td><input type='button' class='btn btn-lg btn-success col-12 input'  onclick='CleanPalletID(" + i + "); return false;' value='Change Pallet ID'></button></td>" +
                 "<td><input type='button' class='btn btn-lg btn-primary col-12 input' id='btnTransfer" + i + "' onclick='CleanPalletID(" + i + "); return false;' value='Transfer' style='display:none'></button></td>" +
-                (i == 0 ? "<td><input type='button' class='btn btn-primary btn-lg col-sm-1' id='btnTransfer' value='Transfer' style='position:fixed' onclick='SendTransfer()'/></td>" : "<td></td>");
+                (i == 0 ? "<td><input type='button' class='btn btn-lg btn-primary col-12 input' id='btnTransfer' value='Transfer' onclick='SendTransfer()'/></td>" : "<td></td>");
+                // style='position:fixed'  btn btn-primary btn-lg col-sm-1
             }
         }
         CargarRegistros();
