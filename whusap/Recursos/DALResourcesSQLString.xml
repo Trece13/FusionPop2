@@ -3781,7 +3781,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="Updateqtystwhcol131">
         <stringSQL>
-          UPDATE {0}.TWHCOL131{1} SET T$QTYS = ':QTYS',T$QTYC = ':QTYC' WHERE TRIM(T$PAID) = TRIM(':PAID')
+          UPDATE {0}.TWHCOL131{1} SET T$QTYS = '[:QTYS]',T$QTYC = '[:QTYC]' WHERE TRIM(T$PAID) = TRIM('[:PAID]')
         </stringSQL>
       </operationName>
       <operationName name="ListaPurchaseOrders">

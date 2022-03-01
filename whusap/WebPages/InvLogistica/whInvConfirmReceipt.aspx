@@ -4,12 +4,12 @@
     <script type="text/javascript">
         function hidediv() {
             var v = document.getElementById("Contenido_divTable");
-                if (v.style.display === "none") {
-                 v.style.display = "block";
-                } else {
-                    v.style.display = "none";
-                }
-            };
+            if (v.style.display === "none") {
+                v.style.display = "block";
+            } else {
+                v.style.display = "none";
+            }
+        };
 
         function validarOrden() {
             var regex = /^-?\d*[0-9]*[.]?[0-9]*$/;
@@ -50,6 +50,15 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <table border="0">
         <tr>
+            <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Left addon</span>
+        </div>
+        <input type="text" class="form-control">
+        <div class="input-group-append">
+            <span class="input-group-text">Right addon</span>
+        </div>
+    </div>
             <td style="text-align: left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
                     <b style="font-size: 11px;">
@@ -70,7 +79,6 @@
     </table>
 
     <div runat="server" id="divTable" visible="false">
-        <hr />
         <div style="text-align: left;">
             <asp:Button Text="" runat="server" ID="btnGuardar" OnClick="btnGuardar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
         </div>

@@ -119,7 +119,7 @@
         <label id="lblError">
         </label>
     </div>
-    <div class="form-group row" id="DivPaids">
+    <div class="form-group row" id="DivPaids" style="display:none">
         <table class="table col-12">
             <thead>
                 <tr>
@@ -331,7 +331,7 @@
 
             return true;
         };
-
+        var paidsUdp = 0;
         var timer;
         function stoper() {
 
@@ -425,6 +425,10 @@
             $('#txPalletID').prop("disabled", false);
             $('#DivPaids').hide(100);
             $("#tbody tr").remove();
+            $('#txQuantityTotal').val("");
+            $('#txQuantityPaidTotal').val("");
+            $('#txWarehouseTrgt').val("");
+            $('#txLocationTrgt').val("");
         });
 
         var SuccesVerificarItem = function (r) {
@@ -610,7 +614,7 @@
                 url: "TransferFromTransitWarehouseNew.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
-                async: true,
+                async: asyncMode != false ? true: false,
                 dataType: "json",
                 success: FuncitionSucces
             };
@@ -685,29 +689,59 @@
             }
         }
 
-        var saveQty = function (i) {
-            var qty = $('#txQty'+i).val()
-            var paid = $('#Paid' + i).val()
-            if (qty > 0) {
-                var Data = "{'qty':'" + qty + "','paid':'" + paid + "'}";
-                sendAjax("SaveQty", Data, saveQtySucces);
+        var saveQty = function (paids) {
+            for (let i = 0 ; i < paids; i++) {
+                var qty = $('#txQty' + i).val()
+                var paid = $('#Paid' + i).html()
+                if (qty > 0) {
+                    var Data = "{'qty':'" + qty + "','paid':'" + paid + "'}";
+                    sendAjax("SaveQty", Data, saveQtySucces,false);
+                }
             }
+            if (paidsUdp == parseInt(localStorage.getItem("NmrPaids"))) {
+                alert("Save success");
+                paidsUdp = 0;
+                $('#DivPaids').hide(100);
+                $("#tbody tr").remove();
+                $('#btnClear').click();
+            }
+            else {
+                alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
+            }
+            
         }
 
         var saveQtySucces = function (r) {
             if (r.d) {
-                alert("Save success");
+                paidsUdp++;
+                
+            }          
+        }
+
+        let verifyQty = function (i) {
+            let sumcount = 0;
+            let TtlQty = parseFloat(localStorage.getItem("TtlQty"));
+            let NmrPaids = parseInt(localStorage.getItem("NmrPaids"));
+            for (var j = 0 ; j < NmrPaids; j++) {
+                sumcount += parseFloat($("#txQty" + j).val());
+            }
+            if (sumcount <= TtlQty) {
+                $("#btnSaver" + i).show(100);
             }
             else {
-                alert("Save failed");
+                for (var j = 0 ; j < NmrPaids; j++) {
+                    $("#btnSaver" +j).hide(100);
+                }
             }
             
         }
 
         var TransferSucces = function (r) {
+            localStorage.setItem("TtlQty", $('#txQuantityTotal').val());
+            localStorage.setItem("NmrPaids", $('#txQuantityPaidTotal').val());
             $("#MyDynamicEtiqueta").empty();
             MyList = JSON.parse(r.d);
-
+            
             if (MyList.PAIDS.length == undefined) {
                 MyObject = JSON.parse(r.d);
                 if (MyObject.Error == false) {
@@ -787,7 +821,7 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + index + '</th><td id="Paid'+i+'">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + i + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '"></td><td><input type="button" class="btn btn-primary col-12" id="btnClear'+i+'" onclick="saveQty('+i+') value="save"></td></tr>');
+                    $('#tbody').append('<tr><th scope="row">' + index + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="number" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '" oninput="verifyQty(' + index + ')" ></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
                     var etiqueta =
                         '<div id="myLabel" style="width: 100%; height: 100%;">' +
                         '<div class="row">' +
