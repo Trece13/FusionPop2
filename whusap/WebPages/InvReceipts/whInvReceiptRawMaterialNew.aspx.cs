@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 using System.Data;
 using System.Configuration;
 using whusa.Entidades;
-using whusa.Interfases;
+//using whusa.Interfases;
 using System.Globalization;
 using System.Threading;
 using whusa.Utilidades;

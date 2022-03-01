@@ -184,36 +184,36 @@ namespace whusap.WebPages.InvFloor
                 else
                 {
                                         //JC 030222 Validar si el item es de RFID que el pallet este asociado a un RFID
-                    DataTable Rfid = Transfers.ConsultarRegistroTransferirRfid(Transferencias.Rows[0]["T$ITEM"].ToString().Trim());
+                    //DataTable Rfid = Transfers.ConsultarRegistroTransferirRfid(Transferencias.Rows[0]["T$ITEM"].ToString().Trim());
 
-                    if (Rfid.Rows[0]["T$RFID"].ToString().Trim() == "1")
-                    {
-                        DataTable RfidPallet = Transfers.ConsultarRegistroTransferirRfidPallet(PAID);
+                    //if (Rfid.Rows[0]["T$RFID"].ToString().Trim() == "1")
+                    //{
+                    //    DataTable RfidPallet = Transfers.ConsultarRegistroTransferirRfidPallet(PAID);
 
-                        if (RfidPallet.Rows.Count > 0)
-                        {
-                            objWhcol020.tbl = Transferencias.Rows[0]["TBL"].ToString().Trim();
-                            objWhcol020.sloc = Transferencias.Rows[0]["SLOC"].ToString();
-                            objWhcol020.clot = Transferencias.Rows[0]["T$ORNO"].ToString().Trim();
-                            objWhcol020.sqnb = Transferencias.Rows[0]["T$PAID"].ToString().Trim();
-                            objWhcol020.mitm = Transferencias.Rows[0]["T$ITEM"].ToString().Trim();
-                            objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);
-                            objWhcol020.cwor = Transferencias.Rows[0]["T$CWAR"].ToString().Trim();
-                            objWhcol020.loor = Transferencias.Rows[0]["T$LOCA"].ToString().Trim();
-                            objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
-                            objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
-                            objWhcol020.user = HttpContext.Current.Session["user"].ToString();
-                        }
-                        else
-                        {
-                            objWhcol020.Error = true;
-                            objWhcol020.ErrorMsg = PalletRfidNotExist;
-                            objWhcol020.TipeMsgJs = "lbl";
-                            objWhcol020.row = ROW;
-                        }
-                    }
-                    else
-                    {
+                    //    if (RfidPallet.Rows.Count > 0)
+                    //    {
+                    //        objWhcol020.tbl = Transferencias.Rows[0]["TBL"].ToString().Trim();
+                    //        objWhcol020.sloc = Transferencias.Rows[0]["SLOC"].ToString();
+                    //        objWhcol020.clot = Transferencias.Rows[0]["T$ORNO"].ToString().Trim();
+                    //        objWhcol020.sqnb = Transferencias.Rows[0]["T$PAID"].ToString().Trim();
+                    //        objWhcol020.mitm = Transferencias.Rows[0]["T$ITEM"].ToString().Trim();
+                    //        objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);
+                    //        objWhcol020.cwor = Transferencias.Rows[0]["T$CWAR"].ToString().Trim();
+                    //        objWhcol020.loor = Transferencias.Rows[0]["T$LOCA"].ToString().Trim();
+                    //        objWhcol020.qtdl = Convert.ToDouble(Transferencias.Rows[0]["T$QTYC"].ToString().Trim());
+                    //        objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
+                    //        objWhcol020.user = HttpContext.Current.Session["user"].ToString();
+                    //    }
+                    //    else
+                    //    {
+                    //        objWhcol020.Error = true;
+                    //        objWhcol020.ErrorMsg = PalletRfidNotExist;
+                    //        objWhcol020.TipeMsgJs = "lbl";
+                    //        objWhcol020.row = ROW;
+                    //    }
+                    //}
+                    //else
+                    //{
                         objWhcol020.tbl = Transferencias.Rows[0]["TBL"].ToString().Trim();
                         objWhcol020.sloc = Transferencias.Rows[0]["SLOC"].ToString();
                         objWhcol020.clot = Transferencias.Rows[0]["T$ORNO"].ToString().Trim();
@@ -226,7 +226,7 @@ namespace whusap.WebPages.InvFloor
                         objWhcol020.cuni = Transferencias.Rows[0]["T$CUNI"].ToString().Trim();
                         objWhcol020.user = HttpContext.Current.Session["user"].ToString();
                         objWhcol020.row = ROW;
-                    }
+                    //}
                 }
                 //}
             }

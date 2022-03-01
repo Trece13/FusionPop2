@@ -47,7 +47,7 @@ namespace whusap.WebPages.InvReceipts
         private static Mensajes _mensajesForm = new Mensajes();
         private static string globalMessages = "GlobalMessages";
         public static decimal QUANTITYAUX_COMPLETADA;
-        public static bool rfid = Convert.ToBoolean(ConfigurationManager.AppSettings["rfid"]);
+        //public static bool rfid = Convert.ToBoolean(ConfigurationManager.AppSettings["rfid"]);
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -363,7 +363,7 @@ namespace whusap.WebPages.InvReceipts
                             FIRE = FIRE,
                             PSLIP = PSLIP.ToUpper(),
                             PROC = "2",
-                            RFID = " ",
+                            //RFID = " ",
                             EVNT = " ",
                             REFCNTD = "0",
                             REFCNTU = "0",
