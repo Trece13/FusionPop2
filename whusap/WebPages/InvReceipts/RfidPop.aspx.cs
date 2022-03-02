@@ -18,7 +18,7 @@ using whusa.Utilidades;
 using System.Web.Configuration;
 using System.Reflection;
 using System.Diagnostics;
-
+using System.Net;
 namespace whusap.WebPages.InvReceipts
 {
     public partial class RfidPop : System.Web.UI.Page
@@ -128,20 +128,31 @@ namespace whusap.WebPages.InvReceipts
         public static string ValidarRfis(string RFID)
         {
             string strMsg = string.Empty;
-            DataTable dt133WhitPaid = ServiceRfidPop.SelectWhcol133OPaidAssing(RFID, "VA Dock");
-            DataTable dt133 = ServiceRfidPop.SelectWhcol133Oss(RFID, "VA Dock");
-            HttpContext.Current.Session["dt133"] = dt133;
-            if (dt133.Rows.Count <= 0)
+            //JC 020322 Validar si el web service esta arriba
+            string ws = WebConfigurationManager.AppSettings["ws"].ToString();  
+            var respuesta = WebSiteIsAvailable(ws);
+            if (respuesta != false)
             {
-                strMsg = mensajes("RfidNotRegisterRealview");
-                //HttpContext.Current.Session["dt133"] = dt133;
-            }
-            if (dt133WhitPaid.Rows.Count > 0)
+                DataTable dt133WhitPaid = ServiceRfidPop.SelectWhcol133OPaidAssing(RFID, "VA Dock");
+                DataTable dt133 = ServiceRfidPop.SelectWhcol133Oss(RFID, "VA Dock");
+                HttpContext.Current.Session["dt133"] = dt133;
+                if (dt133.Rows.Count <= 0)
+                {
+                    strMsg = mensajes("RfidNotRegisterRealview");
+                    //HttpContext.Current.Session["dt133"] = dt133;
+                }
+                if (dt133WhitPaid.Rows.Count > 0)
+                {
+                    strMsg = mensajes("RfidAlreadyLinkedPallet");
+                    //HttpContext.Current.Session["dt133"] = dt133WhitPaid;
+                }
+                return strMsg;
+            } //JC 020322 Mensaje cuando el web service no esté disponible.
+            else
             {
-                strMsg = mensajes("RfidAlreadyLinkedPallet");
-                //HttpContext.Current.Session["dt133"] = dt133WhitPaid;
-            }
-            return strMsg;
+                strMsg = mensajes("Rfidnotalive");
+                return strMsg;
+            }            
         }
 
         [WebMethod]
@@ -188,6 +199,29 @@ namespace whusap.WebPages.InvReceipts
 
             return retorno;
         }
+        //JC 020322 Función para determinar si el web service está disponible
+        private static bool WebSiteIsAvailable(string Url)
+        {
+            string Message = string.Empty;
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(Url);
 
+            // Set the credentials to the current user account
+            request.Credentials = System.Net.CredentialCache.DefaultCredentials;
+            request.Method = "GET";
+
+            try
+            {
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    // Do nothing; we're only testing to see if we can get the response
+                }
+            }
+            catch (WebException ex)
+            {
+                Message += ((Message.Length > 0) ? "\n" : "") + ex.Message;
+            }
+
+            return (Message.Length == 0);
+        }
     }
 }
