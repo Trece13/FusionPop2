@@ -538,13 +538,14 @@ namespace whusap.WebPages.WorkOrders
             MyObj131Base.PAIDS_URLS.Clear();
             MyObj131Base.PAIDS.Clear();
             Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
-            Double qtyReal = Convert.ToDouble(QtyReal);
+            decimal qtyReal = Convert.ToDecimal(QtyReal);
             int PaidsInt = Convert.ToInt32(Paids);
-            Double QtyPallets = qtyReal / PaidsInt;
-            Double Parcials = qtyReal / QtyPallets;
-            Decimal QUANTITY = 0;
-            double CantPalletsComp = Math.Truncate(Parcials);
-            double CantParcPallets = Parcials - CantPalletsComp;
+            decimal QtyPallets = Decimal.Round((qtyReal / PaidsInt), 4);
+            decimal QtyPalletFin = (qtyReal - (QtyPallets * PaidsInt)) + QtyPallets;
+            decimal Parcials = qtyReal / QtyPallets;
+            decimal QUANTITY = 0;
+            decimal CantPalletsComp = Math.Truncate(Parcials);
+            decimal CantParcPallets = Parcials - CantPalletsComp;
             if (CantParcPallets == 0)
             {
                 CantParcPallets = 0;
@@ -601,8 +602,8 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.PAID = MyObj131Base.ORNO + "-" + SecuenciaPallet;
                 MyObj.CWAR = TargetCwar;
                 MyObj.LOCA = TargetLoca;
-                MyObj.QTYS = QtyPallets.ToString();
-                MyObj.QTYC = QtyPallets.ToString();
+                MyObj.QTYS = QtyPallets.ToString().Replace(",",".");
+                MyObj.QTYC = QtyPallets.ToString().Replace(",", ".");
                 MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
                 MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
                 MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
@@ -611,7 +612,8 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.LOGT = " ";
                 MyObj.CWAA = TargetCwar;
                 MyObj.LOAA = TargetLoca;
-                MyObj.QTYA = QtyPallets.ToString();
+                MyObj.QTYA = QtyPallets.ToString().Replace(",", ".");
+                MyObj.QTYAF = i == PaidsInt-1 ? QtyPalletFin.ToString().Replace(",","."):QtyPallets.ToString().Replace(",", ".");
                 MyObj.QTYAS.Add(MyObj.QTYA);
                 MyObj.PAIDS.Add(MyObj.PAID);
                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";

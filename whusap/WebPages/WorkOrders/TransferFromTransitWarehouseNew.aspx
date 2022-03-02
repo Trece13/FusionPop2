@@ -790,7 +790,15 @@
             }
         }
 
-        let verifyQty = function (i) {
+        let verifyQty = function (evnt, i) {
+            if (document.getElementById('txQty' + i).value.indexOf('.') != -1) {
+                var decimals = document.getElementById('txQty' + i).value.substring(document.getElementById('txQty' + i).value.indexOf('.') + 1).trim()
+                if ( decimals != "") {
+                    if (decimals.length > 4) {
+                        document.getElementById('txQty' + i).value = parseFloat(document.getElementById('txQty' + i).value).toFixed(4);
+                    }
+                }
+            }
             let sumcount = 0;
             let TtlQty = parseFloat(localStorage.getItem("TtlQty"));
             let NmrPaids = parseInt(localStorage.getItem("NmrPaids"));
@@ -799,10 +807,12 @@
             }
             if (sumcount == TtlQty) {
                 $("#btnSaver" + i).fadeIn(100);
+                $('#lblError').html("")
             }
             else {
                 for (var j = 0 ; j < NmrPaids; j++) {
-                    $("#btnSaver" +j).fadeOut(100);
+                    $("#btnSaver" + j).fadeOut(100);
+                    $('#lblError').html("Total qty paids: "+sumcount);
                 }
             }
             
@@ -1022,7 +1032,7 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + (index+1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="number" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '" oninput="verifyQty(' + index + ')" ></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
+                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
                     //var etiqueta =
                     //    '<div id="myLabel" style="width: 100%; height: 100%;">' +
                     //    '<div class="row">' +

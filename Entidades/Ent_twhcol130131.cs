@@ -167,5 +167,7 @@ namespace whusa
 
         public string RFID { get; set; }
         public string EVNT { get; set; }
+
+        public string QTYAF { get; set; }
     }
 }
