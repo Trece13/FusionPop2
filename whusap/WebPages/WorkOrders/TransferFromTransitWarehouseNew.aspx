@@ -84,7 +84,7 @@
             <label class="col-sm-2 col-form-label-lg" for="txQuantityPaidTotal">
                 Pallet´s</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txQuantityPaidTotal" placeholder="Qty for Pallets">
+                <input type="text" class="form-control form-control-lg" id="txQuantityPaidTotal" placeholder="Qty of Pallets">
             </div>
         </div>
         <div class="form-group row">
