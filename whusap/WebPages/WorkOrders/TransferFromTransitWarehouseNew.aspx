@@ -800,7 +800,7 @@
                 }
             }
             let sumcount = 0;
-            let TtlQty = parseFloat(localStorage.getItem("TtlQty"));
+            let TtlQty = parseFloat(localStorage.getItem("TtlQty")).toFixed(4);
             let NmrPaids = parseInt(localStorage.getItem("NmrPaids"));
             for (var j = 0 ; j < NmrPaids; j++) {
                 sumcount += parseFloat($("#txQty" + j).val());
@@ -948,6 +948,7 @@
 
         }
         var ProcessSucces = function (r) {
+            $("#tbody tr").remove();
             localStorage.setItem("TtlQty", $('#txQuantityTotal').val());
             localStorage.setItem("NmrPaids", $('#txQuantityPaidTotal').val());
             $("#MyDynamicEtiqueta").empty();
@@ -1032,7 +1033,7 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
+                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" '+((index == 0)? '':'style="display:none"' )+' value="save" ></td></tr>');
                     //var etiqueta =
                     //    '<div id="myLabel" style="width: 100%; height: 100%;">' +
                     //    '<div class="row">' +
