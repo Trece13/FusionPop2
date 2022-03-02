@@ -29,6 +29,9 @@
         .form-group {
             margin-bottom: 1.5rem;
         }
+        #DivPaids{
+            margin-bottom:1000px;
+        }
     </style>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
@@ -108,7 +111,7 @@
         </div>--%>
 
         <div class="form-group row">
-            <input id="btnTransfer" type="button" class="btn btn-primary btn-lg col-6" value="Transfer" />
+            <input id="btnProcess" type="button" class="btn btn-primary btn-lg col-6" value="Prosses" />
         </div>
         <div class="form-group row">
             <div id="MyDynamicEtiqueta">
@@ -355,7 +358,7 @@
             //lblWarehouse = $('#lblWarehouse');
             lblQuantity = $('#lblQuantity');
 
-            btnTransfer = $('#btnTransfer');
+            btnProcess = $('#btnProcess');
 
         };
 
@@ -369,7 +372,7 @@
             $('#txWarehouseCrrnt').prop("disabled", true);
             //$('#txLocationCrrnt').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
 
         };
         BloquearComponentes();
@@ -516,11 +519,11 @@
             if (MyObj.Error == false) {
                 $('#lblError').html("");
                 if ($('#txQuantity').val() > 0 && $('#txQuantity').val() <= parseInt(MyObj.stks, 10)) {
-                    $('#btnTransfer').prop("disabled", false);
+                    $('#btnProcess').prop("disabled", false);
 
                 }
                 else {
-                    $('#btnTransfer').prop("disabled", true);
+                    $('#btnProcess').prop("disabled", true);
                     ImprimirMensaje(MyObjy.TypeMsgJs, MyObj.SuccessMsg);
                 }
             }
@@ -552,7 +555,7 @@
                 //$('#txLocationCrrnt').val("");
                 $('#txQuantity').val("");
                 $('#lblQuantity').html("");
-                $('#btnTransfer').prop("disabled", true);
+                $('#btnProcess').prop("disabled", true);
                 alert("Registration was successful");
             }
             else {
@@ -564,38 +567,38 @@
 
 
         var VerificarPalletID = function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             var Data = "{'PAID':'" + $('#txPalletID').val() + "'}";
             sendAjax("VerificarPalletID", Data, SuccesVerificarPalletID)
         }
 
 
         var VerificarItem = function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             var Data = "{'ITEM':'" + $('#txItem').val() + "'}";
             sendAjax("VerificarItem", Data, SuccesVerificarItem)
         }
 
         var VerificarLote = function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             var Data = "{'ITEM':'" + $('#txItem').val() + "','CLOT':'" + $('#txLot').val() + "'}";
             sendAjax("VerificarLote", Data, SuccesVerificarLote)
         }
 
         var VerificarWarehouse = function (cware, SuccessMethod) {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             var Data = "{'CWAR':'" + cware.toUpperCase().trim() + "'}";
             sendAjax("VerificarWarehouse", Data, SuccessMethod)
         }
 
         var VerificarLocation = function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             var Data = "{'CWAR':'" + $('#txWarehouseTrgt').val() + "','LOCA':'" + $('#txLocationTrgt').val() + "'}";
             sendAjax("VerificarLocation", Data, SuccesVerificarLocation)
         }
 
         var VerificarQuantity = function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             var Data = "{'CWAR':'" + $('#txWarehouseCrrnt').val() + "','ITEM':'" + $('#lblItem').val() + "','LOCA':'" + $('#txLocationCrrnt').val() + "','CLOT':'" + (ktlc == "1" ? $('#lblWorkOrder').html() : " ") + "'}";
             sendAjax("VerificarQuantity", Data, SuccesVerificarQuantity)
         }
@@ -603,10 +606,16 @@
         var Click_Transfer = function () {
 
             var Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Paids':'" + $('#txQuantityPaidTotal').val() + "','TargetCwar':'" + $('#txWarehouseTrgt').val() + "','TargetLoca':'" + $('#txLocationTrgt').val() + "'}";
-            sendAjax("Click_Transfer", Data, TransferSucces);
+            sendAjax("Click_TransferP1", Data, TransferSucces);
 
         }
 
+        var Click_Process = function () {
+
+            var Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Paids':'" + $('#txQuantityPaidTotal').val() + "','TargetCwar':'" + $('#txWarehouseTrgt').val() + "','TargetLoca':'" + $('#txLocationTrgt').val() + "'}";
+            sendAjax("Click_Process", Data, ProcessSucces);
+
+        }
 
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
@@ -635,13 +644,13 @@
         });
 
         txWarehouseTrgt.bind('paste input', function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             stoper();
             timer = setTimeout("VerificarWarehouse('" + txWarehouseTrgt.val() + "',SuccesVerificarWarehouseTrgt)", 1000);
         });
 
         txLocationTrgt.bind('paste input', function () {
-            $('#btnTransfer').prop("disabled", true);
+            $('#btnProcess').prop("disabled", true);
             stoper();
             timer = setTimeout("VerificarLocation()", 1000);
         });
@@ -661,31 +670,36 @@
             VerificarForm();
         })
 
-        btnTransfer.bind('click', function () {
-            Click_Transfer();
+        //btnTransfer.bind('click', function () {
+        //    Click_Transfer();
+        //});
+
+        btnProcess.bind('click', function () {
+            Click_Process();
         });
 
+        
 
         var VerificarForm = function () {
             if (parseFloat($("#txQuantityTotal").val()) > parseFloat($("#txQuantity").val())) {
                 $('#lblError').html("Total Quantity Real is greater than allowed");
-                $('#btnTransfer').prop("disabled", true);
+                $('#btnProcess').prop("disabled", true);
             }
             else if ($("#txQuantityTotal").val().trim() == "") {
                 $('#lblError').html("Total Quantity Real is Empty");
-                $('#btnTransfer').prop("disabled", true);
+                $('#btnProcess').prop("disabled", true);
             }
             else if (parseFloat($("#txQuantityPaidTotal").val()) <= 0) {
-                $('#btnTransfer').prop("disabled", true);
+                $('#btnProcess').prop("disabled", true);
             }
             else if (warehouseValid == false) {
-                $('#btnTransfer').prop("disabled", true);
+                $('#btnProcess').prop("disabled", true);
             }
             else if (locationValid == false) {
-                $('#btnTransfer').prop("disabled", true);
+                $('#btnProcess').prop("disabled", true);
             }
             else {
-                $('#btnTransfer').prop("disabled", false);
+                $('#btnProcess').prop("disabled", false);
             }
         }
 
@@ -694,28 +708,89 @@
                 var qty = $('#txQty' + i).val()
                 var paid = $('#Paid' + i).html()
                 if (qty > 0) {
-                    var Data = "{'qty':'" + qty + "','paid':'" + paid + "'}";
-                    sendAjax("SaveQty", Data, saveQtySucces,false);
+                    var Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Qty':'" + qty + "','Paid':'" + paid + "','TargetCwar':'" + $('#txWarehouseTrgt').val() + "','TargetLoca':'" + $('#txLocationTrgt').val() + "','final':'" + (i == (paids-1) ? true : false) + "'}";
+                    sendAjax("Click_TransferP1", Data, (i == (paids - 1) ? saveQtySucces : null), false);
                 }
-            }
-            if (paidsUdp == parseInt(localStorage.getItem("NmrPaids"))) {
-                alert("Save success");
-                paidsUdp = 0;
-                $('#DivPaids').hide(100);
-                $("#tbody tr").remove();
-                $('#btnClear').click();
-            }
-            else {
-                alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
-            }
-            
+            }            
         }
 
         var saveQtySucces = function (r) {
-            if (r.d) {
-                paidsUdp++;
-                
-            }          
+            paidsUdp = 0;
+            $("#MyDynamicEtiqueta").empty();
+            let myList131 = JSON.parse(r.d);
+            myList131.forEach(function (MyObj, index) {
+                if (MyList.Error == false) {
+                    paidsUdp += 1;
+                }
+                CBPalletNOd = MyObj.PAID_URL;
+                lblItemIDd = MyObj.ITEM;
+                lblItemDescd = MyObj.DSCA;
+                LblQuantityd = MyObj.QTYA;
+                LblUnitd = MyObj.UNIC;
+                LblLotIdd = MyObj.CLOT;
+                CBPurchaseOrderd = MyObj.ORNO_URL;
+                CBItem = MyObj.ITEM_URL;
+                CBLotd = MyObj.CLOT_URL;
+                CBQuantityd = MyObj.QTYC_URL;
+                CBUnitd = MyObj.UNIC_URL;
+                LblPurchaseOCd = MyObj.ORNO;
+                LblItemOCd = MyObj.ITEM;
+                LblLotOCd = MyObj.CLOT;
+                LblUnitOCd = MyObj.UNIT;
+                LblQuantityOCd = MyObj.QTYA;
+                LblUser = MyList.LOGN;
+                LblSup = MyList.NAMA;
+
+                var etiqueta =
+                    '<div id="myLabel" style="width: 100%; height: 100%;">' +
+                    '<div class="row">' +
+                    '<div class="col-6 alingLeft" style="font-size: 30px; height: 1em;">' +
+                    '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
+                    '</div>' +
+                    '<div class="col-4 alingRight" style="font-size: 30px; height: 1em;">' +
+                    '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
+                    '</div>' +
+                    '</div>' +
+                    '<br />' +
+                    '<div class="col-10 borderTop" id="divBarcode">' +
+                    '<img src="' + CBPalletNOd + '" id="codePaid" alt="" style="margin-left:50px; width:680px"/>' +
+                    '</div>' +
+                    '<div>' +
+                    '<table class="table mw-100">' +
+                    '<tbody>' +
+                    '<tr>' +
+                    '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
+                    '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ? LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
+                    '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblSup + '</label></td>' +
+                    '</tr>' +
+                    '<tr>' +
+                    '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
+                    '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyList.DATE + '</label></td>' +
+                    '</tr>' +
+                    '</tbody>' +
+                    '</table>' +
+                    '</div>' +
+                    '</div>';
+                $('#MyDynamicEtiqueta').append(etiqueta);
+            })
+            printDiv('MyDynamicEtiqueta');
+
+            if (paidsUdp == parseInt(localStorage.getItem("NmrPaids"))) {
+                $('#DivPaids').hide(100);
+                $("#tbody tr").remove();
+                $('#btnClear').click();
+                alert("Save success");
+
+            }
+            else {
+                $('#DivPaids').hide(100);
+                $("#tbody tr").remove();
+                $('#btnClear').click();
+                alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
+            }
         }
 
         let verifyQty = function (i) {
@@ -821,7 +896,6 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + index + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="number" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '" oninput="verifyQty(' + index + ')" ></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
                     var etiqueta =
                         '<div id="myLabel" style="width: 100%; height: 100%;">' +
                         '<div class="row">' +
@@ -861,6 +935,136 @@
 
                 //DeshabilitarLimpiarControles();
                 printDiv('MyDynamicEtiqueta');
+                $('#DivPaids').show(100);
+
+            }
+
+        }
+        var ProcessSucces = function (r) {
+            localStorage.setItem("TtlQty", $('#txQuantityTotal').val());
+            localStorage.setItem("NmrPaids", $('#txQuantityPaidTotal').val());
+            $("#MyDynamicEtiqueta").empty();
+            MyList = JSON.parse(r.d);
+
+            if (MyList.PAIDS.length == undefined) {
+                MyObject = JSON.parse(r.d);
+                if (MyObject.Error == false) {
+                    //Etiqueta Sin orden de compra
+
+                    $('#pslip').val("");
+                    CBPalletNO.attr("src", MyObject.PAID_URL);
+                    lblItemID.html(MyObject.ITEM);
+                    lblItemDesc.html(MyObject.DSCA);
+                    LblQuantity.html(MyObject.QTYC);
+                    LblUnit.html(MyObject.UNIC);
+                    LblLotId.html(MyObject.CLOT);
+                    //LblReprint.html(MyObject.PAID.substring(10, 13));
+
+                    // Etiqueta orden de compra
+
+                    CBPurchaseOrder.attr("src", MyObject.ORNO_URL);
+                    CBItem.attr("src", MyObject.ITEM_URL);
+                    CBLot.attr("src", MyObject.CLOT_URL);
+                    if (MyObject.CLOT_URL == "") {
+                        CBLot.hide();
+                    }
+                    else {
+                        CBLot.show();
+                    }
+                    CBQuantity.attr("src", MyObject.QTYC_URL);
+                    CBUnit.attr("src", MyObject.UNIC_URL);
+
+                    LblPurchaseOC.html(MyObject.ORNO);
+                    LblItemOC.html(MyObject.ITEM);
+                    LblLotOC.html(MyObject.CLOT);
+                    LblUnitOC.html(MyObject.UNIT);
+                    LblQuantityOC.html(MyObject.QTYC);
+
+                    //                if (MyObject.OORG != "2" && MyObject != undefined) {
+                    //                    //btnMyEtiqueta.show();
+                    //                }
+                    //                else if (MyObject != undefined) {
+                    //                    //btnMyEtiqueta.show();
+                    //                }
+
+                    DeshabilitarLimpiarControles();
+                    myLabelFrame = document.getElementById('myLabelFrame');
+                    if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterialME.aspx';
+                    }
+                    else {
+                        myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
+                    }
+
+
+                }
+                else {
+                    console.log("El registro no se realizo");
+                    alert(MyObject.ErrorMsg);
+                }
+            }
+            else {
+                MyList.PAIDS.forEach(function (PAID, index) {
+
+                    CBPalletNOd = MyList.PAIDS_URLS[index];
+                    lblItemIDd = MyList.ITEM;
+                    lblItemDescd = MyList.DSCA;
+                    LblQuantityd = MyList.QTYAS[index];
+                    LblUnitd = MyList.UNIC;
+                    LblLotIdd = MyList.CLOT;
+                    CBPurchaseOrderd = MyList.ORNO_URL;
+                    CBItem = MyList.ITEM_URL;
+                    CBLotd = MyList.CLOT_URL;
+                    CBQuantityd = MyList.QTYC_URL;
+                    CBUnitd = MyList.UNIC_URL;
+                    LblPurchaseOCd = MyList.ORNO;
+                    LblItemOCd = MyList.ITEM;
+                    LblLotOCd = MyList.CLOT;
+                    LblUnitOCd = MyList.UNIT;
+                    LblQuantityOCd = MyList.QTYAS[index];
+                    LblUser = MyList.LOGN;
+                    LblSup = MyList.NAMA;
+
+                    $('#tbody').append('<tr><th scope="row">' + index+1 + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="number" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '" oninput="verifyQty(' + index + ')" ></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
+                    //var etiqueta =
+                    //    '<div id="myLabel" style="width: 100%; height: 100%;">' +
+                    //    '<div class="row">' +
+                    //    '<div class="col-6 alingLeft" style="font-size: 30px; height: 1em;">' +
+                    //    '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
+                    //    '</div>' +
+                    //    '<div class="col-4 alingRight" style="font-size: 30px; height: 1em;">' +
+                    //    '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
+                    //    '</div>' +
+                    //    '</div>' +
+                    //    '<br />' +
+                    //    '<div class="col-10 borderTop" id="divBarcode">' +
+                    //    '<img src="' + CBPalletNOd + '" id="codePaid" alt="" style="margin-left:50px; width:680px"/>' +
+                    //    '</div>' +
+                    //    '<div>' +
+                    //    '<table class="table mw-100">' +
+                    //    '<tbody>' +
+                    //    '<tr>' +
+                    //    '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
+                    //    '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ? LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
+                    //    '</tr>' +
+                    //    '<tr>' +
+                    //    '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
+                    //    '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblSup + '</label></td>' +
+                    //    '</tr>' +
+                    //    '<tr>' +
+                    //    '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
+                    //    '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyList.DATE + '</label></td>' +
+                    //    '</tr>' +
+                    //    '</tbody>' +
+                    //    '</table>' +
+                    //    '</div>' +
+                    //    '</div>';
+                    //$('#MyDynamicEtiqueta').append(etiqueta);
+                }
+            );
+
+                //DeshabilitarLimpiarControles();
+                //printDiv('MyDynamicEtiqueta');
                 $('#DivPaids').show(100);
 
             }
