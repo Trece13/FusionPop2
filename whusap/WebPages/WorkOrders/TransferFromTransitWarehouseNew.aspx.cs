@@ -275,7 +275,7 @@ namespace whusap.WebPages.WorkOrders
         [WebMethod]
         public static string VerificarWarehouse(string CWAR)
         {
-
+            Ent_twhcol130131 MyObj131Base = (Ent_twhcol130131)HttpContext.Current.Session["MyPalletTwhcol13"];
             string strError = string.Empty;
 
             Ent_ttwhcol016 Obj_twhcol016 = new Ent_ttwhcol016();
@@ -300,6 +300,12 @@ namespace whusap.WebPages.WorkOrders
                 else
                 {
                     Obj_twhcol016.sloc = string.Empty;
+                    if (MyObj131Base.CWAR == CWAR)
+                    {
+                        Obj_twhcol016.Error = true;
+                        Obj_twhcol016.TypeMsgJs = "label";
+                        Obj_twhcol016.ErrorMsg = "Warehouse / Location can't be the same";
+                    }
                 }
             }
             else
@@ -317,6 +323,7 @@ namespace whusap.WebPages.WorkOrders
         public static string VerificarLocation(string CWAR, string LOCA)
         {
 
+            Ent_twhcol130131 MyObj131Base = (Ent_twhcol130131)HttpContext.Current.Session["MyPalletTwhcol13"];
 
             string strError = string.Empty;
             Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
@@ -330,9 +337,18 @@ namespace whusap.WebPages.WorkOrders
                 {
                     if (DtTransfer.Rows[0]["BINB"].ToString() == "2")
                     {
-                        Obj_twhwmd200.Error = false;
-                        Obj_twhwmd200.TypeMsgJs = "console";
-                        Obj_twhwmd200.SuccessMsg = "Location Encontrado";
+                        if (MyObj131Base.LOCA.ToUpper().Trim() != LOCA.ToUpper().Trim())
+                        {
+                            Obj_twhwmd200.Error = false;
+                            Obj_twhwmd200.TypeMsgJs = "console";
+                            Obj_twhwmd200.SuccessMsg = "Location Encontrado";
+                        }
+                        else{
+                            Obj_twhwmd200.Error = true;
+                            Obj_twhwmd200.TypeMsgJs = "label";
+                            Obj_twhwmd200.ErrorMsg = "Warehouse / Location can't be the same";
+                        }
+                        
                     }
                     else
                     {
@@ -482,8 +498,8 @@ namespace whusap.WebPages.WorkOrders
             MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
             MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
             MyObj.LOGT = " ";
-            MyObj.CWAA = TargetCwar;
-            MyObj.LOAA = TargetLoca;
+            MyObj.CWAA = TargetCwar.ToUpper();
+            MyObj.LOAA = TargetLoca.ToUpper();
             MyObj.QTYA = Qty.ToString();
             MyObj.QTYAS.Add(MyObj.QTYA);
             MyObj.PAIDS.Add(MyObj.PAID);
@@ -508,7 +524,7 @@ namespace whusap.WebPages.WorkOrders
 
             if (final)
             {
-                Click_TransferP2(QtyReal, TargetCwar, TargetLoca);
+                Click_TransferP2(QtyReal, TargetCwar.ToUpper(), TargetLoca.ToUpper());
             }
 
             return JsonConvert.SerializeObject(lst131Insrt);

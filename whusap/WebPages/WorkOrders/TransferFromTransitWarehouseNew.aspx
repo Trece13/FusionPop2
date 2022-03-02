@@ -29,9 +29,6 @@
         .form-group {
             margin-bottom: 1.5rem;
         }
-        #DivPaids{
-            margin-bottom:1000px;
-        }
     </style>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label-lg" for="txPalletID">
@@ -87,7 +84,7 @@
             <label class="col-sm-2 col-form-label-lg" for="txQuantityPaidTotal">
                 Pallet´s</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control form-control-lg" id="txQuantityPaidTotal" placeholder="Qty per Pallet">
+                <input type="text" class="form-control form-control-lg" id="txQuantityPaidTotal" placeholder="Qty for Pallets">
             </div>
         </div>
         <div class="form-group row">
@@ -111,7 +108,7 @@
         </div>--%>
 
         <div class="form-group row">
-            <input id="btnProcess" type="button" class="btn btn-primary btn-lg col-6" value="Prosses" />
+            <input id="btnProcess" type="button" class="btn btn-primary btn-lg col-6" value="Process" />
         </div>
         <div class="form-group row">
             <div id="MyDynamicEtiqueta">
@@ -122,8 +119,8 @@
         <label id="lblError">
         </label>
     </div>
-    <div class="form-group row" id="DivPaids" style="display:none">
-        <table class="table col-12">
+    <div class="form-group row" id="DivPaids" style="display:none; padding-bottom:3200px">
+        <table class="table col-12" style="margin-bottom:2000px">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -426,7 +423,7 @@
             //$('#txLocationCrrnt').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
             $('#txPalletID').prop("disabled", false);
-            $('#DivPaids').hide(100);
+            $('#DivPaids').fadeOut(100);
             $("#tbody tr").remove();
             $('#txQuantityTotal').val("");
             $('#txQuantityPaidTotal').val("");
@@ -779,14 +776,14 @@
             printDiv('MyDynamicEtiqueta');
 
             if (paidsUdp == parseInt(localStorage.getItem("NmrPaids"))) {
-                $('#DivPaids').hide(100);
+                $('#DivPaids').fadeOut(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
                 alert("Save success");
 
             }
             else {
-                $('#DivPaids').hide(100);
+                $('#DivPaids').fadeOut(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
                 alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
@@ -800,12 +797,12 @@
             for (var j = 0 ; j < NmrPaids; j++) {
                 sumcount += parseFloat($("#txQty" + j).val());
             }
-            if (sumcount <= TtlQty) {
-                $("#btnSaver" + i).show(100);
+            if (sumcount == TtlQty) {
+                $("#btnSaver" + i).fadeIn(100);
             }
             else {
                 for (var j = 0 ; j < NmrPaids; j++) {
-                    $("#btnSaver" +j).hide(100);
+                    $("#btnSaver" +j).fadeOut(100);
                 }
             }
             
@@ -935,7 +932,7 @@
 
                 //DeshabilitarLimpiarControles();
                 printDiv('MyDynamicEtiqueta');
-                $('#DivPaids').show(100);
+                $('#DivPaids').fadeIn(100);
 
             }
 
@@ -1025,7 +1022,7 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + index+1 + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="number" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '" oninput="verifyQty(' + index + ')" ></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
+                    $('#tbody').append('<tr><th scope="row">' + (index+1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="number" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + MyList.QTYS + '" oninput="verifyQty(' + index + ')" ></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" style="display:none" value="save" ></td></tr>');
                     //var etiqueta =
                     //    '<div id="myLabel" style="width: 100%; height: 100%;">' +
                     //    '<div class="row">' +
@@ -1065,7 +1062,7 @@
 
                 //DeshabilitarLimpiarControles();
                 //printDiv('MyDynamicEtiqueta');
-                $('#DivPaids').show(100);
+                $('#DivPaids').fadeIn(100);
 
             }
 
