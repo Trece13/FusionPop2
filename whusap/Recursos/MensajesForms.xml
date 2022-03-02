@@ -6482,6 +6482,11 @@
     </Module>
     <Module name="RfidPop.aspx">
       <Idiom name="INGLES">
+        <operationName name="Rfidnotalive">
+          <stringMessage>
+            Web Service is not alive
+          </stringMessage>
+        </operationName>
         <operationName name="RfidAlreadyLinkedPallet">
           <stringMessage>
             RFID Already linked to a pallet

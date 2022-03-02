@@ -106,7 +106,7 @@
 
         #lblError {
             color: red;
-            font-size: 13px;
+            font-size: 30px;
         }
     </style>
     <form id="form1" class="container col-sm-12">
