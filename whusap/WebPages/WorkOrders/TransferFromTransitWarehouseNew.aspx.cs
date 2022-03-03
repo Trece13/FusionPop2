@@ -488,8 +488,8 @@ namespace whusap.WebPages.WorkOrders
             Ent_twhcol130131 MyObj131Base = (Ent_twhcol130131)HttpContext.Current.Session["MyPalletTwhcol13"];
             Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
             MyObj.PAID = Paid;
-            MyObj.CWAR = TargetCwar;
-            MyObj.LOCA = TargetLoca;
+            MyObj.CWAR = TargetCwar.ToUpper();
+            MyObj.LOCA = TargetLoca.ToUpper();
             MyObj.QTYS = Qty.ToString().Replace(".",",");
             MyObj.QTYC = Qty.ToString().Replace(".", ",");
             MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();

@@ -886,7 +886,7 @@ namespace whusap.WebPages.WorkOrders
                             MyObj.PONO = "1";
                             MyObj.SEQN = "1";
                             MyObj.CLOT = CLOT;//CLOT.ToUpper();// lote VIEW
-                            MyObj.CWAR = CWAR;//CWAR.ToUpper();
+                            MyObj.CWAR = CWAR.ToUpper();
                             MyObj.QTYS = qtyt.ToString();//QTYS;// cantidad escaneada view 
                             MyObj.UNIT = CUNI;//UNIT;//unit escaneada view
                             MyObj.QTYC = qtyt.ToString();//QTYS;//cantidad escaneada view aplicando factor
