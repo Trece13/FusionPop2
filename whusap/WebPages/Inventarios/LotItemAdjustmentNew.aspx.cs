@@ -555,7 +555,8 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.FIRE = "1";
                     MyObj131.PSLIP = " ";
                     MyObj131.ALLO = "0";
-                    res = _idaltwhcol130.Insertartwhcol131(MyObj131);
+                    string StrError = string.Empty;
+                    res = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
                     break;
 
             }

@@ -856,8 +856,8 @@ namespace whusap.WebPages.WorkOrders
                                 //MyObj.ALLO = qtyt.ToString();
                                 MyObj.ALLO = "0";
                                 MyObj.ALLOAUX = Convert.ToDecimal(dtAllo.Rows[0]["ALLO"].ToString());
-
-                                bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+                                string StrError = string.Empty;
+                                bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj, ref StrError);
 
                                 _idaltticol125.updataPalletStatus131(PAID, "3");
                                 twhcolDAL.ingRegTticol092140(maximo, PAID, newPallet, 1, HttpContext.Current.Session["user"].ToString().Trim());
