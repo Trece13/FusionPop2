@@ -490,8 +490,8 @@ namespace whusap.WebPages.WorkOrders
             MyObj.PAID = Paid;
             MyObj.CWAR = TargetCwar;
             MyObj.LOCA = TargetLoca;
-            MyObj.QTYS = Qty.ToString();
-            MyObj.QTYC = Qty.ToString();
+            MyObj.QTYS = Qty.ToString().Replace(".",",");
+            MyObj.QTYC = Qty.ToString().Replace(".", ",");
             MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
             MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
             MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
@@ -500,7 +500,7 @@ namespace whusap.WebPages.WorkOrders
             MyObj.LOGT = " ";
             MyObj.CWAA = TargetCwar.ToUpper();
             MyObj.LOAA = TargetLoca.ToUpper();
-            MyObj.QTYA = Qty.ToString();
+            MyObj.QTYA = Qty.ToString().Replace(".", ","); ;
             MyObj.QTYAS.Add(MyObj.QTYA);
             MyObj.PAIDS.Add(MyObj.PAID);
             MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
@@ -510,8 +510,8 @@ namespace whusap.WebPages.WorkOrders
             MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
             MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
 
-
-            if (twhcol130DAL.Insertartwhcol131(MyObj))
+            string StrError = "";
+            if (twhcol130DAL.Insertartwhcol131(MyObj, ref StrError))
             {
                 MyObj.Error = false;
                 lst131Insrt.Add(MyObj);
@@ -519,6 +519,7 @@ namespace whusap.WebPages.WorkOrders
             else
             {
                 MyObj.Error = true;
+                MyObj.ErrorMsg = StrError;
                 lst131Insrt.Add(MyObj);
             }
 
