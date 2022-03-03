@@ -649,8 +649,8 @@ namespace whusap.WebPages.Inventarios
                     MyObj.PSLIP = " ";
                     MyObj.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
 
-
-                    bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+                    string StrError = string.Empty;
+                    bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj, ref StrError);
                     var ActalizacionExitosa = Itticol082.Actualizartwhcol131Cant(MyObj82);
                 }
 

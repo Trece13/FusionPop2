@@ -1386,8 +1386,8 @@ namespace whusap.WebPages.Migration
                 MyObj131.FIRE = "2";
                 MyObj131.PSLIP = " ";
                 MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
-
-                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
+                string StrError = string.Empty;
+                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
             }
                
             Ent_twhwmd300 data = new Ent_twhwmd300() { loca = location };
@@ -1971,8 +1971,8 @@ namespace whusap.WebPages.Migration
                 MyObj131.FIRE = "2";
                 MyObj131.PSLIP = " ";
                 MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
-
-                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
+                string StrError = string.Empty;
+                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
             }
 
             var consultaMaquina = _idaltticol011.findRecordByPdno(ref pdno, ref strError);

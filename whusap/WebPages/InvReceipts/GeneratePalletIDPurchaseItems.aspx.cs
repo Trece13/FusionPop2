@@ -409,8 +409,8 @@ namespace whusap.WebPages.InvReceipts
                 UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + UNIT + "&code=Code128&dpi=96"
             };
 
-
-            bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj);
+            string StrError = string.Empty;
+            bool Insertsucces = twhcol130DAL.Insertartwhcol131(MyObj, ref StrError);
 
             if (Insertsucces)
             {

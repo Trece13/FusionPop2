@@ -509,8 +509,8 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
                 //MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYC.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
                 MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
-
-                if (twhcol130DAL.Insertartwhcol131(MyObj))
+                string StrError = string.Empty;
+                if (twhcol130DAL.Insertartwhcol131(MyObj,ref StrError))
                 {
                     inserts++;
                 }
@@ -563,8 +563,8 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
                 //MyObj.QTYC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.QTYC.ToString("0.0000").Trim().ToUpper() + "&code=Code128&dpi=96";
                 MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
-
-                if (twhcol130DAL.Insertartwhcol131(MyObj))
+                string StrError = string.Empty;
+                if (twhcol130DAL.Insertartwhcol131(MyObj, ref StrError))
                 {
                     inserts++;
                 }

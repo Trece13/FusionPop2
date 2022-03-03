@@ -716,71 +716,71 @@
             $("#MyDynamicEtiqueta").empty();
             let myList131 = JSON.parse(r.d);
             myList131.forEach(function (MyObj, index) {
-                if (MyList.Error == false) {
+                if (MyObj.Error == false) {
                     paidsUdp += 1;
-                }
-                CBPalletNOd = MyObj.PAID_URL;
-                lblItemIDd = MyObj.ITEM;
-                lblItemDescd = MyObj.DSCA;
-                LblQuantityd = MyObj.QTYA;
-                LblUnitd = MyObj.UNIC;
-                LblLotIdd = MyObj.CLOT;
-                CBPurchaseOrderd = MyObj.ORNO_URL;
-                CBItem = MyObj.ITEM_URL;
-                CBLotd = MyObj.CLOT_URL;
-                CBQuantityd = MyObj.QTYC_URL;
-                CBUnitd = MyObj.UNIC_URL;
-                LblPurchaseOCd = MyObj.ORNO;
-                LblItemOCd = MyObj.ITEM;
-                LblLotOCd = MyObj.CLOT;
-                LblUnitOCd = MyObj.UNIT;
-                LblQuantityOCd = MyObj.QTYA;
-                LblUser = MyList.LOGN;
-                LblSup = MyList.NAMA;
+                    CBPalletNOd = MyObj.PAID_URL;
+                    lblItemIDd = MyObj.ITEM;
+                    lblItemDescd = MyObj.DSCA;
+                    LblQuantityd = MyObj.QTYA;
+                    LblUnitd = MyObj.UNIC;
+                    LblLotIdd = MyObj.CLOT;
+                    CBPurchaseOrderd = MyObj.ORNO_URL;
+                    CBItem = MyObj.ITEM_URL;
+                    CBLotd = MyObj.CLOT_URL;
+                    CBQuantityd = MyObj.QTYC_URL;
+                    CBUnitd = MyObj.UNIC_URL;
+                    LblPurchaseOCd = MyObj.ORNO;
+                    LblItemOCd = MyObj.ITEM;
+                    LblLotOCd = MyObj.CLOT;
+                    LblUnitOCd = MyObj.UNIT;
+                    LblQuantityOCd = MyObj.QTYA;
+                    LblUser = MyList.LOGN;
+                    LblSup = MyList.NAMA;
 
-                var etiqueta =
-                    '<div id="myLabel" style="width: 100%; height: 100%;">' +
-                    '<div class="row">' +
-                    '<div class="col-6 alingLeft" style="font-size: 30px; height: 1em;">' +
-                    '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
-                    '</div>' +
-                    '<div class="col-4 alingRight" style="font-size: 30px; height: 1em;">' +
-                    '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
-                    '</div>' +
-                    '</div>' +
-                    '<br />' +
-                    '<div class="col-10 borderTop" id="divBarcode">' +
-                    '<img src="' + CBPalletNOd + '" id="codePaid" alt="" style="margin-left:50px; width:680px"/>' +
-                    '</div>' +
-                    '<div>' +
-                    '<table class="table mw-100">' +
-                    '<tbody>' +
-                    '<tr>' +
-                    '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
-                    '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ? LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
-                    '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblSup + '</label></td>' +
-                    '</tr>' +
-                    '<tr>' +
-                    '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
-                    '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyList.DATE + '</label></td>' +
-                    '</tr>' +
-                    '</tbody>' +
-                    '</table>' +
-                    '</div>' +
-                    '</div>';
-                $('#MyDynamicEtiqueta').append(etiqueta);
+                    var etiqueta =
+                        '<div id="myLabel" style="width: 100%; height: 100%;">' +
+                        '<div class="row">' +
+                        '<div class="col-6 alingLeft" style="font-size: 30px; height: 1em;">' +
+                        '<label id="lblMaterialDesc"><strong>' + lblItemDescd + '</strong></label>' +
+                        '</div>' +
+                        '<div class="col-4 alingRight" style="font-size: 30px; height: 1em;">' +
+                        '<label id="lblMaterialCode"><strong>' + lblItemIDd + '</strong></label>' +
+                        '</div>' +
+                        '</div>' +
+                        '<br />' +
+                        '<div class="col-10 borderTop" id="divBarcode">' +
+                        '<img src="' + CBPalletNOd + '" id="codePaid" alt="" style="margin-left:50px; width:680px"/>' +
+                        '</div>' +
+                        '<div>' +
+                        '<table class="table mw-100">' +
+                        '<tbody>' +
+                        '<tr>' +
+                        '<td><strong>LOT</strong>&nbsp;&nbsp;<label id="lblLot">' + LblLotIdd + '</label></td>' +
+                        '<td><strong>Quantity</strong>&nbsp;&nbsp;<label id="lblQuantity">' + (MyList.PAIDS.length - 1 == index && MyList.PAIDS.length > 1 ? (MyList.QTYCFinal.replace(",", ".").trim() == "" ? LblQuantityd.replace(",", ".") : MyList.QTYCFinal.replace(",", ".")) : LblQuantityd.replace(",", ".")) + " " + MyList.UNIC + '</label></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td><strong>Origin Lot</strong>&nbsp;&nbsp;<label id="lblOrigin">' + LblLotIdd + '</label></td>' +
+                        '<td><strong>Supplier</strong>&nbsp;&nbsp;<label id="lblSupplier">' + LblSup + '</label></td>' +
+                        '</tr>' +
+                        '<tr>' +
+                        '<td><strong>Received By</strong>&nbsp;&nbsp;<label id="lblRecibedBy">' + LblUser + '</label></td>' +
+                        '<td><strong>Received On</strong>&nbsp;&nbsp;<class="LblDate">' + MyList.DATE + '</label></td>' +
+                        '</tr>' +
+                        '</tbody>' +
+                        '</table>' +
+                        '</div>' +
+                        '</div>';
+                    $('#MyDynamicEtiqueta').append(etiqueta);
+                }
             })
-            printDiv('MyDynamicEtiqueta');
+            
 
             if (paidsUdp == parseInt(localStorage.getItem("NmrPaids"))) {
                 $('#DivPaids').fadeOut(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
                 alert("Save success");
-
+                printDiv('MyDynamicEtiqueta');
             }
             else {
                 $('#DivPaids').fadeOut(100);

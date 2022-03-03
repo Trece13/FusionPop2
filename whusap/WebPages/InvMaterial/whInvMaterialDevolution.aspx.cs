@@ -323,8 +323,9 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.FIRE = "1";
                             MyObj.PSLIP = " ";
                             MyObj.ALLO = "0";
+                            string StrError = string.Empty;
 
-                            Itwhcol130.Insertartwhcol131(MyObj); 
+                            Itwhcol130.Insertartwhcol131(MyObj, ref StrError); 
                         }
 
                         if (tabla022 == 1)

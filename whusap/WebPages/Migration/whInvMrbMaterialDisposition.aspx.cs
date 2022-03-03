@@ -1264,7 +1264,8 @@ namespace whusap.WebPages.Migration
                             MyObj131.FIRE = "2";
                             MyObj131.PSLIP = " ";
                             MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
-                            bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131);
+                            string StrError = string.Empty;
+                            bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
                         }
                             
                             Ent_tticol116 data116 = new Ent_tticol116()
