@@ -416,9 +416,9 @@ namespace whusa.Interfases
             return dal.Eliminartccol130(MyObj);
         }
 
-        public bool Insertartwhcol131(Ent_twhcol130131 MyObj)
+        public bool Insertartwhcol131(Ent_twhcol130131 MyObj, ref string StrError)
         {
-            return dal.Insertartwhcol131(MyObj);
+            return dal.Insertartwhcol131(MyObj, ref StrError);
         }
 
         public bool Updateqtystwhcol131(Ent_twhcol130131 MyObj)

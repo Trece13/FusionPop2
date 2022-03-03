@@ -1372,7 +1372,7 @@ namespace whusa.Interfases
             return retorno;
         }
 
-        public bool Insertartwhcol131(Ent_twhcol130131 MyObj)
+        public bool Insertartwhcol131(Ent_twhcol130131 MyObj, ref string StrError)
         {
             bool retorno = false;
 
@@ -1420,6 +1420,7 @@ namespace whusa.Interfases
             }
             catch (Exception ex)
             {
+                StrError = ex.Message;
                 log.escribirError("My Query" + strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
 
             }
