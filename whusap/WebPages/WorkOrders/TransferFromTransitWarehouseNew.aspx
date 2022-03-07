@@ -405,11 +405,12 @@
             mywindow.document.write('</body></html>');
             mywindow.document.close(); // necessary for IE >= 10
             mywindow.focus(); // necessary for IE >= 10*/
-            setTimeout(function () { mywindow.print() }, 2000);
+            setTimeout(function () { mywindow.print() }, 3000);
             //mywindow.close();
 
             return true;
         };
+
         var paidsUdp = 0;
         var timer;
         function stoper() {
@@ -746,9 +747,9 @@
             VerificarForm();
         })
 
-        //btnTransfer.bind('click', function () {
-        //    Click_Transfer();
-        //});
+        $(".btnSaver").bind('click', function () {
+            saveQty();
+        });
 
         btnProcess.bind('click', function () {
             Click_Process();
@@ -779,11 +780,12 @@
             }
         }
 
-        var saveQty = function (paids, index) {
+        var saveQty = function () {
             $("#loader").fadeIn();
             var paidA = [];
             var qtyS = [];
             var Data = '{}';
+            var paids = $("#tbody tr").length;
                 for (let i = 0 ; i < paids; i++) {
                     var qty = $('#txQty' + i).val()
                     var paid = $('#Paid' + i).html()
@@ -866,16 +868,16 @@
                 $('#DivPaids').hide(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
+                $("#loader").fadeOut(100)
                 alert("Save success");
                 printDiv('MyDynamicEtiqueta');
-                $("#loader").fadeOut(100)
             }
             else {
                 $('#DivPaids').hide(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
-                alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
                 $("#loader").fadeOut(100)
+                alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
             }
         }
 
@@ -1122,7 +1124,7 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><button class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ',' + index + ')" ' + ((index == 0) ? '' : 'style="display:none"') + '>Save<i id="spin' + index + '" class="fa fa-circle-o-notch fa-spin" style = "display:none"></i></button></td></tr>');
+                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><input type="button" id="btnSaver' + index + '" value="Save" class="btn btn-primary col-12 btnSaver" ' + ((index == 0) ? "" : 'style="display:none"') + '/></td></tr>');
                     //var etiqueta =
                     //    '<div id="myLabel" style="width: 100%; height: 100%;">' +
                     //    '<div class="row">' +
@@ -1163,7 +1165,9 @@
                 //DeshabilitarLimpiarControles();
                 $('#DivPaids').show(100);
                 //printDiv('MyDynamicEtiqueta');
-
+                $(".btnSaver").bind('click', function () {
+                    saveQty();
+                });
             }
 
         }
