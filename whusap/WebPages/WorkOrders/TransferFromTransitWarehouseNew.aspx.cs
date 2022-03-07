@@ -15,6 +15,7 @@ using System.Web.Configuration;
 using Newtonsoft.Json;
 using System.Configuration;
 using whusa.Utilidades;
+using Newtonsoft.Json.Linq;
 
 namespace whusap.WebPages.WorkOrders
 {
@@ -52,7 +53,6 @@ namespace whusap.WebPages.WorkOrders
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            HttpContext.Current.Session["MyPalletTwhcol13"] = null;
             RequestUrlAuthority = (string)Request.Url.Authority;
 
 
@@ -62,6 +62,7 @@ namespace whusap.WebPages.WorkOrders
 
             if (!IsPostBack)
             {
+                HttpContext.Current.Session["MyPalletTwhcol13"] = null;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
 
                 if (formName.Contains('?'))
@@ -343,12 +344,13 @@ namespace whusap.WebPages.WorkOrders
                             Obj_twhwmd200.TypeMsgJs = "console";
                             Obj_twhwmd200.SuccessMsg = "Location Encontrado";
                         }
-                        else{
+                        else
+                        {
                             Obj_twhwmd200.Error = true;
                             Obj_twhwmd200.TypeMsgJs = "label";
                             Obj_twhwmd200.ErrorMsg = "Warehouse / Location can't be the same";
                         }
-                        
+
                     }
                     else
                     {
@@ -482,50 +484,56 @@ namespace whusap.WebPages.WorkOrders
 
 
         [WebMethod]
-        public static string Click_TransferP1(string QtyReal, string Qty, string Paid, string TargetCwar, string TargetLoca, bool final = false)
+        public static string Click_TransferP1(string QtyReal, string Paids, string Qtys, string TargetCwar, string TargetLoca, bool final = false)
         {
+            string[] PaidsA = Paids.Split(',');
+            string[] QtysA = Qtys.Split(',');
             List<Ent_twhcol130131> lst131Insrt = (List<Ent_twhcol130131>)HttpContext.Current.Session["lst131Insrt"];
             Ent_twhcol130131 MyObj131Base = (Ent_twhcol130131)HttpContext.Current.Session["MyPalletTwhcol13"];
             Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
-            MyObj.PAID = Paid;
-            MyObj.CWAR = TargetCwar.ToUpper();
-            MyObj.LOCA = TargetLoca.ToUpper();
-            MyObj.QTYS = Qty.ToString().Replace(".",",");
-            MyObj.QTYC = Qty.ToString().Replace(".", ",");
-            MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-            MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
-            MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-            MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
-            MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
-            MyObj.LOGT = " ";
-            MyObj.CWAA = TargetCwar.ToUpper();
-            MyObj.LOAA = TargetLoca.ToUpper();
-            MyObj.QTYA = Qty.ToString().Replace(".", ","); ;
-            MyObj.QTYAS.Add(MyObj.QTYA);
-            MyObj.PAIDS.Add(MyObj.PAID);
-            MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
-            MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
-            MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
-            MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
-            MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
-            MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+            for (int i = 0; i < PaidsA.Length; i++)
+            {
 
-            string StrError = "";
-            if (twhcol130DAL.Insertartwhcol131(MyObj, ref StrError))
-            {
-                MyObj.Error = false;
-                lst131Insrt.Add(MyObj);
-            }
-            else
-            {
-                MyObj.Error = true;
-                MyObj.ErrorMsg = StrError;
-                lst131Insrt.Add(MyObj);
-            }
+                MyObj.PAID = PaidsA[i].ToUpper().Trim();// Paid;
+                MyObj.CWAR = TargetCwar.ToUpper();
+                MyObj.LOCA = TargetLoca.ToUpper();
+                MyObj.QTYS = QtysA[i].ToUpper().Trim();//Qty.ToString().Replace(".",",");
+                MyObj.QTYC = QtysA[i].ToUpper().Trim();// Qty.ToString().Replace(".", ",");
+                MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
+                MyObj.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();
+                MyObj.LOGN = HttpContext.Current.Session["user"].ToString();
+                MyObj.LOGT = " ";
+                MyObj.CWAA = TargetCwar.ToUpper();
+                MyObj.LOAA = TargetLoca.ToUpper();
+                MyObj.QTYA = QtysA[i].ToUpper().Trim();// Qty.ToString().Replace(".", ","); 
+                MyObj.QTYAS.Add(MyObj.QTYA);
+                MyObj.PAIDS.Add(MyObj.PAID);
+                MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
+                MyObj.PAIDS_URLS.Add(MyObj.PAID_URL);
+                MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
+                MyObj.ITEM_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ITEM + "&code=Code128&dpi=96";
+                MyObj.CLOT_URL = MyObj.LOT.ToString().Trim() != "" ? UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.CLOT + "&code=Code128&dpi=96" : "";
+                MyObj.UNIC_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.UNIC.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
 
-            if (final)
-            {
-                Click_TransferP2(QtyReal, TargetCwar.ToUpper(), TargetLoca.ToUpper());
+                string StrError = "";
+                if (twhcol130DAL.Insertartwhcol131(MyObj, ref StrError))
+                {
+                    MyObj.Error = false;
+                    lst131Insrt.Add(MyObj);
+                }
+                else
+                {
+                    MyObj.Error = true;
+                    MyObj.ErrorMsg = StrError;
+                    lst131Insrt.Add(MyObj);
+                }
+
+                if (PaidsA.Length-1 == i)
+                {
+                    Click_TransferP2(QtyReal, TargetCwar.ToUpper(), TargetLoca.ToUpper());
+                }
             }
 
             return JsonConvert.SerializeObject(lst131Insrt);
@@ -584,7 +592,7 @@ namespace whusap.WebPages.WorkOrders
                         {
                             consecutivoPalletID += 1;
                         }
-                        
+
                         if (consecutivoPalletID.ToString().Length == 1)
                         {
                             SecuenciaPallet = "00" + consecutivoPalletID;
@@ -603,7 +611,7 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.PAID = MyObj131Base.ORNO + "-" + SecuenciaPallet;
                 MyObj.CWAR = TargetCwar;
                 MyObj.LOCA = TargetLoca;
-                MyObj.QTYS = QtyPallets.ToString().Replace(",",".");
+                MyObj.QTYS = QtyPallets.ToString().Replace(",", ".");
                 MyObj.QTYC = QtyPallets.ToString().Replace(",", ".");
                 MyObj.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();
                 MyObj.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString(); ;
@@ -614,7 +622,7 @@ namespace whusap.WebPages.WorkOrders
                 MyObj.CWAA = TargetCwar;
                 MyObj.LOAA = TargetLoca;
                 MyObj.QTYA = QtyPallets.ToString().Replace(",", ".");
-                MyObj.QTYAF = i == PaidsInt-1 ? QtyPalletFin.ToString().Replace(",","."):QtyPallets.ToString().Replace(",", ".");
+                MyObj.QTYAF = i == PaidsInt - 1 ? QtyPalletFin.ToString().Replace(",", ".") : QtyPallets.ToString().Replace(",", ".");
                 MyObj.QTYAS.Add(MyObj.QTYA);
                 MyObj.PAIDS.Add(MyObj.PAID);
                 MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";

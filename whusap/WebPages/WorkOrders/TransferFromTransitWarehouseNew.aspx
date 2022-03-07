@@ -2,6 +2,7 @@
     CodeBehind="TransferFromTransitWarehouseNew.aspx.cs" Inherits="whusap.WebPages.WorkOrders.TransferFromTransitWarehouseNew" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Encabezado" runat="server">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Contenido" runat="server">
     <style>
@@ -29,20 +30,97 @@
         .form-group {
             margin-bottom: 1.5rem;
         }
+
+        .lds-ellipsis {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+            .lds-ellipsis div {
+                position: absolute;
+                top: 33px;
+                width: 13px;
+                height: 13px;
+                border-radius: 50%;
+                background: blue;
+                animation-timing-function: cubic-bezier(0, 1, 1, 0);
+            }
+
+                .lds-ellipsis div:nth-child(1) {
+                    left: 8px;
+                    animation: lds-ellipsis1 0.6s infinite;
+                }
+
+                .lds-ellipsis div:nth-child(2) {
+                    left: 8px;
+                    animation: lds-ellipsis2 0.6s infinite;
+                }
+
+                .lds-ellipsis div:nth-child(3) {
+                    left: 32px;
+                    animation: lds-ellipsis2 0.6s infinite;
+                }
+
+                .lds-ellipsis div:nth-child(4) {
+                    left: 56px;
+                    animation: lds-ellipsis3 0.6s infinite;
+                }
+
+        @keyframes lds-ellipsis1 {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes lds-ellipsis3 {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes lds-ellipsis2 {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(24px, 0);
+            }
+        }
     </style>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label-lg" for="txPalletID">
-            Pallet ID</label>
+    <div class="form-group row" style="display: contents">
         <div class="col-sm-4 form-inline">
-            <div class="col-10 p-0">
+            <div class="col-8 p-0">
                 <input type="text" class="form-control form-control-lg col-12" id="txPalletID" placeholder="Pallet ID">
             </div>
             <div class="col-2 p-0">
-                <input type="button" class="btn btn-primary col-12" id="btnClear" value="Reset" />
+                <input type="button" class="btn btn-primary col-12" id="btnClear" value="Reset">
+            </div>
+            <div class="col-2 p-0">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="lds-ellipsis" id="loader" style="display: none;height: 41px !important">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
             </div>
         </div>
     </div>
-    <div id="detail">
+    <br />
+    <div class="form-group row" style=" display: contents">
+        <div id="detail" class="col-10">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label-lg" for="txPalletID">
                 Item</label>
@@ -114,13 +192,14 @@
             <div id="MyDynamicEtiqueta">
             </div>
         </div>
+        </div>
     </div>
-    <div class="form-group row">
+    <div class="form-group row" style="display: contents">
         <label id="lblError">
         </label>
     </div>
-    <div class="form-group row" id="DivPaids" style="display:none; padding-bottom:3200px">
-        <table class="table col-12" style="margin-bottom:2000px">
+    <div class="form-group row" style="padding-bottom: 3200px; display: contents">
+        <table class="table col-12" id="DivPaids" style=" display: none; margin-bottom: 2000px">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -132,7 +211,7 @@
                     <th scope="col">Quantity</th>
                 </tr>
             </thead>
-            <tbody  id="tbody">
+            <tbody id="tbody">
             </tbody>
         </table>
     </div>
@@ -389,7 +468,7 @@
                 //$('#txLocationCrrnt').prop("disabled", true);
                 $('#txQuantity').prop("disabled", true);
                 $('#txPalletID').prop("disabled", false);
-                $('#detail').hide(1000);
+                $('#detail').fadeOut(1000);
             }
             else {
                 //$('#lblWorkOrder').html(MyObj.PAID);
@@ -406,12 +485,12 @@
                 $('#lblQuantity').html(MyObj.UNIT)
                 $('#txLocationCrrnt').val(MyObj.LOCA);
                 $('#lblError').html("");
-                $('#detail').show(1000);
+                $('#detail').fadeIn(1000);
             }
         };
 
         $('#btnClear').bind('click', function () {
-            $('#detail').hide(1000);
+            $('#detail').fadeOut(1000);
             $('#txPalletID').val("");
             $('#lblItem').val("");
             $('#lblItemDsca').html("");
@@ -423,7 +502,7 @@
             //$('#txLocationCrrnt').prop("disabled", true);
             $('#txQuantity').prop("disabled", true);
             $('#txPalletID').prop("disabled", false);
-            $('#DivPaids').fadeOut(100);
+            $('#DivPaids').hide();
             $("#tbody tr").remove();
             $('#txQuantityTotal').val("");
             $('#txQuantityPaidTotal').val("");
@@ -620,7 +699,7 @@
                 url: "TransferFromTransitWarehouseNew.aspx/" + WebMethod,
                 data: Data,
                 contentType: "application/json; charset=utf-8",
-                async: asyncMode != false ? true: false,
+                async: asyncMode != false ? true : false,
                 dataType: "json",
                 success: FuncitionSucces
             };
@@ -675,7 +754,7 @@
             Click_Process();
         });
 
-        
+
 
         var VerificarForm = function () {
             if (parseFloat($("#txQuantityTotal").val()) > parseFloat($("#txQuantity").val())) {
@@ -700,15 +779,23 @@
             }
         }
 
-        var saveQty = function (paids) {
-            for (let i = 0 ; i < paids; i++) {
-                var qty = $('#txQty' + i).val()
-                var paid = $('#Paid' + i).html()
-                if (qty > 0) {
-                    var Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Qty':'" + qty + "','Paid':'" + paid + "','TargetCwar':'" + $('#txWarehouseTrgt').val() + "','TargetLoca':'" + $('#txLocationTrgt').val() + "','final':'" + (i == (paids-1) ? true : false) + "'}";
-                    sendAjax("Click_TransferP1", Data, (i == (paids - 1) ? saveQtySucces : null), false);
+        var saveQty = function (paids, index) {
+            $("#loader").fadeIn();
+            var paidA = [];
+            var qtyS = [];
+            var Data = '{}';
+                for (let i = 0 ; i < paids; i++) {
+                    var qty = $('#txQty' + i).val()
+                    var paid = $('#Paid' + i).html()
+                    if (qty > 0) {
+                        paidA.push(paid);
+                        qtyS.push(qty);
+                        var paidsJSon = paidA.toString();
+                        var qtySJSon = qtyS.toString();
+                        Data = "{'QtyReal':'" + $('#txQuantityTotal').val() + "','Paids':'" + paidsJSon + "','Qtys':'" + qtySJSon + "','TargetCwar':'" + $('#txWarehouseTrgt').val() + "','TargetLoca':'" + $('#txLocationTrgt').val() + "','final':'" + (i == (paids - 1) ? true : false) + "'}";
+                    }
                 }
-            }            
+                sendAjax("Click_TransferP1", Data,saveQtySucces,true);
         }
 
         var saveQtySucces = function (r) {
@@ -773,27 +860,29 @@
                     $('#MyDynamicEtiqueta').append(etiqueta);
                 }
             })
-            
+
 
             if (paidsUdp == parseInt(localStorage.getItem("NmrPaids"))) {
-                $('#DivPaids').fadeOut(100);
+                $('#DivPaids').hide(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
                 alert("Save success");
                 printDiv('MyDynamicEtiqueta');
+                $("#loader").fadeOut(100)
             }
             else {
-                $('#DivPaids').fadeOut(100);
+                $('#DivPaids').hide(100);
                 $("#tbody tr").remove();
                 $('#btnClear').click();
                 alert("Save failed to:" + (parseInt(localStorage.getItem("NmrPaids")) - paidsUdp) + "and success to:" + paidsUdp);
+                $("#loader").fadeOut(100)
             }
         }
 
         let verifyQty = function (evnt, i) {
             if (document.getElementById('txQty' + i).value.indexOf('.') != -1) {
                 var decimals = document.getElementById('txQty' + i).value.substring(document.getElementById('txQty' + i).value.indexOf('.') + 1).trim()
-                if ( decimals != "") {
+                if (decimals != "") {
                     if (decimals.length > 4) {
                         document.getElementById('txQty' + i).value = parseFloat(document.getElementById('txQty' + i).value).toFixed(4);
                     }
@@ -812,10 +901,10 @@
             else {
                 for (var j = 0 ; j < NmrPaids; j++) {
                     $("#btnSaver" + j).fadeOut(100);
-                    $('#lblError').html("Total qty paids: "+sumcount);
+                    $('#lblError').html("Total qty paids: " + sumcount);
                 }
             }
-            
+
         }
 
         var TransferSucces = function (r) {
@@ -823,7 +912,7 @@
             localStorage.setItem("NmrPaids", $('#txQuantityPaidTotal').val());
             $("#MyDynamicEtiqueta").empty();
             MyList = JSON.parse(r.d);
-            
+
             if (MyList.PAIDS.length == undefined) {
                 MyObject = JSON.parse(r.d);
                 if (MyObject.Error == false) {
@@ -942,7 +1031,7 @@
 
                 //DeshabilitarLimpiarControles();
                 printDiv('MyDynamicEtiqueta');
-                $('#DivPaids').fadeIn(100);
+                $('#DivPaids').show(100);
 
             }
 
@@ -1033,7 +1122,7 @@
                     LblUser = MyList.LOGN;
                     LblSup = MyList.NAMA;
 
-                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><input type="button" class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ')" '+((index == 0)? '':'style="display:none"' )+' value="save" ></td></tr>');
+                    $('#tbody').append('<tr><th scope="row">' + (index + 1) + '</th><td id="Paid' + index + '">' + MyList.PAIDS[index] + '</td><td>' + MyList.ITEM + '</td><td>' + MyList.UNIC + '</td><td>' + MyList.CWAR + '</td><td>' + MyList.LOCA + '</td><td><input type="text" class="form-control form-control-lg col-12" id="txQty' + index + '" placeholder="' + MyList.QTYS + '" value="' + ((MyList.PAIDS.length - 1 == index) ? MyList.QTYAF : MyList.QTYS) + '" oninput="verifyQty(this,' + index + ')" step="0.0001"></td><td><button class="btn btn-primary col-12" id="btnSaver' + index + '" onclick="saveQty(' + MyList.PAIDS.length + ',' + index + ')" ' + ((index == 0) ? '' : 'style="display:none"') + '>Save<i id="spin' + index + '" class="fa fa-circle-o-notch fa-spin" style = "display:none"></i></button></td></tr>');
                     //var etiqueta =
                     //    '<div id="myLabel" style="width: 100%; height: 100%;">' +
                     //    '<div class="row">' +
@@ -1073,7 +1162,7 @@
 
                 //DeshabilitarLimpiarControles();
                 //printDiv('MyDynamicEtiqueta');
-                $('#DivPaids').fadeIn(100);
+                $('#DivPaids').show(100);
 
             }
 
