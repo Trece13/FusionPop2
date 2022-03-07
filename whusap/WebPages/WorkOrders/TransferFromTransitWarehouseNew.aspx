@@ -805,7 +805,7 @@
             myList131.forEach(function (MyObj, index) {
                 if (MyObj.Error == false) {
                     paidsUdp += 1;
-                    CBPalletNOd = MyObj.PAID_URL;
+                    CBPalletNOd = MyObj.PAID;
                     lblItemIDd = MyObj.ITEM;
                     lblItemDescd = MyObj.DSCA;
                     LblQuantityd = MyObj.QTYA;
