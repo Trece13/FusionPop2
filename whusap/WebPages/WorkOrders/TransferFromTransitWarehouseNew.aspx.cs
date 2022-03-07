@@ -490,10 +490,10 @@ namespace whusap.WebPages.WorkOrders
             string[] QtysA = Qtys.Split(',');
             List<Ent_twhcol130131> lst131Insrt = (List<Ent_twhcol130131>)HttpContext.Current.Session["lst131Insrt"];
             Ent_twhcol130131 MyObj131Base = (Ent_twhcol130131)HttpContext.Current.Session["MyPalletTwhcol13"];
-            Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
             for (int i = 0; i < PaidsA.Length; i++)
             {
 
+                Ent_twhcol130131 MyObj = (Ent_twhcol130131)MyObj131Base.clone();
                 MyObj.PAID = PaidsA[i].ToUpper().Trim();// Paid;
                 MyObj.CWAR = TargetCwar.ToUpper();
                 MyObj.LOCA = TargetLoca.ToUpper();
