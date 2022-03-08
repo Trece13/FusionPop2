@@ -812,7 +812,7 @@
                     lblItemDescd = MyObj.DSCA;
                     LblQuantityd = MyObj.QTYA;
                     LblUnitd = MyObj.UNIC;
-                    LblLotIdd = MyObj.CLOT;
+                    LblLotIdd = MyObj.LOT;
                     CBPurchaseOrderd = MyObj.ORNO_URL;
                     CBItem = MyObj.ITEM_URL;
                     CBLotd = MyObj.CLOT_URL;
@@ -824,7 +824,7 @@
                     LblUnitOCd = MyObj.UNIT;
                     LblQuantityOCd = MyObj.QTYA;
                     LblUser = MyList.LOGN;
-                    LblSup = MyList.NAMA;
+                    LblSup = MyObj.NAMA;
 
                     var etiqueta =
                         '<div id="myLabel" style="width: 100%; height: 100%;">' +

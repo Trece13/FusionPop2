@@ -168,6 +168,7 @@ namespace whusap.WebPages.WorkOrders
                     Obj131.STAT = DTPalletID.Rows[0]["STAT"].ToString();
                     Obj131.PSNO = DTPalletID.Rows[0]["PSNO"].ToString();
                     Obj131.ALLO = DTPalletID.Rows[0]["ALLO"].ToString();
+                    Obj131.NAMA = DTPalletID.Rows[0]["NAMA"].ToString();
                     Obj131.REFCNTD = DTPalletID.Rows[0]["REFCNTD"].ToString();
                     Obj131.REFCNTU = DTPalletID.Rows[0]["REFCNTU"].ToString();
                     Obj131.error = false;
