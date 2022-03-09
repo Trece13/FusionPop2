@@ -365,11 +365,12 @@ namespace whusa.DAL
         }
 
 
-        public DataTable UserConsigment(string user)
+        public DataTable UserConsigment(string user, string wareh)
         {
             method = MethodBase.GetCurrentMethod();
             paramList = new Dictionary<string, object>();
             paramList.Add(":USER", user);
+            paramList.Add(":CWAR", wareh);
 
             strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 

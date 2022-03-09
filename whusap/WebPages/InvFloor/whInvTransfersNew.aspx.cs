@@ -120,9 +120,9 @@ namespace whusap.WebPages.InvFloor
             Obj_twhcol016.Row = ROW;
 
             Ent_twhwmd200 Obj_twhwmd200 = new Ent_twhwmd200();
-            Obj_twhwmd200.cwar = WARE;
+            Obj_twhwmd200.cwar = WARE.ToUpper();
 
-            DataTable DtConsigment = ITtwhcol016.UserConsigment(HttpContext.Current.Session["user"].ToString());
+            DataTable DtConsigment = ITtwhcol016.UserConsigment(HttpContext.Current.Session["user"].ToString(), WARE.ToUpper());
             DataTable DtTtwhcol016 = ITtwhcol016.TakeMaterialInv_verificaBodega_Param(ref Obj_twhcol016, ref strError);
             DataTable DtTwhwmd200 = ITwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref Obj_twhwmd200, ref strError);
 

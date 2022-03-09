@@ -4940,7 +4940,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="UserConsigment">
         <stringSQL>
-          SELECT * FROM BAAN.TTICOL136140 WHERE T$USER = '[:USER]'
+          SELECT * FROM {0}.TTICOL136{1} WHERE T$USER = '[:USER]' AND T$CWAR = '[:CWAR]'
         </stringSQL>
       </operationName>
     </Module>

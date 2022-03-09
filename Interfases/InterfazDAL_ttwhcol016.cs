@@ -193,9 +193,9 @@ namespace whusa.Interfases
         }
 
 
-        public DataTable UserConsigment(string user)
+        public DataTable UserConsigment(string user, string wareh)
         {
-            return dal.UserConsigment(user);
+            return dal.UserConsigment(user, wareh);
         }
     }
 }
