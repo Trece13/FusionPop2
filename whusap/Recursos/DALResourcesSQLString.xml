@@ -211,7 +211,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {0}.tticol042{1}
           set
           T$PDNO = '[:T$PDNO]',
-          T$MITM ='[:T$MITM]',
+          T$MITM ={0}.F_ITEM_POP('[:T$MITM]'),
           T$DELE ='[:T$DELE]'
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
@@ -556,7 +556,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {0}.tticol022{1}
           set
           T$PDNO ='[:T$PDNO]',
-          T$MITM ='[:T$MITM]',
+          T$MITM ={0}.F_ITEM_POP([':T$MITM]'),
           T$DELE ='[:T$DELE]'
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
@@ -3043,7 +3043,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           set
           T$OORG ='[:T$OORG]',
           T$ORNO ='[:T$ORNO]',
-          T$ITEM ='[:T$ITEM]',
+          T$ITEM ={0}.F_ITEM_POP('[:T$ITEM]'),
           T$CWAA ='[:T$CWAA]',
           T$QTYA ='[:T$QTYA]',
           T$STAT ='[:T$STAT]',
@@ -3190,7 +3190,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYA AS QTYT,T$UNIT AS UNIT,T$ITEM AS ITEM, T$ORNO AS ORNO, T$STAT AS STAT,T$CWAA,T$LOAA,T$ALLO AS ALLO, T$CLOT as LOT from {0}.twhcol131{1} col131
 
           ) ConGlobal
-          LEFT JOIN {0}.ttcibd001{1} cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
+          LEFT JOIN {0}.ttcibd001{1} cibd001 on  trim(cibd001.T$ITEM)=  trim(ConGlobal.ITEM)
           LEFT JOIN {0}.ttcmcs003{1} mcs003 on ConGlobal.CWAT = mcs003.t$cwar
           LEFT JOIN {0}.twhwmd200{1}  wmd200 on ConGlobal.CWAT = wmd200.t$cwar
           LEFT JOIN BAAN.Ttisfc010140 tisfc010 ON TRIM(tisfc010.T$ITEM) = TRIM(ConGlobal.ITEM)

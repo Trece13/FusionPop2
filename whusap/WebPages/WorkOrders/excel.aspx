@@ -179,9 +179,11 @@
             }
             else {
                 $("#tbody tr").remove();
+                let errorsNum = 0;
                 let errors = r.d.split(';')
                 for (var i = 0; i < errors.length; i++) {
                     if (errors[i].trim() != "") {
+                        errorsNum++;
                         $('#tbody').append('<tr id=""><td>' + i + '</td><td style="color:red">' + errors[i] + '</td></tr>');
                     }
                 }
@@ -189,7 +191,7 @@
                 document.getElementById("uploadFile").value = "";
                 Swal.fire(
                 'Warning!',
-                'Some records were not saved! saved:' + (totalreg - errors.length) + ', not saved:' +errors.length,
+                'Some records were not saved! saved: not saved:' + errorsNum,
                 'warning'
                 )
             }
