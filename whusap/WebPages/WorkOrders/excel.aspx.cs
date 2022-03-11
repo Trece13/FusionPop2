@@ -52,7 +52,7 @@ namespace whusap.WebPages.WorkOrders
                                 if (DataColArray.Length == 8 && (DataColArray[7] != "" || DataColArray[6] != ""))
                                 {
                                     MyObj042.pdno = DataColArray[1].ToString();
-                                    MyObj042.mitm = DataColArray[2].ToString();
+                                    MyObj042.mitm = DataColArray[2].ToString().Trim();
                                     MyObj042.sqnb = DataColArray[3].ToString();
                                     MyObj042.cwat = DataColArray[4].ToString();
                                     MyObj042.aclo = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
@@ -79,7 +79,7 @@ namespace whusap.WebPages.WorkOrders
                                 {
                                     MyObj022.pdno = DataColArray[1].ToString();
                                     MyObj022.mitm = DataColArray[2].ToString();
-                                    MyObj022.sqnb = DataColArray[3].ToString();
+                                    MyObj022.sqnb = DataColArray[3].ToString().Trim();
                                     MyObj022.cwat = DataColArray[4].ToString();
                                     MyObj022.aclo = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
                                     MyObj022.acqt = Convert.ToInt32(DataColArray[6]);
@@ -106,7 +106,7 @@ namespace whusap.WebPages.WorkOrders
 
                                     MyObj131.OORG = Convert.ToInt32(DataColArray[0].Contains(",") ? (DataColArray[0].Substring(0, DataColArray[0].IndexOf(",")).ToString()) : ((DataColArray[0].ToString())));
                                     MyObj131.ORNO = DataColArray[1].ToString();
-                                    MyObj131.ITEM = DataColArray[2].ToString();
+                                    MyObj131.ITEM = DataColArray[2].ToString().Trim();
                                     MyObj131.PAID = DataColArray[3].ToString();
                                     MyObj131.CWAA = DataColArray[4].ToString();
                                     MyObj131.LOAA = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
