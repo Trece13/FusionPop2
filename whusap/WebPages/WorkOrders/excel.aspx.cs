@@ -56,7 +56,7 @@ namespace whusap.WebPages.WorkOrders
                                     MyObj042.sqnb = DataColArray[3].ToString();
                                     MyObj042.cwat = DataColArray[4].ToString();
                                     MyObj042.aclo = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
-                                    MyObj042.acqt = Convert.ToInt32(DataColArray[6]);
+                                    MyObj042.acqt = Convert.ToDouble(DataColArray[6]);
                                     MyObj042.dele = Convert.ToInt32(DataColArray[7]);
                                     if (ITticol042.UpdateMasive(MyObj042))
                                     {
@@ -82,7 +82,7 @@ namespace whusap.WebPages.WorkOrders
                                     MyObj022.sqnb = DataColArray[3].ToString();
                                     MyObj022.cwat = DataColArray[4].ToString();
                                     MyObj022.aclo = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
-                                    MyObj022.acqt = Convert.ToInt32(DataColArray[6]);
+                                    MyObj022.acqt = Convert.ToDecimal(DataColArray[6]);
                                     MyObj022.dele = Convert.ToInt32(DataColArray[7]);
                                     if (ITticol022.UpdateMasive(MyObj022))
                                     {
@@ -110,7 +110,7 @@ namespace whusap.WebPages.WorkOrders
                                     MyObj131.PAID = DataColArray[3].ToString();
                                     MyObj131.CWAA = DataColArray[4].ToString();
                                     MyObj131.LOAA = DataColArray[5].ToString() == "" ? " " : DataColArray[5].ToString();
-                                    MyObj131.QTYA = Convert.ToInt32(DataColArray[6]);
+                                    MyObj131.QTYA = Convert.ToDouble(DataColArray[6]);
                                     MyObj131.STAT = Convert.ToInt32(DataColArray[7]);
                                     if (!ITwhcol130.UpdateMasive(MyObj131))
                                     {
