@@ -412,7 +412,15 @@ namespace whusap.WebPages.Balance
             }
             else
             {
-                idal022.insertarRegistro(ref parameterCollection022, ref parameterCollection020, ref strError, ref anuncioautomatico); 
+                idal022.insertarRegistro(ref parameterCollection022, ref strError);
+                idal022.insertarRegistroTticon222(ref parameterCollection022, ref strError);
+
+                if (anuncioautomatico == "true")
+                {
+                    int intRetorno = idal020.insertarRegistro(ref parameterCollection020, ref strError);
+                }
+
+                //idal022.insertarRegistro(ref parameterCollection022, ref parameterCollection020, ref strError, ref anuncioautomatico);
             }
 
             if (!string.IsNullOrEmpty(strError))
