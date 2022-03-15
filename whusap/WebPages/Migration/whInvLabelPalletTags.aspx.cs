@@ -453,6 +453,8 @@ namespace whusap.WebPages.Migration
                 Session["Reprint"] = "no";
                 Session["AutoPrint"] = "yes";
 
+
+
                 StringBuilder script = new StringBuilder();
                 if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
                 {
