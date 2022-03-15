@@ -36,47 +36,74 @@ namespace whusa.DAL
             parametrosIn.Clear();
         }
 
-        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError, ref string anuncioautomatico)
+        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();
-            var _anuncioautomatico = anuncioautomatico;
             bool retorno = false;
 
             try
             {
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
-                log.escribirError(strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+
                 foreach (Ent_tticol022 reg in parametros)
                 {
-                    // Se quita esta validación del tiempo, ahora se valida con el parametro de la tabla ticol000 mbrl
-                    //if (!invLabel_tiempoGrabacion(reg, ref strError))
-                    //    break;
-
-                    // Inicia la insercion del registro
                     parametrosIn = AdicionaParametrosComunes(reg);
                     retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
-                    if (retorno)
-                    {
-                        if (_anuncioautomatico == "true")
-                        {
-                            DAL.tticol020 dal020 = new tticol020();
-                            int intRetorno = dal020.insertarRegistro(ref parametros020, ref strError);
-                        }
-                        Ent_tticol022 nreg = reg;
-                        int retorno222 = InsertarRegistroTicol222(ref nreg, ref strError);
-                    }
-
                 }
                 return Convert.ToInt32(retorno);
             }
+
             catch (Exception ex)
             {
-                strError = "Error when inserting data [col022]. Try again or contact your administrator";
-                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                strError = "Error when inserting data [tticol022]. Try again or contact your administrator";
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, method.Module.Name, method.Name, method.ReflectedType.Name);
             }
+
             return Convert.ToInt32(retorno);
+
         }
-        //my nuevo metodo 
+
+        //public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError, ref string anuncioautomatico)
+        //{
+        //    method = MethodBase.GetCurrentMethod();
+        //    var _anuncioautomatico = anuncioautomatico;
+        //    bool retorno = false;
+
+        //    try
+        //    {
+        //        strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla);
+        //        log.escribirError(strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+        //        foreach (Ent_tticol022 reg in parametros)
+        //        {
+        //            // Se quita esta validación del tiempo, ahora se valida con el parametro de la tabla ticol000 mbrl
+        //            //if (!invLabel_tiempoGrabacion(reg, ref strError))
+        //            //    break;
+
+        //            // Inicia la insercion del registro
+        //            parametrosIn = AdicionaParametrosComunes(reg);
+        //            retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, parametrosIn, false);
+        //            if (retorno)
+        //            {
+        //                if (_anuncioautomatico == "true")
+        //                {
+        //                    DAL.tticol020 dal020 = new tticol020();
+        //                    int intRetorno = dal020.insertarRegistro(ref parametros020, ref strError);
+        //                }
+        //                Ent_tticol022 nreg = reg;
+        //                int retorno222 = InsertarRegistroTicol222(ref nreg, ref strError);
+        //            }
+
+        //        }
+        //        return Convert.ToInt32(retorno);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        strError = "Error when inserting data [col022]. Try again or contact your administrator";
+        //        log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+        //    }
+        //    return Convert.ToInt32(retorno);
+        //}
+        ////my nuevo metodo 
         public bool insertarRegistroAux(Ent_tticol022 Objtticol022, Ent_tticol020 Objtticol020)
         {
             method = MethodBase.GetCurrentMethod();
@@ -162,7 +189,7 @@ namespace whusa.DAL
             paramList.Add(":T$SQNB", parametros.sqnb.Trim().ToUpper());
             paramList.Add(":T$URPT", parametros.urpt.ToUpper());
             paramList.Add(":T$ACQT", parametros.acqt);
-            paramList.Add(":T$CWAF", parametros.cwaf.ToUpper().Trim());
+            paramList.Add(":T$CWAF", parametros.cwaf.ToUpper().Trim() == string.Empty ? " " : parametros.cwat.ToUpper().Trim());
             paramList.Add(":T$CWAT", parametros.cwat.ToUpper().Trim() == string.Empty ? " " : parametros.cwat.ToUpper().Trim());
             //paramList.Add(":T$ACLO", parametros.aclo.ToUpper());
             paramList.Add(":T$ACLO", parametros.aclo.ToUpper().Trim() == string.Empty ? " " : parametros.aclo.ToUpper().Trim());
@@ -1314,6 +1341,47 @@ namespace whusa.DAL
             return retorno;
         }
 
+
+        public bool insertarRegistroTticon222(ref List<Ent_tticol022> parametros, ref string strError)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+
+            try
+            {
+
+
+                foreach (Ent_tticol022 reg in parametros)
+                {
+                    paramList = new Dictionary<string, object>();
+
+                    paramList.Add(":T$PDNO", reg.pdno);
+                    paramList.Add(":T$SQNB", reg.sqnb);
+                    //JC 240821 SAlvar los kilos con coma para que no falle en el local
+                    paramList.Add(":T$ACQT", reg.qtdl);
+                    //paramList.Add(":T$ACQT", reg.kilos.Replace(".",","));
+                    paramList.Add(":T$CWAF", reg.cwaf);
+                    //JC 060921 Traer la bodega correcta definida para bodega mrb por bodega regrind ticol008
+                    //paramList.Add(":T$CWAT", reg.cwaf);
+                    paramList.Add(":T$CWAT", reg.cwat);
+                    paramList.Add(":T$URPT", reg.urpt);
+                    paramList.Add(":T$ACLO", reg.aclo.Trim() == string.Empty ? " " : reg.aclo.Trim());
+                    paramList.Add(":T$ALLO", reg.allo.ToString().Trim() == decimal.MinValue.ToString().Trim() ? "0" : reg.allo.ToString());
+
+                    strSentencia = recursos.readStatement("tticol222", method.Name, ref owner, ref env, tabla222, paramList);
+                    log.escribirError("aclo: " + reg.acqt + " Sentencia SQL 222 : " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+                    retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("text", strSentencia, ref parametersOut, null, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+                log.escribirError(" Sentencia SQL 222 : " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return retorno;
+        }
     }
 
 }

@@ -16,12 +16,12 @@ namespace whusa.Interfases
         {
         }
 
-        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError, ref string anuncioautomatico)
+        public int insertarRegistro(ref List<Ent_tticol022> parametros, ref string strError)
         {
             int retorno = -1;
             try
             {
-                retorno = dal.insertarRegistro(ref parametros, ref parametros020, ref strError, ref anuncioautomatico);
+                retorno = dal.insertarRegistro(ref parametros, ref strError);
                 return retorno;
             }
             catch (Exception ex)
@@ -29,6 +29,20 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        //public int insertarRegistro(ref List<Ent_tticol022> parametros, ref List<Ent_tticol020> parametros020, ref string strError, ref string anuncioautomatico)
+        //{
+        //    int retorno = -1;
+        //    try
+        //    {
+        //        retorno = dal.insertarRegistro(ref parametros, ref parametros020, ref strError, ref anuncioautomatico);
+        //        return retorno;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(strError += "\nPila: " + ex.Message);
+        //    }
+        //}
 
         public bool insertarRegistroAux(Ent_tticol022 Objtticol022, Ent_tticol020 Objtticol020)
         {
@@ -630,6 +644,20 @@ namespace whusa.Interfases
         }
 
 
+
+        public bool insertarRegistroTticon222(ref List<Ent_tticol022> parameterCollectionRegrind, ref string strError)
+        {
+            bool retorno = false;
+            //try
+            //{
+            retorno = dal.insertarRegistroTticon222(ref parameterCollectionRegrind, ref strError);
+            return retorno;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new Exception(strError += "\nPila: " + ex.Message);
+            //}
+        }
     }
 
 
