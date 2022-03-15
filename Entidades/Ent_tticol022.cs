@@ -151,6 +151,10 @@ namespace whusa.Entidades
         [DataMember(Order = 29)]
         public string SuccessMsg { get; set; }
 
+        public string cwaf { get; set; }
+
+        public string cwat { get; set; }
+
         public Ent_tticol022()
         {
             pdno = string.Empty;
@@ -179,7 +183,10 @@ namespace whusa.Entidades
             refcntu = 0;
             idrecord = string.Empty;
             Error = false;
+            cwaf = " ";
+            cwat = " ";
         }
+
         public Ent_tticol022(string ppdno, string psqnb, int pproc, string plogn, string pdate, string pmitm, decimal pqtdl,
                              string pcuni, string plog1, string pdatc, int pqtd1, int ppro1, string plog2, string pdatu,
                              int pqtd2, int ppro2, string ploca, int pnorp, string pdlrp, int pdele, string plogd, string pdatd,
