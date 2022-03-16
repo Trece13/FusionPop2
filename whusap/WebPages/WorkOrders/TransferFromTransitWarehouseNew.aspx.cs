@@ -145,7 +145,7 @@ namespace whusap.WebPages.WorkOrders
                     Obj131.CONF = DTPalletID.Rows[0]["CONF"].ToString();
                     Obj131.RCNO = DTPalletID.Rows[0]["RCNO"].ToString();
                     Obj131.DATR = DTPalletID.Rows[0]["DATR"].ToString();
-                    Obj131.LOCA = DTPalletID.Rows[0]["LOCA"].ToString();
+                    Obj131.LOCA = DTPalletID.Rows[0]["LOAA"].ToString();
                     Obj131.DATL = DTPalletID.Rows[0]["DATL"].ToString();
                     Obj131.PICK = DTPalletID.Rows[0]["PICK"].ToString();
                     Obj131.DATK = DTPalletID.Rows[0]["DATK"].ToString();

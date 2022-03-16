@@ -124,7 +124,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label-lg" for="txPalletID">
                 Item</label>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
                 <input type="text" class="form-control form-control-lg" id="lblItem" placeholder="Item" disabled>
             </div>
             <label id="lblItemDsca">
