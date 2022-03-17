@@ -733,16 +733,22 @@
         });
 
         txQuantity.bind('paste keyup', function () {
+            $('#DivPaids').hide();
+            $("#tbody tr").remove();
             stoper();
             timer = setTimeout("VerificarQuantity()", 1000);
         });
 
         txQuantityTotal.bind('paste keyup', function () {
+            $('#DivPaids').hide();
+            $("#tbody tr").remove();
             $('#lblError').html("");
             VerificarForm();
         })
 
         txQuantityPaidTotal.bind('paste keyup', function () {
+            $('#DivPaids').hide();
+            $("#tbody tr").remove();
             $('#lblError').html("");
             VerificarForm();
         })
