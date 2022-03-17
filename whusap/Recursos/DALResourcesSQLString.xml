@@ -3215,6 +3215,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN BAAN.ttdpur400140 ur400 ON TRIM(ur400.T$ORNO) = TRIM(ConGlobal.ORNO)
           LEFT JOIN BAAN.ttccom100140 com100 ON TRIM(ur400.T$OTBP) = TRIM(com100.T$BPID)
           WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
+          AND   ur400.t$cotp in ('CI2','CI3','CIA','CIM','CR3','CRI','MI2','MR2','OI3','OIA','OR3','ORI')
         </stringSQL>
       </operationName>
       <operationName name="ValidarStockBaan">
