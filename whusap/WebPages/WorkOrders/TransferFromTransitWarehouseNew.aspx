@@ -721,12 +721,16 @@
         });
 
         txWarehouseTrgt.bind('paste input', function () {
+            $('#DivPaids').hide();
+            $("#tbody tr").remove();
             $('#btnProcess').prop("disabled", true);
             stoper();
             timer = setTimeout("VerificarWarehouse('" + txWarehouseTrgt.val() + "',SuccesVerificarWarehouseTrgt)", 1000);
         });
 
         txLocationTrgt.bind('paste input', function () {
+            $('#DivPaids').hide();
+            $("#tbody tr").remove();
             $('#btnProcess').prop("disabled", true);
             stoper();
             timer = setTimeout("VerificarLocation()", 1000);
