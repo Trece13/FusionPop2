@@ -69,6 +69,7 @@ namespace whusap.WebPages.InvMaterial
 
             if (!IsPostBack)
             {
+                Session["save"] = null;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
                 if (formName.Contains('?'))
                 {
@@ -118,6 +119,7 @@ namespace whusap.WebPages.InvMaterial
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
+            Session["save"] = null;
             btnSave.Visible = false;
             if (string.IsNullOrEmpty(txtWorkOrder.Text.Trim()))
             {
@@ -189,6 +191,9 @@ namespace whusap.WebPages.InvMaterial
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
+            if (Session["save"] == null)
+            {
+                Session["save"] = true;
             List<Ent_tticol125> parameterCollection = new List<Ent_tticol125>();
             Ent_tticol125 obj = new Ent_tticol125();
             //Recorrer filas con valores en los textos
@@ -461,6 +466,7 @@ namespace whusap.WebPages.InvMaterial
                 lblResult.ForeColor = System.Drawing.Color.Red;
                 throw new System.InvalidOperationException(strError);
             }
+            }
         }
 
         private string addZero(int secint)
@@ -468,11 +474,11 @@ namespace whusap.WebPages.InvMaterial
             string secRet = string.Empty;
             if (secint < 10)
             {
-                secRet = "0" + ( secint ).ToString();
+                secRet = "0" + (secint).ToString();
             }
             else
             {
-                secRet = ( secint ).ToString();
+                secRet = (secint).ToString();
             }
             return secRet;
         }
@@ -613,13 +619,13 @@ namespace whusap.WebPages.InvMaterial
                     lista.DataBind();
 
                 }
-                    ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MinimumValue = "0";
-                    ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MaximumValue = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["CANT"].ToString(); ;
-                    TextBox control = (TextBox)e.Row.Cells[6].FindControl("toReturn");
-                    string quantityCheck = control.Text;
-                    control.Attributes.Add("onblur", "validaLot(this, " + FilaSerializada + ", '" + txtWorkOrder.Text.Trim() + "');");
-                    control.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 0);validateQty('" + rowIndex + "')");
-                    lista.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 1);");
+                ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MinimumValue = "0";
+                ((RangeValidator)e.Row.Cells[6].FindControl("validateQuantity")).MaximumValue = ((DataRowView)e.Row.DataItem).DataView.Table.Rows[e.Row.RowIndex]["CANT"].ToString(); ;
+                TextBox control = (TextBox)e.Row.Cells[6].FindControl("toReturn");
+                string quantityCheck = control.Text;
+                control.Attributes.Add("onblur", "validaLot(this, " + FilaSerializada + ", '" + txtWorkOrder.Text.Trim() + "');");
+                control.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 0);validateQty('" + rowIndex + "')");
+                lista.Attributes.Add("onchange", "validarCantidadMaxima(this, " + FilaSerializada + ", 1);");
                 //TextBox palletIdTextBox = (TextBox)e.Row.Cells[10].FindControl("palletId");
                 //Console.WriteLine("This is palletIDBox value : ", palletIdTextBox);
                 //changing following line.
@@ -751,14 +757,14 @@ namespace whusap.WebPages.InvMaterial
                     }
                     if (((tableName == "whcol131") || (tableName == "whcol130")) && (status != 9))
                     {
-                        
+
                         retorno = PalletIDstatusdoesntallowreturn
 ;
                         break;
                     }
                     else if (((tableName == "ticol022") || (tableName == "ticol042")) && (status != 11))
                     {
-                        
+
                         retorno = PalletIDstatusdoesntallowreturn;
                         break;
                     }
@@ -797,7 +803,7 @@ namespace whusap.WebPages.InvMaterial
                 }
                 if (!string.IsNullOrEmpty(valor) && !string.IsNullOrEmpty(lote))
                 {
-                    
+
                     double iCantMax = 0;
 
                     obj.pdno = row.GetValue(1).ToString().Trim();
@@ -813,11 +819,11 @@ namespace whusap.WebPages.InvMaterial
                     }
                     else if (string.IsNullOrEmpty(strError))
                     {
-                        
-                        strError = Theamounttoreturnisinvalid;  
+
+                        strError = Theamounttoreturnisinvalid;
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -871,6 +877,6 @@ namespace whusap.WebPages.InvMaterial
 
         #endregion
 
-        
+
     }
 }
