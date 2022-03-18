@@ -90,6 +90,7 @@ namespace whusap.WebPages.Migration
 
             if (!IsPostBack)
             {
+                Session["Located"] = null;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
                 if (formName.Contains('?'))
                 {
@@ -135,7 +136,7 @@ namespace whusap.WebPages.Migration
 
         protected void Form_Unload(object sender, EventArgs e)
         {
-            Session["resultado"] = null;
+            
         }
 
         protected void generateWarehouseData()
@@ -175,8 +176,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
-           
-
+            Session["Located"] = null;
             InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
             Ent_tticol125 obj = new Ent_tticol125();
             string strError = string.Empty;
@@ -1104,6 +1104,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_announce(object sender, EventArgs e)
         {
+
             Session["CantRest"] = "";
             var validInsert = 0;
             var validUpdate = 0;
@@ -1232,489 +1233,283 @@ namespace whusap.WebPages.Migration
 
         protected void btnGuardar_Click_located(object sender, EventArgs e)
         {
-            Session["CantRest"] = "";
-            var tipol = "Located";
-            Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
-            Ent_tticol022 MyObj022 = new Ent_tticol022();
-            //JC 060921 Ajustar Datos para rechazar regrind
-            Ent_tticol042 MyObj042 = new Ent_tticol042();
-
-            var validUpdate = 0;
-            lblErrorLocated.Text = String.Empty;
-            var item = Session["ItemName"].ToString().Trim().ToUpper();
-            var warehouse = Session["Warehouse"].ToString().ToUpper();
-            var location = Session["Location"].ToString().ToUpper();
-            var lot = Session["Lot"].ToString().ToUpper();
-
-            var cantidad = Convert.ToDouble(Request.Form["txtQuantity"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat);
-            var cdis = Request.Form["slReasons"].ToString().Trim();
-            var obse = Request.Form["txtComments"].ToString().Trim();
-            var VariableAuxSuno = Request.Form["txtSupplier"].ToString().Trim();
-            var suno = string.IsNullOrEmpty(VariableAuxSuno) ? string.Empty : Request.Form["txtSupplier"].ToString().Trim();
-            var reasondesc = Request.Form["lblReasonDesc"];
-
-            var paid = txtPalletId.Text.Trim().ToUpper();
-            var cwam = dropDownWarehouse.Text.Trim();
-
-            //if (lot == string.Empty)
-            //{
-            //    lblErrorLocated.Text = "The lot can't be empty";
-            //    return;
-            //}
-
-            if (reasondesc == null || reasondesc == "")
+            if (Session["Located"] == null)
             {
-                reasondesc = "Adhesion";
-            }
+                Session["Located"] = true;
+                Session["CantRest"] = "";
+                var tipol = "Located";
+                Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+                Ent_tticol022 MyObj022 = new Ent_tticol022();
+                //JC 060921 Ajustar Datos para rechazar regrind
+                Ent_tticol042 MyObj042 = new Ent_tticol042();
 
-            if (cantidad > Convert.ToDouble(_stock, CultureInfo.InvariantCulture.NumberFormat))
-            {
-                lblErrorLocated.Text = mensajes("quantexceed");
-                return;
-            }
+                var validUpdate = 0;
+                lblErrorLocated.Text = String.Empty;
+                var item = Session["ItemName"].ToString().Trim().ToUpper();
+                var warehouse = Session["Warehouse"].ToString().ToUpper();
+                var location = Session["Location"].ToString().ToUpper();
+                var lot = Session["Lot"].ToString().ToUpper();
 
-            string strMaxSequence = getSequence(paid.ToUpper().Trim(),"Q");
-            string separator = "-";
-            string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+                var cantidad = Convert.ToDouble(Request.Form["txtQuantity"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                var cdis = Request.Form["slReasons"].ToString().Trim();
+                var obse = Request.Form["txtComments"].ToString().Trim();
+                var VariableAuxSuno = Request.Form["txtSupplier"].ToString().Trim();
+                var suno = string.IsNullOrEmpty(VariableAuxSuno) ? string.Empty : Request.Form["txtSupplier"].ToString().Trim();
+                var reasondesc = Request.Form["lblReasonDesc"];
 
-            if (Session["TableNameSave"].ToString() == "ticol022")
-            {
+                var paid = txtPalletId.Text.Trim().ToUpper();
+                var cwam = dropDownWarehouse.Text.Trim();
 
-                
-                MyObj022.pdno = lot;
-                MyObj022.sqnb = newPallet;
-                MyObj022.proc = 2;
-                MyObj022.logn = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj022.mitm = item;
-                MyObj022.qtdl = Convert.ToDecimal(cantidad);
-                MyObj022.cuni = Session["Cuni"].ToString();//CUNI;
-                MyObj022.log1 = "NONE";
-                MyObj022.qtd1 = Convert.ToInt32(cantidad);
-                MyObj022.pro1 = 2;
-                MyObj022.log2 = "NONE";
-                MyObj022.qtd2 = Convert.ToInt32(cantidad);
-                MyObj022.pro2 = 2;
-                MyObj022.loca = location == string.Empty ? " " : location;
-                MyObj022.norp = 1;
-                //JC 130821 Ajustar Datos Estado rechazado
-                //MyObj022.dele = 7;
-                MyObj022.dele = 3;
-                MyObj022.logd = "NONE";
-                MyObj022.refcntd = 0;
-                MyObj022.refcntu = 0;
-                MyObj022.drpt = DateTime.Now;
-                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj022.acqt = Convert.ToDecimal(cantidad); 
-                //JC 130821 Ajustar Datos Bodega Rechazo
-                 //MyObj022.cwaf = warehouse;//CWAR;
-                //MyObj022.cwat = warehouse;//CWAR;
-                //MyObj022.aclo = warehouse;
-                MyObj022.cwaf = cwam;//CWAR;
-                MyObj022.cwat = cwam;//CWAR;
-                MyObj022.aclo = " ";
-                MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+                //if (lot == string.Empty)
+                //{
+                //    lblErrorLocated.Text = "The lot can't be empty";
+                //    return;
+                //}
 
-                var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
-                var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
-            }
-            //JC 060921 Ajustar Datos para rechazar regrind
-            else if (Session["TableNameSave"].ToString() == "ticol042")
-            {                                
-                MyObj042.pdno = lot;
-                MyObj042.sqnb = newPallet;
-                MyObj042.proc = 2;
-                MyObj042.logn = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj042.mitm = item;
-                MyObj042.qtdl = Convert.ToDouble(cantidad);
-                MyObj042.cuni = Session["Cuni"].ToString();//CUNI;
-                MyObj042.log1 = "NONE";
-                MyObj042.qtd1 = Convert.ToInt32(cantidad);
-                MyObj042.pro1 = 2;
-                MyObj042.log2 = "NONE";
-                MyObj042.qtd2 = Convert.ToInt32(cantidad);
-                MyObj042.pro2 = 2;
-                MyObj042.loca = location == string.Empty ? " " : location;
-                MyObj042.norp = 1;
-                MyObj042.dele = 3;
-                MyObj042.logd = "NONE";
-                MyObj042.refcntd = 0;
-                MyObj042.refcntu = 0;
-                MyObj042.drpt = DateTime.Now;
-                MyObj042.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj042.acqt = Convert.ToDouble(cantidad); 
-                MyObj042.cwaf = cwam;//CWAR;
-                MyObj042.cwat = cwam;//CWAR;
-                MyObj042.aclo = " ";
-                MyObj042.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
-
-                var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj042, ref strError);
-                var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj042, ref strError);
-            }
-            else if (Session["TableNameSave"].ToString() == "whcol131")
-            {
-                
-                MyObj131.OORG = "2";// Order type escaneada view 
-                MyObj131.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
-                MyObj131.ITEM = item;
-                MyObj131.PAID = newPallet;
-                //MyObj131.PONO = HttpContext.Current.Session["pono"].ToString();
-                MyObj131.PONO = "1";
-                MyObj131.SEQN = "1";
-                MyObj131.CLOT = lot == String.Empty ? " " : lot;//CLOT.ToUpper();// lote VIEW
-                //MyObj131.CWAR = warehouse;//CWAR.ToUpper();
-                MyObj131.CWAR = cwam;
-                MyObj131.QTYS = cantidad.ToString();//QTYS;// cantidad escaneada view 
-                MyObj131.UNIT = Session["Cuni"].ToString();//UNIT;//unit escaneada view
-                MyObj131.QTYC = cantidad.ToString();//QTYS;//cantidad escaneada view aplicando factor
-                MyObj131.QTYA = cantidad.ToString();//QTYS;//cantidad escaneada view aplicando factor
-                MyObj131.UNIC = Session["Cuni"].ToString();//UNIT;//unidad view stock
-                MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
-                MyObj131.CONF = "1";
-                MyObj131.RCNO = " ";//llena baan
-                MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                //MyObj131.LOCA = location;//LOCA.ToUpper();// enviamos vacio 
-                MyObj131.LOCA = " ";
-                MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
-                MyObj131.PRNT = "1";// llenar en 1
-                MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                MyObj131.NPRT = "1";//conteo de reimpresiones 
-                MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
-                MyObj131.LOGT = " ";//llena baan
-                MyObj131.STAT = "11";// LLENAR EN 11 Para el pallet Q
-                MyObj131.DSCA = " ";
-                MyObj131.COTP = " ";
-                MyObj131.FIRE = "2";
-                MyObj131.PSLIP = " ";
-                MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
-                string StrError = string.Empty;
-                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
-            }
-               
-            Ent_twhwmd300 data = new Ent_twhwmd300() { loca = location };
-            var validaLocation = _idaltwhwmd300.listaRegistro_ObtieneAlmacen(ref data, ref strError);
-            if (txSloc.Value.ToString().Trim() == "1")
-            {
-                if (validaLocation.Rows.Count > 0)
+                if (reasondesc == null || reasondesc == "")
                 {
-                    if (Convert.ToInt32(validaLocation.Rows[0]["LOCT"]) != 5)
+                    reasondesc = "Adhesion";
+                }
+
+                if (cantidad > Convert.ToDouble(_stock, CultureInfo.InvariantCulture.NumberFormat))
+                {
+                    Session["Located"] = null;
+                    lblErrorLocated.Text = mensajes("quantexceed");
+                    return;
+                }
+
+                string strMaxSequence = getSequence(paid.ToUpper().Trim(), "Q");
+                string separator = "-";
+                string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+
+                if (Session["TableNameSave"].ToString() == "ticol022")
+                {
+
+
+                    MyObj022.pdno = lot;
+                    MyObj022.sqnb = newPallet;
+                    MyObj022.proc = 2;
+                    MyObj022.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj022.mitm = item;
+                    MyObj022.qtdl = Convert.ToDecimal(cantidad);
+                    MyObj022.cuni = Session["Cuni"].ToString();//CUNI;
+                    MyObj022.log1 = "NONE";
+                    MyObj022.qtd1 = Convert.ToInt32(cantidad);
+                    MyObj022.pro1 = 2;
+                    MyObj022.log2 = "NONE";
+                    MyObj022.qtd2 = Convert.ToInt32(cantidad);
+                    MyObj022.pro2 = 2;
+                    MyObj022.loca = location == string.Empty ? " " : location;
+                    MyObj022.norp = 1;
+                    //JC 130821 Ajustar Datos Estado rechazado
+                    //MyObj022.dele = 7;
+                    MyObj022.dele = 3;
+                    MyObj022.logd = "NONE";
+                    MyObj022.refcntd = 0;
+                    MyObj022.refcntu = 0;
+                    MyObj022.drpt = DateTime.Now;
+                    MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj022.acqt = Convert.ToDecimal(cantidad);
+                    //JC 130821 Ajustar Datos Bodega Rechazo
+                    //MyObj022.cwaf = warehouse;//CWAR;
+                    //MyObj022.cwat = warehouse;//CWAR;
+                    //MyObj022.aclo = warehouse;
+                    MyObj022.cwaf = cwam;//CWAR;
+                    MyObj022.cwat = cwam;//CWAR;
+                    MyObj022.aclo = " ";
+                    MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                    var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
+                    var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+                }
+                //JC 060921 Ajustar Datos para rechazar regrind
+                else if (Session["TableNameSave"].ToString() == "ticol042")
+                {
+                    MyObj042.pdno = lot;
+                    MyObj042.sqnb = newPallet;
+                    MyObj042.proc = 2;
+                    MyObj042.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj042.mitm = item;
+                    MyObj042.qtdl = Convert.ToDouble(cantidad);
+                    MyObj042.cuni = Session["Cuni"].ToString();//CUNI;
+                    MyObj042.log1 = "NONE";
+                    MyObj042.qtd1 = Convert.ToInt32(cantidad);
+                    MyObj042.pro1 = 2;
+                    MyObj042.log2 = "NONE";
+                    MyObj042.qtd2 = Convert.ToInt32(cantidad);
+                    MyObj042.pro2 = 2;
+                    MyObj042.loca = location == string.Empty ? " " : location;
+                    MyObj042.norp = 1;
+                    MyObj042.dele = 3;
+                    MyObj042.logd = "NONE";
+                    MyObj042.refcntd = 0;
+                    MyObj042.refcntu = 0;
+                    MyObj042.drpt = DateTime.Now;
+                    MyObj042.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj042.acqt = Convert.ToDouble(cantidad);
+                    MyObj042.cwaf = cwam;//CWAR;
+                    MyObj042.cwat = cwam;//CWAR;
+                    MyObj042.aclo = " ";
+                    MyObj042.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                    var validateSave = _idaltticol042.insertarRegistroSimple(ref MyObj042, ref strError);
+                    var validateSaveTicol242 = _idaltticol042.InsertarRegistroTicol242(ref MyObj042, ref strError);
+
+
+                }
+                else if (Session["TableNameSave"].ToString() == "whcol131")
+                {
+
+                    MyObj131.OORG = "2";// Order type escaneada view 
+                    MyObj131.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
+                    MyObj131.ITEM = item;
+                    MyObj131.PAID = newPallet;
+                    //MyObj131.PONO = HttpContext.Current.Session["pono"].ToString();
+                    MyObj131.PONO = "1";
+                    MyObj131.SEQN = "1";
+                    MyObj131.CLOT = lot == String.Empty ? " " : lot;//CLOT.ToUpper();// lote VIEW
+                    //MyObj131.CWAR = warehouse;//CWAR.ToUpper();
+                    MyObj131.CWAR = cwam;
+                    MyObj131.QTYS = cantidad.ToString();//QTYS;// cantidad escaneada view 
+                    MyObj131.UNIT = Session["Cuni"].ToString();//UNIT;//unit escaneada view
+                    MyObj131.QTYC = cantidad.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj131.QTYA = cantidad.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj131.UNIC = Session["Cuni"].ToString();//UNIT;//unidad view stock
+                    MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                    MyObj131.CONF = "1";
+                    MyObj131.RCNO = " ";//llena baan
+                    MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    //MyObj131.LOCA = location;//LOCA.ToUpper();// enviamos vacio 
+                    MyObj131.LOCA = " ";
+                    MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                    MyObj131.PRNT = "1";// llenar en 1
+                    MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    MyObj131.NPRT = "1";//conteo de reimpresiones 
+                    MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
+                    MyObj131.LOGT = " ";//llena baan
+                    MyObj131.STAT = "11";// LLENAR EN 11 Para el pallet Q
+                    MyObj131.DSCA = " ";
+                    MyObj131.COTP = " ";
+                    MyObj131.FIRE = "2";
+                    MyObj131.PSLIP = " ";
+                    MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
+                    string StrError = string.Empty;
+                    bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
+
+                }
+
+                Ent_twhwmd300 data = new Ent_twhwmd300() { loca = location };
+                var validaLocation = _idaltwhwmd300.listaRegistro_ObtieneAlmacen(ref data, ref strError);
+                if (txSloc.Value.ToString().Trim() == "1")
+                {
+                    if (validaLocation.Rows.Count > 0)
                     {
-                        lblErrorLocated.Text = mensajes("bulklocation");
+                        if (Convert.ToInt32(validaLocation.Rows[0]["LOCT"]) != 5)
+                        {
+                            Session["Located"] = null;
+                            lblErrorLocated.Text = mensajes("bulklocation");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        Session["Located"] = null;
+                        lblErrorLocated.Text = mensajes("locationnotexists");
                         return;
                     }
                 }
-                else
-                {
-                    lblErrorLocated.Text = mensajes("locationnotexists");
-                    return;
-                }
-            }
 
-            var validarRegistro = _idaltticol116.findRecordByWarehouseItemLocation(ref item, ref warehouse, ref location, ref strError);
+                var validarRegistro = _idaltticol116.findRecordByWarehouseItemLocation(ref item, ref warehouse, ref location, ref strError);
 
-            if (validarRegistro.Rows.Count > 0)
-            {
-                Ent_tticol116 data116 = new Ent_tticol116()
+                if (validarRegistro.Rows.Count > 0)
                 {
-                    item = item,
-                    cwar = warehouse,
-                    loca = location == String.Empty ? " " : location,
-                    clot = lot == String.Empty ? " " : lot,
-                    qtyr = cantidad,
-                    cdis = cdis,
-                    obse = obse == String.Empty ? " " : obse,
-                    logr = HttpContext.Current.Session["user"].ToString(),
-                    suno = suno == String.Empty ? " " : suno,
-                    paid = newPallet,
-                    cwam = cwam,
-                    //JC 01122021 Ajustar la cantidad restante con respecto a la cantidad del pallet
-                    //resCant = _stock-Convert.ToDecimal(cantidad)
-                    resCant = _stockpallet - Convert.ToDecimal(cantidad)
-                };
-                //1JC 130821 Validar si rechazaron todo el pallet para que grabe el dato correcto del pallet
-                var estado = String.Empty;
-                if (data116.resCant > 0)
-                {
-                    data116.paid = newPallet; 
-                    estado = "7";
-                }
-                else
-                {
-                    estado = "3";
-                }
-                Session["CantRest"] = data116.resCant;
-                Ent_tticol100 data100 = new Ent_tticol100()
-                {
-                    dele = estado,
-                    paid = paid,
-                    cwar = warehouse,
-                    logr = HttpContext.Current.Session["user"].ToString(),
-                    //JC 021221 Adicionar la cantidad restante en caso de tomar parcial
-                    qtyr = Convert.ToDouble(Session["CantRest"]),
-
-                };
-                var validInsertaux = _idaltticol116.insertarRegistro(ref data116, ref strError);
-
-                if (validInsertaux > 0)
-                {
-                    //JC 060921 Ajustar para grabar datos de regrind
-                    //validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
-                    //validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
-                    tableNameSave = Session["TableNameSave"].ToString();
-                    if (tableNameSave == "ticol022")
+                    Ent_tticol116 data116 = new Ent_tticol116()
                     {
-                        validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
-                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
-                    }
-                    if (tableNameSave == "ticol042")
+                        item = item,
+                        cwar = warehouse,
+                        loca = location == String.Empty ? " " : location,
+                        clot = lot == String.Empty ? " " : lot,
+                        qtyr = cantidad,
+                        cdis = cdis,
+                        obse = obse == String.Empty ? " " : obse,
+                        logr = HttpContext.Current.Session["user"].ToString(),
+                        suno = suno == String.Empty ? " " : suno,
+                        paid = newPallet,
+                        cwam = cwam,
+                        //JC 01122021 Ajustar la cantidad restante con respecto a la cantidad del pallet
+                        //resCant = _stock-Convert.ToDecimal(cantidad)
+                        resCant = _stockpallet - Convert.ToDecimal(cantidad)
+                    };
+                    //1JC 130821 Validar si rechazaron todo el pallet para que grabe el dato correcto del pallet
+                    var estado = String.Empty;
+                    if (data116.resCant > 0)
                     {
-                        validUpdate = _idaltticol100.ActualizaRegistro_ticol042(ref data100, ref strError);
-                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol242(ref data100, ref strError, ref tipol);
-                    }
-                    //JC 01122021 Se mueve más arriba para que actualice bien los estados
-                    //tableNameSave = Session["TableNameSave"].ToString();
-                    if (tableNameSave == "ticol022")
-                    {
-                        validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
-                    }
-                    else if (tableNameSave == "ticol042")
-                    {
-                        validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol242(ref data116, ref strError);
+                        data116.paid = newPallet;
+                        estado = "7";
                     }
                     else
                     {
-                        validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
+                        estado = "3";
                     }
-
-
-                    lblErrorLocated.Text = String.Empty;
-                    lblConfirmLocated.Text = mensajes("msjupdate");
-                    divTableLocated.InnerHtml = String.Empty;
-                    divBtnGuardarLocated.Visible = false;
-                   // txtPalletId.Text = String.Empty;
-                    lblDefectiveMaterial.Text = "DEFECTIVE MATERIAL-TAG";
-                    lblDescRejectQty.Text = "Rejected qty - ";
-                    lblDescPrintedBy.Text = "Printed by - ";
-                    lblValueLot.Text = "Lot - ";
-                    lblDescReason.Text = "Reason"; 
-                    lblDescDescription.Text = "Description";
-                    lblCommentsLocated.Text = "Comments : ";
-
-
-                    var rutaServ1 = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
-                    imgPalletId.Src = !string.IsNullOrEmpty(txtPalletId.Text) ? rutaServ1 : "";
-
-                    var rutaServ = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
-                    imgCodeItem.Src = !string.IsNullOrEmpty(item) ? rutaServ : "";
-
-                    var rutaServQty = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + cantidad.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
-                    imgQty.Src = !string.IsNullOrEmpty(cantidad.ToString()) ? rutaServQty : "";
-
-                    lblValueDescription.Text = hdfDescItem.Value;
-                    lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
-                    lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", HttpContext.Current.Session["user"].ToString());
-                    lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
-                    lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
-                    lblValueReasonLocated.Text = reasondesc;
-
-                    //update actual warehouse field on table ticol222 to MRB Warehouse:  Located.
-                    tableNameSave = Session["TableNameSave"].ToString();
-                    //JC 02122021 Quitar actualizaciones innecesarias, ya las hace en la parte superior.
-                    //if (tableNameSave == "ticol022")
-                    //{
-                    //    validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
-                    //    _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
-                    //}
-                    //else if (tableNameSave == "ticol042")
-                    //{
-                    //    validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol242(ref data116, ref strError);
-                    //    _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
-                    //}
-                    //else
-                    //{
-                    //    validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
-                    //    _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
-                    //}
-
-                    //Session["WorkOrder"] = paid.Trim().ToUpper();
-                    Session["WorkOrder"] = MyObj022.pdno;
-                    Session["lblReason"] = reasondesc;
-                    Session["codePaid"] = paid.Trim().ToUpper();
-                    Session["ProductDesc"] = Session["DescItem"];
-                    Session["ProductCode"] = item.Trim().ToUpper();
-                    Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                    //JC 021221 Tomar la cantidad pendiente en caso de ser un rechazo parcial.
-                    //Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
-                    Session["Quantity"] = Convert.ToDouble(Session["CantRest"]) + " " + Session["Cuni"].ToString(); ;
-                    Session["Finished"] = paid.Trim().ToUpper();
-                    Session["Pallet"] = paid.Trim().ToUpper();
-                    Session["PrintedBy"] = _operator;
-                    Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                    Session["Comments"] = obse;
-                    Session["Reprint"] = "no";
-                    //JC 020221 Ajustar para que imprima las etiquetas correctas
-                    //StringBuilder script = new StringBuilder();
-                    ////JC 270721 
-                    ////JC 270721 Unificar el diseño de la etiqueta
-                    
-                    //if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
-                    //{
-                    //    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
-                    //}
-                    //else
-                    //{
-                    //    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
-                    //}
-                    //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-                    if (tableNameSave == "ticol022")
+                    Session["CantRest"] = data116.resCant;
+                    Ent_tticol100 data100 = new Ent_tticol100()
                     {
-                        Session["WorkOrder"] = MyObj022.pdno;
-                        Session["WorkOrder2"] = MyObj022.pdno;
-                        Session["lblReason2"] = reasondesc;
-                        Session["codePaid2"] = MyObj022.sqnb;
-                        Session["ProductDesc2"] = Session["DescItem"];
-                        Session["ProductCode2"] = item.Trim().ToUpper();
-                        Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity2"] = MyObj022.qtdl + " " + Session["Cuni"].ToString(); ;
-                        Session["Finished2"] = MyObj022.sqnb;
-                        Session["Pallet2"] = MyObj022.sqnb;
-                        Session["PrintedBy2"] = _operator;
-                        Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                        Session["Comments2"] = obse;
-                    }
-                    else if (tableNameSave == "ticol042")
+                        dele = estado,
+                        paid = paid,
+                        cwar = warehouse,
+                        logr = HttpContext.Current.Session["user"].ToString(),
+                        //JC 021221 Adicionar la cantidad restante en caso de tomar parcial
+                        qtyr = Convert.ToDouble(Session["CantRest"]),
+
+                    };
+                    var validInsertaux = _idaltticol116.insertarRegistro(ref data116, ref strError);
+
+                    if (validInsertaux > 0)
                     {
-                        Session["WorkOrder"] = MyObj042.pdno;
-                        Session["WorkOrder2"] = MyObj042.pdno;
-                        Session["lblReason2"] = reasondesc;
-                        Session["codePaid2"] = MyObj042.sqnb;
-                        Session["ProductDesc2"] = Session["DescItem"];
-                        Session["ProductCode2"] = item.Trim().ToUpper();
-                        Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity2"] = MyObj042.qtdl + " " + Session["Cuni"].ToString(); ;
-                        Session["Finished2"] = MyObj042.sqnb;
-                        Session["Pallet2"] = MyObj042.sqnb;
-                        Session["PrintedBy2"] = _operator;
-                        Session["Machine2"] = " ";
-                        Session["Comments2"] = obse;
-                    }
-                    else
-                    {
-                        Session["WorkOrder"] = MyObj131.ORNO;
-                        Session["WorkOrder2"] = MyObj131.ORNO;
-                        Session["lblReason2"] = reasondesc;
-                        Session["codePaid2"] = MyObj131.PAID;
-                        Session["ProductDesc2"] = Session["DescItem"];
-                        Session["ProductCode2"] = item.Trim().ToUpper();
-                        Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity2"] = MyObj131.QTYC + " " + Session["Cuni"].ToString(); ;
-                        Session["Finished2"] = MyObj131.PAID;
-                        Session["Pallet2"] = MyObj131.PAID;
-                        Session["PrintedBy2"] = _operator;
-                        Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
-                        Session["Comments2"] = obse;
-                        Session["Reprint"] = "no";
-                    }
-                    StringBuilder script = new StringBuilder();
-                    if (Convert.ToInt16(Session["CantRest"]) > 0)
-                    {
-                        if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                        //JC 060921 Ajustar para grabar datos de regrind
+                        //validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
+                        //validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
+                        tableNameSave = Session["TableNameSave"].ToString();
+                        if (tableNameSave == "ticol022")
                         {
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDoubleME.aspx'; ");
+                            validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
+                            validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
+                        }
+                        if (tableNameSave == "ticol042")
+                        {
+                            validUpdate = _idaltticol100.ActualizaRegistro_ticol042(ref data100, ref strError);
+                            validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol242(ref data100, ref strError, ref tipol);
+                        }
+                        //JC 01122021 Se mueve más arriba para que actualice bien los estados
+                        //tableNameSave = Session["TableNameSave"].ToString();
+                        if (tableNameSave == "ticol022")
+                        {
+                            validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
+                        }
+                        else if (tableNameSave == "ticol042")
+                        {
+                            validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol242(ref data116, ref strError);
                         }
                         else
                         {
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                            validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
                         }
-                    }
-                    else
-                    {
-                        if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
-                        {
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
-                        }
-                        else
-                        {
-                            script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
-                        }
-                    }
-                    ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
-                    divLabel.Visible = false;
-                    divBotonesLocated.Visible = false;
-                }
-                else
-                {
-                    lblErrorLocated.Text = mensajes("errorupdt");
-                    return;
-                }
-            }
-            else
-            {
-                Ent_tticol116 data116 = new Ent_tticol116()
-                {
-                    item = item,
-                    cwar = warehouse,
-                    loca = location == String.Empty ? " " : location,
-                    clot = lot == String.Empty ? " " : lot,
-                    qtyr = cantidad,
-                    cdis = cdis,
-                    obse = obse == String.Empty ? " " : obse,
-                    logr = HttpContext.Current.Session["user"].ToString(),
-                    suno = suno == String.Empty ? " " : suno,
-                    paid = newPallet,
-                    cwam = cwam,
-                    //JC 01122021 Ajustar la cantidad restante con respecto a la cantidad del pallet
-                    //resCant = _stock - Convert.ToDecimal(cantidad)
-                    resCant = _stockpallet - Convert.ToDecimal(cantidad)                   
-                };
-                //2JC 130821 Validar si rechazaron todo el pallet para que grabe el dato correcto del pallet
-                var estado = String.Empty;
-                if (data116.resCant > 0)
-                {
-                    data116.paid = newPallet;
-                    estado = "7";
-                }
-                else
-                {
-                    estado = "3";
-                }
-                Session["CantRest"] = data116.resCant;
-                Ent_tticol100 data100 = new Ent_tticol100()
-                {
-                    //JC 130821 Ajustar estado y cantidad
-                    dele = estado,
-                    qtyr = Convert.ToDouble(data116.resCant),
-                    paid = paid,
-                    cwar = cwam,
-                    logr = HttpContext.Current.Session["user"].ToString(),
-                };
-                var validInsert = _idaltticol116.insertarRegistro(ref data116, ref strError);
+                        lblErrorLocated.Text = String.Empty;
+                        lblConfirmLocated.Text = mensajes("msjupdate");
+                        divTableLocated.InnerHtml = String.Empty;
+                        divBtnGuardarLocated.Visible = false;
+                        // txtPalletId.Text = String.Empty;
+                        lblDefectiveMaterial.Text = "DEFECTIVE MATERIAL-TAG";
+                        lblDescRejectQty.Text = "Rejected qty - ";
+                        lblDescPrintedBy.Text = "Printed by - ";
+                        lblValueLot.Text = "Lot - ";
+                        lblDescReason.Text = "Reason";
+                        lblDescDescription.Text = "Description";
+                        lblCommentsLocated.Text = "Comments : ";
 
-                if (validInsert > 0)
-                {
-                    lblErrorLocated.Text = String.Empty;
-                    lblConfirmLocated.Text = mensajes("msjsave");
-                    divTableLocated.InnerHtml = String.Empty;
-                    divBtnGuardarLocated.Visible = false;
-                    
 
-                    tableNameSave = Session["TableNameSave"].ToString();
-                    if (tableNameSave == "ticol022")
-                    {
-                        validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
-                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
-                    }
-                    else if (tableNameSave == "ticol042")
-                    {
-                        validUpdate = _idaltticol100.ActualizaRegistro_ticol042(ref data100, ref strError);
-                        validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol242(ref data100, ref strError, ref tipol);
-                    }
-                    else
-                    {
-                        validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError, ref tipol);
-                    }
-                    
                         var rutaServ1 = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
                         imgPalletId.Src = !string.IsNullOrEmpty(txtPalletId.Text) ? rutaServ1 : "";
 
@@ -1723,10 +1518,6 @@ namespace whusap.WebPages.Migration
 
                         var rutaServQty = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + cantidad.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
                         imgQty.Src = !string.IsNullOrEmpty(cantidad.ToString()) ? rutaServQty : "";
-                    
-                        lblDefectiveMaterial.Text = "DEFECTIVE MATERIAL-TAG";
-                        lblDescReason.Text = "Reason";
-                        lblDescDescription.Text = "Description";
 
                         lblValueDescription.Text = hdfDescItem.Value;
                         lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
@@ -1734,22 +1525,56 @@ namespace whusap.WebPages.Migration
                         lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
                         lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
                         lblValueReasonLocated.Text = reasondesc;
-                        //JC 270721  Completar los datos para la etiqueta
-                        //Session["WorkOrder"] = paid.Trim().ToUpper();                        
+
+                        //update actual warehouse field on table ticol222 to MRB Warehouse:  Located.
+                        tableNameSave = Session["TableNameSave"].ToString();
+                        //JC 02122021 Quitar actualizaciones innecesarias, ya las hace en la parte superior.
+                        //if (tableNameSave == "ticol022")
+                        //{
+                        //    validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol222(ref data116, ref strError);
+                        //    _idaltticol116.ActualCant_ticol222(ref data116, ref strError);
+                        //}
+                        //else if (tableNameSave == "ticol042")
+                        //{
+                        //    validUpdate = _idaltticol116.ActualUpdateWarehouse_ticol242(ref data116, ref strError);
+                        //    _idaltticol116.ActualCant_ticol242(ref data116, ref strError);
+                        //}
+                        //else
+                        //{
+                        //    validUpdate = _idaltticol116.ActualUpdateWarehouse_whcol131(ref data116, ref strError);
+                        //    _idaltticol116.ActualCant_whcol131(ref data116, ref strError);
+                        //}
+
+                        //Session["WorkOrder"] = paid.Trim().ToUpper();
+                        Session["WorkOrder"] = MyObj022.pdno;
                         Session["lblReason"] = reasondesc;
                         Session["codePaid"] = paid.Trim().ToUpper();
                         Session["ProductDesc"] = Session["DescItem"];
                         Session["ProductCode"] = item.Trim().ToUpper();
                         Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        //Session["Quantity"] = (Session["Cuni"].ToString().ToUpper().Trim() == "KG" || Session["Cuni"].ToString().ToUpper().Trim() == "LB" ? data116.resCant.ToString() : Convert.ToInt32(data116.resCant).ToString()) + " " + Session["Cuni"].ToString();
-                        Session["Quantity"] = (Session["Cuni"].ToString().ToUpper().Trim() == "KG" || Session["Cuni"].ToString().ToUpper().Trim() == "LB" ? Convert.ToDouble(data116.resCant).ToString() : Convert.ToDouble(data116.resCant).ToString()) + " " + Session["Cuni"].ToString();
+                        //JC 021221 Tomar la cantidad pendiente en caso de ser un rechazo parcial.
+                        //Session["Quantity"] = cantidad.ToString().Trim().ToUpper() + " " + Session["Cuni"].ToString(); ;
+                        Session["Quantity"] = Convert.ToDouble(Session["CantRest"]) + " " + Session["Cuni"].ToString(); ;
                         Session["Finished"] = paid.Trim().ToUpper();
                         Session["Pallet"] = paid.Trim().ToUpper();
                         Session["PrintedBy"] = _operator;
                         Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                         Session["Comments"] = obse;
                         Session["Reprint"] = "no";
+                        //JC 020221 Ajustar para que imprima las etiquetas correctas
+                        //StringBuilder script = new StringBuilder();
+                        ////JC 270721 
+                        ////JC 270721 Unificar el diseño de la etiqueta
 
+                        //if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                        //{
+                        //    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                        //}
+                        //else
+                        //{
+                        //    script.Append("ventanaImp = window.open('../Labels/RedesingLabels/5MRBMaterials.aspx', 'ventanaImp', 'menubar=0,resizable=0,width=800,height=450');");
+                        //}
+                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
                         if (tableNameSave == "ticol022")
                         {
                             Session["WorkOrder"] = MyObj022.pdno;
@@ -1765,7 +1590,7 @@ namespace whusap.WebPages.Migration
                             Session["PrintedBy2"] = _operator;
                             Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
                             Session["Comments2"] = obse;
-                       }
+                        }
                         else if (tableNameSave == "ticol042")
                         {
                             Session["WorkOrder"] = MyObj042.pdno;
@@ -1825,15 +1650,231 @@ namespace whusap.WebPages.Migration
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
 
 
-                    divLabel.Visible = false;
-                    divBotonesLocated.Visible = false;
+                        divLabel.Visible = false;
+                        divBotonesLocated.Visible = false;
+                    }
+                    else
+                    {
+                        Session["Located"] = null;
+                        lblErrorLocated.Text = mensajes("errorupdt");
+                        return;
+                    }
                 }
                 else
                 {
-                    lblErrorLocated.Text = mensajes("errorsave");
-                    return;
+                    Ent_tticol116 data116 = new Ent_tticol116()
+                    {
+                        item = item,
+                        cwar = warehouse,
+                        loca = location == String.Empty ? " " : location,
+                        clot = lot == String.Empty ? " " : lot,
+                        qtyr = cantidad,
+                        cdis = cdis,
+                        obse = obse == String.Empty ? " " : obse,
+                        logr = HttpContext.Current.Session["user"].ToString(),
+                        suno = suno == String.Empty ? " " : suno,
+                        paid = newPallet,
+                        cwam = cwam,
+                        //JC 01122021 Ajustar la cantidad restante con respecto a la cantidad del pallet
+                        //resCant = _stock - Convert.ToDecimal(cantidad)
+                        resCant = _stockpallet - Convert.ToDecimal(cantidad)
+                    };
+                    //2JC 130821 Validar si rechazaron todo el pallet para que grabe el dato correcto del pallet
+                    var estado = String.Empty;
+                    if (data116.resCant > 0)
+                    {
+                        data116.paid = newPallet;
+                        estado = "7";
+                    }
+                    else
+                    {
+                        estado = "3";
+                    }
+                    Session["CantRest"] = data116.resCant;
+                    Ent_tticol100 data100 = new Ent_tticol100()
+                    {
+                        //JC 130821 Ajustar estado y cantidad
+                        dele = estado,
+                        qtyr = Convert.ToDouble(data116.resCant),
+                        paid = paid,
+                        cwar = cwam,
+                        logr = HttpContext.Current.Session["user"].ToString(),
+                    };
+                    var validInsert = _idaltticol116.insertarRegistro(ref data116, ref strError);
+
+                    if (validInsert > 0)
+                    {
+                        lblErrorLocated.Text = String.Empty;
+                        lblConfirmLocated.Text = mensajes("msjsave");
+                        divTableLocated.InnerHtml = String.Empty;
+
+
+                        tableNameSave = Session["TableNameSave"].ToString();
+                        if (tableNameSave == "ticol022")
+                        {
+                            validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
+                            validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipol);
+                        }
+                        else if (tableNameSave == "ticol042")
+                        {
+                            validUpdate = _idaltticol100.ActualizaRegistro_ticol042(ref data100, ref strError);
+                            validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol242(ref data100, ref strError, ref tipol);
+                        }
+                        else
+                        {
+                            validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError, ref tipol);
+                        }
+
+                        var rutaServ1 = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + paid.Trim().ToUpper() + "&code=Code128&dpi=96";
+                        imgPalletId.Src = !string.IsNullOrEmpty(txtPalletId.Text) ? rutaServ1 : "";
+
+                        var rutaServ = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + item.Trim().ToUpper() + "&code=Code128&dpi=96";
+                        imgCodeItem.Src = !string.IsNullOrEmpty(item) ? rutaServ : "";
+
+                        var rutaServQty = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + cantidad.ToString().Trim().ToUpper() + "&code=Code128&dpi=96";
+                        imgQty.Src = !string.IsNullOrEmpty(cantidad.ToString()) ? rutaServQty : "";
+
+                        lblDefectiveMaterial.Text = "DEFECTIVE MATERIAL-TAG";
+                        lblDescReason.Text = "Reason";
+                        lblDescDescription.Text = "Description";
+
+                        lblValueDescription.Text = hdfDescItem.Value;
+                        lblDescRejectQty.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblRejectedQty"), " ", cantidad);
+                        lblDescPrintedBy.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblPrintedBy"), " ", HttpContext.Current.Session["user"].ToString());
+                        lblValueLot.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescLot"), " ", lot);
+                        lblCommentsLocated.Text = String.Concat(_textoLabels.readStatement(formName, _idioma, "lblDescComments"), " ", obse);
+                        lblValueReasonLocated.Text = reasondesc;
+                        //JC 270721  Completar los datos para la etiqueta
+                        //Session["WorkOrder"] = paid.Trim().ToUpper();                        
+                        Session["lblReason"] = reasondesc;
+                        Session["codePaid"] = paid.Trim().ToUpper();
+                        Session["ProductDesc"] = Session["DescItem"];
+                        Session["ProductCode"] = item.Trim().ToUpper();
+                        Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
+                        //Session["Quantity"] = (Session["Cuni"].ToString().ToUpper().Trim() == "KG" || Session["Cuni"].ToString().ToUpper().Trim() == "LB" ? data116.resCant.ToString() : Convert.ToInt32(data116.resCant).ToString()) + " " + Session["Cuni"].ToString();
+                        Session["Quantity"] = (Session["Cuni"].ToString().ToUpper().Trim() == "KG" || Session["Cuni"].ToString().ToUpper().Trim() == "LB" ? Convert.ToDouble(data116.resCant).ToString() : Convert.ToDouble(data116.resCant).ToString()) + " " + Session["Cuni"].ToString();
+                        Session["Finished"] = paid.Trim().ToUpper();
+                        Session["Pallet"] = paid.Trim().ToUpper();
+                        Session["PrintedBy"] = _operator;
+                        Session["Machine"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                        Session["Comments"] = obse;
+                        Session["Reprint"] = "no";
+
+                        if (tableNameSave == "ticol022")
+                        {
+                            Session["WorkOrder"] = MyObj022.pdno;
+                            Session["WorkOrder2"] = MyObj022.pdno;
+                            Session["lblReason2"] = reasondesc;
+                            Session["codePaid2"] = MyObj022.sqnb;
+                            Session["ProductDesc2"] = Session["DescItem"];
+                            Session["ProductCode2"] = item.Trim().ToUpper();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity2"] = MyObj022.qtdl + " " + Session["Cuni"].ToString(); ;
+                            Session["Finished2"] = MyObj022.sqnb;
+                            Session["Pallet2"] = MyObj022.sqnb;
+                            Session["PrintedBy2"] = _operator;
+                            Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                            Session["Comments2"] = obse;
+                        }
+                        else if (tableNameSave == "ticol042")
+                        {
+                            Session["WorkOrder"] = MyObj042.pdno;
+                            Session["WorkOrder2"] = MyObj042.pdno;
+                            Session["lblReason2"] = reasondesc;
+                            Session["codePaid2"] = MyObj042.sqnb;
+                            Session["ProductDesc2"] = Session["DescItem"];
+                            Session["ProductCode2"] = item.Trim().ToUpper();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity2"] = MyObj042.qtdl + " " + Session["Cuni"].ToString(); ;
+                            Session["Finished2"] = MyObj042.sqnb;
+                            Session["Pallet2"] = MyObj042.sqnb;
+                            Session["PrintedBy2"] = _operator;
+                            Session["Machine2"] = " ";
+                            Session["Comments2"] = obse;
+                        }
+                        else
+                        {
+                            Session["WorkOrder"] = MyObj131.ORNO;
+                            Session["WorkOrder2"] = MyObj131.ORNO;
+                            Session["lblReason2"] = reasondesc;
+                            Session["codePaid2"] = MyObj131.PAID;
+                            Session["ProductDesc2"] = Session["DescItem"];
+                            Session["ProductCode2"] = item.Trim().ToUpper();
+                            Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity2"] = MyObj131.QTYC + " " + Session["Cuni"].ToString(); ;
+                            Session["Finished2"] = MyObj131.PAID;
+                            Session["Pallet2"] = MyObj131.PAID;
+                            Session["PrintedBy2"] = _operator;
+                            Session["Machine2"] = _idaltticol022.getMachine(lot, item.Trim().ToUpper(), ref strError);
+                            Session["Comments2"] = obse;
+                            Session["Reprint"] = "no";
+                        }
+                        StringBuilder script = new StringBuilder();
+                        if (Convert.ToInt16(Session["CantRest"]) > 0)
+                        {
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDoubleME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                            }
+                        }
+                        else
+                        {
+                            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                            }
+                            else
+                            {
+                                script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+                            }
+                        }
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
+
+
+                        divLabel.Visible = false;
+                        divBotonesLocated.Visible = false;
+                    }
+                    else
+                    {
+                        Session["Located"] = null;
+                        lblErrorLocated.Text = mensajes("errorsave");
+                        return;
+                    }
                 }
             }
+            divBtnGuardarLocated.Visible = false;
+            divLabel.Visible = false;
+            divTableLocated.Visible = false;
+            divBotonesLocated.Visible = false;
+            StringBuilder script1 = new StringBuilder();
+            if (Convert.ToInt16(Session["CantRest"]) > 0)
+            {
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script1.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDoubleME.aspx'; ");
+                }
+                else
+                {
+                    script1.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                }
+            }
+            else
+            {
+                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                {
+                    script1.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                }
+                else
+                {
+                    script1.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
+                }
+            }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script1.ToString(), true);
+            
         }
 
         protected void btnGuardar_Click_Delivered(object sender, EventArgs e)
