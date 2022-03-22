@@ -480,7 +480,9 @@ namespace whusap.WebPages.WorkOrders
             objWhcol020.user = HttpContext.Current.Session["user"].ToString();
 
             Transfers.InsertarTransferencia(objWhcol020);
-            _idaltwhcol131.Actualizartwhcol131CantEstado(MyObj131Base.PAID, 9, (Convert.ToDecimal(QtyReal) - Convert.ToDecimal(MyObj131Base.QTYS)));
+            //JC 22032022 Ajuste cantidad final
+            //_idaltwhcol131.Actualizartwhcol131CantEstado(MyObj131Base.PAID, 9, (Convert.ToDecimal(QtyReal) - Convert.ToDecimal(MyObj131Base.QTYS)));
+            _idaltwhcol131.Actualizartwhcol131CantEstado(MyObj131Base.PAID, 9, (Convert.ToDecimal(MyObj131Base.QTYT) - Convert.ToDecimal(QtyReal)));
         }
 
 
