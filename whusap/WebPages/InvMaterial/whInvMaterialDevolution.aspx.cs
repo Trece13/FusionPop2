@@ -154,7 +154,7 @@ namespace whusap.WebPages.InvMaterial
                     DataTable ResQtdl = idal.ConsultarQtdl(ref MyObj, ref strError);
 
                     decimal Qtdl = 0;
-
+                        
                     if (ResQtdl.Rows.Count > 0)
                     {
                         Qtdl = Convert.ToDecimal(ResQtdl.Rows[0]["REQT"].ToString());
