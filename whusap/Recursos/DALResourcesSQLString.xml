@@ -630,6 +630,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-RT%'
           union
           select t$paid as t$sqnb from {0}.twhcol131{1} where T$PAID LIKE '%[:T$SQNB]-RT%'
+          union
+          select t$paid as t$sqnb from {0}.tticol125{1} where T$PAID LIKE '%[:T$SQNB]-RT%'
           order by t$sqnb desc
           )
           where rownum = 1
