@@ -1248,10 +1248,10 @@ namespace whusap.WebPages.Migration
             {
                 Ent_tticol100 Objdata100S = (Ent_tticol100)Session["Objdata100"];
                 MakeLabel(Objdata100S);
-                divBtnGuardarAnnouce.Visible = false;
-                divLabelAnnounce.Visible = false;
-                divBotonesAnnounce.Visible = false;
             }
+            divBtnGuardarAnnouce.Visible = false;
+            divLabelAnnounce.Visible = false;
+            divBotonesAnnounce.Visible = false;
         }
 
         protected void btnGuardar_Click_located(object sender, EventArgs e)
@@ -1869,10 +1869,6 @@ namespace whusap.WebPages.Migration
                     }
                 }
             }
-            divBtnGuardarLocated.Visible = false;
-            divLabel.Visible = false;
-            divTableLocated.Visible = false;
-            divBotonesLocated.Visible = false;
             StringBuilder script1 = new StringBuilder();
             if (Convert.ToInt16(Session["CantRest"]) > 0)
             {
@@ -1896,6 +1892,10 @@ namespace whusap.WebPages.Migration
                     script1.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterials.aspx'; ");
                 }
             }
+            divBtnGuardarLocated.Visible = false;
+            divLabel.Visible = false;
+            divTableLocated.Visible = false;
+            divBotonesLocated.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script1.ToString(), true);
 
         }
@@ -2184,13 +2184,14 @@ namespace whusap.WebPages.Migration
             }
             if (Session["dataticol100"] != null)
             {
-                divTableDelivered.Visible = false;
-                divBtnGuardarDelivered.Visible = false;
-                divLabelDelivered.Visible = false;
-                divBotonesDelivered.Visible = false;
+                
                 Ent_tticol100 tticol100S = (Ent_tticol100)Session["dataticol100"];
                 MakeLabelDelivered(tticol100S);
             }
+            divTableDelivered.Visible = false;
+            divBtnGuardarDelivered.Visible = false;
+            divLabelDelivered.Visible = false;
+            divBotonesDelivered.Visible = false;
         }
 
         protected void btnExit_Click(object sender, EventArgs e)
