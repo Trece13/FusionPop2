@@ -1435,6 +1435,8 @@ namespace whusap.WebPages.Migration
                 btnSave.Visible = false;
                 grdRecords.Visible = false;
             }
+            btnSave.Visible = false;
+            grdRecords.Visible = false;
         }
 
         protected void printLabel_Click(object sender, EventArgs e)

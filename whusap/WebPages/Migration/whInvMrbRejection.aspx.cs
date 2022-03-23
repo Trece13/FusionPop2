@@ -1248,6 +1248,9 @@ namespace whusap.WebPages.Migration
             {
                 Ent_tticol100 Objdata100S = (Ent_tticol100)Session["Objdata100"];
                 MakeLabel(Objdata100S);
+                divBtnGuardarAnnouce.Visible = false;
+                divLabelAnnounce.Visible = false;
+                divBotonesAnnounce.Visible = false;
             }
         }
 
@@ -2181,6 +2184,10 @@ namespace whusap.WebPages.Migration
             }
             if (Session["dataticol100"] != null)
             {
+                divTableDelivered.Visible = false;
+                divBtnGuardarDelivered.Visible = false;
+                divLabelDelivered.Visible = false;
+                divBotonesDelivered.Visible = false;
                 Ent_tticol100 tticol100S = (Ent_tticol100)Session["dataticol100"];
                 MakeLabelDelivered(tticol100S);
             }
