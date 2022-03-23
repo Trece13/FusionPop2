@@ -45,7 +45,7 @@ namespace whusap.WebPages.Migration
         string Aplicacion = "WEBAPP";
         public string UrlBaseBarcode = WebConfigurationManager.AppSettings["UrlBaseBarcode"].ToString();
         //Manejo idioma
-       
+
         private static LabelsText _textoLabels = new LabelsText();
         private static DataTable _consultaPedido;
         //JC 200921 Validar si el pallet se consumió en esa orden
@@ -91,6 +91,10 @@ namespace whusap.WebPages.Migration
             if (!IsPostBack)
             {
                 Session["Located"] = null;
+                Session["Announce"] = null;
+                Session["Delivered"] = null;
+                Session["dataticol100"] = null;
+                Session["Objdata100"] = null;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
                 if (formName.Contains('?'))
                 {
@@ -136,16 +140,16 @@ namespace whusap.WebPages.Migration
 
         protected void Form_Unload(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void generateWarehouseData()
         {
 
             InterfazDAL_ttcmcs003 idal = new InterfazDAL_ttcmcs003();
-          //  Ent_ttcmcs003 obj = new Ent_ttcmcs003();
+            //  Ent_ttcmcs003 obj = new Ent_ttcmcs003();
             DataTable resultado = idal.listRecordCwar(ref strError);
-          //  dropDownWarehouse.Items.Clear();
+            //  dropDownWarehouse.Items.Clear();
             if (dropDownWarehouse.Items.Count <= 0)
             {
 
@@ -177,6 +181,10 @@ namespace whusap.WebPages.Migration
         protected void btnSend_Click(object sender, EventArgs e)
         {
             Session["Located"] = null;
+            Session["Announce"] = null;
+            Session["Delivered"] = null;
+            Session["dataticol100"] = null;
+            Session["Objdata100"] = null;
             InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
             Ent_tticol125 obj = new Ent_tticol125();
             string strError = string.Empty;
@@ -191,7 +199,7 @@ namespace whusap.WebPages.Migration
             lblConfirmAnnounce.Text = "";
             lblConfirmDelivered.Text = "";
             lblConfirmLocated.Text = "";
-           
+
 
             divBtnGuardarDelivered.Visible = false;
             divBtnGuardarLocated.Visible = false;
@@ -216,7 +224,7 @@ namespace whusap.WebPages.Migration
 
             DataTable resultado = idal.vallidatePalletIDMRB(ref obj, ref strError);
 
-      
+
             decimal status;
             string itemName = string.Empty;
             string lot = string.Empty;
@@ -241,51 +249,51 @@ namespace whusap.WebPages.Migration
                     war = dr.ItemArray[6].ToString().Trim().ToUpper();
                     orno = dr.ItemArray[1].ToString().Trim().ToUpper();
                     Pqty = Convert.ToDecimal(dr.ItemArray[3].ToString());
-                    statusCheck =dr.ItemArray[8].ToString();
+                    statusCheck = dr.ItemArray[8].ToString();
                     //JC 270721  Llevar la unidad en una variable de sesion para imprimirla en la etiqueta.
                     //JC 060921 Quitar las mayusculas de la unidad, porque baan no maneja todo en mayúsculas
                     Session["Cuni"] = dr.ItemArray[5].ToString().Trim();
-                     if (string.IsNullOrEmpty(lot) == true)
-                     {
-                         Session["Lot"] = string.Empty;
-                     }
-                     else
-                     {
-                         Session["Lot"] =lot;
-                     }
+                    if (string.IsNullOrEmpty(lot) == true)
+                    {
+                        Session["Lot"] = string.Empty;
+                    }
+                    else
+                    {
+                        Session["Lot"] = lot;
+                    }
 
-                     if (string.IsNullOrEmpty(loc) == true)
-                     {
-                         Session["Location"] = string.Empty;
-                     }
-                     else
-                     {
-                         Session["Location"] = loc;
-                     }
-                     if (string.IsNullOrEmpty(war) == true)
-                     {
-                         Session["Warehouse"] = string.Empty;
-                     }
-                     else
-                     {
-                         Session["Warehouse"] = war;
-                     }
-                     if (string.IsNullOrEmpty(itemName) == true)
-                     {
-                         Session["ItemName"] = string.Empty;
-                     }
-                     else
-                     {
-                         Session["ItemName"] = itemName;
-                     }
-                     if (string.IsNullOrEmpty(orno) == true)
-                     {
-                         Session["OrNo"] = string.Empty;
-                     }
-                     else
-                     {
-                         Session["OrNo"] = orno;
-                     }
+                    if (string.IsNullOrEmpty(loc) == true)
+                    {
+                        Session["Location"] = string.Empty;
+                    }
+                    else
+                    {
+                        Session["Location"] = loc;
+                    }
+                    if (string.IsNullOrEmpty(war) == true)
+                    {
+                        Session["Warehouse"] = string.Empty;
+                    }
+                    else
+                    {
+                        Session["Warehouse"] = war;
+                    }
+                    if (string.IsNullOrEmpty(itemName) == true)
+                    {
+                        Session["ItemName"] = string.Empty;
+                    }
+                    else
+                    {
+                        Session["ItemName"] = itemName;
+                    }
+                    if (string.IsNullOrEmpty(orno) == true)
+                    {
+                        Session["OrNo"] = string.Empty;
+                    }
+                    else
+                    {
+                        Session["OrNo"] = orno;
+                    }
                     tableName = dr.ItemArray[0].ToString();
                     retorno = "";
                     if ((tableName == "whcol131") && (status == 4))
@@ -306,7 +314,7 @@ namespace whusap.WebPages.Migration
                         Session["OrNo"] = TxtOrder.Text.Trim();
                         break;
                     }
-                    else if ((tableName == "whcol131")  && (status == 3))
+                    else if ((tableName == "whcol131") && (status == 3))
                     {
                         retorno = "Located";
                         Session["TableNameSave"] = tableName;
@@ -320,7 +328,7 @@ namespace whusap.WebPages.Migration
                         TxtOrder.Enabled = false;
                         break;
                     }
-                    else if ((tableName == "ticol022")  && (status == 11))
+                    else if ((tableName == "ticol022") && (status == 11))
                     {
                         //JC 080921 Evitar cargar datos de un pallet delivered con cantidad cero
                         if (Pqty == 0)
@@ -351,7 +359,7 @@ namespace whusap.WebPages.Migration
                     }
                 }
             }
-          // string inlistring= statusCheck;
+            // string inlistring= statusCheck;
             if (retorno != "")
             {
                 getData(retorno);
@@ -361,7 +369,7 @@ namespace whusap.WebPages.Migration
                 string inlineStatus = string.Empty;
                 if (tableName == "whcol131")
                 {
-                   // statusCheck = "wer";
+                    // statusCheck = "wer";
                     switch (statusCheck)
                     {
                         case "1":
@@ -397,52 +405,12 @@ namespace whusap.WebPages.Migration
                     }
                 }
                 if (tableName == "ticol022")
-                if (tableName == "ticol022" || tableName == "ticol042")
-                {
-                    switch (statusCheck)
-                    {
-                        case "1":
-                            inlineStatus="Deleted";
-                            break;
-                        case "3":
-                            inlineStatus = "Rejected";
-                            break;
-                        case "4":
-                            inlineStatus = "Validated";
-                            break;
-                        case "5":
-                            inlineStatus = "Received";
-                            break;
-                        case "6":
-                            inlineStatus = "Picked";
-                            break;
-                        case "8":
-                            inlineStatus = "Requested";
-                            break;
-                        case "9":
-                            inlineStatus = "Picking";
-                            break;
-                        case "10":
-                            inlineStatus = "Dropped CP";
-                            break;
-                        case "12":
-                            inlineStatus = "Blocked";
-                            break;
-                        case "13":
-                            inlineStatus = "ToDelete";
-                            break;
-                    }
-                }
-                //JC 060921 Incluir la tabla de regrind
-                if (tableName == "ticol042")
+                    if (tableName == "ticol022" || tableName == "ticol042")
                     {
                         switch (statusCheck)
                         {
                             case "1":
                                 inlineStatus = "Deleted";
-                                break;
-                            case "2":
-                                inlineStatus = "Announced";
                                 break;
                             case "3":
                                 inlineStatus = "Rejected";
@@ -465,9 +433,6 @@ namespace whusap.WebPages.Migration
                             case "10":
                                 inlineStatus = "Dropped CP";
                                 break;
-                            case "11":
-                                inlineStatus = "Delivered";
-                                break;
                             case "12":
                                 inlineStatus = "Blocked";
                                 break;
@@ -476,304 +441,347 @@ namespace whusap.WebPages.Migration
                                 break;
                         }
                     }
-             
-                    lblError.Text =   "Pallet ID status doesn´t allow rejection Actual Status " + inlineStatus;
-                    return;
+                //JC 060921 Incluir la tabla de regrind
+                if (tableName == "ticol042")
+                {
+                    switch (statusCheck)
+                    {
+                        case "1":
+                            inlineStatus = "Deleted";
+                            break;
+                        case "2":
+                            inlineStatus = "Announced";
+                            break;
+                        case "3":
+                            inlineStatus = "Rejected";
+                            break;
+                        case "4":
+                            inlineStatus = "Validated";
+                            break;
+                        case "5":
+                            inlineStatus = "Received";
+                            break;
+                        case "6":
+                            inlineStatus = "Picked";
+                            break;
+                        case "8":
+                            inlineStatus = "Requested";
+                            break;
+                        case "9":
+                            inlineStatus = "Picking";
+                            break;
+                        case "10":
+                            inlineStatus = "Dropped CP";
+                            break;
+                        case "11":
+                            inlineStatus = "Delivered";
+                            break;
+                        case "12":
+                            inlineStatus = "Blocked";
+                            break;
+                        case "13":
+                            inlineStatus = "ToDelete";
+                            break;
+                    }
+                }
+
+                lblError.Text = "Pallet ID status doesn´t allow rejection Actual Status " + inlineStatus;
+                return;
             }
-            
-           // return retorno;
+
+            // return retorno;
         }
 
         protected void getData(string retorno)
         {
 
-             if (retorno == "Announced")
-             {
-                 divBotonesAnnounce.Visible = false;
-                 divLabelAnnounce.Visible = false;
+            if (retorno == "Announced")
+            {
+                divBotonesAnnounce.Visible = false;
+                divLabelAnnounce.Visible = false;
 
-                 var order = txtPalletId.Text.Trim().ToUpper();
+                var order = txtPalletId.Text.Trim().ToUpper();
 
-                 if (order == String.Empty)
-                 {
-                     lblErrorAnnounce.Text = mensajes("formempty");
-                     return;
-                 }
+                if (order == String.Empty)
+                {
+                    lblErrorAnnounce.Text = mensajes("formempty");
+                    return;
+                }
 
-                 _validarOrden = _idaltticol022.findRecordBySqnbRejectedPlantMRBRejection(ref order, ref strError);
+                _validarOrden = _idaltticol022.findRecordBySqnbRejectedPlantMRBRejection(ref order, ref strError);
 
-                 if (_validarOrden.Rows.Count > 0)
-                 {
-                     lblErrorAnnounce.Text = string.Empty;
-                     //var sqnb = _validarOrden.Rows[0]["SQNB"].ToString().Trim();
-                     //var mitm = _validarOrden.Rows[0]["MITM"].ToString().Trim();
-                     //var dsca = _validarOrden.Rows[0]["DSCA"].ToString().Trim();
-                     //var qtdl = _validarOrden.Rows[0]["QTDL"].ToString().Trim();
-                     //var pdno = _validarOrden.Rows[0]["PDNO"].ToString().Trim();
+                if (_validarOrden.Rows.Count > 0)
+                {
+                    lblErrorAnnounce.Text = string.Empty;
+                    //var sqnb = _validarOrden.Rows[0]["SQNB"].ToString().Trim();
+                    //var mitm = _validarOrden.Rows[0]["MITM"].ToString().Trim();
+                    //var dsca = _validarOrden.Rows[0]["DSCA"].ToString().Trim();
+                    //var qtdl = _validarOrden.Rows[0]["QTDL"].ToString().Trim();
+                    //var pdno = _validarOrden.Rows[0]["PDNO"].ToString().Trim();
 
-                     var dele = Convert.ToInt32(_validarOrden.Rows[0]["DELE"].ToString());
-                     var pro1 = Convert.ToInt32(_validarOrden.Rows[0]["PRO1"].ToString());
-                     var proc = Convert.ToInt32(_validarOrden.Rows[0]["PROC"].ToString());
-
-                    
-                     //if (proc == 2)
-                     //{
-                     //    lblErrorAnnounce.Text = mensajes("palletnotannounced");
-                     //    return;
-                     //}
-
-                     if (dele != 2 && dele != 4)
-                     {
-                         lblErrorAnnounce.Text = mensajes("palletdeleted");
-                         return;
-                     }
-
-                     if (pro1 == 1)
-                     {
-                         lblErrorAnnounce.Text = mensajes("palletconfirmed");
-                         return;
-                     }
-
-                     makeTableAnnounce();
-                     divBtnGuardarAnnouce.Visible = true;
-                     divTableAnnounce.Visible = true;
-                 }
-                 else
-                 {
-                     lblErrorAnnounce.Text = mensajes("palletnotexists");
-                     return;
-                 } 
-             }
-             else if (retorno == "Delivered")  //Deliverd
-             {
-                 var worder = TxtOrder.Text.Trim().ToUpper();
-                 if (worder == String.Empty)
-                 {
-                     lblErrorAnnounce.Text = mensajes("formempty");
-                     return;
-                 }
-                 var encontrado = false;
-                 if (worder != String.Empty)
-                 {
-                     divLabelDelivered.Visible = false;
-                     divBotonesDelivered.Visible = false;
-                     //  slItems.Items.Clear();
-                     txtDescription.Text = string.Empty;
-                     txtQty.Text = string.Empty;
-                     txtUnit.Text = string.Empty;
-                     txtShift.Text = string.Empty;
-                     slReason.Items.Clear();
-                     slRejectType.Items.Clear();
-                     txtExactReasons.InnerText = string.Empty;
-                     // var item = Session["ItemName"].ToString(); 
-                     var pdno = Session["OrNo"].ToString();
-
-                     if (pdno != String.Empty)
-                     {
-                         _consultaPedido = _idaltticst001.findByPdnoMRB(ref pdno, ref strError);
-                         //JC 200921 Consultar si el pallet se consumió para esa orden
-                         _consultaOrdenPallet = _idaltticst001.findByPdnoMRBPallet(txtPalletId.Text.Trim(), ref pdno, ref strError);
-
-                         if (_consultaOrdenPallet.Rows.Count <= 0)
-                         {
-                             lblErrorDelivered.Visible = true;
-                             lblErrorDelivered.Text = mensajes("ordernotlinked");
-                             TxtOrder.Text = string.Empty;
-                             return;
-                         }
-
-                         if (_consultaPedido.Rows.Count > 0)
-                         {
-                             _consultaInformacionPedido = _idalttisfc001.findByOrderMaterialRejected(ref worder, ref strError);
-
-                             if (_consultaInformacionPedido.Rows.Count > 0)
-                             {
-                                 lblError.Text = "";
-                                 //lblValueOrder.Text = _consultaPedido.Rows[0]["PDNO"].ToString();
-                                 lblValueOrder.Text = worder;
-                                 //var itemName = _consultaPedido.Rows[0]["MITM"].ToString();
-                                 var itemName = itempallet;
-
-                                 foreach (DataRow item in _consultaInformacionPedido.Rows)
-                                 {
-                                     var itemorder = item["SITM"].ToString();
-                                     if (itemName.Trim() == itemorder.Trim())
-                                     {
-                                         Ent_ttcibd001 data001 = new Ent_ttcibd001() { item = itemName };
-                                         _validaItem = _idalttcibd001.listaRegistro_ObtieneDescripcionUnidad(ref data001, ref strError);
-
-                                         //var lotes = _consultaPedido.Rows[0]["CLOT"].ToString();
-                                         var lotes = lotepallet;
-
-                                         slItems.Text = _validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper();
-                                         txtDescription.Text = _validaItem.Rows[0]["DESCRIPCION"].ToString().Trim().ToUpper();
-                                         slLot.Text = lotes.ToString();
-                                         txtUnit.Text = _validaItem.Rows[0]["UNID"].ToString().Trim().ToUpper();
-                                         txtkltc.Value = _validaItem.Rows[0]["KLTC"].ToString().Trim().ToUpper();
-
-                                         txtpono.Value = item["PONO"].ToString();
-                                         //hdfQuantity.Value = _consultaInformacionPedido.Rows[0]["CANTIDAD"].ToString();
-                                         hdfQuantity.Value = Pqty.ToString();
+                    var dele = Convert.ToInt32(_validarOrden.Rows[0]["DELE"].ToString());
+                    var pro1 = Convert.ToInt32(_validarOrden.Rows[0]["PRO1"].ToString());
+                    var proc = Convert.ToInt32(_validarOrden.Rows[0]["PROC"].ToString());
 
 
-                                         var rstp = "10";
-                                         var listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
+                    //if (proc == 2)
+                    //{
+                    //    lblErrorAnnounce.Text = mensajes("palletnotannounced");
+                    //    return;
+                    //}
 
-                                         foreach (DataRow itemReason in listaReasons.Rows)
-                                         {
-                                             ListItem itemRazon = new ListItem()
-                                             {
-                                                 Text = itemReason["CDIS"].ToString().Trim() + " - " + itemReason["DSCA"].ToString().Trim(),
-                                                 Value = itemReason["CDIS"].ToString().Trim().ToUpper()
-                                             };
+                    if (dele != 2 && dele != 4)
+                    {
+                        lblErrorAnnounce.Text = mensajes("palletdeleted");
+                        return;
+                    }
 
-                                             slReason.Items.Insert(slReason.Items.Count, itemRazon);
-                                         }
+                    if (pro1 == 1)
+                    {
+                        lblErrorAnnounce.Text = mensajes("palletconfirmed");
+                        return;
+                    }
 
-                                         ListItem supplied = new ListItem() { Text = "Supplied", Value = "1" };
-                                         ListItem intern = new ListItem() { Text = "Internal", Value = "2" };
-                                         ListItem retur = new ListItem() { Text = "Return", Value = "3" };
+                    makeTableAnnounce();
+                    divBtnGuardarAnnouce.Visible = true;
+                    divTableAnnounce.Visible = true;
+                }
+                else
+                {
+                    lblErrorAnnounce.Text = mensajes("palletnotexists");
+                    return;
+                }
+            }
+            else if (retorno == "Delivered")  //Deliverd
+            {
+                var worder = TxtOrder.Text.Trim().ToUpper();
+                if (worder == String.Empty)
+                {
+                    lblErrorAnnounce.Text = mensajes("formempty");
+                    return;
+                }
+                var encontrado = false;
+                if (worder != String.Empty)
+                {
+                    divLabelDelivered.Visible = false;
+                    divBotonesDelivered.Visible = false;
+                    //  slItems.Items.Clear();
+                    txtDescription.Text = string.Empty;
+                    txtQty.Text = string.Empty;
+                    txtUnit.Text = string.Empty;
+                    txtShift.Text = string.Empty;
+                    slReason.Items.Clear();
+                    slRejectType.Items.Clear();
+                    txtExactReasons.InnerText = string.Empty;
+                    // var item = Session["ItemName"].ToString(); 
+                    var pdno = Session["OrNo"].ToString();
 
-                                         slRejectType.Items.Insert(slRejectType.Items.Count, supplied);
-                                         slRejectType.Items.Insert(slRejectType.Items.Count, intern);
-                                         slRejectType.Items.Insert(slRejectType.Items.Count, retur);
+                    if (pdno != String.Empty)
+                    {
+                        _consultaPedido = _idaltticst001.findByPdnoMRB(ref pdno, ref strError);
+                        //JC 200921 Consultar si el pallet se consumió para esa orden
+                        _consultaOrdenPallet = _idaltticst001.findByPdnoMRBPallet(txtPalletId.Text.Trim(), ref pdno, ref strError);
 
-                                         divTableDelivered.Visible = true;
-                                         divBtnGuardarDelivered.Visible = true;
-                                         lblErrorDelivered.Visible = false;
-                                         encontrado = true;
+                        if (_consultaOrdenPallet.Rows.Count <= 0)
+                        {
+                            lblErrorDelivered.Visible = true;
+                            lblErrorDelivered.Text = mensajes("ordernotlinked");
+                            TxtOrder.Text = string.Empty;
+                            return;
+                        }
 
-                                     }
-                                 }
-                                 if (encontrado == false)
-                                 {
-                                     lblErrorDelivered.Text = mensajes("itemsnotequals");
-                                     TxtOrder.Text = string.Empty;
-                                     return;
-                                 }
-                             }
-                             else
-                             {
-                                 lblErrorDelivered.Text = mensajes("notitems");
-                                 return;
-                             }
-                         }
-                         else
-                         {
-                             lblErrorDelivered.Text = mensajes("ordernotexists");
-                             return;
-                         }
-                     }
-                     else
-                     {
-                         lblErrorDelivered.Text = mensajes("formempty");
-                         return;
-                     }
-                 }
-             }
-             else if (retorno == "Located")  //Located
-             {
-                 //                 , string itemName, string lotno, string loc,string war
+                        if (_consultaPedido.Rows.Count > 0)
+                        {
+                            _consultaInformacionPedido = _idalttisfc001.findByOrderMaterialRejected(ref worder, ref strError);
 
+                            if (_consultaInformacionPedido.Rows.Count > 0)
+                            {
+                                lblError.Text = "";
+                                //lblValueOrder.Text = _consultaPedido.Rows[0]["PDNO"].ToString();
+                                lblValueOrder.Text = worder;
+                                //var itemName = _consultaPedido.Rows[0]["MITM"].ToString();
+                                var itemName = itempallet;
 
-                 lblErrorLocated.Text = String.Empty;
-                 var item = Session["itemName"].ToString();
-                 var warehouse = Session["Warehouse"].ToString();
-                 var location = Session["Location"].ToString(); ;
-                 var lot = Session["Lot"].ToString();
+                                foreach (DataRow item in _consultaInformacionPedido.Rows)
+                                {
+                                    var itemorder = item["SITM"].ToString();
+                                    if (itemName.Trim() == itemorder.Trim())
+                                    {
+                                        Ent_ttcibd001 data001 = new Ent_ttcibd001() { item = itemName };
+                                        _validaItem = _idalttcibd001.listaRegistro_ObtieneDescripcionUnidad(ref data001, ref strError);
 
+                                        //var lotes = _consultaPedido.Rows[0]["CLOT"].ToString();
+                                        var lotes = lotepallet;
+
+                                        slItems.Text = _validaItem.Rows[0]["ITEM"].ToString().Trim().ToUpper();
+                                        txtDescription.Text = _validaItem.Rows[0]["DESCRIPCION"].ToString().Trim().ToUpper();
+                                        slLot.Text = lotes.ToString();
+                                        txtUnit.Text = _validaItem.Rows[0]["UNID"].ToString().Trim().ToUpper();
+                                        txtkltc.Value = _validaItem.Rows[0]["KLTC"].ToString().Trim().ToUpper();
+
+                                        txtpono.Value = item["PONO"].ToString();
+                                        //hdfQuantity.Value = _consultaInformacionPedido.Rows[0]["CANTIDAD"].ToString();
+                                        hdfQuantity.Value = Pqty.ToString();
 
 
-                 Ent_ttcibd001 data001 = new Ent_ttcibd001() { item = item };
-                 _validaItem = _idalttcibd001.listaRegistro_ObtieneDescripcionUnidad(ref data001, ref strError);
-                 //JC 270721 Obtener la descripcion del item para la etiqueta
-                 Session["DescItem"] = _validaItem.Rows[0]["DESCRIPCION"].ToString().Trim();
+                                        var rstp = "10";
+                                        var listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
 
-                 if (_validaItem.Rows.Count < 1)
-                 {
-                     lblErrorLocated.Text = mensajes("itemnotexists");
-                     return;
-                 }
+                                        foreach (DataRow itemReason in listaReasons.Rows)
+                                        {
+                                            ListItem itemRazon = new ListItem()
+                                            {
+                                                Text = itemReason["CDIS"].ToString().Trim() + " - " + itemReason["DSCA"].ToString().Trim(),
+                                                Value = itemReason["CDIS"].ToString().Trim().ToUpper()
+                                            };
 
-                 var kltc = Convert.ToInt32(_validaItem.Rows[0]["KLTC"].ToString());
+                                            slReason.Items.Insert(slReason.Items.Count, itemRazon);
+                                        }
 
-                 _validaWarehouse = _idalttcmcs003.findRecordByCwar(ref warehouse, ref strError);
+                                        ListItem supplied = new ListItem() { Text = "Supplied", Value = "1" };
+                                        ListItem intern = new ListItem() { Text = "Internal", Value = "2" };
+                                        ListItem retur = new ListItem() { Text = "Return", Value = "3" };
 
-                 if (_validaWarehouse.Rows.Count < 1)
-                 {
-                     lblErrorLocated.Text = mensajes("warehousenotexists");
-                     return;
-                 }
+                                        slRejectType.Items.Insert(slRejectType.Items.Count, supplied);
+                                        slRejectType.Items.Insert(slRejectType.Items.Count, intern);
+                                        slRejectType.Items.Insert(slRejectType.Items.Count, retur);
 
-                 Ent_twhwmd200 data200 = new Ent_twhwmd200() { cwar = warehouse };
-                 var manejoUbicacionAlmacen = Convert.ToInt32(_idaltwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref data200, ref strError).Rows[0]["LOC"]);
+                                        divTableDelivered.Visible = true;
+                                        divBtnGuardarDelivered.Visible = true;
+                                        lblErrorDelivered.Visible = false;
+                                        encontrado = true;
 
-                 if (manejoUbicacionAlmacen == 1)
-                 {
-                     _validaUbicacion = _idaltwhwmd300.validateExistsLocation(ref location, ref warehouse, ref strError);
+                                    }
+                                }
+                                if (encontrado == false)
+                                {
+                                    lblErrorDelivered.Text = mensajes("itemsnotequals");
+                                    TxtOrder.Text = string.Empty;
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                lblErrorDelivered.Text = mensajes("notitems");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            lblErrorDelivered.Text = mensajes("ordernotexists");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        lblErrorDelivered.Text = mensajes("formempty");
+                        return;
+                    }
+                }
+            }
+            else if (retorno == "Located")  //Located
+            {
+                //                 , string itemName, string lotno, string loc,string war
 
-                     if (_validaUbicacion.Rows.Count < 1)
-                     {
-                         lblErrorLocated.Text = mensajes("locationnotexists");
-                         return;
-                     }
-                 }
 
-                 if (kltc == 1)
-                 {
-                     Ent_twhltc100 data100 = new Ent_twhltc100() { item = item, clot = lot };
-                     _validaItemLote = _idaltwhltc100.listaRegistro_Clot(ref data100, ref strError);
+                lblErrorLocated.Text = String.Empty;
+                var item = Session["itemName"].ToString();
+                var warehouse = Session["Warehouse"].ToString();
+                var location = Session["Location"].ToString(); ;
+                var lot = Session["Lot"].ToString();
 
-                     if (_validaItemLote.Rows.Count < 1)
-                     {
-                         lblErrorLocated.Text = mensajes("lotnotexists");
-                         return;
-                     }
-                 }
 
-                 var consultaCantidad = new DataTable();
 
-                 if (manejoUbicacionAlmacen == 1)
-                 {
-                     if (kltc == 1)
-                     {
-                         consultaCantidad = _idaltwhinr140.consultaPorAlmacenItemUbicacionLote(ref warehouse, ref item, ref location, ref lot, ref strError);
-                     }
-                     else
-                     {
-                         consultaCantidad = _idaltwhinr140.consultaPorAlmacenItemUbicacion(ref warehouse, ref item, ref location, ref strError);
-                     }
-                 }
-                 else
-                 {
-                     if (kltc == 1)
-                     {
-                         consultaCantidad = _idaltwhinr140.consultaPorAlmacenItemLote(ref warehouse, ref item, ref lot, ref strError);
-                     }
-                     else
-                     {
-                         consultaCantidad = _idaltwhinr140.consultaCantidadItemLote(ref warehouse, ref item, ref strError);
-                     }
-                 }
+                Ent_ttcibd001 data001 = new Ent_ttcibd001() { item = item };
+                _validaItem = _idalttcibd001.listaRegistro_ObtieneDescripcionUnidad(ref data001, ref strError);
+                //JC 270721 Obtener la descripcion del item para la etiqueta
+                Session["DescItem"] = _validaItem.Rows[0]["DESCRIPCION"].ToString().Trim();
 
-                 _stock = (Decimal)0;
+                if (_validaItem.Rows.Count < 1)
+                {
+                    lblErrorLocated.Text = mensajes("itemnotexists");
+                    return;
+                }
 
-                 if (consultaCantidad.Rows.Count > 0)
-                 {
-                     _stock = Convert.ToDecimal(consultaCantidad.Rows[0]["STKS"].ToString());
-                 }
+                var kltc = Convert.ToInt32(_validaItem.Rows[0]["KLTC"].ToString());
 
-                 if (_stock == 0)
-                 {
-                     lblErrorLocated.Text = mensajes("notstock");
-                     return;
-                 }
+                _validaWarehouse = _idalttcmcs003.findRecordByCwar(ref warehouse, ref strError);
 
-                 divBotonesLocated.Visible = false;
-                 // divLabelLocated.Visible = false;
-                 divBtnGuardarLocated.Visible = true;
-                 makeTableLocated(location, lot);
-             }
+                if (_validaWarehouse.Rows.Count < 1)
+                {
+                    lblErrorLocated.Text = mensajes("warehousenotexists");
+                    return;
+                }
+
+                Ent_twhwmd200 data200 = new Ent_twhwmd200() { cwar = warehouse };
+                var manejoUbicacionAlmacen = Convert.ToInt32(_idaltwhwmd200.listaRegistro_ObtieneAlmacenLocation(ref data200, ref strError).Rows[0]["LOC"]);
+
+                if (manejoUbicacionAlmacen == 1)
+                {
+                    _validaUbicacion = _idaltwhwmd300.validateExistsLocation(ref location, ref warehouse, ref strError);
+
+                    if (_validaUbicacion.Rows.Count < 1)
+                    {
+                        lblErrorLocated.Text = mensajes("locationnotexists");
+                        return;
+                    }
+                }
+
+                if (kltc == 1)
+                {
+                    Ent_twhltc100 data100 = new Ent_twhltc100() { item = item, clot = lot };
+                    _validaItemLote = _idaltwhltc100.listaRegistro_Clot(ref data100, ref strError);
+
+                    if (_validaItemLote.Rows.Count < 1)
+                    {
+                        lblErrorLocated.Text = mensajes("lotnotexists");
+                        return;
+                    }
+                }
+
+                var consultaCantidad = new DataTable();
+
+                if (manejoUbicacionAlmacen == 1)
+                {
+                    if (kltc == 1)
+                    {
+                        consultaCantidad = _idaltwhinr140.consultaPorAlmacenItemUbicacionLote(ref warehouse, ref item, ref location, ref lot, ref strError);
+                    }
+                    else
+                    {
+                        consultaCantidad = _idaltwhinr140.consultaPorAlmacenItemUbicacion(ref warehouse, ref item, ref location, ref strError);
+                    }
+                }
+                else
+                {
+                    if (kltc == 1)
+                    {
+                        consultaCantidad = _idaltwhinr140.consultaPorAlmacenItemLote(ref warehouse, ref item, ref lot, ref strError);
+                    }
+                    else
+                    {
+                        consultaCantidad = _idaltwhinr140.consultaCantidadItemLote(ref warehouse, ref item, ref strError);
+                    }
+                }
+
+                _stock = (Decimal)0;
+
+                if (consultaCantidad.Rows.Count > 0)
+                {
+                    _stock = Convert.ToDecimal(consultaCantidad.Rows[0]["STKS"].ToString());
+                }
+
+                if (_stock == 0)
+                {
+                    lblErrorLocated.Text = mensajes("notstock");
+                    return;
+                }
+
+                divBotonesLocated.Visible = false;
+                // divLabelLocated.Visible = false;
+                divBtnGuardarLocated.Visible = true;
+                makeTableLocated(location, lot);
+            }
         }
 
         protected void OptionList_value(object sender, EventArgs e)
@@ -870,72 +878,72 @@ namespace whusap.WebPages.Migration
         }
 
         protected void makeTableAnnounce()
-         {
-             var rstp = "10";
-             listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
+        {
+            var rstp = "10";
+            listaReasons = _idalttcmcs005.findRecords(ref rstp, ref strError);
 
-             var selectReasons = "<select id='slReasons' name='slReasons' class='TextboxBig'>";
+            var selectReasons = "<select id='slReasons' name='slReasons' class='TextboxBig'>";
 
-             foreach (DataRow item in listaReasons.Rows)
-             {
-                 selectReasons += String.Format("<option value='{0}'>{1}</option>", item["CDIS"].ToString().Trim(), item["CDIS"].ToString().Trim() + " - " + item["DSCA"].ToString().Trim());
-             }
+            foreach (DataRow item in listaReasons.Rows)
+            {
+                selectReasons += String.Format("<option value='{0}'>{1}</option>", item["CDIS"].ToString().Trim(), item["CDIS"].ToString().Trim() + " - " + item["DSCA"].ToString().Trim());
+            }
 
-             selectReasons += "</select>";
+            selectReasons += "</select>";
 
-             var table = String.Empty;
+            var table = String.Empty;
 
-             //Fila cwar
-             table += String.Format("<hr /><table class='table table-bordered' style='width:1200px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");
+            //Fila cwar
+            table += String.Format("<hr /><table class='table table-bordered' style='width:1200px; font-size:13px; border:3px solid; border-style:outset; text-align:center;'>");
 
-             table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='8'>{1}</td></tr>"
-                 , _idioma == "INGLES" ? "Order:" : "Orden:"
-                 , _validarOrden.Rows[0]["PDNO"].ToString().Trim().ToUpper());
+            table += String.Format("<tr style='font-weight:bold; background-color:lightgray;'><td>{0}</td><td colspan='8'>{1}</td></tr>"
+                , _idioma == "INGLES" ? "Order:" : "Orden:"
+                , _validarOrden.Rows[0]["PDNO"].ToString().Trim().ToUpper());
 
-             table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>"
-                 , _idioma == "INGLES" ? "Pallet Id" : "Id Pallet"
-                 , _idioma == "INGLES" ? "Item" : "Articulo"
-                 , _idioma == "INGLES" ? "Description" : "Descripción"
-                 , _idioma == "INGLES" ? "Qty" : "Cant"
-                 , _idioma == "INGLES" ? "Unit" : "Unidad"
-                 , _idioma == "INGLES" ? "Shift" : "Cambio"
-                 , _idioma == "INGLES" ? "Reason" : "Razón"
-                 , _idioma == "INGLES" ? "Reject type" : "Tipo de devolución"
-                 , _idioma == "INGLES" ? "Exact Reason" : "Razón exacta");
+            table += String.Format("<tr style='font-weight:bold; background-color:white;'><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>"
+                , _idioma == "INGLES" ? "Pallet Id" : "Id Pallet"
+                , _idioma == "INGLES" ? "Item" : "Articulo"
+                , _idioma == "INGLES" ? "Description" : "Descripción"
+                , _idioma == "INGLES" ? "Qty" : "Cant"
+                , _idioma == "INGLES" ? "Unit" : "Unidad"
+                , _idioma == "INGLES" ? "Shift" : "Cambio"
+                , _idioma == "INGLES" ? "Reason" : "Razón"
+                , _idioma == "INGLES" ? "Reject type" : "Tipo de devolución"
+                , _idioma == "INGLES" ? "Exact Reason" : "Razón exacta");
 
-             for (int i = 0; i < _validarOrden.Rows.Count; i++)
-             {
-                 table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>"
-                     , _validarOrden.Rows[i]["SQNB"].ToString().Trim().ToUpper()
-                     , _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper()
-                     , _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper()
-                     , _validarOrden.Rows[i]["QTDL"].ToString().Trim().ToUpper()
-                     , _validarOrden.Rows[i]["CUNI"].ToString().Trim().ToUpper()
-                     , String.Format("<input type='text' id='{0}' name='{0}' class='TextBoxBig' onchange='validarShift(this);' />", "txtShift-" + i)
-                     , selectReasons.Replace("id='slReasons'", "id='slReasons-" + i + "'").Replace("name='slReasons'", "name='slReasons-" + i + "'")
-                     , String.Format("<select id='{0}' name='{0}' class='TextBoxBig'><option value='1'>Supplied</option><option value='2'>Internal</option><option value='3'>Return</option></select>", "txtRejectType-" + i)
-                     , String.Format("<textarea id='{0}' name='{0}' rows='2'></textarea>", "txtExactReason-" + i));
-             }
+            for (int i = 0; i < _validarOrden.Rows.Count; i++)
+            {
+                table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>"
+                    , _validarOrden.Rows[i]["SQNB"].ToString().Trim().ToUpper()
+                    , _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper()
+                    , _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper()
+                    , _validarOrden.Rows[i]["QTDL"].ToString().Trim().ToUpper()
+                    , _validarOrden.Rows[i]["CUNI"].ToString().Trim().ToUpper()
+                    , String.Format("<input type='text' id='{0}' name='{0}' class='TextBoxBig' onchange='validarShift(this);' />", "txtShift-" + i)
+                    , selectReasons.Replace("id='slReasons'", "id='slReasons-" + i + "'").Replace("name='slReasons'", "name='slReasons-" + i + "'")
+                    , String.Format("<select id='{0}' name='{0}' class='TextBoxBig'><option value='1'>Supplied</option><option value='2'>Internal</option><option value='3'>Return</option></select>", "txtRejectType-" + i)
+                    , String.Format("<textarea id='{0}' name='{0}' rows='2'></textarea>", "txtExactReason-" + i));
+            }
 
-             //foreach (DataRow itemOrder in _validarOrden.Rows)
-             //{
-             //    table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>"
-             //        , itemOrder["SQNB"].ToString().Trim().ToUpper()
-             //        , itemOrder["MITM"].ToString().Trim().ToUpper()
-             //        , itemOrder["DSCA"].ToString().Trim().ToUpper()
-             //        , itemOrder["QTDL"].ToString().Trim().ToUpper()
-             //        , itemOrder["CUNI"].ToString().Trim().ToUpper()
-             //        ,"<input type='text' id='txtShift' name='txtShift' class='TextBoxBig' onchange='validarShift(this);' />"
-             //        , selectReasons
-             //        ,"<select id='txtRejectType' name='txtRejectType' class='TextBoxBig'><option value='1'>Supplied</option><option value='2'>Internal</option><option value='3'>Return</option></select>"
-             //        , "<textarea id='txtExactReason' name='txtExactReason' rows='2'></textarea>");
-             //}
+            //foreach (DataRow itemOrder in _validarOrden.Rows)
+            //{
+            //    table += String.Format("<tr><td>{0}</td><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td><td>{5}</td><td>{6}</td><td>{7}</td><td>{8}</td></tr>"
+            //        , itemOrder["SQNB"].ToString().Trim().ToUpper()
+            //        , itemOrder["MITM"].ToString().Trim().ToUpper()
+            //        , itemOrder["DSCA"].ToString().Trim().ToUpper()
+            //        , itemOrder["QTDL"].ToString().Trim().ToUpper()
+            //        , itemOrder["CUNI"].ToString().Trim().ToUpper()
+            //        ,"<input type='text' id='txtShift' name='txtShift' class='TextBoxBig' onchange='validarShift(this);' />"
+            //        , selectReasons
+            //        ,"<select id='txtRejectType' name='txtRejectType' class='TextBoxBig'><option value='1'>Supplied</option><option value='2'>Internal</option><option value='3'>Return</option></select>"
+            //        , "<textarea id='txtExactReason' name='txtExactReason' rows='2'></textarea>");
+            //}
 
-             table += "</table>";
+            table += "</table>";
 
-             divTableAnnounce.InnerHtml = table;
-             divTableAnnounce.Visible = true;
-         }
+            divTableAnnounce.InnerHtml = table;
+            divTableAnnounce.Visible = true;
+        }
 
         protected void MakeLabel(Ent_tticol100 Objtticol100)
         {
@@ -999,7 +1007,7 @@ namespace whusap.WebPages.Migration
 
             Session["WorkOrder"] = pdno.ToUpper();
             Session["lblReason"] = ObjReason.dsca;
-            Session["codePaid"] =  sqnb ;
+            Session["codePaid"] = sqnb;
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
@@ -1022,7 +1030,7 @@ namespace whusap.WebPages.Migration
             }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
-        
+
         protected void MakeLabelDelivered(Ent_tticol100 Objtticol100)
         {
 
@@ -1075,19 +1083,19 @@ namespace whusap.WebPages.Migration
             lblMachine.Text = Objtticol100.mcno;
             lblValueCommentsDelivered.Text = txtExactReasons.InnerText;
 
-            Session["WorkOrder"]   = sqnb ;
-            Session["lblReason"]   = slReason.SelectedItem.Text.Substring(7);
+            Session["WorkOrder"] = sqnb;
+            Session["lblReason"] = slReason.SelectedItem.Text.Substring(7);
             Session["codePaid"] = sqnb;
             Session["ProductDesc"] = dsca;
             Session["ProductCode"] = mitm;
             Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-            Session["Quantity"]    = qtyr;
-            Session["Finished"]    = sqnb;
-            Session["Pallet"]      = Objtticol100.proc;
-            Session["PrintedBy"]   = _operator;
+            Session["Quantity"] = qtyr;
+            Session["Finished"] = sqnb;
+            Session["Pallet"] = Objtticol100.proc;
+            Session["PrintedBy"] = _operator;
             Session["Machine"] = _idaltticol022.getMachine(pdno.ToUpper(), mitm.Trim().ToUpper(), ref strError);
-            Session["Comments"]    = txtExactReasons.InnerText;
-            Session["Reprint"]     = "no";
+            Session["Comments"] = txtExactReasons.InnerText;
+            Session["Reprint"] = "no";
 
             StringBuilder script = new StringBuilder();
             if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
@@ -1105,129 +1113,141 @@ namespace whusap.WebPages.Migration
         protected void btnGuardar_Click_announce(object sender, EventArgs e)
         {
 
-            Session["CantRest"] = "";
-            var validInsert = 0;
-            var validUpdate = 0;
-            var tipoa = "Announced";
-            lblErrorAnnounce.Text = String.Empty;
-            Ent_tticol100 Objdata100 = new Ent_tticol100();
-            for (int i = 0; i < _validarOrden.Rows.Count; i++)
+            if (Session["Announce"] == null)
             {
-                var shift = Request.Form["txtShift-" + i].ToString().Trim();
-                var reason = Request.Form["slReasons-" + i].ToString().Trim();
-                var rejectType = Request.Form["txtRejectType-" + i].ToString().Trim();
-                var exactReasons = Request.Form["txtExactReason-" + i].ToString().Trim();
-                var pdno = txtPalletId.Text.Trim().ToUpper().Substring(0, 9);
-                var paid = txtPalletId.Text.Trim().ToUpper();
-                var cwar = dropDownWarehouse.Text.Trim();
-                var machine = " ";
-                var consecutivo = 1;
-
-
-
-
-                if (shift != String.Empty && exactReasons != String.Empty)
+                Session["Announce"] = true;
+                Session["CantRest"] = "";
+                var validInsert = 0;
+                var validUpdate = 0;
+                var tipoa = "Announced";
+                lblErrorAnnounce.Text = String.Empty;
+                Ent_tticol100 Objdata100 = new Ent_tticol100();
+                for (int i = 0; i < _validarOrden.Rows.Count; i++)
                 {
-                    var findMachine = _idaltticol011.findRecordByPdno(ref pdno, ref strError);
+                    var shift = Request.Form["txtShift-" + i].ToString().Trim();
+                    var reason = Request.Form["slReasons-" + i].ToString().Trim();
+                    var rejectType = Request.Form["txtRejectType-" + i].ToString().Trim();
+                    var exactReasons = Request.Form["txtExactReason-" + i].ToString().Trim();
+                    var pdno = txtPalletId.Text.Trim().ToUpper().Substring(0, 9);
+                    var paid = txtPalletId.Text.Trim().ToUpper();
+                    var cwar = dropDownWarehouse.Text.Trim();
+                    var machine = " ";
+                    var consecutivo = 1;
 
-                    if (findMachine.Rows.Count > 0)
+
+
+
+                    if (shift != String.Empty && exactReasons != String.Empty)
                     {
-                        machine = findMachine.Rows[0]["MCNO"].ToString();
-                    }
+                        var findMachine = _idaltticol011.findRecordByPdno(ref pdno, ref strError);
 
-                    var consultaConsecutivo = _idaltticol100.findMaxSeqnByPdno(ref pdno, ref strError);
-
-                    if (consultaConsecutivo.Rows.Count > 0)
-                    {
-                        consecutivo = Convert.ToInt32(consultaConsecutivo.Rows[0]["SEQN"]) + 1;
-                    }
-
-                    Ent_tticol100 data100 = new Ent_tticol100()
-                    {
-                        pdno = pdno,
-                        seqn = consecutivo,
-                        seqnR = _validarOrden.Rows[0][1].ToString().Trim().ToUpper(),
-                        mcno = machine,
-                        shif = shift,
-                        item = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper(),
-                        qtyr = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat),
-                        cdis = reason,
-                        rejt = Convert.ToInt32(rejectType),
-                        clot = pdno,
-                        obse = exactReasons,
-                        logr = HttpContext.Current.Session["user"].ToString(),
-                        dsca = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper(),
-                        cwar = cwar,
-                        paid = paid,
-                        dele = "3"
-                    };
-                    Objdata100 = data100;
-
-                    validInsert += _idaltticol100.insertRecord(ref data100, ref strError);
-
-                    if (validInsert > 0)
-                    {
-
-                         validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
-                 
-                       
-                        //update actual warehouse field on table ticol222 to MRB Warehouse: Announced.
-                        
-                        tableNameSave = Session["TableNameSave"].ToString();
-                        if (tableNameSave == "ticol022")
+                        if (findMachine.Rows.Count > 0)
                         {
-                            validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipoa);
-                        }
-                        else
-                        {
-                            validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError, ref tipoa);
+                            machine = findMachine.Rows[0]["MCNO"].ToString();
                         }
 
-                        Session["WorkOrder"] = pdno.ToUpper();
-                        Session["lblReason"] = exactReasons;
-                        Session["codePaid"] = paid ;
-                        Session["ProductDesc"] = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper();
-                        Session["ProductCode"] = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper();
-                        Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
-                        Session["Quantity"] = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat) + " " + _validarOrden.Rows[i]["CUNI"].ToString();
-                        Session["Finished"] = paid;
-                        Session["Pallet"] = paid;
-                        Session["PrintedBy"] = _operator;
-                        Session["Machine"] = machine;
-                        Session["Comments"] = exactReasons;
-                        Session["Reprint"] = "no";
+                        var consultaConsecutivo = _idaltticol100.findMaxSeqnByPdno(ref pdno, ref strError);
+
+                        if (consultaConsecutivo.Rows.Count > 0)
+                        {
+                            consecutivo = Convert.ToInt32(consultaConsecutivo.Rows[0]["SEQN"]) + 1;
+                        }
+
+                        Ent_tticol100 data100 = new Ent_tticol100()
+                        {
+                            pdno = pdno,
+                            seqn = consecutivo,
+                            seqnR = _validarOrden.Rows[0][1].ToString().Trim().ToUpper(),
+                            mcno = machine,
+                            shif = shift,
+                            item = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper(),
+                            qtyr = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat),
+                            cdis = reason,
+                            rejt = Convert.ToInt32(rejectType),
+                            clot = pdno,
+                            obse = exactReasons,
+                            logr = HttpContext.Current.Session["user"].ToString(),
+                            dsca = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper(),
+                            cwar = cwar,
+                            paid = paid,
+                            dele = "3"
+                        };
+                        Objdata100 = data100;
+
+                        validInsert += _idaltticol100.insertRecord(ref data100, ref strError);
+
+                        if (validInsert > 0)
+                        {
+
+                            validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref data100, ref strError);
+
+
+                            //update actual warehouse field on table ticol222 to MRB Warehouse: Announced.
+
+                            tableNameSave = Session["TableNameSave"].ToString();
+                            if (tableNameSave == "ticol022")
+                            {
+                                validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref data100, ref strError, ref tipoa);
+                            }
+                            else
+                            {
+                                validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref data100, ref strError, ref tipoa);
+                            }
+
+                            Session["WorkOrder"] = pdno.ToUpper();
+                            Session["lblReason"] = exactReasons;
+                            Session["codePaid"] = paid;
+                            Session["ProductDesc"] = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper();
+                            Session["ProductCode"] = _validarOrden.Rows[i]["MITM"].ToString().Trim().ToUpper();
+                            Session["Date"] = DateTime.Now.ToString("MM/dd/yyyy");
+                            Session["Quantity"] = double.Parse(_validarOrden.Rows[i]["QTDL"].ToString().Trim(), CultureInfo.InvariantCulture.NumberFormat) + " " + _validarOrden.Rows[i]["CUNI"].ToString();
+                            Session["Finished"] = paid;
+                            Session["Pallet"] = paid;
+                            Session["PrintedBy"] = _operator;
+                            Session["Machine"] = machine;
+                            Session["Comments"] = exactReasons;
+                            Session["Reprint"] = "no";
+                        }
                     }
+                    else
+                    {
+                        if (shift == String.Empty)
+                        {
+                            Session["Announce"] = null;
+                            lblErrorAnnounce.Text = mensajes("errorshift");
+                            return;
+                        }
+                        if (exactReasons == String.Empty)
+                        {
+                            Session["Announce"] = null;
+                            lblErrorAnnounce.Text = mensajes("errorreason");
+                            return;
+                        }
+                    }
+                }
+
+                if (validInsert > 0)
+                {
+                    lblErrorAnnounce.Text = "";
+                    lblConfirmAnnounce.Text = mensajes("msjsave");
+                    divTableAnnounce.InnerHtml = String.Empty;
+                    divBtnGuardarAnnouce.Visible = false;
+                    txtPalletId.Text = String.Empty;
+                    Session["Objdata100"] = Objdata100;
+                    divLabelAnnounce.Visible = false;
+                    divBotonesAnnounce.Visible = false;
                 }
                 else
                 {
-                    if (shift == String.Empty)
-                    {
-                        lblErrorAnnounce.Text = mensajes("errorshift");
-                        return;
-                    }
-                    if (exactReasons == String.Empty)
-                    {
-                        lblErrorAnnounce.Text = mensajes("errorreason");
-                        return;
-                    }
+                    Session["Announce"] = null;
+                    lblErrorAnnounce.Text = mensajes("errorsave");
+                    return;
                 }
             }
-
-            if (validInsert > 0)
+            if (Session["Objdata100"] != null)
             {
-                lblErrorAnnounce.Text = "";
-                lblConfirmAnnounce.Text = mensajes("msjsave");
-                divTableAnnounce.InnerHtml = String.Empty;
-                divBtnGuardarAnnouce.Visible = false;
-                txtPalletId.Text = String.Empty;
-                MakeLabel(Objdata100);
-                divLabelAnnounce.Visible = false;
-                divBotonesAnnounce.Visible = false;
-            }
-            else
-            {
-                lblErrorAnnounce.Text = mensajes("errorsave");
-                return;
+                Ent_tticol100 Objdata100S = (Ent_tticol100)Session["Objdata100"];
+                MakeLabel(Objdata100S);
             }
         }
 
@@ -1874,284 +1894,295 @@ namespace whusap.WebPages.Migration
                 }
             }
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script1.ToString(), true);
-            
+
         }
 
         protected void btnGuardar_Click_Delivered(object sender, EventArgs e)
         {
-            Session["CantRest"] = "";
-            var validUpdate = 0;
-            var tipod = "Delivered";
-            Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
-            Ent_tticol022 MyObj022 = new Ent_tticol022();
-            
-            lblErrorDelivered.Text = String.Empty;
-            lblErrorDelivered.Visible = true;
-            //var pdno = txtPalletId.Text.Trim().ToUpper().Substring(0, 9);
-            var pdno = TxtOrder.Text.Trim().ToUpper().ToString();
-            var machine = " ";
-            var seqn = 1;
-            var item = slItems.Text.Trim().ToUpper();
-            var clot = slLot.Text.ToString().Trim().ToUpper() == String.Empty ? " " : slLot.Text.ToString().Trim().ToUpper();
-            var reason = slReason.SelectedValue.Trim().ToUpper();
-            var rejectType = slRejectType.SelectedValue.Trim().ToUpper();
-            var qtyr = double.Parse(txtQty.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
-            var paid = txtPalletId.Text.Trim().ToUpper();
-            var cwar = dropDownWarehouse.Text.Trim();
-              
-            if (item == string.Empty)
+            if (Session["Delivered"] == null)
             {
-                lblErrorDelivered.Text = "The Item can't be empty";
-                return;
-            }
-            //JC 050821 Se quita la validacion del lote, debido a que este dato ya lo trae del pallet
-            //if (clot == string.Empty)
-            //{
-            //    lblErrorDelivered.Text = "The lot can't be empty";
-            //    return;
-            //}
-
-            if (reason == string.Empty)
-            {
-                lblErrorDelivered.Text = "The Reason can't be empty";
-                return;
-            }
-
-            if (rejectType == string.Empty)
-            {
-                lblErrorDelivered.Text = "The Reject Type can't be empty";
-                return;
-            }
-
-            if (qtyr.ToString() == string.Empty)
-            {
-                lblErrorDelivered.Text = "The quantity can't be empty";
-                return;
-            }
-
-            string strMaxSequence = getSequence(paid.ToUpper().Trim(), "Q");
-            string separator = "-";
-            string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
-
-            if (Session["TableNameSave"].ToString() == "ticol022")
-            {
-
-
-                MyObj022.pdno = clot;
-                MyObj022.sqnb = newPallet;
-                MyObj022.proc = 2;
-                MyObj022.logn = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj022.mitm = item;
-                MyObj022.qtdl = Convert.ToDecimal(qtyr);
-                MyObj022.cuni = Session["Cuni"].ToString();//CUNI;
-                MyObj022.log1 = "NONE";
-                MyObj022.qtd1 = Convert.ToInt32(qtyr);
-                MyObj022.pro1 = 2;
-                MyObj022.log2 = "NONE";
-                MyObj022.qtd2 = Convert.ToInt32(qtyr);
-                MyObj022.pro2 = 2;
-                MyObj022.loca = " ";
-                MyObj022.norp = 1;
-                //JC 130821 Ajustar Datos Estado rechazado
-                //MyObj022.dele = 7;
-                MyObj022.dele = 3;
-                MyObj022.logd = "NONE";
-                MyObj022.refcntd = 0;
-                MyObj022.refcntu = 0;
-                MyObj022.drpt = DateTime.Now;
-                MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
-                MyObj022.acqt = Convert.ToDecimal(qtyr);
-                //JC 130821 Ajustar Datos Bodega Rechazo
-                //MyObj022.cwaf = warehouse;//CWAR;
-                //MyObj022.cwat = warehouse;//CWAR;
-                //MyObj022.aclo = warehouse;
-                MyObj022.cwaf = cwar;//CWAR;
-                MyObj022.cwat = cwar;//CWAR;
-                MyObj022.aclo = " ";
-                MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
-
-                var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
-                var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
-                //JC 090821 Ajustar la cantidad del pallet cuando esta en estado delivered y lo rechazan
-                var qt = Convert.ToDecimal(qtyr);
-                var actualizacol022 = _idaltticol022.Actualizartticol022Cant(ref paid, ref qt);
-            }
-            else if (Session["TableNameSave"].ToString() == "whcol131")
-            {
-
-                MyObj131.OORG = "2";// Order type escaneada view 
-                MyObj131.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
-                MyObj131.ITEM = item;
-                MyObj131.PAID = newPallet;
-                //MyObj131.PONO = HttpContext.Current.Session["pono"].ToString();
-                MyObj131.PONO = "1";
-                MyObj131.SEQN = "1";
-                MyObj131.CLOT = clot == String.Empty ? " " : clot;//CLOT.ToUpper();// lote VIEW
-                //MyObj131.CWAR = warehouse;//CWAR.ToUpper();
-                MyObj131.CWAR = cwar;
-                MyObj131.QTYS = qtyr.ToString();//QTYS;// cantidad escaneada view 
-                MyObj131.UNIT = Session["Cuni"].ToString();//UNIT;//unit escaneada view
-                MyObj131.QTYC = qtyr.ToString();//QTYS;//cantidad escaneada view aplicando factor
-                MyObj131.QTYA = qtyr.ToString();//QTYS;//cantidad escaneada view aplicando factor
-                MyObj131.UNIC = Session["Cuni"].ToString();//UNIT;//unidad view stock
-                MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
-                MyObj131.CONF = "1";
-                MyObj131.RCNO = " ";//llena baan
-                MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                //MyObj131.LOCA = location;//LOCA.ToUpper();// enviamos vacio 
-                MyObj131.LOCA = " ";
-                MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
-                MyObj131.PRNT = "1";// llenar en 1
-                MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
-                MyObj131.NPRT = "1";//conteo de reimpresiones 
-                MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
-                MyObj131.LOGT = " ";//llena baan
-                MyObj131.STAT = "11";// LLENAR EN 9 Para el pallet Q
-                MyObj131.DSCA = " ";
-                MyObj131.COTP = " ";
-                MyObj131.FIRE = "2";
-                MyObj131.PSLIP = " ";
-                MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
-                string StrError = string.Empty;
-                bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
-            }
-
-            var consultaMaquina = _idaltticol011.findRecordByPdno(ref pdno, ref strError);
-
-            if (consultaMaquina.Rows.Count > 0)
-            {
-                machine = consultaMaquina.Rows[0]["MCNO"].ToString().Trim();
-            }
-
-          //  var registroItem = _consultaInformacionPedido.AsEnumerable().Where(x => x["SITM"].ToString().Trim() == item).FirstOrDefault();
-
-          //  var pono = registroItem["PONO"].ToString();
-
-           // txtpono.Value = pono;
-           // var registroItem = _consultaInformacionPedido.AsEnumerable().Where(x => x["SITM"].ToString().Trim() == item).FirstOrDefault();
-            var kltc = txtkltc.Value;
-            var pono = txtpono.Value;
-
-            if (kltc == "1")
-            {
-                Ent_twhltc100 data100 = new Ent_twhltc100() { item = item, clot = clot };
-                var validaLote = _idaltwhltc100.listaRegistro_Clot(ref data100, ref strError);
-
-                if (validaLote.Rows.Count < 0)
-                {
-                    lblError.Text = mensajes("lotnotexists");
-                    return;
-                }
-            }
-
-            var consultaSecuencia = _idaltticol100.findMaxSeqnByPdnoPono(ref pdno, ref pono, ref strError);
-
-            if (consultaSecuencia.Rows.Count > 0)
-            {
-                seqn = Convert.ToInt32(consultaSecuencia.Rows[0]["SEQN"]) + 1;
-            }
-
-            Ent_tticol100 dataticol100 = new Ent_tticol100()
-            {
-                //dsca = .Text,
-                pdno = pdno,
-                pono = Convert.ToInt32(pono),
-                seqn = seqn,
-                mcno = machine,
-                item = item,
-                qtyr = qtyr,
-                shif = txtShift.Text.Trim().ToUpper(),
-                cdis = slReason.SelectedValue.Trim().ToUpper(),
-                rejt = Convert.ToInt32(slRejectType.SelectedValue),
-                clot = slLot.Text == "" ? " " : slLot.Text.Trim().ToUpper(),
-                obse = txtExactReasons.InnerText,
-                logr = HttpContext.Current.Session["user"].ToString(),
-                disp = 4,
-                proc = 1,
-                Unit = txtUnit.Text,
-                logn = HttpContext.Current.Session["user"].ToString(),
-                mess = "0",
-                cwar = cwar,
-                //paid = paid
-                paid = newPallet
-
-            };
-
-            var validaInsert = _idaltticol100.insertRecord(ref dataticol100, ref strError);
-
-            if (validaInsert > 0)
-            {
-
-                 //validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref dataticol100, ref strError);
-
-                //update actual warehouse field on table ticol222 to MRB Warehouse: Delivered
-                 tableNameSave = Session["TableNameSave"].ToString();
-                 //if (tableNameSave == "ticol022")
-                 //{
-                 //    validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref dataticol100, ref strError, ref tipod);
-                 //}
-                 //else
-                 //{
-                 //    validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref dataticol100, ref strError, ref tipod);
-                 //}
-
-                if (tableNameSave == "ticol022")
-                {
-                    Session["WorkOrder"] = MyObj022.pdno;
-                    Session["WorkOrder2"] = MyObj022.pdno;
-                    Session["lblReason2"] = slReason.SelectedValue.Trim().ToUpper();
-                    Session["codePaid2"] = MyObj022.sqnb;
-                    Session["ProductDesc2"] = Session["DescItem"];
-                    Session["ProductCode2"] = item.Trim().ToUpper();
-                    Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
-                    Session["Quantity2"] = MyObj022.qtdl + " " + Session["Cuni"].ToString(); ;
-                    Session["Finished2"] = MyObj022.sqnb;
-                    Session["Pallet2"] = MyObj022.sqnb;
-                    Session["PrintedBy2"] = _operator;
-                    Session["Machine2"] = _idaltticol022.getMachine(clot, item.Trim().ToUpper(), ref strError);
-                    Session["Comments2"] = txtExactReasons.InnerText;
-                }
-                else
-                {
-                    Session["WorkOrder"] = MyObj131.ORNO;
-                    Session["WorkOrder2"] = MyObj131.ORNO;
-                    Session["lblReason2"] = slReason.SelectedValue.Trim().ToUpper();
-                    Session["codePaid2"] = MyObj131.PAID;
-                    Session["ProductDesc2"] = Session["DescItem"];
-                    Session["ProductCode2"] = item.Trim().ToUpper();
-                    Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
-                    Session["Quantity2"] = MyObj131.QTYC + " " + Session["Cuni"].ToString(); ;
-                    Session["Finished2"] = MyObj131.PAID;
-                    Session["Pallet2"] = MyObj131.PAID;
-                    Session["PrintedBy2"] = _operator;
-                    Session["Machine2"] = _idaltticol022.getMachine(clot, item.Trim().ToUpper(), ref strError);
-                    Session["Comments2"] = txtExactReasons.InnerText;
-                }
-                StringBuilder script = new StringBuilder();
-                Session["CantRest"] = 0;
-                if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
-                {
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
-                }
-                else
-                {
-                    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
-                }
+                Session["Delivered"] = true;
+                Session["CantRest"] = "";
+                var validUpdate = 0;
+                var tipod = "Delivered";
+                Ent_twhcol130131 MyObj131 = new Ent_twhcol130131();
+                Ent_tticol022 MyObj022 = new Ent_tticol022();
 
                 lblErrorDelivered.Text = String.Empty;
-                lblConfirmDelivered.Text = mensajes("msjsave");
-                divTableDelivered.Visible = false;
-                divBtnGuardarDelivered.Visible = false;
-                txtPalletId.Text = String.Empty;
-                TxtOrder.Text = string.Empty;
-                MakeLabelDelivered(dataticol100);
-                divLabelDelivered.Visible = false;
-                divBotonesDelivered.Visible = false;
+                lblErrorDelivered.Visible = true;
+                //var pdno = txtPalletId.Text.Trim().ToUpper().Substring(0, 9);
+                var pdno = TxtOrder.Text.Trim().ToUpper().ToString();
+                var machine = " ";
+                var seqn = 1;
+                var item = slItems.Text.Trim().ToUpper();
+                var clot = slLot.Text.ToString().Trim().ToUpper() == String.Empty ? " " : slLot.Text.ToString().Trim().ToUpper();
+                var reason = slReason.SelectedValue.Trim().ToUpper();
+                var rejectType = slRejectType.SelectedValue.Trim().ToUpper();
+                var qtyr = double.Parse(txtQty.Text.Trim(), CultureInfo.InvariantCulture.NumberFormat);
+                var paid = txtPalletId.Text.Trim().ToUpper();
+                var cwar = dropDownWarehouse.Text.Trim();
+
+                if (item == string.Empty)
+                {
+                    lblErrorDelivered.Text = "The Item can't be empty";
+                    return;
+                }
+                //JC 050821 Se quita la validacion del lote, debido a que este dato ya lo trae del pallet
+                //if (clot == string.Empty)
+                //{
+                //    lblErrorDelivered.Text = "The lot can't be empty";
+                //    return;
+                //}
+
+                if (reason == string.Empty)
+                {
+                    lblErrorDelivered.Text = "The Reason can't be empty";
+                    return;
+                }
+
+                if (rejectType == string.Empty)
+                {
+                    lblErrorDelivered.Text = "The Reject Type can't be empty";
+                    return;
+                }
+
+                if (qtyr.ToString() == string.Empty)
+                {
+                    lblErrorDelivered.Text = "The quantity can't be empty";
+                    return;
+                }
+
+                string strMaxSequence = getSequence(paid.ToUpper().Trim(), "Q");
+                string separator = "-";
+                string newPallet = recursos.GenerateNewPallet(strMaxSequence, separator);
+
+                if (Session["TableNameSave"].ToString() == "ticol022")
+                {
+
+
+                    MyObj022.pdno = clot;
+                    MyObj022.sqnb = newPallet;
+                    MyObj022.proc = 2;
+                    MyObj022.logn = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj022.mitm = item;
+                    MyObj022.qtdl = Convert.ToDecimal(qtyr);
+                    MyObj022.cuni = Session["Cuni"].ToString();//CUNI;
+                    MyObj022.log1 = "NONE";
+                    MyObj022.qtd1 = Convert.ToInt32(qtyr);
+                    MyObj022.pro1 = 2;
+                    MyObj022.log2 = "NONE";
+                    MyObj022.qtd2 = Convert.ToInt32(qtyr);
+                    MyObj022.pro2 = 2;
+                    MyObj022.loca = " ";
+                    MyObj022.norp = 1;
+                    //JC 130821 Ajustar Datos Estado rechazado
+                    //MyObj022.dele = 7;
+                    MyObj022.dele = 3;
+                    MyObj022.logd = "NONE";
+                    MyObj022.refcntd = 0;
+                    MyObj022.refcntu = 0;
+                    MyObj022.drpt = DateTime.Now;
+                    MyObj022.urpt = HttpContext.Current.Session["user"].ToString().Trim();
+                    MyObj022.acqt = Convert.ToDecimal(qtyr);
+                    //JC 130821 Ajustar Datos Bodega Rechazo
+                    //MyObj022.cwaf = warehouse;//CWAR;
+                    //MyObj022.cwat = warehouse;//CWAR;
+                    //MyObj022.aclo = warehouse;
+                    MyObj022.cwaf = cwar;//CWAR;
+                    MyObj022.cwat = cwar;//CWAR;
+                    MyObj022.aclo = " ";
+                    MyObj022.allo = 0;// Convert.ToDecimal(txtAdjustmentQuantity.Text.Trim()); ;
+
+                    var validateSave = _idaltticol022.insertarRegistroSimple(ref MyObj022, ref strError);
+                    var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
+                    //JC 090821 Ajustar la cantidad del pallet cuando esta en estado delivered y lo rechazan
+                    var qt = Convert.ToDecimal(qtyr);
+                    var actualizacol022 = _idaltticol022.Actualizartticol022Cant(ref paid, ref qt);
+                }
+                else if (Session["TableNameSave"].ToString() == "whcol131")
+                {
+
+                    MyObj131.OORG = "2";// Order type escaneada view 
+                    MyObj131.ORNO = newPallet.Substring(0, newPallet.IndexOf("-"));
+                    MyObj131.ITEM = item;
+                    MyObj131.PAID = newPallet;
+                    //MyObj131.PONO = HttpContext.Current.Session["pono"].ToString();
+                    MyObj131.PONO = "1";
+                    MyObj131.SEQN = "1";
+                    MyObj131.CLOT = clot == String.Empty ? " " : clot;//CLOT.ToUpper();// lote VIEW
+                    //MyObj131.CWAR = warehouse;//CWAR.ToUpper();
+                    MyObj131.CWAR = cwar;
+                    MyObj131.QTYS = qtyr.ToString();//QTYS;// cantidad escaneada view 
+                    MyObj131.UNIT = Session["Cuni"].ToString();//UNIT;//unit escaneada view
+                    MyObj131.QTYC = qtyr.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj131.QTYA = qtyr.ToString();//QTYS;//cantidad escaneada view aplicando factor
+                    MyObj131.UNIC = Session["Cuni"].ToString();//UNIT;//unidad view stock
+                    MyObj131.DATE = DateTime.Now.ToString("dd/MM/yyyy").ToString();//fecha de confirmacion 
+                    MyObj131.CONF = "1";
+                    MyObj131.RCNO = " ";//llena baan
+                    MyObj131.DATR = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    //MyObj131.LOCA = location;//LOCA.ToUpper();// enviamos vacio 
+                    MyObj131.LOCA = " ";
+                    MyObj131.DATL = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llenar con fecha de hoy
+                    MyObj131.PRNT = "1";// llenar en 1
+                    MyObj131.DATP = DateTime.Now.ToString("dd/MM/yyyy").ToString();//llena baan
+                    MyObj131.NPRT = "1";//conteo de reimpresiones 
+                    MyObj131.LOGN = HttpContext.Current.Session["user"].ToString().Trim();// nombre de ususario de la session
+                    MyObj131.LOGT = " ";//llena baan
+                    MyObj131.STAT = "11";// LLENAR EN 9 Para el pallet Q
+                    MyObj131.DSCA = " ";
+                    MyObj131.COTP = " ";
+                    MyObj131.FIRE = "2";
+                    MyObj131.PSLIP = " ";
+                    MyObj131.ALLO = "0"; //txtAdjustmentQuantity.Text.Trim();
+                    string StrError = string.Empty;
+                    bool Insertsucces = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
+                }
+
+                var consultaMaquina = _idaltticol011.findRecordByPdno(ref pdno, ref strError);
+
+                if (consultaMaquina.Rows.Count > 0)
+                {
+                    machine = consultaMaquina.Rows[0]["MCNO"].ToString().Trim();
+                }
+
+                //  var registroItem = _consultaInformacionPedido.AsEnumerable().Where(x => x["SITM"].ToString().Trim() == item).FirstOrDefault();
+
+                //  var pono = registroItem["PONO"].ToString();
+
+                // txtpono.Value = pono;
+                // var registroItem = _consultaInformacionPedido.AsEnumerable().Where(x => x["SITM"].ToString().Trim() == item).FirstOrDefault();
+                var kltc = txtkltc.Value;
+                var pono = txtpono.Value;
+
+                if (kltc == "1")
+                {
+                    Ent_twhltc100 data100 = new Ent_twhltc100() { item = item, clot = clot };
+                    var validaLote = _idaltwhltc100.listaRegistro_Clot(ref data100, ref strError);
+
+                    if (validaLote.Rows.Count < 0)
+                    {
+                        Session["Delivered"] = null;
+                        lblError.Text = mensajes("lotnotexists");
+                        return;
+                    }
+                }
+
+                var consultaSecuencia = _idaltticol100.findMaxSeqnByPdnoPono(ref pdno, ref pono, ref strError);
+
+                if (consultaSecuencia.Rows.Count > 0)
+                {
+                    seqn = Convert.ToInt32(consultaSecuencia.Rows[0]["SEQN"]) + 1;
+                }
+
+                Ent_tticol100 dataticol100 = new Ent_tticol100()
+                {
+                    //dsca = .Text,
+                    pdno = pdno,
+                    pono = Convert.ToInt32(pono),
+                    seqn = seqn,
+                    mcno = machine,
+                    item = item,
+                    qtyr = qtyr,
+                    shif = txtShift.Text.Trim().ToUpper(),
+                    cdis = slReason.SelectedValue.Trim().ToUpper(),
+                    rejt = Convert.ToInt32(slRejectType.SelectedValue),
+                    clot = slLot.Text == "" ? " " : slLot.Text.Trim().ToUpper(),
+                    obse = txtExactReasons.InnerText,
+                    logr = HttpContext.Current.Session["user"].ToString(),
+                    disp = 4,
+                    proc = 1,
+                    Unit = txtUnit.Text,
+                    logn = HttpContext.Current.Session["user"].ToString(),
+                    mess = "0",
+                    cwar = cwar,
+                    //paid = paid
+                    paid = newPallet
+
+                };
+
+                var validaInsert = _idaltticol100.insertRecord(ref dataticol100, ref strError);
+
+                if (validaInsert > 0)
+                {
+                    Session["dataticol100"] = dataticol100;
+                    //validUpdate = _idaltticol100.ActualizaRegistro_ticol022(ref dataticol100, ref strError);
+
+                    //update actual warehouse field on table ticol222 to MRB Warehouse: Delivered
+                    tableNameSave = Session["TableNameSave"].ToString();
+                    //if (tableNameSave == "ticol022")
+                    //{
+                    //    validUpdate = _idaltticol100.ActualUpdateWarehouse_ticol222(ref dataticol100, ref strError, ref tipod);
+                    //}
+                    //else
+                    //{
+                    //    validUpdate = _idaltticol100.ActualUpdateWarehouse_whcol131(ref dataticol100, ref strError, ref tipod);
+                    //}
+
+                    if (tableNameSave == "ticol022")
+                    {
+                        Session["WorkOrder"] = MyObj022.pdno;
+                        Session["WorkOrder2"] = MyObj022.pdno;
+                        Session["lblReason2"] = slReason.SelectedValue.Trim().ToUpper();
+                        Session["codePaid2"] = MyObj022.sqnb;
+                        Session["ProductDesc2"] = Session["DescItem"];
+                        Session["ProductCode2"] = item.Trim().ToUpper();
+                        Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                        Session["Quantity2"] = MyObj022.qtdl + " " + Session["Cuni"].ToString(); ;
+                        Session["Finished2"] = MyObj022.sqnb;
+                        Session["Pallet2"] = MyObj022.sqnb;
+                        Session["PrintedBy2"] = _operator;
+                        Session["Machine2"] = _idaltticol022.getMachine(clot, item.Trim().ToUpper(), ref strError);
+                        Session["Comments2"] = txtExactReasons.InnerText;
+                    }
+                    else
+                    {
+                        Session["WorkOrder"] = MyObj131.ORNO;
+                        Session["WorkOrder2"] = MyObj131.ORNO;
+                        Session["lblReason2"] = slReason.SelectedValue.Trim().ToUpper();
+                        Session["codePaid2"] = MyObj131.PAID;
+                        Session["ProductDesc2"] = Session["DescItem"];
+                        Session["ProductCode2"] = item.Trim().ToUpper();
+                        Session["Date2"] = DateTime.Now.ToString("MM/dd/yyyy");
+                        Session["Quantity2"] = MyObj131.QTYC + " " + Session["Cuni"].ToString(); ;
+                        Session["Finished2"] = MyObj131.PAID;
+                        Session["Pallet2"] = MyObj131.PAID;
+                        Session["PrintedBy2"] = _operator;
+                        Session["Machine2"] = _idaltticol022.getMachine(clot, item.Trim().ToUpper(), ref strError);
+                        Session["Comments2"] = txtExactReasons.InnerText;
+                    }
+                    Session["CantRest"] = 0;
+                    //StringBuilder script = new StringBuilder();
+                    //if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+                    //{
+                    //    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsME.aspx'; ");
+                    //}
+                    //else
+                    //{
+                    //    script.Append("myLabelFrame = document.getElementById('myLabelFrame'); myLabelFrame.src ='../Labels/RedesingLabels/5MRBMaterialsDouble.aspx'; ");
+                    //}
+
+                    lblErrorDelivered.Text = String.Empty;
+                    lblConfirmDelivered.Text = mensajes("msjsave");
+                    divTableDelivered.Visible = false;
+                    divBtnGuardarDelivered.Visible = false;
+                    txtPalletId.Text = String.Empty;
+                    TxtOrder.Text = string.Empty;
+                    divLabelDelivered.Visible = false;
+                    divBotonesDelivered.Visible = false;
+                }
+                else
+                {
+                    Session["Delivered"] = null;
+                    lblErrorDelivered.Text = mensajes("errorsave");
+                    return;
+                }
+
             }
-            else
+            if (Session["dataticol100"] != null)
             {
-                lblErrorDelivered.Text = mensajes("errorsave");
-                return;
+                Ent_tticol100 tticol100S = (Ent_tticol100)Session["dataticol100"];
+                MakeLabelDelivered(tticol100S);
             }
         }
 
@@ -2159,8 +2190,8 @@ namespace whusap.WebPages.Migration
         {
             Response.Redirect("whInvMrbRejection.aspx");
         }
-        
-        
+
+
         #endregion
 
         #region Metodos
@@ -2197,7 +2228,7 @@ namespace whusap.WebPages.Migration
             lblRejectedType.Text = _textoLabels.readStatement(formName, _idioma, "lblRejectedType");
             lblExactReason.Text = _textoLabels.readStatement(formName, _idioma, "lblExactReason");
             lblItem.Text = _textoLabels.readStatement(formName, _idioma, "lblItem");
-          //  btnSave.Text = _textoLabels.readStatement(formName, _idioma, "btnSave");
+            //  btnSave.Text = _textoLabels.readStatement(formName, _idioma, "btnSave");
             //minlenght.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "regularWorkOrder");
             //RequiredField.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "requiredWorkOrder");
             //OrderError.ErrorMessage = _textoLabels.readStatement(formName, _idioma, "customWorkOrder");
