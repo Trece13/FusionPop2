@@ -154,7 +154,7 @@ namespace whusap.WebPages.InvMaterial
                     DataTable ResQtdl = idal.ConsultarQtdl(ref MyObj, ref strError);
 
                     decimal Qtdl = 0;
-                        
+
                     if (ResQtdl.Rows.Count > 0)
                     {
                         Qtdl = Convert.ToDecimal(ResQtdl.Rows[0]["REQT"].ToString());
@@ -194,100 +194,101 @@ namespace whusap.WebPages.InvMaterial
             if (Session["save"] == null)
             {
                 Session["save"] = true;
-            List<Ent_tticol125> parameterCollection = new List<Ent_tticol125>();
-            Ent_tticol125 obj = new Ent_tticol125();
-            //Recorrer filas con valores en los textos
-            Session["WorkOrder"] = txtWorkOrder.Text.Trim();
+                List<Ent_tticol125> parameterCollection = new List<Ent_tticol125>();
+                Ent_tticol125 obj = new Ent_tticol125();
+                //Recorrer filas con valores en los textos
+                Session["WorkOrder"] = txtWorkOrder.Text.Trim();
 
-            //string vpaid = validaPalletID("OPI009584-001", 1);
-            String a = string.Empty;
-            foreach (GridViewRow row in grdRecords.Rows)
-            {
-                string paid = string.Empty;
-                string sec  = string.Empty;
-                int sec022 = 0;
-                string toreturn = ((TextBox)row.Cells[4].FindControl("toReturn")).Text;
-                string toLot = ((DropDownList)row.Cells[6].FindControl("toLot")).SelectedValue;
-                //string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
-                string condLote = ((HiddenField)row.Cells[4].FindControl("LOTE")).Value.Trim();
-                ktlc = Convert.ToString(row.Cells[9].Text);
-                Item = row.Cells[0].Text.ToUpperInvariant();
-                //JC 180821 Tomar la bodega del maestro de artículos
-                HttpContext.Current.Session["ITEM"] = Item;
-                var Warehouse = Itwhcol130.GetWarehouseMaterialReturn(HttpContext.Current.Session["ITEM"].ToString());
-
-                Uni = row.Cells[3].Text.ToLower().Trim();
-                //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
-                //Pos = row.Cells[0].Text;
-                Pos = "10";
-                Tipo = row.Cells[10].Text;
-                Clase = row.Cells[11].Text.ToUpperInvariant().Trim();
-                
-                bool reqLote = condLote == "1" ? true : false;
-                
-                //if (myObj.CUNI.Trim().ToUpper() != "PLT")
-                //{
-                //    MyConvertionFactor = FactorConversion(myObj.ITEM, myObj.CUNI, "PLT");
-                //    QUANTITYPLT = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITYCUNI * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITYCUNI * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
-                //    ciclosADVS = Convert.ToInt32(Math.Ceiling(QUANTITYPLT));
-                //}
-
-                //if (palletId.Trim() == string.Empty)
-                //{
-                //    lblResult.Text = RecordswithoutIDpallet;
-                //    lblResult.ForeColor = System.Drawing.Color.Red;
-                //    return;
-                //}
-                if ((reqLote && String.IsNullOrEmpty(toLot.Trim())) && !string.IsNullOrEmpty(toreturn))
+                //string vpaid = validaPalletID("OPI009584-001", 1);
+                String a = string.Empty;
+                foreach (GridViewRow row in grdRecords.Rows)
                 {
-                    lblResult.Text = mensajes("lotcode");
-                    lblResult.ForeColor = System.Drawing.Color.Red;
-                    return;
-                }
+                    string paid = string.Empty;
+                    string sec = string.Empty;
+                    int sec022 = 0;
+                    string toreturn = ((TextBox)row.Cells[4].FindControl("toReturn")).Text;
+                    string toLot = ((DropDownList)row.Cells[6].FindControl("toLot")).SelectedValue;
+                    //string palletId = ((TextBox)row.Cells[9].FindControl("palletId")).Text;
+                    string condLote = ((HiddenField)row.Cells[4].FindControl("LOTE")).Value.Trim();
+                    ktlc = Convert.ToString(row.Cells[9].Text);
+                    Item = row.Cells[0].Text.ToUpperInvariant();
+                    //JC 180821 Tomar la bodega del maestro de artículos
+                    HttpContext.Current.Session["ITEM"] = Item;
+                    var Warehouse = Itwhcol130.GetWarehouseMaterialReturn(HttpContext.Current.Session["ITEM"].ToString());
 
-                //string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
-                //string toLot = ((TextBox)row.Cells[8].FindControl("toLot")).Text;
+                    Uni = row.Cells[3].Text.ToLower().Trim();
+                    //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
+                    //Pos = row.Cells[0].Text;
+                    Pos = "10";
+                    Tipo = row.Cells[10].Text;
+                    Clase = row.Cells[11].Text.ToUpperInvariant().Trim();
 
-                int tabla022 = 0;
-                int tabla042 = 0;
-                int tabla131 = 0;
+                    bool reqLote = condLote == "1" ? true : false;
 
-                if (!toreturn.Equals(string.Empty))
-                {
-                    if (Tipo == "2")
+                    //if (myObj.CUNI.Trim().ToUpper() != "PLT")
+                    //{
+                    //    MyConvertionFactor = FactorConversion(myObj.ITEM, myObj.CUNI, "PLT");
+                    //    QUANTITYPLT = (MyConvertionFactor.Tipo == "Div") ? Convert.ToDecimal((QUANTITYCUNI * MyConvertionFactor.FactorB) / MyConvertionFactor.FactorD) : Convert.ToDecimal((QUANTITYCUNI * MyConvertionFactor.FactorD) / MyConvertionFactor.FactorB);
+                    //    ciclosADVS = Convert.ToInt32(Math.Ceiling(QUANTITYPLT));
+                    //}
+
+                    //if (palletId.Trim() == string.Empty)
+                    //{
+                    //    lblResult.Text = RecordswithoutIDpallet;
+                    //    lblResult.ForeColor = System.Drawing.Color.Red;
+                    //    return;
+                    //}
+                    if ((reqLote && String.IsNullOrEmpty(toLot.Trim())) && !string.IsNullOrEmpty(toreturn))
                     {
-                        if (Clase != "RET")
+                        lblResult.Text = mensajes("lotcode");
+                        lblResult.ForeColor = System.Drawing.Color.Red;
+                        Session["save"] = null;
+                        return;
+                    }
+
+                    //string toreturn = ((TextBox)row.Cells[6].FindControl("toReturn")).Text;
+                    //string toLot = ((TextBox)row.Cells[8].FindControl("toLot")).Text;
+
+                    int tabla022 = 0;
+                    int tabla042 = 0;
+                    int tabla131 = 0;
+
+                    if (!toreturn.Equals(string.Empty))
+                    {
+                        if (Tipo == "2")
                         {
-                            tabla022 = 1;
-                            tabla042 = 0;
-                            tabla131 = 0;
+                            if (Clase != "RET")
+                            {
+                                tabla022 = 1;
+                                tabla042 = 0;
+                                tabla131 = 0;
+                            }
+                            else
+                            {
+                                tabla042 = 1;
+                                tabla022 = 0;
+                                tabla131 = 0;
+                            }
                         }
                         else
                         {
-                            tabla042 = 1;
+                            tabla131 = 1;
                             tabla022 = 0;
-                            tabla131 = 0;
+                            tabla042 = 0;
                         }
-                    }
-                    else
-                    {
-                        tabla131 = 1;
-                        tabla022 = 0;
-                        tabla042 = 0;
-                    }
 
-                    DataTable dt022 = Itticol022.SecuenciaMayorRT(txtWorkOrder.Text.Trim().ToUpperInvariant());
-                    if (dt022.Rows.Count > 0)
-                    {
-                        paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper(); ;
-                        sec = paid.Substring(12, 2);
-                        sec022 = Convert.ToInt32(sec);
-                        sec = addZero(sec022 + 1);
-                    }
-                    else
-                    {
-                        sec = "01";
-                    }
+                        DataTable dt022 = Itticol022.SecuenciaMayorRT(txtWorkOrder.Text.Trim().ToUpperInvariant());
+                        if (dt022.Rows.Count > 0)
+                        {
+                            paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper(); ;
+                            sec = paid.Substring(12, 2);
+                            sec022 = Convert.ToInt32(sec);
+                            sec = addZero(sec022 + 1);
+                        }
+                        else
+                        {
+                            sec = "01";
+                        }
 
                         if (tabla131 == 1)
                         {
@@ -330,7 +331,7 @@ namespace whusap.WebPages.InvMaterial
                             MyObj.ALLO = "0";
                             string StrError = string.Empty;
 
-                            Itwhcol130.Insertartwhcol131(MyObj, ref StrError); 
+                            Itwhcol130.Insertartwhcol131(MyObj, ref StrError);
                         }
 
                         if (tabla022 == 1)
@@ -369,7 +370,7 @@ namespace whusap.WebPages.InvMaterial
                             obj022.cwat = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
                             obj022.aclo = "";
                             obj022.allo = 0;
-                            
+
                             list022.Add(obj022);
                             Itticol022.insertarRegistroSimple(ref obj022, ref strError);
                             Itticol022.InsertarRegistroTicol222(ref obj022, ref strError);
@@ -399,7 +400,7 @@ namespace whusap.WebPages.InvMaterial
                             obj042.norp = 1;
                             obj042.dele = 2;
                             obj042.logd = "NONE";
-                            obj042.refcntd = 0; 
+                            obj042.refcntd = 0;
                             obj042.refcntu = 0;
                             obj042.drpt = DateTime.Now;
                             obj042.urpt = HttpContext.Current.Session["user"].ToString();
@@ -421,52 +422,57 @@ namespace whusap.WebPages.InvMaterial
 
                         }
 
-                    obj = new Ent_tticol125();
-                    obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
-                    //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
-                    //obj.pono = Convert.ToInt32(row.Cells[0].Text);
-                    obj.pono = Convert.ToInt32("10");
-                    obj.item = row.Cells[0].Text.ToUpper(); //.Trim();
-                    //JC 180821 Grabar la bodega por defecto del item
-                    //obj.cwar = row.Cells[3].Text.ToUpper(); //.Trim();
-                    obj.cwar = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
-                    obj.paid = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
-                    obj.clot = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
-                    obj.reqt = Decimal.Parse(toreturn, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToInt32(toreturn);
-                    obj.refcntd = "0";
-                    obj.refcntu = "0";
-                    obj.mess = " ";
-                    obj.prin = 1;
-                    obj.conf = 2;
-                    obj.user = Session["user"].ToString();
-                    obj.idrecord = grdRecords.DataKeys[row.RowIndex].Value.ToString();
-                    parameterCollection.Add(obj);
+                        obj = new Ent_tticol125();
+                        obj.pdno = txtWorkOrder.Text.Trim().ToUpper();
+                        //JC 061221 Como ya no se tiene posición se define fija la posicíón 10
+                        //obj.pono = Convert.ToInt32(row.Cells[0].Text);
+                        obj.pono = Convert.ToInt32("10");
+                        obj.item = row.Cells[0].Text.ToUpper(); //.Trim();
+                        //JC 180821 Grabar la bodega por defecto del item
+                        //obj.cwar = row.Cells[3].Text.ToUpper(); //.Trim();
+                        obj.cwar = Warehouse.Rows[0]["WARITEM"].ToString().Trim().ToUpper();
+                        obj.paid = txtWorkOrder.Text.Trim().ToUpper() + "-RT" + sec;
+                        obj.clot = string.IsNullOrEmpty(toLot) ? " " : toLot.ToUpperInvariant();
+                        obj.reqt = Decimal.Parse(toreturn, System.Globalization.CultureInfo.InvariantCulture);  //Convert.ToInt32(toreturn);
+                        obj.refcntd = "0";
+                        obj.refcntu = "0";
+                        obj.mess = " ";
+                        obj.prin = 1;
+                        obj.conf = 2;
+                        obj.user = Session["user"].ToString();
+                        obj.idrecord = grdRecords.DataKeys[row.RowIndex].Value.ToString();
+                        parameterCollection.Add(obj);
+
+                    }
+
 
                 }
+                InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
+                idal.insertarRegistro(ref parameterCollection, ref strError, Aplicacion);
+                printResult.Visible = true;
+                printLabel.Visible = true;
+                lblResult.Text = mensajes("msjsave");
+                lblResult.ForeColor = System.Drawing.Color.Green;
+                this.HeaderGrid.Visible = false;
 
+                grdRecords.DataSource = "";
+                grdRecords.DataBind();
+                btnSave.Visible = false;
 
+                if (strError != string.Empty)
+                {
+                    btnSave.Visible = false;
+
+                    lblResult.Text = mensajes("errorsave");
+                    lblResult.ForeColor = System.Drawing.Color.Red;
+                    throw new System.InvalidOperationException(strError);
+                }
             }
-            InterfazDAL_tticol125 idal = new InterfazDAL_tticol125();
-            idal.insertarRegistro(ref parameterCollection, ref strError, Aplicacion);
             printResult.Visible = true;
             printLabel.Visible = true;
-            lblResult.Text = mensajes("msjsave");
-            lblResult.ForeColor = System.Drawing.Color.Green;
-            this.HeaderGrid.Visible = false;
-
             grdRecords.DataSource = "";
             grdRecords.DataBind();
             btnSave.Visible = false;
-
-            if (strError != string.Empty)
-            {
-                btnSave.Visible = false;
-
-                lblResult.Text = mensajes("errorsave");
-                lblResult.ForeColor = System.Drawing.Color.Red;
-                throw new System.InvalidOperationException(strError);
-            }
-            }
         }
 
         private string addZero(int secint)

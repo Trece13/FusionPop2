@@ -1252,6 +1252,7 @@ namespace whusap.WebPages.Migration
             divBtnGuardarAnnouce.Visible = false;
             divLabelAnnounce.Visible = false;
             divBotonesAnnounce.Visible = false;
+            divTableAnnounce.Visible = false;
         }
 
         protected void btnGuardar_Click_located(object sender, EventArgs e)
