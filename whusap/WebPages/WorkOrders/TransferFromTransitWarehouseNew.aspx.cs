@@ -136,6 +136,7 @@ namespace whusap.WebPages.WorkOrders
                     Obj131.PONO = DTPalletID.Rows[0]["PONO"].ToString();
                     Obj131.SEQN = DTPalletID.Rows[0]["SEQN"].ToString();
                     Obj131.LOT = DTPalletID.Rows[0]["LOT"].ToString();
+                    Obj131.CLOT = DTPalletID.Rows[0]["LOT"].ToString();
                     Obj131.CWAR = DTPalletID.Rows[0]["CWAR"].ToString();
                     Obj131.QTYS = DTPalletID.Rows[0]["QTYS"].ToString();
                     Obj131.UNIT = DTPalletID.Rows[0]["UNIT"].ToString();

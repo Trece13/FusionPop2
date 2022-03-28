@@ -1384,7 +1384,7 @@ namespace whusa.Interfases
             paramList.Add(":T$PAID", MyObj.PAID);
             paramList.Add(":T$PONO", MyObj.PONO);
             paramList.Add(":T$SEQN", MyObj.SEQN);
-            paramList.Add(":T$CLOT", MyObj.LOT == "" ? " " : MyObj.LOT);
+            paramList.Add(":T$CLOT", MyObj.CLOT == "" ? " " : MyObj.CLOT);
             paramList.Add(":T$CWAR", MyObj.CWAR);
             paramList.Add(":T$QTYS", MyObj.QTYS);
             paramList.Add(":T$UNIT", MyObj.UNIT);
