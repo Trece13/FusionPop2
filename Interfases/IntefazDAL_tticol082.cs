@@ -297,5 +297,10 @@ namespace whusa.Interfases
         {
             return dal.ExistPrio182(MyObj082);
         }
+
+        public DataTable ConsultarPalletIDTticol082PIckAbreb(string PickID)
+        {
+            return dal.ConsultarPalletIDTticol082PIckAbreb(PickID);
+        }
     }
 }

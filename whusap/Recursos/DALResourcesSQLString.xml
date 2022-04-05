@@ -226,7 +226,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
       </operationName>
-<!--Actualizar Masivamente Estado y cantidad Inicio-->
+      <!--Actualizar Masivamente Estado y cantidad Inicio-->
       <operationName name="UpdateMasiveStatus">
         <stringSQL>
           UPDATE
@@ -571,7 +571,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
       </operationName>
-<!--Actualizar Masivamente Estado y cantidad Inicio-->
+      <!--Actualizar Masivamente Estado y cantidad Inicio-->
       <operationName name="UpdateMasiveStatus">
         <stringSQL>
           UPDATE
@@ -592,7 +592,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where   t$cwat = '[:T$CWAT]'
         </stringSQL>
       </operationName>
-<!--Actualizar Masivamente Estado y cantidad Fin-->
+      <!--Actualizar Masivamente Estado y cantidad Fin-->
       <operationName name="getMachine">
         <stringSQL>
           SELECT tisfc001.T$PDNO,tisfc010.T$MCNO as MCNO FROM baan.ttisfc001140 tisfc001
@@ -2377,22 +2377,22 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE col082.T$STAT IN (2,7)
           )
           WHERE TRIM(PICK) like TRIM('[:PICK]%')
-          <!--SELECT distinct ticol082.T$CWAR CWAR,TBL,mcs003.T$TYPW TYPW,QTYA,ticol082.T$PAID PAID,ticol082.T$QTYT QTYT,ticol082.T$UNIT UNIT,ITEM,cibd001.t$dsca DSCA,ticol082.T$ORNO ORNO,ticol082.T$PICK PICK,
-          ticol082.T$MCNO MCNO, tirou002.T$DSCA DSCAM, ticol082.T$STAT STAT, ticol082.T$PRIO PRIO,ticol082.T$ADVS ADVS, ticol082.T$PONO PONO, ticol082.T$ORNO,stap FROM(
-          select 'whcol131' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol131140 col131
-          UNION
-          select 'whcol130' AS  TBL,T$PAID AS PAID,T$QTYC AS QTYT, T$UNIC AS UNIT,T$ITEM AS ITEM, t$stat as stap,T$QTYA AS QTYA from BAAN.twhcol130140 col130
-          UNION
-          select 'ticol022' AS  TBL, T022.T$SQNB AS PAID,T022.T$QTDL AS QTYT,T022.T$CUNI AS UNIT, T022.T$MITM AS ITEM,T022.t$dele as stap, T222.T$ACQT AS QTYA from BAAN.tticol022140 T022
-          LEFT JOIN BAAN.tticol222140 T222 ON  T222.T$SQNB = T022.T$SQNB
-          UNION
-          select 'ticol042' AS  TBL, T042.T$SQNB AS PAID,T042.T$QTDL AS QTYT,T042.T$CUNI AS UNIT, T042.T$MITM AS ITEM,T042.t$dele as stap, T242.T$ACQT AS QTYA from BAAN.tticol042140 T042
-          LEFT JOIN BAAN.tticol242140 T242 ON  T242.T$SQNB = T042.T$SQNB
-          )ConGlobal INNER JOIN BAAN.tticol082140 ticol082 ON ConGlobal.PAID = ticol082.t$PAID AND ticol082.T$STAT =  2 INNER JOIN BAAN.ttirou002140 tirou002 ON tirou002.T$MCNO = ticol082.T$MCNO
-          LEFT JOIN BAAN.ttcibd001140 cibd001 on  cibd001.T$ITEM =  ConGlobal.ITEM
-          LEFT JOIN baan.ttcmcs003140 mcs003 ON mcs003.T$CWAR = ticol082.T$CWAR
-          WHERE TRIM(ConGlobal.PAID) = TRIM('[:PAID]')
-          WHERE TRIM(ticol082.T$PICK) = TRIM('[:PICK]')-->
+        </stringSQL>
+      </operationName>
+            <operationName name="ConsultarPalletIDTticol082PIckAbreb">
+        <stringSQL>
+          SELECT distinct CWAR, TBL, TYPW, QTYA, PAID, QTYT, UNIT, ITEM, DSCA, ORNO, PICK, MCNO, DSCAM, STAT, PRIO, ADVS, PONO, STAP
+          FROM(
+          select 'ticol082' AS  TBL,col082.T$PAID AS PAID,col082.T$QTYT AS QTYT, col082.T$UNIT AS UNIT,col082.T$ITEM AS ITEM, col082.T$STAT AS STAP,
+          col082.T$QTYT AS QTYA, col082.T$ORNO AS ORNO, col082.T$PONO AS PONO, col082.T$ADVS AS ADVS, col082.T$PRIO AS PRIO, col082.T$STAT AS STAT,
+          rou002.T$DSCA AS DSCAM, col082.T$MCNO AS MCNO, col082.T$PICK AS PICK, cibd001.t$dsca AS DSCA, mcs003.T$TYPW AS TYPW, col082.T$CWAR AS CWAR
+          from {0}.tticol082{1} col082
+          LEFT JOIN {0}.ttcibd001{1} cibd001 ON cibd001.T$ITEM =  col082.T$ITEM
+          LEFT JOIN {0}.ttcmcs003{1} mcs003 ON mcs003.T$CWAR = col082.T$CWAR
+          LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
+          WHERE col082.T$STAT IN (4) and trim(col082.T$OORG) = '22' 
+          )
+          WHERE TRIM(PICK) like TRIM('[:PICK]%')
         </stringSQL>
       </operationName>
       <operationName name="ConsultarPalletID_x_Picking">
@@ -2632,6 +2632,23 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         </stringSQL>
       </operationName>
     </Module>
+    <Module name="twhcol030">
+      <operationName name="InsertTwhcol030">
+        <stringSQL>
+          INSERT INTO BAAN.TWHCOL030140 VALUES('[:T$CWOR]',
+          '[:T$CWDE]',
+          '[:T$ITEM]',
+          '[:T$QTDL]',
+          '[:T$CUNI]',
+          '[:T$RCNO]',
+          SYSDATE+5/24,
+          '0',
+          '[:T$USER]',
+          '0',
+          '0')
+        </stringSQL>
+      </operationName>
+    </Module>
     <Module name="twhinh220">
       <operationName name="TraerOrdenesCustomer">
         <stringSQL>
@@ -2790,7 +2807,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ConsultarTipoWarehouse">
         <stringSQL>
-          SELECT T$TYPW TYPW from {0}.ttcmcs003{1} WHERE T$CWAR = '[:T$CWAR]'
+          SELECT T$TYPW TYPW,T$DSCA AS DSCA from {0}.ttcmcs003{1} WHERE T$CWAR = '[:T$CWAR]'
         </stringSQL>
       </operationName>
       <operationName name="ConsultarRegistroTransferir">
@@ -2839,7 +2856,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE   TRIM(T$PAID) = TRIM('[:T$PAID]')
           AND     TRIM(T$EVNT) = 'VA Dock 11'
         </stringSQL>
-      </operationName>      
+      </operationName>
       <operationName name="InsertarTransferencia">
         <stringSQL>
           INSERT INTO {0}.twhcol020{1}(T$CLOT, T$SQNB, T$MITM, T$DSCA, T$CWOR, T$LOOR, T$CWDE, T$LODE, T$QTDL, T$CUNI, T$RCNO, T$DATE, T$MESS, T$USER, T$REFCNTD, T$REFCNTU)
@@ -3059,7 +3076,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where TRIM(T$PAID) = TRIM('[:T$PAID]')
         </stringSQL>
       </operationName>
-<!-- Actualizar masivamente para limpiar datos de bodega a cargar Inicio -->
+      <!-- Actualizar masivamente para limpiar datos de bodega a cargar Inicio -->
       <operationName name="UpdateMasiveStaQty">
         <stringSQL>
           update {0}.twhcol131{1}
@@ -3425,9 +3442,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT
           WHCOL131.T$OORG OORG, WHCOL131.T$ORNO ORNO, WHCOL131.T$ITEM ITEM, TCIBD001.T$DSCA DSCA, WHCOL131.T$PAID PAID, WHCOL131.T$PONO PONO, WHCOL131.T$SEQN SEQN,
           WHCOL131.T$CLOT CLOT, WHCOL131.T$CWAR CWAR, WHCOL131.T$QTYS QTYS, WHCOL131.T$UNIC UNIT,
-          CASE WHEN WHCOL131.T$QTYC = WHCOL131.T$QTYA 
-            THEN CASE WHEN WHCOL131.T$QTYC = 0 THEN WHCOL131.T$QTYA END
-            ELSE CASE WHEN WHCOL131.T$QTYA = 0 THEN WHCOL131.T$QTYC END
+          CASE WHEN WHCOL131.T$QTYC = WHCOL131.T$QTYA
+          THEN CASE WHEN WHCOL131.T$QTYC = 0 THEN WHCOL131.T$QTYA END
+          ELSE CASE WHEN WHCOL131.T$QTYA = 0 THEN WHCOL131.T$QTYC END
           END QTYC, WHCOL131.T$UNIC UNIC,
           WHCOL131.T$DATE-5/24 T$DATE, WHCOL131.T$CONF CONF, WHCOL131.T$RCNO RCNO, WHCOL131.T$DATR DATR, WHCOL131.T$LOCA LOCA, WHCOL131.T$DATL DATL,
           WHCOL131.T$PICK PICK, WHCOL131.T$DATK DATK, WHCOL131.T$PRNT PRNT, WHCOL131.T$DATP DATP, WHCOL131.T$NPRT NPRT, WHCOL131.T$LOGN LOGN,
@@ -3933,9 +3950,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ValidarItemOnly">
         <stringSQL>
-          select distinct TCIBD001.T$ITEM AS ITEM, TCIBD001.T$KLTC AS KLTC, TCIBD001.T$CUNI AS CUNI from {0}.twhinh210{1} whinh210
-          inner join {0}.TTCIBD001{1} TCIBD001 on whinh210.T$ITEM = TCIBD001.T$ITEM
-          where TRIM(UPPER(TCIBD001.T$ITEM)) = TRIM(UPPER('[:T$ITEM]'))
+          SELECT DISTINCT TCIBD001.T$ITEM AS ITEM, TCIBD001.T$KLTC AS KLTC, TCIBD001.T$CUNI AS CUNI,TCIBD001.T$DSCA AS DSCA, WHINH210.T$QSTR AS QSTR FROM {0}.TWHINH210{1} WHINH210
+          INNER JOIN {0}.TTCIBD001{1} TCIBD001 ON WHINH210.T$ITEM = TCIBD001.T$ITEM
+          WHERE TRIM(UPPER(TCIBD001.T$ITEM)) = TRIM(UPPER('[:T$ITEM]'))
         </stringSQL>
       </operationName>
       <operationName name="ValidarLote">
