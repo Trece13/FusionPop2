@@ -1669,5 +1669,31 @@ namespace whusa.DAL
             }
             return retrotno;
         }
+
+        public DataTable ConsultarPalletIDTticol082PIckAbreb(string PickID)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                //paramList.Add(":PAID", PalletID);
+                paramList.Add(":PICK", PalletID);
+
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
     }
 }
