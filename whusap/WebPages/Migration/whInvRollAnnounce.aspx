@@ -91,6 +91,18 @@
                 </span>
             </td>
         </tr>
+        <tr runat="server" id="trLot" visible="false">
+            <td style="text-align:left;">
+                <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">
+                <b style="font-size: 11px;">
+                    <asp:Label runat="server" ID="lblLot" /></b></span>
+            </td>
+            <td style="width: 250px; padding:5px;">
+                <span style="vertical-align: middle;">
+                    <asp:TextBox runat="server" ID="txtLot" CssClass="TextBoxBig" ClientIDMode="Static" ReadOnly="true" />
+                </span>
+            </td>
+        </tr>
         <tr runat="server" id="trQuantity" visible="false">
             <td style="text-align:left;">
                 <span style="vertical-align: middle" /><span class="style2" style="vertical-align: middle;">

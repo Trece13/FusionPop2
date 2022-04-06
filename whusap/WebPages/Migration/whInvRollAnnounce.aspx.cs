@@ -113,10 +113,12 @@ namespace whusap.WebPages.Migration
                     if (consultaItem.Rows.Count > 0)
                     {
                         txtItem.Text = item.Trim().ToUpper();
+                        txtLot.Text = loteitem.Trim().ToUpper();
                         txtQuantity.Text = qtdl.Trim();
                         hdfCWAR.Value = consultaItem.Rows[0]["CWAR"].ToString();
                         hdfPONO.Value = consultaItem.Rows[0]["PONO"].ToString();
                         trItem.Visible = true;
+                        trLot.Visible = true;
                         trQuantity.Visible = true;
                         txtWorkOrder.ReadOnly = true;
                         txtRollNumber.ReadOnly = true;
@@ -126,6 +128,7 @@ namespace whusap.WebPages.Migration
                     else 
                     {
                         trItem.Visible = false;
+                        trLot.Visible = false;
                         trQuantity.Visible = false;
                         txtWorkOrder.ReadOnly = false;
                         txtRollNumber.ReadOnly = false;
@@ -203,6 +206,7 @@ namespace whusap.WebPages.Migration
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjupdate");
                     trItem.Visible = false;
+                    trLot.Visible = false;
                     trQuantity.Visible = false;
                     txtWorkOrder.ReadOnly = false;
                     txtRollNumber.ReadOnly = false;
@@ -236,6 +240,7 @@ namespace whusap.WebPages.Migration
                     lblError.Text = String.Empty;
                     lblConfirm.Text = mensajes("msjsave");
                     trItem.Visible = false;
+                    trLot.Visible = false;
                     trQuantity.Visible = false;
                     txtWorkOrder.ReadOnly = false;
                     txtRollNumber.ReadOnly = false;
@@ -262,6 +267,7 @@ namespace whusap.WebPages.Migration
             lblWorkOrder.Text = _textoLabels.readStatement(formName, _idioma, "lblWorkOrder");
             btnConsultar.Text = _textoLabels.readStatement(formName, _idioma, "btnConsultar");
             lblItem.Text = _textoLabels.readStatement(formName, _idioma, "lblItem");
+            lblLot.Text = _textoLabels.readStatement(formName, _idioma, "lblLot");
             lblQuantity.Text = _textoLabels.readStatement(formName, _idioma, "lblQuantity");
             btnRegister.Text = _textoLabels.readStatement(formName, _idioma, "btnRegister");
         }

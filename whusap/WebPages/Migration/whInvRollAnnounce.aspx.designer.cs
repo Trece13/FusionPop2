@@ -76,6 +76,33 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.TextBox txtItem;
         
         /// <summary>
+        /// trLot control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trLot;
+        
+        /// <summary>
+        /// lblLot control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLot;
+        
+        /// <summary>
+        /// txtLot control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLot;
+        
+        /// <summary>
         /// trQuantity control.
         /// </summary>
         /// <remarks>

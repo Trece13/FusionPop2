@@ -2259,6 +2259,11 @@
             Item:
           </stringMessage>
         </label>
+        <label name="lblLot">
+          <stringMessage>
+            Lot:
+          </stringMessage>
+        </label>
         <label name="lblQuantity">
           <stringMessage>
             Quantity
@@ -2289,6 +2294,11 @@
         <label name="lblItem">
           <stringMessage>
             Articulo:
+          </stringMessage>
+        </label>
+        <label name="lblLot">
+          <stringMessage>
+            Lote:
           </stringMessage>
         </label>
         <label name="lblQuantity">
