@@ -1087,7 +1087,7 @@
         </operationName>
         <operationName name="itemnotexists">
           <stringMessage>
-            Item not exists
+            Item dosen't exists
           </stringMessage>
         </operationName>
         <operationName name="usernotwarehouse">
@@ -1144,7 +1144,7 @@
         </operationName>
         <operationName name="itemnotexists">
           <stringMessage>
-            Item not exists
+            Item doesn't exists
           </stringMessage>
         </operationName>
         <operationName name="Lotnotexists">
@@ -5160,6 +5160,11 @@
 
     <Module name="Picking.aspx">
       <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Open Picking
+          </stringMessage>
+        </operationName>
         <operationName name="ThePalletNotAllowedHavingTheSameWarehouse">
           <stringMessage>
             The pallet not allowed, not having the same warehouse   
@@ -5217,6 +5222,11 @@
         </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
+        <operationName name="encabezado">
+          <stringMessage>
+            Open Picking
+          </stringMessage>
+        </operationName>
         <operationName name="ThepalletIDNotContaenthesameItem">
           <stringMessage>
             The pallet ID not contain the same Item

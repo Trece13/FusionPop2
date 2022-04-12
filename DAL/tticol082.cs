@@ -1679,7 +1679,7 @@ namespace whusa.DAL
             {
                 paramList = new Dictionary<string, object>();
                 //paramList.Add(":PAID", PalletID);
-                paramList.Add(":PICK", PalletID);
+                paramList.Add(":PICK", PickID);
 
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
