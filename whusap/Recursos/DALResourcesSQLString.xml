@@ -7501,7 +7501,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.tticol022{1} ticol022 ON ticol022.T$PDNO = tisfc001.T$PDNO
           INNER JOIN {0}.twhwmd200{1} wmd200 on wmd200.t$cwar = tisfc001.T$CWAR
           LEFT JOIN {0}.ttcibd003{1} tcibd003 ON tcibd003.T$BASU = tcibd001.T$CUNI AND tcibd003.T$ITEM = tcibd001.T$ITEM AND tcibd003.T$UNIT = 'PLT'
-          WHERE ticol022.T$PRO1 = 2 AND ticol022.T$DELE NOT IN (1, 13) AND ticol022.T$PDNO = '[:T$PDNO]' AND ticol022.T$SQNB = '[:T$SQNB]'
+          --WHERE ticol022.T$PRO1 = 2 AND ticol022.T$DELE NOT IN (1, 13) AND ticol022.T$PDNO = '[:T$PDNO]' AND ticol022.T$SQNB = '[:T$SQNB]'
+          WHERE ticol022.T$PRO1 = 2 AND ticol022.T$DELE= 2 AND ticol022.T$PDNO = '[:T$PDNO]' AND ticol022.T$SQNB = '[:T$SQNB]'
         </stringSQL>
       </operationName>
       <operationName name="findBySqnbPdnoNoClot">
