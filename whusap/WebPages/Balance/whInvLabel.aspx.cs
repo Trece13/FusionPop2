@@ -219,6 +219,20 @@ namespace whusap.WebPages.Balance
             else if (_tipoFormulario.ToUpper() == "ROLLTAGS") {
                 Prosess();
             }
+
+            StringBuilder script = new StringBuilder();
+            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
+            {
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStockME.aspx', ");
+
+            }
+            else
+            {
+                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', ");
+            }
+            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
+            script.Append("ventanaImp.moveTo(30, 0);");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
 
         private void Prosess()
@@ -569,24 +583,6 @@ namespace whusap.WebPages.Balance
                 Session["Winder"] = RollWinder;
             }
             Session["Pallet"] = reg["SECUENCIA"].ToString();
-
-            StringBuilder script = new StringBuilder();
-            if (HttpContext.Current.Session["navigator"].ToString() == "EDG")
-            {
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStockME.aspx', ");
-
-            }
-            else
-            {
-                script.Append("ventanaImp = window.open('../Labels/RedesingLabels/2RollStock.aspx', ");
-            }
-            script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-            script.Append("ventanaImp.moveTo(30, 0);");
-            //script.Append("ventanaImp = window.open('../Labels/whInvLabel.aspx', ");
-            //script.Append("'ventanaImp', 'menubar=0,resizable=0,width=580,height=450');");
-            //script.Append("ventanaImp.moveTo(30, 0);");
-            ////script.Append("setTimeout (ventanaImp.close(), 20000);");
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
         }
 
         #endregion
