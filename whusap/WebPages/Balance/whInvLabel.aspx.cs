@@ -61,7 +61,6 @@ namespace whusap.WebPages.Balance
             base.InitializeCulture();
             if (!IsPostBack)
             {
-                WebConfigurationManager.AppSettings["enterSend"] = null;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
                 if (formName.Contains('?'))
                 {
@@ -189,11 +188,42 @@ namespace whusap.WebPages.Balance
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
+            DateTime localDate = DateTime.Now;
             //JC 270921 Evitar que se confunda el programa y no haga el proceso correcto de acuerdo al formulario
             if (Request.QueryString["tipoFormulario"] != null)
             {
                 _tipoFormulario = Request.QueryString["tipoFormulario"].ToString().ToUpper();
             }
+            if (_tipoFormulario.ToUpper() == "GRINDER")
+            {
+
+                if (Session["TimeClick"] != null)
+                {
+                    DateTime lastDateClick = (DateTime)Session["TimeClick"];
+                    TimeSpan Tans = localDate - lastDateClick;
+                    double segTrans = Tans.TotalSeconds;
+                    if (segTrans > 20)
+                    {
+
+                        Session["TimeClick"] = DateTime.Now;
+                        Prosess();
+                    }
+
+                }
+                else
+                {
+                    Session["TimeClick"] = DateTime.Now;
+                    Prosess();
+                }
+            }
+            else if (_tipoFormulario.ToUpper() == "ROLLTAGS") {
+                Prosess();
+            }
+        }
+
+        private void Prosess()
+        {
+
             lblError.Visible = true;
             decimal cantidad;
             string cantidads;
@@ -217,7 +247,6 @@ namespace whusap.WebPages.Balance
                 }
                 else
                 {
-                    WebConfigurationManager.AppSettings["enterSend"] = null;
                     lblError.Text = mensajes("Pleaseselectrollwinder");
                     lblError.ForeColor = System.Drawing.Color.Red;
                     return;
@@ -233,7 +262,6 @@ namespace whusap.WebPages.Balance
             if (!convert || cantidad < 1)
             {
                 lblError.Visible = true;
-                WebConfigurationManager.AppSettings["enterSend"] = null;
                 lblError.Text = mensajes("quantitymust");
                 lblError.ForeColor = System.Drawing.Color.Red;
                 return;
@@ -245,7 +273,6 @@ namespace whusap.WebPages.Balance
 
             if (resultado.Rows.Count < 1)
             {
-                WebConfigurationManager.AppSettings["enterSend"] = null;
                 lblError.Visible = true;
                 lblError.Text = String.Concat(mensajes("noitemsfound"), obj.pdno.Trim());
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -254,7 +281,6 @@ namespace whusap.WebPages.Balance
 
             if (Convert.ToDecimal(resultado.Rows[0]["maxr"].ToString()) < Convert.ToDecimal(cantidads))
             {
-                WebConfigurationManager.AppSettings["enterSend"] = null;
                 lblError.Visible = true;
                 lblError.Text = "Roll weight cannot be higher than " + Convert.ToDecimal(resultado.Rows[0]["maxr"].ToString()) + " Kg";
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -269,7 +295,6 @@ namespace whusap.WebPages.Balance
 
             if (validaTiempoGuardado.Rows.Count > 0)
             {
-                WebConfigurationManager.AppSettings["enterSend"] = null;
                 lblError.Visible = true;
                 lblError.Text = String.Format(mensajes("rollannounced"), tiempo);
                 lblError.ForeColor = System.Drawing.Color.Red;
@@ -406,7 +431,7 @@ namespace whusap.WebPages.Balance
             }
 
             int retorno = 0;
-            if (_tipoFormulario.ToUpper() == "GRINDER" && WebConfigurationManager.AppSettings["enterSend"] == null)
+            if (_tipoFormulario.ToUpper() == "GRINDER")
             {
                 idal042.insertarRegistro(ref parameterCollection042, ref strError);
                 idal042.insertarRegistroTticon242(ref parameterCollection042, ref strError);
@@ -431,7 +456,6 @@ namespace whusap.WebPages.Balance
 
             if (!string.IsNullOrEmpty(strError))
             {
-                WebConfigurationManager.AppSettings["enterSend"] = null;
                 lblError.Text = strError;
                 return;
             }
@@ -484,7 +508,7 @@ namespace whusap.WebPages.Balance
                 //}
             }
 
-            if (confirmacionautomaticagrinder == "true" && _tipoFormulario.ToUpper() == "GRINDER" && WebConfigurationManager.AppSettings["enterSend"] == null)
+            if (confirmacionautomaticagrinder == "true" && _tipoFormulario.ToUpper() == "GRINDER")
             {
                 //if (retorno > 0)
                 //{
@@ -512,7 +536,7 @@ namespace whusap.WebPages.Balance
 
             txtQuantity.Text = string.Empty;
 
-            if (_tipoFormulario.ToUpper() == "GRINDER" && WebConfigurationManager.AppSettings["enterSend"] == null)
+            if (_tipoFormulario.ToUpper() == "GRINDER")
             {
                 resultado = idal042.invLabel_registroImprimir_Param(ref obj042, ref strError);
             }
@@ -536,7 +560,7 @@ namespace whusap.WebPages.Balance
             Session["Date"] = reg["FECHA"].ToString();
             Session["Machine"] = idal022.getMachine(reg["ORDEN"].ToString(), obj022.mitm, ref strError);
             Session["Operator"] = reg["USUARIO"].ToString();
-            if (_tipoFormulario.ToUpper() == "GRINDER" && WebConfigurationManager.AppSettings["enterSend"] == null)
+            if (_tipoFormulario.ToUpper() == "GRINDER")
             {
                 Session["Winder"] = "";
             }
@@ -563,11 +587,6 @@ namespace whusap.WebPages.Balance
             //script.Append("ventanaImp.moveTo(30, 0);");
             ////script.Append("setTimeout (ventanaImp.close(), 20000);");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "printTag", script.ToString(), true);
-
-            if (WebConfigurationManager.AppSettings["enterSend"] == null)
-            {
-                WebConfigurationManager.AppSettings["enterSend"] = "true";
-            }
         }
 
         #endregion
