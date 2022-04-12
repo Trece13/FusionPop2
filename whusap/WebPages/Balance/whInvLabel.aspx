@@ -126,7 +126,7 @@
         <div style="padding: 1%; height: 35px; vertical-align: middle; width: 50%; text-align: center;"
             align="center">
             <asp:Button ID="btnSend" runat="server" Text="" CssClass="ButtonsSendSave" Width="107px"
-                Height="24px" OnClick="btnSend_Click" TabIndex="6" />
+                Height="24px" OnClick="btnSend_Click"  UseSubmitBehavior="false" OnClientClick="this.disabled='true'; this.value='Please Wait... '; " TabIndex="6" />
             <span style="vertical-align: middle" />
         </div>
     </div>
