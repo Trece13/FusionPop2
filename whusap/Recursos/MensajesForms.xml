@@ -3787,7 +3787,7 @@
       <Idiom name="INGLES">
         <operationName name="encabezado">
           <stringMessage>
-            Print Tags
+            Print roll and grinder Tag
           </stringMessage>
         </operationName>
         <operationName name="machinelist">
