@@ -21,6 +21,7 @@ namespace whusap.WebPages.Balance
     public partial class whInvLabel : System.Web.UI.Page
     {
         #region Propiedades
+        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         protected static InterfazDAL_tticol011 idal = new InterfazDAL_tticol011();
         protected static InterfazDAL_tticol020 idal020 = new InterfazDAL_tticol020();
         protected static InterfazDAL_tticol022 idal022 = new InterfazDAL_tticol022();
@@ -45,6 +46,7 @@ namespace whusap.WebPages.Balance
         private static string globalMessages = "GlobalMessages";
         public static string _tipoFormulario;
         public static string _idioma;
+        private static string _operator;
         public static string anuncioautomatico;
         public static string confirmacionautomatica;
         public static string confirmacionautomaticagrinder;
@@ -66,7 +68,7 @@ namespace whusap.WebPages.Balance
                 {
                     formName = formName.Split('?')[0];
                 }
-
+                _operator = Session["user"].ToString();
                 formName += "?Regrind";
 
                 if (Session["ddlIdioma"] != null)
@@ -156,6 +158,19 @@ namespace whusap.WebPages.Balance
                 {
                     lblInfo.Text = lblInfo.Text + "The process of confirm announcement grinder is active.";
                 }
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = _operator,
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                _idalttccol301.insertarRegistro(ref datalog, ref strError);
             }
 
 
