@@ -641,8 +641,9 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           select t$sqnb from
           (
-          select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-R%'
-          order by T$DATE desc
+          --select t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-R%'
+          --order by T$DATE desc
+          select count(*) t$sqnb from {0}.tticol042{1} where T$SQNB LIKE '%[:T$SQNB]-R%'
           )
           where rownum = 1
         </stringSQL>

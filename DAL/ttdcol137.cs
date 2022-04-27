@@ -119,6 +119,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
 
             catch (Exception ex)
@@ -146,6 +148,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             catch (Exception ex)
             {
@@ -172,6 +176,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
 
             catch (Exception ex)
@@ -199,6 +205,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             catch (Exception ex)
             {
@@ -323,6 +331,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             catch (Exception ex)
             {
@@ -351,6 +361,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             catch (Exception ex)
             {
@@ -377,6 +389,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             catch (Exception ex)
             {
@@ -403,6 +417,8 @@ namespace whusa.DAL
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                //JC 0412200 Enviar al log el query de lo cambiado para seguimiento
+                log.escribirError("Sentencia SQL: " + strSentencia, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             catch (Exception ex)
             {

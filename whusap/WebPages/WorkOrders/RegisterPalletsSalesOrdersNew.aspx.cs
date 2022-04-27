@@ -105,7 +105,7 @@ namespace whusap.WebPages.WorkOrders
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString(),
-                    come = "",
+                    come = "Change Info Pallet",
                     refcntd = 0,
                     refcntu = 0
                 };

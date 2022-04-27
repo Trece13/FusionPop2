@@ -315,7 +315,7 @@ namespace whusap.WebPages.Balance
                 lblError.ForeColor = System.Drawing.Color.Red;
                 return;
             }
-
+            
             var mbrl = idal022.consultambrl(ref strError).Rows[0]["MBRL"];//ConfigurationManager.AppSettings["MBRL"].ToString();
 
             var tiempo = Convert.ToInt32(mbrl);
@@ -370,8 +370,10 @@ namespace whusap.WebPages.Balance
                 DataTable dt022 = Itticol022.SecuenciaMayorR(obj022.pdno.Trim().ToUpperInvariant());
                 if (dt022.Rows.Count > 0)
                 {
-                    string paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper();
-                    sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-R") + 2)) + 1;
+                    //JC 260422 Corregir la busqueda de la secuencia para evitar problemas con la organización por fecha
+                    //string paid = dt022.Rows[0]["T$SQNB"].ToString().Trim().ToUpper();
+                    //sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-R") + 2)) + 1;
+                    sec = Convert.ToInt32(dt022.Rows[0]["T$SQNB"].ToString().Trim()) + 1;
                     obj022.sqnb = obj022.pdno + "-R" + sec;
                 }
                 else
