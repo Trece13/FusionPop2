@@ -621,7 +621,42 @@ namespace whusap.WebPages.Migration
 
                                         txtpono.Value = item["PONO"].ToString();
                                         //hdfQuantity.Value = _consultaInformacionPedido.Rows[0]["CANTIDAD"].ToString();
-                                        hdfQuantity.Value = Pqty.ToString();
+                                        DataTable DtSum100 = new InterfazDAL_tticol100().SearchQtdlSumPaid100(txtPalletId.Text.Trim().ToUpper());
+                                        DataTable DtSum101 = new InterfazDAL_tticol101().SearchQtdlSumPaid101(txtPalletId.Text.Trim().ToUpper());
+                                        DataTable DtSum022 = new InterfazDAL_tticol022().SearchQtdlSumPaid022(txtPalletId.Text.Trim().ToUpper());
+
+                                        decimal Sum100 = 0;
+                                        decimal Sum101 = 0;
+                                        decimal Sum022 = 0;
+
+
+
+                                        if (DtSum100.Rows.Count > 0)
+                                        {
+                                            if (DtSum100.Rows[0]["SUM"].ToString() != string.Empty)
+                                            {
+                                                Sum100 = Convert.ToDecimal(DtSum100.Rows[0]["SUM"].ToString());
+                                            }
+                                        }
+
+                                        if (DtSum101.Rows.Count > 0)
+                                        {
+                                            if (DtSum101.Rows[0]["SUM"].ToString() != string.Empty)
+                                            {
+                                                Sum101 = Convert.ToDecimal(DtSum101.Rows[0]["SUM"].ToString());
+                                            }
+                                        }
+
+                                        if (DtSum022.Rows.Count > 0)
+                                        {
+                                            if (DtSum022.Rows[0]["SUM"].ToString() != string.Empty)
+                                            {
+                                                Sum022 = Convert.ToDecimal(DtSum022.Rows[0]["SUM"].ToString());
+                                            }
+
+                                        }
+
+                                        hdfQuantity.Value = (Sum022 - (Sum100 + Sum101)).ToString();
 
 
                                         var rstp = "10";
@@ -1927,6 +1962,8 @@ namespace whusap.WebPages.Migration
                 var paid = txtPalletId.Text.Trim().ToUpper();
                 var cwar = dropDownWarehouse.Text.Trim();
 
+                
+
                 if (item == string.Empty)
                 {
                     lblErrorDelivered.Text = "The Item can't be empty";
@@ -1956,6 +1993,12 @@ namespace whusap.WebPages.Migration
                     lblErrorDelivered.Text = "The quantity can't be empty";
                     return;
                 }
+
+                //if ((Sum022 - (Sum100 + Sum101)) > Convert.ToDecimal(qtyr.ToString()))
+                //{
+                //    lblErrorDelivered.Text = "The quantity can't be greater than " + (Sum022 - (Sum100 + Sum101));
+                //    return;
+                //}
 
                 string strMaxSequence = getSequence(paid.ToUpper().Trim(), "Q");
                 string separator = "-";
