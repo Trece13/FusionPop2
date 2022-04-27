@@ -749,5 +749,26 @@ namespace whusa.DAL
             }
             return retorno;
         }
+
+        public DataTable SearchQtdlSumPaid100(string PAID)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$PAID", PAID.Trim().ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+            }
+            catch (Exception ex)
+            {
+                log.escribirError(Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+
+            return consulta;
+        }
     }
 }

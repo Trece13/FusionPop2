@@ -551,6 +551,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>-->
     </Module>
     <Module name="tticol022">
+      <operationName name="SearchQtdlSumPaid022">
+        <stringSQL>
+          SELECT SUM(T$QTDL) SUM FROM BAAN.TTICOL022140 where T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="UpdateMasive">
         <stringSQL>
           UPDATE {0}.tticol022{1}
@@ -2381,7 +2386,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(PICK) like TRIM('[:PICK]%')
         </stringSQL>
       </operationName>
-            <operationName name="ConsultarPalletIDTticol082PIckAbreb">
+      <operationName name="ConsultarPalletIDTticol082PIckAbreb">
         <stringSQL>
           SELECT distinct CWAR, TBL, TYPW, QTYA, PAID, QTYT, UNIT, ITEM, DSCA, ORNO, PICK, MCNO, DSCAM, STAT, PRIO, ADVS, PONO, STAP
           FROM(
@@ -2392,7 +2397,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           LEFT JOIN {0}.ttcibd001{1} cibd001 ON cibd001.T$ITEM =  col082.T$ITEM
           LEFT JOIN {0}.ttcmcs003{1} mcs003 ON mcs003.T$CWAR = col082.T$CWAR
           LEFT JOIN {0}.ttirou002{1} rou002 ON rou002.T$MCNO = col082.T$MCNO
-          WHERE col082.T$STAT IN (4) and trim(col082.T$OORG) = '22' 
+          WHERE col082.T$STAT IN (4) and trim(col082.T$OORG) = '22'
           )
           WHERE TRIM(PICK) like TRIM('[:PICK]%')
         </stringSQL>
@@ -6523,6 +6528,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol100">
+      <operationName name="SearchQtdlSumPaid100">
+        <stringSQL>
+          SELECT SUM(T$QTYR) SUM FROM BAAN.TTICOL100140 WHERE T$PAID = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="updatetwhcol131">
         <stringSQL>
           UPDATE  {0}.twhcol131{1} SET T$CWAA  = '[:T$SWAR]'  ,T$LOAA ='[:ACLO]'   WHERE T$PAID = '[:T$SQNB]'
@@ -6702,6 +6712,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="tticol101">
+      <operationName name="SearchQtdlSumPaid101">
+        <stringSQL>
+          SELECT SUM(T$QTYR) SUM FROM BAAN.TTICOL101140 WHERE T$PAID = '[:T$PAID]'
+        </stringSQL>
+      </operationName>
       <operationName name="findRecordByPdnoClotSeqn">
         <stringSQL>
           SELECT

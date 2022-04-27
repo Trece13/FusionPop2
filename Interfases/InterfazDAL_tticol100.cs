@@ -268,5 +268,10 @@ namespace whusa.Interfases
                 throw new Exception(strError += "\nPila: " + ex.Message);
             }
         }
+
+        public  DataTable SearchQtdlSumPaid100(string PAID)
+        {
+            return dal.SearchQtdlSumPaid100(PAID);
+        }
     }
 }
