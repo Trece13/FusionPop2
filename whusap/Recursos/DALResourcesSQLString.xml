@@ -6572,8 +6572,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="insertRecord">
         <stringSQL>
-          INSERT INTO {0}.tticol100{1} (T$PDNO,T$PONO,T$SEQN,T$MCNO,T$SHIF,T$ITEM,T$QTYR,T$CDIS,T$REJT,T$CLOT,T$OBSE,T$LOGR,T$DATR,T$DISP,T$LOGN,T$DATE,T$PROC,T$MESS,T$REFCNTD,T$REFCNTU,T$CWAR,T$PAID)
-          VALUES('[:T$PDNO]', '[:T$PONO]', '[:T$SEQN]', '[:T$MCNO]', '[:T$SHIF]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , '[:T$QTYR]', '[:T$CDIS]', '[:T$REJT]', '[:T$CLOT]', '[:T$OBSE]', '[:T$LOGR]', sysdate+5/24, '[:T$DISP]', '[:T$LOGN]', sysdate+5/24, '[:T$PROC]', '[:T$MESS]', '[:T$REFCNTD]', '[:T$REFCNTU]','[:T$CWAR]','[:T$PAID]')
+          INSERT INTO {0}.tticol100{1} (T$PDNO,T$PONO,T$SEQN,T$MCNO,T$SHIF,T$ITEM,T$QTYR,T$CDIS,T$REJT,T$CLOT,T$OBSE,T$LOGR,T$DATR,T$DISP,T$LOGN,T$DATE,T$PROC,T$MESS,T$REFCNTD,T$REFCNTU,T$CWAR,T$PAID,T$PAIO)
+          VALUES('[:T$PDNO]', '[:T$PONO]', '[:T$SEQN]', '[:T$MCNO]', '[:T$SHIF]', {0}.F_ITEM_POP(TRIM('[:T$ITEM]')) , '[:T$QTYR]', '[:T$CDIS]', '[:T$REJT]', '[:T$CLOT]', '[:T$OBSE]', '[:T$LOGR]', sysdate+5/24, '[:T$DISP]', '[:T$LOGN]', sysdate+5/24, '[:T$PROC]', '[:T$MESS]', '[:T$REFCNTD]', '[:T$REFCNTU]','[:T$CWAR]','[:T$PAID]','[:T$PAIO]')
         </stringSQL>
       </operationName>
       <operationName name="SelectRegister">
