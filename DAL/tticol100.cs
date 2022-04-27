@@ -63,6 +63,7 @@ namespace whusa.DAL
                 paramList.Add(":T$REFCNTU", parametro.refcntu);
                 paramList.Add(":T$CWAR", parametro.cwar);
                 paramList.Add(":T$PAID", parametro.paid);
+                paramList.Add(":T$PAIO", parametro.paio);
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
 

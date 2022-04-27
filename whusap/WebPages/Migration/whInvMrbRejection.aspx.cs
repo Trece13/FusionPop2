@@ -1170,6 +1170,7 @@ namespace whusap.WebPages.Migration
                             dsca = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper(),
                             cwar = cwar,
                             paid = paid,
+                            paio = paid,
                             dele = "3"
                         };
                         Objdata100 = data100;
@@ -2001,7 +2002,7 @@ namespace whusap.WebPages.Migration
                     var validateSaveTicol222 = _idaltticol022.InsertarRegistroTicol222(ref MyObj022, ref strError);
                     //JC 090821 Ajustar la cantidad del pallet cuando esta en estado delivered y lo rechazan
                     var qt = Convert.ToDecimal(qtyr);
-                    var actualizacol022 = _idaltticol022.Actualizartticol022Cant(ref paid, ref qt);
+                    //var actualizacol022 = _idaltticol022.Actualizartticol022Cant(ref paid, ref qt);
                 }
                 else if (Session["TableNameSave"].ToString() == "whcol131")
                 {
@@ -2101,7 +2102,9 @@ namespace whusap.WebPages.Migration
                     mess = "0",
                     cwar = cwar,
                     //paid = paid
-                    paid = newPallet
+                    paid = newPallet,
+                    paio = paid,
+
 
                 };
 

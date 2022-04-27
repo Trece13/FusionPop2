@@ -221,6 +221,7 @@ namespace whusap.WebPages.Migration
                         dsca = _validarOrden.Rows[i]["DSCA"].ToString().Trim().ToUpper(),
                         cwar = _validarOrden.Rows[i]["CWAR"].ToString().Trim().ToUpper(),
                         paid = txtWorkOrder.Text.Trim().ToUpper(),
+                        paio = txtWorkOrder.Text.Trim().ToUpper()
                     };
                     Objdata100 = data100;
 
