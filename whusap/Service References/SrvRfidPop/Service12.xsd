@@ -251,7 +251,6 @@
         <xs:element minOccurs="0" name="EVNT" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="LOGN" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="PROC" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PRINT" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -299,6 +298,28 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Insert133ss">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PAID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="RFID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="EVNT" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ORNO" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="DATE" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="LOGN" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PROC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="REFCNTD" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="REFCNTU" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Insert133ssResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Insert133ssResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="678fd4cb-7a3f-4a9a-a470-21c78a4bd48f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="4aa1829e-3e9b-41f8-9616-df9aab67122c" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,14 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://gpbfpr.grupophoenix.com/rfidpop/Service1.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="045f6d67-c5ab-44e9-8b32-edb6c827c9bf" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="657edead-710b-460b-a3c2-b0c321e00b9d" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?disco" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="c68d3b6d-7d8f-40e5-9755-2afd174fadae" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?wsdl" />
-    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="24416710-1109-44c3-8d1d-23e17ca74708" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?xsd=xsd1" />
-    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="f8824c81-9955-40ec-a2c5-3d7e6aef7057" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?xsd=xsd0" />
+    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="f6daec9e-bdb3-45f4-93fc-c0825f5c56c5" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?xsd=xsd2" />
+    <MetadataFile FileName="Service1.disco" MetadataType="Disco" ID="5f641bfd-9683-4c41-8763-8ef5e96a3ffc" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?disco" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="74ba893a-2328-4e0f-8735-5d2c81233bfc" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?wsdl" />
+    <MetadataFile FileName="Service11.xsd" MetadataType="Schema" ID="9302def5-9112-4ba9-9e48-a9128bafef27" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service12.xsd" MetadataType="Schema" ID="1eab9d8d-aea5-4f35-9a7d-07c09f4011e0" SourceId="1" SourceUrl="https://gpbfpr.grupophoenix.com/RfidPop/Service1.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
