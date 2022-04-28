@@ -553,7 +553,16 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol022">
       <operationName name="SearchQtdlSumPaid022">
         <stringSQL>
-          SELECT SUM(T$QTDL) SUM FROM BAAN.TTICOL022140 where T$SQNB = '[:T$SQNB]'
+          --SELECT SUM(T$QTDL) SUM FROM {0}.TTICOL022{1} where T$SQNB = '[:T$SQNB]'
+          SELECT SUM(QTY) SUM
+          FROM
+          (
+          SELECT SUM(T$QTDL) QTY FROM {0}.TTICOL022{1} where T$SQNB = '[:T$SQNB]'
+          UNION
+          SELECT SUM(T$QTDL) QTY FROM {0}.TTICOL042{1} where T$SQNB = '[:T$SQNB]'
+          UNION
+          SELECT SUM(T$QTYC) QTY FROM {0}.TWHCOL131{1} where T$PAID = '[:T$SQNB]'
+          )
         </stringSQL>
       </operationName>
       <operationName name="UpdateMasive">
@@ -6530,7 +6539,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol100">
       <operationName name="SearchQtdlSumPaid100">
         <stringSQL>
-          SELECT SUM(T$QTYR) SUM FROM BAAN.TTICOL100140 WHERE T$PAID = '[:T$PAID]'
+          SELECT SUM(T$QTYR) SUM FROM {0}.TTICOL100{1} WHERE T$PAIO = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="updatetwhcol131">
@@ -6714,7 +6723,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
     <Module name="tticol101">
       <operationName name="SearchQtdlSumPaid101">
         <stringSQL>
-          SELECT SUM(T$QTYR) SUM FROM BAAN.TTICOL101140 WHERE T$PAID = '[:T$PAID]'
+          SELECT SUM(T$QTYR) SUM FROM {0}.TTICOL101{1} WHERE T$PAIO = '[:T$PAID]'
         </stringSQL>
       </operationName>
       <operationName name="findRecordByPdnoClotSeqn">
