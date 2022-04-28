@@ -494,7 +494,6 @@ namespace whusap.WebPages.Migration
 
         protected void getData(string retorno)
         {
-
             if (retorno == "Announced")
             {
                 divBotonesAnnounce.Visible = false;
@@ -673,6 +672,7 @@ namespace whusap.WebPages.Migration
                                             slReason.Items.Insert(slReason.Items.Count, itemRazon);
                                         }
 
+                                        slRejectType.Items.Clear();
                                         ListItem supplied = new ListItem() { Text = "Supplied", Value = "1" };
                                         ListItem intern = new ListItem() { Text = "Internal", Value = "2" };
                                         ListItem retur = new ListItem() { Text = "Return", Value = "3" };
