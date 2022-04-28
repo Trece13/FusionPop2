@@ -27,6 +27,9 @@ namespace whusap.SrvRfidPop {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectWhcol133Oss", ReplyAction="http://tempuri.org/IService1/SelectWhcol133OssResponse")]
         System.Data.DataTable SelectWhcol133Oss(string RFID, string EVNT);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectWhcol133ORfidss", ReplyAction="http://tempuri.org/IService1/SelectWhcol133ORfidssResponse")]
+        System.Data.DataTable SelectWhcol133ORfidss(string RFID, string EVNT);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectWhcol131Ora", ReplyAction="http://tempuri.org/IService1/SelectWhcol131OraResponse")]
         System.Data.DataTable SelectWhcol131Ora(string PAID);
         
@@ -102,6 +105,10 @@ namespace whusap.SrvRfidPop {
         
         public System.Data.DataTable SelectWhcol133Oss(string RFID, string EVNT) {
             return base.Channel.SelectWhcol133Oss(RFID, EVNT);
+        }
+        
+        public System.Data.DataTable SelectWhcol133ORfidss(string RFID, string EVNT) {
+            return base.Channel.SelectWhcol133ORfidss(RFID, EVNT);
         }
         
         public System.Data.DataTable SelectWhcol131Ora(string PAID) {

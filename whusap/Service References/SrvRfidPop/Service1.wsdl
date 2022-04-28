@@ -56,6 +56,12 @@
   <wsdl:message name="IService1_SelectWhcol133Oss_OutputMessage">
     <wsdl:part name="parameters" element="tns:SelectWhcol133OssResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SelectWhcol133ORfidss_InputMessage">
+    <wsdl:part name="parameters" element="tns:SelectWhcol133ORfidss" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SelectWhcol133ORfidss_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SelectWhcol133ORfidssResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_SelectWhcol131Ora_InputMessage">
     <wsdl:part name="parameters" element="tns:SelectWhcol131Ora" />
   </wsdl:message>
@@ -139,6 +145,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectWhcol133Oss" message="tns:IService1_SelectWhcol133Oss_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectWhcol133OssResponse" message="tns:IService1_SelectWhcol133Oss_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SelectWhcol133ORfidss">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectWhcol133ORfidss" message="tns:IService1_SelectWhcol133ORfidss_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectWhcol133ORfidssResponse" message="tns:IService1_SelectWhcol133ORfidss_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="SelectWhcol131Ora">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SelectWhcol131Ora" message="tns:IService1_SelectWhcol131Ora_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SelectWhcol131OraResponse" message="tns:IService1_SelectWhcol131Ora_OutputMessage" />
@@ -216,6 +226,15 @@
     </wsdl:operation>
     <wsdl:operation name="SelectWhcol133Oss">
       <soap:operation soapAction="http://tempuri.org/IService1/SelectWhcol133Oss" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectWhcol133ORfidss">
+      <soap:operation soapAction="http://tempuri.org/IService1/SelectWhcol133ORfidss" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
