@@ -179,8 +179,8 @@ namespace whusap.WebPages.InvReceipts
 
             if (dt130.Rows[0]["T$PAID"].ToString().ToUpper().Contains("-RT"))
             {
-                bl1 = ServiceRfidPop.Insert133ss(dt130.Rows[0]["T$PAID"].ToString(), HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11", dt130.Rows[0]["T$ORNO"].ToString(), "", _operator, "1", "", "");
-                DataTable dt133ss = ServiceRfidPop.SelectWhcol133Oss(HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11");            
+                bl1 = ServiceRfidPop.Insert133ss(dt130.Rows[0]["T$PAID"].ToString(), HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11", dt130.Rows[0]["T$ORNO"].ToString(), "", _operator, "Si", "", "");
+                DataTable dt133ss = ServiceRfidPop.SelectWhcol133ORfidss(HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11");            
                 bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133ss.Rows[0]["RFID"].ToString(), dt133ss.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
                 bl3 = twhcol130DAL.Actfirecol130140(MyObj131);                
             }
