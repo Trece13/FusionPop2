@@ -224,7 +224,7 @@
             let ValidarPalletIDSucces = function (r) {
                 let myList = JSON.parse(r.d)
                 if (myList.length > 0) {
-                    if (myList[0]["T$FIRE"].toString().trim() == '2') {
+                    if (myList[0]["T$FIRE"].toString().trim() == '2' || myList[0]["T$PAID"].toString().trim().substring(myList[0]["T$PAID"].toString().trim().indexOf('-') + 1).includes("RT")) {
 
                         if (myList[0]["T$RFID"].toString().trim() == "1") {
                             txItem.value = myList[0]["T$ITEM"].toString().trim();
