@@ -49,13 +49,16 @@ namespace whusap.SrvRfidPop {
         void InitProcRfid022(string RFID, string EVNT, string LOGN, string PROC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/InitProcRfid025", ReplyAction="http://tempuri.org/IService1/InitProcRfid025Response")]
-        void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC, string PRINT);
+        void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Updtwhcol133RfidSS", ReplyAction="http://tempuri.org/IService1/Updtwhcol133RfidSSResponse")]
         bool Updtwhcol133RfidSS(string PAID, string RFID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SelectWhcol133OPaidAssing", ReplyAction="http://tempuri.org/IService1/SelectWhcol133OPaidAssingResponse")]
         System.Data.DataTable SelectWhcol133OPaidAssing(string RFID, string EVNT);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/Insert133ss", ReplyAction="http://tempuri.org/IService1/Insert133ssResponse")]
+        bool Insert133ss(string PAID, string RFID, string EVNT, string ORNO, string DATE, string LOGN, string PROC, string REFCNTD, string REFCNTU);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -129,8 +132,8 @@ namespace whusap.SrvRfidPop {
             base.Channel.InitProcRfid022(RFID, EVNT, LOGN, PROC);
         }
         
-        public void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC, string PRINT) {
-            base.Channel.InitProcRfid025(RFID, EVNT, LOGN, PROC, PRINT);
+        public void InitProcRfid025(string RFID, string EVNT, string LOGN, string PROC) {
+            base.Channel.InitProcRfid025(RFID, EVNT, LOGN, PROC);
         }
         
         public bool Updtwhcol133RfidSS(string PAID, string RFID) {
@@ -139,6 +142,10 @@ namespace whusap.SrvRfidPop {
         
         public System.Data.DataTable SelectWhcol133OPaidAssing(string RFID, string EVNT) {
             return base.Channel.SelectWhcol133OPaidAssing(RFID, EVNT);
+        }
+        
+        public bool Insert133ss(string PAID, string RFID, string EVNT, string ORNO, string DATE, string LOGN, string PROC, string REFCNTD, string REFCNTU) {
+            return base.Channel.Insert133ss(PAID, RFID, EVNT, ORNO, DATE, LOGN, PROC, REFCNTD, REFCNTU);
         }
     }
 }
