@@ -120,6 +120,7 @@ namespace whusap.WebPages.InvReceipts
             twhcol130.PAID = PAID;
             DataTable dt130 = twhcol130DAL.VerificarPalletID130(twhcol130);
             HttpContext.Current.Session["dt130"] = dt130;
+            HttpContext.Current.Session["ObjTwhcol130"] = twhcol130;
             return JsonConvert.SerializeObject(dt130);
         }
 
@@ -127,10 +128,18 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static string ValidarRfis(string RFID)
         {
+            Ent_twhcol130 twhcol130 = (Ent_twhcol130)HttpContext.Current.Session["ObjTwhcol130"];
+            HttpContext.Current.Session["RFID"] = RFID.Trim().ToUpper();
+
             string strMsg = string.Empty;
-            //JC 020322 Validar si el web service esta arriba
-            string ws = WebConfigurationManager.AppSettings["ws"].ToString();  
-            var respuesta = WebSiteIsAvailable(ws);
+            ////JC 020322 Validar si el web service esta arriba
+            //string ws = WebConfigurationManager.AppSettings["ws"].ToString();
+            if (twhcol130.PAID.ToUpper().Trim().Contains("-RT"))
+            {
+                return "";
+            }
+
+            var respuesta = true;
             if (respuesta != false)
             {
                 DataTable dt133WhitPaid = ServiceRfidPop.SelectWhcol133OPaidAssing(RFID, "VA Dock");
@@ -158,14 +167,30 @@ namespace whusap.WebPages.InvReceipts
         [WebMethod]
         public static bool Save()
         {
-            DataTable dt133 = (DataTable)HttpContext.Current.Session["dt133"];
             DataTable dt130 = (DataTable)HttpContext.Current.Session["dt130"];
+            DataTable dt133 = (DataTable)HttpContext.Current.Session["dt133"];
             Ent_twhcol130 MyObj131 = new Ent_twhcol130();
             MyObj131.FIRE = "1";
             MyObj131.PAID = dt130.Rows[0]["T$PAID"].ToString();
-            bool bl2 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(),dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
-            bool bl1 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
-            bool bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
+
+            bool bl1 = false;
+            bool bl2 = false;
+            bool bl3 = false;
+
+            if (dt130.Rows[0]["T$PAID"].ToString().ToUpper().Contains("-RT"))
+            {
+                bl1 = ServiceRfidPop.Insert133ss(dt130.Rows[0]["T$PAID"].ToString(), HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11", dt130.Rows[0]["T$ORNO"].ToString(), "", _operator, "1", "", "");
+                DataTable dt133ss = ServiceRfidPop.SelectWhcol133Oss(HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11");            
+                bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133ss.Rows[0]["RFID"].ToString(), dt133ss.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
+                bl3 = twhcol130DAL.Actfirecol130140(MyObj131);                
+            }
+            else
+            {
+                bl1 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
+                bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
+                bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
+            }
+            
             if (bl1 && bl2)
             {
                 return true;
