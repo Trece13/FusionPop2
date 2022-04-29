@@ -662,6 +662,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           where rownum = 1
         </stringSQL>
       </operationName>
+      <operationName name="ValidarConsecutivoR">
+        <stringSQL>
+          select t$sqnb from {0}.tticol042{1} where T$SQNB = '[:T$SQNB]'
+        </stringSQL>
+      </operationName>
       <operationName name="ActualizarUbicacionTicol222">
         <stringSQL>
           UPDATE {0}.tticol222{1} SET T$CWAF = '[:T$CWAT]', T$ACLO = '[:T$ACLO]' WHERE T$SQNB = '[:T$SQNB]'

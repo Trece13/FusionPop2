@@ -383,6 +383,18 @@ namespace whusap.WebPages.Balance
                     //sec = Convert.ToInt16(paid.Substring(paid.IndexOf("-R") + 2)) + 1;
                     sec = Convert.ToInt32(dt022.Rows[0]["T$SQNB"].ToString().Trim()) + 1;
                     obj022.sqnb = obj022.pdno + "-R" + sec;
+                    //JC 290422 Validar si ese registro existe, si es así incrementar la secuencia en 1
+                    int cons_pal = 0;
+                    while (cons_pal < 10)
+                    {
+                        obj022.sqnb = obj022.pdno + "-R" + sec;
+                        var cons_pallet = Itticol022.ValidarConsecutivoR(obj022.sqnb.Trim().ToUpperInvariant());
+                        if (cons_pallet.Rows.Count > 0)
+                        {
+                            sec = sec + 1;
+                        }
+                        cons_pal++;
+                    }
                 }
                 else
                 {
