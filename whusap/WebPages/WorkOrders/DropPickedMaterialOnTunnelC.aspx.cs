@@ -94,7 +94,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
         {
             Ent_tticol082 MyObj = new Ent_tticol082();
             //DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082(PickID);
-            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082PIckAbreb(PickID.Substring(0, PickID.IndexOf('-') - 1));
+            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082PIckAbreb(PickID.Substring(0, PickID.IndexOf('-')));
             string ObjRetorno = string.Empty;
             bool ActalizacionExitosa = false;
             //JC 230721 Adicionar la generación del número aleatorio para asignarsela al pick
@@ -116,10 +116,12 @@ namespace whusap.WebPages.WorkOrders.NewPages
 
             if (ExistenciaData(TableItticol082))
             {
+                List<string> paids = new List<string>();
                 foreach (DataRow myObjDt in TableItticol082.Rows)
                 {
                     MyObj.TBL = myObjDt["TBL"].ToString();
                     MyObj.PAID = myObjDt["PAID"].ToString();
+                    paids.Add(myObjDt["PAID"].ToString());
                     MyObj.QTYT = myObjDt["QTYT"].ToString();
                     MyObj.UNIT = myObjDt["UNIT"].ToString();
                     MyObj.ITEM = myObjDt["ITEM"].ToString();
@@ -134,6 +136,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.CWAR = myObjDt["CWAR"].ToString();
                     MyObj.STAT = myObjDt["STAT"].ToString();
                     MyObj.MCNO = HttpContext.Current.Session["MCNO"].ToString();
+                    MyObj.PAIDS = paids;
                     STATPICK = MyObj.STAT;
                     //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                     //MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + myObjDt["PICK"] + "&code=Code128&dpi=96";
@@ -142,7 +145,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     if (MyObj.TYPW == "21")
                     {
                         //MyObj.STAT  = MyObj.STAT.Trim() == "2" ? "7" : "4";
-                        MyObj.STAT  = "8";
+                        MyObj.STAT = "8";
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                         //JC 260721 Cambio para que cuando ya tenga el número aleatorio no le genere uno adicional
                         if (STATPICK == "7")
@@ -155,20 +158,23 @@ namespace whusap.WebPages.WorkOrders.NewPages
                         else
                         {
                             MyObj.RAND = ramdomNumStr;
-                            Itticol082.Actualizartticol082(MyObj);
+                            MyObj.STAT = "4";
+                            MyObj.STATW = "8";
+                            Itticol082.Actualizartticol082Pick(MyObj);
                             //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                             MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
                             MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
                         }
-                     }
+                    }
                     //JC 270721 Quitar restricion de consignacion 
                     //else if (HttpContext.Current.Session["consigment"].ToString().ToLower() == "false" && MyObj.TYPW == "1")
                     else if (MyObj.TYPW == "1")
                     {
                         MyObj.STAT = "4";
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+                        MyObj.STATW = "8";
                         MyObj.RAND = ramdomNumStr;
-                        Itticol082.Actualizartticol082(MyObj);
+                        Itticol082.Actualizartticol082Pick(MyObj);
                         //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
                         MyObj.PICK = MyObj.PICK + "-" + ramdomNumStr;
                         MyObj.PICK_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PICK + "&code=Code128&dpi=96";
@@ -184,7 +190,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     MyObj.Error = false;
                     MyObj.TipeMsgJs = "alert";
                     MyObj.SuccessMsg = Thedropprocessissuccess;
-                    ObjRetorno = JsonConvert.SerializeObject(MyObj);                    
+                    ObjRetorno = JsonConvert.SerializeObject(MyObj);
                 }
                 else
                 {
@@ -212,7 +218,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
             HttpContext.Current.Session["consigment"] = consigment.ToString();
             Ent_tticol082 MyObj = new Ent_tticol082();
             //DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082(PickID);
-            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082PIckAbreb(PickID.Substring(0,PickID.IndexOf('-')-1));
+            DataTable TableItticol082 = Itticol082.ConsultarPalletIDTticol082PIckAbreb(PickID.Substring(0, PickID.IndexOf('-')));
             string ObjRetorno = string.Empty;
             bool PalletAsignado = false;
 
@@ -263,7 +269,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                     //if (MyObj.TYPW != "21")
                     //{
                     //    noConsigmentPallets = true;
-                        
+
                     //}
                     //else if (MyObj.TYPW != "1")
                     //{
