@@ -1201,6 +1201,29 @@ namespace whusa.DAL
             return consulta;
         }
 
+        //JC 290422 Validar si el pallet existe
+        public DataTable ValidarConsecutivoR(string id)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = "";
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$SQNB", id);
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                if (consulta.Rows.Count < 1) { strError = "Not item's found for Sequence "; }
+            }
+            catch (Exception ex)
+            {
+                strError = "Error to the search sequence [tticol022]. Try again or contact your administrator \n " + strSentencia;
+                log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
+
         public DataTable getloca(string cwar, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

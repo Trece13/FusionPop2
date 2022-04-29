@@ -573,6 +573,22 @@ namespace whusa.Interfases
             }
         }
 
+        //JC 290422 Validar si el pallet existe
+        public DataTable ValidarConsecutivoR(string id)
+        {
+            string strError = "";
+            DataTable retorno;
+            try
+            {
+                retorno = dal.ValidarConsecutivoR(id);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(strError += "\nPila: " + ex.Message);
+            }
+        }
+
         public DataTable getloca(string cwar, ref string strError)
         {
             try
