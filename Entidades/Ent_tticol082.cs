@@ -81,5 +81,9 @@ namespace whusa.Entidades
         public string RAND { get; set; }
         //JC 041021 Actualizar solo el pick que estan cambiando
         public string OLDP { get; set; }
+
+        public string STATW { get; set; }
+
+        public List<string> PAIDS { get; set; }
     }
 }

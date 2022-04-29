@@ -302,5 +302,11 @@ namespace whusa.Interfases
         {
             return dal.ConsultarPalletIDTticol082PIckAbreb(PickID);
         }
+
+        public bool Actualizartticol082Pick(Ent_tticol082 MyObj)
+        {
+
+            return dal.Actualizartticol082Pick(MyObj);
+        }
     }
 }
