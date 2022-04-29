@@ -161,42 +161,49 @@ namespace whusap.WebPages.InvReceipts
             {
                 strMsg = mensajes("Rfidnotalive");
                 return strMsg;
-            }            
+            }
         }
 
         [WebMethod]
         public static bool Save()
         {
-            DataTable dt130 = (DataTable)HttpContext.Current.Session["dt130"];
-            DataTable dt133 = (DataTable)HttpContext.Current.Session["dt133"];
-            Ent_twhcol130 MyObj131 = new Ent_twhcol130();
-            MyObj131.FIRE = "1";
-            MyObj131.PAID = dt130.Rows[0]["T$PAID"].ToString();
-
-            bool bl1 = false;
-            bool bl2 = false;
-            bool bl3 = false;
-
-            if (dt130.Rows[0]["T$PAID"].ToString().ToUpper().Contains("-RT"))
+            try
             {
-                bl1 = ServiceRfidPop.Insert133ss(dt130.Rows[0]["T$PAID"].ToString(), HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11", dt130.Rows[0]["T$ORNO"].ToString(), "", _operator, "Si", "", "");
-                DataTable dt133ss = ServiceRfidPop.SelectWhcol133ORfidss(HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11");            
-                bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133ss.Rows[0]["RFID"].ToString(), dt133ss.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
-                bl3 = twhcol130DAL.Actfirecol130140(MyObj131);                
-            }
-            else
-            {
-                bl1 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
-                bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
-                bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
-            }
+
+                DataTable dt130 = (DataTable)HttpContext.Current.Session["dt130"];
+                DataTable dt133 = (DataTable)HttpContext.Current.Session["dt133"];
+                Ent_twhcol130 MyObj131 = new Ent_twhcol130();
+                MyObj131.FIRE = "1";
+                MyObj131.PAID = dt130.Rows[0]["T$PAID"].ToString();
+
+                bool bl1 = false;
+                bool bl2 = false;
+                bool bl3 = false;
+
+                if (dt130.Rows[0]["T$PAID"].ToString().ToUpper().Contains("-RT"))
+                {
+                    bl1 = ServiceRfidPop.Insert133ss(dt130.Rows[0]["T$PAID"].ToString(), HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11", dt130.Rows[0]["T$ORNO"].ToString(), "", _operator, "Si", "", "");
+                    DataTable dt133ss = ServiceRfidPop.SelectWhcol133ORfidss(HttpContext.Current.Session["RFID"].ToString(), "VA Dock 11");            
+                    bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133ss.Rows[0]["RFID"].ToString(), dt133ss.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
+                    bl3 = twhcol130DAL.Actfirecol130140(MyObj131);                
+                }
+                else
+                {
+                    bl1 = ServiceRfidPop.Update133ss(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), "VA Dock", dt130.Rows[0]["T$ORNO"].ToString(), "", "", "", "", "");
+                    bl2 = ServiceRfidPop.ProWhcol133Ora(dt130.Rows[0]["T$PAID"].ToString(), dt133.Rows[0]["RFID"].ToString(), dt133.Rows[0]["EVNT"].ToString(), dt130.Rows[0]["T$ORNO"].ToString(), _operator, "Si");
+                    bl3 = twhcol130DAL.Actfirecol130140(MyObj131);
+                }
             
-            if (bl1 && bl2)
-            {
-                return true;
+                if (bl1 && bl2)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
+            catch(Exception ex){
                 return false;
             }
         }

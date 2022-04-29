@@ -47,5 +47,13 @@ namespace whusa
         public string CWAA { get; set; }
         public string LOAA { get; set; }
         public double QTYA { get; set; }
+
+        public string DSCA { get; set; }
+
+        public string Row { get; set; }
+
+        public bool Error { get; set; }
+
+        public string MsgError { get; set; }
     }
 }
