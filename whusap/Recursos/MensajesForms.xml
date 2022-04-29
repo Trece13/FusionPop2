@@ -586,6 +586,11 @@
             Please select a roll winder.
           </stringMessage>
         </operationName>
+        <operationName name="Pleasewait">
+          <stringMessage>
+            Please wait 20 seconds to generate a new label.
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="blanknumber">
@@ -641,6 +646,11 @@
         <operationName name="Pleaseselectrollwinder">
           <stringMessage>
             Por favor seleccione una bobina.
+          </stringMessage>
+        </operationName>
+        <operationName name="Pleasewait">
+          <stringMessage>
+            Por favor espere 20 segundos para generar una etiqueta nueva.
           </stringMessage>
         </operationName>
       </Idiom>

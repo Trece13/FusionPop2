@@ -40,6 +40,7 @@ namespace whusap.WebPages.Balance
         private static bool _procesConfirmacionAutomaticagrinder = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticagrinder"].ToString());
         ////Manejo idioma
         public string Pleaseselectrollwinder = string.Empty;
+        public string Pleasewait = string.Empty;
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string formName;
@@ -230,6 +231,14 @@ namespace whusap.WebPages.Balance
 
                         Session["TimeClick"] = DateTime.Now;
                         Prosess();
+                    }
+                    //JC 290422 Evitar que se genere una etiqueta en blanco sino ha pasado el tiempo de espera
+                    else
+                    {
+                        lblError.Visible = true;
+                        lblError.Text = mensajes("Pleasewait");
+                        lblError.ForeColor = System.Drawing.Color.Red;
+                        return;
                     }
 
                 }
@@ -642,6 +651,8 @@ namespace whusap.WebPages.Balance
         {
 
             Pleaseselectrollwinder = _textoLabels.readStatement("whInvLabel.aspx", _idioma, "Pleaseselectrollwinder");
+            //JC 290422 Enviar Mensaje de tiempo de espera
+            Pleasewait = _textoLabels.readStatement("whInvLabel.aspx", _idioma, "Pleasewait");
             lblMachine.Text = _textoLabels.readStatement("whInvLabel.aspx", _idioma, "lblMachine");
             lblWeight.Text = _textoLabels.readStatement("whInvLabel.aspx", _idioma, "lblWeight");
             lblRollWinder.Text = _textoLabels.readStatement("whInvLabel.aspx", _idioma, "lblRollWinder");

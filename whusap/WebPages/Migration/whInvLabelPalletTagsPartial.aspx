@@ -111,7 +111,7 @@
                         <asp:Label Text="" runat="server" ID="lblError" Style="color: red; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
                         <asp:Label Text="" runat="server" ID="lblConfirm" Style="color: green; font-size: 15px; font-weight: bold;" ClientIDMode="Static" />
                         <hr />
-                        <asp:Button Text="" runat="server" ID="btnConsultar" OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
+                        <asp:Button Text="" runat="server" ID="btnConsultar" UseSubmitBehavior="false" OnClientClick="this.disabled='true'; this.value='Please Wait 20 seconds... '; " OnClick="btnConsultar_Click" CssClass="ButtonsSendSave" Style="height: 30px;" />
                     </td>
                 </tr>
             </table>
