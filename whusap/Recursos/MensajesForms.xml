@@ -3787,7 +3787,12 @@
       <Idiom name="INGLES">
         <operationName name="encabezado">
           <stringMessage>
-            Print roll and grinder Tag
+            Print Rolls
+          </stringMessage>
+        </operationName>
+        <operationName name="encabezadoregrind">
+          <stringMessage>
+            Print Regrind by Grinder 
           </stringMessage>
         </operationName>
         <operationName name="machinelist">
@@ -3829,7 +3834,12 @@
       <Idiom name="ESPAÑOL">
         <operationName name="encabezado">
           <stringMessage>
-            Imprimir etiquetas
+            Imprimir etiquetas rollos
+          </stringMessage>
+        </operationName>
+        <operationName name="encabezadoregrind">
+          <stringMessage>
+            Imprimir etiquetas Retal de Molinos
           </stringMessage>
         </operationName>
         <operationName name="machinelist">

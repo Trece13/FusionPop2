@@ -136,8 +136,16 @@ namespace whusap.WebPages.Balance
                 }
 
                 if (Session["IsPreviousPage"] == null) { Session.Clear(); }
-
-                string strTitulo = mensajes("encabezado");
+                //JC 04292022 Poner el título de acuerdo al formulario
+                string strTitulo = "";
+                if (_tipoFormulario.ToUpper() == "ROLLTAGS")
+                {
+                    strTitulo = mensajes("encabezado");
+                }
+                else
+                {
+                    strTitulo = mensajes("encabezadoregrind");        
+                }
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 control.Text = strTitulo;
                 Page.Form.DefaultButton = btnSend.UniqueID;
