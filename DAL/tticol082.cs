@@ -272,7 +272,7 @@ namespace whusa.DAL
             return retorno;
         }
 
-        public DataTable ConsultaWarehouseTticol082( string plant )
+        public DataTable ConsultaWarehouseTticol082(string plant)
         {
             method = MethodBase.GetCurrentMethod();
             DataTable retorno = new DataTable();
@@ -374,7 +374,7 @@ namespace whusa.DAL
             return retrotno;
         }
 
-        public DataTable ConsultarTticol082PorPlant(string plant,string warehouse,string machine)
+        public DataTable ConsultarTticol082PorPlant(string plant, string warehouse, string machine)
         {
             method = MethodBase.GetCurrentMethod();
             string strError = string.Empty;
@@ -427,7 +427,7 @@ namespace whusa.DAL
             return retrotno;
         }
 
-        public DataTable ConsultarTticol082PorPlantPono(string plant,int prio,string advs)
+        public DataTable ConsultarTticol082PorPlantPono(string plant, int prio, string advs)
         {
             method = MethodBase.GetCurrentMethod();
             string strError = string.Empty;
@@ -644,7 +644,7 @@ namespace whusa.DAL
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
                 return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
             }
-                  
+
             catch (Exception ex)
             {
                 strError = ex.InnerException != null ?
@@ -1218,7 +1218,7 @@ namespace whusa.DAL
 
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
-                retorno =  DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+                retorno = DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
             }
 
             catch (Exception ex)
@@ -1294,7 +1294,7 @@ namespace whusa.DAL
                 paramList = new Dictionary<string, object>();
                 paramList.Add(":PAID", myObj.PAID);
                 paramList.Add(":QTYA", myObj.QTYC);
-                
+
 
 
                 strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
@@ -1698,7 +1698,7 @@ namespace whusa.DAL
 
         public bool Actualizartticol082Pick(Ent_tticol082 MyObj)
         {
-            
+
             method = MethodBase.GetCurrentMethod();
             bool retorno = false;
             string strError = string.Empty;
@@ -1732,8 +1732,8 @@ namespace whusa.DAL
             MyObj.Error = true;
             MyObj.ErrorMsg = strError;
             return retorno;
-        
-        }
+
         }
     }
 }
+
