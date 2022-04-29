@@ -85,7 +85,7 @@
                         <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="LblMachineval">
                         </label>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                         <label class="col-sm-12 col-form-label-lg" for="txCustomer" id="LblMachinedes">
                         </label>
                     </div>
@@ -94,10 +94,18 @@
                     <label class="col-sm-2 col-form-label-lg" for="txCustomer" id="lblQuantity">
                         Pallet(s)
                     </label>
-                    <div class="col-sm-4">
-                        <label class="col-sm-12 col-form-label-lg" id="LblPalletsVal">
+                    <div class="col-sm-5">
+                        <label class="col-sm-12 col-form-label-lg" >
+                            <p id="LblPalletsVal">
+
+                            </p>
                         </label>
                     </div>
+                    <div class="col-sm-4">
+                        <input type="button" class="btn btn-primary btn-lg col-sm-10 " id="btnDropTagPick"
+                            value="Drop Pick ID" onclick="ClickDropTagPick()" />
+                    </div>
+                </div>
                     <%--                <div class="col-sm-3">
                     <label class="col-sm-12 col-form-label-lg" id="LblQuantityUnit">
                     </label>
@@ -113,14 +121,7 @@
                 </div>
             </div>
                 --%>
-                <div class="form-group row" id="divQueryAction">
-                    <div class="col-sm-2">
-                    </div>
-                    <div class="col-sm-4">
-                        <input type="button" class="btn btn-primary btn-lg col-sm-10 " id="btnDropTagPick"
-                            value="Drop Pick ID" onclick="ClickDropTagPick()" />
-                    </div>
-                </div>
+                
             </div>
         </div>
         <div id="LblEtiqueta">
@@ -355,7 +356,11 @@
                 LblPalletsValET.html("");
                 LblPickIdVal.html("");
                 lblMachine.html(MyObj.MCNO);
-                LblPalletsValET.html(MyObj.PAID);
+                let strPAids = "";
+                for (let i = 0; i < MyObj.PAIDS.length; i++) {
+                    strPAids += MyObj.PAIDS[i]+" ";
+                }
+                LblPalletsValET.html(strPAids);
                 $("#Contenido_LblPickIdVal").attr("src", MyObj.PICK_URL);
 
                 if (MyObj.TipeMsgJs == "alert") {
