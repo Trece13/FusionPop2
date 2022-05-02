@@ -895,25 +895,25 @@
             if (document.getElementById('txQty' + i).value.indexOf('.') != -1) {
                 var decimals = document.getElementById('txQty' + i).value.substring(document.getElementById('txQty' + i).value.indexOf('.') + 1).trim()
                 if (decimals != "") {
-                    if (decimals.length > 4) {
+                    if (decimals.length > 10) {
                         document.getElementById('txQty' + i).value = parseFloat(document.getElementById('txQty' + i).value).toFixed(4);
                     }
                 }
             }
-            let sumcount = 0;
+            let sumcount = 0.0000;
             let TtlQty = parseFloat(localStorage.getItem("TtlQty")).toFixed(4);
             let NmrPaids = parseInt(localStorage.getItem("NmrPaids"));
             for (var j = 0 ; j < NmrPaids; j++) {
                 sumcount += parseFloat($("#txQty" + j).val());
             }
-            if (sumcount == TtlQty) {
+            if (parseFloat(sumcount).toFixed(4) == TtlQty) {
                 $("#btnSaver" + i).fadeIn(100);
                 $('#lblError').html("")
             }
             else {
                 for (var j = 0 ; j < NmrPaids; j++) {
                     $("#btnSaver" + j).fadeOut(100);
-                    $('#lblError').html("Total qty paids: " + sumcount);
+                    $('#lblError').html("Total qty paids: " + parseFloat(sumcount).toFixed(4));
                 }
             }
 
