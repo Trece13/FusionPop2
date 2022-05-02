@@ -432,8 +432,10 @@ namespace whusap.WebPages.Balance
             obj022.urpt = " ";
             //obj022.acqt = Convert.ToDouble(obj022.qtdl);
             obj022.acqt = _procesConfirmacionAutomatica ? value : 0;
-            obj022.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
-            obj022.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
+            obj022.cwaf = idal022.WharehouseTisfc001(obj022.pdno, ref strError);
+            obj022.cwat = idal022.WharehouseTisfc001(obj022.pdno, ref strError);
+            //obj022.cwaf = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
+            //obj022.cwat = idal022.WharehouseTisfc001(resultado.Rows[0]["ORDEN"].ToString(), ref strError);
             if (_procesConfirmacionAutomatica)
             {
                 obj022.aclo = idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj022.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
