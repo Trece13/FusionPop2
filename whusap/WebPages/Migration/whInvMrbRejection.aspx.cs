@@ -110,6 +110,18 @@ namespace whusap.WebPages.Migration
                     _idioma = "INGLES";
                 }
 
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = HttpContext.Current.Session["user"].ToString(),
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
                 CargarIdioma();
 
                 String strTitulo = mensajes("encabezado");
@@ -1962,7 +1974,7 @@ namespace whusap.WebPages.Migration
                 var paid = txtPalletId.Text.Trim().ToUpper();
                 var cwar = dropDownWarehouse.Text.Trim();
 
-                
+
 
                 if (item == string.Empty)
                 {
@@ -2231,7 +2243,7 @@ namespace whusap.WebPages.Migration
             }
             if (Session["dataticol100"] != null)
             {
-                
+
                 Ent_tticol100 tticol100S = (Ent_tticol100)Session["dataticol100"];
                 MakeLabelDelivered(tticol100S);
             }

@@ -27,10 +27,22 @@ namespace whusap.WebPages.WorkOrders
         public static string Updtatesuccessfull = mensajes("Updtatesuccessfull");
         public static string Updtatenotsuccessfull = mensajes("Updtatenotsuccessfull");
         public static string Theusertoupdatenotexist = mensajes("Theusertoupdatenotexist");
+        public string strError;
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Ent_ttccol301 data = new Ent_ttccol301()
+            {
+                user = HttpContext.Current.Session["user"].ToString(),
+                come = "",
+                refcntd = 0,
+                refcntu = 0
+            };
 
+            List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+            datalog.Add(data);
+
+            new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
         }
 
         [WebMethod]

@@ -18,10 +18,25 @@ namespace whusap.WebPages.WorkOrders
         public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
         public int CicloPaginacion = 0;
         public int CicloActualizacion = 0;
+        public string strError;
         protected void Page_Load(object sender, EventArgs e)
         {
             CicloPaginacion = Convert.ToInt32(ConfigurationManager.AppSettings["CicloPaginacion"].ToString());
             CicloActualizacion = Convert.ToInt32(ConfigurationManager.AppSettings["CicloActualizacion"].ToString());
+
+
+            Ent_ttccol301 data = new Ent_ttccol301()
+            {
+                user = HttpContext.Current.Session["user"].ToString(),
+                come = "",
+                refcntd = 0,
+                refcntu = 0
+            };
+
+            List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+            datalog.Add(data);
+
+            new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
         }
 
         [WebMethod]

@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Xml;
 using System.Configuration;
+using whusa.Entidades;
+using whusa.Interfases;
 
 namespace whusap.WebPages.WorkOrders
 {
@@ -36,7 +38,7 @@ namespace whusap.WebPages.WorkOrders
         public static string userImpersonation = string.Empty;
         public static string passImpersonation = string.Empty;
         public static string domaImpersonation = string.Empty;
-
+        public string strError;
         //Ruta donde se guardan documentos de calidad-->
         //public static string SaveDocQuality = string.Empty;
         //Url base para armar menu-->
@@ -165,6 +167,19 @@ namespace whusap.WebPages.WorkOrders
                     }
                 }
             }
+
+            Ent_ttccol301 data = new Ent_ttccol301()
+            {
+                user = HttpContext.Current.Session["user"].ToString(),
+                come = "",
+                refcntd = 0,
+                refcntu = 0
+            };
+
+            List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+            datalog.Add(data);
+
+            new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
         }
 
         [WebMethod]
