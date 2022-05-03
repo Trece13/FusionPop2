@@ -170,7 +170,7 @@ namespace whusap.WebPages.InvReceipts
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString(),
-                    come = this.GetType().Name,
+                    come = this.GetType().BaseType.Name,
                     refcntd = 0,
                     refcntu = 0
                 };
