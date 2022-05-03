@@ -25,6 +25,7 @@ namespace whusap.WebPages.InvMaterial
         public static InterfazDAL_twhcol130 Itwhcol130 = new InterfazDAL_twhcol130();
         public static InterfazDAL_tticol022 Itticol022 = new InterfazDAL_tticol022();
         public static InterfazDAL_tticol042 Itticol042 = new InterfazDAL_tticol042();
+        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
         ClientScriptManager scriptBlock;
         Type csType;
         string strError = string.Empty;
@@ -55,6 +56,7 @@ namespace whusap.WebPages.InvMaterial
         protected void Page_Load(object sender, EventArgs e)
         {
             txtWorkOrder.Focus();
+
             Page.Form.DefaultButton = btnSend.UniqueID;
 
             var ctrlName = Request.Params[Page.postEventSourceID];
@@ -94,10 +96,23 @@ namespace whusap.WebPages.InvMaterial
 
                 CargarIdioma();
 
-                String strTitulo = mensajes("encabezado");
-
+                string strTitulo = mensajes("encabezado");
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
+                control.Text = strTitulo;
                 if (control != null) { control.Text = strTitulo; }
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = _operator,
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                _idalttccol301.insertarRegistro(ref datalog, ref strError);
             }
 
             csType = this.GetType();
@@ -114,7 +129,8 @@ namespace whusap.WebPages.InvMaterial
             script.Append("</script>");
 
             scriptBlock.RegisterClientScriptBlock(csType, "button_click", script.ToString(), false);
-            this.txtWorkOrder.Attributes.Add("onkeypress", "button_click(this," + this.btnSend.ClientID + ")");
+            this.txtWorkOrder.Attributes.Add("onkeypress", "button_click(this," + this.btnSend.ClientID + ")");          
+
         }
 
         protected void btnSend_Click(object sender, EventArgs e)

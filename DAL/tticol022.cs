@@ -261,7 +261,9 @@ namespace whusa.DAL
                 consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
                 if (consulta.Rows.Count < 1)
                 {
-                    strError = "Incorrect location, please verify.";
+                    //strError = "Incorrect location, please verify.";
+                    strError = "Error updating data [022]. Try again or contact your administrator";
+                    log.escribirError(strSentencia + Console.Out.NewLine, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
                 }
                 else
                 {
@@ -270,7 +272,8 @@ namespace whusa.DAL
             }
             catch (Exception ex)
             {
-
+                strError = "Error updating data [022]. Try again or contact your administrator";
+                log.escribirError(strSentencia + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
             }
             return resultado;
         }
