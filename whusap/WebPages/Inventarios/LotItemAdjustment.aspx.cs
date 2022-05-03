@@ -87,6 +87,20 @@ namespace whusap.WebPages.Inventarios
 
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 if (control != null) { control.Text = strTitulo; }
+
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = Session["user"].ToString(),
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
             }
         }
 
@@ -481,7 +495,7 @@ namespace whusap.WebPages.Inventarios
                     MyObj131.PSLIP = " ";
                     MyObj131.ALLO = "0";
                     string StrError = string.Empty;
-                    res = _idaltwhcol130.Insertartwhcol131(MyObj131,ref StrError);
+                    res = _idaltwhcol130.Insertartwhcol131(MyObj131, ref StrError);
                     break;
 
             }

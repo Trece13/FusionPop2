@@ -69,6 +69,20 @@ namespace whusap.WebPages.GenericProducts
             {
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 if (control != null) { control.Text = strTitulo; }
+
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = Session["user"].ToString(),
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
             }
 
             csType = this.GetType();

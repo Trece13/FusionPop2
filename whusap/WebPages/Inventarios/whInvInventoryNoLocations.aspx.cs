@@ -91,6 +91,20 @@ namespace whusap.WebPages.Inventarios
                     Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                     control.Text = strTitulo;
                     Page.Form.DefaultButton = btnSave.UniqueID;
+
+
+                    Ent_ttccol301 data = new Ent_ttccol301()
+                    {
+                        user = Session["user"].ToString(),
+                        come = strTitulo,
+                        refcntd = 0,
+                        refcntu = 0
+                    };
+
+                    List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                    datalog.Add(data);
+
+                    new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
                 }
             }
 

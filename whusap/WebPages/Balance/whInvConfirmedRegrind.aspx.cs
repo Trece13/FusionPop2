@@ -33,6 +33,8 @@ namespace whusap.WebPages.Balance
         string strConteo = string.Empty;
 
         //Manejo idioma
+        public string strTitulo = string.Empty;
+        private static string _operator;
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string formName;
@@ -40,6 +42,7 @@ namespace whusap.WebPages.Balance
         public static string _idioma;
         private static bool _ConfirmacionAutomaticaRgr = Convert.ToBoolean(ConfigurationManager.AppSettings["confirmacionAutomaticagrinder"].ToString());
         #endregion
+
 
         #region Eventos
 
@@ -73,7 +76,7 @@ namespace whusap.WebPages.Balance
                 printerDiv.Visible = false;
                 if (Session["IsPreviousPage"] == null) { Session.Clear(); }
 
-                string strTitulo = mensajes("encabezado");
+                strTitulo = mensajes("encabezado");
                 Label control = (Label)Page.Controls[0].FindControl("lblPageTitle");
                 control.Text = strTitulo;
                 Page.Form.DefaultButton = btnQuery.UniqueID;
@@ -82,6 +85,19 @@ namespace whusap.WebPages.Balance
                 {
                     lblIngreso.Text = "1";
                 }
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = Session["user"].ToString(),
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
             }
         }
 
@@ -98,26 +114,26 @@ namespace whusap.WebPages.Balance
             resultado1 = idal042.selectTticol000(ref strError);
             string RGVL = resultado1.Rows[0]["T$RGVL"].ToString();
 
-                if (resultado.Rows.Count < 1)
-                {
-                    lblError.Visible = true;
-                    lblError.Text = mensajes("regrindnotexists");
-                    return;
-                }
+            if (resultado.Rows.Count < 1)
+            {
+                lblError.Visible = true;
+                lblError.Text = mensajes("regrindnotexists");
+                return;
+            }
 
-                if (resultado.Rows[0]["T$DELE"].ToString() != "4" && RGVL != "2")
-                {
-                    lblError.Visible = true;
-                    lblError.Text = mensajes("regrindwrapped");
-                    return;
-                }
+            if (resultado.Rows[0]["T$DELE"].ToString() != "4" && RGVL != "2")
+            {
+                lblError.Visible = true;
+                lblError.Text = mensajes("regrindwrapped");
+                return;
+            }
 
-                if (resultado.Rows[0]["T$PRO1"].ToString() == "1")
-                {
-                    lblError.Visible = true;
-                    lblError.Text = mensajes("regrindconfirmed");
-                    return;
-                }
+            if (resultado.Rows[0]["T$PRO1"].ToString() == "1")
+            {
+                lblError.Visible = true;
+                lblError.Text = mensajes("regrindconfirmed");
+                return;
+            }
 
             lblWorkOrder.Text = resultado.Rows[0]["T$PDNO"].ToString();
             lblRegrindSequence.Text = resultado.Rows[0]["T$SQNB"].ToString();
@@ -152,7 +168,7 @@ namespace whusap.WebPages.Balance
             {
                 obj042.dele = 7;
                 obj042.cwat = Session["CWAR"].ToString();
-                obj042.loca = idal022.getloca(obj042.cwat.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj042.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " "; 
+                obj042.loca = idal022.getloca(obj042.cwat.Trim(), ref strError).Rows.Count > 0 ? idal022.getloca(obj042.cwaf.Trim(), ref strError).Rows[0]["LOCA"].ToString() : " ";
             }
             else
             {

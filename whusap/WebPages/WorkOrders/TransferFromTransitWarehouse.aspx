@@ -124,6 +124,7 @@
         var ktlc = "";
         var warehouseValid = false;
         var locationValid = false;
+
         function printDiv(divID) {
 
             var monthNames = [
@@ -320,7 +321,6 @@
             clearTimeout(timer);
         }
 
-
         function IniciarComponentes() {
 
             txItem = $('#txItem');
@@ -343,7 +343,6 @@
 
         IniciarComponentes();
 
-
         function BloquearComponentes() {
 
             //$('#txItem').prop("disabled", true); 
@@ -354,6 +353,7 @@
             $('#btnTransfer').prop("disabled", true);
 
         };
+
         BloquearComponentes();
 
         var SuccesVerificarPalletID = function (r) {
@@ -502,7 +502,6 @@
             }
         }
 
-
         function ImprimirMensaje(type, msg) {
             switch (type) {
                 case "alert":
@@ -516,6 +515,7 @@
                     break;
             }
         }
+
         var SuccesClick_Transfer = function (r) {
             MyObject = JSON.parse(r.d);
 
@@ -539,13 +539,11 @@
 
         }
 
-
         var VerificarPalletID = function () {
             $('#btnTransfer').prop("disabled", true);
             var Data = "{'PAID':'" + $('#txPalletID').val() + "'}";
             sendAjax("VerificarPalletID", Data, SuccesVerificarPalletID)
         }
-
 
         var VerificarItem = function () {
             $('#btnTransfer').prop("disabled", true);
@@ -584,7 +582,6 @@
 
         }
 
-
         function sendAjax(WebMethod, Data, FuncitionSucces, asyncMode) {
             var options = {
                 type: "POST",
@@ -599,7 +596,6 @@
 
             WebMethod = "";
         }
-
 
         $('#txPalletID').bind('paste keyup', function () {
             stoper();
