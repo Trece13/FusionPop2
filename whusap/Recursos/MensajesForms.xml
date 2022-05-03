@@ -4656,7 +4656,7 @@
       <Idiom name="INGLES">
         <operationName name="encabezado">
           <stringMessage>
-            Material Diposition Inside MRB Warehouse
+            Material Diposition Inside MRB Wrh
           </stringMessage>
         </operationName>
         <operationName name="notwarehouseuser">
