@@ -118,7 +118,7 @@ namespace whusap.WebPages.InvMaterial
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString(),
-                    come = "",
+                    come = this.GetType().Name,
                     refcntd = 0,
                     refcntu = 0
                 };

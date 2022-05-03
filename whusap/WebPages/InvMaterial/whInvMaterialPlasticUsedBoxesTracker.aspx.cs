@@ -22,6 +22,7 @@ namespace whusap.WebPages.InvMaterial
             private static string formName;
             private static string globalMessages = "GlobalMessages";
             public static string _idioma;
+            public string strError;
 
         #endregion
 
@@ -54,7 +55,7 @@ namespace whusap.WebPages.InvMaterial
                     Ent_ttccol301 data = new Ent_ttccol301()
                     {
                         user = HttpContext.Current.Session["user"].ToString(),
-                        come = strTitulo,
+                        come = this.GetType().Name,
                         refcntd = 0,
                         refcntu = 0
                     };

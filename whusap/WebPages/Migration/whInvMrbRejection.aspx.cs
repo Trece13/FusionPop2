@@ -110,6 +110,7 @@ namespace whusap.WebPages.Migration
                     _idioma = "INGLES";
                 }
 
+                String strTitulo = mensajes("encabezado");
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString(),
@@ -124,7 +125,6 @@ namespace whusap.WebPages.Migration
                 new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
                 CargarIdioma();
 
-                String strTitulo = mensajes("encabezado");
                 if (Session["user"] == null)
                 {
                     if (Request.QueryString["Valor1"] == null || Request.QueryString["Valor1"] == "")

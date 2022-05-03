@@ -25,14 +25,14 @@ namespace whusap.WebPages.WorkOrders
         public static string ThePalletIDDoesntexist = mensajes("ThePalletIDDoesntexist");
         public static string PalletIDnotvalidfortaketoMFG = mensajes("PalletIDnotvalidfortaketoMFG");
         public static string PalletIdAlreadyPicked = mensajes("PalletIdAlreadyPicked");
-        
+        public string strError;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             Ent_ttccol301 data = new Ent_ttccol301()
             {
                 user = HttpContext.Current.Session["user"].ToString(),
-                come = "",
+                come = this.GetType().Name,
                 refcntd = 0,
                 refcntu = 0
             };

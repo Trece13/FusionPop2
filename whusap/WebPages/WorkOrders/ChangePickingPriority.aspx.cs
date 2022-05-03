@@ -33,6 +33,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
         private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
         private static IntefazDAL_ttccol307 _idaltccol307 = new IntefazDAL_ttccol307();
         private static IntefazDAL_tticol082 _idalticol082 = new IntefazDAL_tticol082();
+        public string strError;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,7 +41,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
             Ent_ttccol301 data = new Ent_ttccol301()
             {
                 user = HttpContext.Current.Session["user"].ToString(),
-                come = strTitulo,
+                come = this.GetType().Name,
                 refcntd = 0,
                 refcntu = 0
             };

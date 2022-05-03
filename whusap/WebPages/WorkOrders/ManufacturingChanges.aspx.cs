@@ -18,9 +18,22 @@ namespace whusap.WebPages.WorkOrders
         public static IntefazDAL_transfer Transfers = new IntefazDAL_transfer();
         public static InterfazDAL_twhcol130 ITwhcol130 = new InterfazDAL_twhcol130();
         public static InterfazDAL_twhcol030 Itwhcol030 = new InterfazDAL_twhcol030();
+        public string strError;
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            Ent_ttccol301 data = new Ent_ttccol301()
+            {
+                user = HttpContext.Current.Session["user"].ToString(),
+                come = this.GetType().Name,
+                refcntd = 0,
+                refcntu = 0
+            };
+
+            List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+            datalog.Add(data);
+
+            new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
         }
 
         [WebMethod]
