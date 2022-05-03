@@ -16,87 +16,100 @@ namespace whusap.WebPages.InvMaterial
     {
         #region Propiedades
 
-            //Manejo idioma
-            private static Mensajes _mensajesForm = new Mensajes();
-            private static LabelsText _textoLabels = new LabelsText();
-            private static string formName;
-            private static string globalMessages = "GlobalMessages";
-            public static string _idioma;
+        //Manejo idioma
+        private static Mensajes _mensajesForm = new Mensajes();
+        private static LabelsText _textoLabels = new LabelsText();
+        private static string formName;
+        private static string globalMessages = "GlobalMessages";
+        public static string _idioma;
 
         #endregion
 
         #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
+        {
+            this.Form.DefaultButton = this.btnContinue.UniqueID;
+            if (!IsPostBack)
             {
-                this.Form.DefaultButton = this.btnContinue.UniqueID;
-                if (!IsPostBack)
+                formName = Request.Url.AbsoluteUri.Split('/').Last();
+                if (formName.Contains('?'))
                 {
-                    formName = Request.Url.AbsoluteUri.Split('/').Last();
-                    if (formName.Contains('?'))
-                    {
-                        formName = formName.Split('?')[0];
-                    }
-
-                    if (Session["ddlIdioma"] != null)
-                    {
-                        _idioma = Session["ddlIdioma"].ToString();
-                    }
-                    else
-                    {
-                        _idioma = "INGLES";
-                    }
-
-                    CargarIdioma();
-
-                    txtItem.Attributes.Add("onchange", "validarItem(this);");
-
-                    //btnContinue.Attributes.Add("onclick", "guardar(this);");
+                    formName = formName.Split('?')[0];
                 }
+
+                if (Session["ddlIdioma"] != null)
+                {
+                    _idioma = Session["ddlIdioma"].ToString();
+                }
+                else
+                {
+                    _idioma = "INGLES";
+                }
+
+                CargarIdioma();
+
+                txtItem.Attributes.Add("onchange", "validarItem(this);");
+
+                //btnContinue.Attributes.Add("onclick", "guardar(this);");
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = HttpContext.Current.Session["user"].ToString(),
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
             }
+        }
 
         protected void btnContinue_Click(object sender, EventArgs e)
-            {//
-                InterfazDAL_tticol132 tticol132 = new InterfazDAL_tticol132();
-                string strError = string.Empty;
-                int retorno;
-                List<Ent_tticol132> param = new List<Ent_tticol132>();
-                try
+        {//
+            InterfazDAL_tticol132 tticol132 = new InterfazDAL_tticol132();
+            string strError = string.Empty;
+            int retorno;
+            List<Ent_tticol132> param = new List<Ent_tticol132>();
+            try
+            {
+                if (validarDatos(ref strError))
                 {
-                    if (validarDatos(ref strError))
+                    param.Add(new Ent_tticol132()
                     {
-                        param.Add(new Ent_tticol132()
-                        {
-                            barcode = txtBarCodeID.Text.Trim().ToUpperInvariant(),
-                            date = DateTime.Now,
-                            type = ddlType.SelectedIndex,
-                            item = string.Format("         {0}", txtItem.Text.Trim().ToUpperInvariant()),
-                            user = Session["user"].ToString(),
-                            status = 1,
-                            machine = "  ",
-                            refcntd = 0,
-                            refcntu = 0
-                        });
+                        barcode = txtBarCodeID.Text.Trim().ToUpperInvariant(),
+                        date = DateTime.Now,
+                        type = ddlType.SelectedIndex,
+                        item = string.Format("         {0}", txtItem.Text.Trim().ToUpperInvariant()),
+                        user = Session["user"].ToString(),
+                        status = 1,
+                        machine = "  ",
+                        refcntd = 0,
+                        refcntu = 0
+                    });
 
-                        retorno = tticol132.insertarRegistro(ref param, ref strError);
+                    retorno = tticol132.insertarRegistro(ref param, ref strError);
 
-                        if (retorno == 0 && string.IsNullOrEmpty(strError))
-                            strError = mensajes("errorsave");
-                        else
-                        {
-                            txtBarCodeID.Text = "";
-                            strError = mensajes("msjsave");
-                        }
+                    if (retorno == 0 && string.IsNullOrEmpty(strError))
+                        strError = mensajes("errorsave");
+                    else
+                    {
+                        txtBarCodeID.Text = "";
+                        strError = mensajes("msjsave");
                     }
                 }
-                catch (Exception ex)
-                {
-                    strError = ex.InnerException != null ?
-                                    ex.Message + " (" + ex.InnerException + ")" :
-                                    ex.Message;
-                }
-                lblMessage.Text = strError;
             }
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                                ex.Message + " (" + ex.InnerException + ")" :
+                                ex.Message;
+            }
+            lblMessage.Text = strError;
+        }
 
         #endregion
 

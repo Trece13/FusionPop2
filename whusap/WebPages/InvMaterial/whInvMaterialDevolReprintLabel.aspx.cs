@@ -102,7 +102,7 @@ namespace whusap.WebPages.InvMaterial
                     List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
                     datalog.Add(data);
 
-                    new InterfazDAL_ttccol301.insertarRegistro(ref datalog, ref strError);
+                    new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
                 }
 
             }
