@@ -89,6 +89,20 @@ namespace whusap.WebPages.InvMaterial
                     control.Text = strTitulo;
                     Page.Form.DefaultButton = btnSearch.UniqueID;
                     btnSearch.Enabled = false;
+
+
+                    Ent_ttccol301 data = new Ent_ttccol301()
+                    {
+                        user = HttpContext.Current.Session["user"].ToString(),
+                        come = strTitulo,
+                        refcntd = 0,
+                        refcntu = 0
+                    };
+
+                    List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                    datalog.Add(data);
+
+                    new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
                 }
                 btnSend.Enabled = false;
                 StringBuilder script = new StringBuilder();

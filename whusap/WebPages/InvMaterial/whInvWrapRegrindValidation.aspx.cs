@@ -78,6 +78,20 @@ namespace whusap.WebPages.InvMaterial
                 {
                     lblIngreso.Text = "1";
                 }
+
+
+                Ent_ttccol301 data = new Ent_ttccol301()
+                {
+                    user = HttpContext.Current.Session["user"].ToString(),
+                    come = strTitulo,
+                    refcntd = 0,
+                    refcntu = 0
+                };
+
+                List<Ent_ttccol301> datalog = new List<Ent_ttccol301>();
+                datalog.Add(data);
+
+                new InterfazDAL_ttccol301().insertarRegistro(ref datalog, ref strError);
             }
             CargarIdioma();
         }
