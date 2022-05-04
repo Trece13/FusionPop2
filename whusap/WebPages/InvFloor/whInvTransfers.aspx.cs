@@ -74,7 +74,7 @@ namespace whusap.WebPages.InvFloor
 
                 CargarIdioma();
 
-                string strTitulo = mensajes("encabezado");
+                string strTitulo = mensajes("encabezadot");
                 control.Text = strTitulo;
 
                 Ent_ttccol301 data = new Ent_ttccol301()

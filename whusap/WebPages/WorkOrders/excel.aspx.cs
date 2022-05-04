@@ -23,11 +23,10 @@ namespace whusap.WebPages.WorkOrders
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             Ent_ttccol301 data = new Ent_ttccol301()
             {
                 user = HttpContext.Current.Session["user"].ToString(),
-                come = this.GetType().BaseType.Name,
+                come = "Load Bulk Pallet Data",
                 refcntd = 0,
                 refcntu = 0
             };
@@ -188,7 +187,7 @@ namespace whusap.WebPages.WorkOrders
             if (ITwhcol130.UpdateMasiveStaQty(MyObj131))
             {
                 MyObj042.Error = false;
-                
+
             }
 
             if (MyObj042.Error == false)
@@ -208,6 +207,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
     }
+
 }
 
 

@@ -77,7 +77,7 @@ namespace whusap.WebPages.WorkOrders.NewPages
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString().Trim(),
-                    come = this.GetType().BaseType.Name,
+                    come = "Drop Warehouse Transfer",
                     refcntd = 0,
                     refcntu = 0
                 };

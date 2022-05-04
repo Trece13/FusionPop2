@@ -102,10 +102,12 @@ namespace whusap.WebPages.WorkOrders
 
                     }
                 }
+                string strTitulo = mensajes("encabezado");
+                control.Text = strTitulo;
                 Ent_ttccol301 data = new Ent_ttccol301()
                 {
                     user = HttpContext.Current.Session["user"].ToString(),
-                    come = this.GetType().BaseType.Name,
+                    come = strTitulo,
                     refcntd = 0,
                     refcntu = 0
                 };

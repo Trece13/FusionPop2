@@ -359,6 +359,11 @@
             Bulk transfers
           </stringMessage>
         </operationName>
+        <operationName name="encabezadot">
+          <stringMessage>
+            Transfer PalletID
+          </stringMessage>
+        </operationName>
         <operationName name="PalletIdAlreadyTransferAndPendingToProcess">
           <stringMessage>
             Pallet Id already transfer and pending to process
@@ -439,6 +444,11 @@
         <operationName name="encabezado">
           <stringMessage>
             Transferencias Masivas
+          </stringMessage>
+        </operationName>
+        <operationName name="encabezadot">
+          <stringMessage>
+            Transferencia Pallet
           </stringMessage>
         </operationName>
         <operationName name="PalletNotLocate">
@@ -6323,6 +6333,11 @@
     </Module>
     <Module name="RegisterPalletsSalesOrders.aspx">
       <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Change Info Pallet
+          </stringMessage>
+        </operationName>
         <operationName name="SalesOrdercodeisnotManufacturingType">
           <stringMessage>
             Item code is not Manufacturing Type
