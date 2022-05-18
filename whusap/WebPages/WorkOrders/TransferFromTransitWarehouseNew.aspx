@@ -476,7 +476,7 @@
                 $('#txPalletID').prop("disabled", true);
                 $('#lblItem').val(MyObj.ITEM);
                 $('#lblItemDsca').html(MyObj.DSCA);
-                $('#txWarehouseCrrnt').val(MyObj.CWAR);
+                $('#txWarehouseCrrnt').val(MyObj.CWAA);
                 //$('#lblWarehouse').html(MyObj.DESCWRH);
                 $('#txWarehouseCrrnt').prop("disabled", true);
                 $('#txLocationCrrnt').prop("disabled", true);

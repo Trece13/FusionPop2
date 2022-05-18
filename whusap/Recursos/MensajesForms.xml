@@ -6527,6 +6527,12 @@
     </Module>
     <Module name="RfidPop.aspx">
       <Idiom name="INGLES">
+        <operationName name="encabezado">
+          <stringMessage>
+            Register Pallet Rfid
+          </stringMessage>
+        </operationName>
+
         <operationName name="Rfidnotalive">
           <stringMessage>
             Web Service is not alive

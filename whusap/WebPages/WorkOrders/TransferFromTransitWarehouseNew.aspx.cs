@@ -471,8 +471,9 @@ namespace whusap.WebPages.WorkOrders
             objWhcol020.sqnb = MyObj131Base.PAID;
             objWhcol020.mitm = MyObj131Base.ITEM;
             objWhcol020.dsca = Transfers.DescripcionItem(objWhcol020.mitm);
-            objWhcol020.cwor = MyObj131Base.CWAR;
-            objWhcol020.loor = MyObj131Base.LOCA;
+            //objWhcol020.cwor = MyObj131Base.CWAR;  //JC 180522 La bodega no es la correcta.
+            objWhcol020.cwor = MyObj131Base.CWAA;
+            objWhcol020.loor = MyObj131Base.LOCA; //JC 180522 La ubicacion no es la correcta.
             objWhcol020.cwde = TargetCwar;
             objWhcol020.lode = TargetLoca;
 
