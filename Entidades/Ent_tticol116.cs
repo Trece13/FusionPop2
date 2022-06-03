@@ -37,6 +37,7 @@ namespace whusa.Entidades
 
         public int refcntu { get; set; }
         public string paid { get; set; }
+        public string paio { get; set; }
         public string cwam { get; set; }
         public decimal resCant { get; set; }
         public Ent_tticol116()
@@ -56,6 +57,7 @@ namespace whusa.Entidades
             refcntd = 0;
             refcntu = 0;
             paid = String.Empty;
+            paio = String.Empty;
             cwam = String.Empty;
             resCant = 0;
         }
