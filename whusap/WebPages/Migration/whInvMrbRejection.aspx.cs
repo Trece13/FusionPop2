@@ -1508,6 +1508,7 @@ namespace whusap.WebPages.Migration
                         suno = suno == String.Empty ? " " : suno,
                         paid = newPallet,
                         cwam = cwam,
+                        paio = txtPalletId.Text.Trim().ToUpper(),
                         //JC 01122021 Ajustar la cantidad restante con respecto a la cantidad del pallet
                         //resCant = _stock-Convert.ToDecimal(cantidad)
                         resCant = _stockpallet - Convert.ToDecimal(cantidad)
@@ -1747,6 +1748,7 @@ namespace whusap.WebPages.Migration
                         suno = suno == String.Empty ? " " : suno,
                         paid = newPallet,
                         cwam = cwam,
+                        paio = txtPalletId.Text.Trim().ToUpper(),
                         //JC 01122021 Ajustar la cantidad restante con respecto a la cantidad del pallet
                         //resCant = _stock - Convert.ToDecimal(cantidad)
                         resCant = _stockpallet - Convert.ToDecimal(cantidad)
