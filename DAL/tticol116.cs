@@ -55,6 +55,7 @@ namespace whusa.DAL
                 paramList.Add(":T$SUNO", parametro.suno.Trim().ToUpper());
                 paramList.Add(":T$CWAM", parametro.cwam.Trim().ToUpper());
                 paramList.Add(":T$PAID", parametro.paid.Trim().ToUpper());
+                paramList.Add(":T$PAIO", parametro.paio.Trim().ToUpper() == String.Empty ? " " : parametro.paio.Trim().ToUpper());
                 paramList.Add(":T$REFCNTD", 0);
                 paramList.Add(":T$REFCNTU", 0);
 
