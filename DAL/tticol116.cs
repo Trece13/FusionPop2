@@ -271,6 +271,7 @@ namespace whusa.DAL
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTD", DbType.Int32, parametros.refcntd);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$REFCNTU", DbType.Int32, parametros.refcntu);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PAID", DbType.String, parametros.paid);
+                Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$PAIO", DbType.String, parametros.paio);
                 Ent_ParametrosDAL.AgregaParametro(ref parameterCollection, ":T$CWAM", DbType.String, parametros.cwam);
 
                 if (blnUsarPRetorno)
