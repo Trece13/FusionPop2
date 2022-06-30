@@ -390,14 +390,14 @@
                     else {
                         document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).value = "";
                         document.getElementById("txbTargetLocation" + MyObjWarehoouse.Row).disabled = true;
-                        document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.row).setAttribute("sloc", "2");
-                        if (document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.row).value.trim().toUpperCase() === document.getElementById("txbCurrentWarehouse" + MyObjWarehoouse.row).value.trim().toUpperCase()) {
+                        document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.Row).setAttribute("sloc", "2");
+                        if (document.getElementById("txbTargetWarehouse" + MyObjWarehoouse.Row).value.trim().toUpperCase() === document.getElementById("txbCurrentWarehouse" + MyObjWarehoouse.Row).value.trim().toUpperCase()) {
                             document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", false);
-                            document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = "Warehouse / Location cannot be the same.";
+                            document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = "Warehouse / Location cannot be the same.";
                         }
                         else {
-                            document.getElementById("txPalletID" + MyObjWarehoouse.row).setAttribute("valid", true);
-                            document.getElementById("lblError" + MyObjWarehoouse.row).innerHTML = "";
+                            document.getElementById("txPalletID" + MyObjWarehoouse.Row).setAttribute("valid", true);
+                            document.getElementById("lblError" + MyObjWarehoouse.Row).innerHTML = "";
                         }
                     }
                 }

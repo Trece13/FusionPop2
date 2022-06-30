@@ -218,7 +218,7 @@ namespace whusap.WebPages.InvFloor
 
             bool LocationCurrent = false;
             bool LocationTarget = false;
-            if (CurrentWarehouse != TargetWarehouse && CurrentLocation != TargetLocation || CurrentWarehouse == TargetWarehouse && CurrentLocation != TargetLocation || CurrentWarehouse != TargetWarehouse && CurrentLocation == TargetLocation || (CurrentWarehouse == TargetWarehouse && CurrentLocation == TargetLocation && CurrentSloc.Trim() != "1" && TargetSloc != "1"))
+            if (CurrentWarehouse != TargetWarehouse && CurrentLocation != TargetLocation || CurrentWarehouse == TargetWarehouse && CurrentLocation != TargetLocation || CurrentWarehouse != TargetWarehouse && CurrentLocation == TargetLocation /*|| (CurrentWarehouse == TargetWarehouse && CurrentLocation == TargetLocation && CurrentSloc.Trim() != "1" && TargetSloc != "1")*/)
             {
                 if (CurrentSloc.Trim() != "1")
                 {

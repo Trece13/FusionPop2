@@ -84,7 +84,7 @@
                 </div>
         
     </div>
-
+        <br />
     <div class="form-group row">
         <input type="button" class="btn btn-primary btn-lg col-sm-6" id="btnTransfer" value="Transfer" />
     </div>
@@ -112,7 +112,7 @@
                 txbCurrentLocation.value = MyObject.loor;
                 (txbCurrentLocation.value.trim() == "" && MyObject.sloc == "1") ? EnabletxbCurrentLocation() : DisabletxbCurrentLocation();
                 (txbCurrentLocation.value == "") ? StartCurrentLocation = false : StartCurrentLocation = true;
-
+                localStorage.CurrentSloc = MyObject.sloc;
 
                 (txbCurrentWarehouse.value == "") ? VerifyWarehouse() : "";
 
