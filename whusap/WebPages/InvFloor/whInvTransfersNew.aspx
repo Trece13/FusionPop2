@@ -142,6 +142,7 @@
                 document.getElementById("lblError" + MyObject.row).innerHTML = "";
             }
             else {
+                document.getElementById("lblSuccess" + MyObject.row).innerHTML = "";
                 document.getElementById("lblError" + MyObject.row).innerHTML = MyObject.ErrorMsg;
                 CleanPalletID(MyObject.row,true);
             }
@@ -164,9 +165,12 @@
             if (MyObject.Success == true) {
                 //alert(MyObject.SuccessMsg);
                 document.getElementById("lblError").innerHTML = "";
+                document.getElementById("lblError" + MyObject.row).innerHTML = "";
+                document.getElementById("lblSuccess" + MyObject.row).innerHTML = "Transfer Saved Successfully";
                 CleanPalletID(MyObject.row);
             }
             else if (MyObject.Error == true) {
+                document.getElementById("lblSuccess" + MyObject.row).innerHTML = "";
                 document.getElementById("lblError" + MyObject.row).innerHTML = MyObject.ErrorMsg;
             }
 
@@ -516,7 +520,7 @@
             for(i = 0; i < cantidad; i++){
                 MyTableTransfer.insertRow(-1).innerHTML = "<th scope='row'>" + (i + 1) + "</th>" +
                 "<td><input type='text' row = " + i + "  valid = false class='form-control form-control-lg col-12 input' id='txPalletID" + i + "' placeholder='Pallet ID' oninput='SendPalletID(" + i + ")'>" +
-                "<label id='lblError" + i + "' style='font-size:15px; color:red; position: absolute;'></label></td>" +
+                "<label id='lblError" + i + "' style='font-size:15px; color:red; position: absolute;'></label><label id='lblSuccess" + i + "' style='font-size:15px; color:green; position: absolute;'></label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemId" + i + "' >-</label></td>" +
                 "<td><label class='col-12 col-form-label' style='font-size:small' id='lblItemDescription" + i + "' >-</label></td>" +
                 "<td><input type='text' class='form-control form-control-lg col-sm-12 input' id='txbCurrentWarehouse" + i + "' placeholder='Warehouse' disabled/></td>" +
