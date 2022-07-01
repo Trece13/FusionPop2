@@ -420,8 +420,8 @@
 
             }
             //JC 070122 Enviar el mensaje de salvar al final
-            MyObject.SuccessMsg = "Transfer Saved Successfully"
-            alert(MyObject.SuccessMsg);
+            //MyObject.SuccessMsg = "Transfer Saved Successfully"
+            //alert(MyObject.SuccessMsg);
 
         }
 
