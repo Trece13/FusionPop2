@@ -94,6 +94,7 @@ namespace whusap.WebPages.Migration
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
+            divTable.Visible = false;
             lblError.Text = String.Empty;
             lblConfirm.Text = String.Empty;
             if (txtWorkOrder.Text.Trim().Length == 9)
@@ -203,6 +204,8 @@ namespace whusap.WebPages.Migration
 
         protected void btnSaveOrder_Click(object sender, EventArgs e)
         {
+            lblError.Text = String.Empty;
+            lblConfirm.Text = String.Empty;
             if (slAction.SelectedValue != String.Empty)
             {
                 var stat = (enumStatus)Convert.ToInt32(slAction.SelectedValue);
