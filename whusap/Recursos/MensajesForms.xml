@@ -1938,6 +1938,11 @@
             Another workorder was initiated on that machine - {0}.
           </stringMessage>
         </operationName>
+        <operationName name="orderinitiatedRfid">
+          <stringMessage>
+            Another workorder was initiated for rfid on that machine - {0}.
+          </stringMessage>
+        </operationName>
       </Idiom>
       <Idiom name="ESPAÑOL">
         <operationName name="OrderLength">
