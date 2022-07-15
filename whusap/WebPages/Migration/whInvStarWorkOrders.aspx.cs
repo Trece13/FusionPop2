@@ -18,7 +18,8 @@ namespace whusap.WebPages.Migration
         Scheduled = 1,
         Initiated = 2,
         Finished = 3,
-        OnHold = 4
+        OnHold = 4,
+        InitiatedRfid = 5
     }
 
     public partial class whInvStarWorkOrders : System.Web.UI.Page
@@ -100,19 +101,24 @@ namespace whusap.WebPages.Migration
                 if (txtWorkOrder.Text.Trim() != String.Empty)
                 {
                     var pdno = txtWorkOrder.Text.Trim().ToUpper();
-                    var status = "1,2,4";
+                    var status = "1,2,4,5";
                     var validaOrden = _idaltticol011.findByPdnoAndInStatus(ref pdno, ref status, ref strError);
 
                     if (validaOrden.Rows.Count > 0)
                     {
                         var machine = validaOrden.Rows[0]["MCNO"].ToString().Trim();
-                        status = "2";
+                        status = validaOrden.Rows[0]["TRAY"].ToString().Trim() == "1" ? "5" : "2";
 
                         var consultaMaquina = _idaltticol011.countByMachineStatusAndDiferentPdno(ref pdno, ref status, ref machine, ref strError);
 
                         if (consultaMaquina > 0)
                         {
-                            lblError.Text = String.Format(mensajes("orderinitiated"), machine);
+                            if(validaOrden.Rows[0]["TRAY"].ToString().Trim()=="1"){
+                                lblError.Text = String.Format(mensajes("orderinitiatedRfid"), machine);
+                            }
+                            else{
+                                lblError.Text = String.Format(mensajes("orderinitiated"), machine);
+                            }                            
                             return;
                         }
                         else
@@ -125,6 +131,7 @@ namespace whusap.WebPages.Migration
 
                             ListItem itemSelect = new ListItem() { Text = _idioma == "INGLES" ? "--Select an action--" : "--Seleccione una acción--", Value = "" };
                             ListItem itemInitiated = new ListItem() { Text = _idioma == "INGLES" ? "Initiated" : "Iniciado", Value = "2" };
+                            ListItem itemInitiatedTray = new ListItem() { Text = _idioma == "INGLES" ? "Initiated for Rfid" : "Iniciado para Rfid", Value = "5" };
                             //ListItem itemFinish = new ListItem() { Text = _idioma == "INGLES" ? "Finish" : "Finalizado", Value = "3" };
                             ListItem itemHold = new ListItem() { Text = _idioma == "INGLES" ? "On Hold" : "En espera", Value = "4" };
 
@@ -134,12 +141,23 @@ namespace whusap.WebPages.Migration
 
                             switch (stat)//1 - Scheduled, 2 - Initiated, 4 - On hold
                             {
+                                case enumStatus.InitiatedRfid:
+                                    //slAction.Items.Insert(slAction.Items.Count, itemFinish);
+                                    slAction.Items.Insert(slAction.Items.Count, itemHold);
+                                    break;
                                 case enumStatus.Initiated:
                                     //slAction.Items.Insert(slAction.Items.Count, itemFinish);
                                     slAction.Items.Insert(slAction.Items.Count, itemHold);
                                     break;
                                 case enumStatus.Scheduled:
-                                    slAction.Items.Insert(slAction.Items.Count, itemInitiated);
+                                    if (validaOrden.Rows[0]["TRAY"].ToString().Trim() != "1")
+                                    {
+                                        slAction.Items.Insert(slAction.Items.Count, itemInitiated);
+                                    }
+                                    else
+                                    {
+                                        slAction.Items.Insert(slAction.Items.Count, itemInitiatedTray);
+                                    }
                                     break;
                                 case enumStatus.OnHold:
                                     slAction.Items.Insert(slAction.Items.Count, itemInitiated);
@@ -155,7 +173,9 @@ namespace whusap.WebPages.Migration
                                 : stat == enumStatus.Finished
                                 ? _idioma == "INGLES" ? "Finish" : "Finalizado"
                                 : stat == enumStatus.Scheduled
-                                ? _idioma == "INGLES" ? "Scheduled" : "Programado" : "";
+                                ? _idioma == "INGLES" ? "Scheduled" : "Programado"
+                                : stat == enumStatus.InitiatedRfid
+                                    ? _idioma == "INGLES" ? "Initiated for Rfid" : "Iniciado para rfid" : "";
 
                             divTable.Visible = true;
                         }
@@ -200,6 +220,10 @@ namespace whusap.WebPages.Migration
 
                 switch (stat)
                 {
+
+                    case enumStatus.InitiatedRfid:
+                        updateStatus = _idaltticol011.updateStatusInitiated(ref data011, ref strError);
+                        break;
                     case enumStatus.Initiated:
                         updateStatus = _idaltticol011.updateStatusInitiated(ref data011, ref strError);
                         break;
