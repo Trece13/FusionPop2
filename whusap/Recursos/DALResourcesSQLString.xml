@@ -6321,7 +6321,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="findByPdnoAndInStatus">
         <stringSQL>
           SELECT
-          RTRIM(ticol011.T$PDNO) AS PDNO, ticol011.T$MCNO AS MCNO,
+          RTRIM(ticol011.T$PDNO) AS PDNO, ticol011.T$MCNO AS MCNO,ticol011.T$TRAY AS TRAY,
           ticol011.T$STAT AS STAT
           FROM {2} ticol011
           WHERE ticol011.T$STAT IN ([:T$STATUS]) AND ticol011.T$PDNO = '[:T$PDNO]'
