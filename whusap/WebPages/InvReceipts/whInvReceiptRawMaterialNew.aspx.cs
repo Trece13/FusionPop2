@@ -739,15 +739,27 @@ namespace whusap.WebPages.InvReceipts
                 {
 
                     DiaMin = Convert.ToDouble(ToleranciaMinimaDias.ToString().Trim());
+                    FechaMinima = FechaActual.AddDays(-DiaMin); //JC150722  Así toma de manera correcta las fechas para la recepción
+                }
+                //JC150722  Así toma de manera correcta las fechas para la recepción
+                else
+                {
+                    FechaMinima = FechaActual.AddDays(-Convert.ToDouble(RTDM));
                 }
 
                 if (RTDM == "0" || RTDM == "null" || RTDM == null)
                 {
                     DiaMax = Convert.ToDouble(ToleranciaMaximaDias.ToString().Trim());
+                    FechaMaxima = FechaActual.AddDays(DiaMax); //JC150722  Así toma de manera correcta las fechas para la recepción
+                }
+                //JC150722  Así toma de manera correcta las fechas para la recepción
+                else
+                {
+                    FechaMaxima = FechaActual.AddDays(Convert.ToDouble(RTDP));
                 }
 
-                FechaMaxima = FechaActual.AddDays(DiaMax);
-                FechaMinima = FechaActual.AddDays(-DiaMin);
+                //FechaMaxima = FechaActual.AddDays(DiaMax);
+                //FechaMinima = FechaActual.AddDays(-DiaMin);
 
                 if (FechaMaxima >= FechaRegistro && FechaRegistro >= FechaMinima)
                 {
@@ -755,7 +767,7 @@ namespace whusap.WebPages.InvReceipts
                 }
                 else
                 {
-                    retorno = "1";
+                    retorno = "0";
                 }
 
             }
