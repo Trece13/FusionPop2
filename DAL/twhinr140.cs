@@ -75,6 +75,31 @@ namespace whusa.DAL
             return consulta;
         }
 
+        public DataTable selectTwhinr140(ref string ITEM, ref string CWAR, ref string LOCA, ref string CLOT)
+        {
+            method = MethodBase.GetCurrentMethod();
+
+            paramList = new Dictionary<string, object>();
+            //paramList.Add(":T$CWAR", cwar.Trim().ToUpper());
+            paramList.Add(":ITEM", ITEM.Trim().ToUpper());
+            paramList.Add(":CWAR", CWAR.Trim().ToUpper());
+            paramList.Add(":LOCA", LOCA.ToUpper());
+            paramList.Add(":CLOT", CLOT.ToUpper());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+                //if (consulta.Rows.Count < 1) { strError = "That Lot doesn't have Item Asociated."; }
+            }
+            catch (Exception ex)
+            {
+                //strError = "Error when querying data [twhinr140]. Try again or contact your administrator \n " + strSentencia;
+                //log.escribirError(strError + Console.Out.NewLine + ex.Message, stackTrace.GetFrame(1).GetMethod().Name, method.Name, method.ReflectedType.Name);
+            }
+            return consulta;
+        }
         public DataTable consultaPorAlmacenItemPallet(ref string item, ref string clot, ref string paid, ref string strError)
         {
             method = MethodBase.GetCurrentMethod();

@@ -48,6 +48,21 @@ namespace whusa.Interfases
             }
         }
 
+        public DataTable selectTwhinr140(ref string ITEM, ref string CWAR, ref string LOCA, ref string CLOT)
+        {
+            //int retorno = -1;
+            DataTable retorno;
+            try
+            {
+                retorno = dal.selectTwhinr140(ref ITEM, ref CWAR, ref LOCA, ref CLOT);
+                return retorno;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException.ToString());
+            }
+        }
+
         public DataTable consultaPorAlmacenItemPallet(ref string item, ref string clot, ref string paid, ref string strError)
         {
             //int retorno = -1;
