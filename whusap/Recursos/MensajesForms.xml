@@ -401,7 +401,7 @@
         </operationName>
         <operationName name="LocationTransfeCannotEqual">
           <stringMessage>
-            The Location to transfer cannot be equal
+            The Warehouse / Location to transfer cannot be equal
           </stringMessage>
         </operationName>
         <operationName name="LocationTypeMustBulK">
