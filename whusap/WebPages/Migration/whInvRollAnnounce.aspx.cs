@@ -10,6 +10,7 @@ using System.Threading;
 using System.Globalization;
 using System.Configuration;
 using whusa.Entidades;
+using System.Data;
 
 namespace whusap.WebPages.Migration
 {
@@ -20,6 +21,7 @@ namespace whusap.WebPages.Migration
             private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
             private static InterfazDAL_twhcol130 _idaltwhcol131 = new InterfazDAL_twhcol130();
             private static InterfazDAL_tticol080 _idaltticol080 = new InterfazDAL_tticol080();
+            private static InterfazDAL_twhinr140 _idalTwhinr140 = new InterfazDAL_twhinr140();
             private static InterfazDAL_tticst001 _idaltticst001 = new InterfazDAL_tticst001();
             private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
             private static Mensajes _mensajesForm = new Mensajes();
@@ -116,7 +118,11 @@ namespace whusap.WebPages.Migration
                         txtLot.Text = loteitem.Trim().ToUpper();
                         txtQuantity.Text = qtdl.Trim();
                         hdfCWAR.Value = consultaItem.Rows[0]["CWAR"].ToString();
+                        hdfCWARTbl.Value = consultaSqnb.Rows[0]["CWAT"].ToString();
+                        hdfACLO.Value = consultaSqnb.Rows[0]["ACLO"].ToString();
+                        hdfLOT.Value = consultaSqnb.Rows[0]["LOT"].ToString();
                         hdfPONO.Value = consultaItem.Rows[0]["PONO"].ToString();
+                        hdfITEM.Value = consultaSqnb.Rows[0]["ITEM"].ToString();
                         trItem.Visible = true;
                         trLot.Visible = true;
                         trQuantity.Visible = true;
@@ -166,6 +172,22 @@ namespace whusap.WebPages.Migration
             {
                 lblError.Text = mensajes("quantityhigher");
                 return;
+            }
+            else
+            {
+                string MyItem = hdfITEM.Value;
+                string MyCwar = hdfCWARTbl.Value;
+                string MyLoca= hdfACLO.Value;
+                string MyLot = hdfLOT.Value;
+                DataTable Result = _idalTwhinr140.selectTwhinr140(ref MyItem, ref MyCwar, ref MyLoca,ref MyLot);
+                if (Result.Rows.Count > 0)
+                {
+                    if (Convert.ToDouble(qtdl) > Convert.ToDouble(Result.Rows[0]["T$STKS"].ToString()))
+                    {
+                        lblError.Text = "Baan stock is not avalible";
+                        return;
+                    }
+                }
             }
 
             var consultaRegistro = _idaltticol080.findRecordByOrnoPonoItem(ref orno, ref pono, ref item, ref strError).Rows;

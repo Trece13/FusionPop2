@@ -5269,6 +5269,11 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
     </Module>
     <Module name="twhinr140">
+      <operationName name="selectTwhinr140">
+        <stringSQL>
+          SELECT * FROM BAAN.TWHINR140140 WHERE trim(T$CWAR) = trim('[:CWAR]') and trim(T$ITEM) = trim('[:ITEM]') and T$LOCA = '[:LOCA]' AND T$CLOT = '[:CLOT]'
+        </stringSQL>
+      </operationName>
       <operationName name="listaRegistros_ObtieneItem">
         <stringSQL>
           SELECT T$ITEM ID, TRIM(T$ITEM) ITEM

@@ -126,6 +126,10 @@
 
     <asp:Label Text="" runat="server" ID="lblError" style="color:red; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
     <asp:Label Text="" runat="server" ID="lblConfirm" style="color:green; font-size:15px; font-weight:bold;" ClientIDMode="Static" />
+    <asp:HiddenField runat="server" ID="hdfITEM"/>
+    <asp:HiddenField runat="server" ID="hdfCWARTbl"/>
     <asp:HiddenField runat="server" ID="hdfCWAR"/>
+    <asp:HiddenField runat="server" ID="hdfLOT"/>
+    <asp:HiddenField runat="server" ID="hdfACLO"/>
     <asp:HiddenField runat="server" ID="hdfPONO"/>
 </asp:Content>

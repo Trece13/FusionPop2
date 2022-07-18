@@ -166,6 +166,24 @@ namespace whusap.WebPages.Migration {
         protected global::System.Web.UI.WebControls.Label lblConfirm;
         
         /// <summary>
+        /// hdfITEM control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfITEM;
+        
+        /// <summary>
+        /// hdfCWARTbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfCWARTbl;
+        
+        /// <summary>
         /// hdfCWAR control.
         /// </summary>
         /// <remarks>
@@ -173,6 +191,24 @@ namespace whusap.WebPages.Migration {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdfCWAR;
+        
+        /// <summary>
+        /// hdfLOT control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfLOT;
+        
+        /// <summary>
+        /// hdfACLO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfACLO;
         
         /// <summary>
         /// hdfPONO control.
