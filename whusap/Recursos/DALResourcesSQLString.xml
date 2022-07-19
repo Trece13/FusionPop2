@@ -6257,7 +6257,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           SELECT col011.t$mcno machine, col011.T$STAT stat,col011.t$pdno orden, ticol000.T$MAXR MAXR,ticol000.T$MAXG MAXG
           FROM {2} col011
           LEFT JOIN {0}.tticol000{1} ticol000 ON ticol000.T$SERN = ticol000.T$SERN
-          WHERE col011.t$stat = '2' AND col011.t$mcno ='[p1]'
+          WHERE col011.t$stat in ('2','5') AND col011.t$mcno ='[p1]'
         </stringSQL>
       </operationName>
       <operationName name="listaRegistrosOrdenMaquina_Param">

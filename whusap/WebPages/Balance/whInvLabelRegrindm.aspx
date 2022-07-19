@@ -46,6 +46,7 @@
                 <td style="text-align: left;">
                 </td>
             </tr>
+            
             <tr>
                 <td colspan="2" style="text-align: center;">
                     <hr />
@@ -58,6 +59,24 @@
         <br />
         <br />
         <table style="width: 60%">
+            <tr>
+                <td class="style8">
+                    <span class="style2" style="vertical-align: middle;"><b style="font-size: 11px">
+                        <asp:Label ID="lblOrnos" runat="server" />
+                    </b></span>
+                </td>
+                <td style="width: 120px">
+                    <span style="vertical-align: middle;">
+                        <asp:DropDownList ID="DdOrnos" runat="server" Width="250px" Height="20px" CssClass="TextBoxBig"
+                            TabIndex="4" ToolTip="Select one item from list" OnSelectedIndexChanged="listOrnos_SelectedIndexChanged"
+                            AutoPostBack="true">
+                        </asp:DropDownList>
+                    </span>
+                </td>
+                <td class="rTableCellError" style="width: 50%" height="350px">
+                    &nbsp;
+                </td>
+            </tr>
             <tr>
                 <td class="style8">
                     <span class="style2" style="vertical-align: middle;"><b style="font-size: 11px">

@@ -94,6 +94,24 @@ namespace whusap.WebPages.Balance {
         protected global::System.Web.UI.WebControls.Label lblIngreso;
         
         /// <summary>
+        /// lblOrnos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrnos;
+        
+        /// <summary>
+        /// DdOrnos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DdOrnos;
+        
+        /// <summary>
         /// lblRegrind control.
         /// </summary>
         /// <remarks>
