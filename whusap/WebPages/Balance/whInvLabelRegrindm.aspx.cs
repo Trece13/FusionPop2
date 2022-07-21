@@ -222,9 +222,11 @@ namespace whusap.WebPages.Balance
             }
             else
             {
+
+                DdOrnos.Visible = false;
+                lblOrnos.Visible = false;
                 if (resultado.Rows.Count > 0)
                 {
-
                     ListOrders();
                 }
             }
