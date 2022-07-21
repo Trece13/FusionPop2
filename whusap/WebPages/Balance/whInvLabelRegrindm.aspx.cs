@@ -214,13 +214,19 @@ namespace whusap.WebPages.Balance
             //resultado = idal011.listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
             // Para este caso strError muestra los mensajes de resutado de la consulta para cuando no hay filas 
             // o cuando existe mas de una fila
-            
-            if( resultado.Rows.Count > 1 ){
+            MAXG = Convert.ToDecimal(resultado.Rows[0]["MAXG"].ToString().Trim());
+
+            if (resultado.Rows.Count > 1)
+            {
                 chargeListOrder();
             }
             else
             {
-                ListOrders();
+                if (resultado.Rows.Count > 0)
+                {
+
+                    ListOrders();
+                }
             }
 
             lblError.Text = string.Empty;
@@ -238,25 +244,26 @@ namespace whusap.WebPages.Balance
             ListOrders();
         }
 
-        private void chargeListOrder(){
+        private void chargeListOrder()
+        {
             lblOrnos.Visible = true;
-                DdOrnos.Visible = true;
-                printerDiv.Visible = true;
-                DataRow fila = resultado.NewRow();
+            DdOrnos.Visible = true;
+            printerDiv.Visible = true;
+            DataRow fila = resultado.NewRow();
 
-                //resultado.DefaultView.Sort = "itemr ASC";
-                resultado.DefaultView.Sort = "ORDEN";
-                ViewState["resultado"] = resultado;
+            //resultado.DefaultView.Sort = "itemr ASC";
+            resultado.DefaultView.Sort = "ORDEN";
+            ViewState["resultado"] = resultado;
 
-                DdOrnos.DataSource = ViewState["resultado"] as DataTable;
-                DdOrnos.DataTextField = "ORDEN";
-                //            DdOrnos.DataTextField = "COMB";
-                DdOrnos.DataValueField = "ORDEN";
-                //            DdOrnos.DataValueField = "ITEMR";
-                DdOrnos.DataBind();
-                DdOrnos.Items.Insert(0,(_idioma == "INGLES" ? "-- Select the Order --" : "-- Seleccione la orden --"));
+            DdOrnos.DataSource = ViewState["resultado"] as DataTable;
+            DdOrnos.DataTextField = "ORDEN";
+            //            DdOrnos.DataTextField = "COMB";
+            DdOrnos.DataValueField = "ORDEN";
+            //            DdOrnos.DataValueField = "ITEMR";
+            DdOrnos.DataBind();
+            DdOrnos.Items.Insert(0, (_idioma == "INGLES" ? "-- Select the Order --" : "-- Seleccione la orden --"));
 
-                DdOrnos.Focus();
+            DdOrnos.Focus();
         }
 
         private void ListRegrind()
@@ -275,7 +282,14 @@ namespace whusap.WebPages.Balance
 
         private void ListOrders()
         {
-            obj011.pdno = DdOrnos.Text.ToString().Trim().ToUpperInvariant();
+            if (DdOrnos.Text.ToString().Trim() != "")
+            {
+                obj011.pdno = DdOrnos.Text.ToString().Trim().ToUpperInvariant();
+            }
+            else
+            {
+                obj011.pdno = resultado.Rows[0]["ORDEN"].ToString().Trim().ToUpperInvariant();
+            }
             //MAXG = Convert.ToDecimal(resultado.Rows[0]["MAXG"].ToString().Trim());
             resultado = idal011.invLabelRegrind_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
             //if (!String.IsNullOrEmpty(strError)) { lblError.Text = resultado.Rows.Count <= 0 ? mensajes("ordermachine") : mensajes("moreoneorder"); return; }
@@ -336,12 +350,12 @@ namespace whusap.WebPages.Balance
             cantidads = txtQuantity.Text;
             cantidad = Convert.ToDecimal(cantidads);
             var value = Convert.ToDecimal(cantidad);
-            decimal valueP = Convert .ToDecimal(value.ToString());
+            decimal valueP = Convert.ToDecimal(value.ToString());
 
             if (String.IsNullOrEmpty(listRegrind.SelectedValue.Trim())) { lblError.Text = mensajes("fillform"); return; }
             if (cantidad <= 0) { lblError.Text = mensajes("quantityzero"); return; }
             if (cantidad > MAXG) { lblError.Text = "Regrind announced weight cannot be higher than " + MAXG + "Kg"; return; }
-            
+
             strError = string.Empty;
             //obj.pdno = hidden.Value;
             cantidad = cantidad * (-1);
@@ -381,7 +395,7 @@ namespace whusap.WebPages.Balance
             obj042.sqnb = strTagId;
             obj042.proc = 1;
             obj042.logn = Session["user"].ToString();
-            obj042.mitm =  listRegrind.SelectedValue;
+            obj042.mitm = listRegrind.SelectedValue;
             obj042.pono = Convert.ToInt32(ConsecPos);
             obj042.qtdl = Convert.ToDouble(value);
             obj042.cuni = unityItem;
