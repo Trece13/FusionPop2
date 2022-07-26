@@ -56,8 +56,6 @@ namespace whusap.WebPages.Balance
 
             if (!IsPostBack)
             {
-                DdOrnos.Visible = false;
-                lblOrnos.Visible = false;
                 formName = Request.Url.AbsoluteUri.Split('/').Last();
                 if (formName.Contains('?'))
                 {
@@ -119,7 +117,7 @@ namespace whusap.WebPages.Balance
 
         }
 
-        protected void txtMachine_listMachine1(object sender, EventArgs e)
+        protected void txtMachine_listMachine(object sender, EventArgs e)
         {
 
             btnSave.Visible = false;
@@ -187,88 +185,7 @@ namespace whusap.WebPages.Balance
             btnSave.Visible = true;
         }
 
-        protected void txtMachine_listMachine(object sender, EventArgs e)
-        {
-
-            btnSave.Visible = false;
-            lblError.Visible = true;
-            lblError.Text = string.Empty;
-            //printerDiv.Visible = false;
-
-            listRegrind.DataSource = "";
-            listRegrind.DataBind();
-
-            DdOrnos.DataSource = "";
-            DdOrnos.DataBind();
-
-
-            txtQuantity.Enabled = true;
-            btnChangeMac.Enabled = true;
-            txtMachine.Enabled = false;
-            txtMachine.Text = txtMachine.Text.ToUpperInvariant();
-            lblError.Text = string.Empty; ;
-            obj011.mcno = ((TextBox)sender).Text.Trim().ToUpperInvariant(); ;  //listMachine.SelectedValue.Trim().ToUpperInvariant();
-
-            resultado = idal011.invLabel_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-            //JC 230721 Reversión a Tomar Orden inicializada en la máquina
-            //resultado = idal011.listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-            // Para este caso strError muestra los mensajes de resutado de la consulta para cuando no hay filas 
-            // o cuando existe mas de una fila
-            MAXG = Convert.ToDecimal(resultado.Rows[0]["MAXG"].ToString().Trim());
-
-            if (resultado.Rows.Count > 1)
-            {
-                chargeListOrder();
-            }
-            else
-            {
-
-                DdOrnos.Visible = false;
-                lblOrnos.Visible = false;
-                if (resultado.Rows.Count > 0)
-                {
-                    ListOrders();
-                }
-            }
-
-            lblError.Text = string.Empty;
-            lblError.Visible = false;
-            btnSave.Visible = true;
-        }
-
         protected void listRegrind_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListRegrind();
-        }
-
-        protected void listOrnos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ListOrders();
-        }
-
-        private void chargeListOrder()
-        {
-            lblOrnos.Visible = true;
-            DdOrnos.Visible = true;
-            printerDiv.Visible = true;
-            DataRow fila = resultado.NewRow();
-
-            //resultado.DefaultView.Sort = "itemr ASC";
-            resultado.DefaultView.Sort = "ORDEN";
-            ViewState["resultado"] = resultado;
-
-            DdOrnos.DataSource = ViewState["resultado"] as DataTable;
-            DdOrnos.DataTextField = "ORDEN";
-            //            DdOrnos.DataTextField = "COMB";
-            DdOrnos.DataValueField = "ORDEN";
-            //            DdOrnos.DataValueField = "ITEMR";
-            DdOrnos.DataBind();
-            DdOrnos.Items.Insert(0, (_idioma == "INGLES" ? "-- Select the Order --" : "-- Seleccione la orden --"));
-
-            DdOrnos.Focus();
-        }
-
-        private void ListRegrind()
         {
             resultado = ViewState["resultado"] as DataTable;
             DataRow[] cons = resultado.Select("ITEMR = '" + listRegrind.SelectedValue.Trim() + "'");
@@ -281,50 +198,6 @@ namespace whusap.WebPages.Balance
             descItem = listRegrind.SelectedItem.Text; // fila["DESCAR"].ToString();
             machineItem = fila["MAQUINA"].ToString();
         }
-
-        private void ListOrders()
-        {
-            if (DdOrnos.Text.ToString().Trim() != "")
-            {
-                obj011.pdno = DdOrnos.Text.ToString().Trim().ToUpperInvariant();
-            }
-            else
-            {
-                obj011.pdno = resultado.Rows[0]["ORDEN"].ToString().Trim().ToUpperInvariant();
-            }
-            //MAXG = Convert.ToDecimal(resultado.Rows[0]["MAXG"].ToString().Trim());
-            resultado = idal011.invLabelRegrind_listaRegistrosOrdenMaquina_Param(ref obj011, ref strError);
-            //if (!String.IsNullOrEmpty(strError)) { lblError.Text = resultado.Rows.Count <= 0 ? mensajes("ordermachine") : mensajes("moreoneorder"); return; }
-
-            ActiveMachine = obj011.mcno.Trim().ToUpperInvariant(); // 
-            ActiveOrderMachine = resultado.Rows[0]["ORDEN"].ToString();
-
-            resultado = idal011.invLabelRegrind_listaRegistrosOrdenParam(ref obj011, ref strError);
-            if (!String.IsNullOrEmpty(strError)) { lblError.Text = mensajes("ordernotexists"); return; }
-
-            printerDiv.Visible = true;
-            DataRow fila = resultado.NewRow();
-
-            fila[0] = " ";
-            fila[7] = _idioma == "INGLES" ? "-- Select the Regrind Item --" : "-- Seleccione el articulo molido --";
-            resultado.Rows.InsertAt(fila, 0);
-
-            resultado.DefaultView.Sort = "itemr ASC";
-            ViewState["resultado"] = resultado;
-
-            listRegrind.DataSource = ViewState["resultado"] as DataTable;
-            listRegrind.DataTextField = "COMB";
-            listRegrind.DataValueField = "ITEMR";
-            listRegrind.DataBind();
-
-            listRegrind.SelectedIndex = 0;
-            listRegrind.Focus();
-
-            lblError.Text = string.Empty;
-            lblError.Visible = false;
-            btnSave.Visible = true;
-        }
-
 
         protected void btnChangeMac_Click(object sender, EventArgs e)
         {
@@ -573,7 +446,6 @@ namespace whusap.WebPages.Balance
         {
             lblMachine.Text = _textoLabels.readStatement(formName, _idioma, "lblMachine");
             lblRegrind.Text = _textoLabels.readStatement(formName, _idioma, "lblRegrind");
-            lblOrnos.Text = "Orders";
             lblToIssue.Text = _textoLabels.readStatement(formName, _idioma, "lblToIssue");
             lblMaxDigits.Text = _textoLabels.readStatement(formName, _idioma, "lblMaxDigits");
             btnChangeMac.Text = _textoLabels.readStatement(formName, _idioma, "btnChangeMac");
