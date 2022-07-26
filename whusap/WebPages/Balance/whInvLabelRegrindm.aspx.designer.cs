@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace whusap.WebPages.Balance
-{
-
-
-    public partial class whInvLabelRegrindm
-    {
-
+namespace whusap.WebPages.Balance {
+    
+    
+    public partial class whInvLabelRegrindm {
+        
         /// <summary>
         /// ScriptManager1 control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-
+        
         /// <summary>
         /// printResult control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl printResult;
-
+        
         /// <summary>
         /// lblResult control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblResult;
-
+        
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -49,7 +47,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-
+        
         /// <summary>
         /// printerDiv control.
         /// </summary>
@@ -58,7 +56,16 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl printerDiv;
-
+        
+        /// <summary>
+        /// lblMachine control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMachine;
+        
         /// <summary>
         /// txtMachine control.
         /// </summary>
@@ -67,7 +74,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMachine;
-
+        
         /// <summary>
         /// btnChangeMac control.
         /// </summary>
@@ -76,7 +83,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnChangeMac;
-
+        
         /// <summary>
         /// lblIngreso control.
         /// </summary>
@@ -85,7 +92,16 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIngreso;
-
+        
+        /// <summary>
+        /// lblRegrind control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRegrind;
+        
         /// <summary>
         /// listRegrind control.
         /// </summary>
@@ -94,7 +110,34 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList listRegrind;
-
+        
+        /// <summary>
+        /// lblToIssue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblToIssue;
+        
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// lblMaxDigits control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMaxDigits;
+        
         /// <summary>
         /// txtQuantity control.
         /// </summary>
@@ -103,16 +146,16 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtQuantity;
-
+        
         /// <summary>
-        /// validateReturn control.
+        /// ValidateQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator validateReturn;
-
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator ValidateQuantity;
+        
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -121,7 +164,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-
+        
         /// <summary>
         /// HiddenField1 control.
         /// </summary>
@@ -130,7 +173,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField HiddenField1;
-
+        
         /// <summary>
         /// hOrdenMachine control.
         /// </summary>
@@ -139,7 +182,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hOrdenMachine;
-
+        
         /// <summary>
         /// hidden control.
         /// </summary>
@@ -148,7 +191,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hidden;
-
+        
         /// <summary>
         /// hi_indBodega control.
         /// </summary>
@@ -157,7 +200,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hi_indBodega;
-
+        
         /// <summary>
         /// hi_indLote control.
         /// </summary>
@@ -166,7 +209,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hi_indLote;
-
+        
         /// <summary>
         /// hi_descItem control.
         /// </summary>
@@ -175,7 +218,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hi_descItem;
-
+        
         /// <summary>
         /// hi_unityItem control.
         /// </summary>
@@ -184,7 +227,7 @@ namespace whusap.WebPages.Balance
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hi_unityItem;
-
+        
         /// <summary>
         /// hi_machineItem control.
         /// </summary>
