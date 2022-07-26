@@ -1970,6 +1970,11 @@
 
     <Module name="whInvRollAnnounce.aspx">
       <Idiom name="INGLES">
+        <label name="BaanStockIsNotAvalible">
+          <stringMessage>
+            Baan stock is not avalible
+          </stringMessage>
+        </label>
         <operationName name="encabezado">
           <stringMessage>
             Rolls Consumption

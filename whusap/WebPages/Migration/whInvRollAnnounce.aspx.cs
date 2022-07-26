@@ -184,14 +184,14 @@ namespace whusap.WebPages.Migration
                 {
                     if (Convert.ToDouble(qtdl) > Convert.ToDouble(Result.Rows[0]["T$STKS"].ToString()))
                     {
-                        lblError.Text = "Baan stock is not avalible";
+                        lblError.Text = mensajes("BaanStockIsNotAvalible");
                         return;
                     }
                 }
                 //JC 220722 Si no encuentra registros en la tabla inr140 también debe enviar un mensaje que no hay stock disponible
                 else
                 {
-                    lblError.Text = "Baan stock is not avalible";
+                    lblError.Text = mensajes("BaanStockIsNotAvalible");
                     return;
                 }
 
