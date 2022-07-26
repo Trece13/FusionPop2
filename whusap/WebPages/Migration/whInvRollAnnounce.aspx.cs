@@ -188,6 +188,13 @@ namespace whusap.WebPages.Migration
                         return;
                     }
                 }
+                //JC 220722 Si no encuentra registros en la tabla inr140 también debe enviar un mensaje que no hay stock disponible
+                else
+                {
+                    lblError.Text = "Baan stock is not avalible";
+                    return;
+                }
+
             }
 
             var consultaRegistro = _idaltticol080.findRecordByOrnoPonoItem(ref orno, ref pono, ref item, ref strError).Rows;
