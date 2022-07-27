@@ -455,7 +455,7 @@ namespace whusap.WebPages.WorkOrders
                     obj082.PONO = MyObjPicking182.PONO == "" ? " " : MyObjPicking182.PONO;
                     obj082.ADVS = MyObjPicking182.ADVS == "" ? " " : MyObjPicking182.ADVS;
                     obj082.ITEM = MyObjPicking182.ITEM;
-                    obj082.STAT = consigment.Trim() == "true" ? "7" : "4";
+                    obj082.STAT = consigment.Trim() == "true" ? "7" : "8";
                     obj082.QTYT = QTYT;
                     obj082.CWAR = MyObjPicking182.WRH;
                     obj082.UNIT = MyObjPicking182.UN;

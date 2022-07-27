@@ -2668,7 +2668,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
         <stringSQL>
           INSERT INTO BAAN.TWHCOL030140 VALUES('[:T$CWOR]',
           '[:T$CWDE]',
-          '[:T$ITEM]',
+          {0}.F_ITEM_POP('[:T$ITEM]'),
           '[:T$QTDL]',
           '[:T$CUNI]',
           '[:T$RCNO]',

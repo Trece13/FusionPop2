@@ -86,8 +86,8 @@ namespace whusap.WebPages.WorkOrders
             twhcol130.CWOR = CWOR.ToUpper();
             twhcol130.CWDE = CWDE.ToUpper();
             twhcol130.ITEM = ITEM.ToUpper();
-            twhcol130.QTDL = OQTY.ToUpper();
-            twhcol130.RCNO = RQTY.ToUpper();
+            twhcol130.QTDL = RQTY.ToUpper();
+            twhcol130.RCNO = "";
             twhcol130.CUNI = UNIT;
             twhcol130.USER = HttpContext.Current.Session["user"].ToString();
             if(Itwhcol030.InsertTwhcol030(twhcol130,ref strError)){
