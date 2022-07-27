@@ -144,7 +144,8 @@
         let timer2;
         let timer3;
         let timer4;
-
+        let timerSuccesInsert;
+        let msg = "";
         function stoper() {
 
             clearTimeout(timer);
@@ -311,9 +312,12 @@
         }
 
         let save = function () {
+            let enter = false;
             for (var row = 0; row < 5 ; row++) {
                 if ($('#txItem' + row).val().trim() != "" && $('#lblUnit' + row).html().trim() != "" && $('#txReqQty' + row).val().trim() != "") {
-                    sendAjax('Save', "{'CWOR':'" + $('#txWareFrom').val() + "','CWDE':'" + $('#txWareTo').val() + "','ITEM':'" + $('#txItem' + row).val() + "','OQTY':'" + $('#lblAvalI' + row).html() + "','UNIT':'" + $('#lblUnit' + row).html() + "','RQTY':'" + $('#txReqQty' + row).val() + "'}",null)
+                    stoperD(timerSuccesInsert);
+                    sendAjax('Save', "{'CWOR':'" + $('#txWareFrom').val() + "','CWDE':'" + $('#txWareTo').val() + "','ITEM':'" + $('#txItem' + row).val() + "','OQTY':'" + $('#lblAvalI' + row).html() + "','UNIT':'" + $('#lblUnit' + row).html() + "','RQTY':'" + $('#txReqQty' + row).val() + "'}", null)
+                    enter = true;
                 }
             }
             ClearTable();
@@ -324,10 +328,23 @@
             $("#toWareDiv").fadeOut(500);
             $("#toSaveDiv").fadeOut(500);
             $("#toTableDiv").fadeOut(500);
+            if (enter) {
+                alert("Save Success");
+            }
+            else {
+                alert("Save don't Success");
+            }
         }
 
         let saveSucces = function (r) {
-            ClearTable();
+            var myJson = JSON.parse(r.d);
+            console.log(myJson.Msg);
+            msg = myJson.Msg;
+            //timerSuccesInsert = setTimeout(mensaje, 2000);
+        }
+
+        let mensaje = function () {
+            alert(msg);
         }
 
         let verifyWareFrom = function () {
