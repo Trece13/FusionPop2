@@ -455,7 +455,7 @@ namespace whusap.WebPages.WorkOrders
                     obj082.PONO = MyObjPicking182.PONO == "" ? " " : MyObjPicking182.PONO;
                     obj082.ADVS = MyObjPicking182.ADVS == "" ? " " : MyObjPicking182.ADVS;
                     obj082.ITEM = MyObjPicking182.ITEM;
-                    obj082.STAT = consigment.Trim() == "true" ? "7" : "8";
+                    obj082.STAT = consigment.Trim() == "true" ? "8" : "4";
                     obj082.QTYT = QTYT;
                     obj082.CWAR = MyObjPicking182.WRH;
                     obj082.UNIT = MyObjPicking182.UN;
@@ -473,7 +473,7 @@ namespace whusap.WebPages.WorkOrders
                     obj182Old.PONO = MyObjPicking.PONO == "" ? " " : MyObjPicking182.PONO;
                     obj182Old.ADVS = MyObjPicking.ADVS == "" ? " " : MyObjPicking182.ADVS;
                     obj182Old.ITEM = MyObjPicking.ITEM;
-                    obj182Old.STAT = consigment.Trim() == "true" ? "7" : "4";
+                    obj182Old.STAT = consigment.Trim() == "true" ? "8" : "4";
                     obj182Old.QTYT = (Convert.ToDecimal(MyObjPicking.QTY) - Convert.ToDecimal(QTYT)).ToString();
                     obj182Old.QTY = (Convert.ToDecimal(MyObjPicking182.QTYT) - Convert.ToDecimal(QTYT)).ToString();
                     obj182Old.CWAR = MyObjPicking.WRH;
