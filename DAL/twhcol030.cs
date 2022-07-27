@@ -37,7 +37,7 @@ namespace whusa.DAL
             paramList.Add(":T$ITEM", ObjTwhcol030.ITEM);
             paramList.Add(":T$QTDL", ObjTwhcol030.QTDL);
             paramList.Add(":T$CUNI", ObjTwhcol030.CUNI);
-            paramList.Add(":T$RCNO", ObjTwhcol030.RCNO);
+            paramList.Add(":T$RCNO", ObjTwhcol030.RCNO.Trim() == "" ? " " : ObjTwhcol030.RCNO.Trim());
             paramList.Add(":T$DATE", ObjTwhcol030.DATE);
             //paramList.Add(":T$MESS", ObjTwhcol030.MESS);
             paramList.Add(":T$USER", ObjTwhcol030.USER);
