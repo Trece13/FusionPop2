@@ -235,7 +235,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.tticol242{1} col242
           ON col042.t$pdno = col242.t$pdno
           AND col042.t$sqnb = col242.t$sqnb
-          WHERE col242.t$cwat = '[:T$CWAT]'
+          WHERE col242.t$cwat = upper('[:T$CWAT]')
           AND col042.t$dele = '7') t
           SET t.t$dele = '[:T$DELE]'
         </stringSQL>
@@ -570,7 +570,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           UPDATE {0}.tticol022{1}
           set
           T$PDNO ='[:T$PDNO]',
-          T$MITM ={0}.F_ITEM_POP([':T$MITM]'),
+          T$MITM ={0}.F_ITEM_POP('[:T$MITM]'),
           T$DELE ='[:T$DELE]'
           WHERE T$SQNB ='[:T$SQNB]'
         </stringSQL>
@@ -594,7 +594,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           INNER JOIN {0}.tticol222{1} col222
           ON col022.t$pdno = col222.t$pdno
           AND col022.t$sqnb = col222.t$sqnb
-          WHERE col222.t$cwat = '[:T$CWAT]'
+          WHERE col222.t$cwat = upper('[:T$CWAT]')
           AND col022.t$dele = '7') t
           SET t.t$dele = '[:T$DELE]'
         </stringSQL>
@@ -3118,7 +3118,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           set
           T$QTYA ='[:T$QTYA]',
           T$STAT ='[:T$STAT]'
-          where TRIM(T$CWAA) = TRIM('[:T$CWAA]')
+          where TRIM(T$CWAA) = TRIM(upper('[:T$CWAA]'))
           and t$stat = '3'
         </stringSQL>
       </operationName>
