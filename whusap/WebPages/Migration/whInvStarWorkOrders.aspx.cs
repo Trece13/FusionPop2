@@ -161,7 +161,14 @@ namespace whusap.WebPages.Migration
                                     }
                                     break;
                                 case enumStatus.OnHold:
-                                    slAction.Items.Insert(slAction.Items.Count, itemInitiated);
+                                    if (validaOrden.Rows[0]["TRAY"].ToString().Trim() != "1")
+                                    {
+                                        slAction.Items.Insert(slAction.Items.Count, itemInitiated);
+                                    }
+                                    else
+                                    {
+                                        slAction.Items.Insert(slAction.Items.Count, itemInitiatedTray);
+                                    }
                                     break;
                             }
 
