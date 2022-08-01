@@ -636,7 +636,7 @@ namespace whusa.Interfases
             string strError = string.Empty;
             try
             {
-                bool retorno = dal.UpdateMasive(MyObj022);
+                bool retorno = dal.UpdateMasiveStatus(MyObj022);
                 return retorno;
             }
             catch (Exception ex)
