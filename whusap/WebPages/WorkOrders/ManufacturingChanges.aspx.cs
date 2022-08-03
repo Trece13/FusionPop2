@@ -52,16 +52,17 @@ namespace whusap.WebPages.WorkOrders
                 MyWarehouse.MsgError = "The Warehouse don't exist";
 
             }
-            
+
             return JsonConvert.SerializeObject(MyWarehouse);
         }
 
         [WebMethod]
-        public static string VerifyItem(string ITEM,string ROW)
+        public static string VerifyItem(string ITEM, string ROW, string CWAR)
         {
             Ent_twhcol130 twhcol130 = new Ent_twhcol130();
             twhcol130.ITEM = ITEM;
-            DataTable CurrentItem = ITwhcol130.ValidarItemOnly(twhcol130);
+            twhcol130.CWAR = CWAR;
+            DataTable CurrentItem = ITwhcol130.ValidarItemOnly215(twhcol130);
             if (CurrentItem.Rows.Count > 0)
             {
                 twhcol130.ITEM = CurrentItem.Rows[0]["ITEM"].ToString();
@@ -79,7 +80,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string Save(string CWOR,string CWDE,string ITEM, string OQTY, string UNIT, string RQTY)
+        public static string Save(string CWOR, string CWDE, string ITEM, string OQTY, string UNIT, string RQTY)
         {
             string strError = string.Empty;
             Ent_ttwhcol030 twhcol130 = new Ent_ttwhcol030();

@@ -4000,6 +4000,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHERE TRIM(UPPER(TCIBD001.T$ITEM)) = TRIM(UPPER('[:T$ITEM]'))
         </stringSQL>
       </operationName>
+      <operationName name="ValidarItemOnly215">
+        <stringSQL>
+          SELECT DISTINCT TCIBD001.T$ITEM AS ITEM, TCIBD001.T$KLTC AS KLTC, TCIBD001.T$CUNI AS CUNI,TCIBD001.T$DSCA AS DSCA, WHWMD215.T$STOC AS QSTR FROM {0}.TWHWMD215{1} WHWMD215
+          INNER JOIN {0}.TTCIBD001{1} TCIBD001 ON WHWMD215.T$ITEM = TCIBD001.T$ITEM
+          WHERE TRIM(UPPER(TCIBD001.T$ITEM)) = TRIM(UPPER('[:T$ITEM]'))
+          AND WHWMD215.T$CWAR = '[:T$CWAR]'
+        </stringSQL>
+      </operationName>
       <operationName name="ValidarLote">
         <stringSQL>
           <stringSQL>

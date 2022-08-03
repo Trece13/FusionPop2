@@ -31,7 +31,7 @@
         </div>
         <div id="">
             <div class="row p-1">
-                <label id="lblError" class="col-2" style="color:red"></label>
+                <label id="lblError" class="col-2" style="color: red"></label>
             </div>
         </div>
         <div id="toSaveDiv">
@@ -68,7 +68,7 @@
                         <label id="lblUnit0"></label>
                     </td>
                     <td>
-                        <input class="form-control col-3" type="text" id="txReqQty0" /></td>
+                        <input class="form-control col-3" type="text" id="txReqQty0" oninput="verifyQty('0')" /></td>
                 </tr>
                 <tr row="1">
                     <th scope="row">2</th>
@@ -84,7 +84,7 @@
                         <label id="lblUnit1"></label>
                     </td>
                     <td>
-                        <input class="form-control col-3" type="text" id="txReqQty1" /></td>
+                        <input class="form-control col-3" type="text" id="txReqQty1" oninput="verifyQty('1')" /></td>
                 </tr>
                 <tr row="2">
                     <th scope="row">3</th>
@@ -100,7 +100,7 @@
                         <label id="lblUnit2"></label>
                     </td>
                     <td>
-                        <input class="form-control col-3" type="text" id="txReqQty2" /></td>
+                        <input class="form-control col-3" type="text" id="txReqQty2" oninput="verifyQty('2')" /></td>
                 </tr>
                 <tr row="3">
                     <th scope="row">4</th>
@@ -116,7 +116,7 @@
                         <label id="lblUnit3"></label>
                     </td>
                     <td>
-                        <input class="form-control col-3" type="text" id="txReqQty3" /></td>
+                        <input class="form-control col-3" type="text" id="txReqQty3" oninput="verifyQty('3')" /></td>
                 </tr>
                 <tr row="4">
                     <th scope="row">5</th>
@@ -132,7 +132,7 @@
                         <label id="lblUnit4"></label>
                     </td>
                     <td>
-                        <input class="form-control col-3" type="text" id="txReqQty4" /></td>
+                        <input class="form-control col-3" type="text" id="txReqQty4" oninput="verifyQty('4')" /></td>
                 </tr>
             </tbody>
         </table>
@@ -214,6 +214,17 @@
             $.ajax(options);
 
         }
+        let verifyQty = function (i) {
+            txQty = document.getElementById('txReqQty' + i).value;
+            lblAval = document.getElementById('lblAvalI' + i).innerHTML;
+            let qty = parseFloat(txQty);
+            let aval = parseFloat(lblAval);
+            if (qty > aval) {
+                $('txReqQty' + i).focus();
+                document.getElementById('txReqQty' + i).value = "0";
+                alert("the quantity entered is greater than the Quantity of stock ")
+            }
+        }
 
         let verifyItem = function (i) {
             txItem = document.getElementById('txItem' + i);
@@ -222,7 +233,7 @@
                     stoperD(timer0);
                     timer0 = setTimeout(
                         function () {
-                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "'}", verifyItemSucces)
+                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "','CWAR':'" + $('#txWareFrom').val().trim().toUpperCase() + "'}", verifyItemSucces)
                         }
                         , 2000);
                     break;
@@ -230,7 +241,7 @@
                     stoperD(timer1);
                     timer1 = setTimeout(
                         function () {
-                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "'}", verifyItemSucces)
+                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "','CWAR':'" + $('#txWareFrom').val().trim().toUpperCase() + "'}", verifyItemSucces)
                         }
                         , 2000);
                     break;
@@ -238,7 +249,7 @@
                     stoperD(timer2);
                     timer2 = setTimeout(
                         function () {
-                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "'}", verifyItemSucces)
+                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "','CWAR':'" + $('#txWareFrom').val().trim().toUpperCase() + "'}", verifyItemSucces)
                         }
                         , 2000);
                     break;
@@ -246,7 +257,7 @@
                     stoperD(timer3);
                     timer3 = setTimeout(
                         function () {
-                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "'}", verifyItemSucces)
+                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "','CWAR':'" + $('#txWareFrom').val().trim().toUpperCase() + "'}", verifyItemSucces)
                         }
                         , 2000);
                     break;
@@ -254,7 +265,7 @@
                     stoperD(timer4);
                     timer4 = setTimeout(
                         function () {
-                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "'}", verifyItemSucces)
+                            sendAjax('VerifyItem', "{'ITEM':'" + txItem.value.trim() + "','ROW':'" + i + "','CWAR':'" + $('#txWareFrom').val().trim().toUpperCase() + "'}", verifyItemSucces)
                         }
                         , 2000);
                     break;
@@ -314,10 +325,18 @@
         let save = function () {
             let enter = false;
             for (var row = 0; row < 5 ; row++) {
-                if ($('#txItem' + row).val().trim() != "" && $('#lblUnit' + row).html().trim() != "" && $('#txReqQty' + row).val().trim() != "") {
-                    stoperD(timerSuccesInsert);
-                    sendAjax('Save', "{'CWOR':'" + $('#txWareFrom').val() + "','CWDE':'" + $('#txWareTo').val() + "','ITEM':'" + $('#txItem' + row).val() + "','OQTY':'" + $('#lblAvalI' + row).html() + "','UNIT':'" + $('#lblUnit' + row).html() + "','RQTY':'" + $('#txReqQty' + row).val() + "'}", null)
-                    enter = true;
+                txQty = document.getElementById('txReqQty' + row).value;
+                lblAval = document.getElementById('lblAvalI' + row).innerHTML;
+                let qty = parseFloat(txQty);
+                let aval = parseFloat(lblAval);
+                if (qty <= aval) {
+                    if ($('#txItem' + row).val().trim() != "" && $('#lblUnit' + row).html().trim() != "" && $('#txReqQty' + row).val().trim() != "") {
+                        stoperD(timerSuccesInsert);
+                        sendAjax('Save', "{'CWOR':'" + $('#txWareFrom').val() + "','CWDE':'" + $('#txWareTo').val() + "','ITEM':'" + $('#txItem' + row).val() + "','OQTY':'" + $('#lblAvalI' + row).html() + "','UNIT':'" + $('#lblUnit' + row).html() + "','RQTY':'" + $('#txReqQty' + row).val() + "'}", null)
+                        enter = true;
+                    }
+                }
+                else {
                 }
             }
             ClearTable();
