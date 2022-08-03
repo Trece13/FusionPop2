@@ -2146,5 +2146,26 @@ namespace whusa.Interfases
             return retorno;
         }
 
+
+        public DataTable ValidarItemOnly215(Ent_twhcol130 twhcol130)
+        {
+            method = MethodBase.GetCurrentMethod();
+            paramList = new Dictionary<string, object>();
+            paramList.Add(":T$ITEM", twhcol130.ITEM.Trim());
+            paramList.Add(":T$CWAR", twhcol130.CWAR.Trim());
+
+            strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+
+            try
+            {
+                consulta = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, true);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return consulta;
+        }
     }
 }
