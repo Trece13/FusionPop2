@@ -133,13 +133,14 @@ namespace whusap.WebPages.InvReceipts
 
             string strMsg = string.Empty;
             ////JC 020322 Validar si el web service esta arriba
-            //string ws = WebConfigurationManager.AppSettings["ws"].ToString();
+            string ws = WebConfigurationManager.AppSettings["ws"].ToString();
+            var respuesta = WebSiteIsAvailable(ws);
             if (twhcol130.PAID.ToUpper().Trim().Contains("-RT"))
             {
                 return "";
             }
 
-            var respuesta = true;
+            //var respuesta = true;
             if (respuesta != false)
             {
                 DataTable dt133WhitPaid = ServiceRfidPop.SelectWhcol133OPaidAssing(RFID, "VA Dock");
