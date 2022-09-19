@@ -6631,7 +6631,8 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       </operationName>
       <operationName name="ActualizaRegistro_ticol022">
         <stringSQL>
-          UPDATE {0}.tticol022{1} SET T$DELE = [:T$DELE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24
+          --UPDATE {0}.tticol022{1} SET T$DELE = [:T$DELE], T$LOGN = '[:T$LOGN]', T$DATE = sysdate+5/24 --JC140922 Evitar cambiar los datos de usuario y fecha del anuncio por los del usuario que rechaza
+          UPDATE {0}.tticol022{1} SET T$DELE = [:T$DELE]
           WHERE T$SQNB = '[:T$PAID]'
         </stringSQL>
       </operationName>
