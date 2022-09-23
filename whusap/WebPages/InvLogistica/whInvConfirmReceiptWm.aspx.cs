@@ -22,7 +22,8 @@ namespace whusap.WebPages.InvLogistica
         private static InterfazDAL_tticol025 _idaltticol025 = new InterfazDAL_tticol025();
         private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
         private static InterfazDAL_ttisfc001 _idalttisfc001 = new InterfazDAL_ttisfc001();
-
+        // JC 230922 Si las variables están vacías vuelvo a consultar la ubicación y la bodega
+        public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
         private static Mensajes _mensajesForm = new Mensajes();
         private static LabelsText _textoLabels = new LabelsText();
         private static string _operator;
@@ -282,6 +283,13 @@ namespace whusap.WebPages.InvLogistica
                     {
                         ReturnObj.Msg = mensajes("msjsave");
                         ReturnObj.Error = false;
+                        // JC 230922 Si las variables están vacías vuelvo a consultar la ubicación y la bodega
+                        if (LOCAG == null || CWARG == null)
+                        {
+                            CWARG = ReturnObj.CWAR;
+                            LOCAG = HttpContext.Current.Session["LOCA"].ToString() == null ? twhcol130DAL.ConsultarLocationNativa(ReturnObj.CWAR, "1").Rows[0]["T$LOCA"].ToString().Trim() : HttpContext.Current.Session["LOCA"].ToString();
+                        }
+                        
                         _idaltticol022.ActualizarCantidadAlmacenRegistroTicol222(HttpContext.Current.Session["user"].ToString(), data022.qtd1, LOCAG, CWARG, data022.sqnb);
                         return JsonConvert.SerializeObject(ReturnObj);
                     }
