@@ -991,6 +991,7 @@
         }
 
         var loadPicksPending = function () {
+            $("#btnPickingComplete").hide(100);
             $("#MainDiv").hide(100);
             if (bdPicket182.childElementCount > 0) {
                 for (let i = bdPicket182.childElementCount - 1; i >= 0 ; i--) {
