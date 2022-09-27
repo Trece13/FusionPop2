@@ -1055,7 +1055,7 @@
                 }
                 OORG = item.OORG
 
-                if (OORG = "21" && item.FinishPickEnable == true) {
+                if (OORG == "21" && item.FinishPickEnable == true) {
                     $("#btnPickingComplete").show(100);
                 }
                 else {
