@@ -693,14 +693,8 @@
             }).then(function (result) {
                 if (result.value) {
                     Method = "PickingComplete"
-                    Data = "{'PAID':'" + $('#txPaid').val() + "'}";
+                    Data = "{}";
                     EventoAjax(Method, Data, SucceessPalletFinish);
-                    $("#StatusChange").hide(100);
-                    Swal.fire(
-                      'Finished!',
-                      'Pallet Finished.',
-                      'success'
-                    )
                 }
             })
         }
@@ -781,6 +775,21 @@
             ClearFormPicking();
         }
         var SucceessPalletFinish = function (r) {
+            
+            myLabelFrame = document.getElementById('myLabelFrame');
+            if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
+            }
+            else {
+                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
+
+            }
+            $("#StatusChange").hide(100);
+            Swal.fire(
+              'Finished!',
+              'Pallet Finished.',
+              'success'
+            );
             ClearFormPicking();
             loadPicksPending();
         }
