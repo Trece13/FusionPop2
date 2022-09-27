@@ -2359,6 +2359,39 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           --AND T$ORNO = '[:ORNO]'
         </stringSQL>
       </operationName>
+      <operationName name="Actualizartticol082Stat">
+        <stringSQL>
+          update {0}.tticol082{1}
+          set t$stat = '[:STAT]'
+          where trim(T$ORNO) =  trim('[:ORNO]')
+        </stringSQL>
+      </operationName>
+      <operationName name="GetTticol082PaidsOrno">
+        <stringSQL>
+          SELECT LISTAGG(CONCAT(TRIM(T$PAID),CONCAT('/',T$QTYT)), ',')  WITHIN GROUP (ORDER BY T$ORNO) AS PAIDS FROM BAAN.TTICOL082140 WHERE TRIM(T$ORNO) =  TRIM('[:ORNO]')
+        </stringSQL>
+      </operationName>
+      <operationName name="UpdateTticol082Pick">
+        <stringSQL>
+          UPDATE BAAN.TTICOL082140 SET T$PICK = '[:PICK]' WHERE  TRIM(T$ORNO) =  TRIM('[:ORNO]')
+        </stringSQL>
+      </operationName>
+      <operationName name="GetTticol082LastPick">
+        <stringSQL>
+          SELECT * FROM (SELECT T$ORNO,T$PICK,TO_CHAR(T$TIME,'YYYY-MON-DD HH24:MM:SS') AS TIMEREC
+          FROM BAAN.TTICOL082140 WHERE TRIM(T$ORNO) =  TRIM('[:ORNO]') ORDER BY T$ORNO, TIMEREC DESC) WHERE ROWNUM = 1
+        </stringSQL>
+      </operationName>
+      <operationName name="DeleteTticol182P">
+        <stringSQL>
+          DELETE FROM BAAN.tticol182140 WHERE trim(T$OORG) = trim('[:OORG]') AND trim(T$ORNO) = trim('[:ORNO]') AND trim(T$PONO) = trim('[:PONO]') AND trim(T$ADVS) = trim('[:ADVS]') AND trim(T$ITEM) = trim('[:ITEM]')
+        </stringSQL>
+      </operationName>
+      <operationName name="GetTticol082Paids">
+        <stringSQL>
+          select trim(T$PAID) from BAAN.tticol082140 where trim(T$ORNO) =  trim('[:ORNO]')
+        </stringSQL>
+      </operationName>
       <operationName name="Actualizartticol082Pick">
         <stringSQL>
           update {0}.tticol082{1}

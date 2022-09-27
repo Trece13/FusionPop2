@@ -21,9 +21,11 @@
             -webkit-animation: load7 1.8s infinite ease-in-out;
             animation: load7 1.8s infinite ease-in-out;
         }
-        #StatusChangeBtn{
-            display:none;
+
+        #StatusChangeBtn {
+            display: none;
         }
+
         .loader {
             margin: 8em auto;
             font-size: 10px;
@@ -259,7 +261,7 @@
             border-radius: 4px;
         }
 
-        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc, #MainDiv {
+        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc, #MainDiv,#btnPickingComplete {
             display: none;
         }
 
@@ -276,6 +278,7 @@
         }
     </style>
     <script>
+        let OORG = "";
         function printDiv(divID) {
 
             var monthNames = [
@@ -474,9 +477,10 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button><br />
-                        <button class="btn btn-danger col-12 btn-sm" id="" type="button" onclick="Stop()";><span>Stop Picking</span></button><br />
-                        <button class="btn btn-warning col-12 btn-sm" id="" type="button" onclick="Block()";><span>Block Picking</span></button>
+                        <button class="btn btn-success col-6 btn-sm mb-1"" id="btnPickingComplete" type="button" onclick="PickingComplete()"><span>Final pallet picked</span></button>
+                        <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button>
+                        <button class="btn btn-danger col-12 btn-sm mb-1"" id="" type="button" onclick="Stop()";><span>Stop Picking</span></button><br />
+                        <button class="btn btn-warning col-12 btn-sm mb-1"" id="" type="button" onclick="Block()";><span>Block Picking</span></button>
                     </div>
                     <div class="row">
                         <label id="lblError" style="color: red; font-size: 30px;"></label>
@@ -677,6 +681,30 @@
             })
         }
 
+        function PickingComplete() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then(function (result) {
+                if (result.value) {
+                    Method = "PickingComplete"
+                    Data = "{'PAID':'" + $('#txPaid').val() + "'}";
+                    EventoAjax(Method, Data, SucceessPalletFinish);
+                    $("#StatusChange").hide(100);
+                    Swal.fire(
+                      'Finished!',
+                      'Pallet Finished.',
+                      'success'
+                    )
+                }
+            })
+        }
+
         function BlockPicking() {
             Swal.fire({
                 title: 'Are you sure?',
@@ -690,7 +718,7 @@
                 if (result.value) {
                     Method = "BlockPicking"
                     Data = "{}";
-                    EventoAjax(Method, Data,BlockPickingSuccess);
+                    EventoAjax(Method, Data, BlockPickingSuccess);
                     $("#StatusChange").hide(100);
                     Swal.fire(
                       'Blocked!',
@@ -700,7 +728,7 @@
                 }
             })
         }
-        var BlockPickingSuccess = function(){
+        var BlockPickingSuccess = function () {
             ClearFormPicking();
             loadPicksPending();
         }
@@ -752,6 +780,10 @@
         var SucceessStatusChange = function (r) {
             ClearFormPicking();
         }
+        var SucceessPalletFinish = function (r) {
+            ClearFormPicking();
+            loadPicksPending();
+        }
         var changeReason = function () {
             console.log(ddReason.value);
             if (ddReason.value != "0") {
@@ -793,7 +825,7 @@
 
         }
 
-        var PalletIDSuccess = function (r) {    
+        var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
                 $("#StatusChangeBtn").show(100);
@@ -814,6 +846,7 @@
                     hideShowNeutroInputText(btnConfirm, false);
 
                 }
+
                 //lblPick.innerHTML = MyObj.PICK;
                 //lblPaid.innerHTML = MyObj.PALLETID;
                 LblItem.innerHTML = MyObj.ITEM;
@@ -1010,8 +1043,17 @@
                     $("#MainDiv").show(100);
                     ShowCurrentOptionsItem();
                 }
+                OORG = item.OORG
+
+                if (OORG = "21" && item.FinishPickEnable == true) {
+                    $("#btnPickingComplete").show(100);
+                }
+                else {
+                    $("#btnPickingComplete").hide(100);
+                }
             }
             else {
+                $("#btnPickingComplete").hide(100);
                 $("#MainDiv").hide(100);
                 $('#bdPicket182').hide(100);
                 alert("No Picks Availables For This Warehouse");
@@ -1127,7 +1169,7 @@
         //}
 
         var VerifyQuantity = function (e) {
-            console.log(e.keyCode+" "+e.which);
+            console.log(e.keyCode + " " + e.which);
             if (e.keyCode >= 48 && e.keyCode <= 57 || e.keyCode == 9 || e.keyCode == 8 || e.keyCode == 190) {
                 if (lblUnit.innerHTML.trim().toUpperCase() != "KG" && lblUnit.innerHTML.trim().toUpperCase() != "LB") {
                     txQtyc.value = txQtyc.value.replace(',', '').replace('.', '');
@@ -1141,7 +1183,7 @@
                 }
                 else {
                     qtytInvalid();
-                    $('#lblError').html('Quantity invalid')
+                    $('#lblError').html('Quantity invalid');
                 }
             }
             else {
@@ -1171,7 +1213,7 @@
                     $("#ConfirmLoader").hide(500);
                     return;
                 }
-                dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "','consigment':'" + (chkConsigment.checked == true ? 'true' : 'false') + "'}";
+                dataS = "{'QTYT':'" + (txQtyc.value.trim() == "" ? lblQtyc.innerHTML.trim() : txQtyc.value.trim()) + "','consigment':'" + (chkConsigment.checked == true ? 'true' : 'false') + "','QTYTDESP':'" + $("#qtyTbl").html().trim() + "'}";
 
                 //"'CUNI':'" + $('#Contenido_lblQuantityDesc').html() + "', 'LOCA':'" + $('#Contenido_lbllocation').html() + "', 'CWAR':'" + $('#Contenido_lblWarehouse').html() + "', 'CLOT':'" + $('#Contenido_LblLotId').html() + "'"
                 var AjaxConfirm = $.ajax({
@@ -1190,7 +1232,7 @@
                         }
                         var myObj = JSON.parse(response.d)
                         if (myObj.Error == false) {
-                            if (true) {
+                            $("#btnPickingComplete").hide();
                                 //    printDiv("MyEtiqueta");
                                 myLabelFrame = document.getElementById('myLabelFrame');
                                 if (sessionStorage.getItem('nav').toString() == 'EDG') {
@@ -1200,7 +1242,6 @@
                                     myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
 
                                 }
-                            }
                             alert("Information saved successfully");
                             //selectPicksPending();
                             $("#ConfirmLoader").hide(500);

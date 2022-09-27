@@ -717,6 +717,62 @@ namespace whusa.DAL
             return retorno;
         }
 
+        public bool Actualizartticol082Stat(Ent_tticol082 MyObj)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":ORNO", MyObj.ORNO);
+                paramList.Add(":STAT", MyObj.STAT);
+                //JC 230721 Cambio para que se envíe el dato con el numero aleatorio
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            MyObj.Error = true;
+            MyObj.ErrorMsg = strError;
+            return retorno;
+        }
+
+        public DataTable GetTticol082PaidsOrno(Ent_tticol082 MyObj)
+        {
+
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":ORNO", MyObj.ORNO);
+
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+
         public bool Actualizartticol082SinRandom(Ent_tticol082 MyObj)
         {
 
@@ -1733,6 +1789,88 @@ namespace whusa.DAL
             MyObj.ErrorMsg = strError;
             return retorno;
 
+        }
+
+        public DataTable GetTticol082LastPick(Ent_tticol082 MyObj)
+        {
+            method = MethodBase.GetCurrentMethod();
+            string strError = string.Empty;
+            DataTable retrotno = new DataTable();
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":ORNO", MyObj.ORNO);
+
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                retrotno = DAL.BaseDAL.BaseDal.EjecutarCons("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retrotno;
+        }
+
+        public bool UpdateTticol082Pick(Ent_tticol082 MyObj)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":ORNO", MyObj.ORNO);
+                paramList.Add(":PICK", MyObj.PICK);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            MyObj.Error = true;
+            MyObj.ErrorMsg = strError;
+            return retorno;
+        }
+
+        public bool DeleteTticol182P(EntidadPicking MyObjPicking)
+        {
+            method = MethodBase.GetCurrentMethod();
+            bool retorno = false;
+            string strError = string.Empty;
+
+            try
+            {
+                paramList = new Dictionary<string, object>();
+                paramList.Add(":OORG", MyObjPicking.OORG);
+                paramList.Add(":ORNO", MyObjPicking.ORNO);
+                paramList.Add(":PONO", MyObjPicking.PONO);
+                paramList.Add(":ADVS", MyObjPicking.ADVS);
+                paramList.Add(":ITEM", MyObjPicking.ITEM);
+
+                strSentencia = recursos.readStatement(method.ReflectedType.Name, method.Name, ref owner, ref env, tabla, paramList);
+                return DAL.BaseDAL.BaseDal.EjecutarCrud("Text", strSentencia, ref parametersOut, null, false);
+            }
+
+            catch (Exception ex)
+            {
+                strError = ex.InnerException != null ?
+                    ex.Message + " (" + ex.InnerException + ")" :
+                    ex.Message;
+
+            }
+            return retorno;
         }
     }
 }

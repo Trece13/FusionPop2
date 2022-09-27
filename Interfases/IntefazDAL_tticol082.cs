@@ -125,6 +125,12 @@ namespace whusa.Interfases
             return dal.Actualizartticol082(myObj);
         }
 
+        public bool Actualizartticol082Stat(Ent_tticol082 myObj)
+        {
+            return dal.Actualizartticol082Stat(myObj);
+        }
+
+
         public bool Actualizartticol082SinRandom(Ent_tticol082 myObj)
         {
             return dal.Actualizartticol082SinRandom(myObj);
@@ -307,6 +313,27 @@ namespace whusa.Interfases
         {
 
             return dal.Actualizartticol082Pick(MyObj);
+        }
+
+        public DataTable GetTticol082PaidsOrno(Ent_tticol082 ent_tticol082)
+        {
+            return dal.GetTticol082PaidsOrno(ent_tticol082);
+        }
+
+        public DataTable GetTticol082LastPick(Ent_tticol082 ent_tticol082)
+        {
+            return dal.GetTticol082LastPick(ent_tticol082);
+        }
+
+
+        public bool UpdateTticol082Pick(Ent_tticol082 obj082)
+        {
+            return dal.UpdateTticol082Pick(obj082);
+        }
+
+        public bool DeleteTticol182P(EntidadPicking MyObjPicking)
+        {
+            return dal.DeleteTticol182P(MyObjPicking);
         }
     }
 }

@@ -28,17 +28,6 @@ namespace whusap.WebPages.WorkOrders
         public static string ThepalletIDDoesntexistorItsinpickingprocess = mensajes("ThepalletIDDoesntexistorItsinpickingprocess");
         public static string errorlog = string.Empty;
         public static string ADVS = string.Empty;
-        public object GObject = new object();
-        private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
-        private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
-        private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
-        public static InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
-        public static InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
-        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
-        private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
-        private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
-        private static InterfazDAL_tticol182 _idaltticol182 = new InterfazDAL_tticol182();
-        public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
         private static Mensajes _mensajesForm = new Mensajes();
         public static whusa.Utilidades.Recursos recursos = new whusa.Utilidades.Recursos();
         string sentencia1 = string.Empty;
@@ -46,6 +35,17 @@ namespace whusap.WebPages.WorkOrders
         string _idioma = string.Empty;
         private static string globalMessages = "GlobalMessages";
         public static string qtyaG = "0";
+        public object GObject = new object();
+        private static InterfazDAL_twhcol130 _idaltwhcol130 = new InterfazDAL_twhcol130();
+        private static InterfazDAL_tticol022 _idaltticol022 = new InterfazDAL_tticol022();
+        private static InterfazDAL_tticol042 _idaltticol042 = new InterfazDAL_tticol042();
+        public static  InterfazDAL_twhcol122 twhcolDAL = new InterfazDAL_twhcol122();
+        public static  InterfazDAL_twhcol130 twhcol130DAL = new InterfazDAL_twhcol130();
+        private static InterfazDAL_ttccol301 _idalttccol301 = new InterfazDAL_ttccol301();
+        private static InterfazDAL_tticol125 _idaltticol125 = new InterfazDAL_tticol125();
+        private static InterfazDAL_twhcol122 _idaltwhcol122 = new InterfazDAL_twhcol122();
+        private static InterfazDAL_tticol182 _idaltticol182 = new InterfazDAL_tticol182();
+        public static IntefazDAL_tticol082 Itticol082 = new IntefazDAL_tticol082();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -121,6 +121,7 @@ namespace whusap.WebPages.WorkOrders
         public static string loadPicks182(string CWAR)
         {
             EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+            MySessionObjPicking.FinishPickEnable = false;
             string strError = string.Empty;
             Ent_tticol182 MyObj182 = new Ent_tticol182();
             MyObj182.CWAR = CWAR;
@@ -156,6 +157,14 @@ namespace whusap.WebPages.WorkOrders
                         MyObj182.ADVS = MySessionObjPicking.ADVS;
                         _idaltticol182.ChangeStat182(ref MyObj182, ref strError);
                         MySessionObjPicking.error = false;
+                        DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MySessionObjPicking.ORNO });
+                        if (Paids082.Rows.Count > 0)
+                        {
+                            if (Paids082.Rows[0]["paids"].ToString().Trim() != "")
+                            {
+                                MySessionObjPicking.FinishPickEnable = true;
+                            }
+                        }
                         break;
                     }
                     index++;
@@ -388,7 +397,7 @@ namespace whusap.WebPages.WorkOrders
         }
 
         [WebMethod]
-        public static string Click_confirPKG(string QTYT, string consigment)
+        public static string Click_confirPKG(string QTYT, string consigment,string QTYTDESP)
         {
             try
             {
@@ -431,7 +440,7 @@ namespace whusap.WebPages.WorkOrders
                 {
                     QtyPicked = StockPicked.Rows[0]["QTY"].ToString();
                 }
-                String QtyTotal = (Convert.ToDecimal(QtyPicked) + Convert.ToDecimal(QTY)).ToString();
+                String QtyTotal = (Convert.ToDecimal(QtyPicked) + Convert.ToDecimal(QTYT)).ToString();
                 DataTable StockBaan = _idaltwhcol130.ValidarStockBaan(ref ITM, ref LOT, ref LOC, ref WRH, ref QtyTotal);
                 //JC 181121 Validar la cantidad en pickings previos
                 //DataTable StockPicked = _idaltwhcol130.ValidarStockPicked(ref ITM, ref LOT, ref LOC, ref WRH, ref QTY);
@@ -456,7 +465,7 @@ namespace whusap.WebPages.WorkOrders
                     obj082.ADVS = MyObjPicking182.ADVS == "" ? " " : MyObjPicking182.ADVS;
                     obj082.ITEM = MyObjPicking182.ITEM;
                     obj082.STAT = consigment.Trim() == "true" ? "7" : "4";
-                    obj082.STAT = MyObjPicking182.OORG.Trim() == "22" ? "8" : obj082.STAT;
+                    
                     obj082.QTYT = QTYT;
                     obj082.CWAR = MyObjPicking182.WRH;
                     obj082.UNIT = MyObjPicking182.UN;
@@ -485,8 +494,16 @@ namespace whusap.WebPages.WorkOrders
                     obj182Old.MCNO = MyObjPicking.MCNO == "" ? " " : MyObjPicking182.MCNO;
                     obj182Old.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
 
+                    if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY)&& MyObjPicking182.OORG.Trim() == "21")
+                    {
+                        obj082.STAT =  "4";
+                        Itticol082.Actualizartticol082Stat(new Ent_tticol082 { ORNO = MyObjPicking.ORNO, STAT = "4" });
 
-
+                    }
+                    else
+                    {
+                        obj082.STAT = (MyObjPicking182.OORG.Trim() == "22" || MyObjPicking182.OORG.Trim() == "21") ? "8" : obj082.STAT;
+                    }
 
                     decimal qtyt = ConvertToDecimal(QTYT.ToString().Trim());
                     decimal qtyt_old = ConvertToDecimal(QTYT_OLD.ToString().Trim());
@@ -572,6 +589,8 @@ namespace whusap.WebPages.WorkOrders
 
                                 if (res182 && Convert.ToDecimal(obj182Old.QTY) != 0)
                                 {
+
+
                                     HttpContext.Current.Session["codeMaterial"] = MyObj.mitm;
                                     HttpContext.Current.Session["codePaid"] = PAID;
                                     HttpContext.Current.Session["codePaid2"] = MyObj.sqnb;
@@ -588,6 +607,14 @@ namespace whusap.WebPages.WorkOrders
                                     HttpContext.Current.Session["Pick"] = obj082.PICK;
                                     HttpContext.Current.Session["PartialLabel"] = "yes";
 
+                                    if(Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY)){
+                                        DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MyObjPicking.ORNO});
+                                        if (Paids082.Rows.Count > 0)
+                                        {
+                                            HttpContext.Current.Session["codePaid2"] = Paids082.Rows[0]["PAIDS"].ToString();
+                                            HttpContext.Current.Session["Quantity"] = string.Empty;
+                                        }
+                                    }
 
                                     MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
                                     MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
@@ -616,6 +643,15 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codePaid"] = obj082.PAID;
                                 HttpContext.Current.Session["codePaid2"] = obj082.PAID;
 
+                                if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY))
+                                {
+                                    DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MyObjPicking.ORNO });
+                                    if (Paids082.Rows.Count > 0)
+                                    {
+                                        HttpContext.Current.Session["codePaid2"] = Paids082.Rows[0]["PAIDS"].ToString();
+                                        HttpContext.Current.Session["Quantity"] = string.Empty;
+                                    }
+                                }
                             }
                         }
                         else
@@ -736,6 +772,17 @@ namespace whusap.WebPages.WorkOrders
                                     HttpContext.Current.Session["AutoPrint"] = "yes";
                                     HttpContext.Current.Session["PickLabel"] = "yes";
 
+                                    if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY))
+                                    {
+                                        DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MyObjPicking.ORNO });
+                                        if (Paids082.Rows.Count > 0)
+                                        {
+                                            HttpContext.Current.Session["codePaid2"] = Paids082.Rows[0]["PAIDS"].ToString();
+                                            HttpContext.Current.Session["Quantity"] = string.Empty;
+                                        }
+                                    }
+
+
                                     MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.sqnb + "&code=Code128&dpi=96";
                                     MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                                     MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + ORNO + "&code=Code128&dpi=96";
@@ -762,6 +809,17 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["Quantity2"] = obj082.QTYT;
                                 HttpContext.Current.Session["codePaid"] = obj082.PAID;
                                 HttpContext.Current.Session["codePaid2"] = obj082.PAID;
+
+                                if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY))
+                                {
+                                    DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MyObjPicking.ORNO });
+                                    if (Paids082.Rows.Count > 0)
+                                    {
+                                        HttpContext.Current.Session["codePaid2"] = Paids082.Rows[0]["PAIDS"].ToString();
+                                        HttpContext.Current.Session["Quantity"] = string.Empty;
+                                    }
+                                }
+
 
                             }
                         }
@@ -881,6 +939,17 @@ namespace whusap.WebPages.WorkOrders
                                     HttpContext.Current.Session["Pick"] = obj082.PICK;
                                     HttpContext.Current.Session["PartialLabel"] = "yes";
 
+                                    if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY))
+                                    {
+                                        DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MyObjPicking.ORNO });
+                                        if (Paids082.Rows.Count > 0)
+                                        {
+                                            HttpContext.Current.Session["codePaid2"] = Paids082.Rows[0]["PAIDS"].ToString();
+                                            HttpContext.Current.Session["Quantity"] = string.Empty;
+                                        }
+                                    }
+
+
                                     MyObj.PAID_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.PAID + "&code=Code128&dpi=96";
                                     MyObj.PAID_OLD_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + PAID + "&code=Code128&dpi=96";
                                     MyObj.ORNO_URL = UrlBaseBarcode + "/Barcode/BarcodeHandler.ashx?data=" + MyObj.ORNO + "&code=Code128&dpi=96";
@@ -909,6 +978,17 @@ namespace whusap.WebPages.WorkOrders
                                 HttpContext.Current.Session["codePaid"] = obj082.PAID;
                                 HttpContext.Current.Session["codePaid2"] = obj082.PAID;
                                 HttpContext.Current.Session["PartialLabel"] = "no";
+
+                                if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY))
+                                {
+                                    DataTable Paids082 = Itticol082.GetTticol082PaidsOrno(new Ent_tticol082 { ORNO = MyObjPicking.ORNO });
+                                    if (Paids082.Rows.Count > 0)
+                                    {
+                                        HttpContext.Current.Session["codePaid2"] = Paids082.Rows[0]["PAIDS"].ToString();
+                                        HttpContext.Current.Session["Quantity"] = string.Empty;
+                                    }
+                                }
+
                             }
                         }
                         else
@@ -1008,6 +1088,23 @@ namespace whusap.WebPages.WorkOrders
             return JsonConvert.SerializeObject(MySessionObjPicking);
         }
 
+        [WebMethod]
+        public static string PickingComplete(string PAID)
+        {
+            EntidadPicking MyObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking"];
+            EntidadPicking MySessionObjPicking = (EntidadPicking)HttpContext.Current.Session["MyObjPicking182"];
+            string strError = string.Empty;
+            Ent_tticol082 obj082 = new Ent_tticol082();
+            obj082.ORNO = MyObjPicking.ORNO;
+            obj082.STAT = "4";
+            DataTable dt082Pick = Itticol082.GetTticol082LastPick(obj082);
+            bool actStat082 = Itticol082.Actualizartticol082Stat(obj082);
+            string latsPick = dt082Pick.Rows[0]["T$PICK"].ToString();
+            obj082.PICK = latsPick;
+            bool update082=Itticol082.UpdateTticol082Pick(obj082);
+            bool delete182 = Itticol082.DeleteTticol182P(MyObjPicking);
+            return JsonConvert.SerializeObject(MySessionObjPicking);
+        }
 
         public static string getSequence(string PAIDOld, string complement = "")
         {
