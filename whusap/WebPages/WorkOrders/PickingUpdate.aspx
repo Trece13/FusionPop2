@@ -477,10 +477,10 @@
 
                     <br>
                     <div class="row">
-                        <button class="btn btn-success col-6 btn-sm mb-1"" id="btnPickingComplete" type="button" onclick="PickingComplete()"><span>Final pallet picked</span></button>
                         <button class="btn btn-primary col-12 btn-sm mb-1" id="btnConfirm" onclick="Confirm(); return false;" style="display:none" type="button"><span>Confirm&nbsp;<i class='fas fa-circle-notch fa-spin' id="ConfirmLoader" style="display:none"></i></span></button>
                         <button class="btn btn-danger col-12 btn-sm mb-1"" id="" type="button" onclick="Stop()";><span>Stop Picking</span></button><br />
                         <button class="btn btn-warning col-12 btn-sm mb-1"" id="" type="button" onclick="Block()";><span>Block Picking</span></button>
+                        <button class="btn btn-success col-6 btn-sm mb-1"" id="btnPickingComplete" type="button" onclick="PickingComplete()"><span>Final pallet picked</span></button>
                     </div>
                     <div class="row">
                         <label id="lblError" style="color: red; font-size: 30px;"></label>
