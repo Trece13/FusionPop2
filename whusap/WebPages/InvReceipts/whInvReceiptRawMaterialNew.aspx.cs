@@ -637,93 +637,6 @@ namespace whusap.WebPages.InvReceipts
             return JsonConvert.SerializeObject(LstUnidadesMedida);
         }
 
-        //public void ListasOdenCompra()
-        //{
-        //    List<DataTable> LstDataTable = twhcol130DAL.ListasOrderType();
-
-        //    DataTable DtSalesOrder = LstDataTable[0];
-        //    DataTable DtListaTransferOrder = LstDataTable[1];
-        //    DataTable DtListaPurchaseOrders = LstDataTable[2];
-
-        //    List<twhinh210> LstSalesOrder = new List<twhinh210>();
-        //    List<twhinh210> LstTransferOrder = new List<twhinh210>();
-        //    List<twhinh210> LstPurchaseOrders = new List<twhinh210>();
-
-
-        //    foreach (DataRow row in DtSalesOrder.Rows)
-        //    {
-        //        twhinh210 ttwhinh210 = new twhinh210();
-        //        ttwhinh210.TERM = row["TERM"].ToString().Trim();
-        //        ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
-        //        ttwhinh210.ITEM = row["ITEM"].ToString().Trim();
-        //        ttwhinh210.KLTC = row["KLTC"].ToString().Trim();
-        //        ttwhinh210.PONO = row["PONO"].ToString().Trim();
-        //        ttwhinh210.STUN = row["STUN"].ToString().Trim();
-        //        ttwhinh210.CUNI = row["CUNI"].ToString().Trim();
-        //        ttwhinh210.CWAR = row["CWAR"].ToString().Trim();
-        //        ttwhinh210.OQUA = row["QSTR"].ToString().Trim();
-        //        ttwhinh210.LSEL = row["LSEL"].ToString().Trim();
-        //        ttwhinh210.LSEL = row["CLOT"].ToString().Trim();
-        //        //ttwhinh210.RTQP = row["RTQP"].ToString().Trim();
-        //        ttwhinh210.DSCA = row["DSCA"].ToString().Trim().Replace("\"", string.Empty).Replace("'", "");
-        //        ttwhinh210.PRDT = row["PRDT"].ToString().Trim();
-        //        ttwhinh210.QSTR = row["QSTR"].ToString().Trim();
-
-        //        LstSalesOrder.Add(ttwhinh210);
-        //    }
-
-        //    foreach (DataRow row in DtListaTransferOrder.Rows)
-        //    {
-        //        twhinh210 ttwhinh210 = new twhinh210();
-
-        //        ttwhinh210.TERM = row["TERM"].ToString().Trim();
-        //        ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
-        //        ttwhinh210.ITEM = row["ITEM"].ToString().Trim();
-        //        ttwhinh210.KLTC = row["KLTC"].ToString().Trim();
-        //        ttwhinh210.PONO = row["PONO"].ToString().Trim();
-        //        ttwhinh210.STUN = row["STUN"].ToString().Trim();
-        //        ttwhinh210.CUNI = row["CUNI"].ToString().Trim();
-        //        ttwhinh210.CWAR = row["CWAR"].ToString().Trim();
-        //        ttwhinh210.OQUA = row["QSTR"].ToString().Trim();
-        //        ttwhinh210.LSEL = row["LSEL"].ToString().Trim();
-        //        ttwhinh210.LSEL = row["CLOT"].ToString().Trim();
-        //        ttwhinh210.DSCA = row["DSCA"].ToString().Trim().Replace("\"", string.Empty).Replace("'", "");
-        //        ttwhinh210.PRDT = row["PRDT"].ToString().Trim();
-        //        ttwhinh210.QSTR = row["QSTR"].ToString().Trim();
-        //        LstTransferOrder.Add(ttwhinh210);
-        //    }
-
-        //    foreach (DataRow row in DtListaPurchaseOrders.Rows)
-        //    {
-
-        //        twhinh210 ttwhinh210 = new twhinh210();
-        //        ttwhinh210.OQUA = row["OQUA"].ToString().Trim();
-        //        ttwhinh210.TERM = AsignadorTerm(row["RTDP"].ToString().Trim(), row["RTDM"].ToString().Trim(), row["TERM"].ToString().Trim(), Convert.ToDateTime(row["PRDT"]));
-        //        ttwhinh210.ORNO = row["ORNO"].ToString().Trim();
-        //        ttwhinh210.ITEM = row["ITEM"].ToString().Trim();
-        //        ttwhinh210.KLTC = row["KLTC"].ToString().Trim();
-        //        ttwhinh210.PONO = row["PONO"].ToString().Trim();
-        //        ttwhinh210.STUN = row["STUN"].ToString().Trim();
-        //        ttwhinh210.CUNI = row["CUNI"].ToString().Trim();
-        //        ttwhinh210.CWAR = row["CWAR"].ToString().Trim();
-        //        ttwhinh210.RTQP = row["RTQP"].ToString().Trim();
-        //        ttwhinh210.SEQNR = row["SEQNR"].ToString().Trim();
-        //        ttwhinh210.DSCA = row["DSCA"].ToString().Trim().Replace("\"", string.Empty).Replace("'", "");
-        //        ttwhinh210.PRDT = row["PRDT"].ToString().Trim();
-        //        ttwhinh210.QSTR = row["QSTR"].ToString().Trim();
-
-
-
-        //        LstPurchaseOrders.Add(ttwhinh210);
-        //    }
-
-        //    LstSalesOrderJSON = JsonConvert.SerializeObject(LstSalesOrder);
-        //    LstTransferOrderJSON = JsonConvert.SerializeObject(LstTransferOrder);
-        //    LstPurchaseOrdersJSON = JsonConvert.SerializeObject(LstPurchaseOrders);
-
-        //}
-
-
         public static string AsignadorTerm(string RTDP, string RTDM, string TERM, DateTime PRDT)
         {
             string retorno = "1";
@@ -808,6 +721,8 @@ namespace whusap.WebPages.InvReceipts
                     ttwhinh210.DSCA = row["DSCA"].ToString().Trim().Replace("\"", string.Empty).Replace("'", "");
                     ttwhinh210.PRDT = row["PRDT"].ToString().Trim();
                     ttwhinh210.QSTR = row["QSTR"].ToString().Trim();
+                    ttwhinh210.RFID = row["RFID"].ToString().Trim();
+
 
                     LstSalesOrder.Add(ttwhinh210);
                 }
@@ -832,6 +747,8 @@ namespace whusap.WebPages.InvReceipts
                     ttwhinh210.DSCA = row["DSCA"].ToString().Trim().Replace("\"", string.Empty).Replace("'", "");
                     ttwhinh210.PRDT = row["PRDT"].ToString().Trim();
                     ttwhinh210.QSTR = row["QSTR"].ToString().Trim();
+                    ttwhinh210.RFID = row["RFID"].ToString().Trim();
+
                     LstTransferOrder.Add(ttwhinh210);
                 }
             }
@@ -855,6 +772,7 @@ namespace whusap.WebPages.InvReceipts
                     ttwhinh210.DSCA = row["DSCA"].ToString().Trim().Replace("\"", string.Empty).Replace("'", "");
                     ttwhinh210.PRDT = row["PRDT"].ToString().Trim();
                     ttwhinh210.QSTR = row["QSTR"].ToString().Trim();
+                    ttwhinh210.RFID = row["RFID"].ToString().Trim();
 
 
 
@@ -871,8 +789,6 @@ namespace whusap.WebPages.InvReceipts
 
             return JsonConvert.SerializeObject(listJson);
         }
-
-
 
         [WebMethod]
         public static string ValidarOrderID(string ORNO)
@@ -915,7 +831,6 @@ namespace whusap.WebPages.InvReceipts
             }
             return JsonConvert.SerializeObject(tcibd001);
         }
-
 
         [WebMethod]
         public static bool ValidarLote(string ITEM, string CLOT)

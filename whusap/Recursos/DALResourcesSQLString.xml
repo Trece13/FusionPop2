@@ -3927,13 +3927,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
           TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
-          pur401.t$oltp OLTP, pur401.t$cwar CWAR,inh210.T$STUN STUN, IBD001.T$CUNI CUNI,inh210.t$seqn SEQNR,inh210.T$QSTR QSTR
+          pur401.t$oltp OLTP, pur401.t$cwar CWAR,inh210.T$STUN STUN, IBD001.T$CUNI CUNI,inh210.t$seqn SEQNR,inh210.T$QSTR QSTR,COL020.T$RFID RFID
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001 on ipu001.t$item = pur401.t$item
           inner join {0}.twhinh210{1} inh210 on inh210.t$orno = pur401.t$orno
           and inh210.t$pono = pur401.t$pono/*
           and inh210.t$seqn/100000 = pur401.t$sqnb*/ INNER JOIN {0}.TTCIBD001{1} IBD001 on pur401.T$ITEM = IBD001.T$ITEM
           INNER JOIN {0}.TTCCOL003{1} COL003 on COL003.T$CWAR = INH210.T$CWAR
+          LEFT JOIN {0}.TTCCOL020{1} COL020 on TRIM(COL020.T$ITEM) = TRIM(IBD001.T$ITEM)
           where /*TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') between TO_CHAR(sysdate-ipu001.t$rtdp,'MM/DD/YYYY')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'MM/DD/YYYY') -- Tolerancia en dias atras y adelante and */
           pur401.t$oltp != 3 --No tomar retroordenes
@@ -3968,7 +3969,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
 
       <operationName name="ListaSalesOrdersReturn">
         <stringSQL>
-          SELECT distinct t$prdt PRDT, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM,
+          SELECT distinct t$prdt PRDT, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM,COL020.T$RFID RFID,
           sysdate-case when ipu001.t$rtdp is null then 0 else ipu001.t$rtdp end,
           sysdate+case when ipu001.t$rtdm is null then 0 else ipu001.t$rtdm end,
           TCIBD001.t$DSCA DSCA, WHINH210.T$CLOT AS CLOT, T$LSEL AS LSEL,
@@ -3978,13 +3979,14 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHINH210.T$PONO PONO, WHINH210.T$STUN STUN, TCIBD001.T$CUNI CUNI, WHINH210.T$CWAR CWAR, WHINH210.T$QSTR QSTR FROM {0}.TWHINH210{1} WHINH210
           INNER JOIN {0}.TTCIBD001{1} TCIBD001 on WHINH210.T$ITEM = TCIBD001.T$ITEM
           left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = WHINH210.T$ITEM
+          LEFT JOIN {0}.TTCCOL020{1} COL020 on TRIM(COL020.T$ITEM) = TRIM(IBD001.T$ITEM)
           where WHINH210.T$OORG = 1  and WHINH210.T$LSTA = 5 and WHINH210.t$blck = 2 and WHINH210.T$ORNO = '[:T$ORNO]' order by WHINH210.T$PONO asc
         </stringSQL>
       </operationName>
 
       <operationName name="ListaTransferOrder">
         <stringSQL>
-          SELECT distinct TO_CHAR(t$prdt,'MM/DD/YYYY') PRDT, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM,
+          SELECT distinct TO_CHAR(t$prdt,'MM/DD/YYYY') PRDT, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM,COL020.T$RFID RFID,
           sysdate-case when ipu001.t$rtdp is null then 0 else ipu001.t$rtdp end,
           sysdate+case when ipu001.t$rtdm is null then 0 else ipu001.t$rtdm end,
           TCIBD001.t$DSCA DSCA, WHINH210.T$CLOT AS CLOT, T$LSEL AS LSEL,
@@ -3994,6 +3996,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           WHINH210.T$PONO PONO, WHINH210.T$STUN STUN, TCIBD001.T$CUNI CUNI, WHINH210.T$CWAR CWAR, WHINH210.T$QSTR QSTR FROM {0}.TWHINH210{1} WHINH210
           INNER JOIN {0}.TTCIBD001{1} TCIBD001 on WHINH210.T$ITEM = TCIBD001.T$ITEM
           left join {0}.ttdipu001{1} ipu001 on ipu001.t$item = WHINH210.T$ITEM
+          LEFT JOIN {0}.TTCCOL020{1} COL020 on TRIM(COL020.T$ITEM) = TRIM(IBD001.T$ITEM)
           where WHINH210.T$OORG = 22  and WHINH210.T$LSTA = 5 and WHINH210.t$blck = 2 order by WHINH210.T$PONO asc
         </stringSQL>
       </operationName>

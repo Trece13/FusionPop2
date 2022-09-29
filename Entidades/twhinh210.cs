@@ -23,6 +23,8 @@ namespace whusa
         public string DSCA { get; set; }
         public string PRDT { get; set; }
         public string QSTR { get; set; }
+
+        public string RFID { get; set; }
     }
 
 }

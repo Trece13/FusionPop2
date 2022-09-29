@@ -1267,6 +1267,10 @@
 
 
                                 }
+                                else if (MyObject.RFID.trim() == "1") {
+                                    $('#ChkfinalReceipt').prop('checked', false);
+                                    $('#ChkfinalReceipt').prop('disabled', true);
+                                }
                                 else {
                                     $('#ChkfinalReceipt').prop('checked', false);
                                     $('#ChkfinalReceipt').prop('disabled', false);
@@ -1312,6 +1316,11 @@
                                 $('#ChkfinalReceipt').prop('checked', true);
                                 $('#ShowModal').click();
                                 finalReceiptAuto = true;
+                            }
+                            else if (MyObject.RFID.trim()=="1") {
+                                $('#ChkfinalReceipt').prop('checked', false);
+                                $('#ChkfinalReceipt').prop('disabled', true);
+                                finalReceiptAuto = false;
                             }
                             else {
                                 $('#ChkfinalReceipt').prop('checked', false);
