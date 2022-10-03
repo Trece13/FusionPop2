@@ -850,9 +850,6 @@
                 if (OORG == "21" && FinishPickEnable == true) {
                     $("#btnPickingComplete").prop("disabled", true);
                 }
-                else {
-                    $("#btnPickingComplete").prop("disabled", true);
-                }
 
                 $("#StatusChangeBtn").show(100);
                 paidOk = true;
@@ -1075,6 +1072,7 @@
                 FinishPickEnable = item.FinishPickEnable;
                 if (OORG == "21" && FinishPickEnable == true) {
                     $("#btnPickingComplete").show(100);
+                    $("#btnPickingComplete").prop("disabled", false)
                 }
                 else {
                     $("#btnPickingComplete").hide(100);
