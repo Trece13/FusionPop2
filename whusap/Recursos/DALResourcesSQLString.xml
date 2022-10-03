@@ -3923,10 +3923,10 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
       <operationName name="ListaPurchaseOrder">
         <stringSQL>
           --LOCAL FORMATO FECHA DD/MM/YYYY  Servidor MM/DD/YYYY
-          select TO_CHAR(inh210.t$prdt,'MM/DD/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
+          select TO_CHAR(inh210.t$prdt,'DD/MM/YYYY') PRDT,ipu001.t$rtdp RTDP,ipu001.t$rtdm RTDM,CASE WHEN TO_CHAR(inh210.t$prdt,'YYYYMMDD') between TO_CHAR(sysdate-ipu001.t$rtdp,'YYYYMMDD')
           and TO_CHAR(sysdate+ipu001.t$rtdm,'YYYYMMDD') THEN '1' ELSE '0' END AS TERM,pur401.t$orno ORNO, pur401.t$pono PONO,
           pur401.t$sqnb SQNB, pur401.t$oqua OQUA, pur401.t$bqua BQUA, pur401.t$item ITEM, IBD001.t$dsca dsca, IBD001.T$KLTC KLTC,
-          TO_CHAR(pur401.t$ddtb,'MM/DD/YYYY') DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
+          TO_CHAR(pur401.t$ddtb,'DD/MM/YYYY') DDTB, inh210.t$oset OSET, ipu001.t$rtdp RTDP, ipu001.t$rtdm RTDM, ipu001.t$rtqp RTQP, ipu001.t$rtqm RTQM,
           pur401.t$oltp OLTP, pur401.t$cwar CWAR,inh210.T$STUN STUN, IBD001.T$CUNI CUNI,inh210.t$seqn SEQNR,inh210.T$QSTR QSTR,COL020.T$RFID RFID
           from {0}.ttdpur401{1} pur401
           inner join {0}.ttdipu001{1} ipu001 on ipu001.t$item = pur401.t$item

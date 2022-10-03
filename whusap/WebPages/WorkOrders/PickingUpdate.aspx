@@ -261,7 +261,7 @@
             border-radius: 4px;
         }
 
-        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc, #MainDiv,#btnPickingComplete {
+        #btnStarPicking, #divPicketPending, #formPicking, #reasonLine, #MyEtiqueta, #lblReason, #ddReason, #txQtyc, #MainDiv, #btnPickingComplete {
             display: none;
         }
 
@@ -279,6 +279,7 @@
     </style>
     <script>
         let OORG = "";
+        let FinishPickEnable = false;
         function printDiv(divID) {
 
             var monthNames = [
@@ -423,7 +424,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row">
+                    <div ""class="row">
                         <div class="col-3">
                             <label>Warehouse</label>
                         </div>
@@ -765,6 +766,7 @@
             ddWare.addEventListener("change", loadPicksPending);
             ddReason.addEventListener("change", changeReason);
             txPaid.addEventListener("input", verifyPallet);
+           
             //txLoca.addEventListener("input", VerifyLocation);
             txQtyc.addEventListener("keyup", VerifyQuantity);
             chkConsigment.addEventListener('change', GetWarehouse);
@@ -775,7 +777,7 @@
             ClearFormPicking();
         }
         var SucceessPalletFinish = function (r) {
-            
+
             myLabelFrame = document.getElementById('myLabelFrame');
             if (sessionStorage.getItem('nav').toString() == 'EDG') {
                 myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
@@ -824,19 +826,37 @@
         function verifyPallet() {
             stoper();
             lstPallets = JSON.parse(window.localStorage.getItem('MyPalletList'));
-            timer = setTimeout(function () {
-                $("#lblError").html("");
-                Method = "VerificarExistenciaPalletID"
-                Data = "{'PAID_NEW':'" + $('#txPaid').val().toUpperCase() + "'}";
-                EventoAjax(Method, Data, PalletIDSuccess)
-                lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
-            }, 2000);
+            if ($("#txPaid").val().trim().toUpperCase() != "") {
+                timer = setTimeout(function () {
+                    $("#lblError").html("");
+                    Method = "VerificarExistenciaPalletID"
+                    Data = "{'PAID_NEW':'" + $("#txPaid").val().trim().toUpperCase + "'}";
+                    EventoAjax(Method, Data, PalletIDSuccess)
+                    lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
+                }, 2000);
+            }
+            else {
+                if (OORG == "21" && FinishPickEnable == true) {
+                    $("#btnPickingComplete").show(100);
+                }
+                else {
+                    $("#btnPickingComplete").hide(100);
+                }
+            }
 
         }
 
         var PalletIDSuccess = function (r) {
             var MyObj = JSON.parse(r.d);
             if (MyObj.error == false) {
+
+                if (OORG == "21" && FinishPickEnable == true) {
+                    $("#btnPickingComplete").show(100);
+                }
+                else {
+                    $("#btnPickingComplete").hide(100);
+                }
+
                 $("#StatusChangeBtn").show(100);
                 paidOk = true;
                 console.log();
@@ -868,6 +888,7 @@
                 //ShowCurrentOptionsWarehouse();
             }
             else if (MyObj.error == true) {
+                $("#btnPickingComplete").hide(100);
                 paidInvalid();
                 $("#lblError").html(MyObj.errorMsg);
                 $("#StatusChangeBtn").hide(100);
@@ -1054,8 +1075,8 @@
                     ShowCurrentOptionsItem();
                 }
                 OORG = item.OORG
-
-                if (OORG == "21" && item.FinishPickEnable == true) {
+                FinishPickEnable = item.FinishPickEnable;
+                if (OORG == "21" && FinishPickEnable == true) {
                     $("#btnPickingComplete").show(100);
                 }
                 else {
@@ -1243,15 +1264,15 @@
                         var myObj = JSON.parse(response.d)
                         if (myObj.Error == false) {
                             $("#btnPickingComplete").hide();
-                                //    printDiv("MyEtiqueta");
-                                myLabelFrame = document.getElementById('myLabelFrame');
-                                if (sessionStorage.getItem('nav').toString() == 'EDG') {
-                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
-                                }
-                                else {
-                                    myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
+                            //    printDiv("MyEtiqueta");
+                            myLabelFrame = document.getElementById('myLabelFrame');
+                            if (sessionStorage.getItem('nav').toString() == 'EDG') {
+                                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
+                            }
+                            else {
+                                myLabelFrame.src = '../Labels/RedesingLabels/4FinishedCupsDoubleME.aspx';
 
-                                }
+                            }
                             alert("Information saved successfully");
                             //selectPicksPending();
                             $("#ConfirmLoader").hide(500);
