@@ -837,9 +837,6 @@
             }
             else {
                 if (OORG == "21" && FinishPickEnable == true) {
-                    $("#btnPickingComplete").prop("disabled", false);
-                }
-                else {
                     $("#btnPickingComplete").prop("disabled", true);
                 }
             }
@@ -851,7 +848,7 @@
             if (MyObj.error == false) {
 
                 if (OORG == "21" && FinishPickEnable == true) {
-                    $("#btnPickingComplete").prop("disabled", false);
+                    $("#btnPickingComplete").prop("disabled", true);
                 }
                 else {
                     $("#btnPickingComplete").prop("disabled", true);
