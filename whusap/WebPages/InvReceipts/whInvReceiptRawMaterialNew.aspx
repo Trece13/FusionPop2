@@ -184,10 +184,10 @@
                                     'vertical-align: middle;' +
                                     'padding-left: 1em;' +
                                     '}' +
-                                    '@page {'+
-                                        'size: landscape;'+
-                                        'margin: 3px;'+
-                                    '}'+
+                                    '@page {' +
+                                        'size: landscape;' +
+                                        'margin: 3px;' +
+                                    '}' +
                                     '</style>' +
                                     '</head><body>');
 
@@ -204,12 +204,14 @@
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/font-awesome.min.css">
     <style type="text/css">
-        #lblUnidDsca{
-            font-size :small;
+        #lblUnidDsca {
+            font-size: small;
         }
-        #lblUnidSt{
-            font-size :small;
+
+        #lblUnidSt {
+            font-size: small;
         }
+
         #myLabelFrame {
             display: none;
         }
@@ -439,9 +441,10 @@
             vertical-align: middle;
             padding-left: 1em;
         }
-        @page{
-            size:landscape;
-            margin:3px;
+
+        @page {
+            size: landscape;
+            margin: 3px;
         }
     </style>
 
@@ -511,135 +514,135 @@
         </div>
 
         <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group row">
-                <label class="col-sm-4" for="TxOrderType">
-                    Order Type</label>
-                <div class="col-sm-6">
-                    <select class="form-control" id="TxOrderType" tabindex="1">
-                        <option value="0">Select Order Type</option>
-                        <option value="1">Sales Order Return</option>
-                        <option value="2">Purchase orders</option>
-                        <option value="22">Transfer Order</option>
-                    </select>
+            <div class="col-sm-6">
+                <div class="form-group row">
+                    <label class="col-sm-4" for="TxOrderType">
+                        Order Type</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" id="TxOrderType" tabindex="1">
+                            <option value="0">Select Order Type</option>
+                            <option value="1">Sales Order Return</option>
+                            <option value="2">Purchase orders</option>
+                            <option value="22">Transfer Order</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txOrderID">
-                    Order ID</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txOrderID" placeholder="Order ID"
-                        data-method="ValidarOrderID" tabindex="1" maxlength="9">
+                <div class="form-group row">
+                    <label class="col-sm-4" for="txOrderID">
+                        Order ID</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="txOrderID" placeholder="Order ID"
+                            data-method="ValidarOrderID" tabindex="1" maxlength="9">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txPosition">
-                    Position</label>
-                <div class="col-sm-6" style="display: none">
-                    <input type="text" class="form-control" id="txPosition" placeholder="Position "
-                        data-method="ValidarPosition" tabindex="1">
+                <div class="form-group row">
+                    <label class="col-sm-4" for="txPosition">
+                        Position</label>
+                    <div class="col-sm-6" style="display: none">
+                        <input type="text" class="form-control" id="txPosition" placeholder="Position "
+                            data-method="ValidarPosition" tabindex="1">
+                    </div>
+                    <div class="col-sm-6 ">
+                        <select class="form-control" id="DdPosition" tabindex="1">
+                            <option value="0">Select Position</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-sm-6 ">
-                    <select class="form-control" id="DdPosition" tabindex="1">
-                        <option value="0">Select Position</option>
-                    </select>
+                <div class="form-group row">
+                    <label class="col-sm-4" for="txItem">
+                        Item</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="txItem" placeholder="Item"
+                            data-method="ValidarItem" tabindex="1">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txItem">
-                    Item</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txItem" placeholder="Item"
-                        data-method="ValidarItem" tabindex="1">
+                <div class="form-group row" id="lblsItemDesc">
+                    <div class="col-sm-6">
+                        <label class="col-sm-10" id="lblUnidDsca">-</label>
+                        <label class="col-sm-1" id="lblUnidSt">-</label>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row" id="lblsItemDesc">
-                <div class="col-sm-6">
-                    <label class="col-sm-10" id="lblUnidDsca">-</label>
-                    <label class="col-sm-1" id="lblUnidSt">-</label>
+                <div class="form-group row">
+                    <label class="col-sm-4" for="txLot">
+                        Lot</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="txLot" placeholder="Lot"
+                            data-method="ValidarLote" tabindex="1">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-4" for="txLot">
-                    Lot</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txLot" placeholder="Lot"
-                        data-method="ValidarLote" tabindex="1">
-                </div>
-            </div>
-            <div class="form-group row" style="display: none">
-                <label class="col-sm-4" for="DdUnit">
-                    Unit</label>
-                <div class="col-sm-6">
-                    <asp:DropDownList class="form-control" ID="DdUnit" runat="server">
-                    </asp:DropDownList>
-                </div>
-                <label id="Label1" for="txUnit">
-                </label>
-            </div>
-            <div class="form-group row">   
-                <label class="col-sm-4" for="txQuantity">Quantity</label>            
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" id="txQuantity" placeholder="Quantity"
-                        data-method="ValidarQuantity" tabindex="1">
-                </div>
-                <label id="lblUnis" for="txQuantity">
-                </label>
-            </div>
-            <div class="form-group row" id="LabelQuantityDiv">
-                <label class="col-sm-4" for="txQuantity">
-                    Label quantity</label>
-                <div class="col-sm-6">
-                    <input type="number" class="form-control" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
-                </div>
-                <label id="Label2" class="col-2" for="txQuantity">
-                </label>
-            </div>
-
-            <div class="form-group row" id="finalReceipt">
-                <label class="col-sm-4" for="">
-                </label>
-                <div class=" col-sm-6">
-                    <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
-                    <label class="" for="ChkfinalReceipt">
-                        Final Receipt
+                <div class="form-group row" style="display: none">
+                    <label class="col-sm-4" for="DdUnit">
+                        Unit</label>
+                    <div class="col-sm-6">
+                        <asp:DropDownList class="form-control" ID="DdUnit" runat="server">
+                        </asp:DropDownList>
+                    </div>
+                    <label id="Label1" for="txUnit">
                     </label>
                 </div>
-            </div>
-            <div class="form-group row">
-                <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
+                <div class="form-group row">
+                    <label class="col-sm-4" for="txQuantity">Quantity</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="txQuantity" placeholder="Quantity"
+                            data-method="ValidarQuantity" tabindex="1">
+                    </div>
+                    <label id="lblUnis" for="txQuantity">
+                    </label>
+                </div>
+                <div class="form-group row" id="LabelQuantityDiv">
+                    <label class="col-sm-4" for="txQuantity">
+                        Label quantity</label>
+                    <div class="col-sm-6">
+                        <input type="number" class="form-control" id="LabelQuantity" min="0" max="50" placeholder="Label quantity">
+                    </div>
+                    <label id="Label2" class="col-2" for="txQuantity">
+                    </label>
+                </div>
+
+                <div class="form-group row" id="finalReceipt">
+                    <label class="col-sm-4" for="">
+                    </label>
+                    <div class=" col-sm-6">
+                        <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
+                        <label class="" for="ChkfinalReceipt">
+                            Final Receipt
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
                 Print</button>&nbsp
                 <i class="fa fa-spinner fa-pulse fa-3x fa-fw" id="loadingIcon"></i>
 
 
+                </div>
             </div>
-        </div>
 
-        <div class="col-sm-6">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Order Number
-                        </th>
-                        <th>Position
-                        </th>
-                        <th>Item Code
-                        </th>
-                        <th>Description
-                        </th>
-                        <th>PI.Re Date
-                        </th>
-                        <th colspan="2" style="text-align: center">Expected
-                        </th>
-                        <th>Warehouse
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="DetailBody">
-                </tbody>
-            </table>
-        </div>
+            <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order Number
+                            </th>
+                            <th>Position
+                            </th>
+                            <th>Item Code
+                            </th>
+                            <th>Description
+                            </th>
+                            <th>PI.Re Date
+                            </th>
+                            <th colspan="2" style="text-align: center">Expected
+                            </th>
+                            <th>Warehouse
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="DetailBody">
+                    </tbody>
+                </table>
+            </div>
         </div>
         <label id="lblError" class="col-sm-12">
         </label>
@@ -1156,7 +1159,7 @@
                         break;
                     case "2":
                         $('#lblsItemDesc').hide(500);
-                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500).css("display","flex") : $('#LabelQuantityDiv').hide(500);
+                        qtylabelsrec == "True" ? $('#LabelQuantityDiv').show(500).css("display", "flex") : $('#LabelQuantityDiv').hide(500);
                         $('#ChkfinalReceipt').prop('disabled', true);
                         $('#ChkfinalReceipt').prop('checked', false);
                         txOrderID.attr('disabled', false);
@@ -1272,8 +1275,10 @@
                                     $('#ChkfinalReceipt').prop('disabled', true);
                                 }
                                 else {
-                                    $('#ChkfinalReceipt').prop('checked', false);
-                                    $('#ChkfinalReceipt').prop('disabled', false);
+                                    if (MyObject.RFID.trim() != "1") {
+                                        $('#ChkfinalReceipt').prop('checked', false);
+                                        $('#ChkfinalReceipt').prop('disabled', false);
+                                    }
                                 }
 
                             }
@@ -1317,15 +1322,17 @@
                                 $('#ShowModal').click();
                                 finalReceiptAuto = true;
                             }
-                            else if (MyObject.RFID.trim()=="1") {
+                            else if (MyObject.RFID.trim() == "1") {
                                 $('#ChkfinalReceipt').prop('checked', false);
                                 $('#ChkfinalReceipt').prop('disabled', true);
                                 finalReceiptAuto = false;
                             }
                             else {
-                                $('#ChkfinalReceipt').prop('checked', false);
-                                $('#ChkfinalReceipt').prop('disabled', false);
-                                finalReceiptAuto = false;
+                                if (MyObject.RFID.trim() != "1") {
+                                    $('#ChkfinalReceipt').prop('checked', false);
+                                    $('#ChkfinalReceipt').prop('disabled', false);
+                                    finalReceiptAuto = false;
+                                }
                             }
                         }
                         else {
