@@ -6356,7 +6356,7 @@ la denotacion p(n) donde n es un numero identificador (iniciando en uno (1)) que
           FROM {0}.tticst001{1} cst001 INNER JOIN
           {0}.ttcibd001{1} ibd001 ON ibd001.t$item = cst001.t$sitm INNER JOIN
           {0}.ttisfc010{1} sfc010 ON sfc010.t$pdno = cst001.t$pdno
-          WHERE ibd001.t$cpcl = 'RET' and cst001.t$pdno ='[p1]'
+          WHERE ibd001.t$cpcl = 'RET' and cst001.t$pdno ='[p1]' AND cst001.t$nnts = '1'
           ORDER BY ibd001.t$dsca
         </stringSQL>
       </operationName>
