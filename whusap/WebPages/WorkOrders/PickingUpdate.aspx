@@ -830,17 +830,17 @@
                 timer = setTimeout(function () {
                     $("#lblError").html("");
                     Method = "VerificarExistenciaPalletID"
-                    Data = "{'PAID_NEW':'" + $("#txPaid").val().trim().toUpperCase + "'}";
+                    Data = "{'PAID_NEW':'" + $("#txPaid").val().trim().toUpperCase() + "'}";
                     EventoAjax(Method, Data, PalletIDSuccess)
                     lstPAllets = JSON.parse(window.localStorage.getItem('MyPalletList'));
                 }, 2000);
             }
             else {
                 if (OORG == "21" && FinishPickEnable == true) {
-                    $("#btnPickingComplete").show(100);
+                    $("#btnPickingComplete").prop("disabled", false);
                 }
                 else {
-                    $("#btnPickingComplete").hide(100);
+                    $("#btnPickingComplete").prop("disabled", true);
                 }
             }
 
@@ -851,10 +851,10 @@
             if (MyObj.error == false) {
 
                 if (OORG == "21" && FinishPickEnable == true) {
-                    $("#btnPickingComplete").show(100);
+                    $("#btnPickingComplete").prop("disabled", false);
                 }
                 else {
-                    $("#btnPickingComplete").hide(100);
+                    $("#btnPickingComplete").prop("disabled", true);
                 }
 
                 $("#StatusChangeBtn").show(100);
@@ -888,7 +888,7 @@
                 //ShowCurrentOptionsWarehouse();
             }
             else if (MyObj.error == true) {
-                $("#btnPickingComplete").hide(100);
+                $("#btnPickingComplete").prop("disabled", true);
                 paidInvalid();
                 $("#lblError").html(MyObj.errorMsg);
                 $("#StatusChangeBtn").hide(100);
