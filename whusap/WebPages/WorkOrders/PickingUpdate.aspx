@@ -1015,6 +1015,7 @@
         }
 
         var loadPicksPending = function () {
+            ClearFormPicking();
             $("#btnPickingComplete").hide(100);
             $("#MainDiv").hide(100);
             if (bdPicket182.childElementCount > 0) {
