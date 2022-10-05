@@ -789,7 +789,7 @@
             $("#StatusChange").hide(100);
             Swal.fire(
               'Finished!',
-              'Pallet Finished.',
+              'Pick Finished.',
               'success'
             );
             ClearFormPicking();
