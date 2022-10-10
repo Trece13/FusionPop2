@@ -494,7 +494,7 @@ namespace whusap.WebPages.WorkOrders
                     obj182Old.MCNO = MyObjPicking.MCNO == "" ? " " : MyObjPicking182.MCNO;
                     obj182Old.LOGN = HttpContext.Current.Session["user"].ToString().Trim();
 
-                    if (Convert.ToInt32(QTYTDESP.Trim()) == Convert.ToDecimal(QTY) && MyObjPicking182.OORG.Trim() == "21")
+                    if (Convert.ToDecimal(QTYTDESP.Trim()) == Convert.ToDecimal(QTY) && MyObjPicking182.OORG.Trim() == "21")
                     {
                         obj082.STAT = "4";
                         Itticol082.Actualizartticol082Stat(new Ent_tticol082 { ORNO = MyObjPicking.ORNO, STAT = "4" });
