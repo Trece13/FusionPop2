@@ -861,7 +861,7 @@
                 //hideShowNeutroSelect(ddReason, true);
                 cnpk = MyObj.CNPK;
                 if (cnpk == "1") {
-                    if (parseFloat(MyObj.QTYT) <= parseFloat($("#qtyTbl").html.trim)) {
+                    if (parseFloat(MyObj.QTYT) <= parseFloat($("#qtyTbl").html().trim())) {
                         hideShowNeutroInputText(txQtyc, false);
                         hideShowNeutroInputText(btnConfirm, true);
                     }
