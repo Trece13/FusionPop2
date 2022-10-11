@@ -868,6 +868,7 @@
                     else {
                         hideShowNeutroInputText(txQtyc, false);
                         hideShowNeutroInputText(btnConfirm, false);
+                        alert("The quantity of the pallet is greater than the quantity of the pick")
                     }
                     
                 }
