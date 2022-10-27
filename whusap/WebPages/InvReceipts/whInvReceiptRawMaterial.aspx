@@ -722,17 +722,50 @@
         }
 
         var ValidarLoteSucces = function (retorno) {
+            var Position = txPosition.val().trim();
+            var MyItem = txItem.val().trim().toUpperCase();
+            var OrdenID = txOrderID.val().trim();
+
             if (retorno.d == false) {
-                lblError.html("The lot does not exist or is not associated with the item");
-                txLot.focus();
-                btnEnviar.attr('disabled', true);
+                if (TxOrderType.val() == "1") {
+                    var Item = undefined;
+                    LstSalesOrder.forEach(function (x) {
+                        if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
+                            Item = x
+                        }
+                    });
+
+                }
+
+                else if (TxOrderType.val() == "22") {
+                    var Item = undefined;
+                    LstTransferOrder.forEach(function (x) {
+                        if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
+                            Item = x
+                        }
+                    });
+
+                }
+                //lblError.html("The lot does not exist or is not associated with the item");
+                //txLot.focus();
+                //btnEnviar.attr('disabled', true);
             }
             if (retorno.d == true) {
-                lblError.html("");
-                txPosition.focus();
-                ddPosition.focus();
+                lblError.html("Lot is already linked to this item please use another");
                 btnEnviar.attr('disabled', true);
             }
+
+            //if (retorno.d == false) {
+            //    lblError.html("The lot does not exist or is not associated with the item");
+            //    txLot.focus();
+            //    btnEnviar.attr('disabled', true);
+            //}
+            //if (retorno.d == true) {
+            //    lblError.html("");
+            //    txPosition.focus();
+            //    ddPosition.focus();
+            //    btnEnviar.attr('disabled', true);
+            //}
         }
         var OrderIDSucces = function (r) {
             var OrderJSON = JSON.parse(r.d)
@@ -1979,35 +2012,8 @@
             });
 
             txLot.bind("change paste keyup", function (e) {
-
-                var Position = txPosition.val().trim();
-                var MyItem = txItem.val().trim().toUpperCase();
-                var OrdenID = txOrderID.val().trim();
-
-                if (TxOrderType.val() == "1") {
-                    var Item = undefined;
-                    LstSalesOrder.forEach(function (x) {
-                        if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
-                            Item = x
-                        }
-                    });
-
-                }
-
-                else if (TxOrderType.val() == "22") {
-                    var Item = undefined;
-                    LstTransferOrder.forEach(function (x) {
-                        if (x.ORNO == OrdenID.toUpperCase() && x.ITEM == MyItem && x.PONO == Position) {
-                            Item = x
-                        }
-                    });
-
-                }
-
-                //                else {
-                //                    Data = "{'ITEM':'" + $('#txItem').val().trim() + "','CLOT':'" + $('#txLot').val().trim() + "'}";
-                //                    sendAjax("ValidarLote", Data, ValidarLoteSucces, false);
-                //                }
+                Data = "{'ITEM':'" + $('#txItem').val().trim() + "','CLOT':'" + $('#txLot').val().trim() + "'}";
+                sendAjax("ValidarLote", Data, ValidarLoteSucces, false);
             });
 
         });
