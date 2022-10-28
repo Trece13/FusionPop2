@@ -474,7 +474,7 @@
     <script src="styles/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
 
-
+        var myTimeout;
         function Enviar() {
 
         }
@@ -2012,9 +2012,11 @@
             });
 
             txLot.bind("change paste keyup", function (e) {
+                clearTimeout(myTimeout);
                 var MyItem1 = txItem.val().trim().toUpperCase();
                 Data = "{'ITEM':'" + MyItem1.trim() + "','CLOT':'" + txLot.val().trim() + "'}";
-                sendAjax("ValidarLote", Data, ValidarLoteSucces, false);
+                myTimeout = setTimeout(function () { sendAjax("ValidarLote", Data, ValidarLoteSucces, false, true) }, 3000);
+                
             });
 
         });
