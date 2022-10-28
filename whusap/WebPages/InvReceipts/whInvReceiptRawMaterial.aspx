@@ -12,7 +12,7 @@
                 "4", "5", "6", "7",
                 "8", "9", "10",
                 "11", "12"
-              ];
+            ];
 
             //PRINT LOCAL HOUR
             var d = new Date();
@@ -69,50 +69,46 @@
     </script>
     <link rel="stylesheet" href="styles/bootstrap.min.css" />
     <style type="text/css">
-        #myLabelFrame{
-            display:none;
+        #myLabelFrame {
+            display: none;
         }
-        #ShowModal
-        {
-            display:none;
+
+        #ShowModal {
+            display: none;
         }
-        #ShowModalMsg
-        {
-            display:none;
+
+        #ShowModalMsg {
+            display: none;
         }
-        .form-group
-        {
+
+        .form-group {
             margin-bottom: 2rem;
         }
-        
-        #MyEtiqueta
-        {
+
+        #MyEtiqueta {
             display: none;
             padding-left: 50px;
         }
-        
-        #MyEtiquetaOC
-        {
+
+        #MyEtiquetaOC {
             display: none;
         }
-        
-        #lblError
-        {
+
+        #lblError {
             color: Red;
             font-size: 24px;
         }
-        
-        .FontPopUp
-        {
-            font-size:15px;
+
+        .FontPopUp {
+            font-size: 15px;
         }
-        
-        etiqueta
-        {
+
+        etiqueta {
             text-align: center;
             border: 1px solid black;
-        }       
-    </style><script type="text/javascript">
+        }
+    </style>
+    <script type="text/javascript">
         function IniciarListasOrderType() {
 
             LstSalesOrder = JSON.parse('<%= LstSalesOrderJSON%>');
@@ -124,220 +120,214 @@
         }
 
         IniciarListasOrderType();
-    </script><form id="form1" class="container col-sm-12">
+    </script>
+    <form id="form1" class="container col-sm-12">
 
-    
-    <button  id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1Label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body FontPopUp">
-          <label id="label1"></label>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Modal2">Yes</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="Modal2Label" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body FontPopUp">
-                Packing Slip Number
-            <input type="text" id="pslip"/>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="BtnSavePslip" class="btn btn-primary" data-dismiss="modal" data-toggle="modal">Save</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <button  id="ShowModalMsg" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Modal3">
-    </button>
 
-    <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-body FontPopUp">
-            It could be final receipt, total receivedquantity equal to total ordered quantity
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
-          </div>
+        <button id="ShowModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="Modal1Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body FontPopUp">
+                        <label id="label1"></label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#Modal2">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+
+        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="Modal2Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body FontPopUp">
+                        Packing Slip Number
+            <input type="text" id="pslip" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="BtnSavePslip" class="btn btn-primary" data-dismiss="modal" data-toggle="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="ShowModalMsg" type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal3">
+        </button>
+
+        <div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body FontPopUp">
+                        It could be final receipt, total receivedquantity equal to total ordered quantity
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
-    <div class="col-sm-6">
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
-                Order Type</label>
             <div class="col-sm-6">
-                <select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
-                    <option value="0">Select Order Type</option>
-                    <option value="1">Sales Order Return</option>
-                    <option value="2">Purchase orders</option>
-                    <option value="22">Transfer Order</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txOrderID">
-                Order ID</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
-                    data-method="ValidarOrderID" tabindex="1">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txPosition">
-                Position</label>
-            <div class="col-sm-6" style ="display:none">
-                <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
-                    data-method="ValidarPosition" tabindex="1">
-            </div>
-            <div class="col-sm-6" >
-                <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
-                    <option value="0">Select Position</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txItem">
-                Item</label><%--<select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label-lg" for="TxOrderType">
+                        Order Type</label>
+                    <div class="col-sm-6">
+                        <select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
+                            <option value="0">Select Order Type</option>
+                            <option value="1">Sales Order Return</option>
+                            <option value="2">Purchase orders</option>
+                            <option value="22">Transfer Order</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label-lg" for="txOrderID">
+                        Order ID</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-lg" id="txOrderID" placeholder="Order ID"
+                            data-method="ValidarOrderID" tabindex="1">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label-lg" for="txPosition">
+                        Position</label>
+                    <div class="col-sm-6" style="display: none">
+                        <input type="text" class="form-control form-control-lg" id="txPosition" placeholder="Position "
+                            data-method="ValidarPosition" tabindex="1">
+                    </div>
+                    <div class="col-sm-6">
+                        <select class="form-control form-control-lg" id="DdPosition" tabindex="1">
+                            <option value="0">Select Position</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label-lg" for="txItem">
+                        Item</label><%--<select class="form-control form-control-lg" id="TxOrderType" tabindex="1">
                     <option value="0">Select Order Type</option>
                     <option value="1">Sales Order Return</option>
                     <option value="2">Purchase orders</option>
                     <option value="22">Transfer Order</option>
                 </select>--%>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
-                    data-method="ValidarItem" tabindex="1">
-                <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
-                    -</label>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txLot">
-                Lot</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
-                    data-method="ValidarLote" tabindex="1">
-            </div>
-        </div>
-        <div class="form-group row" style="display:none">
-            <label class="col-sm-4 col-form-label-lg" for="DdUnit">
-                Unit</label>
-            <div class="col-sm-6">
-                <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
-                </asp:DropDownList>
-            </div>
-            <label id="Label1" for="txUnit">
-            </label>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-4 col-form-label-lg" for="txQuantity">
-                Quantity</label>
-            <div class="col-sm-6">
-                <input class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern = "[0-9]"
-                    data-method="ValidarQuantity" tabindex="1">
-            </div>
-            <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
-                    -</label>
-            <label id="lblUnis" for="txQuantity">
-            </label>
-            <label id="lblMyCant" for="txQuantity" style="display:none">
-            </label>
-        </div>
-        <div class="form-group row" id="finalReceipt">
-            <label class="col-sm-4 col-form-label-lg" for="">
-            </label>
-            <div class=" col-sm-6">
-                <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
-                <label class="" for="ChkfinalReceipt">
-                    Final Receipt
-                </label>
-            </div>
-        </div>
-        <div class="form-group row">
-            <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp;
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-lg" id="txItem" placeholder="Item"
+                            data-method="ValidarItem" tabindex="1">
+                        <label class="col-sm-10 col-form-label-lg" id="lblUnidDsca">
+                            -</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label-lg" for="txLot">
+                        Lot</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control form-control-lg" id="txLot" placeholder="Lot"
+                            data-method="ValidarLote" tabindex="1">
+                    </div>
+                </div>
+                <div class="form-group row" style="display: none">
+                    <label class="col-sm-4 col-form-label-lg" for="DdUnit">
+                        Unit</label>
+                    <div class="col-sm-6">
+                        <asp:DropDownList class="form-control form-control-lg" ID="DdUnit" runat="server">
+                        </asp:DropDownList>
+                    </div>
+                    <label id="Label1" for="txUnit">
+                    </label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label-lg" for="txQuantity">
+                        Quantity</label>
+                    <div class="col-sm-6">
+                        <input class="form-control form-control-lg" id="txQuantity" placeholder="Quantity" pattern="[0-9]"
+                            data-method="ValidarQuantity" tabindex="1">
+                    </div>
+                    <label class="col-sm-2 col-form-label-lg" id="lblUnidSt">
+                        -</label>
+                    <label id="lblUnis" for="txQuantity">
+                    </label>
+                    <label id="lblMyCant" for="txQuantity" style="display: none">
+                    </label>
+                </div>
+                <div class="form-group row" id="finalReceipt">
+                    <label class="col-sm-4 col-form-label-lg" for="">
+                    </label>
+                    <div class=" col-sm-6">
+                        <input class="" type="checkbox" id="ChkfinalReceipt" disabled>
+                        <label class="" for="ChkfinalReceipt">
+                            Final Receipt
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <input type="button" class="btn btn-primary btn-lg" id="btnEnviar" value="Confirm" />&nbsp;
             <button id="btnMyEtiqueta" class="btn btn-primary btn-lg" type="button" onclick="printDiv('MyEtiqueta')">
                 Print</button>&nbsp;
-            <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()" style="display:none">
+            <button id="" class="btn btn-primary btn-lg" type="button" onclick="printLabel()" style="display: none">
                 Print</button>&nbsp;
-        </div>
-    </div>
-    <div class="col-sm-6">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Order Number
-                    </th>
-                    <th>
-                        Position
-                    </th>
-                    <th>
-                        Item Code
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        PI.Re Date
-                    </th>
-                    <th colspan="2" style="text-align: center">
-                        Expected
-                    </th>
-                    <th>
-                        Warehouse
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="DetailBody">
-            </tbody>
-        </table>
-    </div>
+                </div>
             </div>
+            <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Order Number
+                            </th>
+                            <th>Position
+                            </th>
+                            <th>Item Code
+                            </th>
+                            <th>Description
+                            </th>
+                            <th>PI.Re Date
+                            </th>
+                            <th colspan="2" style="text-align: center">Expected
+                            </th>
+                            <th>Warehouse
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="DetailBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </form>
     <label id="lblError" class="col-sm-12">
     </label>
     <div id="MyEtiqueta">
-        <table style="width: 6in; height: 4in; margin: 0px; border:1px solid black">
+        <table style="width: 6in; height: 4in; margin: 0px; border: 1px solid black">
             <tr>
-                <td colspan="4" style="border:1px solid black;" align="center">
-                <label id="lblItemID">
+                <td colspan="4" style="border: 1px solid black;" align="center">
+                    <label id="lblItemID">
                     </label>
                 </td>
             </tr>
             <tr>
-                <td colspan="4" style="border:1px solid black;" align="center">
+                <td colspan="4" style="border: 1px solid black;" align="center">
                     <img src="~/images/logophoenix_login.jpg" runat="server" id="CBPalletNO" alt="" hspace="60"
                         vspace="5" style="width: 4in; height: 0.7in; margin: 0px !important" />
                 </td>
             </tr>
             <tr>
-                <td style="border:1px solid black;" align="left">
+                <td style="border: 1px solid black;" align="left">
                     <label>
                         LOT</label>
                 </td>
-                <td style="border:1px solid black;" align="center">                   
+                <td style="border: 1px solid black;" align="center">
                     <label id="LblOriginalLot">
                     </label>
                 </td>
-                <td style="border:1px solid black;" align="left">
+                <td style="border: 1px solid black;" align="left">
                     <label>
                         Quantity</label>
                 </td>
-                <td style="border:1px solid black;" align="center">
+                <td style="border: 1px solid black;" align="center">
                     <label id="LblQuantity">
                     </label>
                     <label id="LblUnit">
@@ -345,37 +335,37 @@
                 </td>
             </tr>
             <tr>
-                <td style="border:1px solid black;" align="left">
+                <td style="border: 1px solid black;" align="left">
                     <label>
                         Origin Lot</label>
                 </td>
-                <td style="border:1px solid black;" align="center">                   
+                <td style="border: 1px solid black;" align="center">
                     <label id="LblLotId">
                     </label>
                 </td>
-                <td style="border:1px solid black;" align="left">
+                <td style="border: 1px solid black;" align="left">
                     <label>
                         Supplier</label>
                 </td>
-                <td style="border:1px solid black;" align="center">
+                <td style="border: 1px solid black;" align="center">
                     <label id="LblSupplier">
                     </label>
                 </td>
             </tr>
             <tr>
-                <td style="border:1px solid black;" align="left">
+                <td style="border: 1px solid black;" align="left">
                     <label>
                         Received By</label>
                 </td>
-                <td style="border:1px solid black;" align="center">
+                <td style="border: 1px solid black;" align="center">
                     <label id="LblLogn">
                     </label>
                 </td>
-                <td style="border:1px solid black;" align="left">
+                <td style="border: 1px solid black;" align="left">
                     <label>
                         Received On</label>
                 </td>
-                <td style="border:1px solid black;" align="center">
+                <td style="border: 1px solid black;" align="center">
                     <label id="LblDate">
                     </label>
                 </td>
@@ -391,8 +381,7 @@
                 </td>
             </tr>-->
             <tr>
-                <td colspan="2">
-                </td>
+                <td colspan="2"></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -415,8 +404,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                </td>
+                <td colspan="2"></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -429,8 +417,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                </td>
+                <td colspan="2"></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -464,7 +451,7 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <div class="container">
-                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class ="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
+                <iframe id="myLabelFrame" scrolling="no" title="Inline Frame Example" class="col-12" style="height: 470px; overflow: hidden; margin-bottom: 100px;" frameborder="0" src=""></iframe>
             </div>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -475,6 +462,7 @@
     <script type="text/javascript">
 
         var myTimeout;
+        var LotExist = false;
         function Enviar() {
 
         }
@@ -494,9 +482,9 @@
             WebMethod = "";
         }
 
-            function resBartender(res){
-                console.log(res);
-            }
+        function resBartender(res) {
+            console.log(res);
+        }
 
         function IniciarControles() {
 
@@ -552,9 +540,9 @@
         }
 
 
-        $('#BtnSavePslip').click(function(){                
-            if(finalReceiptAuto){
-                $('#ShowModalMsg').click();   
+        $('#BtnSavePslip').click(function () {
+            if (finalReceiptAuto) {
+                $('#ShowModalMsg').click();
             }
         });
 
@@ -659,7 +647,7 @@
                 else {
                     myLabelFrame.src = '../Labels/RedesingLabels/1RawMaterial.aspx';
                 }
-                
+
             }
             else {
                 console.log("El registro no se realizo");
@@ -669,14 +657,14 @@
 
         }
 
-        function printLabel(){
+        function printLabel() {
             //var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'" + MyObject.ORNO + "','ITEM':'" + MyObject.ITEM + "','LOT':'" + MyObject.CLOT + "','QTY':'" + MyObject.QTYC + "'}";
             var Data = "{'PrinterName':'\\\\scolbogprint\\BMPrima','BarTenderLabel':'Label_Receptions.btw','ID':'jjhjhj','ITEM':'aaaaa','LOT':'aaaaa','QTY':'aaaa'}";
             WebMethod = "http://susavgabart01:82/Integration/WebServiceIntegration/Execute";
-            sendAjax(WebMethod, Data, resBartender,true,false);
+            sendAjax(WebMethod, Data, resBartender, true, false);
         }
 
-        
+
         var SuccesQuantityUnity = function (r) {
 
             lstFactor = JSON.parse(r.d);
@@ -727,6 +715,7 @@
             var OrdenID = txOrderID.val().trim();
 
             if (retorno.d == false) {
+                LotExist = false;
                 if (TxOrderType.val() == "1") {
                     var Item = undefined;
                     LstSalesOrder.forEach(function (x) {
@@ -751,6 +740,7 @@
                 //btnEnviar.attr('disabled', true);
             }
             if (retorno.d == true) {
+                LotExist = true;
                 lblError.html("Lot is already linked to this item please use another");
                 btnEnviar.attr('disabled', true);
             }
@@ -812,104 +802,152 @@
             });
 
             txQuantity.bind("input paste", function (e) {
-                
-                if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
-                    var straux = "";
-                    str = $('#txQuantity').val();
-                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
-                        straux += str.charAt(i).replace(",","").replace(".","");
+
+                if (LotExist == false) {
+                    if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
+                        var straux = "";
+                        str = $('#txQuantity').val();
+                        for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                            straux += str.charAt(i).replace(",", "").replace(".", "");
+                        }
+                        $('#txQuantity').val(straux);
+                    } else {
+                        var straux = "";
+                        str = $('#txQuantity').val();
+                        for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                            straux += str.charAt(i).replace(",", ".");
+                        }
+                        $('#txQuantity').val(straux);
                     }
-                    $('#txQuantity').val(straux);
-                } else {
-                    var straux = "";
-                    str = $('#txQuantity').val();
-                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
-                        straux += str.charAt(i).replace(",", ".");
-                    }
-                    $('#txQuantity').val(straux);
-                }
-                if (TxOrderType.val() == "1") {
-                    //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
-                    LstSalesOrder.forEach(function (x) {
-                        if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
-                            MyObject = x;
-                        }
-                    });
-                }
-
-                if (TxOrderType.val() == "2") {
-                    //MyObject = LstPurchaseOrders.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());
-                    LstPurchaseOrders.forEach(function (x) {
-                        if (x.ITEM.trim() == txItem.val().trim() && x.ORNO.trim() == txOrderID.val().trim().toUpperCase() && x.PONO.trim() == txPosition.val().trim()) {
-                            MyObject = x;
-                        }
-                    });
-                }
-
-                if (TxOrderType.val() == "22") {
-                    //MyObject = LstTransferOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
-                    LstTransferOrder.forEach(function (x) {
-                        if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
-                            MyObject = x;
-                        }
-                    });
-                }
-
-                var mycant = parseFloat(MyObject.OQUA);
-                $('#lblMyCant').html(mycant);
-                //var rangBajo = parseFloat(MyObject.OQUA) * (1 - parseFloat(MyObject.RTQP) / 100);
-                var rangAlto = parseFloat(MyObject.OQUA) * (1 + parseFloat(MyObject.RTQP) / 100);
-
-                var mycantView = parseFloat(txQuantity.val());
-
-                if (MyObject.STUN.trim() != DdUnis.val().trim()) {
-
-                    FactorMul = undefined; //lstFactor.find(x => x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim());
-                    FactorDiv = undefined; //lstFactor.find(x => x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim());
-
-                    if (lstFactor[0].Error != true) {
-                        lstFactor.forEach(function (x) {
-                            if (x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim()) {
-                                FactorMul = x;
-                            }
-                            else if (x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim()) {
-                                FactorDiv = x;
+                    if (TxOrderType.val() == "1") {
+                        //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
+                        LstSalesOrder.forEach(function (x) {
+                            if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
+                                MyObject = x;
                             }
                         });
-
                     }
 
+                    if (TxOrderType.val() == "2") {
+                        //MyObject = LstPurchaseOrders.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());
+                        LstPurchaseOrders.forEach(function (x) {
+                            if (x.ITEM.trim() == txItem.val().trim() && x.ORNO.trim() == txOrderID.val().trim().toUpperCase() && x.PONO.trim() == txPosition.val().trim()) {
+                                MyObject = x;
+                            }
+                        });
+                    }
 
-                    if (FactorMul != undefined || FactorDiv != undefined) {
+                    if (TxOrderType.val() == "22") {
+                        //MyObject = LstTransferOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
+                        LstTransferOrder.forEach(function (x) {
+                            if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
+                                MyObject = x;
+                            }
+                        });
+                    }
 
-                        if (FactorDiv != undefined) {
-                            mycantView = parseFloat(txQuantity.val()) / parseFloat(FactorDiv.FACTOR);
+                    var mycant = parseFloat(MyObject.OQUA);
+                    $('#lblMyCant').html(mycant);
+                    //var rangBajo = parseFloat(MyObject.OQUA) * (1 - parseFloat(MyObject.RTQP) / 100);
+                    var rangAlto = parseFloat(MyObject.OQUA) * (1 + parseFloat(MyObject.RTQP) / 100);
+
+                    var mycantView = parseFloat(txQuantity.val());
+
+                    if (MyObject.STUN.trim() != DdUnis.val().trim()) {
+
+                        FactorMul = undefined; //lstFactor.find(x => x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim());
+                        FactorDiv = undefined; //lstFactor.find(x => x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim());
+
+                        if (lstFactor[0].Error != true) {
+                            lstFactor.forEach(function (x) {
+                                if (x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim()) {
+                                    FactorMul = x;
+                                }
+                                else if (x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim()) {
+                                    FactorDiv = x;
+                                }
+                            });
+
                         }
-                        else if (FactorMul != undefined) {
-                            mycantView = parseFloat(txQuantity.val()) * parseFloat(FactorMul.FACTOR);
+
+
+                        if (FactorMul != undefined || FactorDiv != undefined) {
+
+                            if (FactorDiv != undefined) {
+                                mycantView = parseFloat(txQuantity.val()) / parseFloat(FactorDiv.FACTOR);
+                            }
+                            else if (FactorMul != undefined) {
+                                mycantView = parseFloat(txQuantity.val()) * parseFloat(FactorMul.FACTOR);
+                            }
+
+                            if (TxOrderType.val() == "2") {
+                                if (rangAlto >= mycantView + SumatoriaDevuelta && mycantView > 0) {
+                                    console.log("Cantidad dentro de rango.");
+                                    lblError.html("");
+                                    btnEnviar.attr('disabled', false);
+                                    if (mycantView + SumatoriaDevuelta == mycant) {
+                                        $('#ChkfinalReceipt').prop('checked', true);
+                                        $('#ShowModal').click();
+                                        finalReceiptAuto = true;
+
+
+                                    }
+                                    else {
+                                        $('#ChkfinalReceipt').prop('checked', false);
+                                        $('#ChkfinalReceipt').prop('disabled', false);
+                                    }
+
+                                }
+                                else {
+                                    lblError.html('<%= lblQuantityError%>');
+                                    btnEnviar.attr('disabled', true);
+                                }
+                            }
+                            else {
+                                if (mycantView + SumatoriaDevuelta <= mycant && mycantView > 0) {
+                                    console.log("Cantidad dentro de rango.");
+                                    lblError.html("");
+                                    btnEnviar.attr('disabled', false);
+
+                                    if (mycantView + SumatoriaDevuelta == mycant) {
+                                        $('#ChkfinalReceipt').prop('checked', true);
+
+                                    }
+                                    else {
+                                        $('#ChkfinalReceipt').prop('checked', false);
+                                    }
+                                }
+                                else {
+                                    lblError.html('<%= lblQuantityError%>');
+                                    btnEnviar.attr('disabled', true);
+                                }
+                            }
                         }
+                    }
+
+                    else if (MyObject.STUN.trim() == DdUnis.val().trim()) {
 
                         if (TxOrderType.val() == "2") {
                             if (rangAlto >= mycantView + SumatoriaDevuelta && mycantView > 0) {
-                                console.log("Cantidad dentro de rango.");
+                                console.log("Cantidad dentro de rango");
                                 lblError.html("");
                                 btnEnviar.attr('disabled', false);
+
                                 if (mycantView + SumatoriaDevuelta == mycant) {
                                     $('#ChkfinalReceipt').prop('checked', true);
                                     $('#ShowModal').click();
                                     finalReceiptAuto = true;
-
-
                                 }
                                 else {
                                     $('#ChkfinalReceipt').prop('checked', false);
                                     $('#ChkfinalReceipt').prop('disabled', false);
+                                    finalReceiptAuto = false;
                                 }
-
                             }
                             else {
                                 lblError.html('<%= lblQuantityError%>');
                                 btnEnviar.attr('disabled', true);
+                                $('#ChkfinalReceipt').prop('checked', false);
                             }
                         }
                         else {
@@ -931,55 +969,9 @@
                                 btnEnviar.attr('disabled', true);
                             }
                         }
+
                     }
-                }
-
-                else if (MyObject.STUN.trim() == DdUnis.val().trim()) {
-
-                    if (TxOrderType.val() == "2") {
-                        if (rangAlto >= mycantView + SumatoriaDevuelta && mycantView > 0) {
-                            console.log("Cantidad dentro de rango");
-                            lblError.html("");
-                            btnEnviar.attr('disabled', false);
-
-                            if (mycantView + SumatoriaDevuelta == mycant) {
-                                $('#ChkfinalReceipt').prop('checked', true);
-                                $('#ShowModal').click();
-                                finalReceiptAuto = true;
-                            }
-                            else {
-                                $('#ChkfinalReceipt').prop('checked', false);
-                                $('#ChkfinalReceipt').prop('disabled', false);
-                                finalReceiptAuto = false;
-                            }
-                        }
-                        else {
-                            lblError.html('<%= lblQuantityError%>');
-                            btnEnviar.attr('disabled', true);
-                            $('#ChkfinalReceipt').prop('checked', false);
-                        }
-                    }
-                    else {
-                        if (mycantView + SumatoriaDevuelta <= mycant && mycantView > 0) {
-                            console.log("Cantidad dentro de rango.");
-                            lblError.html("");
-                            btnEnviar.attr('disabled', false);
-
-                            if (mycantView + SumatoriaDevuelta == mycant) {
-                                $('#ChkfinalReceipt').prop('checked', true);
-
-                            }
-                            else {
-                                $('#ChkfinalReceipt').prop('checked', false);
-                            }
-                        }
-                        else {
-                            lblError.html('<%= lblQuantityError%>');
-                            btnEnviar.attr('disabled', true);
-                        }
-                    }
-
-                }
+            }
             });
 
 
@@ -1060,7 +1052,7 @@
 
                 var Data = "{'ORNO':'" + OrdenID + "','PONO':'" + Position + "'}";
                 WebMethod = "ConsultarSumatoriaCantidades130";
-                sendAjax(WebMethod, Data, ConsultarSumatoria, false,true);
+                sendAjax(WebMethod, Data, ConsultarSumatoria, false, true);
 
             }
 
@@ -1068,7 +1060,7 @@
 
                 var Data = "{'ITEM':'" + $('#txItem').val().trim() + "'}";
                 WebMethod = "ConsultafactoresporItem";
-                sendAjax(WebMethod, Data, SuccesQuantityUnity, false,true);
+                sendAjax(WebMethod, Data, SuccesQuantityUnity, false, true);
 
             }
 
@@ -1101,7 +1093,7 @@
                         console.log(MyObject);
 
                         var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
-                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
+                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false, true);
                     } else {
                     }
                 }
@@ -1136,7 +1128,7 @@
                             console.log(MyObject);
 
                             var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
-                            sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
+                            sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false, true);
                         }
                         else {
 
@@ -1172,7 +1164,7 @@
 
 
                         var Data = "{'OORG':'" + OORG + "', 'ORNO':'" + ORNO + "',  'ITEM':'" + ITEM + "',  'PONO':'" + PONO + "',  'LOT':'" + LOT + "',  'QUANTITY':'" + QUANTITY + "',  'STUN':'" + STUN + "',  'CUNI':'" + CUNI + "', 'CWAR':'" + CWAR + "', 'FIRE':'" + FIRE + "','PSLIP':'" + PSLIP + "'}";
-                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false,true);
+                        sendAjax("InsertarReseiptRawMaterial", Data, InsertSucces, false, true);
 
                     } else {
 
@@ -1434,7 +1426,7 @@
 
                         }
                     }
-                }
+        }
             });
 
 
@@ -1552,7 +1544,7 @@
                             $('#txItem').focus();
                         }
                     }
-                }
+        }
             });
 
             //            txPosition.bind("change paste keyup", function (e) {
@@ -1981,18 +1973,18 @@
                             $(MyElemnt).focus();
                         }
                     }
-                }
-                else {
+        }
+        else {
 
-                    txLot.attr('disabled', true);
-                    DdUnis.attr('disabled', true);
-                    txQuantity.attr('disabled', true);
+            txLot.attr('disabled', true);
+            DdUnis.attr('disabled', true);
+            txQuantity.attr('disabled', true);
 
-                    txItem.val("");
-                    txLot.val("");
-                    DdUnis.val("");
-                    txQuantity.val("");
-                }
+            txItem.val("");
+            txLot.val("");
+            DdUnis.val("");
+            txQuantity.val("");
+        }
             });
 
             $('#ChkfinalReceipt').click(function () {
@@ -2012,123 +2004,125 @@
             });
 
             txLot.bind("change paste keyup", function (e) {
+                $("#txQuantity").val("");
+                lblError.html("");
                 clearTimeout(myTimeout);
                 var MyItem1 = txItem.val().trim().toUpperCase();
                 Data = "{'ITEM':'" + MyItem1.trim() + "','CLOT':'" + txLot.val().trim() + "'}";
-                myTimeout = setTimeout(function () { sendAjax("ValidarLote", Data, ValidarLoteSucces, false, true) }, 3000);
-                
+                myTimeout = setTimeout(function () { sendAjax("ValidarLote", Data, ValidarLoteSucces, false, true) }, 1500);
+
             });
 
         });
 
 
-        $('#DdPosition').bind("change", function (e) {
+$('#DdPosition').bind("change", function (e) {
 
-            txPosition.val($('#DdPosition').val());
-            txPosition.change();
+    txPosition.val($('#DdPosition').val());
+    txPosition.change();
+});
+
+
+function addOption() {
+
+    var options = [];
+    var unique = [];
+
+    $('.rowTable').remove();
+    $('#DdPosition option').remove(0);
+    $('#DdPosition').append("<option value='0'>Select Position</option>");
+
+    if (TxOrderType.val() == "1") {
+        LstSalesOrder.forEach(function (x) {
+            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                optionValue = x.PONO.trim();
+                options.push(optionValue);
+            }
+        });
+    }
+    else if (TxOrderType.val() == "2") {
+
+        LstPurchaseOrders.forEach(function (x) {
+            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                optionValue = x.PONO.trim();
+                options.push(optionValue);
+            }
         });
 
+    }
+    else if (TxOrderType.val() == "22") {
 
-        function addOption() {
-
-            var options = [];
-            var unique = [];
-
-            $('.rowTable').remove();
-            $('#DdPosition option').remove(0);
-            $('#DdPosition').append("<option value='0'>Select Position</option>");
-
-            if (TxOrderType.val() == "1") {
-                LstSalesOrder.forEach(function (x) {
-                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                        optionValue = x.PONO.trim();
-                        options.push(optionValue);
-                    }
-                });
+        LstTransferOrder.forEach(function (x) {
+            if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
+                optionValue = x.PONO.trim();
+                options.push(optionValue);
             }
-            else if (TxOrderType.val() == "2") {
-
-                LstPurchaseOrders.forEach(function (x) {
-                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                        optionValue = x.PONO.trim();
-                        options.push(optionValue);
-                    }
-                });
-
-            }
-            else if (TxOrderType.val() == "22") {
-
-                LstTransferOrder.forEach(function (x) {
-                    if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase()) {
-                        optionValue = x.PONO.trim();
-                        options.push(optionValue);
-                    }
-                });
-            }
+        });
+    }
 
 
 
-            unique = options.filter(onlyUnique);
+    unique = options.filter(onlyUnique);
 
-            function onlyUnique(value, index, self) {
-                return self.indexOf(value) === index;
-            }
+    function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
 
-            unique.forEach(function (x) {
-                optionValueX = x;
-                $('#DdPosition').append("<option value=" + optionValueX + ">" + optionValueX + "</option>");
+    unique.forEach(function (x) {
+        optionValueX = x;
+        $('#DdPosition').append("<option value=" + optionValueX + ">" + optionValueX + "</option>");
 
+    });
+
+    unique.forEach(function (x) {
+        CurrentOption = x;
+        PonoAnt = "";
+
+        if (TxOrderType.val() == "1") {
+
+            LstSalesOrder.forEach(function (x) {
+                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                    PonoAnt = x.PONO.toUpperCase().trim();
+                }
+            });
+        }
+        else if (TxOrderType.val() == "2") {
+
+            LstPurchaseOrders.forEach(function (x) {
+                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                    PonoAnt = x.PONO.toUpperCase().trim();
+                }
             });
 
-            unique.forEach(function (x) {
-                CurrentOption = x;
-                PonoAnt = "";
+        }
+        else if (TxOrderType.val() == "22") {
 
-                if (TxOrderType.val() == "1") {
 
-                    LstSalesOrder.forEach(function (x) {
-                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                            PonoAnt = x.PONO.toUpperCase().trim();
-                        }
-                    });
+
+            LstTransferOrder.forEach(function (x) {
+                if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
+                    $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
+                    PonoAnt = x.PONO.toUpperCase().trim();
                 }
-                else if (TxOrderType.val() == "2") {
-
-                    LstPurchaseOrders.forEach(function (x) {
-                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                            PonoAnt = x.PONO.toUpperCase().trim();
-                        }
-                    });
-
-                }
-                else if (TxOrderType.val() == "22") {
-
-
-
-                    LstTransferOrder.forEach(function (x) {
-                        if (x.ORNO.toUpperCase() == txOrderID.val().trim().toUpperCase() && x.PONO.toUpperCase().trim() == CurrentOption.trim() && PonoAnt.trim() != x.PONO.toUpperCase().trim()) {
-                            $('#DetailBody').append("<tr class='rowTable'><td>" + x.ORNO.trim() + "</rd><td>" + x.PONO.trim() + "</td><td>" + x.ITEM.trim() + "</td><td>" + x.DSCA.trim() + "</td><td>" + x.PRDT.trim() + "</td><td>" + x.QSTR.trim() + "</td><td>" + x.STUN.trim() + "</td><td>" + x.CWAR.trim() + "</td></tr>");
-                            PonoAnt = x.PONO.toUpperCase().trim();
-                        }
-                    });
-                }
-
-
-
-
             });
-
-            options = [];
-            unique = []
         }
 
-        function limpiarPosition() {
-            $('#DdPosition option').remove(0);
-            $('#DdPosition').append("<option value='0'>Select Position</option>");
-            $('.rowTable').remove();
-        }
+
+
+
+    });
+
+    options = [];
+    unique = []
+}
+
+function limpiarPosition() {
+    $('#DdPosition option').remove(0);
+    $('#DdPosition').append("<option value='0'>Select Position</option>");
+    $('.rowTable').remove();
+}
     </script>
     <script src="styles/popper.min.js"></script>
     <script src="styles/bootstrap.min.js"></script>

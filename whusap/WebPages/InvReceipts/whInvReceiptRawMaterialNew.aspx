@@ -806,7 +806,7 @@
     <script src="styles/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
         var myTimeout;
-
+        var LotExist = false;
         function Enviar() {
 
         }
@@ -1123,6 +1123,7 @@
             var OrdenID = txOrderID.val().trim();
 
             if (retorno.d == false) {
+                LotExist = false;
                 if (TxOrderType.val() == "1") {
                     var Item = undefined;
                     LstSalesOrder.forEach(function (x) {
@@ -1149,8 +1150,9 @@
             if (retorno.d == true) {
                 lblError.html("Lot is already linked to this item please use another");
                 btnEnviar.attr('disabled', true);
+                LotExist = true;
             }
-            
+
             //if (retorno.d == false) {
             //    lblError.html("The lot does not exist or is not associated with the item");
             //    txLot.focus();
@@ -1215,108 +1217,109 @@
 
             txQuantity.bind("input paste", function (e) {
 
-                if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
-                    var straux = "";
-                    str = $('#txQuantity').val();
-                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
-                        straux += str.charAt(i).replace(",", "").replace(".", "");
+                if (LotExist == false) {
+                    if ($('#lblUnidSt').html().toUpperCase().trim() == "UN") {
+                        var straux = "";
+                        str = $('#txQuantity').val();
+                        for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                            straux += str.charAt(i).replace(",", "").replace(".", "");
+                        }
+                        $('#txQuantity').val(straux);
+                    } else {
+                        var straux = "";
+                        str = $('#txQuantity').val();
+                        for (var i = 0; i < $('#txQuantity').val().length; i++) {
+                            straux += str.charAt(i).replace(",", ".");
+                        }
+                        $('#txQuantity').val(straux);
                     }
-                    $('#txQuantity').val(straux);
-                } else {
-                    var straux = "";
-                    str = $('#txQuantity').val();
-                    for (var i = 0; i < $('#txQuantity').val().length; i++) {
-                        straux += str.charAt(i).replace(",", ".");
-                    }
-                    $('#txQuantity').val(straux);
-                }
 
-                if (TxOrderType.val() == "1") {
-                    //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
-                    LstSalesOrder.forEach(function (x) {
-                        if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
-                            MyObject = x;
-                        }
-                    });
-                }
-
-                if (TxOrderType.val() == "2") {
-                    //MyObject = LstPurchaseOrders.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());
-                    LstPurchaseOrders.forEach(function (x) {
-                        if (x.ITEM.trim() == txItem.val().trim() && x.ORNO.trim() == txOrderID.val().trim().toUpperCase() && x.PONO.trim() == txPosition.val().trim()) {
-                            MyObject = x;
-                        }
-                    });
-                }
-
-                if (TxOrderType.val() == "22") {
-                    //MyObject = LstTransferOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
-                    LstTransferOrder.forEach(function (x) {
-                        if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
-                            MyObject = x;
-                        }
-                    });
-                }
-
-                var mycant = parseFloat(MyObject.OQUA);
-                //var rangBajo = parseFloat(MyObject.OQUA) * (1 - parseFloat(MyObject.RTQP) / 100);
-                var rangAlto = parseFloat(MyObject.OQUA) * (1 + parseFloat(MyObject.RTQP) / 100);
-
-                var mycantView = parseFloat(txQuantity.val());
-
-                if (MyObject.STUN.trim() != DdUnis.val().trim()) {
-
-                    FactorMul = undefined; //lstFactor.find(x => x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim());
-                    FactorDiv = undefined; //lstFactor.find(x => x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim());
-
-                    if (lstFactor[0].Error != true) {
-                        lstFactor.forEach(function (x) {
-                            if (x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim()) {
-                                FactorMul = x;
-                            }
-                            else if (x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim()) {
-                                FactorDiv = x;
+                    if (TxOrderType.val() == "1") {
+                        //MyObject = LstSalesOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
+                        LstSalesOrder.forEach(function (x) {
+                            if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
+                                MyObject = x;
                             }
                         });
-
                     }
 
+                    if (TxOrderType.val() == "2") {
+                        //MyObject = LstPurchaseOrders.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());
+                        LstPurchaseOrders.forEach(function (x) {
+                            if (x.ITEM.trim() == txItem.val().trim() && x.ORNO.trim() == txOrderID.val().trim().toUpperCase() && x.PONO.trim() == txPosition.val().trim()) {
+                                MyObject = x;
+                            }
+                        });
+                    }
 
-                    if (FactorMul != undefined || FactorDiv != undefined) {
+                    if (TxOrderType.val() == "22") {
+                        //MyObject = LstTransferOrder.find(x => x.ITEM==txItem.val().trim() && x.ORNO==txOrderID.val().trim() && x.PONO==txPosition.val().trim());                        
+                        LstTransferOrder.forEach(function (x) {
+                            if (x.ITEM == txItem.val().trim() && x.ORNO == txOrderID.val().trim().toUpperCase() && x.PONO == txPosition.val().trim()) {
+                                MyObject = x;
+                            }
+                        });
+                    }
 
-                        if (FactorDiv != undefined) {
-                            mycantView = parseFloat(txQuantity.val()) / parseFloat(FactorDiv.FACTOR);
-                        }
-                        else if (FactorMul != undefined) {
-                            mycantView = parseFloat(txQuantity.val()) * parseFloat(FactorMul.FACTOR);
-                        }
+                    var mycant = parseFloat(MyObject.OQUA);
+                    //var rangBajo = parseFloat(MyObject.OQUA) * (1 - parseFloat(MyObject.RTQP) / 100);
+                    var rangAlto = parseFloat(MyObject.OQUA) * (1 + parseFloat(MyObject.RTQP) / 100);
 
-                        if (TxOrderType.val() == "2") {
-                            if (rangAlto >= mycantView + SumatoriaDevuelta && mycantView > 0) {
-                                console.log("Cantidad dentro de rango.");
-                                lblError.html("");
-                                btnEnviar.attr('disabled', false);
-                                if (mycantView + SumatoriaDevuelta == rangAlto) {
-                                    $('#ChkfinalReceipt').prop('checked', true);
-                                    $('#ShowModal').click();
-                                    finalReceiptAuto = true;
+                    var mycantView = parseFloat(txQuantity.val());
 
+                    if (MyObject.STUN.trim() != DdUnis.val().trim()) {
 
+                        FactorMul = undefined; //lstFactor.find(x => x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim());
+                        FactorDiv = undefined; //lstFactor.find(x => x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim());
+
+                        if (lstFactor[0].Error != true) {
+                            lstFactor.forEach(function (x) {
+                                if (x.BASU.trim() == MyObject.STUN.trim() && x.UNIT.trim() == DdUnis.val().trim()) {
+                                    FactorMul = x;
                                 }
-                                else if (MyObject.RFID.trim() == "1") {
-                                    $('#ChkfinalReceipt').prop('checked', false);
-                                    $('#ChkfinalReceipt').prop('disabled', true);
+                                else if (x.BASU.trim() == DdUnis.val().trim() && x.UNIT.trim() == MyObject.STUN.trim()) {
+                                    FactorDiv = x;
+                                }
+                            });
+
+                        }
+
+
+                        if (FactorMul != undefined || FactorDiv != undefined) {
+
+                            if (FactorDiv != undefined) {
+                                mycantView = parseFloat(txQuantity.val()) / parseFloat(FactorDiv.FACTOR);
+                            }
+                            else if (FactorMul != undefined) {
+                                mycantView = parseFloat(txQuantity.val()) * parseFloat(FactorMul.FACTOR);
+                            }
+
+                            if (TxOrderType.val() == "2") {
+                                if (rangAlto >= mycantView + SumatoriaDevuelta && mycantView > 0) {
+                                    console.log("Cantidad dentro de rango.");
+                                    lblError.html("");
+                                    btnEnviar.attr('disabled', false);
+                                    if (mycantView + SumatoriaDevuelta == rangAlto) {
+                                        $('#ChkfinalReceipt').prop('checked', true);
+                                        $('#ShowModal').click();
+                                        finalReceiptAuto = true;
+
+
+                                    }
+                                    else if (MyObject.RFID.trim() == "1") {
+                                        $('#ChkfinalReceipt').prop('checked', false);
+                                        $('#ChkfinalReceipt').prop('disabled', true);
+                                    }
+                                    else {
+                                        if (MyObject.RFID.trim() != "1") {
+                                            $('#ChkfinalReceipt').prop('checked', false);
+                                            $('#ChkfinalReceipt').prop('disabled', false);
+                                        }
+                                    }
+
                                 }
                                 else {
-                                    if (MyObject.RFID.trim() != "1") {
-                                        $('#ChkfinalReceipt').prop('checked', false);
-                                        $('#ChkfinalReceipt').prop('disabled', false);
-                                    }
-                                }
-
-                            }
-                            else {
-                                lblError.html('<%= lblQuantityError%>');
+                                    lblError.html('<%= lblQuantityError%>');
                                 btnEnviar.attr('disabled', true);
                             }
                         }
@@ -1395,6 +1398,7 @@
                     }
 
                 }
+        }
             });
 
 
@@ -2169,11 +2173,12 @@
             });
 
             txLot.bind("change paste keyup", function (e) {
-
+                $("#txQuantity").val("");
+                lblError.html("");
                 clearTimeout(myTimeout);
                 var MyItem1 = txItem.val().trim().toUpperCase();
                 Data = "{'ITEM':'" + MyItem1.trim() + "','CLOT':'" + txLot.val().trim() + "'}";
-                myTimeout = setTimeout(function () { sendAjax("ValidarLote", Data, ValidarLoteSucces, false, true) }, 2500);
+                myTimeout = setTimeout(function () { sendAjax("ValidarLote", Data, ValidarLoteSucces, false, true) }, 1500);
 
             });
 
