@@ -2170,7 +2170,7 @@
 
             txLot.bind("change paste keyup", function (e) {
 
-                Data = "{'ITEM':'" + $('#txItem').val().trim() + "','CLOT':'" + $('#txLot').val().trim() + "'}";
+                Data = "{'ITEM':'" + MyItem1.trim() + "','CLOT':'" + txLot.val().trim() + "'}";
                 sendAjax("ValidarLote", Data, ValidarLoteSucces, false);
 
             });
