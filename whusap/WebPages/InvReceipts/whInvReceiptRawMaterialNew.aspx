@@ -1657,7 +1657,7 @@
                             //setTimeout(function () { lblError.html(""); }, 2500);
 
                         } else {
-                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
 
                             btnEnviar.attr('disabled', true);
                             txItem.attr('disabled', true);
@@ -1696,7 +1696,7 @@
                             ddPosition.focus();
                             //setTimeout(function () { lblError.html(""); }, 2500);
                         } else {
-                            //setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
+                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 500);
 
                             btnEnviar.attr('disabled', true);
                             txItem.attr('disabled', true);
@@ -1821,7 +1821,7 @@
                             ddPosition.focus();
                             //setTimeout(function () { lblError.html(""); }, 4000);
                         } else {
-                            lblError.html('<%= lblItemError%>');
+                            setTimeout(function () { lblError.html('<%= lblOrderError%>'); }, 1500);
 
                             btnEnviar.attr('disabled', true);
 
